@@ -1,165 +1,271 @@
-# Learning similarity under a condition: a literature review
+# Introduction to Conditional Language Representations
 
-Similarity depends on the question. A red bicycle resembles a red car in color and a blue bicycle in vehicle type. A representation intended to support both comparisons needs a way to select the relevant information. This review maps that problem across metric learning, sentence embeddings, instruction tuning and conditional semantic textual similarity.
+## The central idea
 
-The organization follows the field’s conceptual dependencies. The [mathematical primer](01-learning-semantic-similarity.md) supplies the geometry and loss derivations. This review concentrates on what each line of work changes, what its evidence establishes and which questions remain open.
+A conditional representation lets the comparison criterion change which meanings become neighbors.
 
-## 1. Map the problem before choosing its name
+Consider these descriptions again:
 
-**Representation learning** learns features from data. **Similarity learning** trains a score that reflects judgments of resemblance. **Metric learning** is a closely related tradition that learns distances or embeddings with useful geometry. Neural similarity scores can have a broader mathematical form than a strict metric.
+- **A:** a red bicycle parked beside a tree;
+- **B:** a blue bicycle leaning against a wall;
+- **C:** a red car waiting at a crossing.
 
-**Conditional similarity learning** makes the comparison criterion an input. The condition can be a discrete attribute, a task instruction or a natural-language description. **Conditional semantic textual similarity**, abbreviated **C-STS**, is a particular NLP task: predict similarity between two sentences under a supplied condition. **Conditional sentence embeddings** are one class of representation used to solve it. “Conditional semantic encoder” is understandable descriptive language; these more specific terms give clearer search targets. [Conditional Similarity Networks](literature/conditional-similarity-networks-2017.pdf); [C-STS](literature/csts-2023.pdf).
+Under “vehicle type,” A should be closer to B. Under “color,” A should be closer to C. The text stays fixed while the question changes. The model must interpret that question and make the requested relationship visible in its similarity scores.
 
-Several neighboring problems contribute useful ideas:
+The field brings together two problems. **Representation learning** asks what information a vector should preserve. **Conditional similarity learning** asks how the comparison criterion should control that information. In NLP, **conditional semantic textual similarity (C-STS)** names the task of rating two sentences under a natural-language condition. Conditional sentence embeddings are reusable vectors designed to support such comparisons.
 
-| Neighboring area | Its question | Connection to conditional similarity |
+The useful literature progresses through a sequence of design questions:
+
+```text
+several valid notions of similarity
+    -> describe the desired notion in language
+    -> decide where the condition enters the model
+    -> teach or elicit the requested relationship
+    -> measure whether the relationship transfers
+```
+
+The [first primer](01-learning-semantic-similarity.md) supplies the geometry and training foundations. Here we use those ideas to understand the modern methods and the choices they expose.
+
+## Start with these
+
+| Reading | Core idea | Why it belongs here |
 |---|---|---|
-| Instruction-tuned embeddings | How should a representation adapt to a task or domain instruction? | Learns an interface between language instructions and embedding behavior |
-| Contextual word representations / sense induction | Which meaning does a word express in its surrounding text? | Context resolves usage; a comparison condition selects which aspect matters |
-| Disentangled representations | Can different factors be represented with some separation? | May support selecting attributes or semantic dimensions |
-| Conditional computation / hypernetworks | Can an input control transformations or weights? | Supplies architectures for condition-dependent projections |
-| Retrieval and clustering | Which items should be neighbors or form groups? | Tests how a learned similarity behaves in downstream use |
+| Deshpande et al. — *C-STS: Conditional Semantic Textual Similarity* | The same sentence pair can receive different similarity ratings under different conditions. | Defines the task and the main encoder formulations. |
+| Su et al. — *One Embedder, Any Task* (INSTRUCTOR) | Natural-language instructions can guide representations across tasks and domains. | Explains how an embedding model can learn to use an instruction. |
+| Tu et al. — *Linguistically Conditioned Semantic Textual Similarity* | Extracting an answer makes the selected meaning explicit; annotation also determines the target. | Connects the model’s input to the linguistic distinction being measured. |
+| Zhang et al. — *CASE* | Conditional feature extraction can be followed by a compact supervised projection. | Separates what a frozen backbone represents from how its features are aligned to similarity judgments. |
+| Yoo et al. — *Hyper-CL* | A condition can generate the transformation applied to cached sentence features. | Shows a different placement of conditional computation. |
+| Liu et al. — *Conditional Semantic Textual Similarity via Conditional Contrastive Learning* | Graded reference differences can guide the training objective. | Explains why the loss and example construction deserve their own design. |
 
-This table is a conceptual map. The studies below support different parts of it; they have distinct benchmarks and guarantees.
+Read the first four to understand the task and the Tu–CASE design space. Hyper-CL and Liu then expose architecture and objective changes as separate levers. The later steering paper supplies an optional inference-time branch.
 
-## 2. Similarity can be learned as geometry
+## 1. A condition defines which similarity the model should predict
 
-Xing and colleagues learn a positive-semidefinite distance matrix from similarity constraints and apply it to clustering. The central abstraction is that observed features and the rule for comparing them are separate objects. Read §2 alongside the primer’s factorization proof. [Xing et al., 2002](literature/xing-2002.pdf).
+[Deshpande et al.](https://aclanthology.org/2023.emnlp-main.345/) turn the intuition in our example into an NLP benchmark. Their C-STS dataset includes sentence pairs evaluated under conditions intended to produce high and low similarity. Read the task construction and §4 in the [local paper](literature/csts-2023.pdf).
 
-Veit, Belongie and Karaletsos extend the multiple-similarities idea in computer vision. Their **Conditional Similarity Networks** jointly learn image embeddings and masks that select or reweight dimensions for different similarity notions. Read §3, especially the condition-specific triplets and masking operation. The condition indexes a learned notion of similarity; free-form linguistic conditions require an additional mechanism. [CVPR 2017](literature/conditional-similarity-networks-2017.pdf).
+This changes the prediction problem from a score for two sentences to a score for two sentences **and a condition**. Let $a,b$ denote sentences, let $c$ describe the criterion and let $s_\theta(a,b\mid c)$ be the model’s prediction.
 
-In schematic notation, with representation $h(x)\in\mathbb{R}^d$ and condition mask $m_c\in\mathbb{R}^d$:
+Our toy example requires:
 
-$$ z(x,c)=m_c\odot h(x). $$
+$$ s_\theta(A,B\mid\text{vehicle type})>s_\theta(A,C\mid\text{vehicle type}), $$
 
-The symbol $\odot$ means coordinate-wise multiplication. A condition changes the contribution of each coordinate. This is a concrete architectural answer to “similar in which respect?” It also reveals a recurring design choice: organize information so that a later operation can select it, or let the condition influence feature extraction itself.
+$$ s_\theta(A,C\mid\text{color})>s_\theta(A,B\mid\text{color}). $$
 
-## 3. Sentence embeddings make language comparisons reusable
+These inequalities specify the behavior an architecture should produce. They also reveal the evaluation unit: the model must distinguish comparisons that look similar at the broad topic level and change its preference when the condition changes.
 
-Sentence-BERT shares encoder weights across sentence inputs and trains representations using sentence-pair supervision. Its pooling and objectives turn transformer outputs into reusable vectors for similarity comparisons. Read §3 for classification, regression and triplet training. [Reimers and Gurevych, 2019](literature/sentence-bert-2019.pdf).
+A condition such as “color” is relatively concrete. Conditions such as “purpose,” “attitude” or “consequence” require more interpretation. Their wording, scope and reference labels become part of what the benchmark measures.
 
-SimCSE develops contrastive training for sentence embeddings. Dropout supplies paired views in its unsupervised method; natural-language-inference data supplies supervised positives and hard negatives. Read §§2–4 with the primer’s gradient derivation. The construction of positive and alternative examples determines which distinctions training rewards. [Gao, Yao and Chen, 2021](literature/simcse-2021.pdf).
+> Define the requested relationship before choosing how to encode it.
 
-These papers supply general sentence-representation machinery. Conditional similarity adds a further requirement: the same pair may deserve different scores under different questions. An encoder’s general similarity performance and its sensitivity to a specified aspect are therefore separate empirical properties.
+## 2. The architecture determines where the condition can act
 
-## 4. Instructions teach an embedding model what it is being used for
+The C-STS paper studies cross-, bi- and tri-encoder formulations. These names become useful once we trace the information through them.
 
-**INSTRUCTOR** embeds text together with task and domain instructions. Su and colleagues train it contrastively on a diverse collection of instruction-annotated embedding datasets. Their experiments span several task families and examine the role of instructions and instruction variation. Read §2 for architecture, loss and training data, then §4 for the analyses. [Su et al., 2023](literature/instructor-2023.pdf).
+A **cross-encoder** processes the two sentences and condition together. It can compare their words during encoding and produce a joint score. A **conditional bi-encoder** processes each sentence with the condition, yielding two reusable vectors. A **tri-encoder** encodes the sentences and condition separately, then combines their vectors.
 
-This establishes an important bridge: the encoder can learn to treat natural-language instructions as part of its input interface. A task instruction such as “represent this passage for retrieval” specifies intended use. An aspect condition such as “compare the vehicles by color” specifies which content should govern a particular similarity judgment. Both can influence embeddings; their evaluation questions differ.
-
-The methodological lesson is to test the exact instruction behavior of interest. Broad multitask performance measures task adaptation. Controlled comparisons under different aspects measure selection among meanings inside the text.
-
-## 5. C-STS isolates aspect-dependent similarity
-
-Deshpande and colleagues introduce **C-STS**, pairing sentences with natural-language conditions and similarity ratings. The same pair appears under conditions intended to yield higher and lower similarity. The paper evaluates cross-, bi- and tri-encoder formulations. Read the dataset construction and §4, especially the paired-condition objective. [Deshpande et al., 2023](literature/csts-2023.pdf).
-
-The architectures place interaction at different points:
-
-| Formulation | Computation | Reuse |
+| Formulation | What the heavy encoder sees | What can be cached |
 |---|---|---|
-| Cross-encoder | Jointly process both texts and the condition to produce a score | Joint inference for each pair |
-| Conditional bi-encoder | Encode each text together with the condition, then compare | Cache each text–condition representation |
-| Tri-encoder | Encode each text and the condition independently, then combine | Cache text and condition features separately |
+| Cross-encoder | Both sentences and the condition together | A result for the specific comparison |
+| Conditional bi-encoder | One sentence together with its condition | Each sentence–condition vector |
+| Tri-encoder | Each sentence and the condition separately | Sentence and condition vectors |
 
-Define $s_\theta(a,b\mid c)$ as predicted similarity under condition $c$. The Quad margin objective has the form:
+Suppose there are $N$ sentences and $K$ conditions, and every combination is needed. A conditional bi-encoder requires approximately $NK$ sentence–condition encodings. A separate-encoding design can start with $N+K$ encodings, then apply a smaller composition operation for each combination. This is an operation-count comparison; actual runtime depends on batching, sequence lengths and the composition model.
 
-$$ \ell_{\mathrm{Quad}}=\max\{0,\lambda+s_\theta(a,b\mid c_{\mathrm{low}})-s_\theta(a,b\mid c_{\mathrm{high}})\},\qquad\lambda>0. $$
+The computational tradeoff creates an information tradeoff. Early conditioning lets the requested aspect influence token processing. Late conditioning asks a previously computed vector to contain enough information for subsequent questions.
 
-This rewards a score gap in the intended direction until a margin is reached. Its relationship to graded reference scores becomes a target for later work.
+The toy descriptions make the issue visible: if a cached representation preserves vehicle type and loses color, a later projection has little evidence from which to recover the red/blue distinction. An expressive composition function helps use available features; the upstream representation determines what is available.
 
-## 6. Hyper-CL lets the condition generate a transformation
+## 3. Natural-language instructions become useful through training
 
-**Hyper-CL** addresses the interaction–reuse tradeoff. A sentence encoder produces $h_s$, a condition encoder produces $h_c$, and a hypernetwork generates a projection matrix from $h_c$. The matrix transforms the sentence embedding. The method also introduces a low-rank formulation to control the cost of generating weights. Read §§3.1–3.4 for the architecture, training and factorization. [Yoo et al., ACL 2024](literature/hyper-cl-2024.pdf).
+Providing the condition as text gives the model an interface. Training determines how reliably the model uses that interface.
 
-The central computation is:
+[INSTRUCTOR](https://aclanthology.org/2023.findings-acl.71/) embeds inputs together with task and domain instructions and trains contrastively across a collection of instruction-annotated datasets. Its experiments study performance across task families and instruction variants. Read §2 and the §4 analyses in the [local paper](literature/instructor-2023.pdf).
 
-$$ W_c=q_\psi(h_c),\qquad z(s,c)=W_ch_s. $$
+For example, “represent this sentence for topic classification” and “represent this sentence for finding a paraphrase” reward different relationships. The instruction tells the shared model which behavior the training example expects.
 
-Here $q_\psi$ is a network whose output parameterizes another transformation. The paper combines contrastive and score-based supervision and evaluates C-STS and knowledge graph completion. Its results support learned late interaction as an accuracy–efficiency option on those tasks.
+This supplies a bridge to C-STS. A task instruction describes what the representation will be used for. An aspect condition specifies which part of the sentence should govern a particular comparison. Both are language inputs, and both require a learned connection between the words in the instruction and the representation’s behavior.
 
-This architecture changes the parametrization: the condition controls the transformation itself. In a prompted bi-encoder, the condition participates in token processing. Both produce conditional vectors, with different information and computation paths.
+General instruction-following performance therefore motivates a conditional encoder, while aspect-specific tests establish whether it makes the desired distinctions. The next question becomes: how can we make the selected meaning easier to inspect and compare?
 
-## 7. Tu examines the target meaning and introduces answer-first representations
+## 4. Answering the question makes the selected meaning explicit
 
-Tu and colleagues’ **Linguistically Conditioned Semantic Textual Similarity** reexamines C-STS annotation and reannotates the validation set. It turns conditions into questions, generates corresponding answers and uses those answers in similarity analysis. Read §3 for annotation issues, §4 for answer generation, §5 for trained models and §6 for linguistic feature analysis. [Tu et al., ACL 2024](literature/tu-2024.pdf).
+[Tu et al.](https://aclanthology.org/2024.acl-long.64/) decompose conditional similarity into generating condition-specific answers and comparing those answers. They also examine annotation problems and reannotate C-STS’s validation set. Read §3 for the target-label question, §4 for QA, §5 for trained models and §6 for linguistic analysis in the [local paper](literature/tu-2024.pdf).
 
-A schematic pathway is:
+Our running example shows what the decomposition buys:
+
+| Text | Answer to “What color is the vehicle?” | Answer to “What type of vehicle is it?” |
+|---|---|---|
+| A | red | bicycle |
+| B | blue | bicycle |
+| C | red | car |
+
+The extracted answers contain the desired distinction in a compact form. The embedding model receives much less surrounding content to organize. The intermediate text also lets a reader inspect what was selected.
+
+A schematic Tu-style bi-encoder is:
 
 $$ a=G(x,q(c)),\qquad z=E_\phi(a,c). $$
 
-$G$ generates an answer to question $q(c)$ from text $x$; $E_\phi$ embeds the answer, with the condition included in applicable variants. The paper’s trained base bi-encoder comparison improves Spearman correlation from 49.6 to 73.9, scaled by 100, on reannotated labels. The inference-only QA-SimCSE base result is 49.4; those are distinct experimental settings.
+$G$ generates an answer from sentence $x$ and question $q(c)$. $E_\phi$ embeds the answer with its condition. Tu studies several configurations; this expression illustrates the bi-encoder route.
 
-The conceptual addition is an explicit linguistic intermediate. It makes the selected meaning inspectable and introduces generation as another source of variation. The paper’s category-versus-feature analysis also illustrates why a shared broad category and a shared specific attribute can warrant different judgments.
+The paper’s base bi-encoder comparison rises from 49.6 to 73.9 Spearman correlation, scaled by 100, on its reannotated-data experiment. The authors use a 70/30 train/test division of that reannotated set. Their inference-only QA-SimCSE base score is 49.4. Training and the evaluation labels are therefore essential to interpreting the headline result.
 
-## 8. Liu changes the training signal
+### The decomposition creates two places to inspect an error
 
-Liu and colleagues’ **Conditional Contrastive Learning** retains bi- and tri-encoder formulations while revising the objective and sample construction. It combines Weighted Adaptive Contrastive Loss, Balanced Contrastive Loss and score-regression terms. Read §§3.2–3.4 and equations 3–11. [Liu et al., COLING 2025](literature/liu-ccl-2025.pdf).
+First ask whether the generated answer captures the requested property. An answer about the bicycle’s location would lose the color comparison before embedding begins. Then ask whether the embedding score preserves the answer’s meaning. Two answers can share vocabulary while expressing different claims.
 
-A key argument concerns fixed-margin separation: reference scores also specify how large a conditional similarity gap should be. Define $\Delta y=y_{\mathrm{high}}-y_{\mathrm{low}}\geq0$ and $\Delta s=s_{\mathrm{high}}-s_{\mathrm{low}}$. The weighted adaptive term can be written:
+A controlled diagnostic follows from this decomposition: hold the answer encoder fixed, replace generated answers with independently checked answers, and measure the change. That is a proposed diagnostic strategy derived from the architecture. Its result would help locate a source of error.
 
-$$ \ell_{\mathrm{W\text{-}ACL}}=\Delta y\,|\Delta y-\Delta s|. $$
+The category level also matters. “Bicycle” and “car” share the category “vehicle.” The desired score depends on whether the question asks for that broad category or a finer type. Tu’s linguistic analysis makes this granularity issue central to the task.
 
-This is one component of the full training objective. It weights agreement with the reference gap by the gap’s magnitude. Balanced contrastive learning separately addresses the treatment of generated views and potentially problematic negatives.
+> An inspectable answer exposes which meaning was selected; the comparison model still has to preserve the relevant distinctions within that answer.
 
-The contribution sits primarily in the loss and training examples. A clear comparison with Hyper-CL therefore asks different questions: what changes the available transformation, and what changes the relationships that optimization rewards?
+## 5. A frozen encoder’s geometry can be aligned with a small learned model
 
-## 9. CASE separates conditional feature extraction from supervised alignment
+Tu makes the selected information explicit as generated language. Another route is to extract conditional features directly and learn how those features should be compared.
 
-**CASE** constructs condition-aware embeddings with an LLM encoder, subtracts a standalone condition embedding, and trains a compact projection using similarity ratings. Read §§3.1–3.2 and equations 1–4, followed by the §4 ablations. [Zhang, Zhou and Bollegala, EACL 2026](literature/case-2026.pdf).
+[CASE](https://aclanthology.org/2026.eacl-long.231/) takes that route. It constructs a condition-aware embedding, subtracts a standalone condition embedding and trains a projection using similarity ratings while freezing the backbone. Read §§3.1–3.2, equations 1–4 and the §4 ablations in the [local paper](literature/case-2026.pdf).
 
-In notation matching the paper’s conceptual construction:
+In the paper’s notation, the passage appears in an instruction and the condition is the text being represented. Write $F(c;I(x))$ for that contextualized condition vector. The construction is:
 
 $$ e(x,c)=F(c;I(x))-F(c;I(\varnothing)),\qquad z=g_\psi(e(x,c)). $$
 
-$F$ uses the paper’s prompting and pooling; $I(x)$ supplies the passage-bearing instruction. The backbone stays frozen during projection training. The supervised objective minimizes squared error between projected cosine similarity and reference ratings. The paper studies linear and nonlinear projections.
+The subtraction compares the condition in the presence of a passage with the condition under an empty-passage instruction. The projection $g_\psi$ then maps the resulting features into a space aligned with the similarity task. CASE studies linear and nonlinear projections and reports improvements from its construction on C-STS.
 
-This provides two levers: the representation extracted from the backbone and the learned alignment to the similarity task. The shared projection receives already conditioned features. Hyper-CL instead generates transformation weights from the condition embedding.
+In our example, the common condition “color” appears in every comparison. The passage must determine whether the resulting vector represents red or blue. The construction attempts to emphasize passage-dependent variation; interpreting the subtraction as a perfect removal of all irrelevant meaning would require additional evidence.
 
-CASE uses a later C-STS annotation resource. Zhang and colleagues’ 2025 data paper refines conditions and combines LLM ratings with existing annotations. Tu’s reannotation and this larger resource belong to the same measurement discussion, with distinct procedures and dataset versions. [Data paper, arXiv v1](https://arxiv.org/html/2509.14399v1).
+### What projection learning can change
 
-## 10. Inference-time steering changes internal computation
+The projection’s squared-error objective rewards cosine scores that match reference similarity ratings. Only the projection parameters change during this training stage. The backbone’s feature extraction remains fixed.
 
-Cheng and colleagues’ **Focusing Condition** introduces Self-Contrastive Steering. At an intermediate layer, it forms conditional and condition-masked views, adjusts positions for the masked view, and uses their contrast to steer the representation before continuing the forward pass. Read §§4.1–4.3 and the ablations. [ACL 2026](literature/self-contrastive-steering-2026.pdf).
+This separates two questions: are useful distinctions present in the features, and does the current geometry make them easy to compare? A projection can improve the second by reweighting or combining information available from the first.
 
-The paper evaluates a training-free intervention requiring an additional self-attention computation at the selected layer. It offers direct and projection-based elimination variants. This differs operationally from subtracting a standalone condition vector after embedding extraction: the contrast uses an input-specific, condition-masked view inside the network.
+There is a precise capacity boundary. If two inputs produce exactly the same feature vector, any deterministic projection maps them to the same output. Equality is preserved by function application. Differences that have already collapsed at the projection’s input require additional information or a change upstream.
 
-The general research question is whether useful conditional information already exists in hidden states and can be elicited through a better inference procedure. Answering that question requires matched backbone and prompt controls, sensitivity to intervention settings and measured computational overhead.
+This explains why a frozen projection is an informative baseline. Its success establishes that useful information can be recovered through the learned transformation. Its failure leaves several possibilities, including feature loss, limited projection capacity, insufficient data and optimization.
 
-## 11. Read results through their measurement choices
+## 6. The condition can generate the transformation itself
 
-These papers vary the benchmark, annotation version, backbone, training data and evaluation protocol. Their reported scores become comparable when those ingredients match.
+CASE’s shared projection receives features that already depend on the condition. A different design uses the condition to determine the projection’s weights.
 
-**Spearman correlation** measures agreement between score orderings: rank predictions and references, average tied ranks, then compute Pearson correlation between the ranks. **Pearson correlation** measures linear association between scores. **Triplet accuracy** measures whether a preferred candidate receives the higher similarity. Each metric preserves different information about a model’s errors.
+[Hyper-CL](https://aclanthology.org/2024.acl-long.41/) implements this with a **hypernetwork**: a network whose output supplies the parameters of another network. Read §§3.1–3.4 in the [local paper](literature/hyper-cl-2024.pdf).
 
-A useful review asks about several forms of generalization:
+Let $h_s\in\mathbb{R}^d$ encode the sentence and $h_c\in\mathbb{R}^d$ encode the condition. The schematic computation is:
 
-- new sentences under familiar conditions;
-- paraphrases of a familiar condition;
-- new conditions or attribute combinations;
-- changes in language, domain or passage length;
-- transfer from similarity scoring to retrieval or clustering.
+$$ W_c=q_\psi(h_c),\qquad z(s,c)=W_ch_s. $$
 
-These are evaluation dimensions for comparing studies, with evidence assessed paper by paper. A benchmark gain can arise through improved feature selection, improved score calibration, cleaner reference judgments or several changes together. Matched ablations identify the contribution of each operation.
+$q_\psi$ generates the transformation matrix $W_c$. A color condition and a vehicle-type condition can therefore apply different transformations to the same cached sentence vector. Hyper-CL also develops a low-rank construction to manage the cost of generating matrices and combines contrastive and score-based supervision.
 
-## 12. What remains open in the problem domain
+The architectural distinction is now concrete. A conditional bi-encoder lets sentence and condition tokens interact inside the backbone. Hyper-CL caches their features separately and learns a richer late interaction. CASE’s projection route aligns already conditional features with a shared learned map.
 
-The literature supports multiple functioning ways to condition a representation. Several broader questions remain productive research directions, with scope to be established for each dataset:
+These designs address different computational budgets and information boundaries. The appropriate comparison holds the task, data and evaluation fixed while measuring accuracy, encoding cost and reuse across conditions.
 
-**Condition interpretation.** A natural-language condition may admit different granularity or refer to several entities. Annotation analysis and model analysis interact here.
+## 7. The loss decides how strongly different meanings should separate
 
-**Compositional generalization.** A model may learn familiar conditions while struggling to combine attributes or follow novel, finely specified comparisons. Evaluation needs separate condition splits to measure that ability.
+The architecture defines the available transformations. The loss specifies which relationships training rewards.
 
-**Information selection and capacity.** A cached embedding trades reusable computation against the information needed for future conditions. Hypernetworks, early conditioning, answer generation and hidden-state interventions explore different points in this tradeoff.
+C-STS’s Quad objective pushes the predicted score under the high-similarity condition above the score under the low-similarity condition by a fixed margin. With predictions $s_{\mathrm{high}}$ and $s_{\mathrm{low}}$:
 
-**Faithfulness and invariance.** Desired similarity should respond to relevant changes and remain stable under meaning-preserving paraphrase. Evidence spans and controlled edits can help test that behavior, with appropriate checks on the edits’ validity.
+$$ \ell_{\mathrm{Quad}}=\max\{0,\lambda+s_{\mathrm{low}}-s_{\mathrm{high}}\},\qquad\lambda>0. $$
 
-**Downstream structure.** Retrieval and clustering impose additional requirements on the geometry. The [foundations primer](01-learning-semantic-similarity.md) explains why local similarity judgments and global partitions need separate validation.
+Suppose reference scores have already been normalized and differ by 0.2. A fixed margin of 1.0 asks for a much larger separation than that reference difference. This numerical example illustrates a distinction between learning the correct ordering and learning its graded magnitude.
 
-These are synthesis questions drawn from the methods’ assumptions and evaluation boundaries. A specific algorithmic hypothesis should identify which boundary it targets and the experiment that would distinguish its explanation from alternatives.
+[Liu et al.](https://aclanthology.org/2025.coling-main.306/) address this issue through Conditional Contrastive Learning. Their objective combines Weighted Adaptive Contrastive Loss, Balanced Contrastive Loss and regression terms. Read §§3.2–3.4 and equations 3–11 in the [local paper](literature/liu-ccl-2025.pdf).
+
+Define the reference gap $\Delta y=y_{\mathrm{high}}-y_{\mathrm{low}}\geq0$ and the predicted gap $\Delta s=s_{\mathrm{high}}-s_{\mathrm{low}}$. One component of the objective is:
+
+$$ \ell_{\mathrm{W\text{-}ACL}}=\Delta y\,|\Delta y-\Delta s|. $$
+
+The term rewards matching the gap, weighted by its reference magnitude. Liu also changes the construction and weighting of contrastive examples. These operations address training signals; they remain distinct from changing where the condition enters the architecture.
+
+At this point the main levers have concrete meanings:
+
+| Lever | Operation | Representative work |
+|---|---|---|
+| Inputs | Generate the relevant answer before encoding | Tu |
+| Parametrization | Generate a condition-dependent transformation | Hyper-CL |
+| Feature construction and alignment | Extract conditional features, subtract a baseline and learn a projection | CASE |
+| Objective and sample construction | Reward graded score differences and revise contrastive examples | Liu |
+| Annotation | Clarify conditions and revise similarity judgments | Tu; Zhang et al.’s later data study |
+
+A contribution can act on several levers. An ablation is useful when it isolates which operation accounts for a measured gain.
+
+## Then read the inference-time work
+
+## 8. Hidden-state intervention supplies another lever
+
+A frozen model may contain useful information that its ordinary extraction procedure expresses weakly. This motivates changing the inference computation itself.
+
+[Cheng et al.’s *Focusing Condition*](https://aclanthology.org/2026.acl-long.50/) introduces Self-Contrastive Steering. At a selected intermediate layer, it constructs a condition-masked view through attention masking and position adjustment, contrasts that view with the conditional representation, and continues the forward pass with the intervention. Read §4 and the ablations in the [local paper](literature/self-contrastive-steering-2026.pdf).
+
+The method uses an additional self-attention computation at the selected layer and evaluates direct and projection-based elimination variants. Its contrast concerns an input-specific masked view inside the model. CASE’s subtraction concerns a standalone condition vector at the feature-construction stage.
+
+Both approaches motivate questions about which information dominates an extracted representation. Their mechanisms and controls differ. For a steering method, the intervention layer, strength, masking procedure and added cost all belong in the experiment.
+
+## 9. The benchmark defines what an improvement means
+
+Tu’s annotation study and [Zhang et al.’s later data paper](https://arxiv.org/html/2509.14399v1) make a central measurement issue visible: model quality is judged against interpretations encoded in the dataset. Zhang and colleagues refine conditions and combine LLM ratings with existing annotations; CASE uses that later resource.
+
+Keep the annotation version beside every result. Also record the backbone, split, training examples, generated inputs and metric. A number becomes informative when those ingredients explain the comparison it represents.
+
+**Spearman correlation** measures agreement between score orderings. Compute ranks, average tied ranks and take their Pearson correlation. **Pearson correlation** measures linear association between the original scores. **Triplet accuracy** asks whether a preferred candidate receives the higher score. These metrics summarize different errors.
+
+Generalization also has several meanings. A model can be tested on new sentences under familiar conditions, paraphrases of known conditions, entirely new conditions, or new combinations of attributes. Language and domain transfer add further changes. Report which changes the evaluation actually contains.
+
+The toy example suggests a useful test pattern: change color while holding vehicle type fixed, then change vehicle type while holding color fixed. The model should respond according to the supplied condition. Natural-language versions require checking that the edits preserve the intended meanings.
+
+## A practical mental model
+
+```text
+text + comparison criterion
+        |
+        +-> select information in the input       [Tu]
+        |
+        +-> condition feature extraction          [conditional bi-encoder]
+        |
+        +-> condition a feature transformation    [Hyper-CL]
+        |
+        +-> construct and align conditional features [CASE]
+        |
+        +-> intervene during inference            [self-contrastive steering]
+        |
+        v
+representation -> similarity score -> evaluation under a defined question
+                           ^
+                           |
+                  labels and training objective  [C-STS / Liu]
+```
+
+This is a map of intervention points. Individual methods may combine several of them. The unifying question is where the requested meaning becomes accessible and how the training or inference procedure makes comparisons reflect it.
 
 ## What to retain
 
-Locate the condition in the computation. Identify which parameters training changes. Inspect how labels define similarity. Compare models on the same target and data version. Separate proofs about a mathematical operation from empirical claims about meaning.
+1. Specify the criterion that should change a comparison.
+2. Locate the condition inside the computation and identify what can be reused.
+3. Separate information selection from the geometry used to compare selected information.
+4. Inspect the objective and the construction of its examples together.
+5. Bind every empirical comparison to its data version, split, backbone and metric.
+6. Test new conditions explicitly when claiming generalization across conditions.
+7. Treat semantic discovery through clustering as a downstream test of the learned geometry.
 
-For an ordered reading path, use [the guide index](README.md). The purpose is to understand the research landscape well enough to formulate and evaluate several possible research directions.
+## Reading order
+
+### Minimum core
+
+1. [C-STS](literature/csts-2023.pdf) — learn the task, dataset and encoder formulations.
+2. [INSTRUCTOR](literature/instructor-2023.pdf) — understand how instruction training connects language to embedding behavior.
+3. [Tu](literature/tu-2024.pdf) — follow the annotation problem into answer-first modeling; keep trained and inference-only results separate.
+4. [CASE](literature/case-2026.pdf) — trace the two embedding calls, subtraction and supervised projection.
+
+### Then read
+
+5. [Hyper-CL](literature/hyper-cl-2024.pdf) — draw the path from condition vector to transformation weights.
+6. [Liu](literature/liu-ccl-2025.pdf) — work through the difference between a fixed margin and matching a graded reference gap.
+7. [Focusing Condition](literature/self-contrastive-steering-2026.pdf) — identify the altered attention computation and the controls that test it.
+
+### Optional depth
+
+- [Zhang et al.’s annotation study](https://arxiv.org/html/2509.14399v1) for the dataset lineage behind CASE.
+- [Conditional Similarity Networks](literature/conditional-similarity-networks-2017.pdf) for the earlier masked-subspace formulation in vision.
+- [The first primer’s clustering section](01-learning-semantic-similarity.md#7-clustering-organizes-the-geometry-at-a-chosen-resolution) for the move from similarity scores to groups.
+
+After the core readings, take one method and explain its inputs, trainable parameters, comparison rule and evaluation target using only those operations. That is the point at which the literature becomes a set of usable design ideas.

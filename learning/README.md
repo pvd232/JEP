@@ -1,49 +1,39 @@
-# Representation and similarity learning: a map of the literature
+# Representation Learning and Conditional Similarity: Two Primers
 
-The organizing question is **how a model should represent similarity when the aspect of interest changes**. This is a standalone literature review and mathematical onramp. Its structure follows the research domain and the dependencies among its ideas.
+This directory contains two literature-guided introductions:
 
-## Where the names fit
+1. [Introduction to Representation and Similarity Learning](01-learning-semantic-similarity.md) — how examples define useful relationships, how training turns them into geometry, and what embeddings make possible for comparison and clustering.
+2. [Introduction to Conditional Language Representations](02-conditional-encoders-and-discovery.md) — how a natural-language criterion changes the comparison problem, where the condition can enter a model, and how Tu, CASE and related methods address it.
 
-| Level | Useful terminology | Scope |
-|---|---|---|
-| Broad ML field | Representation learning | Learn features useful for later tasks |
-| Learning problem | Similarity learning / metric learning | Learn scores or distances from judgments and examples |
-| Conditional form | Conditional similarity learning | Make the criterion of comparison an input |
-| Specific NLP task | Conditional semantic textual similarity (C-STS) | Score sentence similarity under a natural-language condition |
-| Model family | Conditional sentence embeddings / instruction-conditioned text embeddings | Produce reusable vectors whose behavior depends on conditions or instructions |
-| Downstream uses | Retrieval, clustering and semantic discovery | Use the learned geometry to organize or search a collection |
+The local source collection is indexed in [literature/README.md](literature/README.md). Thirteen papers are included as PDFs; additional primary sources are linked there.
 
-“Conditional semantic encoder” is a reasonable description of a model. The terms above identify the broader field, specific task and model families more precisely. The review explains their relationships and links to the original papers.
+## Suggested order
 
-## Start here
+Read the foundations primer first. Its central chain—examples, objective, representation, comparison and evaluation—supplies the vocabulary used by the conditional methods.
 
-1. Read [the mathematical foundations](01-learning-semantic-similarity.md): embeddings, learned distances, training objectives, annotation targets and the geometry of clustering. Worked derivations state their assumptions.
-2. Read [the literature review](02-conditional-encoders-and-discovery.md): how the field moves from several notions of similarity to natural-language conditioning, competing architectures and recent inference methods.
-3. Use [the source library](literature/README.md) to read the primary papers. Local PDFs accompany the citations.
+Then read the conditional-language primer. It develops one question:
 
-The primers follow the `/moa` teaching format: an explanation built through an ordered argument, followed by reading guidance. The filename of the second primer is retained for existing links; its content now surveys the field independently of the proposal.
+> How can a model preserve several meanings in the same text and let the requested criterion determine which ones govern similarity?
 
-## Reading sequence
+Both primers follow a running example and introduce papers as their ideas become necessary. Each starts with a reading table and ends with the principles to retain and an exact reading order. Proofs appear beside the claims they establish. Clustering is an optional downstream branch.
 
-**Prerequisites.** Read Xing et al. §2 for metric learning, Sentence-BERT §3 for sentence-vector training, and SimCSE §§2–4 for contrastive objectives. Use the first primer’s derivations while reading. Clustering proofs are an optional downstream branch.
+## Where this sits in machine learning
 
-The core sequence then gives each paper a distinct role:
+Representation learning is the broad field. Similarity and metric learning study how to learn useful comparisons. Conditional similarity makes the comparison criterion an input. C-STS is the specific sentence-similarity task; conditional sentence embeddings are one model family used to solve it.
 
-| Order | Paper | Central question | Read closely |
-|---|---|---|---|
-| 1 | Conditional Similarity Networks — Veit et al., 2017 | Can one representation support several notions of similarity? | §3: masks and conditional triplets |
-| 2 | INSTRUCTOR — Su et al., 2023 | Can natural-language instructions control embeddings across tasks? | §2 and §4 analyses |
-| 3 | C-STS — Deshpande et al., 2023 | How should aspect-dependent sentence similarity be specified and tested? | Dataset construction and §4 |
-| 4 | Hyper-CL — Yoo et al., 2024 | Can a condition generate a reusable transformation of sentence features? | §§3.1–3.4 |
-| 5 | L-CSTS — Tu et al., 2024 | What happens when the requested meaning is made explicit as an answer? | §§3–6 |
-| 6 | Conditional Contrastive Learning — Liu et al., 2025 | How should the objective use graded conditional similarity differences? | §§3.2–3.4, equations 3–11 |
-| 7 | CASE — Zhang et al., 2026 | How much can conditional extraction and a compact learned projection achieve? | §§3–4 |
-| 8 | Focusing Condition — Cheng et al., 2026 | Can inference-time intervention elicit better conditional representations? | §4 and ablations |
+The primers stand independently of the JEP proposal. They explain the research area and its design choices so that several possible applications and research directions can be assessed.
 
-**Optional branches.** Zhang et al.’s 2025 annotation paper explains the data lineage used by CASE. Bilenko et al. and von Luxburg connect learned geometry to clustering. Nelson addresses computational qualitative interpretation. These branches answer different questions and can be read according to interest.
+## Directory contents
 
-## How to use the review
+```text
+learning/
+├── README.md
+├── 01-learning-semantic-similarity.md
+├── 02-conditional-encoders-and-discovery.md
+└── literature/
+    ├── README.md
+    ├── SHA256SUMS
+    └── *.pdf
+```
 
-For every method, identify the representation’s inputs, where the condition enters, the parameters that training changes, the loss, and the benchmark’s annotation version. Then ask which generalization setting the reported result actually measures.
-
-The source library records downloaded bytes in `literature/SHA256SUMS`. Verify from that directory with `shasum -a 256 -c SHA256SUMS`.
+The PDF manifest records the source bytes. From `learning/literature`, run `shasum -a 256 -c SHA256SUMS` to verify the local copies.
