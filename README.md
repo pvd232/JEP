@@ -16,4 +16,6 @@ The [two-primer learning guide](learning/README.md) introduces representation an
 
 ## Proposed collaboration
 
-[Learning the Meanings of Justice](CONCEPT_NOTE.md) is a short concept note connecting the Columbia team’s existing JEP research with opportunities for expert-supervised language representation learning.
+[Learning the Meanings of Justice](proposal/concept-note.pdf) is a short concept note connecting the Columbia team’s existing JEP research with opportunities for expert-supervised language representation learning.
+
+The one-page PDF uses the NeurIPS 2023 style. Its [LaTeX source](proposal/concept-note.tex) and [expanded Markdown background](CONCEPT_NOTE.md) are available for editing. Rebuild the PDF from the repository root with `./proposal/build.sh`, using a TeX installation that provides `pdflatex`. The build keeps temporary files outside the repository.

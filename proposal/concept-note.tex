@@ -1,0 +1,30 @@
+\documentclass{article}
+\usepackage[preprint]{neurips_2023}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage[colorlinks=true,urlcolor=blue,citecolor=blue,linkcolor=black]{hyperref}
+\makeatletter
+\renewcommand{\@noticestring}{Research concept note. September 2026.}
+\makeatother
+\title{Learning the Meanings of Justice}
+\author{A proposed collaboration in language representation learning and transitional justice}
+\begin{document}
+\maketitle
+
+An ongoing Columbia research program offers an opportunity to develop language models that capture how people express justice, harm and reparation. The team includes \textbf{Peter Dixon}, Associate Professor of Practice and Director of Columbia's M.S. in Negotiation and Conflict Resolution, and Senior Fellow at the Center for Justice.\footnote{\href{https://sps.columbia.edu/person/peter-dixon-phd}{Columbia faculty profile}; \href{https://www.peterdixon.org/}{professional biography}.} Its Spanish-language and transitional-justice expertise could support a computer-science collaboration grounded in Colombia's Special Jurisdiction for Peace (JEP).
+
+\textbf{An existing foundation.} The team's summaries describe \textbf{243 hearing videos spanning more than 1,500 hours}, an initial 40-video pilot, 2,145 coded justice claims and 25 conceptions of justice. Repeated AI coding and expert review of 30 segments provide initial evaluation.\footnote{Team-provided \emph{Contexto del Proyecto}, \emph{Script LSA presentation}, and workflow outline, retained in the repository's \texttt{sources/} directory. Figures are team-reported.} Its proposed workflow combines AI extraction, human validation, inductive codebook development, AI coding and expert review. The Casanare extension examines demands for reparation, restoration and sanction, alongside narratives of harm. Coordinating now would let expert corrections and interpretive judgments support both this substantive analysis and model development.
+
+\textbf{The technical question.} Can domain-informed human supervision improve how encoders represent specific aspects of meaning across new accounts? An encoder maps a passage to a vector used for comparison, retrieval and clustering. Conditional semantic similarity asks how that comparison should change with the question being asked. Two narratives might share an initiating event while describing different consequences. C-STS formalizes conditional similarity [1]; Tu et al. generate aspect-specific answers before comparison [2]; CASE learns a compact transformation of conditional embeddings [3]. These provide concrete baselines for testing the value of expert supervision.
+
+The opportunity is to combine capable LLMs with the Columbia team's judgments and, through an agreed partnership, JEP expert annotations. LLMs could propose comparisons and flag disagreements; experts could identify meaningful distinctions, supporting passages and alternative readings. A representative sample would accompany disagreement-focused examples. Holding annotation effort and evaluation accounts fixed, we would test whether targeted supervision improves agreement with independent expert judgments. We would then encode the corpus and assess whether retrieval and clustering reveal useful, interpretable patterns. The initial contribution would be a grounded benchmark and evidence about which supervision improves representation learning.
+
+\textbf{A shared research opportunity.} The team is seeking technical oversight as it develops its AI-assisted methodology. CS participation could strengthen model selection, reproducibility and evaluation while gaining access to substantive questions and expert feedback. Faculty sponsorship would help shape a bounded first study. The social purpose is tangible. Better tools could help researchers find and preserve victims' accounts across a large archive, supporting work on accountability, memory and peacebuilding.
+
+\begin{small}
+\noindent [1] Deshpande et al. \href{https://aclanthology.org/2023.emnlp-main.345/}{C-STS: Conditional Semantic Textual Similarity}. EMNLP, 2023.\\
+{[2]} Tu et al. \href{https://aclanthology.org/2024.acl-long.64/}{Linguistically Conditioned Semantic Textual Similarity}. ACL, 2024.\\
+{[3]} Zhang et al. \href{https://aclanthology.org/2026.eacl-long.231/}{CASE---Condition-Aware Sentence Embeddings for Conditional Semantic Textual Similarity Measurement}. EACL, 2026.
+\end{small}
+\end{document}
