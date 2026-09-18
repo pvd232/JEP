@@ -13,3 +13,7 @@ The [two-primer learning guide](learning/README.md) introduces representation an
 ## Application context
 
 [Project Proposal JEP – Columbia (English)](Project%20Proposal%20JEP%20-%20Columbia%20%28English%29.docx) contains the existing substantive project proposal. The learning guide is a standalone introduction to the machine-learning field.
+
+## Proposed collaboration
+
+[Learning the Meanings of Justice](CONCEPT_NOTE.md) is a short concept note connecting the Columbia team’s existing JEP research with opportunities for expert-supervised language representation learning.
