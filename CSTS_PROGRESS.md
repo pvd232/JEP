@@ -1,22 +1,21 @@
-# C-STS progress
+# C-STS results
 
-Snapshot: 2026-10-21T07:52:49.103307+00:00.
+The rating study is complete. All selected checkpoints and evaluation artifacts are stored in VIPER. These scores use 2,620 reserved comparisons from 1,241 caption groups.
 
-All training trials have completed. Reserved evaluation is being finished through the corrected input declaration. The next stages generate answer annotations and train the shared encoder.
+| Model | MSE | Spearman | Question ordering |
+| --- | ---: | ---: | ---: |
+| With question | 0.1443 | 0.432 | 76.1% |
+| Without question | 0.1723 | 0.125 | 50.0% |
+| Constant training mean | 0.1681 | Undefined | 50.0% |
 
-| Training arm | Seed | Development MSE | Spearman | Question ordering |
-| --- | ---: | ---: | ---: | ---: |
-| With question | 7 | 0.0811 | 0.486 | 78.1% |
-| Without question | 7 | 0.0998 | 0.191 | 50.0% |
-| With question | 8 | 0.0790 | 0.501 | 78.9% |
-| With question | 9 | 0.0796 | 0.492 | 78.4% |
-| Without question | 8 | 0.1007 | 0.181 | 50.0% |
-| Without question | 9 | 0.0951 | 0.177 | 50.0% |
+Model scores average seeds 7, 8 and 9. MSE uses the normalized 0–1 rating scale. Ordering compares different conditions for the same caption pair. Those comparisons reuse captions.
 
-The constant training-mean predictor has development MSE 0.0920. Ordering compares different questions for the same caption pair; these comparisons reuse captions.
+The condition produces a consistent gain across the three seeds. Absolute rating accuracy remains modest. Reserved ratings contain more extreme scores than development ratings. Constant-predictor MSE is 0.1681 on reserved evaluation and 0.0920 on development.
 
-![Epoch curves](training_outputs/csts_learning_curves.png)
+![Training and development curves](training_outputs/csts_learning_curves.png)
 
-These are development results on the filtered C-STS reannotation split. The [protocol](CSTS_RUN.md) records data construction, label sources and checkpoint selection. The [joint study](CSTS_JOINT_RUN.md) defines the answer supervision experiment.
+The [result record](training_outputs/csts_baseline_results.json) contains every seed, selected learning rate, native run references and the data manifest. The [rating protocol](CSTS_RUN.md) records the filtered split and the original label sources.
 
-For live output, see [training visibility](TRAINING_OUTPUTS.md). This page is a timestamped snapshot.
+The [answer and joint study](CSTS_JOINT_RUN.md) follows this baseline. Its first annotation pilot exposed question echoes and incorrect value types. A revised prompt is being checked on 128 fresh examples. Joint training follows the answer audit.
+
+Use the [live-output instructions](TRAINING_OUTPUTS.md) for current controller status, epoch scores, answer loss, GPU use and storage.

@@ -1,0 +1,462 @@
+{
+  "source_commit": "344207017dc36a4fe243fa15ae84bcf00bc6f165",
+  "data_manifest": {
+    "dataset": "LivNLP/C-STS-Reannotated",
+    "revision": "058ac842f5f19d27b08ad54f6d4a2c50b3f9578b",
+    "labels": "Authors combine LLM reannotations and original human labels.",
+    "invalid_rows_removed": {
+      "train": 0,
+      "evaluation": 214
+    },
+    "overlapping_training_rows_removed": 2532,
+    "split": "Connected canonical caption components. Released validation is evaluation.",
+    "normalization": "target = (rating - 1) / 4; rating_prediction = 1 + 4 * score",
+    "partitions": {
+      "train": {
+        "rows": 6980,
+        "groups": 2674,
+        "pairs": 3484,
+        "ratings": {
+          "1.0": 702,
+          "2.0": 1170,
+          "3.0": 2320,
+          "4.0": 1505,
+          "5.0": 1283
+        },
+        "sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01"
+      },
+      "dev": {
+        "rows": 1830,
+        "groups": 688,
+        "pairs": 915,
+        "ratings": {
+          "1.0": 181,
+          "2.0": 304,
+          "3.0": 627,
+          "4.0": 373,
+          "5.0": 345
+        },
+        "sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273"
+      },
+      "evaluation": {
+        "rows": 2620,
+        "groups": 1241,
+        "pairs": 1408,
+        "ratings": {
+          "1.0": 633,
+          "2.0": 233,
+          "3.0": 392,
+          "4.0": 296,
+          "5.0": 1066
+        },
+        "sha256": "2c8b6f2b62740c85c376eacd02ef222c2bfacdfe8df5f772a4dd7d52b6d38f1e"
+      }
+    }
+  },
+  "protocol": "CSTS_RUN.md",
+  "status": "complete",
+  "runs": [
+    {
+      "name": "fit_check",
+      "path": "/home/machina/jep-csts-20261021/experiments/csts_natural_20261021_3442070_fit_check/runs/fit_check/01M5EMPYAC06GE99SK77XSPAQZ/resolved.yaml",
+      "verified_measurements": 12,
+      "best_development_mse": 0.05626547615879676,
+      "best_epoch": 6
+    },
+    {
+      "name": "conditioned_lr1e_05_seed7",
+      "path": "/home/machina/jep-csts-20261021/experiments/csts_natural_20261021_3442070_conditioned_lr1e_05_seed7/runs/conditioned_lr1e_05_seed7/01M5EMRJ60QZNDWANJ6ZZ9KHK8/resolved.yaml",
+      "verified_measurements": 16,
+      "best_development_mse": 0.08544373670083129,
+      "best_epoch": 8
+    },
+    {
+      "name": "conditioned_lr3e_05_seed7",
+      "path": "/home/machina/jep-csts-20261021/experiments/csts_natural_20261021_3442070_conditioned_lr3e_05_seed7/runs/conditioned_lr3e_05_seed7/01M5EMXG9G5WKAN6P2NXJSWGST/resolved.yaml",
+      "verified_measurements": 16,
+      "best_development_mse": 0.08110058722537876,
+      "best_epoch": 8
+    },
+    {
+      "name": "without_question_lr1e_05_seed7",
+      "path": "/home/machina/jep-csts-20261021/experiments/csts_natural_20261021_3442070_without_question_lr1e_05_seed7/runs/without_question_lr1e_05_seed7/01M5EN2H8PNAFVNWZT376AN5DK/resolved.yaml",
+      "verified_measurements": 8,
+      "best_development_mse": 0.09982069798807057,
+      "best_epoch": 1
+    },
+    {
+      "name": "without_question_lr3e_05_seed7",
+      "path": "/home/machina/jep-csts-20261021/experiments/csts_natural_20261021_3442070_without_question_lr3e_05_seed7/runs/without_question_lr3e_05_seed7/01M5EN5JHQ1Q44EE2VD75170YM/resolved.yaml",
+      "verified_measurements": 8,
+      "best_development_mse": 0.10100241960113307,
+      "best_epoch": 1
+    },
+    {
+      "name": "conditioned_seed8",
+      "path": "/home/machina/jep-csts-20261021/experiments/csts_natural_20261021_3442070_conditioned_seed8/runs/conditioned_seed8/01M5ENSVPF61897NFZNAD2MRQ9/resolved.yaml",
+      "verified_measurements": 16,
+      "best_development_mse": 0.07903362626181502,
+      "best_epoch": 8
+    },
+    {
+      "name": "conditioned_seed9",
+      "path": "/home/machina/jep-csts-20261021/experiments/csts_natural_20261021_3442070_conditioned_seed9/runs/conditioned_seed9/01M5ENZ8YK2Y2TA7XKDEMMRMM9/resolved.yaml",
+      "verified_measurements": 16,
+      "best_development_mse": 0.07964279019428086,
+      "best_epoch": 6
+    },
+    {
+      "name": "without_question_seed8",
+      "path": "/home/machina/jep-csts-20261021/experiments/csts_natural_20261021_3442070_without_question_seed8/runs/without_question_seed8/01M5EP5B0K10E17BFEJ14PVFHZ/resolved.yaml",
+      "verified_measurements": 8,
+      "best_development_mse": 0.10071213804881171,
+      "best_epoch": 1
+    },
+    {
+      "name": "without_question_seed9",
+      "path": "/home/machina/jep-csts-20261021/experiments/csts_natural_20261021_3442070_without_question_seed9/runs/without_question_seed9/01M5EP8ENM5ETNK8REMP8WQX0E/resolved.yaml",
+      "verified_measurements": 16,
+      "best_development_mse": 0.09507883374600744,
+      "best_epoch": 6
+    },
+    {
+      "name": "publish_evaluation",
+      "path": "/home/machina/jep-csts-20261021/experiments/csts_natural_20261021_3442070_publish_evaluation/runs/publish_evaluation/01M5EPDQ48Q3Y5KHW59VFJ8104/resolved.yaml",
+      "verified_measurements": 0
+    }
+  ],
+  "selected": {
+    "conditioned": {
+      "encoder_learning_rate": 3e-05,
+      "selection": "Minimum development MSE, seed 7. Lower LR breaks exact ties."
+    },
+    "without_question": {
+      "encoder_learning_rate": 1e-05,
+      "selection": "Minimum development MSE, seed 7. Lower LR breaks exact ties."
+    }
+  },
+  "evaluation": [
+    {
+      "arm": "conditioned",
+      "seed": 7,
+      "metrics": {
+        "n": 2620,
+        "mse_0_1": 0.1448600899380066,
+        "mse_1_5": 2.3177614390081054,
+        "spearman": 0.43307828331195986,
+        "prediction_mean": 0.6728198174813776,
+        "target_mean": 0.5886450381679389,
+        "prediction_std": 0.16791282044469621,
+        "target_std": 0.40850906064376585,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 633,
+            "mean": 0.5699677362002279
+          },
+          "2.0": {
+            "n": 233,
+            "mean": 0.6581450065701816
+          },
+          "3.0": {
+            "n": 392,
+            "mean": 0.627275160342759
+          },
+          "4.0": {
+            "n": 296,
+            "mean": 0.693549194247336
+          },
+          "5.0": {
+            "n": 1066,
+            "mean": 0.7480939342439399
+          }
+        },
+        "condition_changes": {
+          "n": 1044,
+          "correct": 796,
+          "ties": 0,
+          "accuracy_ties_half": 0.7624521072796935,
+          "difference_mse": 0.3975145845782161,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      }
+    },
+    {
+      "arm": "conditioned",
+      "seed": 8,
+      "metrics": {
+        "n": 2620,
+        "mse_0_1": 0.14233020944718658,
+        "mse_1_5": 2.2772833511549853,
+        "spearman": 0.4413248744195981,
+        "prediction_mean": 0.6639900982742489,
+        "target_mean": 0.5886450381679389,
+        "prediction_std": 0.18188732659335366,
+        "target_std": 0.40850906064376585,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 633,
+            "mean": 0.5486488399253261
+          },
+          "2.0": {
+            "n": 233,
+            "mean": 0.6518965838037335
+          },
+          "3.0": {
+            "n": 392,
+            "mean": 0.6146098130658193
+          },
+          "4.0": {
+            "n": 296,
+            "mean": 0.6892290684218342
+          },
+          "5.0": {
+            "n": 1066,
+            "mean": 0.7462744716743591
+          }
+        },
+        "condition_changes": {
+          "n": 1044,
+          "correct": 796,
+          "ties": 0,
+          "accuracy_ties_half": 0.7624521072796935,
+          "difference_mse": 0.38451609974322504,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      }
+    },
+    {
+      "arm": "conditioned",
+      "seed": 9,
+      "metrics": {
+        "n": 2620,
+        "mse_0_1": 0.1457029469943686,
+        "mse_1_5": 2.3312471519098974,
+        "spearman": 0.421959307808468,
+        "prediction_mean": 0.6656629963749522,
+        "target_mean": 0.5886450381679389,
+        "prediction_std": 0.17695478210287846,
+        "target_std": 0.40850906064376585,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 633,
+            "mean": 0.5585882259977137
+          },
+          "2.0": {
+            "n": 233,
+            "mean": 0.6621408726012757
+          },
+          "3.0": {
+            "n": 392,
+            "mean": 0.6169068920140972
+          },
+          "4.0": {
+            "n": 296,
+            "mean": 0.6848237559803434
+          },
+          "5.0": {
+            "n": 1066,
+            "mean": 0.7426234021482335
+          }
+        },
+        "condition_changes": {
+          "n": 1044,
+          "correct": 792,
+          "ties": 0,
+          "accuracy_ties_half": 0.7586206896551724,
+          "difference_mse": 0.391540431309539,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      }
+    },
+    {
+      "arm": "without_question",
+      "seed": 7,
+      "metrics": {
+        "n": 2620,
+        "mse_0_1": 0.17255980074291805,
+        "mse_1_5": 2.7609568118866887,
+        "spearman": 0.133261375664599,
+        "prediction_mean": 0.6329048287379377,
+        "target_mean": 0.5886450381679389,
+        "prediction_std": 0.13576062195424354,
+        "target_std": 0.40850906064376585,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 633,
+            "mean": 0.6144136962073298
+          },
+          "2.0": {
+            "n": 233,
+            "mean": 0.6089557010856309
+          },
+          "3.0": {
+            "n": 392,
+            "mean": 0.6114453087959971
+          },
+          "4.0": {
+            "n": 296,
+            "mean": 0.6440713143831974
+          },
+          "5.0": {
+            "n": 1066,
+            "mean": 0.6539103500335346
+          }
+        },
+        "condition_changes": {
+          "n": 1044,
+          "correct": 1,
+          "ties": 1043,
+          "accuracy_ties_half": 0.5004789272030651,
+          "difference_mse": 0.5374160000522398,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      }
+    },
+    {
+      "arm": "without_question",
+      "seed": 8,
+      "metrics": {
+        "n": 2620,
+        "mse_0_1": 0.1742502360946428,
+        "mse_1_5": 2.7880037775142847,
+        "spearman": 0.11742009605257872,
+        "prediction_mean": 0.6413158172727313,
+        "target_mean": 0.5886450381679389,
+        "prediction_std": 0.12872009821678942,
+        "target_std": 0.40850906064376585,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 633,
+            "mean": 0.6256082454846369
+          },
+          "2.0": {
+            "n": 233,
+            "mean": 0.6238816247477552
+          },
+          "3.0": {
+            "n": 392,
+            "mean": 0.6263002264598498
+          },
+          "4.0": {
+            "n": 296,
+            "mean": 0.6446754176270317
+          },
+          "5.0": {
+            "n": 1066,
+            "mean": 0.6590425805878908
+          }
+        },
+        "condition_changes": {
+          "n": 1044,
+          "correct": 1,
+          "ties": 1043,
+          "accuracy_ties_half": 0.5004789272030651,
+          "difference_mse": 0.5374161223292532,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      }
+    },
+    {
+      "arm": "without_question",
+      "seed": 9,
+      "metrics": {
+        "n": 2620,
+        "mse_0_1": 0.17001627928668284,
+        "mse_1_5": 2.7202604685869254,
+        "spearman": 0.12450134926686361,
+        "prediction_mean": 0.593682184920625,
+        "target_mean": 0.5886450381679389,
+        "prediction_std": 0.12357448463705549,
+        "target_std": 0.40850906064376585,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 633,
+            "mean": 0.5755941506010285
+          },
+          "2.0": {
+            "n": 233,
+            "mean": 0.5828189432237282
+          },
+          "3.0": {
+            "n": 392,
+            "mean": 0.5782507642609428
+          },
+          "4.0": {
+            "n": 296,
+            "mean": 0.5996797847989443
+          },
+          "5.0": {
+            "n": 1066,
+            "mean": 0.6108066580672425
+          }
+        },
+        "condition_changes": {
+          "n": 1044,
+          "correct": 0,
+          "ties": 1043,
+          "accuracy_ties_half": 0.49952107279693486,
+          "difference_mse": 0.5374164856470969,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      }
+    }
+  ],
+  "evaluation_source_commit": "ac8fbd54c4ac13f97c6985953a73b68f970be3bd",
+  "mean_predictor": {
+    "prediction": 0.5536174785100286,
+    "metrics": {
+      "n": 2620,
+      "mse_0_1": 0.16810658256364042,
+      "mse_1_5": 2.6897053210182467,
+      "spearman": null,
+      "prediction_mean": 0.5536174785100287,
+      "target_mean": 0.5886450381679389,
+      "prediction_std": 1.1102230246251565e-16,
+      "target_std": 0.40850906064376585,
+      "mean_prediction_by_rating": {
+        "1.0": {
+          "n": 633,
+          "mean": 0.5536174785100286
+        },
+        "2.0": {
+          "n": 233,
+          "mean": 0.5536174785100288
+        },
+        "3.0": {
+          "n": 392,
+          "mean": 0.5536174785100287
+        },
+        "4.0": {
+          "n": 296,
+          "mean": 0.5536174785100287
+        },
+        "5.0": {
+          "n": 1066,
+          "mean": 0.5536174785100286
+        }
+      },
+      "condition_changes": {
+        "n": 1044,
+        "correct": 0,
+        "ties": 1044,
+        "accuracy_ties_half": 0.5,
+        "difference_mse": 0.5374161877394636,
+        "unit": "Within-pair comparisons. These reuse captions and are dependent."
+      }
+    }
+  },
+  "evaluation_run": {
+    "sha256": "cc87c9066565ea9cbf278e183f5958d4904cbbf188801ce55e877d3098c866a9",
+    "bytes": 1009,
+    "stored_at": {
+      "kind": "gcs",
+      "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+      "prefix": "viper",
+      "owner": "pvd232",
+      "workspace": "jep_csts_joint_20261021",
+      "revision": "a6403558e4c871b5ec66f1c76c00d74604b651426b94a63ddd825a1a84c316b2",
+      "path": "experiments/csts_finish_ac8fbd5/runs/selected_models/01M5EQSGVX1P7RKK64J97SST0F/resolved.yaml"
+    },
+    "kind": "resolved_run"
+  }
+}
