@@ -1,0 +1,45 @@
+{
+  "source_commit": "9254e4f9bdf738bb1dcd36a573f296ec459c326a",
+  "inference_execution": "external authenticated Codex CLI; raw capture published as evidence",
+  "metric_execution": "native VIPER evaluation and independent metric verification",
+  "runs": [
+    {
+      "phase": "publish",
+      "path": "/Users/machina/.codex/.chatgpt-projects/g-p-6ad6fb9258ac8191b4baa874735994e2/work/csts-sol61-max-20261021/repository/experiments/csts_sol61_max_20261021_9254e4f_publish/runs/publish/01M5FTNJ2GJVKNMWG33YPA9SHZ/resolved.yaml",
+      "reference": {
+        "sha256": "1c3e2486d06763b7ea0f37b5ccafb5114c291d0d70b78a6fe0809f29bb977678",
+        "bytes": 1032,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "17147991427c757d6d0e6280ebdfd86f4054a16ac3257e3fd02212b40e56f223",
+          "path": "experiments/csts_sol61_max_20261021_9254e4f_publish/runs/publish/01M5FTNJ2GJVKNMWG33YPA9SHZ/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "verified_measurements": 0
+    },
+    {
+      "phase": "evaluate",
+      "path": "/Users/machina/.codex/.chatgpt-projects/g-p-6ad6fb9258ac8191b4baa874735994e2/work/csts-sol61-max-20261021/repository/experiments/csts_sol61_max_20261021_9254e4f_evaluate/runs/evaluate/01M5FTPRHWWNS7A7Z0CM0XVF4Q/resolved.yaml",
+      "reference": {
+        "sha256": "8858fb17067e046c7080dffa0ebfe4b18d044dd59f32bee3651261c8bc8f80de",
+        "bytes": 1036,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "b020ae2b41bc78f2a33aa700bbf739cabd5e3d0af5d2c95c60e224cbd6bd519c",
+          "path": "experiments/csts_sol61_max_20261021_9254e4f_evaluate/runs/evaluate/01M5FTPRHWWNS7A7Z0CM0XVF4Q/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "verified_measurements": 2
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # C-STS: GPT-6.1 Sol, max reasoning
 
-Updated: 2026-10-21T18:13:07.040621+00:00.
+Updated: 2026-10-21T18:14:37.927714+00:00.
 
 Status: **complete**. Completed 2,620 / 2,620 comparisons.
 
@@ -26,9 +26,9 @@ The LLM evaluates both sentences together and emits a scalar score. Its result t
 
 Source-component bootstrap (2,000 replicates, percentile 95% intervals): Spearman [0.784272, 0.820256]; MSE [0.059037, 0.069768]. These are intervals for this single LLM pass, not paired differences against encoder arms.
 
-Native VIPER publication and independent MSE/Spearman verification: **pending**. Inference itself ran through the external authenticated CLI; VIPER records its captured evidence and verifies the evaluation.
+Native VIPER publication and independent MSE/Spearman verification: **passed**. Inference itself ran through the external authenticated CLI; VIPER records its captured evidence and verifies the evaluation.
 
-Files: [status](csts_sol61_max_status.json), [results](csts_sol61_max_results.json), [predictions](csts_sol61_max_predictions.json).
+Files: [status](csts_sol61_max_status.json), [results](csts_sol61_max_results.json), [predictions](csts_sol61_max_predictions.json). [Verification receipt](csts_sol61_max_verification.json).
 
 Fixed rubric:
 
