@@ -18,11 +18,11 @@ The [result record](training_outputs/csts_baseline_results.json) contains every 
 
 ## Answer and joint study
 
-Observed at 2026-10-21T16:20:43.141460+00:00.
+Observed at 2026-10-21T16:25:50.680036+00:00.
 
 Annotation: 17334 records completed; 11312 accepted. Total planned: 17,334.
 
-Study status: training.
+Study status: evaluating.
 [Live counts and epoch metrics](training_outputs/csts_live_status.json).
 [Completed trial records](training_outputs/csts_joint_study_status.json).
 
