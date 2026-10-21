@@ -10,7 +10,7 @@ import torch
 from torch import nn
 from transformers import T5Config, T5ForConditionalGeneration
 
-from csts_pilot.answers import answer_id, validated_answer
+from csts_pilot.answers import answer_id, parse_response, validated_answer
 from csts_pilot.joint import AnswerEncoder
 
 
@@ -76,6 +76,17 @@ def test_answer_identity_and_source_validation():
     assert validated_answer("A blue shirt.", "blue shirt") == ("blue shirt", True)
     assert validated_answer("A blue shirt.", "red shirt")[1] is False
     assert validated_answer("A blue shirt.", "NOT_SPECIFIED")[1] is False
+
+
+def test_teacher_json_requires_supported_evidence():
+    def response(evidence):
+        return json.dumps({"target": "shirt", "attribute": "color", "evidence": evidence})
+
+    assert parse_response("A blue shirt.", response("blue"))["valid"] is True
+    assert parse_response("A blue shirt.", response("red"))["valid"] is False
+    assert parse_response("A blue shirt.", response("NOT_SPECIFIED"))["valid"] is False
+    assert parse_response("A blue shirt.", '{"evidence":"blue"}')["valid"] is False
+    assert parse_response("A blue shirt.", "bad JSON")["valid"] is False
 
 
 def test_answer_loader_imports_in_an_isolated_directory(tmp_path):

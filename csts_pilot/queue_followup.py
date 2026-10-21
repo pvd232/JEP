@@ -72,7 +72,7 @@ def main() -> None:
                 "--annotation-limit",
                 "128",
                 "--annotation-offset",
-                "128",
+                "256",
             ],
             cwd=ROOT,
             check=True,

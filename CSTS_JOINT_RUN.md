@@ -8,9 +8,10 @@ reviewing its reserved evaluation scores.
 ## Annotation
 
 The C-STS release supplies similarity ratings. Its answer targets are generated
-for this experiment by `Qwen/Qwen3-4B-Instruct-2507`, revision
-`cdbee75f17c01a7cc42f958dc650907174af0554`. The teacher sees one caption and its
-condition. Its prompt requests a short, exact evidence span. It sees neither the
+for this experiment by `Qwen/Qwen3-8B`, revision
+`b968826d9c46dd6066d109eabc6255188de91218`. Thinking is disabled. The teacher sees one caption and its
+condition. Its response identifies the target entity, requested attribute and an
+exact evidence span. The span becomes the student's answer target. It sees neither the
 other caption nor the similarity rating. Identical caption and condition inputs
 receive one cached answer. Training and development captions receive answers.
 The reserved evaluation captions are excluded from annotation generation.
@@ -19,6 +20,10 @@ An answer enters the loss when it matches a contiguous span of the caption.
 Abstentions and unsupported generations receive no answer loss. This check
 establishes source support. The 128-example annotation pilot is reviewed for
 relevance to the condition before generating the complete answer artifact.
+The first two pilots used a 4B teacher. Their audits found errors in entity
+binding and counting. The 8B pilot uses the next 128 records in the fixed
+hash order, excluding both earlier pilot samples. These prompt changes use
+training and development captions only.
 The full run stops if fewer than half of generations pass the source-span check.
 The answers remain teacher annotations, with their provenance recorded in VIPER.
 

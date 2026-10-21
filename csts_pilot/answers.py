@@ -15,44 +15,46 @@ from csts_pilot.data import canonical
 from csts_pilot.training import write_json
 from jep_pilot.loaders import load_json
 
-TEACHER = "Qwen/Qwen3-4B-Instruct-2507"
-TEACHER_REVISION = "cdbee75f17c01a7cc42f958dc650907174af0554"
-PROMPT = """Answer the question about the TARGET caption by copying a short,
-contiguous evidence phrase from that caption. The aspect asks for a value:
-animal type asks which animal, color asks which color, and number asks for the
-quantity and its noun. Preserve all relevant values and qualifications.
-Return only the evidence phrase. Use NOT_SPECIFIED when the requested value
-is absent. A breed, room type, named place, or age requires supporting words.
+TEACHER = "Qwen/Qwen3-8B"
+TEACHER_REVISION = "b968826d9c46dd6066d109eabc6255188de91218"
+PROMPT = """Extract the caption's answer to the aspect question.
+First identify the entity the question concerns and the attribute requested.
+Return JSON with exactly three string fields: target, attribute, evidence.
+The evidence must copy one contiguous span of the caption that supplies the
+requested value for the correct entity. Copy enough words to preserve ALL
+relevant entities, values, relations and qualifications. A whole sentence is
+allowed when the answer spans several clauses.
+For a number, include every instance of the requested entity. Singular nouns
+can establish one instance. A bare plural such as 'people' supplies no count.
+For a color, copy the color of the requested entity. Check which noun it modifies.
+A breed, age, room type, named place or purpose requires explicit support.
+When the requested value is absent or its entity is unclear, evidence must be
+NOT_SPECIFIED. Return only the JSON.
 
-Examples:
-Aspect: type of animal
-Caption: A brown dog is running through grass.
-Evidence: dog
+Aspect: color of ball
+Caption: A boy in a red shirt throws a ball.
+{{"target":"ball","attribute":"color","evidence":"NOT_SPECIFIED"}}
+
+Aspect: number of dogs
+Caption: Two dogs run while a third dog sleeps.
+{{"target":"dogs","attribute":"number","evidence":"Two dogs run while a third dog sleeps"}}
 
 Aspect: number of people
 Caption: A young boy carries a basket.
-Evidence: A young boy
-
-Aspect: number of animals
-Caption: Two dogs play near a tree.
-Evidence: Two dogs
-
-Aspect: color of uniform
-Caption: A player wears a red and black uniform.
-Evidence: red and black
+{{"target":"people","attribute":"number","evidence":"A young boy"}}
 
 Aspect: dog breed
 Caption: A big brown dog jumps over a log.
-Evidence: NOT_SPECIFIED
+{{"target":"dog","attribute":"breed","evidence":"NOT_SPECIFIED"}}
 
-Aspect: room type
-Caption: A room contains a stove and wooden cabinets.
-Evidence: NOT_SPECIFIED
+Aspect: color of uniform
+Caption: A player wears a red and black uniform.
+{{"target":"uniform","attribute":"color","evidence":"red and black"}}
 
 TARGET
 Aspect: {condition}
 Caption: {passage}
-Evidence:"""
+JSON:"""
 
 
 def answer_id(passage: str, condition: str) -> str:
@@ -70,11 +72,32 @@ def validated_answer(passage: str, answer: str) -> tuple[str, bool]:
     return answer, valid
 
 
+def parse_response(passage: str, response: str) -> dict[str, Any]:
+    """Retain the teacher record and reject malformed or unsupported evidence."""
+    try:
+        record = json.loads(response)
+    except (ValueError, TypeError):
+        record = None
+    required = ("target", "attribute", "evidence")
+    if not isinstance(record, dict) or any(
+        not isinstance(record.get(key), str) for key in required
+    ):
+        return {"answer": "", "valid": False, "response": response}
+    answer, valid = validated_answer(passage, record["evidence"])
+    return {
+        "answer": answer,
+        "valid": valid,
+        "target": record["target"],
+        "attribute": record["attribute"],
+        "response": response,
+    }
+
+
 class AnswerConfig(BuildConfig):
     """Pin the teacher and bound generation for the annotation stage."""
 
-    batch_size: int = Field(default=64, ge=1)
-    max_new_tokens: int = Field(default=32, ge=1)
+    batch_size: int = Field(default=16, ge=1)
+    max_new_tokens: int = Field(default=128, ge=1)
     limit: int | None = None
     offset: int = Field(default=0, ge=0)
 
@@ -112,6 +135,7 @@ def annotate(context: StageContext[AnswerConfig]) -> None:
             [{"role": "user", "content": PROMPT.format(**row)}],
             tokenize=False,
             add_generation_prompt=True,
+            enable_thinking=False,
         )
         for row in items
     ]
@@ -138,10 +162,10 @@ def annotate(context: StageContext[AnswerConfig]) -> None:
             answers = tokenizer.batch_decode(
                 generated[:, batch["input_ids"].shape[1] :], skip_special_tokens=True
             )
-            for row, answer in zip(items[start:stop], answers, strict=True):
-                answer, valid = validated_answer(row["passage"], answer)
-                stream.write(json.dumps(dict(row, answer=answer, valid=valid)) + "\n")
-                accepted += int(valid)
+            for row, response in zip(items[start:stop], answers, strict=True):
+                parsed = parse_response(row["passage"], response)
+                stream.write(json.dumps(dict(row, **parsed)) + "\n")
+                accepted += int(parsed["valid"])
             stream.flush()
             print(
                 json.dumps(
@@ -161,6 +185,7 @@ def annotate(context: StageContext[AnswerConfig]) -> None:
             "revision": TEACHER_REVISION,
             "prompt": PROMPT,
             "configuration": context.config.model_dump(),
+            "generation": {"do_sample": False, "enable_thinking": False},
             "unique_caption_conditions": len(items),
             "accepted_extractive_answers": accepted,
             "accepted_fraction": accepted / len(items),
