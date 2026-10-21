@@ -19,12 +19,12 @@ For sentence `x`, question `q`, and expert-scale rating `r`:
 \[
 z_\theta(x,q)=\frac{W\operatorname{mean}_{t\in x}h_\theta([q;x])_t}
 {\|W\operatorname{mean}_{t\in x}h_\theta([q;x])_t\|_2},\quad
-s=\frac{1+z_\theta(x_1,q)^\top z_\theta(x_2,q)}2,\quad
+s=z_\theta(x_1,q)^\top z_\theta(x_2,q),\quad
 y=\frac{r-1}{4},\quad
 \mathcal L=\operatorname{mean}(s-y)^2.
 \]
 
-This score normalization is declared for this experiment. Error on the original 1–5 scale is 16 times MSE on the 0–1 scale. Correlations are unchanged by the positive affine transformation. Results belong to the filtered evaluation protocol described here.
+The target ratings occupy 0–1. The model predicts cosine directly, following the original C-STS bi-encoder objective. Predictions can extend below zero and receive the corresponding squared error. Error on the original 1–5 scale is 16 times MSE on the normalized rating scale. Correlations are unchanged by the positive affine transformation. Results belong to the filtered evaluation protocol described here.
 
 ## Training and selection
 
@@ -33,7 +33,9 @@ This score normalization is declared for this experiment. Error on the original 
 - Batch size is 32 passage pairs. Each epoch visits every training comparison once in a seeded shuffled order. The maximum is eight epochs. Training stops after three epochs without improvement in development MSE. The checkpoint with minimum development MSE is retained.
 - The first seed is 7. Each approach receives both learning-rate trials. Development MSE selects its learning rate, with the lower rate breaking exact ties. Seeds 8 and 9 repeat the selected setting. All settings and checkpoints are fixed before final evaluation.
 - The comparison approach omits the condition from the input. It receives the same source pairs, initialization seeds, optimizer search and stopping rules. The mean training-rating predictor supplies a simple reference.
-- BF16 autocast reduces GPU memory use. Pooling, vector normalization and scoring use float32. Input tokenization is cached. Only the encoder and projection run during similarity training.
+- BF16 autocast reduces GPU memory use. Its weight cache is disabled within each forward pass to refresh weights under the enclosing VIPER context. Pooling, vector normalization and scoring use float32. Input tokenization is cached. Only the encoder and projection run during similarity training.
+
+The initial fitting check at source commit `a79a04f` failed before any full training or evaluation. Nested autocast contexts retained stale cast weights across optimizer updates. A linear-layer reproduction demonstrated this behavior. The corrected implementation disables the inner autocast weight cache and includes a CUDA regression test. The correction also adopts the original C-STS cosine scoring convention in place of the synthetic pilot's shifted cosine. All model selection remains ahead of final evaluation.
 
 ## Diagnostics
 

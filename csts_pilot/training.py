@@ -68,6 +68,16 @@ class RatingEncoder(nn.Module):
         return F.normalize(self.projection(pooled).float(), dim=-1)
 
 
+def mixed_precision(config: CstsConfig) -> Any:
+    """Refresh cast weights inside VIPER's enclosing autocast context."""
+    return torch.autocast(
+        "cuda",
+        dtype=torch.bfloat16,
+        enabled=config.device == "cuda",
+        cache_enabled=False,
+    )
+
+
 def prepare_tokens(
     rows: list[dict[str, Any]], config: CstsConfig, tokenizer: Any
 ) -> dict[str, torch.Tensor]:
@@ -107,13 +117,13 @@ def prepare_tokens(
 def score_batch(
     model: RatingEncoder, tokens: dict[str, torch.Tensor], indices: torch.Tensor, n: int
 ) -> torch.Tensor:
-    """Encode both passages in one call and transform cosine to the 0–1 range."""
+    """Encode both passages in one call and return their cosine similarity."""
     sides = torch.cat((indices, indices + n))
     selected = {key: value[sides] for key, value in tokens.items()}
     width = int(selected["attention_mask"].sum(1).max().item())
     selected = {key: value[:, :width] for key, value in selected.items()}
     left, right = model(selected).chunk(2)
-    return (1 + (left * right).sum(-1)) / 2
+    return (left * right).sum(-1)
 
 
 @torch.no_grad()
@@ -128,9 +138,7 @@ def predict(
     values: list[float] = []
     for start in range(0, len(rows), 128):
         index = torch.arange(start, min(start + 128, len(rows)), device=config.device)
-        with torch.autocast(
-            "cuda", dtype=torch.bfloat16, enabled=config.device == "cuda"
-        ):
+        with mixed_precision(config):
             values.extend(
                 score_batch(model, tokens, index, len(rows)).float().cpu().tolist()
             )
@@ -197,9 +205,7 @@ def fit(context: StageContext[CstsConfig]) -> None:
         for start in range(0, len(order), config.batch_size):
             index = order[start : start + config.batch_size].to(config.device)
             optimizer.zero_grad(set_to_none=True)
-            with torch.autocast(
-                "cuda", dtype=torch.bfloat16, enabled=config.device == "cuda"
-            ):
+            with mixed_precision(config):
                 scores = score_batch(model, training_tokens, index, len(training))
                 loss = F.mse_loss(scores, target[index])
             loss.backward()
