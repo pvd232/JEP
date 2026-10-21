@@ -66,7 +66,7 @@ def main() -> None:
 
     def execute(name: str, stages: tuple, estimator: Any, seed: int = 7) -> Any:
         study = experiment(
-            experiment_id="csts_natural_20261021",
+            experiment_id=f"csts_natural_20261021_{source.commit[:7]}_{name}",
             variants=(variant(name, stages=stages, estimator=estimator),),
             replicates=(replicate(seed=seed),),
         )
