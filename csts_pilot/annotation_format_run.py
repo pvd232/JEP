@@ -28,7 +28,12 @@ from viper.metrics import min as minimize
 from viper.outputs import EvalOutputs, StageOutputs, TrainOutputs, output
 from viper.references import GitFileRef
 from viper.repository import read_source, resolve_root
-from viper.runtime import CUDAComputeSpec, LocalEnvSpec, observe_python_env
+from viper.runtime import (
+    CPUComputeSpec,
+    CUDAComputeSpec,
+    LocalEnvSpec,
+    observe_python_env,
+)
 from viper.stages import StageContext, build
 
 from csts_pilot.annotation_formats import FORMATS, prepare_targets
@@ -163,7 +168,9 @@ def main() -> None:
     source = read_source(root)
     attempt = uuid.uuid4().hex[:8]
     env = LocalEnvSpec(
-        compute=CUDAComputeSpec(model="NVIDIA L4", count=1),
+        compute=CPUComputeSpec()
+        if args.prepare_only
+        else CUDAComputeSpec(model="NVIDIA L4", count=1),
         lockfile=GitFileRef(
             repository=source.repository,
             commit=source.commit,
@@ -194,7 +201,12 @@ def main() -> None:
             trusted_source_repositories=frozenset({str(source.repository)}),
         )
         summary["runs"].append(
-            {"name": name, "path": str(result.path), "status": result.status}
+            {
+                "name": name,
+                "path": str(result.path),
+                "status": result.status,
+                "reference": result.reference.model_dump(mode="json"),
+            }
         )
         if result.status != "succeeded":
             summary["status"] = "failed"
@@ -327,7 +339,11 @@ def main() -> None:
         selected[style] = (previous, answer_ref)
     summary["status"] = "checkpoints_frozen"
     summary["selected_models"] = {
-        style: str(model.path) for style, (model, _) in selected.items()
+        style: {
+            "path": str(model.path),
+            "reference": model.reference.model_dump(mode="json"),
+        }
+        for style, (model, _) in selected.items()
     }
     write_json(result_dir / "selection.json", summary["selected_models"])
     write_json(summary_path, summary)
