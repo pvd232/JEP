@@ -1,10 +1,16 @@
 {
   "source_commit": "38496f8f7f30402429acf0ba150dcffc56bf8f48",
-  "status": "annotating",
+  "status": "training",
   "runs": [
     {
       "name": "annotations",
       "path": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_annotations/runs/annotations/01M5FC4F6Q37P5P0EM1QY31326/resolved.yaml"
+    },
+    {
+      "name": "ratings_seed7",
+      "path": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_ratings_seed7/runs/ratings_seed7/01M5FF3YRCAQR6HKY28REHR50E/resolved.yaml",
+      "best_development_mse": 0.07994704444615552,
+      "best_epoch": 8
     }
   ],
   "selected": {},
@@ -61,5 +67,33 @@
         "sha256": "2c8b6f2b62740c85c376eacd02ef222c2bfacdfe8df5f772a4dd7d52b6d38f1e"
       }
     }
+  },
+  "annotation": {
+    "teacher": "Qwen/Qwen3-8B",
+    "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+    "prompt": "Extract the caption's answer to the aspect question.\nFirst identify the entity the question concerns and the attribute requested.\nReturn JSON with exactly three string fields: target, attribute, evidence.\nThe evidence must copy one contiguous span of the caption that supplies the\nrequested value for the correct entity. Copy enough words to preserve ALL\nrelevant entities, values, relations and qualifications. A whole sentence is\nallowed when the answer spans several clauses.\nFor a number, include every instance of the requested entity. Singular nouns\ncan establish one instance. A bare plural such as 'people' supplies no count.\nFor a color, copy the color of the requested entity. Check which noun it modifies.\nA breed, age, room type, named place or purpose requires explicit support.\nWhen the requested value is absent or its entity is unclear, evidence must be\nNOT_SPECIFIED. Return only the JSON.\n\nAspect: color of ball\nCaption: A boy in a red shirt throws a ball.\n{{\"target\":\"ball\",\"attribute\":\"color\",\"evidence\":\"NOT_SPECIFIED\"}}\n\nAspect: number of dogs\nCaption: Two dogs run while a third dog sleeps.\n{{\"target\":\"dogs\",\"attribute\":\"number\",\"evidence\":\"Two dogs run while a third dog sleeps\"}}\n\nAspect: number of people\nCaption: A young boy carries a basket.\n{{\"target\":\"people\",\"attribute\":\"number\",\"evidence\":\"A young boy\"}}\n\nAspect: dog breed\nCaption: A big brown dog jumps over a log.\n{{\"target\":\"dog\",\"attribute\":\"breed\",\"evidence\":\"NOT_SPECIFIED\"}}\n\nAspect: color of uniform\nCaption: A player wears a red and black uniform.\n{{\"target\":\"uniform\",\"attribute\":\"color\",\"evidence\":\"red and black\"}}\n\nTARGET\nAspect: {condition}\nCaption: {passage}\nJSON:",
+    "review_prompt": "Check whether the proposed evidence answers the aspect question.\nRead the ENTIRE caption before deciding. Return JSON with boolean accept and\na short reason. Accept when the evidence supplies the requested value for the\ncorrect entity and preserves all relevant values and qualifications.\nReject if the value is absent, the question's entity is unclear, the evidence\ndescribes another entity, or the evidence omits a relevant entity or value.\nFor number questions, count every mentioned instance of the requested kind.\nA bare plural supplies no count. A selected singular noun is incomplete when\nthe caption also mentions other people or animals of the requested kind.\nA full caption can be valid evidence. General words such as 'sporting event'\nsupply no particular game. A description of reading a book supplies no evidence\nabout aids used or their absence. Broad questions about object type require\nall the caption's relevant object types.\n\nAspect: {condition}\nCaption: {passage}\nProposed evidence: {answer}\nJSON:",
+    "configuration": {
+      "schema_version": 2,
+      "batch_size": 16,
+      "max_new_tokens": 128,
+      "review_max_new_tokens": 96,
+      "limit": null,
+      "offset": 0
+    },
+    "generation": {
+      "do_sample": false,
+      "enable_thinking": false
+    },
+    "unique_caption_conditions": 17334,
+    "accepted_extractive_answers": 11312,
+    "accepted_fraction": 0.6525902849890389,
+    "reused_answers": 14272,
+    "generated_this_attempt": 3062,
+    "completed_input_sha256": "d4d4cf1663af17d1db6cadb8d705d96b41124e23c6baf4ef5eee1aa024743592",
+    "seconds": 3070.250239051995,
+    "peak_cuda_memory_bytes": 18106109440,
+    "checks": "Exact source span and a second teacher check. Semantic relevance requires an independent pilot audit.",
+    "label_source": "Teacher generated. No human answer annotations."
   }
 }

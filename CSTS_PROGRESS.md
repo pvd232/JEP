@@ -18,13 +18,15 @@ The [result record](training_outputs/csts_baseline_results.json) contains every 
 
 ## Answer and joint study
 
-Observed at 2026-10-21T14:54:01.239662+00:00.
+Observed at 2026-10-21T14:59:06.592227+00:00.
 
 Annotation: 17334 records completed; 11312 accepted. Total planned: 17,334.
 
-Study status: annotating.
+Study status: training.
 [Live counts and epoch metrics](training_outputs/csts_live_status.json).
 [Completed trial records](training_outputs/csts_joint_study_status.json).
+
+![Joint study learning curves](training_outputs/csts_joint_learning_curves.png)
 
 The VIPER precision repair is documented in [PR #21](https://github.com/pvd232/viper/pull/21). All seven CI jobs passed, including 198 integration tests and 28 subtests. Its nine numerical GPU regressions also passed on the L4.
 
