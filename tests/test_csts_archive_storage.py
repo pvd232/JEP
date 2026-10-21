@@ -4,11 +4,10 @@ import hashlib
 from types import SimpleNamespace
 
 import pytest
-
 from csts_pilot.archive_storage import archive_file
 
 
-@pytest.mark.parametrize("verification_fails", [True, False])
+@pytest.mark.parametrize("verification_fails", [True, False, "corrupt"])
 def test_archive_deletes_source_after_verified_restore(tmp_path, verification_fails):
     source = tmp_path / "source.bin"
     payload = b"preserve these research bytes"
@@ -31,12 +30,12 @@ def test_archive_deletes_source_after_verified_restore(tmp_path, verification_fa
 
         def fetch_to_path(self, reference, path):
             assert source.exists()
-            if verification_fails:
+            if verification_fails is True:
                 raise RuntimeError("verification failed")
-            path.write_bytes(payload)
+            path.write_bytes(b"corrupt" if verification_fails == "corrupt" else payload)
 
     if verification_fails:
-        with pytest.raises(RuntimeError, match="verification failed"):
+        with pytest.raises(RuntimeError, match="verification failed|Restored payload"):
             archive_file(source, tmp_path, scratch, Cloud(), None)
         assert source.read_bytes() == payload
         assert not receipts
