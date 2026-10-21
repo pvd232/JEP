@@ -1,0 +1,35 @@
+{
+  "source_commit": "aa11bd3e5f0b731b484fc2a0d01c74dc1d1f2520",
+  "teacher": "Qwen/Qwen3-8B",
+  "teacher_revision": "b968826d9c46dd6066d109eabc6255188de91218",
+  "pilot_offset": 384,
+  "caption_condition_total": 17334,
+  "approved": true,
+  "answer_sha256": "4a6b044df01eaf462cc215cfce03261cb5c4e899fd0ba7877bcb067392a44403",
+  "reviewer": "Codex; provisional LLM audit",
+  "indexing": "zero-based pilot indices",
+  "total": 128,
+  "accepted": 89,
+  "clearly_appropriate": 82,
+  "clear_errors": [
+    69,
+    121
+  ],
+  "uncertain": [
+    4,
+    7,
+    15,
+    20,
+    34
+  ],
+  "conservative_appropriate_fraction": 0.9213483146067416,
+  "minimum_appropriate_fraction": 0.9,
+  "minimum_accepted_fraction": 0.5,
+  "limitations": [
+    "The checker rejects some correct answers, especially implicit singular counts.",
+    "Some accepted spans cover entire captions and may provide a weak conditional signal.",
+    "Questions with underspecified entities remain ambiguous.",
+    "The extraction and checking prompts share teacher weights.",
+    "This small audit provides provisional quality control. Human annotation reliability requires a separate study."
+  ]
+}
