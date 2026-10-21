@@ -65,7 +65,15 @@ def main() -> None:
             )
         write_state("annotation_pilot_running")
         subprocess.run(
-            [sys.executable, "-m", "csts_pilot.joint_run", "--annotation-limit", "128"],
+            [
+                sys.executable,
+                "-m",
+                "csts_pilot.joint_run",
+                "--annotation-limit",
+                "128",
+                "--annotation-offset",
+                "128",
+            ],
             cwd=ROOT,
             check=True,
         )

@@ -9,6 +9,15 @@ def load_json(path: Path):
     return json.loads(path.read_text())
 
 
+def load_answers(path: Path):
+    """Read caption answers using only this file and the standard library."""
+    records = {}
+    for line in path.read_text().splitlines():
+        row = json.loads(line)
+        records[row["id"]] = row
+    return records
+
+
 def load_model(path: Path):
     """Read a tensor checkpoint with restricted pickle loading."""
     import torch

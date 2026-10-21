@@ -23,7 +23,7 @@ from viper.references import GitFileRef
 from viper.repository import read_source, resolve_root
 from viper.runtime import CUDAComputeSpec, LocalEnvSpec, observe_python_env
 
-from csts_pilot.answers import AnswerConfig, annotate, load_answers
+from csts_pilot.answers import AnswerConfig, annotate
 from csts_pilot.diagnostics import summarize
 from csts_pilot.joint import JointConfig, evaluate, fit
 from csts_pilot.metrics import (
@@ -32,7 +32,7 @@ from csts_pilot.metrics import (
     training_answer_ce,
 )
 from csts_pilot.training import write_json
-from jep_pilot.loaders import load_json, load_model, load_state
+from jep_pilot.loaders import load_answers, load_json, load_model, load_state
 from jep_pilot.metrics import evaluation_mse, evaluation_spearman, training_mse
 from jep_pilot.stages import publish_evaluation_inputs
 
@@ -41,6 +41,7 @@ def main() -> None:
     """Freeze all checkpoints before reading reserved similarity evaluation."""
     parser = argparse.ArgumentParser()
     parser.add_argument("--annotation-limit", type=int)
+    parser.add_argument("--annotation-offset", type=int, default=0)
     args = parser.parse_args()
     root = resolve_root()
     source = read_source(root)
@@ -86,7 +87,7 @@ def main() -> None:
     annotation = stage(
         annotate,
         stage_id="annotate",
-        config=AnswerConfig(limit=args.annotation_limit),
+        config=AnswerConfig(limit=args.annotation_limit, offset=args.annotation_offset),
         inputs=(
             input("training", path="csts_data/train.json", data_role="training"),
             input("development", path="csts_data/dev.json", data_role="training"),

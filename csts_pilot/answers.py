@@ -3,7 +3,6 @@
 import hashlib
 import json
 import time
-from pathlib import Path
 from typing import Any
 
 import torch
@@ -18,13 +17,42 @@ from jep_pilot.loaders import load_json
 
 TEACHER = "Qwen/Qwen3-4B-Instruct-2507"
 TEACHER_REVISION = "cdbee75f17c01a7cc42f958dc650907174af0554"
-PROMPT = (
-    "Extract the shortest phrase from the caption that answers the comparison "
-    "question or describes the comparison aspect. Copy one exact contiguous "
-    "phrase from the caption. Preserve qualifications. Return only the phrase, "
-    "without quotation marks. If the caption does not specify the answer, "
-    "return NOT_SPECIFIED.\nAspect: {condition}\nCaption: {passage}"
-)
+PROMPT = """Answer the question about the TARGET caption by copying a short,
+contiguous evidence phrase from that caption. The aspect asks for a value:
+animal type asks which animal, color asks which color, and number asks for the
+quantity and its noun. Preserve all relevant values and qualifications.
+Return only the evidence phrase. Use NOT_SPECIFIED when the requested value
+is absent. A breed, room type, named place, or age requires supporting words.
+
+Examples:
+Aspect: type of animal
+Caption: A brown dog is running through grass.
+Evidence: dog
+
+Aspect: number of people
+Caption: A young boy carries a basket.
+Evidence: A young boy
+
+Aspect: number of animals
+Caption: Two dogs play near a tree.
+Evidence: Two dogs
+
+Aspect: color of uniform
+Caption: A player wears a red and black uniform.
+Evidence: red and black
+
+Aspect: dog breed
+Caption: A big brown dog jumps over a log.
+Evidence: NOT_SPECIFIED
+
+Aspect: room type
+Caption: A room contains a stove and wooden cabinets.
+Evidence: NOT_SPECIFIED
+
+TARGET
+Aspect: {condition}
+Caption: {passage}
+Evidence:"""
 
 
 def answer_id(passage: str, condition: str) -> str:
@@ -45,9 +73,10 @@ def validated_answer(passage: str, answer: str) -> tuple[str, bool]:
 class AnswerConfig(BuildConfig):
     """Pin the teacher and bound generation for the annotation stage."""
 
-    batch_size: int = Field(default=32, ge=1)
+    batch_size: int = Field(default=64, ge=1)
     max_new_tokens: int = Field(default=32, ge=1)
     limit: int | None = None
+    offset: int = Field(default=0, ge=0)
 
 
 @build(config=AnswerConfig)
@@ -67,7 +96,9 @@ def annotate(context: StageContext[AnswerConfig]) -> None:
                 )
     items = sorted(records.values(), key=lambda row: row["id"])
     if context.config.limit is not None:
-        items = items[: context.config.limit]
+        items = items[
+            context.config.offset : context.config.offset + context.config.limit
+        ]
     tokenizer = AutoTokenizer.from_pretrained(TEACHER, revision=TEACHER_REVISION)
     tokenizer.padding_side = "left"
     if tokenizer.pad_token_id is None:
@@ -139,12 +170,3 @@ def annotate(context: StageContext[AnswerConfig]) -> None:
             "label_source": "Teacher generated. No human answer annotations.",
         },
     )
-
-
-def load_answers(path: Path) -> dict[str, dict[str, Any]]:
-    """Load one immutable answer artifact for the student training stage."""
-    return {
-        row["id"]: row
-        for line in path.read_text().splitlines()
-        if (row := json.loads(line))
-    }

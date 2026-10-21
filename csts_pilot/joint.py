@@ -26,10 +26,10 @@ from viper.resume import (
 )
 from viper.stages import StageContext, eval, train
 
-from csts_pilot.answers import answer_id, load_answers
+from csts_pilot.answers import answer_id
 from csts_pilot.diagnostics import summarize
 from csts_pilot.training import CstsConfig, mixed_precision, prepare_tokens, write_json
-from jep_pilot.loaders import load_json, load_model
+from jep_pilot.loaders import load_answers, load_json, load_model
 
 
 class JointConfig(CstsConfig):

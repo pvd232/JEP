@@ -1,5 +1,11 @@
 """Check shared gradients, masked answers and source-span supervision."""
 
+import json
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
 import torch
 from torch import nn
 from transformers import T5Config, T5ForConditionalGeneration
@@ -70,3 +76,24 @@ def test_answer_identity_and_source_validation():
     assert validated_answer("A blue shirt.", "blue shirt") == ("blue shirt", True)
     assert validated_answer("A blue shirt.", "red shirt")[1] is False
     assert validated_answer("A blue shirt.", "NOT_SPECIFIED")[1] is False
+
+
+def test_answer_loader_imports_in_an_isolated_directory(tmp_path):
+    """Load the JSONL artifact with only its frozen source file available."""
+    loader = tmp_path / "loader.py"
+    shutil.copyfile(Path(__file__).parents[1] / "jep_pilot/loaders.py", loader)
+    artifact = tmp_path / "answers.jsonl"
+    artifact.write_text(json.dumps({"id": "sample", "answer": "blue"}) + "\n")
+    program = """import importlib.util,sys
+from pathlib import Path
+spec=importlib.util.spec_from_file_location("frozen_loader",sys.argv[1])
+module=importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+assert module.load_answers(Path(sys.argv[2]))["sample"]["answer"]=="blue"
+"""
+    subprocess.run(
+        [sys.executable, "-I", "-c", program, str(loader), str(artifact)],
+        cwd=tmp_path,
+        check=True,
+        timeout=30,
+    )
