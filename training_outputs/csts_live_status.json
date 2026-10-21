@@ -1,14 +1,14 @@
 {
-  "observed_at_utc": "2026-10-21T16:05:25.324512+00:00",
+  "observed_at_utc": "2026-10-21T16:10:31.027223+00:00",
   "source_commit": "38496f8f7f30402429acf0ba150dcffc56bf8f48",
   "controller_alive": true,
   "resources": {
-    "disk_free_gib": 295.2168083190918,
+    "disk_free_gib": 295.0650405883789,
     "disk_total_gib": 491.0848846435547,
     "gpus": [
       {
         "utilization_percent": 0.0,
-        "memory_used_mib": 3.0,
+        "memory_used_mib": 8583.0,
         "memory_total_mib": 23034.0
       }
     ]
@@ -5681,7 +5681,7 @@
     {
       "name": "sequential_seed9",
       "run_id": "01M5FK55YJEP73AFYG4XK1SP4V",
-      "status": "trained",
+      "status": "verified",
       "epochs": [
         {
           "epoch": 1,
@@ -6135,6 +6135,78 @@
       "peak_cuda_memory_bytes": 5577819648,
       "verified_measurements": null,
       "native_record": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_sequential_seed9/runs/sequential_seed9/01M5FK55YJEP73AFYG4XK1SP4V/resolved.yaml",
+      "annotation": null
+    },
+    {
+      "name": "joint_seed9",
+      "run_id": "01M5FKBZTQ2NZ3EZZQCPHJYEJG",
+      "status": "training",
+      "epochs": [
+        {
+          "epoch": 1,
+          "training_mse": 0.09670494496822357,
+          "training_answer_ce": 1.2099876403808594,
+          "development_answer_ce": 0.4299507737159729,
+          "development": {
+            "mse_0_1": 0.12413442286894272
+          }
+        },
+        {
+          "epoch": 2,
+          "training_mse": 0.08349613845348358,
+          "training_answer_ce": 0.5999148488044739,
+          "development_answer_ce": 0.3618398606777191,
+          "development": {
+            "mse_0_1": 0.11473227509856793
+          }
+        },
+        {
+          "epoch": 3,
+          "training_mse": 0.07258828729391098,
+          "training_answer_ce": 0.5125944018363953,
+          "development_answer_ce": 0.32923904061317444,
+          "development": {
+            "mse_0_1": 0.08579483243333541
+          }
+        },
+        {
+          "epoch": 4,
+          "training_mse": 0.06789694726467133,
+          "training_answer_ce": 0.4695378243923187,
+          "development_answer_ce": 0.31859472393989563,
+          "development": {
+            "mse_0_1": 0.09577730551984086
+          }
+        },
+        {
+          "epoch": 5,
+          "training_mse": 0.06450856477022171,
+          "training_answer_ce": 0.44608044624328613,
+          "development_answer_ce": 0.3115173578262329,
+          "development": {
+            "mse_0_1": 0.0784455520382069
+          }
+        },
+        {
+          "epoch": 6,
+          "training_mse": 0.06018960848450661,
+          "training_answer_ce": 0.4418058395385742,
+          "development_answer_ce": 0.30692076683044434,
+          "development": {
+            "mse_0_1": 0.07398019919741436
+          }
+        }
+      ],
+      "best_epoch": 6,
+      "best_development": {
+        "mse_0_1": 0.07398019919741436
+      },
+      "development_answer_ce": 0.30692076683044434,
+      "config": {},
+      "seconds": null,
+      "peak_cuda_memory_bytes": null,
+      "verified_measurements": null,
+      "native_record": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_joint_seed9/runs/joint_seed9/01M5FKBZTQ2NZ3EZZQCPHJYEJG/resolved.yaml",
       "annotation": null
     }
   ],
