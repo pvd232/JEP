@@ -1,0 +1,107 @@
+{
+  "observed_at_utc": "2026-10-21T14:18:16.937999+00:00",
+  "source_commit": "38496f8f7f30402429acf0ba150dcffc56bf8f48",
+  "controller_alive": true,
+  "resources": {
+    "disk_free_gib": 308.7352714538574,
+    "disk_total_gib": 491.0848846435547,
+    "gpus": [
+      {
+        "utilization_percent": 98.0,
+        "memory_used_mib": 18015.0,
+        "memory_total_mib": 23034.0
+      }
+    ]
+  },
+  "failure": null,
+  "pipeline": {
+    "phase": "joint_study_running",
+    "pid": 414199,
+    "cached_answers": 14272,
+    "shutdown_requested": true
+  },
+  "status": "starting",
+  "data_manifest": {
+    "dataset": "LivNLP/C-STS-Reannotated",
+    "revision": "058ac842f5f19d27b08ad54f6d4a2c50b3f9578b",
+    "labels": "Authors combine LLM reannotations and original human labels.",
+    "invalid_rows_removed": {
+      "train": 0,
+      "evaluation": 214
+    },
+    "overlapping_training_rows_removed": 2532,
+    "split": "Connected canonical caption components. Released validation is evaluation.",
+    "normalization": "target = (rating - 1) / 4; rating_prediction = 1 + 4 * score",
+    "partitions": {
+      "train": {
+        "rows": 6980,
+        "groups": 2674,
+        "pairs": 3484,
+        "ratings": {
+          "1.0": 702,
+          "2.0": 1170,
+          "3.0": 2320,
+          "4.0": 1505,
+          "5.0": 1283
+        },
+        "sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01"
+      },
+      "dev": {
+        "rows": 1830,
+        "groups": 688,
+        "pairs": 915,
+        "ratings": {
+          "1.0": 181,
+          "2.0": 304,
+          "3.0": 627,
+          "4.0": 373,
+          "5.0": 345
+        },
+        "sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273"
+      },
+      "evaluation": {
+        "rows": 2620,
+        "groups": 1241,
+        "pairs": 1408,
+        "ratings": {
+          "1.0": 633,
+          "2.0": 233,
+          "3.0": 392,
+          "4.0": 296,
+          "5.0": 1066
+        },
+        "sha256": "2c8b6f2b62740c85c376eacd02ef222c2bfacdfe8df5f772a4dd7d52b6d38f1e"
+      }
+    }
+  },
+  "trials": [
+    {
+      "name": "annotations",
+      "run_id": "01M5FC4F6Q37P5P0EM1QY31326",
+      "status": "training",
+      "epochs": [],
+      "best_epoch": null,
+      "best_development": {},
+      "development_answer_ce": null,
+      "config": {},
+      "seconds": null,
+      "peak_cuda_memory_bytes": null,
+      "verified_measurements": null,
+      "native_record": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_annotations/runs/annotations/01M5FC4F6Q37P5P0EM1QY31326/resolved.yaml",
+      "annotation": {
+        "completed": 15376,
+        "accepted": 9991,
+        "total": null,
+        "seconds": null
+      }
+    }
+  ],
+  "selected": {},
+  "evaluation": [],
+  "mean_predictor": null,
+  "development_reference": {
+    "prediction": 0.5536174785100286,
+    "development_mse": 0.09203845723442874
+  },
+  "launcher_log": "/mnt/rico-source-data/jep-joint-recovery-20261021/csts_results/launcher.log"
+}

@@ -16,9 +16,15 @@ The condition produces a consistent gain across the three seeds. Absolute rating
 
 The [result record](training_outputs/csts_baseline_results.json) contains every seed, selected learning rate, native run references and the data manifest. The [rating protocol](CSTS_RUN.md) records the filtered split and the original label sources.
 
-The [answer and joint study](CSTS_JOINT_RUN.md) is annotating 17,334 unique caption and question inputs. Qwen3-8B generates evidence spans. A second prompt checks their relevance and completeness. In the fresh 128-example pilot, 89 answers passed both checks. Codex judged 82 clearly appropriate, with two errors and five uncertain cases. The [audit](training_outputs/csts_annotation_audit.json) records these findings and limitations.
+## Answer and joint study
 
-At 09:48 EDT on 21 October, the observer confirmed that annotation stopped at its four-hour execution limit. It saved 14,272 of 17,334 records, including 9,302 accepted answers. The GPU was idle. Training had not started. Recovery validates and reuses the saved answers and gives each stage a six-hour limit. The remaining generation uses the same Qwen revision, prompts and batch size. Comparison, annotation-only, sequential, joint and shuffled-answer checkpoints will use the same reserved evaluation set. Results from the original source `aa11bd3e5f0b731b484fc2a0d01c74dc1d1f2520` remain intact.
+Observed at 2026-10-21T14:18:16.937999+00:00.
+
+Annotation: 15376 records completed; 9991 accepted. Total planned: 17,334.
+
+Study status: annotating.
+[Live counts and epoch metrics](training_outputs/csts_live_status.json).
+[Completed trial records](training_outputs/csts_joint_study_status.json).
 
 The VIPER precision repair is documented in [PR #21](https://github.com/pvd232/viper/pull/21). All seven CI jobs passed, including 198 integration tests and 28 subtests. Its nine numerical GPU regressions also passed on the L4.
 
