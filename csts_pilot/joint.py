@@ -38,6 +38,28 @@ class JointConfig(CstsConfig):
     objective: Literal["ratings", "answers", "joint"] = "joint"
     annotation_weight: float = Field(default=0.2, ge=0)
     shuffle_answers: bool = False
+    checkpoint_metric: Literal["mse", "spearman"] = "mse"
+    fixed_epoch_budget: bool = False
+
+
+def selection_score(
+    config: JointConfig, diagnostic: dict[str, Any], answer_ce: float | None
+) -> float:
+    """Use a minimization score while preserving the historical default."""
+    value = (
+        answer_ce
+        if config.objective == "answers"
+        else diagnostic[config.checkpoint_metric]
+        if config.checkpoint_metric == "spearman"
+        else diagnostic["mse_0_1"]
+    )
+    if value is None or not math.isfinite(value):
+        raise ValueError("The checkpoint selection metric must be finite.")
+    return (
+        -value
+        if config.objective != "answers" and config.checkpoint_metric == "spearman"
+        else value
+    )
 
 
 class AnswerEncoder(nn.Module):
@@ -167,7 +189,7 @@ def predictions(
 
 @train(config=JointConfig)
 def fit(context: StageContext[JointConfig]) -> None:
-    """Select answer pretraining by answer CE and other arms by development MSE."""
+    """Select annotations by CE and ratings by the configured development metric."""
     config = context.config
     torch.manual_seed(config.seed)
     random.seed(config.seed)
@@ -192,6 +214,12 @@ def fit(context: StageContext[JointConfig]) -> None:
     answer_coverage = {
         "training": float(labels.ne(-100).any(1).float().mean()),
         "development": float(dev_labels.ne(-100).any(1).float().mean()),
+    }
+    answer_token_counts = {
+        "training_nonpadding_per_epoch": int(labels.ne(-100).sum()),
+        "development_nonpadding_per_pass": int(dev_labels.ne(-100).sum()),
+        "training_padded_width": labels.shape[1],
+        "development_padded_width": dev_labels.shape[1],
     }
     target = torch.tensor([row["target"] for row in training], device=config.device)
     optimizer = torch.optim.AdamW(
@@ -283,6 +311,10 @@ def fit(context: StageContext[JointConfig]) -> None:
             ("development_answer_ce", dev_ce),
         ):
             context.metrics[name].record(value, step=epoch)
+        if config.checkpoint_metric == "spearman":
+            context.metrics["development_spearman"].record(
+                diagnostic["spearman"], step=epoch
+            )
         history.append(
             {
                 "epoch": epoch,
@@ -294,9 +326,7 @@ def fit(context: StageContext[JointConfig]) -> None:
                 "elapsed_seconds": time.monotonic() - started,
             }
         )
-        selected = dev_ce if config.objective == "answers" else diagnostic["mse_0_1"]
-        if selected is None:
-            raise RuntimeError("The checkpoint selection metric is missing.")
+        selected = selection_score(config, diagnostic, dev_ce)
         if selected < best:
             best, best_epoch, stale = selected, epoch, 0
             torch.save(
@@ -314,7 +344,7 @@ def fit(context: StageContext[JointConfig]) -> None:
         else:
             stale += 1
         print(json.dumps(history[-1]), flush=True)
-        if stale >= config.patience:
+        if stale >= config.patience and not config.fixed_epoch_budget:
             break
     selected_epoch = next(row for row in history if row["epoch"] == best_epoch)
     write_json(
@@ -323,12 +353,23 @@ def fit(context: StageContext[JointConfig]) -> None:
             "config": config.model_dump(),
             "initial_development": initial_development,
             "answer_coverage": answer_coverage,
+            "answer_token_counts": answer_token_counts,
+            "training_nonpadding_answer_tokens": answer_token_counts[
+                "training_nonpadding_per_epoch"
+            ]
+            * len(history)
+            if config.objective != "ratings"
+            else 0,
             "initial_shared_gradients": gradient_check,
             "epochs": history,
             "best_epoch": best_epoch,
             "best_development_mse": selected_epoch["development"]["mse_0_1"],
-            "selection_metric": "answer_ce" if config.objective == "answers" else "mse",
-            "best_selection_value": best,
+            "selection_metric": "answer_ce"
+            if config.objective == "answers"
+            else config.checkpoint_metric,
+            "best_selection_value": -best
+            if config.objective != "answers" and config.checkpoint_metric == "spearman"
+            else best,
             "elapsed_seconds": time.monotonic() - started,
             "peak_cuda_memory_bytes": torch.cuda.max_memory_allocated(),
         },

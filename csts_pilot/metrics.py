@@ -20,3 +20,9 @@ def training_answer_ce(_context: MetricContext[MetricConfig], value: float) -> f
 def development_answer_ce(_context: MetricContext[MetricConfig], value: float) -> float:
     """Record teacher-forced answer loss on development captions."""
     return value
+
+
+@metric(metric_id="development_spearman", mode="stateless")
+def development_spearman(_context: MetricContext[MetricConfig], value: float) -> float:
+    """Record the ranking criterion for the matched annotation-format screen."""
+    return value
