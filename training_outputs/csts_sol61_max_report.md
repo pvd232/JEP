@@ -1,8 +1,8 @@
 # C-STS: GPT-6.1 Sol, max reasoning
 
-Updated: 2026-10-21T17:43:03.701509+00:00.
+Updated: 2026-10-21T17:48:26.584988+00:00.
 
-Status: **running**. Completed 256 / 2,620 comparisons.
+Status: **running**. Completed 768 / 2,620 comparisons.
 
 Model: `gpt-6.1-sol`, `model_reasoning_effort="max"`, through the signed-in Codex CLI. Each request starts a fresh session. The model sees only an item identifier, two sentences, and the condition. The fixed zero-shot rubric requests a 1–5 score with 0.1 precision. Reference scores are joined by the offline evaluator after inference. No tools are allowed; any tool event invalidates a batch. Private reasoning is neither requested nor captured.
 
@@ -10,7 +10,26 @@ Protocol: 64 independently scored items per request, four requests at a time; 41
 
 A development timing check of eight source-distinct rows completed in 44.021 seconds. The rubric was fixed before evaluation. This uses the same existing 2,620-comparison split as the completed encoder study. This split has previously been examined by researchers; it is not a new confirmatory holdout. Public benchmark exposure during pretraining cannot be ruled out.
 
-Files: [status](csts_sol61_max_status.json), [results](csts_sol61_max_results.json), [predictions](csts_sol61_max_predictions.json), [verification receipt](csts_sol61_max_verification.json).
+Label provenance: **LivNLP/C-STS-Reannotated**, revision `058ac842f5f19d27b08ad54f6d4a2c50b3f9578b`. This is the later release by Zhang, Zhou and Bollegala (EMNLP 2025), also used by CASE. It combines GPT-4o/Claude-3.7-Sonnet reannotations with original human scores and revised conditions. Tu et al. (ACL 2024) released a separate manually reannotated validation set at [brandeis-llc/L-CSTS](https://github.com/brandeis-llc/L-CSTS). Our current run uses the LivNLP labels. [Release description](https://livnlp.github.io/CSTS-reannotation/).
+
+## Preliminary results
+
+**768 completed comparisons out of 2,620**, as of 2026-10-21T17:48:26.577982+00:00. These are the completed batches, and their scores have not been used to alter the prompt or inference settings.
+
+| Metric | Preliminary value |
+|---|---:|
+| Spearman | 0.823185 |
+| MSE, normalized 0–1 | 0.059195 |
+| MSE, 1–5 rating units | 0.947122 |
+| Exact rating agreement | 52.47% (403/768) |
+| Mean absolute error, rating points | 0.5751 |
+| Condition ordering, ties count half | 95.35% |
+
+Condition ordering currently covers 86 eligible within-pair comparisons: 81 correct, 2 tied. Only pairs with both conditions completed contribute. Exact rating agreement compares the numeric 1–5 prediction with the reference score, without rounding.
+
+Spearman measures global rank agreement across the completed comparison rows. Its value is not a percent-correct score. MSE uses `(score - 1) / 4`. These partial metrics have been checked against SciPy offline; native VIPER publication and independent verification follow full inference completion. The final result may change as additional batches finish.
+
+Files: [status](csts_sol61_max_status.json), [results](csts_sol61_max_results.json), [predictions](csts_sol61_max_predictions.json).
 
 Fixed rubric:
 
