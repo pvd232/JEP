@@ -32,6 +32,12 @@ from jep_pilot.metrics import evaluation_mse, evaluation_spearman, training_mse
 from jep_pilot.stages import publish_evaluation_inputs
 
 
+def trial_name(label: str, rate: float) -> str:
+    """Encode a learning rate using VIPER's permitted identifier characters."""
+    rate_tag = f"{rate:.0e}".replace("-", "_")
+    return f"{label}_lr{rate_tag}_seed7"
+
+
 def main() -> None:
     """Finish all development choices before reading final model scores."""
     root = resolve_root()
@@ -139,7 +145,7 @@ def main() -> None:
     for condition, label in ((True, "conditioned"), (False, "without_question")):
         trials = []
         for rate in (1e-5, 3e-5):
-            name = f"{label}_lr{rate:.0e}_seed7"
+            name = trial_name(label, rate)
             config = CstsConfig(condition=condition, encoder_learning_rate=rate)
             resolved = training_run(name, config)
             score = summary["runs"][-1]["best_development_mse"]
