@@ -1,14 +1,14 @@
 {
-  "observed_at_utc": "2026-10-21T14:48:55.116362+00:00",
+  "observed_at_utc": "2026-10-21T14:54:01.239662+00:00",
   "source_commit": "38496f8f7f30402429acf0ba150dcffc56bf8f48",
   "controller_alive": true,
   "resources": {
-    "disk_free_gib": 308.7071342468262,
+    "disk_free_gib": 303.8142433166504,
     "disk_total_gib": 491.0848846435547,
     "gpus": [
       {
-        "utilization_percent": 98.0,
-        "memory_used_mib": 18015.0,
+        "utilization_percent": 86.0,
+        "memory_used_mib": 7025.0,
         "memory_total_mib": 23034.0
       }
     ]
@@ -20,7 +20,7 @@
     "cached_answers": 14272,
     "shutdown_requested": true
   },
-  "status": "starting",
+  "status": "annotating",
   "data_manifest": {
     "dataset": "LivNLP/C-STS-Reannotated",
     "revision": "058ac842f5f19d27b08ad54f6d4a2c50b3f9578b",
@@ -78,7 +78,7 @@
     {
       "name": "annotations",
       "run_id": "01M5FC4F6Q37P5P0EM1QY31326",
-      "status": "training",
+      "status": "verified",
       "epochs": [],
       "best_epoch": null,
       "best_development": {},
@@ -89,11 +89,74 @@
       "verified_measurements": null,
       "native_record": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_annotations/runs/annotations/01M5FC4F6Q37P5P0EM1QY31326/resolved.yaml",
       "annotation": {
-        "completed": 17200,
-        "accepted": 11222,
-        "total": null,
-        "seconds": null
+        "completed": 17334,
+        "accepted": 11312,
+        "total": 17334,
+        "seconds": 3070.250239051995
       }
+    },
+    {
+      "name": "ratings_seed7",
+      "run_id": "01M5FF3YRCAQR6HKY28REHR50E",
+      "status": "training",
+      "epochs": [
+        {
+          "epoch": 1,
+          "training_mse": 0.09904371947050095,
+          "training_answer_ce": 0.0,
+          "development_answer_ce": 1.5190484523773193,
+          "development": {
+            "mse_0_1": 0.0967124369247724
+          }
+        },
+        {
+          "epoch": 2,
+          "training_mse": 0.08276306837797165,
+          "training_answer_ce": 0.0,
+          "development_answer_ce": 1.4831397533416748,
+          "development": {
+            "mse_0_1": 0.12640200356021297
+          }
+        },
+        {
+          "epoch": 3,
+          "training_mse": 0.0735812708735466,
+          "training_answer_ce": 0.0,
+          "development_answer_ce": 1.377748727798462,
+          "development": {
+            "mse_0_1": 0.09496933485848712
+          }
+        },
+        {
+          "epoch": 4,
+          "training_mse": 0.0677054151892662,
+          "training_answer_ce": 0.0,
+          "development_answer_ce": 1.3613232374191284,
+          "development": {
+            "mse_0_1": 0.09089518378726749
+          }
+        },
+        {
+          "epoch": 5,
+          "training_mse": 0.06431347131729126,
+          "training_answer_ce": 0.0,
+          "development_answer_ce": 1.3584529161453247,
+          "development": {
+            "mse_0_1": 0.08654138520392143
+          }
+        }
+      ],
+      "best_epoch": 5,
+      "best_development": {
+        "mse_0_1": 0.08654138520392143
+      },
+      "development_answer_ce": 1.3584529161453247,
+      "config": {},
+      "seconds": null,
+      "peak_cuda_memory_bytes": null,
+      "verified_measurements": null,
+      "native_record": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_ratings_seed7/runs/ratings_seed7/01M5FF3YRCAQR6HKY28REHR50E/resolved.yaml",
+      "annotation": null
     }
   ],
   "selected": {},

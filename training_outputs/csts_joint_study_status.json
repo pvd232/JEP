@@ -1,4 +1,65 @@
 {
+  "source_commit": "38496f8f7f30402429acf0ba150dcffc56bf8f48",
   "status": "annotating",
-  "runs": []
+  "runs": [
+    {
+      "name": "annotations",
+      "path": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_annotations/runs/annotations/01M5FC4F6Q37P5P0EM1QY31326/resolved.yaml"
+    }
+  ],
+  "selected": {},
+  "evaluation": [],
+  "data_manifest": {
+    "dataset": "LivNLP/C-STS-Reannotated",
+    "revision": "058ac842f5f19d27b08ad54f6d4a2c50b3f9578b",
+    "labels": "Authors combine LLM reannotations and original human labels.",
+    "invalid_rows_removed": {
+      "train": 0,
+      "evaluation": 214
+    },
+    "overlapping_training_rows_removed": 2532,
+    "split": "Connected canonical caption components. Released validation is evaluation.",
+    "normalization": "target = (rating - 1) / 4; rating_prediction = 1 + 4 * score",
+    "partitions": {
+      "train": {
+        "rows": 6980,
+        "groups": 2674,
+        "pairs": 3484,
+        "ratings": {
+          "1.0": 702,
+          "2.0": 1170,
+          "3.0": 2320,
+          "4.0": 1505,
+          "5.0": 1283
+        },
+        "sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01"
+      },
+      "dev": {
+        "rows": 1830,
+        "groups": 688,
+        "pairs": 915,
+        "ratings": {
+          "1.0": 181,
+          "2.0": 304,
+          "3.0": 627,
+          "4.0": 373,
+          "5.0": 345
+        },
+        "sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273"
+      },
+      "evaluation": {
+        "rows": 2620,
+        "groups": 1241,
+        "pairs": 1408,
+        "ratings": {
+          "1.0": 633,
+          "2.0": 233,
+          "3.0": 392,
+          "4.0": 296,
+          "5.0": 1066
+        },
+        "sha256": "2c8b6f2b62740c85c376eacd02ef222c2bfacdfe8df5f772a4dd7d52b6d38f1e"
+      }
+    }
+  }
 }
