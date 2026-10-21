@@ -1,8 +1,8 @@
 # C-STS: GPT-6.1 Sol, max reasoning
 
-Updated: 2026-10-21T18:06:28.922523+00:00.
+Updated: 2026-10-21T18:09:34.865550+00:00.
 
-Status: **running**. Completed 2,304 / 2,620 comparisons.
+Status: **complete**. Completed 2,620 / 2,620 comparisons.
 
 Model: `gpt-6.1-sol`, `model_reasoning_effort="max"`, through the signed-in Codex CLI. Each request starts a fresh session. The model sees only an item identifier, two sentences, and the condition. The fixed zero-shot rubric requests a 1–5 score with 0.1 precision. Reference scores are joined by the offline evaluator after inference. No tools are allowed; any tool event invalidates a batch. Private reasoning is neither requested nor captured.
 
@@ -12,22 +12,21 @@ A development timing check of eight source-distinct rows completed in 44.021 sec
 
 **Corrected evaluation-label provenance:** The files come from **LivNLP/C-STS-Reannotated**, revision `058ac842f5f19d27b08ad54f6d4a2c50b3f9578b`, but their validation ratings match **Tu et al. (ACL 2024) human reannotations** exactly. A row-by-row audit found all **2,834 / 2,834** labels identical to [Tu's released TSV](https://github.com/brandeis-llc/L-CSTS/blob/main/data/csts-val-reannotated.tsv), including the 214 invalid labels removed to leave 2,620 evaluation comparisons. LivNLP modifies condition text. Its separate training ratings combine original human scores with GPT-4o/Claude-3.7-Sonnet judgments. The earlier report incorrectly described our evaluation ratings as a separate LLM reannotation. [Audit receipt](csts_sol61_max_label_audit.json); [2025 paper, Section 3](https://aclanthology.org/2025.emnlp-main.1373.pdf).
 
-## Preliminary results
+| System | MSE, normalized 0–1 | Spearman | Condition ordering |
+|---|---:|---:|---:|
+| GPT-6.1 Sol, max | 0.064261 | 0.802917 | 92.24% |
+| FLAN ratings, 3-seed mean | 0.144039 | 0.430310 | 75.93% |
+| FLAN sequential answers → ratings, 3-seed mean | 0.135446 | 0.464267 | 78.29% |
 
-**2,304 completed comparisons out of 2,620**, as of 2026-10-21T18:06:28.905809+00:00. These are the completed batches, and their scores have not been used to alter the prompt or inference settings.
+Inference wall time: 30.69 minutes. One inference pass, with no training or evaluation-based prompt selection.
 
-| Metric | Preliminary value |
-|---|---:|
-| Spearman | 0.803204 |
-| MSE, normalized 0–1 | 0.063951 |
-| MSE, 1–5 rating units | 1.023216 |
-| Exact rating agreement | 49.78% (1147/2304) |
-| Mean absolute error, rating points | 0.6088 |
-| Condition ordering, ties count half | 92.28% |
+MSE uses `(score - 1) / 4` against the existing normalized target. Spearman ranks all 2,620 predictions and all 2,620 targets separately, assigns average ranks to ties, then computes Pearson correlation of those two rank vectors. It is a global correlation over comparison rows. Condition ordering is evaluated separately within the same sentence pair under different conditions; tied predictions receive half credit.
 
-Condition ordering currently covers 797 eligible within-pair comparisons: 714 correct, 43 tied. Only pairs with both conditions completed contribute. Exact rating agreement compares the numeric 1–5 prediction with the reference score, without rounding.
+The LLM evaluates both sentences together and emits a scalar score. Its result tests direct conditional judging; it does not establish an independently indexable conditional embedding model. These results support comparison with our own split. Published CASE and Tu results use different label/split protocols.
 
-Spearman measures global rank agreement across the completed comparison rows. Its value is not a percent-correct score. MSE uses `(score - 1) / 4`. These partial metrics have been checked against SciPy offline; native VIPER publication and independent verification follow full inference completion. The final result may change as additional batches finish.
+Source-component bootstrap (2,000 replicates, percentile 95% intervals): Spearman [0.784272, 0.820256]; MSE [0.059037, 0.069768]. These are intervals for this single LLM pass, not paired differences against encoder arms.
+
+Native VIPER publication and independent MSE/Spearman verification: **pending**. Inference itself ran through the external authenticated CLI; VIPER records its captured evidence and verifies the evaluation.
 
 Files: [status](csts_sol61_max_status.json), [results](csts_sol61_max_results.json), [predictions](csts_sol61_max_predictions.json).
 
