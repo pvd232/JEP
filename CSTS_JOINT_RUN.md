@@ -87,6 +87,12 @@ states. Shuffled indices move to the GPU once per epoch. BF16 forward passes
 use the corrected VIPER precision handling. Checkpoints and epoch metrics are
 native VIPER artifacts. The workspace publishes to the existing GCS repository.
 
+Diagnostics include development scores before training and the fraction of
+answers contributing to each split's loss. The first joint update records both
+gradient norms on a shared encoder weight, their cosine, and the weighted
+answer-to-rating norm ratio. These measurements help identify weak supervision,
+dominant auxiliary gradients and conflicting updates.
+
 The [progress command](csts_pilot/progress.py) reports epochs, development scores,
 GPU utilization and storage. The annotation stage writes a count after each
 generation batch. Its [manifest](csts_pilot/answers.py) records the teacher,

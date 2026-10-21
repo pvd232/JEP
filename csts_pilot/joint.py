@@ -189,6 +189,10 @@ def fit(context: StageContext[JointConfig]) -> None:
         training, answers, tokenizer, config, shuffle=config.shuffle_answers
     )
     dev_labels = answer_labels(development, answers, tokenizer, config)
+    answer_coverage = {
+        "training": float(labels.ne(-100).any(1).float().mean()),
+        "development": float(dev_labels.ne(-100).any(1).float().mean()),
+    }
     target = torch.tensor([row["target"] for row in training], device=config.device)
     optimizer = torch.optim.AdamW(
         [
@@ -208,6 +212,11 @@ def fit(context: StageContext[JointConfig]) -> None:
     generator = torch.Generator().manual_seed(config.seed + 100)
     best, best_epoch, stale, step = float("inf"), 0, 0, 0
     history = []
+    initial_rows, initial_ce = predictions(
+        model, development, dev_tokens, config, dev_labels
+    )
+    initial_development = dict(summarize(initial_rows), answer_ce=initial_ce)
+    gradient_check = None
     started = time.monotonic()
     for epoch in range(1, config.max_epochs + 1):
         model.train()
@@ -232,6 +241,28 @@ def fit(context: StageContext[JointConfig]) -> None:
                     if config.objective == "answers"
                     else mse + config.annotation_weight * ce
                 )
+            if step == 0 and config.objective == "joint":
+                shared = model.t5.encoder.block[0].layer[0].SelfAttention.q.weight
+                rating_gradient = torch.autograd.grad(mse, shared, retain_graph=True)[
+                    0
+                ].float()
+                answer_gradient = torch.autograd.grad(ce, shared, retain_graph=True)[
+                    0
+                ].float()
+                gradient_check = {
+                    "rating_norm": float(rating_gradient.norm()),
+                    "answer_norm": float(answer_gradient.norm()),
+                    "weighted_answer_to_rating_ratio": float(
+                        config.annotation_weight
+                        * answer_gradient.norm()
+                        / rating_gradient.norm().clamp_min(1e-12)
+                    ),
+                    "cosine": float(
+                        F.cosine_similarity(
+                            rating_gradient.flatten(), answer_gradient.flatten(), dim=0
+                        )
+                    ),
+                }
             loss.backward()
             torch.nn.utils.clip_grad_norm_(
                 model.parameters(), 1.0, error_if_nonfinite=True
@@ -290,6 +321,9 @@ def fit(context: StageContext[JointConfig]) -> None:
         context.outputs["trace"],
         {
             "config": config.model_dump(),
+            "initial_development": initial_development,
+            "answer_coverage": answer_coverage,
+            "initial_shared_gradients": gradient_check,
             "epochs": history,
             "best_epoch": best_epoch,
             "best_development_mse": selected_epoch["development"]["mse_0_1"],

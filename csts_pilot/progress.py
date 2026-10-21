@@ -83,6 +83,7 @@ def collect(root: Path) -> dict[str, Any]:
     if summary.get("source_commit") != source:
         summary = {}
     verified = {row["name"]: row for row in summary.get("runs", [])}
+    queue = read_json(root / "csts_results/queue_state.json")
     manifest = (
         summary.get("data_manifest")
         or read_json(root / "csts_data/manifest.json")
@@ -111,10 +112,14 @@ def collect(root: Path) -> dict[str, Any]:
             logs = folder / "attempts/1/measurements"
             train = measurements(logs / "train.training_mse.jsonl")
             dev = measurements(logs / "train.development_mse.jsonl")
+            train_ce = measurements(logs / "train.training_answer_ce.jsonl")
+            dev_ce = measurements(logs / "train.development_answer_ce.jsonl")
             epochs = [
                 {
                     "epoch": epoch,
                     "training_mse": train.get(epoch),
+                    "training_answer_ce": train_ce.get(epoch),
+                    "development_answer_ce": dev_ce.get(epoch),
                     "development": {"mse_0_1": dev[epoch]},
                 }
                 for epoch in sorted(dev)
@@ -143,6 +148,9 @@ def collect(root: Path) -> dict[str, Any]:
                 "epochs": epochs,
                 "best_epoch": best["epoch"] if best else None,
                 "best_development": metrics,
+                "development_answer_ce": best.get("development_answer_ce")
+                if best
+                else None,
                 "config": config,
                 "seconds": trace.get("elapsed_seconds") if trace else None,
                 "peak_cuda_memory_bytes": trace.get("peak_cuda_memory_bytes")
@@ -171,11 +179,20 @@ def collect(root: Path) -> dict[str, Any]:
         and summary.get("status") != "complete"
         and log_path.exists()
     ):
+        latest_trace = log_path.read_text().rsplit(
+            "Traceback (most recent call last):", 1
+        )[-1]
         errors = [
             line
-            for line in log_path.read_text().splitlines()
+            for line in latest_trace.splitlines()
             if line.startswith(
-                ("OSError:", "RuntimeError:", "ValueError:", "viper.execution.errors.")
+                (
+                    "OSError:",
+                    "RuntimeError:",
+                    "ValueError:",
+                    "viper.execution.errors.",
+                    "pydantic_core.",
+                )
             )
         ]
         failure = errors[-2:] or None
@@ -185,6 +202,7 @@ def collect(root: Path) -> dict[str, Any]:
         "controller_alive": controller_alive,
         "resources": resources(root),
         "failure": failure,
+        "pipeline": queue,
         "status": summary.get("status", "starting")
         if controller_alive or summary.get("status") == "complete"
         else "stopped",
@@ -210,6 +228,8 @@ def render(progress: dict[str, Any]) -> str:
         f"Observed {progress['observed_at_utc']}",
         f"{'Trial':40} {'Status':9} {'Epoch':>5} {'Dev MSE':>9} {'Spearman':>9} {'Q order':>9}",
     ]
+    if progress.get("pipeline"):
+        lines.insert(2, "Pipeline: " + progress["pipeline"]["phase"])
     resource = progress.get("resources", {})
     if resource:
         lines.insert(2, f"Storage: {resource['disk_free_gib']:.1f} GiB free")
@@ -227,6 +247,10 @@ def render(progress: dict[str, Any]) -> str:
             f"{number(metrics.get('mse_0_1')):>9} {number(metrics.get('spearman')):>9} "
             f"{number(100 * accuracy, 1) + '%' if accuracy is not None else 'pending':>9}"
         )
+        if trial.get("development_answer_ce") is not None:
+            lines.append(
+                f"  Development answer cross-entropy: {trial['development_answer_ce']:.4f}"
+            )
     if progress["development_reference"]:
         lines.append(
             "Mean-rating development MSE: "
