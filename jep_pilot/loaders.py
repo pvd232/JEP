@@ -4,6 +4,11 @@ import json
 from pathlib import Path
 
 
+def load_bytes(path: Path):
+    """Read captured inference evidence without importing experiment code."""
+    return path.read_bytes()
+
+
 def load_json(path: Path):
     """Read a saved data, trace or prediction artifact."""
     return json.loads(path.read_text())

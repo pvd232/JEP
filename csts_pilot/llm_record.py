@@ -18,11 +18,8 @@ from viper.references import GitFileRef
 from viper.repository import read_source,resolve_root
 from viper.runtime import CPUComputeSpec,LocalEnvSpec,observe_python_env
 from viper.stages import StageContext,build,eval
-from jep_pilot.loaders import load_json
+from jep_pilot.loaders import load_bytes,load_json
 from jep_pilot.metrics import evaluation_mse,evaluation_spearman
-
-def load_bytes(path:Path)->bytes:
-    return path.read_bytes()
 
 @build(config=BuildConfig)
 def publish_capture(context:StageContext[BuildConfig])->None:
