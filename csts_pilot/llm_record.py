@@ -31,6 +31,9 @@ def publish_capture(context:StageContext[BuildConfig])->None:
 def evaluate_capture(context:StageContext[EvalConfig])->None:
     rows=load_json(context.inputs['test']);indices=load_json(context.inputs['holdout'])
     manifest=load_json(context.inputs['manifest']);scores=load_json(context.inputs['scores'])
+    model=load_json(context.inputs['model'])
+    for field in ('model','reasoning_effort','rubric_sha256','schema_sha256'):
+        if model[field]!=manifest[field]:raise ValueError('External predictor descriptor differs')
     if indices!=list(range(len(rows))) or len(rows)!=2620 or manifest['n']!=len(rows):
         raise ValueError('Reserved comparison coverage differs')
     if hashlib.sha256(context.inputs['test'].read_bytes()).hexdigest()!=manifest['data_sha256']:
@@ -55,6 +58,11 @@ def main()->None:
     supplied=args.bundle.resolve();target=root/'csts_data/sol61_max';target.mkdir(parents=True,exist_ok=True)
     files={'test':'evaluation.json','holdout':'evaluation_indices.json','scores':'scores.json','manifest':'manifest.json','evidence':'evidence.zip'}
     for name in files.values():shutil.copyfile(supplied/name,target/name)
+    manifest=load_json(target/'manifest.json')
+    descriptor={key:manifest[key] for key in ('model','reasoning_effort','rubric_sha256','schema_sha256','model_snapshot')}
+    descriptor['kind']='externally_hosted_predictor'
+    descriptor['execution']='Inference completed externally; VIPER verifies captured predictions and metrics. Model weights are not available.'
+    (target/'model.json').write_text(json.dumps(descriptor,indent=2))
     env=LocalEnvSpec(compute=CPUComputeSpec(),lockfile=GitFileRef(repository=source.repository,commit=source.commit,path='llm_baseline_requirements.txt'),python_env=observe_python_env())
     receipts=[]
     def execute(label,stages,estimator):
@@ -69,7 +77,7 @@ def main()->None:
     refs={name:run_artifact(captured.reference,StageArtifactRef(stage_id='publish',artifact_name=name),path='inputs/'+filename,data_role='eval') for name,filename in files.items()}
     dependency=(MetricDependency(source='artifact',name='predictions',data_role='eval'),);comparator=FloatComparator(mode='absolute',tolerance=1e-12)
     mse=measure(evaluation_mse,dependencies=dependency,comparator=comparator);rho=measure(evaluation_spearman,dependencies=dependency,comparator=comparator)
-    evaluated=stage(evaluate_capture,stage_id='eval',eval_id='csts_existing_2620',inputs=tuple(input(name,source=refs[name]) for name in ('test','holdout','scores','manifest')),split_inputs=('holdout',),outputs=EvalOutputs(predictions=output(path='predictions.json',loader=load_json,data_role='eval')),metrics=(mse,rho),objective=minimize(mse),reuse='never')
+    evaluated=stage(evaluate_capture,stage_id='eval',eval_id='csts_existing_2620',inputs=tuple(input(name,source=refs[name]) for name in ('test','holdout','scores','manifest'))+(input('model',path='csts_data/sol61_max/model.json',data_role='training'),),split_inputs=('holdout',),outputs=EvalOutputs(predictions=output(path='predictions.json',loader=load_json,data_role='eval')),metrics=(mse,rho),objective=minimize(mse),reuse='never')
     evaluated_run=execute('evaluate',(evaluated,),evaluated.outputs['predictions'])
     receipt={'source_commit':source.commit,'inference_execution':'external authenticated Codex CLI; raw capture published as evidence','metric_execution':'native VIPER evaluation and independent metric verification','runs':receipts}
     out=root/'training_outputs/csts_sol61_max_verification.json';out.parent.mkdir(exist_ok=True);out.write_text(json.dumps(receipt,indent=2));print(json.dumps(receipt),flush=True)
