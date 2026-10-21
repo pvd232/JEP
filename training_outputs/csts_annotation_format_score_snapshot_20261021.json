@@ -1,0 +1,42 @@
+{
+  "observed_at_utc": "2026-10-21T22:27:28.529298+00:00",
+  "status": "all_three_benchmark_evaluations_complete",
+  "training_source": "47864845b6520ae49676c27d0224513ac161388a",
+  "model": "google/flan-t5-small",
+  "model_revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+  "seed": 7,
+  "annotation_epochs": 6,
+  "rating_epochs": 8,
+  "evaluation_rows": 2620,
+  "scores": [
+    {
+      "arm": "evidence",
+      "spearman": 0.48662916187843175,
+      "mse_0_1": 0.13374191076288394
+    },
+    {
+      "arm": "prose",
+      "spearman": 0.48647532806225785,
+      "mse_0_1": 0.13193204917950768
+    },
+    {
+      "arm": "record",
+      "spearman": 0.4839893544360993,
+      "mse_0_1": 0.13252358128544475
+    }
+  ],
+  "interpretation": "No observed ranking gain from cached metadata or JSON serialization in this one-seed screen. Paired uncertainty calculation remains pending.",
+  "subsequent_observation": {
+    "observed_at_utc": "2026-10-21T22:28:06.483217+00:00",
+    "native_runner": "complete",
+    "collection": "verifying_native_runs_and_restoring_small_artifacts"
+  },
+  "label_provenance": "Tu et al. 2024 human reannotations distributed by LivNLP for evaluation: all 2834 labels match; 214 invalid rows excluded. Separate training ratings use LivNLP human/LLM aggregation.",
+  "pending": [
+    "Verify restored native artifacts and complete paired bootstrap intervals.",
+    "Publish full report, traces, predictions and the common 32-item generation diagnostic per arm.",
+    "Confirm new pilot VM shutdown and remove only its scoped NAT."
+  ],
+  "gpu_shutdown": "unconfirmed",
+  "access_blocker": "Mac connection stopped responding during closeout; the existing completion monitor remains enabled."
+}
