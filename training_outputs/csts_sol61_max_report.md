@@ -1,8 +1,8 @@
 # C-STS: GPT-6.1 Sol, max reasoning
 
-Updated: 2026-10-21T17:56:23.536270+00:00.
+Updated: 2026-10-21T18:01:26.322114+00:00.
 
-Status: **running**. Completed 1,408 / 2,620 comparisons.
+Status: **running**. Completed 1,920 / 2,620 comparisons.
 
 Model: `gpt-6.1-sol`, `model_reasoning_effort="max"`, through the signed-in Codex CLI. Each request starts a fresh session. The model sees only an item identifier, two sentences, and the condition. The fixed zero-shot rubric requests a 1–5 score with 0.1 precision. Reference scores are joined by the offline evaluator after inference. No tools are allowed; any tool event invalidates a batch. Private reasoning is neither requested nor captured.
 
@@ -14,18 +14,18 @@ A development timing check of eight source-distinct rows completed in 44.021 sec
 
 ## Preliminary results
 
-**1,408 completed comparisons out of 2,620**, as of 2026-10-21T17:56:23.525502+00:00. These are the completed batches, and their scores have not been used to alter the prompt or inference settings.
+**1,920 completed comparisons out of 2,620**, as of 2026-10-21T18:01:26.298819+00:00. These are the completed batches, and their scores have not been used to alter the prompt or inference settings.
 
 | Metric | Preliminary value |
 |---|---:|
-| Spearman | 0.799415 |
-| MSE, normalized 0–1 | 0.064431 |
-| MSE, 1–5 rating units | 1.030902 |
-| Exact rating agreement | 50.00% (704/1408) |
-| Mean absolute error, rating points | 0.6106 |
-| Condition ordering, ties count half | 92.78% |
+| Spearman | 0.792169 |
+| MSE, normalized 0–1 | 0.066841 |
+| MSE, 1–5 rating units | 1.069458 |
+| Exact rating agreement | 48.75% (936/1920) |
+| Mean absolute error, rating points | 0.6275 |
+| Condition ordering, ties count half | 92.60% |
 
-Condition ordering currently covers 291 eligible within-pair comparisons: 261 correct, 18 tied. Only pairs with both conditions completed contribute. Exact rating agreement compares the numeric 1–5 prediction with the reference score, without rounding.
+Condition ordering currently covers 547 eligible within-pair comparisons: 490 correct, 33 tied. Only pairs with both conditions completed contribute. Exact rating agreement compares the numeric 1–5 prediction with the reference score, without rounding.
 
 Spearman measures global rank agreement across the completed comparison rows. Its value is not a percent-correct score. MSE uses `(score - 1) / 4`. These partial metrics have been checked against SciPy offline; native VIPER publication and independent verification follow full inference completion. The final result may change as additional batches finish.
 
