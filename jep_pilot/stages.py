@@ -8,7 +8,7 @@ import numpy as np
 import torch
 from pydantic import Field
 from scipy.stats import spearmanr
-from viper.config import EvalConfig, MetricConfig, TrainConfig
+from viper.config import BuildConfig, EvalConfig, MetricConfig, TrainConfig
 from viper.metrics import MetricContext, metric
 from viper.randomness import capture_main_process_rng
 from viper.resume import (
@@ -18,7 +18,7 @@ from viper.resume import (
     load_resume_state,
     save_resume_state,
 )
-from viper.stages import StageContext, eval, train
+from viper.stages import StageContext, build, eval, train
 
 from jep_pilot.model import JointModel, tiny_spec
 
@@ -51,6 +51,14 @@ def load_model(path: Path):
 def load_state(path: Path):
     """Validate a native VIPER resume artifact."""
     return load_resume_state(path)
+
+
+@build(config=BuildConfig)
+def publish_evaluation_inputs(context: StageContext[BuildConfig]) -> None:
+    """Publish immutable test data and row indices before training any arm."""
+    for name in ("test", "holdout"):
+        context.outputs[name].parent.mkdir(parents=True, exist_ok=True)
+        context.outputs[name].write_bytes(context.inputs[name].read_bytes())
 
 
 @metric(metric_id="training_mse", mode="stateless")

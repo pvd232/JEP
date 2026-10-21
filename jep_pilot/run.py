@@ -4,9 +4,18 @@ import argparse
 import json
 
 from viper import api, execution
-from viper.authoring import experiment, input, plan, replicate, stage, variant
+from viper.artifacts import StageArtifactRef
+from viper.authoring import (
+    experiment,
+    input,
+    plan,
+    replicate,
+    run_artifact,
+    stage,
+    variant,
+)
 from viper.metrics import FloatComparator, MetricDependency, measure, min
-from viper.outputs import EvalOutputs, TrainOutputs, output
+from viper.outputs import EvalOutputs, StageOutputs, TrainOutputs, output
 from viper.references import GitFileRef
 from viper.repository import read_source, resolve_root
 from viper.runtime import (
@@ -25,6 +34,7 @@ from jep_pilot.stages import (
     load_json,
     load_model,
     load_state,
+    publish_evaluation_inputs,
     training_mse,
 )
 
@@ -41,13 +51,65 @@ def main() -> None:
     args = parser.parse_args()
     root = resolve_root()
     source = read_source(root)
+    compute = (
+        CUDAComputeSpec(model="NVIDIA L4", count=1)
+        if args.device == "cuda"
+        else CPUComputeSpec()
+    )
+    environment = LocalEnvSpec(
+        compute=compute,
+        lockfile=GitFileRef(
+            repository=source.repository,
+            commit=source.commit,
+            path="pilot_requirements.txt",
+        ),
+        python_env=observe_python_env(),
+    )
+    preparation = stage(
+        publish_evaluation_inputs,
+        stage_id="publish",
+        inputs=(
+            input("test", path="pilot_data/test.json", data_role="eval"),
+            input("holdout", path="pilot_data/test_indices.json", data_role="eval"),
+        ),
+        outputs=StageOutputs(
+            test=output(path="test.json", loader=load_json, data_role="eval"),
+            holdout=output(path="holdout.json", loader=load_json, data_role="eval"),
+        ),
+    )
+    data_study = experiment(
+        experiment_id="joint_annotation_inputs",
+        variants=(
+            variant(
+                "fixed", stages=(preparation,), estimator=preparation.outputs["test"]
+            ),
+        ),
+        replicates=(replicate(seed=args.seed),),
+    )
+    data_run = execution.run(
+        plan(experiment=data_study, source=source, env=environment)
+    )
+    test_data = run_artifact(
+        data_run.reference,
+        StageArtifactRef(stage_id="publish", artifact_name="test"),
+        path="inputs/test.json",
+        data_role="eval",
+    )
+    test_indices = run_artifact(
+        data_run.reference,
+        StageArtifactRef(stage_id="publish", artifact_name="holdout"),
+        path="inputs/holdout.json",
+        data_role="eval",
+    )
     train_metric = measure(training_mse)
     dependency = (
         MetricDependency(source="artifact", name="predictions", data_role="eval"),
     )
     comparator = FloatComparator(mode="absolute", tolerance=1e-12)
     mse = measure(evaluation_mse, dependencies=dependency, comparator=comparator)
-    spearman = measure(evaluation_spearman, dependencies=dependency, comparator=comparator)
+    spearman = measure(
+        evaluation_spearman, dependencies=dependency, comparator=comparator
+    )
     variants = []
     for name, weight, shuffle in [
         ("ratings", 0.0, False),
@@ -86,8 +148,8 @@ def main() -> None:
             eval_id="synthetic_holdout",
             inputs=(
                 training.outputs["model"],
-                input("test", path="pilot_data/test.json", data_role="eval"),
-                input("holdout", path="pilot_data/test_indices.json", data_role="eval"),
+                input("test", source=test_data),
+                input("holdout", source=test_indices),
             ),
             split_inputs=("holdout",),
             outputs=EvalOutputs(
@@ -108,20 +170,6 @@ def main() -> None:
         experiment_id="joint_annotation_diagnostic",
         variants=tuple(variants),
         replicates=(replicate(seed=args.seed),),
-    )
-    compute = (
-        CUDAComputeSpec(model="NVIDIA L4", count=1)
-        if args.device == "cuda"
-        else CPUComputeSpec()
-    )
-    environment = LocalEnvSpec(
-        compute=compute,
-        lockfile=GitFileRef(
-            repository=source.repository,
-            commit=source.commit,
-            path="pilot_requirements.txt",
-        ),
-        python_env=observe_python_env(),
     )
     outcomes = []
     for name in ("ratings", "joint", "shuffled"):
@@ -150,6 +198,7 @@ def main() -> None:
                 "source_commit": source.commit,
                 "synthetic": True,
                 "expert_labels": False,
+                "data_run": str(data_run.path),
                 "runs": outcomes,
             },
             indent=2,
