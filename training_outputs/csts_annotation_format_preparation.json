@@ -1,5 +1,5 @@
 {
-  "observed_at_utc": "2026-10-21T21:01:28.065842+00:00",
+  "observed_at_utc": "2026-10-21T21:11:29.997054+00:00",
   "status": "prepared_waiting_for_gpu_capacity",
   "training_started": false,
   "source_commit": "47864845b6520ae49676c27d0224513ac161388a",
@@ -134,5 +134,23 @@
     "Three evaluations after checkpoint selection",
     "Development generation diagnostic",
     "Publication and VM shutdown"
-  ]
+  ],
+  "capacity_evidence": "csts_annotation_format_capacity.json",
+  "japan_capacity": {
+    "checked_at": "2026-10-21T21:11:29.997054+00:00",
+    "attempts": 9,
+    "zones": [
+      "asia-northeast1-a",
+      "asia-northeast1-b",
+      "asia-northeast1-c"
+    ],
+    "machine_types": [
+      "g2-standard-12",
+      "g2-standard-4",
+      "g2-standard-8"
+    ],
+    "vm_exists": false,
+    "training_started": false,
+    "retrieval": "csts_annotation_format_capacity.json"
+  }
 }

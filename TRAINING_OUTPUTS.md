@@ -58,3 +58,8 @@ snapshot includes metrics and configuration. It leaves evaluation inputs closed.
 Model checkpoints, source references and native run records remain available
 through VIPER. The joint study publishes to the configured GCS repository.
 
+
+
+## Cached annotation format screen
+
+The separate cached-format pilot has completed native CPU preparation; GPU training awaits capacity. Its [protocol](training_outputs/csts_annotation_format_protocol.md) specifies the three matched arms, common budget freeze after throughput profiling, development Spearman checkpoint selection, and all-model freeze before benchmark evaluation. [Preparation evidence](training_outputs/csts_annotation_format_preparation.json), [metadata source review](training_outputs/csts_annotation_format_metadata_audit.json), [native immutable retrieval references](training_outputs/csts_annotation_format_retrieval.json), and [Tokyo allocation errors](training_outputs/csts_annotation_format_capacity.json) are published. The retrieval record identifies the full cache and every prepared artifact by exact native reference, SHA256 and byte count. The earlier VM study and its outputs remain intact.

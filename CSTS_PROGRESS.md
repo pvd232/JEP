@@ -43,3 +43,10 @@ The VIPER precision repair is documented in [PR #21](https://github.com/pvd232/v
 
 Use the [live-output instructions](TRAINING_OUTPUTS.md) for current controller status, epoch scores, answer loss, GPU use and storage.
 
+
+
+## Cached annotation format screen
+
+The authorized evidence/prose/JSON comparison is prepared. The complete teacher cache was restored and checksum verified; native VIPER preparation published all three matched target artifacts. A 100-record assistant source review and target-length audit are complete. GPU training has not started: on October 21, 2026, all three Tokyo zones returned stockouts for 4-, 8- and 12-vCPU L4 configurations. The original VM remains stopped with both disks intact.
+
+[Pilot protocol](training_outputs/csts_annotation_format_protocol.md) · [Preparation](training_outputs/csts_annotation_format_preparation.json) · [Capacity evidence](training_outputs/csts_annotation_format_capacity.json) · [Native retrieval references](training_outputs/csts_annotation_format_retrieval.json).

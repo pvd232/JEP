@@ -1,0 +1,86 @@
+{
+  "checked_at": "2026-10-21T21:11:29.997054+00:00",
+  "status": "prepared_waiting_for_gpu_capacity",
+  "project": "mantra-477901",
+  "japan_vm_name": "jep-csts-format-jp-20261021",
+  "japan_vm_exists": false,
+  "attempts": [
+    {
+      "zone": "asia-northeast1-a",
+      "machine_type": "g2-standard-8",
+      "returncode": 1,
+      "error": "ZONE_RESOURCE_POOL_EXHAUSTED",
+      "detail": "WARNING: Some requests generated warnings:\n - Disk size: '100 GB' is larger than image size: '10 GB'. You might need to resize the root repartition manually if the operating system does not support automatic resizing. See https://cloud.google.com/compute/docs/disks/add-persistent-disk#resize_pd for details.\n - You are creating a global DNS VM. VM instances using global DNS are vulnerable to cross-regional outages. To reduce the risk of widespread service disruption, use zonal DNS instead. Learn more at https://cloud.google.com/compute/docs/networking/zonal-dns?utm_id=vm-insert\n\nERROR: (gcloud.compute.instances.create) Could not fetch resource:\n---\ncode: ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS\nerrorDetails:\n- help:\n    links:\n    - description: Troubleshooting documentation\n      url: https://cloud.google.com/compute/docs/resource-error\n- localizedMessage:\n    locale: en-US\n    message: A g2-standard-8 VM instance with 1 nvidia-l4 accelerator(s) is currently\n      unavailable in the asia-northeast1-a zone. Alternatively, you can try your request\n      again with a different VM hardware configuration or at a later time. For more\n      information, see the troubleshooting documentation.\n- errorInfo:\n    domain: compute.googleapis.com\n    metadatas:\n      attachment: nvidia-l4:1\n      vmType: g2-standard-8\n      zone: asia-northeast1-a\n      zonesAvailable: ''\n    reason: resource_availability\nmessage: The zone 'projects/mantra-477901/zones/asia-northeast1-a' does not have enough\n  resources available to fulfill the request.  'NULL:0/NULL:0/NULL:0 (state:STOCKOUT,\n  sub-state:STOCKOUT, resource type:compute)'.\n\n"
+    },
+    {
+      "zone": "asia-northeast1-b",
+      "machine_type": "g2-standard-8",
+      "returncode": 1,
+      "error": "ZONE_RESOURCE_POOL_EXHAUSTED",
+      "detail": "WARNING: Some requests generated warnings:\n - You are creating a global DNS VM. VM instances using global DNS are vulnerable to cross-regional outages. To reduce the risk of widespread service disruption, use zonal DNS instead. Learn more at https://cloud.google.com/compute/docs/networking/zonal-dns?utm_id=vm-insert\n\nERROR: (gcloud.compute.instances.create) Could not fetch resource:\n---\ncode: ZONE_RESOURCE_POOL_EXHAUSTED\nerrorDetails:\n- help:\n    links:\n    - description: Troubleshooting documentation\n      url: https://cloud.google.com/compute/docs/resource-error\n- localizedMessage:\n    locale: en-US\n    message: A g2-standard-8 VM instance with 1 nvidia-l4 accelerator(s) is currently\n      unavailable in the asia-northeast1-b zone. Alternatively, you can try your request\n      again with a different VM hardware configuration or at a later time. For more\n      information, see the troubleshooting documentation.\n- errorInfo:\n    domain: compute.googleapis.com\n    metadatas:\n      attachment: nvidia-l4:1\n      vmType: g2-standard-8\n      zone: asia-northeast1-b\n      zonesAvailable: ''\n    reason: resource_availability\nmessage: The zone 'projects/mantra-477901/zones/asia-northeast1-b' does not have enough\n  resources available to fulfill the request.  Try a different zone, or try again\n  later.\n\n"
+    },
+    {
+      "zone": "asia-northeast1-c",
+      "machine_type": "g2-standard-8",
+      "returncode": 1,
+      "error": "ZONE_RESOURCE_POOL_EXHAUSTED",
+      "detail": "WARNING: Some requests generated warnings:\n - Disk size: '100 GB' is larger than image size: '10 GB'. You might need to resize the root repartition manually if the operating system does not support automatic resizing. See https://cloud.google.com/compute/docs/disks/add-persistent-disk#resize_pd for details.\n - You are creating a global DNS VM. VM instances using global DNS are vulnerable to cross-regional outages. To reduce the risk of widespread service disruption, use zonal DNS instead. Learn more at https://cloud.google.com/compute/docs/networking/zonal-dns?utm_id=vm-insert\n\nERROR: (gcloud.compute.instances.create) Could not fetch resource:\n---\ncode: ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS\nerrorDetails:\n- help:\n    links:\n    - description: Troubleshooting documentation\n      url: https://cloud.google.com/compute/docs/resource-error\n- localizedMessage:\n    locale: en-US\n    message: A g2-standard-8 VM instance with 1 nvidia-l4 accelerator(s) is currently\n      unavailable in the asia-northeast1-c zone. Alternatively, you can try your request\n      again with a different VM hardware configuration or at a later time. For more\n      information, see the troubleshooting documentation.\n- errorInfo:\n    domain: compute.googleapis.com\n    metadatas:\n      attachment: nvidia-l4:1\n      vmType: g2-standard-8\n      zone: asia-northeast1-c\n      zonesAvailable: ''\n    reason: resource_availability\nmessage: The zone 'projects/mantra-477901/zones/asia-northeast1-c' does not have enough\n  resources available to fulfill the request.  'NULL:0/NULL:0/NULL:0 (state:STOCKOUT,\n  sub-state:STOCKOUT, resource type:compute)'.\n\n"
+    },
+    {
+      "zone": "asia-northeast1-a",
+      "machine_type": "g2-standard-4",
+      "returncode": 1,
+      "error": "ZONE_RESOURCE_POOL_EXHAUSTED",
+      "detail": "WARNING: Some requests generated warnings:\n - Disk size: '100 GB' is larger than image size: '10 GB'. You might need to resize the root repartition manually if the operating system does not support automatic resizing. See https://cloud.google.com/compute/docs/disks/add-persistent-disk#resize_pd for details.\n - You are creating a global DNS VM. VM instances using global DNS are vulnerable to cross-regional outages. To reduce the risk of widespread service disruption, use zonal DNS instead. Learn more at https://cloud.google.com/compute/docs/networking/zonal-dns?utm_id=vm-insert\n\nERROR: (gcloud.compute.instances.create) Could not fetch resource:\n---\ncode: ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS\nerrorDetails:\n- help:\n    links:\n    - description: Troubleshooting documentation\n      url: https://cloud.google.com/compute/docs/resource-error\n- localizedMessage:\n    locale: en-US\n    message: A g2-standard-4 VM instance with 1 nvidia-l4 accelerator(s) is currently\n      unavailable in the asia-northeast1-a zone. Alternatively, you can try your request\n      again with a different VM hardware configuration or at a later time. For more\n      information, see the troubleshooting documentation.\n- errorInfo:\n    domain: compute.googleapis.com\n    metadatas:\n      attachment: nvidia-l4:1\n      vmType: g2-standard-4\n      zone: asia-northeast1-a\n      zonesAvailable: ''\n    reason: resource_availability\nmessage: The zone 'projects/mantra-477901/zones/asia-northeast1-a' does not have enough\n  resources available to fulfill the request.  'NULL:0/NULL:0/NULL:0 (state:STOCKOUT,\n  sub-state:STOCKOUT, resource type:compute)'.\n\n"
+    },
+    {
+      "zone": "asia-northeast1-b",
+      "machine_type": "g2-standard-4",
+      "returncode": 1,
+      "error": "ZONE_RESOURCE_POOL_EXHAUSTED",
+      "detail": "WARNING: Some requests generated warnings:\n - You are creating a global DNS VM. VM instances using global DNS are vulnerable to cross-regional outages. To reduce the risk of widespread service disruption, use zonal DNS instead. Learn more at https://cloud.google.com/compute/docs/networking/zonal-dns?utm_id=vm-insert\n\nERROR: (gcloud.compute.instances.create) Could not fetch resource:\n---\ncode: ZONE_RESOURCE_POOL_EXHAUSTED\nerrorDetails:\n- help:\n    links:\n    - description: Troubleshooting documentation\n      url: https://cloud.google.com/compute/docs/resource-error\n- localizedMessage:\n    locale: en-US\n    message: A g2-standard-4 VM instance with 1 nvidia-l4 accelerator(s) is currently\n      unavailable in the asia-northeast1-b zone. Alternatively, you can try your request\n      again with a different VM hardware configuration or at a later time. For more\n      information, see the troubleshooting documentation.\n- errorInfo:\n    domain: compute.googleapis.com\n    metadatas:\n      attachment: nvidia-l4:1\n      vmType: g2-standard-4\n      zone: asia-northeast1-b\n      zonesAvailable: ''\n    reason: resource_availability\nmessage: The zone 'projects/mantra-477901/zones/asia-northeast1-b' does not have enough\n  resources available to fulfill the request.  Try a different zone, or try again\n  later.\n\n"
+    },
+    {
+      "zone": "asia-northeast1-c",
+      "machine_type": "g2-standard-4",
+      "returncode": 1,
+      "error": "ZONE_RESOURCE_POOL_EXHAUSTED",
+      "detail": "WARNING: Some requests generated warnings:\n - Disk size: '100 GB' is larger than image size: '10 GB'. You might need to resize the root repartition manually if the operating system does not support automatic resizing. See https://cloud.google.com/compute/docs/disks/add-persistent-disk#resize_pd for details.\n - You are creating a global DNS VM. VM instances using global DNS are vulnerable to cross-regional outages. To reduce the risk of widespread service disruption, use zonal DNS instead. Learn more at https://cloud.google.com/compute/docs/networking/zonal-dns?utm_id=vm-insert\n\nERROR: (gcloud.compute.instances.create) Could not fetch resource:\n---\ncode: ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS\nerrorDetails:\n- help:\n    links:\n    - description: Troubleshooting documentation\n      url: https://cloud.google.com/compute/docs/resource-error\n- localizedMessage:\n    locale: en-US\n    message: A g2-standard-4 VM instance with 1 nvidia-l4 accelerator(s) is currently\n      unavailable in the asia-northeast1-c zone. Alternatively, you can try your request\n      again with a different VM hardware configuration or at a later time. For more\n      information, see the troubleshooting documentation.\n- errorInfo:\n    domain: compute.googleapis.com\n    metadatas:\n      attachment: nvidia-l4:1\n      vmType: g2-standard-4\n      zone: asia-northeast1-c\n      zonesAvailable: ''\n    reason: resource_availability\nmessage: The zone 'projects/mantra-477901/zones/asia-northeast1-c' does not have enough\n  resources available to fulfill the request.  'NULL:0/NULL:0/NULL:0 (state:STOCKOUT,\n  sub-state:STOCKOUT, resource type:compute)'.\n\n"
+    },
+    {
+      "zone": "asia-northeast1-a",
+      "machine_type": "g2-standard-12",
+      "returncode": 1,
+      "error": "ZONE_RESOURCE_POOL_EXHAUSTED",
+      "detail": "WARNING: Some requests generated warnings:\n - Disk size: '100 GB' is larger than image size: '10 GB'. You might need to resize the root repartition manually if the operating system does not support automatic resizing. See https://cloud.google.com/compute/docs/disks/add-persistent-disk#resize_pd for details.\n - You are creating a global DNS VM. VM instances using global DNS are vulnerable to cross-regional outages. To reduce the risk of widespread service disruption, use zonal DNS instead. Learn more at https://cloud.google.com/compute/docs/networking/zonal-dns?utm_id=vm-insert\n\nERROR: (gcloud.compute.instances.create) Could not fetch resource:\n---\ncode: ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS\nerrorDetails:\n- help:\n    links:\n    - description: Troubleshooting documentation\n      url: https://cloud.google.com/compute/docs/resource-error\n- localizedMessage:\n    locale: en-US\n    message: A g2-standard-12 VM instance with 1 nvidia-l4 accelerator(s) is currently\n      unavailable in the asia-northeast1-a zone. Alternatively, you can try your request\n      again with a different VM hardware configuration or at a later time. For more\n      information, see the troubleshooting documentation.\n- errorInfo:\n    domain: compute.googleapis.com\n    metadatas:\n      attachment: nvidia-l4:1\n      vmType: g2-standard-12\n      zone: asia-northeast1-a\n      zonesAvailable: ''\n    reason: resource_availability\nmessage: The zone 'projects/mantra-477901/zones/asia-northeast1-a' does not have enough\n  resources available to fulfill the request.  'NULL:0/NULL:0/NULL:0 (state:STOCKOUT,\n  sub-state:STOCKOUT, resource type:compute)'.\n\n"
+    },
+    {
+      "zone": "asia-northeast1-b",
+      "machine_type": "g2-standard-12",
+      "returncode": 1,
+      "error": "ZONE_RESOURCE_POOL_EXHAUSTED",
+      "detail": "WARNING: Some requests generated warnings:\n - You are creating a global DNS VM. VM instances using global DNS are vulnerable to cross-regional outages. To reduce the risk of widespread service disruption, use zonal DNS instead. Learn more at https://cloud.google.com/compute/docs/networking/zonal-dns?utm_id=vm-insert\n\nERROR: (gcloud.compute.instances.create) Could not fetch resource:\n---\ncode: ZONE_RESOURCE_POOL_EXHAUSTED\nerrorDetails:\n- help:\n    links:\n    - description: Troubleshooting documentation\n      url: https://cloud.google.com/compute/docs/resource-error\n- localizedMessage:\n    locale: en-US\n    message: A g2-standard-12 VM instance with 1 nvidia-l4 accelerator(s) is currently\n      unavailable in the asia-northeast1-b zone. Alternatively, you can try your request\n      again with a different VM hardware configuration or at a later time. For more\n      information, see the troubleshooting documentation.\n- errorInfo:\n    domain: compute.googleapis.com\n    metadatas:\n      attachment: nvidia-l4:1\n      vmType: g2-standard-12\n      zone: asia-northeast1-b\n      zonesAvailable: ''\n    reason: resource_availability\nmessage: The zone 'projects/mantra-477901/zones/asia-northeast1-b' does not have enough\n  resources available to fulfill the request.  Try a different zone, or try again\n  later.\n\n"
+    },
+    {
+      "zone": "asia-northeast1-c",
+      "machine_type": "g2-standard-12",
+      "returncode": 1,
+      "error": "ZONE_RESOURCE_POOL_EXHAUSTED",
+      "detail": "WARNING: Some requests generated warnings:\n - Disk size: '100 GB' is larger than image size: '10 GB'. You might need to resize the root repartition manually if the operating system does not support automatic resizing. See https://cloud.google.com/compute/docs/disks/add-persistent-disk#resize_pd for details.\n - You are creating a global DNS VM. VM instances using global DNS are vulnerable to cross-regional outages. To reduce the risk of widespread service disruption, use zonal DNS instead. Learn more at https://cloud.google.com/compute/docs/networking/zonal-dns?utm_id=vm-insert\n\nERROR: (gcloud.compute.instances.create) Could not fetch resource:\n---\ncode: ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS\nerrorDetails:\n- help:\n    links:\n    - description: Troubleshooting documentation\n      url: https://cloud.google.com/compute/docs/resource-error\n- localizedMessage:\n    locale: en-US\n    message: A g2-standard-12 VM instance with 1 nvidia-l4 accelerator(s) is currently\n      unavailable in the asia-northeast1-c zone. Alternatively, you can try your request\n      again with a different VM hardware configuration or at a later time. For more\n      information, see the troubleshooting documentation.\n- errorInfo:\n    domain: compute.googleapis.com\n    metadatas:\n      attachment: nvidia-l4:1\n      vmType: g2-standard-12\n      zone: asia-northeast1-c\n      zonesAvailable: ''\n    reason: resource_availability\nmessage: The zone 'projects/mantra-477901/zones/asia-northeast1-c' does not have enough\n  resources available to fulfill the request.  'NULL:0/NULL:0/NULL:0 (state:STOCKOUT,\n  sub-state:STOCKOUT, resource type:compute)'.\n\n"
+    }
+  ],
+  "original_vm": {
+    "name": "rico-source-l4-uswest4c",
+    "status": "TERMINATED",
+    "machine_type": "g2-standard-12",
+    "disk_sources": [
+      "https://www.googleapis.com/compute/v1/projects/mantra-477901/zones/us-west4-c/disks/rico-source-l4-uswest4c",
+      "https://www.googleapis.com/compute/v1/projects/mantra-477901/zones/us-west4-c/disks/rico-source-working-data"
+    ]
+  },
+  "new_training_started": false,
+  "new_teacher_calls": 0,
+  "pilot_boot_disks_after_failed_creation": [],
+  "unused_pilot_nat_removed": true,
+  "dedicated_empty_subnet_and_router_retained": true
+}
