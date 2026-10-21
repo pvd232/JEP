@@ -1,0 +1,138 @@
+{
+  "observed_at_utc": "2026-10-21T21:01:28.065842+00:00",
+  "status": "prepared_waiting_for_gpu_capacity",
+  "training_started": false,
+  "source_commit": "47864845b6520ae49676c27d0224513ac161388a",
+  "native_preparation_run": {
+    "sha256": "40e1e0700ff5d87679072a3a69562d6d3f700bc3718d1405afffa515627f3d9b",
+    "bytes": 1046,
+    "stored_at": {
+      "kind": "gcs",
+      "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+      "prefix": "viper",
+      "owner": "pvd232",
+      "workspace": "jep_csts_joint_20261021",
+      "revision": "8c66399e63a18b1c0784c54504ed3aa6624882ecb2ea27017a033ea1a09a06be",
+      "path": "experiments/csts_formats_20261021_4786484_59d937b7_prepare/runs/prepare/01M5G44QB3MZ1B2794VQHKSH58/resolved.yaml"
+    },
+    "kind": "resolved_run"
+  },
+  "target_manifest": {
+    "source_sha256": "1dcd743762cfad9f42b78775510c526e3ce6dd0c51716caf4df3234442ac1c94",
+    "records": 17334,
+    "accepted": 11312,
+    "new_teacher_calls": 0,
+    "new_semantic_fields": [],
+    "formats": {
+      "evidence": {
+        "file": "evidence.jsonl",
+        "sha256": "2973dc896b9084e087e2dc73879f324b0a01c3d16e40a2bbaf69fc71fbf9762f",
+        "identity_order_preserved": true,
+        "acceptance_preserved": true
+      },
+      "prose": {
+        "file": "prose.jsonl",
+        "sha256": "0192dcd00873a8843c69db4148473582197f2abecccf7c0b2a28d08ff818427c",
+        "identity_order_preserved": true,
+        "acceptance_preserved": true
+      },
+      "record": {
+        "file": "record.jsonl",
+        "sha256": "805debccf24269a524be2713738494b26a304b40072d4cc859e86507d11c0367",
+        "identity_order_preserved": true,
+        "acceptance_preserved": true
+      }
+    },
+    "validation_scope": "Original source-span and teacher-review checks; metadata semantic audit remains separate."
+  },
+  "target_lengths": {
+    "model": "google/flan-t5-small",
+    "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+    "truncation": false,
+    "formats": {
+      "evidence": {
+        "accepted": 11312,
+        "min": 2,
+        "median": 5.0,
+        "mean": 8.107496463932108,
+        "p95": 21.0,
+        "max": 50,
+        "nonpadding_tokens": 91712,
+        "targets_over_generation_limit_192": 0
+      },
+      "prose": {
+        "accepted": 11312,
+        "min": 21,
+        "median": 26.0,
+        "mean": 28.904791371994342,
+        "p95": 43.0,
+        "max": 71,
+        "nonpadding_tokens": 326971,
+        "targets_over_generation_limit_192": 0
+      },
+      "record": {
+        "accepted": 11312,
+        "min": 30,
+        "median": 35.0,
+        "mean": 37.8876414427157,
+        "p95": 51.44999999999891,
+        "max": 80,
+        "nonpadding_tokens": 428585,
+        "targets_over_generation_limit_192": 0
+      }
+    }
+  },
+  "metadata_review": {
+    "source_sha256": "1dcd743762cfad9f42b78775510c526e3ce6dd0c51716caf4df3234442ac1c94",
+    "reviewer": "Assistant source review, independent of the Qwen teacher; not a human-expert audit",
+    "sample_size": 100,
+    "sampling": "Deterministic hash order, round-robin over five condition-keyword strata, 20 per stratum",
+    "strata": {
+      "count": 20,
+      "color": 20,
+      "location": 20,
+      "action": 20,
+      "other": 20
+    },
+    "review_categories": {
+      "no_specific_concern_identified": 91,
+      "condition_ambiguity": 4,
+      "partial_information": 2,
+      "contextual_inference": 3
+    },
+    "field_role_note": "The free-form target sometimes names an entity and sometimes the requested property or answer object. Target and attribute can restate the question. These fields are not a typed entity ontology.",
+    "decision": "Keep the exact accepted cohort for the authorized cached-supervision screen. Report ambiguity and role variation; do not interpret this as a validated typed-schema experiment.",
+    "training_records_modified": 0,
+    "new_teacher_calls": 0
+  },
+  "vm": {
+    "name": "rico-source-l4-uswest4c",
+    "zone": "us-west4-c",
+    "project": "mantra-477901",
+    "status": "TERMINATED",
+    "machine_type": "g2-standard-12",
+    "disks_preserved": true
+  },
+  "capacity_error": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+  "attempted_configurations": [
+    "g2-standard-12",
+    "g2-standard-8",
+    "g2-standard-4"
+  ],
+  "new_teacher_calls": 0,
+  "completed_checks": [
+    "12 regression and shared-gradient checks",
+    "Ruff",
+    "Pyrefly",
+    "Native VIPER CPU preparation and graph verification",
+    "Original cache restored and checksum verified"
+  ],
+  "pending": [
+    "L4 capacity",
+    "GPU throughput profile and frozen common budget",
+    "Six matched training stages",
+    "Three evaluations after checkpoint selection",
+    "Development generation diagnostic",
+    "Publication and VM shutdown"
+  ]
+}

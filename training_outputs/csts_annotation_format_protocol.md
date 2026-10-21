@@ -12,13 +12,19 @@ A versus B tests the added metadata and its supervision. B versus C tests serial
 
 ## Execution status
 
-Target preparation and source-validation tests are implemented. GPU execution is blocked by Google Cloud reauthentication on the Mac: the configured helper returned `Reauthentication failed. cannot prompt during non-interactive execution.` No new training or teacher generation has started. The complete 17,334-record teacher cache was last verified on the GPU VM; it is not present in this Mac workspace. The VM was previously confirmed stopped; the authentication failure prevents a fresh status check.
+The complete 17,334-record teacher cache was restored through its immutable native VIPER reference and independently checked against SHA256 `1dcd743762cfad9f42b78775510c526e3ce6dd0c51716caf4df3234442ac1c94`. It contains 11,312 accepted answers. All three derived formats retain the same records, order, acceptance mask and underlying evidence. Native CPU preparation succeeded and published the inputs and derived artifacts to durable storage; exact retrieval references are in [csts_annotation_format_retrieval.json](csts_annotation_format_retrieval.json).
 
-Validation passed: twelve target-preservation, corruption-refusal, checkpoint-selection, fixed-budget training-loop and shared-gradient checks, Ruff, and Pyrefly. The complete cache audit and GPU checks remain pending access. The isolated native runner is implemented as `python -m csts_pilot.annotation_format_run`: it prepares all formats, trains six stages, freezes selected checkpoints, verifies evaluation metrics and saves a common development generation sample.
+A stratified assistant review of 100 cached records found 4 ambiguous conditions, 2 partial-information cases and 3 cases requiring contextual inference; 91 had no specific concern identified. This is a source review, not expert accuracy measurement. The cached `target` field varies in semantic role, so this remains a free-form metadata experiment. The common cohort is retained. Review records appear in [csts_annotation_format_metadata_audit.json](csts_annotation_format_metadata_audit.json).
+
+Median annotation target lengths are 5 tokens for evidence, 26 for prose and 35 for JSON; maximum lengths are 50, 71 and 80. No target exceeds the 192-token diagnostic generation limit. Equal update counts therefore have different token costs; these are reported explicitly.
+
+Validation passed: twelve target-preservation, corruption-refusal, checkpoint-selection, fixed-budget training-loop and shared-gradient checks, Ruff, Pyrefly, and live native CPU preparation. The isolated runner is implemented as `python -m csts_pilot.annotation_format_run`. No GPU training has started as of this preparation update.
+
+Google Cloud authentication is restored. The original L4 VM remains stopped, with both disks preserved. Starts in `us-west4-c` failed with GPU stockouts. Following user direction, an isolated private Tokyo L4 VM is being provisioned for this pilot, using the recorded Python 3.13.15, PyTorch 2.14.0+cu130 and original VIPER precision fix. GPU validation and a discarded-model throughput profile precede the common budget freeze. See [csts_annotation_format_preparation.json](csts_annotation_format_preparation.json) for the completed preparation evidence.
 
 ## Preparation
 
-Use the existing SSH and Google Cloud helpers and configured credentials after access is restored. Inspect the prior study completion and process identities, then create a separate checkout and output directory. Preserve the previous study, its environment and all completed artifacts.
+Use the existing SSH and Google Cloud helpers and configured credentials. Inspect completion state and process identities before action, then use a separate checkout and output directory. Preserve the previous study, its environment and all completed artifacts.
 
 Locate the full annotation artifact through the original study's native VIPER run and retrieval receipt. Verify its manifest reports 17,334 records and 11,312 accepted answers. Use `python -m csts_pilot.annotation_formats --source FULL_CACHE --destination NEW_EMPTY_DIRECTORY` to derive three JSONL inputs. This command validates each accepted record against its saved teacher response, source-span check and second-review acceptance before rendering targets. It records all input and output hashes and preserves original record identities, order and acceptance decisions. It never calls a teacher or starts training.
 
@@ -38,4 +44,4 @@ Collect a small common development generation sample from each selected model. R
 
 ## Timing and closeout
 
-Allow approximately 1–2 hours after access is restored, assuming reusable cache and the existing environment. This includes preparation, the initial audit, approximately 30 GPU minutes, evaluation and reporting; extended independent review can increase elapsed time. Publish verified results and retrieval instructions, then stop the GPU VM after confirming no other GPU work is active. Do not create duplicate jobs.
+Allow approximately 1–2 hours after GPU capacity is obtained, assuming reusable cache and a reproduced environment. This includes preparation, the initial audit, approximately 30 GPU minutes, evaluation and reporting; extended independent review can increase elapsed time. Publish verified results and retrieval instructions, then stop the GPU VM after confirming no other GPU work is active. Do not create duplicate jobs.
