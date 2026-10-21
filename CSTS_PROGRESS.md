@@ -26,6 +26,17 @@ Study status: complete.
 [Live counts and epoch metrics](training_outputs/csts_live_status.json).
 [Completed trial records](training_outputs/csts_joint_study_status.json).
 
+| Training | MSE | Spearman | Condition ordering |
+| --- | ---: | ---: | ---: |
+| ratings | 0.1440 | 0.430 | 75.9% |
+| answers | 0.2148 | 0.024 | 53.0% |
+| sequential | 0.1354 | 0.464 | 78.3% |
+| joint | 0.1406 | 0.435 | 76.0% |
+| shuffled | 0.1418 | 0.434 | 76.1% |
+
+Scores average seeds 7, 8 and 9 on 2,620 reserved comparisons.
+[Results, source-group intervals and label provenance](training_outputs/csts_joint_results.json).
+
 ![Joint study learning curves](training_outputs/csts_joint_learning_curves.png)
 
 The VIPER precision repair is documented in [PR #21](https://github.com/pvd232/viper/pull/21). All seven CI jobs passed, including 198 integration tests and 28 subtests. Its nine numerical GPU regressions also passed on the L4.
