@@ -1,2 +1,10 @@
 [workspace]
 schema_version = 2
+
+[storage]
+destination = "viper://pvd232/jep_csts_joint_20261021"
+
+[viper_cloud]
+provider = "gcs"
+bucket = "mantra-mlfg-prod-uscentral1-8e7a"
+prefix = "viper"

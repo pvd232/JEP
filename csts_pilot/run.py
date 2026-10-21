@@ -220,7 +220,7 @@ def main() -> None:
                 eval_id="natural_csts",
                 inputs=(
                     input("model", source=model),
-                    input("evaluation", source=eval_input),
+                    input("test", source=eval_input),
                     input("holdout", source=indices),
                 ),
                 split_inputs=("holdout",),

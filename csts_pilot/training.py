@@ -335,7 +335,7 @@ def evaluate(context: StageContext[EvalConfig]) -> None:
     tokenizer = AutoTokenizer.from_pretrained(
         config.model_id, revision=config.revision, use_fast=True
     )
-    rows = load_json(context.inputs["evaluation"])
+    rows = load_json(context.inputs["test"])
     if load_json(context.inputs["holdout"]) != list(range(len(rows))):
         raise ValueError("Evaluation indices differ from the reserved evaluation set.")
     tokens = prepare_tokens(rows, config, tokenizer)
