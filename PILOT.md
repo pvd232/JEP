@@ -32,6 +32,6 @@ Before a pretrained run, resolve and record an immutable model revision, then pa
 python -m jep_pilot.run --device cuda --mode pretrained --revision 0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab --steps 120
 ```
 
-Run the existing GCP L4 through its GitHub Actions route when the runner is available. The connected development host currently requires Google Cloud reauthentication to start the MANTRA machine. No GPU job has been submitted by this pilot setup.
+The pretrained pilot completed on the existing L4 at rico-source-l4-uswest4c. [GPU results](GPU_PILOT_RESULTS.md) include the three comparisons and the mean rating reference. The recorded GPU environment uses Python 3.13. See the [dependency versions](gpu_runtime_requirements.txt).
 
 The initial run uses one seed. A scientific comparison needs several seeds, expert-defined targets, and a fixed selection rule for the annotation weight using development data. Evidence for JEP transfer requires expert evaluation on testimony.

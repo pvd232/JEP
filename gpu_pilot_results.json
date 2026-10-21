@@ -1,0 +1,168 @@
+{
+  "scope": "pretrained GPU pilot on scripted Spanish passages",
+  "source_commit": "a1fb72c32d9f18af1d1c6a75d198ca01a2d189ea",
+  "model": "google/flan-t5-small",
+  "model_revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+  "viper_commit": "8ae163150f15613743d2a016c84bc42bfa0baa32",
+  "gpu": "NVIDIA L4",
+  "steps_per_arm": 120,
+  "seed": 7,
+  "annotation_weight": 0.2,
+  "expert_labels": false,
+  "arms": [
+    {
+      "arm": "ratings",
+      "status": "succeeded",
+      "verified_measurements": 122,
+      "parameter_count": 76977536,
+      "metrics": {
+        "all": {
+          "n": 672,
+          "mse": 0.07914171643826523,
+          "spearman": 0.2514359693370365
+        },
+        "atomic": {
+          "n": 384,
+          "mse": 0.08279763872101455,
+          "spearman": 0.29741533172988527
+        },
+        "composed": {
+          "n": 288,
+          "mse": 0.07426715339459948,
+          "spearman": 0.18971895698651908
+        }
+      },
+      "by_category": {
+        "da\u00f1os": {
+          "n": 168,
+          "mse": 0.06711781072034809,
+          "spearman": 0.22179364037256588
+        },
+        "reparaciones": {
+          "n": 168,
+          "mse": 0.06392338815730969,
+          "spearman": 0.3171132024932323
+        },
+        "restauraci\u00f3n": {
+          "n": 168,
+          "mse": 0.08209005240383929,
+          "spearman": 0.2891404241796571
+        },
+        "sanciones": {
+          "n": 168,
+          "mse": 0.10343561447156382,
+          "spearman": 0.2269639643262599
+        }
+      },
+      "initial_shared_gradients": {
+        "similarity_norm": 0.03220720589160919,
+        "annotation_norm": 0.4907538592815399,
+        "cosine": -0.05967063084244728
+      }
+    },
+    {
+      "arm": "joint",
+      "status": "succeeded",
+      "verified_measurements": 122,
+      "parameter_count": 76977536,
+      "metrics": {
+        "all": {
+          "n": 672,
+          "mse": 0.06142081995504549,
+          "spearman": 0.3329003616958892
+        },
+        "atomic": {
+          "n": 384,
+          "mse": 0.06849838815916491,
+          "spearman": 0.2824271025321233
+        },
+        "composed": {
+          "n": 288,
+          "mse": 0.05198406234955293,
+          "spearman": 0.41882416279472057
+        }
+      },
+      "by_category": {
+        "da\u00f1os": {
+          "n": 168,
+          "mse": 0.0709929986525639,
+          "spearman": 0.3543660494416429
+        },
+        "reparaciones": {
+          "n": 168,
+          "mse": 0.06795160548234226,
+          "spearman": 0.33063558821827815
+        },
+        "restauraci\u00f3n": {
+          "n": 168,
+          "mse": 0.06020740301857239,
+          "spearman": 0.2628910871839798
+        },
+        "sanciones": {
+          "n": 168,
+          "mse": 0.046531272666703406,
+          "spearman": 0.4458410116993061
+        }
+      },
+      "initial_shared_gradients": {
+        "similarity_norm": 0.03220720589160919,
+        "annotation_norm": 0.4907538592815399,
+        "cosine": -0.05967063084244728
+      }
+    },
+    {
+      "arm": "shuffled",
+      "status": "succeeded",
+      "verified_measurements": 122,
+      "parameter_count": 76977536,
+      "metrics": {
+        "all": {
+          "n": 672,
+          "mse": 0.061474612188463076,
+          "spearman": 0.29515928081767784
+        },
+        "atomic": {
+          "n": 384,
+          "mse": 0.07156090233873395,
+          "spearman": 0.2535782852047695
+        },
+        "composed": {
+          "n": 288,
+          "mse": 0.048026225321435224,
+          "spearman": 0.36102356387458934
+        }
+      },
+      "by_category": {
+        "da\u00f1os": {
+          "n": 168,
+          "mse": 0.06255524959405762,
+          "spearman": 0.26951970763743366
+        },
+        "reparaciones": {
+          "n": 168,
+          "mse": 0.057952452969360704,
+          "spearman": 0.34627913248842923
+        },
+        "restauraci\u00f3n": {
+          "n": 168,
+          "mse": 0.06416221687813625,
+          "spearman": 0.27628090049995657
+        },
+        "sanciones": {
+          "n": 168,
+          "mse": 0.061228529312297705,
+          "spearman": 0.2986856376326306
+        }
+      },
+      "initial_shared_gradients": {
+        "similarity_norm": 0.03220720589160919,
+        "annotation_norm": 0.3267994821071625,
+        "cosine": 0.03534351661801338
+      }
+    }
+  ],
+  "training_mean_reference": {
+    "prediction": 0.75,
+    "test_mse": 0.05357142857142857
+  }
+}

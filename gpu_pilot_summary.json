@@ -1,0 +1,28 @@
+{
+  "mode": "pretrained",
+  "device": "cuda",
+  "source_commit": "a1fb72c32d9f18af1d1c6a75d198ca01a2d189ea",
+  "synthetic": true,
+  "expert_labels": false,
+  "data_run": "/home/machina/jep-joint-pilot-20261020/experiments/joint_annotation_inputs/runs/fixed/01M5E7R41V6XHFPVYGN35296K9/resolved.yaml",
+  "runs": [
+    {
+      "arm": "ratings",
+      "status": "succeeded",
+      "result": "/home/machina/jep-joint-pilot-20261020/experiments/joint_annotation_diagnostic/runs/ratings/01M5E7RP1BVMPKQ86YPJPWWYSH/resolved.yaml",
+      "verified_measurements": 122
+    },
+    {
+      "arm": "joint",
+      "status": "succeeded",
+      "result": "/home/machina/jep-joint-pilot-20261020/experiments/joint_annotation_diagnostic/runs/joint/01M5E7W00K7AN9AQ1W4KWEH46Q/resolved.yaml",
+      "verified_measurements": 122
+    },
+    {
+      "arm": "shuffled",
+      "status": "succeeded",
+      "result": "/home/machina/jep-joint-pilot-20261020/experiments/joint_annotation_diagnostic/runs/shuffled/01M5E7Z1Y69VE3Q3YBYZGW8XAX/resolved.yaml",
+      "verified_measurements": 122
+    }
+  ]
+}

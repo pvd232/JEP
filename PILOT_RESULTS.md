@@ -22,7 +22,7 @@ The split and gradient tests passed. Ruff passed. Pyrefly reported zero errors. 
 
 ## GPU status
 
-Both registered MANTRA L4 runners were offline at inspection. Starting the GPU through the connected development VM requires Google Cloud reauthentication for `peter@aetherlabs.live`. The pretrained GPU run remains pending. The exact command and model revision are in `PILOT.md`.
+The subsequent pretrained L4 run completed. See [GPU results](GPU_PILOT_RESULTS.md) for the comparison and saved records.
 
 ## Files
 
