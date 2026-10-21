@@ -25,18 +25,13 @@ from viper.runtime import (
     observe_python_env,
 )
 
-from jep_pilot.stages import (
-    PilotConfig,
-    evaluate,
+from jep_pilot.loaders import load_json, load_model, load_state
+from jep_pilot.metrics import (
     evaluation_mse,
     evaluation_spearman,
-    fit,
-    load_json,
-    load_model,
-    load_state,
-    publish_evaluation_inputs,
     training_mse,
 )
+from jep_pilot.stages import PilotConfig, evaluate, fit, publish_evaluation_inputs
 
 
 def main() -> None:
@@ -87,7 +82,9 @@ def main() -> None:
         replicates=(replicate(seed=args.seed),),
     )
     data_run = execution.run(
-        plan(experiment=data_study, source=source, env=environment)
+        plan(experiment=data_study, source=source, env=environment),
+        timeout_seconds=600,
+        trusted_source_repositories=frozenset({str(source.repository)}),
     )
     test_data = run_artifact(
         data_run.reference,
@@ -174,7 +171,11 @@ def main() -> None:
     outcomes = []
     for name in ("ratings", "joint", "shuffled"):
         draft = plan(experiment=study, variant=name, source=source, env=environment)
-        resolved = execution.run(draft)
+        resolved = execution.run(
+            draft,
+            timeout_seconds=600,
+            trusted_source_repositories=frozenset({str(source.repository)}),
+        )
         verified = api.verify_run(
             api.VerifyRunRequest(
                 root=root,
