@@ -207,7 +207,17 @@ def publish(
             ["git", "-C", str(checkout), *args], text=True
         ).strip()
 
-    subprocess.run(["git", "-C", str(root), "fetch", "origin", BRANCH], check=True)
+    subprocess.run(
+        [
+            "git",
+            "-C",
+            str(root),
+            "fetch",
+            "origin",
+            f"refs/heads/{BRANCH}:refs/remotes/origin/{BRANCH}",
+        ],
+        check=True,
+    )
     if not checkout.exists():
         subprocess.run(
             [
@@ -336,7 +346,7 @@ def main() -> None:
             summary = (
                 read_json(summary_path)
                 if summary_path.exists()
-                else {"status": "starting", "runs": []}
+                else {"status": "annotating", "runs": []}
             )
             storage = read_json(STORAGE) if STORAGE.exists() else {}
             stream_path = root / "csts_results/live_status.json"
