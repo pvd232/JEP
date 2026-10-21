@@ -21,19 +21,19 @@ On the VM, the shorter command is:
   --root /home/machina/jep-csts-20261021 --watch
 ```
 
-For the answer and joint study, replace the root with
-`/mnt/rico-source-data/jep-joint-csts-20261021` and use its separate environment:
+The resumed answer and joint study uses
+`/mnt/rico-source-data/jep-joint-recovery-20261021` and its separate environment:
 
 ```sh
 /mnt/rico-source-data/jep-joint-env-20261021/bin/python \
   /home/machina/jep-csts-observer-20261021/progress.py \
-  --root /mnt/rico-source-data/jep-joint-csts-20261021 --watch
+  --root /mnt/rico-source-data/jep-joint-recovery-20261021 --watch
 ```
 
 The controller log gives trial completions and failures:
 
 ```sh
-tail -f /mnt/rico-source-data/jep-joint-csts-20261021/csts_results/launcher.log
+tail -f /mnt/rico-source-data/jep-joint-recovery-20261021/csts_results/finalizer.log
 ```
 
 VIPER saves training and development MSE in each run's
@@ -43,7 +43,18 @@ Joint traces also include training and development answer cross-entropy.
 The answer stage prints its completed count after each batch. Its artifact
 contains every generated answer and its source-span validation result.
 
+The finalizer prints counts and epoch metrics every 30 seconds. It publishes
+[live status](training_outputs/csts_live_status.json) and completed training
+curves to GitHub every five minutes. The launcher log in the same directory
+contains controller errors. Verified storage cleanup writes
+`/mnt/rico-source-data/jep-storage-cleanup-20261021.log`.
+
+The VM stops after all five approaches have been evaluated across three seeds,
+the approved backup and cleanup have completed, and reports have been published
+to GitHub and VIPER. A failed study leaves an error in the finalizer log.
+
 The observation process reads files and queries GPU utilization. Its JSON
 snapshot includes metrics and configuration. It leaves evaluation inputs closed.
 Model checkpoints, source references and native run records remain available
 through VIPER. The joint study publishes to the configured GCS repository.
+
