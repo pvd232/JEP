@@ -1,0 +1,97 @@
+{
+  "scope": "synthetic CPU implementation check",
+  "source_commit": "f60003f261fd2095d8ab5b04899126d305ac3a48",
+  "mode": "tiny",
+  "device": "cpu",
+  "expert_labels": false,
+  "steps_per_arm": 8,
+  "seed": 7,
+  "checks": {
+    "pytest": "2 passed",
+    "ruff": "passed",
+    "pyrefly": "0 errors"
+  },
+  "arms": [
+    {
+      "arm": "ratings",
+      "status": "succeeded",
+      "verified_measurements": 10,
+      "metrics": {
+        "all": {
+          "n": 672,
+          "mse": 0.08479061729829308,
+          "spearman": 0.26837181331399895
+        },
+        "atomic": {
+          "n": 384,
+          "mse": 0.08486633518543103,
+          "spearman": 0.24267775487912438
+        },
+        "composed": {
+          "n": 288,
+          "mse": 0.08468966011544247,
+          "spearman": 0.5417911006743624
+        }
+      },
+      "initial_shared_gradients": {
+        "similarity_norm": 0.0330936573445797,
+        "annotation_norm": 0.2341291606426239,
+        "cosine": -0.10982327908277512
+      }
+    },
+    {
+      "arm": "joint",
+      "status": "succeeded",
+      "verified_measurements": 10,
+      "metrics": {
+        "all": {
+          "n": 672,
+          "mse": 0.09777037621252341,
+          "spearman": 0.2772705884760624
+        },
+        "atomic": {
+          "n": 384,
+          "mse": 0.10146649417397972,
+          "spearman": 0.2533903450267411
+        },
+        "composed": {
+          "n": 288,
+          "mse": 0.09284221893058169,
+          "spearman": 0.5205634470886505
+        }
+      },
+      "initial_shared_gradients": {
+        "similarity_norm": 0.0330936573445797,
+        "annotation_norm": 0.2341291606426239,
+        "cosine": -0.10982327908277512
+      }
+    },
+    {
+      "arm": "shuffled",
+      "status": "succeeded",
+      "verified_measurements": 10,
+      "metrics": {
+        "all": {
+          "n": 672,
+          "mse": 0.09747988388452249,
+          "spearman": 0.2831409685643033
+        },
+        "atomic": {
+          "n": 384,
+          "mse": 0.10113617217017223,
+          "spearman": 0.25644438650670703
+        },
+        "composed": {
+          "n": 288,
+          "mse": 0.09260483283698948,
+          "spearman": 0.52792918712803
+        }
+      },
+      "initial_shared_gradients": {
+        "similarity_norm": 0.0330936573445797,
+        "annotation_norm": 0.2567129135131836,
+        "cosine": -0.14009101688861847
+      }
+    }
+  ]
+}

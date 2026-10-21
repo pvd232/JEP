@@ -1,0 +1,71 @@
+{
+  "config": {
+    "schema_version": 2,
+    "mode": "tiny",
+    "model_id": "google/flan-t5-small",
+    "revision": "",
+    "annotation_weight": 0.2,
+    "shuffle_annotations": false,
+    "steps": 8,
+    "batch_size": 4,
+    "learning_rate": 0.001,
+    "seed": 7,
+    "device": "cpu"
+  },
+  "parameter_count": 24768,
+  "initial_shared_gradients": {
+    "similarity_norm": 0.0330936573445797,
+    "annotation_norm": 0.2341291606426239,
+    "cosine": -0.10982327908277512
+  },
+  "steps": [
+    {
+      "step": 1,
+      "mse": 0.11650402843952179,
+      "annotation_ce": 5.621227264404297,
+      "loss": 1.2407495975494385
+    },
+    {
+      "step": 2,
+      "mse": 0.165693461894989,
+      "annotation_ce": 5.484090805053711,
+      "loss": 1.2625117301940918
+    },
+    {
+      "step": 3,
+      "mse": 0.11350153386592865,
+      "annotation_ce": 5.341190338134766,
+      "loss": 1.1817396879196167
+    },
+    {
+      "step": 4,
+      "mse": 0.059126418083906174,
+      "annotation_ce": 5.108500003814697,
+      "loss": 1.0808264017105103
+    },
+    {
+      "step": 5,
+      "mse": 0.09385865926742554,
+      "annotation_ce": 4.964044094085693,
+      "loss": 1.086667537689209
+    },
+    {
+      "step": 6,
+      "mse": 0.14860452711582184,
+      "annotation_ce": 4.925287246704102,
+      "loss": 1.1336619853973389
+    },
+    {
+      "step": 7,
+      "mse": 0.1007375419139862,
+      "annotation_ce": 4.769155979156494,
+      "loss": 1.0545687675476074
+    },
+    {
+      "step": 8,
+      "mse": 0.1711394488811493,
+      "annotation_ce": 4.618847370147705,
+      "loss": 1.0949089527130127
+    }
+  ]
+}

@@ -29,7 +29,7 @@ python -m jep_pilot.run --device cpu --mode tiny --steps 8
 Before a pretrained run, resolve and record an immutable model revision, then pass it explicitly:
 
 ```bash
-python -m jep_pilot.run --device cuda --mode pretrained --revision MODEL_COMMIT_SHA --steps 120
+python -m jep_pilot.run --device cuda --mode pretrained --revision 0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab --steps 120
 ```
 
 Run the existing GCP L4 through its GitHub Actions route when the runner is available. The connected development host currently requires Google Cloud reauthentication to start the MANTRA machine. No GPU job has been submitted by this pilot setup.
