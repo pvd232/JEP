@@ -1,8 +1,8 @@
 # C-STS: GPT-6.1 Sol, max reasoning
 
-Updated: 2026-10-21T17:53:28.637032+00:00.
+Updated: 2026-10-21T17:56:23.536270+00:00.
 
-Status: **running**. Completed 1,088 / 2,620 comparisons.
+Status: **running**. Completed 1,408 / 2,620 comparisons.
 
 Model: `gpt-6.1-sol`, `model_reasoning_effort="max"`, through the signed-in Codex CLI. Each request starts a fresh session. The model sees only an item identifier, two sentences, and the condition. The fixed zero-shot rubric requests a 1–5 score with 0.1 precision. Reference scores are joined by the offline evaluator after inference. No tools are allowed; any tool event invalidates a batch. Private reasoning is neither requested nor captured.
 
@@ -10,22 +10,22 @@ Protocol: 64 independently scored items per request, four requests at a time; 41
 
 A development timing check of eight source-distinct rows completed in 44.021 seconds. The rubric was fixed before evaluation. This uses the same existing 2,620-comparison split as the completed encoder study. This split has previously been examined by researchers; it is not a new confirmatory holdout. Public benchmark exposure during pretraining cannot be ruled out.
 
-Label provenance: **LivNLP/C-STS-Reannotated**, revision `058ac842f5f19d27b08ad54f6d4a2c50b3f9578b`. This is the later release by Zhang, Zhou and Bollegala (EMNLP 2025), also used by CASE. It combines GPT-4o/Claude-3.7-Sonnet reannotations with original human scores and revised conditions. Tu et al. (ACL 2024) released a separate manually reannotated validation set at [brandeis-llc/L-CSTS](https://github.com/brandeis-llc/L-CSTS). Our current run uses the LivNLP labels. [Release description](https://livnlp.github.io/CSTS-reannotation/).
+**Corrected evaluation-label provenance:** The files come from **LivNLP/C-STS-Reannotated**, revision `058ac842f5f19d27b08ad54f6d4a2c50b3f9578b`, but their validation ratings match **Tu et al. (ACL 2024) human reannotations** exactly. A row-by-row audit found all **2,834 / 2,834** labels identical to [Tu's released TSV](https://github.com/brandeis-llc/L-CSTS/blob/main/data/csts-val-reannotated.tsv), including the 214 invalid labels removed to leave 2,620 evaluation comparisons. LivNLP modifies condition text. Its separate training ratings combine original human scores with GPT-4o/Claude-3.7-Sonnet judgments. The earlier report incorrectly described our evaluation ratings as a separate LLM reannotation. [Audit receipt](csts_sol61_max_label_audit.json); [2025 paper, Section 3](https://aclanthology.org/2025.emnlp-main.1373.pdf).
 
 ## Preliminary results
 
-**1,088 completed comparisons out of 2,620**, as of 2026-10-21T17:53:28.626195+00:00. These are the completed batches, and their scores have not been used to alter the prompt or inference settings.
+**1,408 completed comparisons out of 2,620**, as of 2026-10-21T17:56:23.525502+00:00. These are the completed batches, and their scores have not been used to alter the prompt or inference settings.
 
 | Metric | Preliminary value |
 |---|---:|
-| Spearman | 0.812229 |
-| MSE, normalized 0–1 | 0.061067 |
-| MSE, 1–5 rating units | 0.977068 |
-| Exact rating agreement | 50.18% (546/1088) |
-| Mean absolute error, rating points | 0.5916 |
-| Condition ordering, ties count half | 94.54% |
+| Spearman | 0.799415 |
+| MSE, normalized 0–1 | 0.064431 |
+| MSE, 1–5 rating units | 1.030902 |
+| Exact rating agreement | 50.00% (704/1408) |
+| Mean absolute error, rating points | 0.6106 |
+| Condition ordering, ties count half | 92.78% |
 
-Condition ordering currently covers 174 eligible within-pair comparisons: 162 correct, 5 tied. Only pairs with both conditions completed contribute. Exact rating agreement compares the numeric 1–5 prediction with the reference score, without rounding.
+Condition ordering currently covers 291 eligible within-pair comparisons: 261 correct, 18 tied. Only pairs with both conditions completed contribute. Exact rating agreement compares the numeric 1–5 prediction with the reference score, without rounding.
 
 Spearman measures global rank agreement across the completed comparison rows. Its value is not a percent-correct score. MSE uses `(score - 1) / 4`. These partial metrics have been checked against SciPy offline; native VIPER publication and independent verification follow full inference completion. The final result may change as additional batches finish.
 
