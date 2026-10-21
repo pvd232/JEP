@@ -56,6 +56,25 @@ Aspect: {condition}
 Caption: {passage}
 JSON:"""
 
+REVIEW_PROMPT = """Check whether the proposed evidence answers the aspect question.
+Read the ENTIRE caption before deciding. Return JSON with boolean accept and
+a short reason. Accept when the evidence supplies the requested value for the
+correct entity and preserves all relevant values and qualifications.
+Reject if the value is absent, the question's entity is unclear, the evidence
+describes another entity, or the evidence omits a relevant entity or value.
+For number questions, count every mentioned instance of the requested kind.
+A bare plural supplies no count. A selected singular noun is incomplete when
+the caption also mentions other people or animals of the requested kind.
+A full caption can be valid evidence. General words such as 'sporting event'
+supply no particular game. A description of reading a book supplies no evidence
+about aids used or their absence. Broad questions about object type require
+all the caption's relevant object types.
+
+Aspect: {condition}
+Caption: {passage}
+Proposed evidence: {answer}
+JSON:"""
+
 
 def answer_id(passage: str, condition: str) -> str:
     """Identify a caption and condition independently of pair membership."""
@@ -93,11 +112,21 @@ def parse_response(passage: str, response: str) -> dict[str, Any]:
     }
 
 
+def review_accepts(response: str) -> bool:
+    """Accept only an explicit, well-formed affirmative verifier judgment."""
+    try:
+        record = json.loads(response)
+    except (ValueError, TypeError):
+        return False
+    return isinstance(record, dict) and record.get("accept") is True
+
+
 class AnswerConfig(BuildConfig):
     """Pin the teacher and bound generation for the annotation stage."""
 
     batch_size: int = Field(default=16, ge=1)
     max_new_tokens: int = Field(default=128, ge=1)
+    review_max_new_tokens: int = Field(default=96, ge=1)
     limit: int | None = None
     offset: int = Field(default=0, ge=0)
 
@@ -162,10 +191,42 @@ def annotate(context: StageContext[AnswerConfig]) -> None:
             answers = tokenizer.batch_decode(
                 generated[:, batch["input_ids"].shape[1] :], skip_special_tokens=True
             )
-            for row, response in zip(items[start:stop], answers, strict=True):
-                parsed = parse_response(row["passage"], response)
-                stream.write(json.dumps(dict(row, **parsed)) + "\n")
-                accepted += int(parsed["valid"])
+            records = [
+                dict(row, **parse_response(row["passage"], response))
+                for row, response in zip(items[start:stop], answers, strict=True)
+            ]
+            candidates = [row for row in records if row["valid"]]
+            if candidates:
+                review_prompts = [
+                    tokenizer.apply_chat_template(
+                        [{"role": "user", "content": REVIEW_PROMPT.format(**row)}],
+                        tokenize=False,
+                        add_generation_prompt=True,
+                        enable_thinking=False,
+                    )
+                    for row in candidates
+                ]
+                review_batch = tokenizer(
+                    review_prompts, padding=True, return_tensors="pt"
+                ).to("cuda")
+                reviewed = teacher.generate(
+                    **review_batch,
+                    do_sample=False,
+                    max_new_tokens=context.config.review_max_new_tokens,
+                    pad_token_id=tokenizer.pad_token_id,
+                    use_cache=True,
+                )
+                reviews = tokenizer.batch_decode(
+                    reviewed[:, review_batch["input_ids"].shape[1] :],
+                    skip_special_tokens=True,
+                )
+                for row, review in zip(candidates, reviews, strict=True):
+                    row["source_span_valid"] = True
+                    row["review_response"] = review
+                    row["valid"] = review_accepts(review)
+            for row in records:
+                stream.write(json.dumps(row) + "\n")
+                accepted += int(row["valid"])
             stream.flush()
             print(
                 json.dumps(
@@ -184,6 +245,7 @@ def annotate(context: StageContext[AnswerConfig]) -> None:
             "teacher": TEACHER,
             "revision": TEACHER_REVISION,
             "prompt": PROMPT,
+            "review_prompt": REVIEW_PROMPT,
             "configuration": context.config.model_dump(),
             "generation": {"do_sample": False, "enable_thinking": False},
             "unique_caption_conditions": len(items),
@@ -191,7 +253,7 @@ def annotate(context: StageContext[AnswerConfig]) -> None:
             "accepted_fraction": accepted / len(items),
             "seconds": time.monotonic() - start_time,
             "peak_cuda_memory_bytes": torch.cuda.max_memory_allocated(),
-            "checks": "Exact source span only. Semantic relevance requires review.",
+            "checks": "Exact source span and a second teacher check. Semantic relevance requires an independent pilot audit.",
             "label_source": "Teacher generated. No human answer annotations.",
         },
     )

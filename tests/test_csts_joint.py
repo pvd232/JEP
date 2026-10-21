@@ -10,7 +10,12 @@ import torch
 from torch import nn
 from transformers import T5Config, T5ForConditionalGeneration
 
-from csts_pilot.answers import answer_id, parse_response, validated_answer
+from csts_pilot.answers import (
+    answer_id,
+    parse_response,
+    review_accepts,
+    validated_answer,
+)
 from csts_pilot.joint import AnswerEncoder
 
 
@@ -87,6 +92,10 @@ def test_teacher_json_requires_supported_evidence():
     assert parse_response("A blue shirt.", response("NOT_SPECIFIED"))["valid"] is False
     assert parse_response("A blue shirt.", '{"evidence":"blue"}')["valid"] is False
     assert parse_response("A blue shirt.", "bad JSON")["valid"] is False
+    assert review_accepts('{"accept":true,"reason":"Correct entity"}') is True
+    assert review_accepts('{"accept":false}') is False
+    assert review_accepts('{"accept":"true"}') is False
+    assert review_accepts('truncated {"accept":true') is False
 
 
 def test_answer_loader_imports_in_an_isolated_directory(tmp_path):

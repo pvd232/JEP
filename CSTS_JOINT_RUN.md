@@ -16,14 +16,17 @@ other caption nor the similarity rating. Identical caption and condition inputs
 receive one cached answer. Training and development captions receive answers.
 The reserved evaluation captions are excluded from annotation generation.
 
-An answer enters the loss when it matches a contiguous span of the caption.
+An answer enters the loss when it matches a contiguous span of the caption
+and a second teacher prompt accepts its relevance and completeness.
 Abstentions and unsupported generations receive no answer loss. This check
 establishes source support. The 128-example annotation pilot is reviewed for
 relevance to the condition before generating the complete answer artifact.
 The first two pilots used a 4B teacher. Their audits found errors in entity
-binding and counting. The 8B pilot uses the next 128 records in the fixed
-hash order, excluding both earlier pilot samples. These prompt changes use
-training and development captions only.
+binding and counting. A third pilot used an 8B teacher and exposed incomplete
+counts and ambiguous questions. The current pilot adds the second check and
+uses the next 128 records in the fixed hash order, excluding the earlier
+384 records. These prompt changes use training and development captions only.
+The teacher's two checks share model weights, so their errors can be correlated.
 The full run stops if fewer than half of generations pass the source-span check.
 The answers remain teacher annotations, with their provenance recorded in VIPER.
 
