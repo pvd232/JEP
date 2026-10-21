@@ -1,14 +1,14 @@
 {
-  "observed_at_utc": "2026-10-21T15:45:01.849507+00:00",
+  "observed_at_utc": "2026-10-21T15:50:07.458283+00:00",
   "source_commit": "38496f8f7f30402429acf0ba150dcffc56bf8f48",
   "controller_alive": true,
   "resources": {
-    "disk_free_gib": 299.22339630126953,
+    "disk_free_gib": 298.6579055786133,
     "disk_total_gib": 491.0848846435547,
     "gpus": [
       {
-        "utilization_percent": 94.0,
-        "memory_used_mib": 5951.0,
+        "utilization_percent": 99.0,
+        "memory_used_mib": 8583.0,
         "memory_total_mib": 23034.0
       }
     ]
@@ -4305,10 +4305,76 @@
       "name": "shuffled_seed8",
       "run_id": "01M5FJ4P3VCPMFVSJ3NRWN022Z",
       "status": "training",
-      "epochs": [],
-      "best_epoch": null,
-      "best_development": {},
-      "development_answer_ce": null,
+      "epochs": [
+        {
+          "epoch": 1,
+          "training_mse": 0.09784266352653503,
+          "training_answer_ce": 3.0886011123657227,
+          "development_answer_ce": 0.8906646966934204,
+          "development": {
+            "mse_0_1": 0.09619810570828316
+          }
+        },
+        {
+          "epoch": 2,
+          "training_mse": 0.08191297948360443,
+          "training_answer_ce": 2.55619740486145,
+          "development_answer_ce": 0.7692010998725891,
+          "development": {
+            "mse_0_1": 0.10517121019234277
+          }
+        },
+        {
+          "epoch": 3,
+          "training_mse": 0.07486461848020554,
+          "training_answer_ce": 2.434678077697754,
+          "development_answer_ce": 0.7383968234062195,
+          "development": {
+            "mse_0_1": 0.08624671258725987
+          }
+        },
+        {
+          "epoch": 4,
+          "training_mse": 0.06883753091096878,
+          "training_answer_ce": 2.3719794750213623,
+          "development_answer_ce": 0.711091160774231,
+          "development": {
+            "mse_0_1": 0.08250052411576943
+          }
+        },
+        {
+          "epoch": 5,
+          "training_mse": 0.06338910013437271,
+          "training_answer_ce": 2.33198881149292,
+          "development_answer_ce": 0.6889273524284363,
+          "development": {
+            "mse_0_1": 0.07554630694217801
+          }
+        },
+        {
+          "epoch": 6,
+          "training_mse": 0.059722650796175,
+          "training_answer_ce": 2.2964327335357666,
+          "development_answer_ce": 0.6896074414253235,
+          "development": {
+            "mse_0_1": 0.07474797499831398
+          }
+        },
+        {
+          "epoch": 7,
+          "training_mse": 0.05699339509010315,
+          "training_answer_ce": 2.2826156616210938,
+          "development_answer_ce": 0.6850885152816772,
+          "development": {
+            "mse_0_1": 0.07693233063402939
+          }
+        }
+      ],
+      "best_epoch": 6,
+      "best_development": {
+        "mse_0_1": 0.07474797499831398
+      },
+      "development_answer_ce": 0.6896074414253235,
       "config": {},
       "seconds": null,
       "peak_cuda_memory_bytes": null,
