@@ -3,8 +3,8 @@
   "final": false,
   "model": "gpt-6.1-sol",
   "reasoning_effort": "max",
-  "as_of": "2026-10-21T17:48:26.577982+00:00",
-  "completed_rows": 768,
+  "as_of": "2026-10-21T17:53:28.626195+00:00",
+  "completed_rows": 1088,
   "total_rows": 2620,
   "completed_batches": [
     0,
@@ -18,26 +18,31 @@
     8,
     9,
     10,
-    11
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
   ],
   "metrics": {
-    "n": 768,
-    "mse_0_1": 0.059195149739583335,
-    "mse_1_5": 0.9471223958333334,
-    "spearman": 0.8231849056527752,
-    "pearson": 0.8133515150630174,
-    "prediction_mean": 0.6140950520833334,
-    "target_mean": 0.595703125,
+    "n": 1088,
+    "mse_0_1": 0.061066750919117646,
+    "mse_1_5": 0.9770680147058823,
+    "spearman": 0.8122286136107489,
+    "pearson": 0.8044081871643756,
+    "prediction_mean": 0.6112821691176471,
+    "target_mean": 0.5981158088235294,
     "condition_changes": {
-      "n": 86,
-      "correct": 81,
-      "ties": 2,
-      "accuracy_ties_half": 0.9534883720930233
+      "n": 174,
+      "correct": 162,
+      "ties": 5,
+      "accuracy_ties_half": 0.9454022988505747
     },
-    "exact_rating_match_fraction": 0.5247395833333334,
-    "exact_rating_matches": 403,
-    "mae_1_5": 0.5751302083333333,
-    "within_1_rating_point_fraction": 0.8515625
+    "exact_rating_match_fraction": 0.5018382352941176,
+    "exact_rating_matches": 546,
+    "mae_1_5": 0.5916360294117647,
+    "within_1_rating_point_fraction": 0.8483455882352942
   },
   "reference_dataset": "LivNLP/C-STS-Reannotated",
   "reference_revision": "058ac842f5f19d27b08ad54f6d4a2c50b3f9578b",
