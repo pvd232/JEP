@@ -1,6 +1,6 @@
 {
-  "observed_at_utc": "2026-10-21T21:11:29.997054+00:00",
-  "status": "prepared_waiting_for_gpu_capacity",
+  "observed_at_utc": "2026-10-21T21:32:55.266534+00:00",
+  "status": "gpu_allocated_setting_up",
   "training_started": false,
   "source_commit": "47864845b6520ae49676c27d0224513ac161388a",
   "native_preparation_run": {
@@ -106,12 +106,14 @@
     "new_teacher_calls": 0
   },
   "vm": {
-    "name": "rico-source-l4-uswest4c",
-    "zone": "us-west4-c",
+    "name": "jep-csts-format-20261021",
     "project": "mantra-477901",
-    "status": "TERMINATED",
-    "machine_type": "g2-standard-12",
-    "disks_preserved": true
+    "zone": "asia-northeast3-a",
+    "region": "asia-northeast3",
+    "machine_type": "g2-standard-4",
+    "status": "RUNNING",
+    "external_ip": false,
+    "purpose": "isolated cached annotation format pilot"
   },
   "capacity_error": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
   "attempted_configurations": [
@@ -128,12 +130,12 @@
     "Original cache restored and checksum verified"
   ],
   "pending": [
-    "L4 capacity",
-    "GPU throughput profile and frozen common budget",
-    "Six matched training stages",
-    "Three evaluations after checkpoint selection",
-    "Development generation diagnostic",
-    "Publication and VM shutdown"
+    "driver installation and reboot",
+    "reproduce recorded Python environment",
+    "GPU and input validation",
+    "throughput profile and common budget freeze",
+    "six native training stages",
+    "evaluation, publication and shutdown"
   ],
   "capacity_evidence": "csts_annotation_format_capacity.json",
   "japan_capacity": {
@@ -152,5 +154,14 @@
     "vm_exists": false,
     "training_started": false,
     "retrieval": "csts_annotation_format_capacity.json"
-  }
+  },
+  "original_vm": {
+    "name": "rico-source-l4-uswest4c",
+    "zone": "us-west4-c",
+    "project": "mantra-477901",
+    "status": "TERMINATED",
+    "machine_type": "g2-standard-12",
+    "disks_preserved": true
+  },
+  "global_capacity_evidence": "csts_annotation_format_global_capacity.json"
 }
