@@ -1,0 +1,47 @@
+{
+  "bootstrap": {
+    "replicates": 2000,
+    "seed": 61021,
+    "groups": 1241,
+    "unit": "connected canonical source-caption component",
+    "method": "paired percentile 95%"
+  },
+  "paired": {
+    "prose_minus_evidence": {
+      "mse_delta": -0.00180986158337626,
+      "mse_delta_95": [
+        -0.0036288215566004345,
+        8.797013339982488e-05
+      ],
+      "spearman_delta": -0.00015383381617389835,
+      "spearman_delta_95": [
+        -0.011181381074617249,
+        0.009873636125874378
+      ]
+    },
+    "record_minus_evidence": {
+      "mse_delta": -0.0012183294774391895,
+      "mse_delta_95": [
+        -0.0030200381993127474,
+        0.0006744480943923653
+      ],
+      "spearman_delta": -0.002639807442332387,
+      "spearman_delta_95": [
+        -0.012991586207674734,
+        0.007265441373374801
+      ]
+    },
+    "record_minus_prose": {
+      "mse_delta": 0.0005915321059370704,
+      "mse_delta_95": [
+        -0.00023895102795797458,
+        0.001477864751408623
+      ],
+      "spearman_delta": -0.0024859736261584886,
+      "spearman_delta_95": [
+        -0.006903033869733453,
+        0.0019461908754279465
+      ]
+    }
+  }
+}

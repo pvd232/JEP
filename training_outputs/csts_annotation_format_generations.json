@@ -1,0 +1,1826 @@
+[
+  {
+    "id": "e6064927cec628bab551719df2993b67b1b3cc6ac396ac486ca8b6eb56c6b45e",
+    "passage": "Five children are on a slide , all dressed in different colored clothes .",
+    "condition": "number of people",
+    "target": "people",
+    "attribute": "number",
+    "expected": "Five children",
+    "generated": "Five children",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "Five children"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "505f334992b9e5a67e960a4730d7dc06bce7f741af69418166f308c17275dabd",
+    "passage": "A woman is skiing in a snowy forest with a dog next to her.",
+    "condition": "activity",
+    "target": "activity",
+    "attribute": "activity",
+    "expected": "skiing",
+    "generated": "skiing",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "skiing"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "6925e2770b6136c236095e73cdc2ef8bcdc57626835b1993371c41c23242cd94",
+    "passage": "A soccer team with green uniforms and their coach are huddling .",
+    "condition": "action people are taking",
+    "target": "people",
+    "attribute": "action",
+    "expected": "are huddling",
+    "generated": "are huddling",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "are huddling"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "f1ed24107d0edb305e59c5e522da760506830202a98f8c1472c2c59d4366ff23",
+    "passage": "A guy wearing a motorcycle helmet is riding an ATV on a sandy road .",
+    "condition": "type of clothing",
+    "target": "clothing",
+    "attribute": "type",
+    "expected": "motorcycle helmet",
+    "generated": "motorcycle helmet",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "motorcycle helmet"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "bebe5d0dc824f4901036cb79d92135f20fcfe5eb9b45d429da4e6daabb32a46c",
+    "passage": "A person in face paint and an orange oversized cowboy hat rides his bike on a trail .",
+    "condition": "color of object",
+    "target": "object",
+    "attribute": "color",
+    "expected": "orange",
+    "generated": "face paint",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "face paint"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "702d6e5dc049357ba2b7ae2cdd859d9ecf832c09eea72d7a778676b959afdeb6",
+    "passage": "Many people, with one lady looking at the camera, are at the table eating. ",
+    "condition": "woman eating",
+    "target": "woman",
+    "attribute": "eating",
+    "expected": "Many people, with one lady looking at the camera, are at the table eating.",
+    "generated": "at the table eating",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "at the table eating"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.4444444444444444
+    }
+  },
+  {
+    "id": "0ad47996ffdc713c16a1b5993b2f52330a431416cf8232ec273a10f824c53398",
+    "passage": "Several people are on the beach with boats and sails .",
+    "condition": "location",
+    "target": "location",
+    "attribute": "location",
+    "expected": "on the beach",
+    "generated": "on the beach",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "on the beach"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "f57a0eaa887d968488a2cba6a2bad1fd85267d43beb546f61b24a13049301f59",
+    "passage": "A man plays the violin while a woman sits in front of him .",
+    "condition": "musical activity",
+    "target": "man",
+    "attribute": "musical activity",
+    "expected": "plays the violin",
+    "generated": "plays the violin",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "plays the violin"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "551bba7bb27c2cc334f554e400533526630b35600034de2cd13fc51712bff485",
+    "passage": "A male weimaraner with a clipped tail is walking through a river .",
+    "condition": "body of water dog is walking through",
+    "target": "river",
+    "attribute": "body of water",
+    "expected": "a river",
+    "generated": "river",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "river"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.6666666666666666
+    }
+  },
+  {
+    "id": "6fda828ff228e1d799b1cfb56feac6a5171ad0bca3ec324489c0e9418eb0e2ae",
+    "passage": "A baseball player wearing green and white standing next to a baseball player wearing red and gray on a baseball field.",
+    "condition": "sport played",
+    "target": "sport",
+    "attribute": "played",
+    "expected": "baseball",
+    "generated": "baseball",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "baseball"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "85787df13a28e734b4e4d4a5a86035a05e752604413619f99fb4fe334b2de5df",
+    "passage": "A snowboard rider jumping high on his snowboard in the snow .",
+    "condition": "action of snowboarder",
+    "target": "snowboarder",
+    "attribute": "action",
+    "expected": "jumping high on his snowboard",
+    "generated": "jumping high",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "jumping high"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.5714285714285714
+    }
+  },
+  {
+    "id": "689db1e2bbd995ac58b3f6af9cedf1cea51891f592df82dfea892cbc89186402",
+    "passage": "a muzzled greyhound wearing the number five is running on a dog track .",
+    "condition": "breed of dogs",
+    "target": "dog",
+    "attribute": "breed",
+    "expected": "a muzzled greyhound",
+    "generated": "greyhound",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "greyhound"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.5
+    }
+  },
+  {
+    "id": "4f775b6ed547c177da7a712433253e03ce99fe4d843fa7fe9c46de6b60681ecf",
+    "passage": "A bus with a bicycle rack with a bike on it driving down a road.",
+    "condition": "type of vehicle",
+    "target": "vehicle",
+    "attribute": "type",
+    "expected": "A bus",
+    "generated": "bus",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "bus"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.6666666666666666
+    }
+  },
+  {
+    "id": "4309c2cd14c6889e9bf0cb1b8fd0894d14d675529dcfa7659d10bba891bfbcd4",
+    "passage": "A cowboy is desperately grasping too the reigns off a horse that is trying to buck him off at a rodeo .",
+    "condition": "animal they are riding",
+    "target": "horse",
+    "attribute": "animal they are riding",
+    "expected": "A cowboy is desperately grasping too the reigns off a horse that is trying to buck him off at a rodeo",
+    "generated": "horse",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "horse"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.09090909090909091
+    }
+  },
+  {
+    "id": "ccfb44703878615bc0b3c3072b055cee9114f0d25d42e83586da16f6e7e65c56",
+    "passage": "A man is playing tennis during a game and touches his racket to the ground.",
+    "condition": "activity during game",
+    "target": "game",
+    "attribute": "activity",
+    "expected": "A man is playing tennis during a game and touches his racket to the ground",
+    "generated": "is playing tennis",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "is playing tennis"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.3333333333333333
+    }
+  },
+  {
+    "id": "0312e2372ad1fa843ff21aa731f88ca3846783cc859f59b83aaaac7074a2b607",
+    "passage": "Inside of an air museum and the view from under the wing of a large plane.",
+    "condition": "type of vehicle",
+    "target": "vehicle",
+    "attribute": "type",
+    "expected": "a large plane",
+    "generated": "plane",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "plane"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.5
+    }
+  },
+  {
+    "id": "9d7bb1f97f41636234d307d2fb277c466a71bd409cfef7595b7891c0946a9a63",
+    "passage": "A girl with a number seven jersey throws a softball to her teammate .",
+    "condition": "gender of persons",
+    "target": "persons",
+    "attribute": "gender",
+    "expected": "A girl",
+    "generated": "A girl",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "A girl"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "114b240ff7b519dada33b84fffef4b0cffb8ebf37c910ec64345b4f09bc43c63",
+    "passage": "Someone leaps across the beach in a sign of joy !",
+    "condition": "type of landscape",
+    "target": "landscape",
+    "attribute": "type",
+    "expected": "beach",
+    "generated": "beach",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "beach"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "85e8330feeab9ddacec590feb72b805d540d5d19152dd302268e1ecba95d08e9",
+    "passage": "The dining room has four chairs at the table, and a hard wood floor.",
+    "condition": "name of room",
+    "target": "room",
+    "attribute": "name",
+    "expected": "dining room",
+    "generated": "dining room",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "dining room"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "225c577280c16bcf4faa294ddc7393a8d0bedfd852eed5009e34ab8e1e29dd4e",
+    "passage": "A man is looking into purchasing some fruit from a stand .",
+    "condition": "gender of subject",
+    "target": "subject",
+    "attribute": "gender",
+    "expected": "A man",
+    "generated": "A man",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "A man"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "d3bd56bc58b9e2061c1a47b7048227781b44e0986904c34706988650622c6a09",
+    "passage": "A wide view of the living room, dining room and kitchen in a home.",
+    "condition": "number of rooms involved",
+    "target": "rooms",
+    "attribute": "number",
+    "expected": "living room, dining room and kitchen",
+    "generated": "living room, dining room and kitchen",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "living room, dining room and kitchen"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "b94ace3f7ae8259ae66b9b8b80fef1780342a68b84fd3ffbdd47338f2f1ad01f",
+    "passage": "A living room with a couch next to a chair in front of a TV.",
+    "condition": "type of room",
+    "target": "room",
+    "attribute": "type",
+    "expected": "living room",
+    "generated": "living room",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "living room"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "79c505f24da9c65f9a6eee167be94a99734a1c8f902f67872e75c389edb66399",
+    "passage": "Brush, books, bag, umbrella and couple of other items laid out on the bed",
+    "condition": "number of objects",
+    "target": "objects",
+    "attribute": "number",
+    "expected": "Brush, books, bag, umbrella and couple of other items",
+    "generated": "couple of other items",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "couple of other items"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.6153846153846154
+    }
+  },
+  {
+    "id": "43a47635a5185b0633fc8d2ae4bccd96cff636d870162b13cef3d59db35f8f8f",
+    "passage": "A train pumps out steam while going down a track on a cloudy day.",
+    "condition": "type of transport",
+    "target": "transport",
+    "attribute": "type",
+    "expected": "A train",
+    "generated": "train",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "train"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.6666666666666666
+    }
+  },
+  {
+    "id": "aa596a5cc847fae07031180054561a60ac6f896a11d743c1ec42f30ea15b951c",
+    "passage": "A man rock climbing in a forest with a long rope .",
+    "condition": "sport",
+    "target": "sport",
+    "attribute": "sport",
+    "expected": "rock climbing",
+    "generated": "rock climbing",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "rock climbing"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "e5032023195d4e102b5ad66480d4f747217205fa38852e8ae41814972874a2d3",
+    "passage": "Two motorcycles are near a curve in the road in front of a two story house.",
+    "condition": "motorcycle",
+    "target": "motorcycle",
+    "attribute": "number",
+    "expected": "Two motorcycles",
+    "generated": "Two motorcycles",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "Two motorcycles"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "9beeb61dab7261235f7caef2afafee48556a3d32bfe1a927ea18608dc211d693",
+    "passage": "Knitting yarn, a spool of thread, a book, a remote control, a clip board, and three ring binder are on a couch. ",
+    "condition": "types of objects",
+    "target": "objects",
+    "attribute": "types",
+    "expected": "Knitting yarn, a spool of thread, a book, a remote control, a clip board, and three ring binder",
+    "generated": "Knitting yarn, a spool of thread, a book, a remote control, a clip board, and three ring binder",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "Knitting yarn, a spool of thread, a book, a remote control, a clip board, and three ring binder"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "fd9dfc49c3e7f49cea2afc920196a66839ed0507747f8e8bff417d38a429a9b5",
+    "passage": "A lively party where most people are watching others dance .",
+    "condition": "activity",
+    "target": "activity",
+    "attribute": "activity",
+    "expected": "watching others dance",
+    "generated": "watching others dance",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "watching others dance"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "1f6388b30527878e30e95754dba293b590a5db90034554660a743724ae0d3933",
+    "passage": "Two muddy men try to tackle third muddy rugby player .",
+    "condition": "sport",
+    "target": "sport",
+    "attribute": "sport",
+    "expected": "rugby",
+    "generated": "rugby",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "rugby"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "e93e7cf8a245d3673e8235d31145a9a75df6f7083a22dc06897836ef0ebf195a",
+    "passage": "two young girls wearing pink playing on a playground",
+    "condition": "number of girls",
+    "target": "girls",
+    "attribute": "number",
+    "expected": "two young girls",
+    "generated": "two young girls",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "two young girls"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "3bd4ecd0ae8e82cde46b34619c7fbf4568102663a6b6bf9439831349f7091216",
+    "passage": "A group of mountain bikers race each other down a dirt hill .",
+    "condition": "type of vehicle",
+    "target": "vehicle",
+    "attribute": "type",
+    "expected": "mountain bikers",
+    "generated": "mountain bike",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "mountain bike"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.5
+    }
+  },
+  {
+    "id": "5e20a612d194e06d0f2508f7aa7ca0175abf63ca6809e432302118c735f1351b",
+    "passage": "A man in a white tank hits a jump with his red BMX bicycle .",
+    "condition": "gender",
+    "target": "man",
+    "attribute": "gender",
+    "expected": "A man",
+    "generated": "A man",
+    "arm": "evidence",
+    "parsed_generated": {
+      "evidence": "A man"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "e6064927cec628bab551719df2993b67b1b3cc6ac396ac486ca8b6eb56c6b45e",
+    "passage": "Five children are on a slide , all dressed in different colored clothes .",
+    "condition": "number of people",
+    "target": "people",
+    "attribute": "number",
+    "expected": "The target is \"people\" and the attribute is \"number\". The supporting evidence is \"Five children\".",
+    "generated": "The target is \"people\" and the attribute is \"number\". The supporting evidence is \"Two children\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "people",
+      "attribute": "number",
+      "evidence": "Two children"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.5
+    }
+  },
+  {
+    "id": "505f334992b9e5a67e960a4730d7dc06bce7f741af69418166f308c17275dabd",
+    "passage": "A woman is skiing in a snowy forest with a dog next to her.",
+    "condition": "activity",
+    "target": "activity",
+    "attribute": "activity",
+    "expected": "The target is \"activity\" and the attribute is \"activity\". The supporting evidence is \"skiing\".",
+    "generated": "The target is \"activity\" and the attribute is \"activity\". The supporting evidence is \"skiing\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "activity",
+      "attribute": "activity",
+      "evidence": "skiing"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "6925e2770b6136c236095e73cdc2ef8bcdc57626835b1993371c41c23242cd94",
+    "passage": "A soccer team with green uniforms and their coach are huddling .",
+    "condition": "action people are taking",
+    "target": "people",
+    "attribute": "action",
+    "expected": "The target is \"people\" and the attribute is \"action\". The supporting evidence is \"are huddling\".",
+    "generated": "The target is \"sports team\" and the attribute is \"action\". The supporting evidence is \"huddling\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "sports team",
+      "attribute": "action",
+      "evidence": "huddling"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.6666666666666666
+    }
+  },
+  {
+    "id": "f1ed24107d0edb305e59c5e522da760506830202a98f8c1472c2c59d4366ff23",
+    "passage": "A guy wearing a motorcycle helmet is riding an ATV on a sandy road .",
+    "condition": "type of clothing",
+    "target": "clothing",
+    "attribute": "type",
+    "expected": "The target is \"clothing\" and the attribute is \"type\". The supporting evidence is \"motorcycle helmet\".",
+    "generated": "The target is \"clothing\" and the attribute is \"type\". The supporting evidence is \"motocyclic helmet\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "clothing",
+      "attribute": "type",
+      "evidence": "motocyclic helmet"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.5
+    }
+  },
+  {
+    "id": "bebe5d0dc824f4901036cb79d92135f20fcfe5eb9b45d429da4e6daabb32a46c",
+    "passage": "A person in face paint and an orange oversized cowboy hat rides his bike on a trail .",
+    "condition": "color of object",
+    "target": "object",
+    "attribute": "color",
+    "expected": "The target is \"object\" and the attribute is \"color\". The supporting evidence is \"orange\".",
+    "generated": "The target is \"object\" and the attribute is \"color\". The supporting evidence is \"face paint\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "object",
+      "attribute": "color",
+      "evidence": "face paint"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "702d6e5dc049357ba2b7ae2cdd859d9ecf832c09eea72d7a778676b959afdeb6",
+    "passage": "Many people, with one lady looking at the camera, are at the table eating. ",
+    "condition": "woman eating",
+    "target": "woman",
+    "attribute": "eating",
+    "expected": "The target is \"woman\" and the attribute is \"eating\". The supporting evidence is \"Many people, with one lady looking at the camera, are at the table eating.\".",
+    "generated": "The target is \"woman\" and the attribute is \"eat\". The supporting evidence is \"A lady is at the table eating\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "woman",
+      "attribute": "eat",
+      "evidence": "A lady is at the table eating"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.47619047619047616
+    }
+  },
+  {
+    "id": "0ad47996ffdc713c16a1b5993b2f52330a431416cf8232ec273a10f824c53398",
+    "passage": "Several people are on the beach with boats and sails .",
+    "condition": "location",
+    "target": "location",
+    "attribute": "location",
+    "expected": "The target is \"location\" and the attribute is \"location\". The supporting evidence is \"on the beach\".",
+    "generated": "The target is \"beach\" and the attribute is \"location\". The supporting evidence is \"on the beach\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "beach",
+      "attribute": "location",
+      "evidence": "on the beach"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "f57a0eaa887d968488a2cba6a2bad1fd85267d43beb546f61b24a13049301f59",
+    "passage": "A man plays the violin while a woman sits in front of him .",
+    "condition": "musical activity",
+    "target": "man",
+    "attribute": "musical activity",
+    "expected": "The target is \"man\" and the attribute is \"musical activity\". The supporting evidence is \"plays the violin\".",
+    "generated": "The target is \"musical activity\" and the attribute is \"activity\". The supporting evidence is \"plays the violin\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "musical activity",
+      "attribute": "activity",
+      "evidence": "plays the violin"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "551bba7bb27c2cc334f554e400533526630b35600034de2cd13fc51712bff485",
+    "passage": "A male weimaraner with a clipped tail is walking through a river .",
+    "condition": "body of water dog is walking through",
+    "target": "river",
+    "attribute": "body of water",
+    "expected": "The target is \"river\" and the attribute is \"body of water\". The supporting evidence is \"a river\".",
+    "generated": "The target is \"dog\" and the attribute is \"body of water\". The supporting evidence is \"walking through a river\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "dog",
+      "attribute": "body of water",
+      "evidence": "walking through a river"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.6666666666666666
+    }
+  },
+  {
+    "id": "6fda828ff228e1d799b1cfb56feac6a5171ad0bca3ec324489c0e9418eb0e2ae",
+    "passage": "A baseball player wearing green and white standing next to a baseball player wearing red and gray on a baseball field.",
+    "condition": "sport played",
+    "target": "sport",
+    "attribute": "played",
+    "expected": "The target is \"sport\" and the attribute is \"played\". The supporting evidence is \"baseball\".",
+    "generated": "The target is \"sport\" and the attribute is \"played\". The supporting evidence is \"baseball\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "sport",
+      "attribute": "played",
+      "evidence": "baseball"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "85787df13a28e734b4e4d4a5a86035a05e752604413619f99fb4fe334b2de5df",
+    "passage": "A snowboard rider jumping high on his snowboard in the snow .",
+    "condition": "action of snowboarder",
+    "target": "snowboarder",
+    "attribute": "action",
+    "expected": "The target is \"snowboarder\" and the attribute is \"action\". The supporting evidence is \"jumping high on his snowboard\".",
+    "generated": "The target is \"snowboard rider\" and the attribute is \"action\". The supporting evidence is \" jumping high on his snowboard\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "snowboard rider",
+      "attribute": "action",
+      "evidence": " jumping high on his snowboard"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "689db1e2bbd995ac58b3f6af9cedf1cea51891f592df82dfea892cbc89186402",
+    "passage": "a muzzled greyhound wearing the number five is running on a dog track .",
+    "condition": "breed of dogs",
+    "target": "dog",
+    "attribute": "breed",
+    "expected": "The target is \"dog\" and the attribute is \"breed\". The supporting evidence is \"a muzzled greyhound\".",
+    "generated": "The target is \"dogs\" and the attribute is \"breed\". The supporting evidence is \"a muzzled greyhound\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "dogs",
+      "attribute": "breed",
+      "evidence": "a muzzled greyhound"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "4f775b6ed547c177da7a712433253e03ce99fe4d843fa7fe9c46de6b60681ecf",
+    "passage": "A bus with a bicycle rack with a bike on it driving down a road.",
+    "condition": "type of vehicle",
+    "target": "vehicle",
+    "attribute": "type",
+    "expected": "The target is \"vehicle\" and the attribute is \"type\". The supporting evidence is \"A bus\".",
+    "generated": "The target is \"vehicle\" and the attribute is \"type\". The supporting evidence is \"bus\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "vehicle",
+      "attribute": "type",
+      "evidence": "bus"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.6666666666666666
+    }
+  },
+  {
+    "id": "4309c2cd14c6889e9bf0cb1b8fd0894d14d675529dcfa7659d10bba891bfbcd4",
+    "passage": "A cowboy is desperately grasping too the reigns off a horse that is trying to buck him off at a rodeo .",
+    "condition": "animal they are riding",
+    "target": "horse",
+    "attribute": "animal they are riding",
+    "expected": "The target is \"horse\" and the attribute is \"animal they are riding\". The supporting evidence is \"A cowboy is desperately grasping too the reigns off a horse that is trying to buck him off at a rodeo\".",
+    "generated": "The target is \"hero\" and the attribute is \"animal\". The supporting evidence is \"a horse\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "hero",
+      "attribute": "animal",
+      "evidence": "a horse"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.17391304347826086
+    }
+  },
+  {
+    "id": "ccfb44703878615bc0b3c3072b055cee9114f0d25d42e83586da16f6e7e65c56",
+    "passage": "A man is playing tennis during a game and touches his racket to the ground.",
+    "condition": "activity during game",
+    "target": "game",
+    "attribute": "activity",
+    "expected": "The target is \"game\" and the attribute is \"activity\". The supporting evidence is \"A man is playing tennis during a game and touches his racket to the ground\".",
+    "generated": "The target is \"player\" and the attribute is \"activity\". The supporting evidence is \"playing tennis\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "player",
+      "attribute": "activity",
+      "evidence": "playing tennis"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.23529411764705882
+    }
+  },
+  {
+    "id": "0312e2372ad1fa843ff21aa731f88ca3846783cc859f59b83aaaac7074a2b607",
+    "passage": "Inside of an air museum and the view from under the wing of a large plane.",
+    "condition": "type of vehicle",
+    "target": "vehicle",
+    "attribute": "type",
+    "expected": "The target is \"vehicle\" and the attribute is \"type\". The supporting evidence is \"a large plane\".",
+    "generated": "The target is \"vehicle\" and the attribute is \"type\". The supporting evidence is \"large plane\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "vehicle",
+      "attribute": "type",
+      "evidence": "large plane"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.8
+    }
+  },
+  {
+    "id": "9d7bb1f97f41636234d307d2fb277c466a71bd409cfef7595b7891c0946a9a63",
+    "passage": "A girl with a number seven jersey throws a softball to her teammate .",
+    "condition": "gender of persons",
+    "target": "persons",
+    "attribute": "gender",
+    "expected": "The target is \"persons\" and the attribute is \"gender\". The supporting evidence is \"A girl\".",
+    "generated": "The target is \"persons\" and the attribute is \"gender\". The supporting evidence is \"A girl\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "persons",
+      "attribute": "gender",
+      "evidence": "A girl"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "114b240ff7b519dada33b84fffef4b0cffb8ebf37c910ec64345b4f09bc43c63",
+    "passage": "Someone leaps across the beach in a sign of joy !",
+    "condition": "type of landscape",
+    "target": "landscape",
+    "attribute": "type",
+    "expected": "The target is \"landscape\" and the attribute is \"type\". The supporting evidence is \"beach\".",
+    "generated": "The target is \"painting\" and the attribute is \"type\". The supporting evidence is \"beach\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "painting",
+      "attribute": "type",
+      "evidence": "beach"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "85e8330feeab9ddacec590feb72b805d540d5d19152dd302268e1ecba95d08e9",
+    "passage": "The dining room has four chairs at the table, and a hard wood floor.",
+    "condition": "name of room",
+    "target": "room",
+    "attribute": "name",
+    "expected": "The target is \"room\" and the attribute is \"name\". The supporting evidence is \"dining room\".",
+    "generated": "The target is \"room\" and the attribute is \"name\". The supporting evidence is \"dining room\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "room",
+      "attribute": "name",
+      "evidence": "dining room"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "225c577280c16bcf4faa294ddc7393a8d0bedfd852eed5009e34ab8e1e29dd4e",
+    "passage": "A man is looking into purchasing some fruit from a stand .",
+    "condition": "gender of subject",
+    "target": "subject",
+    "attribute": "gender",
+    "expected": "The target is \"subject\" and the attribute is \"gender\". The supporting evidence is \"A man\".",
+    "generated": "The target is \"person\" and the attribute is \"gender\". The supporting evidence is \"A man\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "person",
+      "attribute": "gender",
+      "evidence": "A man"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "d3bd56bc58b9e2061c1a47b7048227781b44e0986904c34706988650622c6a09",
+    "passage": "A wide view of the living room, dining room and kitchen in a home.",
+    "condition": "number of rooms involved",
+    "target": "rooms",
+    "attribute": "number",
+    "expected": "The target is \"rooms\" and the attribute is \"number\". The supporting evidence is \"living room, dining room and kitchen\".",
+    "generated": "The target is \"rooms\" and the attribute is \"number\". The supporting evidence is \"living room, dining room and kitchen\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "rooms",
+      "attribute": "number",
+      "evidence": "living room, dining room and kitchen"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "b94ace3f7ae8259ae66b9b8b80fef1780342a68b84fd3ffbdd47338f2f1ad01f",
+    "passage": "A living room with a couch next to a chair in front of a TV.",
+    "condition": "type of room",
+    "target": "room",
+    "attribute": "type",
+    "expected": "The target is \"room\" and the attribute is \"type\". The supporting evidence is \"living room\".",
+    "generated": "The target is \"room\" and the attribute is \"type\". The supporting evidence is \"living room\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "room",
+      "attribute": "type",
+      "evidence": "living room"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "79c505f24da9c65f9a6eee167be94a99734a1c8f902f67872e75c389edb66399",
+    "passage": "Brush, books, bag, umbrella and couple of other items laid out on the bed",
+    "condition": "number of objects",
+    "target": "objects",
+    "attribute": "number",
+    "expected": "The target is \"objects\" and the attribute is \"number\". The supporting evidence is \"Brush, books, bag, umbrella and couple of other items\".",
+    "generated": "The target is \"objects\" and the attribute is \"number\". The supporting evidence is \"couple of other items\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "objects",
+      "attribute": "number",
+      "evidence": "couple of other items"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.6153846153846154
+    }
+  },
+  {
+    "id": "43a47635a5185b0633fc8d2ae4bccd96cff636d870162b13cef3d59db35f8f8f",
+    "passage": "A train pumps out steam while going down a track on a cloudy day.",
+    "condition": "type of transport",
+    "target": "transport",
+    "attribute": "type",
+    "expected": "The target is \"transport\" and the attribute is \"type\". The supporting evidence is \"A train\".",
+    "generated": "The target is \"transport\" and the attribute is \"type\". The supporting evidence is \"train\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "transport",
+      "attribute": "type",
+      "evidence": "train"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.6666666666666666
+    }
+  },
+  {
+    "id": "aa596a5cc847fae07031180054561a60ac6f896a11d743c1ec42f30ea15b951c",
+    "passage": "A man rock climbing in a forest with a long rope .",
+    "condition": "sport",
+    "target": "sport",
+    "attribute": "sport",
+    "expected": "The target is \"sport\" and the attribute is \"sport\". The supporting evidence is \"rock climbing\".",
+    "generated": "The target is \"sport\" and the attribute is \"sport\". The supporting evidence is \"rock climbing\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "sport",
+      "attribute": "sport",
+      "evidence": "rock climbing"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "e5032023195d4e102b5ad66480d4f747217205fa38852e8ae41814972874a2d3",
+    "passage": "Two motorcycles are near a curve in the road in front of a two story house.",
+    "condition": "motorcycle",
+    "target": "motorcycle",
+    "attribute": "number",
+    "expected": "The target is \"motorcycle\" and the attribute is \"number\". The supporting evidence is \"Two motorcycles\".",
+    "generated": "The target is \"motocycle\" and the attribute is \"near a curve\". The supporting evidence is \"two motorcycles\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "motocycle",
+      "attribute": "near a curve",
+      "evidence": "two motorcycles"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "9beeb61dab7261235f7caef2afafee48556a3d32bfe1a927ea18608dc211d693",
+    "passage": "Knitting yarn, a spool of thread, a book, a remote control, a clip board, and three ring binder are on a couch. ",
+    "condition": "types of objects",
+    "target": "objects",
+    "attribute": "types",
+    "expected": "The target is \"objects\" and the attribute is \"types\". The supporting evidence is \"Knitting yarn, a spool of thread, a book, a remote control, a clip board, and three ring binder\".",
+    "generated": "The target is \"objects\" and the attribute is \"types\". The supporting evidence is \"knittting yarn, a spool of thread, a book, a remote control, a clip board, and three ring binder\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "objects",
+      "attribute": "types",
+      "evidence": "knittting yarn, a spool of thread, a book, a remote control, a clip board, and three ring binder"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.9444444444444444
+    }
+  },
+  {
+    "id": "fd9dfc49c3e7f49cea2afc920196a66839ed0507747f8e8bff417d38a429a9b5",
+    "passage": "A lively party where most people are watching others dance .",
+    "condition": "activity",
+    "target": "activity",
+    "attribute": "activity",
+    "expected": "The target is \"activity\" and the attribute is \"activity\". The supporting evidence is \"watching others dance\".",
+    "generated": "The target is \"activity\" and the attribute is \"activity\". The supporting evidence is \"watching others dance\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "activity",
+      "attribute": "activity",
+      "evidence": "watching others dance"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "1f6388b30527878e30e95754dba293b590a5db90034554660a743724ae0d3933",
+    "passage": "Two muddy men try to tackle third muddy rugby player .",
+    "condition": "sport",
+    "target": "sport",
+    "attribute": "sport",
+    "expected": "The target is \"sport\" and the attribute is \"sport\". The supporting evidence is \"rugby\".",
+    "generated": "The target is \"sport\" and the attribute is \"sport\". The supporting evidence is \"rugby\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "sport",
+      "attribute": "sport",
+      "evidence": "rugby"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "e93e7cf8a245d3673e8235d31145a9a75df6f7083a22dc06897836ef0ebf195a",
+    "passage": "two young girls wearing pink playing on a playground",
+    "condition": "number of girls",
+    "target": "girls",
+    "attribute": "number",
+    "expected": "The target is \"girls\" and the attribute is \"number\". The supporting evidence is \"two young girls\".",
+    "generated": "The target is \"girls\" and the attribute is \"number\". The supporting evidence is \"two young girls\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "girls",
+      "attribute": "number",
+      "evidence": "two young girls"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "3bd4ecd0ae8e82cde46b34619c7fbf4568102663a6b6bf9439831349f7091216",
+    "passage": "A group of mountain bikers race each other down a dirt hill .",
+    "condition": "type of vehicle",
+    "target": "vehicle",
+    "attribute": "type",
+    "expected": "The target is \"vehicle\" and the attribute is \"type\". The supporting evidence is \"mountain bikers\".",
+    "generated": "The target is \"vehicle\" and the attribute is \"type\". The supporting evidence is \"bike\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "vehicle",
+      "attribute": "type",
+      "evidence": "bike"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "5e20a612d194e06d0f2508f7aa7ca0175abf63ca6809e432302118c735f1351b",
+    "passage": "A man in a white tank hits a jump with his red BMX bicycle .",
+    "condition": "gender",
+    "target": "man",
+    "attribute": "gender",
+    "expected": "The target is \"man\" and the attribute is \"gender\". The supporting evidence is \"A man\".",
+    "generated": "The target is \"man\" and the attribute is \"gender\". The supporting evidence is \"A man\".",
+    "arm": "prose",
+    "parsed_generated": {
+      "target": "man",
+      "attribute": "gender",
+      "evidence": "A man"
+    },
+    "scores": {
+      "format_valid": true,
+      "whole_target_exact": true,
+      "evidence_normalized_exact": true,
+      "evidence_token_f1": 1.0
+    }
+  },
+  {
+    "id": "e6064927cec628bab551719df2993b67b1b3cc6ac396ac486ca8b6eb56c6b45e",
+    "passage": "Five children are on a slide , all dressed in different colored clothes .",
+    "condition": "number of people",
+    "target": "people",
+    "attribute": "number",
+    "expected": "{\"target\": \"people\", \"attribute\": \"number\", \"evidence\": \"Five children\"}",
+    "generated": "\"target\": \"people\", \"attribute\": \"number\", \"evidence\": \"Two children\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "505f334992b9e5a67e960a4730d7dc06bce7f741af69418166f308c17275dabd",
+    "passage": "A woman is skiing in a snowy forest with a dog next to her.",
+    "condition": "activity",
+    "target": "activity",
+    "attribute": "activity",
+    "expected": "{\"target\": \"activity\", \"attribute\": \"activity\", \"evidence\": \"skiing\"}",
+    "generated": "\"target\": \"activity\", \"attribute\": \"activity\", \"evidence\": \"is skiing\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "6925e2770b6136c236095e73cdc2ef8bcdc57626835b1993371c41c23242cd94",
+    "passage": "A soccer team with green uniforms and their coach are huddling .",
+    "condition": "action people are taking",
+    "target": "people",
+    "attribute": "action",
+    "expected": "{\"target\": \"people\", \"attribute\": \"action\", \"evidence\": \"are huddling\"}",
+    "generated": "\"target\": \"people\", \"attribute\": \"action\", \"evidence\": \"huddling\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "f1ed24107d0edb305e59c5e522da760506830202a98f8c1472c2c59d4366ff23",
+    "passage": "A guy wearing a motorcycle helmet is riding an ATV on a sandy road .",
+    "condition": "type of clothing",
+    "target": "clothing",
+    "attribute": "type",
+    "expected": "{\"target\": \"clothing\", \"attribute\": \"type\", \"evidence\": \"motorcycle helmet\"}",
+    "generated": "\"target\": \"clothing\", \"attribute\": \"type\", \"evidence\": \"motocyclic helmet\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "bebe5d0dc824f4901036cb79d92135f20fcfe5eb9b45d429da4e6daabb32a46c",
+    "passage": "A person in face paint and an orange oversized cowboy hat rides his bike on a trail .",
+    "condition": "color of object",
+    "target": "object",
+    "attribute": "color",
+    "expected": "{\"target\": \"object\", \"attribute\": \"color\", \"evidence\": \"orange\"}",
+    "generated": "\"target\": \"object\", \"attribute\": \"color\", \"evidence\": \"face paint\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "702d6e5dc049357ba2b7ae2cdd859d9ecf832c09eea72d7a778676b959afdeb6",
+    "passage": "Many people, with one lady looking at the camera, are at the table eating. ",
+    "condition": "woman eating",
+    "target": "woman",
+    "attribute": "eating",
+    "expected": "{\"target\": \"woman\", \"attribute\": \"eating\", \"evidence\": \"Many people, with one lady looking at the camera, are at the table eating.\"}",
+    "generated": "\"target\": \"woman\", \"attribute\": \"eating\", \"evidence\": \"at the table eating\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "0ad47996ffdc713c16a1b5993b2f52330a431416cf8232ec273a10f824c53398",
+    "passage": "Several people are on the beach with boats and sails .",
+    "condition": "location",
+    "target": "location",
+    "attribute": "location",
+    "expected": "{\"target\": \"location\", \"attribute\": \"location\", \"evidence\": \"on the beach\"}",
+    "generated": "\"target\": \"beach\", \"attribute\": \"location\", \"evidence\": \"on the beach\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "f57a0eaa887d968488a2cba6a2bad1fd85267d43beb546f61b24a13049301f59",
+    "passage": "A man plays the violin while a woman sits in front of him .",
+    "condition": "musical activity",
+    "target": "man",
+    "attribute": "musical activity",
+    "expected": "{\"target\": \"man\", \"attribute\": \"musical activity\", \"evidence\": \"plays the violin\"}",
+    "generated": "\"target\": \"musical activity\", \"attribute\": \"activity\", \"evidence\": \"plays the violin\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "551bba7bb27c2cc334f554e400533526630b35600034de2cd13fc51712bff485",
+    "passage": "A male weimaraner with a clipped tail is walking through a river .",
+    "condition": "body of water dog is walking through",
+    "target": "river",
+    "attribute": "body of water",
+    "expected": "{\"target\": \"river\", \"attribute\": \"body of water\", \"evidence\": \"a river\"}",
+    "generated": "\"target\": \"dog\", \"attribute\": \"body of water\", \"evidence\": \"is walking through a river\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "6fda828ff228e1d799b1cfb56feac6a5171ad0bca3ec324489c0e9418eb0e2ae",
+    "passage": "A baseball player wearing green and white standing next to a baseball player wearing red and gray on a baseball field.",
+    "condition": "sport played",
+    "target": "sport",
+    "attribute": "played",
+    "expected": "{\"target\": \"sport\", \"attribute\": \"played\", \"evidence\": \"baseball\"}",
+    "generated": "\"target\": \"sport\", \"attribute\": \"played\", \"evidence\": \"baseball\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "85787df13a28e734b4e4d4a5a86035a05e752604413619f99fb4fe334b2de5df",
+    "passage": "A snowboard rider jumping high on his snowboard in the snow .",
+    "condition": "action of snowboarder",
+    "target": "snowboarder",
+    "attribute": "action",
+    "expected": "{\"target\": \"snowboarder\", \"attribute\": \"action\", \"evidence\": \"jumping high on his snowboard\"}",
+    "generated": "\"target\": \"snowboard rider\", \"attribute\": \"action\", \"evidence\": \" jumping high on his snowboard\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "689db1e2bbd995ac58b3f6af9cedf1cea51891f592df82dfea892cbc89186402",
+    "passage": "a muzzled greyhound wearing the number five is running on a dog track .",
+    "condition": "breed of dogs",
+    "target": "dog",
+    "attribute": "breed",
+    "expected": "{\"target\": \"dog\", \"attribute\": \"breed\", \"evidence\": \"a muzzled greyhound\"}",
+    "generated": "\"target\": \"dogs\", \"attribute\": \"type\", \"evidence\": \"a muzzled greyhound\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "4f775b6ed547c177da7a712433253e03ce99fe4d843fa7fe9c46de6b60681ecf",
+    "passage": "A bus with a bicycle rack with a bike on it driving down a road.",
+    "condition": "type of vehicle",
+    "target": "vehicle",
+    "attribute": "type",
+    "expected": "{\"target\": \"vehicle\", \"attribute\": \"type\", \"evidence\": \"A bus\"}",
+    "generated": "\"target\": \"vehicle\", \"attribute\": \"type\", \"evidence\": \"bus\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "4309c2cd14c6889e9bf0cb1b8fd0894d14d675529dcfa7659d10bba891bfbcd4",
+    "passage": "A cowboy is desperately grasping too the reigns off a horse that is trying to buck him off at a rodeo .",
+    "condition": "animal they are riding",
+    "target": "horse",
+    "attribute": "animal they are riding",
+    "expected": "{\"target\": \"horse\", \"attribute\": \"animal they are riding\", \"evidence\": \"A cowboy is desperately grasping too the reigns off a horse that is trying to buck him off at a rodeo\"}",
+    "generated": "\"target\": \"hero\", \"attribute\": \"animal\", \"evidence\": \"a horse\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "ccfb44703878615bc0b3c3072b055cee9114f0d25d42e83586da16f6e7e65c56",
+    "passage": "A man is playing tennis during a game and touches his racket to the ground.",
+    "condition": "activity during game",
+    "target": "game",
+    "attribute": "activity",
+    "expected": "{\"target\": \"game\", \"attribute\": \"activity\", \"evidence\": \"A man is playing tennis during a game and touches his racket to the ground\"}",
+    "generated": "\"target\": \"game\", \"attribute\": \"activity\", \"evidence\": \"playing tennis\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "0312e2372ad1fa843ff21aa731f88ca3846783cc859f59b83aaaac7074a2b607",
+    "passage": "Inside of an air museum and the view from under the wing of a large plane.",
+    "condition": "type of vehicle",
+    "target": "vehicle",
+    "attribute": "type",
+    "expected": "{\"target\": \"vehicle\", \"attribute\": \"type\", \"evidence\": \"a large plane\"}",
+    "generated": "\"target\": \"vehicle\", \"attribute\": \"type\", \"evidence\": \"large plane\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "9d7bb1f97f41636234d307d2fb277c466a71bd409cfef7595b7891c0946a9a63",
+    "passage": "A girl with a number seven jersey throws a softball to her teammate .",
+    "condition": "gender of persons",
+    "target": "persons",
+    "attribute": "gender",
+    "expected": "{\"target\": \"persons\", \"attribute\": \"gender\", \"evidence\": \"A girl\"}",
+    "generated": "\"target\": \"persons\", \"attribute\": \"gender\", \"evidence\": \"A girl\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "114b240ff7b519dada33b84fffef4b0cffb8ebf37c910ec64345b4f09bc43c63",
+    "passage": "Someone leaps across the beach in a sign of joy !",
+    "condition": "type of landscape",
+    "target": "landscape",
+    "attribute": "type",
+    "expected": "{\"target\": \"landscape\", \"attribute\": \"type\", \"evidence\": \"beach\"}",
+    "generated": "\"target\": \"painting\", \"attribute\": \"type\", \"evidence\": \"beach\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "85e8330feeab9ddacec590feb72b805d540d5d19152dd302268e1ecba95d08e9",
+    "passage": "The dining room has four chairs at the table, and a hard wood floor.",
+    "condition": "name of room",
+    "target": "room",
+    "attribute": "name",
+    "expected": "{\"target\": \"room\", \"attribute\": \"name\", \"evidence\": \"dining room\"}",
+    "generated": "\"target\": \"room\", \"attribute\": \"name\", \"evidence\": \"dining room\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "225c577280c16bcf4faa294ddc7393a8d0bedfd852eed5009e34ab8e1e29dd4e",
+    "passage": "A man is looking into purchasing some fruit from a stand .",
+    "condition": "gender of subject",
+    "target": "subject",
+    "attribute": "gender",
+    "expected": "{\"target\": \"subject\", \"attribute\": \"gender\", \"evidence\": \"A man\"}",
+    "generated": "\"target\": \"subject\", \"attribute\": \"gender\", \"evidence\": \"A man\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "d3bd56bc58b9e2061c1a47b7048227781b44e0986904c34706988650622c6a09",
+    "passage": "A wide view of the living room, dining room and kitchen in a home.",
+    "condition": "number of rooms involved",
+    "target": "rooms",
+    "attribute": "number",
+    "expected": "{\"target\": \"rooms\", \"attribute\": \"number\", \"evidence\": \"living room, dining room and kitchen\"}",
+    "generated": "\"target\": \"rooms\", \"attribute\": \"number\", \"evidence\": \"living room, dining room and kitchen\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "b94ace3f7ae8259ae66b9b8b80fef1780342a68b84fd3ffbdd47338f2f1ad01f",
+    "passage": "A living room with a couch next to a chair in front of a TV.",
+    "condition": "type of room",
+    "target": "room",
+    "attribute": "type",
+    "expected": "{\"target\": \"room\", \"attribute\": \"type\", \"evidence\": \"living room\"}",
+    "generated": "\"target\": \"room\", \"attribute\": \"type\", \"evidence\": \"living room\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "79c505f24da9c65f9a6eee167be94a99734a1c8f902f67872e75c389edb66399",
+    "passage": "Brush, books, bag, umbrella and couple of other items laid out on the bed",
+    "condition": "number of objects",
+    "target": "objects",
+    "attribute": "number",
+    "expected": "{\"target\": \"objects\", \"attribute\": \"number\", \"evidence\": \"Brush, books, bag, umbrella and couple of other items\"}",
+    "generated": "\"target\": \"objects\", \"attribute\": \"number\", \"evidence\": \"couple of other items\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "43a47635a5185b0633fc8d2ae4bccd96cff636d870162b13cef3d59db35f8f8f",
+    "passage": "A train pumps out steam while going down a track on a cloudy day.",
+    "condition": "type of transport",
+    "target": "transport",
+    "attribute": "type",
+    "expected": "{\"target\": \"transport\", \"attribute\": \"type\", \"evidence\": \"A train\"}",
+    "generated": "\"target\": \"transport\", \"attribute\": \"type\", \"evidence\": \"train\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "aa596a5cc847fae07031180054561a60ac6f896a11d743c1ec42f30ea15b951c",
+    "passage": "A man rock climbing in a forest with a long rope .",
+    "condition": "sport",
+    "target": "sport",
+    "attribute": "sport",
+    "expected": "{\"target\": \"sport\", \"attribute\": \"sport\", \"evidence\": \"rock climbing\"}",
+    "generated": "\"target\": \"sport\", \"attribute\": \"sport\", \"evidence\": \"rock climbing\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "e5032023195d4e102b5ad66480d4f747217205fa38852e8ae41814972874a2d3",
+    "passage": "Two motorcycles are near a curve in the road in front of a two story house.",
+    "condition": "motorcycle",
+    "target": "motorcycle",
+    "attribute": "number",
+    "expected": "{\"target\": \"motorcycle\", \"attribute\": \"number\", \"evidence\": \"Two motorcycles\"}",
+    "generated": "\"target\": \"motorcycle\", \"attribute\": \"type\", \"evidence\": \"two motorcycles\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "9beeb61dab7261235f7caef2afafee48556a3d32bfe1a927ea18608dc211d693",
+    "passage": "Knitting yarn, a spool of thread, a book, a remote control, a clip board, and three ring binder are on a couch. ",
+    "condition": "types of objects",
+    "target": "objects",
+    "attribute": "types",
+    "expected": "{\"target\": \"objects\", \"attribute\": \"types\", \"evidence\": \"Knitting yarn, a spool of thread, a book, a remote control, a clip board, and three ring binder\"}",
+    "generated": "\"target\": \"objects\", \"attribute\": \"types\", \"evidence\": \"three ring binder\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "fd9dfc49c3e7f49cea2afc920196a66839ed0507747f8e8bff417d38a429a9b5",
+    "passage": "A lively party where most people are watching others dance .",
+    "condition": "activity",
+    "target": "activity",
+    "attribute": "activity",
+    "expected": "{\"target\": \"activity\", \"attribute\": \"activity\", \"evidence\": \"watching others dance\"}",
+    "generated": "\"target\": \"activity\", \"attribute\": \"activity\", \"evidence\": \"watching others dance\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "1f6388b30527878e30e95754dba293b590a5db90034554660a743724ae0d3933",
+    "passage": "Two muddy men try to tackle third muddy rugby player .",
+    "condition": "sport",
+    "target": "sport",
+    "attribute": "sport",
+    "expected": "{\"target\": \"sport\", \"attribute\": \"sport\", \"evidence\": \"rugby\"}",
+    "generated": "\"target\": \"sport\", \"attribute\": \"sport\", \"evidence\": \"rugby\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "e93e7cf8a245d3673e8235d31145a9a75df6f7083a22dc06897836ef0ebf195a",
+    "passage": "two young girls wearing pink playing on a playground",
+    "condition": "number of girls",
+    "target": "girls",
+    "attribute": "number",
+    "expected": "{\"target\": \"girls\", \"attribute\": \"number\", \"evidence\": \"two young girls\"}",
+    "generated": "\"target\": \"girls\", \"attribute\": \"number\", \"evidence\": \"two young girls\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "3bd4ecd0ae8e82cde46b34619c7fbf4568102663a6b6bf9439831349f7091216",
+    "passage": "A group of mountain bikers race each other down a dirt hill .",
+    "condition": "type of vehicle",
+    "target": "vehicle",
+    "attribute": "type",
+    "expected": "{\"target\": \"vehicle\", \"attribute\": \"type\", \"evidence\": \"mountain bikers\"}",
+    "generated": "\"target\": \"vehicle\", \"attribute\": \"type\", \"evidence\": \"bike\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  },
+  {
+    "id": "5e20a612d194e06d0f2508f7aa7ca0175abf63ca6809e432302118c735f1351b",
+    "passage": "A man in a white tank hits a jump with his red BMX bicycle .",
+    "condition": "gender",
+    "target": "man",
+    "attribute": "gender",
+    "expected": "{\"target\": \"man\", \"attribute\": \"gender\", \"evidence\": \"A man\"}",
+    "generated": "\"target\": \"man\", \"attribute\": \"gender\", \"evidence\": \"A man\"",
+    "arm": "record",
+    "parsed_generated": null,
+    "scores": {
+      "format_valid": false,
+      "whole_target_exact": false,
+      "evidence_normalized_exact": false,
+      "evidence_token_f1": 0.0
+    }
+  }
+]

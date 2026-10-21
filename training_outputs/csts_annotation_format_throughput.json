@@ -1,0 +1,34 @@
+{
+  "device": "NVIDIA L4",
+  "torch": "2.14.0+cu130",
+  "cuda": "13.0",
+  "seed": 7,
+  "discarded_profile_models": true,
+  "styles": {
+    "evidence": {
+      "answers_seconds_per_step": 0.15297502795000356,
+      "ratings_seconds_per_step": 0.05593633964999754,
+      "development_seconds_per_batch128": 0.1749109416000124,
+      "target_width": 50,
+      "target_nonpadding_per_training_epoch": 73631
+    },
+    "prose": {
+      "answers_seconds_per_step": 0.22008250990000988,
+      "ratings_seconds_per_step": 0.05569366545001344,
+      "development_seconds_per_batch128": 0.24274826960000837,
+      "target_width": 71,
+      "target_nonpadding_per_training_epoch": 263709
+    },
+    "record": {
+      "answers_seconds_per_step": 0.2324894044500013,
+      "ratings_seconds_per_step": 0.05555026869998869,
+      "development_seconds_per_batch128": 0.2966409136000152,
+      "target_width": 80,
+      "target_nonpadding_per_training_epoch": 345831
+    }
+  },
+  "annotation_epochs": 6,
+  "rating_epochs": 8,
+  "estimated_training_seconds": 1260.0205518318273,
+  "profiling_sha256": "da1ac6426af0db0a0a227bc7f60f7373e58e16d144636704083b9f2ed4b259cb"
+}
