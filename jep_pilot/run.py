@@ -5,7 +5,7 @@ import json
 
 from viper import api, execution
 from viper.authoring import experiment, input, plan, replicate, stage, variant
-from viper.metrics import MetricDependency, measure, min
+from viper.metrics import FloatComparator, MetricDependency, measure, min
 from viper.outputs import EvalOutputs, TrainOutputs, output
 from viper.references import GitFileRef
 from viper.repository import read_source, resolve_root
@@ -45,8 +45,9 @@ def main() -> None:
     dependency = (
         MetricDependency(source="artifact", name="predictions", data_role="eval"),
     )
-    mse = measure(evaluation_mse, dependencies=dependency)
-    spearman = measure(evaluation_spearman, dependencies=dependency)
+    comparator = FloatComparator(mode="absolute", tolerance=1e-12)
+    mse = measure(evaluation_mse, dependencies=dependency, comparator=comparator)
+    spearman = measure(evaluation_spearman, dependencies=dependency, comparator=comparator)
     variants = []
     for name, weight, shuffle in [
         ("ratings", 0.0, False),
