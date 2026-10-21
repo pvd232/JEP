@@ -6,17 +6,18 @@ import subprocess
 import sys
 from pathlib import Path
 
+import pytest
 import torch
-from torch import nn
-from transformers import T5Config, T5ForConditionalGeneration
-
 from csts_pilot.answers import (
     answer_id,
+    completed_prefix,
     parse_response,
     review_accepts,
     validated_answer,
 )
 from csts_pilot.joint import AnswerEncoder
+from torch import nn
+from transformers import T5Config, T5ForConditionalGeneration
 
 
 def tiny_model() -> AnswerEncoder:
@@ -85,7 +86,9 @@ def test_answer_identity_and_source_validation():
 
 def test_teacher_json_requires_supported_evidence():
     def response(evidence):
-        return json.dumps({"target": "shirt", "attribute": "color", "evidence": evidence})
+        return json.dumps(
+            {"target": "shirt", "attribute": "color", "evidence": evidence}
+        )
 
     assert parse_response("A blue shirt.", response("blue"))["valid"] is True
     assert parse_response("A blue shirt.", response("red"))["valid"] is False
@@ -96,6 +99,32 @@ def test_teacher_json_requires_supported_evidence():
     assert review_accepts('{"accept":false}') is False
     assert review_accepts('{"accept":"true"}') is False
     assert review_accepts('truncated {"accept":true') is False
+
+
+def test_resume_preserves_accepted_and_rejected_records(tmp_path):
+    passage, condition = "A blue shirt.", "shirt color"
+    item = {
+        "id": answer_id(passage, condition),
+        "passage": passage,
+        "condition": condition,
+    }
+    response = json.dumps({"target": "shirt", "attribute": "color", "evidence": "blue"})
+    accepted = dict(
+        item, **parse_response(passage, response), review_response='{"accept":true}'
+    )
+    rejected_item = dict(item, id="second")
+    rejected = dict(rejected_item, answer="", valid=False, response="bad JSON")
+    path = tmp_path / "saved.jsonl"
+    path.write_text("\n".join(json.dumps(row) for row in (accepted, rejected)) + "\n")
+    assert completed_prefix(path, [item, rejected_item], 2) == [accepted, rejected]
+    with pytest.raises(ValueError, match="ordered input"):
+        completed_prefix(path, [dict(item, condition="location"), rejected_item], 2)
+    accepted["review_response"] = '{"accept":false}'
+    path.write_text(json.dumps(accepted) + "\n")
+    with pytest.raises(ValueError, match="original checks"):
+        completed_prefix(path, [item], 2)
+    with pytest.raises(ValueError, match="complete generation batch"):
+        completed_prefix(path, [item, rejected_item], 2)
 
 
 def test_answer_loader_imports_in_an_isolated_directory(tmp_path):

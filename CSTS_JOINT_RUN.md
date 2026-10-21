@@ -64,6 +64,7 @@ Similarity prediction uses the projected passage vector.
 | Arm | Training |
 | --- | --- |
 | Ratings | Rating loss |
+| Answers | Answer loss, then similarity evaluation of that checkpoint |
 | Answers, then ratings | Answer pretraining, followed by rating training |
 | Joint | Rating loss plus answer loss |
 | Shuffled answers | Joint training with training answers reassigned within conditions |
@@ -74,6 +75,21 @@ weight is selected from `0.05` and `0.2` with seed 7. Seeds 8 and 9 repeat that
 weight. The shuffled control uses the same weight. Reassignment occurs among
 unique training caption and condition records. Development answers retain their
 original assignment.
+
+The Answers arm uses the same initialized projection as its matched seed. Answer
+loss trains the encoder and decoder; the projection receives no gradient. Its
+similarity score therefore measures transfer through that unchanged projection.
+The sequential arm then trains the projection and encoder with rating labels.
+
+## Annotation recovery
+
+The original annotation stage reached 14,272 of 17,334 inputs before its
+14,400-second execution limit expired. Recovery declares the saved JSONL as a
+VIPER training input and validates its exact ordered caption and condition IDs,
+batch boundary, source spans and acceptance decisions. It copies that prefix
+and generates the remaining 3,062 records using the same teacher, prompts,
+padding and batch size. Each stage has a six-hour execution limit. The manifest
+records the saved-input SHA256, reused count and newly generated count.
 
 Each stage uses the same batch size, eight-epoch cap, patience and optimizer
 schedule as the rating study. The encoder learning rate is `3e-5`; the projection
@@ -105,3 +121,4 @@ The [progress command](csts_pilot/progress.py) reports epochs, development score
 GPU utilization and storage. The annotation stage writes a count after each
 generation batch. Its [manifest](csts_pilot/answers.py) records the teacher,
 prompt, generation settings, acceptance fraction, time and peak GPU memory.
+

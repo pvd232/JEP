@@ -3,17 +3,17 @@
 import hashlib
 import json
 import time
+from pathlib import Path
 from typing import Any
 
 import torch
+from csts_pilot.data import canonical
+from csts_pilot.training import write_json
+from jep_pilot.loaders import load_json
 from pydantic import Field
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from viper.config import BuildConfig
 from viper.stages import StageContext, build
-
-from csts_pilot.data import canonical
-from csts_pilot.training import write_json
-from jep_pilot.loaders import load_json
 
 TEACHER = "Qwen/Qwen3-8B"
 TEACHER_REVISION = "b968826d9c46dd6066d109eabc6255188de91218"
@@ -121,6 +121,33 @@ def review_accepts(response: str) -> bool:
     return isinstance(record, dict) and record.get("accept") is True
 
 
+def completed_prefix(
+    path: Path, items: list[dict[str, Any]], batch_size: int
+) -> list[dict[str, Any]]:
+    """Validate saved answers against the exact ordered inputs and audit rules."""
+    with path.open() as stream:
+        saved = [json.loads(line) for line in stream if line.strip()]
+    if len(saved) > len(items) or (len(saved) < len(items) and len(saved) % batch_size):
+        raise ValueError("Saved answers must end at a complete generation batch.")
+    for index, record in enumerate(saved):
+        if any(
+            record.get(key) != items[index][key]
+            for key in ("id", "passage", "condition")
+        ):
+            raise ValueError(f"Saved answer {index} differs from its ordered input.")
+        if type(record.get("valid")) is not bool:
+            raise ValueError(f"Saved answer {index} has no acceptance decision.")
+        if record["valid"]:
+            parsed = parse_response(record["passage"], record.get("response", ""))
+            if (
+                not parsed["valid"]
+                or parsed["answer"] != record.get("answer")
+                or not review_accepts(record.get("review_response", ""))
+            ):
+                raise ValueError(f"Saved answer {index} fails the original checks.")
+    return saved
+
+
 class AnswerConfig(BuildConfig):
     """Pin the teacher and bound generation for the annotation stage."""
 
@@ -151,6 +178,8 @@ def annotate(context: StageContext[AnswerConfig]) -> None:
         items = items[
             context.config.offset : context.config.offset + context.config.limit
         ]
+    prior = context.inputs.get("completed_answers")
+    saved = completed_prefix(prior, items, context.config.batch_size) if prior else []
     tokenizer = AutoTokenizer.from_pretrained(TEACHER, revision=TEACHER_REVISION)
     tokenizer.padding_side = "left"
     if tokenizer.pad_token_id is None:
@@ -173,10 +202,25 @@ def annotate(context: StageContext[AnswerConfig]) -> None:
     output_path = context.outputs["answers"]
     output_path.parent.mkdir(parents=True, exist_ok=True)
     start_time = time.monotonic()
-    accepted = 0
+    accepted = sum(int(row["valid"]) for row in saved)
     torch.cuda.reset_peak_memory_stats()
     with output_path.open("w") as stream, torch.inference_mode():
-        for start in range(0, len(items), context.config.batch_size):
+        for row in saved:
+            stream.write(json.dumps(row) + "\n")
+        stream.flush()
+        print(
+            json.dumps(
+                {
+                    "completed": len(saved),
+                    "total": len(items),
+                    "accepted": accepted,
+                    "cached": len(saved),
+                    "seconds": 0,
+                }
+            ),
+            flush=True,
+        )
+        for start in range(len(saved), len(items), context.config.batch_size):
             stop = start + context.config.batch_size
             batch = {
                 name: value[start:stop].to("cuda") for name, value in encoded.items()
@@ -251,6 +295,11 @@ def annotate(context: StageContext[AnswerConfig]) -> None:
             "unique_caption_conditions": len(items),
             "accepted_extractive_answers": accepted,
             "accepted_fraction": accepted / len(items),
+            "reused_answers": len(saved),
+            "generated_this_attempt": len(items) - len(saved),
+            "completed_input_sha256": hashlib.sha256(prior.read_bytes()).hexdigest()
+            if prior
+            else None,
             "seconds": time.monotonic() - start_time,
             "peak_cuda_memory_bytes": torch.cuda.max_memory_allocated(),
             "checks": "Exact source span and a second teacher check. Semantic relevance requires an independent pilot audit.",

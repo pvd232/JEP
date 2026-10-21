@@ -4,6 +4,18 @@ import argparse
 from pathlib import Path
 from typing import Any
 
+from csts_pilot.answers import AnswerConfig, annotate
+from csts_pilot.diagnostics import summarize
+from csts_pilot.joint import JointConfig, evaluate, fit
+from csts_pilot.metrics import (
+    development_answer_ce,
+    development_mse,
+    training_answer_ce,
+)
+from csts_pilot.training import write_json
+from jep_pilot.loaders import load_answers, load_json, load_model, load_state
+from jep_pilot.metrics import evaluation_mse, evaluation_spearman, training_mse
+from jep_pilot.stages import publish_evaluation_inputs
 from viper import execution
 from viper.artifacts import StageArtifactRef
 from viper.authoring import (
@@ -23,25 +35,14 @@ from viper.references import GitFileRef
 from viper.repository import read_source, resolve_root
 from viper.runtime import CUDAComputeSpec, LocalEnvSpec, observe_python_env
 
-from csts_pilot.answers import AnswerConfig, annotate
-from csts_pilot.diagnostics import summarize
-from csts_pilot.joint import JointConfig, evaluate, fit
-from csts_pilot.metrics import (
-    development_answer_ce,
-    development_mse,
-    training_answer_ce,
-)
-from csts_pilot.training import write_json
-from jep_pilot.loaders import load_answers, load_json, load_model, load_state
-from jep_pilot.metrics import evaluation_mse, evaluation_spearman, training_mse
-from jep_pilot.stages import publish_evaluation_inputs
-
 
 def main() -> None:
     """Freeze all checkpoints before reading reserved similarity evaluation."""
     parser = argparse.ArgumentParser()
     parser.add_argument("--annotation-limit", type=int)
     parser.add_argument("--annotation-offset", type=int, default=0)
+    parser.add_argument("--resume-answers", type=str)
+    parser.add_argument("--stage-timeout-seconds", type=int, default=21600)
     args = parser.parse_args()
     root = resolve_root()
     source = read_source(root)
@@ -74,7 +75,7 @@ def main() -> None:
         )
         result = execution.run(
             plan(experiment=study, source=source, env=env),
-            timeout_seconds=14400,
+            timeout_seconds=args.stage_timeout_seconds,
             trusted_source_repositories=trusted,
         )
         if result.status != "succeeded":
@@ -84,14 +85,27 @@ def main() -> None:
         write_json(result_dir / "summary.json", summary)
         return result
 
+    annotation_inputs = [
+        input("training", path="csts_data/train.json", data_role="training"),
+        input("development", path="csts_data/dev.json", data_role="training"),
+    ]
+    if args.resume_answers:
+        saved_answers = root / args.resume_answers
+        if (
+            not saved_answers.resolve().is_relative_to(root.resolve())
+            or not saved_answers.is_file()
+        ):
+            raise ValueError(
+                "Saved answers must be a declared file inside this workspace."
+            )
+        annotation_inputs.append(
+            input("completed_answers", path=args.resume_answers, data_role="training")
+        )
     annotation = stage(
         annotate,
         stage_id="annotate",
         config=AnswerConfig(limit=args.annotation_limit, offset=args.annotation_offset),
-        inputs=(
-            input("training", path="csts_data/train.json", data_role="training"),
-            input("development", path="csts_data/dev.json", data_role="training"),
-        ),
+        inputs=tuple(annotation_inputs),
         outputs=StageOutputs(
             answers=output(
                 path="answers.jsonl", loader=load_answers, data_role="training"
@@ -184,12 +198,13 @@ def main() -> None:
         return result
 
     selected: dict[str, list[tuple[int, Any]]] = {
-        name: [] for name in ("ratings", "sequential", "joint", "shuffled")
+        name: [] for name in ("ratings", "answers", "sequential", "joint", "shuffled")
     }
     selected["ratings"].append(
         (7, train_run("ratings_seed7", JointConfig(objective="ratings")))
     )
     pretrained = train_run("answers_seed7", JointConfig(objective="answers"))
+    selected["answers"].append((7, pretrained))
     selected["sequential"].append(
         (7, train_run("sequential_seed7", JointConfig(objective="ratings"), pretrained))
     )
@@ -225,6 +240,7 @@ def main() -> None:
         pretrained = train_run(
             f"answers_seed{seed}", JointConfig(objective="answers", seed=seed)
         )
+        selected["answers"].append((seed, pretrained))
         selected["sequential"].append(
             (
                 seed,
