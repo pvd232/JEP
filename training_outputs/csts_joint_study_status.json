@@ -125,6 +125,26 @@
     {
       "name": "evaluate_answers_seed8",
       "path": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_evaluate_answers_seed8/runs/evaluate_answers_seed8/01M5FME6F35M26PDMFSFZPW61T/resolved.yaml"
+    },
+    {
+      "name": "evaluate_answers_seed9",
+      "path": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_evaluate_answers_seed9/runs/evaluate_answers_seed9/01M5FMG28XE93YKE7JH9GW5G4N/resolved.yaml"
+    },
+    {
+      "name": "evaluate_sequential_seed7",
+      "path": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_evaluate_sequential_seed7/runs/evaluate_sequential_seed7/01M5FMHWX28MX9Q2SK5FQXK4BG/resolved.yaml"
+    },
+    {
+      "name": "evaluate_sequential_seed8",
+      "path": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_evaluate_sequential_seed8/runs/evaluate_sequential_seed8/01M5FMKS9FVA6ZCDS7YPJ0Q7QP/resolved.yaml"
+    },
+    {
+      "name": "evaluate_sequential_seed9",
+      "path": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_evaluate_sequential_seed9/runs/evaluate_sequential_seed9/01M5FMNN8BDFJP0Q0MFMB4ZADJ/resolved.yaml"
+    },
+    {
+      "name": "evaluate_joint_seed7",
+      "path": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_evaluate_joint_seed7/runs/evaluate_joint_seed7/01M5FMQK4VQCAEV0Q6N39AB9NC/resolved.yaml"
     }
   ],
   "selected": {
@@ -355,6 +375,231 @@
         }
       },
       "path": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_evaluate_answers_seed8/runs/evaluate_answers_seed8/01M5FME6F35M26PDMFSFZPW61T/resolved.yaml"
+    },
+    {
+      "arm": "answers",
+      "seed": 9,
+      "diagnostics": {
+        "n": 2620,
+        "mse_0_1": 0.19923905133634712,
+        "mse_1_5": 3.187824821381554,
+        "spearman": 0.027143972276502257,
+        "prediction_mean": 0.7563518574560871,
+        "target_mean": 0.5886450381679389,
+        "prediction_std": 0.07200831615906193,
+        "target_std": 0.40850906064376585,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 633,
+            "mean": 0.756433456382857
+          },
+          "2.0": {
+            "n": 233,
+            "mean": 0.7569114530035355
+          },
+          "3.0": {
+            "n": 392,
+            "mean": 0.750582507754467
+          },
+          "4.0": {
+            "n": 296,
+            "mean": 0.7527714301202748
+          },
+          "5.0": {
+            "n": 1066,
+            "mean": 0.759296842157058
+          }
+        },
+        "condition_changes": {
+          "n": 1044,
+          "correct": 560,
+          "ties": 0,
+          "accuracy_ties_half": 0.5363984674329502,
+          "difference_mse": 0.5372932002261638,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "path": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_evaluate_answers_seed9/runs/evaluate_answers_seed9/01M5FMG28XE93YKE7JH9GW5G4N/resolved.yaml"
+    },
+    {
+      "arm": "sequential",
+      "seed": 7,
+      "diagnostics": {
+        "n": 2620,
+        "mse_0_1": 0.13657704240374938,
+        "mse_1_5": 2.18523267845999,
+        "spearman": 0.45171486819517975,
+        "prediction_mean": 0.6312283945380077,
+        "target_mean": 0.5886450381679389,
+        "prediction_std": 0.1903725723192624,
+        "target_std": 0.40850906064376585,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 633,
+            "mean": 0.5117107610252066
+          },
+          "2.0": {
+            "n": 233,
+            "mean": 0.6007320635948058
+          },
+          "3.0": {
+            "n": 392,
+            "mean": 0.5833485151251436
+          },
+          "4.0": {
+            "n": 296,
+            "mean": 0.6423068559048949
+          },
+          "5.0": {
+            "n": 1066,
+            "mean": 0.7233953694804217
+          }
+        },
+        "condition_changes": {
+          "n": 1044,
+          "correct": 811,
+          "ties": 0,
+          "accuracy_ties_half": 0.7768199233716475,
+          "difference_mse": 0.37550071647580086,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "path": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_evaluate_sequential_seed7/runs/evaluate_sequential_seed7/01M5FMHWX28MX9Q2SK5FQXK4BG/resolved.yaml"
+    },
+    {
+      "arm": "sequential",
+      "seed": 8,
+      "diagnostics": {
+        "n": 2620,
+        "mse_0_1": 0.1340368286366729,
+        "mse_1_5": 2.1445892581867665,
+        "spearman": 0.48138804605571983,
+        "prediction_mean": 0.6363354089293088,
+        "target_mean": 0.5886450381679389,
+        "prediction_std": 0.19564447801501286,
+        "target_std": 0.40850906064376585,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 633,
+            "mean": 0.5071599335302297
+          },
+          "2.0": {
+            "n": 233,
+            "mean": 0.606073791313069
+          },
+          "3.0": {
+            "n": 392,
+            "mean": 0.5859892855455376
+          },
+          "4.0": {
+            "n": 296,
+            "mean": 0.6468495956143817
+          },
+          "5.0": {
+            "n": 1066,
+            "mean": 0.735249587109288
+          }
+        },
+        "condition_changes": {
+          "n": 1044,
+          "correct": 824,
+          "ties": 0,
+          "accuracy_ties_half": 0.789272030651341,
+          "difference_mse": 0.36188605659167933,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "path": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_evaluate_sequential_seed8/runs/evaluate_sequential_seed8/01M5FMKS9FVA6ZCDS7YPJ0Q7QP/resolved.yaml"
+    },
+    {
+      "arm": "sequential",
+      "seed": 9,
+      "diagnostics": {
+        "n": 2620,
+        "mse_0_1": 0.13572309352932344,
+        "mse_1_5": 2.171569496469175,
+        "spearman": 0.459697119836456,
+        "prediction_mean": 0.6149844462087535,
+        "target_mean": 0.5886450381679389,
+        "prediction_std": 0.20163132677272652,
+        "target_std": 0.40850906064376585,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 633,
+            "mean": 0.4873814865870263
+          },
+          "2.0": {
+            "n": 233,
+            "mean": 0.5901809299660471
+          },
+          "3.0": {
+            "n": 392,
+            "mean": 0.5607151826986169
+          },
+          "4.0": {
+            "n": 296,
+            "mean": 0.6252768558223505
+          },
+          "5.0": {
+            "n": 1066,
+            "mean": 0.7132760885872268
+          }
+        },
+        "condition_changes": {
+          "n": 1044,
+          "correct": 817,
+          "ties": 0,
+          "accuracy_ties_half": 0.7825670498084292,
+          "difference_mse": 0.37236122854882087,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "path": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_evaluate_sequential_seed9/runs/evaluate_sequential_seed9/01M5FMNN8BDFJP0Q0MFMB4ZADJ/resolved.yaml"
+    },
+    {
+      "arm": "joint",
+      "seed": 7,
+      "diagnostics": {
+        "n": 2620,
+        "mse_0_1": 0.14256936448866556,
+        "mse_1_5": 2.281109831818649,
+        "spearman": 0.42640962249678244,
+        "prediction_mean": 0.650549219487562,
+        "target_mean": 0.5886450381679389,
+        "prediction_std": 0.16074316172826222,
+        "target_std": 0.40850906064376585,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 633,
+            "mean": 0.5637629501474506
+          },
+          "2.0": {
+            "n": 233,
+            "mean": 0.6148849952438359
+          },
+          "3.0": {
+            "n": 392,
+            "mean": 0.5963337459810534
+          },
+          "4.0": {
+            "n": 296,
+            "mean": 0.6651362855289433
+          },
+          "5.0": {
+            "n": 1066,
+            "mean": 0.7257651358171878
+          }
+        },
+        "condition_changes": {
+          "n": 1044,
+          "correct": 789,
+          "ties": 0,
+          "accuracy_ties_half": 0.7557471264367817,
+          "difference_mse": 0.4017317975436352,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "path": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_evaluate_joint_seed7/runs/evaluate_joint_seed7/01M5FMQK4VQCAEV0Q6N39AB9NC/resolved.yaml"
     }
   ],
   "data_manifest": {
