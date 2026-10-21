@@ -1,0 +1,47 @@
+{
+  "repository": "LivNLP/C-STS-Reannotated",
+  "revision": "058ac842f5f19d27b08ad54f6d4a2c50b3f9578b",
+  "rating_provenance": "LLM reannotations combined with original human labels, according to the authors",
+  "files": {
+    "csts_train_reannotated.csv": {
+      "rows": 11342,
+      "fields": [
+        "sentence1",
+        "sentence2",
+        "condition",
+        "label"
+      ],
+      "sha256": "118ef935443531a60f3dd5652afd946869f47b134c83fd8da38779912167b652",
+      "unique_sentence_pairs": 5665,
+      "labels": {
+        "3.0": 3790,
+        "4.0": 2416,
+        "2.0": 1902,
+        "5.0": 2119,
+        "1.0": 1115
+      }
+    },
+    "csts_validation_reannotated.csv": {
+      "rows": 2834,
+      "fields": [
+        "sentence1",
+        "sentence2",
+        "condition",
+        "label"
+      ],
+      "sha256": "84602c1bcbbe1e6410a78c9cb1cb0f3dac4bf48c0c55ad42dc19558370e4821f",
+      "unique_sentence_pairs": 1416,
+      "labels": {
+        "1": 633,
+        "3": 392,
+        "5": 1066,
+        "2": 233,
+        "4": 296,
+        "-1": 214
+      }
+    }
+  },
+  "validation_policy": "Exclude label -1, which the authors define as invalid. Keep all questions for a sentence pair in the same partition.",
+  "valid_validation_rows": 2620,
+  "train_validation_sentence_pair_overlap": 3
+}
