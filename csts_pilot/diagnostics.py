@@ -16,7 +16,7 @@ def summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
         raise ValueError("Predictions must be finite.")
     correlation = (
         float(spearmanr(target, prediction).statistic)
-        if np.std(target) > 0 and np.std(prediction) > 0
+        if np.ptp(target) > 0 and np.ptp(prediction) > 0
         else None
     )
     groups: dict[str, list[dict[str, Any]]] = defaultdict(list)

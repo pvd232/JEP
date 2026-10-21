@@ -51,3 +51,17 @@ def test_condition_change_error_and_ranking_are_separate():
     metrics = summarize(rows)
     assert metrics["condition_changes"]["accuracy_ties_half"] == 1.0
     assert metrics["condition_changes"]["difference_mse"] == pytest.approx(0.64)
+
+
+def test_nonbinary_constant_has_undefined_rank_correlation():
+    rows = [
+        {
+            "target": (index % 5) / 4,
+            "rating": 1 + index % 5,
+            "prediction": 0.5536174785100286,
+            "pair_id": str(index),
+            "condition": "type",
+        }
+        for index in range(2620)
+    ]
+    assert summarize(rows)["spearman"] is None
