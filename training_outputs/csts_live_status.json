@@ -1,14 +1,14 @@
 {
-  "observed_at_utc": "2026-10-21T16:30:55.860404+00:00",
+  "observed_at_utc": "2026-10-21T16:36:01.654484+00:00",
   "source_commit": "38496f8f7f30402429acf0ba150dcffc56bf8f48",
-  "controller_alive": true,
+  "controller_alive": false,
   "resources": {
-    "disk_free_gib": 290.19889068603516,
+    "disk_free_gib": 288.55245208740234,
     "disk_total_gib": 491.0848846435547,
     "gpus": [
       {
         "utilization_percent": 0.0,
-        "memory_used_mib": 1041.0,
+        "memory_used_mib": 0.0,
         "memory_total_mib": 23034.0
       }
     ]
@@ -20,7 +20,7 @@
     "cached_answers": 14272,
     "shutdown_requested": true
   },
-  "status": "evaluating",
+  "status": "complete",
   "data_manifest": {
     "dataset": "LivNLP/C-STS-Reannotated",
     "revision": "058ac842f5f19d27b08ad54f6d4a2c50b3f9578b",
@@ -7509,6 +7509,231 @@
         }
       },
       "path": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_evaluate_joint_seed7/runs/evaluate_joint_seed7/01M5FMQK4VQCAEV0Q6N39AB9NC/resolved.yaml"
+    },
+    {
+      "arm": "joint",
+      "seed": 8,
+      "diagnostics": {
+        "n": 2620,
+        "mse_0_1": 0.13912622038066463,
+        "mse_1_5": 2.226019526090634,
+        "spearman": 0.4468262613962627,
+        "prediction_mean": 0.6346266419562788,
+        "target_mean": 0.5886450381679389,
+        "prediction_std": 0.19349867842975121,
+        "target_std": 0.40850906064376585,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 633,
+            "mean": 0.5168550453526902
+          },
+          "2.0": {
+            "n": 233,
+            "mean": 0.6134423417850625
+          },
+          "3.0": {
+            "n": 392,
+            "mean": 0.5797001410190168
+          },
+          "4.0": {
+            "n": 296,
+            "mean": 0.6459989961035348
+          },
+          "5.0": {
+            "n": 1066,
+            "mean": 0.7262310829785902
+          }
+        },
+        "condition_changes": {
+          "n": 1044,
+          "correct": 796,
+          "ties": 0,
+          "accuracy_ties_half": 0.7624521072796935,
+          "difference_mse": 0.3787965901936013,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "path": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_evaluate_joint_seed8/runs/evaluate_joint_seed8/01M5FMSG5051S7RVAFVH82NR72/resolved.yaml"
+    },
+    {
+      "arm": "joint",
+      "seed": 9,
+      "diagnostics": {
+        "n": 2620,
+        "mse_0_1": 0.14007030803394727,
+        "mse_1_5": 2.2411249285431563,
+        "spearman": 0.43182128831074207,
+        "prediction_mean": 0.6360261790447278,
+        "target_mean": 0.5886450381679389,
+        "prediction_std": 0.18070219036976515,
+        "target_std": 0.40850906064376585,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 633,
+            "mean": 0.5324441426673442
+          },
+          "2.0": {
+            "n": 233,
+            "mean": 0.6106337168186008
+          },
+          "3.0": {
+            "n": 392,
+            "mean": 0.5795184441233928
+          },
+          "4.0": {
+            "n": 296,
+            "mean": 0.639314334940266
+          },
+          "5.0": {
+            "n": 1066,
+            "mean": 0.7229507669149488
+          }
+        },
+        "condition_changes": {
+          "n": 1044,
+          "correct": 794,
+          "ties": 0,
+          "accuracy_ties_half": 0.7605363984674329,
+          "difference_mse": 0.38482829621710996,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "path": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_evaluate_joint_seed9/runs/evaluate_joint_seed9/01M5FMVCVP69SJHPJ156VKHHQ5/resolved.yaml"
+    },
+    {
+      "arm": "shuffled",
+      "seed": 7,
+      "diagnostics": {
+        "n": 2620,
+        "mse_0_1": 0.14429245607229227,
+        "mse_1_5": 2.3086792971566763,
+        "spearman": 0.42255501225584363,
+        "prediction_mean": 0.6586696344832996,
+        "target_mean": 0.5886450381679389,
+        "prediction_std": 0.16167312963758437,
+        "target_std": 0.40850906064376585,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 633,
+            "mean": 0.5718414745518664
+          },
+          "2.0": {
+            "n": 233,
+            "mean": 0.6245502339987796
+          },
+          "3.0": {
+            "n": 392,
+            "mean": 0.605642098401274
+          },
+          "4.0": {
+            "n": 296,
+            "mean": 0.6730507856889351
+          },
+          "5.0": {
+            "n": 1066,
+            "mean": 0.7331931044052287
+          }
+        },
+        "condition_changes": {
+          "n": 1044,
+          "correct": 789,
+          "ties": 0,
+          "accuracy_ties_half": 0.7557471264367817,
+          "difference_mse": 0.4048239024209903,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "path": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_evaluate_shuffled_seed7/runs/evaluate_shuffled_seed7/01M5FMX8KWFHJVGV3TG1407N0G/resolved.yaml"
+    },
+    {
+      "arm": "shuffled",
+      "seed": 8,
+      "diagnostics": {
+        "n": 2620,
+        "mse_0_1": 0.14023861331425483,
+        "mse_1_5": 2.2438178130280773,
+        "spearman": 0.4452225467481971,
+        "prediction_mean": 0.6470149995567177,
+        "target_mean": 0.5886450381679389,
+        "prediction_std": 0.18982141196446164,
+        "target_std": 0.40850906064376585,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 633,
+            "mean": 0.530524139120398
+          },
+          "2.0": {
+            "n": 233,
+            "mean": 0.62632075291079
+          },
+          "3.0": {
+            "n": 392,
+            "mean": 0.5948641782350914
+          },
+          "4.0": {
+            "n": 296,
+            "mean": 0.6606833028632242
+          },
+          "5.0": {
+            "n": 1066,
+            "mean": 0.736093590836308
+          }
+        },
+        "condition_changes": {
+          "n": 1044,
+          "correct": 799,
+          "ties": 0,
+          "accuracy_ties_half": 0.7653256704980843,
+          "difference_mse": 0.38159311490063597,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "path": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_evaluate_shuffled_seed8/runs/evaluate_shuffled_seed8/01M5FMZ4MNDGN311NJN750GVKG/resolved.yaml"
+    },
+    {
+      "arm": "shuffled",
+      "seed": 9,
+      "diagnostics": {
+        "n": 2620,
+        "mse_0_1": 0.14085920670598873,
+        "mse_1_5": 2.2537473072958196,
+        "spearman": 0.43349616753728426,
+        "prediction_mean": 0.6441290135516693,
+        "target_mean": 0.5886450381679389,
+        "prediction_std": 0.1872654308519905,
+        "target_std": 0.40850906064376585,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 633,
+            "mean": 0.533419845422721
+          },
+          "2.0": {
+            "n": 233,
+            "mean": 0.6231783940556735
+          },
+          "3.0": {
+            "n": 392,
+            "mean": 0.5889997009130917
+          },
+          "4.0": {
+            "n": 296,
+            "mean": 0.6507000962423312
+          },
+          "5.0": {
+            "n": 1066,
+            "mean": 0.7328964130320423
+          }
+        },
+        "condition_changes": {
+          "n": 1044,
+          "correct": 797,
+          "ties": 0,
+          "accuracy_ties_half": 0.7634099616858238,
+          "difference_mse": 0.38328129456064536,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "path": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_evaluate_shuffled_seed9/runs/evaluate_shuffled_seed9/01M5FN10F7EDGY05NFBJ4N4DVN/resolved.yaml"
     }
   ],
   "mean_predictor": null,
