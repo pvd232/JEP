@@ -1,0 +1,47 @@
+{
+  "confirmed_at": "2026-10-21T23:47:39.453329+00:00",
+  "project": "mantra-477901",
+  "pilot": {
+    "name": "jep-csts-format-20261021",
+    "zone": "asia-northeast3-a",
+    "id": "8646910299736412654",
+    "status": "TERMINATED",
+    "allocated_at": "2026-10-21T14:30:42.987-07:00",
+    "last_stop_at": "2026-10-21T16:47:27.108-07:00"
+  },
+  "original": {
+    "name": "rico-source-l4-uswest4c",
+    "zone": "us-west4-c",
+    "status": "TERMINATED"
+  },
+  "pre_shutdown_guard": {
+    "status": "complete",
+    "gpu_processes": "",
+    "runs": 14
+  },
+  "report_publication": {
+    "sha256": "8a6f8db452587abd28ee253b1d54602b733bc83092829a00a1f0a66f03488c83",
+    "bytes": 1034,
+    "stored_at": {
+      "kind": "gcs",
+      "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+      "prefix": "viper",
+      "owner": "pvd232",
+      "workspace": "jep_csts_joint_20261021",
+      "revision": "5337022c9e1ef8ab447f1397dfb6575249fa3c63158050db6501cbe20f5f71d6",
+      "path": "experiments/csts_formats_report_20261021_49c835cb4a66/runs/report/01M5GDPX9M3FX5YSTVFT810RAE/resolved.yaml"
+    },
+    "kind": "resolved_run"
+  },
+  "github_report_commit": "e762ce92fbbf2e2b23aa127af453211f0ed6eb8a",
+  "new_pilot_nat_removed": true,
+  "egress": {
+    "region": "asia-northeast3",
+    "router": "jep-csts-format-20261021",
+    "nat": "jep-csts-format-20261021",
+    "reused": false,
+    "new_nat_created": true,
+    "scope": "only dedicated new pilot subnet"
+  },
+  "persistent_disks_preserved": true
+}
