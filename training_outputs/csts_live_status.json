@@ -1,14 +1,14 @@
 {
-  "observed_at_utc": "2026-10-21T16:00:19.273021+00:00",
+  "observed_at_utc": "2026-10-21T16:05:25.324512+00:00",
   "source_commit": "38496f8f7f30402429acf0ba150dcffc56bf8f48",
   "controller_alive": true,
   "resources": {
-    "disk_free_gib": 297.1432800292969,
+    "disk_free_gib": 295.2168083190918,
     "disk_total_gib": 491.0848846435547,
     "gpus": [
       {
-        "utilization_percent": 92.0,
-        "memory_used_mib": 8583.0,
+        "utilization_percent": 0.0,
+        "memory_used_mib": 3.0,
         "memory_total_mib": 23034.0
       }
     ]
@@ -5222,73 +5222,919 @@
     {
       "name": "answers_seed9",
       "run_id": "01M5FJR2C26RA3FJZWK5AW8D0X",
-      "status": "training",
+      "status": "verified",
       "epochs": [
         {
           "epoch": 1,
+          "step": 219,
           "training_mse": 0.1111687645316124,
           "training_answer_ce": 1.0904406309127808,
           "development_answer_ce": 0.36442163586616516,
           "development": {
-            "mse_0_1": 0.13930928151019442
-          }
+            "n": 1830,
+            "mse_0_1": 0.13930928151019442,
+            "mse_1_5": 2.2289485041631107,
+            "spearman": 0.05160330476386329,
+            "prediction_mean": 0.7675749585602453,
+            "target_mean": 0.5542349726775956,
+            "prediction_std": 0.06386484077919938,
+            "target_std": 0.30337777758989165,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 181,
+                "mean": 0.7576177136674112
+              },
+              "2.0": {
+                "n": 304,
+                "mean": 0.7709918339785776
+              },
+              "3.0": {
+                "n": 627,
+                "mean": 0.7640778053510322
+              },
+              "4.0": {
+                "n": 373,
+                "mean": 0.7675259894723867
+              },
+              "5.0": {
+                "n": 345,
+                "mean": 0.7761967316917752
+              }
+            },
+            "condition_changes": {
+              "n": 721,
+              "correct": 371,
+              "ties": 0,
+              "accuracy_ties_half": 0.5145631067961165,
+              "difference_mse": 0.28503709519742054,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "elapsed_seconds": 41.61847906903131
         },
         {
           "epoch": 2,
+          "step": 438,
           "training_mse": 0.10940577834844589,
           "training_answer_ce": 0.49608010053634644,
           "development_answer_ce": 0.31363990902900696,
           "development": {
-            "mse_0_1": 0.13576268045635376
-          }
+            "n": 1830,
+            "mse_0_1": 0.13576268045635376,
+            "mse_1_5": 2.17220288730166,
+            "spearman": 0.053474036959060216,
+            "prediction_mean": 0.7584251524157862,
+            "target_mean": 0.5542349726775956,
+            "prediction_std": 0.06822458003253379,
+            "target_std": 0.30337777758989165,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 181,
+                "mean": 0.750186384712135
+              },
+              "2.0": {
+                "n": 304,
+                "mean": 0.7604994989539448
+              },
+              "3.0": {
+                "n": 627,
+                "mean": 0.7542770224039634
+              },
+              "4.0": {
+                "n": 373,
+                "mean": 0.7575468034271261
+              },
+              "5.0": {
+                "n": 345,
+                "mean": 0.7694081011025802
+              }
+            },
+            "condition_changes": {
+              "n": 721,
+              "correct": 362,
+              "ties": 0,
+              "accuracy_ties_half": 0.5020804438280166,
+              "difference_mse": 0.2845708464926366,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "elapsed_seconds": 83.657437123009
         },
         {
           "epoch": 3,
+          "step": 657,
           "training_mse": 0.11042332649230957,
           "training_answer_ce": 0.4213084280490875,
           "development_answer_ce": 0.2952216565608978,
           "development": {
-            "mse_0_1": 0.1357540582843389
-          }
+            "n": 1830,
+            "mse_0_1": 0.1357540582843389,
+            "mse_1_5": 2.1720649325494223,
+            "spearman": 0.054492465632420356,
+            "prediction_mean": 0.7584533448590607,
+            "target_mean": 0.5542349726775956,
+            "prediction_std": 0.06869915840309192,
+            "target_std": 0.30337777758989165,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 181,
+                "mean": 0.7514724435068626
+              },
+              "2.0": {
+                "n": 304,
+                "mean": 0.7597633678662149
+              },
+              "3.0": {
+                "n": 627,
+                "mean": 0.7539926284903354
+              },
+              "4.0": {
+                "n": 373,
+                "mean": 0.7572179502200824
+              },
+              "5.0": {
+                "n": 345,
+                "mean": 0.7704039753347204
+              }
+            },
+            "condition_changes": {
+              "n": 721,
+              "correct": 371,
+              "ties": 0,
+              "accuracy_ties_half": 0.5145631067961165,
+              "difference_mse": 0.2838543522622681,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "elapsed_seconds": 129.00431701401249
         },
         {
           "epoch": 4,
+          "step": 876,
           "training_mse": 0.11065468192100525,
           "training_answer_ce": 0.38068240880966187,
           "development_answer_ce": 0.2801160514354706,
           "development": {
-            "mse_0_1": 0.13509292314514867
-          }
+            "n": 1830,
+            "mse_0_1": 0.13509292314514867,
+            "mse_1_5": 2.161486770322379,
+            "spearman": 0.055247174963840524,
+            "prediction_mean": 0.7565218719628339,
+            "target_mean": 0.5542349726775956,
+            "prediction_std": 0.07014014462941813,
+            "target_std": 0.30337777758989165,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 181,
+                "mean": 0.7504608532341804
+              },
+              "2.0": {
+                "n": 304,
+                "mean": 0.7573210693111545
+              },
+              "3.0": {
+                "n": 627,
+                "mean": 0.7518283169615592
+              },
+              "4.0": {
+                "n": 373,
+                "mean": 0.7547865484419202
+              },
+              "5.0": {
+                "n": 345,
+                "mean": 0.7694036779196366
+              }
+            },
+            "condition_changes": {
+              "n": 721,
+              "correct": 370,
+              "ties": 0,
+              "accuracy_ties_half": 0.5131761442441054,
+              "difference_mse": 0.2837396421319014,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "elapsed_seconds": 174.48212929000147
         },
         {
           "epoch": 5,
+          "step": 1095,
           "training_mse": 0.11168534308671951,
           "training_answer_ce": 0.36086171865463257,
           "development_answer_ce": 0.2760299742221832,
           "development": {
-            "mse_0_1": 0.13501094158103802
-          }
+            "n": 1830,
+            "mse_0_1": 0.13501094158103802,
+            "mse_1_5": 2.1601750652966083,
+            "spearman": 0.05828031012338748,
+            "prediction_mean": 0.7565923977907889,
+            "target_mean": 0.5542349726775956,
+            "prediction_std": 0.07018223615836004,
+            "target_std": 0.30337777758989165,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 181,
+                "mean": 0.750719067141496
+              },
+              "2.0": {
+                "n": 304,
+                "mean": 0.7569788622816926
+              },
+              "3.0": {
+                "n": 627,
+                "mean": 0.7517731651735078
+              },
+              "4.0": {
+                "n": 373,
+                "mean": 0.7547820271180079
+              },
+              "5.0": {
+                "n": 345,
+                "mean": 0.7700489622959192
+              }
+            },
+            "condition_changes": {
+              "n": 721,
+              "correct": 376,
+              "ties": 0,
+              "accuracy_ties_half": 0.521497919556172,
+              "difference_mse": 0.28315788465660385,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "elapsed_seconds": 219.7202331040171
         },
         {
           "epoch": 6,
+          "step": 1314,
           "training_mse": 0.11065555363893509,
           "training_answer_ce": 0.35281506180763245,
           "development_answer_ce": 0.27314379811286926,
           "development": {
-            "mse_0_1": 0.13431798185840568
+            "n": 1830,
+            "mse_0_1": 0.13431798185840568,
+            "mse_1_5": 2.149087709734491,
+            "spearman": 0.05736785211109883,
+            "prediction_mean": 0.7546597036670466,
+            "target_mean": 0.5542349726775956,
+            "prediction_std": 0.07081348344409368,
+            "target_std": 0.30337777758989165,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 181,
+                "mean": 0.7491274607774302
+              },
+              "2.0": {
+                "n": 304,
+                "mean": 0.7548668819822764
+              },
+              "3.0": {
+                "n": 627,
+                "mean": 0.7497965573218831
+              },
+              "4.0": {
+                "n": 373,
+                "mean": 0.7527388486082368
+              },
+              "5.0": {
+                "n": 345,
+                "mean": 0.7682945600454358
+              }
+            },
+            "condition_changes": {
+              "n": 721,
+              "correct": 373,
+              "ties": 0,
+              "accuracy_ties_half": 0.5173370319001387,
+              "difference_mse": 0.28288887041124927,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "elapsed_seconds": 264.7727440270246
+        },
+        {
+          "epoch": 7,
+          "step": 1533,
+          "training_mse": 0.11136385053396225,
+          "training_answer_ce": 0.3376065790653229,
+          "development_answer_ce": 0.2733601927757263,
+          "development": {
+            "n": 1830,
+            "mse_0_1": 0.13338912274903644,
+            "mse_1_5": 2.134225963984583,
+            "spearman": 0.05604025057182247,
+            "prediction_mean": 0.7520288963298328,
+            "target_mean": 0.5542349726775956,
+            "prediction_std": 0.0715757121607048,
+            "target_std": 0.30337777758989165,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 181,
+                "mean": 0.7465985726915012
+              },
+              "2.0": {
+                "n": 304,
+                "mean": 0.7522303988470843
+              },
+              "3.0": {
+                "n": 627,
+                "mean": 0.7471710234357599
+              },
+              "4.0": {
+                "n": 373,
+                "mean": 0.7500068832977848
+              },
+              "5.0": {
+                "n": 345,
+                "mean": 0.7657150672829669
+              }
+            },
+            "condition_changes": {
+              "n": 721,
+              "correct": 374,
+              "ties": 0,
+              "accuracy_ties_half": 0.5187239944521498,
+              "difference_mse": 0.28297271387215234,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "elapsed_seconds": 309.92347155703465
+        },
+        {
+          "epoch": 8,
+          "step": 1752,
+          "training_mse": 0.11112610995769501,
+          "training_answer_ce": 0.3305579125881195,
+          "development_answer_ce": 0.27235543727874756,
+          "development": {
+            "n": 1830,
+            "mse_0_1": 0.13351362123766722,
+            "mse_1_5": 2.1362179398026755,
+            "spearman": 0.056536741660334594,
+            "prediction_mean": 0.7524312435766387,
+            "target_mean": 0.5542349726775956,
+            "prediction_std": 0.07140784568775974,
+            "target_std": 0.30337777758989165,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 181,
+                "mean": 0.7470940888257317
+              },
+              "2.0": {
+                "n": 304,
+                "mean": 0.7524827628543502
+              },
+              "3.0": {
+                "n": 627,
+                "mean": 0.7475703405706506
+              },
+              "4.0": {
+                "n": 373,
+                "mean": 0.7504990722474719
+              },
+              "5.0": {
+                "n": 345,
+                "mean": 0.766109067460765
+              }
+            },
+            "condition_changes": {
+              "n": 721,
+              "correct": 372,
+              "ties": 0,
+              "accuracy_ties_half": 0.5159500693481276,
+              "difference_mse": 0.28292146667323403,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "elapsed_seconds": 351.1543289300171
+        }
+      ],
+      "best_epoch": 8,
+      "best_development": {
+        "n": 1830,
+        "mse_0_1": 0.13351362123766722,
+        "mse_1_5": 2.1362179398026755,
+        "spearman": 0.056536741660334594,
+        "prediction_mean": 0.7524312435766387,
+        "target_mean": 0.5542349726775956,
+        "prediction_std": 0.07140784568775974,
+        "target_std": 0.30337777758989165,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 181,
+            "mean": 0.7470940888257317
+          },
+          "2.0": {
+            "n": 304,
+            "mean": 0.7524827628543502
+          },
+          "3.0": {
+            "n": 627,
+            "mean": 0.7475703405706506
+          },
+          "4.0": {
+            "n": 373,
+            "mean": 0.7504990722474719
+          },
+          "5.0": {
+            "n": 345,
+            "mean": 0.766109067460765
           }
+        },
+        "condition_changes": {
+          "n": 721,
+          "correct": 372,
+          "ties": 0,
+          "accuracy_ties_half": 0.5159500693481276,
+          "difference_mse": 0.28292146667323403,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "development_answer_ce": 0.27235543727874756,
+      "config": {
+        "schema_version": 2,
+        "model_id": "google/flan-t5-small",
+        "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+        "condition": true,
+        "projection_dimension": 128,
+        "encoder_learning_rate": 3e-05,
+        "projection_learning_rate": 0.001,
+        "batch_size": 32,
+        "max_epochs": 8,
+        "patience": 3,
+        "warmup_fraction": 0.1,
+        "weight_decay": 0.01,
+        "max_length": 160,
+        "seed": 9,
+        "device": "cuda",
+        "fit_check": false,
+        "objective": "answers",
+        "annotation_weight": 0.2,
+        "shuffle_answers": false
+      },
+      "seconds": 355.04680181801086,
+      "peak_cuda_memory_bytes": 6080471552,
+      "verified_measurements": null,
+      "native_record": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_answers_seed9/runs/answers_seed9/01M5FJR2C26RA3FJZWK5AW8D0X/resolved.yaml",
+      "annotation": null
+    },
+    {
+      "name": "sequential_seed9",
+      "run_id": "01M5FK55YJEP73AFYG4XK1SP4V",
+      "status": "trained",
+      "epochs": [
+        {
+          "epoch": 1,
+          "step": 219,
+          "training_mse": 0.09200868755578995,
+          "training_answer_ce": 0.0,
+          "development_answer_ce": 0.2982618510723114,
+          "development": {
+            "n": 1830,
+            "mse_0_1": 0.0966908048203058,
+            "mse_1_5": 1.5470528771248928,
+            "spearman": 0.3302503596262483,
+            "prediction_mean": 0.6637878275797016,
+            "target_mean": 0.5542349726775956,
+            "prediction_std": 0.13049457341110687,
+            "target_std": 0.30337777758989165,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 181,
+                "mean": 0.6384234148494446
+              },
+              "2.0": {
+                "n": 304,
+                "mean": 0.6273952408840782
+              },
+              "3.0": {
+                "n": 627,
+                "mean": 0.6298259138775785
+              },
+              "4.0": {
+                "n": 373,
+                "mean": 0.6769751721828297
+              },
+              "5.0": {
+                "n": 345,
+                "mean": 0.7566270896490069
+              }
+            },
+            "condition_changes": {
+              "n": 721,
+              "correct": 523,
+              "ties": 0,
+              "accuracy_ties_half": 0.7253814147018031,
+              "difference_mse": 0.22943068121136476,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "elapsed_seconds": 16.444835898000747
+        },
+        {
+          "epoch": 2,
+          "step": 438,
+          "training_mse": 0.07764459401369095,
+          "training_answer_ce": 0.0,
+          "development_answer_ce": 0.32442715764045715,
+          "development": {
+            "n": 1830,
+            "mse_0_1": 0.08531919435320635,
+            "mse_1_5": 1.3651071096513017,
+            "spearman": 0.47336809948373754,
+            "prediction_mean": 0.6712989558104446,
+            "target_mean": 0.5542349726775956,
+            "prediction_std": 0.14907375940900344,
+            "target_std": 0.30337777758989165,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 181,
+                "mean": 0.517114449827546
+              },
+              "2.0": {
+                "n": 304,
+                "mean": 0.64730244051469
+              },
+              "3.0": {
+                "n": 627,
+                "mean": 0.6414039707972863
+              },
+              "4.0": {
+                "n": 373,
+                "mean": 0.7112960828213526
+              },
+              "5.0": {
+                "n": 345,
+                "mean": 0.7844223281611566
+              }
+            },
+            "condition_changes": {
+              "n": 721,
+              "correct": 564,
+              "ties": 0,
+              "accuracy_ties_half": 0.782246879334258,
+              "difference_mse": 0.18941791952945067,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "elapsed_seconds": 33.29369801102439
+        },
+        {
+          "epoch": 3,
+          "step": 657,
+          "training_mse": 0.0691668689250946,
+          "training_answer_ce": 0.0,
+          "development_answer_ce": 0.3404386043548584,
+          "development": {
+            "n": 1830,
+            "mse_0_1": 0.07766100002185611,
+            "mse_1_5": 1.2425760003496977,
+            "spearman": 0.5013035328395782,
+            "prediction_mean": 0.637675234153765,
+            "target_mean": 0.5542349726775956,
+            "prediction_std": 0.1762724586226662,
+            "target_std": 0.30337777758989165,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 181,
+                "mean": 0.4357198808671526
+              },
+              "2.0": {
+                "n": 304,
+                "mean": 0.6076666742661282
+              },
+              "3.0": {
+                "n": 627,
+                "mean": 0.6067827705507786
+              },
+              "4.0": {
+                "n": 373,
+                "mean": 0.6926273886918343
+              },
+              "5.0": {
+                "n": 345,
+                "mean": 0.766802602812
+              }
+            },
+            "condition_changes": {
+              "n": 721,
+              "correct": 576,
+              "ties": 0,
+              "accuracy_ties_half": 0.7988904299583911,
+              "difference_mse": 0.1788051052869339,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "elapsed_seconds": 53.770785364031326
+        },
+        {
+          "epoch": 4,
+          "step": 876,
+          "training_mse": 0.06282475590705872,
+          "training_answer_ce": 0.0,
+          "development_answer_ce": 0.35543227195739746,
+          "development": {
+            "n": 1830,
+            "mse_0_1": 0.08424415430302584,
+            "mse_1_5": 1.3479064688484135,
+            "spearman": 0.4824556673949614,
+            "prediction_mean": 0.6726839794578855,
+            "target_mean": 0.5542349726775956,
+            "prediction_std": 0.1511567003041496,
+            "target_std": 0.30337777758989165,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 181,
+                "mean": 0.5074457885563702
+              },
+              "2.0": {
+                "n": 304,
+                "mean": 0.6476331140453878
+              },
+              "3.0": {
+                "n": 627,
+                "mean": 0.6448397993999853
+              },
+              "4.0": {
+                "n": 373,
+                "mean": 0.7099341731768192
+              },
+              "5.0": {
+                "n": 345,
+                "mean": 0.7917783396831457
+              }
+            },
+            "condition_changes": {
+              "n": 721,
+              "correct": 569,
+              "ties": 0,
+              "accuracy_ties_half": 0.7891816920943134,
+              "difference_mse": 0.18653885408670176,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "elapsed_seconds": 73.98126067902194
+        },
+        {
+          "epoch": 5,
+          "step": 1095,
+          "training_mse": 0.059171922504901886,
+          "training_answer_ce": 0.0,
+          "development_answer_ce": 0.36412543058395386,
+          "development": {
+            "n": 1830,
+            "mse_0_1": 0.07471039734909647,
+            "mse_1_5": 1.1953663575855435,
+            "spearman": 0.5132522255307913,
+            "prediction_mean": 0.6366747209211924,
+            "target_mean": 0.5542349726775956,
+            "prediction_std": 0.18225504636211579,
+            "target_std": 0.30337777758989165,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 181,
+                "mean": 0.40322678972509024
+              },
+              "2.0": {
+                "n": 304,
+                "mean": 0.6116522745670456
+              },
+              "3.0": {
+                "n": 627,
+                "mean": 0.6057009160714714
+              },
+              "4.0": {
+                "n": 373,
+                "mean": 0.6924662963155128
+              },
+              "5.0": {
+                "n": 345,
+                "mean": 0.7771710028251012
+              }
+            },
+            "condition_changes": {
+              "n": 721,
+              "correct": 581,
+              "ties": 0,
+              "accuracy_ties_half": 0.8058252427184466,
+              "difference_mse": 0.17163803106806313,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "elapsed_seconds": 90.10383567103418
+        },
+        {
+          "epoch": 6,
+          "step": 1314,
+          "training_mse": 0.05480755865573883,
+          "training_answer_ce": 0.0,
+          "development_answer_ce": 0.37035053968429565,
+          "development": {
+            "n": 1830,
+            "mse_0_1": 0.07009815597629418,
+            "mse_1_5": 1.1215704956207069,
+            "spearman": 0.5207847967524325,
+            "prediction_mean": 0.6002074878220065,
+            "target_mean": 0.5542349726775956,
+            "prediction_std": 0.1938668535162437,
+            "target_std": 0.30337777758989165,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 181,
+                "mean": 0.36635406145013005
+              },
+              "2.0": {
+                "n": 304,
+                "mean": 0.5633070443903929
+              },
+              "3.0": {
+                "n": 627,
+                "mean": 0.5655494847437411
+              },
+              "4.0": {
+                "n": 373,
+                "mean": 0.6560521516899002
+              },
+              "5.0": {
+                "n": 345,
+                "mean": 0.7580211495143779
+              }
+            },
+            "condition_changes": {
+              "n": 721,
+              "correct": 569,
+              "ties": 0,
+              "accuracy_ties_half": 0.7891816920943134,
+              "difference_mse": 0.16837872022307843,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "elapsed_seconds": 110.24068279698258
+        },
+        {
+          "epoch": 7,
+          "step": 1533,
+          "training_mse": 0.05206768214702606,
+          "training_answer_ce": 0.0,
+          "development_answer_ce": 0.3723614513874054,
+          "development": {
+            "n": 1830,
+            "mse_0_1": 0.0714323057032659,
+            "mse_1_5": 1.1429168912522545,
+            "spearman": 0.540935770190572,
+            "prediction_mean": 0.6263813823573495,
+            "target_mean": 0.5542349726775956,
+            "prediction_std": 0.19246288361213965,
+            "target_std": 0.30337777758989165,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 181,
+                "mean": 0.38189050734290103
+              },
+              "2.0": {
+                "n": 304,
+                "mean": 0.5911351294305763
+              },
+              "3.0": {
+                "n": 627,
+                "mean": 0.5916650607213497
+              },
+              "4.0": {
+                "n": 373,
+                "mean": 0.6871021944460217
+              },
+              "5.0": {
+                "n": 345,
+                "mean": 0.7831523389488027
+              }
+            },
+            "condition_changes": {
+              "n": 721,
+              "correct": 574,
+              "ties": 0,
+              "accuracy_ties_half": 0.7961165048543689,
+              "difference_mse": 0.16342590984370564,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "elapsed_seconds": 130.42293636203976
+        },
+        {
+          "epoch": 8,
+          "step": 1752,
+          "training_mse": 0.050547245889902115,
+          "training_answer_ce": 0.0,
+          "development_answer_ce": 0.37348613142967224,
+          "development": {
+            "n": 1830,
+            "mse_0_1": 0.07015631410225305,
+            "mse_1_5": 1.1225010256360488,
+            "spearman": 0.5421475071722829,
+            "prediction_mean": 0.6195576296763016,
+            "target_mean": 0.5542349726775956,
+            "prediction_std": 0.193580977345889,
+            "target_std": 0.30337777758989165,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 181,
+                "mean": 0.37558100023692814
+              },
+              "2.0": {
+                "n": 304,
+                "mean": 0.5828837218547338
+              },
+              "3.0": {
+                "n": 627,
+                "mean": 0.5835288315149918
+              },
+              "4.0": {
+                "n": 373,
+                "mean": 0.6796321338766701
+              },
+              "5.0": {
+                "n": 345,
+                "mean": 0.7804008305072785
+              }
+            },
+            "condition_changes": {
+              "n": 721,
+              "correct": 583,
+              "ties": 0,
+              "accuracy_ties_half": 0.8085991678224688,
+              "difference_mse": 0.16283769799372821,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "elapsed_seconds": 146.52936741203303
         }
       ],
       "best_epoch": 6,
       "best_development": {
-        "mse_0_1": 0.13431798185840568
+        "n": 1830,
+        "mse_0_1": 0.07009815597629418,
+        "mse_1_5": 1.1215704956207069,
+        "spearman": 0.5207847967524325,
+        "prediction_mean": 0.6002074878220065,
+        "target_mean": 0.5542349726775956,
+        "prediction_std": 0.1938668535162437,
+        "target_std": 0.30337777758989165,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 181,
+            "mean": 0.36635406145013005
+          },
+          "2.0": {
+            "n": 304,
+            "mean": 0.5633070443903929
+          },
+          "3.0": {
+            "n": 627,
+            "mean": 0.5655494847437411
+          },
+          "4.0": {
+            "n": 373,
+            "mean": 0.6560521516899002
+          },
+          "5.0": {
+            "n": 345,
+            "mean": 0.7580211495143779
+          }
+        },
+        "condition_changes": {
+          "n": 721,
+          "correct": 569,
+          "ties": 0,
+          "accuracy_ties_half": 0.7891816920943134,
+          "difference_mse": 0.16837872022307843,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
       },
-      "development_answer_ce": 0.27314379811286926,
-      "config": {},
-      "seconds": null,
-      "peak_cuda_memory_bytes": null,
+      "development_answer_ce": 0.37035053968429565,
+      "config": {
+        "schema_version": 2,
+        "model_id": "google/flan-t5-small",
+        "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+        "condition": true,
+        "projection_dimension": 128,
+        "encoder_learning_rate": 3e-05,
+        "projection_learning_rate": 0.001,
+        "batch_size": 32,
+        "max_epochs": 8,
+        "patience": 3,
+        "warmup_fraction": 0.1,
+        "weight_decay": 0.01,
+        "max_length": 160,
+        "seed": 9,
+        "device": "cuda",
+        "fit_check": false,
+        "objective": "ratings",
+        "annotation_weight": 0.2,
+        "shuffle_answers": false
+      },
+      "seconds": 146.52951866702642,
+      "peak_cuda_memory_bytes": 5577819648,
       "verified_measurements": null,
-      "native_record": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_answers_seed9/runs/answers_seed9/01M5FJR2C26RA3FJZWK5AW8D0X/resolved.yaml",
+      "native_record": "/mnt/rico-source-data/jep-joint-recovery-20261021/experiments/csts_natural_20261021_38496f8_sequential_seed9/runs/sequential_seed9/01M5FK55YJEP73AFYG4XK1SP4V/resolved.yaml",
       "annotation": null
     }
   ],
