@@ -44,22 +44,18 @@ Let a reference rating be r in [1,5]. Its training target is y = (r - 1) / 4. Th
 
 ## Arms and optimization
 
-| Setting | MSE arm | Pearson arm |
-| --- | --- | --- |
-| Initialization | Same saved seed-7 model state | Same saved seed-7 model state |
-| Objective | Mean squared score error | One minus stabilized batch Pearson correlation |
-| Epochs | 24 fixed epochs | 24 fixed epochs |
-| Pair batch size | 32 | 32 |
-| Pair order | Same saved per-epoch permutations | Same saved per-epoch permutations |
-| Encoder learning rate | 3e-5 | 3e-5 |
-| Projection learning rate | 1e-3 | 1e-3 |
-| Optimizer | Fresh AdamW, weight decay 0.01 | Fresh AdamW, weight decay 0.01 |
-| Schedule | Linear warmup and decay over 5,256 updates | Same schedule |
-| Warmup | 526 updates | 526 updates |
-| Gradient clipping | Global norm 1.0 | Global norm 1.0 |
-| Inputs | Same tokenizer, passage mask and 160-token cap | Same inputs |
-| Precision | Existing BF16 forward policy, float32 loss arithmetic | Same precision policy |
-| Checkpoint criterion | Highest development Spearman | Highest development Spearman |
+The two arms differ only in their training objective: mean squared score error versus one minus stabilized batch Pearson correlation.
+
+Both arms use these settings:
+
+- The same saved seed-7 model state and per-epoch pair permutations.
+- 24 fixed epochs, pair batch size 32 and 5,256 total updates.
+- Fresh AdamW with weight decay 0.01, encoder learning rate 3e-5 and projection learning rate 1e-3.
+- Linear warmup for 526 updates, followed by linear learning-rate decay over the remaining updates.
+- Gradient clipping at global norm 1.0.
+- The same tokenizer, passage mask and 160-token cap.
+- The existing BF16 forward policy and float32 loss arithmetic.
+- Checkpoint selection by highest development Spearman.
 
 Each epoch contains 219 updates, including the final four-pair batch. Both arms complete the common budget; development scores determine the retained checkpoints. Reset and record RNG state for each arm. Record initialization digests, batch-order digests, actual updates, processed tokens, peak memory and elapsed fit time.
 
