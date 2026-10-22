@@ -40,7 +40,7 @@ Use the existing [AnswerEncoder](../csts_pilot/joint.py) in rating-only mode, wi
 
 Create one initial model state from the pinned pretrained backbone and seed-7 projection initialization. Both arms restore those exact bytes. Teacher generation and auxiliary decoder losses are outside this tranche. Rating-only training and development passes execute the encoder and projection; the decoder remains available in the model container for compatibility with later tranches.
 
-Let a reference rating be r in [1,5]. Its training target is y = (r - 1) / 4. The predicted score s is raw cosine in [-1,1]. Preserve that score definition in both arms and report its observed range.
+Let a reference rating be $r \in [1,5]$. Its training target is $y = (r - 1) / 4$. The predicted score $s$ is raw cosine in $[-1,1]$. Preserve that score definition in both arms and report its observed range.
 
 ## Arms and optimization
 
@@ -59,22 +59,23 @@ Both arms use these settings:
 
 Each epoch contains 219 updates, including the final four-pair batch. Both arms complete the common budget; development scores determine the retained checkpoints. Reset and record RNG state for each arm. Record initialization digests, batch-order digests, actual updates, processed tokens, peak memory and elapsed fit time.
 
-For a batch of b comparisons, MSE is:
+For a batch of $b$ comparisons, MSE is:
 
-\[
-\mathcal L_{\mathrm{MSE}}=\frac1b\sum_{i=1}^{b}(s_i-y_i)^2.
-\]
+```math
+\mathcal{L}_{\mathrm{MSE}}=\frac{1}{b}\sum_{i=1}^{b}(s_i-y_i)^2.
+```
 
-For Pearson loss, define centered scores u_i = s_i - mean(s) and centered targets v_i = y_i - mean(y):
+For Pearson loss, define centered scores $u_i = s_i - \bar{s}$ and centered targets $v_i = y_i - \bar{y}$, where the bars denote batch means:
 
-\[
-\rho_{\epsilon}(s,y)=
+```math
+\begin{aligned}
+\rho_{\epsilon}(s,y)&=
 \frac{\sum_i u_i v_i}
-{\sqrt{\sum_i u_i^2+\epsilon}\sqrt{\sum_i v_i^2+\epsilon}},
-\qquad
-\mathcal L_{\mathrm{Pearson}}=1-\rho_{\epsilon}(s,y),
-\qquad \epsilon=10^{-8}.
-\]
+{\sqrt{\sum_i u_i^2+\epsilon}\sqrt{\sum_i v_i^2+\epsilon}},\\
+\mathcal{L}_{\mathrm{Pearson}}&=1-\rho_{\epsilon}(s,y),\\
+\epsilon&=10^{-8}.
+\end{aligned}
+```
 
 Compute the loss in float32. Record batches with constant targets. In such a batch the centered target vector is zero, the data gradient is zero, and the ordinary optimizer and schedule step still occurs. Preserve the common batch order and final batch. Fail on nonfinite losses or gradients and retain the exact failure record.
 
@@ -105,7 +106,7 @@ Recompute metrics independently from saved row-level predictions. Require identi
 
 ## Calibration diagnostic
 
-Fit a single positive affine map s_cal = a*s + c, with a > 0, using development predictions and ratings. A fixed positive affine map preserves score order. Primary ranking results use raw cosine; calibrated results provide a separate numerical-error diagnostic.
+Fit a single positive affine map $s_{\mathrm{cal}} = as + c$, with $a > 0$, using development predictions and ratings. A fixed positive affine map preserves score order. Primary ranking results use raw cosine; calibrated results provide a separate numerical-error diagnostic.
 
 First estimate calibration MSE with five deterministic development folds separated by connected caption groups. Fit on four folds and score the fifth, then aggregate held-out squared errors. Fit the final coefficients on all development predictions and freeze them before evaluation. If the unconstrained slope is zero or negative, retain the identity map and record that outcome. Preserve raw and calibrated predictions as distinct fields. The final map is applied unchanged to evaluation scores, with clipping disabled so its rank-preserving behavior stays explicit.
 
