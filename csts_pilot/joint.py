@@ -65,7 +65,7 @@ def selection_score(
 class AnswerEncoder(nn.Module):
     """Give rating prediction and answer generation the same contextual states."""
 
-    def __init__(self, config: JointConfig) -> None:
+    def __init__(self, config: CstsConfig) -> None:
         super().__init__()
         self.t5 = T5ForConditionalGeneration.from_pretrained(
             config.model_id, revision=config.revision
@@ -154,12 +154,31 @@ def select(
     return {key: value[sides] for key, value in tokens.items()}, sides
 
 
+def rating_loss(
+    scores: torch.Tensor, targets: torch.Tensor, objective: Literal["mse", "pearson"]
+) -> torch.Tensor:
+    """Calculate matched rating objectives with float32 reductions."""
+    with torch.autocast(scores.device.type, enabled=False):
+        scores, targets = scores.float(), targets.float()
+        if objective == "mse":
+            return F.mse_loss(scores, targets)
+        if objective != "pearson":
+            raise ValueError(f"Unknown rating objective: {objective}")
+        centered_scores = scores - scores.mean()
+        centered_targets = targets - targets.mean()
+        numerator = (centered_scores * centered_targets).sum()
+        denominator = (centered_scores.square().sum() + 1e-8).sqrt() * (
+            centered_targets.square().sum() + 1e-8
+        ).sqrt()
+        return 1 - numerator / denominator
+
+
 @torch.no_grad()
 def predictions(
     model: AnswerEncoder,
     rows: list[dict[str, Any]],
     tokens: dict[str, torch.Tensor],
-    config: JointConfig,
+    config: CstsConfig,
     labels: torch.Tensor | None = None,
 ) -> tuple[list[dict[str, Any]], float | None]:
     """Evaluate the same source comparisons and optionally teacher-forced answers."""
@@ -258,7 +277,7 @@ def fit(context: StageContext[JointConfig]) -> None:
             with mixed_precision(config):
                 z, hidden = model.encode(batch)
                 left, right = z.chunk(2)
-                mse = F.mse_loss((left * right).sum(-1), target[indices])
+                mse = rating_loss((left * right).sum(-1), target[indices], "mse")
                 ce = (
                     model.answer_loss(hidden, batch["attention_mask"], labels[sides])
                     if config.objective != "ratings"

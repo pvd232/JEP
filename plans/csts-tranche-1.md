@@ -1,6 +1,6 @@
 # Tranche 1: loss, convergence and checkpoint selection
 
-**Status: experiment proposal for review.** This PR contains the plan. Implementation begins after the user reviews and approves the design. Training follows implementation checks and a frozen run configuration.
+**Status: implementation prepared for code review.** The user approved the design and requested a code walkthrough before execution. This PR contains the plan and first implementation. Training follows the user's code review and the remaining execution checks.
 
 The experiment will determine whether the existing conditional FLAN encoder benefits from a correlation objective and continued rating training. It will establish the comparison loss, checkpoint rule and training budget for subsequent experiments on evidence supervision and stronger encoders.
 
@@ -44,6 +44,8 @@ Create one initial model state from the pinned pretrained backbone and seed-7 pr
 
 Let a reference rating be $r \in [1,5]$. Its training target is $y = (r - 1) / 4$. The predicted score $s$ is raw cosine in $[-1,1]$. Preserve that score definition in both arms and report its observed range.
 
+Reported MSE is the mean of $(s_i-y_i)^2$ on this rescaled rating scale. Converting predictions back through $\hat r_i=1+4s_i$ makes MSE on the original 1–5 scale equal to 16 times this value. The rescaling applies to rating targets; predictions retain their raw cosine definition.
+
 ## Arms and optimization
 
 The two arms differ only in their training objective: mean squared score error versus one minus stabilized batch Pearson correlation.
@@ -56,7 +58,7 @@ Both arms use these settings:
 - Linear warmup for 526 updates, followed by linear learning-rate decay over the remaining updates.
 - Gradient clipping at global norm 1.0.
 - The same tokenizer, passage mask and 160-token cap.
-- The existing BF16 forward policy and float32 loss arithmetic.
+- BF16 for eligible encoder and projection operations; float32 for passage pooling, vector normalization, cosine scores and loss arithmetic.
 - Checkpoint selection by highest validation Spearman.
 
 Each epoch contains 219 updates, including the final four-pair batch. Both arms complete the common budget; validation scores determine the retained checkpoints. Reset and record RNG state for each arm. Record initialization digests, batch-order digests, actual updates, processed tokens, peak memory and elapsed fit time.
@@ -100,7 +102,7 @@ Predeclare three contrasts:
 2. **Secondary:** full-run MSE minus its eight-epoch-prefix candidate.
 3. **Secondary:** full-run Pearson minus its eight-epoch-prefix candidate.
 
-Report raw Spearman, normalized MSE, condition-ordering accuracy, prediction mean and standard deviation, target mean and standard deviation, score range, selected epoch, optimizer steps and measured GPU time. Condition ordering follows the existing [diagnostic](../csts_pilot/diagnostics.py): compare the same passage pair under different conditions with distinct reference ratings, assigning half credit to tied predictions.
+Report raw Spearman, MSE on the rescaled rating scale, condition-ordering accuracy, prediction mean and standard deviation, target mean and standard deviation, score range, selected epoch, optimizer steps and measured GPU time. Condition ordering follows the existing [diagnostic](../csts_pilot/diagnostics.py): compare the same passage pair under different conditions with distinct reference ratings, assigning half credit to tied predictions.
 
 Produce learning curves against epochs, optimizer steps and measured GPU time. Include epoch-level training objectives and validation metrics. Pearson training loss and MSE training loss have different meanings; assess arms through the common validation and test metrics.
 
@@ -126,7 +128,17 @@ Plan for one L4, sequential execution and roughly 15-20 minutes of fitting, extr
 
 Reuse the prepared inputs, pinned model cache and existing native VIPER execution path. Keep tokenized inputs on the GPU where practical and batch both passages together. Publish each completed measurement stage and its exact artifact references before downstream scoring. A reporting or transfer failure resumes from the successful artifacts. Publish scalar results before bulky transfers, verify durable selected checkpoints, then stop the task's GPU after completion. Preserve prior studies and unrelated worktrees.
 
-After approval, the expected implementation surface is the shared rating-loss and checkpoint logic in `csts_pilot/joint.py`, a dedicated convergence runner, and focused tests. The final path choices follow review of their callers. The implementation PR will retain this plan and add the approved code and run configuration as separate commits.
+The implementation keeps the existing encoder and tokenization. Its code can be reviewed in this order:
+
+1. [Frozen settings](../configs/csts-tranche-1.json): model revision, optimizer settings, checkpoint windows, input hashes and the resource ceiling.
+2. [Shared rating losses](../csts_pilot/joint.py): MSE and stabilized Pearson with float32 reductions.
+3. [Native VIPER stages](../csts_pilot/convergence.py): one saved initialization, matched training, both checkpoint windows and test scoring. Teacher generation and decoder losses remain outside these stages.
+4. [Runner](../csts_pilot/convergence_run.py): verify matching arms, freeze selection and calibration, then invoke VIPER test stages. Identical checkpoints reuse one prediction artifact. Successful native stages are reused on resume; an uncertain invocation requires reconciliation.
+5. [CPU analysis](../csts_pilot/convergence_analysis.py) and [reporting](../csts_pilot/convergence_report.py): validation calibration, independent metrics, paired intervals and learning curves.
+
+Running `python -m csts_pilot.convergence_run` displays the settings for review. The experiment requires the explicit `--execute` flag. After the native stages finish, `python -m csts_pilot.convergence_report` produces the report using a CPU environment with NumPy, SciPy and Matplotlib.
+
+The runner counts the wall time of GPU stages, including their native publication, against the 1,800-second ceiling. This is a conservative implementation of the proposed compute allowance. Epoch traces separately record fitting and validation times. VM startup and shutdown remain operator actions, to be reviewed before execution.
 
 Required implementation checks:
 
@@ -142,7 +154,7 @@ The completed experiment will publish its frozen configuration, native run and c
 
 ## Review boundary and references
 
-This proposal is based on repository commit `71df70a33a210a0f1347366d9bc774539e95c4ea`. The plan PR targets `experiment/csts-joint-20261021`. Existing completed measurements retain their source revisions and native identities. The experiment starts only after design approval and implementation checks.
+This proposal is based on repository commit `71df70a33a210a0f1347366d9bc774539e95c4ea`. The PR targets `experiment/csts-joint-20261021`. Existing completed measurements retain their source revisions and native identities. The experiment starts after the user's code review and implementation checks.
 
 - [Overall research plan](https://chatgpt.com/space/page_d766bdd5d80881918721acab2cac1e3d)
 - [Earlier study protocol](../CSTS_JOINT_RUN.md)
