@@ -1,6 +1,6 @@
 # Tranche 1 code walkthrough
 
-**Status: collaborative review open. Experiment execution awaits the user's code review.**
+**Status: collaborative review open; execution authorized on October 23, 2026.** The user explicitly instructed “yes. run it” after the loss discussion. Execution authorization and walkthrough completion are recorded separately.
 
 The first implementation is commit `50e266e53c6d144de1bf33ac3a102844b1ae8b18`, compared with plan commit `18a1509d7fd3fdabaea78697fff997f41080322f`. The scientific design is in [the plan](csts-tranche-1.md); the concrete parameters are in [the frozen settings](../configs/csts-tranche-1.json).
 
@@ -36,6 +36,16 @@ The small observers cover hand-computable loss values, analytic gradients, const
 - The actual CPU report command completed on explicitly synthetic fixtures and rendered its curves.
 - The default runner command displayed settings and created zero experiment state.
 
-Actual L4 execution, native runtime verification, resource accounting on the VM and operator startup/shutdown checks remain for the execution phase after review. Prior studies and their saved artifacts retain their existing identities.
+The actual pinned L4 environment passed 22 focused checks, including CUDA precision, before launch. Both 24-epoch arms completed and their matched initialization, RNG, permutations and update counts passed verification. Prior studies and their saved artifacts retain their existing identities. Shutdown checks remain for closeout.
 
 **Overall verdict: incomplete.** The first code snapshot and its mechanical checks are ready for discussion; the remaining slices and the user's judgment are pending.
+
+## Execution repair: canonical model handoff
+
+The first prefix evaluation produced predictions and independent metric receipts, then failed final VIPER verification: a stored EVAL model must select an artifact named `model`. The frozen prefix checkpoint was stored as `prefix_model`. The failed native run remains failed and its evidence is preserved.
+
+The repair adds a CPU BUILD stage that copies the frozen prefix checkpoint to canonical `model`, checking the same SHA-256 before and after copying. Full-window checkpoints already have the required name. The EVAL implementation, predictions, metric definitions and selection rules remain fixed.
+
+The separate `convergence_evaluate` command has an evaluation-only entry point. It verifies completed native runs, matched arms, frozen settings, selection hash and checkpoint bytes; preserves the original failed summary and sealed references; and charges further scoring against the original remaining GPU-stage budget. It contains zero training-stage execution calls. Training and evaluation source commits are retained separately.
+
+Repair checks: 21 focused loss, native model-selection, failure-reconciliation and report tests passed; Ruff and Pyrefly passed. The native-selection regression reproduces the original rejection and accepts the canonical handoff. The first-pass diff review also caught and removed an accidental extra argument in the untouched initialization call.

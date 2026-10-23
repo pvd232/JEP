@@ -355,3 +355,107 @@ def test_default_command_only_shows_review_settings(monkeypatch, capsys):
     )
     convergence_run.main()
     assert json.loads(capsys.readouterr().out)["status"] == "review"
+
+
+def test_checkpoint_handoff_preserves_bytes_and_rejects_changed_input(tmp_path):
+    source, destination = tmp_path / "prefix.pt", tmp_path / "model.pt"
+    source.write_bytes(b"frozen checkpoint weights")
+    config = convergence.CheckpointConfig(model_sha256=convergence.file_sha256(source))
+    context = SimpleNamespace(
+        config=config, inputs={"checkpoint": source}, outputs={"model": destination}
+    )
+    convergence.promote_checkpoint(context)
+    assert destination.read_bytes() == source.read_bytes()
+    source.write_bytes(b"changed checkpoint")
+    with pytest.raises(ValueError, match="frozen identity"):
+        convergence.promote_checkpoint(context)
+    assert destination.read_bytes() == b"frozen checkpoint weights"
+
+
+def test_prefix_handoff_satisfies_native_stored_eval_model_contract():
+    from viper.artifacts import StageArtifactRef
+    from viper.evidence import VerificationError
+    from viper.inputs import StoredInputRef
+    from viper.stages import EvalSpec
+    from viper.verification import verify_stored_input_selections
+
+    reference = {
+        "sha256": "a" * 64,
+        "bytes": 1,
+        "stored_at": {
+            "kind": "gcs",
+            "bucket": "fixture",
+            "owner": "owner",
+            "workspace": "study",
+            "revision": "b" * 64,
+            "path": "experiments/fixture/resolved.yaml",
+        },
+    }
+    original = {"name": "train_mse", "reference": reference}
+    candidate = {
+        "run": original,
+        "artifact_name": "prefix_model",
+        "sha256": "c" * 64,
+        "arm": "mse",
+        "window": "prefix",
+    }
+    configured_stages = []
+
+    def execute(_name, configured, _estimator, gpu):
+        assert gpu is False
+        configured_stages.append(configured)
+        return {"name": "checkpoint_mse_prefix", "reference": reference}
+
+    promoted, stage_id = convergence_run.canonical_checkpoint(candidate, execute)
+    configured = convergence_run.evaluation_stage(
+        candidate["sha256"],
+        promoted,
+        stage_id,
+        original,
+        {"splits": {"test": {"sha256": "d" * 64}}},
+        "e" * 64,
+    )
+    model = configured.spec.inputs["model"]
+    assert model.artifact.artifact_name == "model"
+    assert model.artifact.stage_id == "checkpoint"
+    assert (
+        configured_stages[0].spec.inputs["checkpoint"].artifact.artifact_name
+        == "prefix_model"
+    )
+
+    # Exercise the exact native verifier that rejected the first test run.
+    spec = EvalSpec.model_construct(inputs={"model": StoredInputRef.model_construct()})
+    pointer = SimpleNamespace(
+        artifact=StageArtifactRef(stage_id="train", artifact_name="prefix_model")
+    )
+    with pytest.raises(VerificationError, match="must select model"):
+        verify_stored_input_selections("test", spec, {"model": pointer})
+    pointer.artifact = model.artifact
+    verify_stored_input_selections("test", spec, {"model": pointer})
+
+    full = dict(candidate, artifact_name="model")
+    assert convergence_run.canonical_checkpoint(full, execute) == (original, "train")
+    assert len(configured_stages) == 1
+
+
+def test_evaluation_recovery_preserves_failed_evidence_and_blocks_live_state(tmp_path):
+    from csts_pilot.convergence_evaluate import reconcile_failure
+
+    path = tmp_path / "experiments/fixture/runs/test_mse_prefix/run/resolved.yaml"
+    path.parent.mkdir(parents=True)
+    failed = "status: failed\nattempts: []\nsuccessful_attempt_id: null\n"
+    path.write_text(failed)
+    summary = {
+        "status": "failed",
+        "in_flight": {"stage": "test_mse_prefix", "experiment_id": "fixture"},
+        "gpu_stage_seconds": 1240.0,
+    }
+    reconcile_failure(tmp_path, summary)
+    assert summary["in_flight"] is None
+    assert summary["failed_evaluations"][0]["resolved"]["status"] == "failed"
+    assert summary["gpu_stage_seconds"] == 1240.0
+    assert path.read_text() == failed
+    summary["in_flight"] = {"stage": "test_mse_prefix", "experiment_id": "fixture"}
+    path.write_text("status: running\n")
+    with pytest.raises(ValueError, match="unresolved native status"):
+        reconcile_failure(tmp_path, summary)

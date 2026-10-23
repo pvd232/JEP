@@ -63,6 +63,12 @@ class TestConfig(EvalConfig):
     test_sha256: str
 
 
+class CheckpointConfig(BuildConfig):
+    """Identify frozen bytes republished under VIPER's canonical model name."""
+
+    model_sha256: str
+
+
 def file_sha256(path: Path) -> str:
     """Hash checkpoint bytes without holding another model copy in memory."""
     with path.open("rb") as stream:
@@ -131,6 +137,16 @@ def initialize(context: StageContext[InitializationConfig]) -> None:
     torch.save(
         {"state": model.state_dict(), "seed": config.seed}, context.outputs["model"]
     )
+
+
+@build(config=CheckpointConfig)
+def promote_checkpoint(context: StageContext[CheckpointConfig]) -> None:
+    """Copy a selected checkpoint without loading or changing its weights."""
+    if file_sha256(context.inputs["checkpoint"]) != context.config.model_sha256:
+        raise ValueError("The checkpoint differs from its frozen identity.")
+    shutil.copyfile(context.inputs["checkpoint"], context.outputs["model"])
+    if file_sha256(context.outputs["model"]) != context.config.model_sha256:
+        raise ValueError("Checkpoint publication changed the frozen bytes.")
 
 
 @metric(metric_id="validation_spearman", mode="stateless")

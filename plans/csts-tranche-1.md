@@ -1,6 +1,6 @@
 # Tranche 1: loss, convergence and checkpoint selection
 
-**Status: implementation prepared for code review.** The user approved the design and requested a code walkthrough before execution. This PR contains the plan and first implementation. Training follows the user's code review and the remaining execution checks.
+**Status: execution authorized on October 23, 2026.** The user instructed “yes. run it” after the rating-loss discussion. Both 24-epoch training arms have completed from source `e2545bbc8e509d12b01e12ce43435b897bcb410f`. Checkpoints and validation calibration were frozen before testing. Evaluation is recovering from a VIPER artifact-name handoff error; the collaborative walkthrough remains open separately.
 
 The experiment will determine whether the existing conditional FLAN encoder benefits from a correlation objective and continued rating training. It will establish the comparison loss, checkpoint rule and training budget for subsequent experiments on evidence supervision and stronger encoders.
 

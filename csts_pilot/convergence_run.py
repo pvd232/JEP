@@ -34,12 +34,14 @@ from viper.runtime import (
 )
 
 from csts_pilot.convergence import (
+    CheckpointConfig,
     ConvergenceConfig,
     InitializationConfig,
     TestConfig,
     file_sha256,
     fit,
     initialize,
+    promote_checkpoint,
     test_checkpoint,
     test_mse,
     test_spearman,
@@ -89,6 +91,94 @@ def artifact_source(
         StageArtifactRef(stage_id=stage_id, artifact_name=name),
         path=f"inputs/{name}",
         data_role=role,
+    )
+
+
+def canonical_checkpoint(candidate: dict[str, Any], execute: Any) -> tuple[Any, str]:
+    """Expose prefix bytes as model; VIPER requires this stored-input name."""
+    if candidate["artifact_name"] == "model":
+        return candidate["run"], "train"
+    configured = stage(
+        promote_checkpoint,
+        stage_id="checkpoint",
+        config=CheckpointConfig(model_sha256=candidate["sha256"]),
+        inputs=(
+            input(
+                "checkpoint",
+                source=artifact_source(
+                    candidate["run"], "train", candidate["artifact_name"]
+                ),
+            ),
+        ),
+        outputs=StageOutputs(
+            model=output(path="model.pt", loader=load_model, data_role="training")
+        ),
+        reuse="never",
+    )
+    record = execute(
+        f"checkpoint_{candidate['arm']}_{candidate['window']}",
+        configured,
+        configured.outputs["model"],
+        gpu=False,
+    )
+    return record, "checkpoint"
+
+
+def evaluation_stage(
+    identity: str,
+    model_record: dict[str, Any],
+    model_stage: str,
+    published: dict[str, Any],
+    settings: dict[str, Any],
+    selection_sha256: str,
+) -> Any:
+    """Bind native scoring to a canonical model and the frozen test inputs."""
+    dependencies = (
+        MetricDependency(source="artifact", name="predictions", data_role="eval"),
+    )
+    comparator = FloatComparator(mode="absolute", tolerance=1e-12)
+    metrics = (
+        measure(test_mse, dependencies=dependencies, comparator=comparator),
+        measure(test_spearman, dependencies=dependencies, comparator=comparator),
+    )
+    return stage(
+        test_checkpoint,
+        stage_id="test",
+        eval_id="csts_tranche1",
+        config=TestConfig(
+            model_sha256=identity,
+            selection_sha256=selection_sha256,
+            test_sha256=settings["splits"]["test"]["sha256"],
+        ),
+        inputs=(
+            input(
+                "model",
+                source=artifact_source(model_record, model_stage, "model"),
+            ),
+            input(
+                "selection",
+                path="convergence_results/selection.json",
+                data_role="training",
+            ),
+            input(
+                "test",
+                source=artifact_source(published, "publish", "test", "eval"),
+            ),
+            input(
+                "holdout",
+                source=artifact_source(published, "publish", "holdout", "eval"),
+            ),
+        ),
+        split_inputs=("holdout",),
+        outputs=EvalOutputs(
+            predictions=output(
+                path="predictions.json", loader=load_json, data_role="eval"
+            ),
+            timing=output(path="timing.json", loader=load_json, data_role="eval"),
+        ),
+        metrics=metrics,
+        objective=maximize(metrics[-1]),
+        reuse="never",
     )
 
 
@@ -413,65 +503,19 @@ def run_study(root: Path, settings: dict[str, Any], resume: bool = False) -> Non
         published = execute(
             "publish_test", publication, publication.outputs["test"], gpu=False
         )
-        dependencies = (
-            MetricDependency(source="artifact", name="predictions", data_role="eval"),
-        )
-        comparator = FloatComparator(mode="absolute", tolerance=1e-12)
-        test_metrics = (
-            measure(test_mse, dependencies=dependencies, comparator=comparator),
-            measure(test_spearman, dependencies=dependencies, comparator=comparator),
-        )
         scored = {}
         summary["test"] = []
         for name, candidate in selection["candidates"].items():
             identity = candidate["sha256"]
             if identity not in scored:
-                configured = stage(
-                    test_checkpoint,
-                    stage_id="test",
-                    eval_id="csts_tranche1",
-                    config=TestConfig(
-                        model_sha256=identity,
-                        selection_sha256=summary["selection_sha256"],
-                        test_sha256=settings["splits"]["test"]["sha256"],
-                    ),
-                    inputs=(
-                        input(
-                            "model",
-                            source=artifact_source(
-                                candidate["run"], "train", candidate["artifact_name"]
-                            ),
-                        ),
-                        input(
-                            "selection",
-                            path="convergence_results/selection.json",
-                            data_role="training",
-                        ),
-                        input(
-                            "test",
-                            source=artifact_source(
-                                published, "publish", "test", "eval"
-                            ),
-                        ),
-                        input(
-                            "holdout",
-                            source=artifact_source(
-                                published, "publish", "holdout", "eval"
-                            ),
-                        ),
-                    ),
-                    split_inputs=("holdout",),
-                    outputs=EvalOutputs(
-                        predictions=output(
-                            path="predictions.json", loader=load_json, data_role="eval"
-                        ),
-                        timing=output(
-                            path="timing.json", loader=load_json, data_role="eval"
-                        ),
-                    ),
-                    metrics=test_metrics,
-                    objective=maximize(test_metrics[-1]),
-                    reuse="never",
+                model_record, model_stage = canonical_checkpoint(candidate, execute)
+                configured = evaluation_stage(
+                    identity,
+                    model_record,
+                    model_stage,
+                    published,
+                    settings,
+                    summary["selection_sha256"],
                 )
                 scored[identity] = execute(
                     f"test_{name}",
