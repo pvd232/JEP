@@ -49,3 +49,13 @@ The repair adds a CPU BUILD stage that copies the frozen prefix checkpoint to ca
 The separate `convergence_evaluate` command has an evaluation-only entry point. It verifies completed native runs, matched arms, frozen settings, selection hash and checkpoint bytes; preserves the original failed summary and sealed references; and charges further scoring against the original remaining GPU-stage budget. It contains zero training-stage execution calls. Training and evaluation source commits are retained separately.
 
 Repair checks: 21 focused loss, native model-selection, failure-reconciliation and report tests passed; Ruff and Pyrefly passed. The native-selection regression reproduces the original rejection and accepts the canonical handoff. The first-pass diff review also caught and removed an accidental extra argument in the untouched initialization call.
+
+## Completed execution evidence
+
+Both 24-epoch training arms and all four fixed-checkpoint evaluations completed. Ten successful native runs and 152 measurements passed VIPER verification. The failed first prefix invocation remains separately preserved. The successful prefix prediction artifact is byte-identical to the failed invocation's predictions.
+
+Independent CPU reporting matched all native test metric events within 1e-12. It checked 2,620 aligned test rows, 1,241 source groups, frozen calibration and 2,000 shared component-bootstrap draws. The rendered learning curves were inspected. The 132-file transferred archive passed its SHA-256 and per-file manifest checks. GPU-stage accounting, including the failed attempt, totaled 1,678.29 seconds against the 1,800-second ceiling.
+
+The [full report](../training_outputs/csts_tranche1_report.md), [native verification](../training_outputs/csts_tranche1_native_verification.json), [recovery evidence](../training_outputs/csts_tranche1_recovery.json), and [timing breakdown](../training_outputs/csts_tranche1_evaluation_timing.json) preserve the result and its limits. CPU report regressions, Ruff and Pyrefly passed for the report update and native CPU publication module. The actual pinned VM also passed all three new handoff and reconciliation checks before recovery.
+
+Mechanical execution and author inspection of the results are complete. The collaborative code walkthrough remains open.

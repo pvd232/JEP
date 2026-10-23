@@ -62,10 +62,12 @@ def report_fixture(tmp_path):
     summary = {
         "status": "complete",
         "source_commit": "synthetic-test-fixture",
+        "evaluation_source_commit": "synthetic-evaluation-repair",
         "selection_sha256": hashlib.sha256(raw).hexdigest(),
         "gpu_stage_seconds": 0,
         "runs": [],
         "settings": {
+            "gpu_budget_seconds": 1800,
             "splits": {"test": {"rows": 12, "groups": 6}},
             "training": {"seed": 7, "max_epochs": 3},
             "bootstrap_draws": 12,
@@ -90,6 +92,8 @@ def test_cpu_report_recomputes_scale_intervals_and_compute(tmp_path, monkeypatch
     assert raw["mse_1_5"] == 1
     assert report["paired_intervals"]["draws"] == 12
     assert report["compute"]["mse"]["nonpadding_input_tokens"] == 216
+    assert report["source_commit"] == "synthetic-test-fixture"
+    assert report["evaluation_source_commit"] == "synthetic-evaluation-repair"
     markdown = (output / "csts_tranche1_report.md").read_text()
     assert "12 shared bootstrap samples" in markdown
     assert len((output / "csts_tranche1_epochs.csv").read_text().splitlines()) == 7

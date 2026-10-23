@@ -1,6 +1,6 @@
 # Tranche 1: loss, convergence and checkpoint selection
 
-**Status: execution authorized on October 23, 2026.** The user instructed “yes. run it” after the rating-loss discussion. Both 24-epoch training arms have completed from source `e2545bbc8e509d12b01e12ce43435b897bcb410f`. Checkpoints and validation calibration were frozen before testing. Evaluation is recovering from a VIPER artifact-name handoff error; the collaborative walkthrough remains open separately.
+**Status: training, evaluation and independent analysis complete.** See the [full report](../training_outputs/csts_tranche1_report.md). All ten native runs and 152 measurements passed verification; 132 transferred evidence files passed manifest checks. Report publication and shutdown are closing out. Training source is `e2545bbc8e509d12b01e12ce43435b897bcb410f`; evaluation recovery source is `182cfc35e5ab528e1239668b881c1779ffba0437`. The remaining collaborative walkthrough stays open separately.
 
 The experiment will determine whether the existing conditional FLAN encoder benefits from a correlation objective and continued rating training. It will establish the comparison loss, checkpoint rule and training budget for subsequent experiments on evidence supervision and stronger encoders.
 
@@ -154,7 +154,7 @@ The completed experiment will publish its frozen configuration, native run and c
 
 ## Review boundary and references
 
-This proposal is based on repository commit `71df70a33a210a0f1347366d9bc774539e95c4ea`. The PR targets `experiment/csts-joint-20261021`. Existing completed measurements retain their source revisions and native identities. The experiment starts after the user's code review and implementation checks.
+This proposal is based on repository commit `71df70a33a210a0f1347366d9bc774539e95c4ea`. The PR targets `experiment/csts-joint-20261021`. Existing completed measurements retain their source revisions and native identities. The user authorized execution on October 23, 2026 after the rating-loss discussion. The remaining collaborative walkthrough stays open separately from execution authorization.
 
 - [Overall research plan](https://chatgpt.com/space/page_d766bdd5d80881918721acab2cac1e3d)
 - [Earlier study protocol](../CSTS_JOINT_RUN.md)

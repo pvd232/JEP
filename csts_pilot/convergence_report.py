@@ -135,6 +135,9 @@ def build_report(results_dir: Path, output_dir: Path) -> dict[str, Any]:
     }
     report = {
         "source_commit": summary["source_commit"],
+        "evaluation_source_commit": summary.get(
+            "evaluation_source_commit", summary["source_commit"]
+        ),
         "settings": settings,
         "provisional_loss_selected_on_validation": selection["provisional_loss"],
         "candidates": results,
@@ -142,6 +145,7 @@ def build_report(results_dir: Path, output_dir: Path) -> dict[str, Any]:
         "compute": timing,
         "gpu_stage_seconds_including_native_publication": summary["gpu_stage_seconds"],
         "native_runs": summary["runs"],
+        "failed_evaluations": summary.get("failed_evaluations", []),
     }
     output_dir.mkdir(parents=True, exist_ok=True)
     prefix = "csts_tranche1"
@@ -187,18 +191,30 @@ def build_report(results_dir: Path, output_dir: Path) -> dict[str, Any]:
         "",
         f"Source: `{summary['source_commit']}`. One matched seed ({settings['training']['seed']}), {settings['training']['max_epochs']} epochs per arm.",
         "",
+        f"Evaluation source: `{report['evaluation_source_commit']}`. Frozen training, checkpoint choices and validation calibration retain their original identities.",
+        "",
+        "The hypotheses are that continued rating training improves conditional ranking, and that Pearson can improve ranking over MSE under shared settings. This screen supplies a stronger rating-only reference for later evidence-supervision experiments. See the [experiment plan](../plans/csts-tranche-1.md).",
+        "",
+        "Both arms used the same initialization, batch order, model and optimizer settings, with BF16 forward computation and float32 loss arithmetic. Checkpoints were selected by highest validation Spearman within each window. Test scoring used native VIPER EVAL stages with independent metric workers. Training and checkpoint selection finished before testing.",
+        "",
+        "Test ratings are the Tu 2024 human reannotations distributed by LivNLP; the fixed cohort excludes 214 invalid comparisons. Training labels separately use human/LLM aggregation. Label provenance is documented in the [existing audit](csts_sol61_max_label_audit.json).",
+        "",
         f"The provisional loss selected using validation Spearman is **{selection['provisional_loss'].upper()}**.",
         "",
         "MSE uses targets $y=(r-1)/4$ and raw cosine predictions: $n^{-1}\\sum_i(s_i-y_i)^2$. MSE on the original 1–5 rating scale equals 16 times this value.",
         "",
+        "| Candidate | Selected epoch | Test Spearman | Raw MSE | Calibrated MSE | Condition ordering |",
+        "| --- | ---: | ---: | ---: | ---: | ---: |",
     ]
     for name, result in results.items():
         raw = result["raw"]
         lines.append(
-            f"- **{name}**, selected epoch {result['selected_epoch']}: test Spearman {raw['spearman']:.6f}; MSE {raw['mse_0_1']:.6f}; calibrated MSE {result['calibrated']['mse_0_1']:.6f}."
+            f"| {name} | {result['selected_epoch']} | {raw['spearman']:.6f} | {raw['mse_0_1']:.6f} | {result['calibrated']['mse_0_1']:.6f} | {raw['condition_ordering_accuracy']:.2%} |"
         )
     lines.extend(
         [
+            "",
+            "Condition ordering compares the same passage pair under different conditions with distinct human ratings, assigning half credit to tied predictions. Counts and score distributions are retained in the result JSON.",
             "",
             f"Paired differences below use {intervals['draws']:,} shared bootstrap samples of connected test-caption groups; intervals are conditional on seed {settings['training']['seed']}.",
             "",
@@ -219,11 +235,26 @@ def build_report(results_dir: Path, output_dir: Path) -> dict[str, Any]:
         interpretation = "The primary paired test interval favors MSE for ranking on this test cohort."
     else:
         interpretation = "The primary paired test interval includes zero; this screen leaves the ranking comparison uncertain."
-    lines.extend(["", interpretation, ""])
+    lines.extend(
+        [
+            "",
+            interpretation,
+            "",
+            "This compares the objectives under one shared optimizer setting. Each objective's best achievable performance remains open.",
+            "",
+            "The predeclared practical target for expanding a change into repeated-seed confirmation is 0.02 Spearman. The two within-objective duration contrasts are exploratory.",
+            "",
+        ]
+    )
     for arm, trace in traces.items():
         epoch = trace["selected"]["full"]["epoch"]
         if epoch == trace["config"]["max_epochs"]:
             conclusion = "The strongest validation checkpoint occurred at the epoch limit, leaving convergence beyond this budget unresolved."
+        elif (
+            epoch >= trace["config"]["max_epochs"] - 2
+            and epoch > trace["config"]["prefix_epochs"]
+        ):
+            conclusion = "The strongest validation checkpoint occurred near the epoch limit. The longer budget improved validation ranking; convergence beyond this budget remains unresolved."
         elif epoch <= trace["config"]["prefix_epochs"]:
             conclusion = (
                 "The strongest validation checkpoint occurred within the prefix window."
@@ -242,6 +273,14 @@ def build_report(results_dir: Path, output_dir: Path) -> dict[str, Any]:
             "The eight-epoch prefix uses the same 24-epoch schedule as the full run. Its contrast measures continued training under that schedule. Each objective has its own loss units; the curves show common MSE and Spearman metrics, while the epoch CSV preserves the actual training objectives.",
             "",
             "Positive affine calibration was fitted using validation data, with five caption-group folds for its held-out error estimate. Raw cosine supplies the primary ranking result. Calibration coefficients were frozen before testing.",
+            "",
+            f"Native GPU-stage wall time, including publication and failed scoring attempts: {summary['gpu_stage_seconds'] / 60:.2f} minutes against the original {settings['gpu_budget_seconds'] / 60:.0f}-minute ceiling. Successful runs and exact sealed checkpoint references are preserved in the result JSON and native verification receipts.",
+            "",
+            (
+                "The first prefix evaluation failed VIPER's stored-model artifact-name check after inference. The failed graph and metric receipts were preserved. A CPU BUILD stage copied each prefix checkpoint byte for byte to canonical `model`, with matching SHA-256 checks. Recovery executed scoring from the original frozen checkpoints; both training arms and the selection document were retained."
+                if report["failed_evaluations"]
+                else "Native evaluation completed using the frozen checkpoint identities."
+            ),
             "",
             "This is a follow-up screen on an already examined test set. One seed limits claims about training variation. Confirmation requires prospectively chosen comparisons, repeated seeds, fresh source groups and independent Spanish JEP review.",
             "",
