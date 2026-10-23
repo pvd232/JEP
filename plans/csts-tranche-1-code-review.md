@@ -59,3 +59,7 @@ Independent CPU reporting matched all native test metric events within 1e-12. It
 The [full report](../training_outputs/csts_tranche1_report.md), [native verification](../training_outputs/csts_tranche1_native_verification.json), [recovery evidence](../training_outputs/csts_tranche1_recovery.json), and [timing breakdown](../training_outputs/csts_tranche1_evaluation_timing.json) preserve the result and its limits. CPU report regressions, Ruff and Pyrefly passed for the report update and native CPU publication module. The actual pinned VM also passed all three new handoff and reconciliation checks before recovery.
 
 Mechanical execution and author inspection of the results are complete. The collaborative code walkthrough remains open.
+
+## Publication and cloud closeout
+
+The [native CPU report receipt](../training_outputs/csts_tranche1_report_publication.json) records successful graph verification and exact-byte restoration. The [cloud receipt](../training_outputs/csts_tranche1_shutdown.json) confirms both VMs TERMINATED and removal of this invocation's new scoped NAT. The [closeout record](../training_outputs/csts_tranche1_closeout.md) distinguishes 49.16 minutes of VM lifecycle time from the 27.97-minute native GPU-stage counter and documents the Mac CPU publication fallback.
