@@ -1,0 +1,217 @@
+{
+  "status": "complete",
+  "completed_at": "2026-10-24T04:24:21.736736+00:00",
+  "measurement_source_commit": "cd6d14accb1213d797305cd7c581224d4422164d",
+  "github_report_commit": "8a19b44053faacd70a96f1b14a57619f4efa2a10",
+  "report_bundle_sha256": "f70c01593591ef8db47ac822f61612c8244c5e1ef2cff7914453bf3df1f69bef",
+  "native_report_reference": {
+    "sha256": "67cd36b2a9d59afed99d18b269cf115b92093bbc6b2bf135f96f6a9d4f2b0c7c",
+    "bytes": 1036,
+    "stored_at": {
+      "kind": "gcs",
+      "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+      "prefix": "viper",
+      "owner": "pvd232",
+      "workspace": "jep_csts_joint_20261021",
+      "revision": "80d90a0f5a86ebac92657f17f3e8e5667555b543734bae728707501114625dd3",
+      "path": "experiments/csts_tranche2_report_20261023_8a19b44053fa/runs/report/01M5P2993KBQZNHV6PCQZ1CJ0C/resolved.yaml"
+    },
+    "kind": "resolved_run"
+  },
+  "native_study_runs": 19,
+  "verified_study_measurements": 89,
+  "scores": {
+    "cosine": {
+      "spearman": 0.29789685423626017,
+      "mse_0_1": 0.18843718772464646
+    },
+    "ridge": {
+      "spearman": 0.5831186418305033,
+      "mse_0_1": 0.11381617576380805
+    },
+    "projection": {
+      "spearman": 0.6200447412115984,
+      "mse_0_1": 0.10673799980279798
+    },
+    "lora": {
+      "spearman": 0.7021695526490561,
+      "mse_0_1": 0.09848685975890356
+    },
+    "flan": {
+      "spearman": 0.5064167453312762,
+      "mse_0_1": 0.13235024811674767
+    },
+    "gpt_reference": {
+      "spearman": 0.8029168452132415,
+      "mse_0_1": 0.0642614503816794
+    },
+    "mean": {
+      "spearman": null,
+      "mse_0_1": 0.16810658256364044
+    }
+  },
+  "training": {
+    "projection": {
+      "completed_epoch": 24,
+      "selected_epoch": 19,
+      "stop_reason": "validation_patience",
+      "total_updates": 5256,
+      "new_fit_seconds": 38.381350161,
+      "new_validation_seconds": 4.506406092000816
+    },
+    "lora": {
+      "completed_epoch": 1,
+      "selected_epoch": 1,
+      "stop_reason": "resource_budget",
+      "total_updates": 219,
+      "new_fit_seconds": 1850.784314391,
+      "new_validation_seconds": 97.64621714499981
+    }
+  },
+  "paired_intervals": {
+    "draws": 2000,
+    "seed": 61021,
+    "groups": 1241,
+    "unit": "connected source-caption component",
+    "scope": "Test-sample uncertainty conditional on seed 7.",
+    "contrasts": {
+      "projection_minus_cosine": {
+        "spearman": {
+          "difference": 0.3221478869753382,
+          "ci95": [
+            0.290097012038745,
+            0.35410577742766
+          ]
+        },
+        "mse_0_1": {
+          "difference": -0.08169918792184848,
+          "ci95": [
+            -0.0889097299974396,
+            -0.07448186799336025
+          ]
+        }
+      },
+      "projection_minus_flan": {
+        "spearman": {
+          "difference": 0.11362799588032213,
+          "ci95": [
+            0.08616792153655732,
+            0.14209916511573503
+          ]
+        },
+        "mse_0_1": {
+          "difference": -0.02561224831394969,
+          "ci95": [
+            -0.03093476510486636,
+            -0.02030309744081676
+          ]
+        }
+      },
+      "ridge_minus_cosine": {
+        "spearman": {
+          "difference": 0.28522178759424316,
+          "ci95": [
+            0.25368935059062275,
+            0.3182265103104546
+          ]
+        },
+        "mse_0_1": {
+          "difference": -0.07462101196083841,
+          "ci95": [
+            -0.08194111954753425,
+            -0.06764261401098408
+          ]
+        }
+      },
+      "ridge_minus_flan": {
+        "spearman": {
+          "difference": 0.0767018964992271,
+          "ci95": [
+            0.05028488541045367,
+            0.10396985241625792
+          ]
+        },
+        "mse_0_1": {
+          "difference": -0.01853407235293962,
+          "ci95": [
+            -0.02368221159905441,
+            -0.013350592128663784
+          ]
+        }
+      },
+      "lora_minus_cosine": {
+        "spearman": {
+          "difference": 0.40427269841279595,
+          "ci95": [
+            0.3767822537564782,
+            0.43091289860491117
+          ]
+        },
+        "mse_0_1": {
+          "difference": -0.0899503279657429,
+          "ci95": [
+            -0.09626989414974112,
+            -0.0832864993038336
+          ]
+        }
+      },
+      "lora_minus_flan": {
+        "spearman": {
+          "difference": 0.1957528073177799,
+          "ci95": [
+            0.16397958471351956,
+            0.22751990635746117
+          ]
+        },
+        "mse_0_1": {
+          "difference": -0.03386338835784411,
+          "ci95": [
+            -0.039275596267120044,
+            -0.028185536316720848
+          ]
+        }
+      },
+      "lora_minus_projection": {
+        "spearman": {
+          "difference": 0.08212481143745776,
+          "ci95": [
+            0.06020384017853608,
+            0.10220355581061726
+          ]
+        },
+        "mse_0_1": {
+          "difference": -0.00825114004389442,
+          "ci95": [
+            -0.01186133474282403,
+            -0.004572676689819897
+          ]
+        }
+      }
+    }
+  },
+  "pilot": {
+    "name": "jep-csts-format-20261021",
+    "id": "8646910299736412654",
+    "zone": "asia-northeast3-a",
+    "status": "TERMINATED",
+    "last_start": "2026-10-23T19:51:35.163-07:00",
+    "last_stop": "2026-10-23T21:24:10.670-07:00"
+  },
+  "original": {
+    "name": "rico-source-l4-uswest4c",
+    "zone": "us-west4-c",
+    "status": "TERMINATED"
+  },
+  "new_scoped_nat_removed": true,
+  "persistent_disks_preserved": true,
+  "cloud_start_stop_interval_seconds": 5555.507,
+  "native_gpu_stage_seconds": 3046.7695748809997,
+  "monitor": {
+    "id": "6ad8733daea0819186fe74a2e7f1f93f",
+    "is_enabled": false,
+    "observed_at": "2026-10-24T04:24:24.158Z",
+    "updated_at": "2026-10-21T23:49:15.238974+00:00"
+  },
+  "new_vms_created": 0,
+  "new_teacher_calls": 0
+}

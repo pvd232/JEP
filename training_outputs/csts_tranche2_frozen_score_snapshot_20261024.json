@@ -1,0 +1,35 @@
+{
+  "status": "frozen_computation_complete",
+  "observed_at": "2026-10-24T03:23:24.360460+00:00",
+  "source_commit": "cd6d14accb1213d797305cd7c581224d4422164d",
+  "seed": 7,
+  "test_rows": 2620,
+  "test_source_components": 1241,
+  "validation_selected_frozen_scorer": "projection",
+  "scores": {
+    "mean": {
+      "spearman": null,
+      "mse_0_1": 0.16810658256364042,
+      "mse_1_5": 2.6897053210182467
+    },
+    "cosine": {
+      "spearman": 0.29789685423626017,
+      "mse_0_1": 0.18843718772464646,
+      "mse_1_5": 3.0149950035943434
+    },
+    "ridge": {
+      "spearman": 0.5831186418305033,
+      "mse_0_1": 0.11381617576380805,
+      "mse_1_5": 1.8210588122209288
+    },
+    "projection": {
+      "spearman": 0.6200447412115984,
+      "mse_0_1": 0.10673799980279798,
+      "mse_1_5": 1.7078079968447677
+    }
+  },
+  "checkpoint_selection": "Validation Spearman, frozen before test scoring.",
+  "scope": "One seed on an already examined benchmark. Paired uncertainty, final native collection, LoRA and shutdown remain pending.",
+  "full_report_pending": true,
+  "shutdown_confirmed": false
+}

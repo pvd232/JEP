@@ -1,0 +1,210 @@
+{
+  "status": "verified",
+  "source_commit": "cd6d14accb1213d797305cd7c581224d4422164d",
+  "runs": [
+    {
+      "name": "train_lora",
+      "local_reference": {
+        "sha256": "6aa6ad3367328f4504dbc475ae1e6b75d0b0b3fab6af41eebd0592d3134a228b",
+        "bytes": 1058,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "13962ed2ba4dc22cfec3816097962015d650fa9b09340b9d5eabc04801f22462",
+          "path": "experiments/csts_tranche2_cd6d14ac_9c5ad2d2_train_lora/runs/train_lora/01M5NZ2G9G2GT8RBBA6ZNA3GC3/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "cloud_reference": {
+        "sha256": "bb07ad602485d09d432ef6b6bba216685074391529c89b50826dc929806c0296",
+        "bytes": 1044,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "eda586ff93749c8089a46e4ab92f54385b2429aa598ab47438057df69d4dfb24",
+          "path": "experiments/csts_tranche2_cd6d14ac_9c5ad2d2_train_lora/runs/train_lora/01M5NZ2G9G2GT8RBBA6ZNA3GC3/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "measurements_verified": 3,
+      "promotion_seconds": 75.32708439599946
+    },
+    {
+      "name": "publish_test",
+      "local_reference": {
+        "sha256": "e5a2fe6b297bf55bfe9ef5b41b0acb09728a6b897dcf552ddb85046413c5ef42",
+        "bytes": 1066,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "7aea703280099818ba0e734b53feb16d81f9c77556f8e456545aeb7f79181a76",
+          "path": "experiments/csts_tranche2_cd6d14ac_9c5ad2d2_publish_test/runs/publish_test/01M5P1168HACMV2NXY9XAZTYPM/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "cloud_reference": {
+        "sha256": "2d1fb3fc1cb51c4f782c58bfec93ad96ec9bb3dffa7769116d9c8aeb11a13918",
+        "bytes": 1052,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "4baea41620f8e7f2af6c9ce33a711fa387616dfa6076e27f01bb1d5fea32161e",
+          "path": "experiments/csts_tranche2_cd6d14ac_9c5ad2d2_publish_test/runs/publish_test/01M5P1168HACMV2NXY9XAZTYPM/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "measurements_verified": 0,
+      "promotion_seconds": 46.77520483599983
+    },
+    {
+      "name": "predict_lora",
+      "local_reference": {
+        "sha256": "97c9f7abadb76534d0ddcc819ca46ea959a83e2c072c7e579cf642e52a2747a6",
+        "bytes": 1066,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "9c9998dc46df3cbb3e164d2e9766ec90c0d4c32d35be9ce64baa4125e6f5aef9",
+          "path": "experiments/csts_tranche2_cd6d14ac_9c5ad2d2_predict_lora/runs/predict_lora/01M5P11R6X7J3E31V9FH53K0PR/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "cloud_reference": {
+        "sha256": "a8585b4a5b0ba61651cfd5afd45f2d5f07053eb99edf585cce38e938ce25e10c",
+        "bytes": 1052,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "9023a804946ffc8a1d3bdd8206abdb177c81e9192fb2809f1319013ab5577aba",
+          "path": "experiments/csts_tranche2_cd6d14ac_9c5ad2d2_predict_lora/runs/predict_lora/01M5P11R6X7J3E31V9FH53K0PR/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "measurements_verified": 0,
+      "promotion_seconds": 149.16314361700006
+    },
+    {
+      "name": "test_lora",
+      "local_reference": {
+        "sha256": "c5236564f853bfcb28df17679aeb876c0e208299c2b60fad0b4f68bc29741035",
+        "bytes": 1054,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "13190f95649e3bc80e26ef5046d1862211d460ca794c65414069386a891c78d0",
+          "path": "experiments/csts_tranche2_cd6d14ac_9c5ad2d2_test_lora/runs/test_lora/01M5P19A34AV596B1C4041HHEE/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "cloud_reference": {
+        "sha256": "46fc83d1659837b28c3dc6c098d3819f4da26970b13d812d6de11b7f10aa3c77",
+        "bytes": 1040,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "27f5b68e1b35687dcf549d5f42b20af86d4c5ba3d1843fd6efb607b5e115ce82",
+          "path": "experiments/csts_tranche2_cd6d14ac_9c5ad2d2_test_lora/runs/test_lora/01M5P19A34AV596B1C4041HHEE/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "measurements_verified": 2,
+      "promotion_seconds": 199.02919486300016
+    }
+  ],
+  "measurements_verified": 5,
+  "summary_sha256": "30b9a46b74d56d5ea1b828a128117f62b341f2b1b96060b8660ebc1caa221e2d",
+  "exports": {
+    "lora_trace.json": {
+      "sha256": "1563cb70034c6cc9c8a8b0d1191f69775e145e0462eddd89a3dfbdb27bcddc55",
+      "producer": {
+        "sha256": "6aa6ad3367328f4504dbc475ae1e6b75d0b0b3fab6af41eebd0592d3134a228b",
+        "bytes": 1058,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "13962ed2ba4dc22cfec3816097962015d650fa9b09340b9d5eabc04801f22462",
+          "path": "experiments/csts_tranche2_cd6d14ac_9c5ad2d2_train_lora/runs/train_lora/01M5NZ2G9G2GT8RBBA6ZNA3GC3/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "stage": "train",
+      "artifact": "trace"
+    },
+    "lora_validation_predictions.json": {
+      "sha256": "7316e922cbe9833c85b641d3a1a3d496446f3285fff8f49528adb6760117a67a",
+      "producer": {
+        "sha256": "6aa6ad3367328f4504dbc475ae1e6b75d0b0b3fab6af41eebd0592d3134a228b",
+        "bytes": 1058,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "13962ed2ba4dc22cfec3816097962015d650fa9b09340b9d5eabc04801f22462",
+          "path": "experiments/csts_tranche2_cd6d14ac_9c5ad2d2_train_lora/runs/train_lora/01M5NZ2G9G2GT8RBBA6ZNA3GC3/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "stage": "train",
+      "artifact": "validation_predictions"
+    },
+    "lora_predictions.json": {
+      "sha256": "fabef2615ec28cd44d4a2e829a2014a0104d8e192de713fee7588d86c8bfc542",
+      "producer": {
+        "sha256": "c5236564f853bfcb28df17679aeb876c0e208299c2b60fad0b4f68bc29741035",
+        "bytes": 1054,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "13190f95649e3bc80e26ef5046d1862211d460ca794c65414069386a891c78d0",
+          "path": "experiments/csts_tranche2_cd6d14ac_9c5ad2d2_test_lora/runs/test_lora/01M5P19A34AV596B1C4041HHEE/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "stage": "test",
+      "artifact": "predictions"
+    },
+    "lora_evaluation_timing.json": {
+      "sha256": "779068a7a1e12c38e9f95579d74d468ec8aa15c8c21941842d91e9a3e52edcc7",
+      "producer": {
+        "sha256": "c5236564f853bfcb28df17679aeb876c0e208299c2b60fad0b4f68bc29741035",
+        "bytes": 1054,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "13190f95649e3bc80e26ef5046d1862211d460ca794c65414069386a891c78d0",
+          "path": "experiments/csts_tranche2_cd6d14ac_9c5ad2d2_test_lora/runs/test_lora/01M5P19A34AV596B1C4041HHEE/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "stage": "test",
+      "artifact": "timing"
+    }
+  }
+}

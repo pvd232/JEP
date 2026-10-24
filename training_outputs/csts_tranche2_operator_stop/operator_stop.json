@@ -1,0 +1,34 @@
+{
+  "requested_at": "2026-10-24T08:23:03.634827+00:00",
+  "reason": "User requested stop current run, test best validation checkpoint, then reviewed Tranche 3; VIPER asynchronous.",
+  "native_training_status": "operator_interrupted; preserve native failed attempt",
+  "worker_pid": 2119,
+  "parent_pid": 2000,
+  "source_commit": "5f842c8f7915685f7d020ee6f045734151363ff4",
+  "selected_epoch": 5,
+  "selected_validation_spearman": 0.776790887947513,
+  "last_completed_epoch": 7,
+  "files": {
+    "model.pt": {
+      "path": "/home/machina/jep-tranche2-control-20261023/continuation-20261024/user-stopped-selection/model.pt",
+      "sha256": "1be3cedbeacb494f46010d447564144a7f499d2dc8b174029107ff81651bbea3"
+    },
+    "validation_predictions.json": {
+      "path": "/home/machina/jep-tranche2-control-20261023/continuation-20261024/user-stopped-selection/validation_predictions.json",
+      "sha256": "c0976ff15f419799450cb1df42ed32b5ea09cccb070cd337e9f6a081fcb42eeb"
+    },
+    "validation_spearman.jsonl": {
+      "path": "/home/machina/jep-tranche2-control-20261023/continuation-20261024/user-stopped-selection/validation_spearman.jsonl",
+      "sha256": "48c0a95fdd3af03e13fd6b830f34b7f3a94545a6318ac66972fa0030513e5497"
+    },
+    "training_objective.jsonl": {
+      "path": "/home/machina/jep-tranche2-control-20261023/continuation-20261024/user-stopped-selection/training_objective.jsonl",
+      "sha256": "716bd183b106bbffc1ee7ca1e9887df2a3c3ff878844a2587ebd2212900a582e"
+    },
+    "parent_run_spec.yaml": {
+      "path": "/home/machina/jep-tranche2-control-20261023/continuation-20261024/user-stopped-selection/parent_run_spec.yaml",
+      "sha256": "a60c26406f4bd73e7b6a2c157639a7994d478e49c7d52f68dc14d46d99ee0edd"
+    }
+  },
+  "test_accessed_for_selection": false
+}

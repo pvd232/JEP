@@ -1,0 +1,165 @@
+"""Evaluate the validation-selected checkpoint preserved after the user's stop."""
+import fcntl
+import json
+import os
+import shutil
+import sys
+import time
+from pathlib import Path
+
+ROOT = Path("/home/machina/jep-csts-tranche2-20261023")
+CONTROL = Path("/home/machina/jep-tranche2-control-20261023/continuation-20261024")
+os.chdir(ROOT)
+sys.path[:0] = [str(ROOT), "/home/machina/jep-viper-source/src"]
+os.environ.update(
+    PYTHONPATH=str(ROOT) + ":/home/machina/jep-viper-source/src",
+    HF_HOME="/home/machina/jep-model-cache",
+    HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1",
+    OMP_NUM_THREADS="2", OPENBLAS_NUM_THREADS="2", MKL_NUM_THREADS="2",
+    TOKENIZERS_PARALLELISM="false", PYTHONUNBUFFERED="1",
+    TMPDIR="/home/machina/jep-worker-scratch",
+)
+
+from viper import api, execution
+from viper.authoring import experiment, input, plan, replicate, stage, variant
+from viper.metrics import FloatComparator, MetricDependency, measure
+from viper.metrics import max as maximize
+from viper.outputs import EvalOutputs, StageOutputs, output
+from viper.references import GitFileRef, ResolvedRunRef
+from viper.repository import read_source
+from viper.runtime import CPUComputeSpec, CUDAComputeSpec, LocalEnvSpec, observe_python_env
+from viper.storage import LocalStorageDestination, ViperCloudDestination, load_storage_settings
+from csts_pilot.background_storage import queue_publication
+from csts_pilot.baseline_models import ScoreConfig
+from csts_pilot.baseline_stages import capture_predictions, evaluate_baseline
+from csts_pilot.convergence import CheckpointConfig, promote_checkpoint, file_sha256, write_json, test_mse, test_spearman
+from csts_pilot.convergence_run import artifact_source, artifact_path, check_inputs
+from csts_pilot.diagnostics import summarize
+from jep_pilot.loaders import load_json, load_model
+
+def main():
+    directory = ROOT / "baseline_results/lora/operator_stop_epoch5_20261024"
+    directory.mkdir(exist_ok=True)
+    summary_path = directory / "summary.json"
+    if summary_path.exists():
+        raise RuntimeError("An evaluation exists; inspect it before any retry.")
+    with (ROOT / "baseline_results/run.lock").open("a+") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        assert isinstance(load_storage_settings(ROOT).destination, LocalStorageDestination)
+        source = read_source(ROOT)
+        assert source.commit == "5f842c8f7915685f7d020ee6f045734151363ff4"
+        trusted = frozenset({str(source.repository)})
+        settings = load_json(ROOT / "configs/csts-tranche-2-lora-continuation.json")
+        check_inputs(ROOT, settings)
+        receipt_path = CONTROL / "user-stopped-selection/selection.json"
+        receipt = load_json(receipt_path)
+        assert not receipt["test_accessed_for_selection"]
+        assert receipt["selected_epoch"] == 5
+        for item in receipt["files"].values():
+            assert file_sha256(Path(item["path"])) == item["sha256"]
+        model_path = Path(receipt["files"]["model.pt"]["path"])
+        saved = load_model(model_path)
+        assert saved["epoch"] == 5 and saved["kind"] == "lora"
+        validation = summarize(load_json(Path(receipt["files"]["validation_predictions.json"]["path"])))
+        assert abs(validation["spearman"] - receipt["selected_validation_spearman"]) < 1e-12
+        del saved
+        for name in ("model.pt", "validation_predictions.json", "selection.json"):
+            shutil.copyfile(receipt_path.parent / name, directory / ("operator_stop.json" if name == "selection.json" else name))
+        selection = dict(
+            status="checkpoints_frozen", test_scores_used_for_selection=False,
+            candidates={"lora":dict(sha256=receipt["files"]["model.pt"]["sha256"],
+                                   epoch=5, validation=validation)},
+            operator_stop=receipt,
+        )
+        selection_path = directory / "selection.json"
+        write_json(selection_path, selection)
+        selection_sha = file_sha256(selection_path)
+        summary = dict(status="running", source_commit=source.commit, runs=[],
+                       selected_epoch=5, validation=validation, operator_stop=receipt,
+                       selection_sha256=selection_sha, publication_status="queued_separately")
+        write_json(summary_path, summary)
+        environment = observe_python_env()
+        destination = ViperCloudDestination.model_validate(settings["publication_destination"])
+
+        def execute(name, configured, gpu=False):
+            trial = experiment(
+                experiment_id=f"csts_tranche2_stop_{source.commit[:8]}_20261024_{name}",
+                variants=(variant(name, stages=(configured,), estimator=next(iter(configured.outputs.values()))),),
+                replicates=(replicate(seed=7),),
+            )
+            env = LocalEnvSpec(
+                compute=CUDAComputeSpec(model="NVIDIA L4", count=1) if gpu else CPUComputeSpec(),
+                lockfile=GitFileRef(repository=source.repository, commit=source.commit, path="tranche2_requirements.txt"),
+                python_env=environment,
+            )
+            summary.update(current_stage=name, in_flight=trial.experiment_id)
+            write_json(summary_path, summary)
+            started = time.monotonic()
+            result = execution.run(plan(experiment=trial, source=source, env=env),
+                                   timeout_seconds=1800, trusted_source_repositories=trusted)
+            if result.status != "succeeded":
+                raise RuntimeError(f"{name} failed: {result.path}")
+            record = dict(name=name,status=result.status,path=str(result.path),
+                          reference=result.reference.model_dump(mode="json"),
+                          local_run_seconds=time.monotonic()-started)
+            summary["runs"].append(record)
+            summary["in_flight"] = None
+            write_json(summary_path, summary)
+            record["publication_queue"] = str(queue_publication(ROOT, result.reference, destination))
+            write_json(summary_path, summary)
+            print(json.dumps(dict(stage=name,status="succeeded",seconds=record["local_run_seconds"])),flush=True)
+            return record
+
+        checkpoint = execute("checkpoint", stage(
+            promote_checkpoint, stage_id="checkpoint",
+            config=CheckpointConfig(model_sha256=selection["candidates"]["lora"]["sha256"]),
+            inputs=(input("checkpoint",path=str((directory/"model.pt").relative_to(ROOT)),data_role="training"),
+                    input("operator_stop",path=str((directory/"operator_stop.json").relative_to(ROOT)),data_role="training")),
+            outputs=StageOutputs(model=output(path="model.pt",loader=load_model,data_role="training")),
+            reuse="never"))
+        parent = load_json(ROOT / "baseline_results/lora/initial/summary.json")
+        published = next(x for x in parent["runs"] if x["name"] == "publish_test")
+        api.verify_run(api.VerifyRunRequest(root=ROOT,path=Path(published["path"]),
+                                           trusted_source_repositories=trusted))
+        config = ScoreConfig(**settings["encoder"],kind="lora",
+                             model_sha256=selection["candidates"]["lora"]["sha256"],
+                             selection_sha256=selection_sha,
+                             test_sha256=settings["splits"]["test"]["sha256"])
+        inputs = (
+            input("model",source=artifact_source(checkpoint,"checkpoint","model")),
+            input("selection",path=str(selection_path.relative_to(ROOT)),data_role="training"),
+            input("test",source=artifact_source(published,"publish","test","eval")),
+            input("holdout",source=artifact_source(published,"publish","holdout","eval")),
+        )
+        snapshot = execute("predict",stage(
+            capture_predictions,stage_id="predict",config=config,inputs=inputs,
+            outputs=StageOutputs(predictions=output(path="predictions.json",loader=load_json,data_role="eval"),
+                                 timing=output(path="timing.json",loader=load_json,data_role="eval")),
+            reuse="never"),gpu=True)
+        predictions_path = artifact_path(snapshot,"predict","predictions","predictions.json")
+        scores = summarize(load_json(predictions_path))
+        summary.update(live_scores={"lora":scores},metric_verification="native_eval_pending")
+        write_json(summary_path,summary)
+        print(json.dumps(dict(TEST_SCORES=scores,selected_epoch=5)),flush=True)
+        dependencies=(MetricDependency(source="artifact",name="predictions",data_role="eval"),)
+        comparator=FloatComparator(mode="absolute",tolerance=1e-12)
+        metrics=(measure(test_mse,dependencies=dependencies,comparator=comparator),
+                 measure(test_spearman,dependencies=dependencies,comparator=comparator))
+        evaluated=execute("evaluate",stage(
+            evaluate_baseline,stage_id="test",eval_id="csts_tranche2_operator_stop",
+            config=config.model_copy(update={"device":"cpu"}),
+            inputs=inputs+(
+                input("snapshot_predictions",source=artifact_source(snapshot,"predict","predictions","eval")),
+                input("snapshot_timing",source=artifact_source(snapshot,"predict","timing","eval"))),
+            split_inputs=("holdout",),
+            outputs=EvalOutputs(predictions=output(path="predictions.json",loader=load_json,data_role="eval"),
+                                timing=output(path="timing.json",loader=load_json,data_role="eval")),
+            metrics=metrics,objective=maximize(metrics[-1]),reuse="never"))
+        shutil.copyfile(artifact_path(evaluated,"test","predictions","predictions.json"),directory/"test_predictions.json")
+        assert summarize(load_json(directory/"test_predictions.json")) == scores
+        summary.update(status="complete",current_stage=None,metric_verification="native_eval_passed")
+        write_json(summary_path,summary)
+        print(json.dumps(dict(status="complete",scores=scores,summary=str(summary_path))),flush=True)
+
+if __name__ == "__main__":
+    main()

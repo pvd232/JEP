@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "observed_at": "2026-10-24T03:25:20.107066+00:00",
+  "source_commit": "cd6d14accb1213d797305cd7c581224d4422164d",
+  "settings_sha256": "fc6cbc6e171ec380f5edfc2e3e5f1000b83d6e94cad727b6ad1847b55f4e2714",
+  "microbatch_pairs": 2,
+  "effective_batch_pairs": 32,
+  "model_load_seconds": 80.82291508000003,
+  "backward_seconds": [
+    1.9760716729999785,
+    0.508548061999818,
+    0.49721192900005917,
+    0.5225005620000047,
+    0.5191081220000342,
+    0.5079055510000217,
+    0.5113994020000519,
+    0.7948147790000348
+  ],
+  "steady_microbatch_seconds": 0.515253762000043,
+  "projected_training_epoch_seconds": 1798.2356293801502,
+  "projection_scope": "Training forward/backward estimate; excludes validation, checkpoint writes, optimizer work and native overhead.",
+  "peak_cuda_allocated_bytes": 15475660800,
+  "conservative_additional_optimizer_bytes": 368050176,
+  "device_memory_bytes": 23659151360,
+  "trainable_parameters": 30670848,
+  "optimizer_updates": 0,
+  "test_inputs_accessed": false,
+  "finite_adapter_gradients": true,
+  "frozen_base_gradients_absent": true
+}

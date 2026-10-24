@@ -1,0 +1,84 @@
+{
+  "status": "complete",
+  "config": {
+    "schema_version": 2,
+    "model_id": "Qwen/Qwen3-Embedding-8B",
+    "revision": "c90816d848505624c2434128dfc61132162a0ee9",
+    "max_length": 160,
+    "embedding_dimension": 4096,
+    "encode_batch_size": 4,
+    "device": "cpu",
+    "kind": "cosine",
+    "seed": 7,
+    "projection_dimension": 128,
+    "ridge_alphas": [
+      1e-05,
+      0.0001,
+      0.001,
+      0.01,
+      0.1,
+      1.0
+    ],
+    "learning_rate": 0.001,
+    "batch_size": 32,
+    "microbatch_size": 32,
+    "max_epochs": 48,
+    "start_epoch": 0,
+    "patience": 5,
+    "weight_decay": 0.01,
+    "schedule": "constant",
+    "warmup_fraction": 0.0,
+    "max_seconds": 1800.0,
+    "lora_rank": 32,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05
+  },
+  "candidates": [
+    {
+      "alpha": null,
+      "validation": {
+        "n": 1830,
+        "mse_0_1": 0.13039700607548735,
+        "mse_1_5": 2.0863520972077976,
+        "spearman": 0.3334018406178779,
+        "prediction_mean": 0.7709310019602541,
+        "target_mean": 0.5542349726775956,
+        "prediction_std": 0.0652941775562222,
+        "target_std": 0.30337777758989165,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 181,
+            "mean": 0.7543731190223062
+          },
+          "2.0": {
+            "n": 304,
+            "mean": 0.7425950683261219
+          },
+          "3.0": {
+            "n": 627,
+            "mean": 0.7599467646562311
+          },
+          "4.0": {
+            "n": 373,
+            "mean": 0.7830789141936213
+          },
+          "5.0": {
+            "n": 345,
+            "mean": 0.811415193737417
+          }
+        },
+        "condition_changes": {
+          "n": 721,
+          "correct": 441,
+          "ties": 0,
+          "accuracy_ties_half": 0.6116504854368932,
+          "difference_mse": 0.2744696109274098,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      }
+    }
+  ],
+  "selected_alpha": null,
+  "selection_split": "validation",
+  "elapsed_seconds": 0.8624807179999152
+}

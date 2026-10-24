@@ -1,0 +1,151 @@
+{
+  "status": "complete",
+  "config": {
+    "schema_version": 2,
+    "model_id": "Qwen/Qwen3-Embedding-8B",
+    "revision": "c90816d848505624c2434128dfc61132162a0ee9",
+    "max_length": 160,
+    "embedding_dimension": 4096,
+    "encode_batch_size": 4,
+    "device": "cuda",
+    "kind": "lora",
+    "seed": 7,
+    "projection_dimension": 128,
+    "ridge_alphas": [
+      1e-05,
+      0.0001,
+      0.001,
+      0.01,
+      0.1,
+      1.0
+    ],
+    "learning_rate": 2e-05,
+    "batch_size": 32,
+    "microbatch_size": 2,
+    "max_epochs": 24,
+    "start_epoch": 0,
+    "patience": 5,
+    "weight_decay": 0.01,
+    "schedule": "linear",
+    "warmup_fraction": 0.1,
+    "max_seconds": 2400.0,
+    "lora_rank": 32,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05
+  },
+  "selected": {
+    "epoch": 1,
+    "step": 219,
+    "sha256": "4c5120eb85f6bb2d092a5ac4f08ac462136bccdcc60598f06d82e2ae2706e573",
+    "validation": {
+      "n": 1830,
+      "mse_0_1": 0.05186571084475896,
+      "mse_1_5": 0.8298513735161434,
+      "spearman": 0.6667722886017582,
+      "prediction_mean": 0.5673495068535453,
+      "target_mean": 0.5542349726775956,
+      "prediction_std": 0.17813436333604302,
+      "target_std": 0.30337777758989165,
+      "mean_prediction_by_rating": {
+        "1.0": {
+          "n": 181,
+          "mean": 0.4141976037654429
+        },
+        "2.0": {
+          "n": 304,
+          "mean": 0.45091132971605186
+        },
+        "3.0": {
+          "n": 627,
+          "mean": 0.5072842396950228
+        },
+        "4.0": {
+          "n": 373,
+          "mean": 0.6440157828797604
+        },
+        "5.0": {
+          "n": 345,
+          "mean": 0.776572990503864
+        }
+      },
+      "condition_changes": {
+        "n": 721,
+        "correct": 615,
+        "ties": 0,
+        "accuracy_ties_half": 0.8529819694868238,
+        "difference_mse": 0.13121007787116734,
+        "unit": "Within-pair comparisons. These reuse captions and are dependent."
+      }
+    }
+  },
+  "epochs": [
+    {
+      "epoch": 1,
+      "step": 219,
+      "training_mse_0_1": 0.10014955046515069,
+      "validation": {
+        "n": 1830,
+        "mse_0_1": 0.05186571084475896,
+        "mse_1_5": 0.8298513735161434,
+        "spearman": 0.6667722886017582,
+        "prediction_mean": 0.5673495068535453,
+        "target_mean": 0.5542349726775956,
+        "prediction_std": 0.17813436333604302,
+        "target_std": 0.30337777758989165,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 181,
+            "mean": 0.4141976037654429
+          },
+          "2.0": {
+            "n": 304,
+            "mean": 0.45091132971605186
+          },
+          "3.0": {
+            "n": 627,
+            "mean": 0.5072842396950228
+          },
+          "4.0": {
+            "n": 373,
+            "mean": 0.6440157828797604
+          },
+          "5.0": {
+            "n": 345,
+            "mean": 0.776572990503864
+          }
+        },
+        "condition_changes": {
+          "n": 721,
+          "correct": 615,
+          "ties": 0,
+          "accuracy_ties_half": 0.8529819694868238,
+          "difference_mse": 0.13121007787116734,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "fit_seconds": 1850.784314391,
+      "validation_seconds": 97.64621714499981,
+      "learning_rates": [
+        8.326996197718633e-06
+      ],
+      "batch_order_sha256": "fda05d03b7afb8a22d0474c1eecd4859dd4d43cdddf58e5776580e7a7f2ff7e4",
+      "mean_preclip_gradient_norm": 0.08413880451084817,
+      "training_nonpadding_input_tokens": 531638,
+      "validation_nonpadding_input_tokens": 140064,
+      "epochs_without_improvement": 0,
+      "observed_epoch_seconds": 1949.121380485
+    }
+  ],
+  "actual_updates": 219,
+  "stop_reason": "resource_budget",
+  "initial_trainable_sha256": "4b73103d990fd3441c8b8ea0cbad43ed04049a46ca5846e718c14101c67c57aa",
+  "training_inputs": {
+    "training": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01",
+    "validation": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273"
+  },
+  "updates_per_epoch": 219,
+  "phase_elapsed_seconds": 1950.098916763,
+  "trainable_parameter_count": 30670848,
+  "peak_cuda_memory_bytes": 15850636800,
+  "continuation_parent_last_sha256": null
+}

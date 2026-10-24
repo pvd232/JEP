@@ -1,0 +1,681 @@
+{
+  "source_commit": "cd6d14accb1213d797305cd7c581224d4422164d",
+  "settings": {
+    "publication_destination": {
+      "kind": "viper_cloud",
+      "owner": "pvd232",
+      "workspace": "jep_csts_joint_20261021"
+    },
+    "gpu_budget_seconds": {
+      "frozen": 1800,
+      "lora": 3600
+    },
+    "cpu_stage_timeout_seconds": 1800,
+    "bootstrap_draws": 2000,
+    "bootstrap_seed": 61021,
+    "seed": 7,
+    "references": {
+      "flan": {
+        "path": "training_outputs/csts_continuation_mse_predictions.json",
+        "sha256": "da207ef895288fa202facf898fc9a4957a66f8f7e99b5483b2caeb5b58c2b462"
+      },
+      "gpt_reference": {
+        "path": "training_outputs/csts_sol61_max_predictions.json",
+        "sha256": "305d74025d64768cb0c2b8421fa8a1c79219d9774d5726f6e8c1e5b8a3c95eb5"
+      }
+    },
+    "encoder": {
+      "model_id": "Qwen/Qwen3-Embedding-8B",
+      "revision": "c90816d848505624c2434128dfc61132162a0ee9",
+      "embedding_dimension": 4096,
+      "max_length": 160,
+      "encode_batch_size": 4,
+      "device": "cuda"
+    },
+    "fits": {
+      "mean": {
+        "device": "cpu"
+      },
+      "cosine": {
+        "device": "cpu"
+      },
+      "ridge": {
+        "device": "cpu",
+        "ridge_alphas": [
+          1e-05,
+          0.0001,
+          0.001,
+          0.01,
+          0.1,
+          1.0
+        ]
+      },
+      "projection": {
+        "device": "cpu",
+        "seed": 7,
+        "projection_dimension": 128,
+        "learning_rate": 0.001,
+        "batch_size": 32,
+        "microbatch_size": 32,
+        "max_epochs": 48,
+        "patience": 5,
+        "weight_decay": 0.01,
+        "schedule": "constant",
+        "warmup_fraction": 0.0,
+        "max_seconds": 1800
+      },
+      "lora": {
+        "device": "cuda",
+        "seed": 7,
+        "learning_rate": 2e-05,
+        "batch_size": 32,
+        "microbatch_size": 2,
+        "max_epochs": 24,
+        "patience": 5,
+        "weight_decay": 0.01,
+        "schedule": "linear",
+        "warmup_fraction": 0.1,
+        "max_seconds": 2400,
+        "lora_rank": 32,
+        "lora_alpha": 32,
+        "lora_dropout": 0.05
+      }
+    },
+    "splits": {
+      "training": {
+        "path": "csts_data/train.json",
+        "rows": 6980,
+        "groups": 2674,
+        "sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01"
+      },
+      "validation": {
+        "path": "csts_data/dev.json",
+        "rows": 1830,
+        "groups": 688,
+        "sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273"
+      },
+      "test": {
+        "path": "csts_data/evaluation.json",
+        "rows": 2620,
+        "groups": 1241,
+        "sha256": "2c8b6f2b62740c85c376eacd02ef222c2bfacdfe8df5f772a4dd7d52b6d38f1e"
+      }
+    }
+  },
+  "phase": "frozen",
+  "name": "initial",
+  "attempt": "1bffccb7",
+  "runs": [
+    {
+      "name": "train_validation_embeddings",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_1bffccb7_train_validation_embeddings/runs/train_validation_embeddings/01M5NXNEBEXXCRPHTQDAEH8JW0/resolved.yaml",
+      "reference": {
+        "sha256": "88ee3de2707c01627f04a091575c329aa60b68f6010bf00dbde848de6afb53d1",
+        "bytes": 1126,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "83f2f32174b566050c0941f9c1752f6e6cec196cace896a444a10bd3e924b683",
+          "path": "experiments/csts_tranche2_cd6d14ac_1bffccb7_train_validation_embeddings/runs/train_validation_embeddings/01M5NXNEBEXXCRPHTQDAEH8JW0/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "local_run_seconds": 507.825692946,
+      "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/d8ee6f2e47d7f29f5cb5f21c3711855fb48edb647ac381d6601cd00b4d428d0d.json"
+    },
+    {
+      "name": "train_mean",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_1bffccb7_train_mean/runs/train_mean/01M5NY4Y9JF2GN909333EQYGZH/resolved.yaml",
+      "reference": {
+        "sha256": "6fd7c878309f0ca461d10c299946c5a72b7915e44d01df0cab9465a3f5ac6c1b",
+        "bytes": 1058,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "d3a178d8d4ee2e99e17a1be33c98093e4f4a39b3d4a6b1dd3e0fc0e420dd9350",
+          "path": "experiments/csts_tranche2_cd6d14ac_1bffccb7_train_mean/runs/train_mean/01M5NY4Y9JF2GN909333EQYGZH/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "local_run_seconds": 37.29511942399995,
+      "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/df7340c40e1c9b92b8fa9aa1b5fb1d098dcc2a036b111373892b1893c2d51122.json"
+    },
+    {
+      "name": "train_cosine",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_1bffccb7_train_cosine/runs/train_cosine/01M5NY62QBVNAGBR420CC2873A/resolved.yaml",
+      "reference": {
+        "sha256": "c0b99c727cd035e0ee3350a464bf3e9d2ad1a6a02a83413625ee68d5f49fcf4a",
+        "bytes": 1066,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "01352d0cd2dd82ce78fde5120467f3036abdc2ad7e6f48bd26dac031ba609e13",
+          "path": "experiments/csts_tranche2_cd6d14ac_1bffccb7_train_cosine/runs/train_cosine/01M5NY62QBVNAGBR420CC2873A/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "local_run_seconds": 33.867634339000006,
+      "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/c5e2e15c1837543b1ace0a3faea6255829c2c934f17c291d3a20d9414cc062d6.json"
+    },
+    {
+      "name": "train_ridge",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_1bffccb7_train_ridge/runs/train_ridge/01M5NY73T35S4R4CPRFQA3JV02/resolved.yaml",
+      "reference": {
+        "sha256": "53de4fe7999f467999894b1d7a9da1216fecd773415f51b0218a21eab7c39e7e",
+        "bytes": 1062,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "fd43209b8981e9bcf2232dc29e3cce4aa933ac4c2472a03eef7c77727321a36f",
+          "path": "experiments/csts_tranche2_cd6d14ac_1bffccb7_train_ridge/runs/train_ridge/01M5NY73T35S4R4CPRFQA3JV02/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "local_run_seconds": 82.49323926900001,
+      "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/c3969dd491db00abf785f6433bfae532ddd7dce4b95d72484592da439b5ada79.json"
+    },
+    {
+      "name": "train_projection",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_1bffccb7_train_projection/runs/train_projection/01M5NY9MCBKJ0GKYENWRNRP6V0/resolved.yaml",
+      "reference": {
+        "sha256": "0e59b577c6bb041120889a3fa89db364a9ae0946195f4a454cb64199eae7b03d",
+        "bytes": 1082,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "2590c348784df2f3c505ce8ea97f344ef95d281b456ff29e0a62421624b60963",
+          "path": "experiments/csts_tranche2_cd6d14ac_1bffccb7_train_projection/runs/train_projection/01M5NY9MCBKJ0GKYENWRNRP6V0/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "local_run_seconds": 78.48174656399988,
+      "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/7eeb53fefcd42cae86a385e089a0b4efce2e8f1625a2f21f551d93dae89d04c9.json"
+    },
+    {
+      "name": "publish_test",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_1bffccb7_publish_test/runs/publish_test/01M5NYC13BA22VDKZ2ZTD0H340/resolved.yaml",
+      "reference": {
+        "sha256": "cc83fb0102715db43d1a4d969f3a735b8b5412cd1ea404e0be951d6cd6fa9700",
+        "bytes": 1066,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "15f6b592f42cbcae569eb9b3d06927117fc18c0d6b26a8a9888e960fc4bca588",
+          "path": "experiments/csts_tranche2_cd6d14ac_1bffccb7_publish_test/runs/publish_test/01M5NYC13BA22VDKZ2ZTD0H340/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "local_run_seconds": 16.379283274000045,
+      "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/3a59688e46df89d4b95aafa3bb632dee85580f77fe98ae1bbaa93d4c12d0cfac.json"
+    },
+    {
+      "name": "test_embeddings",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_1bffccb7_test_embeddings/runs/test_embeddings/01M5NYCH3KR386RAF1W7KCT0DH/resolved.yaml",
+      "reference": {
+        "sha256": "3d6c8e3f58587279d373c08af6251bf2767b9a9ad9d83329016af54a174e3580",
+        "bytes": 1078,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "6609403be03fd5358cc06544d5cc3f7a0bf321ce644c6491af1dbae2209cd969",
+          "path": "experiments/csts_tranche2_cd6d14ac_1bffccb7_test_embeddings/runs/test_embeddings/01M5NYCH3KR386RAF1W7KCT0DH/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "local_run_seconds": 238.01380944200014,
+      "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/91c8be2a8dbb5dea86823e1202ce1abf3e3d56a1c46f61d4d604ce3c3024a7b8.json"
+    },
+    {
+      "name": "predict_mean",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_1bffccb7_predict_mean/runs/predict_mean/01M5NYKSHWA2GWVW3ZGGD8RPMY/resolved.yaml",
+      "reference": {
+        "sha256": "6c34e6efa60d4ebd0a1ce21fc0b663f682b2411025dac0e21e822a55f26dbb69",
+        "bytes": 1066,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "89874a6a6b1c8fcebd9ee1fa91b970374676c717886f993e69955329f277b178",
+          "path": "experiments/csts_tranche2_cd6d14ac_1bffccb7_predict_mean/runs/predict_mean/01M5NYKSHWA2GWVW3ZGGD8RPMY/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "local_run_seconds": 33.7919297200001,
+      "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/7d15455b26bd3bce232d0ca19231e265baf5c188c7dbaad481e16070139c7a86.json"
+    },
+    {
+      "name": "test_mean",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_1bffccb7_test_mean/runs/test_mean/01M5NYMTJDQG1QACSQ60QDQVSR/resolved.yaml",
+      "reference": {
+        "sha256": "2ad3735ffd5e7ac38ed83810669e2b717d9daf832f9e63cb8f930d3ae5fc5915",
+        "bytes": 1054,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "237591a917b0b6cab7baa67800965ccd7888924eb6601f1ace369731f4a020b0",
+          "path": "experiments/csts_tranche2_cd6d14ac_1bffccb7_test_mean/runs/test_mean/01M5NYMTJDQG1QACSQ60QDQVSR/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "local_run_seconds": 43.74306076800008,
+      "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/30e0b4f1ddca0590527532ffc185e7b44e225fd741539a79721e90abdabbaf61.json"
+    },
+    {
+      "name": "predict_cosine",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_1bffccb7_predict_cosine/runs/predict_cosine/01M5NYP5A7AHV0Y133GKTJ63GX/resolved.yaml",
+      "reference": {
+        "sha256": "aaaedefe2a9d0953808e12bc537c6d1ab6e1c09d7bc9b2b3dc9026d8b7bd928a",
+        "bytes": 1074,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "2e02aee7eef0905d530b6f4e613136fd2bc748bfa8e05c718b0c770661aec432",
+          "path": "experiments/csts_tranche2_cd6d14ac_1bffccb7_predict_cosine/runs/predict_cosine/01M5NYP5A7AHV0Y133GKTJ63GX/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "local_run_seconds": 27.729745186000173,
+      "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/41df5c56fe39bbc7a06567394deb51cc7a08b6a30ab1189a7da754dca05afe9b.json"
+    },
+    {
+      "name": "test_cosine",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_1bffccb7_test_cosine/runs/test_cosine/01M5NYQ0D4NCRGVV5QDSQGBK2K/resolved.yaml",
+      "reference": {
+        "sha256": "b745c686c108d77f0c0130480326570699cadd8b1648b554ae2bfbd4f89ece98",
+        "bytes": 1062,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "f0de392a05e1f58bdf1c0f8b84c339858007d59868098415653ed4920b859d63",
+          "path": "experiments/csts_tranche2_cd6d14ac_1bffccb7_test_cosine/runs/test_cosine/01M5NYQ0D4NCRGVV5QDSQGBK2K/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "local_run_seconds": 59.54350317500007,
+      "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/b228856395767b8b6b7f746e5528de11a0c0f15ee55c0ee92bd249e6f54e19f6.json"
+    },
+    {
+      "name": "predict_ridge",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_1bffccb7_predict_ridge/runs/predict_ridge/01M5NYRTJZ9TFFH3ATG12XCKBS/resolved.yaml",
+      "reference": {
+        "sha256": "6f79117f9c95f8770b591425b49badedf8e7aae932875841b69bfc2840acaeec",
+        "bytes": 1070,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "079434f60ff76d367ed57046ccbdd03bb0891463da7bc8739cd64a94260ffa18",
+          "path": "experiments/csts_tranche2_cd6d14ac_1bffccb7_predict_ridge/runs/predict_ridge/01M5NYRTJZ9TFFH3ATG12XCKBS/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "local_run_seconds": 28.573327274999883,
+      "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/f03d4972579aaefbdb08bf742a6b597f93e91b586dcdd0d6241590efd39c92dc.json"
+    },
+    {
+      "name": "test_ridge",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_1bffccb7_test_ridge/runs/test_ridge/01M5NYSPG7ENZPNYF2TRYE2PXH/resolved.yaml",
+      "reference": {
+        "sha256": "b7f63f9b02153cd53ed24ace862af0ba66fabb1c9edea69523b9acff69a78364",
+        "bytes": 1058,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "eefef600d018a75bc5f1bff0e871ed9b58de75518a716323a75ec0dc1151afc8",
+          "path": "experiments/csts_tranche2_cd6d14ac_1bffccb7_test_ridge/runs/test_ridge/01M5NYSPG7ENZPNYF2TRYE2PXH/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "local_run_seconds": 58.74274870199997,
+      "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/ab126247e447338f5dc0f54568db8da4e220470766dfd1361e882bb3370258c0.json"
+    },
+    {
+      "name": "predict_projection",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_1bffccb7_predict_projection/runs/predict_projection/01M5NYVFWT9XR2G2BMZ0DKWXQM/resolved.yaml",
+      "reference": {
+        "sha256": "3807f98996158544bb262ebea9ac5207b0cf32f66d2c06dd70f888a78cdc0860",
+        "bytes": 1090,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "e77de2c73f4ee1149c08794f414fe1ec3d4149db0e03c0ef6b1ffd9b04e5ad04",
+          "path": "experiments/csts_tranche2_cd6d14ac_1bffccb7_predict_projection/runs/predict_projection/01M5NYVFWT9XR2G2BMZ0DKWXQM/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "local_run_seconds": 28.085203704999913,
+      "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/50e1bf7f1a57cc8e8d441167be23e673ca43618876d85f71d67891ee5d2b60cc.json"
+    },
+    {
+      "name": "test_projection",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_1bffccb7_test_projection/runs/test_projection/01M5NYWBAW71233E51E2RKYKV8/resolved.yaml",
+      "reference": {
+        "sha256": "e197888c5653caf4b0058fcab924b3bb4d5519ca8c48811ed8f74994e48770ed",
+        "bytes": 1078,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "a21e805aabe9c8082994b0990b8c6f85f6021f324ae9f0759e47e64037bc9847",
+          "path": "experiments/csts_tranche2_cd6d14ac_1bffccb7_test_projection/runs/test_projection/01M5NYWBAW71233E51E2RKYKV8/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "local_run_seconds": 58.63501462499994,
+      "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/c19edb0c083b0bebf50c87b6062c42a16677f15c6b68ee631b54e4b2299f9026.json"
+    }
+  ],
+  "gpu_stage_seconds": 745.8360977179999,
+  "in_flight": null,
+  "parent_summary_sha256": null,
+  "frozen_prerequisite_sha256": null,
+  "recovery": false,
+  "failed_parent_records": [],
+  "status": "complete",
+  "current_stage": null,
+  "selection_sha256": "96d11526a7f6f1281f477aa48f29497dec6b60c1d02daea7ddc47cbb351cd27e",
+  "provisional_winner": "projection",
+  "test": [
+    {
+      "candidate": "mean",
+      "checkpoint_sha256": "707204056c7c018f5aa0a72b3b6b6cad9aa7e068771f217fa12e12eb9eddd33b",
+      "run": {
+        "name": "test_mean",
+        "status": "succeeded",
+        "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_1bffccb7_test_mean/runs/test_mean/01M5NYMTJDQG1QACSQ60QDQVSR/resolved.yaml",
+        "reference": {
+          "sha256": "2ad3735ffd5e7ac38ed83810669e2b717d9daf832f9e63cb8f930d3ae5fc5915",
+          "bytes": 1054,
+          "stored_at": {
+            "kind": "local",
+            "workspace": "/home/machina/jep-csts-tranche2-20261023",
+            "store": ".viper/store",
+            "store_id": "2d4879a006d16034ff3c985f9117f460",
+            "commit": "237591a917b0b6cab7baa67800965ccd7888924eb6601f1ace369731f4a020b0",
+            "path": "experiments/csts_tranche2_cd6d14ac_1bffccb7_test_mean/runs/test_mean/01M5NYMTJDQG1QACSQ60QDQVSR/resolved.yaml"
+          },
+          "kind": "resolved_run"
+        },
+        "local_run_seconds": 43.74306076800008,
+        "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/30e0b4f1ddca0590527532ffc185e7b44e225fd741539a79721e90abdabbaf61.json"
+      }
+    },
+    {
+      "candidate": "cosine",
+      "checkpoint_sha256": "d2f3f4af932fdeaa52c0bf9dfbfe8f5137021696f562d05d40f9c59b2ba85f48",
+      "run": {
+        "name": "test_cosine",
+        "status": "succeeded",
+        "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_1bffccb7_test_cosine/runs/test_cosine/01M5NYQ0D4NCRGVV5QDSQGBK2K/resolved.yaml",
+        "reference": {
+          "sha256": "b745c686c108d77f0c0130480326570699cadd8b1648b554ae2bfbd4f89ece98",
+          "bytes": 1062,
+          "stored_at": {
+            "kind": "local",
+            "workspace": "/home/machina/jep-csts-tranche2-20261023",
+            "store": ".viper/store",
+            "store_id": "2d4879a006d16034ff3c985f9117f460",
+            "commit": "f0de392a05e1f58bdf1c0f8b84c339858007d59868098415653ed4920b859d63",
+            "path": "experiments/csts_tranche2_cd6d14ac_1bffccb7_test_cosine/runs/test_cosine/01M5NYQ0D4NCRGVV5QDSQGBK2K/resolved.yaml"
+          },
+          "kind": "resolved_run"
+        },
+        "local_run_seconds": 59.54350317500007,
+        "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/b228856395767b8b6b7f746e5528de11a0c0f15ee55c0ee92bd249e6f54e19f6.json"
+      }
+    },
+    {
+      "candidate": "ridge",
+      "checkpoint_sha256": "1d655f1d43cc179f272911d89b42e404677bf3dfa77f541abd6c5257191e685d",
+      "run": {
+        "name": "test_ridge",
+        "status": "succeeded",
+        "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_1bffccb7_test_ridge/runs/test_ridge/01M5NYSPG7ENZPNYF2TRYE2PXH/resolved.yaml",
+        "reference": {
+          "sha256": "b7f63f9b02153cd53ed24ace862af0ba66fabb1c9edea69523b9acff69a78364",
+          "bytes": 1058,
+          "stored_at": {
+            "kind": "local",
+            "workspace": "/home/machina/jep-csts-tranche2-20261023",
+            "store": ".viper/store",
+            "store_id": "2d4879a006d16034ff3c985f9117f460",
+            "commit": "eefef600d018a75bc5f1bff0e871ed9b58de75518a716323a75ec0dc1151afc8",
+            "path": "experiments/csts_tranche2_cd6d14ac_1bffccb7_test_ridge/runs/test_ridge/01M5NYSPG7ENZPNYF2TRYE2PXH/resolved.yaml"
+          },
+          "kind": "resolved_run"
+        },
+        "local_run_seconds": 58.74274870199997,
+        "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/ab126247e447338f5dc0f54568db8da4e220470766dfd1361e882bb3370258c0.json"
+      }
+    },
+    {
+      "candidate": "projection",
+      "checkpoint_sha256": "125a90e7f586e0098552ccae0f394593a160916cd6dafdb73e5d8259e280d144",
+      "run": {
+        "name": "test_projection",
+        "status": "succeeded",
+        "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_1bffccb7_test_projection/runs/test_projection/01M5NYWBAW71233E51E2RKYKV8/resolved.yaml",
+        "reference": {
+          "sha256": "e197888c5653caf4b0058fcab924b3bb4d5519ca8c48811ed8f74994e48770ed",
+          "bytes": 1078,
+          "stored_at": {
+            "kind": "local",
+            "workspace": "/home/machina/jep-csts-tranche2-20261023",
+            "store": ".viper/store",
+            "store_id": "2d4879a006d16034ff3c985f9117f460",
+            "commit": "a21e805aabe9c8082994b0990b8c6f85f6021f324ae9f0759e47e64037bc9847",
+            "path": "experiments/csts_tranche2_cd6d14ac_1bffccb7_test_projection/runs/test_projection/01M5NYWBAW71233E51E2RKYKV8/resolved.yaml"
+          },
+          "kind": "resolved_run"
+        },
+        "local_run_seconds": 58.63501462499994,
+        "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/c19edb0c083b0bebf50c87b6062c42a16677f15c6b68ee631b54e4b2299f9026.json"
+      }
+    }
+  ],
+  "live_scores": {
+    "mean": {
+      "n": 2620,
+      "mse_0_1": 0.16810658256364042,
+      "mse_1_5": 2.6897053210182467,
+      "spearman": null,
+      "prediction_mean": 0.5536174785100287,
+      "target_mean": 0.5886450381679389,
+      "prediction_std": 1.1102230246251565e-16,
+      "target_std": 0.40850906064376585,
+      "mean_prediction_by_rating": {
+        "1.0": {
+          "n": 633,
+          "mean": 0.5536174785100286
+        },
+        "2.0": {
+          "n": 233,
+          "mean": 0.5536174785100288
+        },
+        "3.0": {
+          "n": 392,
+          "mean": 0.5536174785100287
+        },
+        "4.0": {
+          "n": 296,
+          "mean": 0.5536174785100287
+        },
+        "5.0": {
+          "n": 1066,
+          "mean": 0.5536174785100286
+        }
+      },
+      "condition_changes": {
+        "n": 1044,
+        "correct": 0,
+        "ties": 1044,
+        "accuracy_ties_half": 0.5,
+        "difference_mse": 0.5374161877394636,
+        "unit": "Within-pair comparisons. These reuse captions and are dependent."
+      }
+    },
+    "cosine": {
+      "n": 2620,
+      "mse_0_1": 0.18843718772464646,
+      "mse_1_5": 3.0149950035943434,
+      "spearman": 0.29789685423626017,
+      "prediction_mean": 0.7710897503918364,
+      "target_mean": 0.5886450381679389,
+      "prediction_std": 0.0640543467511281,
+      "target_std": 0.40850906064376585,
+      "mean_prediction_by_rating": {
+        "1.0": {
+          "n": 633,
+          "mean": 0.7468761554073196
+        },
+        "2.0": {
+          "n": 233,
+          "mean": 0.7486821957923824
+        },
+        "3.0": {
+          "n": 392,
+          "mean": 0.763157053261387
+        },
+        "4.0": {
+          "n": 296,
+          "mean": 0.7718799263238907
+        },
+        "5.0": {
+          "n": 1066,
+          "mean": 0.7930633817671835
+        }
+      },
+      "condition_changes": {
+        "n": 1044,
+        "correct": 693,
+        "ties": 0,
+        "accuracy_ties_half": 0.6637931034482759,
+        "difference_mse": 0.5154282855004004,
+        "unit": "Within-pair comparisons. These reuse captions and are dependent."
+      }
+    },
+    "ridge": {
+      "n": 2620,
+      "mse_0_1": 0.11381617576380805,
+      "mse_1_5": 1.8210588122209288,
+      "spearman": 0.5831186418305033,
+      "prediction_mean": 0.5633059034084544,
+      "target_mean": 0.5886450381679389,
+      "prediction_std": 0.2074506951000348,
+      "target_std": 0.40850906064376585,
+      "mean_prediction_by_rating": {
+        "1.0": {
+          "n": 633,
+          "mean": 0.39323810763136025
+        },
+        "2.0": {
+          "n": 233,
+          "mean": 0.509556989196461
+        },
+        "3.0": {
+          "n": 392,
+          "mean": 0.5124241863585208
+        },
+        "4.0": {
+          "n": 296,
+          "mean": 0.5671869745759468
+        },
+        "5.0": {
+          "n": 1066,
+          "mean": 0.6936748037426864
+        }
+      },
+      "condition_changes": {
+        "n": 1044,
+        "correct": 884,
+        "ties": 0,
+        "accuracy_ties_half": 0.8467432950191571,
+        "difference_mse": 0.30991533679239514,
+        "unit": "Within-pair comparisons. These reuse captions and are dependent."
+      }
+    },
+    "projection": {
+      "n": 2620,
+      "mse_0_1": 0.10673799980279798,
+      "mse_1_5": 1.7078079968447677,
+      "spearman": 0.6200447412115984,
+      "prediction_mean": 0.5767119915987088,
+      "target_mean": 0.5886450381679389,
+      "prediction_std": 0.23504529455139153,
+      "target_std": 0.40850906064376585,
+      "mean_prediction_by_rating": {
+        "1.0": {
+          "n": 633,
+          "mean": 0.3654751376657913
+        },
+        "2.0": {
+          "n": 233,
+          "mean": 0.5180218255850826
+        },
+        "3.0": {
+          "n": 392,
+          "mean": 0.5303259653286362
+        },
+        "4.0": {
+          "n": 296,
+          "mean": 0.5999004996910289
+        },
+        "5.0": {
+          "n": 1066,
+          "mean": 0.725593099594256
+        }
+      },
+      "condition_changes": {
+        "n": 1044,
+        "correct": 906,
+        "ties": 0,
+        "accuracy_ties_half": 0.867816091954023,
+        "difference_mse": 0.27798031727355066,
+        "unit": "Within-pair comparisons. These reuse captions and are dependent."
+      }
+    }
+  },
+  "publication_status": "queued_separately"
+}
