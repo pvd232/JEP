@@ -13,6 +13,13 @@ import torch
 from pydantic import ConfigDict, Field
 from transformers import AutoTokenizer
 from viper.config import BuildConfig
+from viper.randomness import capture_main_process_rng
+from viper.resume import (
+    DataLoaderConfiguration,
+    DataLoaderResumeState,
+    ResumeState,
+    save_resume_state,
+)
 from viper.stages import StageContext, build, eval, train
 
 from csts_pilot.answers import answer_id, parse_response, review_accepts
@@ -397,16 +404,34 @@ def fit_evidence(context: StageContext[EvidenceConfig]) -> None:
             break
     synchronize(config.device)
     save_evidence_checkpoint(context.outputs["last_model"], model, config, epoch, step)
-    torch.save(
-        {
-            "optimizer": optimizer.state_dict(),
-            "generator": generator.get_state(),
-            "epoch": epoch,
-            "step": step,
-            "python_rng": random.getstate(),
-            "torch_rng": torch.get_rng_state(),
-        },
-        context.outputs["optimizer"],
+    save_resume_state(
+        context.outputs["resume_state"],
+        ResumeState(
+            optimizer_state={
+                "optimizer": optimizer.state_dict(),
+                "config": config.model_dump(),
+                "torch_rng": torch.get_rng_state(),
+                "cuda_rng": torch.cuda.get_rng_state_all()
+                if config.device == "cuda"
+                else [],
+            },
+            main_process_rng=capture_main_process_rng(
+                context.numpy_generators, capture_legacy_global=True
+            ),
+            dataloader=DataLoaderResumeState(
+                configuration=DataLoaderConfiguration(workers=0),
+                state_dict={
+                    "completed_epochs": epoch,
+                    "step": step,
+                    "generator_state": generator.get_state(),
+                    "terminal_model_sha256": file_sha256(context.outputs["last_model"]),
+                    "early_stopping": {
+                        "best_score": stopping.best_score,
+                        "stale_epochs": stopping.stale_epochs,
+                    },
+                },
+            ),
+        ),
     )
     write_json(
         context.outputs["trace"],

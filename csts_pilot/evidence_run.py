@@ -13,7 +13,7 @@ from viper import api, execution
 from viper.authoring import experiment, input, plan, replicate, stage, variant
 from viper.metrics import FloatComparator, MetricDependency, measure
 from viper.metrics import max as maximize
-from viper.outputs import EvalOutputs, StageOutputs, TrainOutputs, output
+from viper.outputs import EvalOutputs, OutputDraft, StageOutputs, TrainOutputs, output
 from viper.references import GitFileRef, ResolvedRunRef
 from viper.repository import read_source, resolve_root
 from viper.runtime import (
@@ -51,10 +51,23 @@ from csts_pilot.evidence_controls import (
     fit_evidence,
     prepare_evidence,
 )
-from jep_pilot.loaders import load_json, load_model
+from jep_pilot.loaders import load_json, load_model, load_state
 from jep_pilot.stages import publish_evaluation_inputs
 
 ARMS = ("ratings", "evidence", "shuffled")
+
+
+def evidence_training_outputs() -> TrainOutputs[OutputDraft]:
+    """Validate the native training contract before starting any study stages."""
+    return TrainOutputs(
+        model=output(path="model.pt", loader=load_model, data_role="training"),
+        resume_state=output(path="resume.pt", loader=load_state, data_role="training"),
+        last_model=output(path="model.pt", loader=load_model, data_role="training"),
+        trace=output(path="trace.json", loader=load_json, data_role="training"),
+        validation_predictions=output(
+            path="predictions.json", loader=load_json, data_role="training"
+        ),
+    )
 
 
 def validate_matched_traces(traces: dict[str, dict[str, Any]]) -> None:
@@ -117,6 +130,7 @@ def run_study(
 ) -> None:
     """Seal each local stage and queue publication without waiting for cloud storage."""
     validate_settings(settings)
+    train_outputs = evidence_training_outputs()
     if not isinstance(load_storage_settings(root).destination, LocalStorageDestination):
         raise TypeError(
             "Use local native sealing and the asynchronous publication queue."
@@ -350,23 +364,7 @@ def run_study(
                         source=artifact_source(parent, parent_stage, parent_artifact),
                     ),
                 ),
-                outputs=TrainOutputs(
-                    model=output(
-                        path="model.pt", loader=load_model, data_role="training"
-                    ),
-                    last_model=output(
-                        path="model.pt", loader=load_model, data_role="training"
-                    ),
-                    optimizer=output(
-                        path="optimizer.pt", loader=load_model, data_role="training"
-                    ),
-                    trace=output(
-                        path="trace.json", loader=load_json, data_role="training"
-                    ),
-                    validation_predictions=output(
-                        path="predictions.json", loader=load_json, data_role="training"
-                    ),
-                ),
+                outputs=train_outputs,
                 metrics=metrics,
                 objective=maximize(metrics[-1]),
                 reuse="never",

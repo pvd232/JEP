@@ -12,7 +12,7 @@ from transformers import T5Config, T5ForConditionalGeneration
 from csts_pilot import evidence_controls as controls
 from csts_pilot.answers import answer_id
 from csts_pilot.convergence import file_sha256, write_json
-from csts_pilot.evidence_run import validate_matched_traces
+from csts_pilot.evidence_run import evidence_training_outputs, validate_matched_traces
 
 MODEL_CLASS = controls.AnswerEncoder
 
@@ -209,10 +209,10 @@ def test_phase_exposure_terminal_weights_and_continuation_patience(
         "predictions",
         lambda model, rows, *a: ([dict(r, prediction=r["target"]) for r in rows], None),
     )
-    outputs = {
-        k: tmp_path / f"{k}.out"
-        for k in ("model", "last_model", "optimizer", "trace", "validation_predictions")
-    }
+    declared = evidence_training_outputs()
+    outputs = {name: tmp_path / name / draft.path for name, draft in declared.items()}
+    for path in outputs.values():
+        path.parent.mkdir(parents=True)
     values = {
         f"{k}_sha256": file_sha256(v) for k, v in inputs.items() if k != "initial_model"
     }
@@ -232,13 +232,30 @@ def test_phase_exposure_terminal_weights_and_continuation_patience(
         for k in ("training_objective", "validation_mse", "validation_spearman")
     }
     controls.fit_evidence(
-        SimpleNamespace(config=c, inputs=inputs, outputs=outputs, metrics=metrics)
+        SimpleNamespace(
+            config=c,
+            inputs=inputs,
+            outputs=outputs,
+            metrics=metrics,
+            numpy_generators={},
+        )
     )
     trace = json.loads(outputs["trace"].read_text())
     assert trace["completed_epoch"] == completed and trace["updates"] == completed
     assert trace["selected"]["epoch"] == 1
     assert torch.load(outputs["last_model"], weights_only=True)["epoch"] == completed
     assert torch.load(outputs["model"], weights_only=True)["epoch"] == 1
+    # Exercise the real runner declarations and every native artifact loader.
+    loaded = {name: draft.loader(outputs[name]) for name, draft in declared.items()}
+    resume = loaded["resume_state"]
+    assert resume.dataloader.state_dict["completed_epochs"] == completed
+    assert resume.dataloader.state_dict["step"] == completed
+    assert resume.dataloader.state_dict["terminal_model_sha256"] == file_sha256(
+        outputs["last_model"]
+    )
+    assert resume.optimizer_state["optimizer"]["param_groups"]
+    assert resume.optimizer_state["config"]["arm"] == arm
+    assert resume.optimizer_state["config"]["phase"] == phase
     assert len({r["batch_order_sha256"] for r in trace["epochs"]}) <= 2
 
 

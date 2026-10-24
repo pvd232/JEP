@@ -1,22 +1,22 @@
 {
-  "reviewed_at": "2026-10-24T08:43:34.240701+00:00",
+  "reviewed_at": "2026-10-24T14:33:25.624456+00:00",
   "status": "passed",
   "review": "Strict manual review plus full repository tests, Pyrefly, Ruff and real CUDA gradients.",
   "files": {
     ".gitignore": "2fe9dba490e9573116cd3a0612369b5b09eb85fe694734a106b83a8afe1b8e43",
-    "csts_pilot/evidence_controls.py": "bca35e84fef164aab041bf12c0b6230325abf87105b6444ec485dc8a529a9697",
-    "csts_pilot/evidence_run.py": "648a007351d2375bf125eba953c9f91e9ace06357f51a3861db60e3e38c88449",
+    "csts_pilot/evidence_controls.py": "991e75b497198d63d74ed5bb1651206710016bed19072eae6d27275d15ccb1b9",
+    "csts_pilot/evidence_run.py": "6246e95b71e24e84dc7d4250ddc9010882db407ffaff95fa04c2ed61ec4c04c6",
     "csts_pilot/evidence_report.py": "9d6a8ad6cd004301d52976f77a37d9578382780524570663577df8b20cfb0bcd",
-    "tests/test_csts_evidence_controls.py": "7378c65c063a622390d20f916dfb6dd8e73a6a8b48191c5c741e770e60c956bc",
+    "tests/test_csts_evidence_controls.py": "340af60c96638e0aac4bc859016dbe8eaf6875f99078297e44ef18c2027cf9f7",
     "configs/csts-tranche-3.json": "977077155192e2b55d4effd0f68b8ba4ccf04908f2e3b36f3e1040ca2d73d855",
     "plans/csts-tranche-3.md": "72abf77b057d7403a0cf520c2d406bdb36365ea2c5399d99122721528359eafd"
   },
   "checks": {
     "ruff_final": "All checks passed!\n",
     "pyrefly_final": " WARN PYTHONPATH environment variable is set to `/home/machina/jep-csts-tranche3-20261024:/home/machina/jep-viper-source/src`. Checks in other environments may not include these paths.\n INFO 0 errors\nNo `pyrefly.toml` found \u2014 using preset `basic`.\nRun `pyrefly init` to continue setting up Pyrefly.\nDocs: https://pyrefly.org/en/docs/installation/\n",
-    "pytest_final": "........................................................................ [ 58%]\n...................................................                      [100%]\n123 passed in 13.07s\n"
+    "pytest_final": "........................................................................ [ 58%]\n...................................................                      [100%]\n123 passed in 13.56s\n"
   },
-  "format_check": "4 files already formatted\n",
+  "format_check": "1 file reformatted, 3 files left unchanged\n",
   "preflight": {
     "preparation": {
       "cache_records": 17334,
@@ -48,6 +48,19 @@
     "Training-only effectively changed evidence with common coverage mask",
     "Correct terminal artifact filename across phase handoff",
     "All candidate identities frozen before test access",
-    "Existing native asynchronous publication queue retained"
-  ]
+    "Existing native asynchronous publication queue retained",
+    "Required native TrainOutputs.resume_state contract; all six arm/phase tests now instantiate the runner outputs and load every emitted artifact"
+  ],
+  "native_contract_repair": {
+    "previous_source_commit": "2f0c0515e809a66802eefcc110abf61995353bd7",
+    "previous_attempt": "93f8ee82",
+    "previous_completed_stages": [
+      "prepare",
+      "initialize"
+    ],
+    "completed_training_epochs": 0,
+    "test_access": false,
+    "failure": "TrainOutputs omitted required resume_state",
+    "repair": "Native ResumeState with optimizer, config, RNG, dataloader/permutation, early stopping and terminal-model hash; contract constructed before native stages"
+  }
 }
