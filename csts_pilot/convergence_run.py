@@ -138,6 +138,7 @@ def evaluation_stage(
     published: dict[str, Any],
     settings: dict[str, Any],
     selection_sha256: str,
+    selection_path: str = "convergence_results/selection.json",
 ) -> Any:
     """Bind native scoring to a canonical model and the frozen test inputs."""
     dependencies = (
@@ -164,7 +165,7 @@ def evaluation_stage(
             ),
             input(
                 "selection",
-                path="convergence_results/selection.json",
+                path=selection_path,
                 data_role="training",
             ),
             input(
@@ -231,6 +232,15 @@ def verify_matched_arms(traces: dict[str, dict[str, Any]]) -> None:
         stopping = ValidationPatience(
             trace["config"].get("patience"), trace["config"].get("min_delta", 0.0)
         )
+        start_epoch = trace["config"].get("start_epoch", 0)
+        if start_epoch:
+            if trace["config"].get("schedule") != "constant":
+                raise ValueError(
+                    "Continuation requires its declared constant schedule."
+                )
+            stopping.best_score = trace["continuation"]["historical_best"][
+                "validation"
+            ]["spearman"]
         expected_stop = cap
         for epoch, record in enumerate(epochs, 1):
             if (
@@ -238,6 +248,8 @@ def verify_matched_arms(traces: dict[str, dict[str, Any]]) -> None:
                 or record["step"] != epoch * trace["updates_per_epoch"]
             ):
                 raise ValueError("The epoch trace has inconsistent update counters.")
+            if epoch <= start_epoch:
+                continue
             exhausted = stopping.observe(record["validation"]["spearman"])
             if exhausted and epoch >= trace["config"]["prefix_epochs"]:
                 expected_stop = epoch

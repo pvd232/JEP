@@ -100,7 +100,10 @@ def metrics(rows: list[dict[str, Any]], field: str = "prediction") -> dict[str, 
 
 
 def paired_intervals(
-    candidates: dict[str, list[dict[str, Any]]], draws: int = 2000, seed: int = 61021
+    candidates: dict[str, list[dict[str, Any]]],
+    draws: int = 2000,
+    seed: int = 61021,
+    contrasts: dict[str, tuple[str, str]] | None = None,
 ) -> dict[str, Any]:
     """Reuse each component bootstrap sample across all four frozen candidates."""
     names = list(candidates)
@@ -121,11 +124,15 @@ def paired_intervals(
     predictions = {
         name: np.array([r["prediction"] for r in candidates[name]]) for name in names
     }
-    contrasts = {
-        "pearson_full_minus_mse_full": ("pearson_full", "mse_full"),
-        "mse_full_minus_prefix": ("mse_full", "mse_prefix"),
-        "pearson_full_minus_prefix": ("pearson_full", "pearson_prefix"),
-    }
+    contrasts = (
+        contrasts
+        if contrasts is not None
+        else {
+            "pearson_full_minus_mse_full": ("pearson_full", "mse_full"),
+            "mse_full_minus_prefix": ("mse_full", "mse_prefix"),
+            "pearson_full_minus_prefix": ("pearson_full", "pearson_prefix"),
+        }
+    )
     samples: dict[str, list[list[float]]] = {key: [] for key in contrasts}
     rng = np.random.default_rng(seed)
     for _ in range(draws):

@@ -118,6 +118,7 @@ def test_rating_losses_reach_encoder_and_projection(monkeypatch, objective):
 
 def exercise_training(tmp_path, monkeypatch, arm, curve, **settings):
     """Run the actual CPU training loop with a controlled validation curve."""
+    parent = settings.pop("parent", None)
     monkeypatch.setattr(
         "csts_pilot.joint.T5ForConditionalGeneration.from_pretrained",
         lambda *args, **kwargs: tiny_backbone(),
@@ -147,12 +148,12 @@ def exercise_training(tmp_path, monkeypatch, arm, curve, **settings):
         lambda *args: pytest.fail("Rating-only training called the decoder."),
     )
     directory = tmp_path / arm
-    directory.mkdir()
+    directory.mkdir(parents=True)
     training = [{"target": (i % 3) / 2} for i in range(9)]
     for name in ("training", "validation"):
         (directory / f"{name}.json").write_text(json.dumps(training))
     initial_path = tmp_path / "initial.pt"
-    if not initial_path.exists():
+    if parent is None and not initial_path.exists():
         convergence.initialize(
             SimpleNamespace(
                 config=convergence.InitializationConfig(projection_dimension=8),
@@ -192,8 +193,126 @@ def exercise_training(tmp_path, monkeypatch, arm, curve, **settings):
             lambda: SimpleNamespace(record=lambda *args, **kwargs: None)
         ),
     )
+    if parent is not None:
+        _parent_trace, parent_paths = parent
+        context.inputs.update(
+            initial_model=parent_paths["last_model"],
+            parent_resume=parent_paths["resume_state"],
+            parent_trace=parent_paths["trace"],
+            incumbent_model=parent_paths["model"],
+            incumbent_validation_predictions=parent_paths["validation_predictions"],
+            incumbent_prefix_model=parent_paths["prefix_model"],
+            incumbent_prefix_validation_predictions=parent_paths[
+                "prefix_validation_predictions"
+            ],
+        )
     convergence.fit(context)
     return json.loads(outputs["trace"].read_text()), outputs
+
+
+def test_continuation_restores_moments_rng_orders_and_new_constant_rates(
+    tmp_path, monkeypatch
+):
+    """A continuation starts after terminal weights and retains a stronger incumbent."""
+    import hashlib
+
+    parent, paths = exercise_training(
+        tmp_path / "parent",
+        monkeypatch,
+        "mse",
+        [0.1, 0.3, 0.8, 0.7],
+        patience=None,
+    )
+    original = {name: path.read_bytes() for name, path in paths.items()}
+    trace, continued = exercise_training(
+        tmp_path / "continued",
+        monkeypatch,
+        "mse",
+        [0.7] * 6,
+        parent=(parent, paths),
+        start_epoch=3,
+        max_epochs=10,
+        prefix_epochs=1,
+        schedule="constant",
+        warmup_fraction=0.0,
+        encoder_learning_rate=3e-6,
+        projection_learning_rate=1e-4,
+    )
+    assert len(trace["epochs"]) == 8
+    assert trace["stop_reason"] == "validation_patience"
+    assert trace["actual_updates"] == 24
+    assert trace["selected"]["full"]["epoch"] == 2
+    assert continued["model"].read_bytes() == original["model"]
+    assert load_model(continued["last_model"])["epoch"] == 8
+    assert trace["continuation"]["rng_restored_and_verified"] is True
+    for epoch in trace["epochs"][3:]:
+        assert epoch["learning_rates"] == [3e-6, 1e-4]
+    saved = load_state(paths["resume_state"])
+    generator = torch.Generator().set_state(
+        saved.dataloader.state_dict["generator_state"]
+    )
+    expected = hashlib.sha256(
+        torch.randperm(9, generator=generator).numpy().tobytes()
+    ).hexdigest()
+    assert trace["epochs"][3]["batch_order_sha256"] == expected
+    final = load_state(continued["resume_state"])
+    assert all(
+        float(s["step"]) == 24
+        for s in final.optimizer_state["optimizer"]["state"].values()
+    )
+    assert all(path.read_bytes() == original[name] for name, path in paths.items())
+
+
+def test_continuation_can_improve_and_freeze_a_new_checkpoint(tmp_path, monkeypatch):
+    """The new stage can replace its incumbent using validation alone."""
+    parent, paths = exercise_training(
+        tmp_path / "parent",
+        monkeypatch,
+        "pearson",
+        [0.1, 0.3, 0.8, 0.7],
+        patience=None,
+    )
+    trace, continued = exercise_training(
+        tmp_path / "continued",
+        monkeypatch,
+        "pearson",
+        [0.7, 0.85, 0.9, 0.89],
+        parent=(parent, paths),
+        start_epoch=3,
+        max_epochs=6,
+        prefix_epochs=1,
+        schedule="constant",
+        warmup_fraction=0.0,
+        encoder_learning_rate=3e-6,
+        projection_learning_rate=1e-4,
+    )
+    assert trace["selected"]["full"]["epoch"] == 5
+    assert load_model(continued["model"])["epoch"] == 5
+    assert trace["epochs"][-1]["epochs_without_improvement"] == 1
+
+
+def test_continuation_rejects_misaligned_epoch_state(tmp_path, monkeypatch):
+    """Reject a resume request whose epoch differs from the frozen parent."""
+    parent, paths = exercise_training(
+        tmp_path / "parent",
+        monkeypatch,
+        "mse",
+        [0.1, 0.3, 0.8, 0.7],
+        patience=None,
+    )
+    with pytest.raises(ValueError, match="completed epoch disagree"):
+        exercise_training(
+            tmp_path / "continued",
+            monkeypatch,
+            "mse",
+            [0.7],
+            parent=(parent, paths),
+            start_epoch=4,
+            max_epochs=10,
+            prefix_epochs=1,
+            schedule="constant",
+            warmup_fraction=0.0,
+        )
 
 
 def test_patience_five_stops_after_five_checks_and_keeps_best_checkpoint(

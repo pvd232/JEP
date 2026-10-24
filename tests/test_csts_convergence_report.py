@@ -134,3 +134,45 @@ def test_report_describes_patience_as_validation_stopping(tmp_path, monkeypatch)
     convergence_report.build_report(inputs, output)
     markdown = (output / "csts_tranche1_report.md").read_text()
     assert "training-loss stationarity remains unresolved" in markdown
+
+
+def test_continuation_report_compares_original_full_winners(tmp_path, monkeypatch):
+    """The continuation contrasts use original full checkpoints and paired IDs."""
+    from csts_pilot import continuation_report
+
+    inputs = report_fixture(tmp_path)
+    summary = json.loads((inputs / "summary.json").read_text())
+    selection = json.loads((inputs / "selection.json").read_text())
+    selection["candidates"] = {
+        k: v for k, v in selection["candidates"].items() if k.endswith("_full")
+    }
+    raw = json.dumps(selection).encode()
+    (inputs / "selection.json").write_bytes(raw)
+    summary["selection_sha256"] = hashlib.sha256(raw).hexdigest()
+    summary["settings"]["parents"] = {}
+    for arm in ("mse", "pearson"):
+        predictions = inputs / f"{arm}_full_predictions.json"
+        (inputs / f"{arm}_predictions.json").write_bytes(predictions.read_bytes())
+        summary["settings"]["parents"][arm] = {
+            "baseline_predictions": str(predictions.relative_to(tmp_path)),
+            "baseline_checkpoint": selection["candidates"][f"{arm}_full"],
+        }
+        path = inputs / f"{arm}_trace.json"
+        trace = json.loads(path.read_text())
+        trace["continuation"] = {"start_epoch": 1, "restored_step": 3}
+        trace["stop_reason"] = "epoch_budget"
+        path.write_text(json.dumps(trace))
+    (inputs / "summary.json").write_text(json.dumps(summary))
+    monkeypatch.setattr(
+        continuation_report,
+        "render_curves",
+        lambda _traces, path: path.write_bytes(b"plot"),
+    )
+    report = continuation_report.build_report(tmp_path, inputs, tmp_path / "report")
+    assert (
+        report["paired_intervals"]["contrasts"]["mse_continued_minus_original"][
+            "spearman"
+        ]["difference"]
+        == 0
+    )
+    assert report["compute"]["mse"]["additional_updates"] == 6

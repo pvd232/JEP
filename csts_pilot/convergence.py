@@ -13,14 +13,19 @@ from typing import Any, Literal
 import numpy as np
 import torch
 from pydantic import Field, model_validator
-from transformers import AutoTokenizer, get_linear_schedule_with_warmup
+from transformers import (
+    AutoTokenizer,
+    get_constant_schedule,
+    get_linear_schedule_with_warmup,
+)
 from viper.config import BuildConfig, EvalConfig, MetricConfig
 from viper.metrics import MetricContext, metric
-from viper.randomness import capture_main_process_rng
+from viper.randomness import capture_main_process_rng, restore_main_process_rng
 from viper.resume import (
     DataLoaderConfiguration,
     DataLoaderResumeState,
     ResumeState,
+    load_resume_state,
     save_resume_state,
 )
 from viper.stages import StageContext, build, eval, train
@@ -40,12 +45,24 @@ class ConvergenceConfig(CstsConfig):
     prefix_epochs: int = Field(default=8, ge=1)
     patience: int | None = Field(default=5, ge=1)
     min_delta: float = Field(default=0.0, ge=0, allow_inf_nan=False)
+    start_epoch: int = Field(default=0, ge=0)
+    schedule: Literal["linear", "constant"] = "linear"
     max_seconds: float = Field(default=1800, gt=0)
 
     @model_validator(mode="after")
     def validate_windows(self) -> "ConvergenceConfig":
         if self.prefix_epochs > self.max_epochs:
             raise ValueError("The prefix window must fit within the full epoch budget.")
+        if self.start_epoch >= self.max_epochs:
+            raise ValueError("Continuation must have at least one additional epoch.")
+        if self.start_epoch and (
+            self.schedule != "constant"
+            or self.warmup_fraction != 0
+            or self.prefix_epochs > self.start_epoch
+        ):
+            raise ValueError(
+                "Continuation requires constant rates, zero warmup and a completed prefix."
+            )
         return self
 
 
@@ -170,6 +187,102 @@ def training_objective(_context: MetricContext[MetricConfig], value: float) -> f
     return value
 
 
+def restore_continuation(
+    context: StageContext[ConvergenceConfig],
+    model: AnswerEncoder,
+    optimizer: torch.optim.Optimizer,
+    permutation_rng: torch.Generator,
+    updates_per_epoch: int,
+) -> dict[str, Any]:
+    """Restore terminal training state while retaining the historical best outputs."""
+    config = context.config
+    parent = load_json(context.inputs["parent_trace"])
+    saved_model = load_model(context.inputs["initial_model"])
+    resume = load_resume_state(context.inputs["parent_resume"])
+    start = config.start_epoch
+    expected_step = start * updates_per_epoch
+    if (
+        parent["status"] != "complete"
+        or len(parent["epochs"]) != start
+        or saved_model["epoch"] != start
+        or resume.dataloader.state_dict["completed_epochs"] != start
+        or resume.dataloader.state_dict["step"] != expected_step
+        or parent["actual_updates"] != expected_step
+    ):
+        raise ValueError("Parent weights, optimizer and completed epoch disagree.")
+    changed_settings = {
+        "max_epochs",
+        "encoder_learning_rate",
+        "projection_learning_rate",
+        "warmup_fraction",
+        "patience",
+        "min_delta",
+        "start_epoch",
+        "schedule",
+        "max_seconds",
+    }
+    current = config.model_dump()
+    for key, value in saved_model["config"].items():
+        if key not in changed_settings and current.get(key) != value:
+            raise ValueError(f"Continuation changed the parent's {key}.")
+    for window, name, predictions_name in (
+        ("full", "model", "validation_predictions"),
+        ("prefix", "prefix_model", "prefix_validation_predictions"),
+    ):
+        if name not in context.outputs:
+            continue
+        source = context.inputs[f"incumbent_{name}"]
+        if file_sha256(source) != parent["selected"][window]["sha256"]:
+            raise ValueError("The historical selected checkpoint identity differs.")
+        shutil.copyfile(source, context.outputs[name])
+        shutil.copyfile(
+            context.inputs[f"incumbent_{predictions_name}"],
+            context.outputs[predictions_name],
+        )
+    optimizer_state = resume.optimizer_state["optimizer"]
+    if not isinstance(optimizer_state, dict):
+        raise ValueError("The parent AdamW state is absent.")
+    optimizer.load_state_dict(optimizer_state)
+    optimizer_steps = [
+        float(state["step"]) for state in optimizer.state.values() if "step" in state
+    ]
+    if not optimizer_steps or any(step != expected_step for step in optimizer_steps):
+        raise ValueError("Restored AdamW moments have inconsistent step counts.")
+    # LambdaLR reads initial_lr from restored groups, so replace both fields.
+    for group, rate in zip(
+        optimizer.param_groups,
+        (
+            config.encoder_learning_rate,
+            config.projection_learning_rate,
+        ),
+        strict=True,
+    ):
+        group["lr"] = group["initial_lr"] = rate
+    generator_state = resume.dataloader.state_dict["generator_state"]
+    if not isinstance(generator_state, torch.Tensor):
+        raise ValueError("The parent permutation generator state is absent.")
+    permutation_rng.set_state(generator_state)
+    restore_main_process_rng(resume.main_process_rng, context.numpy_generators)
+    restored = capture_main_process_rng(
+        context.numpy_generators, capture_legacy_global=True
+    )
+    if restored != resume.main_process_rng:
+        raise ValueError("Main-process random state differs after restoration.")
+    parent["continuation"] = {
+        "start_epoch": start,
+        "restored_step": expected_step,
+        "last_model_sha256": file_sha256(context.inputs["initial_model"]),
+        "resume_state_sha256": file_sha256(context.inputs["parent_resume"]),
+        "parent_trace_sha256": file_sha256(context.inputs["parent_trace"]),
+        "rng_restored_and_verified": True,
+        "historical_best": dict(parent["selected"]["full"]),
+        "schedule": "constant",
+        "learning_rates": [g["lr"] for g in optimizer.param_groups],
+        "patience_counter_reset": True,
+    }
+    return parent
+
+
 @train(config=ConvergenceConfig)
 def fit(context: StageContext[ConvergenceConfig]) -> None:
     """Train one rating arm and retain the best prefix and full checkpoints."""
@@ -204,8 +317,10 @@ def fit(context: StageContext[ConvergenceConfig]) -> None:
     updates_per_epoch = math.ceil(len(training) / config.batch_size)
     total_updates = config.max_epochs * updates_per_epoch
     warmup_updates = math.ceil(config.warmup_fraction * total_updates)
-    scheduler = get_linear_schedule_with_warmup(
-        optimizer, warmup_updates, total_updates
+    scheduler = (
+        get_constant_schedule(optimizer)
+        if config.schedule == "constant"
+        else get_linear_schedule_with_warmup(optimizer, warmup_updates, total_updates)
     )
     permutation_rng = torch.Generator().manual_seed(config.seed + 100)
     initial_predictions, _ = predictions(model, validation, validation_tokens, config)
@@ -228,14 +343,33 @@ def fit(context: StageContext[ConvergenceConfig]) -> None:
     order = torch.empty(0, dtype=torch.long)
     best_full = best_prefix = -math.inf
     stopping = ValidationPatience(config.patience, config.min_delta)
+    parent_elapsed = 0.0
+    if config.start_epoch:
+        parent = restore_continuation(
+            context, model, optimizer, permutation_rng, updates_per_epoch
+        )
+        parent_elapsed = parent["elapsed_seconds"]
+        trace.update(
+            epochs=parent["epochs"],
+            selected=parent["selected"],
+            continuation=parent["continuation"],
+            initial_model_sha256=parent["initial_model_sha256"],
+            initial_rng=parent["initial_rng"],
+            initial_validation=parent["initial_validation"],
+        )
+        best_full = parent["selected"]["full"]["validation"]["spearman"]
+        best_prefix = parent["selected"]["prefix"]["validation"]["spearman"]
+        stopping.best_score = best_full
+        step, epoch = config.start_epoch * updates_per_epoch, config.start_epoch
+        scheduler = get_constant_schedule(optimizer)
     trace["stop_reason"] = "epoch_budget"
     try:
-        for epoch in range(1, config.max_epochs + 1):
+        for epoch in range(config.start_epoch + 1, config.max_epochs + 1):
             model.train()
             order = torch.randperm(len(training), generator=permutation_rng)
             order_digest = hashlib.sha256(order.numpy().tobytes()).hexdigest()
             device_order = order.to(config.device)
-            totals = torch.zeros(2, device=config.device)
+            totals = torch.zeros(3, device=config.device)
             constant_target_batches = torch.zeros(
                 (), device=config.device, dtype=torch.int64
             )
@@ -258,12 +392,14 @@ def fit(context: StageContext[ConvergenceConfig]) -> None:
                 if not torch.isfinite(loss):
                     raise FloatingPointError("The rating objective became nonfinite.")
                 loss.backward()
-                torch.nn.utils.clip_grad_norm_(
+                gradient_norm = torch.nn.utils.clip_grad_norm_(
                     model.parameters(), 1.0, error_if_nonfinite=True
                 )
                 optimizer.step()
                 scheduler.step()
-                totals += torch.stack((loss.detach(), mse.detach())) * len(indices)
+                totals += torch.stack(
+                    (loss.detach(), mse.detach(), gradient_norm.detach())
+                ) * len(indices)
                 constant_target_batches += (
                     targets[indices].max().eq(targets[indices].min())
                 )
@@ -281,13 +417,16 @@ def fit(context: StageContext[ConvergenceConfig]) -> None:
             if rho is None or not math.isfinite(rho):
                 raise FloatingPointError("Validation Spearman became undefined.")
             patience_exhausted = stopping.observe(rho)
-            objective_value, mse_value = (totals / len(training)).cpu().tolist()
+            objective_value, mse_value, gradient_value = (
+                (totals / len(training)).cpu().tolist()
+            )
             record = {
                 "epoch": epoch,
                 "step": step,
                 "batch_order_sha256": order_digest,
                 "training_objective": objective_value,
                 "training_mse_0_1": mse_value,
+                "mean_preclip_gradient_norm": gradient_value,
                 "constant_target_batches": int(constant_target_batches),
                 "validation": diagnostic,
                 "fit_seconds": fit_seconds,
@@ -375,7 +514,10 @@ def fit(context: StageContext[ConvergenceConfig]) -> None:
             ),
         )
         synchronize(config.device)
-        trace["elapsed_seconds"] = time.monotonic() - started
+        trace["continuation_elapsed_seconds"] = time.monotonic() - started
+        trace["elapsed_seconds"] = (
+            parent_elapsed + trace["continuation_elapsed_seconds"]
+        )
         trace["actual_updates"] = step
         trace["peak_cuda_memory_bytes"] = (
             torch.cuda.max_memory_allocated() if config.device == "cuda" else 0

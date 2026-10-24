@@ -1,0 +1,230 @@
+{
+  "publication_destination": {
+    "kind": "viper_cloud",
+    "owner": "pvd232",
+    "workspace": "jep_csts_joint_20261021"
+  },
+  "gpu_budget_seconds": 1800,
+  "bootstrap_draws": 2000,
+  "bootstrap_seed": 61021,
+  "training": {
+    "model_id": "google/flan-t5-small",
+    "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+    "seed": 7,
+    "condition": true,
+    "projection_dimension": 128,
+    "encoder_learning_rate": 3e-06,
+    "projection_learning_rate": 0.0001,
+    "batch_size": 32,
+    "max_epochs": 48,
+    "prefix_epochs": 8,
+    "patience": 5,
+    "min_delta": 0.0,
+    "warmup_fraction": 0.0,
+    "weight_decay": 0.01,
+    "max_length": 160,
+    "device": "cuda",
+    "start_epoch": 24,
+    "schedule": "constant"
+  },
+  "splits": {
+    "training": {
+      "path": "csts_data/train.json",
+      "rows": 6980,
+      "groups": 2674,
+      "sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01"
+    },
+    "validation": {
+      "path": "csts_data/dev.json",
+      "rows": 1830,
+      "groups": 688,
+      "sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273"
+    },
+    "test": {
+      "path": "csts_data/evaluation.json",
+      "rows": 2620,
+      "groups": 1241,
+      "sha256": "2c8b6f2b62740c85c376eacd02ef222c2bfacdfe8df5f772a4dd7d52b6d38f1e"
+    }
+  },
+  "parents": {
+    "mse": {
+      "training_run": {
+        "name": "train_mse",
+        "path": "/home/machina/jep-csts-tranche1-20261023/experiments/csts_tranche1_e2545bb_79085977_train_mse/runs/train_mse/01M5NEWQBZA5V3ZDMRZP6DQTTV/resolved.yaml",
+        "status": "succeeded",
+        "reference": {
+          "sha256": "2b983035ce304237582b9e3e07a8924b8fd3d0fef738f68d9d5174ca2c58382a",
+          "bytes": 1038,
+          "stored_at": {
+            "kind": "gcs",
+            "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+            "prefix": "viper",
+            "owner": "pvd232",
+            "workspace": "jep_csts_joint_20261021",
+            "revision": "0edf7756949970267ad4040f1c05571fc8380883b9572359b0c70811e6f7961d",
+            "path": "experiments/csts_tranche1_e2545bb_79085977_train_mse/runs/train_mse/01M5NEWQBZA5V3ZDMRZP6DQTTV/resolved.yaml"
+          },
+          "kind": "resolved_run"
+        }
+      },
+      "baseline_evaluation": {
+        "name": "test_mse_full",
+        "path": "/home/machina/jep-csts-tranche1-20261023/experiments/csts_tranche1_182cfc3_79085977_test_mse_full/runs/test_mse_full/01M5NGR4STNF2AV7V4ET2DCYGQ/resolved.yaml",
+        "status": "succeeded",
+        "reference": {
+          "sha256": "e3190fde8e28eaaf7efd625f3de90c91a74e0b42f17cfc40a7be3560ac8c3483",
+          "bytes": 1054,
+          "stored_at": {
+            "kind": "gcs",
+            "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+            "prefix": "viper",
+            "owner": "pvd232",
+            "workspace": "jep_csts_joint_20261021",
+            "revision": "e40bf13101629ed7b2562f3e5aaf2ec1048d639e025b5561646ad9ea316549da",
+            "path": "experiments/csts_tranche1_182cfc3_79085977_test_mse_full/runs/test_mse_full/01M5NGR4STNF2AV7V4ET2DCYGQ/resolved.yaml"
+          },
+          "kind": "resolved_run"
+        }
+      },
+      "baseline_checkpoint": {
+        "epoch": 23,
+        "sha256": "91013c57d01021c6307eec017f383a26d2afc8019bb8c51c9813c303963a91be",
+        "validation": {
+          "n": 1830,
+          "mse_0_1": 0.07005373924285169,
+          "mse_1_5": 1.120859827885627,
+          "spearman": 0.5601479884450835,
+          "prediction_mean": 0.6296731247581908,
+          "target_mean": 0.5542349726775956,
+          "prediction_std": 0.20633357048566672,
+          "target_std": 0.30337777758989165,
+          "mean_prediction_by_rating": {
+            "1.0": {
+              "n": 181,
+              "mean": 0.35706533683021424
+            },
+            "2.0": {
+              "n": 304,
+              "mean": 0.5925324038651428
+            },
+            "3.0": {
+              "n": 627,
+              "mean": 0.5888229660701714
+            },
+            "4.0": {
+              "n": 373,
+              "mean": 0.6976513811474511
+            },
+            "5.0": {
+              "n": 345,
+              "mean": 0.8061657294846963
+            }
+          },
+          "condition_changes": {
+            "n": 721,
+            "correct": 586,
+            "ties": 0,
+            "accuracy_ties_half": 0.812760055478502,
+            "difference_mse": 0.1585576635323571,
+            "unit": "Within-pair comparisons. These reuse captions and are dependent."
+          }
+        },
+        "calibration": {
+          "a": 0.8250287617689991,
+          "c": 0.034736534239128924
+        }
+      },
+      "baseline_predictions": "training_outputs/csts_tranche1_mse_full_predictions.json"
+    },
+    "pearson": {
+      "training_run": {
+        "name": "train_pearson",
+        "path": "/home/machina/jep-csts-tranche1-20261023/experiments/csts_tranche1_e2545bb_79085977_train_pearson/runs/train_pearson/01M5NFDEBX6YJR5740B2A2D3CN/resolved.yaml",
+        "status": "succeeded",
+        "reference": {
+          "sha256": "9f51d9b6d7e62cd4375943f03efa295ba985cf4377772f90fee14a6932b22822",
+          "bytes": 1054,
+          "stored_at": {
+            "kind": "gcs",
+            "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+            "prefix": "viper",
+            "owner": "pvd232",
+            "workspace": "jep_csts_joint_20261021",
+            "revision": "338854bae3cecf43d2fe14380f8a48c6c160d8adf2081693e981c9afaf83ed52",
+            "path": "experiments/csts_tranche1_e2545bb_79085977_train_pearson/runs/train_pearson/01M5NFDEBX6YJR5740B2A2D3CN/resolved.yaml"
+          },
+          "kind": "resolved_run"
+        }
+      },
+      "baseline_evaluation": {
+        "name": "test_pearson_full",
+        "path": "/home/machina/jep-csts-tranche1-20261023/experiments/csts_tranche1_182cfc3_79085977_test_pearson_full/runs/test_pearson_full/01M5NH1HGYVQS1AX7T9ER29T0J/resolved.yaml",
+        "status": "succeeded",
+        "reference": {
+          "sha256": "e4ec937a6e7b81ac39cbc06d9cf71e4d3649573fd923ef88fc85692a8cab020a",
+          "bytes": 1070,
+          "stored_at": {
+            "kind": "gcs",
+            "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+            "prefix": "viper",
+            "owner": "pvd232",
+            "workspace": "jep_csts_joint_20261021",
+            "revision": "5d0cff56ae866eacd0dcdef49b7210e4973df139bd992e36fead75ed8a0f3f91",
+            "path": "experiments/csts_tranche1_182cfc3_79085977_test_pearson_full/runs/test_pearson_full/01M5NH1HGYVQS1AX7T9ER29T0J/resolved.yaml"
+          },
+          "kind": "resolved_run"
+        }
+      },
+      "baseline_checkpoint": {
+        "epoch": 22,
+        "sha256": "78cb200178cdd7cf1cfa315a77971bf1d476436a76909187186584cfcb2ccc62",
+        "validation": {
+          "n": 1830,
+          "mse_0_1": 0.06526720292708246,
+          "mse_1_5": 1.0442752468333194,
+          "spearman": 0.5546282323942435,
+          "prediction_mean": 0.5889869701671999,
+          "target_mean": 0.5542349726775956,
+          "prediction_std": 0.20082773300010462,
+          "target_std": 0.30337777758989165,
+          "mean_prediction_by_rating": {
+            "1.0": {
+              "n": 181,
+              "mean": 0.33401203583102695
+            },
+            "2.0": {
+              "n": 304,
+              "mean": 0.5469494671805909
+            },
+            "3.0": {
+              "n": 627,
+              "mean": 0.5479459775436485
+            },
+            "4.0": {
+              "n": 373,
+              "mean": 0.654374554953051
+            },
+            "5.0": {
+              "n": 345,
+              "mean": 0.7636913100878397
+            }
+          },
+          "condition_changes": {
+            "n": 721,
+            "correct": 589,
+            "ties": 0,
+            "accuracy_ties_half": 0.8169209431345353,
+            "difference_mse": 0.1582187910338054,
+            "unit": "Within-pair comparisons. These reuse captions and are dependent."
+          }
+        },
+        "calibration": {
+          "a": 0.8468552031179317,
+          "c": 0.05544829242283633
+        }
+      },
+      "baseline_predictions": "training_outputs/csts_tranche1_pearson_full_predictions.json"
+    }
+  }
+}

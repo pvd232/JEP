@@ -1,5 +1,6 @@
 """Publish the completed Tranche 1 report as a native CPU build."""
 
+import argparse
 import hashlib
 import json
 import shutil
@@ -47,6 +48,13 @@ def cloud_report_reference(root: Path, reference: ResolvedRunRef) -> ResolvedRun
 
 def main() -> None:
     """Publish a fixed bundle and independently verify its native build graph."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--bundle", default="csts_data/tranche1_report.zip")
+    parser.add_argument(
+        "--receipt", default="training_outputs/csts_tranche1_report_publication.json"
+    )
+    parser.add_argument("--experiment-prefix", default="csts_tranche1_report_20261023")
+    args = parser.parse_args()
     root = resolve_root()
     source = read_source(root)
     trusted = frozenset({str(source.repository)})
@@ -56,7 +64,7 @@ def main() -> None:
         inputs=(
             input(
                 "bundle",
-                path="csts_data/tranche1_report.zip",
+                path=args.bundle,
                 data_role="eval",
             ),
         ),
@@ -70,7 +78,7 @@ def main() -> None:
         reuse="never",
     )
     study = experiment(
-        experiment_id=f"csts_tranche1_report_20261023_{source.commit[:12]}",
+        experiment_id=f"{args.experiment_prefix}_{source.commit[:12]}",
         variants=(
             variant(
                 "report", stages=(configured,), estimator=configured.outputs["bundle"]
@@ -141,7 +149,7 @@ def main() -> None:
     restored = provider.fetch(GcsFileRef.model_validate(artifact_reference))
     if hashlib.sha256(restored).hexdigest() != identity["sha256"]:
         raise RuntimeError("Restored report bundle identity differs.")
-    if restored != (root / "csts_data/tranche1_report.zip").read_bytes():
+    if restored != (root / args.bundle).read_bytes():
         raise RuntimeError("Restored report bundle differs from the reviewed input.")
     receipt = {
         "source_commit": source.commit,
@@ -157,7 +165,7 @@ def main() -> None:
         "verified_measurements": verified.measurement_count,
         "scope": "Completed report bundle; training and evaluations retain their original references.",
     }
-    destination = root / "training_outputs/csts_tranche1_report_publication.json"
+    destination = root / args.receipt
     destination.write_text(json.dumps(receipt, indent=2) + "\n")
     print(json.dumps(receipt), flush=True)
 
