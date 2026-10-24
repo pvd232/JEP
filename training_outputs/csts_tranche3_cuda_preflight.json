@@ -1,0 +1,25 @@
+{
+  "preparation": {
+    "cache_records": 17334,
+    "accepted_records": 11312,
+    "training_keys": 13744,
+    "validation_keys": 3590,
+    "supervised_training_keys": 8273,
+    "stage_a_comparisons": 4903,
+    "unchanged_supervised_answers": 0,
+    "shuffle_scope": "training only, within condition",
+    "stage_a_coverage": "identical comparison subset and answer mask in all arms",
+    "stage_a_transition": "terminal weights after six fixed epochs",
+    "expert_verified": false
+  },
+  "batch_pairs": 32,
+  "mse": 0.13331562280654907,
+  "answer_ce": 1.9094033241271973,
+  "rating_gradient_norm": 0.014379465952515602,
+  "answer_gradient_norm": 0.7260655760765076,
+  "peak_cuda_memory_bytes": 3237960192,
+  "batch_forward_and_two_gradient_seconds": 1.0617263019994425,
+  "model_revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+  "settings_sha256": "977077155192e2b55d4effd0f68b8ba4ccf04908f2e3b36f3e1040ca2d73d855",
+  "storage": "local_native_sealing_then_asynchronous_publication"
+}

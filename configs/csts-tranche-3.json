@@ -1,0 +1,64 @@
+{
+  "publication_destination": {
+    "kind": "viper_cloud",
+    "owner": "pvd232",
+    "workspace": "jep_csts_joint_20261021"
+  },
+  "gpu_budget_seconds": 14400,
+  "bootstrap_draws": 2000,
+  "bootstrap_seed": 61021,
+  "training": {
+    "model_id": "google/flan-t5-small",
+    "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+    "seed": 7,
+    "condition": true,
+    "projection_dimension": 128,
+    "encoder_learning_rate": 3e-05,
+    "projection_learning_rate": 0.001,
+    "batch_size": 32,
+    "max_epochs": 40,
+    "patience": 5,
+    "warmup_fraction": 0.1,
+    "weight_decay": 0.01,
+    "max_length": 160,
+    "device": "cuda",
+    "linear_epochs": 24,
+    "continuation_encoder_rate": 3e-06,
+    "continuation_projection_rate": 0.0001,
+    "max_seconds": 2400
+  },
+  "splits": {
+    "training": {
+      "path": "csts_data/train.json",
+      "rows": 6980,
+      "groups": 2674,
+      "sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01"
+    },
+    "validation": {
+      "path": "csts_data/dev.json",
+      "rows": 1830,
+      "groups": 688,
+      "sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273"
+    },
+    "test": {
+      "path": "csts_data/evaluation.json",
+      "rows": 2620,
+      "groups": 1241,
+      "sha256": "2c8b6f2b62740c85c376eacd02ef222c2bfacdfe8df5f772a4dd7d52b6d38f1e"
+    }
+  },
+  "arms": [
+    "ratings",
+    "evidence",
+    "shuffled"
+  ],
+  "pretrain_epochs": 6,
+  "answers": {
+    "path": "csts_data/teacher_answers.jsonl",
+    "sha256": "1dcd743762cfad9f42b78775510c526e3ce6dd0c51716caf4df3234442ac1c94"
+  },
+  "contrasts": [
+    "evidence_minus_ratings",
+    "evidence_minus_shuffled"
+  ]
+}
