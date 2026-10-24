@@ -116,7 +116,7 @@ def test_rating_losses_reach_encoder_and_projection(monkeypatch, objective):
     assert projection_gradient.norm() > 0
 
 
-def exercise_training(tmp_path, monkeypatch, arm, curve):
+def exercise_training(tmp_path, monkeypatch, arm, curve, **settings):
     """Run the actual CPU training loop with a controlled validation curve."""
     monkeypatch.setattr(
         "csts_pilot.joint.T5ForConditionalGeneration.from_pretrained",
@@ -175,10 +175,11 @@ def exercise_training(tmp_path, monkeypatch, arm, curve):
         config=convergence.ConvergenceConfig(
             device="cpu",
             projection_dimension=8,
-            max_epochs=3,
-            prefix_epochs=1,
+            max_epochs=settings.pop("max_epochs", 3),
+            prefix_epochs=settings.pop("prefix_epochs", 1),
             batch_size=4,
             rating_objective=arm,
+            **settings,
         ),
         inputs={
             "training": directory / "training.json",
@@ -193,6 +194,65 @@ def exercise_training(tmp_path, monkeypatch, arm, curve):
     )
     convergence.fit(context)
     return json.loads(outputs["trace"].read_text()), outputs
+
+
+def test_patience_five_stops_after_five_checks_and_keeps_best_checkpoint(
+    tmp_path, monkeypatch
+):
+    """Exercise the real training loop through a plateau and terminal state save."""
+    trace, paths = exercise_training(
+        tmp_path,
+        monkeypatch,
+        "mse",
+        [0.1, 0.8, 0.7, 0.7, 0.6, 0.6, 0.5],
+        max_epochs=12,
+    )
+    assert len(trace["epochs"]) == 6
+    assert trace["stop_reason"] == "validation_patience"
+    assert trace["selected"]["full"]["epoch"] == 1
+    assert load_model(paths["model"])["epoch"] == 1
+    assert load_model(paths["last_model"])["epoch"] == 6
+    state = load_state(paths["resume_state"]).dataloader.state_dict
+    assert state["step"] == 18
+    assert state["early_stopping"]["stale_epochs"] == 5
+
+
+def test_prefix_window_finishes_even_when_patience_expires_earlier(
+    tmp_path, monkeypatch
+):
+    """Keep the complete required prefix without extending the scheduler horizon."""
+    trace, _paths = exercise_training(
+        tmp_path,
+        monkeypatch,
+        "mse",
+        [0.1, 0.8] + [0.7] * 7,
+        max_epochs=12,
+        prefix_epochs=8,
+    )
+    assert len(trace["epochs"]) == 8
+    assert trace["actual_updates"] == 24
+    assert trace["total_updates"] == 36
+
+
+def test_individual_patience_counts_allow_different_valid_stopping_epochs(
+    tmp_path, monkeypatch
+):
+    """Distinguish shared schedules from equal realized training budgets."""
+    traces = {}
+    for arm, curve in {
+        "mse": [0.1, 0.8] + [0.7] * 5,
+        "pearson": [0.1, 0.7, 0.8] + [0.7] * 5,
+    }.items():
+        traces[arm], _paths = exercise_training(
+            tmp_path, monkeypatch, arm, curve, max_epochs=12
+        )
+    convergence_run.verify_matched_arms(traces)
+    assert traces["mse"]["actual_updates"] == 18
+    assert traces["pearson"]["actual_updates"] == 21
+    traces["mse"]["epochs"].pop()
+    traces["mse"]["actual_updates"] -= 3
+    with pytest.raises(ValueError, match="stop rule"):
+        convergence_run.verify_matched_arms(traces)
 
 
 def test_matched_training_preserves_orders_updates_and_both_windows(

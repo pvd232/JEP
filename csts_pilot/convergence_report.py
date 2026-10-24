@@ -186,10 +186,14 @@ def build_report(results_dir: Path, output_dir: Path) -> dict[str, Any]:
             output_dir / f"{prefix}_{name}_predictions.json",
         )
     render_curves(traces, output_dir / f"{prefix}_curves.png")
+    epoch_counts = ", ".join(
+        f"{arm.upper()}: {len(trace['epochs'])} epochs" for arm, trace in traces.items()
+    )
     lines = [
         "# Tranche 1: loss and convergence",
         "",
-        f"Source: `{summary['source_commit']}`. One matched seed ({settings['training']['seed']}), {settings['training']['max_epochs']} epochs per arm.",
+        f"Source: `{summary['source_commit']}`. One shared seed "
+        f"({settings['training']['seed']}); {epoch_counts}.",
         "",
         f"Evaluation source: `{report['evaluation_source_commit']}`. Frozen training, checkpoint choices and validation calibration retain their original identities.",
         "",
@@ -248,7 +252,14 @@ def build_report(results_dir: Path, output_dir: Path) -> dict[str, Any]:
     )
     for arm, trace in traces.items():
         epoch = trace["selected"]["full"]["epoch"]
-        if epoch == trace["config"]["max_epochs"]:
+        if trace.get("stop_reason") == "validation_patience":
+            conclusion = (
+                f"Validation patience of {trace['config']['patience']} epochs was "
+                f"exhausted at epoch {len(trace['epochs'])}. "
+                "This establishes a validation plateau under the declared rule; "
+                "training-loss stationarity remains unresolved."
+            )
+        elif epoch == trace["config"]["max_epochs"]:
             conclusion = "The strongest validation checkpoint occurred at the epoch limit, leaving convergence beyond this budget unresolved."
         elif (
             epoch >= trace["config"]["max_epochs"] - 2
@@ -270,7 +281,12 @@ def build_report(results_dir: Path, output_dir: Path) -> dict[str, Any]:
             "",
             "![Learning curves](csts_tranche1_curves.png)",
             "",
-            "The eight-epoch prefix uses the same 24-epoch schedule as the full run. Its contrast measures continued training under that schedule. Each objective has its own loss units; the curves show common MSE and Spearman metrics, while the epoch CSV preserves the actual training objectives.",
+            "The prefix and full windows share the declared maximum-epoch "
+            "learning-rate schedule. Their contrast measures continued training "
+            "under that schedule. Validation patience can yield different actual "
+            "update counts between arms; consult the compute records. Each "
+            "objective has its own loss units; the curves show common MSE and "
+            "Spearman metrics, while the epoch CSV preserves training objectives.",
             "",
             "Positive affine calibration was fitted using validation data, with five caption-group folds for its held-out error estimate. Raw cosine supplies the primary ranking result. Calibration coefficients were frozen before testing.",
             "",

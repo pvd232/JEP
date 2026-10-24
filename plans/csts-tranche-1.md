@@ -2,6 +2,8 @@
 
 **Status: training, evaluation and independent analysis complete.** See the [full report](../training_outputs/csts_tranche1_report.md). All ten native runs and 152 measurements passed verification; 132 transferred evidence files passed manifest checks. The full report is published to GitHub and native VIPER, both VMs are confirmed TERMINATED, and the newly created scoped NAT is removed. See the [closeout record](../training_outputs/csts_tranche1_closeout.md). Training source is `e2545bbc8e509d12b01e12ce43435b897bcb410f`; evaluation recovery source is `182cfc35e5ab528e1239668b881c1779ffba0437`. The remaining collaborative walkthrough stays open separately.
 
+The completed experiment used a fixed 24-epoch budget. The prospective [patience and storage revision](csts-patience-storage.md) adds five validation checks of patience and background native cloud promotion. Its code and settings apply to future runs; the completed results retain their original source and configuration.
+
 The experiment will determine whether the existing conditional FLAN encoder benefits from a correlation objective and continued rating training. It will establish the comparison loss, checkpoint rule and training budget for subsequent experiments on evidence supervision and stronger encoders.
 
 ## Context

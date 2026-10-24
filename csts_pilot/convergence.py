@@ -26,6 +26,7 @@ from viper.resume import (
 from viper.stages import StageContext, build, eval, train
 
 from csts_pilot.diagnostics import summarize
+from csts_pilot.early_stopping import ValidationPatience
 from csts_pilot.joint import AnswerEncoder, predictions, rating_loss, select
 from csts_pilot.training import CstsConfig, mixed_precision, prepare_tokens
 from jep_pilot.loaders import load_json, load_model
@@ -37,6 +38,8 @@ class ConvergenceConfig(CstsConfig):
     rating_objective: Literal["mse", "pearson"] = "mse"
     max_epochs: int = Field(default=24, ge=1)
     prefix_epochs: int = Field(default=8, ge=1)
+    patience: int | None = Field(default=5, ge=1)
+    min_delta: float = Field(default=0.0, ge=0, allow_inf_nan=False)
     max_seconds: float = Field(default=1800, gt=0)
 
     @model_validator(mode="after")
@@ -224,6 +227,8 @@ def fit(context: StageContext[ConvergenceConfig]) -> None:
     step, epoch, batch_start = 0, 0, 0
     order = torch.empty(0, dtype=torch.long)
     best_full = best_prefix = -math.inf
+    stopping = ValidationPatience(config.patience, config.min_delta)
+    trace["stop_reason"] = "epoch_budget"
     try:
         for epoch in range(1, config.max_epochs + 1):
             model.train()
@@ -275,6 +280,7 @@ def fit(context: StageContext[ConvergenceConfig]) -> None:
             rho = diagnostic["spearman"]
             if rho is None or not math.isfinite(rho):
                 raise FloatingPointError("Validation Spearman became undefined.")
+            patience_exhausted = stopping.observe(rho)
             objective_value, mse_value = (totals / len(training)).cpu().tolist()
             record = {
                 "epoch": epoch,
@@ -287,6 +293,8 @@ def fit(context: StageContext[ConvergenceConfig]) -> None:
                 "fit_seconds": fit_seconds,
                 "validation_seconds": validation_seconds,
                 "elapsed_seconds": time.monotonic() - started,
+                "epochs_without_improvement": stopping.stale_epochs,
+                "learning_rates": scheduler.get_last_lr(),
             }
             # Strict improvement keeps the earlier epoch when validation ranks tie.
             if rho > best_full:
@@ -320,6 +328,9 @@ def fit(context: StageContext[ConvergenceConfig]) -> None:
                 context.metrics[name].record(value, step=epoch)
             write_json(context.outputs["trace"], trace)
             print(json.dumps(record), flush=True)
+            if epoch >= config.prefix_epochs and patience_exhausted:
+                trace["stop_reason"] = "validation_patience"
+                break
         trace["status"] = "complete"
     except BaseException as error:
         trace["status"] = "failed"
@@ -355,6 +366,10 @@ def fit(context: StageContext[ConvergenceConfig]) -> None:
                         "batch_start": batch_start,
                         "epoch_order": order,
                         "generator_state": permutation_rng.get_state(),
+                        "early_stopping": {
+                            "best_score": stopping.best_score,
+                            "stale_epochs": stopping.stale_epochs,
+                        },
                     },
                 ),
             ),

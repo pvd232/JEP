@@ -12,11 +12,13 @@ from viper.authoring import experiment, input, plan, replicate, stage, variant
 from viper.config import BuildConfig
 from viper.gcs import GcsProvider
 from viper.outputs import StageOutputs, output
-from viper.references import GcsFileRef, GitFileRef
+from viper.references import GcsFileRef, GitFileRef, LocalFileRef, ResolvedRunRef
 from viper.repository import read_source, resolve_root
 from viper.runtime import CPUComputeSpec, LocalEnvSpec, observe_python_env
 from viper.stages import StageContext, build
+from viper.storage import ViperCloudDestination
 
+from csts_pilot.background_storage import drain_publications
 from jep_pilot.loaders import load_bytes
 
 
@@ -24,6 +26,23 @@ from jep_pilot.loaders import load_bytes
 def publish_report(context: StageContext[BuildConfig]) -> None:
     """Preserve the reviewed report bundle without changing training or scores."""
     shutil.copyfile(context.inputs["bundle"], context.outputs["bundle"])
+
+
+def cloud_report_reference(root: Path, reference: ResolvedRunRef) -> ResolvedRunRef:
+    """Require finished study uploads before publishing the final CPU report."""
+    drain_publications(root)
+    directory = root / ".viper" / "publication_queue"
+    for path in directory.glob("*.json"):
+        if json.loads(path.read_text())["status"] != "published":
+            raise RuntimeError(f"Study cloud publication is still pending: {path}")
+    if isinstance(reference.stored_at, LocalFileRef):
+        settings = json.loads((root / "configs/csts-tranche-1.json").read_text())
+        return execution.promote_run_to_cloud(
+            root,
+            reference,
+            ViperCloudDestination.model_validate(settings["publication_destination"]),
+        )
+    return reference
 
 
 def main() -> None:
@@ -80,9 +99,31 @@ def main() -> None:
             root=root, path=Path(result.path), trusted_source_repositories=trusted
         )
     )
-    attempt = yaml.safe_load(
-        (Path(result.path).parent / "attempts/1/resolved.yaml").read_text()
+    reference = cloud_report_reference(root, result.reference)
+    if not isinstance(reference.stored_at, GcsFileRef):
+        raise RuntimeError("The final report requires a verified GCS run reference.")
+    provider = GcsProvider(
+        root,
+        reference.stored_at.bucket,
+        client=storage.Client(project="mantra-477901"),
     )
+    run_bytes = provider.fetch(reference.stored_at)
+    if hashlib.sha256(run_bytes).hexdigest() != reference.sha256:
+        raise RuntimeError("Restored report run identity differs.")
+    run = yaml.safe_load(run_bytes)
+    attempt = None
+    for candidate in run["attempts"]:
+        attempt_bytes = provider.fetch(
+            GcsFileRef.model_validate(candidate["stored_at"])
+        )
+        if hashlib.sha256(attempt_bytes).hexdigest() != candidate["sha256"]:
+            raise RuntimeError("Restored report attempt identity differs.")
+        saved = yaml.safe_load(attempt_bytes)
+        if saved["attempt_id"] == run["successful_attempt_id"]:
+            attempt = saved
+            break
+    if attempt is None:
+        raise RuntimeError("The published report has no successful attempt.")
     resolved = attempt["resolved_stages"][0]
     snapshot = resolved["snapshot"]
     provider = GcsProvider(
@@ -111,7 +152,8 @@ def main() -> None:
             "restored_and_checksum_verified": True,
         },
         "status": result.status,
-        "reference": result.reference.model_dump(mode="json"),
+        "reference": reference.model_dump(mode="json"),
+        "local_reference": result.reference.model_dump(mode="json"),
         "verified_measurements": verified.measurement_count,
         "scope": "Completed report bundle; training and evaluations retain their original references.",
     }

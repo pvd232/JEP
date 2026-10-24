@@ -96,6 +96,7 @@ def test_cpu_report_recomputes_scale_intervals_and_compute(tmp_path, monkeypatch
     assert report["evaluation_source_commit"] == "synthetic-evaluation-repair"
     markdown = (output / "csts_tranche1_report.md").read_text()
     assert "12 shared bootstrap samples" in markdown
+    assert "MSE: 3 epochs, PEARSON: 3 epochs" in markdown
     assert len((output / "csts_tranche1_epochs.csv").read_text().splitlines()) == 7
 
 
@@ -114,3 +115,22 @@ def test_report_rejects_calibration_fitted_after_test_scores(tmp_path):
     path.write_text(json.dumps(rows))
     with pytest.raises(ValueError, match="frozen validation fit"):
         convergence_report.build_report(inputs, tmp_path / "report")
+
+
+def test_report_describes_patience_as_validation_stopping(tmp_path, monkeypatch):
+    """Keep an early-stopped report distinct from a stationarity claim."""
+    inputs = report_fixture(tmp_path)
+    path = inputs / "mse_trace.json"
+    trace = json.loads(path.read_text())
+    trace["stop_reason"] = "validation_patience"
+    trace["config"]["patience"] = 5
+    path.write_text(json.dumps(trace))
+    monkeypatch.setattr(
+        convergence_report,
+        "render_curves",
+        lambda _traces, path: path.write_bytes(b"plot-fixture"),
+    )
+    output = tmp_path / "report"
+    convergence_report.build_report(inputs, output)
+    markdown = (output / "csts_tranche1_report.md").read_text()
+    assert "training-loss stationarity remains unresolved" in markdown

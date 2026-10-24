@@ -32,7 +32,13 @@ from viper.runtime import (
     LocalEnvSpec,
     observe_python_env,
 )
+from viper.storage import (
+    LocalStorageDestination,
+    ViperCloudDestination,
+    load_storage_settings,
+)
 
+from csts_pilot.background_storage import queue_publication
 from csts_pilot.convergence import (
     CheckpointConfig,
     ConvergenceConfig,
@@ -51,6 +57,7 @@ from csts_pilot.convergence import (
     write_json,
 )
 from csts_pilot.convergence_analysis import calibration
+from csts_pilot.early_stopping import ValidationPatience
 from jep_pilot.loaders import load_json, load_model, load_state
 from jep_pilot.stages import publish_evaluation_inputs
 
@@ -183,7 +190,7 @@ def evaluation_stage(
 
 
 def verify_matched_arms(traces: dict[str, dict[str, Any]]) -> None:
-    """Require equal initialization, RNG, permutations, tokens and update counts."""
+    """Require shared setup and pair orders; validate each declared stop rule."""
     a, b = traces["mse"], traces["pearson"]
     common_a = {
         key: value
@@ -208,21 +215,40 @@ def verify_matched_arms(traces: dict[str, dict[str, Any]]) -> None:
         "updates_per_epoch",
         "total_updates",
         "warmup_updates",
-        "actual_updates",
         "nonpadding_input_tokens_per_epoch",
     ):
         if a[key] != b[key]:
             raise ValueError(f"The matched arms differ in {key}.")
     for trace in traces.values():
-        if (
-            trace["status"] != "complete"
-            or len(trace["epochs"]) != trace["config"]["max_epochs"]
-        ):
-            raise ValueError("Both arms must complete their common epoch budget.")
-        if trace["actual_updates"] != trace["total_updates"]:
+        epochs = trace["epochs"]
+        cap = trace["config"]["max_epochs"]
+        if trace["status"] != "complete" or not epochs or len(epochs) > cap:
+            raise ValueError("Both arms require a completed, valid epoch trace.")
+        if trace["total_updates"] != cap * trace["updates_per_epoch"]:
+            raise ValueError("An arm changed its declared scheduler horizon.")
+        if trace["actual_updates"] != len(epochs) * trace["updates_per_epoch"]:
             raise ValueError("An arm used an incomplete update budget.")
-    if [r["batch_order_sha256"] for r in a["epochs"]] != [
-        r["batch_order_sha256"] for r in b["epochs"]
+        stopping = ValidationPatience(
+            trace["config"].get("patience"), trace["config"].get("min_delta", 0.0)
+        )
+        expected_stop = cap
+        for epoch, record in enumerate(epochs, 1):
+            if (
+                record["epoch"] != epoch
+                or record["step"] != epoch * trace["updates_per_epoch"]
+            ):
+                raise ValueError("The epoch trace has inconsistent update counters.")
+            exhausted = stopping.observe(record["validation"]["spearman"])
+            if exhausted and epoch >= trace["config"]["prefix_epochs"]:
+                expected_stop = epoch
+                break
+        if len(epochs) != expected_stop:
+            raise ValueError("An arm differs from its declared validation stop rule.")
+        if len(epochs) < cap and trace.get("stop_reason") != "validation_patience":
+            raise ValueError("An early stop requires its validation patience receipt.")
+    shared_epochs = min(len(a["epochs"]), len(b["epochs"]))
+    if [r["batch_order_sha256"] for r in a["epochs"][:shared_epochs]] != [
+        r["batch_order_sha256"] for r in b["epochs"][:shared_epochs]
     ]:
         raise ValueError("The arms used different pair orders.")
 
@@ -271,6 +297,14 @@ def freeze_selection(
     pearson_score = candidates["pearson_full"]["validation"]["spearman"]
     selection = {
         "status": "checkpoints_frozen",
+        "comparison_regime": (
+            "validation_early_stopping"
+            if traces["mse"]["config"].get("patience") is not None
+            else "fixed_update_budget"
+        ),
+        "actual_updates": {
+            arm: trace["actual_updates"] for arm, trace in traces.items()
+        },
         "candidates": candidates,
         "provisional_loss": "pearson" if pearson_score > mse_score else "mse",
         "choice_split": "validation",
@@ -289,7 +323,15 @@ def freeze_selection(
 
 
 def run_study(root: Path, settings: dict[str, Any], resume: bool = False) -> None:
-    """Publish each stage before downstream scoring and preserve resumable progress."""
+    """Use verified local runs downstream while cloud publication proceeds separately."""
+    storage = load_storage_settings(root)
+    if not isinstance(storage.destination, LocalStorageDestination):
+        raise ValueError(
+            "Select destination = 'local' in viper.toml before this runner starts."
+        )
+    cloud_destination = ViperCloudDestination.model_validate(
+        settings["publication_destination"]
+    )
     result_dir = root / "convergence_results"
     result_dir.mkdir(exist_ok=True)
     source = read_source(root)
@@ -340,6 +382,14 @@ def run_study(root: Path, settings: dict[str, Any], resume: bool = False) -> Non
                         trusted_source_repositories=trusted,
                     )
                 )
+                record["publication_queue"] = str(
+                    queue_publication(
+                        root,
+                        ResolvedRunRef.model_validate(record["reference"]),
+                        cloud_destination,
+                    )
+                )
+                write_json(summary_path, summary)
                 return record
         if summary.get("in_flight"):
             raise RuntimeError(
@@ -384,6 +434,7 @@ def run_study(root: Path, settings: dict[str, Any], resume: bool = False) -> Non
             "path": str(result.path),
             "status": result.status,
             "reference": result.reference.model_dump(mode="json"),
+            "local_run_seconds": time.monotonic() - started,
         }
         summary["runs"].append(record)
         summary["in_flight"] = None
@@ -392,6 +443,10 @@ def run_study(root: Path, settings: dict[str, Any], resume: bool = False) -> Non
             raise RuntimeError(
                 f"Native stage failed: {name}. Inspect {result.path} before resuming."
             )
+        record["publication_queue"] = str(
+            queue_publication(root, result.reference, cloud_destination)
+        )
+        write_json(summary_path, summary)
         return record
 
     try:
@@ -533,6 +588,7 @@ def run_study(root: Path, settings: dict[str, Any], resume: bool = False) -> Non
             )
             write_json(summary_path, summary)
         summary.update(status="complete", current_stage=None)
+        summary["publication_status"] = "queued_separately"
         write_json(summary_path, summary)
     except BaseException as error:
         summary.update(
