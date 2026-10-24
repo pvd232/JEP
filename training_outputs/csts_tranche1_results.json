@@ -1,0 +1,491 @@
+{
+  "source_commit": "e2545bbc8e509d12b01e12ce43435b897bcb410f",
+  "evaluation_source_commit": "182cfc35e5ab528e1239668b881c1779ffba0437",
+  "settings": {
+    "gpu_budget_seconds": 1800,
+    "bootstrap_draws": 2000,
+    "bootstrap_seed": 61021,
+    "training": {
+      "model_id": "google/flan-t5-small",
+      "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+      "seed": 7,
+      "condition": true,
+      "projection_dimension": 128,
+      "encoder_learning_rate": 3e-05,
+      "projection_learning_rate": 0.001,
+      "batch_size": 32,
+      "max_epochs": 24,
+      "prefix_epochs": 8,
+      "warmup_fraction": 0.1,
+      "weight_decay": 0.01,
+      "max_length": 160,
+      "device": "cuda"
+    },
+    "splits": {
+      "training": {
+        "path": "csts_data/train.json",
+        "rows": 6980,
+        "groups": 2674,
+        "sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01"
+      },
+      "validation": {
+        "path": "csts_data/dev.json",
+        "rows": 1830,
+        "groups": 688,
+        "sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273"
+      },
+      "test": {
+        "path": "csts_data/evaluation.json",
+        "rows": 2620,
+        "groups": 1241,
+        "sha256": "2c8b6f2b62740c85c376eacd02ef222c2bfacdfe8df5f772a4dd7d52b6d38f1e"
+      }
+    }
+  },
+  "provisional_loss_selected_on_validation": "mse",
+  "candidates": {
+    "mse_prefix": {
+      "selected_epoch": 6,
+      "checkpoint_sha256": "b1c82f6d6752c7b086727a69bea5cf79415232d86e9903f28ed909595390b7eb",
+      "raw": {
+        "n": 2620,
+        "spearman": 0.4281379107736468,
+        "mse_0_1": 0.15274144042087048,
+        "mse_1_5": 2.4438630467339277,
+        "prediction_mean": 0.7028944218502814,
+        "prediction_std": 0.17328791215557857,
+        "target_mean": 0.5886450381679389,
+        "target_std": 0.40850906064376585,
+        "score_min": -0.4063420295715332,
+        "score_max": 0.9527255296707153,
+        "condition_ordering_accuracy": 0.7576628352490421,
+        "condition_ordering_comparisons": 1044
+      },
+      "calibrated": {
+        "n": 2620,
+        "spearman": 0.4281379107736468,
+        "mse_0_1": 0.14037686866483046,
+        "mse_1_5": 2.2460298986372873,
+        "prediction_mean": 0.5645949741740326,
+        "prediction_std": 0.15179715508183228,
+        "target_mean": 0.5886450381679389,
+        "target_std": 0.40850906064376585,
+        "score_min": -0.4070765956682264,
+        "score_max": 0.7834426188039498,
+        "condition_ordering_accuracy": 0.7576628352490421,
+        "condition_ordering_comparisons": 1044
+      }
+    },
+    "mse_full": {
+      "selected_epoch": 23,
+      "checkpoint_sha256": "91013c57d01021c6307eec017f383a26d2afc8019bb8c51c9813c303963a91be",
+      "raw": {
+        "n": 2620,
+        "spearman": 0.4968951688570189,
+        "mse_0_1": 0.13414543500460713,
+        "mse_1_5": 2.146326960073714,
+        "prediction_mean": 0.6462645588343152,
+        "prediction_std": 0.2159695362973972,
+        "target_mean": 0.5886450381679389,
+        "target_std": 0.40850906064376585,
+        "score_min": -0.4900881052017212,
+        "score_max": 0.9696528911590576,
+        "condition_ordering_accuracy": 0.8007662835249042,
+        "condition_ordering_comparisons": 1044
+      },
+      "calibrated": {
+        "n": 2620,
+        "spearman": 0.4968951688570189,
+        "mse_0_1": 0.1308300774608277,
+        "mse_1_5": 2.093281239373243,
+        "prediction_mean": 0.5679233829893925,
+        "prediction_std": 0.17818107911126652,
+        "target_mean": 0.5886450381679389,
+        "target_std": 0.40850906064376585,
+        "score_min": -0.3696002483531621,
+        "score_max": 0.8347280583778163,
+        "condition_ordering_accuracy": 0.8007662835249042,
+        "condition_ordering_comparisons": 1044
+      }
+    },
+    "pearson_prefix": {
+      "selected_epoch": 8,
+      "checkpoint_sha256": "05a080d3a43b6104b8799520877b906d6f679f7d132568b07f3e3e083ed5ce4e",
+      "raw": {
+        "n": 2620,
+        "spearman": 0.4461052046390007,
+        "mse_0_1": 0.1635550470556689,
+        "mse_1_5": 2.6168807528907023,
+        "prediction_mean": 0.751119750895971,
+        "prediction_std": 0.15819576380160813,
+        "target_mean": 0.5886450381679389,
+        "target_std": 0.40850906064376585,
+        "score_min": -0.3076074719429016,
+        "score_max": 0.976660966873169,
+        "condition_ordering_accuracy": 0.7768199233716475,
+        "condition_ordering_comparisons": 1044
+      },
+      "calibrated": {
+        "n": 2620,
+        "spearman": 0.4461052046390007,
+        "mse_0_1": 0.13782099510446102,
+        "mse_1_5": 2.2051359216713764,
+        "prediction_mean": 0.5640017248230405,
+        "prediction_std": 0.15639556846978364,
+        "target_mean": 0.5886450381679389,
+        "target_std": 0.40850906064376585,
+        "score_min": -0.4826776671610172,
+        "score_max": 0.7869763850696729,
+        "condition_ordering_accuracy": 0.7768199233716475,
+        "condition_ordering_comparisons": 1044
+      }
+    },
+    "pearson_full": {
+      "selected_epoch": 22,
+      "checkpoint_sha256": "78cb200178cdd7cf1cfa315a77971bf1d476436a76909187186584cfcb2ccc62",
+      "raw": {
+        "n": 2620,
+        "spearman": 0.4842047223113192,
+        "mse_0_1": 0.13109890693598253,
+        "mse_1_5": 2.0975825109757205,
+        "prediction_mean": 0.6046252849156336,
+        "prediction_std": 0.20935654303234216,
+        "target_mean": 0.5886450381679389,
+        "target_std": 0.40850906064376585,
+        "score_min": -0.40785473585128784,
+        "score_max": 0.9522385001182556,
+        "condition_ordering_accuracy": 0.7931034482758621,
+        "condition_ordering_comparisons": 1044
+      },
+      "calibrated": {
+        "n": 2620,
+        "spearman": 0.4842047223113192,
+        "mse_0_1": 0.13112591216259786,
+        "mse_1_5": 2.098014594601566,
+        "prediction_mean": 0.5674783608903025,
+        "prediction_std": 0.17729467777372213,
+        "target_mean": 0.5886450381679389,
+        "target_std": 0.40850906064376585,
+        "score_min": -0.2899456127491164,
+        "score_max": 0.8618564208571964,
+        "condition_ordering_accuracy": 0.7931034482758621,
+        "condition_ordering_comparisons": 1044
+      }
+    }
+  },
+  "paired_intervals": {
+    "draws": 2000,
+    "seed": 61021,
+    "groups": 1241,
+    "unit": "connected source-caption component",
+    "scope": "Test-sample uncertainty conditional on seed 7.",
+    "contrasts": {
+      "pearson_full_minus_mse_full": {
+        "spearman": {
+          "difference": -0.012690446545699674,
+          "ci95": [
+            -0.01961200267427497,
+            -0.005784136716802661
+          ]
+        },
+        "mse_0_1": {
+          "difference": -0.003046528068624599,
+          "ci95": [
+            -0.0046957934948502564,
+            -0.0013944856922555712
+          ]
+        }
+      },
+      "mse_full_minus_prefix": {
+        "spearman": {
+          "difference": 0.06875725808337207,
+          "ci95": [
+            0.051915958626092336,
+            0.08515306946295359
+          ]
+        },
+        "mse_0_1": {
+          "difference": -0.018596005416263356,
+          "ci95": [
+            -0.02206295906928878,
+            -0.015015254774304362
+          ]
+        }
+      },
+      "pearson_full_minus_prefix": {
+        "spearman": {
+          "difference": 0.038099517672318506,
+          "ci95": [
+            0.023701711816265465,
+            0.054129023815035766
+          ]
+        },
+        "mse_0_1": {
+          "difference": -0.032456140119686366,
+          "ci95": [
+            -0.037184474198524615,
+            -0.027653136653784268
+          ]
+        }
+      }
+    }
+  },
+  "compute": {
+    "mse": {
+      "updates": 5256,
+      "fit_seconds": 315.8091401020001,
+      "validation_seconds": 24.951044173000014,
+      "elapsed_seconds": 411.58440115499997,
+      "nonpadding_input_tokens": 9456864,
+      "peak_cuda_memory_bytes": 2034775552
+    },
+    "pearson": {
+      "updates": 5256,
+      "fit_seconds": 321.1594610020006,
+      "validation_seconds": 25.01202886099975,
+      "elapsed_seconds": 430.049919284,
+      "nonpadding_input_tokens": 9456864,
+      "peak_cuda_memory_bytes": 2034775552
+    }
+  },
+  "gpu_stage_seconds_including_native_publication": 1678.2878267770009,
+  "native_runs": [
+    {
+      "name": "initialize",
+      "path": "/home/machina/jep-csts-tranche1-20261023/experiments/csts_tranche1_e2545bb_79085977_initialize/runs/initialize/01M5NETD95H14Z3WKEX6BAGXCY/resolved.yaml",
+      "status": "succeeded",
+      "reference": {
+        "sha256": "7e75c56937f79bcc068c099b37b84eda4ccc57d6f0cfe6a259015fb00a64a310",
+        "bytes": 1042,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "942fceedfb83e5830a1b6563e1f0a6465ed304eb727840b2b317cab5a03f4b8c",
+          "path": "experiments/csts_tranche1_e2545bb_79085977_initialize/runs/initialize/01M5NETD95H14Z3WKEX6BAGXCY/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      }
+    },
+    {
+      "name": "train_mse",
+      "path": "/home/machina/jep-csts-tranche1-20261023/experiments/csts_tranche1_e2545bb_79085977_train_mse/runs/train_mse/01M5NEWQBZA5V3ZDMRZP6DQTTV/resolved.yaml",
+      "status": "succeeded",
+      "reference": {
+        "sha256": "2b983035ce304237582b9e3e07a8924b8fd3d0fef738f68d9d5174ca2c58382a",
+        "bytes": 1038,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "0edf7756949970267ad4040f1c05571fc8380883b9572359b0c70811e6f7961d",
+          "path": "experiments/csts_tranche1_e2545bb_79085977_train_mse/runs/train_mse/01M5NEWQBZA5V3ZDMRZP6DQTTV/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      }
+    },
+    {
+      "name": "train_pearson",
+      "path": "/home/machina/jep-csts-tranche1-20261023/experiments/csts_tranche1_e2545bb_79085977_train_pearson/runs/train_pearson/01M5NFDEBX6YJR5740B2A2D3CN/resolved.yaml",
+      "status": "succeeded",
+      "reference": {
+        "sha256": "9f51d9b6d7e62cd4375943f03efa295ba985cf4377772f90fee14a6932b22822",
+        "bytes": 1054,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "338854bae3cecf43d2fe14380f8a48c6c160d8adf2081693e981c9afaf83ed52",
+          "path": "experiments/csts_tranche1_e2545bb_79085977_train_pearson/runs/train_pearson/01M5NFDEBX6YJR5740B2A2D3CN/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      }
+    },
+    {
+      "name": "publish_test",
+      "path": "/home/machina/jep-csts-tranche1-20261023/experiments/csts_tranche1_e2545bb_79085977_publish_test/runs/publish_test/01M5NFYMYYT29VFB1EYD1Z1CTT/resolved.yaml",
+      "status": "succeeded",
+      "reference": {
+        "sha256": "7f33185b899b6bab0dd92ddb073f4031d7fc0c0d9279f7e700a2b32dbcf750d9",
+        "bytes": 1050,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "5f37ecbd826e5b2166867b0556974634d00920d9c561f18e553532f77988a0b8",
+          "path": "experiments/csts_tranche1_e2545bb_79085977_publish_test/runs/publish_test/01M5NFYMYYT29VFB1EYD1Z1CTT/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      }
+    },
+    {
+      "name": "checkpoint_mse_prefix",
+      "path": "/home/machina/jep-csts-tranche1-20261023/experiments/csts_tranche1_182cfc3_79085977_checkpoint_mse_prefix/runs/checkpoint_mse_prefix/01M5NGHNYT0N0KKYE5FSQT58MT/resolved.yaml",
+      "status": "succeeded",
+      "reference": {
+        "sha256": "286033ed7da846ad5002d7ec48b9211bf3d6e80afd559ce5d10bdcec35e72755",
+        "bytes": 1086,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "ef5cc5e1ae3138823024531114b2ad051e485f7b984e15701ab8fc10feaaf651",
+          "path": "experiments/csts_tranche1_182cfc3_79085977_checkpoint_mse_prefix/runs/checkpoint_mse_prefix/01M5NGHNYT0N0KKYE5FSQT58MT/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      }
+    },
+    {
+      "name": "test_mse_prefix",
+      "path": "/home/machina/jep-csts-tranche1-20261023/experiments/csts_tranche1_182cfc3_79085977_test_mse_prefix/runs/test_mse_prefix/01M5NGMMJR36DJRWAV78DV85F7/resolved.yaml",
+      "status": "succeeded",
+      "reference": {
+        "sha256": "ca704a75a5a8be39a6871d02b5d764eb07b9e8cb7abcd7ac0cf44ed00aff08a2",
+        "bytes": 1062,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "3072c82dd8bfb9bc41cc160d7f7d72b9e4f7bec6b0896d1394ff81641e709e05",
+          "path": "experiments/csts_tranche1_182cfc3_79085977_test_mse_prefix/runs/test_mse_prefix/01M5NGMMJR36DJRWAV78DV85F7/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      }
+    },
+    {
+      "name": "test_mse_full",
+      "path": "/home/machina/jep-csts-tranche1-20261023/experiments/csts_tranche1_182cfc3_79085977_test_mse_full/runs/test_mse_full/01M5NGR4STNF2AV7V4ET2DCYGQ/resolved.yaml",
+      "status": "succeeded",
+      "reference": {
+        "sha256": "e3190fde8e28eaaf7efd625f3de90c91a74e0b42f17cfc40a7be3560ac8c3483",
+        "bytes": 1054,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "e40bf13101629ed7b2562f3e5aaf2ec1048d639e025b5561646ad9ea316549da",
+          "path": "experiments/csts_tranche1_182cfc3_79085977_test_mse_full/runs/test_mse_full/01M5NGR4STNF2AV7V4ET2DCYGQ/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      }
+    },
+    {
+      "name": "checkpoint_pearson_prefix",
+      "path": "/home/machina/jep-csts-tranche1-20261023/experiments/csts_tranche1_182cfc3_79085977_checkpoint_pearson_prefix/runs/checkpoint_pearson_prefix/01M5NGVGAJRYYCH8A6VTHDH9CY/resolved.yaml",
+      "status": "succeeded",
+      "reference": {
+        "sha256": "117365353204a3d3ff7dc42506b1bc27d1f67d25a01012dea1d66a6116e01103",
+        "bytes": 1102,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "484f52d1d3e65e2a27fc3a62e6fc7d6fe1717a410d87d633af43be5a3d584932",
+          "path": "experiments/csts_tranche1_182cfc3_79085977_checkpoint_pearson_prefix/runs/checkpoint_pearson_prefix/01M5NGVGAJRYYCH8A6VTHDH9CY/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      }
+    },
+    {
+      "name": "test_pearson_prefix",
+      "path": "/home/machina/jep-csts-tranche1-20261023/experiments/csts_tranche1_182cfc3_79085977_test_pearson_prefix/runs/test_pearson_prefix/01M5NGY924276ZEBZBR2S571D2/resolved.yaml",
+      "status": "succeeded",
+      "reference": {
+        "sha256": "bc2521a23b3d3ecbbf42fd7c755e30c9065e4b5f719a93ed512c8703c15633a3",
+        "bytes": 1078,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "92052291dd4328a4607bffc00e021faa1ae47287d8d96ad55d9a943a97d7c3f5",
+          "path": "experiments/csts_tranche1_182cfc3_79085977_test_pearson_prefix/runs/test_pearson_prefix/01M5NGY924276ZEBZBR2S571D2/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      }
+    },
+    {
+      "name": "test_pearson_full",
+      "path": "/home/machina/jep-csts-tranche1-20261023/experiments/csts_tranche1_182cfc3_79085977_test_pearson_full/runs/test_pearson_full/01M5NH1HGYVQS1AX7T9ER29T0J/resolved.yaml",
+      "status": "succeeded",
+      "reference": {
+        "sha256": "e4ec937a6e7b81ac39cbc06d9cf71e4d3649573fd923ef88fc85692a8cab020a",
+        "bytes": 1070,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "5d0cff56ae866eacd0dcdef49b7210e4973df139bd992e36fead75ed8a0f3f91",
+          "path": "experiments/csts_tranche1_182cfc3_79085977_test_pearson_full/runs/test_pearson_full/01M5NH1HGYVQS1AX7T9ER29T0J/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      }
+    }
+  ],
+  "failed_evaluations": [
+    {
+      "name": "test_mse_prefix",
+      "path": "/home/machina/jep-csts-tranche1-20261023/experiments/csts_tranche1_e2545bb_79085977_test_mse_prefix/runs/test_mse_prefix/01M5NG007FBMVESNGSYAXQFS7V/resolved.yaml",
+      "resolved": {
+        "schema_version": 2,
+        "spec": {
+          "sha256": "d04eb99caeeffd96cf917b9386576705178a68584219087eedf7a2416a1e59d4",
+          "bytes": 5430,
+          "stored_at": {
+            "kind": "gcs",
+            "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+            "prefix": "viper",
+            "owner": "pvd232",
+            "workspace": "jep_csts_joint_20261021",
+            "revision": "3411c31a7a8701dcd0950eb7742fb51eaf5897afde864ffd9de69baaf2931cc5",
+            "path": "experiments/csts_tranche1_e2545bb_79085977_test_mse_prefix/runs/test_mse_prefix/01M5NG007FBMVESNGSYAXQFS7V/spec.yaml"
+          },
+          "kind": "run_spec"
+        },
+        "status": "failed",
+        "attempts": [
+          {
+            "sha256": "fb40377f07de3f8f079b2e45501c2366971c9afc3c1fe2b1026b636f934c9268",
+            "bytes": 4727,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_csts_joint_20261021",
+              "revision": "8f26c413c0867ce5189bdf2e045ad40e25f9a4ee4ec640e41e24cc59873146ad",
+              "path": "experiments/csts_tranche1_e2545bb_79085977_test_mse_prefix/runs/test_mse_prefix/01M5NG007FBMVESNGSYAXQFS7V/attempts/1/resolved.yaml"
+            },
+            "kind": "resolved_attempt"
+          }
+        ],
+        "successful_attempt_id": null,
+        "completed_at": "2026-10-23T23:04:15.958099Z"
+      },
+      "failure": {
+        "type": "RunError",
+        "message": "attempt 1 failed; evidence written to /home/machina/jep-csts-tranche1-20261023/experiments/csts_tranche1_e2545bb_79085977_test_mse_prefix/runs/test_mse_prefix/01M5NG007FBMVESNGSYAXQFS7V/resolved.yaml"
+      },
+      "gpu_seconds_already_charged": true
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "confirmed_at": "2026-10-24T01:16:18.465779+00:00",
+  "project": "mantra-477901",
+  "pilot": {
+    "name": "jep-csts-format-20261021",
+    "id": "8646910299736412654",
+    "zone": "asia-northeast3-a",
+    "status": "TERMINATED",
+    "last_start": "2026-10-23T17:45:44.155-07:00",
+    "last_stop": "2026-10-23T18:16:06.708-07:00"
+  },
+  "original": {
+    "name": "rico-source-l4-uswest4c",
+    "zone": "us-west4-c",
+    "status": "TERMINATED"
+  },
+  "pre_shutdown_guard": {
+    "status": "complete",
+    "gpu_processes": "",
+    "native_trainers": [],
+    "published_jobs": 5
+  },
+  "source_commit": "ffa81e7bbd6d26d152aadf966a787ce17293b9d0",
+  "report_commit": "097cf289e27045ae132f75c00da0bee5940899fb",
+  "collection_sha256": "81b09d41365494a4041c6bab6216565ec928349704c0bd8920c618e67a7dc342",
+  "report_publication": {
+    "sha256": "a8331a231deac40fc12d51272c8eb6961fe5c5e5c7daaf0df7d638171b7139b0",
+    "bytes": 1044,
+    "stored_at": {
+      "kind": "gcs",
+      "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+      "prefix": "viper",
+      "owner": "pvd232",
+      "workspace": "jep_csts_joint_20261021",
+      "revision": "cc868f04bb4c0f36d0c071f378a24301ad212d672a485159ec0a3f4d357e6311",
+      "path": "experiments/csts_continuation_report_20261023_097cf289e270/runs/report/01M5NQJ45H07GQS76S7CQ9H1F5/resolved.yaml"
+    },
+    "kind": "resolved_run"
+  },
+  "new_scoped_nat_removed": true,
+  "persistent_disks_preserved": true
+}

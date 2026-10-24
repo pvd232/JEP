@@ -1,0 +1,89 @@
+{
+  "definition": "Sum of MetricExecutionReceipt completed_at minus started_at from sealed successful EVAL receipts. These are worker-body intervals, excluding interpreter/module startup before worker main and whole-run graph/cloud verification.",
+  "viper_revision": "e4ce91fa0a9330e769644aba0fccdfe062d5d821",
+  "production_worker_body_seconds": 28.739196999999997,
+  "verification_worker_body_seconds": 28.768446000000004,
+  "candidates": {
+    "test_mse_prefix": {
+      "production_worker_body_seconds": 7.240815,
+      "verification_worker_body_seconds": 7.280663,
+      "receipts": [
+        {
+          "archive_path": "records/test_mse_prefix/metric_verification/test.test_mse.yaml",
+          "sha256": "a5bad22b59a4b83af72768ecb20c6720f0d30637985d53bfc8a99f3e6bfa6cd9",
+          "metric_id": "test_mse",
+          "production_worker_body_seconds": 3.60032,
+          "verification_worker_body_seconds": 3.605263
+        },
+        {
+          "archive_path": "records/test_mse_prefix/metric_verification/test.test_spearman.yaml",
+          "sha256": "4ba98ca6b5209357a3bc36c3a4f8128e27274b8cb341ded5b289900d1deca89a",
+          "metric_id": "test_spearman",
+          "production_worker_body_seconds": 3.640495,
+          "verification_worker_body_seconds": 3.6754
+        }
+      ]
+    },
+    "test_mse_full": {
+      "production_worker_body_seconds": 7.1851199999999995,
+      "verification_worker_body_seconds": 7.191865,
+      "receipts": [
+        {
+          "archive_path": "records/test_mse_full/metric_verification/test.test_mse.yaml",
+          "sha256": "bade9593ea299fd90b29c252610288805478f5b26642a3fddbacc6637678ae56",
+          "metric_id": "test_mse",
+          "production_worker_body_seconds": 3.596845,
+          "verification_worker_body_seconds": 3.601167
+        },
+        {
+          "archive_path": "records/test_mse_full/metric_verification/test.test_spearman.yaml",
+          "sha256": "81c9e87a4e270b71dbce63af5214e023730dcfbb8da71a259f68f67666778bf1",
+          "metric_id": "test_spearman",
+          "production_worker_body_seconds": 3.588275,
+          "verification_worker_body_seconds": 3.590698
+        }
+      ]
+    },
+    "test_pearson_prefix": {
+      "production_worker_body_seconds": 7.17479,
+      "verification_worker_body_seconds": 7.162586,
+      "receipts": [
+        {
+          "archive_path": "records/test_pearson_prefix/metric_verification/test.test_mse.yaml",
+          "sha256": "5ce70f774659f58ac9e51b9c22b154d9f05162f959ba1f73a66c2fc8a5015681",
+          "metric_id": "test_mse",
+          "production_worker_body_seconds": 3.592104,
+          "verification_worker_body_seconds": 3.581328
+        },
+        {
+          "archive_path": "records/test_pearson_prefix/metric_verification/test.test_spearman.yaml",
+          "sha256": "c47b6e0a6d03aa386b12cab8dd5bc7603a85ace740c9e690d089d864b2fb67b0",
+          "metric_id": "test_spearman",
+          "production_worker_body_seconds": 3.582686,
+          "verification_worker_body_seconds": 3.581258
+        }
+      ]
+    },
+    "test_pearson_full": {
+      "production_worker_body_seconds": 7.138472,
+      "verification_worker_body_seconds": 7.133332,
+      "receipts": [
+        {
+          "archive_path": "records/test_pearson_full/metric_verification/test.test_mse.yaml",
+          "sha256": "d65aee42901dc2da1c688a82165e006f490f222655ab72c3409c886ed0e7f37e",
+          "metric_id": "test_mse",
+          "production_worker_body_seconds": 3.561752,
+          "verification_worker_body_seconds": 3.558485
+        },
+        {
+          "archive_path": "records/test_pearson_full/metric_verification/test.test_spearman.yaml",
+          "sha256": "9ab5ebb7e4dfd292d34ec1b8ae126a2b83ee3dc4a5a9d134ea2b47a6d78000c3",
+          "metric_id": "test_spearman",
+          "production_worker_body_seconds": 3.57672,
+          "verification_worker_body_seconds": 3.574847
+        }
+      ]
+    }
+  },
+  "mean_verification_worker_body_seconds_per_checkpoint": 7.192111500000001
+}

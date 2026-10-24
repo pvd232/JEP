@@ -1,0 +1,30 @@
+{
+  "definition": "Prediction loop timing comes from sealed native artifacts. Stage envelopes use cumulative runner counters observed after each invocation, including publication and verification.",
+  "native_gpu_counter_after_training": 1106.611492177,
+  "native_gpu_counter_after_failed_eval": 1240.1908378680002,
+  "native_gpu_counter_after_mse_prefix": 1355.0953793540004,
+  "native_gpu_counter_after_mse_full": 1465.1893430510006,
+  "native_gpu_counter_after_pearson_prefix": 1572.149241929001,
+  "native_gpu_counter_after_pearson_full": 1678.2878267770009,
+  "successful_prediction_loop_seconds": 8.622390995999922,
+  "successful_native_eval_envelopes_seconds": 438.09698890900063,
+  "failed_native_eval_envelope_seconds": 133.5793456910003,
+  "candidates": {
+    "mse_prefix": {
+      "prediction_seconds": 2.162127092999981,
+      "rows": 2620
+    },
+    "mse_full": {
+      "prediction_seconds": 2.1533552910000253,
+      "rows": 2620
+    },
+    "pearson_prefix": {
+      "prediction_seconds": 2.151643321999927,
+      "rows": 2620
+    },
+    "pearson_full": {
+      "prediction_seconds": 2.1552652899999885,
+      "rows": 2620
+    }
+  }
+}

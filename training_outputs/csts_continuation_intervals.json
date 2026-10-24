@@ -1,0 +1,57 @@
+{
+  "draws": 2000,
+  "seed": 61021,
+  "groups": 1241,
+  "unit": "connected source-caption component",
+  "scope": "Test-sample uncertainty conditional on seed 7.",
+  "contrasts": {
+    "mse_continued_minus_original": {
+      "spearman": {
+        "difference": 0.009521576474257332,
+        "ci95": [
+          0.006371059229022424,
+          0.012439736743016322
+        ]
+      },
+      "mse_0_1": {
+        "difference": -0.0017951868878594568,
+        "ci95": [
+          -0.0023961617590129505,
+          -0.0011454740163912862
+        ]
+      }
+    },
+    "pearson_continued_minus_original": {
+      "spearman": {
+        "difference": 0.002935124810223011,
+        "ci95": [
+          -0.00015936200692785173,
+          0.006066231326557958
+        ]
+      },
+      "mse_0_1": {
+        "difference": -0.0009037924253891272,
+        "ci95": [
+          -0.001611306783473112,
+          -0.00019707379108733022
+        ]
+      }
+    },
+    "pearson_continued_minus_mse_continued": {
+      "spearman": {
+        "difference": -0.019276898209733995,
+        "ci95": [
+          -0.02700082073146995,
+          -0.011513092398760938
+        ]
+      },
+      "mse_0_1": {
+        "difference": -0.002155133606154269,
+        "ci95": [
+          -0.00410977920837779,
+          -0.00014600051939712104
+        ]
+      }
+    }
+  }
+}

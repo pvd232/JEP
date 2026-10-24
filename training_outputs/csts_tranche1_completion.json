@@ -1,0 +1,93 @@
+{
+  "status": "complete",
+  "completed_at": "2026-10-23T23:30:22.068247+00:00",
+  "training_source_commit": "e2545bbc8e509d12b01e12ce43435b897bcb410f",
+  "evaluation_source_commit": "182cfc35e5ab528e1239668b881c1779ffba0437",
+  "github_report_commit": "3c5cc562bc3634a6113e138df58a1ebcc7c817ae",
+  "native_report": {
+    "source_commit": "3c5cc562bc3634a6113e138df58a1ebcc7c817ae",
+    "artifact": {
+      "stored_at": {
+        "kind": "gcs",
+        "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+        "prefix": "viper",
+        "owner": "pvd232",
+        "workspace": "jep_csts_joint_20261021",
+        "revision": "dcbeffb1046d4d4413c1d8178367512c859bd4a10e1d5617029b6c5c6790ee3f",
+        "path": "experiments/csts_tranche1_report_20261023_3c5cc562bc36/runs/report/01M5NHGYKD8GE582N4W4Q6NTTW/artifacts/publish/bundle/tranche1_report.zip"
+      },
+      "sha256": "58fb83f4e994b27133ef400bfe6fea85b09fefa804cad7a7f82ade74dd6b9bfc",
+      "bytes": 6463689,
+      "restored_and_checksum_verified": true
+    },
+    "status": "succeeded",
+    "reference": {
+      "sha256": "56368e94f1575df17f2a2504c315a42106b758dea5b0c35bd92455e1edc6052c",
+      "bytes": 1036,
+      "stored_at": {
+        "kind": "gcs",
+        "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+        "prefix": "viper",
+        "owner": "pvd232",
+        "workspace": "jep_csts_joint_20261021",
+        "revision": "49531fcb4afed33ffeda0b9745b1ded7c18b2646f706600375c5194a05fd827b",
+        "path": "experiments/csts_tranche1_report_20261023_3c5cc562bc36/runs/report/01M5NHGYKD8GE582N4W4Q6NTTW/resolved.yaml"
+      },
+      "kind": "resolved_run"
+    },
+    "verified_measurements": 0,
+    "scope": "Completed report bundle; training and evaluations retain their original references."
+  },
+  "successful_training_and_evaluation_runs_verified": 10,
+  "measurements_verified": 152,
+  "collected_files_verified": 132,
+  "cloud_shutdown": {
+    "confirmed_at": "2026-10-23T23:29:23.563502+00:00",
+    "project": "mantra-477901",
+    "pilot": {
+      "name": "jep-csts-format-20261021",
+      "id": "8646910299736412654",
+      "zone": "asia-northeast3-a",
+      "status": "TERMINATED",
+      "last_start": "2026-10-23T15:40:02.638-07:00",
+      "last_stop": "2026-10-23T16:29:12.128-07:00",
+      "vm_start_to_stop_seconds": 2949.49
+    },
+    "original": {
+      "name": "rico-source-l4-uswest4c",
+      "zone": "us-west4-c",
+      "status": "TERMINATED"
+    },
+    "pre_shutdown_guard": {
+      "status": "complete",
+      "last_observed_at": "2026-10-23T23:22:10.563888+00:00",
+      "gpu_processes_at_last_observation": "",
+      "collection_verified": true,
+      "ssh_access": "pam_nologin ahead of safety shutdown",
+      "native_cpu_publication": "moved to Mac; remote publication command never launched"
+    },
+    "source_commit": "e2545bbc8e509d12b01e12ce43435b897bcb410f",
+    "collection_sha256": "075ef598f0138502b94ed12076a7767e758dc91d67d78c9968cd26dc0f530079",
+    "report_publication": {
+      "sha256": "56368e94f1575df17f2a2504c315a42106b758dea5b0c35bd92455e1edc6052c",
+      "bytes": 1036,
+      "stored_at": {
+        "kind": "gcs",
+        "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+        "prefix": "viper",
+        "owner": "pvd232",
+        "workspace": "jep_csts_joint_20261021",
+        "revision": "49531fcb4afed33ffeda0b9745b1ded7c18b2646f706600375c5194a05fd827b",
+        "path": "experiments/csts_tranche1_report_20261023_3c5cc562bc36/runs/report/01M5NHGYKD8GE582N4W4Q6NTTW/resolved.yaml"
+      },
+      "kind": "resolved_run"
+    },
+    "native_cpu_publication_deferred_to_mac": true,
+    "github_report_sha": "3c5cc562bc3634a6113e138df58a1ebcc7c817ae",
+    "new_scoped_nat_removed": true,
+    "persistent_disks_preserved": true,
+    "native_report_artifact_verified": true,
+    "native_report_execution_location": "Mac CPU"
+  },
+  "collaborative_walkthrough": "open; execution separately authorized"
+}
