@@ -131,26 +131,33 @@ def evidence_tokens(
     max_answer_tokens: int,
 ) -> dict[str, tuple[list[int], list[int]]]:
     """Append evidence after the exact embedding prefix; label answer tokens only."""
-    result = {}
-    eod = tokenizer.get_vocab()[EOD]
+    entries = {}
     for row in rows:
         for side in ("sentence1", "sentence2"):
             key = answer_id(row[side], row["condition"])
-            if key in result or key not in mapping:
-                continue
-            prefix = token_sequences(
-                tokenizer, [(row["condition"], row[side])], config
-            )[0]
-            answer = tokenizer(mapping[key], add_special_tokens=False)["input_ids"]
-            if not answer or len(answer) + 1 > max_answer_tokens:
-                raise ValueError(
-                    "An evidence answer is empty or exceeds its declared token ceiling."
-                )
-            # The prefix includes EOD, as at embedding inference. Under causal
-            # attention, evidence tokens cannot change any prefix hidden state.
-            tokens = prefix + answer + [eod]
-            labels = [-100] * len(prefix) + answer + [eod]
-            result[key] = (tokens, labels)
+            if key in mapping and key not in entries:
+                entries[key] = (row["condition"], row[side])
+    if not entries:
+        raise ValueError("No accepted evidence tokens to prepare.")
+    # Batch both calls. The shared prefix tokenizer checks the full vocabulary;
+    # repeating that operation per answer is expensive for Qwen's 151k tokens.
+    prefixes = token_sequences(tokenizer, list(entries.values()), config)
+    answers = tokenizer(
+        [mapping[key] for key in entries],
+        add_special_tokens=False,
+        padding=False,
+        truncation=False,
+    )["input_ids"]
+    eod = tokenizer.get_vocab()[EOD]
+    result = {}
+    for key, prefix, answer in zip(entries, prefixes, answers, strict=True):
+        if not answer or len(answer) + 1 > max_answer_tokens:
+            raise ValueError(
+                "An evidence answer is empty or exceeds its declared token ceiling."
+            )
+        # The prefix includes EOD, as at embedding inference. Under causal
+        # attention, evidence tokens cannot change any prefix hidden state.
+        result[key] = (prefix + answer + [eod], [-100] * len(prefix) + answer + [eod])
     return result
 
 

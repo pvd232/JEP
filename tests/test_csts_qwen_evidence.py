@@ -52,6 +52,43 @@ def test_only_answer_tokens_and_terminator_are_labels():
     assert set(sequences) == {key}
 
 
+def test_evidence_preparation_batches_vocabulary_and_tokenizer_work():
+    from csts_pilot.answers import answer_id
+
+    class CountingTokenizer(Tokenizer):
+        vocabulary_calls = 0
+        encode_calls = 0
+
+        def get_vocab(self):
+            self.vocabulary_calls += 1
+            return super().get_vocab()
+
+        def __call__(self, texts, **kwargs):
+            self.encode_calls += 1
+            return super().__call__(texts, **kwargs)
+
+    rows = [
+        {
+            "condition": "color",
+            "sentence1": f"red car {i}",
+            "sentence2": f"blue car {i}",
+        }
+        for i in range(20)
+    ]
+    mapping = {
+        answer_id(row[side], row["condition"]): "red"
+        for row in rows
+        for side in ("sentence1", "sentence2")
+    }
+    tokenizer = CountingTokenizer()
+    result = evidence_tokens(
+        rows, mapping, tokenizer, FitConfig(kind="lora", device="cpu"), 8
+    )
+    assert len(result) == 40
+    assert tokenizer.encode_calls == 2
+    assert tokenizer.vocabulary_calls == 2
+
+
 def test_evidence_ce_matches_manual_causal_per_answer_average():
     torch.manual_seed(42)
     hidden = torch.randn(2, 6, 8, requires_grad=True)

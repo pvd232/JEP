@@ -4,7 +4,7 @@ Code review is complete. Execution remains gated on the real-model CUDA prefligh
 
 ## Checks completed
 
-- All **146 tests passed**, including the complete two-arm, two-phase transition with real tiny Qwen and PEFT models.
+- All **147 tests passed**, including the complete two-arm, two-phase transition with real tiny Qwen and PEFT models.
 - Ruff passed. Pyrefly reported **zero errors**, using the pinned GPU Python environment through `--python-interpreter-path`.
 - Prefix and padding labels are ignored. Answer labels are shifted causally. Per-answer mean cross-entropy and gradient accumulation agree with an independently computed reference.
 - Appending answer tokens cannot change prefix hidden states under causal attention. Inference uses only the original conditioned-passage prefix.
@@ -14,6 +14,8 @@ Code review is complete. Execution remains gated on the real-model CUDA prefligh
 - Both final checkpoints are frozen before test publication. Existing native prediction capture and independent CPU EVAL are reused without changing their metric or cohort contracts.
 - Native attempts and input identities are retained. Existing local sealing and asynchronous VIPER publication are reused. No training or score reporting waits for cloud promotion.
 - Live trace updates now expose batch progress and completed-epoch validation results while a native rating stage is running.
+
+The preflight caught repeated full-vocabulary reads during evidence tokenization. Prefixes and answers now tokenize in batches; the regression check bounds vocabulary reads independently of the number of examples.
 
 ## CUDA gate
 
