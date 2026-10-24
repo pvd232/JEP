@@ -1,5 +1,7 @@
 # Tranche 2 implementation review
 
+The first-pass review below preceded execution. Both phases subsequently completed on October 24, 2026 (UTC), at source `cd6d14accb1213d797305cd7c581224d4422164d`. The [results report](../training_outputs/csts_tranche2_report.md) records the measured comparison; the final section below records the live checks.
+
 Base: `86b629d54395057465244d708139984929895900`. Scope: the five new `baseline_*` modules, frozen settings, dependency manifest, focused tests and experiment plan. The completed Tranche 1 branch and reports remain unchanged. This PR is stacked on PR #1.
 
 The first implementation adds a frozen-embedding phase and a separately launched LoRA phase. It reuses the existing native stage interfaces, validation stopping tracker, artifact loaders, independent metric workers and durable publication queue. The new code owns the Qwen representation, scorer fitting and phase selection. Existing VIPER and JEP interfaces retain their behavior.
@@ -32,3 +34,13 @@ The test environment uses the existing Python environment and pinned VIPER suppo
 The CPU fixtures exercise actual Qwen and PEFT gradients, ridge normal equations in both matrix regimes, symmetric pair features, partial-batch weighting, validation patience, terminal-state continuation, deterministic pair order, source recovery, test-data checks, native stage declarations, report identities and delayed publication behavior.
 
 Live boundaries: the full 8B weights, actual CUDA peak memory, throughput, GPU numerical behavior and production cloud promotion are outside these CPU checks. A live source/runtime check precedes experiment launch. The source-host uploader requires completed publication receipts before shutdown; cross-host publication transfer remains separate work.
+
+## Live execution verification
+
+The execution host repeated the 44 focused checks successfully. Native VIPER remained at `e4ce91fa0a9330e769644aba0fccdfe062d5d821`. The full Qwen backbone passed the L4 memory, throughput and finite-unit-vector checks in the [CUDA receipt](../training_outputs/csts_tranche2_cuda_preflight.json). The [adapter receipt](../training_outputs/csts_tranche2_lora_preflight.json) verifies finite adapter gradients and frozen base parameters using zero optimizer updates before the authorized adapter launch.
+
+The frozen phase completed 15 native runs and 84 verified measurements. The adapter phase completed four native runs and five verified measurements. Each phase froze its checkpoint selection before test prediction capture. Independent CPU evaluation consumed the sealed predictions. Every run acquired a completed cloud publication receipt; collection verified the native graphs and retained exact exported bytes.
+
+Projection selected epoch 19 and stopped at epoch 24 through validation patience five. LoRA completed one epoch and 219 updates, then stopped because the remaining fitting allowance could cover less than the reserved duration of another complete epoch. Warmup remained in progress. Best and terminal artifacts, optimizer state and data-order state retain their original sealed references.
+
+The [cloud restoration record](../training_outputs/csts_tranche2_cloud_restoration.json) and [collection receipt](../training_outputs/csts_tranche2_collection.json) preserve the resulting verification and transfer evidence. Final report publication and cloud shutdown have separate receipts alongside the results.

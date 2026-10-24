@@ -1,6 +1,6 @@
 # Tranche 2: stronger encoder baselines
 
-**Status: implementation prepared for review.** Experiment launch is a separate action. The branch inherits Tranche 1's completed results, training utilities and asynchronous VIPER publication queue. Previous measurements retain their original source and bytes.
+**Status: both phases executed on October 24, 2026 (UTC), from `cd6d14accb1213d797305cd7c581224d4422164d`.** The design below records the approved plan. The [results report](../training_outputs/csts_tranche2_report.md) gives the measured outcomes and resource limits. The branch inherits Tranche 1's completed results, training utilities and asynchronous VIPER publication queue. Previous measurements retain their original source and bytes.
 
 ## Question and context
 
@@ -20,7 +20,7 @@ Hypotheses: frozen Qwen embeddings can improve over the FLAN reference; supervis
 
 Run the first four systems in the `frozen` phase. Encode unique passage–condition inputs once for training and validation, fit every head, and freeze their selection document before exposing test inputs. Cache test embeddings once afterward. This ordering separates reusable measurement from downstream fitting and scoring.
 
-The `lora` phase is a separate explicit launch after reviewing the frozen-phase results and the live memory/throughput observation. Its runner trains and freezes the adapter before test access. The default command only displays settings. This PR includes both phase implementations; setup leaves both unexecuted.
+The `lora` phase is a separate explicit launch after reviewing the frozen-phase results and the live memory/throughput observation. Its runner trains and freezes the adapter before test access. The default command only displays settings. Preparation included both phase implementations; each phase was executed after user approval.
 
 The runner requires a completed frozen-phase summary with the same cohort and representation before LoRA starts. Use `--frozen-summary <path>` to name a frozen run other than `baseline_results/frozen/initial/summary.json`. One workspace-level lock serializes Tranche 2 launches. Publication workers retain their independent CPU lock.
 

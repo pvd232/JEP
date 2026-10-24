@@ -1,0 +1,81 @@
+{
+  "status": "checkpoints_frozen",
+  "candidates": {
+    "lora": {
+      "sha256": "4c5120eb85f6bb2d092a5ac4f08ac462136bccdcc60598f06d82e2ae2706e573",
+      "run": {
+        "name": "train_lora",
+        "status": "succeeded",
+        "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_9c5ad2d2_train_lora/runs/train_lora/01M5NZ2G9G2GT8RBBA6ZNA3GC3/resolved.yaml",
+        "reference": {
+          "sha256": "6aa6ad3367328f4504dbc475ae1e6b75d0b0b3fab6af41eebd0592d3134a228b",
+          "bytes": 1058,
+          "stored_at": {
+            "kind": "local",
+            "workspace": "/home/machina/jep-csts-tranche2-20261023",
+            "store": ".viper/store",
+            "store_id": "2d4879a006d16034ff3c985f9117f460",
+            "commit": "13962ed2ba4dc22cfec3816097962015d650fa9b09340b9d5eabc04801f22462",
+            "path": "experiments/csts_tranche2_cd6d14ac_9c5ad2d2_train_lora/runs/train_lora/01M5NZ2G9G2GT8RBBA6ZNA3GC3/resolved.yaml"
+          },
+          "kind": "resolved_run"
+        },
+        "local_run_seconds": 2053.266161326,
+        "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/fc10bd473a776f875c3b0d8bdcfa2ef17b4782cf7861260b91c3137a2bcc765d.json"
+      },
+      "epoch": 1,
+      "validation": {
+        "n": 1830,
+        "mse_0_1": 0.05186571084475896,
+        "mse_1_5": 0.8298513735161434,
+        "spearman": 0.6667722886017582,
+        "prediction_mean": 0.5673495068535453,
+        "target_mean": 0.5542349726775956,
+        "prediction_std": 0.17813436333604302,
+        "target_std": 0.30337777758989165,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 181,
+            "mean": 0.4141976037654429
+          },
+          "2.0": {
+            "n": 304,
+            "mean": 0.45091132971605186
+          },
+          "3.0": {
+            "n": 627,
+            "mean": 0.5072842396950228
+          },
+          "4.0": {
+            "n": 373,
+            "mean": 0.6440157828797604
+          },
+          "5.0": {
+            "n": 345,
+            "mean": 0.776572990503864
+          }
+        },
+        "condition_changes": {
+          "n": 721,
+          "correct": 615,
+          "ties": 0,
+          "accuracy_ties_half": 0.8529819694868238,
+          "difference_mse": 0.13121007787116734,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      }
+    }
+  },
+  "provisional_winner": "lora",
+  "choice_split": "validation",
+  "tie_rule": "earlier declared scorer; earlier epoch; larger ridge alpha",
+  "test_scores_used_for_selection": false,
+  "encoder": {
+    "model_id": "Qwen/Qwen3-Embedding-8B",
+    "revision": "c90816d848505624c2434128dfc61132162a0ee9",
+    "max_length": 160,
+    "embedding_dimension": 4096,
+    "prompt": "Instruct: Represent the passage for semantic similarity with respect to this condition: {condition}\nQuery: {passage}",
+    "pooling": "last_nonpadding_eod_float32_unit_norm"
+  }
+}

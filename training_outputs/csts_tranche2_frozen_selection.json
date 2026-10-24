@@ -1,0 +1,273 @@
+{
+  "status": "checkpoints_frozen",
+  "candidates": {
+    "mean": {
+      "sha256": "707204056c7c018f5aa0a72b3b6b6cad9aa7e068771f217fa12e12eb9eddd33b",
+      "run": {
+        "name": "train_mean",
+        "status": "succeeded",
+        "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_1bffccb7_train_mean/runs/train_mean/01M5NY4Y9JF2GN909333EQYGZH/resolved.yaml",
+        "reference": {
+          "sha256": "6fd7c878309f0ca461d10c299946c5a72b7915e44d01df0cab9465a3f5ac6c1b",
+          "bytes": 1058,
+          "stored_at": {
+            "kind": "local",
+            "workspace": "/home/machina/jep-csts-tranche2-20261023",
+            "store": ".viper/store",
+            "store_id": "2d4879a006d16034ff3c985f9117f460",
+            "commit": "d3a178d8d4ee2e99e17a1be33c98093e4f4a39b3d4a6b1dd3e0fc0e420dd9350",
+            "path": "experiments/csts_tranche2_cd6d14ac_1bffccb7_train_mean/runs/train_mean/01M5NY4Y9JF2GN909333EQYGZH/resolved.yaml"
+          },
+          "kind": "resolved_run"
+        },
+        "local_run_seconds": 37.29511942399995,
+        "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/df7340c40e1c9b92b8fa9aa1b5fb1d098dcc2a036b111373892b1893c2d51122.json"
+      },
+      "epoch": 0,
+      "validation": {
+        "n": 1830,
+        "mse_0_1": 0.09203845723442874,
+        "mse_1_5": 1.47261531575086,
+        "spearman": null,
+        "prediction_mean": 0.5536174785100288,
+        "target_mean": 0.5542349726775956,
+        "prediction_std": 2.220446049250313e-16,
+        "target_std": 0.30337777758989165,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 181,
+            "mean": 0.5536174785100286
+          },
+          "2.0": {
+            "n": 304,
+            "mean": 0.5536174785100286
+          },
+          "3.0": {
+            "n": 627,
+            "mean": 0.5536174785100286
+          },
+          "4.0": {
+            "n": 373,
+            "mean": 0.5536174785100287
+          },
+          "5.0": {
+            "n": 345,
+            "mean": 0.5536174785100287
+          }
+        },
+        "condition_changes": {
+          "n": 721,
+          "correct": 0,
+          "ties": 721,
+          "accuracy_ties_half": 0.5,
+          "difference_mse": 0.28502080443828015,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      }
+    },
+    "cosine": {
+      "sha256": "d2f3f4af932fdeaa52c0bf9dfbfe8f5137021696f562d05d40f9c59b2ba85f48",
+      "run": {
+        "name": "train_cosine",
+        "status": "succeeded",
+        "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_1bffccb7_train_cosine/runs/train_cosine/01M5NY62QBVNAGBR420CC2873A/resolved.yaml",
+        "reference": {
+          "sha256": "c0b99c727cd035e0ee3350a464bf3e9d2ad1a6a02a83413625ee68d5f49fcf4a",
+          "bytes": 1066,
+          "stored_at": {
+            "kind": "local",
+            "workspace": "/home/machina/jep-csts-tranche2-20261023",
+            "store": ".viper/store",
+            "store_id": "2d4879a006d16034ff3c985f9117f460",
+            "commit": "01352d0cd2dd82ce78fde5120467f3036abdc2ad7e6f48bd26dac031ba609e13",
+            "path": "experiments/csts_tranche2_cd6d14ac_1bffccb7_train_cosine/runs/train_cosine/01M5NY62QBVNAGBR420CC2873A/resolved.yaml"
+          },
+          "kind": "resolved_run"
+        },
+        "local_run_seconds": 33.867634339000006,
+        "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/c5e2e15c1837543b1ace0a3faea6255829c2c934f17c291d3a20d9414cc062d6.json"
+      },
+      "epoch": 0,
+      "validation": {
+        "n": 1830,
+        "mse_0_1": 0.13039700607548735,
+        "mse_1_5": 2.0863520972077976,
+        "spearman": 0.3334018406178779,
+        "prediction_mean": 0.7709310019602541,
+        "target_mean": 0.5542349726775956,
+        "prediction_std": 0.0652941775562222,
+        "target_std": 0.30337777758989165,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 181,
+            "mean": 0.7543731190223062
+          },
+          "2.0": {
+            "n": 304,
+            "mean": 0.7425950683261219
+          },
+          "3.0": {
+            "n": 627,
+            "mean": 0.7599467646562311
+          },
+          "4.0": {
+            "n": 373,
+            "mean": 0.7830789141936213
+          },
+          "5.0": {
+            "n": 345,
+            "mean": 0.811415193737417
+          }
+        },
+        "condition_changes": {
+          "n": 721,
+          "correct": 441,
+          "ties": 0,
+          "accuracy_ties_half": 0.6116504854368932,
+          "difference_mse": 0.2744696109274098,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      }
+    },
+    "ridge": {
+      "sha256": "1d655f1d43cc179f272911d89b42e404677bf3dfa77f541abd6c5257191e685d",
+      "run": {
+        "name": "train_ridge",
+        "status": "succeeded",
+        "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_1bffccb7_train_ridge/runs/train_ridge/01M5NY73T35S4R4CPRFQA3JV02/resolved.yaml",
+        "reference": {
+          "sha256": "53de4fe7999f467999894b1d7a9da1216fecd773415f51b0218a21eab7c39e7e",
+          "bytes": 1062,
+          "stored_at": {
+            "kind": "local",
+            "workspace": "/home/machina/jep-csts-tranche2-20261023",
+            "store": ".viper/store",
+            "store_id": "2d4879a006d16034ff3c985f9117f460",
+            "commit": "fd43209b8981e9bcf2232dc29e3cce4aa933ac4c2472a03eef7c77727321a36f",
+            "path": "experiments/csts_tranche2_cd6d14ac_1bffccb7_train_ridge/runs/train_ridge/01M5NY73T35S4R4CPRFQA3JV02/resolved.yaml"
+          },
+          "kind": "resolved_run"
+        },
+        "local_run_seconds": 82.49323926900001,
+        "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/c3969dd491db00abf785f6433bfae532ddd7dce4b95d72484592da439b5ada79.json"
+      },
+      "epoch": 0,
+      "validation": {
+        "n": 1830,
+        "mse_0_1": 0.05969795601720618,
+        "mse_1_5": 0.9551672962752988,
+        "spearman": 0.5889056708853535,
+        "prediction_mean": 0.5505795806858365,
+        "target_mean": 0.5542349726775956,
+        "prediction_std": 0.20929664136225312,
+        "target_std": 0.30337777758989165,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 181,
+            "mean": 0.335240809394639
+          },
+          "2.0": {
+            "n": 304,
+            "mean": 0.46260116575989213
+          },
+          "3.0": {
+            "n": 627,
+            "mean": 0.49106719232838986
+          },
+          "4.0": {
+            "n": 373,
+            "mean": 0.6364502741291528
+          },
+          "5.0": {
+            "n": 345,
+            "mean": 0.7563948113726655
+          }
+        },
+        "condition_changes": {
+          "n": 721,
+          "correct": 616,
+          "ties": 0,
+          "accuracy_ties_half": 0.8543689320388349,
+          "difference_mse": 0.1356580789625762,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      }
+    },
+    "projection": {
+      "sha256": "125a90e7f586e0098552ccae0f394593a160916cd6dafdb73e5d8259e280d144",
+      "run": {
+        "name": "train_projection",
+        "status": "succeeded",
+        "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_cd6d14ac_1bffccb7_train_projection/runs/train_projection/01M5NY9MCBKJ0GKYENWRNRP6V0/resolved.yaml",
+        "reference": {
+          "sha256": "0e59b577c6bb041120889a3fa89db364a9ae0946195f4a454cb64199eae7b03d",
+          "bytes": 1082,
+          "stored_at": {
+            "kind": "local",
+            "workspace": "/home/machina/jep-csts-tranche2-20261023",
+            "store": ".viper/store",
+            "store_id": "2d4879a006d16034ff3c985f9117f460",
+            "commit": "2590c348784df2f3c505ce8ea97f344ef95d281b456ff29e0a62421624b60963",
+            "path": "experiments/csts_tranche2_cd6d14ac_1bffccb7_train_projection/runs/train_projection/01M5NY9MCBKJ0GKYENWRNRP6V0/resolved.yaml"
+          },
+          "kind": "resolved_run"
+        },
+        "local_run_seconds": 78.48174656399988,
+        "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/7eeb53fefcd42cae86a385e089a0b4efce2e8f1625a2f21f551d93dae89d04c9.json"
+      },
+      "epoch": 19,
+      "validation": {
+        "n": 1830,
+        "mse_0_1": 0.05990415097624463,
+        "mse_1_5": 0.9584664156199141,
+        "spearman": 0.6424206754325978,
+        "prediction_mean": 0.5647063190870679,
+        "target_mean": 0.5542349726775956,
+        "prediction_std": 0.23482905070063595,
+        "target_std": 0.30337777758989165,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 181,
+            "mean": 0.3105629740118239
+          },
+          "2.0": {
+            "n": 304,
+            "mean": 0.4480706888502219
+          },
+          "3.0": {
+            "n": 627,
+            "mean": 0.5078720703269496
+          },
+          "4.0": {
+            "n": 373,
+            "mean": 0.6767722803240407
+          },
+          "5.0": {
+            "n": 345,
+            "mean": 0.7829429784546728
+          }
+        },
+        "condition_changes": {
+          "n": 721,
+          "correct": 619,
+          "ties": 0,
+          "accuracy_ties_half": 0.8585298196948682,
+          "difference_mse": 0.12661527221764568,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      }
+    }
+  },
+  "provisional_winner": "projection",
+  "choice_split": "validation",
+  "tie_rule": "earlier declared scorer; earlier epoch; larger ridge alpha",
+  "test_scores_used_for_selection": false,
+  "encoder": {
+    "model_id": "Qwen/Qwen3-Embedding-8B",
+    "revision": "c90816d848505624c2434128dfc61132162a0ee9",
+    "max_length": 160,
+    "embedding_dimension": 4096,
+    "prompt": "Instruct: Represent the passage for semantic similarity with respect to this condition: {condition}\nQuery: {passage}",
+    "pooling": "last_nonpadding_eod_float32_unit_norm"
+  }
+}

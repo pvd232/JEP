@@ -1,0 +1,84 @@
+{
+  "status": "complete",
+  "config": {
+    "schema_version": 2,
+    "model_id": "Qwen/Qwen3-Embedding-8B",
+    "revision": "c90816d848505624c2434128dfc61132162a0ee9",
+    "max_length": 160,
+    "embedding_dimension": 4096,
+    "encode_batch_size": 4,
+    "device": "cpu",
+    "kind": "mean",
+    "seed": 7,
+    "projection_dimension": 128,
+    "ridge_alphas": [
+      1e-05,
+      0.0001,
+      0.001,
+      0.01,
+      0.1,
+      1.0
+    ],
+    "learning_rate": 0.001,
+    "batch_size": 32,
+    "microbatch_size": 32,
+    "max_epochs": 48,
+    "start_epoch": 0,
+    "patience": 5,
+    "weight_decay": 0.01,
+    "schedule": "constant",
+    "warmup_fraction": 0.0,
+    "max_seconds": 1800.0,
+    "lora_rank": 32,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05
+  },
+  "candidates": [
+    {
+      "alpha": null,
+      "validation": {
+        "n": 1830,
+        "mse_0_1": 0.09203845723442874,
+        "mse_1_5": 1.47261531575086,
+        "spearman": null,
+        "prediction_mean": 0.5536174785100288,
+        "target_mean": 0.5542349726775956,
+        "prediction_std": 2.220446049250313e-16,
+        "target_std": 0.30337777758989165,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 181,
+            "mean": 0.5536174785100286
+          },
+          "2.0": {
+            "n": 304,
+            "mean": 0.5536174785100286
+          },
+          "3.0": {
+            "n": 627,
+            "mean": 0.5536174785100286
+          },
+          "4.0": {
+            "n": 373,
+            "mean": 0.5536174785100287
+          },
+          "5.0": {
+            "n": 345,
+            "mean": 0.5536174785100287
+          }
+        },
+        "condition_changes": {
+          "n": 721,
+          "correct": 0,
+          "ties": 721,
+          "accuracy_ties_half": 0.5,
+          "difference_mse": 0.28502080443828015,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      }
+    }
+  ],
+  "selected_alpha": null,
+  "selection_split": "validation",
+  "elapsed_seconds": 0.8337013310001566
+}
