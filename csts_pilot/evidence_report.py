@@ -36,6 +36,9 @@ def build_report(root: Path, directory: Path) -> dict[str, Any]:
             raise ValueError("Independent ranking disagrees with the native result.")
     result = {
         "source_commit": summary["source_commit"],
+        "evaluation_source_commit": summary.get(
+            "evaluation_source_commit", summary["source_commit"]
+        ),
         "scores": scores,
         "paired_intervals": paired_intervals(
             candidates,

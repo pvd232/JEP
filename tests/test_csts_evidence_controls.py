@@ -12,9 +12,125 @@ from transformers import T5Config, T5ForConditionalGeneration
 from csts_pilot import evidence_controls as controls
 from csts_pilot.answers import answer_id
 from csts_pilot.convergence import file_sha256, write_json
-from csts_pilot.evidence_run import evidence_training_outputs, validate_matched_traces
+from csts_pilot.evidence_run import (
+    PRETEST_STAGES,
+    evidence_training_outputs,
+    validate_evaluation_resume,
+    validate_matched_traces,
+)
 
 MODEL_CLASS = controls.AnswerEncoder
+
+
+def test_native_prediction_and_eval_stage_contracts_are_both_constructible():
+    from viper.authoring import input, stage
+    from viper.config import BuildConfig, EvalConfig
+    from viper.metrics import FloatComparator, MetricDependency, measure
+    from viper.metrics import max as maximize
+    from viper.outputs import EvalOutputs, StageOutputs, output
+
+    from csts_pilot.convergence import test_spearman
+    from jep_pilot.loaders import load_json
+
+    config = controls.EvidenceTestConfig(
+        arm="evidence",
+        model_sha256="a" * 64,
+        selection_sha256="b" * 64,
+        test_sha256="c" * 64,
+    )
+    capture = stage(
+        controls.capture_evidence_predictions,
+        stage_id="predict",
+        config=controls.EvidencePredictionConfig(**config.model_dump()),
+        outputs=StageOutputs(
+            predictions=output(
+                path="predictions.json", loader=load_json, data_role="eval"
+            ),
+            binding=output(path="binding.json", loader=load_json, data_role="eval"),
+        ),
+    )
+    metric = measure(
+        test_spearman,
+        dependencies=(
+            MetricDependency(source="artifact", name="predictions", data_role="eval"),
+        ),
+        comparator=FloatComparator(mode="absolute", tolerance=1e-12),
+    )
+    evaluated = stage(
+        controls.evaluate_evidence,
+        stage_id="test",
+        eval_id="csts_tranche3",
+        config=config,
+        inputs=(input("holdout", path="indices.json", data_role="eval"),),
+        split_inputs=("holdout",),
+        metrics=(metric,),
+        objective=maximize(metric),
+        outputs=EvalOutputs(
+            predictions=output(
+                path="predictions.json", loader=load_json, data_role="eval"
+            )
+        ),
+    )
+    assert isinstance(capture.spec.config, BuildConfig)
+    assert isinstance(evaluated.spec.config, EvalConfig)
+    assert capture.spec.config.model_dump() == evaluated.spec.config.model_dump()
+
+
+def completed_for_evaluation(tmp_path):
+    records = [{"name": name, "status": "succeeded"} for name in PRETEST_STAGES]
+    selection = {
+        "status": "checkpoints_frozen",
+        "test_scores_used_for_selection": False,
+        "candidates": {
+            arm: {"run": next(r for r in records if r["name"] == f"{arm}_ratings")}
+            for arm in ("ratings", "evidence", "shuffled")
+        },
+    }
+    path = tmp_path / "selection.json"
+    write_json(path, selection)
+    return {"runs": records, "selection_sha256": file_sha256(path)}
+
+
+def test_evaluation_recovery_accepts_complete_training_and_partial_scoring(tmp_path):
+    summary = completed_for_evaluation(tmp_path)
+    original = json.loads(json.dumps(summary))
+    validate_evaluation_resume(tmp_path, summary)
+    assert summary == original
+    summary["runs"].append({"name": "predict_ratings", "status": "succeeded"})
+    validate_evaluation_resume(tmp_path, summary)
+
+
+@pytest.mark.parametrize(
+    "fault", ["missing", "failed", "duplicate", "reordered", "unknown"]
+)
+def test_evaluation_recovery_rejects_incomplete_or_ambiguous_training(tmp_path, fault):
+    summary = completed_for_evaluation(tmp_path)
+    records = summary["runs"]
+    if fault == "missing":
+        records.pop(3)
+    elif fault == "failed":
+        records[3]["status"] = "failed"
+    elif fault == "duplicate":
+        records.append(dict(records[3]))
+    elif fault == "reordered":
+        records[2], records[3] = records[3], records[2]
+    else:
+        records.append({"name": "unreviewed_training", "status": "succeeded"})
+    with pytest.raises(ValueError, match="all completed native training"):
+        validate_evaluation_resume(tmp_path, summary)
+
+
+@pytest.mark.parametrize("rehash", [False, True])
+def test_evaluation_recovery_rejects_changed_frozen_candidates(tmp_path, rehash):
+    summary = completed_for_evaluation(tmp_path)
+    path = tmp_path / "selection.json"
+    selection = json.loads(path.read_text())
+    selection["candidates"]["evidence"]["run"]["name"] = "different_training"
+    write_json(path, selection)
+    if rehash:
+        summary["selection_sha256"] = file_sha256(path)
+    with pytest.raises(ValueError, match="frozen selection|Frozen candidates"):
+        validate_evaluation_resume(tmp_path, summary)
 
 
 def test_review_gate_rejects_unmatched_exposure_and_best_instead_of_terminal_transition():

@@ -1,0 +1,47 @@
+{
+  "checked_at": "2026-10-24T15:57:10.081887+00:00",
+  "parent_training_source": "9887c3128d9bfe4d73ca5130e25f61fb662988c2",
+  "checks": {
+    "ruff_format": {
+      "exit": 0,
+      "seconds": 0.010666130001482088,
+      "stdout": "4 files left unchanged\n",
+      "stderr": ""
+    },
+    "ruff_check": {
+      "exit": 0,
+      "seconds": 0.010684202999982517,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    "pyrefly": {
+      "exit": 0,
+      "seconds": 2.126262185993255,
+      "stdout": "",
+      "stderr": " WARN PYTHONPATH environment variable is set to `/home/machina/jep-csts-tranche3-20261024:/home/machina/jep-viper-source/src`. Checks in other environments may not include these paths.\n INFO 0 errors\nNo `pyrefly.toml` found \u2014 using preset `basic`.\nRun `pyrefly init` to continue setting up Pyrefly.\nDocs: https://pyrefly.org/en/docs/installation/\n"
+    },
+    "pytest": {
+      "exit": 0,
+      "seconds": 15.845668515998113,
+      "stdout": "........................................................................ [ 54%]\n............................................................             [100%]\n132 passed in 13.46s\n",
+      "stderr": ""
+    }
+  },
+  "training_and_cohort_implementation_unchanged": [
+    "PreparationConfig",
+    "EvidenceConfig",
+    "EvidenceTestConfig",
+    "checked_cache",
+    "passage_keys",
+    "aligned_and_shuffled",
+    "prepare_evidence",
+    "targets_for_rows",
+    "phase_rates",
+    "save_evidence_checkpoint",
+    "fit_evidence",
+    "verify_evidence_test",
+    "evaluate_evidence"
+  ],
+  "recovery": "Explicit evaluation-only resume verifies all successful native stages and frozen selection; it cannot invoke missing preparation or training. Training and evaluation source identities remain separate.",
+  "findings": "Prediction capture incorrectly used EvalConfig; it now uses a dedicated BuildConfig. Native build/eval construction is regression-tested. No remaining critical or high findings."
+}

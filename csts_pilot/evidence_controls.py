@@ -73,6 +73,15 @@ class EvidenceTestConfig(TestConfig):
     arm: Arm
 
 
+class EvidencePredictionConfig(BuildConfig):
+    """Bind GPU prediction capture to the same frozen test identities."""
+
+    arm: Arm
+    model_sha256: str
+    selection_sha256: str
+    test_sha256: str
+
+
 def checked_cache(path: Path) -> dict[str, dict[str, Any]]:
     """Reject duplicates, altered identities and unverified accepted evidence."""
     records = {}
@@ -484,8 +493,10 @@ def verify_evidence_test(context: Any) -> dict[str, Any]:
     return saved
 
 
-@build(config=EvidenceTestConfig)
-def capture_evidence_predictions(context: StageContext[EvidenceTestConfig]) -> None:
+@build(config=EvidencePredictionConfig)
+def capture_evidence_predictions(
+    context: StageContext[EvidencePredictionConfig],
+) -> None:
     """Capture source-passage similarities without teacher evidence or generation."""
     saved = verify_evidence_test(context)
     config = EvidenceConfig.model_validate(saved["config"])

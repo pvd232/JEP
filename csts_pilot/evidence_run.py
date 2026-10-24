@@ -44,6 +44,7 @@ from csts_pilot.convergence_run import artifact_path, artifact_source, check_inp
 from csts_pilot.diagnostics import summarize
 from csts_pilot.evidence_controls import (
     EvidenceConfig,
+    EvidencePredictionConfig,
     EvidenceTestConfig,
     PreparationConfig,
     capture_evidence_predictions,
@@ -55,6 +56,45 @@ from jep_pilot.loaders import load_json, load_model, load_state
 from jep_pilot.stages import publish_evaluation_inputs
 
 ARMS = ("ratings", "evidence", "shuffled")
+PRETEST_STAGES = (
+    "prepare",
+    "initialize",
+    *(f"{arm}_{phase}" for arm in ARMS for phase in ("pretrain", "ratings")),
+    "publish_test",
+)
+
+
+def validate_evaluation_resume(directory: Path, summary: dict[str, Any]) -> None:
+    """Permit recovery only after training and selection have finished."""
+    records = summary["runs"]
+    names = [r["name"] for r in records]
+    allowed = set(PRETEST_STAGES) | {
+        f"{phase}_{arm}" for arm in ARMS for phase in ("predict", "evaluate")
+    }
+    if (
+        names[: len(PRETEST_STAGES)] != list(PRETEST_STAGES)
+        or len(names) != len(set(names))
+        or not set(names) <= allowed
+        or any(r["status"] != "succeeded" for r in records)
+    ):
+        raise ValueError(
+            "Evaluation-only recovery requires all completed native training stages."
+        )
+    selection = directory / "selection.json"
+    if file_sha256(selection) != summary["selection_sha256"]:
+        raise ValueError("Changed frozen selection during evaluation recovery.")
+    frozen = load_json(selection)
+    by_name = {r["name"]: r for r in records}
+    if (
+        frozen["status"] != "checkpoints_frozen"
+        or frozen["test_scores_used_for_selection"] is not False
+        or set(frozen["candidates"]) != set(ARMS)
+        or any(
+            frozen["candidates"][arm]["run"] != by_name[f"{arm}_ratings"]
+            for arm in ARMS
+        )
+    ):
+        raise ValueError("Frozen candidates differ from completed training records.")
 
 
 def evidence_training_outputs() -> TrainOutputs[OutputDraft]:
@@ -126,7 +166,11 @@ def validate_settings(settings: dict[str, Any]) -> None:
 
 
 def run_study(
-    root: Path, settings: dict[str, Any], name: str, resume: bool = False
+    root: Path,
+    settings: dict[str, Any],
+    name: str,
+    resume: bool = False,
+    evaluation_only: bool = False,
 ) -> None:
     """Seal each local stage and queue publication without waiting for cloud storage."""
     validate_settings(settings)
@@ -141,6 +185,10 @@ def run_study(
     directory = root / "evidence_results" / name
     directory.mkdir(parents=True, exist_ok=True)
     path = directory / "summary.json"
+    if evaluation_only and (not resume or not path.exists()):
+        raise ValueError(
+            "Evaluation-only recovery requires an existing run and --resume."
+        )
     source = read_source(root)
     trusted = frozenset({str(source.repository)})
     environment = observe_python_env()
@@ -151,13 +199,21 @@ def run_study(
         summary = load_json(path)
         if (
             not resume
-            or summary["source_commit"] != source.commit
+            or (summary["source_commit"] != source.commit and not evaluation_only)
             or summary["settings"] != settings
             or summary.get("in_flight")
         ):
             raise ValueError(
                 "Preserve existing measurements; reconcile any uncertain invocation before resuming."
             )
+        if evaluation_only:
+            validate_evaluation_resume(directory, summary)
+            if summary.get("evaluation_source_commit", source.commit) != source.commit:
+                raise ValueError(
+                    "Evaluation recovery source changed; reconcile before resuming."
+                )
+            summary["evaluation_source_commit"] = source.commit
+            write_json(path, summary)
         if summary["status"] == "complete":
             print(json.dumps({"status": "complete", "summary": str(path)}))
             return
@@ -193,6 +249,10 @@ def run_study(
                 root, ResolvedRunRef.model_validate(record["reference"]), destination
             )
             return record
+        if evaluation_only and name in PRETEST_STAGES:
+            raise ValueError(
+                "Evaluation-only recovery cannot execute a training or preparation stage."
+            )
         trial = experiment(
             experiment_id=f"csts_tranche3_{source.commit[:8]}_{summary['attempt']}_{name}",
             variants=(
@@ -460,7 +520,7 @@ def run_study(
             stage(
                 capture_evidence_predictions,
                 stage_id="predict",
-                config=config,
+                config=EvidencePredictionConfig(**config.model_dump()),
                 inputs=common,
                 outputs=StageOutputs(
                     predictions=output(
@@ -553,6 +613,7 @@ def main() -> None:
     parser.add_argument("--name", default="initial")
     parser.add_argument("--execute", action="store_true")
     parser.add_argument("--resume", action="store_true")
+    parser.add_argument("--evaluation-only", action="store_true")
     args = parser.parse_args()
     root = resolve_root()
     settings = load_json(root / args.settings)
@@ -565,7 +626,7 @@ def main() -> None:
     (root / "evidence_results").mkdir(exist_ok=True)
     with (root / "evidence_results/run.lock").open("a+") as owner:
         fcntl.flock(owner, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        run_study(root, settings, args.name, args.resume)
+        run_study(root, settings, args.name, args.resume, args.evaluation_only)
 
 
 if __name__ == "__main__":
