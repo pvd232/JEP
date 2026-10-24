@@ -1,0 +1,201 @@
+{
+  "status": "checkpoints_frozen",
+  "candidates": {
+    "ratings": {
+      "epoch": 35,
+      "step": 7665,
+      "validation": {
+        "n": 1830,
+        "mse_0_1": 0.06707033138522114,
+        "mse_1_5": 1.0731253021635383,
+        "spearman": 0.5736627020139483,
+        "prediction_mean": 0.6179234432433146,
+        "target_mean": 0.5542349726775956,
+        "prediction_std": 0.21272784599668434,
+        "target_std": 0.30337777758989165,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 181,
+            "mean": 0.33875449265235036
+          },
+          "2.0": {
+            "n": 304,
+            "mean": 0.5716634234413505
+          },
+          "3.0": {
+            "n": 627,
+            "mean": 0.574718788753381
+          },
+          "4.0": {
+            "n": 373,
+            "mean": 0.6893226406050111
+          },
+          "5.0": {
+            "n": 345,
+            "mean": 0.8064742949129878
+          }
+        },
+        "condition_changes": {
+          "n": 721,
+          "correct": 591,
+          "ties": 0,
+          "accuracy_ties_half": 0.8196948682385575,
+          "difference_mse": 0.1489424857621193,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "sha256": "cb3a021dd3f06032d370d14add9e0e3ca6c801c28252db66a46d629770a920ec",
+      "run": {
+        "name": "ratings_ratings",
+        "status": "succeeded",
+        "path": "/home/machina/jep-csts-tranche3-20261024/experiments/csts_tranche3_9887c312_01f12b4a_ratings_ratings/runs/ratings_ratings/01M5Q5MPQEZ4VQ2CTS4QMZZJ54/resolved.yaml",
+        "reference": {
+          "sha256": "71e1c0ee4367abc6be777c3592c441a5542b6ce5aecec8dce23fe97eb092d1b5",
+          "bytes": 1078,
+          "stored_at": {
+            "kind": "local",
+            "workspace": "/home/machina/jep-csts-tranche3-20261024",
+            "store": ".viper/store",
+            "store_id": "eb71fab6ee0d78135104c9db9c7a7960",
+            "commit": "7aa8b0314acdfd14c4a226b3324d9ce198425dbcde356761ad31c3b1b60900b5",
+            "path": "experiments/csts_tranche3_9887c312_01f12b4a_ratings_ratings/runs/ratings_ratings/01M5Q5MPQEZ4VQ2CTS4QMZZJ54/resolved.yaml"
+          },
+          "kind": "resolved_run"
+        },
+        "local_run_seconds": 741.5542322969995,
+        "publication_queue": "/home/machina/jep-csts-tranche3-20261024/.viper/publication_queue/7903c171890f7cd5a9ab865c77ef34b5a8425e4c9ddee490b79eec14447e3092.json"
+      }
+    },
+    "evidence": {
+      "epoch": 28,
+      "step": 6132,
+      "validation": {
+        "n": 1830,
+        "mse_0_1": 0.05800847164608693,
+        "mse_1_5": 0.9281355463373909,
+        "spearman": 0.6500694062233188,
+        "prediction_mean": 0.5967284275931332,
+        "target_mean": 0.5542349726775956,
+        "prediction_std": 0.23599091483086237,
+        "target_std": 0.30337777758989165,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 181,
+            "mean": 0.28377458345124407
+          },
+          "2.0": {
+            "n": 304,
+            "mean": 0.521260354165478
+          },
+          "3.0": {
+            "n": 627,
+            "mean": 0.5341204330028054
+          },
+          "4.0": {
+            "n": 373,
+            "mean": 0.7010904521788732
+          },
+          "5.0": {
+            "n": 345,
+            "mean": 0.8283664494752884
+          }
+        },
+        "condition_changes": {
+          "n": 721,
+          "correct": 625,
+          "ties": 0,
+          "accuracy_ties_half": 0.8668515950069348,
+          "difference_mse": 0.1238595962398784,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "sha256": "3ac816e38b44a3c8a6e6354d16008977954cd960c64dc8d30778c12ded999412",
+      "run": {
+        "name": "evidence_ratings",
+        "status": "succeeded",
+        "path": "/home/machina/jep-csts-tranche3-20261024/experiments/csts_tranche3_9887c312_01f12b4a_evidence_ratings/runs/evidence_ratings/01M5Q6JVPPFDCVHEGQNHDCCMXF/resolved.yaml",
+        "reference": {
+          "sha256": "892e6bc5e11f0e3bcc4c4cfd6c95341def9e3cffa02980f2496a01c53350abac",
+          "bytes": 1082,
+          "stored_at": {
+            "kind": "local",
+            "workspace": "/home/machina/jep-csts-tranche3-20261024",
+            "store": ".viper/store",
+            "store_id": "eb71fab6ee0d78135104c9db9c7a7960",
+            "commit": "6e21ecbfa4bae4d19d45919a21ac97d1e6ba400b173aff83330303e9964cf6e5",
+            "path": "experiments/csts_tranche3_9887c312_01f12b4a_evidence_ratings/runs/evidence_ratings/01M5Q6JVPPFDCVHEGQNHDCCMXF/resolved.yaml"
+          },
+          "kind": "resolved_run"
+        },
+        "local_run_seconds": 664.0153025320033,
+        "publication_queue": "/home/machina/jep-csts-tranche3-20261024/.viper/publication_queue/56107d306526dad58d2163c79b77bc5f8a66492cc2a9318b852f7d4416ad09af.json"
+      }
+    },
+    "shuffled": {
+      "epoch": 34,
+      "step": 7446,
+      "validation": {
+        "n": 1830,
+        "mse_0_1": 0.0647928268866307,
+        "mse_1_5": 1.0366852301860912,
+        "spearman": 0.5991450938843921,
+        "prediction_mean": 0.6203729407760045,
+        "target_mean": 0.5542349726775956,
+        "prediction_std": 0.21707581749871027,
+        "target_std": 0.30337777758989165,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 181,
+            "mean": 0.32457455811579583
+          },
+          "2.0": {
+            "n": 304,
+            "mean": 0.5726372225357121
+          },
+          "3.0": {
+            "n": 627,
+            "mean": 0.5717460401683
+          },
+          "4.0": {
+            "n": 373,
+            "mean": 0.7020824542393953
+          },
+          "5.0": {
+            "n": 345,
+            "mean": 0.8176557922708816
+          }
+        },
+        "condition_changes": {
+          "n": 721,
+          "correct": 596,
+          "ties": 0,
+          "accuracy_ties_half": 0.826629680998613,
+          "difference_mse": 0.14475003889943866,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "sha256": "706bcd33d69a237e79afade97aec90b58b3d4c3592adca2686769833da594617",
+      "run": {
+        "name": "shuffled_ratings",
+        "status": "succeeded",
+        "path": "/home/machina/jep-csts-tranche3-20261024/experiments/csts_tranche3_9887c312_01f12b4a_shuffled_ratings/runs/shuffled_ratings/01M5Q7ERK87XWG7HFY6E5NGMEK/resolved.yaml",
+        "reference": {
+          "sha256": "f31fa7f7307efce12b509d05426f5c997720671d46b205817bf740bec58ef976",
+          "bytes": 1082,
+          "stored_at": {
+            "kind": "local",
+            "workspace": "/home/machina/jep-csts-tranche3-20261024",
+            "store": ".viper/store",
+            "store_id": "eb71fab6ee0d78135104c9db9c7a7960",
+            "commit": "55332c3d726384d243df227fe37fb6226694b3539a918589229112e41ad072f1",
+            "path": "experiments/csts_tranche3_9887c312_01f12b4a_shuffled_ratings/runs/shuffled_ratings/01M5Q7ERK87XWG7HFY6E5NGMEK/resolved.yaml"
+          },
+          "kind": "resolved_run"
+        },
+        "local_run_seconds": 746.492652054003,
+        "publication_queue": "/home/machina/jep-csts-tranche3-20261024/.viper/publication_queue/948d5ba87371adf15c51774818ad7f6fb3a1454ce75999e2a5bfff68e053bb2b.json"
+      }
+    }
+  },
+  "test_scores_used_for_selection": false
+}

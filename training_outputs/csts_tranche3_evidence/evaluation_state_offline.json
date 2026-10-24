@@ -1,0 +1,23 @@
+{
+  "status": "evaluation_recovery_launched",
+  "at": "2026-10-24T16:08:00.886723+00:00",
+  "pid": 28507,
+  "source_commit": "5e50b096eac1253a569a2deb0b2f324a11074bf2",
+  "parent_training_source": "9887c3128d9bfe4d73ca5130e25f61fb662988c2",
+  "argv": [
+    "/home/machina/jep-format-env/bin/python",
+    "-u",
+    "-m",
+    "csts_pilot.evidence_run",
+    "--settings",
+    "configs/csts-tranche-3.json",
+    "--name",
+    "initial",
+    "--execute",
+    "--resume",
+    "--evaluation-only"
+  ],
+  "log": "/home/machina/jep-tranche3-control-20261024/evaluation-offline.log",
+  "HF_HOME": "/home/machina/jep-model-cache",
+  "HF_HUB_OFFLINE": "1"
+}

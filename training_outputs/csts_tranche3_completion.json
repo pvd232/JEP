@@ -1,0 +1,37 @@
+{
+  "completed_at": "2026-10-24T16:15:46.849040+00:00",
+  "status": "complete",
+  "training_source_commit": "9887c3128d9bfe4d73ca5130e25f61fb662988c2",
+  "evaluation_source_commit": "5e50b096eac1253a569a2deb0b2f324a11074bf2",
+  "native_successful_stages": 15,
+  "independent_prediction_agreement": {
+    "ratings": {
+      "identical_prediction_records": true,
+      "sha256": "cde201a3e08feffb2e6aeef61195e2a1ddae31fa29d6981a077030a95d9f1681"
+    },
+    "evidence": {
+      "identical_prediction_records": true,
+      "sha256": "094e32398fee6f429275a4d45cc461495f8b862ecdef1ba5ca01cfcf5020b6df"
+    },
+    "shuffled": {
+      "identical_prediction_records": true,
+      "sha256": "7204784992ab2352db11da9c1a5f9e0d308effc0f133b6ec97557159f7664fb9"
+    }
+  },
+  "paired_intervals_reproduced": true,
+  "publication": "asynchronous; local scoring and reporting do not wait",
+  "reconciled_invocations": [
+    {
+      "at": "2026-10-24T16:08:00.880923+00:00",
+      "name": "predict_ratings",
+      "status": "failed",
+      "native_result": "/home/machina/jep-csts-tranche3-20261024/experiments/csts_tranche3_5e50b096_01f12b4a_predict_ratings/runs/predict_ratings/01M5QA7V1GX55MHWX5Q1549Q1R/resolved.yaml",
+      "reason": "Operator terminated the uncached model-download wait. No predictions were emitted. Original pinned cache verified through independent offline scoring.",
+      "retry_environment": {
+        "HF_HOME": "/home/machina/jep-model-cache",
+        "HF_HUB_OFFLINE": "1"
+      },
+      "archive": "/home/machina/jep-tranche3-control-20261024/evaluation-cache-miss-failure"
+    }
+  ]
+}
