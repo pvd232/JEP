@@ -1,6 +1,6 @@
 # Rating-training continuation
 
-**Computation complete.** MSE stopped at epoch 40 and selected epoch 35; Pearson stopped at epoch 33 and selected epoch 28. See the [report](../training_outputs/csts_continuation_report.md) and [closeout status](../training_outputs/csts_continuation_status.json).
+**Complete, published and stopped.** MSE stopped at epoch 40 and selected epoch 35; Pearson stopped at epoch 33 and selected epoch 28. See the [report](../training_outputs/csts_continuation_report.md) and [publication and shutdown evidence](../training_outputs/csts_continuation_closeout.md).
 
 Continue the completed seed-7 MSE and Pearson arms from their terminal epoch-24 weights and matching AdamW, main-process RNG and pair-permutation state. Preserve the original experiment and all published evidence. The original validation winners, epoch 23 for MSE and epoch 22 for Pearson, remain incumbents until a later checkpoint improves validation Spearman.
 
