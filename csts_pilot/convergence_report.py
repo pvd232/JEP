@@ -63,6 +63,10 @@ def render_curves(traces: dict[str, Any], destination: Path) -> None:
     ):
         axes[-1, column].set_xlabel(label)
     axes[0, 0].legend()
+    restart = next((t["config"].get("start_epoch", 0) for t in traces.values()), 0)
+    if restart:
+        for axis in axes[:, 0]:
+            axis.axvline(restart, color="0.5", linestyle="--", linewidth=1)
     figure.suptitle("Tranche 1 · seed 7 · checkpoints selected by validation Spearman")
     figure.savefig(destination, dpi=180)
     plt.close(figure)

@@ -1,5 +1,7 @@
 # Rating-training continuation
 
+**Computation complete.** MSE stopped at epoch 40 and selected epoch 35; Pearson stopped at epoch 33 and selected epoch 28. See the [report](../training_outputs/csts_continuation_report.md) and [closeout status](../training_outputs/csts_continuation_status.json).
+
 Continue the completed seed-7 MSE and Pearson arms from their terminal epoch-24 weights and matching AdamW, main-process RNG and pair-permutation state. Preserve the original experiment and all published evidence. The original validation winners, epoch 23 for MSE and epoch 22 for Pearson, remain incumbents until a later checkpoint improves validation Spearman.
 
 The [continuation settings](../configs/csts-continuation.json) allow epochs 25–48 with constant encoder learning rate `3e-6` and projection learning rate `1e-4`, zero additional warmup, patience five and `min_delta=0`. Reset the patience counter for this new learning-rate phase while seeding its best score with the historical winner. Use a separate 1,800-second native GPU-stage budget for this continuation. The epoch ceiling and resource budget are limits; a validation plateau supplies an empirical stopping observation. A stationary training minimum remains a separate mathematical question.

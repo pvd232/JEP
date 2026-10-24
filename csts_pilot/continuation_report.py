@@ -1,14 +1,14 @@
 """Report the separately budgeted continuation against its frozen original winners."""
 
 import argparse
+import hashlib
 import math
 import shutil
 from pathlib import Path
 from typing import Any
 
-from csts_pilot.convergence import file_sha256, write_json
 from csts_pilot.convergence_analysis import metrics, paired_intervals
-from csts_pilot.convergence_report import read_json, render_curves
+from csts_pilot.convergence_report import read_json, render_curves, write_json
 
 
 def build_report(root: Path, results: Path, output: Path) -> dict[str, Any]:
@@ -16,7 +16,10 @@ def build_report(root: Path, results: Path, output: Path) -> dict[str, Any]:
     summary = read_json(results / "summary.json")
     if summary["status"] != "complete":
         raise ValueError("The continuation is still incomplete.")
-    if file_sha256(results / "selection.json") != summary["selection_sha256"]:
+    if (
+        hashlib.sha256((results / "selection.json").read_bytes()).hexdigest()
+        != summary["selection_sha256"]
+    ):
         raise ValueError("The continuation selection differs from its frozen identity.")
     settings = summary["settings"]
     selection = read_json(results / "selection.json")
@@ -95,13 +98,18 @@ def build_report(root: Path, results: Path, output: Path) -> dict[str, Any]:
         "| --- | ---: | ---: | ---: | ---: |",
     ]
     for name, score in scores.items():
+        label = name.replace("mse_", "MSE, ").replace("pearson_", "Pearson, ")
         lines.append(
-            f"| {name} | {score['epoch']} | {score['raw']['spearman']:.6f} | {score['raw']['mse_0_1']:.6f} | {score['calibrated']['mse_0_1']:.6f} |"
+            f"| {label} | {score['epoch']} | {score['raw']['spearman']:.6f} | {score['raw']['mse_0_1']:.6f} | {score['calibrated']['mse_0_1']:.6f} |"
         )
     lines.extend(
         [
             "",
             "MSE uses targets rescaled through $y=(r-1)/4$ and raw cosine predictions. MSE on the original 1–5 rating scale is 16 times the reported value.",
+            "",
+            "This continuation asks whether the 24-epoch rating baseline still benefits from additional optimization. It introduces an explicit constant-rate restart, so its gains describe that continuation policy. Validation selects the ranking baseline; actual update counts differ between the arms under the same patience rule.",
+            "",
+            "The test ratings are Tu's 2024 human reannotations distributed by LivNLP; 214 invalid comparisons were excluded. Training and validation use the release's separate human/LLM aggregation. See the [label audit](csts_sol61_max_label_audit.json).",
             "",
             "The original epoch-23 MSE and epoch-22 Pearson winners remain incumbents throughout the continuation. AdamW moments, terminal weights and RNG state were restored from epoch 24. Both continued checkpoints and validation calibration were frozen before test access. Unchanged checkpoint bytes reuse their original completed evaluation.",
             "",
@@ -111,8 +119,20 @@ def build_report(root: Path, results: Path, output: Path) -> dict[str, Any]:
     )
     for name, contrast in intervals["contrasts"].items():
         rho = contrast["spearman"]
+        label = (
+            name.replace(
+                "mse_continued_minus_original", "MSE, continued minus original"
+            )
+            .replace(
+                "pearson_continued_minus_original", "Pearson, continued minus original"
+            )
+            .replace(
+                "pearson_continued_minus_mse_continued",
+                "Continued Pearson minus continued MSE",
+            )
+        )
         lines.append(
-            f"- {name}: Spearman difference {rho['difference']:+.6f}; paired 95% interval [{rho['ci95'][0]:+.6f}, {rho['ci95'][1]:+.6f}]."
+            f"- {label}: Spearman difference {rho['difference']:+.6f}; paired 95% interval [{rho['ci95'][0]:+.6f}, {rho['ci95'][1]:+.6f}]."
         )
     lines.extend(
         [
