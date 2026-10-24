@@ -25,7 +25,7 @@ All findings above are repaired. The code retains one shared neural training loo
 
 ## Validation
 
-The final focused boundary includes the three new baseline test modules and the unchanged background-storage tests: **44 checks passed**. Pyrefly, Ruff formatting, Ruff E/F/I and docstring checks passed. The default review command and exact prepared-input hashes were checked. The first run of 25 checks preceded the broader recovery and reporting checks.
+The final focused boundary includes the three new baseline test modules and the unchanged background-storage tests: **44 checks passed**. Pyrefly, Ruff formatting, Ruff E/F/I and docstring checks passed. The default review command and exact prepared-input hashes were checked. The first run of 25 checks preceded the broader recovery and reporting checks. The actual pinned Qwen tokenizer was checked on all 17,340 unique training/validation passage–condition inputs: maximum length including EOD was 65 tokens, within the 160-token ceiling. The [tokenizer receipt](../training_outputs/csts_tranche2_tokenizer_preflight.json) records that check; model weights stayed unloaded.
 
 The test environment uses the existing Python environment and pinned VIPER support source. PEFT 0.21.2, Accelerate 1.15.0 and psutil 7.2.2 were added there; pre-existing package versions were preserved. The host's HTTP proxy also required socksio 1.0.0 for Hugging Face downloads. Ridge uses the existing NumPy/SciPy implementation.
 
