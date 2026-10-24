@@ -1,0 +1,34 @@
+{
+  "definition": "Foreground local invocation times include preparation, execution, sealing and native verification. Background promotion times include upload and native graph verification; they overlap computation and cannot be added as sequential elapsed time. Metric worker-body intervals exclude interpreter/module startup.",
+  "runs": {
+    "train_mse": {
+      "local_run_seconds": 357.246985289,
+      "background_promotion_seconds": 162.99693229500002,
+      "promotion_attempts": 1
+    },
+    "train_pearson": {
+      "local_run_seconds": 244.92881881200003,
+      "background_promotion_seconds": 156.31869210000002,
+      "promotion_attempts": 1
+    },
+    "publish_test": {
+      "local_run_seconds": 16.320681860000036,
+      "background_promotion_seconds": 37.57755400400015,
+      "promotion_attempts": 1
+    },
+    "test_mse": {
+      "local_run_seconds": 68.50281452399997,
+      "background_promotion_seconds": 200.40627385499988,
+      "promotion_attempts": 1
+    },
+    "test_pearson": {
+      "local_run_seconds": 65.36818549199995,
+      "background_promotion_seconds": 197.64812276300006,
+      "promotion_attempts": 1
+    }
+  },
+  "prediction_seconds": 4.383581605000018,
+  "metric_production_body_seconds": 15.130374,
+  "metric_verification_body_seconds": 15.755068,
+  "gpu_stage_seconds": 736.046804117
+}

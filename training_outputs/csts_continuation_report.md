@@ -35,3 +35,11 @@ Patience reports a validation plateau under the declared rule. Batch gradient no
 ![Continuation curves](csts_continuation_curves.png)
 
 Training and evaluation use native VIPER stages. Local verification precedes downstream computation; cloud promotion runs in an independent CPU worker. Native cloud publication and shutdown receipts are separate closeout artifacts. The previous studies, completed reports and original stopped VM remain preserved.
+
+## Evidence and timing
+
+All five experiment graphs and 79 native measurements passed verification. The 68-file evidence archive passed transfer and SHA-256 manifest checks. [Native references](csts_continuation_native_verification.json), [collection receipt](csts_continuation_collection.json) and the [evidence archive](csts_continuation_evidence.tar.gz) preserve the exact cloud references for model and optimizer artifacts.
+
+The two prediction loops totaled 4.38 seconds. Their foreground native evaluation invocations totaled 133.87 seconds. Independent metric-verification worker bodies totaled 15.76 seconds; interpreter startup and whole-graph verification remain outside that figure. See the [timing breakdown](csts_continuation_timing.json).
+
+Cloud promotion ran alongside later computation and report analysis. Each publication performed the native graph checks; those checks were retained. Moving the uploader to another host remains a separate infrastructure change.
