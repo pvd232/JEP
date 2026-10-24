@@ -410,6 +410,20 @@ def fit_neural(
             optimizer.step()
             scheduler.step()
             step += 1
+            if step % 25 == 0:
+                write_json(
+                    context.outputs["trace"],
+                    {
+                        "status": "running",
+                        "kind": config.kind,
+                        "current_epoch": epoch,
+                        "actual_updates": step,
+                        "completed_epoch": len(history),
+                        "epochs": history,
+                        "selected": selected,
+                        "epochs_without_improvement": stopping.stale_epochs,
+                    },
+                )
         synchronize(config.device)
         fit_seconds = time.monotonic() - fit_started
         validation_started = time.monotonic()
@@ -452,6 +466,19 @@ def fit_neural(
         )
         record_validation(context, diagnostics, epoch)
         record["observed_epoch_seconds"] = time.monotonic() - fit_started
+        write_json(
+            context.outputs["trace"],
+            {
+                "status": "running",
+                "kind": config.kind,
+                "current_epoch": epoch,
+                "actual_updates": step,
+                "completed_epoch": len(history),
+                "epochs": history,
+                "selected": selected,
+                "epochs_without_improvement": stopping.stale_epochs,
+            },
+        )
         print({"kind": config.kind, **record}, flush=True)
         if exhausted:
             reason = "validation_patience"
