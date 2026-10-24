@@ -1,0 +1,188 @@
+{
+  "status": "complete",
+  "source_commit": "5f842c8f7915685f7d020ee6f045734151363ff4",
+  "runs": [
+    {
+      "name": "checkpoint",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_stop_5f842c8f_20261024_checkpoint/runs/checkpoint/01M5PG99PG2RC528MQY330RV0S/resolved.yaml",
+      "reference": {
+        "sha256": "ad5dbcb792a52a014936d379b4bd4ecae51a865b624ca3859e63879411f475ac",
+        "bytes": 1068,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "30ccc50c4519c8931ce0f3c5aa17e13676b05eb311ce21f5a5a5195ccdf9eb83",
+          "path": "experiments/csts_tranche2_stop_5f842c8f_20261024_checkpoint/runs/checkpoint/01M5PG99PG2RC528MQY330RV0S/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "local_run_seconds": 30.78358996099996,
+      "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/8e510365e8a80c58fcade6eab6a98641631a083f3031f07d480735a3e09c9be9.json"
+    },
+    {
+      "name": "predict",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_stop_5f842c8f_20261024_predict/runs/predict/01M5PGAC3FRK22ZMEZK52SJFRC/resolved.yaml",
+      "reference": {
+        "sha256": "4fcc31a33f0639d158bb831695a06cdf356555a95dedcede093de72c7b8aa4ab",
+        "bytes": 1056,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "09be334360639332226f24bd2025ef5c6494f3a2df9c1a2fea5d279ac3456dee",
+          "path": "experiments/csts_tranche2_stop_5f842c8f_20261024_predict/runs/predict/01M5PGAC3FRK22ZMEZK52SJFRC/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "local_run_seconds": 261.47077396699933,
+      "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/87a9206f90881ce13764e7e622db624a26d285172c4435ecb6214cc28459206c.json"
+    },
+    {
+      "name": "evaluate",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-tranche2-20261023/experiments/csts_tranche2_stop_5f842c8f_20261024_evaluate/runs/evaluate/01M5PGJBFXM40JJ4ZE9JZX2HBZ/resolved.yaml",
+      "reference": {
+        "sha256": "51e2b3f9c3d2c0f16e8e2639343a6dac1dd4d95f7e6ebdecf17131c7254461a0",
+        "bytes": 1060,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-tranche2-20261023",
+          "store": ".viper/store",
+          "store_id": "2d4879a006d16034ff3c985f9117f460",
+          "commit": "341a666a7775d04e971e46377d9168e5fc9a959a80e83cef23eb8c32f3e50e6f",
+          "path": "experiments/csts_tranche2_stop_5f842c8f_20261024_evaluate/runs/evaluate/01M5PGJBFXM40JJ4ZE9JZX2HBZ/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "local_run_seconds": 63.61621646899948,
+      "publication_queue": "/home/machina/jep-csts-tranche2-20261023/.viper/publication_queue/9e67ad7795c825bd3196bee2a2353c8ff80210c01892ad83760c81b5d9ab5f89.json"
+    }
+  ],
+  "selected_epoch": 5,
+  "validation": {
+    "n": 1830,
+    "mse_0_1": 0.035652257161723454,
+    "mse_1_5": 0.5704361145875753,
+    "spearman": 0.776790887947513,
+    "prediction_mean": 0.5591550485989272,
+    "target_mean": 0.5542349726775956,
+    "prediction_std": 0.2360993359876546,
+    "target_std": 0.30337777758989165,
+    "mean_prediction_by_rating": {
+      "1.0": {
+        "n": 181,
+        "mean": 0.2451615145646077
+      },
+      "2.0": {
+        "n": 304,
+        "mean": 0.4043198669035184
+      },
+      "3.0": {
+        "n": 627,
+        "mean": 0.4869141505356801
+      },
+      "4.0": {
+        "n": 373,
+        "mean": 0.6895877419703768
+      },
+      "5.0": {
+        "n": 345,
+        "mean": 0.8505938119430473
+      }
+    },
+    "condition_changes": {
+      "n": 721,
+      "correct": 653,
+      "ties": 0,
+      "accuracy_ties_half": 0.9056865464632455,
+      "difference_mse": 0.07245016864619576,
+      "unit": "Within-pair comparisons. These reuse captions and are dependent."
+    }
+  },
+  "operator_stop": {
+    "requested_at": "2026-10-24T08:23:03.634827+00:00",
+    "reason": "User requested stop current run, test best validation checkpoint, then reviewed Tranche 3; VIPER asynchronous.",
+    "native_training_status": "operator_interrupted; preserve native failed attempt",
+    "worker_pid": 2119,
+    "parent_pid": 2000,
+    "source_commit": "5f842c8f7915685f7d020ee6f045734151363ff4",
+    "selected_epoch": 5,
+    "selected_validation_spearman": 0.776790887947513,
+    "last_completed_epoch": 7,
+    "files": {
+      "model.pt": {
+        "path": "/home/machina/jep-tranche2-control-20261023/continuation-20261024/user-stopped-selection/model.pt",
+        "sha256": "1be3cedbeacb494f46010d447564144a7f499d2dc8b174029107ff81651bbea3"
+      },
+      "validation_predictions.json": {
+        "path": "/home/machina/jep-tranche2-control-20261023/continuation-20261024/user-stopped-selection/validation_predictions.json",
+        "sha256": "c0976ff15f419799450cb1df42ed32b5ea09cccb070cd337e9f6a081fcb42eeb"
+      },
+      "validation_spearman.jsonl": {
+        "path": "/home/machina/jep-tranche2-control-20261023/continuation-20261024/user-stopped-selection/validation_spearman.jsonl",
+        "sha256": "48c0a95fdd3af03e13fd6b830f34b7f3a94545a6318ac66972fa0030513e5497"
+      },
+      "training_objective.jsonl": {
+        "path": "/home/machina/jep-tranche2-control-20261023/continuation-20261024/user-stopped-selection/training_objective.jsonl",
+        "sha256": "716bd183b106bbffc1ee7ca1e9887df2a3c3ff878844a2587ebd2212900a582e"
+      },
+      "parent_run_spec.yaml": {
+        "path": "/home/machina/jep-tranche2-control-20261023/continuation-20261024/user-stopped-selection/parent_run_spec.yaml",
+        "sha256": "a60c26406f4bd73e7b6a2c157639a7994d478e49c7d52f68dc14d46d99ee0edd"
+      }
+    },
+    "test_accessed_for_selection": false
+  },
+  "selection_sha256": "ab728338ebcb2bc3acbdfd32241ea7191ee4ff58396ae73e8379c9d16130a72d",
+  "publication_status": "queued_separately",
+  "current_stage": null,
+  "in_flight": null,
+  "live_scores": {
+    "lora": {
+      "n": 2620,
+      "mse_0_1": 0.072817277752418,
+      "mse_1_5": 1.165076444038688,
+      "spearman": 0.7788823829272487,
+      "prediction_mean": 0.5815831824268023,
+      "target_mean": 0.5886450381679389,
+      "prediction_std": 0.2478978986034666,
+      "target_std": 0.40850906064376585,
+      "mean_prediction_by_rating": {
+        "1.0": {
+          "n": 633,
+          "mean": 0.31680779189598196
+        },
+        "2.0": {
+          "n": 233,
+          "mean": 0.467468690718704
+        },
+        "3.0": {
+          "n": 392,
+          "mean": 0.4919021019892653
+        },
+        "4.0": {
+          "n": 296,
+          "mean": 0.599567893389109
+        },
+        "5.0": {
+          "n": 1066,
+          "mean": 0.7917360978683292
+        }
+      },
+      "condition_changes": {
+        "n": 1044,
+        "correct": 958,
+        "ties": 0,
+        "accuracy_ties_half": 0.9176245210727969,
+        "difference_mse": 0.17629585935681838,
+        "unit": "Within-pair comparisons. These reuse captions and are dependent."
+      }
+    }
+  },
+  "metric_verification": "native_eval_passed"
+}
