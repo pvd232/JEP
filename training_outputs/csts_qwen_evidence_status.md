@@ -11,7 +11,9 @@ This is a timestamped snapshot, not an automatically refreshing dashboard. The c
 
 The evidence arm's last completed validation score is 0.756276 (total epoch 12).
 
-On the common 2,620-comparison test set, evidence → ratings scored **0.004860 lower** than ratings → ratings. Evidence did not beat the control in this seed. Paired uncertainty is being checked; this point estimate alone does not establish a reliable detrimental effect.
+On the common 2,620-comparison test set, evidence → ratings scored **0.004860 lower** than ratings → ratings. Evidence did not beat the control in this seed. The paired 95% interval for evidence minus ratings-only Spearman is **[−0.013408, +0.003454]**, from 2,000 paired source-group draws across 1,241 groups, conditional on training seed 7. It includes zero: no benefit or detrimental effect is established in this comparison.
+
+[Completed report](csts_qwen_evidence_report.md) · [Full results and provenance](csts_qwen_evidence_results.json)
 Both arms include two initial epochs in the total count. Validation scores select checkpoints; test scores are reported separately.
 
 ## Check the current run yourself
@@ -79,4 +81,4 @@ GPU summary: `/home/machina/jep-csts-qwen-evidence-20261024/qwen_evidence_result
 
 Live epoch traces are under `experiments/csts_qwen_evidence_cd720270_6b877324_*/runs/*/*/artifacts/train/trace/trace.json` inside that GPU checkout. The similarly named `training_outputs/csts_live_status.json` belongs to an older experiment and should not be used for this run.
 
-Final report and test results will be collected into `training_outputs/csts_qwen_evidence_report.md` and `training_outputs/csts_qwen_evidence_results.json` after the comparison completes.
+Final report and test results are now available as `training_outputs/csts_qwen_evidence_report.md` and `training_outputs/csts_qwen_evidence_results.json`.
