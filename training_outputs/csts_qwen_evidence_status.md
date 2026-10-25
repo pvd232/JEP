@@ -82,3 +82,11 @@ GPU summary: `/home/machina/jep-csts-qwen-evidence-20261024/qwen_evidence_result
 Live epoch traces are under `experiments/csts_qwen_evidence_cd720270_6b877324_*/runs/*/*/artifacts/train/trace/trace.json` inside that GPU checkout. The similarly named `training_outputs/csts_live_status.json` belongs to an older experiment and should not be used for this run.
 
 Final report and test results are now available as `training_outputs/csts_qwen_evidence_report.md` and `training_outputs/csts_qwen_evidence_results.json`.
+
+## Saved-checkpoint answer inspection, October 25
+
+[Review all 50 development cases](csts_answer_inspection_20261025/report.md).
+
+The diagnostic generated 200 answers from the existing FLAN and Qwen checkpoints. It reused the actual terminal evidence checkpoints and validation-selected rating checkpoints, with no new training.
+
+Exact agreement with cached teacher answers changed from **29/50 to 22/50 for FLAN** and **33/50 to 9/50 for Qwen** during rating training. These counts measure teacher agreement, not expert accuracy. Some shorter answers are valid; other outputs change the requested attribute. The report distinguishes the two.
