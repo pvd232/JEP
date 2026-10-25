@@ -1,15 +1,17 @@
 # Qwen evidence comparison: status and live access
 
-Snapshot checked: **2026-10-25 12:48 a.m. America/New_York (04:48 UTC)**.
+Snapshot checked: **2026-10-25 6:40 p.m. America/New_York (22:40 UTC)**. **Training and test evaluation are complete; all ten native stages succeeded.**
 
 This is a timestamped snapshot, not an automatically refreshing dashboard. The command below reads current scores directly from the GPU.
 
 | Arm | Total epochs completed | State | Best validation Spearman | Test Spearman |
 |---|---:|---|---:|---|
-| Ratings → ratings | 9 | Finished; stopped on validation patience | 0.782575 (total epoch 4) | Pending |
-| Evidence → ratings | 9 | Total epoch 10 running; patience 2/5 | 0.773647 (total epoch 7) | Pending |
+| Ratings → ratings | 9 | Finished; stopped on validation patience | 0.782575 (total epoch 4) | **0.788505** |
+| Evidence → ratings | 12 | Finished; stopped on validation patience | 0.773647 (total epoch 7) | **0.783645** |
 
-The evidence arm's latest completed validation score is 0.764224 (total epoch 9).
+The evidence arm's last completed validation score is 0.756276 (total epoch 12).
+
+On the common 2,620-comparison test set, evidence → ratings scored **0.004860 lower** than ratings → ratings. Evidence did not beat the control in this seed. Paired uncertainty is being checked; this point estimate alone does not establish a reliable detrimental effect.
 Both arms include two initial epochs in the total count. Validation scores select checkpoints; test scores are reported separately.
 
 ## Check the current run yourself
@@ -65,6 +67,9 @@ Then run the same status command.
 | 7 | 0.773551 | 0.773647 |
 | 8 | 0.775654 | 0.773219 |
 | 9 | 0.762140 | 0.764224 |
+| 10 | — | 0.763423 |
+| 11 | — | 0.762666 |
+| 12 | — | 0.756276 |
 
 ## Source records
 
