@@ -275,16 +275,44 @@ def fresh_audit(source_commit: str) -> dict[str, Any]:
     return result
 
 
+def inspect_failure(source_commit: str) -> dict[str, Any]:
+    """Return bounded safe exception summaries from this task's failed phase."""
+    directory = WORK_ROOT / "fresh_audit" / source_commit
+    result_path = directory / "operator_result.json"
+    result = json.loads(result_path.read_text()) if result_path.exists() else None
+    summaries = {}
+    for name in ("operator_failure.log", "prepare_sample.stderr", "fetch_capture.stderr", "capture.stderr"):
+        path = directory / name
+        if not path.exists():
+            continue
+        lines = path.read_text(errors="replace").splitlines()
+        selected = [line[:1000] for line in lines if re.match(
+            r"^(?:[A-Za-z_.]*(?:Error|Failure|Exception):|ERROR:|  File )", line
+        )]
+        summaries[name.replace(".", "_")] = selected[-12:]
+    return {"phase": "inspect_failure", "status": "complete", "diagnostic": {
+        "inspected_source_commit": source_commit, "safe_result": result,
+        "exception_summaries": summaries,
+        "present_files": sorted(path.name for path in directory.iterdir()) if directory.exists() else [],
+    }}
+
+
 def main() -> None:
     """Execute one allowlisted phase from a pinned repository source commit."""
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", choices=("fresh_audit",), required=True)
+    parser.add_argument("--phase", choices=("fresh_audit", "inspect_failure"), required=True)
     parser.add_argument("--source-commit", required=True)
+    parser.add_argument("--inspect-source-commit")
     args = parser.parse_args()
     if re.fullmatch(r"[0-9a-f]{40}", args.source_commit) is None:
         raise OperatorFailure("A full immutable source commit is required.")
     try:
-        result = fresh_audit(args.source_commit)
+        if args.phase == "inspect_failure":
+            if not args.inspect_source_commit or re.fullmatch(r"[0-9a-f]{40}", args.inspect_source_commit) is None:
+                raise OperatorFailure("A failed task source commit is required for inspection.")
+            result = inspect_failure(args.inspect_source_commit)
+        else:
+            result = fresh_audit(args.source_commit)
     except BaseException as exc:
         directory = WORK_ROOT / "fresh_audit" / args.source_commit
         directory.mkdir(parents=True, exist_ok=True)
