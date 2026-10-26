@@ -35,7 +35,9 @@ class PropositionLoraConfig(FitConfig):
     def validate_fresh_phase(self) -> "PropositionLoraConfig":
         """Keep this a fresh constant-rate phase rather than optimizer continuation."""
         if self.schedule != "constant" or self.warmup_fraction:
-            raise ValueError("Answer-input adaptation uses a fresh constant-rate phase.")
+            raise ValueError(
+                "Answer-input adaptation uses a fresh constant-rate phase."
+            )
         return self
 
     def fit_config(self) -> FitConfig:
@@ -79,7 +81,9 @@ def fit_proposition_lora(context: StageContext[PropositionLoraConfig]) -> None:
         if getattr(parent, name) != getattr(fit, name):
             raise ValueError(f"Parent adapter or encoder setting differs: {name}.")
 
-    rows = {name: load_json(context.inputs[name]) for name in ("training", "validation")}
+    rows = {
+        name: load_json(context.inputs[name]) for name in ("training", "validation")
+    }
     for selected in rows.values():
         validate_rows(selected)
     for identity in ("row_id", "group_id"):
