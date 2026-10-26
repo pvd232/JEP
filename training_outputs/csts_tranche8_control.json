@@ -1,12 +1,13 @@
 {
-  "action_id": "native_deploy_serialization_fix3",
+  "action_id": "native_owner_checks_fixed2",
   "action": "run",
   "source_commit": "e37db66c000ddbedbce07714fd4381ff05e73b18",
   "operator_sha256": "4928c30aa81fbf253dbd7e9c4b538aef067cc9c5acf7f6782c5a26b57d618525",
   "arguments": [
     "--phase",
-    "native_deploy",
+    "native_checks",
     "--source-commit",
-    "e37db66c000ddbedbce07714fd4381ff05e73b18"
+    "e37db66c000ddbedbce07714fd4381ff05e73b18",
+    "--allow-format"
   ]
 }
