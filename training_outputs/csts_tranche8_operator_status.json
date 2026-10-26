@@ -1,9 +1,20 @@
 {
-  "updated_at": "2026-10-26T13:20:25.892980+00:00",
-  "worker_status": "running",
+  "updated_at": "2026-10-26T13:20:45.598444+00:00",
+  "worker_status": "waiting",
   "action_id": "repair_tranche8_helper_isolation_v5",
   "source_commit": "f41d42c85fbc841fa98c09f5337f3cd6b6dad29c",
   "operator_sha256": "fe8433816fcd3333b8f927bf7898e5a1191c56a68ced0ebb6aba916bf722bd26",
-  "status": "launching",
-  "returncode": null
+  "status": "completed",
+  "returncode": 0,
+  "result": {
+    "phase": "worker_repair",
+    "status": "complete",
+    "verification": {
+      "old_worker_sha256": "0e119cb60f001694be7a6816bf5064838d8b1aebf93547d82b48401d2e0df400",
+      "new_worker_sha256": "b679553cd18e1a71193e4e05c034b117b30ca668e117a8ccecc185e5ec2fde98",
+      "isolated_operator_start": true,
+      "existing_loop_preserved": true,
+      "future_supervisors_repaired": true
+    }
+  }
 }
