@@ -296,6 +296,8 @@ def test_stage_outputs_resume_and_independent_evaluation_round_trip(tmp_path):
     assert json.loads(outputs["trace"].read_text())["test_accessed"] is False
     holdout = tmp_path / "indices.json"
     holdout.write_text(json.dumps(list(range(12))))
+    published_rows = tmp_path / "validation_rows.json"
+    published_rows.write_text(json.dumps(example_cache("dev", 12)["rows"]))
     evaluated = {
         name: tmp_path / (name + ".json")
         for name in ("predictions", "report", "review")
@@ -308,7 +310,12 @@ def test_stage_outputs_resume_and_independent_evaluation_round_trip(tmp_path):
                 validation_cache_sha256=config.validation_cache_sha256,
                 bootstrap_draws=20,
             ),
-            inputs={**paths, "models": outputs["model"], "holdout": holdout},
+            inputs={
+                **paths,
+                "model": outputs["model"],
+                "test": published_rows,
+                "holdout": holdout,
+            },
             outputs=evaluated,
             metrics={"codebook_mean_spearman_gain": Recorder()},
         )
@@ -325,3 +332,34 @@ def test_stage_outputs_resume_and_independent_evaluation_round_trip(tmp_path):
     assert (
         json.loads(evaluated["review"].read_text())["status"] == "unreviewed_candidates"
     )
+
+
+def test_native_evaluation_binds_reserved_names_and_published_eval_roles(tmp_path):
+    """Catch the native model/test contract that a direct function call cannot observe."""
+    from csts_pilot.codebook_run import evaluation_inputs
+
+    record = {
+        "reference": {
+            "kind": "resolved_run",
+            "sha256": "1" * 64,
+            "bytes": 1,
+            "stored_at": {
+                "kind": "local",
+                "workspace": str(tmp_path),
+                "store": ".viper/store",
+                "store_id": "2" * 32,
+                "commit": "3" * 64,
+                "path": "experiments/example/runs/example/run/resolved.yaml",
+            },
+        }
+    }
+    bindings = evaluation_inputs(
+        {"training": record, "validation": record}, record, record
+    )
+    by_name = {item.name: item for item in bindings}
+    assert set(by_name) == {"training", "validation", "model", "test", "holdout"}
+    assert by_name["model"].source.data_role == "training"
+    assert by_name["test"].source.data_role == "eval"
+    assert by_name["holdout"].source.data_role == "eval"
+    assert by_name["test"].source.artifact.stage_id == "publish"
+    assert by_name["test"].source.artifact.artifact_name == "test"

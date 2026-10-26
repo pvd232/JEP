@@ -157,18 +157,25 @@ def evaluate_codebooks(context: StageContext[EvaluationConfig]) -> None:
     torch.set_num_threads(1)
     config = context.config
     for name, expected in (
-        ("models", config.models_sha256),
+        ("model", config.models_sha256),
         ("training", config.training_cache_sha256),
         ("validation", config.validation_cache_sha256),
     ):
         if file_sha256(context.inputs[name]) != expected:
             raise ValueError(f"Changed evaluation input: {name}.")
-    bundle = load_model(context.inputs["models"])
+    bundle = load_model(context.inputs["model"])
+    for name in ("training", "validation"):
+        if bundle["config"][name + "_cache_sha256"] != getattr(
+            config, name + "_cache_sha256"
+        ):
+            raise ValueError("The frozen model refers to different fitting caches.")
     caches = {
         name: load_model(context.inputs[name]) for name in ("training", "validation")
     }
     check_disjoint(*caches.values())
     evaluation = caches["validation"]
+    if load_json(context.inputs["test"]) != evaluation["rows"]:
+        raise ValueError("Published evaluation rows differ from the development cache.")
     if load_json(context.inputs["holdout"]) != list(range(len(evaluation["rows"]))):
         raise ValueError("Evaluation indices differ from the complete frozen cohort.")
     seeds = bundle["config"]["seeds"]

@@ -48,6 +48,28 @@ from jep_pilot.loaders import load_json, load_model, load_state
 from jep_pilot.stages import publish_evaluation_inputs
 
 
+def evaluation_inputs(
+    prepared: dict[str, Any], trained: dict[str, Any], published: dict[str, Any]
+) -> tuple[Any, ...]:
+    """Bind VIPER's reserved model/test names to frozen training and development producers."""
+    return tuple(
+        input(name, source=stored_source(record, "prepare", "cache", name))
+        for name, record in prepared.items()
+    ) + (
+        input("model", source=stored_source(trained, "train", "model", "models")),
+        input(
+            "test",
+            source=stored_source(
+                published, "publish", "test", "validation_rows", "eval"
+            ),
+        ),
+        input(
+            "holdout",
+            source=stored_source(published, "publish", "holdout", "holdout", "eval"),
+        ),
+    )
+
+
 def render_report(report: dict[str, Any], summary: dict[str, Any]) -> str:
     """Report selected-validation diagnostics and the exact scope of missing evidence."""
     lines = [
@@ -86,7 +108,13 @@ def render_report(report: dict[str, Any], summary: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
-def run(root: Path, name: str, manifest: Path, preflight: bool = False) -> None:
+def run(
+    root: Path,
+    name: str,
+    manifest: Path,
+    preflight: bool = False,
+    recover: Path | None = None,
+) -> None:
     """Create a new immutable attempt; never restart a partial native experiment."""
     root = root.resolve(strict=True)
     settings_path = root / "configs/csts-codebook.json"
@@ -114,6 +142,34 @@ def run(root: Path, name: str, manifest: Path, preflight: bool = False) -> None:
     if shutil.disk_usage(root).free < 3 * 1024**3:
         raise OSError("Require 3 GiB free for the bounded native CPU screen.")
     source = read_source(root)
+    recovered = load_json(recover) if recover is not None else None
+    recovery_sha = file_sha256(recover) if recover is not None else None
+    reused = {}
+    if recovered is not None:
+        if (
+            recovered["status"] != "failed"
+            or recovered["settings_sha256"] != file_sha256(settings_path)
+            or recovered["inputs_manifest_sha256"] != file_sha256(manifest)
+            or not recovered.get("frozen_models_sha256")
+        ):
+            raise ValueError(
+                "Recovery requires a failed attempt with identical settings/inputs and frozen models."
+            )
+        reused = {record["name"]: record for record in recovered["runs"]}
+        if set(reused) != {
+            "prepare_training",
+            "prepare_validation",
+            "fit",
+            "publish_validation",
+        } or any(record["status"] != "succeeded" for record in reused.values()):
+            raise ValueError(
+                "Only the completed preparation, fitting and publication stages may be reused."
+            )
+        if (
+            file_sha256(artifact_path(reused["fit"], "train", "model", "models.pt"))
+            != recovered["frozen_models_sha256"]
+        ):
+            raise ValueError("Recovery model bytes differ from the frozen selection.")
     if preflight:
         print(
             json.dumps(
@@ -147,6 +203,14 @@ def run(root: Path, name: str, manifest: Path, preflight: bool = False) -> None:
         "runs": [],
         "test_accessed": False,
         "backbone_inference": False,
+        "recovery_of": {
+            "path": str(recover),
+            "sha256": recovery_sha,
+            "source_commit": recovered["source_commit"],
+            "error": recovered.get("error"),
+        }
+        if recovered is not None
+        else None,
     }
     write_json(summary_path, summary)
     environment = observe_python_env()
@@ -155,6 +219,11 @@ def run(root: Path, name: str, manifest: Path, preflight: bool = False) -> None:
     )
 
     def execute(label: str, configured: Any, timeout: int = 600) -> dict[str, Any]:
+        if label in reused:
+            record = dict(reused[label], reused_from_summary_sha256=recovery_sha)
+            summary["runs"].append(record)
+            write_json(summary_path, summary)
+            return record
         trial = experiment(
             experiment_id=f"csts_codebook_{source.commit[:8]}_{summary['attempt']}_{label}",
             variants=(
@@ -346,22 +415,7 @@ def run(root: Path, name: str, manifest: Path, preflight: bool = False) -> None:
                     bootstrap_draws=settings["bootstrap_draws"],
                     bootstrap_seed=settings["bootstrap_seed"],
                 ),
-                inputs=tuple(
-                    input(name, source=stored_source(record, "prepare", "cache", name))
-                    for name, record in prepared.items()
-                )
-                + (
-                    input(
-                        "models",
-                        source=stored_source(trained, "train", "model", "models"),
-                    ),
-                    input(
-                        "holdout",
-                        source=stored_source(
-                            published, "publish", "holdout", "holdout", "eval"
-                        ),
-                    ),
-                ),
+                inputs=evaluation_inputs(prepared, trained, published),
                 split_inputs=("holdout",),
                 outputs=EvalOutputs(
                     predictions=output(
@@ -421,6 +475,11 @@ def main() -> None:
     parser.add_argument("--name", default="initial")
     parser.add_argument("--inputs", type=Path, required=True)
     parser.add_argument("--preflight", action="store_true")
+    parser.add_argument(
+        "--recover",
+        type=Path,
+        help="Explicit failed-attempt summary whose sealed training must be reused.",
+    )
     args = parser.parse_args()
     if Path(args.name).name != args.name or args.name in {"", ".", ".."}:
         raise ValueError("An attempt name must be a single directory component.")
@@ -428,7 +487,7 @@ def main() -> None:
     lock.mkdir(exist_ok=True)
     with (lock / "launch.lock").open("a+") as stream:
         fcntl.flock(stream, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        run(args.root, args.name, args.inputs, args.preflight)
+        run(args.root, args.name, args.inputs, args.preflight, args.recover)
 
 
 if __name__ == "__main__":

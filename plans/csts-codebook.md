@@ -70,3 +70,5 @@ source .venv/bin/activate
 python -m csts_pilot.codebook_run --inputs codebook_data/inputs.json --preflight
 python -m csts_pilot.codebook_run --inputs codebook_data/inputs.json --name initial
 ```
+
+If native evaluation construction fails after all fits are frozen, an explicitly inspected recovery can reuse the four successful preparation/TRAIN/publication stages using `--name evaluation_recovery --recover codebook_results/initial/summary.json`. The original attempt remains failed. The recovery checks settings, manifest and frozen model identity and runs only the final evaluation. The reserved VIPER input `test` in that EVAL is the published development cohort; this screen does not access the benchmark test partition.

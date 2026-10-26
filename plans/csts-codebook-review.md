@@ -55,3 +55,13 @@ Reviewed implementation SHA-256 values:
 | `configs/csts-codebook.json` | `d81d33fbe7af7d5fdf282dbf85da445192147cd91f3c6dc949b19ad745c9271c` |
 
 Verdict: approve for the defined validation mechanism screen. Residual scientific uncertainty includes dictionary semantics, choice of one fixed auxiliary weight/code count, validation selection bias, and transfer to overlapping JEP claims. These limitations are measurements or future research questions, not implementation guarantees.
+
+## Native binding repair
+
+The initial attempt `98a103bf`, source `2cd66d61b3c1a08e58b1a91b911574612a447ed4`, completed both cache preparations, all six fits, and immutable development publication. Constructing EVAL then failed because VIPER requires reserved `model` and stored `test` inputs. The original attempt remains failed. The direct fitter/evaluator test did not observe this authoring contract.
+
+The repair supplies those canonical inputs, binds the published development rows as the protocol's `test` dataset, checks their exact equality to the development cache, and checks that frozen model configuration hashes identify the same fitting caches. This protocol input name does not authorize or access the benchmark's actual test partition. `evaluation_inputs` owns this binding and has a focused observer for the names, producer and roles.
+
+An explicit `--recover` option reuses exactly the four successful original stages. It rejects nonfailed parents, changed settings or manifest identities, other stage sets, failed reused runs, or changed frozen model bytes. It creates a new attempt rather than changing the original one. The fitter, loss, settings and codebook implementation remain byte-identical; no retraining is needed. Recovery records identify the original source, failure and summary SHA-256.
+
+Verification after repair: `python -m pytest -q tests/test_csts_codebook.py` passed **13 tests in 9.00s**; Ruff passed and scoped Pyrefly reported **0 errors**. Review verdict: approve the binding repair and explicit evaluation recovery. The new native EVAL remains the observing boundary for the repaired authoring protocol.
