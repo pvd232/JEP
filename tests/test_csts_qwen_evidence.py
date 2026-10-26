@@ -34,6 +34,94 @@ class Tokenizer:
         }
 
 
+@pytest.mark.parametrize(
+    "case", ["exact", "superset", "missing", "overlap", "changed_hash"]
+)
+def test_preparation_reuses_cache_for_validation_subset(tmp_path, case):
+    """Keep only training supervision while validating all required cache inputs."""
+    import json
+    from types import SimpleNamespace
+
+    from csts_pilot import qwen_evidence as module
+    from csts_pilot.answers import answer_id
+    from csts_pilot.convergence import file_sha256
+
+    def row(name, left, right):
+        return {
+            "row_id": name,
+            "group_id": name,
+            "pair_id": name,
+            "condition": "color",
+            "sentence1": left,
+            "sentence2": right,
+            "rating": 1,
+            "target": 0,
+        }
+
+    training = [row("train", "red car", "blue car")]
+    validation = [row("dev", "green bus", "yellow bus")]
+    if case == "overlap":
+        validation = [row("dev", "red car", "yellow bus")]
+    passages = {r[s] for r in training + validation for s in ("sentence1", "sentence2")}
+    if case == "superset":
+        passages.add("black bicycle")
+    if case == "missing":
+        passages.remove("yellow bus")
+    cache = [
+        {
+            "id": answer_id(passage, "color"),
+            "passage": passage,
+            "condition": "color",
+            "answer": passage.split()[0],
+            "valid": True,
+            "response": json.dumps(
+                {
+                    "target": passage.split()[1],
+                    "attribute": "color",
+                    "evidence": passage.split()[0],
+                }
+            ),
+            "review_response": json.dumps(
+                {"accept": True, "reason": "Explicit color."}
+            ),
+        }
+        for passage in sorted(passages)
+    ]
+    inputs = {
+        name: tmp_path / f"{name}.json"
+        for name in ("training", "validation", "answers")
+    }
+    inputs["training"].write_text(json.dumps(training))
+    inputs["validation"].write_text(json.dumps(validation))
+    inputs["answers"].write_text("\n".join(json.dumps(r) for r in cache) + "\n")
+    config = module.PreparationConfig(
+        training_sha256=file_sha256(inputs["training"]),
+        validation_sha256=file_sha256(inputs["validation"]),
+        answers_sha256="0" * 64
+        if case == "changed_hash"
+        else file_sha256(inputs["answers"]),
+    )
+    prepared = tmp_path / "prepared.json"
+    context = SimpleNamespace(
+        config=config, inputs=inputs, outputs={"prepared": prepared}
+    )
+    if case in {"missing", "overlap", "changed_hash"}:
+        match = "Changed preparation input" if case == "changed_hash" else "coverage"
+        with pytest.raises(ValueError, match=match):
+            module.prepare_qwen_evidence(context)
+        assert not prepared.exists()
+        return
+    module.prepare_qwen_evidence(context)
+    result = json.loads(prepared.read_text())
+    assert result["training"] == training
+    assert result["aligned"] == {
+        answer_id(passage, "color"): passage.split()[0]
+        for passage in ("red car", "blue car")
+    }
+    assert result["audit"]["unused_teacher_keys"] == (case == "superset")
+    assert result["audit"]["validation_evidence_used_for_training"] is False
+
+
 def test_only_answer_tokens_and_terminator_are_labels():
     from csts_pilot.answers import answer_id
     from csts_pilot.baseline_models import token_sequences

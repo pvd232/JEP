@@ -54,7 +54,7 @@ Audit rows, rationales and provenance: [label audit](csts_development_blind_audi
 
 ## Re-evaluation of saved candidates
 
-Twenty-seven full-development prediction maps were rescored on the same 1,491 usable examples. Original-label metrics remain available for the full historical cohort and for the same usable rows. Partial answer-input studies are compared on matched usable subsets.
+Twenty-seven full-development prediction maps were rescored on the same 1,491 usable examples; 26 have defined Spearman values, and the mean-pooling candidate is unranked. These are saved candidate checkpoints, rather than a reselection across every historical epoch. Original-label metrics remain available for the full historical cohort and for the same usable rows. Partial answer-input studies are compared on matched usable subsets.
 
 | Saved encoder | Model-audited development Spearman, n=1,491 |
 |---|---:|
@@ -81,4 +81,20 @@ The new [Qwen development profile](../configs/csts-qwen-audited-development.json
 
 New development SHA-256: `076306732aca5a43a0643735a1d9bb17c3e466963b7ff21d5a154fbbab764829`.
 
-The profile is ready for future checkpoint selection. No training was launched and no encoder checkpoint was replaced during this audit.
+Qwen preparation now accepts a hash-pinned teacher cache that covers the current training and validation inputs plus unused entries. This lets the audited subset reuse the existing cache. Missing required entries, changed input hashes and overlapping training/validation passage-condition keys still fail. Only accepted training answers enter supervision; the preparation audit records `unused_teacher_keys`.
+
+Use the audited profile explicitly for the next Qwen evidence run, with a fresh output name:
+
+```bash
+python -m csts_pilot.qwen_evidence_run \
+  --settings configs/csts-qwen-audited-development.json \
+  --name audited-development-20261026 --execute
+```
+
+The runner's historical default profile remains unchanged. This command selects checkpoints against the 1,491 model-audited development rows. The audit itself launched no training and replaced no encoder checkpoint.
+
+## Closeout verification
+
+Independent recomputation from the sealed test export reproduces Spearman `0.7885050017660868`, normalized MSE `0.07076334011896077`, rating-scale MAE `0.8607485359861651`, 936 discrepancies of at least one point and 136 of at least two points. All semantic-family and condition totals reconcile. The development file matches its configured SHA-256; its 1,491 unique rows agree with the usable audit labels and span 671 source groups.
+
+Five preparation regression cases pass in dependency-isolated execution of the exact production and test functions: exact cache, unused superset, missing required key, train/development overlap and changed hash. Real cache parsing, row validation, Pydantic configuration and file hash checks were retained. Ruff checks and formatting pass. Full Qwen pytest collection is blocked in the available local environment by the missing `peft` dependency; full import/integration validation was not completed.

@@ -87,7 +87,8 @@ def prepare_qwen_evidence(context: StageContext[PreparationConfig]) -> None:
     validate_rows(validation)
     train_keys, dev_keys = passage_keys(training), passage_keys(validation)
     records = checked_cache(context.inputs["answers"])
-    if train_keys & dev_keys or set(records) != train_keys | dev_keys:
+    required_keys = train_keys | dev_keys
+    if train_keys & dev_keys or not required_keys <= records.keys():
         raise ValueError(
             "Teacher-cache coverage or train/validation separation changed."
         )
@@ -115,6 +116,7 @@ def prepare_qwen_evidence(context: StageContext[PreparationConfig]) -> None:
                 "training_rows": len(training),
                 "stage_a_comparisons": len(common),
                 "supervised_training_keys": len(aligned),
+                "unused_teacher_keys": len(records.keys() - required_keys),
                 "validation_evidence_used_for_training": False,
                 "expert_verified": False,
                 "transition": "terminal weights after the common fixed update budget",
