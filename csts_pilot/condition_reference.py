@@ -521,9 +521,9 @@ def paired_bootstrap(
 def analyze(context: StageContext[AnalysisConfig]) -> None:
     """Independently derive scores, decision thresholds and geometry on CPU."""
     config = context.config
-    if file_sha256(context.inputs["rows"]) != config.rows_sha256:
+    if file_sha256(context.inputs["test"]) != config.rows_sha256:
         raise ValueError("Analysis rows changed.")
-    rows = load_json(context.inputs["rows"])
+    rows = load_json(context.inputs["test"])
     timing = load_json(context.inputs["timing"])
     if file_sha256(context.inputs["cache"]) != timing["cache_sha256"]:
         raise ValueError("Extracted cache differs from its timing receipt.")

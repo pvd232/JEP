@@ -42,6 +42,7 @@ from csts_pilot.condition_reference import (
 from csts_pilot.convergence import file_sha256, write_json
 from csts_pilot.convergence_run import artifact_path, artifact_source
 from jep_pilot.loaders import load_json, load_model
+from jep_pilot.stages import publish_evaluation_inputs
 
 
 def run(root: Path, name: str, reuse_extraction: Path | None = None) -> None:
@@ -219,6 +220,33 @@ def run(root: Path, name: str, reuse_extraction: Path | None = None) -> None:
                 ),
                 comparator=FloatComparator(mode="absolute", tolerance=1e-12),
             )
+            indices = directory / f"{split}_indices.json"
+            write_json(indices, list(range(spec["rows"])))
+            published = execute(
+                f"publish_{split}",
+                stage(
+                    publish_evaluation_inputs,
+                    stage_id="publish",
+                    inputs=(
+                        input("test", path=spec["path"], data_role="eval"),
+                        input(
+                            "holdout",
+                            path=str(indices.relative_to(root)),
+                            data_role="eval",
+                        ),
+                    ),
+                    outputs=StageOutputs(
+                        test=output(
+                            path="test.json", loader=load_json, data_role="eval"
+                        ),
+                        holdout=output(
+                            path="indices.json", loader=load_json, data_role="eval"
+                        ),
+                    ),
+                    reuse="never",
+                ),
+                False,
+            )
             evaluated = execute(
                 f"analyze_{split}",
                 stage(
@@ -236,8 +264,18 @@ def run(root: Path, name: str, reuse_extraction: Path | None = None) -> None:
                         input(
                             "model", source=artifact_source(parent, "train", "model")
                         ),
-                        input("rows", path=spec["path"], data_role="eval"),
-                        input("test", path=spec["path"], data_role="eval"),
+                        input(
+                            "test",
+                            source=artifact_source(
+                                published, "publish", "test", "eval"
+                            ),
+                        ),
+                        input(
+                            "holdout",
+                            source=artifact_source(
+                                published, "publish", "holdout", "eval"
+                            ),
+                        ),
                         input(
                             "cache",
                             source=artifact_source(
@@ -253,11 +291,14 @@ def run(root: Path, name: str, reuse_extraction: Path | None = None) -> None:
                         input(
                             "baseline_predictions",
                             source=artifact_source(
-                                baseline, baseline_stage, baseline_output, "eval"
+                                baseline,
+                                baseline_stage,
+                                baseline_output,
+                                "training" if split == "validation" else "eval",
                             ),
                         ),
                     ),
-                    split_inputs=("rows",),
+                    split_inputs=("holdout",),
                     metrics=(native_metric,),
                     objective=maximize(native_metric),
                     outputs=EvalOutputs(
