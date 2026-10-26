@@ -6,6 +6,14 @@ Full training/development generation: **2,432/17,334** accepted structural recor
 
 Source sample: running. Adaptation: not_started. Held-out test: not_released.
 
+## Frozen source-sample diagnostic
+
+| Arm | Spearman | MSE (0–1) | False-positive rate | Condition ordering |
+|---|---:|---:|---:|---:|
+| saved_qwen_sample | 0.832202 | 0.029610 | 0.000000 | — |
+| old_spans | 0.806018 | 0.030597 | 0.090909 | — |
+| checked_generated_v1 | 0.751170 | 0.037331 | 0.272727 | — |
+
 ## Audit evidence and limits
 
 | Development audit | Faithful decisions | Severe unsupported assertions | Gate |
