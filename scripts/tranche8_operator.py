@@ -1,523 +1,514 @@
-"""Pinned source deployment and owner-only native Tranche 8 orchestration.
+"""Finish the approved Tranche 8 work using two immutable source bindings.
 
-The Mac worker invokes these phases separately while full capture runs in its
-own supervisor.  Deployment and checks never launch model inference.  Training
-requires complete capture, matching gate bindings and a clean checked commit.
+This Mac controller does not edit source, change generation policy, repeat a
+baseline, or select on test.  Active capture/native/test children survive its
+deadline.  Only the two explicitly authorized repository status files are
+written externally; each update is guarded by the current Git blob identity.
 """
 
 import argparse
 import base64
+import fcntl
 import hashlib
+import importlib.util
 import json
 import os
 import re
-import shlex
 import shutil
 import subprocess
 import sys
-import tarfile
+import tempfile
 import time
+import traceback
+from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from urllib.parse import quote
+from zoneinfo import ZoneInfo
 
 REPO = "pvd232/JEP"
-MAC_ROOT = Path("/tmp/jep-tranche8-worker-20261026/native")
-GEN_ROOT = Path("/tmp/jep-proposition-input-20261026/full_v2_6895d17242704944")
-GPU_ROOT = "/home/machina/jep-csts-proposition-lora-20261026"
-PARENT_ROOT = "/home/machina/jep-csts-qwen-evidence-20261024"
-GPU_PYTHON = "/home/machina/jep-format-env/bin/python"
-GCLOUD = "/Users/machina/google-cloud-sdk/bin/gcloud"
-FLAGS = ["--account=pvd2112@columbia.edu", "--project=mantra-477901", "--zone=asia-northeast3-a", "--tunnel-through-iap"]
-SOURCE_HASHES = {"train.json": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01", "dev.json": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273"}
-OPERATION_LOGS = {
-    "native_deploy": ["source_init", "source_fetch", "source_identity", "source_pin", "source_bundle", "source_bundle_scp", "source_bundle_permissions", "native_deploy"],
-    "native_checks": ["native_checks"],
-    "native_import_capture": ["capture_bank_scp", "capture_bank_permissions", "native_import_capture"],
-    "native_launch": ["capture_bank_scp", "capture_bank_permissions", "native_import_capture", "native_supervisor_scp", "native_supervisor_permissions", "native_launch"],
-    "native_status": ["native_status"],
-    "native_archive": ["native_archive"],
-    "native_sample": ["native_supervisor_scp", "native_supervisor_permissions", "native_launch"],
-}
-OWNED = [
-    "csts_pilot/proposition_capture.py", "csts_pilot/proposition_inputs.py",
-    "csts_pilot/proposition_lora.py", "csts_pilot/proposition_run.py",
-    "csts_pilot/proposition_test.py", "csts_pilot/proposition_sample.py",
-    "csts_pilot/proposition_archive.py",
-    "tests/test_csts_proposition_capture.py", "tests/test_csts_proposition_inputs.py",
-    "tests/test_csts_proposition_lora.py", "tests/test_csts_proposition_test.py",
-    "tests/test_csts_proposition_sample.py",
-    "tests/test_csts_proposition_archive.py",
-]
+BRANCH = "experiment/csts-proposition-lora-20261026"
+WORK_ROOT = Path("/tmp/jep-tranche8-worker-20261026/pipeline")
+CAPTURE_COMMIT = "8a0b50d5bdd2a77ab0c9444f4bf10d484f8ba6bb"
+NATIVE_HELPER_SHA256 = "4928c30aa81fbf253dbd7e9c4b538aef067cc9c5acf7f6782c5a26b57d618525"
+NATIVE_HELPER = "scripts/tranche8_native.py"
+TEST_HELPER = "scripts/tranche8_test_capture.py"
+STATUS_PATH = "training_outputs/csts_tranche8_status.md"
+RESULT_PATH = "training_outputs/csts_tranche8_results.json"
+SAMPLE_NAME = "source_sample_v1"
+VALIDATION_NAME = "proposition_lora_v2"
+PRIVATE_KEYS = {"command", "commands", "argv", "arguments", "env", "environment", "environ", "stdout", "stderr", "prompt", "passage", "sentence1", "sentence2", "records", "credentials", "token", "access_token", "refresh_token", "password", "authorization", "api_key"}
+TERMINAL_FAILURE = {"failed", "interrupted", "timed_out"}
 
 
-class NativeFailure(RuntimeError):
-    """Safe failure details; subprocess logs stay task-private."""
+class PipelineFailure(RuntimeError):
+    """Safe orchestration failure; private process logs are never included."""
 
 
 def sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def now() -> str:
+    return datetime.now(timezone.utc).isoformat()
+
+
 def save(path: Path, value: Any) -> None:
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n")
+    path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+    with tempfile.NamedTemporaryFile("w", dir=path.parent, delete=False) as stream:
+        json.dump(value, stream, ensure_ascii=False, indent=2, allow_nan=False)
+        stream.write("\n")
+        stream.flush()
+        os.fsync(stream.fileno())
+        temporary = Path(stream.name)
+    temporary.replace(path)
 
 
-def run(argv: list[str], directory: Path, name: str, timeout: int = 120) -> bytes:
-    result = subprocess.run(argv, capture_output=True, timeout=timeout, check=False)
-    (directory / f"{name}.stdout").write_bytes(result.stdout)
-    (directory / f"{name}.stderr").write_bytes(result.stderr)
-    if result.returncode:
-        raise NativeFailure(f"{name} exited with status {result.returncode}; private logs retained.")
-    return result.stdout
+def gh() -> str:
+    path = shutil.which("gh") or next((str(p) for p in (Path("/opt/homebrew/bin/gh"), Path("/usr/local/bin/gh")) if p.is_file()), None)
+    if path is None:
+        raise PipelineFailure("The existing gh executable is unavailable.")
+    return path
 
 
-def gh_path() -> str:
-    executable = shutil.which("gh") or next((str(path) for path in (Path("/opt/homebrew/bin/gh"), Path("/usr/local/bin/gh")) if path.is_file()), None)
-    if executable is None:
-        raise NativeFailure("The existing gh executable is unavailable.")
-    return executable
+def github_file(path: str, ref: str, missing_ok: bool = False) -> tuple[dict[str, Any] | None, bytes | None]:
+    if path not in {NATIVE_HELPER, TEST_HELPER, STATUS_PATH, RESULT_PATH}:
+        raise PipelineFailure("GitHub path is outside the fixed pipeline allowlist.")
+    endpoint = f"repos/{REPO}/contents/{path}?ref={quote(ref, safe='')}"
+    response = subprocess.run([gh(), "api", endpoint], stdin=subprocess.DEVNULL, capture_output=True, timeout=45, check=False)
+    if response.returncode:
+        if missing_ok and path == RESULT_PATH and b"HTTP 404" in response.stderr:
+            return None, None
+        raise PipelineFailure("A pinned source/status fetch failed; no credentials or response text published.")
+    record = json.loads(response.stdout)
+    if record.get("type") != "file" or record.get("path") != path or record.get("encoding") != "base64":
+        raise PipelineFailure("GitHub returned an unexpected file identity.")
+    data = base64.b64decode("".join(record["content"].split()), validate=True)
+    if hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest() != record.get("sha"):
+        raise PipelineFailure("A GitHub blob failed its identity check.")
+    return record, data
 
 
-def fetch_file(path: str, commit: str, directory: Path) -> bytes:
-    payload = json.loads(run([gh_path(), "api", f"repos/{REPO}/contents/{path}?ref={commit}"], directory, "fetch_" + Path(path).name))
-    if payload.get("type") != "file" or payload.get("encoding") != "base64":
-        raise NativeFailure("Pinned source is not a file.")
-    data = base64.b64decode("".join(payload["content"].split()), validate=True)
-    if hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest() != payload.get("sha"):
-        raise NativeFailure("Pinned source Git blob differs.")
-    return data
+def guarded_write(path: str, data: bytes) -> None:
+    if path not in {STATUS_PATH, RESULT_PATH}:
+        raise PipelineFailure("Only the fixed Tranche 8 status/results files may be written.")
+    for _ in range(3):
+        previous, old = github_file(path, BRANCH, missing_ok=path == RESULT_PATH)
+        if old == data:
+            return
+        request = {"branch": BRANCH, "message": "Update Tranche 8 experiment status", "content": base64.b64encode(data).decode()}
+        if previous is not None:
+            request["sha"] = previous["sha"]
+        response = subprocess.run([gh(), "api", "--method", "PUT", f"repos/{REPO}/contents/{path}", "--input", "-"], input=json.dumps(request).encode(), capture_output=True, timeout=45, check=False)
+        if response.returncode == 0:
+            return
+        # A concurrent guarded status update is the only automatic write retry.
+        if not any(code in response.stderr for code in (b"HTTP 409", b"HTTP 422")):
+            break
+    raise PipelineFailure("Guarded repository status publication failed; active supervised work was preserved.")
 
 
-def remote(script: str, directory: Path, label: str, timeout: int = 120) -> dict[str, Any]:
-    command = "sudo -n -u machina " + GPU_PYTHON + " -c " + shlex.quote(script)
-    output = run([GCLOUD, "compute", "ssh", "jep-csts-format-20261021", *FLAGS, "--command=" + command], directory, label, timeout)
-    return json.loads(output)
+def load_helper(path: str, commit: str, directory: Path, expected: str | None = None) -> Any:
+    _, source = github_file(path, commit)
+    assert source is not None
+    if expected is not None and sha(source) != expected:
+        raise PipelineFailure("Pinned native helper hash differs from the reviewed implementation.")
+    destination = directory / Path(path).name
+    if destination.exists() and destination.read_bytes() != source:
+        raise PipelineFailure("Preserve the existing immutable helper; its source differs.")
+    destination.write_bytes(source)
+    spec = importlib.util.spec_from_file_location(destination.stem + "_pinned", destination)
+    if spec is None or spec.loader is None:
+        raise PipelineFailure("Cannot load an immutable helper.")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
-def copy_to_gpu(path: Path, directory: Path, label: str) -> tuple[str, str]:
-    digest = sha(path.read_bytes())
-    staging = f"/tmp/jep-tranche8-native-{digest}-{path.name}"
-    run([GCLOUD, "compute", "scp", str(path), f"jep-csts-format-20261021:{staging}", *FLAGS], directory, label + "_scp", 240)
-    run([GCLOUD, "compute", "ssh", "jep-csts-format-20261021", *FLAGS, "--command=chmod 644 " + shlex.quote(staging)], directory, label + "_permissions", 60)
-    return staging, digest
+def public(value: Any, depth: int = 0) -> Any:
+    if depth > 14:
+        return "[nested detail retained privately]"
+    if isinstance(value, dict):
+        return {str(k): public(v, depth+1) for k, v in value.items() if str(k).casefold() not in PRIVATE_KEYS}
+    if isinstance(value, list):
+        return [public(v, depth+1) for v in value[:50]]
+    if isinstance(value, str):
+        value = re.sub(r"(?:\bsk-[A-Za-z0-9_-]{16,}|\bgh[pousr]_[A-Za-z0-9_]{16,}|\bgithub_pat_[A-Za-z0-9_]{16,}|\bhf_[A-Za-z0-9_]{16,}|\bya29\.[A-Za-z0-9._-]{16,}|\bBearer\s+[A-Za-z0-9._~+/-]{16,})", "[REDACTED]", value, flags=re.IGNORECASE)
+        return value[:16000]
+    if value is None or isinstance(value, (int, float, bool)):
+        return value
+    return str(type(value).__name__)
 
 
-def preamble(commit: str) -> str:
-    return (
-        "import pathlib,json,hashlib,subprocess,os,shutil,time\n"
-        f"root=pathlib.Path({GPU_ROOT!r});parent=pathlib.Path({PARENT_ROOT!r})\n"
-        f"commit={commit!r}\n"
-        "def git(*args):\n return subprocess.check_output(['git','-C',str(root),*args],text=True).strip()\n"
-        "def save(p,v):\n p.write_text(json.dumps(v,ensure_ascii=False,indent=2,allow_nan=False)+'\\n')\n"
-        "def digest(p):\n return hashlib.sha256(p.read_bytes()).hexdigest()\n"
-        "def clean():\n assert git('rev-parse','HEAD')==commit,'Source commit differs.'\n assert not git('status','--porcelain','--untracked-files=no'),'Tracked source is dirty.'\n"
-    )
+def audit_evidence(markdown: str) -> str:
+    """Keep the exact frozen methodology and evidence paragraphs in every page."""
+    paragraphs = markdown.split("\n\n")
+    methodology = next((p for p in paragraphs if p.startswith("Each audit used source-sampled groups")), None)
+    artifacts = next((p for p in paragraphs if p.startswith("Audit records, source-only references")), None)
+    if methodology is None or artifacts is None:
+        raise PipelineFailure("The pinned audit evidence paragraphs are absent; preserve the existing status page.")
+    table = "| Development audit | Faithful decisions | Severe unsupported assertions | Gate |\n|---|---:|---:|---|\n| Original cached spans, initial sources | 73/120 | 2 | Descriptive comparator |\n| Generated propositions, initial policy | 115/120 | 1 | Failed |\n| Revised frozen policy, fresh disjoint sources | 58/60 | 0 | Passed |"
+    return table + "\n\n" + methodology + "\n\n" + artifacts
 
 
-def native_deploy(commit: str, directory: Path) -> dict[str, Any]:
-    """Transport one exact git object graph, preserving existing native stores."""
-    source = directory / "source"
-    source.mkdir(exist_ok=True)
-    if not (source / ".git").exists():
-        run(["git", "init", str(source)], directory, "source_init")
-    helper = "!" + shlex.quote(gh_path()) + " auth git-credential"
-    run(["git", "-C", str(source), "-c", "credential.helper=", "-c", "credential.helper=" + helper, "fetch", "--no-tags", f"https://github.com/{REPO}.git", commit], directory, "source_fetch", 240)
-    actual = run(["git", "-C", str(source), "rev-parse", "FETCH_HEAD"], directory, "source_identity").decode().strip()
-    if actual != commit:
-        raise NativeFailure("Fetched source differs from the pinned commit.")
-    run(["git", "-C", str(source), "update-ref", "refs/heads/tranche8-pinned", commit], directory, "source_pin")
-    bundle = directory / "source.bundle"
-    if bundle.exists():
-        bundle = directory / f"source-{time.time_ns()}.bundle"
-    run(["git", "-C", str(source), "bundle", "create", str(bundle), "refs/heads/tranche8-pinned"], directory, "source_bundle", 180)
-    staging, digest = copy_to_gpu(bundle, directory, "source_bundle")
-    script = preamble(commit) + (
-        f"bundle=pathlib.Path({staging!r})\nassert digest(bundle)=={digest!r},'Bundle bytes differ.'\n"
-        "subprocess.run(['git','-C',str(parent),'fetch',str(bundle),'refs/heads/tranche8-pinned'],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)\n"
-        "if root.exists():\n"
-        " assert (root/'.git').is_file(),'Existing native root is not a worktree.'\n"
-        " dirty=git('diff','HEAD','--name-only').splitlines()\n"
-        f" assert set(dirty)<=set({OWNED!r}),'Unexpected local source changes.'\n"
-        " for path in dirty:\n"
-        "  intended=subprocess.check_output(['git','-C',str(parent),'show',commit+':'+path])\n"
-        "  assert (root/path).read_bytes()==intended,'Formatting differs from the published source.'\n"
-        " if dirty:\n"
-        "  subprocess.run(['git','-C',str(root),'add','--',*dirty],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)\n"
-        " if git('rev-parse','HEAD')!=commit:\n"
-        "  subprocess.run(['git','-C',str(root),'checkout','--detach',commit],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)\n"
-        "else:\n"
-        " subprocess.run(['git','-C',str(parent),'worktree','add','--detach',str(root),commit],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)\n"
-        "clean()\n"
-        "assert not root.is_symlink(),'Native root must be physical.'\n"
-        "(root/'csts_data').mkdir(exist_ok=True)\n"
-        f"for name,expected in {SOURCE_HASHES!r}.items():\n"
-        " source=parent/'csts_data'/name;target=root/'csts_data'/name\n"
-        " assert digest(source)==expected,'Original dataset differs.'\n"
-        " if target.exists(): assert digest(target)==expected,'Existing dataset differs.'\n"
-        " else: shutil.copyfile(source,target)\n"
-        " assert not target.is_symlink(),'Native dataset must be physical.'\n"
-        "assert (root/'viper.toml').is_file(),'Native storage configuration absent.'\n"
-        "usage=shutil.disk_usage(root)\n"
-        "print(json.dumps({'phase':'native_deploy','status':'complete','source_commit':commit,'root':str(root),'bundle_sha256':digest(bundle),'free_bytes':usage.free,'physical_datasets':True,'copied_existing_viper_store':False}))\n"
-    )
-    return remote(script, directory, "native_deploy", 240)
-
-
-def native_checks(commit: str, directory: Path, allow_format: bool) -> dict[str, Any]:
-    """Run owner checks and return only changed task source for publication."""
-    script = preamble(commit) + (
-        "import ast\nclean()\n"
-        f"paths=[p for p in {OWNED!r} if (root/p).is_file()]\n"
-        "required={'csts_pilot/proposition_inputs.py','csts_pilot/proposition_lora.py','csts_pilot/proposition_run.py'}\n"
-        "assert required<=set(paths),'Native implementation is incomplete.'\n"
-        "directory=root/'answer_input_results'/'owner_checks'/commit\ndirectory.mkdir(parents=True,exist_ok=True)\n"
-        "before={p:(root/p).read_bytes() for p in paths}\n"
-        "environment=os.environ.copy();environment['VIRTUAL_ENV']='/home/machina/jep-format-env';environment['PATH']='/home/machina/jep-format-env/bin:/usr/local/cuda/bin:/usr/local/bin:/usr/bin:/bin'\n"
-        f"commands=([['ruff','format',*paths]] if {allow_format!r} else [])+[['ruff','check',*paths],['pyrefly','check','--python-interpreter-path',{GPU_PYTHON!r},*[p for p in paths if p.startswith('csts_pilot/')]],['pytest','-q',*[p for p in paths if p.startswith('tests/')]]]\n"
-        "results=[]\n"
-        "for index,args in enumerate(commands):\n"
-        f" command=[{GPU_PYTHON!r},'-m',*args]\n"
-        " outcome=subprocess.run(command,cwd=root,env=environment,capture_output=True,timeout=600,check=False)\n"
-        " (directory/(str(index)+'.stdout')).write_bytes(outcome.stdout);(directory/(str(index)+'.stderr')).write_bytes(outcome.stderr)\n"
-        " results.append({'check':args[0]+(' '+args[1] if len(args)>1 and args[0]=='ruff' else ''),'returncode':outcome.returncode})\n"
-        "changed=[]\n"
-        "for p in paths:\n"
-        " if (root/p).read_bytes()!=before[p]:\n"
-        "  text=(root/p).read_text()\n"
-        "  assert ast.dump(ast.parse(before[p]))==ast.dump(ast.parse(text)),'Formatting changed the source AST.'\n"
-        "  changed.append({'path':p,'chunks':[text[i:i+12000] for i in range(0,len(text),12000)],'sha256':digest(root/p)})\n"
-        f"preflight=subprocess.run([{GPU_PYTHON!r},'-c',\"import json,os,sys;assert sys.prefix=='/home/machina/jep-format-env';assert os.environ.get('VIRTUAL_ENV')==sys.prefix;import torch,viper,ruff,pyrefly;print(json.dumps({{'owner_python_verified':True,'virtual_env_verified':True}}))\"],cwd=root,env=environment,capture_output=True,timeout=60,check=False)\n"
-        "(directory/'preflight.stdout').write_bytes(preflight.stdout);(directory/'preflight.stderr').write_bytes(preflight.stderr);results.append({'check':'owner_environment_preflight','returncode':preflight.returncode})\n"
-        "receipt={'source_commit':commit,'checks':results,'passed':all(item['returncode']==0 for item in results),'source_clean':not bool(changed),'owned_source_sha256':{p:digest(root/p) for p in paths}}\n"
-        "save(directory/'receipt.json',receipt)\n"
-        "result={'phase':'native_checks','status':'source_publication_required' if changed else ('complete' if receipt['passed'] else 'failed'),'source_commit':commit,'checks':results,'formatted_files':changed,'verification':receipt}\n"
-        "if len(json.dumps(result).encode())>=180000:\n"
-        " result['formatted_files']=[{k:v for k,v in item.items() if k!='chunks'} for item in changed];result['source_fetch_required']=True\n"
-        "print(json.dumps(result,ensure_ascii=False))\n"
-    )
-    return remote(script, directory, "native_checks", 1900)
-
-
-def native_source(commit: str, directory: Path, path: str) -> dict[str, Any]:
-    if path not in OWNED:
-        raise NativeFailure("Only the fixed owned source allowlist may be fetched.")
-    script = preamble(commit) + (
-        "assert git('rev-parse','HEAD')==commit,'Source checkout differs.'\n"
-        f"path={path!r}\nsource=root/path\nassert source.is_file() and not source.is_symlink()\ntext=source.read_text()\n"
-        "result={'phase':'native_source','status':'complete','source_commit':commit,'path':path,'sha256':digest(source),'chunks':[text[i:i+12000] for i in range(0,len(text),12000)]}\n"
-        "assert len(json.dumps(result).encode())<180000,'One source file exceeds publication budget.'\nprint(json.dumps(result,ensure_ascii=False))\n"
-    )
-    return remote(script, directory, "native_source")
-
-
-def import_capture(commit: str, directory: Path) -> dict[str, Any]:
-    """Install a complete generated bank without exposing it in worker status."""
-    paths = {"propositions_tranche8.json": GEN_ROOT / "propositions_tranche8.json", "propositions_tranche8_manifest.json": GEN_ROOT / "propositions_tranche8_manifest.json"}
-    manifest = json.loads(paths["propositions_tranche8_manifest.json"].read_text())
-    if manifest.get("items") != 17334 or manifest.get("records_sha256") != sha(paths["propositions_tranche8.json"].read_bytes()) or set(manifest.get("partitions", {})) != {"training", "validation"} or any(part.get("status") != "complete" for part in manifest["partitions"].values()):
-        raise NativeFailure("Full capture is incomplete or its record binding differs.")
-    gate = fetch_file("csts_data/propositions_tranche8_audit_gate.json", commit, directory)
-    if sha(gate) != manifest.get("audit_gate_sha256"):
-        raise NativeFailure("Native source gate differs from the completed capture gate.")
-    gate_path = directory / "propositions_tranche8_audit_gate.json"
-    gate_path.write_bytes(gate)
-    paths[gate_path.name] = gate_path
-    hashes = {name: sha(path.read_bytes()) for name, path in paths.items()}
-    archive = directory / f"capture-bank-{time.time_ns()}.tar.gz"
-    with tarfile.open(archive, "w:gz") as stream:
-        for name, path in paths.items():
-            stream.add(path, arcname=name, recursive=False)
-    staging, digest = copy_to_gpu(archive, directory, "capture_bank")
-    script = preamble(commit) + (
-        "import tarfile\nclean()\n"
-        f"archive=pathlib.Path({staging!r})\nassert digest(archive)=={digest!r}\nexpected={hashes!r}\n"
-        "with tarfile.open(archive,'r:gz') as stream:\n"
-        " assert set(stream.getnames())==set(expected),'Unexpected bank archive members.'\n"
-        " for member in stream.getmembers():\n"
-        "  assert member.isfile() and member.name in expected,'Only regular bank files are accepted.'\n"
-        "  source=stream.extractfile(member);assert source is not None\n"
-        "  data=source.read();assert hashlib.sha256(data).hexdigest()==expected[member.name]\n"
-        "  target=root/'csts_data'/member.name\n"
-        "  assert not target.is_symlink(),'Capture input must be physical.'\n"
-        "  if target.exists(): assert target.read_bytes()==data,'Preserve existing capture input.'\n"
-        "  else: target.write_bytes(data)\n"
-        "print(json.dumps({'phase':'native_import_capture','status':'complete','source_commit':commit,'source_inputs':expected}))\n"
-    )
-    return remote(script, directory, "native_import_capture")
-
-
-def native_launch(commit: str, directory: Path, name: str, module: str = "csts_pilot.proposition_run") -> dict[str, Any]:
-    if module not in {"csts_pilot.proposition_run", "csts_pilot.proposition_sample"}:
-        raise NativeFailure("Native launch module is outside the fixed allowlist.")
-    imported = import_capture(commit, directory) if module == "csts_pilot.proposition_run" else None
-    # The supervisor is task source fetched at the same commit, never shell text.
-    supervisor = fetch_file("scripts/tranche8_native_supervisor.py", commit, directory)
-    local = directory / "tranche8_native_supervisor.py"
-    local.write_bytes(supervisor)
-    staging, digest = copy_to_gpu(local, directory, "native_supervisor")
-    script = preamble(commit) + (
-        "clean()\n"
-        "checks=json.loads((root/'answer_input_results'/'owner_checks'/commit/'receipt.json').read_text())\n"
-        "assert checks.get('passed') is True and checks.get('source_clean') is True,'Owner checks must pass on the executed clean source.'\n"
-        "assert all(digest(root/p)==value for p,value in checks['owned_source_sha256'].items()),'Checked source changed.'\n"
-        f"name={name!r}\n"
-        f"module={module!r}\n"
-        "directory=root/'answer_input_results'/'supervisors'/name;directory.mkdir(parents=True,exist_ok=True)\n"
-        "receipt=directory/'receipt.json'\n"
-        "if receipt.exists():\n print(json.dumps({'phase':'native_launch',**json.loads(receipt.read_text())}))\n"
-        "else:\n"
-        f" source=pathlib.Path({staging!r});assert digest(source)=={digest!r}\n"
-        " target=directory/'supervisor.py';shutil.copyfile(source,target)\n"
-        " save(receipt,{'status':'launching','source_commit':commit,'name':name,'module':module,'started_unix':time.time(),'supervisor_sha256':digest(target)})\n"
-        " environment=os.environ.copy();environment.update({'VIRTUAL_ENV':'/home/machina/jep-format-env','HF_HOME':'/home/machina/jep-model-cache','HF_HUB_OFFLINE':'1','TRANSFORMERS_OFFLINE':'1','PATH':'/home/machina/jep-format-env/bin:/usr/local/cuda/bin:/usr/local/bin:/usr/bin:/bin'})\n"
-        " with (directory/'supervisor.log').open('ab') as log:\n"
-        f"  child=subprocess.Popen([{GPU_PYTHON!r},str(target),'--root',str(root),'--parent-root',str(parent),'--name',name,'--source-commit',commit,'--module',module],cwd=root,env=environment,stdin=subprocess.DEVNULL,stdout=log,stderr=log,start_new_session=True)\n"
-        " print(json.dumps({'phase':'native_launch','status':'running','source_commit':commit,'name':name,'pid':child.pid}))\n"
-    )
-    result = remote(script, directory, "native_launch")
-    if imported is not None:
-        result["capture_import"] = imported
-    else:
-        result["phase"] = "native_sample"
+def capture_state(native: Any) -> dict[str, Any]:
+    result = native.capture_diagnostics()
+    directory = native.MAC_ROOT.parent / "full_capture" / CAPTURE_COMMIT
+    path = directory / "supervisor_receipt.json"
+    if not path.is_file():
+        raise PipelineFailure("The originally authorized full capture supervisor is absent.")
+    receipt = json.loads(path.read_text())
+    if receipt.get("source_commit") != CAPTURE_COMMIT or receipt.get("output_path") != str(native.GEN_ROOT):
+        raise PipelineFailure("The running full capture identity differs.")
+    status = receipt.get("status")
+    result["status"] = status
+    if (directory / "result.json").is_file():
+        terminal = json.loads((directory / "result.json").read_text())
+        result["status"] = terminal.get("status")
+        result["manifest"] = terminal.get("manifest", {})
+        result["native_checkpoints"] = len(terminal.get("checkpoints", []))
+    if result["status"] in TERMINAL_FAILURE:
+        raise PipelineFailure("The full capture stopped or failed; raw attempts and native checkpoints remain preserved.")
+    if result["status"] == "complete":
+        manifest_path = native.GEN_ROOT / "propositions_tranche8_manifest.json"
+        manifest = json.loads(manifest_path.read_text())
+        bank = native.GEN_ROOT / "propositions_tranche8.json"
+        if manifest.get("items") != 17334 or manifest.get("records_sha256") != sha(bank.read_bytes()) or any(v.get("status") != "complete" for v in manifest.get("partitions", {}).values()) or set(manifest.get("partitions", {})) != {"training", "validation"}:
+            raise PipelineFailure("The completed full bank failed its final manifest binding.")
+    elif not any(item.get("process_alive") is True and item.get("source_commit") == CAPTURE_COMMIT for item in result.get("supervisors", [])):
+        raise PipelineFailure("The original capture supervisor is no longer alive; no replacement was launched.")
     return result
 
 
-def native_status(commit: str, directory: Path, name: str) -> dict[str, Any]:
-    script = preamble(commit) + (
-        "import fcntl\n"
-        f"name={name!r}\nresult={{'phase':'native_status','source_commit':commit,'name':name}}\n"
-        "supervisor=root/'answer_input_results'/'supervisors'/name/'receipt.json'\n"
-        "result.update(json.loads(supervisor.read_text()) if supervisor.exists() else {'status':'not_started'})\n"
-        "if result['status'] in {'launching','running'} and time.time()-result.get('started_unix',time.time())>30:\n"
-        " with (supervisor.parent/'supervisor.lock').open('a+') as lock:\n"
-        "  try:\n   fcntl.flock(lock.fileno(),fcntl.LOCK_EX|fcntl.LOCK_NB)\n  except BlockingIOError: pass\n  else: result['status']='interrupted'\n"
-        "summary=root/'answer_input_results'/name/'summary.json'\n"
-        "if summary.exists():\n"
-        " value=json.loads(summary.read_text());result['summary']={key:value[key] for key in ('status','in_flight','source_commit','selection','next_phase','selected','failure_reason','seconds') if key in value}\n"
-        " result['runs']=[{key:item[key] for key in ('name','status','seconds') if key in item} for item in value.get('runs',[])]\n"
-        " if 'result' in value:\n"
-        "  result['result']={key:value['result'][key] for key in ('metrics','selection','selected_training_epoch','selected_training_step','completed_epochs','actual_updates','stop_reason','candidate_test_evaluation_ran') if key in value['result']}\n"
-        "queue=root/'.viper'/'publication_queue'\n"
-        "publication={}\n"
-        "for path in queue.glob('*.json'):\n"
-        " try:\n  status=json.loads(path.read_text()).get('status','unknown');publication[status]=publication.get(status,0)+1\n except (OSError,ValueError): pass\n"
-        "result['publication_counts']=publication;result['free_bytes']=shutil.disk_usage(root).free\n"
-        "events=root/'answer_input_results'/name/'events.jsonl'\ntrace_path=None\n"
-        "if events.is_file():\n"
-        " for line in events.read_text().splitlines():\n"
-        "  try: event=json.loads(line)\n  except ValueError: continue\n"
-        "  if event.get('event')=='proposition_lora_live_trace' and isinstance(event.get('trace_path'),str):\n"
-        "   candidate=pathlib.Path(event['trace_path']).resolve()\n"
-        "   if candidate.is_relative_to(root.resolve()): trace_path=candidate\n"
-        "if trace_path is not None and trace_path.is_file():\n"
-        " try: trace=json.loads(trace_path.read_text())\n except (OSError,ValueError): pass\n"
-        " else:\n"
-        "  live={key:trace[key] for key in ('status','current_epoch','actual_updates','completed_epoch','selected','epochs_without_improvement') if key in trace}\n"
-        "  epochs=trace.get('epochs',[])\n"
-        "  if epochs:\n"
-        "   latest=epochs[-1];live['latest_epoch']={key:latest[key] for key in ('epoch','step','training_mse_0_1','validation','fit_seconds','validation_seconds','observed_epoch_seconds') if key in latest}\n"
-        "  result['training']=live\n"
-        "print(json.dumps(result,allow_nan=False))\n"
+def checked_owner(native: Any, commit: str, directory: Path) -> dict[str, Any]:
+    script = native.preamble(commit) + (
+        "clean()\nchecks=json.loads((root/'answer_input_results'/'owner_checks'/commit/'receipt.json').read_text())\n"
+        "assert checks.get('source_commit')==commit and checks.get('passed') is True and checks.get('source_clean') is True\n"
+        "assert all(digest(root/path)==expected for path,expected in checks['owned_source_sha256'].items())\n"
+        "print(json.dumps({'status':'complete','source_commit':commit,'owner_checks_passed':True,'source_clean':True}))\n"
     )
-    return remote(script, directory, "native_status")
+    return native.remote(script, directory, "pipeline_owner_binding")
 
 
-def redact(text: str) -> str:
-    expression = r"(?:\bsk-[A-Za-z0-9_-]{16,}|\bgh[pousr]_[A-Za-z0-9_]{16,}|\bgithub_pat_[A-Za-z0-9_]{16,}|\bhf_[A-Za-z0-9_]{16,}|\bya29\.[A-Za-z0-9._-]{16,}|\bAIza[A-Za-z0-9_-]{25,}|\bBearer\s+[A-Za-z0-9._~+/-]{16,})"
-    text = re.sub(expression, "[REDACTED]", text, flags=re.IGNORECASE)
-    return re.sub(r"(?im)^.*(?:authorization|api[_-]?key|access[_-]?token|refresh[_-]?token|password)\s*[:=].*$", "[REDACTED credential assignment]", text)
+def known_reauthentication_block(directory: Path) -> bool:
+    """Classify only the observed gcloud failure, without publishing log text."""
+    path = directory / "native_checks.stderr"
+    if not path.is_file() or path.is_symlink():
+        return False
+    with path.open("rb") as stream:
+        size = path.stat().st_size
+        stream.seek(max(0, size-32768))
+        text = stream.read(32768).decode(errors="replace").casefold()
+    text = " ".join(text.split())
+    return "reauthentication failed" in text and "cannot prompt during non-interactive execution" in text
 
 
-def operation_diagnostics(commit: str, operation: str) -> dict[str, Any]:
-    if operation not in OPERATION_LOGS:
-        raise NativeFailure("Operation logs are outside the fixed allowlist.")
-    directory = MAC_ROOT / commit / operation
-    records = []
-    for label in OPERATION_LOGS[operation]:
-        path = directory / (label + ".stderr")
-        if path.is_file() and not path.is_symlink():
-            text = redact(path.read_text(errors="replace")[-24000:])
-            if text.strip():
-                records.append({"operation": label, "stream": "stderr", "chunks": [text[i:i+12000] for i in range(0, len(text), 12000)]})
-    return {"phase": "native_operation_diagnostics", "status": "complete", "source_commit": commit, "operation": operation, "diagnostics": records}
+def wait_for_owner_checks(native: Any, commit: str, directory: Path, snapshot: dict[str, Any], evidence: str, started: float, hours: float) -> bool:
+    """Wait for interactive sign-in, then bind read-only checks to native source.
 
-
-def check_diagnostics(commit: str, directory: Path) -> dict[str, Any]:
-    script = preamble(commit) + (
-        "assert git('rev-parse','HEAD')==commit\ndirectory=root/'answer_input_results'/'owner_checks'/commit\nrecords=[]\n"
-        "for name in ['preflight',*[str(i) for i in range(4)]]:\n"
-        " for suffix in ['stdout','stderr']:\n"
-        "  path=directory/(name+'.'+suffix)\n"
-        "  if path.is_file() and not path.is_symlink():\n"
-        "   text=path.read_text(errors='replace')[-12000:]\n"
-        "   if text.strip(): records.append({'check':name,'stream':suffix,'text':text})\n"
-        "print(json.dumps({'phase':'native_check_diagnostics','status':'complete','source_commit':commit,'diagnostics':records},ensure_ascii=False))\n"
-    )
-    result = remote(script, directory, "native_check_diagnostics")
-    for entry in result.get("diagnostics", []):
-        text = redact(entry.pop("text"))
-        entry["chunks"] = [text[i:i+12000] for i in range(0, len(text), 12000)]
-    return result
-
-
-def native_archive(commit: str, directory: Path) -> dict[str, Any]:
-    script = preamble(commit) + (
-        "clean()\n"
-        "directory=root/'answer_input_results'/'archive_operator';directory.mkdir(parents=True,exist_ok=True)\n"
-        "log_id=str(time.time_ns())\n"
-        "environment=os.environ.copy();environment['VIRTUAL_ENV']='/home/machina/jep-format-env';environment['PATH']='/home/machina/jep-format-env/bin:/usr/local/bin:/usr/bin:/bin'\n"
-        f"command=[{GPU_PYTHON!r},'-m','csts_pilot.proposition_archive','--root',str(root),'--archive-directory','/home/machina/jep-csts-answer-input-20261026/answer_input_results/proposition_capture_full/full_v2_6895d17242704944']\n"
-        "outcome=subprocess.run(command,cwd=root,env=environment,capture_output=True,timeout=600,check=False)\n"
-        "(directory/(log_id+'.stdout')).write_bytes(outcome.stdout);(directory/(log_id+'.stderr')).write_bytes(outcome.stderr)\n"
-        "result={'phase':'native_archive','status':'failed' if outcome.returncode else 'complete','source_commit':commit,'returncode':outcome.returncode,'promotion_waited':False}\n"
-        "for line in outcome.stdout.decode(errors='replace').splitlines():\n"
-        " try: event=json.loads(line)\n except ValueError: continue\n"
-        " if event.get('event')=='capture_archive_batch_complete':\n"
-        "  result.update({key:event[key] for key in ('archives','sealed_bytes','promotion_waited') if key in event})\n"
-        "save(directory/'latest.json',{'result':result,'log_id':log_id})\nprint(json.dumps(result,allow_nan=False))\n"
-    )
-    return remote(script, directory, "native_archive", 660)
-
-
-def capture_diagnostics() -> dict[str, Any]:
-    """Inspect timing and event types only, never prompts or event payload text."""
-    now = time.time()
-    running = []
-    recent = []
-    complete: dict[str, int] = {}
-    failures = 0
-    for split in ("training", "validation"):
-        for directory in sorted((GEN_ROOT / split).glob("batch_*")):
-            try:
-                receipt = json.loads((directory / "receipt.json").read_text())
-            except (OSError, ValueError):
-                continue
-            status = receipt.get("status", "unknown")
-            item = {"split": split, "batch": directory.name, "status": status, "items": receipt.get("items"), "started_unix": receipt.get("started_unix")}
-            if isinstance(receipt.get("started_unix"), (int, float)):
-                item["elapsed_seconds"] = round(receipt.get("elapsed_seconds", now - receipt["started_unix"]), 1)
-            if status == "complete":
-                complete[split + "/" + directory.name.split("-attempt_")[0]] = receipt.get("items", 0)
-                recent.append(item)
-            elif status == "failed":
-                failures += 1
-                recent.append(item)
-            elif status == "running":
-                stderr_path = directory / "stderr.log"
-                if stderr_path.is_file():
-                    size = stderr_path.stat().st_size
-                    with stderr_path.open("rb") as stream:
-                        stream.seek(max(0, size - 262144))
-                        inspected = stream.read(262144)
-                    text = inspected.decode(errors="replace")
-                    patterns = {
-                        "capacity": r"capacity|overload|high demand|server busy",
-                        "rate_limit": r"\b429\b|rate.?limit|too many requests",
-                        "timeout": r"timed? out|timeout|deadline.exceeded",
-                        "auth": r"unauthori[sz]ed|authentication|invalid.api.?key|token expired|\b401\b|\b403\b",
-                        "policy": r"approval|policy|permission denied|not allowed|access denied",
-                        "connection": r"connection|network|socket|\bdns\b|\btls\b|disconnect",
-                        "retrying": r"retry|backoff|reconnect",
-                    }
-                    frequencies = {key: len(re.findall(pattern, text, flags=re.IGNORECASE)) for key, pattern in patterns.items()}
-                    item.update(stderr_flags={key: count > 0 for key, count in frequencies.items()}, stderr_counts=frequencies, stderr_bytes_scanned=len(inspected), stderr_scan_truncated=size > len(inspected))
-                events = directory / "events.jsonl"
-                if events.is_file():
-                    item["last_event_age_seconds"] = round(max(0, now - events.stat().st_mtime), 1)
-                    event_count = 0
-                    last_type = None
-                    with events.open() as stream:
-                        for line in stream:
-                            try:
-                                event = json.loads(line)
-                            except ValueError:
-                                continue
-                            event_count += 1
-                            value = event.get("type")
-                            last_type = value if value in {"thread.started", "turn.started", "item.started", "item.updated", "item.completed", "turn.completed", "turn.failed", "error"} else "unrecognized"
-                    item.update(event_count=event_count, last_cli_event_type=last_type)
-                pid = receipt.get("pid")
-                if isinstance(pid, int) and pid > 1:
-                    try:
-                        os.kill(pid, 0)
-                    except ProcessLookupError:
-                        item["process_alive"] = False
-                    except PermissionError:
-                        item["process_alive"] = True
-                    else:
-                        item["process_alive"] = True
-                    item["pid"] = pid
-                running.append(item)
-    supervisors = []
-    for path in sorted((MAC_ROOT.parent / "full_capture").glob("*/supervisor_receipt.json")):
+    No credential operation occurs here.  A fresh read-only check attempt is
+    allowed only for the specific observed gcloud reauthentication failure.
+    Other operational failures and failed owner checks stop orchestration.
+    """
+    attempt = 0
+    last_signature = None
+    last_publish = 0.0
+    while True:
+        if time.monotonic() - started >= hours * 3600:
+            snapshot.update(status="timed_out", updated_at=now(), stage="supervised_work_preserved", error="The orchestration allowance ended while waiting for native checks; local capture and supervised work were preserved.")
+            publish_snapshot(snapshot, evidence, directory)
+            return False
+        iteration = directory / "owner_check_attempts" / str(time.time_ns())
+        iteration.mkdir(parents=True)
+        attempt += 1
         try:
-            receipt = json.loads(path.read_text())
-        except (OSError, ValueError):
+            checks = native.native_checks(commit, iteration, False)
+        except native.NativeFailure:
+            if not known_reauthentication_block(iteration):
+                raise PipelineFailure("Native owner checks failed for a reason other than the recognized interactive Google Cloud sign-in requirement.") from None
+            snapshot.update(status="authentication_required", stage="waiting_for_google_cloud_sign_in", updated_at=now(), elapsed_seconds=round(time.monotonic()-started))
+            snapshot["capture"] = capture_state(native)
+            snapshot["sample"] = {"status": "awaiting_clean_owner_checks"}
+            snapshot["adaptation"] = {"status": "awaiting_clean_owner_checks"}
+            snapshot["test"] = {"status": "not_released", "test_inputs_opened": False}
+            snapshot["authentication"] = {"service": "Google Cloud", "interactive_sign_in_required": True, "recognized_noninteractive_reauthentication_failure": True, "owner_check_attempts": attempt}
+            signature = sha(json.dumps({"status": snapshot["status"], "counts": snapshot["capture"].get("counts", {})}, sort_keys=True, allow_nan=False).encode())
+            if signature != last_signature or time.monotonic()-last_publish >= 600:
+                publish_snapshot(snapshot, evidence, directory)
+                last_signature, last_publish = signature, time.monotonic()
+            print("OPERATOR_PROGRESS " + json.dumps({"phase": "pipeline", "status": "authentication_required", "stage": snapshot["stage"], "counts": snapshot["capture"].get("counts", {}), "authentication": {"interactive_sign_in_required": True}}, allow_nan=False), flush=True)
+            time.sleep(30)
             continue
-        if receipt.get("output_path") != str(GEN_ROOT):
-            continue
-        item = {key: receipt[key] for key in ("status", "source_commit", "started_unix", "pid") if key in receipt}
+        verification = checks.get("verification", {})
+        if checks.get("status") != "complete" or verification.get("passed") is not True or verification.get("source_clean") is not True:
+            raise PipelineFailure("Owner Ruff/Pyrefly/tests did not pass on the clean native source; private diagnostics were preserved.")
+        checked_owner(native, commit, iteration)
+        snapshot.update(status="running", stage="capture_and_source_sample", updated_at=now())
+        snapshot.pop("authentication", None)
+        snapshot.pop("error", None)
+        snapshot["owner_checks"] = {"status": "passed", "source_commit": commit, "source_clean": True}
+        return True
+
+
+def native_observation(native: Any, commit: str, directory: Path, name: str) -> dict[str, Any]:
+    result = native.native_status(commit, directory, name)
+    if result.get("status") in TERMINAL_FAILURE or result.get("summary", {}).get("status") == "failed":
+        raise PipelineFailure(f"Native attempt {name} failed or was interrupted; no replacement was launched.")
+    if result.get("status") != "not_started" and result.get("source_commit") != commit:
+        raise PipelineFailure("A native attempt belongs to a different checked source commit.")
+    return result
+
+
+def validation_decision(adaptation: dict[str, Any]) -> str:
+    if adaptation.get("status") != "complete":
+        return "pending"
+    result = adaptation.get("result", {})
+    selection = result.get("selection")
+    if not isinstance(selection, dict):
+        raise PipelineFailure("Completed validation has no frozen selection record.")
+    if selection.get("test_scores_used_for_selection") is not False:
+        raise PipelineFailure("Validation selection did not preserve the held-out test gate.")
+    arm = selection.get("selected_arm")
+    if arm is None:
+        if any(item.get("eligible") is True for item in selection.get("eligibility", {}).values()):
+            raise PipelineFailure("Eligible validation candidate was omitted from selection.")
+        return "no_eligible_candidate"
+    if arm not in {"epoch_zero", "adapted"} or selection.get("eligibility", {}).get(arm, {}).get("eligible") is not True:
+        raise PipelineFailure("Frozen validation candidate is not eligible for test.")
+    return "eligible_test"
+
+
+def test_observation(directory: Path, helper: Any, operator: str, native_commit: str, eligible: bool) -> dict[str, Any]:
+    if not eligible:
+        return {"status": "not_released", "test_inputs_opened": False}
+    result_path = helper.WORK_ROOT / (operator + "-" + native_commit) / "result.json"
+    receipt_path = directory / "test_helper_receipt.json"
+    if result_path.is_file():
+        result = json.loads(result_path.read_text())
+        if result.get("status") != "complete":
+            raise PipelineFailure("Eligible test transport failed; raw requests and native receipts remain preserved.")
+        if result.get("source_commit") != operator or result.get("native_source_commit") != native_commit:
+            raise PipelineFailure("Held-out test result source bindings differ.")
+        return result
+    if receipt_path.is_file():
+        receipt = json.loads(receipt_path.read_text())
+        if receipt.get("operator_source_commit") != operator or receipt.get("native_source_commit") != native_commit:
+            raise PipelineFailure("Existing test helper launch bindings differ.")
         pid = receipt.get("pid")
         if isinstance(pid, int) and pid > 1:
+            command = subprocess.run(["ps", "-p", str(pid), "-o", "command="], capture_output=True, timeout=5, check=False)
+            if command.returncode == 0 and str(Path(helper.__file__).resolve()).encode() in command.stdout:
+                return {"status": "running", "test_inputs_released_by_native_gate": True, "progress": test_progress(directory)}
+        raise PipelineFailure("The test helper was interrupted without a final result; no duplicate was launched.")
+    helper_path = Path(helper.__file__).resolve()
+    receipt = {"operator_source_commit": operator, "native_source_commit": native_commit, "helper_sha256": sha(helper_path.read_bytes()), "started_unix": time.time(), "status": "launching"}
+    save(receipt_path, receipt)
+    with (directory / "test_helper.stdout").open("ab") as stdout, (directory / "test_helper.stderr").open("ab") as stderr:
+        process = subprocess.Popen([sys.executable, "-I", str(helper_path), "--source-commit", operator, "--native-source-commit", native_commit, "--concurrency", "4"], cwd=directory, stdin=subprocess.DEVNULL, stdout=stdout, stderr=stderr, start_new_session=True)
+    receipt.update(pid=process.pid, status="running")
+    save(receipt_path, receipt)
+    return {"status": "running", "test_inputs_released_by_native_gate": True}
+
+
+def test_progress(directory: Path) -> dict[str, Any]:
+    """Read only structured helper counters, ignoring every raw CLI log line."""
+    path = directory / "test_helper.stdout"
+    if not path.is_file():
+        return {}
+    size = path.stat().st_size
+    with path.open("rb") as stream:
+        stream.seek(max(0, size-262144))
+        data = stream.read(262144)
+    latest = {}
+    for line in data.splitlines():
+        if not line.startswith(b"OPERATOR_PROGRESS "):
+            continue
+        try:
+            event = json.loads(line.removeprefix(b"OPERATOR_PROGRESS "))
+        except ValueError:
+            continue
+        latest = {key: event[key] for key in ("phase", "event", "counts", "selection_sha256", "total_items") if key in event}
+    return public(latest)
+
+
+def scalar(value: Any) -> str:
+    return "—" if value is None else (f"{value:.6f}" if isinstance(value, float) else str(value))
+
+
+def score_table(title: str, result: dict[str, Any]) -> str:
+    metrics = result.get("result", {}).get("metrics", {})
+    if not isinstance(metrics, dict) or not metrics:
+        return ""
+    lines = [f"## {title}", "", "| Arm | Spearman | MSE (0–1) | False-positive rate | Condition ordering |", "|---|---:|---:|---:|---:|"]
+    for arm, values in metrics.items():
+        if isinstance(values, dict):
+            lines.append("| " + " | ".join((arm, scalar(values.get("spearman")), scalar(values.get("mse_0_1")), scalar(values.get("operating_point", {}).get("false_positive_rate")), scalar(values.get("condition_changes", {}).get("accuracy_ties_half")))) + " |")
+    return "\n".join(lines) + "\n\n"
+
+
+def render(snapshot: dict[str, Any], evidence: str) -> str:
+    capture = snapshot.get("capture", {})
+    counts = capture.get("counts", {})
+    training = snapshot.get("adaptation", {}).get("training", {})
+    text = "# Checked propositions and LoRA — live results\n\n"
+    display_time = datetime.fromisoformat(snapshot["updated_at"]).astimezone(ZoneInfo("America/New_York")).strftime("%b %d, %Y, %I:%M %p %Z")
+    text += f"**{snapshot['status']} — {snapshot.get('stage', 'initializing')}**. Updated {display_time}.\n\n"
+    if snapshot["status"] == "authentication_required":
+        text += "Google Cloud requires interactive sign-in renewal. Existing local proposition generation continues; native sample, adaptation and test stages await clean owner checks.\n\n"
+    text += f"Full training/development generation: **{counts.get('completed_items', 0):,}/17,334** accepted structural records; {counts.get('failed_attempts', 0)} preserved failed attempts. Capture: {capture.get('status', 'pending')}. Provider latency has varied; no fixed ETA is asserted.\n\n"
+    text += f"Source sample: {snapshot.get('sample', {}).get('status', 'pending')}. Adaptation: {snapshot.get('adaptation', {}).get('status', 'pending')}. Held-out test: {snapshot.get('test', {}).get('status', 'not_released')}.\n\n"
+    if training:
+        epoch = training.get("latest_epoch", {})
+        text += f"Live fitting: epoch {training.get('current_epoch', 'pending')}, {training.get('actual_updates', 0)} updates, {training.get('completed_epoch', 0)} completed epochs. Latest completed epoch training MSE: {scalar(epoch.get('training_mse_0_1'))}; validation Spearman: {scalar(epoch.get('validation', {}).get('spearman'))}; validation MSE: {scalar(epoch.get('validation', {}).get('mse_0_1'))}.\n\n"
+    if snapshot.get("error"):
+        text += f"Runtime issue: {snapshot['error']} Active supervised work and raw failures are preserved. This is not a statistical result.\n\n"
+    text += score_table("Frozen source-sample diagnostic", snapshot.get("sample", {}))
+    text += score_table("Full validation", snapshot.get("adaptation", {}))
+    text += score_table("Frozen eligible test", snapshot.get("test", {}))
+    text += "## Audit evidence and limits\n\n" + evidence + "\n\n"
+    text += "The source sample compares old spans with blind-screened generated v1 answers, changing both generation and screening. It is a development diagnostic. The revised full bank uses the separate frozen v2 policy. Native validation alone chooses eligibility and the held-out test is evaluated once only for an eligible frozen candidate.\n\n"
+    text += f"Operator source: `{snapshot['operator_source_commit']}`. Native source: `{snapshot['native_source_commit']}`. Original capture source: `{CAPTURE_COMMIT}`. Detailed live state: [csts_tranche8_results.json](csts_tranche8_results.json). Native artifacts seal locally and queue asynchronous cloud promotion.\n"
+    return text
+
+
+def publish_snapshot(snapshot: dict[str, Any], evidence: str, directory: Path) -> dict[str, Any]:
+    value = public(snapshot)
+    encoded = (json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n").encode()
+    if len(encoded) >= 180000:
+        raise PipelineFailure("Pipeline state exceeded the bounded status budget; detailed artifacts remain private.")
+    save(directory / "latest.json", value)
+    markdown = render(value, evidence)
+    (directory / "latest.md").write_text(markdown)
+    guarded_write(RESULT_PATH, encoded)
+    guarded_write(STATUS_PATH, markdown.encode())
+    return value
+
+
+def run_pipeline(operator: str, native_commit: str, hours: float = 16, poll: int = 30) -> dict[str, Any]:
+    directory = WORK_ROOT / (operator + "-" + native_commit)
+    directory.mkdir(parents=True, exist_ok=True, mode=0o700)
+    with (WORK_ROOT / "pipeline.lock").open("a+") as lock:
+        try:
+            fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            raise PipelineFailure("Another autonomous Tranche 8 pipeline owns this task.") from None
+        native = load_helper(NATIVE_HELPER, operator, directory, NATIVE_HELPER_SHA256)
+        test_helper = load_helper(TEST_HELPER, operator, directory)
+        _, audit_source = github_file(STATUS_PATH, operator)
+        assert audit_source is not None
+        evidence = audit_evidence(audit_source.decode())
+        started = time.monotonic()
+        snapshot = {"phase": "pipeline", "status": "running", "stage": "capture_and_source_sample", "operator_source_commit": operator, "native_source_commit": native_commit, "capture_source_commit": CAPTURE_COMMIT, "audit_source_sha256": sha(audit_source), "helper_sha256": {"native": sha(Path(native.__file__).read_bytes()), "test": sha(Path(test_helper.__file__).read_bytes())}}
+        last_signature = None
+        last_publish = 0.0
+        last_archive = 0.0
+        archive_future = None
+        final_archive = False
+        executor = ThreadPoolExecutor(max_workers=1)
+        try:
+            if not wait_for_owner_checks(native, native_commit, directory, snapshot, evidence, started, hours):
+                save(directory / "result.json", public(snapshot))
+                return public(snapshot)
+            while True:
+                if time.monotonic() - started >= hours * 3600:
+                    snapshot.update(status="timed_out", updated_at=now(), stage="supervised_work_preserved", error="The autonomous orchestration allowance ended; existing capture/native/test children were preserved without replacement.")
+                    publish_snapshot(snapshot, evidence, directory)
+                    save(directory / "result.json", public(snapshot))
+                    return public(snapshot)
+                iteration = directory / "calls" / str(time.time_ns())
+                iteration.mkdir(parents=True)
+                snapshot["updated_at"] = now()
+                snapshot["elapsed_seconds"] = round(time.monotonic() - started)
+                snapshot["capture"] = capture_state(native)
+                sample = native_observation(native, native_commit, iteration, SAMPLE_NAME)
+                if sample.get("status") == "not_started":
+                    if time.monotonic() - started >= hours * 3600:
+                        continue
+                    native.native_launch(native_commit, iteration, SAMPLE_NAME, "csts_pilot.proposition_sample")
+                    sample = native_observation(native, native_commit, iteration, SAMPLE_NAME)
+                snapshot["sample"] = sample
+                full_complete = snapshot["capture"]["status"] == "complete"
+                if archive_future is not None and archive_future.done():
+                    archive_result, was_final = archive_future.result()
+                    if archive_result.get("status") != "complete":
+                        raise PipelineFailure("Native raw capture sealing failed; source archives remain preserved.")
+                    snapshot["archive"] = archive_result
+                    final_archive = final_archive or was_final
+                    archive_future = None
+                if archive_future is None and not final_archive and (time.monotonic() - last_archive >= 600 or full_complete):
+                    def archive_call(call_directory: Path = iteration, final: bool = full_complete) -> tuple[dict[str, Any], bool]:
+                        return native.native_archive(native_commit, call_directory), final
+                    archive_future = executor.submit(archive_call)
+                    last_archive = time.monotonic()
+                adaptation = native_observation(native, native_commit, iteration, VALIDATION_NAME)
+                if full_complete and final_archive and sample.get("status") == "complete" and adaptation.get("status") == "not_started":
+                    if time.monotonic() - started >= hours * 3600:
+                        continue
+                    native.native_launch(native_commit, iteration, VALIDATION_NAME)
+                    adaptation = native_observation(native, native_commit, iteration, VALIDATION_NAME)
+                snapshot["adaptation"] = adaptation
+                decision = validation_decision(adaptation)
+                snapshot["decision"] = decision
+                if decision == "eligible_test" and time.monotonic() - started >= hours * 3600:
+                    continue
+                snapshot["test"] = test_observation(directory, test_helper, operator, native_commit, decision == "eligible_test")
+                if snapshot["test"].get("status") == "complete":
+                    arm = adaptation.get("result", {}).get("selection", {}).get("selected_arm")
+                    if snapshot["test"].get("selected_arm") != arm or re.fullmatch(r"[0-9a-f]{64}", str(snapshot["test"].get("selection_sha256"))) is None:
+                        raise PipelineFailure("The completed test result does not identify the validation-selected frozen candidate.")
+                if decision == "no_eligible_candidate":
+                    snapshot.update(status="complete", stage="no_validation_candidate_eligible")
+                elif snapshot["test"].get("status") == "complete":
+                    snapshot.update(status="complete", stage="eligible_frozen_test_complete")
+                elif decision == "eligible_test":
+                    snapshot["stage"] = "eligible_frozen_test"
+                elif adaptation.get("status") != "not_started":
+                    snapshot["stage"] = "native_validation_adaptation"
+                if time.monotonic() - started >= hours * 3600 and snapshot["status"] != "complete":
+                    snapshot.update(status="timed_out", stage="supervised_work_preserved", error="The autonomous orchestration allowance ended; existing capture/native/test children were preserved without replacement.")
+                signature_value = {key: value for key, value in snapshot.items() if key not in {"updated_at", "elapsed_seconds"}}
+                # Running timers change each poll; publication follows actual counts/scores/stages.
+                signature_value["capture"] = {key: snapshot["capture"].get(key) for key in ("status", "counts", "manifest")}
+                signature = sha(json.dumps(public(signature_value), sort_keys=True, allow_nan=False).encode())
+                if signature != last_signature or time.monotonic() - last_publish >= 600 or snapshot["status"] != "running":
+                    publish_snapshot(snapshot, evidence, directory)
+                    print("OPERATOR_PROGRESS " + json.dumps({"phase": "pipeline", "status": snapshot["status"], "stage": snapshot["stage"], "counts": snapshot["capture"]["counts"], "sample": public(snapshot["sample"]), "validation": public(snapshot["adaptation"]), "decision": decision, "test": public(snapshot["test"])}, allow_nan=False), flush=True)
+                    last_signature, last_publish = signature, time.monotonic()
+                if snapshot["status"] != "running":
+                    save(directory / "result.json", public(snapshot))
+                    return public(snapshot)
+                time.sleep(poll)
+        except Exception as error:
+            (directory / "failure.log").write_text(traceback.format_exc())
+            snapshot.update(status="failed", updated_at=now(), error=str(error) if isinstance(error, PipelineFailure) else "Pipeline operation failed; private logs, raw captures and active supervised work were preserved.", error_type=type(error).__name__)
+            save(directory / "result.json", public(snapshot))
             try:
-                os.kill(pid, 0)
-            except ProcessLookupError:
-                item["process_alive"] = False
-            except PermissionError:
-                item["process_alive"] = True
-            else:
-                item["process_alive"] = True
-        supervisors.append(item)
-    return {"phase": "capture_diagnostics", "status": "complete", "counts": {"completed_items": sum(complete.values()), "total_items": 17334, "completed_batches": len(complete), "failed_attempts": failures, "running_batches": len(running)}, "running": running[:8], "recent_closed": sorted(recent, key=lambda item: item.get("started_unix") or 0, reverse=True)[:8], "supervisors": supervisors[:4], "observed_unix": now}
+                publish_snapshot(snapshot, evidence, directory)
+            except Exception:
+                pass
+            raise PipelineFailure(snapshot["error"]) from None
+        finally:
+            # Archive CPU work is finite and independently queues publication;
+            # the expensive model children are detached and are never killed.
+            executor.shutdown(wait=False, cancel_futures=True)
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", required=True, choices=("native_deploy", "native_checks", "native_source", "native_import_capture", "native_launch", "native_sample", "native_status", "native_check_diagnostics", "native_operation_diagnostics", "native_archive", "capture_diagnostics"))
     parser.add_argument("--source-commit", required=True)
-    parser.add_argument("--name", default="proposition_lora_v2")
-    parser.add_argument("--allow-format", action="store_true")
-    parser.add_argument("--path", choices=OWNED)
-    parser.add_argument("--operation", choices=tuple(OPERATION_LOGS))
+    parser.add_argument("--native-source-commit", required=True)
+    parser.add_argument("--max-hours", type=float, default=16)
+    parser.add_argument("--poll-seconds", type=int, default=30, choices=(15, 20, 30))
     args = parser.parse_args()
-    if re.fullmatch(r"[0-9a-f]{40}", args.source_commit) is None or re.fullmatch(r"[A-Za-z0-9_-]{1,80}", args.name) is None:
-        parser.error("Use a complete source commit and a safe attempt name.")
-    directory = MAC_ROOT / args.source_commit / args.phase
-    directory.mkdir(parents=True, exist_ok=True)
+    if any(re.fullmatch(r"[0-9a-f]{40}", value) is None for value in (args.source_commit, args.native_source_commit)) or not 0 < args.max_hours <= 16:
+        parser.error("Use complete immutable source commits and at most 16 hours.")
     try:
-        if args.phase == "native_deploy":
-            result = native_deploy(args.source_commit, directory)
-        elif args.phase == "native_checks":
-            result = native_checks(args.source_commit, directory, args.allow_format)
-        elif args.phase == "native_import_capture":
-            result = import_capture(args.source_commit, directory)
-        elif args.phase == "native_source":
-            if args.path is None:
-                raise NativeFailure("native_source requires a fixed allowlisted path.")
-            result = native_source(args.source_commit, directory, args.path)
-        elif args.phase == "native_launch":
-            result = native_launch(args.source_commit, directory, args.name)
-        elif args.phase == "native_sample":
-            if args.name == "proposition_lora_v2":
-                raise NativeFailure("Use a separate explicit --name for the frozen sample diagnostic.")
-            result = native_launch(args.source_commit, directory, args.name, "csts_pilot.proposition_sample")
-        elif args.phase == "native_check_diagnostics":
-            result = check_diagnostics(args.source_commit, directory)
-        elif args.phase == "native_operation_diagnostics":
-            if args.operation is None:
-                raise NativeFailure("native_operation_diagnostics requires an allowlisted operation.")
-            result = operation_diagnostics(args.source_commit, args.operation)
-        elif args.phase == "native_archive":
-            result = native_archive(args.source_commit, directory)
-        elif args.phase == "capture_diagnostics":
-            result = capture_diagnostics()
-        else:
-            result = native_status(args.source_commit, directory, args.name)
+        result = run_pipeline(args.source_commit, args.native_source_commit, args.max_hours, args.poll_seconds)
     except Exception as error:
-        result = {"phase": args.phase, "status": "failed", "error": str(error) if isinstance(error, NativeFailure) else "Native phase failed; private logs retained."}
-        print("OPERATOR_RESULT " + json.dumps(result), flush=True)
+        result = {"phase": "pipeline", "status": "failed", "error": str(error) if isinstance(error, PipelineFailure) else "Pipeline failed before launch; no new source/model policy was applied."}
+        print("OPERATOR_RESULT " + json.dumps(result, allow_nan=False), flush=True)
         raise SystemExit(1) from None
-    save(directory / "result.json", result)
     print("OPERATOR_RESULT " + json.dumps(result, ensure_ascii=False, allow_nan=False), flush=True)
 
 
