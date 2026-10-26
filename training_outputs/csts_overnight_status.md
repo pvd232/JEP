@@ -1,6 +1,6 @@
 # JEP overnight experiments — live status
 
-Published: **2026-10-26 07:26 UTC**.
+Published: **2026-10-26 07:28 UTC**.
 
 | Comparator | Validation Spearman | Existing-test Spearman |
 |---|---:|---:|
@@ -11,13 +11,15 @@ Existing baseline predictions are reused. Scores below identify validation or te
 
 ## overnight_disk_recovery
 
-Status: **running**.
+Status: **failed**.
 
 Controller: `/home/machina/jep-csts-evidence-attention-20261026/evidence_attention_results/overnight_disk_recovery/summary.json`
 
 Source: `934e7d87f485fa8a0739e77255984d3b30ff97cf`.
 
 Current native stage: `{'name': 'extract_training', 'experiment_id': 'csts_attention_934e7d87_b6d1d2f1_extract_training'}`.
+
+Failure: `attempt 1 failed; evidence written to /home/machina/jep-csts-evidence-attention-20261026/experiments/csts_attention_934e7d87_b6d1d2f1_extract_training/runs/extract_training/01M5VHK6KN6CX009DBJ5MVZPF2/resolved.yaml`. Attempt preserved.
 
 ## overnight_reviewed
 
