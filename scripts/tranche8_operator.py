@@ -3,6 +3,7 @@
 import argparse
 import base64
 import contextlib
+import fcntl
 import hashlib
 import importlib.util
 import io
@@ -96,6 +97,17 @@ def native_helper(directory):
 
 
 def harvest(directory):
+    """Own the stopped bank lock throughout the read-only capture harvest."""
+    root = BANK.resolve(strict=True)
+    with (root / "supervisor.lock").open("a+") as lock:
+        try:
+            fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            raise SubsetFailure("An existing capture supervisor owns the bank; no subset was harvested.") from None
+        return harvest_locked(directory, root)
+
+
+def harvest_locked(directory, root):
     """Validate exact original batches, accounting for macOS /tmp realpaths."""
     controller_path, capture_path = ORIGINAL / "full_capture_controller.py", ORIGINAL / "proposition_capture.py"
     if sha(controller_path.read_bytes()) != CONTROLLER_SHA or sha(capture_path.read_bytes()) != CAPTURE_SHA:
@@ -104,7 +116,6 @@ def harvest(directory):
     gate_bytes = (ORIGINAL / "audit_gate.json").read_bytes()
     bindings = controller.verify_gate(json.loads(gate_bytes), capture, capture_path.read_bytes())
     inventory = controller.verify_inventory(capture)
-    root = BANK.resolve(strict=True)
     if any(json.loads(path.read_text()).get("status") == "running" for path in root.glob("*/batch_*/receipt.json")):
         raise SubsetFailure("A capture batch remains active; subset harvesting stopped.")
     groups_path = controller.GENERATION_ROOT / "full_inventory/training_groups.json"
@@ -215,12 +226,32 @@ def publish(path, content):
     api(["--method", "PUT", f"repos/{REPO}/contents/{path}"], payload)
 
 
+def subset_status(native, commit, directory):
+    """Expose the subset counts and continuation signal, never source records."""
+    value = native.native_status(commit, directory, NAME)
+    preparation_keys = ("coverage", "source_groups", "training_available_records", "selected_records", "training_selection", "validation_selection", "limitations", "test_inputs_opened")
+    result_keys = ("screening", "promising_for_full_generation", "training_comparisons", "validation_comparisons", "source_groups", "coverage", "completed_training_answers", "subset_triage_only", "test_eligible", "test_inputs_opened", "full_generation_automatically_resumed", "limitations")
+    script = native.preamble(commit) + (
+        f"path=root/'answer_input_results'/{NAME!r}/'summary.json'\nextra={{}}\n"
+        "if path.exists():\n"
+        " summary=json.loads(path.read_text());assert summary.get('source_commit')==commit\n"
+        f" extra['preparation']={{key:summary.get('preparation',{{}})[key] for key in {preparation_keys!r} if key in summary.get('preparation',{{}})}}\n"
+        f" extra['result']={{key:summary.get('result',{{}})[key] for key in {result_keys!r} if key in summary.get('result',{{}})}}\n"
+        " if 'epoch_zero' in summary: extra['epoch_zero_metrics']=summary['epoch_zero'].get('metrics',{})\n"
+        "print(json.dumps(extra,allow_nan=False))\n"
+    )
+    extra = native.remote(script, directory, "subset_status_details")
+    value.setdefault("result", {}).update(extra.pop("result", {}))
+    value.update(extra)
+    return value
+
+
 def watch(native, commit, directory):
     started, last_signature, last_publish = time.monotonic(), None, 0.0
     while time.monotonic() - started < 21600:
-        value = native.native_status(commit, directory, NAME)
-        snapshot = {"phase": "subset_trial", "source_commit": commit, "observed_unix": time.time(), "full_generation_resumed": False, "held_out_test_released": False, **value}
-        signature = sha(json.dumps(value, sort_keys=True, allow_nan=False).encode())
+        value = subset_status(native, commit, directory)
+        snapshot = {**value, "phase": "subset_trial", "source_commit": commit, "observed_unix": time.time(), "full_generation_resumed": False, "held_out_test_released": False}
+        signature = sha(json.dumps({key: item for key, item in value.items() if key != "free_bytes"}, sort_keys=True, allow_nan=False).encode())
         if signature != last_signature or time.monotonic() - last_publish >= 300:
             save(directory / "latest.json", snapshot)
             publish(RESULT_PATH, (json.dumps(snapshot, indent=2, allow_nan=False) + "\n").encode())
@@ -266,7 +297,7 @@ def main():
             elif args.phase == "diagnostics":
                 result = native.check_diagnostics(args.source_commit, directory)
             else:
-                result = native.native_status(args.source_commit, directory, NAME)
+                result = subset_status(native, args.source_commit, directory)
     except Exception:
         # Exit zero so the existing worker retains this safe structured failure.
         result = {"phase": "subset_" + args.phase, "status": "failed", "error": "Subset operation stopped; task-private logs and all capture attempts remain preserved."}
