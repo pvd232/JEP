@@ -351,7 +351,7 @@ def run(
                 stage_id="train",
                 config=fit,
                 inputs=(
-                    input("model", source=artifact_source(parent, "train", "model")),
+                    input("initial_model", source=artifact_source(parent, "train", "model")),
                     *(
                         input(split, source=artifact_source(prepared, "prepare", split))
                         for split in ("training", "validation")
