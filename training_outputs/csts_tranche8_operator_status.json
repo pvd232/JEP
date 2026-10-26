@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-26T15:14:26.930010+00:00",
+  "updated_at": "2026-10-26T15:15:06.892820+00:00",
   "worker_status": "running",
   "action_id": "approved_proposition_pipeline_wait_auth1",
   "source_commit": "d5b7e513e7067538159aaffeb8d2ce463b845739",
@@ -21,12 +21,14 @@
       "phase": "native_status",
       "source_commit": "965aeb48be6f6e4f71b927757191956cbb3fb867",
       "name": "source_sample_v1",
-      "status": "running",
+      "status": "complete",
       "module": "csts_pilot.proposition_sample",
       "started_unix": 1793027213.043061,
       "supervisor_sha256": "a22523165d1af74897dc863009167192be8cfb8d5f46ac71969a69ba2ce0e368",
       "supervisor_pid": 84394,
       "native_pid": 84397,
+      "returncode": 0,
+      "finished_unix": 1793027672.588233,
       "summary": {
         "status": "complete",
         "source_commit": "965aeb48be6f6e4f71b927757191956cbb3fb867"
@@ -351,7 +353,7 @@
         "published": 4,
         "uploading": 1
       },
-      "free_bytes": 5975400448
+      "free_bytes": 5849587712
     },
     "validation": {
       "phase": "native_status",
@@ -362,7 +364,7 @@
         "published": 4,
         "uploading": 1
       },
-      "free_bytes": 5975166976
+      "free_bytes": 5838041088
     },
     "decision": "pending"
   }
