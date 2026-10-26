@@ -1,75 +1,9 @@
 {
-  "updated_at": "2026-10-26T13:19:05.656084+00:00",
-  "worker_status": "waiting",
-  "action_id": "inspect_tranche8_module_collision_v4",
-  "source_commit": "60ba8aca01c27b30c3c3ec0433de401bef58af4c",
-  "operator_sha256": "05dcec6f0aab86e2d1bea8f86976145e179444410df312c8a31ea80ebdc92eff",
-  "status": "completed",
-  "returncode": 0,
-  "result": {
-    "phase": "inspect_failure",
-    "status": "complete",
-    "diagnostic": {
-      "python_runtime": "3.14.6 (v3.14.6:c63aec69bd5, Jun 10 2026, 08:07:54) [Clang 21.0.0 (clang-2100.1.1.101)]",
-      "python_executable": "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
-      "actions": [
-        {
-          "action_id": "inspect_fresh_audit_v2_failure1",
-          "state": "failed",
-          "exit_code": 1,
-          "exceptions": [
-            "AttributeError: partially initialized module 'collections' from '/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/collections/__init__.py' has no attribute 'namedtuple' (most likely due to a circular import)"
-          ],
-          "frames": [
-            "  File \"/tmp/jep-tranche8-worker-20261026/actions/802e57729c4fee63d6025db5faef6b7def1aaba279166936a45b2e153e1c60e0/operator.py\", line 3, in <module>",
-            "  File \"/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py\", line 91, in <module>",
-            "  File \"/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/re/__init__.py\", line 127, in <module>",
-            "  File \"/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/functools.py\", line 18, in <module>",
-            "  File \"/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/collections/__init__.py\", line 39, in <module>",
-            "  File \"/private/tmp/jep-tranche8-worker-20261026/actions/802e57729c4fee63d6025db5faef6b7def1aaba279166936a45b2e153e1c60e0/operator.py\", line 7, in <module>",
-            "  File \"/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/inspect.py\", line 149, in <module>",
-            "  File \"/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/dis.py\", line 284, in <module>"
-          ]
-        },
-        {
-          "action_id": "fresh_audit_v2_seed61029",
-          "state": "failed",
-          "exit_code": 1,
-          "exceptions": [
-            "AttributeError: partially initialized module 'collections' from '/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/collections/__init__.py' has no attribute 'namedtuple' (most likely due to a circular import)"
-          ],
-          "frames": [
-            "  File \"/tmp/jep-tranche8-worker-20261026/actions/dc9123e282fa896a24512c7655f47b7c1051193f1a62b0d77bfd920d84db1d7d/operator.py\", line 3, in <module>",
-            "  File \"/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/argparse.py\", line 91, in <module>",
-            "  File \"/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/re/__init__.py\", line 127, in <module>",
-            "  File \"/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/functools.py\", line 18, in <module>",
-            "  File \"/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/collections/__init__.py\", line 39, in <module>",
-            "  File \"/private/tmp/jep-tranche8-worker-20261026/actions/dc9123e282fa896a24512c7655f47b7c1051193f1a62b0d77bfd920d84db1d7d/operator.py\", line 7, in <module>",
-            "  File \"/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/inspect.py\", line 149, in <module>",
-            "  File \"/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/dis.py\", line 284, in <module>"
-          ]
-        },
-        {
-          "action_id": "inspect_tranche8_runtime_v3",
-          "state": "failed",
-          "exit_code": 1,
-          "exceptions": [
-            "ImportError: cannot import name 'deque' from partially initialized module 'collections' (most likely due to a circular import) (/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/collections/__init__.py)"
-          ],
-          "frames": [
-            "  File \"/tmp/jep-tranche8-worker-20261026/actions/fb3522c3d4e9d25cd1f55c87c60086b0f49d67d918aa1bb0d77b0ed361d3b50e/operator.py\", line 1, in <module>",
-            "  File \"/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/__init__.py\", line 106, in <module>",
-            "  File \"/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/json/decoder.py\", line 3, in <module>",
-            "  File \"/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/re/__init__.py\", line 127, in <module>",
-            "  File \"/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/functools.py\", line 18, in <module>",
-            "  File \"/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/collections/__init__.py\", line 39, in <module>",
-            "  File \"/private/tmp/jep-tranche8-worker-20261026/actions/fb3522c3d4e9d25cd1f55c87c60086b0f49d67d918aa1bb0d77b0ed361d3b50e/operator.py\", line 2, in <module>",
-            "  File \"/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py\", line 15, in <module>",
-            "  File \"/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/glob.py\", line 3, in <module>",
-            "  File \"/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/contextlib.py\", line 6, in <module>"
-          ]
-        }
-      ]
-    }
-  }
+  "updated_at": "2026-10-26T13:20:25.892980+00:00",
+  "worker_status": "running",
+  "action_id": "repair_tranche8_helper_isolation_v5",
+  "source_commit": "f41d42c85fbc841fa98c09f5337f3cd6b6dad29c",
+  "operator_sha256": "fe8433816fcd3333b8f927bf7898e5a1191c56a68ced0ebb6aba916bf722bd26",
+  "status": "launching",
+  "returncode": null
 }
