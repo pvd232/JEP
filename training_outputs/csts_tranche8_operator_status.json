@@ -1,52 +1,9 @@
 {
-  "updated_at": "2026-10-26T22:20:44.651254+00:00",
-  "worker_status": "waiting",
-  "action_id": "subset30_saved_predictions_cpu_export_20261026",
-  "source_commit": "3b8e4cbc574849182b22cc25264cf8f7da367c08",
-  "operator_sha256": "237fcbb028f3df9c9dd17347fe86c17c307696647616c5261dc8074789dacdd5",
-  "status": "completed",
-  "returncode": 0,
-  "result": {
-    "phase": "subset_saved_predictions",
-    "status": "complete",
-    "source_commit": "a75fa36a8d709c25d7efccdd5c9dcdcfab3b3ec1",
-    "row_count": 30,
-    "original_validation_rows_sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
-    "subset_rows_sha256": "832586161976480f9286a874e22a883bf40165c963b554580dcdd51131ec7649",
-    "model_sha256": {
-      "saved_qwen": "8805f9a7241e4e19ffc481341ebad6f1ddb6dd6ff04bbf710f9f0896469e34ff",
-      "frozen_answers": "8805f9a7241e4e19ffc481341ebad6f1ddb6dd6ff04bbf710f9f0896469e34ff",
-      "adapted_answers": "1513a9dbdd4c77de1d1e8b4adebc7a111d62837ab56dafa60871ec0ec544dd52"
-    },
-    "source_prediction_files": {
-      "frozen_answers": {
-        "path": "/home/machina/jep-csts-proposition-lora-20261026/experiments/csts_subset_a75fa36a_c1514635_epoch_zero/runs/epoch_zero/01M5WZN33CTVHC8XZVZ8T3D2KG/artifacts/infer/predictions/predictions.json",
-        "sha256": "e4d611db6aead81480d351f2d50dea0605b6c5a61d259d9142027ea868a7b93d"
-      },
-      "adapted_answers": {
-        "path": "/home/machina/jep-csts-proposition-lora-20261026/answer_input_results/proposition_subset_v2/adapted_original_predictions.json",
-        "sha256": "5165eecdc92e25e362ca1aaf4128861a4f12ceb7fbb7cf8c4803a1a37ac21e85"
-      }
-    },
-    "metrics": {
-      "frozen_answers": {
-        "spearman": 0.486511915493704,
-        "mse_0_1": 0.05753978267137554
-      },
-      "adapted_answers": {
-        "spearman": 0.5261340606350965,
-        "mse_0_1": 0.05148419168540155
-      },
-      "saved_qwen": {
-        "spearman": 0.5758418427215707,
-        "mse_0_1": 0.04185093042714131
-      }
-    },
-    "new_model_inference": false,
-    "optimizer_updates": 0,
-    "gpu_used": false,
-    "artifact_path": "training_outputs/csts_tranche8_subset30_saved_predictions.json",
-    "artifact_sha256": "14d4915ea5ea22d81f4e833a75bd725d4ff71959a9ce22a7d7f77e6954a860d3",
-    "artifact_bytes": 20134
-  }
+  "updated_at": "2026-10-26T22:21:24.987462+00:00",
+  "worker_status": "running",
+  "action_id": "saved_development_candidates_cpu_export_v2_20261026",
+  "source_commit": "16bb7a763c41f4a816b1f3c60d934c7b28e3d878",
+  "operator_sha256": "e1a6e2c4ce78b35cd98241ce84795cbe9887e5fd35b8b0e985f11ef04c8c493e",
+  "status": "launching",
+  "returncode": null
 }
