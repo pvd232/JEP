@@ -36,6 +36,7 @@ OPERATION_LOGS = {
     "native_launch": ["capture_bank_scp", "capture_bank_permissions", "native_import_capture", "native_supervisor_scp", "native_supervisor_permissions", "native_launch"],
     "native_status": ["native_status"],
     "native_archive": ["native_archive"],
+    "native_sample": ["native_supervisor_scp", "native_supervisor_permissions", "native_launch"],
 }
 OWNED = [
     "csts_pilot/proposition_capture.py", "csts_pilot/proposition_inputs.py",
@@ -245,8 +246,10 @@ def import_capture(commit: str, directory: Path) -> dict[str, Any]:
     return remote(script, directory, "native_import_capture")
 
 
-def native_launch(commit: str, directory: Path, name: str) -> dict[str, Any]:
-    imported = import_capture(commit, directory)
+def native_launch(commit: str, directory: Path, name: str, module: str = "csts_pilot.proposition_run") -> dict[str, Any]:
+    if module not in {"csts_pilot.proposition_run", "csts_pilot.proposition_sample"}:
+        raise NativeFailure("Native launch module is outside the fixed allowlist.")
+    imported = import_capture(commit, directory) if module == "csts_pilot.proposition_run" else None
     # The supervisor is task source fetched at the same commit, never shell text.
     supervisor = fetch_file("scripts/tranche8_native_supervisor.py", commit, directory)
     local = directory / "tranche8_native_supervisor.py"
@@ -258,20 +261,24 @@ def native_launch(commit: str, directory: Path, name: str) -> dict[str, Any]:
         "assert checks.get('passed') is True and checks.get('source_clean') is True,'Owner checks must pass on the executed clean source.'\n"
         "assert all(digest(root/p)==value for p,value in checks['owned_source_sha256'].items()),'Checked source changed.'\n"
         f"name={name!r}\n"
+        f"module={module!r}\n"
         "directory=root/'answer_input_results'/'supervisors'/name;directory.mkdir(parents=True,exist_ok=True)\n"
         "receipt=directory/'receipt.json'\n"
         "if receipt.exists():\n print(json.dumps({'phase':'native_launch',**json.loads(receipt.read_text())}))\n"
         "else:\n"
         f" source=pathlib.Path({staging!r});assert digest(source)=={digest!r}\n"
         " target=directory/'supervisor.py';shutil.copyfile(source,target)\n"
-        " save(receipt,{'status':'launching','source_commit':commit,'name':name,'started_unix':time.time(),'supervisor_sha256':digest(target)})\n"
+        " save(receipt,{'status':'launching','source_commit':commit,'name':name,'module':module,'started_unix':time.time(),'supervisor_sha256':digest(target)})\n"
         " environment=os.environ.copy();environment.update({'VIRTUAL_ENV':'/home/machina/jep-format-env','HF_HOME':'/home/machina/jep-model-cache','HF_HUB_OFFLINE':'1','TRANSFORMERS_OFFLINE':'1','PATH':'/home/machina/jep-format-env/bin:/usr/local/cuda/bin:/usr/local/bin:/usr/bin:/bin'})\n"
         " with (directory/'supervisor.log').open('ab') as log:\n"
-        f"  child=subprocess.Popen([{GPU_PYTHON!r},str(target),'--root',str(root),'--parent-root',str(parent),'--name',name,'--source-commit',commit],cwd=root,env=environment,stdin=subprocess.DEVNULL,stdout=log,stderr=log,start_new_session=True)\n"
+        f"  child=subprocess.Popen([{GPU_PYTHON!r},str(target),'--root',str(root),'--parent-root',str(parent),'--name',name,'--source-commit',commit,'--module',module],cwd=root,env=environment,stdin=subprocess.DEVNULL,stdout=log,stderr=log,start_new_session=True)\n"
         " print(json.dumps({'phase':'native_launch','status':'running','source_commit':commit,'name':name,'pid':child.pid}))\n"
     )
     result = remote(script, directory, "native_launch")
-    result["capture_import"] = imported
+    if imported is not None:
+        result["capture_import"] = imported
+    else:
+        result["phase"] = "native_sample"
     return result
 
 
@@ -295,6 +302,21 @@ def native_status(commit: str, directory: Path, name: str) -> dict[str, Any]:
         "for path in queue.glob('*.json'):\n"
         " try:\n  status=json.loads(path.read_text()).get('status','unknown');publication[status]=publication.get(status,0)+1\n except (OSError,ValueError): pass\n"
         "result['publication_counts']=publication;result['free_bytes']=shutil.disk_usage(root).free\n"
+        "events=root/'answer_input_results'/name/'events.jsonl'\ntrace_path=None\n"
+        "if events.is_file():\n"
+        " for line in events.read_text().splitlines():\n"
+        "  try: event=json.loads(line)\n  except ValueError: continue\n"
+        "  if event.get('event')=='proposition_lora_live_trace' and isinstance(event.get('trace_path'),str):\n"
+        "   candidate=pathlib.Path(event['trace_path']).resolve()\n"
+        "   if candidate.is_relative_to(root.resolve()): trace_path=candidate\n"
+        "if trace_path is not None and trace_path.is_file():\n"
+        " try: trace=json.loads(trace_path.read_text())\n except (OSError,ValueError): pass\n"
+        " else:\n"
+        "  live={key:trace[key] for key in ('status','current_epoch','actual_updates','completed_epoch','selected','epochs_without_improvement') if key in trace}\n"
+        "  epochs=trace.get('epochs',[])\n"
+        "  if epochs:\n"
+        "   latest=epochs[-1];live['latest_epoch']={key:latest[key] for key in ('epoch','step','training_mse_0_1','validation','fit_seconds','validation_seconds','observed_epoch_seconds') if key in latest}\n"
+        "  result['training']=live\n"
         "print(json.dumps(result,allow_nan=False))\n"
     )
     return remote(script, directory, "native_status")
@@ -381,6 +403,24 @@ def capture_diagnostics() -> dict[str, Any]:
                 failures += 1
                 recent.append(item)
             elif status == "running":
+                stderr_path = directory / "stderr.log"
+                if stderr_path.is_file():
+                    size = stderr_path.stat().st_size
+                    with stderr_path.open("rb") as stream:
+                        stream.seek(max(0, size - 262144))
+                        inspected = stream.read(262144)
+                    text = inspected.decode(errors="replace")
+                    patterns = {
+                        "capacity": r"capacity|overload|high demand|server busy",
+                        "rate_limit": r"\b429\b|rate.?limit|too many requests",
+                        "timeout": r"timed? out|timeout|deadline.exceeded",
+                        "auth": r"unauthori[sz]ed|authentication|invalid.api.?key|token expired|\b401\b|\b403\b",
+                        "policy": r"approval|policy|permission denied|not allowed|access denied",
+                        "connection": r"connection|network|socket|\bdns\b|\btls\b|disconnect",
+                        "retrying": r"retry|backoff|reconnect",
+                    }
+                    frequencies = {key: len(re.findall(pattern, text, flags=re.IGNORECASE)) for key, pattern in patterns.items()}
+                    item.update(stderr_flags={key: count > 0 for key, count in frequencies.items()}, stderr_counts=frequencies, stderr_bytes_scanned=len(inspected), stderr_scan_truncated=size > len(inspected))
                 events = directory / "events.jsonl"
                 if events.is_file():
                     item["last_event_age_seconds"] = round(max(0, now - events.stat().st_mtime), 1)
@@ -433,7 +473,7 @@ def capture_diagnostics() -> dict[str, Any]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", required=True, choices=("native_deploy", "native_checks", "native_source", "native_import_capture", "native_launch", "native_status", "native_check_diagnostics", "native_operation_diagnostics", "native_archive", "capture_diagnostics"))
+    parser.add_argument("--phase", required=True, choices=("native_deploy", "native_checks", "native_source", "native_import_capture", "native_launch", "native_sample", "native_status", "native_check_diagnostics", "native_operation_diagnostics", "native_archive", "capture_diagnostics"))
     parser.add_argument("--source-commit", required=True)
     parser.add_argument("--name", default="proposition_lora_v2")
     parser.add_argument("--allow-format", action="store_true")
@@ -457,6 +497,10 @@ def main() -> None:
             result = native_source(args.source_commit, directory, args.path)
         elif args.phase == "native_launch":
             result = native_launch(args.source_commit, directory, args.name)
+        elif args.phase == "native_sample":
+            if args.name == "proposition_lora_v2":
+                raise NativeFailure("Use a separate explicit --name for the frozen sample diagnostic.")
+            result = native_launch(args.source_commit, directory, args.name, "csts_pilot.proposition_sample")
         elif args.phase == "native_check_diagnostics":
             result = check_diagnostics(args.source_commit, directory)
         elif args.phase == "native_operation_diagnostics":
