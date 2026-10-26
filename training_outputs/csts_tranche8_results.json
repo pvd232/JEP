@@ -1,6 +1,6 @@
 {
   "phase": "pipeline",
-  "status": "running",
+  "status": "failed",
   "stage": "capture_and_source_sample",
   "operator_source_commit": "d5b7e513e7067538159aaffeb8d2ce463b845739",
   "native_source_commit": "965aeb48be6f6e4f71b927757191956cbb3fb867",
@@ -10,8 +10,8 @@
     "native": "4928c30aa81fbf253dbd7e9c4b538aef067cc9c5acf7f6782c5a26b57d618525",
     "test": "778c9c79c7ce6f163a739bdcbae243644d3c4748e1f35abec20ed55a7c1443bd"
   },
-  "updated_at": "2026-10-26T15:35:47.165415+00:00",
-  "elapsed_seconds": 3359,
+  "updated_at": "2026-10-26T15:36:31.000919+00:00",
+  "elapsed_seconds": 3403,
   "capture": {
     "phase": "capture_diagnostics",
     "status": "running",
@@ -465,5 +465,7 @@
     "promotion_waited": false,
     "archives": 6,
     "sealed_bytes": 686041
-  }
+  },
+  "error": "The full capture stopped or failed; raw attempts and native checkpoints remain preserved.",
+  "error_type": "PipelineFailure"
 }
