@@ -12,8 +12,8 @@ from typing import Any
 import numpy as np
 from viper import execution
 from viper.authoring import experiment, input, plan, replicate, stage, variant
-from viper.metrics import measure
 from viper.metrics import max as maximize
+from viper.metrics import measure
 from viper.outputs import StageOutputs, TrainOutputs, output
 from viper.references import GitFileRef
 from viper.repository import read_source
