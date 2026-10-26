@@ -1,0 +1,57 @@
+# Prototype-screen implementation review
+
+Base: `d0a3984c88962a088af153736f914cc31a0c294b`. Scope: the three new `csts_pilot/codebook*` modules, the new focused test module and configuration, the method document, and the two new ignored runtime directories. Existing experiment implementations are unchanged.
+
+This is an author review, with focused executable counterexamples. No independent or multi-agent review is claimed.
+
+## Invariants and decisions
+
+- Native features identify the selected frozen encoder, exact source extraction, source row bytes, and every question/passage occurrence. Compaction preserves occurrence multiplicity and normalizes the native state without another backbone call.
+- Prototype estimation uses training vectors. All development scores are explicitly labeled selected-validation diagnostics. Source-group and canonical-caption overlap is rejected. The command accepts only training and development manifests.
+- The paired arms share projection and dictionary initialization and all overlapping epoch batch orders. Continuous rating MSE is identical in both arms. The extra code losses are confined to the prototype arm. Checkpoint selection uses the same strict-improvement patience-five rule.
+- The original VQ straight-through estimator is an intentionally biased gradient approximation. Its task term updates the projection; dictionary regression updates selected normalized prototypes. The tests establish finite nonzero gradients to both parameter sets and absence of dictionary force in the control.
+- The selected state is cloned. The control's post-hoc dictionary fit does not change its selected projection. Replay checks exact validation metrics in the same one-thread CPU runtime. Resume files preserve terminal optimizer, parameters and RNG state independently of the selected checkpoint.
+- Code occupancy, effective size, quantization error and low-rating collisions remain visible even when a dictionary collapses. Numeric prototypes and model-produced examples carry no expert semantic labels.
+- Native BUILD/TRAIN/EVAL, existing loaders, metric verification and background publication own experiment provenance. The controller preserves an existing attempt and does not relaunch it automatically. New stages request CPU only. Three fixed seed pairs are aggregated as a mean of paired Spearman differences, not a correlation of averaged predictions.
+
+The existing general projection fitter owns a rating-only loss. Reusing it unchanged would omit the dictionary objective. The added paired fitter owns this distinct objective and keeps the established experiments unaffected. A speculative test-evaluation path was removed from the new evaluator; the initial command has one validation-screen execution path.
+
+## Finding and repair
+
+P2, blocking before repair: `spherical_kmeans` initially computed initialization distances as `2 - 2 * dot(x, center)`. Float32 cancellation let identical normalized directions appear distinct. A constant-vector population passed the requested-distinct-code check and seeded repeated centers. The repair uses coordinate-wise squared differences and rejects a population with fewer distinct directions than requested. The constant-vector counterexample now raises, and repeated seeded fits return identical centers.
+
+No unresolved implementation finding was identified within this screen's scope.
+
+## Verification
+
+Owner runtime: `/home/machina/jep-format-env/bin/python` via the check checkout's `.venv`. The complete observing boundary passed:
+
+```text
+python -m pytest -q tests/test_csts_codebook.py tests/test_csts_data.py tests/test_csts_diagnostics.py tests/test_csts_early_stopping.py
+24 passed in 11.59s
+```
+
+After removing the unused future test path, the affected observer was rerun:
+
+```text
+python -m pytest -q tests/test_csts_codebook.py
+12 passed in 6.72s
+ruff check csts_pilot/codebook.py csts_pilot/codebook_analysis.py csts_pilot/codebook_run.py tests/test_csts_codebook.py
+All checks passed!
+pyrefly check --ignore-missing-imports csts_pilot/codebook.py csts_pilot/codebook_analysis.py csts_pilot/codebook_run.py tests/test_csts_codebook.py
+0 errors
+```
+
+The focused end-to-end observer invokes the actual fitter, writes and reloads checkpoints/resume artifacts, runs the evaluator, and compares its statistic with the independent metric implementation. The real native-process boundary is exercised by the subsequent pilot rather than a duplicate deployment test. No dependency, shared fixture, established model, or established stage implementation changed, so the full repository suite is outside the traced impact boundary.
+
+Reviewed implementation SHA-256 values:
+
+| Path | SHA-256 |
+|---|---|
+| `csts_pilot/codebook.py` | `2b05ef366f861e02f6671e8a0b1b5aaa9e046515af7e83ab55688dd042d7184b` |
+| `csts_pilot/codebook_analysis.py` | `b9c2bcdda37ab97532e0eb717bd18bc8f6f16f1990254e85e3f3c7e431c74cb9` |
+| `csts_pilot/codebook_run.py` | `c534b49c0bbec10b566d7b237de626b22162bf46e59efd58582b9e5772b321b5` |
+| `tests/test_csts_codebook.py` | `28d84c2470a7c69241481a401d95a873d978d80c9be4da19a4154f47c3f02147` |
+| `configs/csts-codebook.json` | `d81d33fbe7af7d5fdf282dbf85da445192147cd91f3c6dc949b19ad745c9271c` |
+
+Verdict: approve for the defined validation mechanism screen. Residual scientific uncertainty includes dictionary semantics, choice of one fixed auxiliary weight/code count, validation selection bias, and transfer to overlapping JEP claims. These limitations are measurements or future research questions, not implementation guarantees.
