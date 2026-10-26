@@ -266,7 +266,9 @@ def test_native_plan_compiler_distinguishes_weights_from_checkpoint_resume(
         )
 
     if weights_input == "model":
-        with pytest.raises(ValidationError, match="checkpoint inputs must be declared together"):
+        with pytest.raises(
+            ValidationError, match="checkpoint inputs must be declared together"
+        ):
             compile_stage()
     else:
         frozen = compile_stage()
