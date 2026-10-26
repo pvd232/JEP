@@ -1,13 +1,9 @@
 # Tranche 4: condition-reference diagnostic
 
-**Status: validation extraction running.** Latest observed progress: 2,356 / 3,591 unique passages. Condition/generic references follow (918 inputs). Optimizer updates: **0**.
+**Status: baseline-agreement reconciliation.** The first extraction finished in 194 seconds: 3,591 unique passages and 918 references. Optimizer updates: **0**.
 
-All six scoring arms share these extracted states. Predictive results will appear here after extraction and the native-baseline agreement check.
+The reproduction check found a maximum native-score difference of 0.02138, above the prespecified 0.001 tolerance. A probe is checking the saved scorer's original two-pair batch layout. Intervention scores remain pending this check. The first extraction is preserved.
 
-Validation has 1,830 comparison pairs. The prespecified validation gate selects whether test scoring proceeds.
-
-Checks: **7 focused tests passed; Ruff passed; Pyrefly: 0 errors.**
+Validation has 1,830 comparison pairs. Test scoring follows the frozen validation gate.
 
 [Runner](../csts_pilot/condition_reference_run.py) · [Scoring code](../csts_pilot/condition_reference.py) · [Proposal](../plans/csts-tranche-4-condition-component.md) · [Derivations](../plans/csts-tranche-4-derivations.md)
-
-Source commit: `5339568d7b2d7898d6e48f6434b115e9abd31a7a`. Adapter checkpoint SHA-256: `8805f9a7241e4e19ffc481341ebad6f1ddb6dd6ff04bbf710f9f0896469e34ff`.
