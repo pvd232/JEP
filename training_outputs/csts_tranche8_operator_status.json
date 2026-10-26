@@ -1,9 +1,24 @@
 {
-  "updated_at": "2026-10-26T22:21:44.659187+00:00",
-  "worker_status": "running",
+  "updated_at": "2026-10-26T22:22:24.747072+00:00",
+  "worker_status": "waiting",
   "action_id": "saved_development_candidates_cpu_export_v2_20261026",
   "source_commit": "16bb7a763c41f4a816b1f3c60d934c7b28e3d878",
   "operator_sha256": "e1a6e2c4ce78b35cd98241ce84795cbe9887e5fd35b8b0e985f11ef04c8c493e",
-  "status": "running",
-  "returncode": null
+  "status": "completed",
+  "returncode": 0,
+  "result": {
+    "phase": "saved_development_candidates",
+    "status": "complete",
+    "artifact_path": "training_outputs/csts_saved_development_candidates_export.json",
+    "artifact_sha256": "d1d6de7bed08ed5ac82040a97660b5557a63fb874890fa2328e764b911be55d3",
+    "artifact_bytes": 823937,
+    "decoded_sha256": "83f150aa3b52f68d5b53623875dc9a3e7fa3ffc66fdbc8f4c2a1d4907684726e",
+    "decoded_bytes": 1731293,
+    "candidate_count": 29,
+    "score_maps": 29,
+    "unmatched": 1,
+    "new_model_inference": false,
+    "optimizer_updates": 0,
+    "gpu_used": false
+  }
 }
