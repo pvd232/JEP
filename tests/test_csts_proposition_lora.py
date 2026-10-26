@@ -259,7 +259,7 @@ def test_native_plan_compiler_distinguishes_weights_from_checkpoint_resume(
     def compile_stage():
         return _freeze_stage(
             root,
-            "experiments/checkpoint-input-contract/runs/compile-only",
+            "experiments/checkpoint_input_contract/runs/warm_start/compile_only",
             "train",
             {"train": configured},
             configured.spec,
