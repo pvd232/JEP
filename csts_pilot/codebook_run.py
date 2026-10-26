@@ -139,8 +139,6 @@ def run(
             != spec["cache_sha256"]
         ):
             raise ValueError(f"Changed sealed producer cache: {split}.")
-    if shutil.disk_usage(root).free < 3 * 1024**3:
-        raise OSError("Require 3 GiB free for the bounded native CPU screen.")
     source = read_source(root)
     recovered = load_json(recover) if recover is not None else None
     recovery_sha = file_sha256(recover) if recover is not None else None
@@ -170,6 +168,20 @@ def run(
             != recovered["frozen_models_sha256"]
         ):
             raise ValueError("Recovery model bytes differ from the frozen selection.")
+    required_bytes = 3 * 1024**3
+    if recovered is not None:
+        # Recovery creates no raw feature cache. Budget two materializations of
+        # the existing compact inputs/model plus 512 MiB for outputs and source.
+        retained = [artifact_path(reused["fit"], "train", "model", "models.pt")]
+        retained.extend(
+            artifact_path(reused["prepare_" + split], "prepare", "cache", "cache.pt")
+            for split in ("training", "validation")
+        )
+        required_bytes = (
+            2 * sum(path.stat().st_size for path in retained) + 512 * 1024**2
+        )
+    if shutil.disk_usage(root).free < required_bytes:
+        raise OSError(f"Require {required_bytes} free bytes for this execution phase.")
     if preflight:
         print(
             json.dumps(
