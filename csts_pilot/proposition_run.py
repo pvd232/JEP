@@ -40,6 +40,7 @@ from csts_pilot.proposition_inputs import (
     prepare,
 )
 from csts_pilot.proposition_lora import PropositionLoraConfig, fit_proposition_lora
+from csts_pilot.proposition_sample import release_verified_model_cache
 from jep_pilot.loaders import load_json, load_model, load_state
 
 
@@ -164,6 +165,10 @@ def run(root: Path, parent_root: Path, name: str, answers: Path, manifest: Path,
         summary["epoch_zero"] = initial
         write_json(summary_path, summary)
         emit("arm_result", arm="epoch_zero", split="validation", **initial["metrics"]["propositions"])
+        summary["epoch_zero_cache_release"] = release_verified_model_cache(
+            root, model_path, directory / "epoch-zero-model-cache-release.json"
+        )
+        write_json(summary_path, summary)
         fit = PropositionLoraConfig(**settings["encoder"], parent_model_sha256=MODEL_SHA256, training_sha256=file_sha256(transformed["training"]), validation_sha256=file_sha256(transformed["validation"]), seed=7, learning_rate=2e-5, batch_size=32, microbatch_size=2, patience=5, max_epochs=12, max_seconds=14400, schedule="constant", warmup_fraction=0, weight_decay=0.01, lora_rank=32, lora_alpha=32, lora_dropout=0.05)
         measures = tuple(measure(metric) for metric in (training_objective, validation_mse, validation_spearman))
         trained = execute("fit", stage(
