@@ -22,23 +22,22 @@ from typing import Any
 
 from jep_pilot.loaders import load_json
 
-
 ROOT = Path(__file__).resolve().parents[1]
 
 
 def load_functions():
-    namespace = dict(
-        Any=Any,
-        Path=Path,
-        hashlib=hashlib,
-        json=json,
-        math=math,
-        os=os,
-        time=time,
-        shutil=shutil,
-        fcntl=fcntl,
-        load_json=load_json,
-    )
+    namespace = {
+        "Any": Any,
+        "Path": Path,
+        "hashlib": hashlib,
+        "json": json,
+        "math": math,
+        "os": os,
+        "time": time,
+        "shutil": shutil,
+        "fcntl": fcntl,
+        "load_json": load_json,
+    }
     sources = {
         "data.py": {"canonical"},
         "answers.py": {"answer_id"},
@@ -69,7 +68,7 @@ def load_functions():
                 raise AssertionError(
                     "Contracts must not silently strip a native decorator."
                 )
-        exec(
+        exec(  # noqa: S102 -- only statically selected repository contract functions
             compile(ast.Module(body=selected, type_ignores=[]), filename, "exec"),
             namespace,
         )
@@ -235,39 +234,41 @@ class CacheContracts(unittest.TestCase):
         self,
     ):
         for mutation in ("hash", "hardlink", "symlink", "pending"):
-            with self.subTest(mutation=mutation):
-                # Each subcase has an independent cache and publication state.
-                with tempfile.TemporaryDirectory() as directory:
-                    root = Path(directory)
-                    candidate = root / ".viper/cache/verified-objects" / self.digest
-                    candidate.parent.mkdir(parents=True)
-                    candidate.write_bytes(self.data)
-                    queue = root / ".viper/publication_queue"
-                    queue.mkdir(parents=True)
-                    (queue / "job.json").write_text(
-                        json.dumps(
-                            {
-                                "status": "pending"
-                                if mutation == "pending"
-                                else "published"
-                            }
-                        )
+            # Each subcase has an independent cache and publication state.
+            with (
+                self.subTest(mutation=mutation),
+                tempfile.TemporaryDirectory() as directory,
+            ):
+                root = Path(directory)
+                candidate = root / ".viper/cache/verified-objects" / self.digest
+                candidate.parent.mkdir(parents=True)
+                candidate.write_bytes(self.data)
+                queue = root / ".viper/publication_queue"
+                queue.mkdir(parents=True)
+                (queue / "job.json").write_text(
+                    json.dumps(
+                        {
+                            "status": "pending"
+                            if mutation == "pending"
+                            else "published"
+                        }
                     )
-                    if mutation == "hash":
-                        candidate.write_bytes(b"changed model bytes")
-                    elif mutation == "hardlink":
-                        candidate.unlink()
-                        os.link(self.original, candidate)
-                    elif mutation == "symlink":
-                        moved = root / "actual-cache"
-                        candidate.parent.rename(moved)
-                        candidate.parent.symlink_to(moved, target_is_directory=True)
-                    result = self.functions["release_verified_model_cache"](
-                        root, self.original, root / "receipt.json", wait_seconds=0
-                    )
-                    self.assertNotEqual(result["status"], "deleted_duplicate")
-                    self.assertTrue(candidate.exists())
-                    self.assertEqual(self.original.read_bytes(), self.data)
+                )
+                if mutation == "hash":
+                    candidate.write_bytes(b"changed model bytes")
+                elif mutation == "hardlink":
+                    candidate.unlink()
+                    os.link(self.original, candidate)
+                elif mutation == "symlink":
+                    moved = root / "actual-cache"
+                    candidate.parent.rename(moved)
+                    candidate.parent.symlink_to(moved, target_is_directory=True)
+                result = self.functions["release_verified_model_cache"](
+                    root, self.original, root / "receipt.json", wait_seconds=0
+                )
+                self.assertNotEqual(result["status"], "deleted_duplicate")
+                self.assertTrue(candidate.exists())
+                self.assertEqual(self.original.read_bytes(), self.data)
 
 
 if __name__ == "__main__":
