@@ -17,6 +17,8 @@ Controller: `/home/machina/jep-csts-evidence-attention-20261026/evidence_attenti
 
 Source: `934e7d87f485fa8a0739e77255984d3b30ff97cf`.
 
+Current native stage: `{'name': 'train_attention_evidence', 'experiment_id': 'csts_attention_934e7d87_85314012_train_attention_evidence'}`.
+
 | Arm | Validation Spearman | Validation MSE | Epoch | State |
 |---|---:|---:|---:|---|
 | attention_ratings | 0.710713 | 0.052670 | 4 | selected checkpoint |
