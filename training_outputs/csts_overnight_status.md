@@ -1,6 +1,6 @@
 # JEP overnight experiments — live status
 
-Published: **2026-10-26 05:45 UTC**.
+Published: **2026-10-26 05:48 UTC**.
 
 | Comparator | Validation Spearman | Existing-test Spearman |
 |---|---:|---:|
@@ -17,13 +17,13 @@ Controller: `/home/machina/jep-csts-matched-baselines-20261026/matched_baseline_
 
 Source: `faa0ae537feea2333b5c245c9b23e0829729441c`.
 
-Current native stage: `{'name': 'extract_training', 'experiment_id': 'csts_matched_faa0ae53_c98e7a60_extract_training'}`.
+Current native stage: `{'name': 'extract_validation', 'experiment_id': 'csts_matched_faa0ae53_c98e7a60_extract_validation'}`.
 
-Extraction `training/bank_2249/2565`: **8/16** occurrences; 2136 seconds elapsed.
+Extraction `training/bank_2462/2565`: **4/16** occurrences; 2226 seconds elapsed.
 
-Extraction `training/bank_2284/2565`: **16/16** occurrences; 2151 seconds elapsed.
+Extraction `training/bank_2497/2565`: **8/16** occurrences; 2241 seconds elapsed.
 
-Extraction `training/bank_2320/2565`: **8/16** occurrences; 2166 seconds elapsed.
+Extraction `training/bank_2533/2565`: **8/16** occurrences; 2256 seconds elapsed.
 
 ## overnight_reviewed_inputs
 
