@@ -1,6 +1,6 @@
 # JEP overnight experiments — live status
 
-Published: **2026-10-26 06:37 UTC**.
+Published: **2026-10-26 06:42 UTC**.
 
 | Comparator | Validation Spearman | Existing-test Spearman |
 |---|---:|---:|
