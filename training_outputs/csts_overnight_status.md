@@ -1,6 +1,6 @@
 # JEP overnight experiments — live status
 
-Published: **2026-10-26 07:35 UTC**.
+Published: **2026-10-26 07:39 UTC**.
 
 | Comparator | Validation Spearman | Existing-test Spearman |
 |---|---:|---:|
@@ -8,6 +8,18 @@ Published: **2026-10-26 07:35 UTC**.
 | Archived LLM pair judge | — | 0.802917 |
 
 Existing baseline predictions are reused. Scores below identify validation or test explicitly.
+
+## overnight_cached_model_recovery
+
+Status: **running**.
+
+Controller: `/home/machina/jep-csts-evidence-attention-20261026/evidence_attention_results/overnight_cached_model_recovery/summary.json`
+
+Source: `934e7d87f485fa8a0739e77255984d3b30ff97cf`.
+
+Current native stage: `{'name': 'extract_validation', 'experiment_id': 'csts_attention_934e7d87_85314012_extract_validation'}`.
+
+Extraction `training/`: **13960/13960** occurrences; 449 seconds elapsed.
 
 ## overnight_disk_recovery
 
@@ -20,18 +32,6 @@ Source: `934e7d87f485fa8a0739e77255984d3b30ff97cf`.
 Current native stage: `{'name': 'extract_training', 'experiment_id': 'csts_attention_934e7d87_b6d1d2f1_extract_training'}`.
 
 Failure: `Operator stopped launch before GPU inference to restore missing HF_HOME; see preserved launch receipt and overnight_cached_model_recovery`. Attempt preserved.
-
-## overnight_cached_model_recovery
-
-Status: **running**.
-
-Controller: `/home/machina/jep-csts-evidence-attention-20261026/evidence_attention_results/overnight_cached_model_recovery/summary.json`
-
-Source: `934e7d87f485fa8a0739e77255984d3b30ff97cf`.
-
-Current native stage: `{'name': 'extract_training', 'experiment_id': 'csts_attention_934e7d87_85314012_extract_training'}`.
-
-Extraction `training/`: **10004/13960** occurrences; 349 seconds elapsed.
 
 ## overnight_reviewed
 
