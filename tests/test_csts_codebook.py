@@ -317,7 +317,7 @@ def test_stage_outputs_resume_and_independent_evaluation_round_trip(tmp_path):
                 "holdout": holdout,
             },
             outputs=evaluated,
-            metrics={"codebook_mean_spearman_gain": Recorder()},
+            metrics={},
         )
     )
     report = json.loads(evaluated["report"].read_text())

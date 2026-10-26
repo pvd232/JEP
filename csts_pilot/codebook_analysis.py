@@ -249,6 +249,5 @@ def evaluate_codebooks(context: StageContext[EvaluationConfig]) -> None:
             ],
         },
     )
-    context.metrics["codebook_mean_spearman_gain"].record(
-        bootstrap["mean_seed_spearman_gain"]
-    )
+    # VIPER evaluates the declared recomputed metric from the sealed prediction
+    # artifact. Such metrics have no in-stage context.metrics recorder.
