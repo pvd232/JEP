@@ -1,0 +1,73 @@
+{
+  "passed": true,
+  "fully_faithful": 58,
+  "items": 60,
+  "severe_unsupported": 0,
+  "required_faithful": 57,
+  "allowed_severe_unsupported": 0,
+  "generation_template_sha256": "6895d17242704944632757d7c5eb669f3d4d8f959ee23bbdd7ddae00a0f0304e",
+  "schema_sha256": "6b77659c25becd6bdf6de301dd9d4582fd3466c7d53c958ee6083aa2ac935924",
+  "model_alias": "gpt-6.1-sol",
+  "reasoning_effort": "high",
+  "capture_source_sha256": "e8ee5293f2a77420a5fe2f69168988e7772da2b3478927f73531856827a8f462",
+  "fresh_group_seed": 61029,
+  "fresh_pair_seed_base": 61030,
+  "source_groups": 30,
+  "excluded_initial_source_groups": 60,
+  "source_validation_sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+  "generation_frozen": true,
+  "no_frozen_score_improvement_required_for_training": true,
+  "expert_verified": false,
+  "review_method": "Two independent model reviewers, each one passage per source group; source-only references frozen before blinded candidate P review; no ratings/companions.",
+  "failures": [
+    {
+      "id": "f17869b9122e161ee68a27a011bbee2e036c5b4fb6cb5b921392cffd748ae67d",
+      "variant": "P",
+      "fully_faithful": false,
+      "severe_unsupported": false,
+      "errors": [
+        "unnecessary_abstention_omits_supported_broad_category"
+      ],
+      "notes": "Abstention omits the broad equestrian / horseback category supported by the mounted athletes. It correctly avoids inventing a specific discipline.",
+      "interpretation_sensitive": true,
+      "interpretation_rationale": "If type of sport is required to mean an identified discipline, abstention is defensible because none is named. Under the frozen broad-category rule, mounted athletes support an equestrian / horseback partial answer, so the candidate loses requested supported information."
+    },
+    {
+      "id": "2afdd6c93dd3ab0cd133133199b526856c551fcab578c087757bdb5530201417",
+      "variant": "P",
+      "fully_faithful": false,
+      "severe_unsupported": false,
+      "errors": [
+        "Unnecessary complete abstention: omits the supported qualitative answer that this is a bicycle trick."
+      ],
+      "notes": "The source supplies the broad category of a bicycle trick. Under the stipulated preference for faithful qualitative partial answers and no forced category precision, total abstention omits that available requested information. The particular named maneuver remains unspecified.",
+      "interpretation_sensitive": true
+    }
+  ],
+  "audit_files": {
+    "proposition_audit_initial_counts.json": "1000d8aea21378dd7dbe49e04f412d9f4fb0a858291b66d2cdce2c0ce3bf4bff",
+    "proposition_audit_pair_mapping.json": "b76d053f2a80336a48212ca4c6330bff05559782a099a1520473122f9da12ee5",
+    "proposition_audit_sides.json": "62ac381bf3d6571da887adef99fdeb6644347960c9e7bbe6cb8b14e734c601d6",
+    "proposition_blind_sample.json": "33893a4c5750c2e2ef225329be741b76511f38497325dfd5ad5968b9c688f742",
+    "proposition_capture_audit_manifest.json": "b0591c92b8d59c4f3a6cfe013a81c4d0e7947addabf82f5141d05be2cddb0617",
+    "proposition_disagreements_left.json": "7e7a47c07d0e88539ca29dde2fb018ca1478b56b18619559358723424a178238",
+    "proposition_disagreements_right.json": "5917d0ec7d532c2ad9f4799aa06295a44b420f9a5140592e34d96c5e6db9889a",
+    "proposition_fresh60_judgments_left.json": "5a6fed36d7c40dae3cc1bd4553a7c8b08cd4f5f9da8d5a0eba2080f0dc283ea7",
+    "proposition_fresh60_judgments_right.json": "304aecb74d123d428126abd2aa892697c38c17050e57fa60b1bcc5ad1afbe0a4",
+    "proposition_fresh60_left.json": "d01d7f86739c8f8509fb535e358a9ff306faf51f1411a213a5b238dffab3e3c4",
+    "proposition_fresh60_manifest.json": "41e6e85d8c0c07e416b60db54911288f54946025e8fe86dd72a9915340e94caf",
+    "proposition_fresh60_records.json": "c2c6a7a671768a1fed894f82a70f8028bd1da6d16380d87f2bb48f36f6e28fa2",
+    "proposition_fresh60_reference_left.json": "bb4ac762f7b124f7904e1370fef5c0599e1d111c5e59d9bb3db2789bcc1425c3",
+    "proposition_fresh60_reference_right.json": "290c3f872c628c089303609dff3bfa5726b0dc4369ad0cef3aeefdfa793e83b4",
+    "proposition_fresh60_review_left.json": "1a3c90560383b6b4486faa81b56f9bc5e695995577b819a954efc191a1a52b56",
+    "proposition_fresh60_review_right.json": "ec615e316ddf441641569df27622f5ba33232d1bad2d99407850f072020300e9",
+    "proposition_fresh60_right.json": "3f227bd0e13ce12ce0698055eeba089effa4e4c5d1e36b1a57b64a62980af9b4",
+    "proposition_generated_audit120.json": "b1ec995bea92121f44f8bb9bbf202c0de2242186d7ed5985a9ba042cfe437787",
+    "proposition_judgments_left.json": "29828be38f759766655fe29292881e474462f10bf567d00e61ade631b03e7a05",
+    "proposition_judgments_right.json": "b1595cdfb691dc2fadc278b9dc6bbe4ab88d40f04bd69b67cf0bb89a096987b1",
+    "proposition_old_audit120.json": "b4d62bd6b00aeaec62f26d76e0f5222e7d3e82ca4b53f62bd0783ec81c286696",
+    "proposition_reference_left.json": "8efd36f8b71160d45c29b6f6cbac1f9f6a3933c4b20198b90df4caca4fc061cc",
+    "proposition_reference_right.json": "5efcb59e9771b2e80731438e3768df8a3957926b4367b1bb8737d8fe7cf97ba1",
+    "proposition_variant_mapping.json": "710c74051b814480d035d252258f906580b29e2cb245cccf8a3e111818ec7969"
+  }
+}
