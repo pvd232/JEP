@@ -1,12 +1,16 @@
 {
-  "action_id": "capture_progress_while_cloud_auth_blocked1",
+  "action_id": "approved_proposition_pipeline_wait_auth1",
   "action": "run",
-  "source_commit": "965aeb48be6f6e4f71b927757191956cbb3fb867",
-  "operator_sha256": "4928c30aa81fbf253dbd7e9c4b538aef067cc9c5acf7f6782c5a26b57d618525",
+  "source_commit": "d5b7e513e7067538159aaffeb8d2ce463b845739",
+  "operator_sha256": "bdeab08a016b5ad497d0077e84c7e76f0f3c0f59ee7e4a17189e3fa66af93591",
   "arguments": [
-    "--phase",
-    "capture_diagnostics",
     "--source-commit",
-    "965aeb48be6f6e4f71b927757191956cbb3fb867"
+    "d5b7e513e7067538159aaffeb8d2ce463b845739",
+    "--native-source-commit",
+    "965aeb48be6f6e4f71b927757191956cbb3fb867",
+    "--max-hours",
+    "16",
+    "--poll-seconds",
+    "30"
   ]
 }
