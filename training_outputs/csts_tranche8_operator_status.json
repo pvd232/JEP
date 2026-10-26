@@ -1,9 +1,19 @@
 {
-  "updated_at": "2026-10-26T14:21:46.534578+00:00",
-  "worker_status": "running",
+  "updated_at": "2026-10-26T14:22:06.277376+00:00",
+  "worker_status": "waiting",
   "action_id": "native_deploy_serialization_fix3",
   "source_commit": "e37db66c000ddbedbce07714fd4381ff05e73b18",
   "operator_sha256": "4928c30aa81fbf253dbd7e9c4b538aef067cc9c5acf7f6782c5a26b57d618525",
-  "status": "running",
-  "returncode": null
+  "status": "completed",
+  "returncode": 0,
+  "result": {
+    "phase": "native_deploy",
+    "status": "complete",
+    "source_commit": "e37db66c000ddbedbce07714fd4381ff05e73b18",
+    "root": "/home/machina/jep-csts-proposition-lora-20261026",
+    "bundle_sha256": "a2218513cd7279e0716388cd5db38afa0fda151ac28fcd502d6a4edbcaef00e4",
+    "free_bytes": 6079787008,
+    "physical_datasets": true,
+    "copied_existing_viper_store": false
+  }
 }
