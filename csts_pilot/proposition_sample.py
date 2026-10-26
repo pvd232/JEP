@@ -187,6 +187,8 @@ def infer_sample(context: StageContext[SampleInferenceConfig]) -> None:
         raise ValueError("The source sample has no positives for descriptive recall metrics.")
     full_metrics = arm_metrics(validation, full_baseline, recall_cutoff(validation, full_baseline))
     native = arm_metrics(original, baseline, recall_cutoff(original, baseline))
+    if native["condition_changes"]["n"] != 0:
+        raise ValueError("The one-pair-per-group sample unexpectedly supplies condition contrasts.")
     saved = load_model(context.inputs["model"])
     fit = FitConfig.model_validate(saved["config"])
     if saved.get("kind") != "lora" or fit.kind != "lora":
