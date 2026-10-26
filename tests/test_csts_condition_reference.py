@@ -8,6 +8,7 @@ from csts_pilot.baseline_models import EOD, EncoderConfig
 from csts_pilot.condition_reference import (
     confusion,
     geometry,
+    native_layout,
     pooled_states,
     recall_cutoff,
     representations,
@@ -118,3 +119,48 @@ def test_geometry_matches_direct_cosines_and_covariance():
     covariance = np.cov(x, rowvar=False, bias=True)
     assert result["covariance_trace"] == pytest.approx(np.trace(covariance))
     assert result["sample_covariance_rank_ceiling"] == 2
+
+
+def test_native_evaluation_declares_its_objective():
+    from viper.authoring import input, stage
+    from viper.metrics import FloatComparator, MetricDependency, measure
+    from viper.metrics import max as maximize
+    from viper.outputs import EvalOutputs, output
+
+    from csts_pilot.condition_reference import AnalysisConfig, analyze, native_spearman
+    from jep_pilot.loaders import load_json
+
+    measured = measure(
+        native_spearman,
+        comparator=FloatComparator(mode="absolute", tolerance=1e-12),
+        dependencies=(
+            MetricDependency(source="artifact", name="predictions", data_role="eval"),
+        ),
+    )
+    configured = stage(
+        analyze,
+        stage_id="analysis",
+        eval_id="condition_reference_check",
+        config=AnalysisConfig(rows_sha256="0" * 64, split="validation"),
+        inputs=(input("rows", path="csts_data/dev.json", data_role="eval"),),
+        split_inputs=("rows",),
+        outputs=EvalOutputs(
+            predictions=output(
+                path="predictions.json", loader=load_json, data_role="eval"
+            )
+        ),
+        metrics=(measured,),
+        objective=maximize(measured),
+        reuse="never",
+    )
+    assert configured.spec.kind == "eval"
+
+
+def test_native_layout_retains_original_pair_batches_and_row_indices():
+    rows = [
+        {"condition": "c", "sentence1": f"a{i}", "sentence2": f"b{i}"} for i in range(3)
+    ]
+    keys, left, right = native_layout(rows)
+    assert keys == [("c", p) for p in ("a0", "a1", "b0", "b1", "a2", "b2")]
+    assert left == [0, 1, 4]
+    assert right == [2, 3, 5]

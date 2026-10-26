@@ -9,8 +9,10 @@ import uuid
 from pathlib import Path
 from typing import Any
 
-from viper import execution
+from viper import api, execution
 from viper.authoring import experiment, input, plan, replicate, stage, variant
+from viper.metrics import FloatComparator, MetricDependency, measure
+from viper.metrics import max as maximize
 from viper.outputs import EvalOutputs, StageOutputs, output
 from viper.references import GitFileRef
 from viper.repository import read_source
@@ -35,13 +37,14 @@ from csts_pilot.condition_reference import (
     analyze,
     emit,
     extract,
+    native_spearman,
 )
 from csts_pilot.convergence import file_sha256, write_json
 from csts_pilot.convergence_run import artifact_path, artifact_source
 from jep_pilot.loaders import load_json, load_model
 
 
-def run(root: Path, name: str) -> None:
+def run(root: Path, name: str, reuse_extraction: Path | None = None) -> None:
     """Freeze the validation decision before permitting test extraction."""
     root = root.resolve(strict=True)
     if not isinstance(load_storage_settings(root).destination, LocalStorageDestination):
@@ -84,6 +87,27 @@ def run(root: Path, name: str) -> None:
         "current_stage": None,
     }
     write_json(summary_path, summary)
+
+    reused = None
+    if reuse_extraction is not None:
+        earlier = load_json(reuse_extraction)
+        reused = next(r for r in earlier["runs"] if r["name"] == "extract_validation")
+        if reused["status"] != "succeeded" or earlier["model_sha256"] != MODEL_SHA256:
+            raise ValueError("Recovery extraction identity differs.")
+        api.verify_run(
+            api.VerifyRunRequest(
+                root=root,
+                path=Path(reused["path"]),
+                trusted_source_repositories=trusted,
+            )
+        )
+        summary["reused_validation_extraction"] = reused
+        write_json(summary_path, summary)
+        emit(
+            "reusing_extraction",
+            source_summary=str(reuse_extraction),
+            reference=reused["reference"],
+        )
 
     def execute(name: str, configured: Any, gpu: bool) -> dict[str, Any]:
         summary["current_stage"] = name
@@ -152,34 +176,48 @@ def run(root: Path, name: str) -> None:
             baseline_output = (
                 "validation_predictions" if split == "validation" else "predictions"
             )
-            extracted = execute(
-                f"extract_{split}",
-                stage(
-                    extract,
-                    stage_id="extract",
-                    config=ExtractionConfig(
-                        **settings["encoder"],
-                        rows_sha256=spec["sha256"],
-                        split=split,
-                        arms=selected_arms,
-                    ),
-                    inputs=(
-                        input(
-                            "model", source=artifact_source(parent, "train", "model")
+            extracted = (
+                reused
+                if split == "validation" and reused is not None
+                else execute(
+                    f"extract_{split}",
+                    stage(
+                        extract,
+                        stage_id="extract",
+                        config=ExtractionConfig(
+                            **settings["encoder"],
+                            rows_sha256=spec["sha256"],
+                            split=split,
+                            arms=selected_arms,
                         ),
-                        input("rows", path=spec["path"], data_role="eval"),
-                    ),
-                    outputs=StageOutputs(
-                        cache=output(
-                            path="cache.pt", loader=load_model, data_role="eval"
+                        inputs=(
+                            input(
+                                "model",
+                                source=artifact_source(parent, "train", "model"),
+                            ),
+                            input("rows", path=spec["path"], data_role="eval"),
                         ),
-                        timing=output(
-                            path="timing.json", loader=load_json, data_role="eval"
+                        outputs=StageOutputs(
+                            cache=output(
+                                path="cache.pt", loader=load_model, data_role="eval"
+                            ),
+                            timing=output(
+                                path="timing.json", loader=load_json, data_role="eval"
+                            ),
                         ),
+                        reuse="never",
                     ),
-                    reuse="never",
+                    True,
+                )
+            )
+            native_metric = measure(
+                native_spearman,
+                dependencies=(
+                    MetricDependency(
+                        source="artifact", name="predictions", data_role="eval"
+                    ),
                 ),
-                True,
+                comparator=FloatComparator(mode="absolute", tolerance=1e-12),
             )
             evaluated = execute(
                 f"analyze_{split}",
@@ -219,6 +257,8 @@ def run(root: Path, name: str) -> None:
                         ),
                     ),
                     split_inputs=("rows",),
+                    metrics=(native_metric,),
+                    objective=maximize(native_metric),
                     outputs=EvalOutputs(
                         predictions=output(
                             path="predictions.json", loader=load_json, data_role="eval"
@@ -298,10 +338,11 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", required=True, type=Path)
     parser.add_argument("--name", default="initial")
+    parser.add_argument("--reuse-extraction", type=Path)
     args = parser.parse_args()
     with (args.root / ".viper" / "condition_reference.lock").open("a+") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        run(args.root, args.name)
+        run(args.root, args.name, args.reuse_extraction)
 
 
 if __name__ == "__main__":
