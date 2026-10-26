@@ -31,10 +31,9 @@ This is a small development triage experiment. Native metrics and training progr
     }
   ],
   "publication_counts": {
-    "published": 7,
-    "uploading": 1
+    "published": 8
   },
-  "free_bytes": 5174456320,
+  "free_bytes": 5169917952,
   "result": {},
   "preparation": {
     "coverage": {
