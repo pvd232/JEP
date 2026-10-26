@@ -51,20 +51,22 @@ class PropositionLoraConfig(FitConfig):
 def fit_proposition_lora(context: StageContext[PropositionLoraConfig]) -> None:
     """Restore adapter weights, then reuse the existing fresh rating-MSE trainer.
 
-    Inputs are ``model``, ``training`` and ``validation``. In addition to the
+    Inputs are ``initial_model``, ``training`` and ``validation``. The weights
+    input deliberately avoids VIPER's reserved checkpoint-continuation names.
+    In addition to the
     standard neural training outputs, declare ``warm_start`` for initialization
     evidence. No optimizer, scheduler, dataloader or RNG state is restored from
     the original passage-training run.
     """
     config = context.config
     for name, digest in (
-        ("model", config.parent_model_sha256),
+        ("initial_model", config.parent_model_sha256),
         ("training", config.training_sha256),
         ("validation", config.validation_sha256),
     ):
         if file_sha256(context.inputs[name]) != digest:
             raise ValueError(f"Changed proposition-LoRA input: {name}.")
-    saved = load_model(context.inputs["model"])
+    saved = load_model(context.inputs["initial_model"])
     parent = FitConfig.model_validate(saved["config"])
     if saved.get("kind") != "lora" or parent.kind != "lora":
         raise ValueError("Answer-input adaptation requires a saved LoRA checkpoint.")
