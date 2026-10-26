@@ -1,6 +1,6 @@
 # JEP overnight experiments — live status
 
-Published: **2026-10-26 07:48 UTC**.
+Published: **2026-10-26 07:49 UTC**.
 
 | Comparator | Validation Spearman | Existing-test Spearman |
 |---|---:|---:|
@@ -11,13 +11,15 @@ Existing baseline predictions are reused. Scores below identify validation or te
 
 ## overnight_cached_model_recovery
 
-Status: **running**.
+Status: **failed**.
 
 Controller: `/home/machina/jep-csts-evidence-attention-20261026/evidence_attention_results/overnight_cached_model_recovery/summary.json`
 
 Source: `934e7d87f485fa8a0739e77255984d3b30ff97cf`.
 
 Current native stage: `{'name': 'freeze_selection', 'experiment_id': 'csts_attention_934e7d87_85314012_freeze_selection'}`.
+
+Failure: `attempt 1 failed; evidence written to /home/machina/jep-csts-evidence-attention-20261026/experiments/csts_attention_934e7d87_85314012_freeze_selection/runs/freeze_selection/01M5VJX4PKCFDR83VSSE0NNTAB/resolved.yaml`. Attempt preserved.
 
 | Arm | Validation Spearman | Validation MSE | Epoch | State |
 |---|---:|---:|---:|---|
