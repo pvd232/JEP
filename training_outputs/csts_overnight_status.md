@@ -1,6 +1,6 @@
 # JEP overnight experiments — live status
 
-Published: **2026-10-26 06:07 UTC**.
+Published: **2026-10-26 06:12 UTC**.
 
 | Comparator | Validation Spearman | Existing-test Spearman |
 |---|---:|---:|
@@ -18,6 +18,8 @@ Controller: `/home/machina/jep-csts-evidence-attention-20261026/evidence_attenti
 Source: `934e7d87f485fa8a0739e77255984d3b30ff97cf`.
 
 Current native stage: `{'name': 'extract_training', 'experiment_id': 'csts_attention_934e7d87_7dd8b9d5_extract_training'}`.
+
+Extraction `training/`: **6948/13960** occurrences; 279 seconds elapsed.
 
 ## overnight_reviewed_physical
 
