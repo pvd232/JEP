@@ -17,7 +17,10 @@ This is a small development triage experiment. Native metrics and training progr
   "native_pid": 97115,
   "summary": {
     "status": "running",
-    "in_flight": null,
+    "in_flight": {
+      "name": "fit",
+      "experiment_id": "csts_subset_a75fa36a_c1514635_fit"
+    },
     "source_commit": "a75fa36a8d709c25d7efccdd5c9dcdcfab3b3ec1"
   },
   "runs": [
@@ -35,7 +38,7 @@ This is a small development triage experiment. Native metrics and training progr
   "publication_counts": {
     "published": 11
   },
-  "free_bytes": 4980486144,
+  "free_bytes": 4980244480,
   "result": {},
   "preparation": {
     "coverage": {
