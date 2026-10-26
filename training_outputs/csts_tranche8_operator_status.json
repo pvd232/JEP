@@ -1,9 +1,133 @@
 {
-  "updated_at": "2026-10-26T14:13:06.324071+00:00",
-  "worker_status": "running",
+  "updated_at": "2026-10-26T14:13:26.352175+00:00",
+  "worker_status": "waiting",
   "action_id": "native_owner_checks_format1",
   "source_commit": "bf719a1c65589b996610cc575d7d536c1a282193",
   "operator_sha256": "4928c30aa81fbf253dbd7e9c4b538aef067cc9c5acf7f6782c5a26b57d618525",
-  "status": "running",
-  "returncode": null
+  "status": "completed",
+  "returncode": 0,
+  "result": {
+    "phase": "native_checks",
+    "status": "source_publication_required",
+    "source_commit": "bf719a1c65589b996610cc575d7d536c1a282193",
+    "checks": [
+      {
+        "check": "ruff format",
+        "returncode": 0
+      },
+      {
+        "check": "ruff check",
+        "returncode": 1
+      },
+      {
+        "check": "pyrefly",
+        "returncode": 0
+      },
+      {
+        "check": "pytest",
+        "returncode": 1
+      },
+      {
+        "check": "owner_environment_preflight",
+        "returncode": 0
+      }
+    ],
+    "formatted_files": [
+      {
+        "path": "csts_pilot/proposition_capture.py",
+        "sha256": "7df22fe4ba6d3a2ff84ca6f0cc7c12eba4c9993fdb3259cf0d76792e05abf9eb"
+      },
+      {
+        "path": "csts_pilot/proposition_inputs.py",
+        "sha256": "628648c9ec6d8ac39b76b4cff30215a5e9ce588a489086cd21dfd851a812c8f0"
+      },
+      {
+        "path": "csts_pilot/proposition_lora.py",
+        "sha256": "8a3537b5385f928f9fa00251b26c0730bc1cb344bf8613a977bc7afa5b6f296b"
+      },
+      {
+        "path": "csts_pilot/proposition_run.py",
+        "sha256": "16fa136812399909fcbdd62c7fb258360b1118e51546b0d5efacdd4fc13b3d0c"
+      },
+      {
+        "path": "csts_pilot/proposition_test.py",
+        "sha256": "d959ff6939ff5a2ce54d61cac70c9896a70d33e3544ad21b9dd29c82ac426c77"
+      },
+      {
+        "path": "csts_pilot/proposition_sample.py",
+        "sha256": "3d5266ad4ec301df182526fbd258abd22bfd67bae2f99a385ee9c708008c3237"
+      },
+      {
+        "path": "csts_pilot/proposition_archive.py",
+        "sha256": "40c930f9ca076a455165682e473ba9fd857d76b7ebc467b81c6f42c461ef6c62"
+      },
+      {
+        "path": "tests/test_csts_proposition_capture.py",
+        "sha256": "e3d51d9c608a4299cf99e1302e201070f8c5e86783aa5e61b7d0a6bb2d62c971"
+      },
+      {
+        "path": "tests/test_csts_proposition_inputs.py",
+        "sha256": "0dfcfea95a3b0c4e71e64853cbd2fa6d351a9ea62114cf7330fa535075357dfe"
+      },
+      {
+        "path": "tests/test_csts_proposition_lora.py",
+        "sha256": "d6f0f34e66fd5181cb961248c898861db9cc99c8e518deed425dbf9ec212ffbc"
+      },
+      {
+        "path": "tests/test_csts_proposition_test.py",
+        "sha256": "d02659c5b5582271216ffa23f9c8a4911e31fa603043002ad49999a506e929db"
+      },
+      {
+        "path": "tests/test_csts_proposition_sample.py",
+        "sha256": "30c33d75ffa385aa2bb229a08b9350f9ce98a7605724b94fb9f01c9439b76ec3"
+      },
+      {
+        "path": "tests/test_csts_proposition_archive.py",
+        "sha256": "bf5aa62d2a5af2b60721bb0b59b0a276b9207426200b84fa60157cebaed417df"
+      }
+    ],
+    "verification": {
+      "source_commit": "bf719a1c65589b996610cc575d7d536c1a282193",
+      "checks": [
+        {
+          "check": "ruff format",
+          "returncode": 0
+        },
+        {
+          "check": "ruff check",
+          "returncode": 1
+        },
+        {
+          "check": "pyrefly",
+          "returncode": 0
+        },
+        {
+          "check": "pytest",
+          "returncode": 1
+        },
+        {
+          "check": "owner_environment_preflight",
+          "returncode": 0
+        }
+      ],
+      "passed": false,
+      "source_clean": false,
+      "owned_source_sha256": {
+        "csts_pilot/proposition_capture.py": "7df22fe4ba6d3a2ff84ca6f0cc7c12eba4c9993fdb3259cf0d76792e05abf9eb",
+        "csts_pilot/proposition_inputs.py": "628648c9ec6d8ac39b76b4cff30215a5e9ce588a489086cd21dfd851a812c8f0",
+        "csts_pilot/proposition_lora.py": "8a3537b5385f928f9fa00251b26c0730bc1cb344bf8613a977bc7afa5b6f296b",
+        "csts_pilot/proposition_run.py": "16fa136812399909fcbdd62c7fb258360b1118e51546b0d5efacdd4fc13b3d0c",
+        "csts_pilot/proposition_test.py": "d959ff6939ff5a2ce54d61cac70c9896a70d33e3544ad21b9dd29c82ac426c77",
+        "csts_pilot/proposition_sample.py": "3d5266ad4ec301df182526fbd258abd22bfd67bae2f99a385ee9c708008c3237",
+        "csts_pilot/proposition_archive.py": "40c930f9ca076a455165682e473ba9fd857d76b7ebc467b81c6f42c461ef6c62",
+        "tests/test_csts_proposition_capture.py": "e3d51d9c608a4299cf99e1302e201070f8c5e86783aa5e61b7d0a6bb2d62c971",
+        "tests/test_csts_proposition_inputs.py": "0dfcfea95a3b0c4e71e64853cbd2fa6d351a9ea62114cf7330fa535075357dfe",
+        "tests/test_csts_proposition_lora.py": "d6f0f34e66fd5181cb961248c898861db9cc99c8e518deed425dbf9ec212ffbc",
+        "tests/test_csts_proposition_test.py": "d02659c5b5582271216ffa23f9c8a4911e31fa603043002ad49999a506e929db",
+        "tests/test_csts_proposition_sample.py": "30c33d75ffa385aa2bb229a08b9350f9ce98a7605724b94fb9f01c9439b76ec3",
+        "tests/test_csts_proposition_archive.py": "bf5aa62d2a5af2b60721bb0b59b0a276b9207426200b84fa60157cebaed417df"
+      }
+    },
+    "source_fetch_required": true
+  }
 }
