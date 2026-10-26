@@ -1,0 +1,152 @@
+{
+  "status": "passed",
+  "arithmetic": "NumPy float64; central finite differences epsilon=1e-6",
+  "random_seed": 7,
+  "checks": [
+    {
+      "check": "normalization_jacobian",
+      "maximum_error": 6.428013676895716e-11,
+      "tolerance": 1e-08
+    },
+    {
+      "check": "raw_passage1_gradient",
+      "maximum_error": 5.2932006000538934e-11,
+      "tolerance": 1e-08
+    },
+    {
+      "check": "raw_passage2_gradient",
+      "maximum_error": 1.0825635179956272e-10,
+      "tolerance": 1e-08
+    },
+    {
+      "check": "raw_shared_reference_gradient",
+      "maximum_error": 6.979863909073458e-11,
+      "tolerance": 1e-08
+    },
+    {
+      "check": "raw_unit_effective_reference_weight_raw",
+      "maximum_error": 5.551115123125783e-17,
+      "tolerance": 1e-12
+    },
+    {
+      "check": "unit_passage1_gradient",
+      "maximum_error": 1.2995043582875176e-10,
+      "tolerance": 1e-08
+    },
+    {
+      "check": "unit_passage2_gradient",
+      "maximum_error": 1.6068740782415603e-10,
+      "tolerance": 1e-08
+    },
+    {
+      "check": "unit_shared_reference_gradient",
+      "maximum_error": 1.316591974331871e-10,
+      "tolerance": 1e-08
+    },
+    {
+      "check": "raw_unit_effective_reference_weight_unit",
+      "maximum_error": 5.551115123125783e-17,
+      "tolerance": 1e-12
+    },
+    {
+      "check": "lora_A_gradient",
+      "maximum_error": 9.012343649139609e-11,
+      "tolerance": 1e-08
+    },
+    {
+      "check": "lora_B_gradient",
+      "maximum_error": 1.65510050109674e-10,
+      "tolerance": 1e-08
+    },
+    {
+      "check": "pearson_score_gradient",
+      "maximum_error": 1.0267299163646548e-10,
+      "tolerance": 1e-08
+    },
+    {
+      "check": "pearson_positive_affine_invariance",
+      "maximum_error": 1.1102230246251565e-16,
+      "tolerance": 1e-12
+    },
+    {
+      "check": "two_pair_pearson_gradient",
+      "maximum_error": 5.551115123125783e-11,
+      "tolerance": 1e-08
+    },
+    {
+      "check": "microbatch_weighting",
+      "maximum_error": 1.1102230246251565e-16,
+      "tolerance": 1e-12
+    },
+    {
+      "check": "native_shared_component_beta_2.0",
+      "maximum_error": 1.1102230246251565e-16,
+      "tolerance": 1e-12
+    },
+    {
+      "check": "raw_shared_component_beta_2.0",
+      "maximum_error": 0.0,
+      "tolerance": 1e-12
+    },
+    {
+      "check": "unit_shared_component_beta_2.0",
+      "maximum_error": 1.3877787807814457e-17,
+      "tolerance": 1e-12
+    },
+    {
+      "check": "native_shared_component_beta_0.1",
+      "maximum_error": 1.734723475976807e-18,
+      "tolerance": 1e-12
+    },
+    {
+      "check": "raw_shared_component_beta_0.1",
+      "maximum_error": 0.0,
+      "tolerance": 1e-12
+    },
+    {
+      "check": "unit_shared_component_beta_0.1",
+      "maximum_error": 5.551115123125783e-17,
+      "tolerance": 1e-12
+    },
+    {
+      "check": "mean_vector_pairwise_cosine_identity",
+      "maximum_error": 0.0,
+      "tolerance": 1e-12
+    },
+    {
+      "check": "covariance_trace_identity",
+      "maximum_error": 1.1102230246251565e-16,
+      "tolerance": 1e-12
+    },
+    {
+      "check": "participation_rank_bounds",
+      "observed": 3.615712346221535,
+      "passed": true
+    },
+    {
+      "check": "threshold_order_statistic",
+      "maximum_error": 0.0,
+      "tolerance": 0
+    },
+    {
+      "check": "monotone_confusion_count_invariance",
+      "passed": true
+    },
+    {
+      "check": "spearman_monotone_invariance",
+      "maximum_error": 0.0,
+      "tolerance": 1e-12
+    }
+  ],
+  "documents": {
+    "csts-tranche-4-condition-component.md": "3eaf1b31528f7af61fd30efaefd8c20d5810df46e5d4008c99fc203898a19520",
+    "csts-tranche-4-derivations.md": "1cabca0477b9fc88b916cd67a6e1df3b9747b7fe30f0faa2bde77378314b970a"
+  },
+  "math_rendering": {
+    "engine": "KaTeX 0.16.22",
+    "complete_markdown_render": "marked; both documents",
+    "parse_errors": 0,
+    "visual_check": "Full document HTML generated; reference-gradient section rendered in Chrome and inspected."
+  },
+  "prose_review": "direct-prose: clean"
+}
