@@ -1,6 +1,6 @@
 # JEP overnight experiments — live status
 
-Published: **2026-10-26 07:39 UTC**.
+Published: **2026-10-26 07:42 UTC**.
 
 | Comparator | Validation Spearman | Existing-test Spearman |
 |---|---:|---:|
@@ -17,9 +17,7 @@ Controller: `/home/machina/jep-csts-evidence-attention-20261026/evidence_attenti
 
 Source: `934e7d87f485fa8a0739e77255984d3b30ff97cf`.
 
-Current native stage: `{'name': 'extract_validation', 'experiment_id': 'csts_attention_934e7d87_85314012_extract_validation'}`.
-
-Extraction `training/`: **13960/13960** occurrences; 449 seconds elapsed.
+Extraction `validation/`: **3660/3660** occurrences; 188 seconds elapsed.
 
 ## overnight_disk_recovery
 
