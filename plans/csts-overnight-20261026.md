@@ -23,6 +23,14 @@ Reuse sealed baseline predictions. Perform no baseline reproduction, new native-
 
 Stop new training by **2026-10-26 12:30 UTC / 08:30 America/New_York**. Preserve completed artifacts, failed attempts, logs and checkpoints. Complete analysis and result publication. An hourly autonomous task checks progress, repairs justified implementation failures, and continues eligible work; it must inspect actual processes/locks and controller identities before starting anything.
 
+## Cached-model launch correction — 07:29 UTC
+
+**This supersedes the active attempt/PIDs in the recovery handoff below.** The first disk-recovery launch omitted `HF_HOME`, leaving its worker waiting before model inference. The timeout supervisor was sent TERM; all previous controllers/workers were verified absent before relaunch. No attention head had trained. Preserve that interrupted attempt.
+
+The active attempt is **`overnight_cached_model_recovery`**, timeout supervisor PID **68680** (inspect its controller child rather than assuming a PID). Its launch/queue/controller-log/summary/events use that name under the same attention worktree. It supplies `HF_HOME=/home/machina/jep-model-cache`, `HF_HUB_OFFLINE=1`, and `TRANSFORMERS_OFFLINE=1`; the pinned revision's local config was verified present. Source/settings remain the same reviewed hashes. No model download, new resources, code edit, architecture change, or loss/seed change is involved.
+
+The newest launch receipt caps the whole retry at **3,600 wall seconds**, counting the first failed extraction's 528.636 seconds and conservatively reserving 360 seconds for the interrupted launch: aggregate upper bound **4,488.636 seconds**, below 80 minutes even when all wall time is counted as GPU use. Preserve all per-stage limits. No failed cache is reused. The verified Tranche 5 bank remains the only completed-stage reuse.
+
 ## Recovery handoff — 07:25 UTC
 
 Tranche 5 completed and selected no eligible arm. Its test stage did not run. The [verified result](../training_outputs/csts_tranche5_verified_result.md) records validation scores, selected coefficients, operating behavior and JEP implications.
