@@ -1,0 +1,71 @@
+{
+  "status": "complete",
+  "metadata": {
+    "flan": {
+      "model_id": "google/flan-t5-small",
+      "parameters_with_projection": 77026688,
+      "t5_parameters": 76961152,
+      "pretrain": {
+        "checkpoint": "/home/machina/jep-csts-tranche3-20261024/experiments/csts_tranche3_9887c312_01f12b4a_evidence_pretrain/runs/evidence_pretrain/01M5Q6BCC4F3JWT3J2D5C7GEFA/artifacts/train/last_model/model.pt",
+        "sha256": "b5db6c3179cfd2bc8f91d0d734a83bcacee3917612b94d133c7761bd1bebfa38",
+        "checkpoint_epoch": 6
+      },
+      "ratings": {
+        "checkpoint": "/home/machina/jep-csts-tranche3-20261024/experiments/csts_tranche3_9887c312_01f12b4a_evidence_ratings/runs/evidence_ratings/01M5Q6JVPPFDCVHEGQNHDCCMXF/artifacts/train/model/model.pt",
+        "sha256": "3ac816e38b44a3c8a6e6354d16008977954cd960c64dc8d30778c12ded999412",
+        "checkpoint_epoch": 28
+      }
+    },
+    "qwen": {
+      "model_id": "Qwen/Qwen3-Embedding-8B",
+      "parameters_with_adapters": 7597966336,
+      "generation_head_parameters": 621219840,
+      "cache_smoke_tokens_match": true,
+      "pretrain": {
+        "checkpoint": "/home/machina/jep-csts-qwen-evidence-20261024/experiments/csts_qwen_evidence_cd720270_6b877324_evidence_pretrain/runs/evidence_pretrain/01M5R4DGKM7WDSA3KZ6S1DQVQM/artifacts/train/last_model/model.pt",
+        "sha256": "a472c2f910f1796f883141943fec9671ff1e6ca72d9fc7b6c9e08a9815a35ecb",
+        "checkpoint_epoch": 2
+      },
+      "ratings": {
+        "checkpoint": "/home/machina/jep-csts-qwen-evidence-20261024/experiments/csts_qwen_evidence_cd720270_6b877324_evidence_ratings/runs/evidence_ratings/01M5R7QP0NNNKCNE8DY5HAHCHD/artifacts/train/model/model.pt",
+        "sha256": "73f1fdf45e628aec47e67d296d33be2e24f41c2b328dc8db2a269649c36ee057",
+        "checkpoint_epoch": 5
+      }
+    }
+  },
+  "automatic_teacher_agreement": {
+    "flan_pretrain": {
+      "n": 50,
+      "teacher_exact_matches": 29,
+      "mean_teacher_token_f1": 0.7921584888541411,
+      "mean_teacher_answer_ce": 0.19498056943994016,
+      "empty_answers": 0,
+      "generation_seconds": 9.059801657131175
+    },
+    "flan_ratings": {
+      "n": 50,
+      "teacher_exact_matches": 22,
+      "mean_teacher_token_f1": 0.6978015473207289,
+      "mean_teacher_answer_ce": 0.54291799769504,
+      "empty_answers": 0,
+      "generation_seconds": 4.843664507963695
+    },
+    "qwen_pretrain": {
+      "n": 50,
+      "teacher_exact_matches": 33,
+      "mean_teacher_token_f1": 0.8543436417129782,
+      "mean_teacher_answer_ce": 0.15228226111270488,
+      "empty_answers": 0,
+      "generation_seconds": 27.25374414800899
+    },
+    "qwen_ratings": {
+      "n": 50,
+      "teacher_exact_matches": 9,
+      "mean_teacher_token_f1": 0.4584730239922056,
+      "mean_teacher_answer_ce": 4.859997177422047,
+      "empty_answers": 0,
+      "generation_seconds": 13.850321654113941
+    }
+  },
+  "scope": "Assistant inspection on a selected 50-item development cohort. Teacher agreement is distinct from correctness; no expert or Spanish evaluation."
+}
