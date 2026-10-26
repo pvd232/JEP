@@ -1,6 +1,6 @@
 # JEP overnight experiments — live status
 
-Published: **2026-10-26 06:06 UTC**.
+Published: **2026-10-26 06:07 UTC**.
 
 | Comparator | Validation Spearman | Existing-test Spearman |
 |---|---:|---:|
@@ -9,15 +9,23 @@ Published: **2026-10-26 06:06 UTC**.
 
 Existing baseline predictions are reused. Scores below identify validation or test explicitly.
 
-## overnight_reviewed_physical
+## overnight_reviewed
 
 Status: **running**.
+
+Controller: `/home/machina/jep-csts-evidence-attention-20261026/evidence_attention_results/overnight_reviewed/summary.json`
+
+Source: `934e7d87f485fa8a0739e77255984d3b30ff97cf`.
+
+Current native stage: `{'name': 'extract_training', 'experiment_id': 'csts_attention_934e7d87_7dd8b9d5_extract_training'}`.
+
+## overnight_reviewed_physical
+
+Status: **complete**.
 
 Controller: `/home/machina/jep-csts-matched-baselines-20261026/matched_baseline_results/overnight_reviewed_physical/summary.json`
 
 Source: `faa0ae537feea2333b5c245c9b23e0829729441c`.
-
-Current native stage: `{'name': 'freeze_selection', 'experiment_id': 'csts_matched_faa0ae53_c98e7a60_freeze_selection'}`.
 
 | Arm | Validation Spearman | Validation MSE | Epoch | State |
 |---|---:|---:|---:|---|
@@ -62,6 +70,8 @@ Extraction `validation/bank_820/917`: **16/16** occurrences; 746 seconds elapsed
 Extraction `validation/bank_856/917`: **8/16** occurrences; 761 seconds elapsed.
 
 Extraction `validation/bank_891/917`: **16/16** occurrences; 776 seconds elapsed.
+
+Stop reason: `no_validation_candidate_eligible`.
 
 ## overnight_reviewed_inputs
 
