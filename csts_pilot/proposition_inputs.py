@@ -58,11 +58,15 @@ class PropositionInferenceConfig(EncoderConfig):
     def bind_test_selection(self) -> "PropositionInferenceConfig":
         """Require an explicit frozen selection for test-only inference."""
         if (self.evaluation_split == "test") != (self.selection_sha256 is not None):
-            raise ValueError("Test inference requires a frozen selection SHA; validation does not.")
+            raise ValueError(
+                "Test inference requires a frozen selection SHA; validation does not."
+            )
         return self
 
 
-def frozen_test_thresholds(selection: dict[str, Any], model_sha256: str) -> dict[str, float]:
+def frozen_test_thresholds(
+    selection: dict[str, Any], model_sha256: str
+) -> dict[str, float]:
     """Validate the eligible frozen decision without consulting any test rows."""
     arm = selection.get("selected_arm")
     if (
@@ -76,7 +80,11 @@ def frozen_test_thresholds(selection: dict[str, Any], model_sha256: str) -> dict
     result = {}
     for name in ("saved_qwen", arm):
         value = thresholds.get(name)
-        if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
+        if (
+            isinstance(value, bool)
+            or not isinstance(value, (int, float))
+            or not math.isfinite(value)
+        ):
             raise ValueError("A frozen validation cutoff is missing or nonfinite.")
         result[name] = float(value)
     return {"saved_qwen": result["saved_qwen"], "propositions": result[arm]}
@@ -102,7 +110,9 @@ def source_inventory(
                         or canonical(old["condition"]) != canonical(condition)
                         or groups[identity] != row["group_id"]
                     ):
-                        raise ValueError("Canonical proposition identity changes source semantics or group.")
+                        raise ValueError(
+                            "Canonical proposition identity changes source semantics or group."
+                        )
                 else:
                     items[identity] = item
                     groups[identity] = row["group_id"]
@@ -181,7 +191,9 @@ def prepare(context: StageContext[PropositionPreparationConfig]) -> None:
     if manifest.get("records_sha256") != hashes["answers"]:
         raise ValueError("The generation manifest refers to different records.")
     if set(manifest.get("partitions", {})) != {"training", "validation"}:
-        raise ValueError("Full proposition preparation requires both source partitions.")
+        raise ValueError(
+            "Full proposition preparation requires both source partitions."
+        )
     training = load_json(context.inputs["training"])
     validation = load_json(context.inputs["validation"])
     validate_original_split(training, validation)
@@ -195,24 +207,37 @@ def prepare(context: StageContext[PropositionPreparationConfig]) -> None:
         validate_rows(transformed)
         write_json(context.outputs[name], transformed)
         transformed_hashes[name] = file_sha256(context.outputs[name])
-    write_json(context.outputs["audit"], {
-        "source_inputs": hashes,
-        "transformed_inputs": transformed_hashes,
-        "capture_manifest": manifest,
-        "fidelity_gate": gate,
-        "inventory": inventory,
-        "coverage": coverage,
-        "expert_verified": False,
-        "supervision": "Model-generated propositions with source quotations and model-assisted fidelity screening.",
-        "fallback": "Original passage and original condition for not_specified or ambiguous records.",
-    })
-    emit("proposition_inputs_prepared", coverage={
-        name: {key: value for key, value in values.items() if key != "accepted_count_per_row"}
-        for name, values in coverage.items()
-    }, canonical_items=len(items))
+    write_json(
+        context.outputs["audit"],
+        {
+            "source_inputs": hashes,
+            "transformed_inputs": transformed_hashes,
+            "capture_manifest": manifest,
+            "fidelity_gate": gate,
+            "inventory": inventory,
+            "coverage": coverage,
+            "expert_verified": False,
+            "supervision": "Model-generated propositions with source quotations and model-assisted fidelity screening.",
+            "fallback": "Original passage and original condition for not_specified or ambiguous records.",
+        },
+    )
+    emit(
+        "proposition_inputs_prepared",
+        coverage={
+            name: {
+                key: value
+                for key, value in values.items()
+                if key != "accepted_count_per_row"
+            }
+            for name, values in coverage.items()
+        },
+        canonical_items=len(items),
+    )
 
 
-def validate_replacements(original: list[dict[str, Any]], transformed: list[dict[str, Any]]) -> None:
+def validate_replacements(
+    original: list[dict[str, Any]], transformed: list[dict[str, Any]]
+) -> None:
     """Reject changed identities, labels, order or fields before model loading."""
     validate_rows(original)
     validate_rows(transformed)
@@ -220,11 +245,17 @@ def validate_replacements(original: list[dict[str, Any]], transformed: list[dict
         raise ValueError("Proposition replacements changed the comparison count.")
     for before, after in zip(original, transformed, strict=True):
         if set(before) != set(after) or {
-            key: value for key, value in before.items() if key not in {"sentence1", "sentence2"}
+            key: value
+            for key, value in before.items()
+            if key not in {"sentence1", "sentence2"}
         } != {
-            key: value for key, value in after.items() if key not in {"sentence1", "sentence2"}
+            key: value
+            for key, value in after.items()
+            if key not in {"sentence1", "sentence2"}
         }:
-            raise ValueError("Proposition replacements changed comparison metadata or order.")
+            raise ValueError(
+                "Proposition replacements changed comparison metadata or order."
+            )
 
 
 @build(config=PropositionInferenceConfig)
@@ -237,7 +268,9 @@ def infer(context: StageContext[PropositionInferenceConfig]) -> None:
         if file_sha256(context.inputs["selection"]) != config.selection_sha256:
             raise ValueError("The frozen validation selection bytes changed.")
         # Check the selected model and cutoffs before opening test input rows.
-        frozen = frozen_test_thresholds(load_json(context.inputs["selection"]), config.parent_model_sha256)
+        frozen = frozen_test_thresholds(
+            load_json(context.inputs["selection"]), config.parent_model_sha256
+        )
     for name, digest in (
         ("model", config.parent_model_sha256),
         ("original_rows", config.original_rows_sha256),
@@ -251,7 +284,8 @@ def infer(context: StageContext[PropositionInferenceConfig]) -> None:
     validate_replacements(original, transformed)
     identities = {row["row_id"] for row in original}
     saved_baseline = [
-        row for row in load_json(context.inputs["baseline_predictions"])
+        row
+        for row in load_json(context.inputs["baseline_predictions"])
         if row["row_id"] in identities
     ]
     baseline = baseline_scores(original, saved_baseline)
@@ -269,7 +303,9 @@ def infer(context: StageContext[PropositionInferenceConfig]) -> None:
     model = load_backbone(fit, adapters=fit)
     restore_parameters(model, saved["state"])
     before = state_digest(trainable_state(model))
-    parameters = {name: value for name, value in model.named_parameters() if value.requires_grad}
+    parameters = {
+        name: value for name, value in model.named_parameters() if value.requires_grad
+    }
     del saved
     model.eval()
     model.requires_grad_(False)
@@ -285,42 +321,66 @@ def infer(context: StageContext[PropositionInferenceConfig]) -> None:
             values.extend(pairs.scores(model, indices).float().cpu().tolist())
             now = time.monotonic()
             if now - last_emit >= 15 or start + 2 >= len(transformed):
-                emit("proposition_inference_progress", done=len(values), total=len(transformed), elapsed_seconds=round(now - started, 2))
+                emit(
+                    "proposition_inference_progress",
+                    done=len(values),
+                    total=len(transformed),
+                    elapsed_seconds=round(now - started, 2),
+                )
                 last_emit = now
     synchronize(config.device)
     after = state_digest(parameters)
     if before != after:
         raise ValueError("Adapter bytes changed during frozen proposition inference.")
-    predictions = original_predictions(original, transformed, [
-        dict(row, prediction=float(score)) for row, score in zip(transformed, values, strict=True)
-    ])
+    predictions = original_predictions(
+        original,
+        transformed,
+        [
+            dict(row, prediction=float(score))
+            for row, score in zip(transformed, values, strict=True)
+        ],
+    )
     scores = np.asarray(values, dtype=float)
-    baseline_cutoff = recall_cutoff(original, baseline) if frozen is None else frozen["saved_qwen"]
+    baseline_cutoff = (
+        recall_cutoff(original, baseline) if frozen is None else frozen["saved_qwen"]
+    )
     native = arm_metrics(original, baseline, baseline_cutoff)
     cutoff = (
-        recall_cutoff(original, scores, recall=native["operating_point"]["recall"] - 1e-12)
-        if frozen is None else frozen["propositions"]
+        recall_cutoff(
+            original, scores, recall=native["operating_point"]["recall"] - 1e-12
+        )
+        if frozen is None
+        else frozen["propositions"]
     )
     candidate = arm_metrics(original, scores, cutoff)
     write_json(context.outputs["predictions"], predictions)
-    write_json(context.outputs["result"], {
-        "metrics": {"saved_qwen": native, "propositions": candidate},
-        "optimizer_updates": 0,
-        "baseline_rerun": False,
-        "selection_use": (
-            "Diagnostic only; semantic fidelity, not frozen cosine improvement, governs adaptation."
-            if frozen is None else "Selected model and both cutoffs frozen on validation before test access."
-        ),
-        "test_cutoffs_refitted": False,
-        "expert_verified": False,
-        "config": config.model_dump(),
-    })
-    write_json(context.outputs["timing"], {
-        "total_seconds": time.monotonic() - started,
-        "nonpadding_tokens": pairs.nonpadding_tokens,
-        "adapter_state_before_sha256": before,
-        "adapter_state_after_sha256": after,
-        "optimizer_updates": 0,
-        "peak_cuda_memory_bytes": torch.cuda.max_memory_allocated() if config.device == "cuda" else 0,
-    })
+    write_json(
+        context.outputs["result"],
+        {
+            "metrics": {"saved_qwen": native, "propositions": candidate},
+            "optimizer_updates": 0,
+            "baseline_rerun": False,
+            "selection_use": (
+                "Diagnostic only; semantic fidelity, not frozen cosine improvement, governs adaptation."
+                if frozen is None
+                else "Selected model and both cutoffs frozen on validation before test access."
+            ),
+            "test_cutoffs_refitted": False,
+            "expert_verified": False,
+            "config": config.model_dump(),
+        },
+    )
+    write_json(
+        context.outputs["timing"],
+        {
+            "total_seconds": time.monotonic() - started,
+            "nonpadding_tokens": pairs.nonpadding_tokens,
+            "adapter_state_before_sha256": before,
+            "adapter_state_after_sha256": after,
+            "optimizer_updates": 0,
+            "peak_cuda_memory_bytes": torch.cuda.max_memory_allocated()
+            if config.device == "cuda"
+            else 0,
+        },
+    )
     emit("proposition_inference_result", **candidate)
