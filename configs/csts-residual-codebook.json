@@ -1,0 +1,16 @@
+{
+  "publication_destination": {"kind": "viper_cloud", "owner": "pvd232", "workspace": "jep_csts_joint_20261021"},
+  "training": {
+    "seeds": [7, 8, 9], "rank": 32, "codes": 128,
+    "learning_rate": 0.001, "weight_decay": 0.01, "batch_size": 32,
+    "max_epochs": 12, "patience": 5, "kmeans_iterations": 10,
+    "auxiliary_weight": 0.1, "commitment_weight": 0.25,
+    "seconds_per_pair": 1200,
+    "expected_baseline_spearman": 0.782575,
+    "baseline_tolerance": 0.000001
+  },
+  "splits": {
+    "training": {"rows": 6980, "sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01"},
+    "validation": {"rows": 1830, "sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273"}
+  }
+}
