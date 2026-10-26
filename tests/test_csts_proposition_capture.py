@@ -49,15 +49,31 @@ class CaptureChecks(unittest.TestCase):
             "schema.json": json.dumps(SCHEMA),
             "response.json": json.dumps({"records": [answer()]}),
             "records.json": json.dumps([answer()]),
-            "events.jsonl": json.dumps({"type": "turn.completed", "usage": {"output_tokens": 2}}),
+            "events.jsonl": json.dumps(
+                {"type": "turn.completed", "usage": {"output_tokens": 2}}
+            ),
         }
         for filename, content in files.items():
             (directory / filename).write_text(content)
-        receipt = {"status": "complete", "returncode": 0, "model_alias": MODEL,
-                   "reasoning_effort": EFFORT, "command": cli_command(directory, "/test/cli"),
-                   "items": 1, "labels_or_companion_fields_provided": False,
-                   "tools_permitted": False, "usage": {"output_tokens": 2}}
-        for filename, field in (("prompt.txt", "prompt_sha256"), ("inputs.json", "input_sha256"), ("schema.json", "schema_sha256"), ("events.jsonl", "events_sha256"), ("response.json", "response_sha256"), ("records.json", "records_sha256")):
+        receipt = {
+            "status": "complete",
+            "returncode": 0,
+            "model_alias": MODEL,
+            "reasoning_effort": EFFORT,
+            "command": cli_command(directory, "/test/cli"),
+            "items": 1,
+            "labels_or_companion_fields_provided": False,
+            "tools_permitted": False,
+            "usage": {"output_tokens": 2},
+        }
+        for filename, field in (
+            ("prompt.txt", "prompt_sha256"),
+            ("inputs.json", "input_sha256"),
+            ("schema.json", "schema_sha256"),
+            ("events.jsonl", "events_sha256"),
+            ("response.json", "response_sha256"),
+            ("records.json", "records_sha256"),
+        ):
             receipt[field] = sha((directory / filename).read_bytes())
         (directory / "receipt.json").write_text(json.dumps(receipt))
         return receipt
@@ -75,7 +91,9 @@ class CaptureChecks(unittest.TestCase):
         self.assertEqual([len(batch) for batch in selected], [3, 3])
         for batch in selected:
             self.assertEqual(len({groups[row["id"]] for row in batch}), len(batch))
-        self.assertEqual({row["id"] for batch in selected for row in batch}, set(groups))
+        self.assertEqual(
+            {row["id"] for batch in selected for row in batch}, set(groups)
+        )
 
     def test_paraphrases_are_valid_with_exact_supporting_spans(self):
         self.assertNotIn(answer()["answer"], item()["passage"])
@@ -108,12 +126,17 @@ class CaptureChecks(unittest.TestCase):
             {"type": "thread.started", "thread_id": "opaque"},
             {"type": "turn.started"},
             {"type": "item.completed", "item": {"type": "agent_message", "text": "{}"}},
-            {"type": "turn.completed", "usage": {"input_tokens": 3, "output_tokens": 2}},
+            {
+                "type": "turn.completed",
+                "usage": {"input_tokens": 3, "output_tokens": 2},
+            },
         ]
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "events.jsonl"
+
             def save(events):
                 path.write_text("\n".join(json.dumps(event) for event in events))
+
             save(normal)
             self.assertEqual(checked_events(path)["output_tokens"], 2)
             tool = copy.deepcopy(normal)
@@ -136,8 +159,18 @@ class CaptureChecks(unittest.TestCase):
                 capture.assert_not_called()
 
     def test_completed_request_tampering_fails_instead_of_regenerating(self):
-        for filename in ("inputs.json", "prompt.txt", "schema.json", "events.jsonl", "response.json", "records.json"):
-            with self.subTest(filename=filename), tempfile.TemporaryDirectory() as parent:
+        for filename in (
+            "inputs.json",
+            "prompt.txt",
+            "schema.json",
+            "events.jsonl",
+            "response.json",
+            "records.json",
+        ):
+            with (
+                self.subTest(filename=filename),
+                tempfile.TemporaryDirectory() as parent,
+            ):
                 directory = Path(parent) / "batch_0000"
                 self.completed_fixture(directory)
                 with (directory / filename).open("a") as stream:
@@ -152,9 +185,13 @@ class CaptureChecks(unittest.TestCase):
             failed.mkdir()
             (failed / "receipt.json").write_text('{"status":"failed"}')
             before = (failed / "receipt.json").read_bytes()
-            with mock.patch("csts_pilot.proposition_capture.capture_batch", return_value={}) as capture:
+            with mock.patch(
+                "csts_pilot.proposition_capture.capture_batch", return_value={}
+            ) as capture:
                 request_batch([item()], root, 0, "/test/cli", 30, True)
-                self.assertEqual(capture.call_args.args[1], root / "batch_0000-attempt_06")
+                self.assertEqual(
+                    capture.call_args.args[1], root / "batch_0000-attempt_06"
+                )
             self.assertEqual((failed / "receipt.json").read_bytes(), before)
 
 
