@@ -1,101 +1,76 @@
 # Completed C-STS development audit and saved-candidate update
 
-**Version 2: every development example has a final disposition.** The final selection set contains **1,513 usable comparisons across 674 source groups**. There are **288 invalid cases and 29 cases excluded for ambiguous conditions**, with **zero pending cases**. The future validation profile points to this finalized set.
+**Version 3: user adjudication of three displayed cases.** The development set contains **1,513 usable comparisons across 674 source groups**, with **288 invalid cases, 29 ambiguity exclusions and zero pending cases**.
 
-Correcting labels improves rank agreement for the same saved predictions on the same examples. For selected Qwen, Spearman rises from **0.800542 to 0.835069**, a correction-only lift of **0.034528**. Evidence then ratings rises from **0.794755 to 0.837784**, a lift of **0.043029**.
+## User adjudication
 
-## Final labels and provenance
+| Source ID | Condition | Version 2 | Current rating | User decision |
+|---|---|---:|---:|---|
+| train_72 | type of meal | 5 | 5 | Pie and cake are interpreted as desserts |
+| train_7753 | angle of ground | 1 | 1 | Sidewalk is interpreted as level ground, stairs as inclined |
+| train_8859 | number of riders | 1 | 5 | Each caption describes one active wave rider |
 
-| Data | Label source | Role |
+Exactly one numeric label changed: `train_8859`, from 1 to 5. Every example ID, group, inclusion decision and other numeric rating stays fixed. The three user decisions followed disclosure of the existing ratings and reader votes.
+
+The [user adjudication record](csts_development_user_adjudications_v3_20261026.json) supplies current decision precedence. The [version-3 audit](csts_development_blind_audit_v3_20261026.json) retains historical model-reader votes and the previous rider-count rationale. [Version 2](https://github.com/pvd232/JEP/blob/769114a4967de1cb8fbb26709a13119e01df1cff/training_outputs/csts_label_audit_report_20261026.md) preserves the prior published results.
+
+## Label provenance
+
+| Data | Labels | Role |
 |---|---|---|
-| Original training: 6,980 | LivNLP released training CSV, mixed human/LLM ratings | Existing training input |
-| Original development: 1,830 | Same released training CSV | Historical development reference |
-| Finalized development: 1,513 | Prediction-blind assistant-model audit consensus | Future checkpoint selection |
-| Test: 2,620 | Tu human reannotations, excluding 214 invalid examples | Existing held-out test and error review |
+| Training, 6,980 | LivNLP released training CSV, mixed human/LLM labels | Existing training input |
+| Original development, 1,830 | Same released training CSV | Historical reference |
+| Current development, 1,513 | Prediction-blind model audit followed by user adjudication of three displayed cases | Future checkpoint selection |
+| Test, 2,620 | Tu human reannotations after invalid-case exclusions | Existing test reference |
 
-These development labels are model-audited. The audit used isolated contexts of the same assistant model. Original dataset ratings remain preserved in the source inputs and archived metric views.
+The initial model audit used isolated contexts of the same assistant model. Its rubric, blind inputs, raw votes, rationales, disagreement review and exclusion policy remain archived in [version-2 audit evidence](csts_development_blind_audit_evidence_v2_20261026.json). User review is separately identified and unblinded.
 
-| Final development disposition | Examples |
-|---|---:|
-| Usable rating from initial reader agreement | 1,306 |
-| Usable rating after review | 207 |
-| Invalid condition or unavailable required information | 288 |
-| Excluded because the comparison remains ambiguous | 29 |
-| Total reviewed | 1,830 |
-| Pending review | 0 |
+The initial 1,306 reader agreements and 207 adjudicated usable cases retain their inclusion statuses. The audit now differs from original ratings on **742 of 1,513** usable comparisons. Original source labels remain preserved.
 
-**741** ratings changed among the **1,513** included examples. The cow/dog example `train_3985` remains rated 5 for number of animals.
+The rubric follows [Tu sections 3.2 and 3.3](https://aclanthology.org/2024.acl-long.64/) and the original [C-STS verification scale, Appendix C.2](https://aclanthology.org/2023.emnlp-main.345/).
 
-The [full label audit](csts_development_blind_audit_v2_20261026.json) records all dispositions, rationales and final review votes. The [final 84-case decisions](csts_development_final84_decisions_20261026.json) retain complete captions, conditions, votes, dissent and explanations. The [review queue](csts_development_label_review_queue_20261026.json) is closed.
+## Saved predictions and label correction
 
-## How the final 84 cases were closed
+The middle and right columns use the same 1,513 comparisons and saved predictions.
 
-The initial audit provided two independent blind judgments per example and review of disagreements. Version 2 preserves every one of its **1,491 usable ratings and 255 invalid decisions** exactly.
-
-Three fresh blind contexts each reviewed the remaining 84 cases. They received captions, the condition, source identifiers and the frozen rubric. Original benchmark ratings, candidate predictions and prior reviewer judgments were withheld.
-
-The closure rule was specified before candidate rescoring:
-
-- A numeric rating requires at least two readers independently returning status `rated` with exactly the same value.
-- An invalid disposition requires at least two readers returning status `invalid`.
-- Every other configuration receives `excluded_ambiguous`, with a null rating and all dissent preserved.
-
-The final 84 yielded **22 usable ratings, 33 invalid cases and 29 ambiguity exclusions**. Excluded cases contribute no numeric target to model selection.
-
-The rubric follows [Tu, sections 3.2 and 3.3](https://aclanthology.org/2024.acl-long.64/): binary comparisons use 1/3/5, featureless conditions default to entity type, contextual inference needs direct support, and invalid conditions are excluded. Nonbinary grading follows the original [C-STS verification scale, Appendix C.2](https://aclanthology.org/2023.emnlp-main.345/).
-
-The compressed [version-2 evidence](csts_development_blind_audit_evidence_v2_20261026.json) preserves blinded inputs, rubric, closure policy, three reader outputs and final decisions. It links initial audit evidence at its immutable source commit.
-
-## Rank lift: correction and cohort filtering
-
-All values below reuse the same saved encoder outputs. The middle and right columns use identical 1,513 example IDs.
-
-| Saved model | Original labels, all 1,830 | Original labels, final 1,513 | Audited labels, final 1,513 | Correction-only lift |
+| Saved model | Original labels, all 1,830 | Original labels, same 1,513 | Current labels, same 1,513 | Correction-only lift |
 |---|---:|---:|---:|---:|
-| Selected Qwen ratings | 0.782575 | 0.800542 | 0.835069 | +0.034528 |
-| Qwen evidence then ratings | 0.773647 | 0.794755 | 0.837784 | +0.043029 |
+| Selected Qwen ratings | 0.782575 | 0.800542 | 0.832619 | +0.032077 |
+| Qwen evidence then ratings | 0.773647 | 0.794755 | 0.835354 | +0.040600 |
 
-Selecting the usable cohort separately contributes 0.017967 to selected Qwen's correlation and 0.021108 to evidence then ratings. Label correction accounts for the additional lift in the final column.
+Selected Qwen normalized MSE is **0.051485**, with rating-scale MAE **0.728315**. Evidence then ratings has MSE **0.050913** and MAE **0.715706**. Original-label values on those same rows are retained in the full comparison.
 
-Numerical calibration metrics also change. On the same 1,513 examples, selected Qwen's normalized MSE increases from **0.034177 to 0.050982**, and rating-scale MAE increases from **0.580031 to 0.726299**. Evidence then ratings has audited MSE **0.050394** and MAE **0.713628**. Rank lift and absolute score errors are reported separately.
+## Saved candidate comparison
 
-## Re-evaluation of saved candidates
+Twenty-seven full-development saved candidates were rescored.
 
-Twenty-seven full-development score maps were evaluated on the same finalized development set.
-
-| Saved encoder | Audited development Spearman, n=1,513 |
+| Candidate | Current development Spearman |
 |---|---:|
-| Qwen evidence then ratings | 0.837784 |
-| Selected Qwen ratings | 0.835069 |
-| Same-passage control | 0.833857 |
-| Qwen ratings pretraining checkpoint | 0.829774 |
-| Earlier Qwen LoRA | 0.822322 |
+| Qwen evidence then ratings | 0.835354 |
+| Selected Qwen ratings | 0.832619 |
+| Same-passage control | 0.831498 |
+| Qwen ratings pretraining checkpoint | 0.827459 |
+| Earlier Qwen LoRA | 0.819768 |
 
-Evidence then ratings exceeds selected Qwen by **0.002714**. Its paired source-group bootstrap 95% interval is **[-0.008891, +0.014437]**.
+Evidence then ratings exceeds selected Qwen by **0.002735**, with a paired source-group bootstrap 95% interval of **[-0.008891, +0.014438]** using 2,000 draws.
 
-| Matched audited answer cohort | Original captions | Frozen answers | Adapted answers |
+The rider comparison occurs outside the retained-answer and answer-input trial cohorts. Their scores stay fixed:
+
+| Matched cohort | Original captions | Frozen answers | Adapted answers |
 |---|---:|---:|---:|
-| Retained generated-answer diagnostic, n=55 | 0.813272 | 0.763026 | Unavailable |
-| Answer-input LoRA trial, n=25 | 0.820347 | 0.764370 | 0.800243 |
+| Retained diagnostic, 55 usable | 0.813272 | 0.763026 | Unavailable |
+| Answer-input LoRA, 25 usable | 0.820347 | 0.764370 | 0.800243 |
 
-These values are Spearman correlations. Generated answers differ from original captions by -0.050246, with 95% interval [-0.185206, +0.069022]. Adapted answers differ by -0.020105, with interval [-0.115548, +0.057211]. Adapted-answer normalized MSE is 0.042388 on the 25-example cohort, compared with original-caption MSE 0.044010.
+The [full version-3 comparison](csts_audited_candidate_comparison_v3_20261026.json) preserves original-label metrics, coverage, all saved candidate identities, exclusions and paired intervals. The [point summary](csts_audited_candidate_point_summary_v3_20261026.json) decomposes filtering and label correction.
 
-The [full comparison](csts_audited_candidate_comparison_v2_20261026.json) preserves original-label views, matched IDs, exclusions, saved-model identities and three 2,000-draw source-group intervals. The [point summary](csts_audited_candidate_point_summary_v2_20261026.json) includes an exact filtering-versus-correction decomposition for each candidate.
+Independent checks reproduced **35 cohort/candidate views** with SciPy Spearman and direct MSE. A separate recomputation matched both leading candidates after the single correction.
 
-Independent checks recomputed the closure policy for all 84 cases, verified all 1,746 frozen initial decisions, and reproduced 35 cohort/candidate metric views using SciPy and direct MSE calculations.
+## Validation profile and preserved artifacts
 
-## Tu-reannotated test review
+The [validation profile](../configs/csts-qwen-audited-development.json) points to [version-3 development rows](csts_development_model_audited_rows_v3_20261026.json).
 
-The selected encoder's existing score on the **2,620 Tu-reannotated test examples remains 0.788505**. Those source ratings and saved predictions remain fixed.
+Development SHA-256: `dfb3a12f25a77ac4c0ff2f472cef6c0d1e22344f6e847bc4da0ae6d6ebc8aa80`.
 
-The error review covers all 2,620 comparisons, 1,140 distinct condition strings and 12 descriptive semantic families. There are 936 discrepancies of at least one rating point and 136 of at least two points. Spatial conditions have 160/341 one-point discrepancies (46.92%); quantity/count has 167/474 (35.23%); entity type has 186/652 (28.53%). Presence/absence has 44/68 (64.71%).
+Training and test paths, hashes and counts stay fixed. The selected encoder's existing Tu-reannotated test score stays **0.788505**. All previous audit versions and raw model-reader decisions remain archived.
 
-Five residual reference-label contradictions are flagged for inspection, including two captions explicitly describing kitchens with a published rating of 1 for room type. Published test labels remain intact. Detailed statistics and flags: [test-review data](csts_clean_test_error_review_20261026.json). Full source rows and saved predictions: [sealed export](csts_qwen_selected_clean_test_export.json).
-
-## Future checkpoint selection
-
-The [Qwen development profile](../configs/csts-qwen-audited-development.json) now points validation at the separately saved [1,513 finalized model-audited rows](csts_development_model_audited_rows_v2_20261026.json). Training and human-reannotated test inputs retain their existing hashes. Original experiment configurations preserve their historical data versions.
-
-Final development SHA-256: `8a5b68f165ec8d914bd2b3accbb6f059f573ca5fe3bd122e75acab33aa68ce35`.
-
-Saved weights and predictions were reused throughout this update. No training or encoder inference was launched.
+This update reuses saved predictions. Training updates and new encoder inference: **0**.
