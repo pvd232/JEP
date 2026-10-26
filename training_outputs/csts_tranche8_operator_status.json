@@ -1,9 +1,485 @@
 {
-  "updated_at": "2026-10-26T20:07:03.714847+00:00",
-  "worker_status": "running",
+  "updated_at": "2026-10-26T20:07:23.324756+00:00",
+  "worker_status": "waiting",
   "action_id": "proposition_recovery_preflight_diagnostics_20261026a",
   "source_commit": "948169a5df1ba4ffb73803df7cb904eaa51a867b",
   "operator_sha256": "2c82e71be1ac6ab822754d73a2230f29f78f8c07097216105a53b4b604f2f342",
-  "status": "launching",
-  "returncode": null
+  "status": "completed",
+  "returncode": 0,
+  "result": {
+    "phase": "recovery_preflight_diagnostics",
+    "status": "complete",
+    "source_files": {
+      "full_capture_controller.py": {
+        "exists": true,
+        "expected_hash_matches": true,
+        "actual_sha256": "d359b57dfe0cefd592b96d9b560e5de47251e0c78899d9010b856e3519b3d216"
+      },
+      "proposition_capture.py": {
+        "exists": true,
+        "expected_hash_matches": true,
+        "actual_sha256": "e8ee5293f2a77420a5fe2f69168988e7772da2b3478927f73531856827a8f462"
+      }
+    },
+    "steps": {
+      "pinned": {
+        "passed": true
+      },
+      "gate": {
+        "passed": true
+      },
+      "inventory": {
+        "passed": true
+      },
+      "no_live_capture": {
+        "passed": true
+      },
+      "preflight": {
+        "passed": false,
+        "error_class": "ValueError"
+      }
+    },
+    "pinned_operator_copies": 1,
+    "supervisor_status": "failed",
+    "supervisor_binding_matches": true,
+    "problem_batches": [
+      {
+        "split": "training",
+        "batch": "batch_0000",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0001",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0002",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0003",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0004",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0005",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0006",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0007",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0008",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0009",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0010",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0011",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0012",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0013",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0014",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0015",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0016",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0017",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0018",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0019",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0020",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0021",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0022",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0023",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0024",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0025",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0026",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0027",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0028",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0029",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0030",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0031",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0032",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0033",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0034",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0035",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0036",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0037",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0038",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0039",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0040",
+        "status": "failed",
+        "validation": {
+          "passed": true,
+          "retryable": true
+        },
+        "classification": {
+          "blocked": false,
+          "transient": true,
+          "login": false,
+          "policy": false,
+          "quota": false
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0041",
+        "status": "failed",
+        "validation": {
+          "passed": true,
+          "retryable": true
+        },
+        "classification": {
+          "blocked": false,
+          "transient": true,
+          "login": false,
+          "policy": false,
+          "quota": false
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0042",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0043",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0044",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0045",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      },
+      {
+        "split": "training",
+        "batch": "batch_0046",
+        "status": "complete",
+        "validation": {
+          "passed": false,
+          "error_class": "ValueError"
+        }
+      }
+    ]
+  }
 }
