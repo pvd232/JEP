@@ -2,21 +2,25 @@
 
 import copy
 import json
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest import mock
 
 from csts_pilot.proposition_capture import (
-    batches,
-    cli_command,
-    completed_batch,
-    checked_events,
-    checked_records,
-    PROMPT,
-    SCHEMA,
     EFFORT,
     MODEL,
+    PROMPT,
+    SCHEMA,
+    batches,
+    capture_lock,
+    checked_events,
+    checked_records,
+    cli_command,
+    completed_batch,
     request_batch,
     sha,
     validate_inputs,
@@ -156,6 +160,83 @@ class CaptureChecks(unittest.TestCase):
                 request_batch([item()], root, 0, "/test/cli", 30, True)
                 self.assertEqual(capture.call_args.args[1], root / "batch_0000-attempt_06")
             self.assertEqual((failed / "receipt.json").read_bytes(), before)
+
+
+    def test_running_attempt_requires_explicit_abandoned_recovery(self):
+        with tempfile.TemporaryDirectory() as parent:
+            root = Path(parent)
+            interrupted = root / "batch_0000"
+            interrupted.mkdir()
+            receipt = interrupted / "receipt.json"
+            receipt.write_text('{"status":"running"}')
+            before = receipt.read_bytes()
+            with mock.patch("csts_pilot.proposition_capture.capture_batch", return_value={}) as capture:
+                with self.assertRaisesRegex(RuntimeError, "recover-abandoned"):
+                    request_batch([item()], root, 0, "/test/cli", 30, True)
+                capture.assert_not_called()
+                request_batch([item()], root, 0, "/test/cli", 30, True, True)
+                self.assertEqual(capture.call_args.args[1], root / "batch_0000-attempt_02")
+            self.assertEqual(receipt.read_bytes(), before)
+
+    def test_live_orphaned_cli_keeps_batch_locked(self):
+        with tempfile.TemporaryDirectory() as parent:
+            root = Path(parent)
+            child = None
+            try:
+                with capture_lock(root / "batch_0000.lock") as descriptor:
+                    child = subprocess.Popen(
+                        [sys.executable, "-c", "import time; time.sleep(30)"],
+                        pass_fds=(descriptor,),
+                    )
+                # Only the CLI owns the descriptor now; a parent restart must
+                # still fail even with explicit abandoned-attempt recovery.
+                with mock.patch("csts_pilot.proposition_capture.capture_batch") as capture:
+                    with self.assertRaisesRegex(RuntimeError, "owned"):
+                        request_batch([item()], root, 0, "/test/cli", 30, True, True)
+                    capture.assert_not_called()
+            finally:
+                if child is not None:
+                    child.terminate()
+                    child.wait(timeout=5)
+            with capture_lock(root / "batch_0000.lock"):
+                pass
+
+    def test_capture_cli_inherits_partition_and_batch_ownership(self):
+        with tempfile.TemporaryDirectory() as parent:
+            root = Path(parent)
+            partition = root / "partition.capture.lock"
+            children = []
+
+            def fake_cli(_command, **kwargs):
+                children.append(subprocess.Popen(
+                    [sys.executable, "-c", "import time; time.sleep(30)"],
+                    pass_fds=kwargs["pass_fds"],
+                ))
+                directory = kwargs["cwd"]
+                (directory / "response.json").write_text(json.dumps({"records": [answer()]}))
+                kwargs["stdout"].write(json.dumps({"type": "turn.completed", "usage": {"output_tokens": 2}}))
+                return SimpleNamespace(returncode=0)
+
+            try:
+                with capture_lock(partition) as partition_fd, mock.patch(
+                    "csts_pilot.proposition_capture.subprocess.check_output", return_value="fixture"
+                ), mock.patch("csts_pilot.proposition_capture.subprocess.run", side_effect=fake_cli):
+                    request_batch([item()], root, 0, "/test/cli", 30, False, partition_lock_fd=partition_fd)
+                # The child retains both output ownership and the current batch
+                # after every descriptor in the original capture parent closes.
+                for path in (partition, root / "batch_0000.lock"):
+                    with self.assertRaisesRegex(RuntimeError, "owned"), capture_lock(path):
+                        self.fail("A live CLI lost capture ownership.")
+            finally:
+                for child in children:
+                    child.terminate()
+                    child.wait(timeout=5)
+
+    def test_partition_lock_rejects_a_second_owner(self):
+        with tempfile.TemporaryDirectory() as parent:
+            path = Path(parent) / "partition.capture.lock"
+            with capture_lock(path), self.assertRaisesRegex(RuntimeError, "owned"), capture_lock(path):
+                self.fail("A second owner acquired the capture lock.")
 
 
 if __name__ == "__main__":

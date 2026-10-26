@@ -1,11 +1,14 @@
 """Capture label-blind condition answers through the existing authenticated CLI."""
 
 import argparse
+import fcntl
 import hashlib
 import json
 import subprocess
 import time
+from collections.abc import Iterator
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 
@@ -190,9 +193,8 @@ def checked_events(path: Path) -> dict[str, Any]:
         event = json.loads(line)
         if event.get("type") not in allowed_events:
             raise ValueError(f"Unaccepted CLI event: {event.get('type')}.")
-        if event["type"].startswith("item."):
-            if event.get("item", {}).get("type") not in {"agent_message", "reasoning"}:
-                raise ValueError("Tool activity or an unknown CLI item invalidates this request.")
+        if event["type"].startswith("item.") and event.get("item", {}).get("type") not in {"agent_message", "reasoning"}:
+            raise ValueError("Tool activity or an unknown CLI item invalidates this request.")
         if event["type"] == "turn.completed":
             completed += 1
             usage = event.get("usage")
@@ -252,8 +254,30 @@ def completed_batch(
     return {**receipt, "directory": str(directory), "reused": True}
 
 
+@contextmanager
+def capture_lock(path: Path) -> Iterator[int]:
+    """Fail closed on a concurrent owner; close without unlocking child-owned FDs."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a+") as lock:
+        try:
+            fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            raise RuntimeError("Capture is still owned by another process.") from None
+        yield lock.fileno()
+
+
 def request_batch(
-    items: list[dict[str, Any]], root: Path, index: int, cli: str, timeout: int, resume: bool
+    items: list[dict[str, Any]], root: Path, index: int, cli: str, timeout: int,
+    resume: bool, recover_abandoned: bool = False, partition_lock_fd: int | None = None,
+) -> dict[str, Any]:
+    """Serialize each batch, including a CLI orphaned by an interrupted parent."""
+    with capture_lock(root / f"batch_{index:04d}.lock") as lock_fd:
+        return _request_batch(items, root, index, cli, timeout, resume, recover_abandoned, lock_fd, partition_lock_fd)
+
+
+def _request_batch(
+    items: list[dict[str, Any]], root: Path, index: int, cli: str, timeout: int,
+    resume: bool, recover_abandoned: bool, lock_fd: int, partition_lock_fd: int | None,
 ) -> dict[str, Any]:
     """Preserve failed attempts and give each authorized retry a new directory."""
     base = root / f"batch_{index:04d}"
@@ -267,19 +291,27 @@ def request_batch(
     attempts.sort(key=lambda pair: pair[0])
     if attempts and not resume:
         raise FileExistsError("Existing requests require explicit --resume.")
+    abandoned = False
     for _, directory in attempts:
         receipt_path = directory / "receipt.json"
         if receipt_path.exists():
             receipt = json.loads(receipt_path.read_text())
             if receipt.get("status") == "complete":
                 return completed_batch(items, directory, cli)
+            if receipt.get("status") != "failed":
+                abandoned = True
+        else:
+            abandoned = True
+    if abandoned and not recover_abandoned:
+        raise RuntimeError("Interrupted requests require explicit --recover-abandoned with --resume.")
     attempt = max((number for number, _ in attempts), default=0) + 1
     directory = base if not attempts else root / f"batch_{index:04d}-attempt_{attempt:02d}"
-    return capture_batch(items, directory, cli, timeout)
+    return capture_batch(items, directory, cli, timeout, lock_fd=lock_fd, partition_lock_fd=partition_lock_fd)
 
 
 def capture_batch(
-    items: list[dict[str, Any]], directory: Path, cli: str, timeout: int
+    items: list[dict[str, Any]], directory: Path, cli: str, timeout: int,
+    *, lock_fd: int, partition_lock_fd: int | None = None,
 ) -> dict[str, Any]:
     """Run one fresh, tools-forbidden request and preserve even a failed attempt."""
     validate_inputs(items)
@@ -307,7 +339,7 @@ def capture_batch(
     started = time.monotonic()
     try:
         with (directory / "events.jsonl").open("w") as events, (directory / "stderr.log").open("w") as errors:
-            response = subprocess.run(command, input=prompt, text=True, stdout=events, stderr=errors, cwd=directory, timeout=timeout, check=False)
+            response = subprocess.run(command, input=prompt, text=True, stdout=events, stderr=errors, cwd=directory, timeout=timeout, check=False, pass_fds=(lock_fd,) if partition_lock_fd is None else (lock_fd, partition_lock_fd))
         receipt["returncode"] = response.returncode
         receipt["events_sha256"] = sha((directory / "events.jsonl").read_bytes())
         if response.returncode:
@@ -340,9 +372,12 @@ def main() -> None:
     parser.add_argument("--timeout", type=int, default=1200)
     parser.add_argument("--cli", default=CLI)
     parser.add_argument("--resume", action="store_true")
+    parser.add_argument("--recover-abandoned", action="store_true", help="Explicitly retry interrupted batches after their CLI releases its lock.")
     args = parser.parse_args()
     if not 1 <= args.concurrency <= 4 or args.timeout < 1 or (args.limit is not None and args.limit < 1):
         raise ValueError("Invalid capture resource bound.")
+    if args.recover_abandoned and not args.resume:
+        raise ValueError("Abandoned recovery requires --resume.")
     items = json.loads(args.inputs.read_text())
     validate_inputs(items)
     groups = json.loads(args.groups.read_text())
@@ -359,40 +394,41 @@ def main() -> None:
     selected = batches(items, groups, args.batch_size)
     args.output = args.output.resolve()
     manifest = {"split": args.split, "input_file_sha256": sha(args.inputs.read_bytes()), "group_file_sha256": sha(args.groups.read_bytes()), "items": len(items), "batches": len(selected), "batch_size": args.batch_size, "concurrency": args.concurrency, "maximum_one_item_per_source_group_per_request": True, "model_alias": MODEL, "reasoning_effort": EFFORT, "prompt_template_sha256": sha(PROMPT.encode()), "schema_content_sha256": sha(json.dumps(SCHEMA, ensure_ascii=False).encode()), "cli": args.cli}
-    if args.resume:
-        previous = json.loads((args.output / "manifest.json").read_text())
-        if any(previous.get(key) != value for key, value in manifest.items() if key != "concurrency"):
-            raise ValueError("Resume changes the declared partition, inputs or batching.")
-        manifest["resume_history"] = [*previous.get("resume_history", []), {"previous_status": previous.get("status"), "previous_concurrency": previous.get("concurrency"), "concurrency": args.concurrency, "resumed_unix": time.time()}]
-    else:
-        args.output.mkdir(parents=True, exist_ok=False)
-    manifest["status"] = "running"
-    write(args.output / "manifest.json", manifest)
-    receipts: list[dict[str, Any] | None] = [None] * len(selected)
-    try:
-        with ThreadPoolExecutor(max_workers=args.concurrency) as pool:
-            futures = {pool.submit(request_batch, batch, args.output, index, args.cli, args.timeout, args.resume): index for index, batch in enumerate(selected)}
-            try:
-                for future in as_completed(futures):
-                    receipts[futures[future]] = future.result()
-            except BaseException:
-                for pending in futures:
-                    pending.cancel()
-                raise
-        records = []
-        for receipt in receipts:
-            if receipt is None:
-                raise ValueError("A requested batch has no completion receipt.")
-            records.extend(json.loads((Path(receipt["directory"]) / "records.json").read_text()))
-        checked = checked_records(items, {"records": records})
-        write(args.output / "records.json", checked)
-        manifest.update(status="complete", receipts=receipts, records_sha256=sha((args.output / "records.json").read_bytes()))
+    with capture_lock(args.output.parent / f".{args.output.name}.capture.lock") as partition_lock_fd:
+        if args.resume:
+            previous = json.loads((args.output / "manifest.json").read_text())
+            if any(previous.get(key) != value for key, value in manifest.items() if key != "concurrency"):
+                raise ValueError("Resume changes the declared partition, inputs or batching.")
+            manifest["resume_history"] = [*previous.get("resume_history", []), {"previous_status": previous.get("status"), "previous_concurrency": previous.get("concurrency"), "concurrency": args.concurrency, "resumed_unix": time.time()}]
+        else:
+            args.output.mkdir(parents=True, exist_ok=False)
+        manifest["status"] = "running"
         write(args.output / "manifest.json", manifest)
-    except BaseException as exc:
-        manifest.update(status="failed", error=str(exc))
-        write(args.output / "manifest.json", manifest)
-        raise
-    print(json.dumps({"event": "capture_complete", "items": len(checked), "batches": len(selected)}, allow_nan=False), flush=True)
+        receipts: list[dict[str, Any] | None] = [None] * len(selected)
+        try:
+            with ThreadPoolExecutor(max_workers=args.concurrency) as pool:
+                futures = {pool.submit(request_batch, batch, args.output, index, args.cli, args.timeout, args.resume, args.recover_abandoned, partition_lock_fd): index for index, batch in enumerate(selected)}
+                try:
+                    for future in as_completed(futures):
+                        receipts[futures[future]] = future.result()
+                except BaseException:
+                    for pending in futures:
+                        pending.cancel()
+                    raise
+            records = []
+            for receipt in receipts:
+                if receipt is None:
+                    raise ValueError("A requested batch has no completion receipt.")
+                records.extend(json.loads((Path(receipt["directory"]) / "records.json").read_text()))
+            checked = checked_records(items, {"records": records})
+            write(args.output / "records.json", checked)
+            manifest.update(status="complete", receipts=receipts, records_sha256=sha((args.output / "records.json").read_bytes()))
+            write(args.output / "manifest.json", manifest)
+        except BaseException as exc:
+            manifest.update(status="failed", error=str(exc))
+            write(args.output / "manifest.json", manifest)
+            raise
+        print(json.dumps({"event": "capture_complete", "items": len(checked), "batches": len(selected)}, allow_nan=False), flush=True)
 
 
 if __name__ == "__main__":
