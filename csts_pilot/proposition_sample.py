@@ -42,7 +42,6 @@ from csts_pilot.evidence_controls import checked_cache
 from csts_pilot.proposition_capture import checked_records
 from jep_pilot.loaders import load_json, load_model
 
-
 AUDIT_FILES = {
     "source_sample": "proposition_blind_sample.json",
     "pair_mapping": "proposition_audit_pair_mapping.json",
