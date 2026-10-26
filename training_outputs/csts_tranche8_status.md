@@ -2,11 +2,13 @@
 
 **failed — capture_and_source_sample**. Updated Oct 26, 2026, 11:36 AM EDT.
 
-Full training/development generation: **2,880/17,334** accepted structural records; 2 preserved failed attempts. Capture: running. Provider latency has varied; no fixed ETA is asserted.
+Full training/development generation: **2,880/17,334** accepted structural records; 2 preserved failed attempts. Capture: stopped. The stopped batches contain provider request-rate errors; recovery is being prepared without changing generation settings.
 
 Source sample: complete. Adaptation: not_started. Held-out test: not_released.
 
-Runtime issue: The full capture stopped or failed; raw attempts and native checkpoints remain preserved. Active supervised work and raw failures are preserved. This is not a statistical result.
+Runtime issue: The full capture stopped or failed; raw attempts and native checkpoints remain preserved. Raw failures and completed records are preserved. This is not a statistical result.
+
+The read-only failure check at 4:00 PM EDT confirmed zero running batches and a failed capture supervisor. Both failed attempts include request-rate-limit error events; one also reached its 1,200-second timeout. No account-usage-cap or insufficient-quota phrase was detected. See [classified diagnostics](proposition_capture_failure_diagnostics_20261026.json). This wording is a diagnostic classification, not a guarantee of remaining account capacity.
 
 ## Frozen source-sample diagnostic
 
