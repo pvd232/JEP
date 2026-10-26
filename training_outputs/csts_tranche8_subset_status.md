@@ -38,11 +38,11 @@ This is a small development triage experiment. Native metrics and training progr
   "publication_counts": {
     "published": 11
   },
-  "free_bytes": 4857339904,
+  "free_bytes": 4857327616,
   "training": {
     "status": "running",
-    "current_epoch": 2,
-    "actual_updates": 20,
+    "current_epoch": 3,
+    "actual_updates": 25,
     "completed_epoch": 2,
     "selected": {
       "epoch": 2,
