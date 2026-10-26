@@ -1,0 +1,76 @@
+{
+  "publication_destination": {
+    "kind": "viper_cloud",
+    "owner": "pvd232",
+    "workspace": "jep_csts_joint_20261021"
+  },
+  "gpu_budget_seconds": 136800,
+  "bootstrap_draws": 2000,
+  "bootstrap_seed": 61024,
+  "arms": [
+    "ratings",
+    "evidence"
+  ],
+  "encoder": {
+    "model_id": "Qwen/Qwen3-Embedding-8B",
+    "revision": "c90816d848505624c2434128dfc61132162a0ee9",
+    "embedding_dimension": 4096,
+    "max_length": 160,
+    "encode_batch_size": 4,
+    "device": "cuda"
+  },
+  "max_answer_tokens": 64,
+  "head": {
+    "path": "qwen_data/qwen-evidence-head.safetensors",
+    "sha256": "a36df847ac68cb10d636cac54bdd99c1d1b6627e98aca62dd5716bb87e6fee4d",
+    "model_id": "Qwen/Qwen3-8B-Base",
+    "revision": "49e3418fbbbca6ecbdf9608b4d22e5a407081db4"
+  },
+  "answers": {
+    "path": "csts_data/teacher_answers.jsonl",
+    "sha256": "1dcd743762cfad9f42b78775510c526e3ce6dd0c51716caf4df3234442ac1c94"
+  },
+  "splits": {
+    "training": {
+      "path": "csts_data/train.json",
+      "rows": 6980,
+      "groups": 2674,
+      "sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01"
+    },
+    "validation": {
+      "path": "training_outputs/csts_development_model_audited_rows_20261026.json",
+      "rows": 1491,
+      "groups": 671,
+      "sha256": "076306732aca5a43a0643735a1d9bb17c3e466963b7ff21d5a154fbbab764829"
+    },
+    "test": {
+      "path": "csts_data/evaluation.json",
+      "rows": 2620,
+      "groups": 1241,
+      "sha256": "2c8b6f2b62740c85c376eacd02ef222c2bfacdfe8df5f772a4dd7d52b6d38f1e"
+    }
+  },
+  "training": {
+    "seed": 7,
+    "learning_rate": 2e-05,
+    "batch_size": 32,
+    "microbatch_size": 2,
+    "patience": 5,
+    "weight_decay": 0.01,
+    "schedule": "constant",
+    "warmup_fraction": 0,
+    "lora_rank": 32,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05
+  },
+  "phases": {
+    "pretrain": {
+      "max_epochs": 2,
+      "max_seconds": 7200
+    },
+    "ratings": {
+      "max_epochs": 24,
+      "max_seconds": 57600
+    }
+  }
+}
