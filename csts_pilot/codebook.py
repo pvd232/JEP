@@ -208,6 +208,8 @@ def spherical_kmeans(
 class PrototypeEncoder(nn.Module):
     """Project conditioned features and look up shared unit-vector prototypes."""
 
+    projection: nn.Module
+
     def __init__(self, input_dim: int, output_dim: int, codes: int) -> None:
         """Use the same projection initialization and zero-cost dictionary allocation."""
         super().__init__()

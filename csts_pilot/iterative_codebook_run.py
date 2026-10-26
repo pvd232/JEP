@@ -44,14 +44,16 @@ from csts_pilot.matched_baselines_run import stored_source
 from jep_pilot.loaders import load_json, load_model, load_state
 
 
-def fitting_stage(prepared: dict[str, Any], config: IterativeConfig) -> Any:
+def fitting_stage(
+    prepared: dict[str, Any], config: Any, trainer: Any = fit_iterative_codebooks
+) -> Any:
     """Reuse the existing native artifact bindings and canonical TRAIN outputs."""
     metrics = tuple(
         measure(metric)
         for metric in (training_objective, validation_mse, validation_spearman)
     )
     return stage(
-        fit_iterative_codebooks,
+        trainer,
         stage_id="train",
         config=config,
         inputs=tuple(
@@ -104,7 +106,13 @@ def replay_stage(
     )
 
 
-def run(root: Path, name: str, prepared_summary: Path, preflight: bool = False) -> None:
+def run(
+    root: Path,
+    name: str,
+    prepared_summary: Path,
+    preflight: bool = False,
+    residual: bool = False,
+) -> None:
     """Preserve each attempt and queue cloud publication after each local success."""
     root = root.resolve(strict=True)
     if (
@@ -120,7 +128,8 @@ def run(root: Path, name: str, prepared_summary: Path, preflight: bool = False) 
         raise ValueError(
             "Execution requires a clean reviewed Git checkout; commit the reviewed changes first."
         )
-    settings_path = root / "configs/csts-iterative-codebook.json"
+    family = "residual" if residual else "iterative"
+    settings_path = root / f"configs/csts-{family}-codebook.json"
     settings, prior = load_json(settings_path), load_json(prepared_summary)
     prepared, hashes, caches = {}, {}, {}
     for split in ("training", "validation"):
@@ -157,8 +166,18 @@ def run(root: Path, name: str, prepared_summary: Path, preflight: bool = False) 
         artifact_path(published, "publish", "holdout", "indices.json")
     ) != list(range(len(caches["validation"]["rows"]))):
         raise ValueError("Published development cohort differs from the sealed cache.")
-    config = IterativeConfig(**settings["training"], **hashes)
-    configured = fitting_stage(prepared, config)
+    config: Any
+    if residual:
+        from csts_pilot.residual_codebook import ResidualConfig, fit_residual_codebooks
+        from csts_pilot.residual_codebook_analysis import residual_replay_stage
+
+        config = ResidualConfig(**settings["training"], **hashes)
+        configured = fitting_stage(prepared, config, fit_residual_codebooks)
+        evaluate_stage = residual_replay_stage
+    else:
+        config = IterativeConfig(**settings["training"], **hashes)
+        configured = fitting_stage(prepared, config)
+        evaluate_stage = replay_stage
     source = read_source(root)
     summary: dict[str, Any] = {
         "status": "preflight_passed",
@@ -178,7 +197,7 @@ def run(root: Path, name: str, prepared_summary: Path, preflight: bool = False) 
         return
     if not isinstance(load_storage_settings(root).destination, LocalStorageDestination):
         raise TypeError("Seal locally before asynchronous cloud promotion.")
-    directory = root / "iterative_codebook_results" / name
+    directory = root / f"{family}_codebook_results" / name
     directory.mkdir(parents=True, exist_ok=False)
     summary_path = directory / "summary.json"
     summary.update(status="running", attempt=uuid.uuid4().hex[:8])
@@ -190,7 +209,7 @@ def run(root: Path, name: str, prepared_summary: Path, preflight: bool = False) 
 
     def execute(label: str, configured: Any, timeout: int) -> dict[str, Any]:
         trial = experiment(
-            experiment_id=f"csts_iterative_{source.commit[:8]}_{summary['attempt']}_{label}",
+            experiment_id=f"csts_{family}_{source.commit[:8]}_{summary['attempt']}_{label}",
             variants=(
                 variant(
                     label,
@@ -248,7 +267,7 @@ def run(root: Path, name: str, prepared_summary: Path, preflight: bool = False) 
         summary["model_sha256"] = models_sha
         evaluated = execute(
             "evaluate_validation",
-            replay_stage(
+            evaluate_stage(
                 prepared,
                 trained,
                 published,
@@ -276,14 +295,16 @@ def main() -> None:
     parser.add_argument("--name", default="initial")
     parser.add_argument("--prepared-summary", type=Path, required=True)
     parser.add_argument("--preflight", action="store_true")
+    parser.add_argument("--residual", action="store_true")
     args = parser.parse_args()
     if Path(args.name).name != args.name or args.name in {"", ".", ".."}:
         raise ValueError("Attempt name must be a single directory component.")
-    directory = args.root / "iterative_codebook_results"
+    family = "residual" if args.residual else "iterative"
+    directory = args.root / f"{family}_codebook_results"
     directory.mkdir(exist_ok=True)
     with (directory / "launch.lock").open("a+") as stream:
         fcntl.flock(stream, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        run(args.root, args.name, args.prepared_summary, args.preflight)
+        run(args.root, args.name, args.prepared_summary, args.preflight, args.residual)
 
 
 if __name__ == "__main__":
