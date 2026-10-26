@@ -1,3 +1,19 @@
+# Final overnight outcome — 26 October 2026
+
+**Experiments stopped; retain saved Qwen.** All six trained alternatives missed the fixed validation gate. No new candidate test extraction or evaluation ran. No active experiment controller or CUDA compute process remained at final verification.
+
+Attention ratings-only validation Spearman: **0.710713**. Ratings plus span CE: **0.598905**. Saved Qwen: **0.782575**. Post-selection development-span attention mass increased from **9.52% to 75.54%** with evidence training, while similarity worsened.
+
+The native attention selection stage remains failed: one ratings-head row exceeded its GPU–CPU replay tolerance (max difference 3.772974e−5). The separate CPU replay verified identities and independently reproduced the negative outcome. No tolerance was widened or failure relabeled.
+
+[Final report, caveats and concrete JEP research direction](csts_overnight_final_report.md) · [Native runs and CPU diagnostics](csts_tranche6_closeout.json) · [Correction-head result](csts_tranche5_verified_result.md).
+
+All eight successful Tranche 5 runs and four successful Tranche 6 runs are cloud-published. Original artifacts, failed attempts and immutable-store references are preserved. The live publisher has stopped. Further GPU work requires a new reviewed plan.
+
+---
+
+The final live snapshot below is preserved as execution history; its failed native stage is not an active job.
+
 # JEP overnight experiments — live status
 
 Published: **2026-10-26 08:35 UTC**.
