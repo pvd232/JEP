@@ -1,6 +1,6 @@
 # JEP overnight experiments — live status
 
-Published: **2026-10-26 06:05 UTC**.
+Published: **2026-10-26 06:06 UTC**.
 
 | Comparator | Validation Spearman | Existing-test Spearman |
 |---|---:|---:|
@@ -17,13 +17,45 @@ Controller: `/home/machina/jep-csts-matched-baselines-20261026/matched_baseline_
 
 Source: `faa0ae537feea2333b5c245c9b23e0829729441c`.
 
-Current native stage: `{'name': 'train_case', 'experiment_id': 'csts_matched_faa0ae53_c98e7a60_train_case'}`.
+Current native stage: `{'name': 'freeze_selection', 'experiment_id': 'csts_matched_faa0ae53_c98e7a60_freeze_selection'}`.
 
 | Arm | Validation Spearman | Validation MSE | Epoch | State |
 |---|---:|---:|---:|---|
 | same_passage | 0.763242 | 0.045916 | 8 | selected checkpoint |
 | population | 0.769697 | 0.049334 | 0 | selected checkpoint |
 | projection | 0.770358 | 0.048931 | 0 | selected checkpoint |
+| case | 0.695586 | 0.056846 | 19 | selected checkpoint |
+
+Frozen validation decision:
+
+```json
+{
+  "event": "validation_selection",
+  "selected_arm": null,
+  "eligibility": {
+    "same_passage": {
+      "eligible": false
+    },
+    "population": {
+      "eligible": false
+    },
+    "projection": {
+      "eligible": false
+    },
+    "case": {
+      "eligible": false
+    }
+  },
+  "thresholds": {
+    "native_direct": 0.5334962606430054,
+    "same_passage": 0.6072174906730652,
+    "population": 0.6161432862281799,
+    "projection": 0.6177546977996826,
+    "case": 0.6212596893310547
+  },
+  "test_scores_used_for_selection": false
+}
+```
 
 Extraction `validation/bank_820/917`: **16/16** occurrences; 746 seconds elapsed.
 
