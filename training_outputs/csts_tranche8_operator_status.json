@@ -1,9 +1,73 @@
 {
-  "updated_at": "2026-10-26T20:18:43.829541+00:00",
-  "worker_status": "running",
+  "updated_at": "2026-10-26T20:19:03.471743+00:00",
+  "worker_status": "waiting",
   "action_id": "proposition_subset_checks_clean_20261026a",
   "source_commit": "0adbead277c450b920b8ca837a7195420dca447d",
   "operator_sha256": "12ff5d29b032b354e6fee48493a42691e0d96729774397046e4296918492f8b6",
-  "status": "launching",
-  "returncode": null
+  "status": "completed",
+  "returncode": 0,
+  "result": {
+    "phase": "native_checks",
+    "status": "complete",
+    "source_commit": "0314b6ccda11c4eb929754a9d4837f98946fd42c",
+    "checks": [
+      {
+        "check": "ruff check",
+        "returncode": 0
+      },
+      {
+        "check": "pyrefly",
+        "returncode": 0
+      },
+      {
+        "check": "pytest",
+        "returncode": 0
+      },
+      {
+        "check": "owner_environment_preflight",
+        "returncode": 0
+      }
+    ],
+    "formatted_files": [],
+    "verification": {
+      "source_commit": "0314b6ccda11c4eb929754a9d4837f98946fd42c",
+      "checks": [
+        {
+          "check": "ruff check",
+          "returncode": 0
+        },
+        {
+          "check": "pyrefly",
+          "returncode": 0
+        },
+        {
+          "check": "pytest",
+          "returncode": 0
+        },
+        {
+          "check": "owner_environment_preflight",
+          "returncode": 0
+        }
+      ],
+      "passed": true,
+      "source_clean": true,
+      "owned_source_sha256": {
+        "csts_pilot/proposition_capture.py": "8563b6af607136adf97d569d89b90eda124598e92d01dcc7bc6f3bc9d56fc821",
+        "csts_pilot/proposition_inputs.py": "628648c9ec6d8ac39b76b4cff30215a5e9ce588a489086cd21dfd851a812c8f0",
+        "csts_pilot/proposition_lora.py": "31a3aa21e4426735b63d904eae6cf8a519fa318907530f69079aef2a6c723d9c",
+        "csts_pilot/proposition_run.py": "5b72a9cff216dc82c330c76e74c218e528dde3f6ad3b56144bd655b371a36eac",
+        "csts_pilot/proposition_test.py": "d959ff6939ff5a2ce54d61cac70c9896a70d33e3544ad21b9dd29c82ac426c77",
+        "csts_pilot/proposition_sample.py": "cbb06e82daf9486b2a1ad90a8937ac338ee33a6b04c7f8d687d06ceb9d94ba88",
+        "csts_pilot/proposition_archive.py": "40c930f9ca076a455165682e473ba9fd857d76b7ebc467b81c6f42c461ef6c62",
+        "tests/test_csts_proposition_capture.py": "3e4f0d3901829652ccc206c3d9af44079df7c894cac0894da220792642323f38",
+        "tests/test_csts_proposition_inputs.py": "0dfcfea95a3b0c4e71e64853cbd2fa6d351a9ea62114cf7330fa535075357dfe",
+        "tests/test_csts_proposition_lora.py": "d6f0f34e66fd5181cb961248c898861db9cc99c8e518deed425dbf9ec212ffbc",
+        "tests/test_csts_proposition_test.py": "d02659c5b5582271216ffa23f9c8a4911e31fa603043002ad49999a506e929db",
+        "tests/test_csts_proposition_sample.py": "eb1981453a00125f8b7c9e753c91299a425df598573768a1077eeb346cdfbd31",
+        "tests/test_csts_proposition_archive.py": "bf5aa62d2a5af2b60721bb0b59b0a276b9207426200b84fa60157cebaed417df",
+        "csts_pilot/proposition_subset.py": "7ed3d27df7f9b11170510fc84f9abbe6f2bef7330f9d90489d4a1ddbf22df797",
+        "tests/test_csts_proposition_subset.py": "c810f2dc82424257d277c7223996449fb3aad7493e0c11fef18a76279b29287d"
+      }
+    }
+  }
 }
