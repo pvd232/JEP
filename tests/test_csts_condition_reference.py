@@ -143,10 +143,10 @@ def test_native_evaluation_declares_its_objective():
         eval_id="condition_reference_check",
         config=AnalysisConfig(rows_sha256="0" * 64, split="validation"),
         inputs=(
-            input("rows", path="csts_data/dev.json", data_role="eval"),
             input("test", path="csts_data/dev.json", data_role="eval"),
+            input("holdout", path="csts_data/dev_indices.json", data_role="eval"),
         ),
-        split_inputs=("rows",),
+        split_inputs=("holdout",),
         outputs=EvalOutputs(
             predictions=output(
                 path="predictions.json", loader=load_json, data_role="eval"

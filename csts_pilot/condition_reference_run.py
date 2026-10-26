@@ -265,12 +265,6 @@ def run(root: Path, name: str, reuse_extraction: Path | None = None) -> None:
                             "model", source=artifact_source(parent, "train", "model")
                         ),
                         input(
-                            "rows",
-                            source=artifact_source(
-                                published, "publish", "test", "eval"
-                            ),
-                        ),
-                        input(
                             "test",
                             source=artifact_source(
                                 published, "publish", "test", "eval"
