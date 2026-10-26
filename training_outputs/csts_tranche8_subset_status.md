@@ -17,10 +17,7 @@ This is a small development triage experiment. Native metrics and training progr
   "native_pid": 93846,
   "summary": {
     "status": "running",
-    "in_flight": {
-      "name": "epoch_zero",
-      "experiment_id": "csts_subset_0314b6cc_9c518b6d_epoch_zero"
-    },
+    "in_flight": null,
     "source_commit": "0314b6ccda11c4eb929754a9d4837f98946fd42c"
   },
   "runs": [
@@ -28,12 +25,18 @@ This is a small development triage experiment. Native metrics and training progr
       "name": "prepare",
       "status": "succeeded",
       "seconds": 35.566704258002574
+    },
+    {
+      "name": "epoch_zero",
+      "status": "succeeded",
+      "seconds": 134.0579491679964
     }
   ],
   "publication_counts": {
-    "published": 8
+    "published": 8,
+    "uploading": 1
   },
-  "free_bytes": 5169917952,
+  "free_bytes": 5169500160,
   "result": {},
   "preparation": {
     "coverage": {
