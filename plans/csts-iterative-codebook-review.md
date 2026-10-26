@@ -1,0 +1,53 @@
+# Iterative codebook experiment code review
+
+Review date: 26 October 2026. Base commit: `065951a9038d1f212afb95408632c62cc9402160`. Branch: `experiment/csts-iterative-codebook-20261026`.
+
+The implementation owner and the independent `runtime_validation` agent reviewed the complete changed scope below against the base. The independent reviewer read the code and method and reran the CPU observers. Final disposition: **no remaining actionable blockers in this snapshot**. This is approval of the draft experiment implementation for user review. Research execution remains pending user review.
+
+## Exact reviewed scope
+
+SHA-256 identifies the full final contents, including new files that are not represented by a tracked-file-only `git diff`. This review record is excluded from its own hash scope and receives a separate prose accuracy check.
+
+| File | SHA-256 |
+|---|---|
+| `.gitignore` | `97a63d992d514d4f1bea16d9291c6f2c75ec1340f2aecb9e40af46fc950b8837` |
+| `csts_pilot/iterative_codebook.py` | `aadb4eb0e11bfca96d5ac2a6e60dc111bd8770d9eb24e727a7479426722668dd` |
+| `csts_pilot/iterative_codebook_analysis.py` | `d405976e290e8072092257a0aa0d9b13924f7b0586cf0bf8ab44cd365878728c` |
+| `csts_pilot/iterative_codebook_run.py` | `a90853512de6844fdf5ab43d618cb35ff56570515a2b5ef0b1fe8f70ad30c71b` |
+| `configs/csts-iterative-codebook.json` | `4742af0cc72dd38ff165e2da7c9b49ecc613d7028e49c0149085bb6dec678487` |
+| `plans/csts-iterative-codebook.md` | `0b0304e93598378dca5d0726be502e57043a936f2b9b439e898668f8b6e6d499` |
+| `tests/test_csts_iterative_codebook.py` | `9221f39123dbb9e866102a35166b1b2297ca7b847bc6e002420078136fef09e3` |
+
+## Findings and verified repairs
+
+| Severity | Finding and counterexample | Repair and observer |
+|---|---|---|
+| Medium | The first metric-step scheme was arm-major while execution was epoch-major, yielding steps such as 1, 50, 2. | Use seed/epoch/arm ordering. The native-stage fixture requires every metric's recorded steps to be unique and increasing. |
+| Medium | The initial controller had TRAIN only and exposed selected metrics without the declared paired aggregate or independent native EVAL. | Add canonical native development EVAL using the existing published development rows and `evaluation_inputs`. Independently replay sealed selected models, export predictions and report each seed gain, mean gain and sample standard deviation. The native artifact metric recomputes the mean from predictions. Tests construct the full native EVAL plan with reserved bindings, split inputs and artifact dependency and compare the metric against independently computed SciPy correlations. |
+| Medium | Checking the deadline only before batches allowed final updates, validation or diagnostics to overrun and return success. | Start the pair timer before initialization, check after each epoch and before returning after diagnostics. A deterministic fake-clock fixture makes final diagnostics cross the deadline and requires failure. |
+| Low | The first native output assertion treated `StageOutputs` iteration as names; iteration exposes name/value pairs containing unhashable output references. | Assert `configured.outputs.keys()`. The fixture now observes canonical `model`, `resume_state` and `trace` outputs without hashing reference objects. |
+
+The reviewer also verified the train-only teacher call path, first-unique-key clustering and occurrence-label broadcast, terminal projection refresh, label-permutation handling, matched classifier/AdamW resets, identical masks/batches and exact pre-refresh states, shared patience five, epoch-zero eligibility, source-group isolation, selected-state cloning, cache/model byte gates, replay mismatch rejection, and treatment of rare/unused numeric codes. A constructed projection-change fixture changes the actual target partition; it does not merely observe a refresh function call.
+
+## Validation performed
+
+The derived local CPU fixture environment uses Torch 2.14.0, SciPy 1.18.1, Pydantic 2.13.5, Transformers 5.19.0, PEFT 0.21.2, Accelerate 1.15.0 and the locally installed VIPER development package. This is not evidence of execution in the pinned remote CUDA training runtime.
+
+From the branch checkout, the implementation owner ran:
+
+```bash
+PY=/Users/machina/.codex/.chatgpt-projects/g-p-6ad6fb9258ac8191b4baa874735994e2/work/csts-codebook-test-env-20261026/bin/python
+TOOLS=/Users/machina/Developer/ChatGPT/viper/.venv/bin
+"$PY" -m pytest -q tests/test_csts_iterative_codebook.py tests/test_csts_codebook.py
+"$TOOLS/ruff" check csts_pilot/iterative_codebook.py csts_pilot/iterative_codebook_analysis.py csts_pilot/iterative_codebook_run.py tests/test_csts_iterative_codebook.py
+"$TOOLS/ruff" format --check csts_pilot/iterative_codebook.py csts_pilot/iterative_codebook_analysis.py csts_pilot/iterative_codebook_run.py tests/test_csts_iterative_codebook.py
+"$TOOLS/pyrefly" check --preset default --python-interpreter-path "$PY" --ignore-missing-imports='*' csts_pilot/iterative_codebook.py csts_pilot/iterative_codebook_analysis.py csts_pilot/iterative_codebook_run.py
+```
+
+Results: **23 tests passed**, Ruff checks and formatting passed, Pyrefly reported zero errors. Pyrefly's remaining warning concerns missing SciPy type stubs. The independent reviewer reran the same new and original codebook suites: **23 passed**, with Ruff and Pyrefly also clean under the stated scope. The fixtures directly execute the native stage functions with synthetic caches and construct a native experiment/plan; they do not execute a sealed native research run.
+
+## Scientific and execution limits
+
+The method is a masked-feature self-supervised adaptation with training ratings. It provides no expert corrections, temporal speech task, claim ontology or JEP semantic validity evidence. All validation is unmasked; both arms share exposure and checkpoint-selection opportunities. The treatment includes repeated clustering overhead, so equal FLOPs are not claimed. Validation selects checkpoints and cannot establish fresh-test improvement.
+
+No research experiment, full native launch, backbone inference, GPU job, paid generation or benchmark test evaluation ran for this PR. The controller still requires accessible prior immutable native artifacts in an owner runtime and user review before the proposed experiment launch. Existing experiment implementations are unchanged.
