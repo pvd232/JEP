@@ -1,0 +1,4710 @@
+{
+  "summary": {
+    "status": "complete",
+    "source_commit": "7fca57e9741702e6484b5ffc133642f18b40e4dd",
+    "attempt": "0f3c54f0",
+    "model_sha256": "8805f9a7241e4e19ffc481341ebad6f1ddb6dd6ff04bbf710f9f0896469e34ff",
+    "runs": [
+      {
+        "name": "publish_validation",
+        "status": "succeeded",
+        "path": "/home/machina/jep-csts-qwen-evidence-20261024/experiments/csts_condition_ref_7fca57e9_0f3c54f0_publish_validation/runs/publish_validation/01M5V6DZYB74B5RNX0W7KP20KM/resolved.yaml",
+        "reference": {
+          "sha256": "4363102128bb66bf628609f85bcf492f3343c20551c5f1e06a0a010b2727442d",
+          "bytes": 1110,
+          "stored_at": {
+            "kind": "local",
+            "workspace": "/home/machina/jep-csts-qwen-evidence-20261024",
+            "store": ".viper/store",
+            "store_id": "5ebda34ae84fd535d08bd2db4f34a218",
+            "commit": "0b1c57cb9693a95b08423435728a0db22569b4b8432f3d8ab27bd1637bcd6071",
+            "path": "experiments/csts_condition_ref_7fca57e9_0f3c54f0_publish_validation/runs/publish_validation/01M5V6DZYB74B5RNX0W7KP20KM/resolved.yaml"
+          },
+          "kind": "resolved_run"
+        },
+        "seconds": 18.495916199986823,
+        "publication_queue": "/home/machina/jep-csts-qwen-evidence-20261024/.viper/publication_queue/fe16a7911cf95e0fccab67b890bfb8fb832383307edbfe52992e83bd792a810d.json"
+      },
+      {
+        "name": "analyze_validation",
+        "status": "succeeded",
+        "path": "/home/machina/jep-csts-qwen-evidence-20261024/experiments/csts_condition_ref_7fca57e9_0f3c54f0_analyze_validation/runs/analyze_validation/01M5V6EJ0S6GCNNBJYKG4MN1MZ/resolved.yaml",
+        "reference": {
+          "sha256": "b0a4ae87428e7d0249f7517a401f80ff31eb60c27993cd83cdabae2612297a8f",
+          "bytes": 1110,
+          "stored_at": {
+            "kind": "local",
+            "workspace": "/home/machina/jep-csts-qwen-evidence-20261024",
+            "store": ".viper/store",
+            "store_id": "5ebda34ae84fd535d08bd2db4f34a218",
+            "commit": "cb98cacb1fb588a9375212d206be1f6d10038285700aedb0ecc4e93bf2b4c735",
+            "path": "experiments/csts_condition_ref_7fca57e9_0f3c54f0_analyze_validation/runs/analyze_validation/01M5V6EJ0S6GCNNBJYKG4MN1MZ/resolved.yaml"
+          },
+          "kind": "resolved_run"
+        },
+        "seconds": 89.22902882201015,
+        "publication_queue": "/home/machina/jep-csts-qwen-evidence-20261024/.viper/publication_queue/fb3618f9b8882df9b6e2ac38d93487139d8085ae7c7c26bb81a4582ea39a32eb.json"
+      }
+    ],
+    "optimizer_updates": 0,
+    "plan_sha256": "3eaf1b31528f7af61fd30efaefd8c20d5810df46e5d4008c99fc203898a19520",
+    "events_path": "/home/machina/jep-csts-qwen-evidence-20261024/condition_reference_results/final_eval/events.jsonl",
+    "current_stage": null,
+    "reused_validation_extraction": {
+      "name": "extract_validation",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-qwen-evidence-20261024/experiments/csts_condition_ref_c7f5bf04_78dd3cc3_extract_validation/runs/extract_validation/01M5V5T2FBC5TY5QS7JM7T00YR/resolved.yaml",
+      "reference": {
+        "sha256": "a454b6a08bcc088814d9118fd0317c2b6f9d23fcbe87363f2d7eb45fc92377e9",
+        "bytes": 1110,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-qwen-evidence-20261024",
+          "store": ".viper/store",
+          "store_id": "5ebda34ae84fd535d08bd2db4f34a218",
+          "commit": "5fe51651924fa57ae8a24c4efead8bede241016c85a304e7089933c2c0ea24d7",
+          "path": "experiments/csts_condition_ref_c7f5bf04_78dd3cc3_extract_validation/runs/extract_validation/01M5V5T2FBC5TY5QS7JM7T00YR/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "seconds": 237.4088576210197,
+      "publication_queue": "/home/machina/jep-csts-qwen-evidence-20261024/.viper/publication_queue/528a0244840c07169c8e446dc83caf79a7eacbfd15e9d1336d0f9edf59401f95.json"
+    },
+    "validation": {
+      "split": "validation",
+      "metrics": {
+        "A": {
+          "n": 1830,
+          "mse_0_1": 0.03457366126356839,
+          "mse_1_5": 0.5531785802170942,
+          "spearman": 0.7825746597420997,
+          "prediction_mean": 0.5577536070958553,
+          "target_mean": 0.5542349726775956,
+          "prediction_std": 0.23948317401634267,
+          "target_std": 0.30337777758989165,
+          "mean_prediction_by_rating": {
+            "1.0": {
+              "n": 181,
+              "mean": 0.25173481262047154
+            },
+            "2.0": {
+              "n": 304,
+              "mean": 0.3927766507197368
+            },
+            "3.0": {
+              "n": 627,
+              "mean": 0.48001047715164447
+            },
+            "4.0": {
+              "n": 373,
+              "mean": 0.6897439214403444
+            },
+            "5.0": {
+              "n": 345,
+              "mean": 0.8622607136550157
+            }
+          },
+          "condition_changes": {
+            "n": 721,
+            "correct": 650,
+            "ties": 0,
+            "accuracy_ties_half": 0.9015256588072122,
+            "difference_mse": 0.0686715301604327,
+            "unit": "Within-pair comparisons. These reuse captions and are dependent."
+          },
+          "operating_point": {
+            "cutoff": 0.5334962010383606,
+            "tp": 647,
+            "fn": 71,
+            "fp": 47,
+            "tn": 438,
+            "recall": 0.9011142061281338,
+            "false_negative_rate": 0.0988857938718663,
+            "false_positive_rate": 0.09690721649484536,
+            "excluded_middle_rating": 627
+          },
+          "descriptive_cutoffs": {
+            "0.5": {
+              "cutoff": 0.5,
+              "tp": 663,
+              "fn": 55,
+              "fp": 65,
+              "tn": 420,
+              "recall": 0.9233983286908078,
+              "false_negative_rate": 0.0766016713091922,
+              "false_positive_rate": 0.13402061855670103,
+              "excluded_middle_rating": 627
+            },
+            "0.75": {
+              "cutoff": 0.75,
+              "tp": 439,
+              "fn": 279,
+              "fp": 1,
+              "tn": 484,
+              "recall": 0.6114206128133705,
+              "false_negative_rate": 0.38857938718662954,
+              "false_positive_rate": 0.002061855670103093,
+              "excluded_middle_rating": 627
+            }
+          },
+          "errors_by_rating": {
+            "1.0": {
+              "n": 181,
+              "signed_error": 0.25173481262047154,
+              "mse": 0.09224169818770202
+            },
+            "2.0": {
+              "n": 304,
+              "signed_error": 0.14277665071973675,
+              "mse": 0.03096886260871879
+            },
+            "3.0": {
+              "n": 627,
+              "signed_error": -0.019989522848355524,
+              "mse": 0.023868293624859923
+            },
+            "4.0": {
+              "n": 373,
+              "signed_error": -0.060256078559655604,
+              "mse": 0.028867965396523153
+            },
+            "5.0": {
+              "n": 345,
+              "signed_error": -0.1377392863449843,
+              "mse": 0.03311984728004425
+            }
+          }
+        },
+        "B_u": {
+          "n": 1830,
+          "mse_0_1": 0.05236473708977168,
+          "mse_1_5": 0.8378357934363468,
+          "spearman": 0.6965749322877287,
+          "prediction_mean": 0.6284288102730375,
+          "target_mean": 0.5542349726775956,
+          "prediction_std": 0.19402395162300382,
+          "target_std": 0.30337777758989165,
+          "mean_prediction_by_rating": {
+            "1.0": {
+              "n": 181,
+              "mean": 0.4800363986531674
+            },
+            "2.0": {
+              "n": 304,
+              "mean": 0.4933773926214168
+            },
+            "3.0": {
+              "n": 627,
+              "mean": 0.5453538626575014
+            },
+            "4.0": {
+              "n": 373,
+              "mean": 0.7132692720950768
+            },
+            "5.0": {
+              "n": 345,
+              "mean": 0.8845365127791529
+            }
+          },
+          "condition_changes": {
+            "n": 721,
+            "correct": 615,
+            "ties": 0,
+            "accuracy_ties_half": 0.8529819694868238,
+            "difference_mse": 0.1106552364366129,
+            "unit": "Within-pair comparisons. These reuse captions and are dependent."
+          },
+          "operating_point": {
+            "cutoff": 0.5624762773513794,
+            "tp": 647,
+            "fn": 71,
+            "fp": 106,
+            "tn": 379,
+            "recall": 0.9011142061281338,
+            "false_negative_rate": 0.0988857938718663,
+            "false_positive_rate": 0.21855670103092784,
+            "excluded_middle_rating": 627
+          },
+          "descriptive_cutoffs": {
+            "0.5": {
+              "cutoff": 0.5,
+              "tp": 674,
+              "fn": 44,
+              "fp": 196,
+              "tn": 289,
+              "recall": 0.9387186629526463,
+              "false_negative_rate": 0.06128133704735376,
+              "false_positive_rate": 0.4041237113402062,
+              "excluded_middle_rating": 627
+            },
+            "0.75": {
+              "cutoff": 0.75,
+              "tp": 477,
+              "fn": 241,
+              "fp": 8,
+              "tn": 477,
+              "recall": 0.6643454038997214,
+              "false_negative_rate": 0.33565459610027853,
+              "false_positive_rate": 0.016494845360824743,
+              "excluded_middle_rating": 627
+            }
+          },
+          "errors_by_rating": {
+            "1.0": {
+              "n": 181,
+              "signed_error": 0.4800363986531674,
+              "mse": 0.24191363008121053
+            },
+            "2.0": {
+              "n": 304,
+              "signed_error": 0.2433773926214168,
+              "mse": 0.06988399602364423
+            },
+            "3.0": {
+              "n": 627,
+              "signed_error": 0.04535386265750137,
+              "mse": 0.020451649302174312
+            },
+            "4.0": {
+              "n": 373,
+              "signed_error": -0.03673072790492316,
+              "mse": 0.025878044601009502
+            },
+            "5.0": {
+              "n": 345,
+              "signed_error": -0.1154634872208471,
+              "mse": 0.024117890694943158
+            }
+          }
+        },
+        "B_r": {
+          "n": 1830,
+          "mse_0_1": 0.053370763993642566,
+          "mse_1_5": 0.853932223898281,
+          "spearman": 0.6895612879488111,
+          "prediction_mean": 0.6287109061994188,
+          "target_mean": 0.5542349726775956,
+          "prediction_std": 0.19902312131272146,
+          "target_std": 0.30337777758989165,
+          "mean_prediction_by_rating": {
+            "1.0": {
+              "n": 181,
+              "mean": 0.48881342529591937
+            },
+            "2.0": {
+              "n": 304,
+              "mean": 0.48749815868703944
+            },
+            "3.0": {
+              "n": 627,
+              "mean": 0.5420261101954672
+            },
+            "4.0": {
+              "n": 373,
+              "mean": 0.7144429152357035
+            },
+            "5.0": {
+              "n": 345,
+              "mean": 0.8913875642030136
+            }
+          },
+          "condition_changes": {
+            "n": 721,
+            "correct": 616,
+            "ties": 0,
+            "accuracy_ties_half": 0.8543689320388349,
+            "difference_mse": 0.1100951629713371,
+            "unit": "Within-pair comparisons. These reuse captions and are dependent."
+          },
+          "operating_point": {
+            "cutoff": 0.5648148059844971,
+            "tp": 647,
+            "fn": 71,
+            "fp": 97,
+            "tn": 388,
+            "recall": 0.9011142061281338,
+            "false_negative_rate": 0.0988857938718663,
+            "false_positive_rate": 0.2,
+            "excluded_middle_rating": 627
+          },
+          "descriptive_cutoffs": {
+            "0.5": {
+              "cutoff": 0.5,
+              "tp": 672,
+              "fn": 46,
+              "fp": 206,
+              "tn": 279,
+              "recall": 0.935933147632312,
+              "false_negative_rate": 0.06406685236768803,
+              "false_positive_rate": 0.4247422680412371,
+              "excluded_middle_rating": 627
+            },
+            "0.75": {
+              "cutoff": 0.75,
+              "tp": 481,
+              "fn": 237,
+              "fp": 10,
+              "tn": 475,
+              "recall": 0.66991643454039,
+              "false_negative_rate": 0.33008356545961004,
+              "false_positive_rate": 0.020618556701030927,
+              "excluded_middle_rating": 627
+            }
+          },
+          "errors_by_rating": {
+            "1.0": {
+              "n": 181,
+              "signed_error": 0.48881342529591937,
+              "mse": 0.25016403059680326
+            },
+            "2.0": {
+              "n": 304,
+              "signed_error": 0.2374981586870394,
+              "mse": 0.06848661037587905
+            },
+            "3.0": {
+              "n": 627,
+              "signed_error": 0.042026110195467155,
+              "mse": 0.021752788314156196
+            },
+            "4.0": {
+              "n": 373,
+              "signed_error": -0.035557084764296504,
+              "mse": 0.02769573619947214
+            },
+            "5.0": {
+              "n": 345,
+              "signed_error": -0.10861243579698646,
+              "mse": 0.022027162726661505
+            }
+          }
+        },
+        "C_u": {
+          "n": 1830,
+          "mse_0_1": 0.08444815172707833,
+          "mse_1_5": 1.3511704276332532,
+          "spearman": 0.7797087232808846,
+          "prediction_mean": 0.7498214553614132,
+          "target_mean": 0.5542349726775956,
+          "prediction_std": 0.1332984566212393,
+          "target_std": 0.30337777758989165,
+          "mean_prediction_by_rating": {
+            "1.0": {
+              "n": 181,
+              "mean": 0.5939897952488115
+            },
+            "2.0": {
+              "n": 304,
+              "mean": 0.6522763249905486
+            },
+            "3.0": {
+              "n": 627,
+              "mean": 0.7033931514578002
+            },
+            "4.0": {
+              "n": 373,
+              "mean": 0.8226973684479659
+            },
+            "5.0": {
+              "n": 345,
+              "mean": 0.923117342548094
+            }
+          },
+          "condition_changes": {
+            "n": 721,
+            "correct": 653,
+            "ties": 0,
+            "accuracy_ties_half": 0.9056865464632455,
+            "difference_mse": 0.12140568407376735,
+            "unit": "Within-pair comparisons. These reuse captions and are dependent."
+          },
+          "operating_point": {
+            "cutoff": 0.7341499924659729,
+            "tp": 647,
+            "fn": 71,
+            "fp": 47,
+            "tn": 438,
+            "recall": 0.9011142061281338,
+            "false_negative_rate": 0.0988857938718663,
+            "false_positive_rate": 0.09690721649484536,
+            "excluded_middle_rating": 627
+          },
+          "descriptive_cutoffs": {
+            "0.5": {
+              "cutoff": 0.5,
+              "tp": 718,
+              "fn": 0,
+              "fp": 476,
+              "tn": 9,
+              "recall": 1.0,
+              "false_negative_rate": 0.0,
+              "false_positive_rate": 0.9814432989690721,
+              "excluded_middle_rating": 627
+            },
+            "0.75": {
+              "cutoff": 0.75,
+              "tp": 627,
+              "fn": 91,
+              "fp": 32,
+              "tn": 453,
+              "recall": 0.8732590529247911,
+              "false_negative_rate": 0.12674094707520892,
+              "false_positive_rate": 0.06597938144329897,
+              "excluded_middle_rating": 627
+            }
+          },
+          "errors_by_rating": {
+            "1.0": {
+              "n": 181,
+              "signed_error": 0.5939897952488115,
+              "mse": 0.3605202305787916
+            },
+            "2.0": {
+              "n": 304,
+              "signed_error": 0.4022763249905486,
+              "mse": 0.16526067959381102
+            },
+            "3.0": {
+              "n": 627,
+              "signed_error": 0.20339315145780024,
+              "mse": 0.04855780038148111
+            },
+            "4.0": {
+              "n": 373,
+              "signed_error": 0.07269736844796597,
+              "mse": 0.013509839781876972
+            },
+            "5.0": {
+              "n": 345,
+              "signed_error": -0.07688265745190606,
+              "mse": 0.01032405290273826
+            }
+          }
+        },
+        "C_r": {
+          "n": 1830,
+          "mse_0_1": 0.10909928437319658,
+          "mse_1_5": 1.7455885499711452,
+          "spearman": 0.7669869896892558,
+          "prediction_mean": 0.7931717545282645,
+          "target_mean": 0.5542349726775956,
+          "prediction_std": 0.11265739734681736,
+          "target_std": 0.30337777758989165,
+          "mean_prediction_by_rating": {
+            "1.0": {
+              "n": 181,
+              "mean": 0.6781670599352589
+            },
+            "2.0": {
+              "n": 304,
+              "mean": 0.706586675032189
+            },
+            "3.0": {
+              "n": 627,
+              "mean": 0.7503258107761828
+            },
+            "4.0": {
+              "n": 373,
+              "mean": 0.8548285095046098
+            },
+            "5.0": {
+              "n": 345,
+              "mean": 0.9410098734109298
+            }
+          },
+          "condition_changes": {
+            "n": 721,
+            "correct": 652,
+            "ties": 0,
+            "accuracy_ties_half": 0.9042995839112344,
+            "difference_mse": 0.1418711473366744,
+            "unit": "Within-pair comparisons. These reuse captions and are dependent."
+          },
+          "operating_point": {
+            "cutoff": 0.7733751535415649,
+            "tp": 647,
+            "fn": 71,
+            "fp": 53,
+            "tn": 432,
+            "recall": 0.9011142061281338,
+            "false_negative_rate": 0.0988857938718663,
+            "false_positive_rate": 0.10927835051546392,
+            "excluded_middle_rating": 627
+          },
+          "descriptive_cutoffs": {
+            "0.5": {
+              "cutoff": 0.5,
+              "tp": 718,
+              "fn": 0,
+              "fp": 485,
+              "tn": 0,
+              "recall": 1.0,
+              "false_negative_rate": 0.0,
+              "false_positive_rate": 1.0,
+              "excluded_middle_rating": 627
+            },
+            "0.75": {
+              "cutoff": 0.75,
+              "tp": 670,
+              "fn": 48,
+              "fp": 84,
+              "tn": 401,
+              "recall": 0.9331476323119777,
+              "false_negative_rate": 0.06685236768802229,
+              "false_positive_rate": 0.1731958762886598,
+              "excluded_middle_rating": 627
+            }
+          },
+          "errors_by_rating": {
+            "1.0": {
+              "n": 181,
+              "signed_error": 0.6781670599352589,
+              "mse": 0.4647199724386557
+            },
+            "2.0": {
+              "n": 304,
+              "signed_error": 0.456586675032189,
+              "mse": 0.21134481083190892
+            },
+            "3.0": {
+              "n": 627,
+              "signed_error": 0.2503258107761827,
+              "mse": 0.06809483207788454
+            },
+            "4.0": {
+              "n": 373,
+              "signed_error": 0.10482850950460972,
+              "mse": 0.017148789119102566
+            },
+            "5.0": {
+              "n": 345,
+              "signed_error": -0.05899012658907019,
+              "mse": 0.006366941577953199
+            }
+          }
+        },
+        "D": {
+          "n": 1830,
+          "mse_0_1": 0.14479161461782245,
+          "mse_1_5": 2.316665833885159,
+          "spearman": 0.20781135215676877,
+          "prediction_mean": 0.7929718260230914,
+          "target_mean": 0.5542349726775956,
+          "prediction_std": 0.06315265451663625,
+          "target_std": 0.30337777758989165,
+          "mean_prediction_by_rating": {
+            "1.0": {
+              "n": 181,
+              "mean": 0.7687980950866615
+            },
+            "2.0": {
+              "n": 304,
+              "mean": 0.7785742796565357
+            },
+            "3.0": {
+              "n": 627,
+              "mean": 0.7885883847872416
+            },
+            "4.0": {
+              "n": 373,
+              "mean": 0.8090773576386173
+            },
+            "5.0": {
+              "n": 345,
+              "mean": 0.8088945905367534
+            }
+          },
+          "condition_changes": {
+            "n": 721,
+            "correct": 483,
+            "ties": 0,
+            "accuracy_ties_half": 0.6699029126213593,
+            "difference_mse": 0.2643590968569945,
+            "unit": "Within-pair comparisons. These reuse captions and are dependent."
+          },
+          "operating_point": {
+            "cutoff": 0.7280995845794678,
+            "tp": 647,
+            "fn": 71,
+            "fp": 379,
+            "tn": 106,
+            "recall": 0.9011142061281338,
+            "false_negative_rate": 0.0988857938718663,
+            "false_positive_rate": 0.7814432989690722,
+            "excluded_middle_rating": 627
+          },
+          "descriptive_cutoffs": {
+            "0.5": {
+              "cutoff": 0.5,
+              "tp": 718,
+              "fn": 0,
+              "fp": 485,
+              "tn": 0,
+              "recall": 1.0,
+              "false_negative_rate": 0.0,
+              "false_positive_rate": 1.0,
+              "excluded_middle_rating": 627
+            },
+            "0.75": {
+              "cutoff": 0.75,
+              "tp": 604,
+              "fn": 114,
+              "fp": 335,
+              "tn": 150,
+              "recall": 0.841225626740947,
+              "false_negative_rate": 0.15877437325905291,
+              "false_positive_rate": 0.6907216494845361,
+              "excluded_middle_rating": 627
+            }
+          },
+          "errors_by_rating": {
+            "1.0": {
+              "n": 181,
+              "signed_error": 0.7687980950866615,
+              "mse": 0.596167284053538
+            },
+            "2.0": {
+              "n": 304,
+              "signed_error": 0.5285742796565357,
+              "mse": 0.2831235769191148
+            },
+            "3.0": {
+              "n": 627,
+              "signed_error": 0.28858838478724164,
+              "mse": 0.08724975280709285
+            },
+            "4.0": {
+              "n": 373,
+              "signed_error": 0.0590773576386173,
+              "mse": 0.007134257373691757
+            },
+            "5.0": {
+              "n": 345,
+              "signed_error": -0.19110540946324667,
+              "mse": 0.03949604621182462
+            }
+          }
+        }
+      },
+      "decision": {
+        "selected_arm": "A",
+        "eligibility": {
+          "B_u": {
+            "false_positive_rate_reduction": -0.12164948453608247,
+            "spearman_change": -0.08599972745437101,
+            "eligible": false
+          },
+          "B_r": {
+            "false_positive_rate_reduction": -0.10309278350515465,
+            "spearman_change": -0.09301337179328861,
+            "eligible": false
+          },
+          "C_u": {
+            "false_positive_rate_reduction": 0.0,
+            "spearman_change": -0.002865936461215135,
+            "eligible": false
+          },
+          "C_r": {
+            "false_positive_rate_reduction": -0.012371134020618554,
+            "spearman_change": -0.015587670052843894,
+            "eligible": false
+          },
+          "D": {
+            "false_positive_rate_reduction": -0.6845360824742268,
+            "spearman_change": -0.5747633075853309,
+            "eligible": false
+          }
+        },
+        "thresholds": {
+          "A": 0.5334962010383606,
+          "B_u": 0.5624762773513794,
+          "B_r": 0.5648148059844971,
+          "C_u": 0.7341499924659729,
+          "C_r": 0.7733751535415649,
+          "D": 0.7280995845794678
+        },
+        "test_scores_used_for_selection": false
+      },
+      "agreement": {
+        "max_absolute_error": 2.384185791015625e-07,
+        "mean_absolute_error": 2.522357418888905e-08,
+        "tolerance": 0.001
+      },
+      "model_sha256": "8805f9a7241e4e19ffc481341ebad6f1ddb6dd6ff04bbf710f9f0896469e34ff",
+      "rows_sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+      "timing": {
+        "split": "validation",
+        "rows": 1830,
+        "unique_passages": 3591,
+        "passage_occurrences": 3660,
+        "references": 918,
+        "nonpadding_tokens": 161340,
+        "model_sha256": "8805f9a7241e4e19ffc481341ebad6f1ddb6dd6ff04bbf710f9f0896469e34ff",
+        "rows_sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+        "adapter_state_before_sha256": "f6c42d54d12275d2f610201eff0d3737ac00430710940cb4da303a5e00632aa6",
+        "adapter_state_after_sha256": "f6c42d54d12275d2f610201eff0d3737ac00430710940cb4da303a5e00632aa6",
+        "optimizer_updates": 0,
+        "inference_seconds": 117.09829852500116,
+        "total_seconds": 199.9846409909951,
+        "peak_cuda_memory_bytes": 15317735424,
+        "cache_sha256": "387ccbe2a6a890a96b4dda6a3ac57ed09d7dfa821357ad00310ccde2d256372a"
+      }
+    },
+    "selection_sha256": "0d724b35b83676333afac4b41b1db7f418f1a5f7d5a2488ae27625d35215d0e1",
+    "stop_reason": "no_validation_candidate_eligible",
+    "publication_status": "queued_separately"
+  },
+  "geometry_summary": {
+    "arms": {
+      "A": {
+        "global": {
+          "n_unique_inputs": 3591,
+          "width": 4096,
+          "sample_covariance_rank_ceiling": 3590,
+          "mean_vector_norm": 0.3823139029584944,
+          "mean_pairwise_cosine": 0.14592608304358365,
+          "covariance_trace": 0.8538360928665182,
+          "leading_variance_share": 0.0494281997664763,
+          "participation_rank": 96.81738955554214
+        },
+        "within_condition": {
+          "type of vehicle": {
+            "n_unique_inputs": 62,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 61,
+            "mean_vector_norm": 0.6018453921592937,
+            "mean_pairwise_cosine": 0.3517624313587358,
+            "covariance_trace": 0.6377821269829254,
+            "leading_variance_share": 0.19643133247124492,
+            "participation_rank": 10.991741678590286,
+            "source_groups": 30
+          },
+          "type of food": {
+            "n_unique_inputs": 58,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 57,
+            "mean_vector_norm": 0.5826978538943145,
+            "mean_pairwise_cosine": 0.32794971486407576,
+            "covariance_trace": 0.6604632219309561,
+            "leading_variance_share": 0.09867791890809585,
+            "participation_rank": 25.175161245971342,
+            "source_groups": 27
+          },
+          "type of room": {
+            "n_unique_inputs": 33,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 32,
+            "mean_vector_norm": 0.7138327834890326,
+            "mean_pairwise_cosine": 0.4942309060311432,
+            "covariance_trace": 0.4904427760818195,
+            "leading_variance_share": 0.3608877231665399,
+            "participation_rank": 5.301071699733826,
+            "source_groups": 15
+          },
+          "type of sport": {
+            "n_unique_inputs": 104,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 103,
+            "mean_vector_norm": 0.5680049261748847,
+            "mean_pairwise_cosine": 0.3160531843932374,
+            "covariance_trace": 0.6773704118669805,
+            "leading_variance_share": 0.17986033087895256,
+            "participation_rank": 14.57257440332845,
+            "source_groups": 48
+          },
+          "number of objects": {
+            "n_unique_inputs": 24,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 23,
+            "mean_vector_norm": 0.545887842596921,
+            "mean_pairwise_cosine": 0.26747151522268053,
+            "covariance_trace": 0.7020064938661251,
+            "leading_variance_share": 0.1474119679807882,
+            "participation_rank": 15.525724670707618,
+            "source_groups": 12
+          },
+          "activity of people": {
+            "n_unique_inputs": 19,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 18,
+            "mean_vector_norm": 0.5570657596138093,
+            "mean_pairwise_cosine": 0.2720068291877445,
+            "covariance_trace": 0.6896777642345859,
+            "leading_variance_share": 0.1533727098004805,
+            "participation_rank": 12.322894585434684,
+            "source_groups": 9
+          },
+          "number of people": {
+            "n_unique_inputs": 223,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 222,
+            "mean_vector_norm": 0.557781875703718,
+            "mean_pairwise_cosine": 0.3080175605381125,
+            "covariance_trace": 0.6888793922488875,
+            "leading_variance_share": 0.3090999278024404,
+            "participation_rank": 8.22819250675081,
+            "source_groups": 105
+          },
+          "location": {
+            "n_unique_inputs": 28,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 27,
+            "mean_vector_norm": 0.5640018665228589,
+            "mean_pairwise_cosine": 0.2928424794001276,
+            "covariance_trace": 0.6819019031108122,
+            "leading_variance_share": 0.16997234521701515,
+            "participation_rank": 14.292954522007143,
+            "source_groups": 14
+          },
+          "color of object": {
+            "n_unique_inputs": 50,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 49,
+            "mean_vector_norm": 0.4973538035655437,
+            "mean_pairwise_cosine": 0.23200082196797128,
+            "covariance_trace": 0.7526392137039655,
+            "leading_variance_share": 0.08908119144771856,
+            "participation_rank": 27.96116093915211,
+            "source_groups": 24
+          },
+          "number of vehicles": {
+            "n_unique_inputs": 16,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 15,
+            "mean_vector_norm": 0.588669038459582,
+            "mean_pairwise_cosine": 0.3029666507067274,
+            "covariance_trace": 0.6534687920130198,
+            "leading_variance_share": 0.22232757711905557,
+            "participation_rank": 8.6732947750844,
+            "source_groups": 8
+          },
+          "type of location": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.5757511046702355,
+            "mean_pairwise_cosine": 0.29630456142544365,
+            "covariance_trace": 0.6685106889675022,
+            "leading_variance_share": 0.17576436709563575,
+            "participation_rank": 12.023094414271489,
+            "source_groups": 10
+          },
+          "type of furniture": {
+            "n_unique_inputs": 18,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 17,
+            "mean_vector_norm": 0.6428487789366014,
+            "mean_pairwise_cosine": 0.37874011264950264,
+            "covariance_trace": 0.5867454788232055,
+            "leading_variance_share": 0.30535945522045727,
+            "participation_rank": 6.906278837290416,
+            "source_groups": 8
+          },
+          "age of person": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.6807537954833964,
+            "mean_pairwise_cosine": 0.43518497894214037,
+            "covariance_trace": 0.536574271335283,
+            "leading_variance_share": 0.3099756918691566,
+            "participation_rank": 6.78562143356409,
+            "source_groups": 10
+          },
+          "species of animal": {
+            "n_unique_inputs": 42,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 41,
+            "mean_vector_norm": 0.6912982792079182,
+            "mean_pairwise_cosine": 0.4651590012800462,
+            "covariance_trace": 0.5221066917870916,
+            "leading_variance_share": 0.4322007623845677,
+            "participation_rank": 4.483729937091506,
+            "source_groups": 21
+          },
+          "number of animals": {
+            "n_unique_inputs": 63,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 62,
+            "mean_vector_norm": 0.5892997502298519,
+            "mean_pairwise_cosine": 0.33674635979049916,
+            "covariance_trace": 0.6527258214889314,
+            "leading_variance_share": 0.45686350095227796,
+            "participation_rank": 4.276632809322144,
+            "source_groups": 31
+          },
+          "type of animal": {
+            "n_unique_inputs": 72,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 71,
+            "mean_vector_norm": 0.6628848339558859,
+            "mean_pairwise_cosine": 0.4315207577952774,
+            "covariance_trace": 0.5605837158346053,
+            "leading_variance_share": 0.41033730519982897,
+            "participation_rank": 4.839855732691449,
+            "source_groups": 32
+          },
+          "name of place": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.5372113800663898,
+            "mean_pairwise_cosine": 0.25115375353223685,
+            "covariance_trace": 0.7114039534713671,
+            "leading_variance_share": 0.1638889660691706,
+            "participation_rank": 12.929513004867264,
+            "source_groups": 10
+          },
+          "name of object": {
+            "n_unique_inputs": 23,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 22,
+            "mean_vector_norm": 0.5289760867318121,
+            "mean_pairwise_cosine": 0.247080050211581,
+            "covariance_trace": 0.7201843026954535,
+            "leading_variance_share": 0.10967822534422864,
+            "participation_rank": 16.193916196268265,
+            "source_groups": 11
+          },
+          "activity": {
+            "n_unique_inputs": 22,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 21,
+            "mean_vector_norm": 0.5266081371871435,
+            "mean_pairwise_cosine": 0.2429026113855287,
+            "covariance_trace": 0.7226838940898761,
+            "leading_variance_share": 0.11085479177746693,
+            "participation_rank": 15.554896298226522,
+            "source_groups": 11
+          },
+          "color of clothing": {
+            "n_unique_inputs": 18,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 17,
+            "mean_vector_norm": 0.5562572824660198,
+            "mean_pairwise_cosine": 0.2687999385348207,
+            "covariance_trace": 0.6905778379482314,
+            "leading_variance_share": 0.144579956911601,
+            "participation_rank": 12.534848462100454,
+            "source_groups": 9
+          },
+          "sport": {
+            "n_unique_inputs": 44,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 43,
+            "mean_vector_norm": 0.6474866463933854,
+            "mean_pairwise_cosine": 0.4057328862231586,
+            "covariance_trace": 0.5807610544875512,
+            "leading_variance_share": 0.2128003244240028,
+            "participation_rank": 9.187583751406422,
+            "source_groups": 21
+          },
+          "sport being played": {
+            "n_unique_inputs": 23,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 22,
+            "mean_vector_norm": 0.634431111487346,
+            "mean_pairwise_cosine": 0.37534387279462084,
+            "covariance_trace": 0.5974971734258641,
+            "leading_variance_share": 0.23245571216754965,
+            "participation_rank": 7.303694254716148,
+            "source_groups": 11
+          },
+          "number of players": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.6246668766616507,
+            "mean_pairwise_cosine": 0.358114428230519,
+            "covariance_trace": 0.609791292786356,
+            "leading_variance_share": 0.38963389333086534,
+            "participation_rank": 5.104111131456353,
+            "source_groups": 10
+          },
+          "type of activity": {
+            "n_unique_inputs": 29,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 28,
+            "mean_vector_norm": 0.6024137001726123,
+            "mean_pairwise_cosine": 0.34014877497742746,
+            "covariance_trace": 0.6370977529904585,
+            "leading_variance_share": 0.21671198965900693,
+            "participation_rank": 9.852984961533645,
+            "source_groups": 14
+          },
+          "person's activity": {
+            "n_unique_inputs": 16,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 15,
+            "mean_vector_norm": 0.5904180614982828,
+            "mean_pairwise_cosine": 0.3051663861574231,
+            "covariance_trace": 0.6514065177895052,
+            "leading_variance_share": 0.24875129335989257,
+            "participation_rank": 7.94435446108126,
+            "source_groups": 8
+          },
+          "type of game": {
+            "n_unique_inputs": 16,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 15,
+            "mean_vector_norm": 0.6772076291715121,
+            "mean_pairwise_cosine": 0.4225175159903117,
+            "covariance_trace": 0.5413898552668288,
+            "leading_variance_share": 0.5022694350271091,
+            "participation_rank": 3.1776614210057974,
+            "source_groups": 6
+          },
+          "color of animal": {
+            "n_unique_inputs": 28,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 27,
+            "mean_vector_norm": 0.6616943937170526,
+            "mean_pairwise_cosine": 0.41701871006410207,
+            "covariance_trace": 0.5621605365368434,
+            "leading_variance_share": 0.18098531422552042,
+            "participation_rank": 12.44093046767013,
+            "source_groups": 14
+          },
+          "gender": {
+            "n_unique_inputs": 24,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 23,
+            "mean_vector_norm": 0.6867237388366284,
+            "mean_pairwise_cosine": 0.44861512292988076,
+            "covariance_trace": 0.5284105226931715,
+            "leading_variance_share": 0.595866132449476,
+            "participation_rank": 2.6428239464225625,
+            "source_groups": 12
+          },
+          "action of person": {
+            "n_unique_inputs": 22,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 21,
+            "mean_vector_norm": 0.5542778219619312,
+            "mean_pairwise_cosine": 0.2742345652075919,
+            "covariance_trace": 0.6927761129366795,
+            "leading_variance_share": 0.14269391067106474,
+            "participation_rank": 14.22012520688407,
+            "source_groups": 11
+          },
+          "number of dogs": {
+            "n_unique_inputs": 29,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 28,
+            "mean_vector_norm": 0.6648997488572053,
+            "mean_pairwise_cosine": 0.42216637822650765,
+            "covariance_trace": 0.5579083385082783,
+            "leading_variance_share": 0.497808883641404,
+            "participation_rank": 3.0532275142041643,
+            "source_groups": 14
+          },
+          "number of persons": {
+            "n_unique_inputs": 34,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 33,
+            "mean_vector_norm": 0.6916369883485135,
+            "mean_pairwise_cosine": 0.46255450312269003,
+            "covariance_trace": 0.5216382774606888,
+            "leading_variance_share": 0.4679027765387918,
+            "participation_rank": 3.9490704631237747,
+            "source_groups": 17
+          }
+        }
+      },
+      "B_u": {
+        "global": {
+          "n_unique_inputs": 3591,
+          "width": 4096,
+          "sample_covariance_rank_ceiling": 3590,
+          "mean_vector_norm": 0.3478056283475086,
+          "mean_pairwise_cosine": 0.12072389961034963,
+          "covariance_trace": 0.8790312444816833,
+          "leading_variance_share": 0.05685282006448877,
+          "participation_rank": 109.11355349510896
+        },
+        "within_condition": {
+          "type of vehicle": {
+            "n_unique_inputs": 62,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 61,
+            "mean_vector_norm": 0.6758085937534645,
+            "mean_pairwise_cosine": 0.44781098074360126,
+            "covariance_trace": 0.5432827534934639,
+            "leading_variance_share": 0.18952444908065574,
+            "participation_rank": 11.302569776419597,
+            "source_groups": 30
+          },
+          "type of food": {
+            "n_unique_inputs": 58,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 57,
+            "mean_vector_norm": 0.6695244629262046,
+            "mean_pairwise_cosine": 0.43858341053056743,
+            "covariance_trace": 0.5517369677851506,
+            "leading_variance_share": 0.09415275760372602,
+            "participation_rank": 25.386749566605417,
+            "source_groups": 27
+          },
+          "type of room": {
+            "n_unique_inputs": 33,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 32,
+            "mean_vector_norm": 0.714684085261874,
+            "mean_pairwise_cosine": 0.49548500833412146,
+            "covariance_trace": 0.48922666855936725,
+            "leading_variance_share": 0.3655616081531032,
+            "participation_rank": 5.225959082153513,
+            "source_groups": 15
+          },
+          "type of sport": {
+            "n_unique_inputs": 104,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 103,
+            "mean_vector_norm": 0.706979663859197,
+            "mean_pairwise_cosine": 0.4949641309609963,
+            "covariance_trace": 0.5001797573950777,
+            "leading_variance_share": 0.1949753062754502,
+            "participation_rank": 13.686578602132224,
+            "source_groups": 48
+          },
+          "number of objects": {
+            "n_unique_inputs": 24,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 23,
+            "mean_vector_norm": 0.7207411483648384,
+            "mean_pairwise_cosine": 0.4985750975006835,
+            "covariance_trace": 0.48053222524839945,
+            "leading_variance_share": 0.14184742303163428,
+            "participation_rank": 15.764294608423532,
+            "source_groups": 12
+          },
+          "activity of people": {
+            "n_unique_inputs": 19,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 18,
+            "mean_vector_norm": 0.6861191220564171,
+            "mean_pairwise_cosine": 0.4413571968547492,
+            "covariance_trace": 0.5292405503409482,
+            "leading_variance_share": 0.15271748167025823,
+            "participation_rank": 12.371829348396568,
+            "source_groups": 9
+          },
+          "number of people": {
+            "n_unique_inputs": 223,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 222,
+            "mean_vector_norm": 0.7353376512310581,
+            "mean_pairwise_cosine": 0.5386526390702446,
+            "covariance_trace": 0.4592785390037237,
+            "leading_variance_share": 0.2855257800660137,
+            "participation_rank": 9.246843650869273,
+            "source_groups": 105
+          },
+          "location": {
+            "n_unique_inputs": 28,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 27,
+            "mean_vector_norm": 0.7050988440784942,
+            "mean_pairwise_cosine": 0.4785408384193673,
+            "covariance_trace": 0.5028356205394614,
+            "leading_variance_share": 0.16722957631858695,
+            "participation_rank": 14.39090601248588,
+            "source_groups": 14
+          },
+          "color of object": {
+            "n_unique_inputs": 50,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 49,
+            "mean_vector_norm": 0.670960027626044,
+            "mean_pairwise_cosine": 0.4389666927463692,
+            "covariance_trace": 0.5498126303530536,
+            "leading_variance_share": 0.09001039219570475,
+            "participation_rank": 27.88352566403393,
+            "source_groups": 24
+          },
+          "number of vehicles": {
+            "n_unique_inputs": 16,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 15,
+            "mean_vector_norm": 0.7266493310851143,
+            "mean_pairwise_cosine": 0.49655386535624046,
+            "covariance_trace": 0.47198077515305376,
+            "leading_variance_share": 0.2215788568456428,
+            "participation_rank": 8.763050158344914,
+            "source_groups": 8
+          },
+          "type of location": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.685691196185165,
+            "mean_pairwise_cosine": 0.4422867546507107,
+            "covariance_trace": 0.5298275756275047,
+            "leading_variance_share": 0.1805925205020636,
+            "participation_rank": 11.95294550766185,
+            "source_groups": 10
+          },
+          "type of furniture": {
+            "n_unique_inputs": 18,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 17,
+            "mean_vector_norm": 0.7118174585162371,
+            "mean_pairwise_cosine": 0.4776655114346192,
+            "covariance_trace": 0.49331590783622636,
+            "leading_variance_share": 0.31299492981332006,
+            "participation_rank": 6.768759123013314,
+            "source_groups": 8
+          },
+          "age of person": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.7566732519257245,
+            "mean_pairwise_cosine": 0.5500572739663029,
+            "covariance_trace": 0.4274455880574127,
+            "leading_variance_share": 0.3124369558856116,
+            "participation_rank": 6.769239003580335,
+            "source_groups": 10
+          },
+          "species of animal": {
+            "n_unique_inputs": 42,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 41,
+            "mean_vector_norm": 0.7788682509579055,
+            "mean_pairwise_cosine": 0.5970415017692116,
+            "covariance_trace": 0.3933642738216274,
+            "leading_variance_share": 0.43193462765243024,
+            "participation_rank": 4.4896846959799825,
+            "source_groups": 21
+          },
+          "number of animals": {
+            "n_unique_inputs": 63,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 62,
+            "mean_vector_norm": 0.769706865875833,
+            "mean_pairwise_cosine": 0.585875250680638,
+            "covariance_trace": 0.4075513391371022,
+            "leading_variance_share": 0.44482640612558044,
+            "participation_rank": 4.48037054562417,
+            "source_groups": 31
+          },
+          "type of animal": {
+            "n_unique_inputs": 72,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 71,
+            "mean_vector_norm": 0.756026849154668,
+            "mean_pairwise_cosine": 0.5655424643081525,
+            "covariance_trace": 0.42842339575536104,
+            "leading_variance_share": 0.4170707970003821,
+            "participation_rank": 4.741961020551422,
+            "source_groups": 32
+          },
+          "name of place": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.7073726994579175,
+            "mean_pairwise_cosine": 0.47408014231631546,
+            "covariance_trace": 0.4996238788192492,
+            "leading_variance_share": 0.16365152767667734,
+            "participation_rank": 12.969362046887623,
+            "source_groups": 10
+          },
+          "name of object": {
+            "n_unique_inputs": 23,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 22,
+            "mean_vector_norm": 0.6932787058193408,
+            "mean_pairwise_cosine": 0.45702787928555744,
+            "covariance_trace": 0.5193646624536196,
+            "leading_variance_share": 0.1129207800324719,
+            "participation_rank": 16.269220069442902,
+            "source_groups": 11
+          },
+          "activity": {
+            "n_unique_inputs": 22,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 21,
+            "mean_vector_norm": 0.6927656543709858,
+            "mean_pairwise_cosine": 0.45515874169298925,
+            "covariance_trace": 0.5200757138444898,
+            "leading_variance_share": 0.11101871257955193,
+            "participation_rank": 15.538513484755534,
+            "source_groups": 11
+          },
+          "color of clothing": {
+            "n_unique_inputs": 18,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 17,
+            "mean_vector_norm": 0.671523237463119,
+            "mean_pairwise_cosine": 0.4186460149099573,
+            "covariance_trace": 0.5490565402308518,
+            "leading_variance_share": 0.14824705634281118,
+            "participation_rank": 12.550012247432813,
+            "source_groups": 9
+          },
+          "sport": {
+            "n_unique_inputs": 44,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 43,
+            "mean_vector_norm": 0.6863174956634609,
+            "mean_pairwise_cosine": 0.45873011645430384,
+            "covariance_trace": 0.528968301176814,
+            "leading_variance_share": 0.1963567727358663,
+            "participation_rank": 9.277470407007415,
+            "source_groups": 21
+          },
+          "sport being played": {
+            "n_unique_inputs": 23,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 22,
+            "mean_vector_norm": 0.7278945084179228,
+            "mean_pairwise_cosine": 0.5084590713189214,
+            "covariance_trace": 0.47016956945305843,
+            "leading_variance_share": 0.24711543005354286,
+            "participation_rank": 7.235421774785582,
+            "source_groups": 11
+          },
+          "number of players": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.7466327378745609,
+            "mean_pairwise_cosine": 0.5341688887373031,
+            "covariance_trace": 0.4425395740464312,
+            "leading_variance_share": 0.3693295617313207,
+            "participation_rank": 5.44203434702768,
+            "source_groups": 10
+          },
+          "type of activity": {
+            "n_unique_inputs": 29,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 28,
+            "mean_vector_norm": 0.7377528433430686,
+            "mean_pairwise_cosine": 0.5280035176942026,
+            "covariance_trace": 0.45572072466422636,
+            "leading_variance_share": 0.21912823968366751,
+            "participation_rank": 9.782592975915788,
+            "source_groups": 14
+          },
+          "person's activity": {
+            "n_unique_inputs": 16,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 15,
+            "mean_vector_norm": 0.7201495138065238,
+            "mean_pairwise_cosine": 0.4865230097398576,
+            "covariance_trace": 0.48138468743872237,
+            "leading_variance_share": 0.24413844603358462,
+            "participation_rank": 8.030022009625164,
+            "source_groups": 8
+          },
+          "type of game": {
+            "n_unique_inputs": 16,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 15,
+            "mean_vector_norm": 0.7853032689303097,
+            "mean_pairwise_cosine": 0.591147973659677,
+            "covariance_trace": 0.383298757994297,
+            "leading_variance_share": 0.4984188794372991,
+            "participation_rank": 3.192542307056804,
+            "source_groups": 6
+          },
+          "color of animal": {
+            "n_unique_inputs": 28,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 27,
+            "mean_vector_norm": 0.7230981024550033,
+            "mean_pairwise_cosine": 0.5051994162578041,
+            "covariance_trace": 0.4771291369380047,
+            "leading_variance_share": 0.18624879794837526,
+            "participation_rank": 12.366576907362383,
+            "source_groups": 14
+          },
+          "gender": {
+            "n_unique_inputs": 24,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 23,
+            "mean_vector_norm": 0.7476404783685755,
+            "mean_pairwise_cosine": 0.5397909058182916,
+            "covariance_trace": 0.44103371876871683,
+            "leading_variance_share": 0.5768373926579503,
+            "participation_rank": 2.7865673087287446,
+            "source_groups": 12
+          },
+          "action of person": {
+            "n_unique_inputs": 22,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 21,
+            "mean_vector_norm": 0.7069668542954228,
+            "mean_pairwise_cosine": 0.475983188471856,
+            "covariance_trace": 0.5001978366106993,
+            "leading_variance_share": 0.1458470153279319,
+            "participation_rank": 14.12391318944671,
+            "source_groups": 11
+          },
+          "number of dogs": {
+            "n_unique_inputs": 29,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 28,
+            "mean_vector_norm": 0.8006110608099197,
+            "mean_pairwise_cosine": 0.6281558591156746,
+            "covariance_trace": 0.359021924114288,
+            "leading_variance_share": 0.48325019023935534,
+            "participation_rank": 3.1808714785615106,
+            "source_groups": 14
+          },
+          "number of persons": {
+            "n_unique_inputs": 34,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 33,
+            "mean_vector_norm": 0.8127802372415012,
+            "mean_pairwise_cosine": 0.6503272201801411,
+            "covariance_trace": 0.3393882977169227,
+            "leading_variance_share": 0.4436766237330229,
+            "participation_rank": 4.248103763377766,
+            "source_groups": 17
+          }
+        }
+      },
+      "B_r": {
+        "global": {
+          "n_unique_inputs": 3591,
+          "width": 4096,
+          "sample_covariance_rank_ceiling": 3590,
+          "mean_vector_norm": 0.3498288392618845,
+          "mean_pairwise_cosine": 0.12213575443973969,
+          "covariance_trace": 0.8776197990840965,
+          "leading_variance_share": 0.05791108432608338,
+          "participation_rank": 107.31845518236966
+        },
+        "within_condition": {
+          "type of vehicle": {
+            "n_unique_inputs": 62,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 61,
+            "mean_vector_norm": 0.6975292757551477,
+            "mean_pairwise_cosine": 0.4781298294103749,
+            "covariance_trace": 0.5134529286326783,
+            "leading_variance_share": 0.18700904163539872,
+            "participation_rank": 11.536519138335244,
+            "source_groups": 30
+          },
+          "type of food": {
+            "n_unique_inputs": 58,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 57,
+            "mean_vector_norm": 0.6335284876629584,
+            "mean_pairwise_cosine": 0.3908558590097812,
+            "covariance_trace": 0.598641683231844,
+            "leading_variance_share": 0.0959222433027206,
+            "participation_rank": 25.529506679528982,
+            "source_groups": 27
+          },
+          "type of room": {
+            "n_unique_inputs": 33,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 32,
+            "mean_vector_norm": 0.7121205605360386,
+            "mean_pairwise_cosine": 0.49171305752004457,
+            "covariance_trace": 0.49288432697975393,
+            "leading_variance_share": 0.36615856423851706,
+            "participation_rank": 5.296896273274661,
+            "source_groups": 15
+          },
+          "type of sport": {
+            "n_unique_inputs": 104,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 103,
+            "mean_vector_norm": 0.7488038983554859,
+            "mean_pairwise_cosine": 0.5564423002124969,
+            "covariance_trace": 0.439292731927212,
+            "leading_variance_share": 0.18620944160869035,
+            "participation_rank": 14.235708117036097,
+            "source_groups": 48
+          },
+          "number of objects": {
+            "n_unique_inputs": 24,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 23,
+            "mean_vector_norm": 0.6711957898276452,
+            "mean_pairwise_cosine": 0.4266126471413144,
+            "covariance_trace": 0.5494962462439648,
+            "leading_variance_share": 0.14343915225617282,
+            "participation_rank": 15.64767056371028,
+            "source_groups": 12
+          },
+          "activity of people": {
+            "n_unique_inputs": 19,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 18,
+            "mean_vector_norm": 0.683254797821892,
+            "mean_pairwise_cosine": 0.4372169573539819,
+            "covariance_trace": 0.5331629050677462,
+            "leading_variance_share": 0.1549705087362658,
+            "participation_rank": 12.354571909704196,
+            "source_groups": 9
+          },
+          "number of people": {
+            "n_unique_inputs": 223,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 222,
+            "mean_vector_norm": 0.7476036328411624,
+            "mean_pairwise_cosine": 0.5569243052480771,
+            "covariance_trace": 0.44108882280826905,
+            "leading_variance_share": 0.2659563111386455,
+            "participation_rank": 10.240864019427313,
+            "source_groups": 105
+          },
+          "location": {
+            "n_unique_inputs": 28,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 27,
+            "mean_vector_norm": 0.7301771769286921,
+            "mean_pairwise_cosine": 0.5158682906606167,
+            "covariance_trace": 0.4668413142673188,
+            "leading_variance_share": 0.16103708761263177,
+            "participation_rank": 14.687549983966809,
+            "source_groups": 14
+          },
+          "color of object": {
+            "n_unique_inputs": 50,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 49,
+            "mean_vector_norm": 0.6644090875588029,
+            "mean_pairwise_cosine": 0.430040240200869,
+            "covariance_trace": 0.5585605760627532,
+            "leading_variance_share": 0.08751987217507916,
+            "participation_rank": 28.12578300534599,
+            "source_groups": 24
+          },
+          "number of vehicles": {
+            "n_unique_inputs": 16,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 15,
+            "mean_vector_norm": 0.7177982607606262,
+            "mean_pairwise_cosine": 0.4829166325959181,
+            "covariance_trace": 0.48476565832592966,
+            "leading_variance_share": 0.2162342965241601,
+            "participation_rank": 8.886692365273626,
+            "source_groups": 8
+          },
+          "type of location": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.663585031439052,
+            "mean_pairwise_cosine": 0.41088957155022615,
+            "covariance_trace": 0.5596549255950874,
+            "leading_variance_share": 0.1810064912586906,
+            "participation_rank": 11.988141199387353,
+            "source_groups": 10
+          },
+          "type of furniture": {
+            "n_unique_inputs": 18,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 17,
+            "mean_vector_norm": 0.6945700568243776,
+            "mean_pairwise_cosine": 0.4519821251003758,
+            "covariance_trace": 0.5175724585229371,
+            "leading_variance_share": 0.3143172199972491,
+            "participation_rank": 6.760905633446613,
+            "source_groups": 8
+          },
+          "age of person": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.7963389240841438,
+            "mean_pairwise_cosine": 0.6149007170212171,
+            "covariance_trace": 0.36584433481521694,
+            "leading_variance_share": 0.3123287864022084,
+            "participation_rank": 6.723758181361821,
+            "source_groups": 10
+          },
+          "species of animal": {
+            "n_unique_inputs": 42,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 41,
+            "mean_vector_norm": 0.7878991144593704,
+            "mean_pairwise_cosine": 0.6115358680835721,
+            "covariance_trace": 0.3792150057738095,
+            "leading_variance_share": 0.42675836612679097,
+            "participation_rank": 4.5871449464710485,
+            "source_groups": 21
+          },
+          "number of animals": {
+            "n_unique_inputs": 63,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 62,
+            "mean_vector_norm": 0.7589010658837749,
+            "mean_pairwise_cosine": 0.5690910022516125,
+            "covariance_trace": 0.42406918397085375,
+            "leading_variance_share": 0.42581766803395865,
+            "participation_rank": 4.8130445444503,
+            "source_groups": 31
+          },
+          "type of animal": {
+            "n_unique_inputs": 72,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 71,
+            "mean_vector_norm": 0.7685162699890153,
+            "mean_pairwise_cosine": 0.5848513028007558,
+            "covariance_trace": 0.4093827650322071,
+            "leading_variance_share": 0.42749129111021744,
+            "participation_rank": 4.6356653293317285,
+            "source_groups": 32
+          },
+          "name of place": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.6887024215368902,
+            "mean_pairwise_cosine": 0.4466431839532154,
+            "covariance_trace": 0.52568898807366,
+            "leading_variance_share": 0.16400755357882651,
+            "participation_rank": 12.983655933027666,
+            "source_groups": 10
+          },
+          "name of object": {
+            "n_unique_inputs": 23,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 22,
+            "mean_vector_norm": 0.6735552414005559,
+            "mean_pairwise_cosine": 0.42884378329023604,
+            "covariance_trace": 0.5463233584143539,
+            "leading_variance_share": 0.11285001474444338,
+            "participation_rank": 16.285554718438792,
+            "source_groups": 11
+          },
+          "activity": {
+            "n_unique_inputs": 22,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 21,
+            "mean_vector_norm": 0.7108681443908254,
+            "mean_pairwise_cosine": 0.4817779704131645,
+            "covariance_trace": 0.4946665142263085,
+            "leading_variance_share": 0.10595695513489109,
+            "participation_rank": 15.776263742675583,
+            "source_groups": 11
+          },
+          "color of clothing": {
+            "n_unique_inputs": 18,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 17,
+            "mean_vector_norm": 0.683051497604265,
+            "mean_pairwise_cosine": 0.4351804862697403,
+            "covariance_trace": 0.5334406558647103,
+            "leading_variance_share": 0.14637995283497424,
+            "participation_rank": 12.587587026542192,
+            "source_groups": 9
+          },
+          "sport": {
+            "n_unique_inputs": 44,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 43,
+            "mean_vector_norm": 0.7208109209809828,
+            "mean_pairwise_cosine": 0.5083955547991037,
+            "covariance_trace": 0.480431647272998,
+            "leading_variance_share": 0.19646263605097702,
+            "participation_rank": 9.224247045758824,
+            "source_groups": 21
+          },
+          "sport being played": {
+            "n_unique_inputs": 23,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 22,
+            "mean_vector_norm": 0.7763052351226244,
+            "mean_pairwise_cosine": 0.5845884471920505,
+            "covariance_trace": 0.3973501595083357,
+            "leading_variance_share": 0.246039880813678,
+            "participation_rank": 7.26169826628119,
+            "source_groups": 11
+          },
+          "number of players": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.7677655362666203,
+            "mean_pairwise_cosine": 0.5678567557628286,
+            "covariance_trace": 0.4105360954029059,
+            "leading_variance_share": 0.35694817555962766,
+            "participation_rank": 5.6690781418543335,
+            "source_groups": 10
+          },
+          "type of activity": {
+            "n_unique_inputs": 29,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 28,
+            "mean_vector_norm": 0.7476734331157854,
+            "mean_pairwise_cosine": 0.543266117705602,
+            "covariance_trace": 0.44098445668319824,
+            "leading_variance_share": 0.2200346847665109,
+            "participation_rank": 10.041255893420383,
+            "source_groups": 14
+          },
+          "person's activity": {
+            "n_unique_inputs": 16,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 15,
+            "mean_vector_norm": 0.7190646826462028,
+            "mean_pairwise_cosine": 0.48485761685710205,
+            "covariance_trace": 0.4829460145797348,
+            "leading_variance_share": 0.2332819152180313,
+            "participation_rank": 8.127379139766074,
+            "source_groups": 8
+          },
+          "type of game": {
+            "n_unique_inputs": 16,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 15,
+            "mean_vector_norm": 0.78297211242988,
+            "mean_pairwise_cosine": 0.5872483508727357,
+            "covariance_trace": 0.386954669552595,
+            "leading_variance_share": 0.4967677143825461,
+            "participation_rank": 3.213991352904826,
+            "source_groups": 6
+          },
+          "color of animal": {
+            "n_unique_inputs": 28,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 27,
+            "mean_vector_norm": 0.7257710842548339,
+            "mean_pairwise_cosine": 0.5092156537425028,
+            "covariance_trace": 0.47325635094423196,
+            "leading_variance_share": 0.1889665227231061,
+            "participation_rank": 12.29267505723837,
+            "source_groups": 14
+          },
+          "gender": {
+            "n_unique_inputs": 24,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 23,
+            "mean_vector_norm": 0.7946106473471116,
+            "mean_pairwise_cosine": 0.6153802573449645,
+            "covariance_trace": 0.36859394124592154,
+            "leading_variance_share": 0.5640788075571902,
+            "participation_rank": 2.88752667361126,
+            "source_groups": 12
+          },
+          "action of person": {
+            "n_unique_inputs": 22,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 21,
+            "mean_vector_norm": 0.724570679779521,
+            "mean_pairwise_cosine": 0.5023837490918058,
+            "covariance_trace": 0.4749973389913775,
+            "leading_variance_share": 0.14586241560289717,
+            "participation_rank": 14.15454564022115,
+            "source_groups": 11
+          },
+          "number of dogs": {
+            "n_unique_inputs": 29,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 28,
+            "mean_vector_norm": 0.8341601732343893,
+            "mean_pairwise_cosine": 0.684959737060527,
+            "covariance_trace": 0.30417681139717356,
+            "leading_variance_share": 0.4819016494863927,
+            "participation_rank": 3.2437484868235926,
+            "source_groups": 14
+          },
+          "number of persons": {
+            "n_unique_inputs": 34,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 33,
+            "mean_vector_norm": 0.8290060932410676,
+            "mean_pairwise_cosine": 0.6777738629457625,
+            "covariance_trace": 0.31274890960681934,
+            "leading_variance_share": 0.42981728782493916,
+            "participation_rank": 4.427442389761882,
+            "source_groups": 17
+          }
+        }
+      },
+      "C_u": {
+        "global": {
+          "n_unique_inputs": 3591,
+          "width": 4096,
+          "sample_covariance_rank_ceiling": 3590,
+          "mean_vector_norm": 0.7193371193766838,
+          "mean_pairwise_cosine": 0.5173114751267004,
+          "covariance_trace": 0.48255410933775034,
+          "leading_variance_share": 0.04513234982588869,
+          "participation_rank": 101.36708400343576
+        },
+        "within_condition": {
+          "type of vehicle": {
+            "n_unique_inputs": 62,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 61,
+            "mean_vector_norm": 0.8004311765058141,
+            "mean_pairwise_cosine": 0.634799741401374,
+            "covariance_trace": 0.35930994218755713,
+            "leading_variance_share": 0.19473951717135693,
+            "participation_rank": 11.059894490096559,
+            "source_groups": 30
+          },
+          "type of food": {
+            "n_unique_inputs": 58,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 57,
+            "mean_vector_norm": 0.7885791800360467,
+            "mean_pairwise_cosine": 0.6152230377671815,
+            "covariance_trace": 0.37814286889109866,
+            "leading_variance_share": 0.09909136976819596,
+            "participation_rank": 25.196824836649125,
+            "source_groups": 27
+          },
+          "type of room": {
+            "n_unique_inputs": 33,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 32,
+            "mean_vector_norm": 0.8540254320009292,
+            "mean_pairwise_cosine": 0.7209019212035945,
+            "covariance_trace": 0.2706405536249323,
+            "leading_variance_share": 0.3590339265562,
+            "participation_rank": 5.329315575355148,
+            "source_groups": 15
+          },
+          "type of sport": {
+            "n_unique_inputs": 104,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 103,
+            "mean_vector_norm": 0.7925058174605105,
+            "mean_pairwise_cosine": 0.6244544558683724,
+            "covariance_trace": 0.37193452855909515,
+            "leading_variance_share": 0.17869263827833767,
+            "participation_rank": 14.651676345665487,
+            "source_groups": 48
+          },
+          "number of objects": {
+            "n_unique_inputs": 24,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 23,
+            "mean_vector_norm": 0.7819787469265078,
+            "mean_pairwise_cosine": 0.5945990547215161,
+            "covariance_trace": 0.38850923623440736,
+            "leading_variance_share": 0.14745373670715622,
+            "participation_rank": 15.506317048523963,
+            "source_groups": 12
+          },
+          "activity of people": {
+            "n_unique_inputs": 19,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 18,
+            "mean_vector_norm": 0.7730505282453543,
+            "mean_pairwise_cosine": 0.5752519587542922,
+            "covariance_trace": 0.40239288839032417,
+            "leading_variance_share": 0.15391105545180941,
+            "participation_rank": 12.33618346411041,
+            "source_groups": 9
+          },
+          "number of people": {
+            "n_unique_inputs": 223,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 222,
+            "mean_vector_norm": 0.7942372161680323,
+            "mean_pairwise_cosine": 0.6291497499490438,
+            "covariance_trace": 0.3691872426009982,
+            "leading_variance_share": 0.2977416600313912,
+            "participation_rank": 8.664236098394506,
+            "source_groups": 105
+          },
+          "location": {
+            "n_unique_inputs": 28,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 27,
+            "mean_vector_norm": 0.7816853454786926,
+            "mean_pairwise_cosine": 0.5966257566942886,
+            "covariance_trace": 0.38896801133006625,
+            "leading_variance_share": 0.17127512421905455,
+            "participation_rank": 14.250881832530157,
+            "source_groups": 14
+          },
+          "color of object": {
+            "n_unique_inputs": 50,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 49,
+            "mean_vector_norm": 0.7512793847129519,
+            "mean_pairwise_cosine": 0.5555313406293068,
+            "covariance_trace": 0.43557929000287504,
+            "leading_variance_share": 0.08759465671877743,
+            "participation_rank": 28.175137422408213,
+            "source_groups": 24
+          },
+          "number of vehicles": {
+            "n_unique_inputs": 16,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 15,
+            "mean_vector_norm": 0.8078340547987517,
+            "mean_pairwise_cosine": 0.6294355840491722,
+            "covariance_trace": 0.34740414065130426,
+            "leading_variance_share": 0.21717829504941946,
+            "participation_rank": 8.71120297625529,
+            "source_groups": 8
+          },
+          "type of location": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.792337341094007,
+            "mean_pairwise_cosine": 0.6082089070557487,
+            "covariance_trace": 0.37220154568727143,
+            "leading_variance_share": 0.17584991590484506,
+            "participation_rank": 12.011857769059734,
+            "source_groups": 10
+          },
+          "type of furniture": {
+            "n_unique_inputs": 18,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 17,
+            "mean_vector_norm": 0.8154767352958181,
+            "mean_pairwise_cosine": 0.6452965581405316,
+            "covariance_trace": 0.3349977103593004,
+            "leading_variance_share": 0.3055473489748201,
+            "participation_rank": 6.903326231530751,
+            "source_groups": 8
+          },
+          "age of person": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.8340099344781335,
+            "mean_pairwise_cosine": 0.6795500745636481,
+            "covariance_trace": 0.30442742864687217,
+            "leading_variance_share": 0.30870497839113775,
+            "participation_rank": 6.813880494336794,
+            "source_groups": 10
+          },
+          "species of animal": {
+            "n_unique_inputs": 42,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 41,
+            "mean_vector_norm": 0.8428714263063909,
+            "mean_pairwise_cosine": 0.7033696131493409,
+            "covariance_trace": 0.28956775351158,
+            "leading_variance_share": 0.4308625259820075,
+            "participation_rank": 4.500685227478629,
+            "source_groups": 21
+          },
+          "number of animals": {
+            "n_unique_inputs": 63,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 62,
+            "mean_vector_norm": 0.8101520197039034,
+            "mean_pairwise_cosine": 0.6508034933475147,
+            "covariance_trace": 0.3436537043335426,
+            "leading_variance_share": 0.4522643010856551,
+            "participation_rank": 4.351209217085102,
+            "source_groups": 31
+          },
+          "type of animal": {
+            "n_unique_inputs": 72,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 71,
+            "mean_vector_norm": 0.8300568096731304,
+            "mean_pairwise_cosine": 0.6846139454286406,
+            "covariance_trace": 0.3110056917827494,
+            "leading_variance_share": 0.4084807105386316,
+            "participation_rank": 4.8620379548162775,
+            "source_groups": 32
+          },
+          "name of place": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.7704609678739657,
+            "mean_pairwise_cosine": 0.5722211613945015,
+            "covariance_trace": 0.40638989083294264,
+            "leading_variance_share": 0.16531112111771334,
+            "participation_rank": 12.903522939507225,
+            "source_groups": 10
+          },
+          "name of object": {
+            "n_unique_inputs": 23,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 22,
+            "mean_vector_norm": 0.759868327062674,
+            "mean_pairwise_cosine": 0.5581907774971477,
+            "covariance_trace": 0.422600133469342,
+            "leading_variance_share": 0.10870580313184486,
+            "participation_rank": 16.215687003774487,
+            "source_groups": 11
+          },
+          "activity": {
+            "n_unique_inputs": 22,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 21,
+            "mean_vector_norm": 0.7602379560031138,
+            "mean_pairwise_cosine": 0.5578646903961655,
+            "covariance_trace": 0.42203824638416726,
+            "leading_variance_share": 0.11105549439464156,
+            "participation_rank": 15.560094752821888,
+            "source_groups": 11
+          },
+          "color of clothing": {
+            "n_unique_inputs": 18,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 17,
+            "mean_vector_norm": 0.7748939803795489,
+            "mean_pairwise_cosine": 0.5769583681286391,
+            "covariance_trace": 0.3995393158969669,
+            "leading_variance_share": 0.14282972020006557,
+            "participation_rank": 12.561198720037243,
+            "source_groups": 9
+          },
+          "sport": {
+            "n_unique_inputs": 44,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 43,
+            "mean_vector_norm": 0.8141597849196432,
+            "mean_pairwise_cosine": 0.6550156006066727,
+            "covariance_trace": 0.3371438552702636,
+            "leading_variance_share": 0.2129090217101403,
+            "participation_rank": 9.174488516801858,
+            "source_groups": 21
+          },
+          "sport being played": {
+            "n_unique_inputs": 23,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 22,
+            "mean_vector_norm": 0.8165326117931564,
+            "mean_pairwise_cosine": 0.6515766655098293,
+            "covariance_trace": 0.3332744934623342,
+            "leading_variance_share": 0.23264927224943988,
+            "participation_rank": 7.284067473037369,
+            "source_groups": 11
+          },
+          "number of players": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.8190792270590359,
+            "mean_pairwise_cosine": 0.6535692414207376,
+            "covariance_trace": 0.3291092367989119,
+            "leading_variance_share": 0.3867923658159589,
+            "participation_rank": 5.151414259960138,
+            "source_groups": 10
+          },
+          "type of activity": {
+            "n_unique_inputs": 29,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 28,
+            "mean_vector_norm": 0.7970405393823882,
+            "mean_pairwise_cosine": 0.6222476791360972,
+            "covariance_trace": 0.3647263839203876,
+            "leading_variance_share": 0.21505513338873383,
+            "participation_rank": 9.909461721377516,
+            "source_groups": 14
+          },
+          "person's activity": {
+            "n_unique_inputs": 16,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 15,
+            "mean_vector_norm": 0.7893686886998846,
+            "mean_pairwise_cosine": 0.5979764549318236,
+            "covariance_trace": 0.3768970765192753,
+            "leading_variance_share": 0.24792494387841552,
+            "participation_rank": 7.958291220973397,
+            "source_groups": 8
+          },
+          "type of game": {
+            "n_unique_inputs": 16,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 15,
+            "mean_vector_norm": 0.8390407148368751,
+            "mean_pairwise_cosine": 0.6842552761896894,
+            "covariance_trace": 0.29601067446427753,
+            "leading_variance_share": 0.49993173006602376,
+            "participation_rank": 3.187611449926779,
+            "source_groups": 6
+          },
+          "color of animal": {
+            "n_unique_inputs": 28,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 27,
+            "mean_vector_norm": 0.8236897750074758,
+            "mean_pairwise_cosine": 0.666556136377802,
+            "covariance_trace": 0.3215351449997274,
+            "leading_variance_share": 0.1826427064189422,
+            "participation_rank": 12.403472555993364,
+            "source_groups": 14
+          },
+          "gender": {
+            "n_unique_inputs": 24,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 23,
+            "mean_vector_norm": 0.8370819741598734,
+            "mean_pairwise_cosine": 0.6876934597087404,
+            "covariance_trace": 0.29929375035696143,
+            "leading_variance_share": 0.5926408652634926,
+            "participation_rank": 2.6659697858149634,
+            "source_groups": 12
+          },
+          "action of person": {
+            "n_unique_inputs": 22,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 21,
+            "mean_vector_norm": 0.7751541836284107,
+            "mean_pairwise_cosine": 0.5818575317841552,
+            "covariance_trace": 0.3991360088619229,
+            "leading_variance_share": 0.14176332435791777,
+            "participation_rank": 14.240861598643757,
+            "source_groups": 11
+          },
+          "number of dogs": {
+            "n_unique_inputs": 29,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 28,
+            "mean_vector_norm": 0.8409043091657641,
+            "mean_pairwise_cosine": 0.6966600587388793,
+            "covariance_trace": 0.2928799561708088,
+            "leading_variance_share": 0.49450012983929836,
+            "participation_rank": 3.0813519945492813,
+            "source_groups": 14
+          },
+          "number of persons": {
+            "n_unique_inputs": 34,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 33,
+            "mean_vector_norm": 0.849472399617496,
+            "mean_pairwise_cosine": 0.7131670951617178,
+            "covariance_trace": 0.2783966641562335,
+            "leading_variance_share": 0.4574027925814276,
+            "participation_rank": 4.076017413566086,
+            "source_groups": 17
+          }
+        }
+      },
+      "C_r": {
+        "global": {
+          "n_unique_inputs": 3591,
+          "width": 4096,
+          "sample_covariance_rank_ceiling": 3590,
+          "mean_vector_norm": 0.7799944670641693,
+          "mean_pairwise_cosine": 0.6082822854616441,
+          "covariance_trace": 0.39160864877354223,
+          "leading_variance_share": 0.041499609988962835,
+          "participation_rank": 107.99728826966071
+        },
+        "within_condition": {
+          "type of vehicle": {
+            "n_unique_inputs": 62,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 61,
+            "mean_vector_norm": 0.8520101426896383,
+            "mean_pairwise_cosine": 0.7214281892142058,
+            "covariance_trace": 0.27407873594053,
+            "leading_variance_share": 0.19218875615973416,
+            "participation_rank": 11.277772129947532,
+            "source_groups": 30
+          },
+          "type of food": {
+            "n_unique_inputs": 58,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 57,
+            "mean_vector_norm": 0.8241358646246757,
+            "mean_pairwise_cosine": 0.673571851495689,
+            "covariance_trace": 0.3208000963034358,
+            "leading_variance_share": 0.10028468840043424,
+            "participation_rank": 25.248174427221905,
+            "source_groups": 27
+          },
+          "type of room": {
+            "n_unique_inputs": 33,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 32,
+            "mean_vector_norm": 0.8740354126906338,
+            "mean_pairwise_cosine": 0.7565609616479212,
+            "covariance_trace": 0.23606211165968632,
+            "leading_variance_share": 0.35976642420705424,
+            "participation_rank": 5.411164495382586,
+            "source_groups": 15
+          },
+          "type of sport": {
+            "n_unique_inputs": 104,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 103,
+            "mean_vector_norm": 0.858851040006914,
+            "mean_pairwise_cosine": 0.7350777797312651,
+            "covariance_trace": 0.26237490653836193,
+            "leading_variance_share": 0.17324673198814797,
+            "participation_rank": 15.045280324815545,
+            "source_groups": 48
+          },
+          "number of objects": {
+            "n_unique_inputs": 24,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 23,
+            "mean_vector_norm": 0.8054687271122359,
+            "mean_pairwise_cosine": 0.6335094298438915,
+            "covariance_trace": 0.35122013177402645,
+            "leading_variance_share": 0.14993916951912453,
+            "participation_rank": 15.309312931635759,
+            "source_groups": 12
+          },
+          "activity of people": {
+            "n_unique_inputs": 19,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 18,
+            "mean_vector_norm": 0.8192516662688144,
+            "mean_pairwise_cosine": 0.6529051416923719,
+            "covariance_trace": 0.32882671785342993,
+            "leading_variance_share": 0.15737856736511832,
+            "participation_rank": 12.288312754321217,
+            "source_groups": 9
+          },
+          "number of people": {
+            "n_unique_inputs": 223,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 222,
+            "mean_vector_norm": 0.8477435803843029,
+            "mean_pairwise_cosine": 0.7174019220442839,
+            "covariance_trace": 0.2813308405498769,
+            "leading_variance_share": 0.2745617513329296,
+            "participation_rank": 9.77684336144898,
+            "source_groups": 105
+          },
+          "location": {
+            "n_unique_inputs": 28,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 27,
+            "mean_vector_norm": 0.8347283211006477,
+            "mean_pairwise_cosine": 0.6855406793444168,
+            "covariance_trace": 0.3032286489834111,
+            "leading_variance_share": 0.1622423049012997,
+            "participation_rank": 14.640235446177517,
+            "source_groups": 14
+          },
+          "color of object": {
+            "n_unique_inputs": 50,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 49,
+            "mean_vector_norm": 0.7933112786580793,
+            "mean_pairwise_cosine": 0.6217783516750197,
+            "covariance_trace": 0.37065722538374885,
+            "leading_variance_share": 0.08633553080830336,
+            "participation_rank": 28.326654640738397,
+            "source_groups": 24
+          },
+          "number of vehicles": {
+            "n_unique_inputs": 16,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 15,
+            "mean_vector_norm": 0.8429948965284637,
+            "mean_pairwise_cosine": 0.6913497548371882,
+            "covariance_trace": 0.28935961103770597,
+            "leading_variance_share": 0.21139118479803243,
+            "participation_rank": 8.746569206002954,
+            "source_groups": 8
+          },
+          "type of location": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.8355130672986335,
+            "mean_pairwise_cosine": 0.6821916686122435,
+            "covariance_trace": 0.30191792327602124,
+            "leading_variance_share": 0.17577130226433194,
+            "participation_rank": 12.035000286300962,
+            "source_groups": 10
+          },
+          "type of furniture": {
+            "n_unique_inputs": 18,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 17,
+            "mean_vector_norm": 0.848992304121882,
+            "mean_pairwise_cosine": 0.7043636917803264,
+            "covariance_trace": 0.279212091523546,
+            "leading_variance_share": 0.3070927723641505,
+            "participation_rank": 6.899234950608578,
+            "source_groups": 8
+          },
+          "age of person": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.8699095617763237,
+            "mean_pairwise_cosine": 0.7439396261758408,
+            "covariance_trace": 0.2432573703866588,
+            "leading_variance_share": 0.3067420975083996,
+            "participation_rank": 6.798204441710188,
+            "source_groups": 10
+          },
+          "species of animal": {
+            "n_unique_inputs": 42,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 41,
+            "mean_vector_norm": 0.890033998581118,
+            "mean_pairwise_cosine": 0.7870912626018723,
+            "covariance_trace": 0.2078394971652637,
+            "leading_variance_share": 0.42577573969649724,
+            "participation_rank": 4.602358877857477,
+            "source_groups": 21
+          },
+          "number of animals": {
+            "n_unique_inputs": 63,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 62,
+            "mean_vector_norm": 0.8580096353448236,
+            "mean_pairwise_cosine": 0.7319253811576287,
+            "covariance_trace": 0.2638194975895523,
+            "leading_variance_share": 0.42865515259843373,
+            "participation_rank": 4.758894375207568,
+            "source_groups": 31
+          },
+          "type of animal": {
+            "n_unique_inputs": 72,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 71,
+            "mean_vector_norm": 0.887235610742866,
+            "mean_pairwise_cosine": 0.7841896628733996,
+            "covariance_trace": 0.21281299287754216,
+            "leading_variance_share": 0.4210009263513998,
+            "participation_rank": 4.736591597718298,
+            "source_groups": 32
+          },
+          "name of place": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.8013443299319187,
+            "mean_pairwise_cosine": 0.623318666212678,
+            "covariance_trace": 0.35784730912580043,
+            "leading_variance_share": 0.1663279964912752,
+            "participation_rank": 12.907333338898914,
+            "source_groups": 10
+          },
+          "name of object": {
+            "n_unique_inputs": 23,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 22,
+            "mean_vector_norm": 0.7937489175075213,
+            "mean_pairwise_cosine": 0.613220858755663,
+            "covariance_trace": 0.3699626763513727,
+            "leading_variance_share": 0.10895368242960982,
+            "participation_rank": 16.265157611123705,
+            "source_groups": 11
+          },
+          "activity": {
+            "n_unique_inputs": 22,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 21,
+            "mean_vector_norm": 0.8130326946379813,
+            "mean_pairwise_cosine": 0.6448803606815956,
+            "covariance_trace": 0.3389778392427296,
+            "leading_variance_share": 0.1095980045744219,
+            "participation_rank": 15.682943485596887,
+            "source_groups": 11
+          },
+          "color of clothing": {
+            "n_unique_inputs": 18,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 17,
+            "mean_vector_norm": 0.8077334579019244,
+            "mean_pairwise_cosine": 0.6319882393191926,
+            "covariance_trace": 0.3475666948151241,
+            "leading_variance_share": 0.14111766286116256,
+            "participation_rank": 12.618185638874923,
+            "source_groups": 9
+          },
+          "sport": {
+            "n_unique_inputs": 44,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 43,
+            "mean_vector_norm": 0.8662944911008966,
+            "mean_pairwise_cosine": 0.7446630318599596,
+            "covariance_trace": 0.24953387842747843,
+            "leading_variance_share": 0.21457401294090045,
+            "participation_rank": 9.07698037792272,
+            "source_groups": 21
+          },
+          "sport being played": {
+            "n_unique_inputs": 23,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 22,
+            "mean_vector_norm": 0.8731544389412302,
+            "mean_pairwise_cosine": 0.7515986132041064,
+            "covariance_trace": 0.23760134285069776,
+            "leading_variance_share": 0.2316382443383114,
+            "participation_rank": 7.2985175761476535,
+            "source_groups": 11
+          },
+          "number of players": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.8643799368618974,
+            "mean_pairwise_cosine": 0.7338449206175597,
+            "covariance_trace": 0.2528473380045473,
+            "leading_variance_share": 0.37250174868703095,
+            "participation_rank": 5.400303270479228,
+            "source_groups": 10
+          },
+          "type of activity": {
+            "n_unique_inputs": 29,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 28,
+            "mean_vector_norm": 0.8493463594160197,
+            "mean_pairwise_cosine": 0.7114388531860778,
+            "covariance_trace": 0.27861078188072724,
+            "leading_variance_share": 0.21632293080054213,
+            "participation_rank": 10.195964449169432,
+            "source_groups": 14
+          },
+          "person's activity": {
+            "n_unique_inputs": 16,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 15,
+            "mean_vector_norm": 0.8441923689910055,
+            "mean_pairwise_cosine": 0.6935048061583954,
+            "covariance_trace": 0.2873392455637574,
+            "leading_variance_share": 0.23132152789130908,
+            "participation_rank": 8.07426926167994,
+            "source_groups": 8
+          },
+          "type of game": {
+            "n_unique_inputs": 16,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 15,
+            "mean_vector_norm": 0.87663839223499,
+            "mean_pairwise_cosine": 0.7530611943380704,
+            "covariance_trace": 0.2315051460341654,
+            "leading_variance_share": 0.4991223600957919,
+            "participation_rank": 3.2059877237685908,
+            "source_groups": 6
+          },
+          "color of animal": {
+            "n_unique_inputs": 28,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 27,
+            "mean_vector_norm": 0.8565303915368137,
+            "mean_pairwise_cosine": 0.7237792853830292,
+            "covariance_trace": 0.2663557085658103,
+            "leading_variance_share": 0.1851438089153664,
+            "participation_rank": 12.327855722348344,
+            "source_groups": 14
+          },
+          "gender": {
+            "n_unique_inputs": 24,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 23,
+            "mean_vector_norm": 0.8715007806042179,
+            "mean_pairwise_cosine": 0.7490576800921156,
+            "covariance_trace": 0.24048640153784154,
+            "leading_variance_share": 0.5826444657175623,
+            "participation_rank": 2.742507823061639,
+            "source_groups": 12
+          },
+          "action of person": {
+            "n_unique_inputs": 22,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 21,
+            "mean_vector_norm": 0.8190655321047985,
+            "mean_pairwise_cosine": 0.6551954099453794,
+            "covariance_trace": 0.3291316546714829,
+            "leading_variance_share": 0.14162072552019972,
+            "participation_rank": 14.263548471938172,
+            "source_groups": 11
+          },
+          "number of dogs": {
+            "n_unique_inputs": 29,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 28,
+            "mean_vector_norm": 0.8913039019779823,
+            "mean_pairwise_cosine": 0.7870805968834146,
+            "covariance_trace": 0.2055773663373387,
+            "leading_variance_share": 0.49415680730945527,
+            "participation_rank": 3.133612285135733,
+            "source_groups": 14
+          },
+          "number of persons": {
+            "n_unique_inputs": 34,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 33,
+            "mean_vector_norm": 0.8954358196212964,
+            "mean_pairwise_cosine": 0.7957994065467469,
+            "covariance_trace": 0.19819471696582747,
+            "leading_variance_share": 0.4417250568211187,
+            "participation_rank": 4.275244086187255,
+            "source_groups": 17
+          }
+        }
+      },
+      "D": {
+        "global": {
+          "n_unique_inputs": 3591,
+          "width": 4096,
+          "sample_covariance_rank_ceiling": 3590,
+          "mean_vector_norm": 0.7457301876801788,
+          "mean_pairwise_cosine": 0.5559898675559565,
+          "covariance_trace": 0.44388648899451155,
+          "leading_variance_share": 0.08907628535017492,
+          "participation_rank": 56.94283196105019
+        },
+        "within_condition": {
+          "type of vehicle": {
+            "n_unique_inputs": 62,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 61,
+            "mean_vector_norm": 0.8225041769052965,
+            "mean_pairwise_cosine": 0.6712100572876395,
+            "covariance_trace": 0.32348688808022225,
+            "leading_variance_share": 0.2366233834170977,
+            "participation_rank": 12.531998889467713,
+            "source_groups": 30
+          },
+          "type of food": {
+            "n_unique_inputs": 58,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 57,
+            "mean_vector_norm": 0.8706861126351757,
+            "mean_pairwise_cosine": 0.753850347440844,
+            "covariance_trace": 0.24190567980985603,
+            "leading_variance_share": 0.09783186380564259,
+            "participation_rank": 25.15711116827834,
+            "source_groups": 27
+          },
+          "type of room": {
+            "n_unique_inputs": 33,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 32,
+            "mean_vector_norm": 0.8835118770394793,
+            "mean_pairwise_cosine": 0.7737367758571421,
+            "covariance_trace": 0.2194067524058247,
+            "leading_variance_share": 0.2591822392189289,
+            "participation_rank": 8.986423190148779,
+            "source_groups": 15
+          },
+          "type of sport": {
+            "n_unique_inputs": 104,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 103,
+            "mean_vector_norm": 0.7693979788879076,
+            "mean_pairwise_cosine": 0.5880118251839704,
+            "covariance_trace": 0.40802674748114776,
+            "leading_variance_share": 0.14069186237480755,
+            "participation_rank": 22.774565664844456,
+            "source_groups": 48
+          },
+          "number of objects": {
+            "n_unique_inputs": 24,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 23,
+            "mean_vector_norm": 0.8499540402096698,
+            "mean_pairwise_cosine": 0.7103532561512995,
+            "covariance_trace": 0.27757812930115605,
+            "leading_variance_share": 0.13249887496718404,
+            "participation_rank": 13.695523133467601,
+            "source_groups": 12
+          },
+          "activity of people": {
+            "n_unique_inputs": 19,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 18,
+            "mean_vector_norm": 0.8035803388500115,
+            "mean_pairwise_cosine": 0.6260603245620537,
+            "covariance_trace": 0.35425865563642056,
+            "leading_variance_share": 0.1717693117780981,
+            "participation_rank": 11.815277983039644,
+            "source_groups": 9
+          },
+          "number of people": {
+            "n_unique_inputs": 223,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 222,
+            "mean_vector_norm": 0.7886961450638392,
+            "mean_pairwise_cosine": 0.6203390939593876,
+            "covariance_trace": 0.3779583919764017,
+            "leading_variance_share": 0.07542512465000248,
+            "participation_rank": 48.394099537187735,
+            "source_groups": 105
+          },
+          "location": {
+            "n_unique_inputs": 28,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 27,
+            "mean_vector_norm": 0.8127093248582392,
+            "mean_pairwise_cosine": 0.647922241210305,
+            "covariance_trace": 0.3395035485332133,
+            "leading_variance_share": 0.16441115644688928,
+            "participation_rank": 14.188729270657614,
+            "source_groups": 14
+          },
+          "color of object": {
+            "n_unique_inputs": 50,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 49,
+            "mean_vector_norm": 0.7958497519971828,
+            "mean_pairwise_cosine": 0.6258947223250974,
+            "covariance_trace": 0.3666231660151302,
+            "leading_variance_share": 0.14766003267036779,
+            "participation_rank": 20.825096604033376,
+            "source_groups": 24
+          },
+          "number of vehicles": {
+            "n_unique_inputs": 16,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 15,
+            "mean_vector_norm": 0.8723960380762976,
+            "mean_pairwise_cosine": 0.7451465027146275,
+            "covariance_trace": 0.23892516804890288,
+            "leading_variance_share": 0.17197149986041857,
+            "participation_rank": 10.52249184813131,
+            "source_groups": 8
+          },
+          "type of location": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.847889351013049,
+            "mean_pairwise_cosine": 0.7041224769828052,
+            "covariance_trace": 0.281083616991953,
+            "leading_variance_share": 0.21912722762886533,
+            "participation_rank": 10.022335333392494,
+            "source_groups": 10
+          },
+          "type of furniture": {
+            "n_unique_inputs": 18,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 17,
+            "mean_vector_norm": 0.8846206327787073,
+            "mean_pairwise_cosine": 0.769762703040727,
+            "covariance_trace": 0.21744633525025245,
+            "leading_variance_share": 0.24480122168576554,
+            "participation_rank": 8.605618066085132,
+            "source_groups": 8
+          },
+          "age of person": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.8318020982354882,
+            "mean_pairwise_cosine": 0.675678663043836,
+            "covariance_trace": 0.3081052841173773,
+            "leading_variance_share": 0.1484292480528932,
+            "participation_rank": 13.575456725973106,
+            "source_groups": 10
+          },
+          "species of animal": {
+            "n_unique_inputs": 42,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 41,
+            "mean_vector_norm": 0.837119380691583,
+            "mean_pairwise_cosine": 0.6934705367670009,
+            "covariance_trace": 0.2992311512608066,
+            "leading_variance_share": 0.23393307298616883,
+            "participation_rank": 11.988613437674793,
+            "source_groups": 21
+          },
+          "number of animals": {
+            "n_unique_inputs": 63,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 62,
+            "mean_vector_norm": 0.849291092492355,
+            "mean_pairwise_cosine": 0.7168001234523639,
+            "covariance_trace": 0.27870465273863376,
+            "leading_variance_share": 0.14403241118460033,
+            "participation_rank": 21.262781588485154,
+            "source_groups": 31
+          },
+          "type of animal": {
+            "n_unique_inputs": 72,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 71,
+            "mean_vector_norm": 0.8390706952027136,
+            "mean_pairwise_cosine": 0.6998711757056681,
+            "covariance_trace": 0.2959603648030904,
+            "leading_variance_share": 0.18315548656152955,
+            "participation_rank": 17.399451183897014,
+            "source_groups": 32
+          },
+          "name of place": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.807857024839692,
+            "mean_pairwise_cosine": 0.6343504978055878,
+            "covariance_trace": 0.34736702076776577,
+            "leading_variance_share": 0.1888371167994228,
+            "participation_rank": 10.527442250652626,
+            "source_groups": 10
+          },
+          "name of object": {
+            "n_unique_inputs": 23,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 22,
+            "mean_vector_norm": 0.8276157141381956,
+            "mean_pairwise_cosine": 0.6706272133315405,
+            "covariance_trace": 0.31505225305256945,
+            "leading_variance_share": 0.13765529191078824,
+            "participation_rank": 14.233670538211513,
+            "source_groups": 11
+          },
+          "activity": {
+            "n_unique_inputs": 22,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 21,
+            "mean_vector_norm": 0.796583564653679,
+            "mean_pairwise_cosine": 0.617142773671514,
+            "covariance_trace": 0.3654546379018049,
+            "leading_variance_share": 0.14579019157862766,
+            "participation_rank": 13.940314549229056,
+            "source_groups": 11
+          },
+          "color of clothing": {
+            "n_unique_inputs": 18,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 17,
+            "mean_vector_norm": 0.802857923200525,
+            "mean_pairwise_cosine": 0.6236738352411331,
+            "covariance_trace": 0.3554191632803588,
+            "leading_variance_share": 0.18758555068325203,
+            "participation_rank": 10.915426652406342,
+            "source_groups": 9
+          },
+          "sport": {
+            "n_unique_inputs": 44,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 43,
+            "mean_vector_norm": 0.7928457950065618,
+            "mean_pairwise_cosine": 0.6199673490519083,
+            "covariance_trace": 0.371395541130193,
+            "leading_variance_share": 0.1775275764465717,
+            "participation_rank": 15.44990305948323,
+            "source_groups": 21
+          },
+          "sport being played": {
+            "n_unique_inputs": 23,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 22,
+            "mean_vector_norm": 0.7895328933232458,
+            "mean_pairwise_cosine": 0.6062422898064725,
+            "covariance_trace": 0.376637796323873,
+            "leading_variance_share": 0.20911117935995327,
+            "participation_rank": 10.56820548854109,
+            "source_groups": 11
+          },
+          "number of players": {
+            "n_unique_inputs": 20,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 19,
+            "mean_vector_norm": 0.8128299323367189,
+            "mean_pairwise_cosine": 0.6428342080661527,
+            "covariance_trace": 0.33930752589088337,
+            "leading_variance_share": 0.14188534630857,
+            "participation_rank": 12.881787295393345,
+            "source_groups": 10
+          },
+          "type of activity": {
+            "n_unique_inputs": 29,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 28,
+            "mean_vector_norm": 0.7985687553000151,
+            "mean_pairwise_cosine": 0.6247732014654835,
+            "covariance_trace": 0.36228795332609226,
+            "leading_variance_share": 0.19666349075170483,
+            "participation_rank": 12.535404503666216,
+            "source_groups": 14
+          },
+          "person's activity": {
+            "n_unique_inputs": 16,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 15,
+            "mean_vector_norm": 0.815999744832557,
+            "mean_pairwise_cosine": 0.6435792885418216,
+            "covariance_trace": 0.33414442537464867,
+            "leading_variance_share": 0.2992631034498772,
+            "participation_rank": 7.408165602588951,
+            "source_groups": 8
+          },
+          "type of game": {
+            "n_unique_inputs": 16,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 15,
+            "mean_vector_norm": 0.8459563180294999,
+            "mean_pairwise_cosine": 0.6966848987439133,
+            "covariance_trace": 0.2843578990517255,
+            "leading_variance_share": 0.3099116271425617,
+            "participation_rank": 6.011757884035692,
+            "source_groups": 6
+          },
+          "color of animal": {
+            "n_unique_inputs": 28,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 27,
+            "mean_vector_norm": 0.8711003790954195,
+            "mean_pairwise_cosine": 0.7498831240228444,
+            "covariance_trace": 0.24118415380815697,
+            "leading_variance_share": 0.14506537076391665,
+            "participation_rank": 15.746700778879237,
+            "source_groups": 14
+          },
+          "gender": {
+            "n_unique_inputs": 24,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 23,
+            "mean_vector_norm": 0.8078401580019166,
+            "mean_pairwise_cosine": 0.6375016218662081,
+            "covariance_trace": 0.347394277330131,
+            "leading_variance_share": 0.1518093615973443,
+            "participation_rank": 13.867331736382827,
+            "source_groups": 12
+          },
+          "action of person": {
+            "n_unique_inputs": 22,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 21,
+            "mean_vector_norm": 0.7885714066213171,
+            "mean_pairwise_cosine": 0.6038374753765027,
+            "covariance_trace": 0.3781551472486173,
+            "leading_variance_share": 0.151276952587698,
+            "participation_rank": 13.336237525687137,
+            "source_groups": 11
+          },
+          "number of dogs": {
+            "n_unique_inputs": 29,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 28,
+            "mean_vector_norm": 0.895011680494884,
+            "mean_pairwise_cosine": 0.7939404038716605,
+            "covariance_trace": 0.1989541218172449,
+            "leading_variance_share": 0.180024111198156,
+            "participation_rank": 13.472443786559866,
+            "source_groups": 14
+          },
+          "number of persons": {
+            "n_unique_inputs": 34,
+            "width": 4096,
+            "sample_covariance_rank_ceiling": 33,
+            "mean_vector_norm": 0.7874778226799053,
+            "mean_pairwise_cosine": 0.6086098456971917,
+            "covariance_trace": 0.3798786920112575,
+            "leading_variance_share": 0.12923426781252093,
+            "participation_rank": 19.602951963655038,
+            "source_groups": 17
+          }
+        }
+      }
+    },
+    "reference_alignment": {
+      "raw_norm": {
+        "min": 74.7408218383789,
+        "mean": 105.83966064453125,
+        "max": 129.86363220214844,
+        "p05": 89.14352416992188,
+        "median": 106.22496795654297,
+        "p95": 122.01507568359375
+      },
+      "condition_reference_norm": {
+        "min": 87.44549560546875,
+        "mean": 107.63761901855469,
+        "max": 130.64756774902344,
+        "p05": 97.07889556884766,
+        "median": 106.56754302978516,
+        "p95": 120.6540298461914
+      },
+      "norm_ratio_reference_over_passage": {
+        "min": 0.7460472583770752,
+        "mean": 1.0246204137802124,
+        "max": 1.4798585176467896,
+        "p05": 0.8657658100128174,
+        "median": 1.0163609981536865,
+        "p95": 1.206579566001892
+      },
+      "condition_reference_cosine": {
+        "min": 0.0905362144112587,
+        "mean": 0.3899405896663666,
+        "max": 0.8544811606407166,
+        "p05": 0.1833467185497284,
+        "median": 0.37285637855529785,
+        "p95": 0.6451708078384399
+      },
+      "raw_condition_residual_norm": {
+        "min": 55.89983367919922,
+        "mean": 117.20149230957031,
+        "max": 159.6810760498047,
+        "p05": 92.17489624023438,
+        "median": 118.72628784179688,
+        "p95": 137.95465087890625
+      },
+      "unit_condition_residual_norm": {
+        "min": 0.53947913646698,
+        "mean": 1.0969173908233643,
+        "max": 1.3486762046813965,
+        "p05": 0.8424122333526611,
+        "median": 1.1199496984481812,
+        "p95": 1.2780089378356934
+      },
+      "passage_token_count": {
+        "min": 8.0,
+        "mean": 16.262043998886103,
+        "max": 37.0,
+        "p05": 11.0,
+        "median": 16.0,
+        "p95": 23.0
+      }
+    },
+    "smaller_condition_groups": {
+      "type of object": 14,
+      "type of food item": 10,
+      "object's purpose": 2,
+      "sign label": 2,
+      "color of vehicle": 10,
+      "position of food": 2,
+      "type of food involved": 4,
+      "type of meal": 6,
+      "contents on bed": 2,
+      "objects in bedroom": 2,
+      "color of sheets": 2,
+      "action of people": 8,
+      "people on street": 2,
+      "position while skateboarding": 2,
+      "color of bus": 4,
+      "contents of desk": 2,
+      "mode of transportation": 8,
+      "room decor style": 2,
+      "room type": 4,
+      "location of fridge": 2,
+      "type of appliance": 2,
+      "type of play": 4,
+      "appearance of bathroom": 2,
+      "types of food items": 6,
+      "number of products": 2,
+      "name of product": 2,
+      "location of kitchen items": 2,
+      "differences in vegetable dishes": 2,
+      "kind of foods": 2,
+      "type of cooking item": 2,
+      "type of food packaging": 2,
+      "position played by person": 2,
+      "next action of person": 2,
+      "presence of animal": 8,
+      "location of bus": 2,
+      "type of objects": 2,
+      "type of computer": 5,
+      "number of computers": 2,
+      "surface stood upon": 2,
+      "objects nearby": 4,
+      "color of capped wave": 2,
+      "type of water activity": 4,
+      "color of blanketed sky": 2,
+      "weather conditions": 2,
+      "objects present": 4,
+      "type of electronic equipment": 2,
+      "number of sinks": 6,
+      "features of bathroom": 5,
+      "action of vehicle": 2,
+      "activity of object": 2,
+      "presence of vehicles": 2,
+      "type of transport": 6,
+      "number of planes": 6,
+      "type of items in bathroom": 2,
+      "function of place": 2,
+      "man with food": 2,
+      "name of sport": 12,
+      "action of man": 10,
+      "furniture food is on": 2,
+      "amount of cups": 4,
+      "shape of pickles": 2,
+      "type of vegetable": 2,
+      "type of hobby": 6,
+      "activity of animal": 8,
+      "dessert with icing": 2,
+      "number of cakes": 2,
+      "brightness": 2,
+      "type of illumination": 2,
+      "movement level of animals": 2,
+      "number of beverages": 4,
+      "type of transportation": 7,
+      "type of wine in glass": 2,
+      "types of wine": 2,
+      "state of food": 2,
+      "location of device": 2,
+      "type of timekeeping device": 2,
+      "action of objects": 2,
+      "food items": 4,
+      "type of food ingredients": 2,
+      "color of sign": 4,
+      "number of signs": 4,
+      "layout of bedroom": 2,
+      "type of dessert": 4,
+      "number of items": 4,
+      "weather": 10,
+      "method of traversal": 2,
+      "Presence of road": 2,
+      "sport played": 10,
+      "age of player": 6,
+      "animal's posture": 2,
+      "animal color": 4,
+      "room function": 6,
+      "room's interior design": 2,
+      "sidewalk": 2,
+      "bed": 4,
+      "speed animal is moving": 2,
+      "type of dish": 8,
+      "plate on table with food": 2,
+      "variety of breakfast items": 2,
+      "gender of patrons": 2,
+      "size of pizza": 2,
+      "presence of frisbee": 2,
+      "movement of players": 2,
+      "name of game": 13,
+      "actions performed in baseball game": 2,
+      "means of transportation": 4,
+      "type of fruit": 6,
+      "color of fruit": 2,
+      "colors": 4,
+      "fruit and nut items": 2,
+      "Types of fruits": 2,
+      "sentiment of man": 2,
+      "vehicle": 4,
+      "average age of group": 2,
+      "amount of food": 2,
+      "name of activity": 2,
+      "name of things": 6,
+      "advertisement on vehicle": 2,
+      "color of paper": 2,
+      "name of room": 11,
+      "action of object": 4,
+      "items on furniture": 2,
+      "object is clock": 2,
+      "number of seats": 2,
+      "train": 4,
+      "presence of cat": 2,
+      "position of cats": 2,
+      "location of objects": 2,
+      "color": 4,
+      "food": 6,
+      "color of ornamental clock": 2,
+      "road": 4,
+      "features of street": 2,
+      "number of dish": 6,
+      "presence of dish": 2,
+      "animal's location": 2,
+      "color of cat": 2,
+      "clothing of man": 2,
+      "type of liquor": 2,
+      "number of wine glasses": 2,
+      "person eating": 2,
+      "number of phones": 2,
+      "name of actions": 2,
+      "hobby": 8,
+      "type of place": 10,
+      "design of bathroom": 2,
+      "number of object": 2,
+      "position of animal": 2,
+      "traffic": 2,
+      "action of batter": 4,
+      "type of animals": 10,
+      "object person is holding": 2,
+      "animal near person": 2,
+      "gender of people in sentences": 2,
+      "Weather": 2,
+      "type of recreational activity": 8,
+      "Pose of person": 2,
+      "location of event": 4,
+      "beverage temperature": 2,
+      "location of animal": 4,
+      "presence of grass": 2,
+      "flat dish": 2,
+      "type of decorations": 2,
+      "place of hitting": 2,
+      "boy hitting ball": 2,
+      "name of products": 2,
+      "presence of body of water": 2,
+      "color of bowl": 2,
+      "name of vegetables": 2,
+      "animal type": 12,
+      "person's age": 12,
+      "location of intersection": 2,
+      "type of vehicles": 8,
+      "contents of bathroom": 4,
+      "amount of cows": 2,
+      "size of cow": 2,
+      "number of animal": 2,
+      "animal": 4,
+      "items used by people": 2,
+      "motorcycle": 2,
+      "perspective of batter in sport": 2,
+      "object": 6,
+      "absence of hand towel": 2,
+      "place description": 2,
+      "placement of objects": 2,
+      "objects in room": 2,
+      "flavors": 2,
+      "type of event": 10,
+      "action of player": 2,
+      "living room": 2,
+      "type of signals": 2,
+      "quantity of food": 6,
+      "action being performed": 2,
+      "type of area involved": 2,
+      "items in room": 2,
+      "room's design": 2,
+      "color of van": 2,
+      "location of van": 2,
+      "style of room": 2,
+      "objects involved in activity": 2,
+      "number of slices": 2,
+      "number of elephants": 3,
+      "posture of animal": 2,
+      "type of large animal": 2,
+      "color of teddy bear": 2,
+      "color of teddy bears": 2,
+      "presence of liquid": 2,
+      "location of vehicle": 2,
+      "name of construct": 2,
+      "number of constructions": 2,
+      "food being eaten": 4,
+      "location of food": 2,
+      "item being carried": 2,
+      "number of ring binder": 2,
+      "types of objects": 2,
+      "number of photos": 2,
+      "location of aircraft": 2,
+      "type of aircraft": 3,
+      "object being held": 2,
+      "location name": 4,
+      "person's gender": 8,
+      "activity involving skateboard": 2,
+      "skateboarding trick": 2,
+      "type of flowers": 2,
+      "species of cat": 2,
+      "game being played": 6,
+      "location of zebras standing": 2,
+      "person's hobby": 2,
+      "person's proximity to surface": 2,
+      "location of items": 2,
+      "number of plates": 4,
+      "number of cups": 3,
+      "outdoor activity": 2,
+      "game played": 8,
+      "player's action": 2,
+      "object is flower": 2,
+      "size of floral arrangement": 2,
+      "color of snow": 4,
+      "size of animal": 2,
+      "food on table": 2,
+      "type of food items": 2,
+      "people's activity": 2,
+      "number of people riding waves": 2,
+      "color of sky": 4,
+      "beverage container": 2,
+      "equipment": 2,
+      "body posture": 2,
+      "type of bed with objects": 2,
+      "furniture in bedroom": 2,
+      "consciousness": 2,
+      "type of electronics": 2,
+      "beach location": 2,
+      "location of people": 6,
+      "reason for gathering": 2,
+      "people's immediate attention": 2,
+      "position in baseball game": 2,
+      "view of bathroom": 2,
+      "place bathroom": 2,
+      "object food is in": 2,
+      "type of plant": 2,
+      "category of road sign": 2,
+      "object shape": 2,
+      "entertainment options in room": 2,
+      "activity during game": 2,
+      "roadside elements": 2,
+      "number of bottles": 4,
+      "number of mirrors": 2,
+      "appearance of wall": 2,
+      "table of food": 2,
+      "signs on road": 2,
+      "view of road sign": 2,
+      "type of sandwich": 2,
+      "action person is taking": 2,
+      "proximity to water": 10,
+      "number of kites": 2,
+      "species of animals": 4,
+      "room's function": 2,
+      "number of towels": 2,
+      "altitude": 2,
+      "type of water repellent": 2,
+      "gender of person": 8,
+      "presence of dog": 2,
+      "location of person": 4,
+      "type of chair": 2,
+      "main furniture in room": 2,
+      "illumination near bed": 2,
+      "number of boxes": 2,
+      "location of box": 2,
+      "speed of trains": 2,
+      "hobby of people": 2,
+      "type of electronic device": 2,
+      "number of tables": 2,
+      "number of drinking glasses": 2,
+      "number of devices": 2,
+      "type of device": 6,
+      "number of laptops": 2,
+      "color of building": 2,
+      "presence of clock": 2,
+      "type of area in home": 2,
+      "number of rooms involved": 2,
+      "number of zebras": 2,
+      "location of zebras": 2,
+      "color of cake": 2,
+      "type of cake": 2,
+      "size of device": 2,
+      "number of dishes": 2,
+      "People on towel": 2,
+      "name of animal": 6,
+      "countertop": 2,
+      "comfort features in bathrooms": 2,
+      "type of bathroom": 3,
+      "activity in baseball game": 2,
+      "color of wine": 3,
+      "wine on table": 2,
+      "animal species": 2,
+      "size of bus": 2,
+      "parking location": 2,
+      "place kitchen": 2,
+      "Type of space": 2,
+      "color of cloth": 2,
+      "types of sign": 2,
+      "activity performed": 4,
+      "number of drinks served": 2,
+      "number of food items": 4,
+      "cat": 2,
+      "neatness of bed": 2,
+      "object holding things": 2,
+      "sweetness of food": 2,
+      "features of kitchen area": 2,
+      "type of meat": 2,
+      "location of ball": 2,
+      "name of objects": 2,
+      "type of drink": 2,
+      "size of room": 2,
+      "kitchen": 2,
+      "address of street": 2,
+      "street": 2,
+      "presence of canine": 2,
+      "vehicle type": 2,
+      "background features": 2,
+      "color of dog": 12,
+      "view of animal": 2,
+      "type of clothing": 8,
+      "sentiment of people": 6,
+      "type of view": 8,
+      "type of signal": 2,
+      "reading material": 2,
+      "location of books": 4,
+      "type of home appliance": 2,
+      "angle of view": 2,
+      "number of bookshelves": 2,
+      "presence of elephants": 2,
+      "name of food": 2,
+      "variety of food item": 2,
+      "color of bathroom features": 2,
+      "type of countertop in bathroom": 2,
+      "type of structure": 2,
+      "architecture of building": 2,
+      "name of equipment": 2,
+      "Container for food": 2,
+      "type of beverage": 2,
+      "speed of vehicles": 2,
+      "number of pictures": 2,
+      "action of cutting": 2,
+      "chopped vegetables": 2,
+      "color of river": 2,
+      "object is train": 2,
+      "Types of activities on beach": 2,
+      "number of drinks": 2,
+      "type of object on landscape": 2,
+      "type of decoration": 2,
+      "decoration location": 2,
+      "name of dish": 2,
+      "presence of pizza in scene": 2,
+      "type of product": 2,
+      "location of product": 2,
+      "number of items in room": 2,
+      "weather condition": 6,
+      "type of bottles": 2,
+      "number of legs of object": 2,
+      "height of skateboard": 2,
+      "Gender": 2,
+      "type of building": 6,
+      "animal present": 2,
+      "bat speed": 2,
+      "location animal is looking at": 2,
+      "type of noodle": 2,
+      "animal's age": 2,
+      "purpose of object": 2,
+      "number of players in scene": 2,
+      "color of plate": 2,
+      "objects next to jet": 2,
+      "Location of jet": 2,
+      "amount of wine on table": 2,
+      "means of traversal": 6,
+      "activity involving object": 2,
+      "dishware": 2,
+      "number of fire trucks": 2,
+      "location of computer": 2,
+      "items in scene": 2,
+      "number of buckets": 2,
+      "meat": 2,
+      "number of people on elephant": 2,
+      "living room space": 2,
+      "Type of objects in room": 2,
+      "object in the air": 2,
+      "situation of parasailer": 2,
+      "plate with food": 2,
+      "items on bed": 2,
+      "presence of instrument": 2,
+      "presence of suitcase": 2,
+      "woman eating": 2,
+      "action of woman": 2,
+      "activity of person": 14,
+      "color of room": 2,
+      "player's activity": 2,
+      "type of sports equipment": 4,
+      "food item": 2,
+      "people's intentions": 4,
+      "people's focus": 2,
+      "type of position": 2,
+      "dog": 2,
+      "mechanical work": 2,
+      "amount of people": 2,
+      "skill level of skateboarder": 2,
+      "type of kitchen equipment": 2,
+      "Sky": 2,
+      "type of educational materials": 2,
+      "electronic objects": 2,
+      "presence of flag near desk": 2,
+      "quantity of animals": 2,
+      "time of day": 2,
+      "age of child": 2,
+      "number of aircraft": 2,
+      "position of racket": 2,
+      "color of t-shirt": 2,
+      "number of men": 4,
+      "Type of food": 4,
+      "type of work": 4,
+      "location on street": 2,
+      "object child is holding": 2,
+      "items on table": 4,
+      "type of object on table": 2,
+      "color of scissors": 2,
+      "motion of child": 2,
+      "type of utensil": 2,
+      "types of fruits and vegetables": 2,
+      "type of produce": 4,
+      "room elements": 2,
+      "number of frames": 2,
+      "position of players": 2,
+      "number of person": 4,
+      "type of donut": 2,
+      "type of plants": 2,
+      "Type of container holding flowers": 2,
+      "meal type": 2,
+      "number of items on table": 2,
+      "amount of features in room": 2,
+      "objects location": 2,
+      "number of pizzas": 2,
+      "type of restroom": 2,
+      "objects in kitchen": 2,
+      "appliances in kitchen": 2,
+      "type of supplementary food": 2,
+      "type of food container": 2,
+      "action of animal": 4,
+      "height of man": 2,
+      "activity of surfer": 2,
+      "type of container": 2,
+      "gender of people": 8,
+      "location of surfboards": 2,
+      "color of train": 2,
+      "train on track": 2,
+      "amount of computers": 2,
+      "activity taking place": 2,
+      "container for food": 2,
+      "type of food being eaten": 2,
+      "person's stance": 4,
+      "number of wheels": 8,
+      "state of terrain traversed": 2,
+      "surface dogs are on": 2,
+      "number of children": 14,
+      "location of play actions": 2,
+      "color of dogs": 4,
+      "type of vehicle being ridden": 2,
+      "number of wheels on motorcycle that are touching ground": 2,
+      "action of persons": 10,
+      "colors associated with different boxers": 2,
+      "activity location": 2,
+      "means of momentum": 2,
+      "setting": 8,
+      "hand action": 4,
+      "dog's action": 2,
+      "dog's level of training": 2,
+      "type of skateboard trick": 2,
+      "type of sport vehicle": 2,
+      "Skateboarding activity": 2,
+      "number of toys": 2,
+      "sex of person": 12,
+      "activity level": 2,
+      "skill level of subject": 2,
+      "place of activity": 2,
+      "type of game being played": 2,
+      "positions players are playing": 2,
+      "number of workers": 2,
+      "vehicle used": 2,
+      "age group of person": 2,
+      "type of toy": 2,
+      "ages of people": 6,
+      "movement of kids": 2,
+      "body of water dog is walking through": 2,
+      "dog's mouth contents": 2,
+      "sex of people": 2,
+      "age of people": 6,
+      "type of surface": 2,
+      "motion of animals": 2,
+      "gender of persons": 8,
+      "type of area": 2,
+      "name of action": 2,
+      "name of dog": 2,
+      "age of players": 2,
+      "locomotion": 2,
+      "movement of people": 4,
+      "type of ride": 2,
+      "Ethnicity of people": 2,
+      "Gender composition of group": 2,
+      "people's gender": 2,
+      "motion of people": 2,
+      "presence of lab coat": 2,
+      "motion of person": 6,
+      "type of landform": 2,
+      "size of animals": 2,
+      "sentiment of dogs": 2,
+      "instrument of performance": 2,
+      "instruments used": 2,
+      "motion of players": 4,
+      "color of frisbee": 2,
+      "color of flying object": 2,
+      "activities racing": 2,
+      "position on object": 2,
+      "action of dog": 10,
+      "Type of toy": 2,
+      "expression of person": 2,
+      "placement of frisbee": 2,
+      "location of action": 4,
+      "type of riding object": 2,
+      "dress of person": 2,
+      "person's board": 2,
+      "action related to taking food": 2,
+      "number of beings on board": 2,
+      "musical instrument": 2,
+      "physical action": 2,
+      "circumstances surrounding accident": 2,
+      "accident": 2,
+      "color of dress": 2,
+      "animal's color": 4,
+      "breed of animal": 2,
+      "temperament of dogs": 2,
+      "type of item in use": 2,
+      "positioning of person": 2,
+      "musical activity": 2,
+      "absence of umbrella": 2,
+      "animal's action": 2,
+      "surface sat upon": 2,
+      "age of passengers": 2,
+      "cause of injury": 2,
+      "sequence of events": 2,
+      "action of girl": 4,
+      "age of girl": 2,
+      "animal's elevation": 2,
+      "method of moving upward": 2,
+      "direction of riders": 2,
+      "type of terrain": 8,
+      "color of mountain": 2,
+      "motion of surfer": 2,
+      "type of water body": 2,
+      "movement or action of player": 2,
+      "age of kids": 4,
+      "material of ground": 2,
+      "breed of dogs": 2,
+      "running surface": 2,
+      "location description": 2,
+      "obstacle type": 2,
+      "type of vehicle used in sport": 2,
+      "competitiveness level of persons": 2,
+      "setting of water activity": 2,
+      "type of activity on water": 2,
+      "number of adults": 2,
+      "type of covering on hill": 2,
+      "type of exercise engaged in": 2,
+      "object travelled past": 2,
+      "presence of tye-dye t-shirt": 2,
+      "speed of runners": 2,
+      "color of clothing on runner's legs": 2,
+      "object person is on": 2,
+      "action performed": 4,
+      "action of dogs": 6,
+      "species of subject": 2,
+      "intensity of activity": 2,
+      "action while riding bike": 2,
+      "reason for exerting physical energy": 2,
+      "location of work": 2,
+      "profession of person": 2,
+      "position of people from ground": 2,
+      "ages of individuals": 2,
+      "pose of person holding child": 2,
+      "outdoor environment": 2,
+      "presence of trees": 2,
+      "age of girls": 2,
+      "number of girls": 2,
+      "activity status of people": 2,
+      "number of dog": 4,
+      "profession of persons": 2,
+      "absence of hard hats": 2,
+      "athlete's surroundings": 2,
+      "activity at playground": 2,
+      "age range of child": 2,
+      "color of kayak": 3,
+      "absence of snowshoes": 2,
+      "number of people involved in accidents": 2,
+      "accidents": 2,
+      "action of children": 2,
+      "type of vehicle involved": 2,
+      "state of play in game": 2,
+      "substance on ground": 2,
+      "type of snow sport": 2,
+      "position of vehicle": 2,
+      "color of uniform": 6,
+      "appearance of dog": 2,
+      "occupation of worker": 2,
+      "type of tool": 4,
+      "type of outdoor activity": 4,
+      "motion of rider": 2,
+      "type of land vehicle": 2,
+      "color of animals": 6,
+      "speed of cyclists": 2,
+      "clothing color": 2,
+      "color of clothes": 10,
+      "means of elevation": 2,
+      "activities of people": 2,
+      "boxing move": 2,
+      "type of interaction in boxing match": 2,
+      "type of locomotion": 2,
+      "angle of ground": 2,
+      "cycling event": 2,
+      "type of construction work": 4,
+      "color of boat": 2,
+      "intent to injure": 2,
+      "action of animals": 2,
+      "place of action": 4,
+      "body position": 4,
+      "number of people involved": 4,
+      "age group of people": 2,
+      "motion of animal": 4,
+      "position of arms": 2,
+      "type of performance": 2,
+      "actions of dogs": 2,
+      "type of utensils used": 2,
+      "Action performed": 2,
+      "activity in snow": 2,
+      "number of people near wave": 2,
+      "attire of person": 2,
+      "color of horse": 2,
+      "type of market": 2,
+      "action of subjects": 2,
+      "actions of riders": 2,
+      "nature of place": 4,
+      "type of item being used": 2,
+      "positioning of skateboarders": 2,
+      "activity of players": 2,
+      "type of musical instrument": 4,
+      "instrument used": 2,
+      "type of martial arts": 2,
+      "type of martial arts action": 2,
+      "people's outfits": 2,
+      "state of ball": 2,
+      "Age of child": 2,
+      "distance from terrain": 2,
+      "type of talent": 2,
+      "number of instruments": 4,
+      "type of instrument": 4,
+      "number of musicians": 2,
+      "position of rope": 2,
+      "urban scene": 2,
+      "speed of people": 2,
+      "activity each couple performs": 2,
+      "intentions of spectators": 2,
+      "equipment used": 2,
+      "position of swimmer": 2,
+      "gender of swimmer": 2,
+      "oldest person's age": 2,
+      "activity involved": 2,
+      "rider": 2,
+      "action of rider": 2,
+      "type of playground equipment": 2,
+      "motion of boy": 2,
+      "object that is red": 2,
+      "position of skateboard": 2,
+      "type of gymnastic routine": 2,
+      "performer's age": 2,
+      "distance above snow": 2,
+      "movement of animal": 2,
+      "person's action": 2,
+      "speed of players": 2,
+      "location of boarders": 2,
+      "method of movement": 2,
+      "nature of work": 2,
+      "age and gender": 2,
+      "place": 2,
+      "uniqueness of bike": 2,
+      "competitive spirit": 2,
+      "type of animal ridden": 2,
+      "temperament of horse": 2,
+      "object in dog's mouth": 2,
+      "gender of skater": 2,
+      "mode of skating": 2,
+      "relationship of players": 2,
+      "location of boy": 2,
+      "number of riders": 2,
+      "purpose of activity": 2,
+      "person's clothing": 2,
+      "activity being performed": 6,
+      "terrain": 2,
+      "actions of persons": 2,
+      "nature of sport": 2,
+      "actions of subject": 2,
+      "gender of subject": 2,
+      "presence of hard hat": 2,
+      "action of surfer": 2,
+      "position of person": 6,
+      "people": 2,
+      "type of exercise men engage in": 2,
+      "gender of first athlete": 2,
+      "dog color": 2,
+      "type of water reservoir": 2,
+      "results of sport": 2,
+      "clothing of players": 2,
+      "types of wear": 2,
+      "attire of surfer": 2,
+      "surface used for writing": 2,
+      "age of person sitting at desk": 2,
+      "animal proximity": 2,
+      "type of road": 2,
+      "position of vehicle or cyclist": 2,
+      "action": 2,
+      "person": 4,
+      "presence of onlookers": 2,
+      "elevation of performance": 2,
+      "type of water sport": 6,
+      "activity involving animals": 2,
+      "water activity": 2,
+      "purpose of running": 2,
+      "person playing guitar": 2,
+      "instrument being played": 2,
+      "type of watercraft": 2,
+      "age of people involved": 2,
+      "items sold": 2,
+      "type of vendor": 2,
+      "action of snowboarder": 2,
+      "people's occupations": 2,
+      "focus of worker": 2,
+      "motion person": 2,
+      "pants' color": 2,
+      "number of performers": 4,
+      "Proximity of people": 2,
+      "type of combat sport": 2,
+      "sentiment": 2,
+      "location of skateboarding trick": 2,
+      "presence of crowd": 2,
+      "current stance of golfer": 2,
+      "men's occupation": 2,
+      "color of surfboard": 2,
+      "type of board being ridden": 2,
+      "intention of person": 2,
+      "shorts color": 2,
+      "urban environment": 2,
+      "dogs' color": 2,
+      "presence of audience": 2,
+      "name of location": 2,
+      "color of hair": 2,
+      "color of shirt": 2,
+      "presence of hat": 2,
+      "type of metalwork": 2,
+      "color of surfing material": 2,
+      "hand position": 2,
+      "height reached": 2,
+      "method of transportation": 4,
+      "type of vessel": 2,
+      "cost of boats": 2,
+      "communication method": 2,
+      "presence of fireman": 2,
+      "job situation": 2,
+      "car's purpose": 2,
+      "car status": 2,
+      "speed of dog": 2,
+      "interaction between dogs": 2,
+      "activity of child": 2,
+      "size of waves": 2,
+      "medium of performance": 2,
+      "animals' intentions": 2,
+      "color of attire": 2,
+      "color of person's shirt": 2,
+      "gender of surfer": 2,
+      "uniform color": 2,
+      "activity involving boards": 2,
+      "location of activity": 2,
+      "clothing worn by boy": 2,
+      "gender of child": 2,
+      "articles of clothing": 2,
+      "action performed by woman": 2,
+      "object being carried": 2,
+      "activity of boy": 2,
+      "obstacle rider is traversing": 2,
+      "music and concert": 2,
+      "location where people are standing": 2,
+      "type of trick": 2,
+      "outfit of cyclist": 2,
+      "movement of dog": 2,
+      "object touching dog": 2,
+      "number of bikers": 2,
+      "number of spectators": 2,
+      "height of location": 2,
+      "number of paintings": 2,
+      "person's clothes": 2,
+      "animal they are riding": 2,
+      "temperament of animals": 2,
+      "action of skateboarder": 2,
+      "clothing of people": 2,
+      "Slope of walking path": 2,
+      "ethnicity of people": 2,
+      "number of musicians on stage": 2,
+      "work being done": 2,
+      "presence of helmets": 2,
+      "action people are taking": 2,
+      "object person grips": 2,
+      "participation in race": 2,
+      "number of women": 2,
+      "action of a man": 2,
+      "presence of swimming pool": 2,
+      "location of skateboarding": 2,
+      "location of skate park": 2,
+      "hair color": 2,
+      "type of musical activity": 2,
+      "footwear": 2,
+      "surface being skated upon": 2,
+      "genders of people": 2,
+      "people's clothing": 2,
+      "material being worked on": 2,
+      "purpose of tool": 2,
+      "type of hat": 2,
+      "type of landscape": 4,
+      "distance travelled": 2,
+      "animals color": 2,
+      "animal size": 2,
+      "surroundings": 2,
+      "address of place": 2,
+      "number of vehicles driven": 2,
+      "person's posture": 2,
+      "use of prop": 2,
+      "bicycles": 2,
+      "outdoor location": 2,
+      "size of object": 2,
+      "speed of woman": 2,
+      "types of items being carried": 2,
+      "location as science lab": 2,
+      "focus of attention": 2,
+      "position of child": 2,
+      "clothing style": 2,
+      "position of crowd's arms": 2,
+      "hair condition": 2,
+      "snowboard maneuver": 2,
+      "environment": 2,
+      "Age and gender of child": 2,
+      "movement of player": 2,
+      "position of dog": 2,
+      "color of swimsuit": 2,
+      "status of transaction": 2,
+      "place of dog running": 2,
+      "number of boys": 2,
+      "location in city": 2,
+      "type of precipitation on ground": 2,
+      "profession of group": 2,
+      "activity of participants": 2,
+      "motion of girl": 2,
+      "woman stance": 2,
+      "means of flotation": 2
+    }
+  },
+  "report": {
+    "split": "validation",
+    "metrics": {
+      "A": {
+        "n": 1830,
+        "mse_0_1": 0.03457366126356839,
+        "mse_1_5": 0.5531785802170942,
+        "spearman": 0.7825746597420997,
+        "prediction_mean": 0.5577536070958553,
+        "target_mean": 0.5542349726775956,
+        "prediction_std": 0.23948317401634267,
+        "target_std": 0.30337777758989165,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 181,
+            "mean": 0.25173481262047154
+          },
+          "2.0": {
+            "n": 304,
+            "mean": 0.3927766507197368
+          },
+          "3.0": {
+            "n": 627,
+            "mean": 0.48001047715164447
+          },
+          "4.0": {
+            "n": 373,
+            "mean": 0.6897439214403444
+          },
+          "5.0": {
+            "n": 345,
+            "mean": 0.8622607136550157
+          }
+        },
+        "condition_changes": {
+          "n": 721,
+          "correct": 650,
+          "ties": 0,
+          "accuracy_ties_half": 0.9015256588072122,
+          "difference_mse": 0.0686715301604327,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        },
+        "operating_point": {
+          "cutoff": 0.5334962010383606,
+          "tp": 647,
+          "fn": 71,
+          "fp": 47,
+          "tn": 438,
+          "recall": 0.9011142061281338,
+          "false_negative_rate": 0.0988857938718663,
+          "false_positive_rate": 0.09690721649484536,
+          "excluded_middle_rating": 627
+        },
+        "descriptive_cutoffs": {
+          "0.5": {
+            "cutoff": 0.5,
+            "tp": 663,
+            "fn": 55,
+            "fp": 65,
+            "tn": 420,
+            "recall": 0.9233983286908078,
+            "false_negative_rate": 0.0766016713091922,
+            "false_positive_rate": 0.13402061855670103,
+            "excluded_middle_rating": 627
+          },
+          "0.75": {
+            "cutoff": 0.75,
+            "tp": 439,
+            "fn": 279,
+            "fp": 1,
+            "tn": 484,
+            "recall": 0.6114206128133705,
+            "false_negative_rate": 0.38857938718662954,
+            "false_positive_rate": 0.002061855670103093,
+            "excluded_middle_rating": 627
+          }
+        },
+        "errors_by_rating": {
+          "1.0": {
+            "n": 181,
+            "signed_error": 0.25173481262047154,
+            "mse": 0.09224169818770202
+          },
+          "2.0": {
+            "n": 304,
+            "signed_error": 0.14277665071973675,
+            "mse": 0.03096886260871879
+          },
+          "3.0": {
+            "n": 627,
+            "signed_error": -0.019989522848355524,
+            "mse": 0.023868293624859923
+          },
+          "4.0": {
+            "n": 373,
+            "signed_error": -0.060256078559655604,
+            "mse": 0.028867965396523153
+          },
+          "5.0": {
+            "n": 345,
+            "signed_error": -0.1377392863449843,
+            "mse": 0.03311984728004425
+          }
+        }
+      },
+      "B_u": {
+        "n": 1830,
+        "mse_0_1": 0.05236473708977168,
+        "mse_1_5": 0.8378357934363468,
+        "spearman": 0.6965749322877287,
+        "prediction_mean": 0.6284288102730375,
+        "target_mean": 0.5542349726775956,
+        "prediction_std": 0.19402395162300382,
+        "target_std": 0.30337777758989165,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 181,
+            "mean": 0.4800363986531674
+          },
+          "2.0": {
+            "n": 304,
+            "mean": 0.4933773926214168
+          },
+          "3.0": {
+            "n": 627,
+            "mean": 0.5453538626575014
+          },
+          "4.0": {
+            "n": 373,
+            "mean": 0.7132692720950768
+          },
+          "5.0": {
+            "n": 345,
+            "mean": 0.8845365127791529
+          }
+        },
+        "condition_changes": {
+          "n": 721,
+          "correct": 615,
+          "ties": 0,
+          "accuracy_ties_half": 0.8529819694868238,
+          "difference_mse": 0.1106552364366129,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        },
+        "operating_point": {
+          "cutoff": 0.5624762773513794,
+          "tp": 647,
+          "fn": 71,
+          "fp": 106,
+          "tn": 379,
+          "recall": 0.9011142061281338,
+          "false_negative_rate": 0.0988857938718663,
+          "false_positive_rate": 0.21855670103092784,
+          "excluded_middle_rating": 627
+        },
+        "descriptive_cutoffs": {
+          "0.5": {
+            "cutoff": 0.5,
+            "tp": 674,
+            "fn": 44,
+            "fp": 196,
+            "tn": 289,
+            "recall": 0.9387186629526463,
+            "false_negative_rate": 0.06128133704735376,
+            "false_positive_rate": 0.4041237113402062,
+            "excluded_middle_rating": 627
+          },
+          "0.75": {
+            "cutoff": 0.75,
+            "tp": 477,
+            "fn": 241,
+            "fp": 8,
+            "tn": 477,
+            "recall": 0.6643454038997214,
+            "false_negative_rate": 0.33565459610027853,
+            "false_positive_rate": 0.016494845360824743,
+            "excluded_middle_rating": 627
+          }
+        },
+        "errors_by_rating": {
+          "1.0": {
+            "n": 181,
+            "signed_error": 0.4800363986531674,
+            "mse": 0.24191363008121053
+          },
+          "2.0": {
+            "n": 304,
+            "signed_error": 0.2433773926214168,
+            "mse": 0.06988399602364423
+          },
+          "3.0": {
+            "n": 627,
+            "signed_error": 0.04535386265750137,
+            "mse": 0.020451649302174312
+          },
+          "4.0": {
+            "n": 373,
+            "signed_error": -0.03673072790492316,
+            "mse": 0.025878044601009502
+          },
+          "5.0": {
+            "n": 345,
+            "signed_error": -0.1154634872208471,
+            "mse": 0.024117890694943158
+          }
+        }
+      },
+      "B_r": {
+        "n": 1830,
+        "mse_0_1": 0.053370763993642566,
+        "mse_1_5": 0.853932223898281,
+        "spearman": 0.6895612879488111,
+        "prediction_mean": 0.6287109061994188,
+        "target_mean": 0.5542349726775956,
+        "prediction_std": 0.19902312131272146,
+        "target_std": 0.30337777758989165,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 181,
+            "mean": 0.48881342529591937
+          },
+          "2.0": {
+            "n": 304,
+            "mean": 0.48749815868703944
+          },
+          "3.0": {
+            "n": 627,
+            "mean": 0.5420261101954672
+          },
+          "4.0": {
+            "n": 373,
+            "mean": 0.7144429152357035
+          },
+          "5.0": {
+            "n": 345,
+            "mean": 0.8913875642030136
+          }
+        },
+        "condition_changes": {
+          "n": 721,
+          "correct": 616,
+          "ties": 0,
+          "accuracy_ties_half": 0.8543689320388349,
+          "difference_mse": 0.1100951629713371,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        },
+        "operating_point": {
+          "cutoff": 0.5648148059844971,
+          "tp": 647,
+          "fn": 71,
+          "fp": 97,
+          "tn": 388,
+          "recall": 0.9011142061281338,
+          "false_negative_rate": 0.0988857938718663,
+          "false_positive_rate": 0.2,
+          "excluded_middle_rating": 627
+        },
+        "descriptive_cutoffs": {
+          "0.5": {
+            "cutoff": 0.5,
+            "tp": 672,
+            "fn": 46,
+            "fp": 206,
+            "tn": 279,
+            "recall": 0.935933147632312,
+            "false_negative_rate": 0.06406685236768803,
+            "false_positive_rate": 0.4247422680412371,
+            "excluded_middle_rating": 627
+          },
+          "0.75": {
+            "cutoff": 0.75,
+            "tp": 481,
+            "fn": 237,
+            "fp": 10,
+            "tn": 475,
+            "recall": 0.66991643454039,
+            "false_negative_rate": 0.33008356545961004,
+            "false_positive_rate": 0.020618556701030927,
+            "excluded_middle_rating": 627
+          }
+        },
+        "errors_by_rating": {
+          "1.0": {
+            "n": 181,
+            "signed_error": 0.48881342529591937,
+            "mse": 0.25016403059680326
+          },
+          "2.0": {
+            "n": 304,
+            "signed_error": 0.2374981586870394,
+            "mse": 0.06848661037587905
+          },
+          "3.0": {
+            "n": 627,
+            "signed_error": 0.042026110195467155,
+            "mse": 0.021752788314156196
+          },
+          "4.0": {
+            "n": 373,
+            "signed_error": -0.035557084764296504,
+            "mse": 0.02769573619947214
+          },
+          "5.0": {
+            "n": 345,
+            "signed_error": -0.10861243579698646,
+            "mse": 0.022027162726661505
+          }
+        }
+      },
+      "C_u": {
+        "n": 1830,
+        "mse_0_1": 0.08444815172707833,
+        "mse_1_5": 1.3511704276332532,
+        "spearman": 0.7797087232808846,
+        "prediction_mean": 0.7498214553614132,
+        "target_mean": 0.5542349726775956,
+        "prediction_std": 0.1332984566212393,
+        "target_std": 0.30337777758989165,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 181,
+            "mean": 0.5939897952488115
+          },
+          "2.0": {
+            "n": 304,
+            "mean": 0.6522763249905486
+          },
+          "3.0": {
+            "n": 627,
+            "mean": 0.7033931514578002
+          },
+          "4.0": {
+            "n": 373,
+            "mean": 0.8226973684479659
+          },
+          "5.0": {
+            "n": 345,
+            "mean": 0.923117342548094
+          }
+        },
+        "condition_changes": {
+          "n": 721,
+          "correct": 653,
+          "ties": 0,
+          "accuracy_ties_half": 0.9056865464632455,
+          "difference_mse": 0.12140568407376735,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        },
+        "operating_point": {
+          "cutoff": 0.7341499924659729,
+          "tp": 647,
+          "fn": 71,
+          "fp": 47,
+          "tn": 438,
+          "recall": 0.9011142061281338,
+          "false_negative_rate": 0.0988857938718663,
+          "false_positive_rate": 0.09690721649484536,
+          "excluded_middle_rating": 627
+        },
+        "descriptive_cutoffs": {
+          "0.5": {
+            "cutoff": 0.5,
+            "tp": 718,
+            "fn": 0,
+            "fp": 476,
+            "tn": 9,
+            "recall": 1.0,
+            "false_negative_rate": 0.0,
+            "false_positive_rate": 0.9814432989690721,
+            "excluded_middle_rating": 627
+          },
+          "0.75": {
+            "cutoff": 0.75,
+            "tp": 627,
+            "fn": 91,
+            "fp": 32,
+            "tn": 453,
+            "recall": 0.8732590529247911,
+            "false_negative_rate": 0.12674094707520892,
+            "false_positive_rate": 0.06597938144329897,
+            "excluded_middle_rating": 627
+          }
+        },
+        "errors_by_rating": {
+          "1.0": {
+            "n": 181,
+            "signed_error": 0.5939897952488115,
+            "mse": 0.3605202305787916
+          },
+          "2.0": {
+            "n": 304,
+            "signed_error": 0.4022763249905486,
+            "mse": 0.16526067959381102
+          },
+          "3.0": {
+            "n": 627,
+            "signed_error": 0.20339315145780024,
+            "mse": 0.04855780038148111
+          },
+          "4.0": {
+            "n": 373,
+            "signed_error": 0.07269736844796597,
+            "mse": 0.013509839781876972
+          },
+          "5.0": {
+            "n": 345,
+            "signed_error": -0.07688265745190606,
+            "mse": 0.01032405290273826
+          }
+        }
+      },
+      "C_r": {
+        "n": 1830,
+        "mse_0_1": 0.10909928437319658,
+        "mse_1_5": 1.7455885499711452,
+        "spearman": 0.7669869896892558,
+        "prediction_mean": 0.7931717545282645,
+        "target_mean": 0.5542349726775956,
+        "prediction_std": 0.11265739734681736,
+        "target_std": 0.30337777758989165,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 181,
+            "mean": 0.6781670599352589
+          },
+          "2.0": {
+            "n": 304,
+            "mean": 0.706586675032189
+          },
+          "3.0": {
+            "n": 627,
+            "mean": 0.7503258107761828
+          },
+          "4.0": {
+            "n": 373,
+            "mean": 0.8548285095046098
+          },
+          "5.0": {
+            "n": 345,
+            "mean": 0.9410098734109298
+          }
+        },
+        "condition_changes": {
+          "n": 721,
+          "correct": 652,
+          "ties": 0,
+          "accuracy_ties_half": 0.9042995839112344,
+          "difference_mse": 0.1418711473366744,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        },
+        "operating_point": {
+          "cutoff": 0.7733751535415649,
+          "tp": 647,
+          "fn": 71,
+          "fp": 53,
+          "tn": 432,
+          "recall": 0.9011142061281338,
+          "false_negative_rate": 0.0988857938718663,
+          "false_positive_rate": 0.10927835051546392,
+          "excluded_middle_rating": 627
+        },
+        "descriptive_cutoffs": {
+          "0.5": {
+            "cutoff": 0.5,
+            "tp": 718,
+            "fn": 0,
+            "fp": 485,
+            "tn": 0,
+            "recall": 1.0,
+            "false_negative_rate": 0.0,
+            "false_positive_rate": 1.0,
+            "excluded_middle_rating": 627
+          },
+          "0.75": {
+            "cutoff": 0.75,
+            "tp": 670,
+            "fn": 48,
+            "fp": 84,
+            "tn": 401,
+            "recall": 0.9331476323119777,
+            "false_negative_rate": 0.06685236768802229,
+            "false_positive_rate": 0.1731958762886598,
+            "excluded_middle_rating": 627
+          }
+        },
+        "errors_by_rating": {
+          "1.0": {
+            "n": 181,
+            "signed_error": 0.6781670599352589,
+            "mse": 0.4647199724386557
+          },
+          "2.0": {
+            "n": 304,
+            "signed_error": 0.456586675032189,
+            "mse": 0.21134481083190892
+          },
+          "3.0": {
+            "n": 627,
+            "signed_error": 0.2503258107761827,
+            "mse": 0.06809483207788454
+          },
+          "4.0": {
+            "n": 373,
+            "signed_error": 0.10482850950460972,
+            "mse": 0.017148789119102566
+          },
+          "5.0": {
+            "n": 345,
+            "signed_error": -0.05899012658907019,
+            "mse": 0.006366941577953199
+          }
+        }
+      },
+      "D": {
+        "n": 1830,
+        "mse_0_1": 0.14479161461782245,
+        "mse_1_5": 2.316665833885159,
+        "spearman": 0.20781135215676877,
+        "prediction_mean": 0.7929718260230914,
+        "target_mean": 0.5542349726775956,
+        "prediction_std": 0.06315265451663625,
+        "target_std": 0.30337777758989165,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 181,
+            "mean": 0.7687980950866615
+          },
+          "2.0": {
+            "n": 304,
+            "mean": 0.7785742796565357
+          },
+          "3.0": {
+            "n": 627,
+            "mean": 0.7885883847872416
+          },
+          "4.0": {
+            "n": 373,
+            "mean": 0.8090773576386173
+          },
+          "5.0": {
+            "n": 345,
+            "mean": 0.8088945905367534
+          }
+        },
+        "condition_changes": {
+          "n": 721,
+          "correct": 483,
+          "ties": 0,
+          "accuracy_ties_half": 0.6699029126213593,
+          "difference_mse": 0.2643590968569945,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        },
+        "operating_point": {
+          "cutoff": 0.7280995845794678,
+          "tp": 647,
+          "fn": 71,
+          "fp": 379,
+          "tn": 106,
+          "recall": 0.9011142061281338,
+          "false_negative_rate": 0.0988857938718663,
+          "false_positive_rate": 0.7814432989690722,
+          "excluded_middle_rating": 627
+        },
+        "descriptive_cutoffs": {
+          "0.5": {
+            "cutoff": 0.5,
+            "tp": 718,
+            "fn": 0,
+            "fp": 485,
+            "tn": 0,
+            "recall": 1.0,
+            "false_negative_rate": 0.0,
+            "false_positive_rate": 1.0,
+            "excluded_middle_rating": 627
+          },
+          "0.75": {
+            "cutoff": 0.75,
+            "tp": 604,
+            "fn": 114,
+            "fp": 335,
+            "tn": 150,
+            "recall": 0.841225626740947,
+            "false_negative_rate": 0.15877437325905291,
+            "false_positive_rate": 0.6907216494845361,
+            "excluded_middle_rating": 627
+          }
+        },
+        "errors_by_rating": {
+          "1.0": {
+            "n": 181,
+            "signed_error": 0.7687980950866615,
+            "mse": 0.596167284053538
+          },
+          "2.0": {
+            "n": 304,
+            "signed_error": 0.5285742796565357,
+            "mse": 0.2831235769191148
+          },
+          "3.0": {
+            "n": 627,
+            "signed_error": 0.28858838478724164,
+            "mse": 0.08724975280709285
+          },
+          "4.0": {
+            "n": 373,
+            "signed_error": 0.0590773576386173,
+            "mse": 0.007134257373691757
+          },
+          "5.0": {
+            "n": 345,
+            "signed_error": -0.19110540946324667,
+            "mse": 0.03949604621182462
+          }
+        }
+      }
+    },
+    "decision": {
+      "selected_arm": "A",
+      "eligibility": {
+        "B_u": {
+          "false_positive_rate_reduction": -0.12164948453608247,
+          "spearman_change": -0.08599972745437101,
+          "eligible": false
+        },
+        "B_r": {
+          "false_positive_rate_reduction": -0.10309278350515465,
+          "spearman_change": -0.09301337179328861,
+          "eligible": false
+        },
+        "C_u": {
+          "false_positive_rate_reduction": 0.0,
+          "spearman_change": -0.002865936461215135,
+          "eligible": false
+        },
+        "C_r": {
+          "false_positive_rate_reduction": -0.012371134020618554,
+          "spearman_change": -0.015587670052843894,
+          "eligible": false
+        },
+        "D": {
+          "false_positive_rate_reduction": -0.6845360824742268,
+          "spearman_change": -0.5747633075853309,
+          "eligible": false
+        }
+      },
+      "thresholds": {
+        "A": 0.5334962010383606,
+        "B_u": 0.5624762773513794,
+        "B_r": 0.5648148059844971,
+        "C_u": 0.7341499924659729,
+        "C_r": 0.7733751535415649,
+        "D": 0.7280995845794678
+      },
+      "test_scores_used_for_selection": false
+    },
+    "agreement": {
+      "max_absolute_error": 2.384185791015625e-07,
+      "mean_absolute_error": 2.522357418888905e-08,
+      "tolerance": 0.001
+    },
+    "model_sha256": "8805f9a7241e4e19ffc481341ebad6f1ddb6dd6ff04bbf710f9f0896469e34ff",
+    "rows_sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+    "timing": {
+      "split": "validation",
+      "rows": 1830,
+      "unique_passages": 3591,
+      "passage_occurrences": 3660,
+      "references": 918,
+      "nonpadding_tokens": 161340,
+      "model_sha256": "8805f9a7241e4e19ffc481341ebad6f1ddb6dd6ff04bbf710f9f0896469e34ff",
+      "rows_sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+      "adapter_state_before_sha256": "f6c42d54d12275d2f610201eff0d3737ac00430710940cb4da303a5e00632aa6",
+      "adapter_state_after_sha256": "f6c42d54d12275d2f610201eff0d3737ac00430710940cb4da303a5e00632aa6",
+      "optimizer_updates": 0,
+      "inference_seconds": 117.09829852500116,
+      "total_seconds": 199.9846409909951,
+      "peak_cuda_memory_bytes": 15317735424,
+      "cache_sha256": "387ccbe2a6a890a96b4dda6a3ac57ed09d7dfa821357ad00310ccde2d256372a"
+    }
+  },
+  "selection": {
+    "selected_arm": "A",
+    "eligibility": {
+      "B_u": {
+        "false_positive_rate_reduction": -0.12164948453608247,
+        "spearman_change": -0.08599972745437101,
+        "eligible": false
+      },
+      "B_r": {
+        "false_positive_rate_reduction": -0.10309278350515465,
+        "spearman_change": -0.09301337179328861,
+        "eligible": false
+      },
+      "C_u": {
+        "false_positive_rate_reduction": 0.0,
+        "spearman_change": -0.002865936461215135,
+        "eligible": false
+      },
+      "C_r": {
+        "false_positive_rate_reduction": -0.012371134020618554,
+        "spearman_change": -0.015587670052843894,
+        "eligible": false
+      },
+      "D": {
+        "false_positive_rate_reduction": -0.6845360824742268,
+        "spearman_change": -0.5747633075853309,
+        "eligible": false
+      }
+    },
+    "thresholds": {
+      "A": 0.5334962010383606,
+      "B_u": 0.5624762773513794,
+      "B_r": 0.5648148059844971,
+      "C_u": 0.7341499924659729,
+      "C_r": 0.7733751535415649,
+      "D": 0.7280995845794678
+    },
+    "test_scores_used_for_selection": false,
+    "model_sha256": "8805f9a7241e4e19ffc481341ebad6f1ddb6dd6ff04bbf710f9f0896469e34ff",
+    "validation_report_sha256": "2e103138d0bb0b9ea9f635366b709d368f5085e717360c1426b567b182668d31",
+    "source_commit": "7fca57e9741702e6484b5ffc133642f18b40e4dd"
+  },
+  "artifact_sha256": {
+    "summary.json": "e24dbe8da07b9754530da745297740af9f1e41cd2a320e660caead1e35bc4466",
+    "validation_report.json": "2e103138d0bb0b9ea9f635366b709d368f5085e717360c1426b567b182668d31",
+    "validation_geometry.json": "53b91103458407c0ab9697da1049661430e76456c0ddf932496fa4833b0b0ec6",
+    "validation_predictions.json": "c44a71d776466fc4c2b9e4db89bc4751bfc437e2c1fa21eb5cd8d822315b63f3",
+    "selection.json": "0d724b35b83676333afac4b41b1db7f418f1a5f7d5a2488ae27625d35215d0e1"
+  },
+  "checks": {
+    "focused_tests_passed": 9,
+    "ruff": "passed",
+    "pyrefly_errors": 0,
+    "diagnostic_optimizer_updates": 0,
+    "test_scoring_started": false,
+    "continuation_started": false
+  },
+  "batch_probe": {
+    "native_batch_probe": [
+      {
+        "row": 92,
+        "id": "train_476",
+        "old": 0.8927896022796631,
+        "unique": 0.8796287775039673,
+        "native": 0.8927896022796631,
+        "error_native": 0.0
+      },
+      {
+        "row": 93,
+        "id": "train_477",
+        "old": 0.4806545674800873,
+        "unique": 0.4816330075263977,
+        "native": 0.4806545674800873,
+        "error_native": 0.0
+      },
+      {
+        "row": 636,
+        "id": "train_3716",
+        "old": 0.5726358294487,
+        "unique": 0.5628969669342041,
+        "native": 0.5726358294487,
+        "error_native": 0.0
+      },
+      {
+        "row": 637,
+        "id": "train_3717",
+        "old": 0.8322271704673767,
+        "unique": 0.83381187915802,
+        "native": 0.8322271704673767,
+        "error_native": 0.0
+      },
+      {
+        "row": 806,
+        "id": "train_4766",
+        "old": 0.7915164828300476,
+        "unique": 0.7912794947624207,
+        "native": 0.7915164828300476,
+        "error_native": 0.0
+      },
+      {
+        "row": 807,
+        "id": "train_4767",
+        "old": 0.19460022449493408,
+        "unique": 0.17322108149528503,
+        "native": 0.19460022449493408,
+        "error_native": 0.0
+      },
+      {
+        "row": 1220,
+        "id": "train_7426",
+        "old": 0.4562780559062958,
+        "unique": 0.4681152403354645,
+        "native": 0.4562780559062958,
+        "error_native": 0.0
+      },
+      {
+        "row": 1221,
+        "id": "train_7427",
+        "old": 0.3440210819244385,
+        "unique": 0.3434518575668335,
+        "native": 0.3440210819244385,
+        "error_native": 0.0
+      },
+      {
+        "row": 1466,
+        "id": "train_9066",
+        "old": 0.6676862835884094,
+        "unique": 0.6774530410766602,
+        "native": 0.6676862835884094,
+        "error_native": 0.0
+      },
+      {
+        "row": 1467,
+        "id": "train_9067",
+        "old": 0.9545621871948242,
+        "unique": 0.9540615081787109,
+        "native": 0.9545621871948242,
+        "error_native": 0.0
+      },
+      {
+        "row": 1562,
+        "id": "train_9688",
+        "old": 0.9405966401100159,
+        "unique": 0.9420896768569946,
+        "native": 0.9405966401100159,
+        "error_native": 0.0
+      },
+      {
+        "row": 1563,
+        "id": "train_9689",
+        "old": 0.4647865295410156,
+        "unique": 0.4506213366985321,
+        "native": 0.4647865295410156,
+        "error_native": 0.0
+      },
+      {
+        "row": 1694,
+        "id": "train_10566",
+        "old": 0.7484576106071472,
+        "unique": 0.7355023622512817,
+        "native": 0.7484576106071472,
+        "error_native": 0.0
+      },
+      {
+        "row": 1695,
+        "id": "train_10567",
+        "old": 0.30805647373199463,
+        "unique": 0.3065555989742279,
+        "native": 0.30805647373199463,
+        "error_native": 0.0
+      },
+      {
+        "row": 1740,
+        "id": "train_10864",
+        "old": 0.6771668791770935,
+        "unique": 0.687109112739563,
+        "native": 0.6771668791770935,
+        "error_native": 0.0
+      },
+      {
+        "row": 1741,
+        "id": "train_10865",
+        "old": 0.2510378360748291,
+        "unique": 0.2553217113018036,
+        "native": 0.2510378360748291,
+        "error_native": 0.0
+      }
+    ],
+    "frozen_inference_mode": [
+      0.8927896022796631,
+      0.4806545674800873
+    ]
+  }
+}

@@ -1,6 +1,8 @@
 # Tranche 4: condition-reference correction and a conditional LoRA follow-up
 
-**Status: proposed specification.** The immediate experiment uses the selected checkpoint with zero optimizer updates. A successful subtraction result can advance to a matched LoRA continuation. This document follows the [earlier tranche format](csts-tranche-3.md). The [derivations](csts-tranche-4-derivations.md) define every calculation and gradient used below.
+**Status: executed; stopped at the validation gate.** See the [completed report](../training_outputs/csts_condition_reference_report.md). All five interventions missed eligibility. Test scoring and conditional training remain unstarted. The original prespecified plan is retained at extraction source `c7f5bf04e18d4a4efced86a2533dcfd9c4a03858`, with SHA-256 `3eaf1b31528f7af61fd30efaefd8c20d5810df46e5d4008c99fc203898a19520`.
+
+The immediate experiment uses the selected checkpoint with zero optimizer updates. A successful subtraction result can advance to a matched LoRA continuation. This document follows the [earlier tranche format](csts-tranche-3.md). The [derivations](csts-tranche-4-derivations.md) define every calculation and gradient used below.
 
 ## Question and working hypotheses
 
@@ -16,7 +18,7 @@ The selected ratings-trained Qwen checkpoint achieved **0.788505 test Spearman**
 
 For the prior binary diagnostic, reference ratings 1–2 define negatives and 4–5 define positives; rating 3 is excluded. At cutoff 0.50, false-positive and missed-positive rates were 14.8% and 10.9%. At 0.75, they were 1.7% and 41.8%.
 
-The [retained results](../training_outputs/csts_qwen_evidence_results.json) identify the native producers. The diagnostic used the sealed ratings prediction file with SHA-256 `9ececbf76ac63b420196b4b4ef1285b5f632601a81043915d9236d9190cd1f24`.
+The [retained results](https://github.com/pvd232/JEP/blob/beffa1f4c62141081419787b62a525a74ce9a5e3/training_outputs/csts_qwen_evidence_results.json) identify the native producers. The diagnostic used the sealed ratings prediction file with SHA-256 `9ececbf76ac63b420196b4b4ef1285b5f632601a81043915d9236d9190cd1f24`.
 
 The test benchmark has already been examined. A frozen validation decision followed by another test measurement provides a controlled comparison on that existing benchmark.
 
@@ -155,7 +157,7 @@ Record source/model/input hashes, native attempts, normalization order, masks, r
 
 ## Implementation review and mathematical verification
 
-The measurement runner remains proposed implementation work. This task updates the design and mathematical specification. Follow the existing [representation](../csts_pilot/baseline_models.py) and [training](../csts_pilot/baseline_stages.py) contracts.
+The [measurement runner](../csts_pilot/condition_reference_run.py) and [extraction/evaluation implementation](../csts_pilot/condition_reference.py) are implemented. Execution retained the original two-pair forward batch layout to pass native-score reproduction. All passage occurrences are captured; geometry selects the first occurrence per unique input. The completed report records the batching correction and evaluator recovery. The implementation follows the existing [representation](../csts_pilot/baseline_models.py) and [training](../csts_pilot/baseline_stages.py) contracts.
 
 Implementation checks cover offsets, padding/EOD handling, shared extraction, both subtraction orders, residual coverage, zero diagnostic parameter updates, full reference gradients, reference dropout policy, exact microbatch weighting, checkpoint restoration/selection, and frozen validation thresholds. Apply Pyrefly, Ruff, and focused checks before measurement.
 
@@ -164,7 +166,7 @@ The [derivations](csts-tranche-4-derivations.md) cover the readout, six arms, no
 ## Sources
 
 - [Tranche 2](csts-tranche-2.md), [Tranche 3](csts-tranche-3.md), and [Qwen evidence design](csts-qwen-evidence.md).
-- [Selected Qwen results](../training_outputs/csts_qwen_evidence_results.json) and [fixed settings](../configs/csts-qwen-evidence.json).
+- [Selected Qwen results](https://github.com/pvd232/JEP/blob/beffa1f4c62141081419787b62a525a74ce9a5e3/training_outputs/csts_qwen_evidence_results.json) and [fixed settings](../configs/csts-qwen-evidence.json).
 - [CASE paper, v5](https://arxiv.org/html/2503.17279v5#S3) and the authors' pinned source files linked above.
 - [Qwen embedding configuration](https://huggingface.co/Qwen/Qwen3-Embedding-8B/blob/c90816d848505624c2434128dfc61132162a0ee9/config.json).
 - [Mathematical derivations and source map](csts-tranche-4-derivations.md).
