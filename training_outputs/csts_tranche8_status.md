@@ -4,7 +4,7 @@
 
 Full training/development generation: **2,432/17,334** accepted structural records; 0 preserved failed attempts. Capture: running. Provider latency has varied; no fixed ETA is asserted.
 
-Source sample: running. Adaptation: not_started. Held-out test: not_released.
+Source sample: complete. Adaptation: not_started. Held-out test: not_released.
 
 ## Frozen source-sample diagnostic
 
