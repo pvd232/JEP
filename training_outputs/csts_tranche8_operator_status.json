@@ -1,11 +1,12 @@
 {
-  "updated_at": "2026-10-26T15:36:07.018455+00:00",
-  "worker_status": "running",
+  "updated_at": "2026-10-26T15:36:47.195981+00:00",
+  "worker_status": "waiting",
   "action_id": "approved_proposition_pipeline_wait_auth1",
   "source_commit": "d5b7e513e7067538159aaffeb8d2ce463b845739",
   "operator_sha256": "bdeab08a016b5ad497d0077e84c7e76f0f3c0f59ee7e4a17189e3fa66af93591",
-  "status": "running",
-  "returncode": null,
+  "status": "failed",
+  "returncode": 1,
+  "operator_error": "Operator exited with a nonzero return code",
   "progress": {
     "phase": "pipeline",
     "status": "running",
