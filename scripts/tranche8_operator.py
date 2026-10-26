@@ -46,7 +46,9 @@ def ranks(values):
 
 def metrics(rows,scores):
     observed=[scores[row['row_id']] for row in rows];targets=[row['target'] for row in rows]
-    return {'spearman':statistics.correlation(ranks(observed),ranks(targets)),'mse_0_1':statistics.fmean((score-target)**2 for score,target in zip(observed,targets,strict=True))}
+    try:rho=statistics.correlation(ranks(observed),ranks(targets))
+    except statistics.StatisticsError:rho=None
+    return {'spearman':rho,'mse_0_1':statistics.fmean((score-target)**2 for score,target in zip(observed,targets,strict=True))}
 
 def checked_scores(path,rows,strict_caption=True):
     saved=json.loads(path.read_text());lookup={row['row_id']:row for row in saved}
@@ -62,46 +64,84 @@ def checked_scores(path,rows,strict_caption=True):
 '''
 
 
-def subset_script(native):
-    return common(native) + r'''
-attempt=root/'answer_input_results/proposition_subset_v2'
-summary=json.loads((attempt/'summary.json').read_text());assert summary['status']=='complete'
-assert summary['source_commit']=='a75fa36a8d709c25d7efccdd5c9dcdcfab3b3ec1'
-def artifact(record,stage,name,filename):return pathlib.Path(record['path']).parent/'artifacts'/stage/name/filename
-prepared=next(record for record in summary['runs'] if record['name']=='prepare')
-zero=next(record for record in summary['runs'] if record['name']=='epoch_zero')
-fit=next(record for record in summary['runs'] if record['name']=='fit')
-rows_path=artifact(prepared,'prepare','original_validation','original_validation.json')
-rows=json.loads(rows_path.read_text());assert len(rows)==30
-full=json.loads((parent/'csts_data/dev.json').read_text());lookup={row['row_id']:row for row in full}
-assert all(lookup[row['row_id']]==row for row in rows)
-paths={'frozen_answers':artifact(zero,'infer','predictions','predictions.json'),'adapted_answers':attempt/'adapted_original_predictions.json'}
-scores={name:checked_scores(path,rows) for name,path in paths.items()}
+def test_script(native):
+    return common(native) + f"expected_model={MODEL_SHA256!r};expected_rows={TEST_SHA256!r}\n" + r'''
+source=parent/'csts_data/evaluation.json';assert digest(source)==expected_rows
+rows=json.loads(source.read_text());assert len(rows)==2620
 study=json.loads((parent/'qwen_evidence_results/initial/summary.json').read_text())
-native=next(record for record in study['runs'] if record['name']=='ratings_ratings')
-baseline_path=artifact(native,'train','validation_predictions','predictions.json')
-all_scores=checked_scores(baseline_path,full)
-scores['saved_qwen']={row['row_id']:all_scores[row['row_id']] for row in rows}
-model=artifact(fit,'train','model','model.pt');model_hash=digest(model)
-assert model_hash=='1513a9dbdd4c77de1d1e8b4adebc7a111d62837ab56dafa60871ec0ec544dd52'
-result={'phase':'subset_saved_predictions','status':'complete','source_commit':summary['source_commit'],'row_count':len(rows),'source_rows':rows,'original_validation_rows_sha256':'f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273','subset_rows_sha256':digest(rows_path),'model_sha256':{'saved_qwen':'8805f9a7241e4e19ffc481341ebad6f1ddb6dd6ff04bbf710f9f0896469e34ff','frozen_answers':'8805f9a7241e4e19ffc481341ebad6f1ddb6dd6ff04bbf710f9f0896469e34ff','adapted_answers':model_hash},'source_prediction_files':{key:{'path':str(path),'sha256':digest(path)} for key,path in paths.items()},'scores':scores,'metrics':{name:metrics(rows,values) for name,values in scores.items()},'new_model_inference':False,'optimizer_updates':0,'gpu_used':False}
+record=next(item for item in study['runs'] if item['name']=='ratings_ratings');assert record['status']=='succeeded'
+run=pathlib.Path(record['path']).parent
+model=run/'artifacts/train/model/model.pt';assert digest(model)==expected_model
+predictions=parent/'qwen_evidence_results/initial/ratings_predictions.json'
+if not predictions.is_file():
+    test_record=next(item for item in study['runs'] if item['name']=='predict_ratings')
+    predictions=pathlib.Path(test_record['path']).parent/'artifacts/predict/predictions/predictions.json'
+scores=checked_scores(predictions,rows)
+result={'phase':'selected_clean_test_export','status':'complete','row_count':len(rows),'source_model_sha256':expected_model,'original_rows_sha256':expected_rows,'source_predictions_sha256':digest(predictions),'source_predictions_path':str(predictions),'source_groups':len({row['group_id'] for row in rows}),'caption_pairs':len({row['pair_id'] for row in rows}),'metrics':metrics(rows,scores),'source_rows':rows,'scores':scores,'original_labels_preserved':True,'new_model_inference':False,'optimizer_updates':0,'gpu_used':False}
 print(json.dumps(result,ensure_ascii=False,allow_nan=False))
 '''
 
 
+def candidates_script(native):
+    return common(native) + f"expected_rows={DEV_SHA256!r}\n" + r'''
+source=parent/'csts_data/dev.json';assert digest(source)==expected_rows
+rows=json.loads(source.read_text());assert len(rows)==1830
+homes=sorted(path for path in pathlib.Path('/home/machina').glob('jep*') if path.is_dir() and ('csts' in path.name or 'tranche' in path.name))
+paths=[]
+for home in homes:
+    paths.extend(home.glob('experiments/*/runs/*/*/artifacts/train/*validation_predictions/predictions.json'))
+# Current two selected Qwen arms first; preserve distinct retained candidates afterward.
+paths=sorted(set(paths),key=lambda path:('qwen_evidence_cd720270_6b877324' not in str(path),str(path)))
+entries=[];score_maps={};seen_models={};unmatched=[]
+for path in paths:
+    try:
+        scores=checked_scores(path,rows,strict_caption=False)
+    except (AssertionError,KeyError,TypeError,ValueError):
+        unmatched.append(str(path));continue
+    prediction_hash=digest(path)
+    train=path.parent.parent
+    model=train/'model/model.pt';trace=train/'trace/trace.json'
+    selected={}
+    if trace.is_file():
+        value=json.loads(trace.read_text());selected=value.get('selected',{})
+        if not isinstance(selected,dict):selected={}
+    model_hash=selected.get('sha256')
+    if model.is_file():
+        key=str(model.resolve())
+        if key not in seen_models:seen_models[key]=digest(model)
+        model_hash=seen_models[key]
+    entry={'source_predictions_path':str(path),'source_predictions_sha256':prediction_hash,'model_path':str(model) if model.is_file() else None,'model_sha256':model_hash,'rows':len(scores),'metrics':metrics(rows,scores),'trace_selected':{key:value for key,value in selected.items() if key in {'epoch','step','sha256','updates','actual_updates'}},'scores_key':prediction_hash}
+    entries.append(entry)
+    if len(score_maps)<48 or prediction_hash in score_maps:score_maps[prediction_hash]=scores
+    else:entry['scores_key']=None
+summary_paths=[]
+for home in homes:
+    for pattern in ('*_results/summary.json','*_results/*/summary.json','*_results/*/selection.json'):
+        for path in home.glob(pattern):summary_paths.append(str(path))
+result={'phase':'saved_development_candidates','status':'complete','source_rows_sha256':expected_rows,'rows':1830,'worktrees':[str(path) for path in homes],'candidate_count':len(entries),'candidates':entries,'score_maps':score_maps,'unmatched_prediction_files':unmatched,'retained_summary_paths':sorted(set(summary_paths)),'new_model_inference':False,'optimizer_updates':0,'gpu_used':False}
+print(json.dumps(result,ensure_ascii=False,allow_nan=False))
+'''
+
+
+def publish_compressed(module,path,value):
+    raw=(json.dumps(value,ensure_ascii=False,separators=(",",":"),allow_nan=False)+"\n").encode()
+    envelope={'encoding':'zlib+base64','decoded_sha256':hashlib.sha256(raw).hexdigest(),'decoded_bytes':len(raw),'payload':base64.b64encode(zlib.compress(raw,9)).decode()}
+    content=(json.dumps(envelope,indent=2)+"\n").encode()
+    module.RESULT_PATH=path
+    module.publish(path,content)
+    return {'artifact_path':path,'artifact_sha256':hashlib.sha256(content).hexdigest(),'artifact_bytes':len(content),'decoded_sha256':envelope['decoded_sha256'],'decoded_bytes':len(raw)}
+
+
 def main():
     try:
-        module=runtime();directory=WORK/'subset30_scores_export';directory.mkdir(parents=True,exist_ok=True)
+        module=runtime();directory=WORK/'saved_development_candidates_export_v2';directory.mkdir(parents=True,exist_ok=True)
         native=module.native_helper(directory)
-        result=native.remote(subset_script(native),directory,'retained_subset30_scores_export')
-        content=(json.dumps(result,ensure_ascii=False,indent=2,allow_nan=False)+'\n').encode()
-        path='training_outputs/csts_tranche8_subset30_saved_predictions.json'
-        module.RESULT_PATH=path;module.publish(path,content)
-        brief={key:value for key,value in result.items() if key not in {'source_rows','scores'}}
-        brief.update(artifact_path=path,artifact_sha256=hashlib.sha256(content).hexdigest(),artifact_bytes=len(content))
+        candidates=native.remote(candidates_script(native),directory,'retained_saved_development_candidates_v2',timeout=240)
+        binding=publish_compressed(module,DEV_EXPORT,candidates)
+        result={'phase':'saved_development_candidates','status':'complete',**binding,'candidate_count':candidates['candidate_count'],'score_maps':len(candidates['score_maps']),'unmatched':len(candidates['unmatched_prediction_files']),'new_model_inference':False,'optimizer_updates':0,'gpu_used':False}
     except Exception as error:
-        brief={'phase':'subset_saved_predictions','status':'failed','exception_type':type(error).__name__,'error':'Retained CPU read failed; all original artifacts remain unchanged.'}
-    print('OPERATOR_RESULT '+json.dumps(brief,allow_nan=False),flush=True)
+        result={'phase':'saved_development_candidates','status':'failed','exception_type':type(error).__name__,'error':'Retained CPU export failed; all original model/data artifacts remain unchanged.'}
+    print('OPERATOR_RESULT '+json.dumps(result,allow_nan=False),flush=True)
 
 
 if __name__=='__main__':main()
