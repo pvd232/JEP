@@ -31,45 +31,45 @@
   "publication_counts": {
     "published": 11
   },
-  "free_bytes": 4857372672,
+  "free_bytes": 4857339904,
   "training": {
     "status": "running",
-    "current_epoch": 1,
-    "actual_updates": 10,
-    "completed_epoch": 1,
+    "current_epoch": 2,
+    "actual_updates": 20,
+    "completed_epoch": 2,
     "selected": {
-      "epoch": 1,
-      "step": 10,
-      "sha256": "67d000bd730e8e4d6c36a50d468a64c746a3ec7e255df1b85604bd84ef21fbb6",
+      "epoch": 2,
+      "step": 20,
+      "sha256": "3791b16ee2db218193ccfbd84a45f5acb5e09fb736b54dd573236f75357b0202",
       "validation": {
         "n": 30,
-        "mse_0_1": 0.0532009241578454,
-        "mse_1_5": 0.8512147865255264,
-        "spearman": 0.5155681552640584,
-        "prediction_mean": 0.4969786917169889,
+        "mse_0_1": 0.051690635835466944,
+        "mse_1_5": 0.8270501733674711,
+        "spearman": 0.5160484236900147,
+        "prediction_mean": 0.5127416474123796,
         "target_mean": 0.5,
-        "prediction_std": 0.2272880286184313,
+        "prediction_std": 0.22399941524470865,
         "target_std": 0.22360679774997896,
         "mean_prediction_by_rating": {
           "1.0": {
             "n": 2,
-            "mean": 0.38246701657772064
+            "mean": 0.38639935851097107
           },
           "2.0": {
             "n": 5,
-            "mean": 0.32790360748767855
+            "mean": 0.34701558500528334
           },
           "3.0": {
             "n": 15,
-            "mean": 0.4706491311391195
+            "mean": 0.4876854399840037
           },
           "4.0": {
             "n": 7,
-            "mean": 0.6875534568514142
+            "mean": 0.7026656993797847
           },
           "5.0": {
             "n": 1,
-            "mean": 0.6322975158691406
+            "mean": 0.64043128490448
           }
         },
         "condition_changes": {
@@ -84,38 +84,38 @@
     },
     "epochs_without_improvement": 0,
     "latest_epoch": {
-      "epoch": 1,
-      "step": 10,
-      "training_mse_0_1": 0.03809488515290455,
+      "epoch": 2,
+      "step": 20,
+      "training_mse_0_1": 0.030937901704563505,
       "validation": {
         "n": 30,
-        "mse_0_1": 0.0532009241578454,
-        "mse_1_5": 0.8512147865255264,
-        "spearman": 0.5155681552640584,
-        "prediction_mean": 0.4969786917169889,
+        "mse_0_1": 0.051690635835466944,
+        "mse_1_5": 0.8270501733674711,
+        "spearman": 0.5160484236900147,
+        "prediction_mean": 0.5127416474123796,
         "target_mean": 0.5,
-        "prediction_std": 0.2272880286184313,
+        "prediction_std": 0.22399941524470865,
         "target_std": 0.22360679774997896,
         "mean_prediction_by_rating": {
           "1.0": {
             "n": 2,
-            "mean": 0.38246701657772064
+            "mean": 0.38639935851097107
           },
           "2.0": {
             "n": 5,
-            "mean": 0.32790360748767855
+            "mean": 0.34701558500528334
           },
           "3.0": {
             "n": 15,
-            "mean": 0.4706491311391195
+            "mean": 0.4876854399840037
           },
           "4.0": {
             "n": 7,
-            "mean": 0.6875534568514142
+            "mean": 0.7026656993797847
           },
           "5.0": {
             "n": 1,
-            "mean": 0.6322975158691406
+            "mean": 0.64043128490448
           }
         },
         "condition_changes": {
@@ -127,9 +127,9 @@
           "unit": "Within-pair comparisons. These reuse captions and are dependent."
         }
       },
-      "fit_seconds": 83.62783989001764,
-      "validation_seconds": 1.6818973679910414,
-      "observed_epoch_seconds": 85.98586052301107
+      "fit_seconds": 81.68054789700545,
+      "validation_seconds": 1.6322823670052458,
+      "observed_epoch_seconds": 84.55781126598595
     }
   },
   "result": {},
@@ -719,7 +719,7 @@
       }
     }
   },
-  "observed_unix": 1793048451.620221,
+  "observed_unix": 1793048536.804638,
   "full_generation_resumed": false,
   "held_out_test_released": false
 }
