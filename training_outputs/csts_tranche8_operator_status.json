@@ -1,9 +1,142 @@
 {
-  "updated_at": "2026-10-26T14:36:06.924804+00:00",
-  "worker_status": "running",
+  "updated_at": "2026-10-26T14:36:26.500095+00:00",
+  "worker_status": "waiting",
   "action_id": "capture_progress_while_cloud_auth_blocked1",
   "source_commit": "965aeb48be6f6e4f71b927757191956cbb3fb867",
   "operator_sha256": "4928c30aa81fbf253dbd7e9c4b538aef067cc9c5acf7f6782c5a26b57d618525",
-  "status": "launching",
-  "returncode": null
+  "status": "completed",
+  "returncode": 0,
+  "result": {
+    "phase": "capture_diagnostics",
+    "status": "complete",
+    "counts": {
+      "completed_items": 1536,
+      "total_items": 17334,
+      "completed_batches": 24,
+      "failed_attempts": 0,
+      "running_batches": 4
+    },
+    "running": [
+      {
+        "split": "training",
+        "batch": "batch_0024",
+        "status": "running",
+        "items": 64,
+        "started_unix": 1793025316.018023,
+        "elapsed_seconds": 51.0,
+        "last_event_age_seconds": 50.1,
+        "event_count": 2,
+        "last_cli_event_type": "turn.started"
+      },
+      {
+        "split": "training",
+        "batch": "batch_0025",
+        "status": "running",
+        "items": 64,
+        "started_unix": 1793025316.128599,
+        "elapsed_seconds": 50.9,
+        "last_event_age_seconds": 50.4,
+        "event_count": 2,
+        "last_cli_event_type": "turn.started"
+      },
+      {
+        "split": "training",
+        "batch": "batch_0026",
+        "status": "running",
+        "items": 64,
+        "started_unix": 1793025337.261374,
+        "elapsed_seconds": 29.8,
+        "last_event_age_seconds": 29.0,
+        "event_count": 2,
+        "last_cli_event_type": "turn.started"
+      },
+      {
+        "split": "training",
+        "batch": "batch_0027",
+        "status": "running",
+        "items": 64,
+        "started_unix": 1793025342.068154,
+        "elapsed_seconds": 25.0,
+        "last_event_age_seconds": 24.3,
+        "event_count": 2,
+        "last_cli_event_type": "turn.started"
+      }
+    ],
+    "recent_closed": [
+      {
+        "split": "training",
+        "batch": "batch_0023",
+        "status": "complete",
+        "items": 64,
+        "started_unix": 1793024810.188023,
+        "elapsed_seconds": 505.8
+      },
+      {
+        "split": "training",
+        "batch": "batch_0022",
+        "status": "complete",
+        "items": 64,
+        "started_unix": 1793024741.001409,
+        "elapsed_seconds": 575.1
+      },
+      {
+        "split": "training",
+        "batch": "batch_0021",
+        "status": "complete",
+        "items": 64,
+        "started_unix": 1793024736.0419898,
+        "elapsed_seconds": 601.2
+      },
+      {
+        "split": "training",
+        "batch": "batch_0020",
+        "status": "complete",
+        "items": 64,
+        "started_unix": 1793024715.121582,
+        "elapsed_seconds": 626.9
+      },
+      {
+        "split": "training",
+        "batch": "batch_0019",
+        "status": "complete",
+        "items": 64,
+        "started_unix": 1793024710.5441,
+        "elapsed_seconds": 99.6
+      },
+      {
+        "split": "training",
+        "batch": "batch_0018",
+        "status": "complete",
+        "items": 64,
+        "started_unix": 1793024204.7413912,
+        "elapsed_seconds": 536.2
+      },
+      {
+        "split": "training",
+        "batch": "batch_0017",
+        "status": "complete",
+        "items": 64,
+        "started_unix": 1793024185.218851,
+        "elapsed_seconds": 529.9
+      },
+      {
+        "split": "training",
+        "batch": "batch_0016",
+        "status": "complete",
+        "items": 64,
+        "started_unix": 1793024163.5879722,
+        "elapsed_seconds": 572.4
+      }
+    ],
+    "supervisors": [
+      {
+        "status": "running",
+        "source_commit": "8a0b50d5bdd2a77ab0c9444f4bf10d484f8ba6bb",
+        "started_unix": 1793022827.383191,
+        "pid": 55410,
+        "process_alive": true
+      }
+    ],
+    "observed_unix": 1793025367.058719
+  }
 }
