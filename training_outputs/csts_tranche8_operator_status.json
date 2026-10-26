@@ -1,9 +1,30 @@
 {
-  "updated_at": "2026-10-26T21:51:44.606631+00:00",
-  "worker_status": "running",
+  "updated_at": "2026-10-26T21:52:04.426311+00:00",
+  "worker_status": "waiting",
   "action_id": "selected_qwen_validation_cpu_export_20261026",
   "source_commit": "87ead0540314953246c1290d6c2269be4c88b1cb",
   "operator_sha256": "c5472eb8bdbb3cc3c3b4e5064034dc98e9b3edff3fbd53bd2affad1d5cadd9d6",
-  "status": "launching",
-  "returncode": null
+  "status": "completed",
+  "returncode": 0,
+  "result": {
+    "phase": "selected_validation_scores",
+    "status": "complete",
+    "rows": 1830,
+    "source_model_sha256": "8805f9a7241e4e19ffc481341ebad6f1ddb6dd6ff04bbf710f9f0896469e34ff",
+    "original_validation_rows_sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+    "source_predictions_sha256": "f82e66b853940ac44b316fb1325e12c6d4d09b1ac7f86c67b76a7177611d6bd0",
+    "source_predictions_path": "/home/machina/jep-csts-qwen-evidence-20261024/experiments/csts_qwen_evidence_cd720270_6b877324_ratings_ratings/runs/ratings_ratings/01M5QQD4KDXNBQD09RKPPFC405/artifacts/train/validation_predictions/predictions.json",
+    "source_groups": 688,
+    "caption_pairs": 915,
+    "metrics": {
+      "spearman": 0.7825746597420996,
+      "mse_0_1": 0.03457366047750326
+    },
+    "new_model_inference": false,
+    "optimizer_updates": 0,
+    "gpu_used": false,
+    "artifact_path": "training_outputs/csts_qwen_selected_validation_scores.json",
+    "artifact_sha256": "0fbd3693d5ee5c56cb86aaa5674ba740e05aa5bffc9e88270b8e9b0d5eb3536f",
+    "artifact_bytes": 70686
+  }
 }
