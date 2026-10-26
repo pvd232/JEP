@@ -1,6 +1,6 @@
 # JEP overnight experiments — live status
 
-Published: **2026-10-26 05:20 UTC**.
+Published: **2026-10-26 05:25 UTC**.
 
 | Comparator | Validation Spearman | Existing-test Spearman |
 |---|---:|---:|
@@ -21,7 +21,9 @@ Current native stage: `{'name': 'extract_training', 'experiment_id': 'csts_match
 
 Extraction `training/native`: **13960/13960** occurrences; 409 seconds elapsed.
 
-Extraction `training/generic`: **9540/13960** occurrences; 650 seconds elapsed.
+Extraction `training/generic`: **13960/13960** occurrences; 759 seconds elapsed.
+
+Extraction `training/case`: **7308/13960** occurrences; 954 seconds elapsed.
 
 ## overnight_reviewed_inputs
 
