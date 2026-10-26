@@ -82,7 +82,14 @@ SCHEMA: dict[str, Any] = {
                     "answer": {"type": "string"},
                     "evidence": {"type": "array", "items": {"type": "string"}},
                 },
-                "required": ["id", "status", "target", "attribute", "answer", "evidence"],
+                "required": [
+                    "id",
+                    "status",
+                    "target",
+                    "attribute",
+                    "answer",
+                    "evidence",
+                ],
                 "additionalProperties": False,
             },
         }
@@ -99,7 +106,9 @@ def sha(data: bytes) -> str:
 
 def write(path: Path, value: Any) -> None:
     """Write a readable local capture record without embedding credentials."""
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n")
+    path.write_text(
+        json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n"
+    )
 
 
 def validate_inputs(items: list[dict[str, Any]]) -> None:
@@ -109,7 +118,9 @@ def validate_inputs(items: list[dict[str, Any]]) -> None:
     for row in items:
         if set(row) != {"id", "passage", "condition"}:
             raise ValueError("Only id, passage and condition may enter generation.")
-        if any(not isinstance(value, str) or not value.strip() for value in row.values()):
+        if any(
+            not isinstance(value, str) or not value.strip() for value in row.values()
+        ):
             raise ValueError("Every input field must be a nonempty string.")
 
 
@@ -158,24 +169,35 @@ def checked_records(
         row = lookup[item["id"]]
         if set(row) != {"id", "status", "target", "attribute", "answer", "evidence"}:
             raise ValueError("Unexpected generated fields.")
-        if any(not isinstance(row[key], str) for key in ("id", "status", "target", "attribute", "answer")):
+        if any(
+            not isinstance(row[key], str)
+            for key in ("id", "status", "target", "attribute", "answer")
+        ):
             raise ValueError("Generated scalar fields must be strings.")
         if row["status"] not in {"answered", "not_specified", "ambiguous"}:
             raise ValueError("Unknown generated answer status.")
         evidence = row["evidence"]
-        if not isinstance(evidence, list) or any(not isinstance(s, str) for s in evidence):
+        if not isinstance(evidence, list) or any(
+            not isinstance(s, str) for s in evidence
+        ):
             raise ValueError("Evidence must be a string list.")
         if row["status"] == "answered":
             if any(not row[key].strip() for key in ("target", "attribute", "answer")):
-                raise ValueError("An answered record needs target, attribute and answer.")
+                raise ValueError(
+                    "An answered record needs target, attribute and answer."
+                )
             if len(row["answer"].split()) > 60:
                 raise ValueError("A generated answer exceeds 60 words.")
             if not evidence or len(set(evidence)) != len(evidence):
                 raise ValueError("Answered evidence must be nonempty and unique.")
             if any(not s.strip() or s not in item["passage"] for s in evidence):
-                raise ValueError("Each evidence quotation must exactly occur in its passage.")
+                raise ValueError(
+                    "Each evidence quotation must exactly occur in its passage."
+                )
         elif row["answer"] != "" or evidence:
-            raise ValueError("Missing or ambiguous records must have empty answer/evidence.")
+            raise ValueError(
+                "Missing or ambiguous records must have empty answer/evidence."
+            )
         result.append(row)
     return result
 
@@ -183,7 +205,14 @@ def checked_records(
 def checked_events(path: Path) -> dict[str, Any]:
     """Reject tool use, unknown item types and failed/incomplete CLI turns."""
     usage, completed = None, 0
-    allowed_events = {"thread.started", "turn.started", "item.started", "item.updated", "item.completed", "turn.completed"}
+    allowed_events = {
+        "thread.started",
+        "turn.started",
+        "item.started",
+        "item.updated",
+        "item.completed",
+        "turn.completed",
+    }
     for line in path.read_text().splitlines():
         if not line.strip():
             continue
@@ -192,7 +221,9 @@ def checked_events(path: Path) -> dict[str, Any]:
             raise ValueError(f"Unaccepted CLI event: {event.get('type')}.")
         if event["type"].startswith("item."):
             if event.get("item", {}).get("type") not in {"agent_message", "reasoning"}:
-                raise ValueError("Tool activity or an unknown CLI item invalidates this request.")
+                raise ValueError(
+                    "Tool activity or an unknown CLI item invalidates this request."
+                )
         if event["type"] == "turn.completed":
             completed += 1
             usage = event.get("usage")
@@ -204,12 +235,25 @@ def checked_events(path: Path) -> dict[str, Any]:
 def cli_command(directory: Path, cli: str) -> list[str]:
     """Keep model settings and restricted execution identical across attempts."""
     return [
-        cli, "exec", "--ignore-user-config", "--ephemeral", "--skip-git-repo-check",
-        "--sandbox", "read-only", "--model", MODEL,
-        "-c", f'model_reasoning_effort="{EFFORT}"',
-        "-c", 'approval_policy="never"',
-        "--output-schema", str(directory / "schema.json"), "--json",
-        "-o", str(directory / "response.json"), "-",
+        cli,
+        "exec",
+        "--ignore-user-config",
+        "--ephemeral",
+        "--skip-git-repo-check",
+        "--sandbox",
+        "read-only",
+        "--model",
+        MODEL,
+        "-c",
+        f'model_reasoning_effort="{EFFORT}"',
+        "-c",
+        'approval_policy="never"',
+        "--output-schema",
+        str(directory / "schema.json"),
+        "--json",
+        "-o",
+        str(directory / "response.json"),
+        "-",
     ]
 
 
@@ -245,15 +289,31 @@ def completed_batch(
             raise ValueError(f"Completed request bytes changed: {filename}.")
     if checked_events(directory / "events.jsonl") != receipt.get("usage"):
         raise ValueError("Completed request usage differs from its event log.")
-    records = checked_records(items, json.loads((directory / "response.json").read_text()))
+    records = checked_records(
+        items, json.loads((directory / "response.json").read_text())
+    )
     if json.loads((directory / "records.json").read_text()) != records:
         raise ValueError("Completed records differ from the checked raw response.")
-    print(json.dumps({"event": "generation_batch_reused", "directory": str(directory), "items": len(items)}), flush=True)
+    print(
+        json.dumps(
+            {
+                "event": "generation_batch_reused",
+                "directory": str(directory),
+                "items": len(items),
+            }
+        ),
+        flush=True,
+    )
     return {**receipt, "directory": str(directory), "reused": True}
 
 
 def request_batch(
-    items: list[dict[str, Any]], root: Path, index: int, cli: str, timeout: int, resume: bool
+    items: list[dict[str, Any]],
+    root: Path,
+    index: int,
+    cli: str,
+    timeout: int,
+    resume: bool,
 ) -> dict[str, Any]:
     """Preserve failed attempts and give each authorized retry a new directory."""
     base = root / f"batch_{index:04d}"
@@ -262,7 +322,10 @@ def request_batch(
         suffix = candidate.name.removeprefix(base.name)
         if not suffix:
             attempts.append((1, candidate))
-        elif suffix.startswith("-attempt_") and suffix.removeprefix("-attempt_").isdigit():
+        elif (
+            suffix.startswith("-attempt_")
+            and suffix.removeprefix("-attempt_").isdigit()
+        ):
             attempts.append((int(suffix.removeprefix("-attempt_")), candidate))
     attempts.sort(key=lambda pair: pair[0])
     if attempts and not resume:
@@ -274,7 +337,9 @@ def request_batch(
             if receipt.get("status") == "complete":
                 return completed_batch(items, directory, cli)
     attempt = max((number for number, _ in attempts), default=0) + 1
-    directory = base if not attempts else root / f"batch_{index:04d}-attempt_{attempt:02d}"
+    directory = (
+        base if not attempts else root / f"batch_{index:04d}-attempt_{attempt:02d}"
+    )
     return capture_batch(items, directory, cli, timeout)
 
 
@@ -290,9 +355,13 @@ def capture_batch(
     write(directory / "schema.json", SCHEMA)
     command = cli_command(directory, cli)
     receipt: dict[str, Any] = {
-        "status": "running", "model_alias": MODEL, "reasoning_effort": EFFORT,
+        "status": "running",
+        "model_alias": MODEL,
+        "reasoning_effort": EFFORT,
         "sampling": "Provider/CLI defaults; no explicit temperature override.",
-        "items": len(items), "command": command, "started_unix": time.time(),
+        "items": len(items),
+        "command": command,
+        "started_unix": time.time(),
         "prompt_sha256": sha(prompt.encode()),
         "schema_sha256": sha((directory / "schema.json").read_bytes()),
         "source_sha256": sha(Path(__file__).read_bytes()),
@@ -301,29 +370,55 @@ def capture_batch(
         "tools_permitted": False,
         "semantic_fidelity_independently_verified": False,
         "directory": str(directory),
-        "cli_version": subprocess.check_output([cli, "--version"], text=True, timeout=30).strip(),
+        "cli_version": subprocess.check_output(
+            [cli, "--version"], text=True, timeout=30
+        ).strip(),
     }
     write(directory / "receipt.json", receipt)
     started = time.monotonic()
     try:
-        with (directory / "events.jsonl").open("w") as events, (directory / "stderr.log").open("w") as errors:
-            response = subprocess.run(command, input=prompt, text=True, stdout=events, stderr=errors, cwd=directory, timeout=timeout, check=False)
+        with (
+            (directory / "events.jsonl").open("w") as events,
+            (directory / "stderr.log").open("w") as errors,
+        ):
+            response = subprocess.run(
+                command,
+                input=prompt,
+                text=True,
+                stdout=events,
+                stderr=errors,
+                cwd=directory,
+                timeout=timeout,
+                check=False,
+            )
         receipt["returncode"] = response.returncode
         receipt["events_sha256"] = sha((directory / "events.jsonl").read_bytes())
         if response.returncode:
-            raise RuntimeError(f"CLI request failed with exit code {response.returncode}; preserved stderr.log.")
+            raise RuntimeError(
+                f"CLI request failed with exit code {response.returncode}; preserved stderr.log."
+            )
         receipt["usage"] = checked_events(directory / "events.jsonl")
         output = json.loads((directory / "response.json").read_text())
         checked = checked_records(items, output)
         write(directory / "records.json", checked)
-        receipt.update(status="complete", response_sha256=sha((directory / "response.json").read_bytes()), records_sha256=sha((directory / "records.json").read_bytes()))
+        receipt.update(
+            status="complete",
+            response_sha256=sha((directory / "response.json").read_bytes()),
+            records_sha256=sha((directory / "records.json").read_bytes()),
+        )
     except Exception as exc:
         receipt.update(status="failed", error=str(exc))
         raise
     finally:
         receipt["elapsed_seconds"] = time.monotonic() - started
         write(directory / "receipt.json", receipt)
-        print(json.dumps({"event": "generation_batch", "directory": str(directory), **receipt}, allow_nan=False), flush=True)
+        print(
+            json.dumps(
+                {"event": "generation_batch", "directory": str(directory), **receipt},
+                allow_nan=False,
+            ),
+            flush=True,
+        )
     return receipt
 
 
@@ -333,7 +428,9 @@ def main() -> None:
     parser.add_argument("--inputs", type=Path, required=True)
     parser.add_argument("--groups", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--split", choices=("training", "validation", "test"), required=True)
+    parser.add_argument(
+        "--split", choices=("training", "validation", "test"), required=True
+    )
     parser.add_argument("--batch-size", type=int, default=64)
     parser.add_argument("--concurrency", type=int, default=2)
     parser.add_argument("--limit", type=int)
@@ -341,7 +438,11 @@ def main() -> None:
     parser.add_argument("--cli", default=CLI)
     parser.add_argument("--resume", action="store_true")
     args = parser.parse_args()
-    if not 1 <= args.concurrency <= 4 or args.timeout < 1 or (args.limit is not None and args.limit < 1):
+    if (
+        not 1 <= args.concurrency <= 4
+        or args.timeout < 1
+        or (args.limit is not None and args.limit < 1)
+    ):
         raise ValueError("Invalid capture resource bound.")
     items = json.loads(args.inputs.read_text())
     validate_inputs(items)
@@ -358,12 +459,40 @@ def main() -> None:
         groups = {row["id"]: groups[row["id"]] for row in items}
     selected = batches(items, groups, args.batch_size)
     args.output = args.output.resolve()
-    manifest = {"split": args.split, "input_file_sha256": sha(args.inputs.read_bytes()), "group_file_sha256": sha(args.groups.read_bytes()), "items": len(items), "batches": len(selected), "batch_size": args.batch_size, "concurrency": args.concurrency, "maximum_one_item_per_source_group_per_request": True, "model_alias": MODEL, "reasoning_effort": EFFORT, "prompt_template_sha256": sha(PROMPT.encode()), "schema_content_sha256": sha(json.dumps(SCHEMA, ensure_ascii=False).encode()), "cli": args.cli}
+    manifest = {
+        "split": args.split,
+        "input_file_sha256": sha(args.inputs.read_bytes()),
+        "group_file_sha256": sha(args.groups.read_bytes()),
+        "items": len(items),
+        "batches": len(selected),
+        "batch_size": args.batch_size,
+        "concurrency": args.concurrency,
+        "maximum_one_item_per_source_group_per_request": True,
+        "model_alias": MODEL,
+        "reasoning_effort": EFFORT,
+        "prompt_template_sha256": sha(PROMPT.encode()),
+        "schema_content_sha256": sha(json.dumps(SCHEMA, ensure_ascii=False).encode()),
+        "cli": args.cli,
+    }
     if args.resume:
         previous = json.loads((args.output / "manifest.json").read_text())
-        if any(previous.get(key) != value for key, value in manifest.items() if key != "concurrency"):
-            raise ValueError("Resume changes the declared partition, inputs or batching.")
-        manifest["resume_history"] = [*previous.get("resume_history", []), {"previous_status": previous.get("status"), "previous_concurrency": previous.get("concurrency"), "concurrency": args.concurrency, "resumed_unix": time.time()}]
+        if any(
+            previous.get(key) != value
+            for key, value in manifest.items()
+            if key != "concurrency"
+        ):
+            raise ValueError(
+                "Resume changes the declared partition, inputs or batching."
+            )
+        manifest["resume_history"] = [
+            *previous.get("resume_history", []),
+            {
+                "previous_status": previous.get("status"),
+                "previous_concurrency": previous.get("concurrency"),
+                "concurrency": args.concurrency,
+                "resumed_unix": time.time(),
+            },
+        ]
     else:
         args.output.mkdir(parents=True, exist_ok=False)
     manifest["status"] = "running"
@@ -371,7 +500,18 @@ def main() -> None:
     receipts: list[dict[str, Any] | None] = [None] * len(selected)
     try:
         with ThreadPoolExecutor(max_workers=args.concurrency) as pool:
-            futures = {pool.submit(request_batch, batch, args.output, index, args.cli, args.timeout, args.resume): index for index, batch in enumerate(selected)}
+            futures = {
+                pool.submit(
+                    request_batch,
+                    batch,
+                    args.output,
+                    index,
+                    args.cli,
+                    args.timeout,
+                    args.resume,
+                ): index
+                for index, batch in enumerate(selected)
+            }
             try:
                 for future in as_completed(futures):
                     receipts[futures[future]] = future.result()
@@ -383,16 +523,32 @@ def main() -> None:
         for receipt in receipts:
             if receipt is None:
                 raise ValueError("A requested batch has no completion receipt.")
-            records.extend(json.loads((Path(receipt["directory"]) / "records.json").read_text()))
+            records.extend(
+                json.loads((Path(receipt["directory"]) / "records.json").read_text())
+            )
         checked = checked_records(items, {"records": records})
         write(args.output / "records.json", checked)
-        manifest.update(status="complete", receipts=receipts, records_sha256=sha((args.output / "records.json").read_bytes()))
+        manifest.update(
+            status="complete",
+            receipts=receipts,
+            records_sha256=sha((args.output / "records.json").read_bytes()),
+        )
         write(args.output / "manifest.json", manifest)
     except BaseException as exc:
         manifest.update(status="failed", error=str(exc))
         write(args.output / "manifest.json", manifest)
         raise
-    print(json.dumps({"event": "capture_complete", "items": len(checked), "batches": len(selected)}, allow_nan=False), flush=True)
+    print(
+        json.dumps(
+            {
+                "event": "capture_complete",
+                "items": len(checked),
+                "batches": len(selected),
+            },
+            allow_nan=False,
+        ),
+        flush=True,
+    )
 
 
 if __name__ == "__main__":
