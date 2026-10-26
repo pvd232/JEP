@@ -249,7 +249,7 @@ def supervise(key: str) -> int:
         try:
             with (directory / "stdout.log").open("ab") as stdout, (directory / "stderr.log").open("ab") as stderr:
                 child = subprocess.Popen(
-                    [sys.executable, str(operator), *receipt["arguments"]],
+                    [sys.executable, "-I", str(operator), *receipt["arguments"]],
                     cwd=WORK_ROOT, stdin=subprocess.DEVNULL, stdout=stdout, stderr=stderr,
                 )
                 receipt["operator_pid"] = child.pid
