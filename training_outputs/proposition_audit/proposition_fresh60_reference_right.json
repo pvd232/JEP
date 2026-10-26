@@ -1,0 +1,543 @@
+[
+  {
+    "id": "79717e8eebf540370771dcc9d1a7d6690fe31754151c026ae04ef6d13da3f500",
+    "condition": "color of animal",
+    "target": "animal (dog)",
+    "attribute": "coat color",
+    "status": "answered",
+    "minimal_faithful_answer": "Black and white.",
+    "evidence_spans": [
+      {
+        "text": "black and white dog",
+        "start": 2,
+        "end": 21
+      }
+    ],
+    "interpretation_caveats": []
+  },
+  {
+    "id": "b07ce1ff92710c092a7458e5221827ff9a063a160b909b9d539f94f69792e80b",
+    "condition": "type of sport",
+    "target": "greyhounds",
+    "attribute": "sport or racing discipline",
+    "status": "answered",
+    "minimal_faithful_answer": "Greyhound racing.",
+    "evidence_spans": [
+      {
+        "text": "greyhounds racing",
+        "start": 11,
+        "end": 28
+      }
+    ],
+    "interpretation_caveats": [
+      "The racing animals identify the discipline; no human sport or specific event is named."
+    ]
+  },
+  {
+    "id": "4d58320708dd60ca1ce37b2ac9cf186aa1cfcc673cd79fb523e7aaa3da93dea1",
+    "condition": "number of people",
+    "target": "bicyclists",
+    "attribute": "number of people",
+    "status": "answered",
+    "minimal_faithful_answer": "A group of bicyclists; the exact number is not stated.",
+    "evidence_spans": [
+      {
+        "text": "A group of bicyclists",
+        "start": 0,
+        "end": 21
+      }
+    ],
+    "interpretation_caveats": [
+      "Preserve the uncounted group instead of inventing an exact count."
+    ]
+  },
+  {
+    "id": "2b55d67beed4eb548d7b6cdbdf7623096498e30aafa9b7d3b455e418c926db8d",
+    "condition": "sport being played",
+    "target": "man preparing to bat",
+    "attribute": "sport being played",
+    "status": "ambiguous",
+    "minimal_faithful_answer": "A bat-and-ball sport; the exact sport is not specified.",
+    "evidence_spans": [
+      {
+        "text": "ready to bat at a ball",
+        "start": 51,
+        "end": 73
+      }
+    ],
+    "interpretation_caveats": [
+      "Batting and spectators do not uniquely distinguish baseball, softball, cricket, or another bat-and-ball sport. The jersey number is not a player count or sport identifier."
+    ]
+  },
+  {
+    "id": "6bd79cc8fe346b50b497c73b3d7bad1c4133f3e727eac15b4a4c326348bc60c8",
+    "condition": "type of food items",
+    "target": "meal on the table",
+    "attribute": "food types",
+    "status": "answered",
+    "minimal_faithful_answer": "Toast, bacon, and potatoes, with coffee to drink.",
+    "evidence_spans": [
+      {
+        "text": "toast, bacon and potatoes",
+        "start": 14,
+        "end": 39
+      },
+      {
+        "text": "a cup of coffee",
+        "start": 56,
+        "end": 71
+      }
+    ],
+    "interpretation_caveats": [
+      "Coffee is explicitly present as a beverage; include it with that qualification if food items is interpreted broadly. Counts and containers are not required by this type-only query."
+    ]
+  },
+  {
+    "id": "540afcf762f3ab5f90d53bd5fdfeed1edb1e4ecb4985bb9a3f048d6587460303",
+    "condition": "type of produce",
+    "target": "produce on the table",
+    "attribute": "produce types",
+    "status": "answered",
+    "minimal_faithful_answer": "Cucumbers, zucchini, squash, and peaches, among other unspecified produce.",
+    "evidence_spans": [
+      {
+        "text": "Fresh veggies and fruit",
+        "start": 0,
+        "end": 23
+      },
+      {
+        "text": "cucumbers, zucchini, squash, and peaches among others",
+        "start": 44,
+        "end": 97
+      }
+    ],
+    "interpretation_caveats": [
+      "The source explicitly says the list is not exhaustive. Do not invent the other produce types."
+    ]
+  },
+  {
+    "id": "76c62b947d39f1e0ece69e65782de630fb3460a4c82805dfaf3886adc7fc2243",
+    "condition": "number of instruments",
+    "target": "performing band",
+    "attribute": "number of instruments",
+    "status": "answered",
+    "minimal_faithful_answer": "Three guitars, drums, and a keyboard: five instrument parts or setups, counting the drums as one setup.",
+    "evidence_spans": [
+      {
+        "text": "one on drums , three guitars and a keyboard player",
+        "start": 48,
+        "end": 98
+      }
+    ],
+    "interpretation_caveats": [
+      "One person on drums does not specify the number of individual drums. Five is the sum of one drum setup, three guitars, and one keyboard part; the count of individual percussion components is unspecified."
+    ]
+  },
+  {
+    "id": "c97a1a5d33043a7f90b9f16eac4ddc612bbe29da3408e8bb426dd4289f0a9199",
+    "condition": "location of play actions",
+    "target": "children playing",
+    "attribute": "location of play",
+    "status": "answered",
+    "minimal_faithful_answer": "In water falling from a mosaic-covered spout.",
+    "evidence_spans": [
+      {
+        "text": "in water falling from a mosaic covered spout",
+        "start": 18,
+        "end": 62
+      }
+    ],
+    "interpretation_caveats": [
+      "No larger setting such as a park, pool, or fountain is explicitly named."
+    ]
+  },
+  {
+    "id": "e4e75a5b6897dcf120029e370a2bb6c4c69e0292cf213ef72c2125176e3bb6e0",
+    "condition": "type of food ingredients",
+    "target": "toast dish",
+    "attribute": "food components or ingredients",
+    "status": "answered",
+    "minimal_faithful_answer": "Toast, cream filling, powdered sugar, walnuts, and strawberries.",
+    "evidence_spans": [
+      {
+        "text": "toast with cream filing, powder sugar, walnuts, and strawberries",
+        "start": 25,
+        "end": 89
+      }
+    ],
+    "interpretation_caveats": [
+      "Normalize apparent spelling variants cream filing and powder sugar without adding a dish identity or unmentioned ingredients. Toast is the base component."
+    ]
+  },
+  {
+    "id": "539a79993afdb0c89893f0a75e22db248b4f07db2d022ef6787bd4d168d49a92",
+    "condition": "color of vehicle",
+    "target": "vehicles",
+    "attribute": "vehicle colors",
+    "status": "answered",
+    "minimal_faithful_answer": "The buses are red and yellow; no color is stated for the parked motorbikes.",
+    "evidence_spans": [
+      {
+        "text": "red and yellow buses",
+        "start": 9,
+        "end": 29
+      },
+      {
+        "text": "parked motorbikes",
+        "start": 91,
+        "end": 108
+      }
+    ],
+    "interpretation_caveats": [
+      "The color phrase describes the buses only. It does not establish whether each bus has both colors or whether different buses have different colors."
+    ]
+  },
+  {
+    "id": "1e98eead9bf3fb65958ec43c6bf56fe7034422e33d720cc5485b945e8d490ebe",
+    "condition": "train on track",
+    "target": "trains on the track",
+    "attribute": "train presence and arrangement",
+    "status": "answered",
+    "minimal_faithful_answer": "A white-and-yellow train and a red-and-yellow train are coupled together on a track.",
+    "evidence_spans": [
+      {
+        "text": "A white and yellow train and a red and yellow train hooked to each other on a track",
+        "start": 0,
+        "end": 83
+      }
+    ],
+    "interpretation_caveats": [
+      "The condition does not name a narrower attribute. The answer preserves the explicitly described trains and their relation, without inferring train models or motion."
+    ]
+  },
+  {
+    "id": "9f9068eb569d0efbe0ef9aa4c8df033a1e3a65f22ab82dee2af501f21ad53921",
+    "condition": "color of uniform",
+    "target": "baseball player uniform",
+    "attribute": "uniform color",
+    "status": "answered",
+    "minimal_faithful_answer": "White and red.",
+    "evidence_spans": [
+      {
+        "text": "white and red uniform",
+        "start": 23,
+        "end": 44
+      }
+    ],
+    "interpretation_caveats": []
+  },
+  {
+    "id": "c0b1b3887a0725115c3bffb7846b230cc42914b5e781d19d46322dd11b4ea09d",
+    "condition": "surroundings",
+    "target": "older man",
+    "attribute": "surroundings or setting",
+    "status": "answered",
+    "minimal_faithful_answer": "Outside a store.",
+    "evidence_spans": [
+      {
+        "text": "standing outside of a store",
+        "start": 31,
+        "end": 58
+      }
+    ],
+    "interpretation_caveats": [
+      "No street, city, store type, or other surroundings are specified."
+    ]
+  },
+  {
+    "id": "a7f205b7d42edb6cf361dfb7413db85a18f190aa2306d7c90709199d51543034",
+    "condition": "action of animals",
+    "target": "dog",
+    "attribute": "animal action",
+    "status": "answered",
+    "minimal_faithful_answer": "The dog is airborne, preparing to catch a ball.",
+    "evidence_spans": [
+      {
+        "text": "A dog flies through the air , preparing to catch a ball",
+        "start": 0,
+        "end": 55
+      }
+    ],
+    "interpretation_caveats": [
+      "Preparing to catch does not establish a successful catch or sustained flight."
+    ]
+  },
+  {
+    "id": "0877fbb440aaa9281db1d2f526eef9be9fff799a339dc24501ea7fa3f52425e5",
+    "condition": "type of vehicle",
+    "target": "vehicle used for stunts",
+    "attribute": "vehicle type",
+    "status": "answered",
+    "minimal_faithful_answer": "A BMX bicycle.",
+    "evidence_spans": [
+      {
+        "text": "blue BMX bike",
+        "start": 39,
+        "end": 52
+      }
+    ],
+    "interpretation_caveats": [
+      "Blue is incidental to the type-only query."
+    ]
+  },
+  {
+    "id": "eb0ed241940ce3a91c4b1ed4b13917bb4092695e819a580ea41be644f8f118e6",
+    "condition": "type of sport",
+    "target": "players",
+    "attribute": "sport",
+    "status": "answered",
+    "minimal_faithful_answer": "Baseball.",
+    "evidence_spans": [
+      {
+        "text": "Young baseball player",
+        "start": 0,
+        "end": 21
+      }
+    ],
+    "interpretation_caveats": []
+  },
+  {
+    "id": "775a904dbb4cbbf976773c9851a385c62e009cbc5cc06802cf4541dc530e1140",
+    "condition": "position of crowd's arms",
+    "target": "crowd",
+    "attribute": "position of arms",
+    "status": "answered",
+    "minimal_faithful_answer": "Their arms are in the air.",
+    "evidence_spans": [
+      {
+        "text": "their arms in the air",
+        "start": 23,
+        "end": 44
+      }
+    ],
+    "interpretation_caveats": [
+      "The passage supplies no exact angle or claim that every individual has both arms raised."
+    ]
+  },
+  {
+    "id": "eb6162e1e9700e705d6cc68383d3fab2fc1edc63053978a336715269a4d51ad0",
+    "condition": "type of room",
+    "target": "room",
+    "attribute": "room type",
+    "status": "answered",
+    "minimal_faithful_answer": "Bathroom.",
+    "evidence_spans": [
+      {
+        "text": "A bathroom",
+        "start": 0,
+        "end": 10
+      }
+    ],
+    "interpretation_caveats": []
+  },
+  {
+    "id": "779f21df84e127d2a13614c88e06708c9378f66b9b5b86decb74198c90e51963",
+    "condition": "type of vehicles",
+    "target": "lady at intersection",
+    "attribute": "vehicle type",
+    "status": "answered",
+    "minimal_faithful_answer": "Bicycle.",
+    "evidence_spans": [
+      {
+        "text": "her bicycle",
+        "start": 29,
+        "end": 40
+      }
+    ],
+    "interpretation_caveats": [
+      "Waiting for a traffic light does not establish the presence or types of other vehicles."
+    ]
+  },
+  {
+    "id": "392244e7effb6b2604b9d7407e31b91ae4507f933076e5b652f0aacfa34bc2d6",
+    "condition": "color of clothing",
+    "target": "clothes",
+    "attribute": "clothing color",
+    "status": "not_specified",
+    "minimal_faithful_answer": null,
+    "evidence_spans": [],
+    "interpretation_caveats": [
+      "The passage mentions clothes on a chair but gives no clothing colors."
+    ]
+  },
+  {
+    "id": "2afdd6c93dd3ab0cd133133199b526856c551fcab578c087757bdb5530201417",
+    "condition": "type of trick",
+    "target": "man on bicycle",
+    "attribute": "trick type or category",
+    "status": "answered",
+    "minimal_faithful_answer": "A bicycle trick; the particular maneuver is not specified.",
+    "evidence_spans": [
+      {
+        "text": "does a trick on a bicycle",
+        "start": 21,
+        "end": 46
+      }
+    ],
+    "interpretation_caveats": [
+      "The source identifies the broad category but supplies no named maneuver such as a wheelie or jump."
+    ]
+  },
+  {
+    "id": "40adfe3c5c11c528e8465b84afe07ea8951d589abbcbdbfd59212cd75ea6feee",
+    "condition": "action of animal",
+    "target": "little dog",
+    "attribute": "animal action",
+    "status": "answered",
+    "minimal_faithful_answer": "Jumping up to catch a red ball in its mouth.",
+    "evidence_spans": [
+      {
+        "text": "little dog is jumping up to catch a red ball in its mouth",
+        "start": 0,
+        "end": 57
+      }
+    ],
+    "interpretation_caveats": [
+      "To catch states the purpose; a successful catch is not explicitly established."
+    ]
+  },
+  {
+    "id": "d743f57681f6cb18868a162c255cbb5e9779d0b7623b7b97aaed44d509c599fc",
+    "condition": "color of clothing",
+    "target": "surfer swimsuit",
+    "attribute": "clothing color",
+    "status": "answered",
+    "minimal_faithful_answer": "Red and black.",
+    "evidence_spans": [
+      {
+        "text": "red and black swimsuit",
+        "start": 16,
+        "end": 38
+      }
+    ],
+    "interpretation_caveats": []
+  },
+  {
+    "id": "91de427319706a635929dc6d189e368cf0a1b848be96b7e662a12d13d625896f",
+    "condition": "distance above snow",
+    "target": "snowboarder",
+    "attribute": "distance above snow",
+    "status": "not_specified",
+    "minimal_faithful_answer": null,
+    "evidence_spans": [],
+    "interpretation_caveats": [
+      "Throwing up snow while riding does not establish whether the snowboarder is airborne or any distance above the snow."
+    ]
+  },
+  {
+    "id": "1678e4328230b3e1ddc03d48ef192cafc2d393294b69befaa9c8e611317c3901",
+    "condition": "amount of people",
+    "target": "people at train and depot",
+    "attribute": "number of people",
+    "status": "answered",
+    "minimal_faithful_answer": "Two specifically described men, plus an unspecified group of other people.",
+    "evidence_spans": [
+      {
+        "text": "an elderly man",
+        "start": 0,
+        "end": 14
+      },
+      {
+        "text": "another man",
+        "start": 26,
+        "end": 37
+      },
+      {
+        "text": "others stand outside a depot",
+        "start": 71,
+        "end": 99
+      }
+    ],
+    "interpretation_caveats": [
+      "The exact total is not given. Retain both individually described men and the uncounted others rather than claiming an exact total."
+    ]
+  },
+  {
+    "id": "875ccc9ea2c90d22f37011e20620442eef71cd62cbaca6a34ec6ca993d19e7b9",
+    "condition": "location of skateboarding",
+    "target": "skateboarding man",
+    "attribute": "skateboarding location",
+    "status": "answered",
+    "minimal_faithful_answer": "In a busy city setting.",
+    "evidence_spans": [
+      {
+        "text": "does a trick and people walk in a busy city scene",
+        "start": 34,
+        "end": 83
+      }
+    ],
+    "interpretation_caveats": [
+      "No specific street, skatepark, or city is identified."
+    ]
+  },
+  {
+    "id": "36f4dde3808baf85a6eb45af18bc98d7e1bb88311354960b25545e7e7ba0fca4",
+    "condition": "activity involved",
+    "target": "two dogs",
+    "attribute": "activities",
+    "status": "answered",
+    "minimal_faithful_answer": "A little dog jumps off a bench while a larger dog eats on the bench.",
+    "evidence_spans": [
+      {
+        "text": "A little dog jumps off of the bench where a larger dog is eating",
+        "start": 0,
+        "end": 64
+      }
+    ],
+    "interpretation_caveats": [
+      "Include both animal activities and their respective actors. No food type is given."
+    ]
+  },
+  {
+    "id": "4d8c2be912a9df744494925ce918aac16b4befe0205009f9fcda19cd29be29b4",
+    "condition": "type of liquor",
+    "target": "contents of wine glasses",
+    "attribute": "alcohol type",
+    "status": "answered",
+    "minimal_faithful_answer": "Wine; the variety is not specified.",
+    "evidence_spans": [
+      {
+        "text": "a little bit of wine",
+        "start": 31,
+        "end": 51
+      }
+    ],
+    "interpretation_caveats": [
+      "Liquor is interpreted broadly as alcoholic beverage. The passage does not name a distilled spirit or a wine variety."
+    ]
+  },
+  {
+    "id": "7e048c9d1d87d9315604d68348f6365e70866d9aadc9818c1d644c23ff2cd9dd",
+    "condition": "body posture",
+    "target": "man wearing snowboard",
+    "attribute": "body posture",
+    "status": "answered",
+    "minimal_faithful_answer": "Kneeling.",
+    "evidence_spans": [
+      {
+        "text": "A Man is kneeling",
+        "start": 0,
+        "end": 17
+      }
+    ],
+    "interpretation_caveats": []
+  },
+  {
+    "id": "bfa149dbc1a3fbd9876b89a8f9a5bfc4cfc5862c27a1d635c61e2cb9dab8b81f",
+    "condition": "number of animals",
+    "target": "dog chasing toy",
+    "attribute": "number of animals",
+    "status": "answered",
+    "minimal_faithful_answer": "One dog is mentioned.",
+    "evidence_spans": [
+      {
+        "text": "A dog chases a toy",
+        "start": 0,
+        "end": 18
+      }
+    ],
+    "interpretation_caveats": [
+      "The owner is a person, not an additional animal for this query. A singular described dog does not prove there are no unmentioned animals in the broader scene."
+    ]
+  }
+]
