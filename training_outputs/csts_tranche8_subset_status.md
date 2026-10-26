@@ -33,10 +33,9 @@ This is a small development triage experiment. Native metrics and training progr
     }
   ],
   "publication_counts": {
-    "published": 10,
-    "uploading": 1
+    "published": 11
   },
-  "free_bytes": 4980715520,
+  "free_bytes": 4980486144,
   "result": {},
   "preparation": {
     "coverage": {
@@ -417,6 +416,212 @@ This is a small development triage experiment. Native metrics and training progr
     "validation_selection": "The 30 disjoint source pairs selected before the frozen v2 fidelity audit; no judgment-based answer filtering.",
     "limitations": "This model-assisted audit sample was used during development and is reused for epoch selection. It is a small development triage, not independent confirmation or test eligibility.",
     "test_inputs_opened": false
+  },
+  "epoch_zero_metrics": {
+    "saved_qwen": {
+      "n": 30,
+      "mse_0_1": 0.04185093042714131,
+      "mse_1_5": 0.669614886834261,
+      "spearman": 0.5758418427215707,
+      "prediction_mean": 0.5015633329749107,
+      "target_mean": 0.5,
+      "prediction_std": 0.20274980324297884,
+      "target_std": 0.22360679774997896,
+      "mean_prediction_by_rating": {
+        "1.0": {
+          "n": 2,
+          "mean": 0.3346192240715027
+        },
+        "2.0": {
+          "n": 5,
+          "mean": 0.31868474185466766
+        },
+        "3.0": {
+          "n": 15,
+          "mean": 0.49986075758934023
+        },
+        "4.0": {
+          "n": 7,
+          "mean": 0.6693160789353507
+        },
+        "5.0": {
+          "n": 1,
+          "mean": 0.6011139154434204
+        }
+      },
+      "condition_changes": {
+        "n": 0,
+        "correct": 0,
+        "ties": 0,
+        "accuracy_ties_half": null,
+        "difference_mse": null,
+        "unit": "Within-pair comparisons. These reuse captions and are dependent."
+      },
+      "operating_point": {
+        "cutoff": 0.3142477869987488,
+        "tp": 8,
+        "fn": 0,
+        "fp": 3,
+        "tn": 4,
+        "recall": 1.0,
+        "false_negative_rate": 0.0,
+        "false_positive_rate": 0.42857142857142855,
+        "excluded_middle_rating": 15
+      },
+      "descriptive_cutoffs": {
+        "0.5": {
+          "cutoff": 0.5,
+          "tp": 6,
+          "fn": 2,
+          "fp": 1,
+          "tn": 6,
+          "recall": 0.75,
+          "false_negative_rate": 0.25,
+          "false_positive_rate": 0.14285714285714285,
+          "excluded_middle_rating": 15
+        },
+        "0.75": {
+          "cutoff": 0.75,
+          "tp": 3,
+          "fn": 5,
+          "fp": 0,
+          "tn": 7,
+          "recall": 0.375,
+          "false_negative_rate": 0.625,
+          "false_positive_rate": 0.0,
+          "excluded_middle_rating": 15
+        }
+      },
+      "errors_by_rating": {
+        "1.0": {
+          "n": 2,
+          "signed_error": 0.3346192240715027,
+          "mse": 0.13211550753528645
+        },
+        "2.0": {
+          "n": 5,
+          "signed_error": 0.06868474185466766,
+          "mse": 0.02653502766189626
+        },
+        "3.0": {
+          "n": 15,
+          "signed_error": -0.00013924241065979003,
+          "mse": 0.026016990790704318
+        },
+        "4.0": {
+          "n": 7,
+          "signed_error": -0.0806839210646493,
+          "mse": 0.04417954130296309
+        },
+        "5.0": {
+          "n": 1,
+          "signed_error": -0.3988860845565796,
+          "mse": 0.15911010845287876
+        }
+      }
+    },
+    "propositions": {
+      "n": 30,
+      "mse_0_1": 0.05753978267137554,
+      "mse_1_5": 0.9206365227420087,
+      "spearman": 0.486511915493704,
+      "prediction_mean": 0.5133678225179513,
+      "target_mean": 0.5,
+      "prediction_std": 0.22962168324313648,
+      "target_std": 0.22360679774997896,
+      "mean_prediction_by_rating": {
+        "1.0": {
+          "n": 2,
+          "mean": 0.4151739180088043
+        },
+        "2.0": {
+          "n": 5,
+          "mean": 0.34012899547815323
+        },
+        "3.0": {
+          "n": 15,
+          "mean": 0.49294862846533455
+        },
+        "4.0": {
+          "n": 7,
+          "mean": 0.6954831736428397
+        },
+        "5.0": {
+          "n": 1,
+          "mean": 0.6074302196502686
+        }
+      },
+      "condition_changes": {
+        "n": 0,
+        "correct": 0,
+        "ties": 0,
+        "accuracy_ties_half": null,
+        "difference_mse": null,
+        "unit": "Within-pair comparisons. These reuse captions and are dependent."
+      },
+      "operating_point": {
+        "cutoff": 0.2539628744125366,
+        "tp": 8,
+        "fn": 0,
+        "fp": 5,
+        "tn": 2,
+        "recall": 1.0,
+        "false_negative_rate": 0.0,
+        "false_positive_rate": 0.7142857142857143,
+        "excluded_middle_rating": 15
+      },
+      "descriptive_cutoffs": {
+        "0.5": {
+          "cutoff": 0.5,
+          "tp": 6,
+          "fn": 2,
+          "fp": 2,
+          "tn": 5,
+          "recall": 0.75,
+          "false_negative_rate": 0.25,
+          "false_positive_rate": 0.2857142857142857,
+          "excluded_middle_rating": 15
+        },
+        "0.75": {
+          "cutoff": 0.75,
+          "tp": 4,
+          "fn": 4,
+          "fp": 0,
+          "tn": 7,
+          "recall": 0.5,
+          "false_negative_rate": 0.5,
+          "false_positive_rate": 0.0,
+          "excluded_middle_rating": 15
+        }
+      },
+      "errors_by_rating": {
+        "1.0": {
+          "n": 2,
+          "signed_error": 0.4151739180088043,
+          "mse": 0.20780440595908978
+        },
+        "2.0": {
+          "n": 5,
+          "signed_error": 0.09012899547815323,
+          "mse": 0.035887134974277854
+        },
+        "3.0": {
+          "n": 15,
+          "signed_error": -0.0070513715346654255,
+          "mse": 0.03888107849180999
+        },
+        "4.0": {
+          "n": 7,
+          "signed_error": -0.0545168263571603,
+          "mse": 0.056260254790101626
+        },
+        "5.0": {
+          "n": 1,
+          "signed_error": -0.39256978034973145,
+          "mse": 0.1541110324438364
+        }
+      }
+    }
   }
 }
 ```
