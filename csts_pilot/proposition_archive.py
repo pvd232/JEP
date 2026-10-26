@@ -131,6 +131,26 @@ def seal_archive(context: StageContext[ArchiveConfig]) -> None:
     })
 
 
+def verify_native_archive(record: dict[str, Any], identity: str, size: int, origin: str) -> None:
+    """Check both native artifacts before first publication or later requeueing."""
+    if record.get("status") != "succeeded":
+        raise ValueError("Archive publication requires a successfully sealed native run.")
+    archive = artifact_path(record, "archive", "archive", "archive.gz")
+    receipt_path = artifact_path(record, "archive", "receipt", "receipt.json")
+    if (
+        not archive.is_file() or archive.stat().st_size != size
+        or file_sha256(archive) != identity or not receipt_path.is_file()
+    ):
+        raise ValueError("The completed native archive artifacts differ from the capture identity.")
+    expected = {
+        "archive_sha256": identity, "archive_bytes": size,
+        "original_source_path": origin, "archive_extracted": False,
+        "optimizer_updates": 0, "compute": "cpu",
+    }
+    if load_json(receipt_path) != expected:
+        raise ValueError("The completed native archive receipt differs from the capture identity.")
+
+
 def seal_one(
     root: Path, source_path: Path, identity: str, size: int,
     source: Any, environment: Any, destination: Any, retry_failed: bool = False,
@@ -144,9 +164,7 @@ def seal_one(
         if record.get("archive_sha256") != identity or record.get("archive_bytes") != size:
             raise ValueError("The archive controller receipt changed content identity.")
         if record.get("status") == "sealed":
-            archive = artifact_path(record["run"], "archive", "archive", "archive.gz")
-            if archive.stat().st_size != size or file_sha256(archive) != identity:
-                raise ValueError("The previously sealed native archive bytes changed.")
+            verify_native_archive(record["run"], identity, size, record["original_source_path"])
             from viper.references import ResolvedRunRef
 
             reference = ResolvedRunRef.model_validate(record["run"]["reference"])
@@ -206,13 +224,7 @@ def seal_one(
         record["run"] = native
         if result.status != "succeeded":
             raise RuntimeError(f"Native CPU archive sealing failed: {result.path}")
-        sealed = artifact_path(native, "archive", "archive", "archive.gz")
-        receipt = load_json(artifact_path(native, "archive", "receipt", "receipt.json"))
-        if (
-            sealed.stat().st_size != size or file_sha256(sealed) != identity
-            or receipt.get("archive_sha256") != identity or receipt.get("archive_bytes") != size
-        ):
-            raise ValueError("The completed native archive artifacts differ from the capture identity.")
+        verify_native_archive(native, identity, size, str(source_path))
         record.update(status="sealed", sealed_unix=time.time())
         # Persist the native reference before spawning the independent uploader.
         save_receipt(receipt_path, record)
