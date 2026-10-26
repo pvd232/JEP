@@ -1,0 +1,244 @@
+{
+  "phase": "pipeline",
+  "status": "authentication_required",
+  "stage": "waiting_for_google_cloud_sign_in",
+  "operator_source_commit": "d5b7e513e7067538159aaffeb8d2ce463b845739",
+  "native_source_commit": "965aeb48be6f6e4f71b927757191956cbb3fb867",
+  "capture_source_commit": "8a0b50d5bdd2a77ab0c9444f4bf10d484f8ba6bb",
+  "audit_source_sha256": "45f09261ce5bb172b0dcb0c0efc085829565b1bd1c48bf2755142ff5b7e56c24",
+  "helper_sha256": {
+    "native": "4928c30aa81fbf253dbd7e9c4b538aef067cc9c5acf7f6782c5a26b57d618525",
+    "test": "778c9c79c7ce6f163a739bdcbae243644d3c4748e1f35abec20ed55a7c1443bd"
+  },
+  "updated_at": "2026-10-26T14:39:48.738899+00:00",
+  "elapsed_seconds": 1,
+  "capture": {
+    "phase": "capture_diagnostics",
+    "status": "running",
+    "counts": {
+      "completed_items": 1600,
+      "total_items": 17334,
+      "completed_batches": 25,
+      "failed_attempts": 0,
+      "running_batches": 4
+    },
+    "running": [
+      {
+        "split": "training",
+        "batch": "batch_0025",
+        "status": "running",
+        "items": 64,
+        "started_unix": 1793025316.128599,
+        "elapsed_seconds": 272.6,
+        "stderr_flags": {
+          "capacity": false,
+          "rate_limit": false,
+          "timeout": false,
+          "auth": false,
+          "policy": false,
+          "connection": false,
+          "retrying": false
+        },
+        "stderr_counts": {
+          "capacity": 0,
+          "rate_limit": 0,
+          "timeout": 0,
+          "auth": 0,
+          "policy": 0,
+          "connection": 0,
+          "retrying": 0
+        },
+        "stderr_bytes_scanned": 0,
+        "stderr_scan_truncated": false,
+        "last_event_age_seconds": 272.1,
+        "event_count": 2,
+        "last_cli_event_type": "turn.started"
+      },
+      {
+        "split": "training",
+        "batch": "batch_0026",
+        "status": "running",
+        "items": 64,
+        "started_unix": 1793025337.261374,
+        "elapsed_seconds": 251.5,
+        "stderr_flags": {
+          "capacity": false,
+          "rate_limit": false,
+          "timeout": false,
+          "auth": false,
+          "policy": false,
+          "connection": false,
+          "retrying": false
+        },
+        "stderr_counts": {
+          "capacity": 0,
+          "rate_limit": 0,
+          "timeout": 0,
+          "auth": 0,
+          "policy": 0,
+          "connection": 0,
+          "retrying": 0
+        },
+        "stderr_bytes_scanned": 0,
+        "stderr_scan_truncated": false,
+        "last_event_age_seconds": 250.7,
+        "event_count": 2,
+        "last_cli_event_type": "turn.started"
+      },
+      {
+        "split": "training",
+        "batch": "batch_0027",
+        "status": "running",
+        "items": 64,
+        "started_unix": 1793025342.068154,
+        "elapsed_seconds": 246.7,
+        "stderr_flags": {
+          "capacity": false,
+          "rate_limit": false,
+          "timeout": false,
+          "auth": false,
+          "policy": false,
+          "connection": false,
+          "retrying": false
+        },
+        "stderr_counts": {
+          "capacity": 0,
+          "rate_limit": 0,
+          "timeout": 0,
+          "auth": 0,
+          "policy": 0,
+          "connection": 0,
+          "retrying": 0
+        },
+        "stderr_bytes_scanned": 0,
+        "stderr_scan_truncated": false,
+        "last_event_age_seconds": 246.0,
+        "event_count": 2,
+        "last_cli_event_type": "turn.started"
+      },
+      {
+        "split": "training",
+        "batch": "batch_0028",
+        "status": "running",
+        "items": 64,
+        "started_unix": 1793025405.403842,
+        "elapsed_seconds": 183.3,
+        "stderr_flags": {
+          "capacity": false,
+          "rate_limit": false,
+          "timeout": false,
+          "auth": false,
+          "policy": false,
+          "connection": false,
+          "retrying": false
+        },
+        "stderr_counts": {
+          "capacity": 0,
+          "rate_limit": 0,
+          "timeout": 0,
+          "auth": 0,
+          "policy": 0,
+          "connection": 0,
+          "retrying": 0
+        },
+        "stderr_bytes_scanned": 0,
+        "stderr_scan_truncated": false,
+        "last_event_age_seconds": 182.7,
+        "event_count": 2,
+        "last_cli_event_type": "turn.started"
+      }
+    ],
+    "recent_closed": [
+      {
+        "split": "training",
+        "batch": "batch_0024",
+        "status": "complete",
+        "items": 64,
+        "started_unix": 1793025316.018023,
+        "elapsed_seconds": 89.3
+      },
+      {
+        "split": "training",
+        "batch": "batch_0023",
+        "status": "complete",
+        "items": 64,
+        "started_unix": 1793024810.188023,
+        "elapsed_seconds": 505.8
+      },
+      {
+        "split": "training",
+        "batch": "batch_0022",
+        "status": "complete",
+        "items": 64,
+        "started_unix": 1793024741.001409,
+        "elapsed_seconds": 575.1
+      },
+      {
+        "split": "training",
+        "batch": "batch_0021",
+        "status": "complete",
+        "items": 64,
+        "started_unix": 1793024736.0419898,
+        "elapsed_seconds": 601.2
+      },
+      {
+        "split": "training",
+        "batch": "batch_0020",
+        "status": "complete",
+        "items": 64,
+        "started_unix": 1793024715.121582,
+        "elapsed_seconds": 626.9
+      },
+      {
+        "split": "training",
+        "batch": "batch_0019",
+        "status": "complete",
+        "items": 64,
+        "started_unix": 1793024710.5441,
+        "elapsed_seconds": 99.6
+      },
+      {
+        "split": "training",
+        "batch": "batch_0018",
+        "status": "complete",
+        "items": 64,
+        "started_unix": 1793024204.7413912,
+        "elapsed_seconds": 536.2
+      },
+      {
+        "split": "training",
+        "batch": "batch_0017",
+        "status": "complete",
+        "items": 64,
+        "started_unix": 1793024185.218851,
+        "elapsed_seconds": 529.9
+      }
+    ],
+    "supervisors": [
+      {
+        "status": "running",
+        "source_commit": "8a0b50d5bdd2a77ab0c9444f4bf10d484f8ba6bb",
+        "started_unix": 1793022827.383191,
+        "pid": 55410,
+        "process_alive": true
+      }
+    ],
+    "observed_unix": 1793025588.7391481
+  },
+  "sample": {
+    "status": "awaiting_clean_owner_checks"
+  },
+  "adaptation": {
+    "status": "awaiting_clean_owner_checks"
+  },
+  "test": {
+    "status": "not_released",
+    "test_inputs_opened": false
+  },
+  "authentication": {
+    "service": "Google Cloud",
+    "interactive_sign_in_required": true,
+    "recognized_noninteractive_reauthentication_failure": true,
+    "owner_check_attempts": 1
+  }
+}
