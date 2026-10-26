@@ -1,22 +1,28 @@
 # Tranche 4: live validation scores
 
-**Status: corrected native-batch extraction running.** Optimizer updates: **0**. Validation cohort: **1,830 pairs**.
+**All six validation arms scored. Native Qwen + LoRA is retained.** Every intervention missed the prespecified validation gate. Independent native CPU verification and geometry are being finalized.
 
-| Arm | Spearman | MSE | False-positive rate | Recall | Source/status |
-|---|---:|---:|---:|---:|---|
-| A: native Qwen + LoRA | 0.78257 | 0.03457 | 9.69% | 90.11% | Saved selected-checkpoint validation predictions; full rerun verification pending |
-| B_u: condition subtraction, unit-first | — | — | — | — | Extraction running |
-| B_r: condition subtraction, raw-first | — | — | — | — | Extraction running |
-| C_u: generic subtraction, unit-first | — | — | — | — | Extraction running |
-| C_r: generic subtraction, raw-first | — | — | — | — | Extraction running |
-| D: passage-only mean pooling | — | — | — | — | Extraction running |
+Validation: **1,830 pairs**. Optimizer updates: **0**. All arms retain **90.11% recall**, using their own validation-derived cutoffs.
 
-Each arm uses its own largest validation cutoff retaining at least 90% positive recall. Negatives: ratings 1–2; positives: ratings 4–5. The native cutoff is `0.5334962606430054`; confusion counts: TP 647, FN 71, FP 47, TN 438. Rating 3 remains in Spearman and MSE.
+| Arm | Spearman | MSE | False-positive rate | False positives |
+|---|---:|---:|---:|---:|
+| Native Qwen + LoRA | 0.78257 | 0.03457 | 9.69% | 47/485 |
+| Condition subtraction, unit-first | 0.69657 | 0.05236 | 21.86% | 106/485 |
+| Condition subtraction, raw-first | 0.68956 | 0.05337 | 20.00% | 97/485 |
+| Generic subtraction, unit-first | 0.77971 | 0.08445 | 9.69% | 47/485 |
+| Generic subtraction, raw-first | 0.76699 | 0.10910 | 10.93% | 53/485 |
+| Passage-only mean pooling | 0.20781 | 0.14479 | 78.14% | 379/485 |
 
-The original two-pair batch layout reproduced all 16 probed native scores exactly. The full extraction retains that layout; all six arms share its states. Geometry uses one deterministic occurrence per unique passage–condition input. The initial sorted-unique cache is preserved; its maximum native-score discrepancy was 0.02138, above the 0.001 gate.
+Every arm has TP 647 and FN 71 out of 718 positives. Negatives are ratings 1–2; positives are ratings 4–5. The 627 rating-3 comparisons remain in Spearman and MSE.
+
+The eligibility rule requires a false-positive-rate reduction of at least 2 percentage points and a Spearman loss of at most 0.005. The condition-reference arms worsened both measurements. Generic unit-first subtraction retained the same false-positive count with a small ranking loss. Passage-only pooling strongly reduced discrimination on this trained checkpoint.
+
+The validation decision retains A. The plan stops here when no candidate qualifies; test scoring and conditional LoRA continuation remain unstarted.
+
+The corrected extraction matches the saved native scores within **2.3842e-7** across all 1,830 comparisons (tolerance 0.001). It retains the original two-pair forward batch layout. Geometry uses one deterministic occurrence per unique passage–condition input. The initial sorted-unique extraction and the exact-reproduction probe are preserved.
 
 Checks: **9 focused tests passed; Ruff passed; Pyrefly: 0 errors.**
 
 [Runner](../csts_pilot/condition_reference_run.py) · [Scoring code](../csts_pilot/condition_reference.py) · [Proposal](../plans/csts-tranche-4-condition-component.md) · [Derivations](../plans/csts-tranche-4-derivations.md)
 
-Corrected source: `c7f5bf04e18d4a4efced86a2533dcfd9c4a03858`.
+Extraction source: `c7f5bf04e18d4a4efced86a2533dcfd9c4a03858`. Model SHA-256: `8805f9a7241e4e19ffc481341ebad6f1ddb6dd6ff04bbf710f9f0896469e34ff`.
