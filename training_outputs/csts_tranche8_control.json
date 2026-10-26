@@ -1,7 +1,12 @@
 {
-  "action_id": "waiting_for_fresh_audit",
-  "action": "wait",
-  "source_commit": null,
-  "task": "Complete checked proposition audit, matched frozen screen and eligible answer-input LoRA adaptation",
-  "stop_after_unix": null
+  "action_id": "fresh_audit_v2_seed61029",
+  "action": "run",
+  "source_commit": "317910ff9d650ff904227417c13780202e12e97a",
+  "operator_sha256": "e363aa21468ff85fd67d593e0bc5332dcd93b4ddbaa1e78f292c1f3a60301d49",
+  "arguments": [
+    "--phase",
+    "fresh_audit",
+    "--source-commit",
+    "317910ff9d650ff904227417c13780202e12e97a"
+  ]
 }
