@@ -237,6 +237,7 @@ def run(root: Path, name: str, reuse_extraction: Path | None = None) -> None:
                             "model", source=artifact_source(parent, "train", "model")
                         ),
                         input("rows", path=spec["path"], data_role="eval"),
+                        input("test", path=spec["path"], data_role="eval"),
                         input(
                             "cache",
                             source=artifact_source(
