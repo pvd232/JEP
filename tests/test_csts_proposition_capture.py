@@ -8,15 +8,15 @@ from pathlib import Path
 from unittest import mock
 
 from csts_pilot.proposition_capture import (
-    batches,
-    cli_command,
-    completed_batch,
-    checked_events,
-    checked_records,
-    PROMPT,
-    SCHEMA,
     EFFORT,
     MODEL,
+    PROMPT,
+    SCHEMA,
+    batches,
+    checked_events,
+    checked_records,
+    cli_command,
+    completed_batch,
     request_batch,
     sha,
     validate_inputs,
