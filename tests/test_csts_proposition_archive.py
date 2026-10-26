@@ -43,9 +43,16 @@ def test_native_archive_stage_rejects_changed_input_and_emits_nothing(tmp_path):
     source, identity, size = capture(tmp_path)
     source.write_bytes(b"tampered")
     context = SimpleNamespace(
-        config=module.ArchiveConfig(archive_sha256=identity, archive_bytes=size, original_source_path=str(source)),
+        config=module.ArchiveConfig(
+            archive_sha256=identity,
+            archive_bytes=size,
+            original_source_path=str(source),
+        ),
         inputs={"archive": source},
-        outputs={"archive": tmp_path / "out/archive.gz", "receipt": tmp_path / "receipt.json"},
+        outputs={
+            "archive": tmp_path / "out/archive.gz",
+            "receipt": tmp_path / "receipt.json",
+        },
     )
     with pytest.raises(ValueError, match="input bytes changed"):
         module.seal_archive(context)
@@ -56,9 +63,16 @@ def test_native_archive_stage_rejects_changed_input_and_emits_nothing(tmp_path):
 def test_native_archive_stage_preserves_opaque_bytes_without_extraction(tmp_path):
     source, identity, size = capture(tmp_path)
     context = SimpleNamespace(
-        config=module.ArchiveConfig(archive_sha256=identity, archive_bytes=size, original_source_path=str(source)),
+        config=module.ArchiveConfig(
+            archive_sha256=identity,
+            archive_bytes=size,
+            original_source_path=str(source),
+        ),
         inputs={"archive": source},
-        outputs={"archive": tmp_path / "out/archive.gz", "receipt": tmp_path / "receipt.json"},
+        outputs={
+            "archive": tmp_path / "out/archive.gz",
+            "receipt": tmp_path / "receipt.json",
+        },
     )
     module.seal_archive(context)
     assert context.outputs["archive"].read_bytes() == source.read_bytes()
@@ -85,23 +99,38 @@ def test_staging_preserves_original_and_rejects_an_existing_conflicting_copy(tmp
 
 
 @pytest.mark.parametrize("tamper", [None, "missing_receipt", "changed_receipt"])
-def test_verified_sealed_archive_requeues_only_with_both_native_artifacts(tmp_path, monkeypatch, tamper):
+def test_verified_sealed_archive_requeues_only_with_both_native_artifacts(
+    tmp_path, monkeypatch, tamper
+):
     source, identity, size = capture(tmp_path)
     native = tmp_path / "native"
     native.mkdir()
     local = ResolvedRunRef(
-        sha256="a" * 64, bytes=10,
-        stored_at=LocalFileRef(workspace=native, store_id="1" * 32, commit="b" * 64, path="experiments/fixture/resolved.yaml"),
+        sha256="a" * 64,
+        bytes=10,
+        stored_at=LocalFileRef(
+            workspace=native,
+            store_id="1" * 32,
+            commit="b" * 64,
+            path="experiments/fixture/resolved.yaml",
+        ),
     )
-    record = {"status": "succeeded", "path": str(native / "experiment/resolved.yaml"), "reference": local.model_dump(mode="json")}
+    record = {
+        "status": "succeeded",
+        "path": str(native / "experiment/resolved.yaml"),
+        "reference": local.model_dump(mode="json"),
+    }
     sealed = native / "sealed/archive.gz"
     sealed.parent.mkdir()
     sealed.write_bytes(source.read_bytes())
     native_receipt = sealed.parent / "receipt.json"
     receipt = {
-        "archive_sha256": identity, "archive_bytes": size,
-        "original_source_path": str(source), "archive_extracted": False,
-        "optimizer_updates": 0, "compute": "cpu",
+        "archive_sha256": identity,
+        "archive_bytes": size,
+        "original_source_path": str(source),
+        "archive_extracted": False,
+        "optimizer_updates": 0,
+        "compute": "cpu",
     }
     if tamper == "changed_receipt":
         receipt["original_source_path"] = "unexpected origin"
@@ -110,14 +139,38 @@ def test_verified_sealed_archive_requeues_only_with_both_native_artifacts(tmp_pa
     directory = native / "answer_input_results/proposition_capture_archive"
     directory.mkdir(parents=True)
     index_path = directory / f"{identity}.json"
-    index_path.write_text(json.dumps({
-        "status": "sealed", "archive_sha256": identity, "archive_bytes": size,
-        "run": record, "attempts": [], "original_source_path": str(source),
-    }))
+    index_path.write_text(
+        json.dumps(
+            {
+                "status": "sealed",
+                "archive_sha256": identity,
+                "archive_bytes": size,
+                "run": record,
+                "attempts": [],
+                "original_source_path": str(source),
+            }
+        )
+    )
     calls = []
-    monkeypatch.setattr(module, "artifact_path", lambda _record, _stage, name, _filename: sealed if name == "archive" else native_receipt)
-    monkeypatch.setattr(module, "queue_publication", lambda root, reference, destination: calls.append((root, reference, destination)) or native / "queue.json")
-    monkeypatch.setattr(module.execution, "run", lambda *_args, **_kwargs: pytest.fail("A sealed archive was executed twice."))
+    monkeypatch.setattr(
+        module,
+        "artifact_path",
+        lambda _record, _stage, name, _filename: (
+            sealed if name == "archive" else native_receipt
+        ),
+    )
+    monkeypatch.setattr(
+        module,
+        "queue_publication",
+        lambda root, reference, destination: (
+            calls.append((root, reference, destination)) or native / "queue.json"
+        ),
+    )
+    monkeypatch.setattr(
+        module.execution,
+        "run",
+        lambda *_args, **_kwargs: pytest.fail("A sealed archive was executed twice."),
+    )
     if tamper:
         with pytest.raises(ValueError, match="native archive"):
             module.seal_one(native, source, identity, size, None, None, "destination")
