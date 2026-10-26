@@ -16,6 +16,10 @@ PATTERNS = {
     "policy": r"approval|policy|permission denied|not allowed|access denied",
     "connection": r"connection|network|socket|\bdns\b|\btls\b|disconnect",
     "usage_limit": r"usage limit|quota|insufficient.credits|exceeded.*limit|limit.*reached",
+    "account_usage_cap": r"you.ve hit your usage limit|you have hit your usage limit|usage.limit.reached|usage_limit_reached",
+    "request_rate": r"requests per minute|\brpm\b|request rate|too many requests",
+    "token_rate": r"tokens per minute|\btpm\b|token rate",
+    "insufficient_quota": r"insufficient_quota|insufficient credits|exceeded your current quota",
 }
 EVENTS = {"thread.started", "turn.started", "item.started", "item.updated", "item.completed", "turn.completed", "turn.failed", "error"}
 
@@ -51,6 +55,7 @@ def inspect(root=ROOT, controller=CONTROLLER):
                 continue
             item = {"split": split, "batch": batch.name, "status": status, "items": receipt.get("items"), "returncode": receipt.get("returncode"), "elapsed_seconds": receipt.get("elapsed_seconds"), "receipt_flags": flags(receipt.get("error", "")), "response_exists": (batch / "response.json").is_file()}
             event_types, item_types, event_flags = {}, {}, {key: False for key in PATTERNS}
+            retry_hints = []
             malformed = 0
             events = batch / "events.jsonl"
             if events.is_file():
@@ -70,9 +75,10 @@ def inspect(root=ROOT, controller=CONTROLLER):
                     if kind in {"error", "turn.failed"}:
                         for key, value in flags(line).items():
                             event_flags[key] |= value
+                        retry_hints.extend(re.findall(r"try again (?:at|in) (?:\d{1,2}:\d{2}(?:\s*[AP]M)?|\d+ (?:seconds?|minutes?|hours?))", line, re.IGNORECASE))
             log = batch / "stderr.log"
             diagnostic_flags = flags(log.read_text(errors="replace")[-262144:] if log.is_file() else "")
-            item.update(event_types=event_types, item_types=item_types, event_flags=event_flags, diagnostic_flags=diagnostic_flags, malformed_event_lines=malformed)
+            item.update(event_types=event_types, item_types=item_types, event_flags=event_flags, diagnostic_flags=diagnostic_flags, malformed_event_lines=malformed, retry_hints=retry_hints)
             failed.append(item)
     supervisor = {}
     receipt_file = controller / "supervisor_receipt.json"
