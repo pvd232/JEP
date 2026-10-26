@@ -2,13 +2,13 @@
 
 The user authorized completion of the reviewed experiment tranches and logical follow-ups while asleep. The objective is a verified improvement over the archived Qwen system, ideally reaching the archived LLM pair judge, or a specific research direction supported by the completed measurements. Scores are published as stages finish. Cloud promotion runs asynchronously.
 
-## Final closeout — 08:45 UTC
+## Final closeout — 08:41 UTC
 
 **This overrides all active PID/attempt instructions below. No new experiment should be launched from this handoff.** Both attention heads completed fitting. Neither qualifies; CPU checkpoint replay confirms the negative result. Native selection remains failed because one prediction exceeds its fixed GPU–CPU tolerance; that guard was not relaxed. The [final report](../training_outputs/csts_overnight_final_report.md) and [machine-readable native/replay/post-selection records](../training_outputs/csts_tranche6_closeout.json) are published.
 
 The post-selection dev diagnostic shows better teacher-span attention (75.54% vs 9.52%) with worse similarity (0.598905 vs 0.710713); teacher agreement is not independent human grounding. No candidate test evaluation or new training follow-up ran. Retain archived Qwen.
 
-All 8 successful Tranche 5 runs and all 4 successful Tranche 6 runs were verified cloud-published. No active experiment controllers or CUDA compute processes remained at closeout. Publisher PID 28055 was verified and stopped before final status publication. Original artifacts, failed attempts and exact immutable-store addresses remain preserved. The recurring experiment checks are being disabled because the reviewed screens and supported analysis are concluded. VM/disks were not stopped or deleted.
+All 8 successful Tranche 5 runs and all 4 successful Tranche 6 runs were verified cloud-published. No active experiment controllers or CUDA compute processes remained at closeout. Publisher PID 28055 was verified and stopped before final status publication. Original artifacts, failed attempts and exact immutable-store addresses remain preserved. The recurring experiment checks are disabled because the reviewed screens and supported analysis are concluded. VM/disks were not stopped or deleted.
 
 ## Comparators and fixed constraints
 
