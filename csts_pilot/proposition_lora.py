@@ -6,6 +6,7 @@ from typing import Literal
 from pydantic import Field, model_validator
 from viper.stages import StageContext, train
 
+from csts_pilot.answer_input import emit
 from csts_pilot.baseline_models import (
     FitConfig,
     TokenPairs,
@@ -129,6 +130,7 @@ def fit_proposition_lora(context: StageContext[PropositionLoraConfig]) -> None:
         metrics=context.metrics,
         numpy_generators=context.numpy_generators,
     )
+    emit("proposition_lora_live_trace", trace_path=str(context.outputs["trace"]))
     fit_neural(inner, model, training, validation)
     trace = load_json(context.outputs["trace"])
     if trace["initial_trainable_sha256"] != initial_digest:
