@@ -1,0 +1,31 @@
+{
+  "checked_date": "2026-10-26",
+  "paper": {
+    "title": "IPED: An Implicit Perspective for Relational Triple Extraction based on Diffusion Model",
+    "authors": ["Jianli Zhao", "Changhao Xu", "Bin Jiang"],
+    "venue": "NAACL 2024",
+    "acl_id": "2024.naacl-long.114",
+    "url": "https://aclanthology.org/2024.naacl-long.114.pdf",
+    "visually_inspected_pdf_pages_zero_based": [4, 5],
+    "level_predictor_query": "fused level representations R_V_hat",
+    "level_predictor_keys_values": "max-pooled edge-sentence representations R_EH_eta",
+    "P_v": "N-by-K final relation probabilities after MLP and softmax",
+    "attention_projection_equations_released_in_paper": false
+  },
+  "official_repository": {
+    "paper_url": "https://github.com/girlsuuu/IPED",
+    "redirected_url": "https://github.com/gentlyzhao/IPED",
+    "main_commit": "e4ac68a3a74c5caddeda7db37f10448f8e3341f1",
+    "main_commit_date": "2024-07-01T11:33:30Z",
+    "tree_sha": "837a6e36b50cb71eb42217fbbaeb62fc915768a7",
+    "recursive_tree_entries": 16,
+    "recursive_tree_truncated": false,
+    "observed_contents": ["LICENSE", "README.md", "data/datasets/NYT", "data/datasets/WebNLG"],
+    "observed_model_code_files": 0,
+    "observed_checkpoint_files": 0,
+    "releases": [],
+    "scope": "official main-branch tree and releases; third-party implementations not exhaustively excluded"
+  },
+  "project_decision": "Define a small condition-query evidence-supervised passage readout; literal pretrained IPED feature extraction unavailable in the inspected official release.",
+  "experiment_launched_by_researcher": false
+}
