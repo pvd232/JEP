@@ -2,6 +2,7 @@
 
 import argparse
 import fcntl
+import subprocess
 import time
 import uuid
 from pathlib import Path
@@ -106,6 +107,19 @@ def replay_stage(
 def run(root: Path, name: str, prepared_summary: Path, preflight: bool = False) -> None:
     """Preserve each attempt and queue cloud publication after each local success."""
     root = root.resolve(strict=True)
+    if (
+        not preflight
+        and subprocess.run(
+            ["git", "status", "--porcelain", "--untracked-files=all"],
+            cwd=root,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout
+    ):
+        raise ValueError(
+            "Execution requires a clean reviewed Git checkout; commit the reviewed changes first."
+        )
     settings_path = root / "configs/csts-iterative-codebook.json"
     settings, prior = load_json(settings_path), load_json(prepared_summary)
     prepared, hashes, caches = {}, {}, {}

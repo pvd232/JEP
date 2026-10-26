@@ -446,3 +446,74 @@ def test_refresh_targets_change_with_terminal_training_projection():
         )
         < 1
     )
+
+
+@pytest.mark.parametrize("change", ["modified", "staged", "untracked"])
+def test_execution_rejects_uncommitted_source_before_loading_inputs(
+    tmp_path, monkeypatch, change
+):
+    import subprocess
+
+    from viper.repository import read_source
+
+    from csts_pilot import iterative_codebook_run as controller
+
+    def git(*args):
+        return subprocess.run(
+            ["git", *args], cwd=tmp_path, check=True, capture_output=True, text=True
+        )
+
+    git("init", "--quiet")
+    git("remote", "add", "origin", "https://github.com/pvd232/JEP.git")
+    (tmp_path / "reviewed.py").write_text("VALUE = 1\n")
+    (tmp_path / ".gitignore").write_text("iterative_codebook_results/\n")
+    (tmp_path / "viper.toml").write_text("[workspace]\nschema_version = 2\n")
+    git("add", "reviewed.py", ".gitignore", "viper.toml")
+    git(
+        "-c",
+        "user.name=Fixture",
+        "-c",
+        "user.email=fixture@example.invalid",
+        "-c",
+        "commit.gpgsign=false",
+        "-c",
+        "core.hooksPath=/dev/null",
+        "commit",
+        "--quiet",
+        "-m",
+        "Reviewed source",
+    )
+    committed = read_source(tmp_path)
+    ignored = tmp_path / "iterative_codebook_results" / "prior"
+    ignored.mkdir(parents=True)
+    (ignored / "trace.json").write_text("{}")
+
+    class InputsReached(RuntimeError):
+        pass
+
+    def observe_input_read(_path):
+        raise InputsReached
+
+    monkeypatch.setattr(controller, "load_json", observe_input_read)
+    with pytest.raises(InputsReached):
+        controller.run(tmp_path, "allowed", tmp_path / "prior.json")
+    if change == "untracked":
+        (tmp_path / "new_helper.py").write_text("VALUE = 2\n")
+    else:
+        (tmp_path / "reviewed.py").write_text("VALUE = 2\n")
+        if change == "staged":
+            git("add", "reviewed.py")
+    assert read_source(tmp_path) == committed
+    with pytest.raises(InputsReached):
+        controller.run(tmp_path, "draft", tmp_path / "prior.json", preflight=True)
+    monkeypatch.setattr(
+        controller, "load_json", lambda *_: pytest.fail("dirty source read inputs")
+    )
+    monkeypatch.setattr(
+        controller.execution,
+        "run",
+        lambda *_a, **_k: pytest.fail("dirty source launched native execution"),
+    )
+    with pytest.raises(ValueError, match="clean reviewed Git checkout"):
+        controller.run(tmp_path, "blocked", tmp_path / "prior.json")
+    assert not (tmp_path / "iterative_codebook_results" / "blocked").exists()
