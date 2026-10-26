@@ -1,0 +1,2969 @@
+{
+  "audit_version": 2,
+  "label_provenance": "Prediction-blind assistant-model audit consensus",
+  "policy": {
+    "version": 2,
+    "scope": "Finalize dispositions for the 84 previously unresolved development comparisons",
+    "label_provenance": "Three isolated blind contexts of the same assistant model",
+    "input_fields": [
+      "row_id",
+      "sentence1",
+      "sentence2",
+      "condition"
+    ],
+    "withheld": [
+      "original benchmark rating",
+      "candidate encoder predictions",
+      "prior reviewer judgments"
+    ],
+    "numeric_acceptance": "At least two readers independently return status rated and exactly the same numeric rating",
+    "invalid_acceptance": "At least two readers independently return status invalid",
+    "otherwise": "excluded_ambiguous, with no numeric rating and all dissent retained",
+    "existing_decisions": "All v1 1491 usable ratings and 255 invalid dispositions remain fixed",
+    "selection_policy": "Only agreement or adjudicated numeric labels enter model selection",
+    "original_labels_preserved": true,
+    "model_scores_used_to_resolve_labels": false
+  },
+  "rows": [
+    {
+      "row_id": "train_72",
+      "sentence1": "there is a large pie on a white plate and a bowl next to it",
+      "sentence2": "a plate with a piece of cake and a pat of butter with a fork",
+      "condition": "type of meal",
+      "status": "adjudicated",
+      "rating": 5,
+      "rationale": "Final blind numeric consensus: Both dishes directly imply the same meal category: dessert. / Both foods are sweet dessert meals: pie and cake.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_72",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Both dishes directly imply the same meal category: dessert.",
+          "value_a": "dessert: pie",
+          "value_b": "dessert: cake"
+        },
+        "b": {
+          "row_id": "train_72",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Both foods are sweet dessert meals: pie and cake.",
+          "value_a": "dessert (pie)",
+          "value_b": "dessert (cake)"
+        },
+        "c": {
+          "row_id": "train_72",
+          "rating": 2,
+          "status": "rated",
+          "rationale": "Pie and cake are different baked dishes within a common food category.",
+          "value_a": "pie",
+          "value_b": "cake with butter"
+        }
+      }
+    },
+    {
+      "row_id": "train_159",
+      "sentence1": "a work desk filled with several objects including a computer monitor, keyboard, mouse and laptop, and an office phone",
+      "sentence2": "A leather jacket on the back of a chair in a cluttered desk area.",
+      "condition": "number of objects",
+      "status": "adjudicated",
+      "rating": 3,
+      "rationale": "Final blind numeric consensus: Both descriptions contain unspecified additional objects, allowing equal totals. / Open ended descriptions permit equal totals without establishing exact object counts.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_159",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "Listed objects and unspecified desk clutter leave possible equal totals.",
+          "value_a": "desk plus five named devices; other objects unspecified",
+          "value_b": "jacket, chair, desk area; unspecified clutter"
+        },
+        "b": {
+          "row_id": "train_159",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "Both descriptions contain unspecified additional objects, allowing equal totals.",
+          "value_a": "desk and at least five objects; unspecified extras",
+          "value_b": "jacket, chair, desk area; unspecified clutter"
+        },
+        "c": {
+          "row_id": "train_159",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "Open ended descriptions permit equal totals without establishing exact object counts.",
+          "value_a": "desk plus at least five listed devices",
+          "value_b": "jacket, chair, desk area with unspecified clutter"
+        }
+      }
+    },
+    {
+      "row_id": "train_163",
+      "sentence1": "a rider on a motorcycle gives a thumbs up as he drives on a street",
+      "sentence2": "A motorcyce parked on the side of a road and driver walking across the road",
+      "condition": "mode of transportation",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_163",
+          "rating": 1,
+          "status": "rated",
+          "rationale": "The person rides a motorcycle versus walking beside a parked motorcycle.",
+          "value_a": "riding motorcycle",
+          "value_b": "walking; motorcycle parked"
+        },
+        "b": {
+          "row_id": "train_163",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Both captions identify a motorcycle as the transportation vehicle.",
+          "value_a": "motorcycle",
+          "value_b": "motorcycle"
+        },
+        "c": {
+          "row_id": "train_163",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Vehicle type matches, but comparing current movement gives motorcycle versus walking.",
+          "value_a": "riding motorcycle",
+          "value_b": "parked motorcycle; driver walking"
+        }
+      }
+    },
+    {
+      "row_id": "train_232",
+      "sentence1": "A display of assorted wooden clocks on a shelf behind a sheet of glass.",
+      "sentence2": "A wall with two doors and various wall hanging on it, including a clock a mirror and numbered coat hangers.",
+      "condition": "number of products",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_232",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "Both contain unspecified plural products; exact totals and product scope remain unclear.",
+          "value_a": "multiple clocks; exact total unspecified",
+          "value_b": "clock, mirror, multiple coat hangers; doors also mentioned"
+        },
+        "b": {
+          "row_id": "train_232",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Clock products are displayed; the second caption establishes no product inventory.",
+          "value_a": "assorted clocks, unknown count",
+          "value_b": "doors and wall fixtures; product scope unavailable"
+        },
+        "c": {
+          "row_id": "train_232",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Product scope is unclear among clocks, furnishings, and architectural elements.",
+          "value_a": "unspecified multiple clocks, shelf and glass",
+          "value_b": "two doors, clock, mirror, unspecified coat hangers"
+        }
+      }
+    },
+    {
+      "row_id": "train_293",
+      "sentence1": "A city with lots of tall buildings and a cat stopped at a traffic light.",
+      "sentence2": "A busy downtown intersection with street signs, pedestrian crossing signal, and large commercial buildings.",
+      "condition": "presence of animal",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: Animal present in A; B never establishes animal presence or absence. / A cat is present; animal presence is unspecified downtown. / A explicitly includes a cat; B supplies no animal presence information.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_293",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Animal present in A; B never establishes animal presence or absence.",
+          "value_a": "cat present",
+          "value_b": "animal presence unspecified"
+        },
+        "b": {
+          "row_id": "train_293",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A cat is present; animal presence is unspecified downtown.",
+          "value_a": "cat present",
+          "value_b": "animal presence unspecified"
+        },
+        "c": {
+          "row_id": "train_293",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A explicitly includes a cat; B supplies no animal presence information.",
+          "value_a": "cat present",
+          "value_b": "animal status unreported"
+        }
+      }
+    },
+    {
+      "row_id": "train_426",
+      "sentence1": "a man standing in a living room with a fire place and a wall mounted flat screen television.",
+      "sentence2": "a bookcase with books and paper piles stands alongside an entertainment unit with toy figurines.",
+      "condition": "name of place",
+      "status": "adjudicated",
+      "rating": 5,
+      "rationale": "Final blind numeric consensus: Entertainment furniture and books directly suggest the same living-room setting. / Entertainment furniture directly supports a living-room setting in both. / Entertainment furniture directly supports the same living room setting.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_426",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Entertainment furniture and books directly suggest the same living-room setting.",
+          "value_a": "living room",
+          "value_b": "living room inferred from entertainment unit and bookcase"
+        },
+        "b": {
+          "row_id": "train_426",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Entertainment furniture directly supports a living-room setting in both.",
+          "value_a": "living room",
+          "value_b": "living room inferred from entertainment unit and bookcase"
+        },
+        "c": {
+          "row_id": "train_426",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Entertainment furniture directly supports the same living room setting.",
+          "value_a": "living room",
+          "value_b": "living room inferred from entertainment unit and bookcase"
+        }
+      }
+    },
+    {
+      "row_id": "train_705",
+      "sentence1": "A dessert consists of a piece of carrot cake, ice cream, an orange slice, and shredded carrots.",
+      "sentence2": "layered chocolate cake with vanilla icing drizzled in chocolate on a white plate with a fork",
+      "condition": "number of items",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: Items could mean servings, ingredients, or utensils, producing incompatible counts. / Items could mean dessert components or all objects, changing counts.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_705",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Items could mean servings, ingredients, or utensils, producing incompatible counts.",
+          "value_a": "four dessert components",
+          "value_b": "cake with icing and chocolate, plate and fork"
+        },
+        "b": {
+          "row_id": "train_705",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Items could mean dessert components or all objects, changing counts.",
+          "value_a": "four dessert components",
+          "value_b": "cake, icing, chocolate, plate, fork"
+        },
+        "c": {
+          "row_id": "train_705",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Counting complete desserts, ingredients, or all objects produces different comparisons.",
+          "value_a": "four dessert components",
+          "value_b": "cake, icing, drizzle, plate and fork"
+        }
+      }
+    },
+    {
+      "row_id": "train_1071",
+      "sentence1": "A woman and four young girls toting things on their heads near a train.",
+      "sentence2": "Several children on a set of train tracks looking up at a train passing them.",
+      "condition": "average age of group",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: Age categories and unknown child ages cannot establish average ages. / Group categories do not establish either group's average age.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_1071",
+          "rating": 4,
+          "status": "uncertain",
+          "rationale": "A is child-dominated with one adult; B contains children exclusively.",
+          "value_a": "one woman and four young girls",
+          "value_b": "several children"
+        },
+        "b": {
+          "row_id": "train_1071",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Age categories and unknown child ages cannot establish average ages.",
+          "value_a": "one woman and four young girls; ages unknown",
+          "value_b": "several children; ages unknown"
+        },
+        "c": {
+          "row_id": "train_1071",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Group categories do not establish either group's average age.",
+          "value_a": "one woman and four young girls; ages unspecified",
+          "value_b": "several children; ages unspecified"
+        }
+      }
+    },
+    {
+      "row_id": "train_1132",
+      "sentence1": "Rough wood-frame furniture with striped cushions, in a bright room with a white tile floor.",
+      "sentence2": "A living room with a couch next to a chair in front of a TV.",
+      "condition": "type of room",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: Cushioned wooden furniture does not establish A’s room type sufficiently. / Generic cushioned furniture does not establish the first room type. / Cushioned furniture and tile do not establish A's particular room type.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_1132",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Cushioned wooden furniture does not establish A’s room type sufficiently.",
+          "value_a": "bright room with cushioned furniture; type unspecified",
+          "value_b": "living room"
+        },
+        "b": {
+          "row_id": "train_1132",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Generic cushioned furniture does not establish the first room type.",
+          "value_a": "bright tiled room; type unspecified",
+          "value_b": "living room"
+        },
+        "c": {
+          "row_id": "train_1132",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Cushioned furniture and tile do not establish A's particular room type.",
+          "value_a": "bright room with cushioned wood furniture",
+          "value_b": "living room"
+        }
+      }
+    },
+    {
+      "row_id": "train_1179",
+      "sentence1": "A brick wall is designed with a clock being the nose of a smiley face.",
+      "sentence2": "A tower portion of a building with a clock on it is shown in the daytime.",
+      "condition": "number of objects",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: Object counting depends on treating depicted face and building parts as objects. / Object scope cannot consistently separate wall, building, clock, and decorative face.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_1179",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Object counting depends on treating depicted face and building parts as objects.",
+          "value_a": "brick wall, clock, depicted smiley face",
+          "value_b": "building tower portion and clock"
+        },
+        "b": {
+          "row_id": "train_1179",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Object scope cannot consistently separate wall, building, clock, and decorative face.",
+          "value_a": "brick wall, clock, smiley-face design",
+          "value_b": "building tower and clock"
+        },
+        "c": {
+          "row_id": "train_1179",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Counting architectural parts and the engraved face as objects changes totals.",
+          "value_a": "wall, clock and smiley face design",
+          "value_b": "building, tower portion and clock"
+        }
+      }
+    },
+    {
+      "row_id": "train_1257",
+      "sentence1": "A table setting with a candle and a glass with limes on the side.",
+      "sentence2": "A tall case of flowers on an elaborate dining area sit alongside two wine glasses and a dish.\n",
+      "condition": "presence of dish",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: A mentions a glass but never establishes presence or absence of dishes. / A dish is explicit only in the second caption.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_1257",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A mentions a glass but never establishes presence or absence of dishes.",
+          "value_a": "candle, glass, limes; dish unspecified",
+          "value_b": "dish present"
+        },
+        "b": {
+          "row_id": "train_1257",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A dish is explicit only in the second caption.",
+          "value_a": "glass and candle; dish presence unspecified",
+          "value_b": "dish present"
+        },
+        "c": {
+          "row_id": "train_1257",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Dish could include glassware or mean a separate plate or bowl.",
+          "value_a": "glass present; separate dish unreported",
+          "value_b": "dish and wine glasses present"
+        }
+      }
+    },
+    {
+      "row_id": "train_1355",
+      "sentence1": "A bedroom contains a dresser and mirror, a side table and lamp and a twin bed with matching bed covers and pillows.",
+      "sentence2": "A bed sitting on top of white drawers and topped with a stuffed animal next to a cat.",
+      "condition": "presence of animal",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: A never establishes animal presence or absence; B explicitly includes a cat. / Cat presence is explicit; the bedroom description leaves animals unspecified. / B explicitly includes a cat; A leaves animal presence unreported.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_1355",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A never establishes animal presence or absence; B explicitly includes a cat.",
+          "value_a": "animal presence unspecified",
+          "value_b": "cat present; stuffed animal also mentioned"
+        },
+        "b": {
+          "row_id": "train_1355",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Cat presence is explicit; the bedroom description leaves animals unspecified.",
+          "value_a": "animal presence unspecified",
+          "value_b": "cat present"
+        },
+        "c": {
+          "row_id": "train_1355",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "B explicitly includes a cat; A leaves animal presence unreported.",
+          "value_a": "animal status unreported",
+          "value_b": "cat present; stuffed animal also mentioned"
+        }
+      }
+    },
+    {
+      "row_id": "train_1404",
+      "sentence1": "The overhead view of a tiled bathroom  with a tub, shower, toilet, bidet, and sink.",
+      "sentence2": "This is a well designed bathroom that is plain and elegant at the same time.",
+      "condition": "design of bathroom",
+      "status": "adjudicated",
+      "rating": 3,
+      "rationale": "Final blind numeric consensus: Tiled fixture-rich design and plain elegant styling overlap only generally. / Materials and fixtures versus aesthetic style leave important design information unmatched.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_1404",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "Fixture layout and tiling give limited overlap with a plain, elegant aesthetic.",
+          "value_a": "tiled bathroom with tub, shower, toilet, bidet, sink",
+          "value_b": "plain, elegant bathroom"
+        },
+        "b": {
+          "row_id": "train_1404",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "Tiled fixture-rich design and plain elegant styling overlap only generally.",
+          "value_a": "tiled bathroom with tub, shower, toilet, bidet, sink",
+          "value_b": "plain, elegant bathroom"
+        },
+        "c": {
+          "row_id": "train_1404",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "Materials and fixtures versus aesthetic style leave important design information unmatched.",
+          "value_a": "tiled bathroom with full fixture set",
+          "value_b": "plain, elegant bathroom"
+        }
+      }
+    },
+    {
+      "row_id": "train_1599",
+      "sentence1": "a train is on it's tracks next to a dirt road and grassy patch",
+      "sentence2": "a train making it's way down a track with smoke coming out of the stack",
+      "condition": "presence of grass",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: Grass is explicit in A and neither confirmed nor denied in B. / Grass is explicit beside the first train, unspecified beside second. / A explicitly includes grass; B supplies no grass presence information.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_1599",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Grass is explicit in A and neither confirmed nor denied in B.",
+          "value_a": "grassy patch present",
+          "value_b": "grass presence unspecified"
+        },
+        "b": {
+          "row_id": "train_1599",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Grass is explicit beside the first train, unspecified beside second.",
+          "value_a": "grassy patch present",
+          "value_b": "grass presence unspecified"
+        },
+        "c": {
+          "row_id": "train_1599",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A explicitly includes grass; B supplies no grass presence information.",
+          "value_a": "grassy patch present",
+          "value_b": "grass status unreported"
+        }
+      }
+    },
+    {
+      "row_id": "train_1906",
+      "sentence1": "A kitchen with two sinks with a dish rack in one and dirty dishes in another.",
+      "sentence2": "The stove is shiny and has a hand-towel with an A hanging off its handle.",
+      "condition": "absence of hand towel",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: A gives no towel information; B explicitly contradicts towel absence. / Second towel defeats absence; first caption never establishes towel absence. / A does not establish towel absence; B explicitly includes a towel.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_1906",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A gives no towel information; B explicitly contradicts towel absence.",
+          "value_a": "hand-towel absence unknown",
+          "value_b": "hand towel present; absence false"
+        },
+        "b": {
+          "row_id": "train_1906",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Second towel defeats absence; first caption never establishes towel absence.",
+          "value_a": "hand-towel presence unspecified",
+          "value_b": "hand towel present; absence false"
+        },
+        "c": {
+          "row_id": "train_1906",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A does not establish towel absence; B explicitly includes a towel.",
+          "value_a": "hand towel status unreported",
+          "value_b": "hand towel present"
+        }
+      }
+    },
+    {
+      "row_id": "train_2050",
+      "sentence1": "A bathroom has gray tiles on the bottom half and white tiles on the top half of the walls.",
+      "sentence2": "This is a well designed bathroom that is plain and elegant at the same time.",
+      "condition": "room's design",
+      "status": "adjudicated",
+      "rating": 3,
+      "rationale": "Final blind numeric consensus: Two-tone tiling describes concrete design; plain elegance leaves details unknown. / Specified tile colors and general elegance provide only partial design correspondence.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_2050",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "Specific two-tone tiling does not establish whether the aesthetic matches plain elegance.",
+          "value_a": "gray lower wall tiles and white upper wall tiles",
+          "value_b": "plain, elegant bathroom design"
+        },
+        "b": {
+          "row_id": "train_2050",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "Two-tone tiling describes concrete design; plain elegance leaves details unknown.",
+          "value_a": "gray lower and white upper wall tiles",
+          "value_b": "plain and elegant bathroom"
+        },
+        "c": {
+          "row_id": "train_2050",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "Specified tile colors and general elegance provide only partial design correspondence.",
+          "value_a": "gray lower and white upper wall tiles",
+          "value_b": "plain, elegant bathroom"
+        }
+      }
+    },
+    {
+      "row_id": "train_2203",
+      "sentence1": "Plate of food ready to be served, each has a fried egg on top.",
+      "sentence2": "A table set for breakfast with tea an two plates with eggs and sausages.",
+      "condition": "presence of liquid",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: A gives no liquid information; B explicitly supplies tea. / Tea establishes liquid; an egg dish establishes no liquid presence. / Tea establishes liquid in B; A leaves liquid presence unspecified.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_2203",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A gives no liquid information; B explicitly supplies tea.",
+          "value_a": "liquid presence unspecified",
+          "value_b": "tea present"
+        },
+        "b": {
+          "row_id": "train_2203",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Tea establishes liquid; an egg dish establishes no liquid presence.",
+          "value_a": "liquid presence unspecified",
+          "value_b": "tea present"
+        },
+        "c": {
+          "row_id": "train_2203",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Tea establishes liquid in B; A leaves liquid presence unspecified.",
+          "value_a": "liquid status unreported",
+          "value_b": "tea present"
+        }
+      }
+    },
+    {
+      "row_id": "train_2383",
+      "sentence1": "Several people on skis in the snow at a ski area, with several snow barren areas around them",
+      "sentence2": "Two woman and a man are looking and standing with their ski gear on on a snowy crest.",
+      "condition": "activity of people",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: First caption places people on skis without establishing their activity. / A places people on skis without specifying their actual activity.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_2383",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "Both involve ski-equipped people; only B explicitly describes standing still.",
+          "value_a": "people on skis; movement unspecified",
+          "value_b": "standing and looking with ski gear"
+        },
+        "b": {
+          "row_id": "train_2383",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "First caption places people on skis without establishing their activity.",
+          "value_a": "people on skis; movement unspecified",
+          "value_b": "standing and looking in ski gear"
+        },
+        "c": {
+          "row_id": "train_2383",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A places people on skis without specifying their actual activity.",
+          "value_a": "on skis; movement unreported",
+          "value_b": "standing and looking with ski gear"
+        }
+      }
+    },
+    {
+      "row_id": "train_2526",
+      "sentence1": "A dozen people smiling for the camera at a large wooden table in a restaurant.",
+      "sentence2": "A group of people sitting in a restaurant about to have a meal together.",
+      "condition": "reason for gathering",
+      "status": "adjudicated",
+      "rating": 5,
+      "rationale": "Final blind numeric consensus: A restaurant table gathering directly implies the shared meal stated in B. / Restaurant-table gathering directly implies a shared meal in both. / Gathering for a restaurant meal is directly supported in both descriptions.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_2526",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "A restaurant table gathering directly implies the shared meal stated in B.",
+          "value_a": "restaurant group dining inferred",
+          "value_b": "gathering for a shared meal"
+        },
+        "b": {
+          "row_id": "train_2526",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Restaurant-table gathering directly implies a shared meal in both.",
+          "value_a": "restaurant meal gathering, posing for camera",
+          "value_b": "gathering for a shared meal"
+        },
+        "c": {
+          "row_id": "train_2526",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Gathering for a restaurant meal is directly supported in both descriptions.",
+          "value_a": "restaurant dining gathering inferred",
+          "value_b": "gathering to eat together"
+        }
+      }
+    },
+    {
+      "row_id": "train_2600",
+      "sentence1": "A selection of small vases and bowls, some of which have flowers in them.",
+      "sentence2": "A bouquet of flowers is stuffed inside an arrangement of wine glasses on a table.",
+      "condition": "number of items",
+      "status": "adjudicated",
+      "rating": 3,
+      "rationale": "Final blind numeric consensus: Both descriptions leave plural container counts unspecified, allowing equal totals. / Both arrangements have unspecified container and flower counts, permitting equality. / Unspecified plural vessels and flowers permit equal counts without establishing them.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_2600",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "Both descriptions leave plural container counts unspecified, allowing equal totals.",
+          "value_a": "unspecified numbers of vases and bowls, some flowers",
+          "value_b": "bouquet, unspecified wine-glass arrangement, table"
+        },
+        "b": {
+          "row_id": "train_2600",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "Both arrangements have unspecified container and flower counts, permitting equality.",
+          "value_a": "vases, bowls, flowers; unknown count",
+          "value_b": "wine glasses and bouquet; unknown count"
+        },
+        "c": {
+          "row_id": "train_2600",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "Unspecified plural vessels and flowers permit equal counts without establishing them.",
+          "value_a": "unspecified vases, bowls and flowers",
+          "value_b": "unspecified wine glasses, bouquet and table"
+        }
+      }
+    },
+    {
+      "row_id": "train_2636",
+      "sentence1": "Guy in shorts and a cap ride along top of wall with his skateboard",
+      "sentence2": "A boy in the street in front of a house performing a skateboard trick with two skateboards.",
+      "condition": "number of objects",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: Generic objects does not identify skateboards alone versus all mentioned physical entities. / Generic objects lacks stable scope across clothes, structures, and skateboards.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_2636",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Generic objects does not identify skateboards alone versus all mentioned physical entities.",
+          "value_a": "one skateboard, cap, shorts, wall",
+          "value_b": "two skateboards, street, house"
+        },
+        "b": {
+          "row_id": "train_2636",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Generic objects lacks stable scope across clothes, structures, and skateboards.",
+          "value_a": "shorts, cap, wall, skateboard",
+          "value_b": "street, house, two skateboards"
+        },
+        "c": {
+          "row_id": "train_2636",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Counting skateboards alone versus clothing and surroundings yields different count comparisons.",
+          "value_a": "one skateboard, shorts, cap and wall",
+          "value_b": "two skateboards, street and house"
+        }
+      }
+    },
+    {
+      "row_id": "train_3124",
+      "sentence1": "A piece of open luggage set on a bed with a sweater and other clothes inside and the image of a cat and persons hands next to it.",
+      "sentence2": "A woman laying down in a bed with a sheet over her body and holding a large kitchen knife in one hand.",
+      "condition": "number of objects",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_3124",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "Unspecified clothing prevents an exact total; equality with B remains possible.",
+          "value_a": "luggage, bed, sweater, unspecified other clothes, cat image, hands",
+          "value_b": "bed, sheet, knife, woman"
+        },
+        "b": {
+          "row_id": "train_3124",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Object scope mixes clothing, people, images, body parts, and furniture.",
+          "value_a": "luggage, bed, sweater, unspecified clothes, cat image, hands",
+          "value_b": "bed, sheet, knife, woman"
+        },
+        "c": {
+          "row_id": "train_3124",
+          "rating": 1,
+          "status": "rated",
+          "rationale": "A lists at least five physical items; B lists bed, sheet, knife.",
+          "value_a": "bed, luggage, sweater and multiple other clothes: at least five",
+          "value_b": "bed, sheet and knife: three"
+        }
+      }
+    },
+    {
+      "row_id": "train_3153",
+      "sentence1": "A guy on a skateboard doing tricks at a city skate park as others look on.",
+      "sentence2": "Four people and a dog watching a young man do stunts on a skateboard.",
+      "condition": "presence of animal",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: A never establishes animal presence or absence; B explicitly includes a dog. / Second caption establishes a dog; first leaves animal presence unspecified. / B explicitly includes a dog; A supplies no animal presence information.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_3153",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A never establishes animal presence or absence; B explicitly includes a dog.",
+          "value_a": "animal presence unspecified",
+          "value_b": "dog present"
+        },
+        "b": {
+          "row_id": "train_3153",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Second caption establishes a dog; first leaves animal presence unspecified.",
+          "value_a": "animal presence unspecified",
+          "value_b": "dog present"
+        },
+        "c": {
+          "row_id": "train_3153",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "B explicitly includes a dog; A supplies no animal presence information.",
+          "value_a": "animal status unreported",
+          "value_b": "dog present"
+        }
+      }
+    },
+    {
+      "row_id": "train_3264",
+      "sentence1": "Spices on divide between two windows as well as in jars on a wooden table.",
+      "sentence2": "A small dark kitchen with a large stove and containers of food on the counter.",
+      "condition": "place kitchen",
+      "status": "adjudicated",
+      "rating": 5,
+      "rationale": "Final blind numeric consensus: Spice jars and a food-work table directly support a kitchen setting. / Spice storage and food containers directly support the same kitchen setting.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_3264",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Spice jars and a food-work table directly support a kitchen setting.",
+          "value_a": "kitchen inferred from spices and jars on table",
+          "value_b": "kitchen"
+        },
+        "b": {
+          "row_id": "train_3264",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Spices and jars can occupy spaces other than a kitchen.",
+          "value_a": "room with spices, jars, table, windows; type unknown",
+          "value_b": "kitchen"
+        },
+        "c": {
+          "row_id": "train_3264",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Spice storage and food containers directly support the same kitchen setting.",
+          "value_a": "kitchen inferred from stored spices",
+          "value_b": "kitchen"
+        }
+      }
+    },
+    {
+      "row_id": "train_3265",
+      "sentence1": "Spices on divide between two windows as well as in jars on a wooden table.",
+      "sentence2": "A small dark kitchen with a large stove and containers of food on the counter.",
+      "condition": "Type of space",
+      "status": "adjudicated",
+      "rating": 5,
+      "rationale": "Final blind numeric consensus: Spice storage and table directly suggest the kitchen space specified in B. / Spice storage and food containers directly support the same kitchen setting.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_3265",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Spice storage and table directly suggest the kitchen space specified in B.",
+          "value_a": "kitchen inferred",
+          "value_b": "kitchen"
+        },
+        "b": {
+          "row_id": "train_3265",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "First room type cannot be inferred confidently from spices alone.",
+          "value_a": "space with spices and table; type unknown",
+          "value_b": "kitchen"
+        },
+        "c": {
+          "row_id": "train_3265",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Spice storage and food containers directly support the same kitchen setting.",
+          "value_a": "kitchen inferred from stored spices",
+          "value_b": "kitchen"
+        }
+      }
+    },
+    {
+      "row_id": "train_3476",
+      "sentence1": "A plate that has two hot dogs, corn on the cob, some pasta, and noodles.",
+      "sentence2": "Hot dogs in buns with brown spicy mustard, all sitting on a paper plate.",
+      "condition": "quantity of food",
+      "status": "adjudicated",
+      "rating": 3,
+      "rationale": "Final blind numeric consensus: Unspecified hot-dog and side quantities allow equal overall food amounts. / Unspecified pasta portions and plural hot dogs allow equal total quantities.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_3476",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "A has two hot dogs plus sides; B’s hot-dog total is unspecified.",
+          "value_a": "two hot dogs, corn, pasta and noodles; total portions unspecified",
+          "value_b": "plural hot dogs in buns; exact quantity unspecified"
+        },
+        "b": {
+          "row_id": "train_3476",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "Unspecified hot-dog and side quantities allow equal overall food amounts.",
+          "value_a": "two hot dogs plus corn, pasta, noodles",
+          "value_b": "hot dogs with buns and mustard; count unknown"
+        },
+        "c": {
+          "row_id": "train_3476",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "Unspecified pasta portions and plural hot dogs allow equal total quantities.",
+          "value_a": "two hot dogs, corn, unspecified pasta and noodles",
+          "value_b": "unspecified multiple hot dogs in buns with mustard"
+        }
+      }
+    },
+    {
+      "row_id": "train_3703",
+      "sentence1": "A variety of vegan donuts are sitting next to each other in two separate plates on a counter.",
+      "sentence2": "A chocolate glazed donut and a peanut donut and sprinkled donut and cinnamon donut",
+      "condition": "variety of food item",
+      "status": "adjudicated",
+      "rating": 3,
+      "rationale": "Final blind numeric consensus: Both assortments are donuts; vegan status and named flavors differ. / Both offer assorted donuts, but vegan status and named flavors differ importantly.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_3703",
+          "rating": 4,
+          "status": "rated",
+          "rationale": "Both offer assorted doughnuts; vegan classification and listed flavors differ slightly.",
+          "value_a": "assorted vegan doughnuts",
+          "value_b": "chocolate, peanut, sprinkled and cinnamon doughnuts"
+        },
+        "b": {
+          "row_id": "train_3703",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "Both assortments are donuts; vegan status and named flavors differ.",
+          "value_a": "variety of vegan donuts, flavors unspecified",
+          "value_b": "chocolate, peanut, sprinkled, cinnamon donuts"
+        },
+        "c": {
+          "row_id": "train_3703",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "Both offer assorted donuts, but vegan status and named flavors differ importantly.",
+          "value_a": "assorted vegan donuts",
+          "value_b": "chocolate, peanut, sprinkled and cinnamon donuts"
+        }
+      }
+    },
+    {
+      "row_id": "train_3880",
+      "sentence1": "A heart shaped figure is engraved on sand,in the center of which a dog is sitting.",
+      "sentence2": "a golden retriever dog sits in front of a tree with a halter leash on",
+      "condition": "type of object on landscape",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_3880",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "The salient animal on each landscape is the same type: dog.",
+          "value_a": "dog",
+          "value_b": "golden retriever dog"
+        },
+        "b": {
+          "row_id": "train_3880",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Object on landscape could denote the engraved heart, dog, or tree.",
+          "value_a": "engraved heart and dog on sand",
+          "value_b": "dog in front of tree"
+        },
+        "c": {
+          "row_id": "train_3880",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Object could select the shared dogs or distinct landscape figures and trees.",
+          "value_a": "dog and heart figure in sand",
+          "value_b": "dog, tree and halter leash"
+        }
+      }
+    },
+    {
+      "row_id": "train_4080",
+      "sentence1": "A man with one foot on a black skate board with people in the background.",
+      "sentence2": "A boy is doing a jump with his skateboard and his dog looks on.",
+      "condition": "height of skateboard",
+      "status": "adjudicated",
+      "rating": 1,
+      "rationale": "Final blind numeric consensus: Resting one foot on a board implies ground level; jumping implies airborne. / Foot resting on skateboard implies grounded board; jumping raises it. / A's board supports a resting foot; B's jumping board is airborne.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_4080",
+          "rating": 1,
+          "status": "rated",
+          "rationale": "Resting one foot on a board implies ground level; jumping implies airborne.",
+          "value_a": "board at ground level inferred",
+          "value_b": "airborne skateboard during jump"
+        },
+        "b": {
+          "row_id": "train_4080",
+          "rating": 1,
+          "status": "rated",
+          "rationale": "Foot resting on skateboard implies grounded board; jumping raises it.",
+          "value_a": "board under one foot, at ground level",
+          "value_b": "airborne skateboard during jump"
+        },
+        "c": {
+          "row_id": "train_4080",
+          "rating": 1,
+          "status": "rated",
+          "rationale": "A's board supports a resting foot; B's jumping board is airborne.",
+          "value_a": "ground level board inferred",
+          "value_b": "airborne board"
+        }
+      }
+    },
+    {
+      "row_id": "train_4263",
+      "sentence1": "A row of hot dogs are lined up on a grill next to a pan of vegetables.",
+      "sentence2": "A sliced hot dog on a bun with french fries and a packet of relish.",
+      "condition": "quantity of food",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_4263",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "Unspecified hot dogs, vegetables and fries prevent establishing equal total food quantities.",
+          "value_a": "plural hot dogs plus pan of vegetables",
+          "value_b": "one hot dog, fries and relish; total quantity unspecified"
+        },
+        "b": {
+          "row_id": "train_4263",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "Both food arrangements contain unspecified amounts, allowing equal totals.",
+          "value_a": "row of hot dogs plus vegetables; amounts unknown",
+          "value_b": "one hot dog plus fries and relish; amounts unknown"
+        },
+        "c": {
+          "row_id": "train_4263",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Hot dog counts differ, while total food quantities remain unspecified.",
+          "value_a": "multiple hot dogs and vegetables",
+          "value_b": "one hot dog, fries and relish"
+        }
+      }
+    },
+    {
+      "row_id": "train_4350",
+      "sentence1": "A bowl of cereal next to a spoon and a banana on a table.",
+      "sentence2": "A bowl sitting on a counter with ingredients for cooking in it and laying around it.",
+      "condition": "activity involving object",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_4350",
+          "rating": 2,
+          "status": "rated",
+          "rationale": "Ready-to-eat cereal suggests eating; ingredients explicitly suggest cooking preparation.",
+          "value_a": "meal ready for eating inferred",
+          "value_b": "ingredients assembled for cooking"
+        },
+        "b": {
+          "row_id": "train_4350",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "The cereal arrangement establishes no activity involving its bowl.",
+          "value_a": "cereal bowl, spoon and banana; activity unspecified",
+          "value_b": "ingredients for cooking in and around bowl"
+        },
+        "c": {
+          "row_id": "train_4350",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "A prepared cereal meal and cooking ingredients imply different food use stages.",
+          "value_a": "ready to eat cereal meal",
+          "value_b": "ingredients for cooking preparation"
+        }
+      }
+    },
+    {
+      "row_id": "train_4373",
+      "sentence1": "A bowl of food sitting on top of a table on a blue plate.",
+      "sentence2": "Plate of food with pancakes, bacon and fruit.  Coffee cup and Maple syrup bottle in background",
+      "condition": "number of objects",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: Objects could count food collectively or separately, preventing stable totals. / Counting objects versus foods and containers yields unstable item boundaries.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_4373",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Objects could count food collectively or separately, preventing stable totals.",
+          "value_a": "bowl, food, table and plate",
+          "value_b": "plate, pancakes, bacon, fruit, coffee cup, syrup bottle"
+        },
+        "b": {
+          "row_id": "train_4373",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Counting objects versus foods and containers yields unstable item boundaries.",
+          "value_a": "bowl, food, table, plate",
+          "value_b": "plate, pancakes, bacon, fruit, cup, bottle"
+        },
+        "c": {
+          "row_id": "train_4373",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Counting vessels alone versus food and furniture changes the count comparison.",
+          "value_a": "bowl, plate, table and food",
+          "value_b": "plate, pancakes, bacon, fruit, cup and syrup bottle"
+        }
+      }
+    },
+    {
+      "row_id": "train_4452",
+      "sentence1": "A man is holding on to a rope while he parasails in the air.",
+      "sentence2": "A kite surfer and a parasailer ride next to each other in the water.",
+      "condition": "object in the air",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_4452",
+          "rating": 4,
+          "status": "uncertain",
+          "rationale": "Both imply parasailing equipment aloft; B additionally implies a kite.",
+          "value_a": "parasail aloft inferred",
+          "value_b": "parasail and kite aloft inferred"
+        },
+        "b": {
+          "row_id": "train_4452",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Second caption does not identify which described objects are airborne.",
+          "value_a": "airborne parasailing man",
+          "value_b": "kite surfer and parasailer described in water"
+        },
+        "c": {
+          "row_id": "train_4452",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Object could refer to riders or implied canopies, changing the comparison.",
+          "value_a": "airborne parasailing man and implied canopy",
+          "value_b": "kite, parasail and riders described in water"
+        }
+      }
+    },
+    {
+      "row_id": "train_4453",
+      "sentence1": "A man is holding on to a rope while he parasails in the air.",
+      "sentence2": "A kite surfer and a parasailer ride next to each other in the water.",
+      "condition": "situation of parasailer",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_4453",
+          "rating": 1,
+          "status": "rated",
+          "rationale": "The parasailer is explicitly airborne in A versus riding in water in B.",
+          "value_a": "parasailing in the air",
+          "value_b": "parasailer riding in the water"
+        },
+        "b": {
+          "row_id": "train_4453",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Situation does not resolve activity versus location; those comparisons diverge.",
+          "value_a": "parasailing in air while holding rope",
+          "value_b": "parasailer riding beside kite surfer in water"
+        },
+        "c": {
+          "row_id": "train_4453",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Water may denote the activity setting or the parasailer's actual physical position.",
+          "value_a": "airborne, holding rope",
+          "value_b": "beside kite surfer, described in the water"
+        }
+      }
+    },
+    {
+      "row_id": "train_4488",
+      "sentence1": "A guitar case, a backpack, and a suitcase all placed next to each other.",
+      "sentence2": "A pile of luggage waiting to be picked up and taken to their destination.",
+      "condition": "presence of instrument",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: A guitar case does not establish an instrument; B supplies no instrument information. / A guitar case establishes neither its contents nor an instrument. / A guitar case does not establish an instrument inside either luggage collection.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_4488",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A guitar case does not establish an instrument; B supplies no instrument information.",
+          "value_a": "guitar case only; instrument presence unknown",
+          "value_b": "luggage only; instrument presence unknown"
+        },
+        "b": {
+          "row_id": "train_4488",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A guitar case establishes neither its contents nor an instrument.",
+          "value_a": "guitar case; instrument presence unspecified",
+          "value_b": "luggage; instrument presence unspecified"
+        },
+        "c": {
+          "row_id": "train_4488",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A guitar case does not establish an instrument inside either luggage collection.",
+          "value_a": "guitar case; instrument contents unreported",
+          "value_b": "luggage; instrument contents unreported"
+        }
+      }
+    },
+    {
+      "row_id": "train_4489",
+      "sentence1": "A guitar case, a backpack, and a suitcase all placed next to each other.",
+      "sentence2": "A pile of luggage waiting to be picked up and taken to their destination.",
+      "condition": "presence of suitcase",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: A specifies a suitcase; generic luggage does not establish one in B. / Generic luggage need not include a suitcase; second presence unavailable. / A explicitly includes a suitcase; B's generic luggage does not establish one.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_4489",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A specifies a suitcase; generic luggage does not establish one in B.",
+          "value_a": "suitcase present",
+          "value_b": "luggage; suitcase presence unspecified"
+        },
+        "b": {
+          "row_id": "train_4489",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Generic luggage need not include a suitcase; second presence unavailable.",
+          "value_a": "suitcase present",
+          "value_b": "pile of luggage; suitcase presence unspecified"
+        },
+        "c": {
+          "row_id": "train_4489",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A explicitly includes a suitcase; B's generic luggage does not establish one.",
+          "value_a": "suitcase present",
+          "value_b": "luggage types unspecified"
+        }
+      }
+    },
+    {
+      "row_id": "train_4743",
+      "sentence1": "A laptop, cell phone, and mouse sit on a cluttered desk near a California flag.",
+      "sentence2": "An office workspace with two screens, a laptop, an ergonomic keyboard and other electronics.",
+      "condition": "presence of flag near desk",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: A flag is present in A; B never establishes flag presence or absence. / Flag is explicit near first desk, unspecified near second workspace. / A specifies a flag near the desk; B leaves flag presence unreported.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_4743",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A flag is present in A; B never establishes flag presence or absence.",
+          "value_a": "California flag near desk",
+          "value_b": "flag presence unspecified"
+        },
+        "b": {
+          "row_id": "train_4743",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Flag is explicit near first desk, unspecified near second workspace.",
+          "value_a": "California flag near desk",
+          "value_b": "flag presence unspecified"
+        },
+        "c": {
+          "row_id": "train_4743",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A specifies a flag near the desk; B leaves flag presence unreported.",
+          "value_a": "California flag near desk",
+          "value_b": "flag status unreported"
+        }
+      }
+    },
+    {
+      "row_id": "train_4822",
+      "sentence1": "A girl in a pink t-shirt and white tennis shoes holds out her racket.",
+      "sentence2": "A woman jumping up to a hit a tennis ball on a tennis court.",
+      "condition": "name of game",
+      "status": "adjudicated",
+      "rating": 5,
+      "rationale": "Final blind numeric consensus: Racket and tennis shoes directly imply the tennis explicitly named in B. / Racket and tennis attire directly support tennis in the first. / The racket and tennis attire directly support the same tennis game.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_4822",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Racket and tennis shoes directly imply the tennis explicitly named in B.",
+          "value_a": "tennis inferred",
+          "value_b": "tennis"
+        },
+        "b": {
+          "row_id": "train_4822",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Racket and tennis attire directly support tennis in the first.",
+          "value_a": "tennis inferred from tennis shoes and racket",
+          "value_b": "tennis"
+        },
+        "c": {
+          "row_id": "train_4822",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "The racket and tennis attire directly support the same tennis game.",
+          "value_a": "tennis inferred from racket and tennis attire",
+          "value_b": "tennis"
+        }
+      }
+    },
+    {
+      "row_id": "train_5149",
+      "sentence1": "A table and chairs by a large window with a drink setting for two.",
+      "sentence2": "A table with a vase and a pair of binoculars sitting on it overlooking a massive garden.",
+      "condition": "number of items on table",
+      "status": "adjudicated",
+      "rating": 3,
+      "rationale": "Final blind numeric consensus: A’s two-person drink setting has unspecified item counts; B names two items. / Drink setting may contain two or more items; equality possible. / A two-person drink setting could contain exactly the two objects B specifies.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_5149",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "A’s two-person drink setting has unspecified item counts; B names two items.",
+          "value_a": "drink setting for two; individual item total unspecified",
+          "value_b": "two items: vase and binoculars"
+        },
+        "b": {
+          "row_id": "train_5149",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "Drink setting may contain two or more items; equality possible.",
+          "value_a": "drink setting for two; item count unspecified",
+          "value_b": "two items: vase and binoculars"
+        },
+        "c": {
+          "row_id": "train_5149",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "A two-person drink setting could contain exactly the two objects B specifies.",
+          "value_a": "drink setting for two; exact item count unspecified",
+          "value_b": "one vase and one pair of binoculars: two"
+        }
+      }
+    },
+    {
+      "row_id": "train_5156",
+      "sentence1": "A vanity and counter top with a sink and a commode in the corner.",
+      "sentence2": "View of a bathroom through doorway looking towards window, with toilet, sink and tub/shower.",
+      "condition": "amount of features in room",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: Features lacks a stable unit for combined fixtures, counters and architectural openings. / Feature granularity varies across vanity, countertop, doorway, and combined tub/shower.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_5156",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Features lacks a stable unit for combined fixtures, counters and architectural openings.",
+          "value_a": "vanity, countertop, sink, commode",
+          "value_b": "doorway, window, toilet, sink, tub/shower"
+        },
+        "b": {
+          "row_id": "train_5156",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Feature granularity varies across vanity, countertop, doorway, and combined tub/shower.",
+          "value_a": "vanity, countertop, sink, commode",
+          "value_b": "doorway, window, toilet, sink, tub/shower"
+        },
+        "c": {
+          "row_id": "train_5156",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Feature counts depend on including architecture and separating combined fixtures.",
+          "value_a": "vanity, countertop, sink and commode",
+          "value_b": "doorway, window, toilet, sink and tub/shower"
+        }
+      }
+    },
+    {
+      "row_id": "train_5469",
+      "sentence1": "A meal of a lunch meat sandwich and iced tea is on the table.",
+      "sentence2": "A person is eating a large beef sandwich on bun, while sitting at a table",
+      "condition": "number of food items",
+      "status": "adjudicated",
+      "rating": 5,
+      "rationale": "Final blind numeric consensus: Each has one sandwich; iced tea is a beverage, not another food item. / Each has one food item, a sandwich; tea is beverage.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_5469",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Each has one sandwich; iced tea is a beverage, not another food item.",
+          "value_a": "one food item: sandwich; iced tea beverage",
+          "value_b": "one food item: sandwich"
+        },
+        "b": {
+          "row_id": "train_5469",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Each has one food item, a sandwich; tea is beverage.",
+          "value_a": "one sandwich; iced tea beverage",
+          "value_b": "one beef sandwich"
+        },
+        "c": {
+          "row_id": "train_5469",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Including beverages as food changes A's count from one to two.",
+          "value_a": "one sandwich plus one iced tea",
+          "value_b": "one sandwich"
+        }
+      }
+    },
+    {
+      "row_id": "train_5795",
+      "sentence1": "A boy makes a jump with a dirt bike with the sun setting behind him .",
+      "sentence2": "A young man flies through the air in a no hands stunt on a bike .",
+      "condition": "type of vehicle",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_5795",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "Dirt bike specifies a motorcycle; B’s stunt bike could denote either vehicle.",
+          "value_a": "dirt bike, ordinarily motorcycle",
+          "value_b": "bike; bicycle or motorcycle unresolved"
+        },
+        "b": {
+          "row_id": "train_5795",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "Dirt bike suggests motorcycle; generic stunt bike leaves motorization unresolved.",
+          "value_a": "dirt bike, ordinarily motorcycle",
+          "value_b": "bike, bicycle or motorcycle unresolved"
+        },
+        "c": {
+          "row_id": "train_5795",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "B's unspecified bike could be a bicycle or a matching motorcycle.",
+          "value_a": "dirt bike",
+          "value_b": "bike of unspecified motorization"
+        }
+      }
+    },
+    {
+      "row_id": "train_5917",
+      "sentence1": "Two blond women sitting at an outside table having a drink .",
+      "sentence2": "Girls sitting out in the sun outside of a Starbucks coffee shop .",
+      "condition": "age of people",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_5917",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "Women indicates adults; girls may indicate children or young women here.",
+          "value_a": "two adult women",
+          "value_b": "girls; precise age category ambiguous"
+        },
+        "b": {
+          "row_id": "train_5917",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "Women are adults; girls may denote children or young women.",
+          "value_a": "adult women",
+          "value_b": "girls; age interpretation ambiguous"
+        },
+        "c": {
+          "row_id": "train_5917",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Girls may denote children or adult women, changing the age comparison.",
+          "value_a": "adult women",
+          "value_b": "girls, potentially children or adult women"
+        }
+      }
+    },
+    {
+      "row_id": "train_5951",
+      "sentence1": "A man rides his bicycle through some grass in a wooded area .",
+      "sentence2": "A young male is performing stunts on a blue BMX bike .",
+      "condition": "age of person",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_5951",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "Adult man and young male overlap, but young male’s age category remains broad.",
+          "value_a": "adult man",
+          "value_b": "young male; child, teen or young adult unspecified"
+        },
+        "b": {
+          "row_id": "train_5951",
+          "rating": 4,
+          "status": "rated",
+          "rationale": "Both describe male youth/adulthood, with youth specified only second.",
+          "value_a": "man, adult",
+          "value_b": "young male"
+        },
+        "c": {
+          "row_id": "train_5951",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "A establishes adulthood; B establishes youth without a narrower age category.",
+          "value_a": "adult man, exact age unspecified",
+          "value_b": "young male, exact age unspecified"
+        }
+      }
+    },
+    {
+      "row_id": "train_6072",
+      "sentence1": "Four little black boys and three black adults are outside of a store .",
+      "sentence2": "A group of African women and children wearing brightly colored clothes .",
+      "condition": "Ethnicity of people",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_6072",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Black racial description and African origin do not determine matching ethnicity.",
+          "value_a": "Black; ethnicity unspecified",
+          "value_b": "African; specific ethnicity unspecified"
+        },
+        "b": {
+          "row_id": "train_6072",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "Black and African overlap, but racial and geographic identities differ.",
+          "value_a": "Black people",
+          "value_b": "African people; racial identity unspecified"
+        },
+        "c": {
+          "row_id": "train_6072",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "Black racial identification and African origin overlap but are not equivalent classifications.",
+          "value_a": "Black",
+          "value_b": "African"
+        }
+      }
+    },
+    {
+      "row_id": "train_6073",
+      "sentence1": "Four little black boys and three black adults are outside of a store .",
+      "sentence2": "A group of African women and children wearing brightly colored clothes .",
+      "condition": "Gender composition of group",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_6073",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "A establishes male children and B women; other members’ genders remain unknown.",
+          "value_a": "four boys and three adults of unspecified gender",
+          "value_b": "women and children of unspecified gender"
+        },
+        "b": {
+          "row_id": "train_6073",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Adults and children have unspecified genders, preventing complete group comparison.",
+          "value_a": "four boys and three adults of unspecified gender",
+          "value_b": "women and children of unspecified gender"
+        },
+        "c": {
+          "row_id": "train_6073",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "A identifies boys, B women; other group members' genders are unspecified.",
+          "value_a": "four male children; three adults of unspecified gender",
+          "value_b": "female adults; children of unspecified gender"
+        }
+      }
+    },
+    {
+      "row_id": "train_6173",
+      "sentence1": "Brown dog and two black dogs have three-way tug on red object , outdoors .",
+      "sentence2": "Three tan dogs are outside , one licks the other 's nose .",
+      "condition": "sentiment of dogs",
+      "status": "adjudicated",
+      "rating": 4,
+      "rationale": "Final blind numeric consensus: Tugging suggests playful engagement; licking another dog suggests friendly affection. / Both show social engagement; playful tugging differs slightly from affection.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_6173",
+          "rating": 4,
+          "status": "rated",
+          "rationale": "Tugging suggests playful engagement; licking another dog suggests friendly affection.",
+          "value_a": "playful interaction inferred from tugging",
+          "value_b": "friendly, affectionate interaction inferred from licking"
+        },
+        "b": {
+          "row_id": "train_6173",
+          "rating": 4,
+          "status": "rated",
+          "rationale": "Both show social engagement; playful tugging differs slightly from affection.",
+          "value_a": "playful competitive tugging",
+          "value_b": "affectionate licking"
+        },
+        "c": {
+          "row_id": "train_6173",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Tugging and licking do not reliably establish either group's emotional sentiment.",
+          "value_a": "tugging an object; sentiment unreported",
+          "value_b": "licking another dog's nose; sentiment unreported"
+        }
+      }
+    },
+    {
+      "row_id": "train_6661",
+      "sentence1": "A lady walks in the rain with a yellow umbrella .",
+      "sentence2": "Woman walking in the rain and unicycle standing next to a pole .",
+      "condition": "absence of umbrella",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: A disproves umbrella absence; B never establishes whether an umbrella is absent. / Umbrella present first; second does not establish umbrella absence. / A explicitly includes an umbrella; B does not establish umbrella absence.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_6661",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A disproves umbrella absence; B never establishes whether an umbrella is absent.",
+          "value_a": "umbrella present; absence false",
+          "value_b": "umbrella absence unknown"
+        },
+        "b": {
+          "row_id": "train_6661",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Umbrella present first; second does not establish umbrella absence.",
+          "value_a": "umbrella present; absence false",
+          "value_b": "umbrella presence unspecified"
+        },
+        "c": {
+          "row_id": "train_6661",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A explicitly includes an umbrella; B does not establish umbrella absence.",
+          "value_a": "umbrella present",
+          "value_b": "umbrella status unreported"
+        }
+      }
+    },
+    {
+      "row_id": "train_6776",
+      "sentence1": "The black dog is gliding down through the snow .",
+      "sentence2": "A dog is jumping to catch a Frisbee and casts a perfect shadow .",
+      "condition": "animal's elevation",
+      "status": "adjudicated",
+      "rating": 1,
+      "rationale": "Final blind numeric consensus: Gliding through snow implies surface contact; a catching jump establishes airborne elevation. / Gliding through snow implies surface movement; jumping explicitly raises dog. / Gliding through snow implies surface contact, whereas jumping establishes airborne elevation.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_6776",
+          "rating": 1,
+          "status": "rated",
+          "rationale": "Gliding through snow implies surface contact; a catching jump establishes airborne elevation.",
+          "value_a": "on snow surface inferred",
+          "value_b": "airborne while jumping"
+        },
+        "b": {
+          "row_id": "train_6776",
+          "rating": 1,
+          "status": "rated",
+          "rationale": "Gliding through snow implies surface movement; jumping explicitly raises dog.",
+          "value_a": "at snow surface",
+          "value_b": "airborne while catching Frisbee"
+        },
+        "c": {
+          "row_id": "train_6776",
+          "rating": 1,
+          "status": "rated",
+          "rationale": "Gliding through snow implies surface contact, whereas jumping establishes airborne elevation.",
+          "value_a": "snow surface contact inferred",
+          "value_b": "airborne while jumping"
+        }
+      }
+    },
+    {
+      "row_id": "train_6804",
+      "sentence1": "A boy in a white shirt does a trick on his skateboard at a skate park .",
+      "sentence2": "A person in an orange helmet is skateboarding on a ramp .",
+      "condition": "type of place",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_6804",
+          "rating": 4,
+          "status": "uncertain",
+          "rationale": "A names a skate park; B’s skateboarding ramp suggests but does not guarantee one.",
+          "value_a": "skate park",
+          "value_b": "skateboarding ramp; larger venue unspecified"
+        },
+        "b": {
+          "row_id": "train_6804",
+          "rating": 4,
+          "status": "rated",
+          "rationale": "Both settings are skateboarding facilities; ramp is less specific.",
+          "value_a": "skate park",
+          "value_b": "skateboarding ramp"
+        },
+        "c": {
+          "row_id": "train_6804",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "Both are skating locations, but a ramp does not specify the overall facility.",
+          "value_a": "skate park",
+          "value_b": "skateboarding ramp; larger setting unspecified"
+        }
+      }
+    },
+    {
+      "row_id": "train_6874",
+      "sentence1": "A man and his bike in the air after launching off a ramp .",
+      "sentence2": "A man jumping on his bmx with another bmxer watching .",
+      "condition": "type of sport",
+      "status": "adjudicated",
+      "rating": 5,
+      "rationale": "Final blind numeric consensus: Both depict the same bicycle-jumping stunt sport, with BMX explicit in B. / Both depict aerial bicycle stunt riding, consistent with BMX. / Bike ramp jumping directly supports the same BMX stunt activity.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_6874",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Both depict the same bicycle-jumping stunt sport, with BMX explicit in B.",
+          "value_a": "bicycle stunt jumping inferred",
+          "value_b": "BMX stunt jumping"
+        },
+        "b": {
+          "row_id": "train_6874",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Both depict aerial bicycle stunt riding, consistent with BMX.",
+          "value_a": "aerial bicycle stunt riding",
+          "value_b": "BMX stunt riding"
+        },
+        "c": {
+          "row_id": "train_6874",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Bike ramp jumping directly supports the same BMX stunt activity.",
+          "value_a": "BMX style stunt jumping inferred",
+          "value_b": "BMX stunt jumping"
+        }
+      }
+    },
+    {
+      "row_id": "train_6981",
+      "sentence1": "Greyhounds race on a sandy track with the dog in green taking the lead .",
+      "sentence2": "a muzzled greyhound wearing the number five is running on a dog track .",
+      "condition": "running surface",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_6981",
+          "rating": 4,
+          "status": "uncertain",
+          "rationale": "A specifies sand; dog-track context suggests similar ground but cannot ensure material.",
+          "value_a": "sandy dog-racing track",
+          "value_b": "dog track; surface material unspecified"
+        },
+        "b": {
+          "row_id": "train_6981",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "Both are dog tracks; only first specifies sandy surface material.",
+          "value_a": "sandy racing track",
+          "value_b": "dog track, surface material unspecified"
+        },
+        "c": {
+          "row_id": "train_6981",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A specifies sand; B does not specify the dog track's surface material.",
+          "value_a": "sandy track",
+          "value_b": "dog track; material unspecified"
+        }
+      }
+    },
+    {
+      "row_id": "train_6998",
+      "sentence1": "Three young girls are taking part in martial arts .",
+      "sentence2": "A woman is swordfighting with an unseen opponent .",
+      "condition": "gender of people",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_6998",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "Female participants are explicit in both; B’s unseen opponent has unknown gender.",
+          "value_a": "three girls, female",
+          "value_b": "woman, female; unseen opponent’s gender unspecified"
+        },
+        "b": {
+          "row_id": "train_6998",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Second opponent is a person whose gender remains unspecified.",
+          "value_a": "three girls, female",
+          "value_b": "woman plus opponent of unspecified gender"
+        },
+        "c": {
+          "row_id": "train_6998",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Named actors are female, but including B's unseen opponent leaves gender unknown.",
+          "value_a": "three girls, female",
+          "value_b": "one woman, female; unseen opponent unspecified"
+        }
+      }
+    },
+    {
+      "row_id": "train_7143",
+      "sentence1": "Man in a colorful tye-dye t-shirt doing a trick on his skateboard .",
+      "sentence2": "A young man is doing a skating trip on a skateboard ramp .",
+      "condition": "presence of tye-dye t-shirt",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: Tie-dye clothing is explicit in A but neither confirmed nor denied in B. / Tie-dye shirt is present first; second leaves clothing pattern unknown. / A specifies the shirt; B leaves clothing pattern unreported.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_7143",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Tie-dye clothing is explicit in A but neither confirmed nor denied in B.",
+          "value_a": "tie-dye T-shirt present",
+          "value_b": "tie-dye T-shirt presence unspecified"
+        },
+        "b": {
+          "row_id": "train_7143",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Tie-dye shirt is present first; second leaves clothing pattern unknown.",
+          "value_a": "tie-dye T-shirt present",
+          "value_b": "tie-dye shirt presence unspecified"
+        },
+        "c": {
+          "row_id": "train_7143",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A specifies the shirt; B leaves clothing pattern unreported.",
+          "value_a": "tie-dye T-shirt present",
+          "value_b": "tie-dye T-shirt status unreported"
+        }
+      }
+    },
+    {
+      "row_id": "train_7313",
+      "sentence1": "A man on a bicycle jumps over jagged rocks amongst tall pine trees .",
+      "sentence2": "a guy on a bike jumping from one large rock to another",
+      "condition": "presence of trees",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: A explicitly contains pine trees; B never establishes trees or their absence. / Pine trees present first; second does not establish trees absence. / A explicitly includes pine trees; B supplies no tree presence information.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_7313",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A explicitly contains pine trees; B never establishes trees or their absence.",
+          "value_a": "tall pine trees present",
+          "value_b": "trees unspecified"
+        },
+        "b": {
+          "row_id": "train_7313",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Pine trees present first; second does not establish trees absence.",
+          "value_a": "tall pine trees present",
+          "value_b": "trees presence unspecified"
+        },
+        "c": {
+          "row_id": "train_7313",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A explicitly includes pine trees; B supplies no tree presence information.",
+          "value_a": "pine trees present",
+          "value_b": "tree status unreported"
+        }
+      }
+    },
+    {
+      "row_id": "train_7332",
+      "sentence1": "A woman is leading an exercise group on the seashore .",
+      "sentence2": "Four women in bikinis are playing volleyball on the beach .",
+      "condition": "gender",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_7332",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "A’s leader is female but group genders are unspecified; B names only women.",
+          "value_a": "woman leader; exercise-group genders unspecified",
+          "value_b": "four women, female"
+        },
+        "b": {
+          "row_id": "train_7332",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Exercise group genders are unspecified beyond its female leader.",
+          "value_a": "woman leader plus group of unspecified genders",
+          "value_b": "four women, female"
+        },
+        "c": {
+          "row_id": "train_7332",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Comparing the named leader gives female equality; comparing whole groups introduces unknowns.",
+          "value_a": "female leader; exercise group genders unspecified",
+          "value_b": "four women, female"
+        }
+      }
+    },
+    {
+      "row_id": "train_7336",
+      "sentence1": "A person walks along a beach at sunset carrying a surfboard .",
+      "sentence2": "A man is beginning to stand up on his surfboard in front of a small wave",
+      "condition": "activity status of people",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_7336",
+          "rating": 2,
+          "status": "rated",
+          "rationale": "Walking while carrying a board and actively surfing are distinct surfing-related activities.",
+          "value_a": "walking on beach carrying surfboard",
+          "value_b": "beginning to stand while surfing a wave"
+        },
+        "b": {
+          "row_id": "train_7336",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "Both are active in surfing contexts; walking and riding differ.",
+          "value_a": "walking carrying surfboard",
+          "value_b": "beginning to stand while surfing"
+        },
+        "c": {
+          "row_id": "train_7336",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Status could mean general physical activity or whether surfing is underway.",
+          "value_a": "walking while carrying surfboard",
+          "value_b": "beginning to stand on surfboard at wave"
+        }
+      }
+    },
+    {
+      "row_id": "train_7423",
+      "sentence1": "Workers are wearing hard hats at a construction site while building something with wood .",
+      "sentence2": "Construction workers hammer nails on the unfinished roof of a house .",
+      "condition": "absence of hard hats",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: A disproves hard-hat absence; B gives no headwear information. / First workers wear hard hats; second workers headwear is unspecified. / A explicitly includes hard hats; B does not establish their absence.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_7423",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A disproves hard-hat absence; B gives no headwear information.",
+          "value_a": "hard hats present; absence false",
+          "value_b": "hard-hat absence unknown"
+        },
+        "b": {
+          "row_id": "train_7423",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "First workers wear hard hats; second workers headwear is unspecified.",
+          "value_a": "hard hats present; absence false",
+          "value_b": "hard-hat presence unspecified"
+        },
+        "c": {
+          "row_id": "train_7423",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A explicitly includes hard hats; B does not establish their absence.",
+          "value_a": "hard hats present",
+          "value_b": "hard hat status unreported"
+        }
+      }
+    },
+    {
+      "row_id": "train_7466",
+      "sentence1": "A young boy and his father use snowshoes to walk in the snow .",
+      "sentence2": "Two kids play a game together with sticks in the snow .",
+      "condition": "absence of snowshoes",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: A disproves snowshoe absence; B gives no snowshoe information. / First snowshoes are present; second children footwear is unspecified. / A explicitly includes snowshoes; B does not establish their absence.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_7466",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A disproves snowshoe absence; B gives no snowshoe information.",
+          "value_a": "snowshoes present; absence false",
+          "value_b": "snowshoe absence unknown"
+        },
+        "b": {
+          "row_id": "train_7466",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "First snowshoes are present; second children footwear is unspecified.",
+          "value_a": "snowshoes present; absence false",
+          "value_b": "snowshoe presence unspecified"
+        },
+        "c": {
+          "row_id": "train_7466",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A explicitly includes snowshoes; B does not establish their absence.",
+          "value_a": "snowshoes present",
+          "value_b": "snowshoe status unreported"
+        }
+      }
+    },
+    {
+      "row_id": "train_7578",
+      "sentence1": "A mountain biker makes his way up a grassy path on his red bicycle .",
+      "sentence2": "A biker dressed in white rides through the forest .",
+      "condition": "type of land vehicle",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_7578",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "A names a mountain bicycle; generic forest biker leaves bicycle versus motorcycle unresolved.",
+          "value_a": "mountain bicycle",
+          "value_b": "biker’s vehicle unspecified"
+        },
+        "b": {
+          "row_id": "train_7578",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Biker alone does not establish whether second vehicle is motorized.",
+          "value_a": "mountain bicycle",
+          "value_b": "biker; vehicle subtype unspecified"
+        },
+        "c": {
+          "row_id": "train_7578",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Biker can denote a cyclist or motorcyclist, changing vehicle type equality.",
+          "value_a": "mountain bicycle",
+          "value_b": "biker's vehicle unspecified"
+        }
+      }
+    },
+    {
+      "row_id": "train_7753",
+      "sentence1": "A man walks on the sidewalk next to a building .",
+      "sentence2": "A person is walking up outdoor stairs between two buildings .",
+      "condition": "angle of ground",
+      "status": "adjudicated",
+      "rating": 1,
+      "rationale": "Final blind numeric consensus: Ordinary sidewalk walking implies level ground; ascending stairs establishes an upward incline. / Ordinary sidewalk is level; ascending stairs explicitly have upward inclination.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_7753",
+          "rating": 1,
+          "status": "rated",
+          "rationale": "Ordinary sidewalk walking implies level ground; ascending stairs establishes an upward incline.",
+          "value_a": "approximately level sidewalk inferred",
+          "value_b": "upward outdoor stairs"
+        },
+        "b": {
+          "row_id": "train_7753",
+          "rating": 1,
+          "status": "rated",
+          "rationale": "Ordinary sidewalk is level; ascending stairs explicitly have upward inclination.",
+          "value_a": "level sidewalk",
+          "value_b": "upward outdoor stairs"
+        },
+        "c": {
+          "row_id": "train_7753",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A sidewalk does not establish whether the walking surface is level or sloped.",
+          "value_a": "sidewalk with unspecified slope",
+          "value_b": "ascending outdoor stairs"
+        }
+      }
+    },
+    {
+      "row_id": "train_8029",
+      "sentence1": "A woman pulls a small child in a sled through the snow .",
+      "sentence2": "A woman and girl riding downhill on a sled with a dog running along side them",
+      "condition": "gender of person",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_8029",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "The principal adult person in each description is explicitly a woman.",
+          "value_a": "woman pulling sled",
+          "value_b": "woman riding sled"
+        },
+        "b": {
+          "row_id": "train_8029",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Multiple people occur; unspecified child gender prevents an unrestricted comparison.",
+          "value_a": "woman and child of unspecified gender",
+          "value_b": "woman and girl, both female"
+        },
+        "c": {
+          "row_id": "train_8029",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Person could select the named women or include A's child of unknown gender.",
+          "value_a": "woman and child of unspecified gender",
+          "value_b": "woman and girl, female"
+        }
+      }
+    },
+    {
+      "row_id": "train_8210",
+      "sentence1": "A man on a bike just hit a dirt ramp and is midair .",
+      "sentence2": "A biker wearing a red and white outfit is riding a dirt bike on a track .",
+      "condition": "type of vehicle",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_8210",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "A’s bike could be bicycle or motorcycle; B specifies a dirt motorcycle.",
+          "value_a": "bike jumping dirt ramp; vehicle subtype unspecified",
+          "value_b": "dirt bike, ordinarily motorcycle"
+        },
+        "b": {
+          "row_id": "train_8210",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "First bike motorization is unclear; second dirt bike ordinarily motorcycle.",
+          "value_a": "bike, motorization unspecified",
+          "value_b": "dirt bike, ordinarily motorcycle"
+        },
+        "c": {
+          "row_id": "train_8210",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "A's unspecified bike could be a bicycle or a matching dirt motorcycle.",
+          "value_a": "bike jumping dirt ramp; motorization unspecified",
+          "value_b": "dirt bike"
+        }
+      }
+    },
+    {
+      "row_id": "train_8778",
+      "sentence1": "A man on a bike just hit a dirt ramp and is midair .",
+      "sentence2": "a man is riding a trails bicycle on a dirt track through rough terrain .",
+      "condition": "type of vehicle",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_8778",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "A’s generic bike leaves motorization unresolved; B explicitly names a bicycle.",
+          "value_a": "bike jumping dirt ramp; vehicle subtype unspecified",
+          "value_b": "trials bicycle"
+        },
+        "b": {
+          "row_id": "train_8778",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "Both are bikes; first leaves bicycle versus motorcycle unresolved.",
+          "value_a": "bike, motorization unspecified",
+          "value_b": "trails bicycle"
+        },
+        "c": {
+          "row_id": "train_8778",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "A's unspecified bike could be a matching bicycle or a motorcycle.",
+          "value_a": "bike jumping dirt ramp; motorization unspecified",
+          "value_b": "trials bicycle"
+        }
+      }
+    },
+    {
+      "row_id": "train_8825",
+      "sentence1": "A black dog with a red collar is running on the snow .",
+      "sentence2": "A brown and white dog is leaping over a log near water in the snow .",
+      "condition": "color of object",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_8825",
+          "rating": 1,
+          "status": "rated",
+          "rationale": "The salient dogs have different colors, black versus brown and white.",
+          "value_a": "black dog",
+          "value_b": "brown-and-white dog"
+        },
+        "b": {
+          "row_id": "train_8825",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Object does not identify dog versus collar among competing colors.",
+          "value_a": "black dog, red collar",
+          "value_b": "brown and white dog"
+        },
+        "c": {
+          "row_id": "train_8825",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Object is unnamed; comparing dogs differs from comparing their shared snow.",
+          "value_a": "black dog, red collar, snow",
+          "value_b": "brown and white dog, log, snow"
+        }
+      }
+    },
+    {
+      "row_id": "train_8829",
+      "sentence1": "A baseball pitcher prepares to pitch the ball to the batter .",
+      "sentence2": "one baseball player running toward a base with another waiting on the base",
+      "condition": "relationship of players",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: A establishes pitcher versus batter; B does not establish teammates or opponents. / Waiting player may be teammate or opponent; relationship cannot resolve. / B does not establish whether the waiting player is teammate or opponent.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_8829",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A establishes pitcher versus batter; B does not establish teammates or opponents.",
+          "value_a": "pitcher and batter, opposing roles",
+          "value_b": "runner and player waiting on base; relationship unresolved"
+        },
+        "b": {
+          "row_id": "train_8829",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Waiting player may be teammate or opponent; relationship cannot resolve.",
+          "value_a": "pitcher versus batter, opposing roles",
+          "value_b": "runner versus waiting player; relationship unspecified"
+        },
+        "c": {
+          "row_id": "train_8829",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "B does not establish whether the waiting player is teammate or opponent.",
+          "value_a": "opposing pitcher and batter",
+          "value_b": "runner and waiting player; relationship unspecified"
+        }
+      }
+    },
+    {
+      "row_id": "train_8859",
+      "sentence1": "Man in a wetsuit is surfing a wave on a white and green surfboard .",
+      "sentence2": "Two surfers are out in the ocean , and one wearing green and black catches a wave .",
+      "condition": "number of riders",
+      "status": "adjudicated",
+      "rating": 1,
+      "rationale": "Final blind numeric consensus: One surfer versus two surfers establishes unequal participant counts. / One surfer is mentioned first, two surfers are mentioned second.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_8859",
+          "rating": 1,
+          "status": "rated",
+          "rationale": "One surfer versus two surfers establishes unequal participant counts.",
+          "value_a": "one surfer",
+          "value_b": "two surfers"
+        },
+        "b": {
+          "row_id": "train_8859",
+          "rating": 1,
+          "status": "rated",
+          "rationale": "One surfer is mentioned first, two surfers are mentioned second.",
+          "value_a": "one surfer",
+          "value_b": "two surfers"
+        },
+        "c": {
+          "row_id": "train_8859",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Counting all surfers gives one versus two; explicit wave riders give one each.",
+          "value_a": "one surfer actively riding",
+          "value_b": "two surfers present; one explicitly catches a wave"
+        }
+      }
+    },
+    {
+      "row_id": "train_8949",
+      "sentence1": "A man wearing a blue shirt and matching helmet is jumping his bike over a hill .",
+      "sentence2": "A man wearing BMX gear and a helmet rides a bicycle on rocky terrain .",
+      "condition": "type of sport",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_8949",
+          "rating": 4,
+          "status": "rated",
+          "rationale": "Both involve bicycle sport; B specifies BMX while A only establishes jumping.",
+          "value_a": "bicycle jumping",
+          "value_b": "BMX cycling"
+        },
+        "b": {
+          "row_id": "train_8949",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Both describe bicycle sport; second explicitly identifies BMX participation.",
+          "value_a": "bicycle jumping",
+          "value_b": "BMX cycling"
+        },
+        "c": {
+          "row_id": "train_8949",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "A's bike may be a bicycle or motorcycle, changing the sport comparison.",
+          "value_a": "bike jumping; motorization unspecified",
+          "value_b": "BMX cycling"
+        }
+      }
+    },
+    {
+      "row_id": "train_9039",
+      "sentence1": "Construction worker in a hard hat and yellow neon vest , working on stairs .",
+      "sentence2": "A worker stands on a scaffolding to repair a brick building .",
+      "condition": "presence of hard hat",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: Hard hat is explicit in A; B never establishes headwear or its absence. / Hard hat explicit first; scaffolding work does not establish headwear. / A explicitly includes a hard hat; B leaves head protection unreported.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_9039",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Hard hat is explicit in A; B never establishes headwear or its absence.",
+          "value_a": "hard hat present",
+          "value_b": "hard-hat presence unspecified"
+        },
+        "b": {
+          "row_id": "train_9039",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Hard hat explicit first; scaffolding work does not establish headwear.",
+          "value_a": "hard hat present",
+          "value_b": "hard-hat presence unspecified"
+        },
+        "c": {
+          "row_id": "train_9039",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A explicitly includes a hard hat; B leaves head protection unreported.",
+          "value_a": "hard hat present",
+          "value_b": "hard hat status unreported"
+        }
+      }
+    },
+    {
+      "row_id": "train_9223",
+      "sentence1": "A brown dog and a black dog are together in the tall grass .",
+      "sentence2": "One dog wades in the water while another dog is on land .",
+      "condition": "animal proximity",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: Together establishes proximity in A; water versus land does not determine separation. / Water versus land does not determine the dogs mutual distance. / Separate land and water locations do not establish B's distance between dogs.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_9223",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Together establishes proximity in A; water versus land does not determine separation.",
+          "value_a": "dogs together in tall grass",
+          "value_b": "one dog in water, another on land; distance unspecified"
+        },
+        "b": {
+          "row_id": "train_9223",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Water versus land does not determine the dogs mutual distance.",
+          "value_a": "two dogs together",
+          "value_b": "one dog in water, another on land; distance unknown"
+        },
+        "c": {
+          "row_id": "train_9223",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Separate land and water locations do not establish B's distance between dogs.",
+          "value_a": "dogs together",
+          "value_b": "one in water, one on land; distance unspecified"
+        }
+      }
+    },
+    {
+      "row_id": "train_9292",
+      "sentence1": "A dirt biker about to turn the corner , probably in a race .",
+      "sentence2": "A motorcyclist is flying through the air above a dirt path .",
+      "condition": "type of road",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_9292",
+          "rating": 4,
+          "status": "rated",
+          "rationale": "Dirt biking implies an off-road course; B explicitly specifies a dirt path.",
+          "value_a": "off-road dirt course inferred",
+          "value_b": "dirt path"
+        },
+        "b": {
+          "row_id": "train_9292",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Dirt biking directly supports an unpaved route like second path.",
+          "value_a": "dirt biking route, unpaved",
+          "value_b": "dirt path"
+        },
+        "c": {
+          "row_id": "train_9292",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Riding a dirt bike does not establish A's actual road surface.",
+          "value_a": "road type unspecified",
+          "value_b": "dirt path"
+        }
+      }
+    },
+    {
+      "row_id": "train_9336",
+      "sentence1": "Helmeted biker makes a fast right turn on weedy road .",
+      "sentence2": "A motocross bike is being ridden between markers in a running stream .",
+      "condition": "type of sport",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_9336",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "A’s biker could be cyclist or motorcyclist; B specifically establishes motocross.",
+          "value_a": "biking around turn; bicycle/motorcycle unresolved",
+          "value_b": "motocross motorcycle riding"
+        },
+        "b": {
+          "row_id": "train_9336",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "Generic biker could cycle or motorcycle; motocross is explicit second.",
+          "value_a": "biking, motorization unspecified",
+          "value_b": "motocross"
+        },
+        "c": {
+          "row_id": "train_9336",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "A's biker may be a cyclist or motorcyclist, changing the sport comparison.",
+          "value_a": "helmeted biker turning; vehicle unspecified",
+          "value_b": "motocross"
+        }
+      }
+    },
+    {
+      "row_id": "train_9616",
+      "sentence1": "A man dressed as a cowboy holds a rope in his teeth as he ropes a calf .",
+      "sentence2": "Two men wearing earring hats and ponchos are on horses surrounding a bull .",
+      "condition": "men's occupation",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: Roping supports cowboy work; horseback riders surrounding a bull lack established occupations. / Costumes and livestock handling do not establish either man's actual occupation.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_9616",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Roping supports cowboy work; horseback riders surrounding a bull lack established occupations.",
+          "value_a": "cowboy or rodeo roper inferred",
+          "value_b": "horseback men in hats and ponchos; occupation unspecified"
+        },
+        "b": {
+          "row_id": "train_9616",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Roping cattle and horseback cattle handling directly suggest cowboy work.",
+          "value_a": "cowboy roping calf",
+          "value_b": "horseback cattle handlers, cowboys inferred"
+        },
+        "c": {
+          "row_id": "train_9616",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Costumes and livestock handling do not establish either man's actual occupation.",
+          "value_a": "dressed as cowboy, roping calf; occupation unreported",
+          "value_b": "costumed horsemen surrounding bull; occupation unreported"
+        }
+      }
+    },
+    {
+      "row_id": "train_9689",
+      "sentence1": "A group of bicyclers that are going down the road .",
+      "sentence2": "Two bicycle racers are speeding down a street in front of spectators .",
+      "condition": "presence of audience",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: B explicitly includes spectators; A never establishes audience presence or absence. / Spectators establish audience second; first leaves audience presence unspecified. / B explicitly includes spectators; A supplies no audience presence information.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_9689",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "B explicitly includes spectators; A never establishes audience presence or absence.",
+          "value_a": "audience presence unspecified",
+          "value_b": "spectators present"
+        },
+        "b": {
+          "row_id": "train_9689",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Spectators establish audience second; first leaves audience presence unspecified.",
+          "value_a": "audience presence unspecified",
+          "value_b": "spectators present"
+        },
+        "c": {
+          "row_id": "train_9689",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "B explicitly includes spectators; A supplies no audience presence information.",
+          "value_a": "audience status unreported",
+          "value_b": "spectators present"
+        }
+      }
+    },
+    {
+      "row_id": "train_9719",
+      "sentence1": "A little girl sitting in a small chair outdoors .",
+      "sentence2": "A little girl in a hat and red pants balances on tightropes .",
+      "condition": "presence of hat",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: B explicitly includes a hat; A never establishes headwear or its absence. / Hat is explicit second; first does not establish headwear absence. / B explicitly includes a hat; A leaves hat presence unreported.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_9719",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "B explicitly includes a hat; A never establishes headwear or its absence.",
+          "value_a": "hat presence unspecified",
+          "value_b": "hat present"
+        },
+        "b": {
+          "row_id": "train_9719",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Hat is explicit second; first does not establish headwear absence.",
+          "value_a": "hat presence unspecified",
+          "value_b": "hat present"
+        },
+        "c": {
+          "row_id": "train_9719",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "B explicitly includes a hat; A leaves hat presence unreported.",
+          "value_a": "hat status unreported",
+          "value_b": "hat present"
+        }
+      }
+    },
+    {
+      "row_id": "train_9751",
+      "sentence1": "Two toddlers are sitting in a plastic playpen with a blue floor .",
+      "sentence2": "Two boys in tent-like area , with colorful balls on floor .",
+      "condition": "color of object",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: Blue modifies A’s floor; B colors balls, leaving corresponding object color unavailable. / Object lacks stable referent between playpen, floor, tent, and balls.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_9751",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Blue modifies A’s floor; B colors balls, leaving corresponding object color unavailable.",
+          "value_a": "blue floor in playpen",
+          "value_b": "multicolored balls; floor and enclosure color unspecified"
+        },
+        "b": {
+          "row_id": "train_9751",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Object lacks stable referent between playpen, floor, tent, and balls.",
+          "value_a": "playpen with blue floor",
+          "value_b": "tent-like area and multicolored balls"
+        },
+        "c": {
+          "row_id": "train_9751",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Object could select the floors, play enclosures, or colorful balls.",
+          "value_a": "playpen with blue floor",
+          "value_b": "tent-like area with colorful balls; floor color unspecified"
+        }
+      }
+    },
+    {
+      "row_id": "train_9871",
+      "sentence1": "A fireman is climbing firetruck ladder , make is way up to a fire .",
+      "sentence2": "A man wearing a fireman 's coat and hat is looking down an opening .",
+      "condition": "job situation",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_9871",
+          "rating": 4,
+          "status": "uncertain",
+          "rationale": "Both imply firefighting work; ladder ascent and inspecting an opening differ.",
+          "value_a": "firefighter climbing ladder toward fire",
+          "value_b": "apparent firefighter looking down opening"
+        },
+        "b": {
+          "row_id": "train_9871",
+          "rating": 4,
+          "status": "rated",
+          "rationale": "Both suggest firefighters at work, with different immediate tasks.",
+          "value_a": "firefighter climbing ladder toward fire",
+          "value_b": "firefighter inspecting an opening"
+        },
+        "c": {
+          "row_id": "train_9871",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "Both imply firefighting work, but ladder ascent and inspecting an opening differ importantly.",
+          "value_a": "firefighter climbing ladder toward fire",
+          "value_b": "firefighter looking down an opening"
+        }
+      }
+    },
+    {
+      "row_id": "train_10037",
+      "sentence1": "A person in face paint and an orange oversized cowboy hat rides his bike on a trail .",
+      "sentence2": "A woman in black bicycle gear and a white helmet pedals hard uphill on her bike .",
+      "condition": "color of object",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: Generic object does not select corresponding headwear versus other colored clothing. / Object does not specify headwear or clothing, yielding competing comparisons.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_10037",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Generic object does not select corresponding headwear versus other colored clothing.",
+          "value_a": "orange cowboy hat; face paint",
+          "value_b": "white helmet and black bicycle gear"
+        },
+        "b": {
+          "row_id": "train_10037",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Object does not specify headwear or clothing, yielding competing comparisons.",
+          "value_a": "orange cowboy hat",
+          "value_b": "black bicycle gear and white helmet"
+        },
+        "c": {
+          "row_id": "train_10037",
+          "rating": 1,
+          "status": "rated",
+          "rationale": "The specified orange headwear differs from B's white headwear and black clothing.",
+          "value_a": "orange cowboy hat",
+          "value_b": "white helmet and black bicycle gear"
+        }
+      }
+    },
+    {
+      "row_id": "train_10159",
+      "sentence1": "A woman wearing a white sun visor is playing tennis .",
+      "sentence2": "Girl playing tennis while spectator watches from behind .",
+      "condition": "age of player",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_10159",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "Woman establishes adulthood; girl may mean a child or a young woman.",
+          "value_a": "adult woman",
+          "value_b": "girl; child or young-woman usage unresolved"
+        },
+        "b": {
+          "row_id": "train_10159",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "Woman establishes adulthood; girl can mean child or young woman.",
+          "value_a": "adult woman",
+          "value_b": "girl; age interpretation ambiguous"
+        },
+        "c": {
+          "row_id": "train_10159",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Girl can denote a child or adult woman, changing the age comparison.",
+          "value_a": "adult woman",
+          "value_b": "girl, possibly child or adult"
+        }
+      }
+    },
+    {
+      "row_id": "train_10529",
+      "sentence1": "Three people in coats walking along a snow strewn trail on a mountain .",
+      "sentence2": "Men in pants and coats walk up a steep and narrow road .",
+      "condition": "Slope of walking path",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: A mountain trail need not have any particular slope; B explicitly specifies steepness. / Mountain trail need not have any particular slope or gradient. / A mountain trail need not be steep; its slope is unreported.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_10529",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A mountain trail need not have any particular slope; B explicitly specifies steepness.",
+          "value_a": "mountain trail; slope unspecified",
+          "value_b": "steep uphill road"
+        },
+        "b": {
+          "row_id": "train_10529",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Mountain trail need not have any particular slope or gradient.",
+          "value_a": "mountain trail, slope unspecified",
+          "value_b": "steep upward road"
+        },
+        "c": {
+          "row_id": "train_10529",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "A mountain trail need not be steep; its slope is unreported.",
+          "value_a": "mountain trail, slope unspecified",
+          "value_b": "steep uphill road"
+        }
+      }
+    },
+    {
+      "row_id": "train_10786",
+      "sentence1": "A woman in a yellow coat is looking at something with the man next to her .",
+      "sentence2": "A person wearing blue jeans and a striped shirt looks toward a smiling woman .",
+      "condition": "genders of people",
+      "status": "excluded_ambiguous",
+      "rating": null,
+      "rationale": "Final blind review found no supported rating consensus; competing interpretations remain recorded.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_10786",
+          "rating": 3,
+          "status": "uncertain",
+          "rationale": "A is mixed male/female; B’s second person has unspecified gender.",
+          "value_a": "one woman and one man",
+          "value_b": "woman and person of unspecified gender"
+        },
+        "b": {
+          "row_id": "train_10786",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Second person gender is unspecified, preventing complete gender-composition comparison.",
+          "value_a": "woman and man",
+          "value_b": "woman and person of unspecified gender"
+        },
+        "c": {
+          "row_id": "train_10786",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "A specifies male and female; B specifies female plus unknown gender.",
+          "value_a": "one woman and one man",
+          "value_b": "one woman and one person of unspecified gender"
+        }
+      }
+    },
+    {
+      "row_id": "train_10899",
+      "sentence1": "A man and his bike in the air after launching off a ramp .",
+      "sentence2": "A stunt biker leaps into the air beside the setting sun .",
+      "condition": "bicycles",
+      "status": "adjudicated",
+      "rating": 5,
+      "rationale": "Final blind numeric consensus: Both generic stunt-bike descriptions support the same bicycle type. / Both describe bikes used for aerial stunts, consistent with bicycles.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_10899",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Both generic stunt-bike descriptions support the same bicycle type.",
+          "value_a": "stunt bicycle inferred",
+          "value_b": "stunt bicycle inferred"
+        },
+        "b": {
+          "row_id": "train_10899",
+          "rating": 5,
+          "status": "rated",
+          "rationale": "Both describe bikes used for aerial stunts, consistent with bicycles.",
+          "value_a": "stunt bicycle inferred",
+          "value_b": "stunt bicycle inferred"
+        },
+        "c": {
+          "row_id": "train_10899",
+          "rating": null,
+          "status": "uncertain",
+          "rationale": "Bike and stunt biker can denote bicycles or motorcycles, leaving the entity ambiguous.",
+          "value_a": "bike after ramp launch; type unspecified",
+          "value_b": "stunt biker airborne; vehicle type unspecified"
+        }
+      }
+    },
+    {
+      "row_id": "train_10990",
+      "sentence1": "A man in athletic gear is jumping and kneeing another man in the head and chest .",
+      "sentence2": "Two men participate in a match while wearing karate garb .",
+      "condition": "type of sport",
+      "status": "adjudicated",
+      "rating": 3,
+      "rationale": "Final blind numeric consensus: Both are martial combat sports; knee striking leaves subtype unspecified. / Striking combat is implied; karate is specified only in B.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_10990",
+          "rating": 4,
+          "status": "rated",
+          "rationale": "Both are striking martial arts; B specifies karate while A’s style remains unspecified.",
+          "value_a": "striking martial arts, style unspecified",
+          "value_b": "karate"
+        },
+        "b": {
+          "row_id": "train_10990",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "Both are martial combat sports; knee striking leaves subtype unspecified.",
+          "value_a": "knee-striking martial combat",
+          "value_b": "karate match"
+        },
+        "c": {
+          "row_id": "train_10990",
+          "rating": 3,
+          "status": "rated",
+          "rationale": "Striking combat is implied; karate is specified only in B.",
+          "value_a": "striking martial combat; specific discipline unspecified",
+          "value_b": "karate"
+        }
+      }
+    },
+    {
+      "row_id": "train_11335",
+      "sentence1": "Women riding a horse carrying the American flag , both rider and horse dressed patriotically .",
+      "sentence2": "A blond woman in a green and gray uniform balances on a horse as she shows the American flag off to the crowd .",
+      "condition": "woman stance",
+      "status": "invalid",
+      "rating": null,
+      "rationale": "Final blind invalid consensus: Riding and balancing do not determine seated versus standing posture reliably. / Riding and balancing do not establish seated versus standing posture. / Riding and balancing do not specify either woman's seated or standing posture.",
+      "reader_votes": {
+        "a": {
+          "row_id": "train_11335",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Riding and balancing do not determine seated versus standing posture reliably.",
+          "value_a": "riding horse; precise stance unspecified",
+          "value_b": "balancing on horse; precise stance unspecified"
+        },
+        "b": {
+          "row_id": "train_11335",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Riding and balancing do not establish seated versus standing posture.",
+          "value_a": "riding horse; exact posture unspecified",
+          "value_b": "balancing on horse; exact posture unspecified"
+        },
+        "c": {
+          "row_id": "train_11335",
+          "rating": null,
+          "status": "invalid",
+          "rationale": "Riding and balancing do not specify either woman's seated or standing posture.",
+          "value_a": "riding horse; precise stance unspecified",
+          "value_b": "balancing on horse; precise stance unspecified"
+        }
+      }
+    }
+  ]
+}
