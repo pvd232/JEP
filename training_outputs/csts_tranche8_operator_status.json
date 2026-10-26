@@ -1,9 +1,19 @@
 {
-  "updated_at": "2026-10-26T20:40:23.762832+00:00",
-  "worker_status": "running",
+  "updated_at": "2026-10-26T20:41:03.785977+00:00",
+  "worker_status": "waiting",
   "action_id": "subset_v2_deploy_618e7491",
   "source_commit": "618e749199f5ecb936333b3c536cd32fed383514",
   "operator_sha256": "7ab0c10b3b36b7156e2a7d975d2633921b26d7b6697b645dac78550ee8c913f5",
-  "status": "running",
-  "returncode": null
+  "status": "completed",
+  "returncode": 0,
+  "result": {
+    "phase": "native_deploy",
+    "status": "complete",
+    "source_commit": "618e749199f5ecb936333b3c536cd32fed383514",
+    "root": "/home/machina/jep-csts-proposition-lora-20261026",
+    "bundle_sha256": "2af0c3dd96ee00e4dfa17a577c341ef3582332636dc77ad5116c79ad3c65d813",
+    "free_bytes": 5113360384,
+    "physical_datasets": true,
+    "copied_existing_viper_store": false
+  }
 }
