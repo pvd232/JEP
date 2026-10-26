@@ -31,12 +31,12 @@
   "publication_counts": {
     "published": 11
   },
-  "free_bytes": 4857212928,
+  "free_bytes": 4857184256,
   "training": {
     "status": "running",
-    "current_epoch": 6,
-    "actual_updates": 60,
-    "completed_epoch": 6,
+    "current_epoch": 7,
+    "actual_updates": 70,
+    "completed_epoch": 7,
     "selected": {
       "epoch": 3,
       "step": 30,
@@ -82,40 +82,40 @@
         }
       }
     },
-    "epochs_without_improvement": 3,
+    "epochs_without_improvement": 4,
     "latest_epoch": {
-      "epoch": 6,
-      "step": 60,
-      "training_mse_0_1": 0.017809945538826193,
+      "epoch": 7,
+      "step": 70,
+      "training_mse_0_1": 0.015870109854480445,
       "validation": {
         "n": 30,
-        "mse_0_1": 0.053342462252401274,
-        "mse_1_5": 0.8534793960384204,
-        "spearman": 0.4975580892906982,
-        "prediction_mean": 0.5133376051982244,
+        "mse_0_1": 0.05398623605888197,
+        "mse_1_5": 0.8637797769421115,
+        "spearman": 0.48411057336392266,
+        "prediction_mean": 0.5048184921344121,
         "target_mean": 0.5,
-        "prediction_std": 0.23094414051427034,
+        "prediction_std": 0.234665809953903,
         "target_std": 0.22360679774997896,
         "mean_prediction_by_rating": {
           "1.0": {
             "n": 2,
-            "mean": 0.3399876654148102
+            "mean": 0.3145029991865158
           },
           "2.0": {
             "n": 5,
-            "mean": 0.36310950219631194
+            "mean": 0.3487091541290283
           },
           "3.0": {
             "n": 15,
-            "mean": 0.48822770416736605
+            "mean": 0.4863102287054062
           },
           "4.0": {
             "n": 7,
-            "mean": 0.7109491143907819
+            "mean": 0.6981199873345239
           },
           "5.0": {
             "n": 1,
-            "mean": 0.6045459508895874
+            "mean": 0.5905096530914307
           }
         },
         "condition_changes": {
@@ -127,9 +127,9 @@
           "unit": "Within-pair comparisons. These reuse captions and are dependent."
         }
       },
-      "fit_seconds": 82.68023605900817,
-      "validation_seconds": 1.648221695999382,
-      "observed_epoch_seconds": 84.33369029598543
+      "fit_seconds": 81.94023684898275,
+      "validation_seconds": 1.6470044899906497,
+      "observed_epoch_seconds": 83.59195904599619
     }
   },
   "result": {},
@@ -719,7 +719,7 @@
       }
     }
   },
-  "observed_unix": 1793048875.333927,
+  "observed_unix": 1793048958.615309,
   "full_generation_resumed": false,
   "held_out_test_released": false
 }
