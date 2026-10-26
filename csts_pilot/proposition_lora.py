@@ -139,7 +139,7 @@ def fit_proposition_lora(context: StageContext[PropositionLoraConfig]) -> None:
     trace = load_json(context.outputs["trace"])
     if trace["initial_trainable_sha256"] != initial_digest:
         raise ValueError("The training trace starts from different adapter weights.")
-    if trace["config"] != fit.model_dump():
+    if trace["config"] != fit.model_dump(mode="json"):
         raise ValueError("The training trace uses a different fit configuration.")
     audit["status"] = "complete"
     audit["selected_model_sha256"] = trace["selected"]["sha256"]
