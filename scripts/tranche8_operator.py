@@ -1,326 +1,384 @@
-"""Run the single permitted fresh, label-blind proposition audit on the Mac."""
+"""Resume the frozen, audited proposition capture; retain raw native checkpoints.
+
+This module is invoked only by the pinned tranche-8 operator.  It deliberately
+does not launch training.  Source, gate and split identities are checked before
+any paid generation, and failed CLI attempts remain available for inspection.
+"""
 
 import argparse
 import base64
+import fcntl
 import hashlib
 import importlib.util
-import inspect
 import json
-import random
+import os
 import re
 import shlex
 import shutil
 import subprocess
 import sys
+import tarfile
 import time
-import traceback
-import unicodedata
 from pathlib import Path
 from typing import Any
 
 REPOSITORY = "pvd232/JEP"
-BRANCH = "experiment/csts-proposition-lora-20261026"
 WORK_ROOT = Path("/tmp/jep-tranche8-worker-20261026")
 GENERATION_ROOT = Path("/tmp/jep-proposition-input-20261026")
 GPU_ROOT = "/home/machina/jep-csts-answer-input-20261026"
 GPU_PYTHON = "/home/machina/jep-format-env/bin/python"
-VALIDATION_SHA256 = "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273"
 GCLOUD = "/Users/machina/google-cloud-sdk/bin/gcloud"
-GCLOUD_FLAGS = [
-    "--account=pvd2112@columbia.edu",
-    "--project=mantra-477901",
-    "--zone=asia-northeast3-a",
-    "--tunnel-through-iap",
-]
+GCLOUD_FLAGS = ["--account=pvd2112@columbia.edu", "--project=mantra-477901", "--zone=asia-northeast3-a", "--tunnel-through-iap"]
+EXPECTED = {
+    "training": {"items": 13744, "inputs": "0a99ac4ec215eda3131b094292cfee380544b32e885770a49f4929803eeca68f", "groups": "0b5c2b42199d482f78cb089162761c706c1f05a075ab310dcd81f12776108edb", "representatives": "354f775ddb7d82c2be8c4effc167a1503c7def11945fea031c0d76e54392568a", "source": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01"},
+    "validation": {"items": 3590, "inputs": "1129660ff464d9af2154cce1af5677661dfee5c6797bad06abe5daf49e761dae", "groups": "0ee536b63e8e6c359355b81d20a65b1cea1f713668f18223c81e7832b970f708", "representatives": "4f5fdb99d20cc98f7f2b0efcf37e4d8ffcb1a29596ba29554d745f2f805df1ba", "source": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273"},
+}
 
 
-class OperatorFailure(RuntimeError):
-    """A safe operational message that never includes subprocess output."""
+class ContinuationFailure(RuntimeError):
+    """A safe error message with no process output or credential content."""
 
 
-def digest(data: bytes) -> str:
-    """Hash immutable source and capture inputs for the phase receipt."""
+def sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
-def write_json(path: Path, value: Any) -> None:
-    """Persist a task-private JSON record with intentional Unicode text."""
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n")
+def save(path: Path, value: Any) -> None:
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n")
+    temporary.replace(path)
 
 
-def progress(event: str, **counts: Any) -> None:
-    """Publish only the phase name, bounded counts and operational hashes."""
-    print(
-        "OPERATOR_PROGRESS "
-        + json.dumps({"phase": "fresh_audit", "event": event, **counts}, allow_nan=False),
-        flush=True,
-    )
+def progress(event: str, **values: Any) -> None:
+    print("OPERATOR_PROGRESS " + json.dumps({"phase": "full_capture", "event": event, **values}, allow_nan=False), flush=True)
 
 
-def select_fresh(
-    rows: list[dict[str, Any]], initial_row_ids: list[str]
-) -> dict[str, Any]:
-    """Choose 30 new source groups and expose no labels or companion fields."""
-    row_lookup = {row["row_id"]: row for row in rows}
-    if len(row_lookup) != len(rows) or len(initial_row_ids) != 60 or len(set(initial_row_ids)) != 60:
-        raise ValueError("Initial audit comparison identities differ.")
-    if not set(initial_row_ids) <= set(row_lookup):
-        raise ValueError("Initial audit rows are absent from validation.")
-    excluded = {row_lookup[row_id]["group_id"] for row_id in initial_row_ids}
-    if len(excluded) != 60:
-        raise ValueError("The initial audit does not contain 60 distinct source groups.")
-    grouped = {}
-    for row in rows:
-        grouped.setdefault(row["group_id"], []).append(row)
-    eligible = sorted(set(grouped) - excluded)
-    if len(eligible) < 30:
-        raise ValueError("Insufficient fresh source groups.")
-    groups = random.Random(61029).sample(eligible, 30)
-    left, right, batch_groups, selected_rows = [], [], {}, []
-
-    def identity(passage: str, condition: str) -> str:
-        def canonical(text: str) -> str:
-            return " ".join(unicodedata.normalize("NFKC", text).casefold().split())
-        value = json.dumps([canonical(passage), canonical(condition)])
-        return hashlib.sha256(value.encode()).hexdigest()
-
-    for index, group in enumerate(groups):
-        candidates = sorted(grouped[group], key=lambda row: row["row_id"])
-        row = random.Random(61030 + index).choice(candidates)
-        selected_rows.append(row["row_id"])
-        for side, target in (("sentence1", left), ("sentence2", right)):
-            key = identity(row[side], row["condition"])
-            if key in batch_groups:
-                raise ValueError("Fresh selection does not contain 60 unique passage-conditions.")
-            target.append({"id": key, "passage": row[side], "condition": row["condition"]})
-            batch_groups[key] = group
-    if len(left) != 30 or len(right) != 30 or len(batch_groups) != 60 or set(groups) & excluded:
-        raise ValueError("Fresh source-group separation or sample size differs.")
-    return {
-        "left": left,
-        "right": right,
-        "groups": batch_groups,
-        "private_manifest": {
-            "seed": 61029,
-            "pair_seed_base": 61030,
-            "groups": groups,
-            "excluded_groups": sorted(excluded),
-            "row_ids": selected_rows,
-            "n_pairs": 30,
-            "unique_passage_conditions": 60,
-        },
-    }
-
-
-def checked_run(command: list[str], directory: Path, label: str, timeout: int) -> bytes:
-    """Retain private subprocess logs while publishing only a safe failure code."""
+def run(command: list[str], directory: Path, label: str, timeout: int) -> bytes:
     result = subprocess.run(command, capture_output=True, timeout=timeout, check=False)
-    (directory / f"{label}.stdout").write_bytes(result.stdout)
-    (directory / f"{label}.stderr").write_bytes(result.stderr)
+    (directory / (label + ".stdout")).write_bytes(result.stdout)
+    (directory / (label + ".stderr")).write_bytes(result.stderr)
     if result.returncode:
-        raise OperatorFailure(f"{label} exited with status {result.returncode}; private logs retained.")
+        raise ContinuationFailure(f"{label} exited with status {result.returncode}; private logs retained.")
     return result.stdout
 
 
-def fetch_capture(source_commit: str, directory: Path) -> tuple[Path, str]:
-    """Fetch the capture module from the exact same reviewed GitHub commit."""
-    gh = shutil.which("gh")
+def fetch(path: str, commit: str, directory: Path, destination: Path) -> bytes:
+    gh = shutil.which("gh") or next((str(p) for p in (Path("/opt/homebrew/bin/gh"), Path("/usr/local/bin/gh")) if p.is_file()), None)
     if gh is None:
-        gh = next((str(path) for path in (Path("/opt/homebrew/bin/gh"), Path("/usr/local/bin/gh")) if path.is_file()), None)
-    if gh is None:
-        raise OperatorFailure("The existing gh executable is unavailable.")
-    path = "csts_pilot/proposition_capture.py"
-    payload = json.loads(checked_run([gh, "api", f"repos/{REPOSITORY}/contents/{path}?ref={source_commit}"], directory, "fetch_capture", 45))
+        raise ContinuationFailure("The existing gh executable is unavailable.")
+    label = "fetch_" + destination.name.replace(".", "_")
+    payload = json.loads(run([gh, "api", f"repos/{REPOSITORY}/contents/{path}?ref={commit}"], directory, label, 60))
     if payload.get("type") != "file" or payload.get("encoding") != "base64":
-        raise OperatorFailure("The pinned capture source response is not a file.")
-    source = base64.b64decode("".join(payload["content"].split()), validate=True)
-    git_blob = hashlib.sha1(b"blob " + str(len(source)).encode() + b"\0" + source).hexdigest()
-    if git_blob != payload.get("sha"):
-        raise OperatorFailure("The pinned capture source Git blob differs.")
-    destination = directory / "proposition_capture.py"
-    if destination.exists() and destination.read_bytes() != source:
-        raise OperatorFailure("Preserve the pre-existing task-private capture source.")
-    destination.write_bytes(source)
-    return destination, digest(source)
+        raise ContinuationFailure("Pinned GitHub source is not a regular file.")
+    data = base64.b64decode("".join(payload["content"].split()), validate=True)
+    if hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest() != payload.get("sha"):
+        raise ContinuationFailure("Pinned GitHub blob identity differs.")
+    if destination.exists() and destination.read_bytes() != data:
+        raise ContinuationFailure("Preserve the existing pinned source; its bytes differ.")
+    destination.write_bytes(data)
+    return data
 
 
-def prepare_sample(directory: Path) -> dict[str, Any]:
-    """Save the new group sample natively and transfer only blinded fields."""
-    script = (
-        "import json,hashlib,pathlib,random,unicodedata\nfrom typing import Any\n"
-        + inspect.getsource(select_fresh)
-        + f"\nroot=pathlib.Path({GPU_ROOT!r})\n"
-        + f"expected={VALIDATION_SHA256!r}\n"
-        + "source=root/'csts_data/dev.json'\n"
-        + "if hashlib.sha256(source.read_bytes()).hexdigest()!=expected: raise RuntimeError('Validation source identity changed.')\n"
-        + "initial_path=root/'answer_input_results/proposition_audit/sample_manifest.json'\n"
-        + "initial=json.loads(initial_path.read_text())\n"
-        + "if initial.get('seed')!=61027: raise RuntimeError('Initial sample seed differs.')\n"
-        + "selected=select_fresh(json.loads(source.read_text()),initial['row_ids'])\n"
-        + "manifest=selected['private_manifest']\n"
-        + "manifest['source_validation_sha256']=expected\n"
-        + "manifest['initial_manifest_sha256']=hashlib.sha256(initial_path.read_bytes()).hexdigest()\n"
-        + "native=root/'answer_input_results/proposition_audit/fresh60'\n"
-        + "native.mkdir(parents=True,exist_ok=True)\n"
-        + "files={'blinded_inputs.json':selected['left']+selected['right'],'left_inputs.json':selected['left'],'right_inputs.json':selected['right'],'group_ids.json':selected['groups'],'sample_manifest.json':manifest}\n"
-        + "for name,value in files.items():\n"
-        + " path=native/name\n"
-        + " data=(json.dumps(value,ensure_ascii=False,indent=2,allow_nan=False)+'\\n').encode()\n"
-        + " if path.exists() and path.read_bytes()!=data: raise RuntimeError('Preserve the existing fresh sample; its identities differ.')\n"
-        + " if not path.exists(): path.write_bytes(data)\n"
-        + "print(json.dumps(selected,ensure_ascii=False,allow_nan=False))\n"
-    )
-    command = [
-        GCLOUD, "compute", "ssh", "jep-csts-format-20261021", *GCLOUD_FLAGS,
-        "--command=sudo -n -u machina " + GPU_PYTHON + " -c " + shlex.quote(script),
-    ]
-    selected = json.loads(checked_run(command, directory, "prepare_sample", 60))
-    if set(selected) != {"left", "right", "groups", "private_manifest"}:
-        raise OperatorFailure("Unexpected fields in the fresh blinded sample.")
-    if len(selected["left"]) != 30 or len(selected["right"]) != 30:
-        raise OperatorFailure("Fresh sample does not have two 30-item sides.")
-    for side in ("left", "right"):
-        if any(set(row) != {"id", "passage", "condition"} for row in selected[side]):
-            raise OperatorFailure("Fresh sample contains forbidden source fields.")
-        write_json(directory / f"{side}_inputs.json", selected[side])
-    write_json(directory / "blinded_inputs.json", selected["left"] + selected["right"])
-    write_json(directory / "group_ids.json", selected["groups"])
-    write_json(directory / "private_sample_manifest.json", selected["private_manifest"])
-    return selected
-
-
-def fresh_audit(source_commit: str) -> dict[str, Any]:
-    """Collect only the revised 60-item audit; never launch full-corpus work."""
-    directory = WORK_ROOT / "fresh_audit" / source_commit
-    directory.mkdir(parents=True, exist_ok=True)
-    progress("fetching_reviewed_source", source_commit=source_commit)
-    capture, source_hash = fetch_capture(source_commit, directory)
-    selected = prepare_sample(directory)
-    inputs = selected["left"] + selected["right"]
-    progress("sample_prepared", source_groups=30, excluded_source_groups=60, items=60)
-    output = GENERATION_ROOT / "fresh60"
-    command = [
-        sys.executable, str(capture),
-        "--inputs", str(directory / "blinded_inputs.json"),
-        "--groups", str(directory / "group_ids.json"),
-        "--output", str(output), "--split", "validation",
-        "--batch-size", "64", "--concurrency", "2", "--timeout", "1200",
-    ]
-    if output.exists():
-        manifest_path = output / "manifest.json"
-        if not manifest_path.is_file():
-            raise OperatorFailure("An existing fresh capture has no manifest; preserve it for review.")
-        if json.loads(manifest_path.read_text()).get("status") == "failed":
-            raise OperatorFailure("The existing fresh capture failed; preserve its logs for review.")
-        command.append("--resume")
-    started = time.monotonic()
-    with (directory / "capture.stdout").open("wb") as stdout, (directory / "capture.stderr").open("wb") as stderr:
-        process = subprocess.Popen(command, stdout=stdout, stderr=stderr, cwd=directory)
-        while process.poll() is None:
-            if time.monotonic() - started > 1300:
-                process.terminate()
-                try:
-                    process.wait(timeout=30)
-                except subprocess.TimeoutExpired:
-                    process.kill()
-                    process.wait()
-                raise OperatorFailure("The fresh capture exceeded its declared wall allowance.")
-            time.sleep(15)
-            complete = 0
-            for receipt_path in output.glob("batch_*/receipt.json"):
-                try:
-                    receipt = json.loads(receipt_path.read_text())
-                    if receipt.get("status") == "complete":
-                        complete += receipt.get("items", 0)
-                except (OSError, ValueError):
-                    continue
-            progress("generating", completed_items=complete, total_items=60, elapsed_seconds=round(time.monotonic() - started, 1))
-    if process.returncode:
-        raise OperatorFailure(f"The fresh capture exited with status {process.returncode}; private logs retained.")
-    manifest = json.loads((output / "manifest.json").read_text())
-    if manifest.get("status") != "complete" or manifest.get("items") != 60:
-        raise OperatorFailure("The fresh capture is not complete for all 60 inputs.")
-    spec = importlib.util.spec_from_file_location("reviewed_proposition_capture", capture)
+def load_capture(path: Path) -> Any:
+    spec = importlib.util.spec_from_file_location("frozen_proposition_capture", path)
     if spec is None or spec.loader is None:
-        raise OperatorFailure("The pinned capture module could not be loaded.")
+        raise ContinuationFailure("Cannot load the frozen capture module.")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
-    records = module.checked_records(inputs, {"records": json.loads((output / "records.json").read_text())})
-    if module.MODEL != "gpt-6.1-sol" or module.EFFORT != "high":
-        raise OperatorFailure("The reviewed generation model settings changed.")
-    public_manifest = {
-        "seed": 61029, "pair_seed_base": 61030,
-        "source_groups": 30, "excluded_source_groups": 60,
-        "unique_passage_conditions": 60,
-        "source_validation_sha256": VALIDATION_SHA256,
-        "input_sha256": digest((directory / "blinded_inputs.json").read_bytes()),
-        "capture_source_sha256": source_hash,
-        "capture_generation_source_sha256": sorted({receipt["source_sha256"] for receipt in manifest["receipts"]}),
-        "prompt_template_sha256": digest(module.PROMPT.encode()),
-        "schema_content_sha256": digest(json.dumps(module.SCHEMA, ensure_ascii=False).encode()),
-        "model_alias": module.MODEL, "reasoning_effort": module.EFFORT,
-        "no_model_tools": True, "semantic_fidelity_independently_verified": False,
-        "source_commit": source_commit,
-        "branch": BRANCH,
-    }
-    result = {
-        "phase": "fresh_audit", "status": "complete",
-        "blinded_fresh_sample": {
-            "left": selected["left"], "right": selected["right"],
-            "records": records, "manifest": public_manifest,
-        },
-    }
-    write_json(directory / "operator_result.json", result)
-    progress("captured", items=60, source_groups=30)
+    return module
+
+
+def verify_gate(gate: dict[str, Any], capture: Any, source: bytes) -> dict[str, str]:
+    bindings = {"generation_template_sha256": sha(capture.PROMPT.encode()), "schema_sha256": sha(json.dumps(capture.SCHEMA, ensure_ascii=False).encode()), "model_alias": capture.MODEL, "reasoning_effort": capture.EFFORT}
+    if gate.get("passed") is not True or gate.get("generation_frozen") is not True:
+        raise ContinuationFailure("The frozen proposition fidelity gate has not passed.")
+    if any(gate.get(key) != value for key, value in bindings.items()):
+        raise ContinuationFailure("Capture settings differ from the passed fidelity gate.")
+    if gate.get("capture_source_sha256") != sha(source):
+        raise ContinuationFailure("Capture source differs from the passed fidelity gate.")
+    if gate.get("severe_unsupported") != 0 or gate.get("fully_faithful", 0) < gate.get("required_faithful", 10**9):
+        raise ContinuationFailure("The declared fidelity counts do not satisfy their gate.")
+    return bindings
+
+
+def verify_inventory(capture: Any) -> dict[str, list[dict[str, Any]]]:
+    root = GENERATION_ROOT / "full_inventory"
+    inventory = json.loads((root / "inventory_manifest.json").read_text())
+    result = {}
+    seen_ids: set[str] = set()
+    seen_groups: set[str] = set()
+    for split, expected in EXPECTED.items():
+        for suffix, key in (("inputs", "inputs"), ("groups", "groups"), ("representatives_audit", "representatives")):
+            if sha((root / f"{split}_{suffix}.json").read_bytes()) != expected[key]:
+                raise ContinuationFailure(f"Frozen {split} {suffix} inventory differs.")
+        if inventory[split].get("original_sha256") != expected["source"]:
+            raise ContinuationFailure(f"Frozen {split} source identity differs.")
+        items = json.loads((root / f"{split}_inputs.json").read_text())
+        groups = json.loads((root / f"{split}_groups.json").read_text())
+        capture.validate_inputs(items)
+        ids = {row["id"] for row in items}
+        if len(items) != expected["items"] or set(groups) != ids or ids & seen_ids or set(groups.values()) & seen_groups:
+            raise ContinuationFailure("Split sizes, identities or source-group separation differ.")
+        seen_ids.update(ids)
+        seen_groups.update(groups.values())
+        result[split] = items
     return result
 
 
-def inspect_failure(source_commit: str) -> dict[str, Any]:
-    """Return bounded safe exception summaries from this task's failed phase."""
-    directory = WORK_ROOT / "fresh_audit" / source_commit
-    result_path = directory / "operator_result.json"
-    result = json.loads(result_path.read_text()) if result_path.exists() else None
-    summaries = {}
-    for name in ("operator_failure.log", "prepare_sample.stderr", "fetch_capture.stderr", "capture.stderr"):
-        path = directory / name
-        if not path.exists():
+def closed_batches(root: Path) -> dict[str, Path]:
+    result = {}
+    for split in EXPECTED:
+        for directory in sorted((root / split).glob("batch_*")):
+            receipt = directory / "receipt.json"
+            try:
+                data = json.loads(receipt.read_text())
+                if data.get("status") in {"complete", "failed"}:
+                    result[f"{split}/{directory.name}"] = directory
+            except (OSError, ValueError):
+                continue
+    return result
+
+
+def counts(root: Path) -> dict[str, int]:
+    complete: dict[str, int] = {}
+    failed = 0
+    for relative, directory in closed_batches(root).items():
+        receipt = json.loads((directory / "receipt.json").read_text())
+        if receipt["status"] == "complete":
+            complete[relative.split("-attempt_")[0]] = receipt["items"]
+        else:
+            failed += 1
+    return {"completed_items": sum(complete.values()), "total_items": 17334, "completed_batches": len(complete), "failed_attempts": failed}
+
+
+def retryable_output_failures(root: Path, capture: Any) -> bool:
+    """Retry response defects only; tools, policy and CLI failures stop work."""
+    failed = 0
+    for directory in closed_batches(root).values():
+        receipt = json.loads((directory / "receipt.json").read_text())
+        if receipt["status"] != "failed":
             continue
-        lines = path.read_text(errors="replace").splitlines()
-        selected = [line[:1000] for line in lines if re.match(
-            r"^(?:[A-Za-z_.]*(?:Error|Failure|Exception):|ERROR:|  File )", line
-        )]
-        summaries[name.replace(".", "_")] = selected[-12:]
-    return {"phase": "inspect_failure", "status": "complete", "diagnostic": {
-        "inspected_source_commit": source_commit, "safe_result": result,
-        "exception_summaries": summaries,
-        "present_files": sorted(path.name for path in directory.iterdir()) if directory.exists() else [],
-    }}
+        failed += 1
+        if receipt.get("returncode") != 0:
+            return False
+        try:
+            capture.checked_events(directory / "events.jsonl")
+        except (OSError, ValueError, TypeError, KeyError):
+            return False
+        try:
+            response = json.loads((directory / "response.json").read_text())
+            capture.checked_records(json.loads((directory / "inputs.json").read_text()), response)
+        except (ValueError, TypeError, KeyError):
+            continue
+        except OSError:
+            return False
+        # An otherwise valid response failed for an unexpected local reason.
+        return False
+    return failed > 0
+
+
+def checkpoint(root: Path, directory: Path, state: dict[str, Any], final: bool = False) -> dict[str, Any]:
+    """Copy closed raw attempts to owner storage; do not delete either copy."""
+    closed = closed_batches(root)
+    added = sorted(set(closed) - set(state.get("archived_batches", [])))
+    if not added and not final:
+        return state
+    index = len(state.get("checkpoints", [])) + 1
+    name = f"capture-checkpoint-{index:04d}-{time.time_ns()}.tar.gz"
+    archive = directory / name
+    with tarfile.open(archive, "w:gz") as stream:
+        for relative in added:
+            stream.add(closed[relative], arcname=f"capture/{relative}", recursive=True)
+        for path in (directory / "proposition_capture.py", directory / "audit_gate.json", root / "launch.json"):
+            stream.add(path, arcname=f"source/{path.name}")
+        if final:
+            for split in EXPECTED:
+                for basename in ("manifest.json", "records.json"):
+                    path = root / split / basename
+                    if path.exists():
+                        stream.add(path, arcname=f"capture/{split}/{basename}")
+            for path in root.glob("propositions_tranche8*.json"):
+                stream.add(path, arcname=f"capture/{path.name}")
+            stream.add(GENERATION_ROOT / "full_inventory", arcname="inventory", recursive=True)
+    archive_hash = sha(archive.read_bytes())
+    name = f"capture-checkpoint-{index:04d}-{archive_hash[:16]}.tar.gz"
+    archive = archive.rename(directory / name)
+    staging = f"/tmp/jep-tranche8-{archive_hash}.tar.gz"
+    run([GCLOUD, "compute", "scp", str(archive), f"jep-csts-format-20261021:{staging}", *GCLOUD_FLAGS], directory, f"checkpoint_{index:04d}_scp", 180)
+    target = f"{GPU_ROOT}/answer_input_results/proposition_capture_full/{root.name}"
+    script = f"import hashlib,pathlib,shutil\ns=pathlib.Path({staging!r})\nb=s.read_bytes()\nassert hashlib.sha256(b).hexdigest()=={archive_hash!r}\nd=pathlib.Path({target!r});d.mkdir(parents=True,exist_ok=True)\np=d/{name!r}\nassert not p.exists() or hashlib.sha256(p.read_bytes()).hexdigest()=={archive_hash!r}\nif not p.exists(): shutil.copyfile(s,p)\nprint('checkpoint_verified')\n"
+    # The SSH account owns staging; permit only owner read for the verified copy.
+    command = "chmod 644 " + shlex.quote(staging) + " && sudo -n -u machina " + GPU_PYTHON + " -c " + shlex.quote(script)
+    run([GCLOUD, "compute", "ssh", "jep-csts-format-20261021", *GCLOUD_FLAGS, "--command=" + command], directory, f"checkpoint_{index:04d}_install", 60)
+    receipt = {"name": name, "sha256": archive_hash, "bytes": archive.stat().st_size, "native_path": f"{target}/{name}", "closed_batch_attempts": len(added), "final": final, "cloud_publication": "pending_native_queue"}
+    state = {"archived_batches": sorted(set(state.get("archived_batches", [])) | set(added)), "checkpoints": [*state.get("checkpoints", []), receipt]}
+    save(root / "checkpoints.json", state)
+    progress("native_checkpoint_saved", counts=counts(root), checkpoint=receipt)
+    return state
+
+
+def full_capture(source_commit: str, concurrency: int = 4) -> dict[str, Any]:
+    directory = WORK_ROOT / "full_capture" / source_commit
+    directory.mkdir(parents=True, exist_ok=True)
+    source = fetch("csts_pilot/proposition_capture.py", source_commit, directory, directory / "proposition_capture.py")
+    gate_bytes = fetch("csts_data/propositions_tranche8_audit_gate.json", source_commit, directory, directory / "audit_gate.json")
+    capture = load_capture(directory / "proposition_capture.py")
+    bindings = verify_gate(json.loads(gate_bytes), capture, source)
+    inventory = verify_inventory(capture)
+    # Same frozen generation settings share one output across controller commits.
+    root = GENERATION_ROOT / ("full_v2_" + bindings["generation_template_sha256"][:16])
+    root.mkdir(parents=True, exist_ok=True)
+    launch = {"generation_source_sha256": sha(source), "audit_gate_sha256": sha(gate_bytes), **bindings, "inventory": EXPECTED, "batch_size": 64, "maximum_one_item_per_source_group_per_request": True}
+    if (root / "launch.json").exists() and json.loads((root / "launch.json").read_text()) != launch:
+        raise ContinuationFailure("Existing full capture launch bindings differ.")
+    save(root / "launch.json", launch)
+    state = json.loads((root / "checkpoints.json").read_text()) if (root / "checkpoints.json").exists() else {}
+    started = time.monotonic()
+    last_checkpoint = started
+    last_checkpoint_items = counts(root)["completed_items"]
+    progress("frozen_gate_and_inventory_verified", counts=counts(root), manifest=launch, source_commit=source_commit)
+    for split, items in inventory.items():
+        output = root / split
+        for attempt in range(1, 4):
+            command = [sys.executable, "-I", str(directory / "proposition_capture.py"), "--inputs", str(GENERATION_ROOT / "full_inventory" / f"{split}_inputs.json"), "--groups", str(GENERATION_ROOT / "full_inventory" / f"{split}_groups.json"), "--output", str(output), "--split", split, "--batch-size", "64", "--concurrency", str(concurrency), "--timeout", "1200"]
+            if output.exists():
+                command.append("--resume")
+            log_id = f"{split}-{time.time_ns()}-attempt{attempt}"
+            with (directory / (log_id + ".stdout")).open("wb") as stdout, (directory / (log_id + ".stderr")).open("wb") as stderr:
+                child = subprocess.Popen(command, cwd=directory, stdin=subprocess.DEVNULL, stdout=stdout, stderr=stderr)
+                while child.poll() is None:
+                    time.sleep(15)
+                    current = counts(root)
+                    progress("generating", split=split, attempt=attempt, counts=current, elapsed_seconds=round(time.monotonic() - started))
+                    if time.monotonic() - last_checkpoint >= 600 or current["completed_items"] - last_checkpoint_items >= 500:
+                        try:
+                            state = checkpoint(root, directory, state)
+                            last_checkpoint = time.monotonic()
+                            last_checkpoint_items = current["completed_items"]
+                        except (OSError, ValueError, subprocess.SubprocessError, ContinuationFailure):
+                            progress("native_checkpoint_retry_pending", split=split, counts=current)
+                            last_checkpoint = time.monotonic()
+                returncode = child.returncode
+            if returncode == 0:
+                manifest = json.loads((output / "manifest.json").read_text())
+                records = json.loads((output / "records.json").read_text())
+                capture.checked_records(items, {"records": records})
+                if manifest.get("status") != "complete" or manifest.get("records_sha256") != sha((output / "records.json").read_bytes()):
+                    raise ContinuationFailure("Completed partition aggregation differs.")
+                break
+            progress("capture_invocation_failed_preserved", split=split, attempt=attempt, counts=counts(root), retry=attempt < 3)
+            state = checkpoint(root, directory, state)
+            if not retryable_output_failures(root, capture):
+                raise ContinuationFailure("Capture stopped on a CLI, event, tool or unexpected local failure; no policy or authentication retry attempted.")
+        else:
+            raise ContinuationFailure(f"{split} exhausted three bounded capture attempts; all raw artifacts preserved.")
+    records = []
+    partitions = {}
+    for split in EXPECTED:
+        records.extend(json.loads((root / split / "records.json").read_text()))
+        partitions[split] = json.loads((root / split / "manifest.json").read_text())
+    capture.checked_records(inventory["training"] + inventory["validation"], {"records": records})
+    save(root / "propositions_tranche8.json", records)
+    manifest = {**launch, "source_commit": source_commit, "records_sha256": sha((root / "propositions_tranche8.json").read_bytes()), "items": len(records), "partitions": partitions, "semantic_fidelity_independently_verified": False, "audit_gate_passed_for_frozen_generation": True}
+    save(root / "propositions_tranche8_manifest.json", manifest)
+    state = checkpoint(root, directory, state, final=True)
+    return {"phase": "full_capture", "status": "complete", "counts": counts(root), "manifest": {**bindings, "items": len(records), "records_sha256": manifest["records_sha256"], "source_commit": source_commit, "capture_source_sha256": sha(source), "audit_gate_sha256": sha(gate_bytes)}, "output_path": str(root), "checkpoints": state.get("checkpoints", []), "next_phase": "native_deploy_checks"}
+
+
+def capture_status(source_commit: str) -> dict[str, Any]:
+    directory = WORK_ROOT / "full_capture" / source_commit
+    path = directory / "supervisor_receipt.json"
+    if not path.exists():
+        return {"phase": "full_capture", "status": "not_started"}
+    receipt = json.loads(path.read_text())
+    root = Path(receipt["output_path"])
+    result = {"phase": "full_capture", "status": receipt["status"], "source_commit": source_commit, "counts": counts(root), "output_path": str(root), "controller_sha256": receipt["controller_sha256"]}
+    if (directory / "result.json").exists():
+        result.update(json.loads((directory / "result.json").read_text()))
+    elif receipt["status"] in {"launching", "running"}:
+        with (root / "supervisor.lock").open("a+") as lock:
+            try:
+                fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except BlockingIOError:
+                result["status"] = "running"
+            else:
+                # A launcher may be between Popen and acquiring its lock.
+                if time.time() - receipt["started_unix"] > 30:
+                    result["status"] = "interrupted"
+    return result
+
+
+def launch_capture(source_commit: str, concurrency: int) -> dict[str, Any]:
+    """Bind and detach one durable supervisor so the worker remains available."""
+    directory = WORK_ROOT / "full_capture" / source_commit
+    directory.mkdir(parents=True, exist_ok=True)
+    path = directory / "supervisor_receipt.json"
+    if path.exists():
+        return capture_status(source_commit)
+    source = fetch("csts_pilot/proposition_capture.py", source_commit, directory, directory / "proposition_capture.py")
+    gate = fetch("csts_data/propositions_tranche8_audit_gate.json", source_commit, directory, directory / "audit_gate.json")
+    capture = load_capture(directory / "proposition_capture.py")
+    bindings = verify_gate(json.loads(gate), capture, source)
+    verify_inventory(capture)
+    root = GENERATION_ROOT / ("full_v2_" + bindings["generation_template_sha256"][:16])
+    root.mkdir(parents=True, exist_ok=True)
+    controller = directory / "full_capture_controller.py"
+    controller_bytes = Path(__file__).read_bytes()
+    if controller.exists() and controller.read_bytes() != controller_bytes:
+        raise ContinuationFailure("The existing detached controller source differs.")
+    controller.write_bytes(controller_bytes)
+    receipt = {"status": "launching", "source_commit": source_commit, "output_path": str(root), "controller_sha256": sha(controller_bytes), "started_unix": time.time(), "concurrency": concurrency}
+    save(path, receipt)
+    command = [sys.executable, "-I", str(controller), "--phase", "_full_capture_run", "--source-commit", source_commit, "--concurrency", str(concurrency)]
+    with (directory / "supervisor.stdout").open("ab") as stdout, (directory / "supervisor.stderr").open("ab") as stderr:
+        child = subprocess.Popen(command, cwd=directory, stdin=subprocess.DEVNULL, stdout=stdout, stderr=stderr, start_new_session=True)
+    receipt["pid"] = child.pid
+    # The child owns receipt updates after launching; avoid overwriting running.
+    if json.loads(path.read_text()).get("status") == "launching":
+        save(path, receipt)
+    return {**capture_status(source_commit), "status": "running", "pid": child.pid, "manifest": bindings, "next_phase": "full_capture_status"}
+
+
+def supervise_capture(source_commit: str, concurrency: int) -> dict[str, Any]:
+    directory = WORK_ROOT / "full_capture" / source_commit
+    receipt_path = directory / "supervisor_receipt.json"
+    receipt = json.loads(receipt_path.read_text())
+    root = Path(receipt["output_path"])
+    with (root / "supervisor.lock").open("a+") as lock:
+        try:
+            fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            raise ContinuationFailure("Another full capture supervisor already owns this frozen bank.") from None
+        receipt.update(status="running", pid=os.getpid())
+        save(receipt_path, receipt)
+        try:
+            result = full_capture(source_commit, concurrency)
+        except Exception as error:
+            result = {"phase": "full_capture", "status": "failed", "counts": counts(root), "error": str(error) if isinstance(error, ContinuationFailure) else "Capture supervisor failed; private logs and raw capture remain preserved."}
+        save(directory / "result.json", result)
+        receipt.update(status=result["status"], finished_unix=time.time())
+        save(receipt_path, receipt)
+        return result
 
 
 def main() -> None:
-    """Execute one allowlisted phase from a pinned repository source commit."""
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", choices=("fresh_audit", "inspect_failure"), required=True)
+    parser.add_argument("--phase", choices=("full_capture", "full_capture_status", "_full_capture_run"), required=True)
     parser.add_argument("--source-commit", required=True)
-    parser.add_argument("--inspect-source-commit")
+    parser.add_argument("--concurrency", type=int, choices=(1, 2, 3, 4), default=4)
     args = parser.parse_args()
     if re.fullmatch(r"[0-9a-f]{40}", args.source_commit) is None:
-        raise OperatorFailure("A full immutable source commit is required.")
+        parser.error("source-commit must be a complete Git commit")
     try:
-        if args.phase == "inspect_failure":
-            if not args.inspect_source_commit or re.fullmatch(r"[0-9a-f]{40}", args.inspect_source_commit) is None:
-                raise OperatorFailure("A failed task source commit is required for inspection.")
-            result = inspect_failure(args.inspect_source_commit)
+        if args.phase == "full_capture":
+            result = launch_capture(args.source_commit, args.concurrency)
+        elif args.phase == "full_capture_status":
+            result = capture_status(args.source_commit)
         else:
-            result = fresh_audit(args.source_commit)
-    except BaseException as exc:
-        directory = WORK_ROOT / "fresh_audit" / args.source_commit
-        directory.mkdir(parents=True, exist_ok=True)
-        (directory / "operator_failure.log").write_text(traceback.format_exc())
-        message = str(exc) if isinstance(exc, OperatorFailure) else "Fresh audit failed; private logs retained."
-        result = {"phase": args.phase, "status": "failed", "error": message, "error_type": type(exc).__name__}
-        write_json(directory / "operator_result.json", result)
-        print("OPERATOR_RESULT " + json.dumps(result, allow_nan=False), flush=True)
+            result = supervise_capture(args.source_commit, args.concurrency)
+    except Exception as error:
+        result = {"phase": args.phase, "status": "failed", "error": str(error) if isinstance(error, ContinuationFailure) else "Continuation failed; private logs and raw capture remain preserved."}
+        print("OPERATOR_RESULT " + json.dumps(result), flush=True)
         raise SystemExit(1) from None
     print("OPERATOR_RESULT " + json.dumps(result, ensure_ascii=False, allow_nan=False), flush=True)
 
