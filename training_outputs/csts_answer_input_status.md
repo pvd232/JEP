@@ -1,20 +1,22 @@
 # Answer-as-input screen — 26 October 2026
 
-**Frozen validation job running; pinned model loading. No new candidate scores yet.**
+**First frozen-arm score available. Generic arm running; trained conditioned-answer projection in preparation.**
 
-Focused checks: **7 tests passed; Ruff and Pyrefly passed.** Independent design/runtime review found no blocking findings.
+Full validation cohort: **1,830 comparisons**. Each completed row retains **90.11% recall**. Native Qwen scores are reused; the baseline was not rerun.
 
-Source: [`2540590`](https://github.com/pvd232/JEP/tree/2540590c72dbd197addf40bfef3da66d91c52d93). GPU controller PID **76866**; native workspace `/home/machina/jep-csts-answer-input-20261026`. Events: `answer_input_results/initial/events.jsonl`.
+| System | Validation Spearman | MSE | FPR |
+|---|---:|---:|---:|
+| Saved Qwen + LoRA | **0.782575** | **0.034574** | **9.69%** |
+| Cached answer, original condition | 0.735916 | 0.041714 | 16.70% |
+| Cached answer, generic condition | pending | pending | pending |
+| Conditioned answers + trained projection | preparing | preparing | preparing |
 
-| System | Validation Spearman | FPR at ~90.11% recall |
-|---|---:|---:|
-| Saved Qwen + LoRA | **0.782575** | **9.69%** |
-| Cached answer, original condition | pending | pending |
-| Cached answer, generic condition | pending | pending |
-| Conditioned answers + trained projection | preparing | preparing |
+The first arm misses the validation gate. Its condition-ordering accuracy is **89.04%**. The other frozen arm remains running.
 
-All 1,830 validation comparisons remain. Saved Qwen scores are reused without rerunning the baseline. Accepted cached spans replace the passage input; missing/rejected answers retain the original passage and condition. Neither-accepted pairs reuse native scores exactly in the frozen arms.
+Accepted cached spans replace passage inputs. Missing/rejected answers keep the original passage and condition; neither-accepted pairs retain saved baseline scores exactly for the frozen screen. Every comparison remains.
 
-Before seeing frozen-arm scores, one trained conditioned-answer comparator was declared: a bias-free 4096→128 projection, seed 7, cosine-MSE, learning rate 0.001, batch 32, patience 5, ceiling 48 epochs / 600 seconds. It reuses the standard native projection trainer and trains on the existing 6,980 training comparisons; the Qwen backbone stays fixed. Its projection applies to fallback inputs too. No new native control head is fitted.
+Before seeing candidate scores, one trained conditioned-answer comparator was declared: bias-free 4096→128 projection, seed 7, cosine-MSE, learning rate 0.001, batch 32, patience 5, ceiling 48 epochs / 600 seconds. It reuses the native projection trainer on 6,980 training comparisons; Qwen remains fixed. The learned projection also applies to fallback inputs. No new native control head.
 
-This is a cached extractive answer-input experiment, not full generated-proposition extraction or Tu encoder fine-tuning. Validation alone determines eligibility; no new test scores are read. Each completed score will be published here.
+This is a cached extractive answer-input experiment, not full generated-proposition extraction or Tu encoder fine-tuning. Validation alone selects candidates; no new test scores are read.
+
+Focused checks: **7 tests passed; Ruff and Pyrefly passed.** Independent review found no blockers. Frozen source: [`2540590`](https://github.com/pvd232/JEP/tree/2540590c72dbd197addf40bfef3da66d91c52d93). Workspace: `/home/machina/jep-csts-answer-input-20261026`; events: `answer_input_results/initial/events.jsonl`.
