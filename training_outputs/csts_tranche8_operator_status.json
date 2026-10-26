@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-26T15:06:46.880861+00:00",
+  "updated_at": "2026-10-26T15:07:06.805115+00:00",
   "worker_status": "running",
   "action_id": "approved_proposition_pipeline_wait_auth1",
   "source_commit": "d5b7e513e7067538159aaffeb8d2ce463b845739",
@@ -8,14 +8,36 @@
   "returncode": null,
   "progress": {
     "phase": "pipeline",
-    "status": "authentication_required",
-    "stage": "waiting_for_google_cloud_sign_in",
+    "status": "running",
+    "stage": "capture_and_source_sample",
     "counts": {
-      "completed_items": 2304,
+      "completed_items": 2432,
       "total_items": 17334,
-      "completed_batches": 36,
+      "completed_batches": 38,
       "failed_attempts": 0,
       "running_batches": 4
-    }
+    },
+    "sample": {
+      "phase": "native_status",
+      "source_commit": "965aeb48be6f6e4f71b927757191956cbb3fb867",
+      "name": "source_sample_v1",
+      "status": "running",
+      "module": "csts_pilot.proposition_sample",
+      "started_unix": 1793027213.043061,
+      "supervisor_sha256": "a22523165d1af74897dc863009167192be8cfb8d5f46ac71969a69ba2ce0e368",
+      "supervisor_pid": 84394,
+      "native_pid": 84397,
+      "publication_counts": {},
+      "free_bytes": 6021857280
+    },
+    "validation": {
+      "phase": "native_status",
+      "source_commit": "965aeb48be6f6e4f71b927757191956cbb3fb867",
+      "name": "proposition_lora_v2",
+      "status": "not_started",
+      "publication_counts": {},
+      "free_bytes": 6010183680
+    },
+    "decision": "pending"
   }
 }
