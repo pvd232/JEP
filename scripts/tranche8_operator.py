@@ -57,7 +57,7 @@ for name in ('native.stderr','native.stdout'):
  if path.is_file():
   with path.open('rb') as stream:
    stream.seek(max(0,path.stat().st_size-12000));text=stream.read(12000).decode(errors='replace')
-  logs[name]=redact(text)
+  logs['exception_trace' if name=='native.stderr' else 'process_output']=redact(text)
 result={'phase':'retained_pair_diagnostics','status':'complete','source_commit':commit,'pairs':pairs,'sample_metrics':read(sample/'result.json').get('metrics',{}),'sample_file_sha256':{name:digest(sample/name) for name in ('source_pairs.json','predictions.json','audited_records.json')},'subset':{'status':summary.get('status'),'error':redact(str(summary.get('error','')))[:2000],'epoch_zero_metrics':summary.get('epoch_zero',{}).get('metrics',{}),'fit_tracebacks':logs},'model_or_capture_changes':False,'training_started_by_diagnostic':False}
 assert len(json.dumps(result,ensure_ascii=False).encode())<160000,'Diagnostic payload exceeds safe public status budget.'
 print(json.dumps(result,ensure_ascii=False,allow_nan=False))
