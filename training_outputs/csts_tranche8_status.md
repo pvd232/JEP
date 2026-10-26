@@ -1,6 +1,6 @@
 # Checked propositions and LoRA — live results
 
-**running — capture_and_source_sample**. Updated Oct 26, 2026, 11:08 AM EDT.
+**running — capture_and_source_sample**. Updated Oct 26, 2026, 11:09 AM EDT.
 
 Full training/development generation: **2,432/17,334** accepted structural records; 0 preserved failed attempts. Capture: running. Provider latency has varied; no fixed ETA is asserted.
 
