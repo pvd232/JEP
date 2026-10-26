@@ -1,0 +1,179 @@
+{
+  "status": "complete",
+  "source_commit": "b99056d226498be37e3423b63ce1b6d5168d18df",
+  "attempt": "da2ec61c",
+  "settings_sha256": "d81d33fbe7af7d5fdf282dbf85da445192147cd91f3c6dc949b19ad745c9271c",
+  "inputs_manifest_sha256": "3568f62dfb1812a2d288457bcdb82e07a4813ebe29f4e7c905986e3400539138",
+  "inputs": {
+    "training": {
+      "kind": "matched",
+      "record": {
+        "name": "extract_training",
+        "status": "succeeded",
+        "path": "/home/machina/jep-csts-matched-baselines-20261026/experiments/csts_matched_faa0ae53_c98e7a60_extract_training/runs/extract_training/01M5V9S8JE7AR4SRTKWZPQSXSB/resolved.yaml",
+        "reference": {
+          "sha256": "5fe361ad272c886d1f172bbe94bd747d409ad492a0ba6422842ad745ee9147ea",
+          "bytes": 1098,
+          "stored_at": {
+            "kind": "local",
+            "workspace": "/home/machina/jep-csts-matched-baselines-20261026",
+            "store": ".viper/store",
+            "store_id": "9c27e3f765a1cb8a165955a63c151851",
+            "commit": "30303731c58a70e39d10cc87e7ade50968fe07dbcfe0b4cfcfe1158e178a2a13",
+            "path": "experiments/csts_matched_faa0ae53_c98e7a60_extract_training/runs/extract_training/01M5V9S8JE7AR4SRTKWZPQSXSB/resolved.yaml"
+          },
+          "kind": "resolved_run"
+        },
+        "seconds": 2327.2186171810026,
+        "publication_queue": "/home/machina/jep-csts-matched-baselines-20261026/.viper/publication_queue/7178dd49be40ae4814b23f5305c1de49bd4802e50df294a6f5f17b555ffb6a93.json"
+      },
+      "rows_path": "/home/machina/jep-csts-matched-baselines-20261026/csts_data/train.json",
+      "rows_sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01",
+      "cache_sha256": "ae77186808c521dba76d74ee094c5572092fcbcc06a2299a687375fb4b0d383e"
+    },
+    "validation": {
+      "kind": "matched",
+      "record": {
+        "name": "extract_validation",
+        "status": "succeeded",
+        "path": "/home/machina/jep-csts-matched-baselines-20261026/experiments/csts_matched_faa0ae53_c98e7a60_extract_validation/runs/extract_validation/01M5VC098D0MY8HZ6JRB6KN67V/resolved.yaml",
+        "reference": {
+          "sha256": "294a00ebaff262bd4fd26f7456934940d819d2dc7e4a8f0aa015b8b025c9fde8",
+          "bytes": 1106,
+          "stored_at": {
+            "kind": "local",
+            "workspace": "/home/machina/jep-csts-matched-baselines-20261026",
+            "store": ".viper/store",
+            "store_id": "9c27e3f765a1cb8a165955a63c151851",
+            "commit": "674a15772de40ff75cc4e36832f34995158cbe91f3a72435e1906e2c9a01b616",
+            "path": "experiments/csts_matched_faa0ae53_c98e7a60_extract_validation/runs/extract_validation/01M5VC098D0MY8HZ6JRB6KN67V/resolved.yaml"
+          },
+          "kind": "resolved_run"
+        },
+        "seconds": 823.6210941189784,
+        "publication_queue": "/home/machina/jep-csts-matched-baselines-20261026/.viper/publication_queue/578cba27cdb32a9bcee7346edfade0cbbcefecd6b053395d3568d80efcf4c102.json"
+      },
+      "rows_path": "/home/machina/jep-csts-matched-baselines-20261026/csts_data/dev.json",
+      "rows_sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+      "cache_sha256": "23ac4f1d4ac113666454bb3736cac862752cf6b4c771762a4ba130a08b3f0b22"
+    }
+  },
+  "runs": [
+    {
+      "name": "prepare_training",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-codebook-20261026/experiments/csts_codebook_2cd66d61_98a103bf_prepare_training/runs/prepare_training/01M5W0H407NXG2R64ZXDS12DNY/resolved.yaml",
+      "reference": {
+        "sha256": "a8a7c19bc419171968d1dd717fef47a78ad7578445f8386087511be0692dc4b2",
+        "bytes": 1082,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-codebook-20261026",
+          "store": ".viper/store",
+          "store_id": "a04de1a4dc129436e9c7342d6e3ccf3d",
+          "commit": "88c4a9bc37ae230cbeaa246a79f08927f88e93d25e9d7354451bac979010ad94",
+          "path": "experiments/csts_codebook_2cd66d61_98a103bf_prepare_training/runs/prepare_training/01M5W0H407NXG2R64ZXDS12DNY/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "seconds": 41.690289084013784,
+      "publication_queue": "/home/machina/jep-csts-codebook-20261026/.viper/publication_queue/ff0cb471a73ec315ba6fd5d0de94319acb1ffcba0f241bf4342575151b7e4f63.json",
+      "reused_from_summary_sha256": "7e3c32dc795366bb90abe362144b13d959a19e0e12488b06715bbd162eeda304"
+    },
+    {
+      "name": "prepare_validation",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-codebook-20261026/experiments/csts_codebook_2cd66d61_98a103bf_prepare_validation/runs/prepare_validation/01M5W0JCQEJ9J5ZRHG8ZMB95FT/resolved.yaml",
+      "reference": {
+        "sha256": "7ec8b5dd45300dc6e823b3481bc278f3a1dd7a7c08885837c9a98039b95d4f76",
+        "bytes": 1090,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-codebook-20261026",
+          "store": ".viper/store",
+          "store_id": "a04de1a4dc129436e9c7342d6e3ccf3d",
+          "commit": "c7310ddd53938e684a47629a3def839d92c8370d39e03760ae28f679e48a8ec6",
+          "path": "experiments/csts_codebook_2cd66d61_98a103bf_prepare_validation/runs/prepare_validation/01M5W0JCQEJ9J5ZRHG8ZMB95FT/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "seconds": 33.93374535100884,
+      "publication_queue": "/home/machina/jep-csts-codebook-20261026/.viper/publication_queue/027609d572d1a24c43bcdef384d9e0f25c8851202b63a49b2a86d668ce5fbc8b.json",
+      "reused_from_summary_sha256": "7e3c32dc795366bb90abe362144b13d959a19e0e12488b06715bbd162eeda304"
+    },
+    {
+      "name": "fit",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-codebook-20261026/experiments/csts_codebook_2cd66d61_98a103bf_fit/runs/fit/01M5W0KEQES5E42V3BJ66QT29X/resolved.yaml",
+      "reference": {
+        "sha256": "2dcf636a7b66ca13e7ca58e7401073b6e53cb4a5416b687be3a42e4d9ce6a6f2",
+        "bytes": 1030,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-codebook-20261026",
+          "store": ".viper/store",
+          "store_id": "a04de1a4dc129436e9c7342d6e3ccf3d",
+          "commit": "9444c2c1a599dfcf836d71d337db106b40f6e08c1ea68c2c3842bd7c0740fb0d",
+          "path": "experiments/csts_codebook_2cd66d61_98a103bf_fit/runs/fit/01M5W0KEQES5E42V3BJ66QT29X/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "seconds": 96.50918447799631,
+      "publication_queue": "/home/machina/jep-csts-codebook-20261026/.viper/publication_queue/76f12eabf0c6c835fe9481e39988165d6d404418206fb9dab55116d3ea36626c.json",
+      "reused_from_summary_sha256": "7e3c32dc795366bb90abe362144b13d959a19e0e12488b06715bbd162eeda304"
+    },
+    {
+      "name": "publish_validation",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-codebook-20261026/experiments/csts_codebook_2cd66d61_98a103bf_publish_validation/runs/publish_validation/01M5W0PD11GHMF9JQM11S7BYDE/resolved.yaml",
+      "reference": {
+        "sha256": "41d3f7144200c1650f1531f4a22a11c7be7c357468f3b314fd3fde270231f7f7",
+        "bytes": 1090,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-codebook-20261026",
+          "store": ".viper/store",
+          "store_id": "a04de1a4dc129436e9c7342d6e3ccf3d",
+          "commit": "06c3972f783f69c8f9adf4743a1d7cb3df09291c62102759bc4f361c663de682",
+          "path": "experiments/csts_codebook_2cd66d61_98a103bf_publish_validation/runs/publish_validation/01M5W0PD11GHMF9JQM11S7BYDE/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "seconds": 19.190965847985353,
+      "publication_queue": "/home/machina/jep-csts-codebook-20261026/.viper/publication_queue/4afa5c7d305e00a531af046b97a682dbe9fa2f00e8f24e5e0f9e67a80c186970.json",
+      "reused_from_summary_sha256": "7e3c32dc795366bb90abe362144b13d959a19e0e12488b06715bbd162eeda304"
+    },
+    {
+      "name": "evaluate_validation",
+      "status": "succeeded",
+      "path": "/home/machina/jep-csts-codebook-20261026/experiments/csts_codebook_b99056d2_da2ec61c_evaluate_validation/runs/evaluate_validation/01M5W25EBZQ3K42X22C39DD4DR/resolved.yaml",
+      "reference": {
+        "sha256": "d399865fb012fbfc481cdb4f05c3b87380dc76de7aed412c9aa963a365a08815",
+        "bytes": 1094,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-csts-codebook-20261026",
+          "store": ".viper/store",
+          "store_id": "a04de1a4dc129436e9c7342d6e3ccf3d",
+          "commit": "ccc5e1617ddaf7a100593ca35db1ace592bd84716286f8416549da7b0f5cd06b",
+          "path": "experiments/csts_codebook_b99056d2_da2ec61c_evaluate_validation/runs/evaluate_validation/01M5W25EBZQ3K42X22C39DD4DR/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "seconds": 78.69793343998026,
+      "publication_queue": "/home/machina/jep-csts-codebook-20261026/.viper/publication_queue/ae4af81b7148528c1cb9a6c5f01f585362a46c296e007ef5ad5118cfc562b1c5.json"
+    }
+  ],
+  "test_accessed": false,
+  "backbone_inference": false,
+  "recovery_of": {
+    "path": "codebook_results/initial/summary.json",
+    "sha256": "7e3c32dc795366bb90abe362144b13d959a19e0e12488b06715bbd162eeda304",
+    "source_commit": "2cd66d61b3c1a08e58b1a91b911574612a447ed4",
+    "error": "1 validation error for EvalSpec\n  Value error, eval requires a model input [type=value_error, input_value={'outputs': StageOutputs[...t_inputs': ('holdout',)}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/value_error"
+  },
+  "frozen_models_sha256": "27ea6121b22cfc6d685ef20a4ba2a594b2c9b41628e19259e1751cdf2c726d28",
+  "in_flight": null,
+  "publication_status": "queued_separately",
+  "evaluation_split": "validation"
+}
