@@ -10,10 +10,7 @@
   "native_pid": 93846,
   "summary": {
     "status": "running",
-    "in_flight": {
-      "name": "epoch_zero",
-      "experiment_id": "csts_subset_0314b6cc_9c518b6d_epoch_zero"
-    },
+    "in_flight": null,
     "source_commit": "0314b6ccda11c4eb929754a9d4837f98946fd42c"
   },
   "runs": [
@@ -21,12 +18,18 @@
       "name": "prepare",
       "status": "succeeded",
       "seconds": 35.566704258002574
+    },
+    {
+      "name": "epoch_zero",
+      "status": "succeeded",
+      "seconds": 134.0579491679964
     }
   ],
   "publication_counts": {
-    "published": 8
+    "published": 8,
+    "uploading": 1
   },
-  "free_bytes": 5169917952,
+  "free_bytes": 5169500160,
   "result": {},
   "preparation": {
     "coverage": {
@@ -408,7 +411,7 @@
     "limitations": "This model-assisted audit sample was used during development and is reused for epoch selection. It is a small development triage, not independent confirmation or test eligibility.",
     "test_inputs_opened": false
   },
-  "observed_unix": 1793046242.987007,
+  "observed_unix": 1793046328.4021251,
   "full_generation_resumed": false,
   "held_out_test_released": false
 }
