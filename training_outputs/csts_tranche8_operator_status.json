@@ -1,9 +1,30 @@
 {
-  "updated_at": "2026-10-26T13:53:46.532536+00:00",
-  "worker_status": "running",
+  "updated_at": "2026-10-26T13:54:06.224480+00:00",
+  "worker_status": "waiting",
   "action_id": "full_capture_frozen_v2_launch1",
   "source_commit": "8a0b50d5bdd2a77ab0c9444f4bf10d484f8ba6bb",
   "operator_sha256": "d359b57dfe0cefd592b96d9b560e5de47251e0c78899d9010b856e3519b3d216",
-  "status": "launching",
-  "returncode": null
+  "status": "completed",
+  "returncode": 0,
+  "result": {
+    "phase": "full_capture",
+    "status": "running",
+    "source_commit": "8a0b50d5bdd2a77ab0c9444f4bf10d484f8ba6bb",
+    "counts": {
+      "completed_items": 0,
+      "total_items": 17334,
+      "completed_batches": 0,
+      "failed_attempts": 0
+    },
+    "output_path": "/tmp/jep-proposition-input-20261026/full_v2_6895d17242704944",
+    "controller_sha256": "d359b57dfe0cefd592b96d9b560e5de47251e0c78899d9010b856e3519b3d216",
+    "pid": 55410,
+    "manifest": {
+      "generation_template_sha256": "6895d17242704944632757d7c5eb669f3d4d8f959ee23bbdd7ddae00a0f0304e",
+      "schema_sha256": "6b77659c25becd6bdf6de301dd9d4582fd3466c7d53c958ee6083aa2ac935924",
+      "model_alias": "gpt-6.1-sol",
+      "reasoning_effort": "high"
+    },
+    "next_phase": "full_capture_status"
+  }
 }
