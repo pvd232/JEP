@@ -10,8 +10,8 @@
     "native": "4928c30aa81fbf253dbd7e9c4b538aef067cc9c5acf7f6782c5a26b57d618525",
     "test": "778c9c79c7ce6f163a739bdcbae243644d3c4748e1f35abec20ed55a7c1443bd"
   },
-  "updated_at": "2026-10-26T15:06:30.793181+00:00",
-  "elapsed_seconds": 1603,
+  "updated_at": "2026-10-26T15:07:36.513934+00:00",
+  "elapsed_seconds": 1668,
   "capture": {
     "phase": "capture_diagnostics",
     "status": "running",
@@ -29,7 +29,7 @@
         "status": "running",
         "items": 64,
         "started_unix": 1793027125.7806022,
-        "elapsed_seconds": 65.0,
+        "elapsed_seconds": 130.7,
         "stderr_flags": {
           "capacity": false,
           "rate_limit": false,
@@ -50,7 +50,7 @@
         },
         "stderr_bytes_scanned": 0,
         "stderr_scan_truncated": false,
-        "last_event_age_seconds": 64.0,
+        "last_event_age_seconds": 129.8,
         "event_count": 2,
         "last_cli_event_type": "turn.started"
       },
@@ -60,7 +60,7 @@
         "status": "running",
         "items": 64,
         "started_unix": 1793027127.11922,
-        "elapsed_seconds": 63.7,
+        "elapsed_seconds": 129.4,
         "stderr_flags": {
           "capacity": false,
           "rate_limit": false,
@@ -81,7 +81,7 @@
         },
         "stderr_bytes_scanned": 0,
         "stderr_scan_truncated": false,
-        "last_event_age_seconds": 63.0,
+        "last_event_age_seconds": 128.7,
         "event_count": 2,
         "last_cli_event_type": "turn.started"
       },
@@ -91,7 +91,7 @@
         "status": "running",
         "items": 64,
         "started_unix": 1793027143.5839229,
-        "elapsed_seconds": 47.2,
+        "elapsed_seconds": 112.9,
         "stderr_flags": {
           "capacity": false,
           "rate_limit": false,
@@ -112,7 +112,7 @@
         },
         "stderr_bytes_scanned": 0,
         "stderr_scan_truncated": false,
-        "last_event_age_seconds": 46.2,
+        "last_event_age_seconds": 111.9,
         "event_count": 2,
         "last_cli_event_type": "turn.started"
       },
@@ -122,7 +122,7 @@
         "status": "running",
         "items": 64,
         "started_unix": 1793027151.100522,
-        "elapsed_seconds": 39.7,
+        "elapsed_seconds": 105.4,
         "stderr_flags": {
           "capacity": false,
           "rate_limit": false,
@@ -143,7 +143,7 @@
         },
         "stderr_bytes_scanned": 0,
         "stderr_scan_truncated": false,
-        "last_event_age_seconds": 38.9,
+        "last_event_age_seconds": 104.7,
         "event_count": 2,
         "last_cli_event_type": "turn.started"
       }
@@ -223,7 +223,7 @@
         "process_alive": true
       }
     ],
-    "observed_unix": 1793027190.793625
+    "observed_unix": 1793027256.514406
   },
   "sample": {
     "phase": "native_status",
@@ -235,16 +235,25 @@
     "supervisor_sha256": "a22523165d1af74897dc863009167192be8cfb8d5f46ac71969a69ba2ce0e368",
     "supervisor_pid": 84394,
     "native_pid": 84397,
-    "publication_counts": {},
-    "free_bytes": 6021857280
+    "summary": {
+      "status": "running",
+      "source_commit": "965aeb48be6f6e4f71b927757191956cbb3fb867"
+    },
+    "runs": [],
+    "publication_counts": {
+      "uploading": 1
+    },
+    "free_bytes": 5996367872
   },
   "adaptation": {
     "phase": "native_status",
     "source_commit": "965aeb48be6f6e4f71b927757191956cbb3fb867",
     "name": "proposition_lora_v2",
     "status": "not_started",
-    "publication_counts": {},
-    "free_bytes": 6010183680
+    "publication_counts": {
+      "uploading": 1
+    },
+    "free_bytes": 5996298240
   },
   "test": {
     "status": "not_released",
