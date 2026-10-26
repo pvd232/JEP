@@ -38,12 +38,10 @@ This is a small development triage experiment. Native metrics and training progr
   "publication_counts": {
     "published": 11
   },
-  "free_bytes": 4857171968,
+  "free_bytes": 3874455552,
   "training": {
-    "status": "running",
-    "current_epoch": 8,
-    "actual_updates": 75,
-    "completed_epoch": 7,
+    "status": "complete",
+    "actual_updates": 80,
     "selected": {
       "epoch": 3,
       "step": 30,
@@ -89,40 +87,39 @@ This is a small development triage experiment. Native metrics and training progr
         }
       }
     },
-    "epochs_without_improvement": 4,
     "latest_epoch": {
-      "epoch": 7,
-      "step": 70,
-      "training_mse_0_1": 0.015870109854480445,
+      "epoch": 8,
+      "step": 80,
+      "training_mse_0_1": 0.012956114548390274,
       "validation": {
         "n": 30,
-        "mse_0_1": 0.05398623605888197,
-        "mse_1_5": 0.8637797769421115,
-        "spearman": 0.48411057336392266,
-        "prediction_mean": 0.5048184921344121,
+        "mse_0_1": 0.05634847995267372,
+        "mse_1_5": 0.9015756792427795,
+        "spearman": 0.46994265479821257,
+        "prediction_mean": 0.5076614871621132,
         "target_mean": 0.5,
-        "prediction_std": 0.234665809953903,
+        "prediction_std": 0.23367881414011282,
         "target_std": 0.22360679774997896,
         "mean_prediction_by_rating": {
           "1.0": {
             "n": 2,
-            "mean": 0.3145029991865158
+            "mean": 0.3284844160079956
           },
           "2.0": {
             "n": 5,
-            "mean": 0.3487091541290283
+            "mean": 0.35793627202510836
           },
           "3.0": {
             "n": 15,
-            "mean": 0.4863102287054062
+            "mean": 0.4898232877254486
           },
           "4.0": {
             "n": 7,
-            "mean": 0.6981199873345239
+            "mean": 0.6955872561250415
           },
           "5.0": {
             "n": 1,
-            "mean": 0.5905096530914307
+            "mean": 0.5667343139648438
           }
         },
         "condition_changes": {
@@ -134,9 +131,9 @@ This is a small development triage experiment. Native metrics and training progr
           "unit": "Within-pair comparisons. These reuse captions and are dependent."
         }
       },
-      "fit_seconds": 81.94023684898275,
-      "validation_seconds": 1.6470044899906497,
-      "observed_epoch_seconds": 83.59195904599619
+      "fit_seconds": 82.21958072399138,
+      "validation_seconds": 1.6483582129876595,
+      "observed_epoch_seconds": 83.87280795900733
     }
   },
   "result": {},
