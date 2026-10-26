@@ -333,7 +333,7 @@ def main() -> None:
     parser.add_argument("--inputs", type=Path, required=True)
     parser.add_argument("--groups", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
-    parser.add_argument("--split", choices=("training", "validation"), required=True)
+    parser.add_argument("--split", choices=("training", "validation", "test"), required=True)
     parser.add_argument("--batch-size", type=int, default=64)
     parser.add_argument("--concurrency", type=int, default=2)
     parser.add_argument("--limit", type=int)
