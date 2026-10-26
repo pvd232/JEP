@@ -1,9 +1,87 @@
 {
-  "updated_at": "2026-10-26T14:23:26.363164+00:00",
-  "worker_status": "running",
+  "updated_at": "2026-10-26T14:23:46.242169+00:00",
+  "worker_status": "waiting",
   "action_id": "native_owner_checks_fixed2",
   "source_commit": "e37db66c000ddbedbce07714fd4381ff05e73b18",
   "operator_sha256": "4928c30aa81fbf253dbd7e9c4b538aef067cc9c5acf7f6782c5a26b57d618525",
-  "status": "running",
-  "returncode": null
+  "status": "completed",
+  "returncode": 0,
+  "result": {
+    "phase": "native_checks",
+    "status": "source_publication_required",
+    "source_commit": "e37db66c000ddbedbce07714fd4381ff05e73b18",
+    "checks": [
+      {
+        "check": "ruff format",
+        "returncode": 0
+      },
+      {
+        "check": "ruff check",
+        "returncode": 0
+      },
+      {
+        "check": "pyrefly",
+        "returncode": 0
+      },
+      {
+        "check": "pytest",
+        "returncode": 0
+      },
+      {
+        "check": "owner_environment_preflight",
+        "returncode": 0
+      }
+    ],
+    "formatted_files": [
+      {
+        "path": "tests/test_csts_proposition_sample.py",
+        "chunks": [
+          "\"\"\"Run source-selection and cache-safety contracts without GPU/VIPER packages.\n\nOnly the named production functions are loaded from their ASTs. Their bodies\nare unchanged; this keeps these CPU contracts runnable in the review workspace.\nNative encoder behavior is shared with proposition_inputs and tested there.\n\"\"\"\n\nimport ast\nimport copy\nimport fcntl\nimport hashlib\nimport json\nimport math\nimport os\nimport shutil\nimport tempfile\nimport time\nimport unittest\nfrom pathlib import Path\nfrom types import SimpleNamespace\nfrom typing import Any\n\nfrom jep_pilot.loaders import load_json\n\nROOT = Path(__file__).resolve().parents[1]\n\n\ndef load_functions():\n    namespace = {\n        \"Any\": Any,\n        \"Path\": Path,\n        \"hashlib\": hashlib,\n        \"json\": json,\n        \"math\": math,\n        \"os\": os,\n        \"time\": time,\n        \"shutil\": shutil,\n        \"fcntl\": fcntl,\n        \"load_json\": load_json,\n    }\n    sources = {\n        \"data.py\": {\"canonical\"},\n        \"answers.py\": {\"answer_id\"},\n        \"baseline_models.py\": {\"validate_rows\"},\n        \"proposition_capture.py\": {\"validate_inputs\", \"checked_records\"},\n        \"proposition_inputs.py\": {\"validate_replacements\"},\n        \"convergence.py\": {\"file_sha256\", \"write_json\"},\n        \"proposition_sample.py\": {\n            \"unique_records\",\n            \"prepare_sample\",\n            \"release_verified_model_cache\",\n        },\n    }\n    import unicodedata\n\n    namespace[\"unicodedata\"] = unicodedata\n    for filename, names in sources.items():\n        tree = ast.parse((ROOT / \"csts_pilot\" / filename).read_text())\n        selected = [\n            node\n            for node in tree.body\n            if isinstance(node, ast.FunctionDef) and node.name in names\n        ]\n        if {node.name for node in selected} != names:\n            raise AssertionError(f\"Missing production function in {filename}.\")\n        for node in selected:\n            if node.decorator_list:\n                raise AssertionError(\n                    \"Contracts must not silently strip a native decorator.\"\n                )\n        exec(  # noqa: S102 -- only statically selected repository contract functions\n            compile(ast.Module(body=selected, type_ignores=[]), filename, \"exec\"),\n            namespace,\n        )\n    namespace[\"frozen\"] = SimpleNamespace(\n        validate_replacements=namespace[\"validate_replacements\"]\n    )\n    namespace[\"ARMS\"] = (\"old_spans\", \"checked_generated_v1\")\n    return namespace\n\n\nclass SelectionContracts(unittest.TestCase):\n    def setUp(self):\n        self.functions = load_functions()\n        directory = ROOT / \"training_outputs/proposition_audit\"\n        files = {\n            \"source_sample\": \"proposition_blind_sample.json\",\n            \"pair_mapping\": \"proposition_audit_pair_mapping.json\",\n            \"old_records\": \"proposition_old_audit120.json\",\n            \"generated_records\": \"proposition_generated_audit120.json\",\n            \"variant_mapping\": \"proposition_variant_mapping.json\",\n            \"judgments_left\": \"proposition_judgments_left.json\",\n            \"judgments_right\": \"proposition_judgments_right.json\",\n            \"references_left\": \"proposition_reference_left.json\",\n            \"references_right\": \"proposition_reference_right.json\",\n            \"capture_manifest\": \"proposition_capture_audit_manifest.json\",\n        }\n        self.audits = {\n            key: json.loads((directory / filename).read_text())\n            for key, filename in files.items()\n        }\n        items = {row[\"id\"]: row for row in self.audits[\"source_sample\"]}\n        # Synthetic labels are deliberately unrelated to fidelity decisions.\n        self.rows = []\n        for index, (group, left, right) in enumerate(\n            reversed(self.audits[\"pair_mapping\"])\n        ):\n            a, b = items[left], items[right]\n            self.assertEqual(a[\"condition\"], b[\"condition\"])\n            self.rows.append(\n                {\n                    \"row_id\": f\"sample-{index}\",\n                    \"pair_id\": group,\n                    \"group_id\": group,\n                    \"sentence1\": a[\"passage\"],\n                    \"sentence2\": b[\"passage\"],\n                    \"condition\": a[\"condition\"],\n                    \"rating\": 1.0 if index % 2 else 5.0,\n                    \"target\": 0.0 if index % 2 else 1.0,\n                }\n            )\n\n    def prepare(self, audits=None, rows=None):\n        return self.functions[\"prepare_sample\"](\n            self.rows if rows is None else rows,\n            self.audits if audits is None else audits,\n        )\n\n    def test_same_sixty_pairs_and_conditions_with_expected_policy_coverage(self):\n        original, changed, audit = self.prepare()\n        self.assertEqual(original, self.rows)\n        self.assertEqual(len(audit[\"records\"]), 120)\n        for arm, expected, sides in (\n            (\"old_spans\", {\"both\": 28, \"one\": 19, \"neither\": 13}, 75),\n            (\"checked_generated_v1\", {\"both\": 42, \"one\": 14, \"neither\": 4}, 98),\n        ):\n            self.assertEqual(audit[\"coverage\"][arm][\"comparison_coverage\"], expected)\n            self.assertEqual(audit[\"coverage\"][arm][\"accepted_side_occurrences\"], sides)\n            self.functions[\"validate_replacements\"](original, changed[arm])\n        reversed_labels = [\n            dict(row, rating=6 - row[\"rating\"], target=1 - row[\"target\"])\n            for row in self.rows\n        ]\n        _, changed_labels, label_audit = self.prepare(rows=reversed_labels)\n        self.assertEqual(audit[\"records\"], label_audit[\"records\"])\n        for arm in changed:\n            self.assertEqual(\n                [(r[\"sentence1\"], r[\"sentence2\"]) for r in changed[arm]],\n                [(r[\"sentence1\"], r[\"sentence2\"]) for r in changed_labels[arm]],\n            )\n\n    def test_blind_variant_lookup_rejection_fallback_and_no_reference_substitution(\n        self,\n    ):\n        _, _, audit = self.prepare()\n        old_audit_rejections = 0\n        new_answer_rejections = 0\n        for record in audit[\"records\"]:\n            old_variant = next(\n                key for key, value in record[\"blind_variants\"].items() if value == \"old\"\n            )\n            old = record[\"old_record\"]\n            if (\n                old[\"status\"] == \"answered\"\n                and not record[\"blind_judgments\"][old_variant][\"fully_faithful\"]\n            ):\n                old_audit_rejections += 1\n                self.assertEqual(\n                    record[\"selected_inputs\"][\"old_spans\"][\"passage\"], old[\"answer\"]\n                )\n            selected = record[\"selected_inputs\"][\"checked_generated_v1\"]\n            new = record[\"generated_v1_record\"]\n            if (\n                record[\"generated_v1_passes_blind_fidelity\"]\n                and new[\"status\"] == \"answered\"\n            ):\n                self.assertEqual(selected[\"passage\"], new[\"answer\"])\n            else:\n                self.assertFalse(selected[\"uses_answer\"])\n                self.assertEqual(selected[\"passage\"], record[\"passage\"])\n                new_answer_rejections += new[\"status\"] == \"answered\"\n        self.assertGreater(old_audit_rejections, 0)\n        self.assertEqual(new_answer_rejections, 2)\n\n    def test_missing_duplicate_changed_source_and_nonboolean_judgments_rejected(self):\n        for mutation in (\"missing\", \"duplicate\", \"source\", \"judgment\"):\n            with self.subTest(mutation=mutation):\n                audits = copy.deepcopy(self.audits)\n                if mutation == \"missing\":\n                    audits[\"generated_records\"].pop()\n                elif mutation == \"duplicate\":\n                    audits[\"judgments_left\"].append(audits[\"judgments_left\"][0])\n                elif mutation == \"source\":\n                    audits[\"source_sample\"][0][\"condition\"] += \" changed\"\n                else:\n                    audits[\"judgments_left\"][0][\"fully_faithful\"] = \"true\"\n                with self.assertRaises(ValueError):\n                    self.prepare(audits=audits)\n\n\nclass CacheContracts(unittest.TestCase):\n    def setUp(self):\n        self.temporary = tempfile.TemporaryDirectory()\n        self.addCleanup(self.temporary.cleanup)\n        self.root = Path(self.temporary.name)\n        self.functions = load_functions()\n        self.data = b\"immutable parent model contract bytes\"\n        self.digest = hashlib.sha256(self.data).hexdigest()\n        self.functions[\"MODEL_SHA256\"] = self.digest\n        self.original = self.root / \"parent/.viper/store/sealed/model.pt\"\n        self.original.parent.mkdir(parents=True)\n        self.original.write_bytes(self.data)\n        self.cache = self.root / \".viper/cache/verified-objects\" / self.digest\n        self.cache.parent.mkdir(parents=True)\n        self.cache.write_bytes(self.data)\n        self.queue = self.root / \".viper/publication_queue\"\n        self.queue.mkdir(parents=True)\n        (self.queue / \"job.json\").write_text(json.dumps({\"status\": \"published\"}))\n        self.receipt = self.root / \"results/release.json\"\n\n    def release(self):\n        return self.functions[\"release_verified_model_cache\"](\n            self.root, self.original, self.receipt, wait_seconds=0\n        )\n\n    def test_deletes_only_exact_duplicate_and_preserves_immutable_original(self):\n        result = self.release()\n        self.assertEqual(result[\"status\"], \"deleted_duplicate\")\n        self.assertFalse(self.cache.exists())\n        self.assertEqual(self.original.read_bytes(), self.data)\n        self.assertEqual(json.loads(self.receipt.read_text())[\"bytes\"], len(self.data))\n\n    def test_wrong_hash_hardlink_symlink_ancestor_and_pending_publication_preserved(\n        self,\n    ):\n        for mutation in (\"hash\", \"hardlink\", \"symlink\", \"pending\"):\n            # Each subcase has an independent cache and publication state.\n            with (\n                self.subTest(mutation=mutation),\n                tempfile.TemporaryDirectory() as directory,\n            ):\n                root = Path(directory)\n                candidate = root / \".viper/cache/verified-objects\" / self.digest\n                candidate.parent.mkdir(parents=True)\n                candidate.write_bytes(self.data)\n                queue = root / \".viper/publication_queue\"\n                queue.mkdir(parents=True)\n                (queue / \"job.json\").write_text(\n                    json.dumps(\n                        {\"status\": \"pending\" if mutation == \"pending\" else \"published\"}\n                    )\n                )\n                if mutation == \"hash\":\n                    candidate.write_bytes(b\"changed model bytes\")\n                elif mutation == \"hardlink\":\n                    candidate.unlink()\n                    os.link(self.original, candidate)\n                elif mutation == \"symlink\":\n                    moved = root / \"actual-cache\"\n                    candidate.parent.rename(moved)\n                    candidate.parent.symlink_to(moved, target_is_directory=True)\n                result = self.functions[\"release_verified_model_cache\"](\n                    root, self.original, root / \"receipt.json\", wait_seconds=0\n                )\n                self.assertNotEqual(result[\"status\"], \"deleted_duplicate\")\n                self.assertTrue(candidate.exists())\n                self.assertEqual(self.original.read_bytes(), self.data)\n\n\nif __name__ == \"__main__\":\n    unittest.main()\n"
+        ],
+        "sha256": "eb1981453a00125f8b7c9e753c91299a425df598573768a1077eeb346cdfbd31"
+      }
+    ],
+    "verification": {
+      "source_commit": "e37db66c000ddbedbce07714fd4381ff05e73b18",
+      "checks": [
+        {
+          "check": "ruff format",
+          "returncode": 0
+        },
+        {
+          "check": "ruff check",
+          "returncode": 0
+        },
+        {
+          "check": "pyrefly",
+          "returncode": 0
+        },
+        {
+          "check": "pytest",
+          "returncode": 0
+        },
+        {
+          "check": "owner_environment_preflight",
+          "returncode": 0
+        }
+      ],
+      "passed": true,
+      "source_clean": false,
+      "owned_source_sha256": {
+        "csts_pilot/proposition_capture.py": "8563b6af607136adf97d569d89b90eda124598e92d01dcc7bc6f3bc9d56fc821",
+        "csts_pilot/proposition_inputs.py": "628648c9ec6d8ac39b76b4cff30215a5e9ce588a489086cd21dfd851a812c8f0",
+        "csts_pilot/proposition_lora.py": "31a3aa21e4426735b63d904eae6cf8a519fa318907530f69079aef2a6c723d9c",
+        "csts_pilot/proposition_run.py": "5b72a9cff216dc82c330c76e74c218e528dde3f6ad3b56144bd655b371a36eac",
+        "csts_pilot/proposition_test.py": "d959ff6939ff5a2ce54d61cac70c9896a70d33e3544ad21b9dd29c82ac426c77",
+        "csts_pilot/proposition_sample.py": "cbb06e82daf9486b2a1ad90a8937ac338ee33a6b04c7f8d687d06ceb9d94ba88",
+        "csts_pilot/proposition_archive.py": "40c930f9ca076a455165682e473ba9fd857d76b7ebc467b81c6f42c461ef6c62",
+        "tests/test_csts_proposition_capture.py": "3e4f0d3901829652ccc206c3d9af44079df7c894cac0894da220792642323f38",
+        "tests/test_csts_proposition_inputs.py": "0dfcfea95a3b0c4e71e64853cbd2fa6d351a9ea62114cf7330fa535075357dfe",
+        "tests/test_csts_proposition_lora.py": "d6f0f34e66fd5181cb961248c898861db9cc99c8e518deed425dbf9ec212ffbc",
+        "tests/test_csts_proposition_test.py": "d02659c5b5582271216ffa23f9c8a4911e31fa603043002ad49999a506e929db",
+        "tests/test_csts_proposition_sample.py": "eb1981453a00125f8b7c9e753c91299a425df598573768a1077eeb346cdfbd31",
+        "tests/test_csts_proposition_archive.py": "bf5aa62d2a5af2b60721bb0b59b0a276b9207426200b84fa60157cebaed417df"
+      }
+    }
+  }
 }
