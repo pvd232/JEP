@@ -247,11 +247,7 @@ class CacheContracts(unittest.TestCase):
                 queue.mkdir(parents=True)
                 (queue / "job.json").write_text(
                     json.dumps(
-                        {
-                            "status": "pending"
-                            if mutation == "pending"
-                            else "published"
-                        }
+                        {"status": "pending" if mutation == "pending" else "published"}
                     )
                 )
                 if mutation == "hash":
