@@ -142,7 +142,10 @@ def test_native_evaluation_declares_its_objective():
         stage_id="analysis",
         eval_id="condition_reference_check",
         config=AnalysisConfig(rows_sha256="0" * 64, split="validation"),
-        inputs=(input("rows", path="csts_data/dev.json", data_role="eval"),),
+        inputs=(
+            input("rows", path="csts_data/dev.json", data_role="eval"),
+            input("test", path="csts_data/dev.json", data_role="eval"),
+        ),
         split_inputs=("rows",),
         outputs=EvalOutputs(
             predictions=output(
