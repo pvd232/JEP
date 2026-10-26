@@ -219,11 +219,12 @@ def checked_events(path: Path) -> dict[str, Any]:
         event = json.loads(line)
         if event.get("type") not in allowed_events:
             raise ValueError(f"Unaccepted CLI event: {event.get('type')}.")
-        if event["type"].startswith("item."):
-            if event.get("item", {}).get("type") not in {"agent_message", "reasoning"}:
-                raise ValueError(
-                    "Tool activity or an unknown CLI item invalidates this request."
-                )
+        if event["type"].startswith("item.") and event.get("item", {}).get(
+            "type"
+        ) not in {"agent_message", "reasoning"}:
+            raise ValueError(
+                "Tool activity or an unknown CLI item invalidates this request."
+            )
         if event["type"] == "turn.completed":
             completed += 1
             usage = event.get("usage")
