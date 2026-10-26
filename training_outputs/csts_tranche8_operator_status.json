@@ -1,9 +1,17 @@
 {
-  "updated_at": "2026-10-26T20:48:44.129530+00:00",
-  "worker_status": "running",
+  "updated_at": "2026-10-26T20:49:03.719782+00:00",
+  "worker_status": "waiting",
   "action_id": "subset_v2_import_a75fa36a",
   "source_commit": "618e749199f5ecb936333b3c536cd32fed383514",
   "operator_sha256": "7ab0c10b3b36b7156e2a7d975d2633921b26d7b6697b645dac78550ee8c913f5",
-  "status": "launching",
-  "returncode": null
+  "status": "completed",
+  "returncode": 0,
+  "result": {
+    "phase": "subset_import",
+    "status": "complete",
+    "source_inputs": {
+      "proposition_subset_training_records.json": "d20ec3bd9e6176be98743156d67867137715d36c152c033317bb1e49362c3d1f",
+      "proposition_subset_training_manifest.json": "c4c34c230c713445b34c3165dc6092ae745c782ac9d560e390d6d3112121bd99"
+    }
+  }
 }
