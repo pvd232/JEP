@@ -1,0 +1,76 @@
+{
+  "precision": "NumPy float64",
+  "checks_passed": 14,
+  "checks": [
+    {
+      "name": "orthogonal_projector_symmetric",
+      "maximum_absolute_error": 0.0,
+      "tolerance": 2e-08
+    },
+    {
+      "name": "orthogonal_projector_idempotent",
+      "maximum_absolute_error": 5.551115123125783e-17,
+      "tolerance": 2e-08
+    },
+    {
+      "name": "component_scale_invariant",
+      "maximum_absolute_error": 1.6653345369377348e-16,
+      "tolerance": 2e-08
+    },
+    {
+      "name": "full_removal_orthogonal",
+      "maximum_absolute_error": 8.53072553308816e-17,
+      "tolerance": 2e-08
+    },
+    {
+      "name": "component_input_jacobian",
+      "maximum_absolute_error": 6.993294832113861e-11,
+      "tolerance": 2e-08
+    },
+    {
+      "name": "component_reference_jacobian",
+      "maximum_absolute_error": 4.203359882382074e-11,
+      "tolerance": 2e-08
+    },
+    {
+      "name": "corrected_input_jacobian",
+      "maximum_absolute_error": 2.487232642067738e-10,
+      "tolerance": 2e-08
+    },
+    {
+      "name": "corrected_reference_jacobian",
+      "maximum_absolute_error": 1.4446249751998153e-10,
+      "tolerance": 2e-08
+    },
+    {
+      "name": "normalization_jacobian",
+      "maximum_absolute_error": 6.268044416835039e-11,
+      "tolerance": 2e-08
+    },
+    {
+      "name": "normalization_radial_nullspace",
+      "maximum_absolute_error": 5.551115123125783e-17,
+      "tolerance": 2e-08
+    },
+    {
+      "name": "cosine_mse_input_gradient",
+      "maximum_absolute_error": 6.17257356338996e-11,
+      "tolerance": 2e-08
+    },
+    {
+      "name": "sigmoid_logit_gradient",
+      "maximum_absolute_error": 5.699704597184052e-11,
+      "tolerance": 2e-08
+    },
+    {
+      "name": "paired_covariance_identity",
+      "maximum_absolute_error": 8.881784197001252e-16,
+      "tolerance": 2e-08
+    },
+    {
+      "name": "paired_mean_identity",
+      "maximum_absolute_error": 3.3306690738754696e-16,
+      "tolerance": 2e-08
+    }
+  ]
+}

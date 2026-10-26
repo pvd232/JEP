@@ -1,0 +1,65 @@
+{
+  "publication_destination": {
+    "kind": "viper_cloud",
+    "owner": "pvd232",
+    "workspace": "jep_csts_joint_20261021"
+  },
+  "model_sha256": "8805f9a7241e4e19ffc481341ebad6f1ddb6dd6ff04bbf710f9f0896469e34ff",
+  "encoder": {
+    "model_id": "Qwen/Qwen3-Embedding-8B",
+    "revision": "c90816d848505624c2434128dfc61132162a0ee9",
+    "embedding_dimension": 4096,
+    "max_length": 160,
+    "encode_batch_size": 4,
+    "device": "cuda"
+  },
+  "bank": {
+    "bank_size": 16,
+    "seed": 7
+  },
+  "training": {
+    "seed": 7,
+    "device": "cuda",
+    "output_dim": 512,
+    "dropout": 0.15,
+    "learning_rate": 0.001,
+    "weight_decay": 0.01,
+    "batch_size": 32,
+    "max_epochs": 48,
+    "patience": 5,
+    "max_seconds": 600
+  },
+  "splits": {
+    "training": {
+      "path": "csts_data/train.json",
+      "rows": 6980,
+      "groups": 2674,
+      "sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01"
+    },
+    "validation": {
+      "path": "csts_data/dev.json",
+      "rows": 1830,
+      "groups": 688,
+      "sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273"
+    },
+    "test": {
+      "path": "csts_data/evaluation.json",
+      "rows": 2620,
+      "groups": 1241,
+      "sha256": "2c8b6f2b62740c85c376eacd02ef222c2bfacdfe8df5f772a4dd7d52b6d38f1e"
+    }
+  },
+  "budgets": {
+    "extraction_seconds": 5400,
+    "test_extraction_seconds": 1800,
+    "analysis_seconds": 1800
+  },
+  "bootstrap_draws": 2000,
+  "bootstrap_seed": 61024,
+  "arms": [
+    "same_passage",
+    "population",
+    "projection",
+    "case"
+  ]
+}

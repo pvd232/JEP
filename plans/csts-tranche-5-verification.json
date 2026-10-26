@@ -1,0 +1,53 @@
+{
+  "status": "passed",
+  "scope": "plan, code, mathematical checks, and review; benchmark execution excluded",
+  "new_head_fits": 4,
+  "comparator": "existing sealed Qwen+LoRA predictions; no baseline rerun or new native head",
+  "benchmark_inference_started": false,
+  "benchmark_training_started": false,
+  "snapshot_sha256": {
+    "csts_pilot/matched_baselines.py": "9a89e28bea4f9dff98b8b760931c12babb94c794b27d80cab7175db425f0669a",
+    "csts_pilot/matched_baselines_run.py": "1e71195a4cc0c034a7bc592112534f5483be02b1af8590ac5ce1dfc47607c65c",
+    "tests/test_csts_matched_baselines.py": "2f9f52eeb5af224ebe75ea28269a3aa29985cea7e19cab9b87c4554976e0ede9",
+    "scripts/check_tranche5_math.py": "07447aed9c4421214be64008c71a84a7b40a1f9194cdf5f7e0795cbc39de343e",
+    "configs/csts-tranche-5.json": "c492c508e7fb63a199b3e927461d954d4d939fecb2d578dbaa6e245f4153f07c",
+    "plans/csts-tranche-5-matched-baselines.md": "5582db5136accc41002cfd772f8405e4a3b935efd44eb05419981d5b744ba387",
+    "plans/csts-tranche-5-derivations.md": "a7b58e0e3417ce09a20bce7d613acd66f335037c1c73396b04bfcdbd9584c492"
+  },
+  "owner_runtime": "/home/machina/jep-format-env/bin/python",
+  "checks": {
+    "pytest": {
+      "command": "python -m pytest -q tests/test_csts_matched_baselines.py",
+      "passed": 43,
+      "elapsed_seconds": 8.56
+    },
+    "ruff": {
+      "status": "passed",
+      "files": 4
+    },
+    "pyrefly": {
+      "status": "passed",
+      "errors": 0,
+      "preset": "basic",
+      "scope": "two production modules"
+    },
+    "mathematics": {
+      "passed": 24,
+      "gradient_checks": 19,
+      "max_gradient_error": 2.63425571429192e-10
+    },
+    "preflight": {
+      "status": "passed",
+      "inference_started": false,
+      "training_started": false,
+      "saved_validation_predictions_sha256": "f82e66b853940ac44b316fb1325e12c6d4d09b1ac7f86c67b76a7177611d6bd0"
+    },
+    "browser_math": {
+      "engine": "KaTeX 0.16.22 then self-contained native MathML",
+      "expressions": 273,
+      "parse_errors": 0,
+      "single_dollar_delimiters": false,
+      "visual_inspection": "focused conventions/equations/symbol table preview visually inspected in Chrome"
+    }
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "scope": "independent mathematical derivations and rendering syntax",
+  "status": "passed",
+  "experiment_scope": {
+    "new_head_fits": 4,
+    "native_comparator": "existing sealed predictions",
+    "native_fitting_updates": 0,
+    "native_reproduction_updates": 0
+  },
+  "derivations": {
+    "path": "plans/csts-tranche-5-derivations.md",
+    "sha256": "a7b58e0e3417ce09a20bce7d613acd66f335037c1c73396b04bfcdbd9584c492"
+  },
+  "reproduction_script": {
+    "path": "scripts/check_tranche5_math.py",
+    "sha256": "07447aed9c4421214be64008c71a84a7b40a1f9194cdf5f7e0795cbc39de343e",
+    "command": "python scripts/check_tranche5_math.py"
+  },
+  "independent_algebra": {
+    "scope": "independent mathematical expressions in NumPy; CPU float64",
+    "checks": 24,
+    "gradient_checks": 19,
+    "max_gradient_error": 2.63425571429192e-10,
+    "finite_difference_step": 1e-06,
+    "gradient_error_tolerance": 1e-07,
+    "example_seed": 61026,
+    "results": [
+      {
+        "check": "I_weight_gradient",
+        "max_error": 2.0041725939425048e-10
+      },
+      {
+        "check": "I_passages_gradient",
+        "max_error": 2.2815095356031913e-10
+      },
+      {
+        "check": "M_weight_gradient",
+        "max_error": 2.434915463700449e-10
+      },
+      {
+        "check": "M_passages_gradient",
+        "max_error": 1.6408869402129156e-10
+      },
+      {
+        "check": "M_logit_gradient",
+        "max_error": 2.0748150940386179e-10
+      },
+      {
+        "check": "M_same_generic_gradient",
+        "max_error": 1.740406601455813e-10
+      },
+      {
+        "check": "B_weight_gradient",
+        "max_error": 6.547026809577972e-11
+      },
+      {
+        "check": "B_passages_gradient",
+        "max_error": 1.0588364213193202e-10
+      },
+      {
+        "check": "B_logit_gradient",
+        "max_error": 1.2019829576104257e-12
+      },
+      {
+        "check": "B_reference_gradient",
+        "max_error": 5.6140370130464134e-11
+      },
+      {
+        "check": "B_generic_gradient",
+        "max_error": 5.6140370130464134e-11
+      },
+      {
+        "check": "P_weight_gradient",
+        "max_error": 1.6640186450977978e-10
+      },
+      {
+        "check": "P_passages_gradient",
+        "max_error": 1.9118126526329604e-10
+      },
+      {
+        "check": "P_logit_gradient",
+        "max_error": 6.612435599073763e-11
+      },
+      {
+        "check": "P_reference_gradient",
+        "max_error": 1.595701851903053e-10
+      },
+      {
+        "check": "P_generic_gradient",
+        "max_error": 1.870888756416722e-10
+      },
+      {
+        "check": "C_weight_gradient",
+        "max_error": 2.63425571429192e-10
+      },
+      {
+        "check": "C_passages_gradient",
+        "max_error": 2.1586087671293056e-10
+      },
+      {
+        "check": "C_case_reference_gradient",
+        "max_error": 1.5832146704752859e-10
+      },
+      {
+        "check": "projection_symmetry",
+        "passed": true
+      },
+      {
+        "check": "projection_idempotence",
+        "passed": true
+      },
+      {
+        "check": "projection_direction_scale_invariance",
+        "passed": true
+      },
+      {
+        "check": "projection_parallel_perpendicular_decomposition",
+        "passed": true
+      },
+      {
+        "check": "projection_residual_squared_norm",
+        "passed": true
+      }
+    ]
+  },
+  "math_rendering": {
+    "engine": "KaTeX 0.16.22",
+    "inline_payloads": 207,
+    "display_payloads": 37,
+    "total_payloads": 244,
+    "parse_errors": 0,
+    "single_dollar_delimiters": false,
+    "visual_inspection": "tracked separately by the parent rendering workflow"
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "numerical_dtype": "NumPy float64",
+    "device": "CPU"
+  },
+  "production_validation": {
+    "scope": "experiment implementation checks",
+    "status": "tracked separately in the main implementation validation receipt"
+  }
+}
