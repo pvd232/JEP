@@ -10,88 +10,26 @@
     "native": "4928c30aa81fbf253dbd7e9c4b538aef067cc9c5acf7f6782c5a26b57d618525",
     "test": "778c9c79c7ce6f163a739bdcbae243644d3c4748e1f35abec20ed55a7c1443bd"
   },
-  "updated_at": "2026-10-26T14:45:27.959947+00:00",
-  "elapsed_seconds": 340,
+  "updated_at": "2026-10-26T14:46:00.932615+00:00",
+  "elapsed_seconds": 373,
   "capture": {
     "phase": "capture_diagnostics",
     "status": "running",
     "counts": {
-      "completed_items": 1728,
+      "completed_items": 1856,
       "total_items": 17334,
-      "completed_batches": 27,
+      "completed_batches": 29,
       "failed_attempts": 0,
       "running_batches": 4
     },
     "running": [
       {
         "split": "training",
-        "batch": "batch_0026",
-        "status": "running",
-        "items": 64,
-        "started_unix": 1793025337.261374,
-        "elapsed_seconds": 590.7,
-        "stderr_flags": {
-          "capacity": false,
-          "rate_limit": false,
-          "timeout": false,
-          "auth": false,
-          "policy": false,
-          "connection": false,
-          "retrying": false
-        },
-        "stderr_counts": {
-          "capacity": 0,
-          "rate_limit": 0,
-          "timeout": 0,
-          "auth": 0,
-          "policy": 0,
-          "connection": 0,
-          "retrying": 0
-        },
-        "stderr_bytes_scanned": 0,
-        "stderr_scan_truncated": false,
-        "last_event_age_seconds": 589.9,
-        "event_count": 2,
-        "last_cli_event_type": "turn.started"
-      },
-      {
-        "split": "training",
-        "batch": "batch_0028",
-        "status": "running",
-        "items": 64,
-        "started_unix": 1793025405.403842,
-        "elapsed_seconds": 522.6,
-        "stderr_flags": {
-          "capacity": false,
-          "rate_limit": false,
-          "timeout": false,
-          "auth": false,
-          "policy": false,
-          "connection": false,
-          "retrying": false
-        },
-        "stderr_counts": {
-          "capacity": 0,
-          "rate_limit": 0,
-          "timeout": 0,
-          "auth": 0,
-          "policy": 0,
-          "connection": 0,
-          "retrying": 0
-        },
-        "stderr_bytes_scanned": 0,
-        "stderr_scan_truncated": false,
-        "last_event_age_seconds": 521.9,
-        "event_count": 2,
-        "last_cli_event_type": "turn.started"
-      },
-      {
-        "split": "training",
         "batch": "batch_0029",
         "status": "running",
         "items": 64,
         "started_unix": 1793025909.678446,
-        "elapsed_seconds": 18.3,
+        "elapsed_seconds": 51.3,
         "stderr_flags": {
           "capacity": false,
           "rate_limit": false,
@@ -112,7 +50,7 @@
         },
         "stderr_bytes_scanned": 0,
         "stderr_scan_truncated": false,
-        "last_event_age_seconds": 17.5,
+        "last_event_age_seconds": 50.5,
         "event_count": 2,
         "last_cli_event_type": "turn.started"
       },
@@ -122,7 +60,7 @@
         "status": "running",
         "items": 64,
         "started_unix": 1793025924.250054,
-        "elapsed_seconds": 3.7,
+        "elapsed_seconds": 36.7,
         "stderr_flags": {
           "capacity": false,
           "rate_limit": false,
@@ -143,7 +81,69 @@
         },
         "stderr_bytes_scanned": 0,
         "stderr_scan_truncated": false,
-        "last_event_age_seconds": 3.2,
+        "last_event_age_seconds": 36.1,
+        "event_count": 2,
+        "last_cli_event_type": "turn.started"
+      },
+      {
+        "split": "training",
+        "batch": "batch_0031",
+        "status": "running",
+        "items": 64,
+        "started_unix": 1793025935.795306,
+        "elapsed_seconds": 25.1,
+        "stderr_flags": {
+          "capacity": false,
+          "rate_limit": false,
+          "timeout": false,
+          "auth": false,
+          "policy": false,
+          "connection": false,
+          "retrying": false
+        },
+        "stderr_counts": {
+          "capacity": 0,
+          "rate_limit": 0,
+          "timeout": 0,
+          "auth": 0,
+          "policy": 0,
+          "connection": 0,
+          "retrying": 0
+        },
+        "stderr_bytes_scanned": 0,
+        "stderr_scan_truncated": false,
+        "last_event_age_seconds": 24.4,
+        "event_count": 2,
+        "last_cli_event_type": "turn.started"
+      },
+      {
+        "split": "training",
+        "batch": "batch_0032",
+        "status": "running",
+        "items": 64,
+        "started_unix": 1793025936.167569,
+        "elapsed_seconds": 24.8,
+        "stderr_flags": {
+          "capacity": false,
+          "rate_limit": false,
+          "timeout": false,
+          "auth": false,
+          "policy": false,
+          "connection": false,
+          "retrying": false
+        },
+        "stderr_counts": {
+          "capacity": 0,
+          "rate_limit": 0,
+          "timeout": 0,
+          "auth": 0,
+          "policy": 0,
+          "connection": 0,
+          "retrying": 0
+        },
+        "stderr_bytes_scanned": 0,
+        "stderr_scan_truncated": false,
+        "last_event_age_seconds": 23.9,
         "event_count": 2,
         "last_cli_event_type": "turn.started"
       }
@@ -151,11 +151,27 @@
     "recent_closed": [
       {
         "split": "training",
+        "batch": "batch_0028",
+        "status": "complete",
+        "items": 64,
+        "started_unix": 1793025405.403842,
+        "elapsed_seconds": 530.3
+      },
+      {
+        "split": "training",
         "batch": "batch_0027",
         "status": "complete",
         "items": 64,
         "started_unix": 1793025342.068154,
         "elapsed_seconds": 567.6
+      },
+      {
+        "split": "training",
+        "batch": "batch_0026",
+        "status": "complete",
+        "items": 64,
+        "started_unix": 1793025337.261374,
+        "elapsed_seconds": 598.9
       },
       {
         "split": "training",
@@ -196,22 +212,6 @@
         "items": 64,
         "started_unix": 1793024736.0419898,
         "elapsed_seconds": 601.2
-      },
-      {
-        "split": "training",
-        "batch": "batch_0020",
-        "status": "complete",
-        "items": 64,
-        "started_unix": 1793024715.121582,
-        "elapsed_seconds": 626.9
-      },
-      {
-        "split": "training",
-        "batch": "batch_0019",
-        "status": "complete",
-        "items": 64,
-        "started_unix": 1793024710.5441,
-        "elapsed_seconds": 99.6
       }
     ],
     "supervisors": [
@@ -223,7 +223,7 @@
         "process_alive": true
       }
     ],
-    "observed_unix": 1793025927.9599922
+    "observed_unix": 1793025960.932666
   },
   "sample": {
     "status": "awaiting_clean_owner_checks"
@@ -239,6 +239,6 @@
     "service": "Google Cloud",
     "interactive_sign_in_required": true,
     "recognized_noninteractive_reauthentication_failure": true,
-    "owner_check_attempts": 12
+    "owner_check_attempts": 13
   }
 }
