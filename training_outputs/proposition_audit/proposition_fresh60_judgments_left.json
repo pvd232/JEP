@@ -1,0 +1,304 @@
+[
+  {
+    "id": "ef77b9514f11b512d5f10d955b13d0efd951a45f9b4afffbbe66ab0c63bf5c99",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "Correctly abstains because no dog color is supplied.",
+    "interpretation_sensitive": false,
+    "interpretation_rationale": null
+  },
+  {
+    "id": "f17869b9122e161ee68a27a011bbee2e036c5b4fb6cb5b921392cffd748ae67d",
+    "variant": "P",
+    "fully_faithful": false,
+    "severe_unsupported": false,
+    "errors": [
+      "unnecessary_abstention_omits_supported_broad_category"
+    ],
+    "notes": "Abstention omits the broad equestrian / horseback category supported by the mounted athletes. It correctly avoids inventing a specific discipline.",
+    "interpretation_sensitive": true,
+    "interpretation_rationale": "If type of sport is required to mean an identified discipline, abstention is defensible because none is named. Under the frozen broad-category rule, mounted athletes support an equestrian / horseback partial answer, so the candidate loses requested supported information."
+  },
+  {
+    "id": "f3e1472e9c75ade838fa1c4dc995fc769df9077ad488443f980ed7b6bc6e6e5c",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "Explicit count of two people is retained.",
+    "interpretation_sensitive": false,
+    "interpretation_rationale": null
+  },
+  {
+    "id": "c57b95a35c430216b2de3ba97a1c51e00cfeb3404a2624cee91c600473cee59c",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "Baseball is explicitly named.",
+    "interpretation_sensitive": false,
+    "interpretation_rationale": null
+  },
+  {
+    "id": "02d0096ad8aa8fe7388675e52b9bd30e8cf7acba5eb93a7a19630896fd40dc85",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "All stated food types are included; the utensil is correctly excluded.",
+    "interpretation_sensitive": false,
+    "interpretation_rationale": null
+  },
+  {
+    "id": "465ddf7186e431d1dffaa7f993645e67a990f860e3ee07a4d328cd069fd5b91e",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "All four stated produce types are included.",
+    "interpretation_sensitive": false,
+    "interpretation_rationale": null
+  },
+  {
+    "id": "be9bf4d678892ef6af75bdec5bdf98a846617dde35693c79c10c7115ecd87e8d",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "The qualitative count several is retained without inventing an exact number.",
+    "interpretation_sensitive": false,
+    "interpretation_rationale": null
+  },
+  {
+    "id": "3d3c7a25abc084e40d44ec6c924c1a2e1e1b3818c00a48ad554574e3c953a6e8",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "The fountain is the explicit location of the child's play.",
+    "interpretation_sensitive": false,
+    "interpretation_rationale": null
+  },
+  {
+    "id": "daaf2cddb2dce9b55d41663332b75423833f1c02ddac3ffe98ac39cd6576d5fe",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "Both stated cake ingredients / toppings are included; the separate croissant is outside that ingredient scope.",
+    "interpretation_sensitive": true,
+    "interpretation_rationale": "Ingredients can be read broadly as all food items, but the candidate reasonably uses the cake-ingredient / topping relationship explicitly stated by with. The nearby croissant is not identified as an ingredient."
+  },
+  {
+    "id": "6e99d9dbdfe9feaf5089987f6aece5a337ec8dc3abaa5b113bbdaa54ae594ef3",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "Correctly abstains because neither vehicle type has a stated color.",
+    "interpretation_sensitive": false,
+    "interpretation_rationale": null
+  },
+  {
+    "id": "5a65a879b754a5cc9cf130b60d1d3a7e2f3d21cf75993e11c3c7737015b7b1d4",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "Directly answers the train-on-tracks proposition.",
+    "interpretation_sensitive": true,
+    "interpretation_rationale": "The condition is a proposition rather than a standard question. Interpreting it as whether the train is on tracks is directly supported."
+  },
+  {
+    "id": "532b91b85b2c300d103545214594415a7b8d8c86a015d19840a7e463be7c6eb4",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "Correctly abstains because the uniform color is absent.",
+    "interpretation_sensitive": false,
+    "interpretation_rationale": null
+  },
+  {
+    "id": "95e18e6781a3e17c013e9ed3e9b615da605bcc1ff7c1877bee7248f0dfb4d2f5",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "Accurately identifies the immediate shop-doorway setting and its sign.",
+    "interpretation_sensitive": false,
+    "interpretation_rationale": null
+  },
+  {
+    "id": "b2b25027153e3ff8f852f4b9243ee16572316d7785df2e87b1abcfecaaebaf9d",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "The stated jumping-and-catching action is retained without adding an animal species.",
+    "interpretation_sensitive": true,
+    "interpretation_rationale": "The passage omits the animal noun. The condition supplies the animal framing, and the answer confines itself to the explicit action without inferring a species."
+  },
+  {
+    "id": "7138437884e9a7cbc00d709087123e5c83e62c94fba82584bcb9c8e5ceee771e",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "The bicycle is explicitly identified.",
+    "interpretation_sensitive": false,
+    "interpretation_rationale": null
+  },
+  {
+    "id": "b9e3f629ebb9f84c13e76ce289d933fbacef4385f3b80179edb2b11eb40da98d",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "Baseball and the Little League qualifier are both supported.",
+    "interpretation_sensitive": false,
+    "interpretation_rationale": null
+  },
+  {
+    "id": "15b53c093bd397ff326e3017d08b50027dc4d2eb6283a8552ab88040abe499e7",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "Hands held up faithfully answers the crowd's arm position.",
+    "interpretation_sensitive": false,
+    "interpretation_rationale": null
+  },
+  {
+    "id": "a4076c17fda5b5adf0b9c33fec98d6b82505d74ca177935c19a8aa5406d80f60",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "The explicit attic bathroom type is retained.",
+    "interpretation_sensitive": false,
+    "interpretation_rationale": null
+  },
+  {
+    "id": "bd9d0f73fa7769bb691120f88e34a0a2f1a4146bc20dfbc3642a35eae1dcdfec",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "Both distinct vehicle types are included; spelling normalization is harmless.",
+    "interpretation_sensitive": false,
+    "interpretation_rationale": null
+  },
+  {
+    "id": "7259b36ed245f6c4f90e1615863506276b182c0d0d2dc1e12c6dc64b0eebee6d",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "Blue is attributed to the person's shirt.",
+    "interpretation_sensitive": false,
+    "interpretation_rationale": null
+  },
+  {
+    "id": "ef7bffa67d2ebee89cfdbc4154e97c50943f0346d9eabb26251cecfe9c333071",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "The descriptive back-tire jumping action answers the available trick information without inventing a named maneuver.",
+    "interpretation_sensitive": true,
+    "interpretation_rationale": "The passage describes the maneuver but does not supply an established trick name. A faithful descriptive partial answer is adequate."
+  },
+  {
+    "id": "693409b524c3dafbbf1d0455a721ba6b3d7c3388c2606f4f70a9d47c9aa4a660",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "The dog's running and carrying something orange in its mouth are accurately retained.",
+    "interpretation_sensitive": false,
+    "interpretation_rationale": null
+  },
+  {
+    "id": "09c999aa8c0a3cbc557a7d9439724489b6b8d177520a17ea320941df31532bcd",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "Gray is correctly attributed to the swimsuit, rather than the white waves.",
+    "interpretation_sensitive": false,
+    "interpretation_rationale": null
+  },
+  {
+    "id": "4a9d8972bca78245e851aa5bf74e331e269d70eb2588f3dbe35c5df49d951ee6",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "The qualitative height high in the air is retained, with the absence of an exact distance made explicit.",
+    "interpretation_sensitive": true,
+    "interpretation_rationale": "Distance is given qualitatively rather than numerically. High in the air is requested information and should not trigger abstention."
+  },
+  {
+    "id": "37e6b0545702ea4b7e643050990b4a29f53c042f8b49fa1a8cf223cc09b5c436",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "The singular man supports a count of one person in the described scene.",
+    "interpretation_sensitive": false,
+    "interpretation_rationale": null
+  },
+  {
+    "id": "8ede472e7d436dd21a29389e4c5acc411c6f986929bbdbe0e3f293325f12df69",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "The location above the stone stairs is accurate.",
+    "interpretation_sensitive": false,
+    "interpretation_rationale": null
+  },
+  {
+    "id": "afca10beefd35c5019e4d42d8527bd8ebc3c7148559a12e65fe9b0cc2dae1da5",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "The dog-facing-dog activity is accurately retained; no play or aggression is invented.",
+    "interpretation_sensitive": false,
+    "interpretation_rationale": null
+  },
+  {
+    "id": "28ef8a0408cbdc7c563c83505384783625a377f97791ea0e9cbb2d1636e6cddd",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "Red wine is the explicitly named alcoholic drink.",
+    "interpretation_sensitive": true,
+    "interpretation_rationale": "Liquor is used in the loose alcoholic-beverage sense in the condition. Under a strict distilled-spirit sense, the passage names no liquor; the candidate appropriately reports the explicit red wine."
+  },
+  {
+    "id": "4f7d78ee205a95b4c893b08ad8e92b1b7f01da1f0d2bccbacd68eb710200c8ed",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "Sitting on the snow is the stated posture.",
+    "interpretation_sensitive": false,
+    "interpretation_rationale": null
+  },
+  {
+    "id": "45e0bddc076995eacded9b193d7628ec6cad171032b0cbbc5906597f35469ff8",
+    "variant": "P",
+    "fully_faithful": true,
+    "severe_unsupported": false,
+    "errors": [],
+    "notes": "The qualitative count several is retained without inventing an exact number.",
+    "interpretation_sensitive": false,
+    "interpretation_rationale": null
+  }
+]
