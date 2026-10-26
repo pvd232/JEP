@@ -1,0 +1,80 @@
+{
+  "status": "pilot_complete_instructuie_gpu_launch_pending_authorization",
+  "source_commit": "769114a4967de1cb8fbb26709a13119e01df1cff",
+  "total_sources": 108,
+  "shared_archive_matched_sources": 30,
+  "all_available": {
+    "assistant_structured": {
+      "n": 108,
+      "reader_a_faithful": 106,
+      "reader_b_faithful": 98,
+      "both_faithful": 97,
+      "reader_disagreements": 10
+    },
+    "archived_qwen_spans": {
+      "n": 30,
+      "reader_a_faithful": 21,
+      "reader_b_faithful": 20,
+      "both_faithful": 20,
+      "reader_disagreements": 1
+    },
+    "archived_generated_v1": {
+      "n": 30,
+      "reader_a_faithful": 29,
+      "reader_b_faithful": 30,
+      "both_faithful": 29,
+      "reader_disagreements": 1
+    }
+  },
+  "matched": {
+    "assistant_structured": {
+      "n": 30,
+      "reader_a_faithful": 29,
+      "reader_b_faithful": 27,
+      "both_faithful": 26,
+      "reader_disagreements": 4
+    },
+    "archived_qwen_spans": {
+      "n": 30,
+      "reader_a_faithful": 21,
+      "reader_b_faithful": 20,
+      "both_faithful": 20,
+      "reader_disagreements": 1
+    },
+    "archived_generated_v1": {
+      "n": 30,
+      "reader_a_faithful": 29,
+      "reader_b_faithful": 30,
+      "both_faithful": 29,
+      "reader_disagreements": 1
+    }
+  },
+  "structured_by_cohort": {
+    "color_diagnostic": {
+      "n": 80,
+      "reader_a_faithful": 79,
+      "reader_b_faithful": 73,
+      "both_faithful": 73,
+      "reader_disagreements": 6
+    },
+    "evidence_helped_control": {
+      "n": 28,
+      "reader_a_faithful": 27,
+      "reader_b_faithful": 25,
+      "both_faithful": 24,
+      "reader_disagreements": 4
+    }
+  },
+  "reference_sha256": {
+    "a": "70c60980fc5941c94c852f7cb4ed7c1907569c3be042a6dbdfd40ae81173d943",
+    "b": "5253a4301fb8b2d00e6e40a9fa8e26ce17cf53d94e78e0da567713f86834183d"
+  },
+  "instructuie_predictions": 0,
+  "optimizer_updates": 0,
+  "limitations": [
+    "Assistant-generated candidate changes generator and representation together.",
+    "Two isolated contexts of the same assistant model supplied review judgments.",
+    "Archive-matched sample has 28 successful-control sources and 2 color sources.",
+    "Extraction-fidelity diagnostic; similarity and training outcomes remain unmeasured."
+  ]
+}

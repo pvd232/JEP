@@ -1,0 +1,3263 @@
+[
+  {
+    "id": "027bb0de3d01a4e90872ab6c64187daf6d89c35846bbfe77964e6b11d9f2cb7e",
+    "record": {
+      "condition": "color of clothes",
+      "status": "answered",
+      "reason": "Only the pants have a stated clothing color.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "pants",
+          "source_quote": "red pants"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "red",
+          "source_quote": "red pants",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "09adaf4cb986ac285d4d3c73d23bbdf915dbef8793973770831b0e79b209ef0b",
+    "record": {
+      "condition": "color of dogs",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "dog1",
+          "type": "dog",
+          "source_quote": "A black and white dog"
+        },
+        {
+          "id": "dog2",
+          "type": "dog",
+          "source_quote": "a tan dog"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "dog1",
+          "predicate": "color",
+          "value": "black",
+          "source_quote": "A black and white dog",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "dog1",
+          "predicate": "color",
+          "value": "white",
+          "source_quote": "A black and white dog",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "dog2",
+          "predicate": "color",
+          "value": "tan",
+          "source_quote": "a tan dog",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "09c999aa8c0a3cbc557a7d9439724489b6b8d177520a17ea320941df31532bcd",
+    "record": {
+      "condition": "color of clothing",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "swimsuit",
+          "source_quote": "a gray swimsuit"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "gray",
+          "source_quote": "a gray swimsuit",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "0dc87c0872cde4a4324029da7829ca07047cf8c6fd5df01301793b8ffd664257",
+    "record": {
+      "condition": "type of activity",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "person",
+          "source_quote": "A person"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "activity",
+          "value": "walking along a beach",
+          "source_quote": "walks along a beach",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e1",
+          "predicate": "activity",
+          "value": "carrying a surfboard",
+          "source_quote": "carrying a surfboard",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "0ec58db56be4dce8fc0598b8c4f9d70a57ab5ca4ece787772ff90ee18e6c47d9",
+    "record": {
+      "condition": "color of uniform",
+      "status": "answered",
+      "reason": "The uniform is explicitly black.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "uniform",
+          "source_quote": "a black uniform"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "black",
+          "source_quote": "a black uniform",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "0fcd9b2ef8f6705de8b21ff155df535bc57e068e1ee27b2bc5424490e3b113d4",
+    "record": {
+      "condition": "animal's color",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "dog1",
+          "type": "dog",
+          "source_quote": "A gray dog"
+        },
+        {
+          "id": "dog2",
+          "type": "dog",
+          "source_quote": "a black and white dog"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "dog1",
+          "predicate": "color",
+          "value": "gray",
+          "source_quote": "A gray dog",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "dog2",
+          "predicate": "color",
+          "value": "black",
+          "source_quote": "a black and white dog",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "dog2",
+          "predicate": "color",
+          "value": "white",
+          "source_quote": "a black and white dog",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "163e6e0f38c23e80057f6e07e2eb87bb17f6e3b6d4a612e69d4bdbefc7ace25c",
+    "record": {
+      "condition": "color of snow",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "snow",
+          "source_quote": "the snow"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "white",
+          "source_quote": "the snow",
+          "support_status": "inferred",
+          "reason": "Ordinary snow has a white appearance."
+        }
+      ]
+    }
+  },
+  {
+    "id": "16e58b05c208930c03c942b29ceb99f1d5f174938b1f35aa4e459a5745935f6f",
+    "record": {
+      "condition": "gender",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "tennis player",
+          "source_quote": "A tennis player"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "gender",
+          "value": "male",
+          "source_quote": "his arm",
+          "support_status": "inferred",
+          "reason": "The masculine pronoun his refers to the tennis player."
+        }
+      ]
+    }
+  },
+  {
+    "id": "19ad69f6f4b5e6011a8b718c483f476322ab877c3ac9c9e52f2b6fbf60c4c609",
+    "record": {
+      "condition": "color of object",
+      "status": "answered",
+      "reason": "The bus is the explicitly colored object.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "bus",
+          "source_quote": "A red double decker bus"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "red",
+          "source_quote": "A red double decker bus",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "1cf3e12b2e23667f1431a8b7bca1efd98c0fd12c83d1a1322f07228cea9d10aa",
+    "record": {
+      "condition": "color of animal",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "dog1",
+          "type": "dog",
+          "source_quote": "a brown dog"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "dog1",
+          "predicate": "color",
+          "value": "brown",
+          "source_quote": "a brown dog",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "1f882e7bc9b39362781cba4f43b59b629082241382a9e03febb23f2f4ac113e4",
+    "record": {
+      "condition": "color of animals",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "dog group",
+          "source_quote": "Two dark colored dogs"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "dark",
+          "source_quote": "Two dark colored dogs",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "20a9a671388f50e1e7c8cc0b2295764676aaf5ff9eee445f134d05f74536a866",
+    "record": {
+      "condition": "color of shirt",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "shirt",
+          "source_quote": "green shirt"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "green",
+          "source_quote": "green shirt",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "22f425b4f4e096ce235f8e4e702ef99399fca6d4cc9af593522b53eec0f37afb",
+    "record": {
+      "condition": "color of animals",
+      "status": "answered",
+      "reason": "Both explicitly mentioned dogs are brown; the green ball is excluded.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "dog",
+          "source_quote": "A brown dog"
+        },
+        {
+          "id": "e2",
+          "type": "dog",
+          "source_quote": "another brown dog"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "brown",
+          "source_quote": "A brown dog",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e2",
+          "predicate": "color",
+          "value": "brown",
+          "source_quote": "another brown dog",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "2392edca0792f7e595e22f4b6853f0233d79a2493bf2e29dddaa5d4137455429",
+    "record": {
+      "condition": "color of vehicle",
+      "status": "answered",
+      "reason": "The train is explicitly red. Colors of its train cars are not stated.",
+      "entities": [
+        {
+          "id": "train1",
+          "type": "train",
+          "source_quote": "a red train"
+        },
+        {
+          "id": "cars",
+          "type": "train cars",
+          "source_quote": "several train cars"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "train1",
+          "predicate": "color",
+          "value": "red",
+          "source_quote": "a red train",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "24c53c173fda79595e4c0babb2c44742a06f264428ce70a8e3b9d456f1c0fdb8",
+    "record": {
+      "condition": "color of clothes",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "t-shirt",
+          "source_quote": "a colorful tye-dye t-shirt"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "multicolored",
+          "source_quote": "a colorful tye-dye t-shirt",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "25d4d4a13f2fc4103518c2b892b7192aac24053f6cccaa247e1e9b11f347db3c",
+    "record": {
+      "condition": "color of animals",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "dog",
+          "source_quote": "Two tan dogs"
+        },
+        {
+          "id": "e2",
+          "type": "dog",
+          "source_quote": "Two tan dogs"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "tan",
+          "source_quote": "Two tan dogs",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e2",
+          "predicate": "color",
+          "value": "tan",
+          "source_quote": "Two tan dogs",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "2ad6f409865177635b43797e609aa01c42573cd2c88b90cd3ea7a9f41b823959",
+    "record": {
+      "condition": "color of clothing",
+      "status": "answered",
+      "reason": "The bathing suit is explicitly green.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "bathing suit",
+          "source_quote": "a green bathing suit"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "green",
+          "source_quote": "a green bathing suit",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "2c7874d6d7b5f299e9cd328d58a9ab5876516b7c595c9dd957754d7297672ce0",
+    "record": {
+      "condition": "color of animal",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "dog1",
+          "type": "dog",
+          "source_quote": "A black , shaggy-haired dog"
+        },
+        {
+          "id": "dog2",
+          "type": "dog",
+          "source_quote": "a brown and white , fluffy dog"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "dog1",
+          "predicate": "color",
+          "value": "black",
+          "source_quote": "A black , shaggy-haired dog",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "dog2",
+          "predicate": "color",
+          "value": "brown",
+          "source_quote": "a brown and white , fluffy dog",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "dog2",
+          "predicate": "color",
+          "value": "white",
+          "source_quote": "a brown and white , fluffy dog",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "304081bed29a2a62d45411dea8d4f39c614551cdf5c224b320f9c3a73cd469b6",
+    "record": {
+      "condition": "color of cake",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "cake",
+          "source_quote": "A chocolate layer cake"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "brown",
+          "source_quote": "A chocolate layer cake",
+          "support_status": "inferred",
+          "reason": "Chocolate cake conventionally has a brown crumb."
+        }
+      ]
+    }
+  },
+  {
+    "id": "30e9c73c626b194a36c780c89db3a473253701179c4d5ecb5c6d63135db82a9c",
+    "record": {
+      "condition": "type of animals",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "giraffe",
+          "source_quote": "a giraffe"
+        },
+        {
+          "id": "e2",
+          "type": "giraffe",
+          "source_quote": "two other giraffes"
+        },
+        {
+          "id": "e3",
+          "type": "giraffe",
+          "source_quote": "two other giraffes"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "type",
+          "value": "giraffe",
+          "source_quote": "a giraffe",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e2",
+          "predicate": "type",
+          "value": "giraffe",
+          "source_quote": "two other giraffes",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e3",
+          "predicate": "type",
+          "value": "giraffe",
+          "source_quote": "two other giraffes",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "346816deca37e9b26a143b297c13b23a9a98fafc1fe274eb633439020972904f",
+    "record": {
+      "condition": "color of animal",
+      "status": "answered",
+      "reason": "Colors are preserved separately for the little and large dogs.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "dog",
+          "source_quote": "A little tan dog"
+        },
+        {
+          "id": "e2",
+          "type": "dog",
+          "source_quote": "a large black dog"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "tan",
+          "source_quote": "A little tan dog",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e2",
+          "predicate": "color",
+          "value": "black",
+          "source_quote": "a large black dog",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "35b01cd01391cb03e69245723938948e417d5b5727cf08efa22e42bbbf044c4f",
+    "record": {
+      "condition": "color of animal",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "dog1",
+          "type": "dog",
+          "source_quote": "A black dog"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "dog1",
+          "predicate": "color",
+          "value": "black",
+          "source_quote": "A black dog",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "35d7a26741a0a81bc14bffd1df7e84e70c7fb76de1ec94e538427dea5659593a",
+    "record": {
+      "condition": "color of dog",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "dog",
+          "source_quote": "A white dog with black markings"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "white",
+          "source_quote": "A white dog with black markings",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "black",
+          "source_quote": "A white dog with black markings",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "37ffb83f8e0e9d8c589f5f121a80d6fa7cfc1a1e997acf273df52cbd06b7bd66",
+    "record": {
+      "condition": "color of dogs",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "dog",
+          "source_quote": "Two brown dogs"
+        },
+        {
+          "id": "e2",
+          "type": "dog",
+          "source_quote": "Two brown dogs"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "brown",
+          "source_quote": "Two brown dogs",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e2",
+          "predicate": "color",
+          "value": "brown",
+          "source_quote": "Two brown dogs",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "3e366c9edef9fd22484eb3fe04f9d34a89de09f8c2142dabdfceb8b5bc7ac308",
+    "record": {
+      "condition": "color of clothing",
+      "status": "answered",
+      "reason": "The conventional phrases in red and in white describe the respective boxers clothing.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "clothing",
+          "source_quote": "A boxer in red"
+        },
+        {
+          "id": "e2",
+          "type": "clothing",
+          "source_quote": "a boxer in white"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "red",
+          "source_quote": "A boxer in red",
+          "support_status": "inferred",
+          "reason": "In red conventionally describes the first boxers worn clothing."
+        },
+        {
+          "entity_id": "e2",
+          "predicate": "color",
+          "value": "white",
+          "source_quote": "a boxer in white",
+          "support_status": "inferred",
+          "reason": "In white conventionally describes the second boxers worn clothing."
+        }
+      ]
+    }
+  },
+  {
+    "id": "41dab1573c65205e78021c6fe8130cb7404c06d1a69475c624d4ff670be98ffa",
+    "record": {
+      "condition": "color of animal",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "dog1",
+          "type": "dog",
+          "source_quote": "A dog with spotted black and tan fur"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "dog1",
+          "predicate": "color",
+          "value": "black",
+          "source_quote": "A dog with spotted black and tan fur",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "dog1",
+          "predicate": "color",
+          "value": "tan",
+          "source_quote": "A dog with spotted black and tan fur",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "42773634c9f23b56c32f182696ede9ac9c80a1b18ac829ec516ddb2385d45578",
+    "record": {
+      "condition": "clothing color",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "t-shirt",
+          "source_quote": "a colorful tye-dye t-shirt"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "multicolored",
+          "source_quote": "a colorful tye-dye t-shirt",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "4ac193d415c867ee1f1ed3a1f6273bf89242af3c828fd7d12ed5bf71398fad81",
+    "record": {
+      "condition": "number of people",
+      "status": "unknown",
+      "reason": "One person is in the boat; the unspecified people on shore leave the total count unavailable.",
+      "entities": [],
+      "facts": []
+    }
+  },
+  {
+    "id": "4c399cced64cba577a1d33305798a38cb12969b079a42e6e4b2ae5b74adaf536",
+    "record": {
+      "condition": "color of uniform",
+      "status": "answered",
+      "reason": "Both uniform colors are retained; soccer ball colors are excluded.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "uniform",
+          "source_quote": "an orange and black uniform"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "orange",
+          "source_quote": "an orange and black uniform",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "black",
+          "source_quote": "an orange and black uniform",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "4d8532899f1ac26f72cb1120f3ac25ba270a36176af395f901cb485733ff4dc8",
+    "record": {
+      "condition": "color of dog",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "dog1",
+          "type": "dog",
+          "source_quote": "A yellow dog"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "dog1",
+          "predicate": "color",
+          "value": "yellow",
+          "source_quote": "A yellow dog",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "50681b351e5d871f04dd643b6b3757a4eea73beadc8acdedcd3d67d359867bb6",
+    "record": {
+      "condition": "color of uniform",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "basketball uniform",
+          "source_quote": "Basketball player in orange"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "orange",
+          "source_quote": "Basketball player in orange",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "53fac8e8af7fe6802ab0c574f9db9fa101cca4fb89496fc3320007c0efe8226e",
+    "record": {
+      "condition": "type of food",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "burrito",
+          "source_quote": "a burrito"
+        },
+        {
+          "id": "e2",
+          "type": "potatoes",
+          "source_quote": "fried potatoes"
+        },
+        {
+          "id": "e3",
+          "type": "strawberry",
+          "source_quote": "a strawberry"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "type",
+          "value": "burrito",
+          "source_quote": "a burrito",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e2",
+          "predicate": "type",
+          "value": "fried potatoes",
+          "source_quote": "fried potatoes",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e3",
+          "predicate": "type",
+          "value": "strawberry",
+          "source_quote": "a strawberry",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "569edb5a0854a19abab31eb0754ed1dd4414902920b0da74fba566eff1b308a1",
+    "record": {
+      "condition": "name of products",
+      "status": "ambiguous",
+      "reason": "Products has no specified scope; the explicit manufactured objects are a cart, flooring and cabinets.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "cart",
+          "source_quote": "A metal cart"
+        },
+        {
+          "id": "e2",
+          "type": "flooring",
+          "source_quote": "hardwood floors"
+        },
+        {
+          "id": "e3",
+          "type": "cabinet",
+          "source_quote": "wooden cabinets"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "name",
+          "value": "cart",
+          "source_quote": "A metal cart",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e2",
+          "predicate": "name",
+          "value": "flooring",
+          "source_quote": "hardwood floors",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e3",
+          "predicate": "name",
+          "value": "cabinets",
+          "source_quote": "wooden cabinets",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "57d1eab45d4c5e91580fb5540d785c3a8d835313e15ad4e83a110d346885e0bb",
+    "record": {
+      "condition": "color of animal",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "horse1",
+          "type": "horse",
+          "source_quote": "An old gray mare"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "horse1",
+          "predicate": "color",
+          "value": "gray",
+          "source_quote": "An old gray mare",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "5b875a5072b1bfa4aa85d438f99c673ebde3ff0475403d180f932c95e5a1d9ea",
+    "record": {
+      "condition": "surface being skated upon",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "ramp",
+          "source_quote": "a ramp"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "surface",
+          "value": "top of a ramp",
+          "source_quote": "grinding at the top of a ramp",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "5d6cb8a102a57a8d52537fe267104b04ae0e53ce992bb23ca65662e2a3f25f4e",
+    "record": {
+      "condition": "number of people",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "person",
+          "source_quote": "A man"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "count",
+          "value": "1",
+          "source_quote": "A man",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "61bbfd5c267a164a20f9fd23dbb1467a2fc772800e3b46f535521fd1bf5c6d65",
+    "record": {
+      "condition": "type of furniture",
+      "status": "answered",
+      "reason": "The desk is furniture; the computer equipment is excluded.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "desk",
+          "source_quote": "An office desk"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "furniture_type",
+          "value": "desk",
+          "source_quote": "An office desk",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "624c1eb754ba024affbe5166b6424b7c9ac2bdc43df84a39ff0074440365ec86",
+    "record": {
+      "condition": "type of animal",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "horse1",
+          "type": "horse",
+          "source_quote": "a horse"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "horse1",
+          "predicate": "type",
+          "value": "horse",
+          "source_quote": "a horse",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "62c4008583a717e9b4101e627089f48c03573c6c4f4e288e485c79f15be08f81",
+    "record": {
+      "condition": "type of animal",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "animal",
+          "source_quote": "A dog"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "type",
+          "value": "dog",
+          "source_quote": "A dog",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "62ea2bd7f4382ed52b8226293562a81283ae08799a214bc36c028e10555fa212",
+    "record": {
+      "condition": "sport",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "sporting event",
+          "source_quote": "A bicycle race"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "type",
+          "value": "bicycle racing",
+          "source_quote": "A bicycle race",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "657f71e03d08f7d66b213be0823e27cd7c393108064ed1cb28392e64e65d52b8",
+    "record": {
+      "condition": "type of food",
+      "status": "answered",
+      "reason": "Both explicitly named foods are retained; the plate and fork are excluded.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "cake",
+          "source_quote": "a piece of cake"
+        },
+        {
+          "id": "e2",
+          "type": "butter",
+          "source_quote": "a pat of butter"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "food_type",
+          "value": "cake",
+          "source_quote": "a piece of cake",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e2",
+          "predicate": "food_type",
+          "value": "butter",
+          "source_quote": "a pat of butter",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "66a6e175d1d0297f5a9818ee15a584bdc4aa2db6cfec2b82278de85ef45db895",
+    "record": {
+      "condition": "type of food",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "food1",
+          "type": "sandwich",
+          "source_quote": "a sandwich"
+        },
+        {
+          "id": "food2",
+          "type": "fries",
+          "source_quote": "fries"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "food1",
+          "predicate": "type",
+          "value": "sandwich",
+          "source_quote": "a sandwich",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "food2",
+          "predicate": "type",
+          "value": "fries",
+          "source_quote": "fries",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "66a90a20eae0323520526a5ee31e8c8c32ec56a6c81a23d54229e4d3dadcd6dc",
+    "record": {
+      "condition": "color",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "fire hydrant",
+          "source_quote": "A pink fire hydrant"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "pink",
+          "source_quote": "A pink fire hydrant",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "67b6a882802321e98ea4372aae74f5f73cec703cab5ddd1ddf21c59350d7f036",
+    "record": {
+      "condition": "color of vehicle",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "train",
+          "source_quote": "A red train"
+        },
+        {
+          "id": "e2",
+          "type": "rail car",
+          "source_quote": "a green rail car"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "red",
+          "source_quote": "A red train",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e2",
+          "predicate": "color",
+          "value": "green",
+          "source_quote": "a green rail car",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "6803f25faedb6a27e7714a33f01ee50c583e5b7b4b11c075fdd3aa4724a36db2",
+    "record": {
+      "condition": "type of animal",
+      "status": "answered",
+      "reason": "The context identifies two dogs despite the apparent word error puddle; no breed is established.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "dog",
+          "source_quote": "one gray puddle"
+        },
+        {
+          "id": "e2",
+          "type": "dog",
+          "source_quote": "another tan dog"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "animal_type",
+          "value": "dog",
+          "source_quote": "one gray puddle jumping in the air in front of another tan dog",
+          "support_status": "inferred",
+          "reason": "Another tan dog identifies the earlier jumping animal as a dog despite the apparent word error puddle."
+        },
+        {
+          "entity_id": "e2",
+          "predicate": "animal_type",
+          "value": "dog",
+          "source_quote": "another tan dog",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "6839a6ffcaf8bd86f461c52b6fc6aac5b48d226d6972b34e6b013fc59297ddae",
+    "record": {
+      "condition": "color of clothing",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "shirt1",
+          "type": "shirt",
+          "source_quote": "the blue shirt"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "shirt1",
+          "predicate": "color",
+          "value": "blue",
+          "source_quote": "the blue shirt",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "6907ec4c127e2d94571243272f283a9a9b17b82a8cc77d9a7bced0a3e1b1c856",
+    "record": {
+      "condition": "color of animal",
+      "status": "ambiguous",
+      "reason": "Cat color: orange. Dog color: unspecified. Singular animal scope is unclear.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "cat",
+          "source_quote": "An orange cat"
+        },
+        {
+          "id": "e2",
+          "type": "dog",
+          "source_quote": "a dog"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "orange",
+          "source_quote": "An orange cat",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "697a78caa711a57a0532366317e065072ef2fba65c247bf82d681fad967ec5d5",
+    "record": {
+      "condition": "color of teddy bears",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "teddy bear",
+          "source_quote": "white teddy bear"
+        },
+        {
+          "id": "e2",
+          "type": "teddy bear",
+          "source_quote": "yellow teddy bear"
+        },
+        {
+          "id": "e3",
+          "type": "teddy bear",
+          "source_quote": "brown teddy bear"
+        },
+        {
+          "id": "e4",
+          "type": "teddy bear",
+          "source_quote": "a small yelllow teddy bear"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "white",
+          "source_quote": "white teddy bear",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e2",
+          "predicate": "color",
+          "value": "yellow",
+          "source_quote": "yellow teddy bear",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e3",
+          "predicate": "color",
+          "value": "brown",
+          "source_quote": "brown teddy bear",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e4",
+          "predicate": "color",
+          "value": "yellow",
+          "source_quote": "a small yelllow teddy bear",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "6b01339b52ab67c497b0f9e0c7eabbb8ce23a88f661706860f3033c9b4e7103f",
+    "record": {
+      "condition": "number of food items",
+      "status": "unknown",
+      "reason": "Doughnuts and candies are unquantified plurals, so the total number of individual food items is unavailable; flowers are excluded.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "doughnut",
+          "source_quote": "doughnuts"
+        },
+        {
+          "id": "e2",
+          "type": "candy",
+          "source_quote": "candies"
+        },
+        {
+          "id": "e3",
+          "type": "cake",
+          "source_quote": "a cake"
+        }
+      ],
+      "facts": []
+    }
+  },
+  {
+    "id": "71cd6a994aeec9692933f971709a32392aadb21e61069d337a5ee319b3ea095a",
+    "record": {
+      "condition": "color of clothes",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "shorts1",
+          "type": "shorts",
+          "source_quote": "orange shorts"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "shorts1",
+          "predicate": "color",
+          "value": "orange",
+          "source_quote": "orange shorts",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "71e6c478a7338eec2900a10e7a7817ae108e010450cb6e18a8b2626b671a1e56",
+    "record": {
+      "condition": "color of sky",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "sky",
+          "source_quote": "the sky is a navy blue"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "navy blue",
+          "source_quote": "the sky is a navy blue",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "74a145205f0341b8795979edc7e834b09e397467f8f6561834d885200d6e159a",
+    "record": {
+      "condition": "animal's color",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "dog",
+          "source_quote": "A black and tan dog"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "black",
+          "source_quote": "A black and tan dog",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "tan",
+          "source_quote": "A black and tan dog",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "78c59d1af55a5a5814d5e19de643e8106f9d2a781ebd687bfbddd2b82cbbfb6a",
+    "record": {
+      "condition": "color of clothing",
+      "status": "ambiguous",
+      "reason": "Only protective equipment colors are stated; whether clothing includes gloves and helmet is unspecified.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "gloves",
+          "source_quote": "orange gloves"
+        },
+        {
+          "id": "e2",
+          "type": "helmet",
+          "source_quote": "the blue helmet"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "orange",
+          "source_quote": "orange gloves",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e2",
+          "predicate": "color",
+          "value": "blue",
+          "source_quote": "the blue helmet",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "7c6e5183e006d1df54ed14a470a76385e479221630e40bc169221ab882fa1899",
+    "record": {
+      "condition": "place",
+      "status": "ambiguous",
+      "reason": "The condition does not specify whether place means the broader setting or the rider's immediate position. The caption establishes a dirt ramp and a rider in midair, but no broader named setting.",
+      "entities": [
+        {
+          "id": "rider1",
+          "type": "man",
+          "source_quote": "A man on a bike"
+        },
+        {
+          "id": "ramp1",
+          "type": "ramp",
+          "source_quote": "a dirt ramp"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "rider1",
+          "predicate": "location",
+          "value": "midair",
+          "source_quote": "A man on a bike just hit a dirt ramp and is midair",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "ramp1",
+          "predicate": "type",
+          "value": "dirt ramp",
+          "source_quote": "a dirt ramp",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "7cca7705719cd921fa006d900837f690cefca5aa9f2307924be84b7088a8a42c",
+    "record": {
+      "condition": "type of location",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "location",
+          "source_quote": "An airport landing area"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "type",
+          "value": "airport landing area",
+          "source_quote": "An airport landing area",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "7e31182ae71458484d35c0bf7dbf03f47946feab4a5463757c421739646409ed",
+    "record": {
+      "condition": "number of people",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "people",
+          "source_quote": "Two track and field sprinters"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "count",
+          "value": "2",
+          "source_quote": "Two track and field sprinters",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "7f3f73d06df694933166a4f93390a40abef231772037260e3f296ecfc471c0c4",
+    "record": {
+      "condition": "location of books",
+      "status": "unknown",
+      "reason": "The caption locates bookshelves but does not establish that any books are present.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "bookshelf",
+          "source_quote": "Book shelves"
+        }
+      ],
+      "facts": []
+    }
+  },
+  {
+    "id": "8267e192749bee0f13421cd8af928b5a8111b1097feade8b8aefcd72c4fbfb22",
+    "record": {
+      "condition": "color of object",
+      "status": "ambiguous",
+      "reason": "The condition does not identify which object is targeted. Only the sheets have a stated color; colors of the bed and pillows are not given.",
+      "entities": [
+        {
+          "id": "bed1",
+          "type": "bed",
+          "source_quote": "The twin bed"
+        },
+        {
+          "id": "sheets1",
+          "type": "sheets",
+          "source_quote": "white sheets"
+        },
+        {
+          "id": "pillows1",
+          "type": "pillows",
+          "source_quote": "a pair of pillows"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "sheets1",
+          "predicate": "color",
+          "value": "white",
+          "source_quote": "white sheets",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "827ad4cdfa6e52d9c985ff5c1c51da0b8a6d401e499e453b3f2c99111dc1ff65",
+    "record": {
+      "condition": "type of area",
+      "status": "unknown",
+      "reason": "The caption identifies a steep rail; the surrounding area type is unspecified.",
+      "entities": [],
+      "facts": []
+    }
+  },
+  {
+    "id": "848077bb642c16f62d6f1d07da9f757a1a86349d6c86318b2e7767d7502f39d9",
+    "record": {
+      "condition": "cause of injury",
+      "status": "ambiguous",
+      "reason": "The caption describes a fall and bull trampling; the injury and its precise cause remain implicit.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "person",
+          "source_quote": "A person"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "possible_cause_of_injury",
+          "value": "fall into mud",
+          "source_quote": "falls into the mud",
+          "support_status": "inferred",
+          "reason": "A fall supplies a possible injury mechanism."
+        },
+        {
+          "entity_id": "e1",
+          "predicate": "possible_cause_of_injury",
+          "value": "trampling by a bull",
+          "source_quote": "being trampled by a bull",
+          "support_status": "inferred",
+          "reason": "Bull trampling supplies a possible injury mechanism."
+        }
+      ]
+    }
+  },
+  {
+    "id": "8651a7063db77401f080331d066a62b0167e9c32aac52f89b910ec3729273dff",
+    "record": {
+      "condition": "color of attire",
+      "status": "answered",
+      "reason": "Only the shirt has a stated attire color; the helmet color is unspecified.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "shirt",
+          "source_quote": "a pink shirt"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "pink",
+          "source_quote": "a pink shirt",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "87c72bdd31289398054006db5c49ce3224055de8e667153a58fb98f0c7be56c4",
+    "record": {
+      "condition": "color of snow",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "snow1",
+          "type": "snow",
+          "source_quote": "the snow at a ski area"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "snow1",
+          "predicate": "color",
+          "value": "white",
+          "source_quote": "the snow at a ski area",
+          "support_status": "inferred",
+          "reason": "Snow in the stated ski setting is conventionally white; the caption gives no contrary appearance. The color itself is not explicitly named."
+        }
+      ]
+    }
+  },
+  {
+    "id": "889efe773939b012900db76e495db918692f63343d5903a79da315d6f8a434e1",
+    "record": {
+      "condition": "number of people",
+      "status": "unknown",
+      "reason": "Several guys establishes an indefinite plurality; the exact count is unspecified.",
+      "entities": [],
+      "facts": []
+    }
+  },
+  {
+    "id": "906bb38b4ff2e640399dca5c28538505ee4c3d1ae039483f2d5403c05f172bee",
+    "record": {
+      "condition": "color of object",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "tour bus",
+          "source_quote": "a brick red tour bus"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "brick red",
+          "source_quote": "a brick red tour bus",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "91ddcf3aa36e4ac52819083c2f2e3a4c4131c2e3b4adaa0e76793d0e690ef7ed",
+    "record": {
+      "condition": "color of clothing",
+      "status": "answered",
+      "reason": "Shirt and vest colors are bound to their respective garments.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "shirt",
+          "source_quote": "a purple shirt"
+        },
+        {
+          "id": "e2",
+          "type": "vest",
+          "source_quote": "black vest"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "purple",
+          "source_quote": "a purple shirt",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e2",
+          "predicate": "color",
+          "value": "black",
+          "source_quote": "black vest",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "92b7f11d73e32d6a764e2b52114b941166a68c22da3fbd1ce2cbe17ba4ae8f8f",
+    "record": {
+      "condition": "color of dog",
+      "status": "answered",
+      "reason": "Dark is the stated color description; a specific hue such as black is not given.",
+      "entities": [
+        {
+          "id": "dog1",
+          "type": "dog",
+          "source_quote": "A dark dog"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "dog1",
+          "predicate": "color",
+          "value": "dark",
+          "source_quote": "A dark dog",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "9472f9ecd83ef9a45aca5a96b60251345f616c66afac1cfdba192131f5f98bb9",
+    "record": {
+      "condition": "color of uniform",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "team uniform",
+          "source_quote": "one team in blue"
+        },
+        {
+          "id": "e2",
+          "type": "team uniform",
+          "source_quote": "the other team in red and blue"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "blue",
+          "source_quote": "one team in blue",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e2",
+          "predicate": "color",
+          "value": "red",
+          "source_quote": "the other team in red and blue",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e2",
+          "predicate": "color",
+          "value": "blue",
+          "source_quote": "the other team in red and blue",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "9a17bbf4af43e93ce7989768d44fa0da1a071ddf7864b9fe38ec6077e684b4b9",
+    "record": {
+      "condition": "color of animal",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "horse",
+          "source_quote": "the large brown horse"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "brown",
+          "source_quote": "the large brown horse",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "9ce1312e5ce28a4954e8c1e346a2619ea174f71c2dfa724faabbc335b3729174",
+    "record": {
+      "condition": "color of shirt",
+      "status": "answered",
+      "reason": "The requested shirt is explicitly white; jeans are outside the requested target.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "shirt",
+          "source_quote": "a white shirt"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "white",
+          "source_quote": "a white shirt",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "a4adaaf700af71d194647d7db4c8c53e9a47b33bf273bb5aa44aca4a79c3be9d",
+    "record": {
+      "condition": "type of decoration",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "decoration1",
+          "type": "vase",
+          "source_quote": "A vase"
+        },
+        {
+          "id": "decoration2",
+          "type": "floral arrangements",
+          "source_quote": "floral arrangements"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "decoration1",
+          "predicate": "type",
+          "value": "vase",
+          "source_quote": "A vase",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "decoration2",
+          "predicate": "type",
+          "value": "floral arrangements",
+          "source_quote": "floral arrangements",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "a5c4c743f34a42ba972c5621f3760a8c51cdc5d293a18b6b929781dcb2d61e1b",
+    "record": {
+      "condition": "color of cake",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "cake",
+          "source_quote": "A piece of yellow cake"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "yellow",
+          "source_quote": "A piece of yellow cake",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "a72483cdba0853cfa6ae98b86dbe3895ba0e926f240bb4c17fb330cd9fca77b8",
+    "record": {
+      "condition": "color of dog",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "dog",
+          "source_quote": "The large brown dog"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "brown",
+          "source_quote": "The large brown dog",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "a972a3f76fe650863630979174bd2fd10d0a9f15bb3ea3bb4fd4f34e306dbd77",
+    "record": {
+      "condition": "color of vehicle",
+      "status": "answered",
+      "reason": "The bus is the vehicle and is explicitly orange.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "bus",
+          "source_quote": "An orange  bus"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "orange",
+          "source_quote": "An orange  bus",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "b0897cd47d4ce12fc819cf0bdb38f367dada85d1581da7c86ab144dc29446bd4",
+    "record": {
+      "condition": "age of girl",
+      "status": "answered",
+      "reason": "Both girls are described qualitatively as little; numeric ages are unavailable.",
+      "entities": [
+        {
+          "id": "girl1",
+          "type": "girl",
+          "source_quote": "A little girl in a pink shirt"
+        },
+        {
+          "id": "girl2",
+          "type": "girl",
+          "source_quote": "a little girl in an orange shirt"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "girl1",
+          "predicate": "age_group",
+          "value": "child",
+          "source_quote": "A little girl in a pink shirt",
+          "support_status": "inferred",
+          "reason": "Little girl denotes a young female child; an exact age is not stated."
+        },
+        {
+          "entity_id": "girl2",
+          "predicate": "age_group",
+          "value": "child",
+          "source_quote": "a little girl in an orange shirt",
+          "support_status": "inferred",
+          "reason": "Little girl denotes a young female child; an exact age is not stated."
+        }
+      ]
+    }
+  },
+  {
+    "id": "b64283d79f16246c9a14027f16dfa182158289e8d3ca324127695ea8581421d1",
+    "record": {
+      "condition": "color of fruit",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "orange fruit",
+          "source_quote": "a whole orange"
+        },
+        {
+          "id": "e2",
+          "type": "orange fruit",
+          "source_quote": "a squeezed orange"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "orange",
+          "source_quote": "a whole orange",
+          "support_status": "inferred",
+          "reason": "An orange fruit conventionally has orange peel or flesh."
+        },
+        {
+          "entity_id": "e2",
+          "predicate": "color",
+          "value": "orange",
+          "source_quote": "a squeezed orange",
+          "support_status": "inferred",
+          "reason": "An orange fruit conventionally has orange peel or flesh."
+        }
+      ]
+    }
+  },
+  {
+    "id": "ba0309311baf818b99b037e3ccbfa8fba664678861272dcbf8f40dc1769fa1d6",
+    "record": {
+      "condition": "color of boat",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "kayak",
+          "source_quote": "a yellow kayak"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "yellow",
+          "source_quote": "a yellow kayak",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "bfc000d7ab723d109d940b279c92ad5f8d5513c1b8d7c2edb4f7967856c6ac7a",
+    "record": {
+      "condition": "color",
+      "status": "answered",
+      "reason": "The hydrant body is yellow and its top is blue.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "fire hydrant",
+          "source_quote": "A yellow fire hydrant"
+        },
+        {
+          "id": "e2",
+          "type": "fire hydrant top",
+          "source_quote": "a blue top"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "yellow",
+          "source_quote": "A yellow fire hydrant",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e2",
+          "predicate": "color",
+          "value": "blue",
+          "source_quote": "A yellow fire hydrant with a blue top",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "c10adbbed181d08a1a7edb5ce2209c538849a86c7451fb5ee84a99ad7c609842",
+    "record": {
+      "condition": "color of clothes",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "gear1",
+          "type": "motocross gear",
+          "source_quote": "red and black motocross gear"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "gear1",
+          "predicate": "color",
+          "value": "red",
+          "source_quote": "red and black motocross gear",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "gear1",
+          "predicate": "color",
+          "value": "black",
+          "source_quote": "red and black motocross gear",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "c3058dd19e3fdac193341f457a479052273fe71fdcc64f29e1a81f08c6a961de",
+    "record": {
+      "condition": "color of dog",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "dog",
+          "source_quote": "A large brown dog"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "brown",
+          "source_quote": "A large brown dog",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "c33c983e5de45f1135e5538f0265600c3c095f8f65ab12722c4d4b0adc17a257",
+    "record": {
+      "condition": "color of animal",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "dog",
+          "source_quote": "A brown dog"
+        },
+        {
+          "id": "e2",
+          "type": "dog",
+          "source_quote": "another brown dog"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "brown",
+          "source_quote": "A brown dog",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e2",
+          "predicate": "color",
+          "value": "brown",
+          "source_quote": "another brown dog",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "c494fff4e0779da359aa34ee7dfccdf42356cb570af3cc2d044940052ad95441",
+    "record": {
+      "condition": "color of snow",
+      "status": "answered",
+      "reason": "The usual color of snow is inferred rather than explicitly stated.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "snow",
+          "source_quote": "the snow"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "white",
+          "source_quote": "the snow",
+          "support_status": "inferred",
+          "reason": "Ordinary snow is white; the caption provides no indication of an unusual snow color."
+        }
+      ]
+    }
+  },
+  {
+    "id": "c667fa52d2c89482ecb8c704be4ec8682366bbb3fb6ab30516f26c9cbd509547",
+    "record": {
+      "condition": "color of sky",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "sky1",
+          "type": "sky",
+          "source_quote": "A dark gray clouded sky"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "sky1",
+          "predicate": "color",
+          "value": "dark gray",
+          "source_quote": "A dark gray clouded sky",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "c67fc10fe4d6807c3a67281d33657d6b5405a6264a67825c3916863f27141d8d",
+    "record": {
+      "condition": "hobby",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "activity",
+          "source_quote": "climbs a white stone structure"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "type",
+          "value": "climbing",
+          "source_quote": "climbs a white stone structure",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "c88c7dbef4e958c4eb999cebb0db15e8492d894b22197077741f2e2834c323d3",
+    "record": {
+      "condition": "color of dog",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "dog",
+          "source_quote": "A brown greyhound"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "brown",
+          "source_quote": "A brown greyhound",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "c98f1525f07ea0d6968d6e3146c0e2b65fc002c76478929e9bdcb0ac21ec7e73",
+    "record": {
+      "condition": "color of attire",
+      "status": "answered",
+      "reason": "The pants are the only attire with an explicit color.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "pants",
+          "source_quote": "blue pants"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "blue",
+          "source_quote": "blue pants",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "ca89d60aea50d992351b0b7a7410e4dd0c89a49e2433e0b6e98919fddbc21b43",
+    "record": {
+      "condition": "color of animals",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "dog1",
+          "type": "dog",
+          "source_quote": "The brown and black dog"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "dog1",
+          "predicate": "color",
+          "value": "brown",
+          "source_quote": "The brown and black dog",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "dog1",
+          "predicate": "color",
+          "value": "black",
+          "source_quote": "The brown and black dog",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "ca8f9d9e962c633a5402bc0e6690b4b4944bd9f96722441aaa9ddae3212d1775",
+    "record": {
+      "condition": "color of animal",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "dog",
+          "source_quote": "A small black dog"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "black",
+          "source_quote": "A small black dog",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "ccfb44703878615bc0b3c3072b055cee9114f0d25d42e83586da16f6e7e65c56",
+    "record": {
+      "condition": "activity during game",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "person",
+          "source_quote": "A man"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "activity",
+          "value": "playing tennis",
+          "source_quote": "playing tennis during a game",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e1",
+          "predicate": "activity",
+          "value": "touching racket to the ground",
+          "source_quote": "touches his racket to the ground",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "d056f3ce3feb83a4c890d1bf243a7a59841c57f0419a30f5658e53391878e5a7",
+    "record": {
+      "condition": "color of animal",
+      "status": "answered",
+      "reason": "Both explicitly stated colors belong to the same dog.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "dog",
+          "source_quote": "A brown and white dog"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "brown",
+          "source_quote": "A brown and white dog",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "white",
+          "source_quote": "A brown and white dog",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "d40ae5606dec4764ca38cc1130270bffb390340baacd16b825fb9c0f76e05b28",
+    "record": {
+      "condition": "color of vehicle",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "car1",
+          "type": "car",
+          "source_quote": "A red car"
+        },
+        {
+          "id": "bus1",
+          "type": "bus",
+          "source_quote": "a red bus"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "car1",
+          "predicate": "color",
+          "value": "red",
+          "source_quote": "A red car",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "bus1",
+          "predicate": "color",
+          "value": "red",
+          "source_quote": "a red bus",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "d485d65adbd33afd0f01860892c1f1fdf6d8070db31f3a32a86cdce072bef511",
+    "record": {
+      "condition": "animal's color",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "dog",
+          "source_quote": "A large brown dog"
+        },
+        {
+          "id": "e2",
+          "type": "dog",
+          "source_quote": "a small black dog"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "brown",
+          "source_quote": "A large brown dog",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e2",
+          "predicate": "color",
+          "value": "black",
+          "source_quote": "a small black dog",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "d743f57681f6cb18868a162c255cbb5e9779d0b7623b7b97aaed44d509c599fc",
+    "record": {
+      "condition": "color of clothing",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "swimsuit",
+          "source_quote": "a red and black swimsuit"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "red",
+          "source_quote": "a red and black swimsuit",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "black",
+          "source_quote": "a red and black swimsuit",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "d79f45c8b1f0d1f1eed13f222e328da54740c469b950840171570ec0346ca5e8",
+    "record": {
+      "condition": "color of object",
+      "status": "answered",
+      "reason": "The swimsuit is the explicitly colored object.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "swimsuit",
+          "source_quote": "a pink swimsuit"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "pink",
+          "source_quote": "a pink swimsuit",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "d7a4bae8d84a2e65483f80c7218e1dc41647bc59e9e891905b88d699b0a940b6",
+    "record": {
+      "condition": "color of object",
+      "status": "ambiguous",
+      "reason": "The object target is unspecified among two suitcases, a chair, a desk, and a bed. Both suitcases are explicitly red; colors of the other objects are unstated. The two suitcases are represented as one explicitly counted group because the caption does not distinguish them individually.",
+      "entities": [
+        {
+          "id": "suitcases1",
+          "type": "suitcases",
+          "source_quote": "two red suitcases"
+        },
+        {
+          "id": "chair1",
+          "type": "chair",
+          "source_quote": "a chair"
+        },
+        {
+          "id": "desk1",
+          "type": "desk",
+          "source_quote": "desk"
+        },
+        {
+          "id": "bed1",
+          "type": "bed",
+          "source_quote": "a bed"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "suitcases1",
+          "predicate": "color",
+          "value": "red",
+          "source_quote": "two red suitcases",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "suitcases1",
+          "predicate": "count",
+          "value": "2",
+          "source_quote": "two red suitcases",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "da26e29583188794fe6c2b425178c23f38e8c39d583aee359343b6ad04a9c261",
+    "record": {
+      "condition": "color of animal",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "cat",
+          "source_quote": "A black cat"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "black",
+          "source_quote": "A black cat",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "dcfa6a8ca7a85e53520dbe28970fe6cc580c69a7392cb67c8f76329b0de949b8",
+    "record": {
+      "condition": "animal's color",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "dog",
+          "source_quote": "A brown dog"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "brown",
+          "source_quote": "A brown dog",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "dd76a9bcd419a51c86399aeeac65bf39057993cc7416fa92f7f92006e39a1672",
+    "record": {
+      "condition": "clothing color",
+      "status": "answered",
+      "reason": "The shirt is explicitly blue.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "shirt",
+          "source_quote": "a blue shirt"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "blue",
+          "source_quote": "a blue shirt",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "e187e8171a9dc5f315731ba3f7f7b47bda3c45ebd3be803b7f01e459b07da47e",
+    "record": {
+      "condition": "color of clothes",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "shirt1",
+          "type": "shirt",
+          "source_quote": "a blue shirt"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "shirt1",
+          "predicate": "color",
+          "value": "blue",
+          "source_quote": "a blue shirt",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "e664d01e0853e3d68623566ed2eadf95db210fec78e019aaadb94f9918da5048",
+    "record": {
+      "condition": "color of snow",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "snow",
+          "source_quote": "a snowy crest"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "white",
+          "source_quote": "a snowy crest",
+          "support_status": "inferred",
+          "reason": "Ordinary snow covering a crest has a white appearance."
+        }
+      ]
+    }
+  },
+  {
+    "id": "effaa9cd32882e06f52bb3660c52f5986c5aa9cb58e02bd9bfc63473afc17d52",
+    "record": {
+      "condition": "color of boat",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "kayak",
+          "source_quote": "a red kayak"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "red",
+          "source_quote": "a red kayak",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "f1b5a6f96a4eb00029634fa24e31bb017e1ab5c7325d88f2aa7db1eb93835d62",
+    "record": {
+      "condition": "color of animals",
+      "status": "answered",
+      "reason": "Both dogs are explicitly white; the caption does not distinguish them individually.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "dog",
+          "source_quote": "Two white dogs"
+        },
+        {
+          "id": "e2",
+          "type": "dog",
+          "source_quote": "Two white dogs"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "white",
+          "source_quote": "Two white dogs",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e2",
+          "predicate": "color",
+          "value": "white",
+          "source_quote": "Two white dogs",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "f1ff07266c8ed72047b040a1e8f9ebca40974c018baf9ca47ea0f59631d6d83a",
+    "record": {
+      "condition": "color of clothes",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "bodysuit1",
+          "type": "bodysuit",
+          "source_quote": "the black bodysuit"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "bodysuit1",
+          "predicate": "color",
+          "value": "black",
+          "source_quote": "the black bodysuit",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "f4f9d9aa707a409a325ca4758789652cb88d6f35453226694b2914971d78443c",
+    "record": {
+      "condition": "color of clothing",
+      "status": "ambiguous",
+      "reason": "Shirt: dark blue. Hat and chaps: unspecified colors.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "shirt",
+          "source_quote": "a dark blue button up shirt"
+        },
+        {
+          "id": "e2",
+          "type": "cowboy hat",
+          "source_quote": "cowboy hat"
+        },
+        {
+          "id": "e3",
+          "type": "chaps",
+          "source_quote": "chaps"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "dark blue",
+          "source_quote": "a dark blue button up shirt",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "f644da70f535529e6f1ddeaa34ffadf80464008aa56e73927dab074a6e70d061",
+    "record": {
+      "condition": "color of object",
+      "status": "ambiguous",
+      "reason": "The requested object is unspecified; the swimsuit is the explicitly colored object.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "swimsuit",
+          "source_quote": "a red swimsuit"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "red",
+          "source_quote": "a red swimsuit",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "f8cba45571dd5ba8fe2da9084c310085c12aad3b2c68f6368d651ffb04e8fca4",
+    "record": {
+      "condition": "color of fruit",
+      "status": "unknown",
+      "reason": "The banana color and ripeness are unstated; its color could be yellow, green or brown.",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "banana",
+          "source_quote": "A whole and sliced banana"
+        }
+      ],
+      "facts": []
+    }
+  },
+  {
+    "id": "f935b5724e3da554f08e3c5df6efc05970e9b9090d3c78ce4b97973e6bfcd609",
+    "record": {
+      "condition": "color of clothes",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "wetsuit1",
+          "type": "wetsuit",
+          "source_quote": "a blue wetsuit"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "wetsuit1",
+          "predicate": "color",
+          "value": "blue",
+          "source_quote": "a blue wetsuit",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "fdf787d1af7a45a65c8ddd68e3ee9e0a63c9c8d46e213a609e9289fb74af9a1a",
+    "record": {
+      "condition": "color of animals",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "dog",
+          "source_quote": "A black dog"
+        },
+        {
+          "id": "e2",
+          "type": "dog",
+          "source_quote": "a brown and white dog"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "black",
+          "source_quote": "A black dog",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e2",
+          "predicate": "color",
+          "value": "brown",
+          "source_quote": "a brown and white dog",
+          "support_status": "explicit",
+          "reason": ""
+        },
+        {
+          "entity_id": "e2",
+          "predicate": "color",
+          "value": "white",
+          "source_quote": "a brown and white dog",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  },
+  {
+    "id": "ffdbf43f370de793ca1bf6545e63f59012677442cfdd23bb1d12bb9ced5524fb",
+    "record": {
+      "condition": "color of clothes",
+      "status": "answered",
+      "reason": "",
+      "entities": [
+        {
+          "id": "e1",
+          "type": "jacket",
+          "source_quote": "green jacket"
+        }
+      ],
+      "facts": [
+        {
+          "entity_id": "e1",
+          "predicate": "color",
+          "value": "green",
+          "source_quote": "green jacket",
+          "support_status": "explicit",
+          "reason": ""
+        }
+      ]
+    }
+  }
+]
