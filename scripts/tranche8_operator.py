@@ -1,15 +1,13 @@
-"""Resume the frozen, audited proposition capture; retain raw native checkpoints.
+"""Pinned source deployment and owner-only native Tranche 8 orchestration.
 
-This module is invoked only by the pinned tranche-8 operator.  It deliberately
-does not launch training.  Source, gate and split identities are checked before
-any paid generation, and failed CLI attempts remain available for inspection.
+The Mac worker invokes these phases separately while full capture runs in its
+own supervisor.  Deployment and checks never launch model inference.  Training
+requires complete capture, matching gate bindings and a clean checked commit.
 """
 
 import argparse
 import base64
-import fcntl
 import hashlib
-import importlib.util
 import json
 import os
 import re
@@ -22,21 +20,37 @@ import time
 from pathlib import Path
 from typing import Any
 
-REPOSITORY = "pvd232/JEP"
-WORK_ROOT = Path("/tmp/jep-tranche8-worker-20261026")
-GENERATION_ROOT = Path("/tmp/jep-proposition-input-20261026")
-GPU_ROOT = "/home/machina/jep-csts-answer-input-20261026"
+REPO = "pvd232/JEP"
+MAC_ROOT = Path("/tmp/jep-tranche8-worker-20261026/native")
+GEN_ROOT = Path("/tmp/jep-proposition-input-20261026/full_v2_6895d17242704944")
+GPU_ROOT = "/home/machina/jep-csts-proposition-lora-20261026"
+PARENT_ROOT = "/home/machina/jep-csts-qwen-evidence-20261024"
 GPU_PYTHON = "/home/machina/jep-format-env/bin/python"
 GCLOUD = "/Users/machina/google-cloud-sdk/bin/gcloud"
-GCLOUD_FLAGS = ["--account=pvd2112@columbia.edu", "--project=mantra-477901", "--zone=asia-northeast3-a", "--tunnel-through-iap"]
-EXPECTED = {
-    "training": {"items": 13744, "inputs": "0a99ac4ec215eda3131b094292cfee380544b32e885770a49f4929803eeca68f", "groups": "0b5c2b42199d482f78cb089162761c706c1f05a075ab310dcd81f12776108edb", "representatives": "354f775ddb7d82c2be8c4effc167a1503c7def11945fea031c0d76e54392568a", "source": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01"},
-    "validation": {"items": 3590, "inputs": "1129660ff464d9af2154cce1af5677661dfee5c6797bad06abe5daf49e761dae", "groups": "0ee536b63e8e6c359355b81d20a65b1cea1f713668f18223c81e7832b970f708", "representatives": "4f5fdb99d20cc98f7f2b0efcf37e4d8ffcb1a29596ba29554d745f2f805df1ba", "source": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273"},
+FLAGS = ["--account=pvd2112@columbia.edu", "--project=mantra-477901", "--zone=asia-northeast3-a", "--tunnel-through-iap"]
+SOURCE_HASHES = {"train.json": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01", "dev.json": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273"}
+OPERATION_LOGS = {
+    "native_deploy": ["source_init", "source_fetch", "source_identity", "source_pin", "source_bundle", "source_bundle_scp", "source_bundle_permissions", "native_deploy"],
+    "native_checks": ["native_checks"],
+    "native_import_capture": ["capture_bank_scp", "capture_bank_permissions", "native_import_capture"],
+    "native_launch": ["capture_bank_scp", "capture_bank_permissions", "native_import_capture", "native_supervisor_scp", "native_supervisor_permissions", "native_launch"],
+    "native_status": ["native_status"],
+    "native_archive": ["native_archive"],
 }
+OWNED = [
+    "csts_pilot/proposition_capture.py", "csts_pilot/proposition_inputs.py",
+    "csts_pilot/proposition_lora.py", "csts_pilot/proposition_run.py",
+    "csts_pilot/proposition_test.py", "csts_pilot/proposition_sample.py",
+    "csts_pilot/proposition_archive.py",
+    "tests/test_csts_proposition_capture.py", "tests/test_csts_proposition_inputs.py",
+    "tests/test_csts_proposition_lora.py", "tests/test_csts_proposition_test.py",
+    "tests/test_csts_proposition_sample.py",
+    "tests/test_csts_proposition_archive.py",
+]
 
 
-class ContinuationFailure(RuntimeError):
-    """A safe error message with no process output or credential content."""
+class NativeFailure(RuntimeError):
+    """Safe failure details; subprocess logs stay task-private."""
 
 
 def sha(data: bytes) -> str:
@@ -44,342 +58,422 @@ def sha(data: bytes) -> str:
 
 
 def save(path: Path, value: Any) -> None:
-    temporary = path.with_suffix(path.suffix + ".tmp")
-    temporary.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n")
-    temporary.replace(path)
+    path.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n")
 
 
-def progress(event: str, **values: Any) -> None:
-    print("OPERATOR_PROGRESS " + json.dumps({"phase": "full_capture", "event": event, **values}, allow_nan=False), flush=True)
-
-
-def run(command: list[str], directory: Path, label: str, timeout: int) -> bytes:
-    result = subprocess.run(command, capture_output=True, timeout=timeout, check=False)
-    (directory / (label + ".stdout")).write_bytes(result.stdout)
-    (directory / (label + ".stderr")).write_bytes(result.stderr)
+def run(argv: list[str], directory: Path, name: str, timeout: int = 120) -> bytes:
+    result = subprocess.run(argv, capture_output=True, timeout=timeout, check=False)
+    (directory / f"{name}.stdout").write_bytes(result.stdout)
+    (directory / f"{name}.stderr").write_bytes(result.stderr)
     if result.returncode:
-        raise ContinuationFailure(f"{label} exited with status {result.returncode}; private logs retained.")
+        raise NativeFailure(f"{name} exited with status {result.returncode}; private logs retained.")
     return result.stdout
 
 
-def fetch(path: str, commit: str, directory: Path, destination: Path) -> bytes:
-    gh = shutil.which("gh") or next((str(p) for p in (Path("/opt/homebrew/bin/gh"), Path("/usr/local/bin/gh")) if p.is_file()), None)
-    if gh is None:
-        raise ContinuationFailure("The existing gh executable is unavailable.")
-    label = "fetch_" + destination.name.replace(".", "_")
-    payload = json.loads(run([gh, "api", f"repos/{REPOSITORY}/contents/{path}?ref={commit}"], directory, label, 60))
+def gh_path() -> str:
+    executable = shutil.which("gh") or next((str(path) for path in (Path("/opt/homebrew/bin/gh"), Path("/usr/local/bin/gh")) if path.is_file()), None)
+    if executable is None:
+        raise NativeFailure("The existing gh executable is unavailable.")
+    return executable
+
+
+def fetch_file(path: str, commit: str, directory: Path) -> bytes:
+    payload = json.loads(run([gh_path(), "api", f"repos/{REPO}/contents/{path}?ref={commit}"], directory, "fetch_" + Path(path).name))
     if payload.get("type") != "file" or payload.get("encoding") != "base64":
-        raise ContinuationFailure("Pinned GitHub source is not a regular file.")
+        raise NativeFailure("Pinned source is not a file.")
     data = base64.b64decode("".join(payload["content"].split()), validate=True)
     if hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest() != payload.get("sha"):
-        raise ContinuationFailure("Pinned GitHub blob identity differs.")
-    if destination.exists() and destination.read_bytes() != data:
-        raise ContinuationFailure("Preserve the existing pinned source; its bytes differ.")
-    destination.write_bytes(data)
+        raise NativeFailure("Pinned source Git blob differs.")
     return data
 
 
-def load_capture(path: Path) -> Any:
-    spec = importlib.util.spec_from_file_location("frozen_proposition_capture", path)
-    if spec is None or spec.loader is None:
-        raise ContinuationFailure("Cannot load the frozen capture module.")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
+def remote(script: str, directory: Path, label: str, timeout: int = 120) -> dict[str, Any]:
+    command = "sudo -n -u machina " + GPU_PYTHON + " -c " + shlex.quote(script)
+    output = run([GCLOUD, "compute", "ssh", "jep-csts-format-20261021", *FLAGS, "--command=" + command], directory, label, timeout)
+    return json.loads(output)
 
 
-def verify_gate(gate: dict[str, Any], capture: Any, source: bytes) -> dict[str, str]:
-    bindings = {"generation_template_sha256": sha(capture.PROMPT.encode()), "schema_sha256": sha(json.dumps(capture.SCHEMA, ensure_ascii=False).encode()), "model_alias": capture.MODEL, "reasoning_effort": capture.EFFORT}
-    if gate.get("passed") is not True or gate.get("generation_frozen") is not True:
-        raise ContinuationFailure("The frozen proposition fidelity gate has not passed.")
-    if any(gate.get(key) != value for key, value in bindings.items()):
-        raise ContinuationFailure("Capture settings differ from the passed fidelity gate.")
-    if gate.get("capture_source_sha256") != sha(source):
-        raise ContinuationFailure("Capture source differs from the passed fidelity gate.")
-    if gate.get("severe_unsupported") != 0 or gate.get("fully_faithful", 0) < gate.get("required_faithful", 10**9):
-        raise ContinuationFailure("The declared fidelity counts do not satisfy their gate.")
-    return bindings
+def copy_to_gpu(path: Path, directory: Path, label: str) -> tuple[str, str]:
+    digest = sha(path.read_bytes())
+    staging = f"/tmp/jep-tranche8-native-{digest}-{path.name}"
+    run([GCLOUD, "compute", "scp", str(path), f"jep-csts-format-20261021:{staging}", *FLAGS], directory, label + "_scp", 240)
+    run([GCLOUD, "compute", "ssh", "jep-csts-format-20261021", *FLAGS, "--command=chmod 644 " + shlex.quote(staging)], directory, label + "_permissions", 60)
+    return staging, digest
 
 
-def verify_inventory(capture: Any) -> dict[str, list[dict[str, Any]]]:
-    root = GENERATION_ROOT / "full_inventory"
-    inventory = json.loads((root / "inventory_manifest.json").read_text())
-    result = {}
-    seen_ids: set[str] = set()
-    seen_groups: set[str] = set()
-    for split, expected in EXPECTED.items():
-        for suffix, key in (("inputs", "inputs"), ("groups", "groups"), ("representatives_audit", "representatives")):
-            if sha((root / f"{split}_{suffix}.json").read_bytes()) != expected[key]:
-                raise ContinuationFailure(f"Frozen {split} {suffix} inventory differs.")
-        if inventory[split].get("original_sha256") != expected["source"]:
-            raise ContinuationFailure(f"Frozen {split} source identity differs.")
-        items = json.loads((root / f"{split}_inputs.json").read_text())
-        groups = json.loads((root / f"{split}_groups.json").read_text())
-        capture.validate_inputs(items)
-        ids = {row["id"] for row in items}
-        if len(items) != expected["items"] or set(groups) != ids or ids & seen_ids or set(groups.values()) & seen_groups:
-            raise ContinuationFailure("Split sizes, identities or source-group separation differ.")
-        seen_ids.update(ids)
-        seen_groups.update(groups.values())
-        result[split] = items
+def preamble(commit: str) -> str:
+    return (
+        "import pathlib,json,hashlib,subprocess,os,shutil,time\n"
+        f"root=pathlib.Path({GPU_ROOT!r});parent=pathlib.Path({PARENT_ROOT!r})\n"
+        f"commit={commit!r}\n"
+        "def git(*args):\n return subprocess.check_output(['git','-C',str(root),*args],text=True).strip()\n"
+        "def save(p,v):\n p.write_text(json.dumps(v,ensure_ascii=False,indent=2,allow_nan=False)+'\\n')\n"
+        "def digest(p):\n return hashlib.sha256(p.read_bytes()).hexdigest()\n"
+        "def clean():\n assert git('rev-parse','HEAD')==commit,'Source commit differs.'\n assert not git('status','--porcelain','--untracked-files=no'),'Tracked source is dirty.'\n"
+    )
+
+
+def native_deploy(commit: str, directory: Path) -> dict[str, Any]:
+    """Transport one exact git object graph, preserving existing native stores."""
+    source = directory / "source"
+    source.mkdir(exist_ok=True)
+    if not (source / ".git").exists():
+        run(["git", "init", str(source)], directory, "source_init")
+    helper = "!" + shlex.quote(gh_path()) + " auth git-credential"
+    run(["git", "-C", str(source), "-c", "credential.helper=", "-c", "credential.helper=" + helper, "fetch", "--no-tags", f"https://github.com/{REPO}.git", commit], directory, "source_fetch", 240)
+    actual = run(["git", "-C", str(source), "rev-parse", "FETCH_HEAD"], directory, "source_identity").decode().strip()
+    if actual != commit:
+        raise NativeFailure("Fetched source differs from the pinned commit.")
+    run(["git", "-C", str(source), "update-ref", "refs/heads/tranche8-pinned", commit], directory, "source_pin")
+    bundle = directory / "source.bundle"
+    if bundle.exists():
+        bundle = directory / f"source-{time.time_ns()}.bundle"
+    run(["git", "-C", str(source), "bundle", "create", str(bundle), "refs/heads/tranche8-pinned"], directory, "source_bundle", 180)
+    staging, digest = copy_to_gpu(bundle, directory, "source_bundle")
+    script = preamble(commit) + (
+        f"bundle=pathlib.Path({staging!r})\nassert digest(bundle)=={digest!r},'Bundle bytes differ.'\n"
+        "subprocess.run(['git','-C',str(parent),'fetch',str(bundle),'refs/heads/tranche8-pinned'],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)\n"
+        "if root.exists():\n"
+        " assert (root/'.git').is_file(),'Existing native root is not a worktree.'\n"
+        " dirty=git('diff','HEAD','--name-only').splitlines()\n"
+        f" assert set(dirty)<=set({OWNED!r}),'Unexpected local source changes.'\n"
+        " for path in dirty:\n"
+        "  intended=subprocess.check_output(['git','-C',str(parent),'show',commit+':'+path])\n"
+        "  assert (root/path).read_bytes()==intended,'Formatting differs from the published source.'\n"
+        " if dirty:\n"
+        "  subprocess.run(['git','-C',str(root),'add','--',*dirty],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)\n"
+        " if git('rev-parse','HEAD')!=commit:\n"
+        "  subprocess.run(['git','-C',str(root),'checkout','--detach',commit],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)\n"
+        "else:\n"
+        " subprocess.run(['git','-C',str(parent),'worktree','add','--detach',str(root),commit],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)\n"
+        "clean()\n"
+        "assert not root.is_symlink(),'Native root must be physical.'\n"
+        "(root/'csts_data').mkdir(exist_ok=True)\n"
+        f"for name,expected in {SOURCE_HASHES!r}.items():\n"
+        " source=parent/'csts_data'/name;target=root/'csts_data'/name\n"
+        " assert digest(source)==expected,'Original dataset differs.'\n"
+        " if target.exists(): assert digest(target)==expected,'Existing dataset differs.'\n"
+        " else: shutil.copyfile(source,target)\n"
+        " assert not target.is_symlink(),'Native dataset must be physical.'\n"
+        "assert (root/'viper.toml').is_file(),'Native storage configuration absent.'\n"
+        "usage=shutil.disk_usage(root)\n"
+        "print(json.dumps({'phase':'native_deploy','status':'complete','source_commit':commit,'root':str(root),'bundle_sha256':digest(bundle),'free_bytes':usage.free,'physical_datasets':True,'copied_existing_viper_store':False}))\n"
+    )
+    return remote(script, directory, "native_deploy", 240)
+
+
+def native_checks(commit: str, directory: Path, allow_format: bool) -> dict[str, Any]:
+    """Run owner checks and return only changed task source for publication."""
+    script = preamble(commit) + (
+        "import ast\nclean()\n"
+        f"paths=[p for p in {OWNED!r} if (root/p).is_file()]\n"
+        "required={'csts_pilot/proposition_inputs.py','csts_pilot/proposition_lora.py','csts_pilot/proposition_run.py'}\n"
+        "assert required<=set(paths),'Native implementation is incomplete.'\n"
+        "directory=root/'answer_input_results'/'owner_checks'/commit\ndirectory.mkdir(parents=True,exist_ok=True)\n"
+        "before={p:(root/p).read_bytes() for p in paths}\n"
+        "environment=os.environ.copy();environment['VIRTUAL_ENV']='/home/machina/jep-format-env';environment['PATH']='/home/machina/jep-format-env/bin:/usr/local/cuda/bin:/usr/local/bin:/usr/bin:/bin'\n"
+        f"commands=([['ruff','format',*paths]] if {allow_format!r} else [])+[['ruff','check',*paths],['pyrefly','check','--python-interpreter-path',{GPU_PYTHON!r},*[p for p in paths if p.startswith('csts_pilot/')]],['pytest','-q',*[p for p in paths if p.startswith('tests/')]]]\n"
+        "results=[]\n"
+        "for index,args in enumerate(commands):\n"
+        f" command=[{GPU_PYTHON!r},'-m',*args]\n"
+        " outcome=subprocess.run(command,cwd=root,env=environment,capture_output=True,timeout=600,check=False)\n"
+        " (directory/(str(index)+'.stdout')).write_bytes(outcome.stdout);(directory/(str(index)+'.stderr')).write_bytes(outcome.stderr)\n"
+        " results.append({'check':args[0]+(' '+args[1] if len(args)>1 and args[0]=='ruff' else ''),'returncode':outcome.returncode})\n"
+        "changed=[]\n"
+        "for p in paths:\n"
+        " if (root/p).read_bytes()!=before[p]:\n"
+        "  text=(root/p).read_text()\n"
+        "  assert ast.dump(ast.parse(before[p]))==ast.dump(ast.parse(text)),'Formatting changed the source AST.'\n"
+        "  changed.append({'path':p,'chunks':[text[i:i+12000] for i in range(0,len(text),12000)],'sha256':digest(root/p)})\n"
+        f"preflight=subprocess.run([{GPU_PYTHON!r},'-c',\"import json,os,sys;assert sys.prefix=='/home/machina/jep-format-env';assert os.environ.get('VIRTUAL_ENV')==sys.prefix;import torch,viper,ruff,pyrefly;print(json.dumps({{'owner_python_verified':True,'virtual_env_verified':True}}))\"],cwd=root,env=environment,capture_output=True,timeout=60,check=False)\n"
+        "(directory/'preflight.stdout').write_bytes(preflight.stdout);(directory/'preflight.stderr').write_bytes(preflight.stderr);results.append({'check':'owner_environment_preflight','returncode':preflight.returncode})\n"
+        "receipt={'source_commit':commit,'checks':results,'passed':all(item['returncode']==0 for item in results),'source_clean':not bool(changed),'owned_source_sha256':{p:digest(root/p) for p in paths}}\n"
+        "save(directory/'receipt.json',receipt)\n"
+        "result={'phase':'native_checks','status':'source_publication_required' if changed else ('complete' if receipt['passed'] else 'failed'),'source_commit':commit,'checks':results,'formatted_files':changed,'verification':receipt}\n"
+        "if len(json.dumps(result).encode())>=180000:\n"
+        " result['formatted_files']=[{k:v for k,v in item.items() if k!='chunks'} for item in changed];result['source_fetch_required']=True\n"
+        "print(json.dumps(result,ensure_ascii=False))\n"
+    )
+    return remote(script, directory, "native_checks", 1900)
+
+
+def native_source(commit: str, directory: Path, path: str) -> dict[str, Any]:
+    if path not in OWNED:
+        raise NativeFailure("Only the fixed owned source allowlist may be fetched.")
+    script = preamble(commit) + (
+        "assert git('rev-parse','HEAD')==commit,'Source checkout differs.'\n"
+        f"path={path!r}\nsource=root/path\nassert source.is_file() and not source.is_symlink()\ntext=source.read_text()\n"
+        "result={'phase':'native_source','status':'complete','source_commit':commit,'path':path,'sha256':digest(source),'chunks':[text[i:i+12000] for i in range(0,len(text),12000)]}\n"
+        "assert len(json.dumps(result).encode())<180000,'One source file exceeds publication budget.'\nprint(json.dumps(result,ensure_ascii=False))\n"
+    )
+    return remote(script, directory, "native_source")
+
+
+def import_capture(commit: str, directory: Path) -> dict[str, Any]:
+    """Install a complete generated bank without exposing it in worker status."""
+    paths = {"propositions_tranche8.json": GEN_ROOT / "propositions_tranche8.json", "propositions_tranche8_manifest.json": GEN_ROOT / "propositions_tranche8_manifest.json"}
+    manifest = json.loads(paths["propositions_tranche8_manifest.json"].read_text())
+    if manifest.get("items") != 17334 or manifest.get("records_sha256") != sha(paths["propositions_tranche8.json"].read_bytes()) or set(manifest.get("partitions", {})) != {"training", "validation"} or any(part.get("status") != "complete" for part in manifest["partitions"].values()):
+        raise NativeFailure("Full capture is incomplete or its record binding differs.")
+    gate = fetch_file("csts_data/propositions_tranche8_audit_gate.json", commit, directory)
+    if sha(gate) != manifest.get("audit_gate_sha256"):
+        raise NativeFailure("Native source gate differs from the completed capture gate.")
+    gate_path = directory / "propositions_tranche8_audit_gate.json"
+    gate_path.write_bytes(gate)
+    paths[gate_path.name] = gate_path
+    hashes = {name: sha(path.read_bytes()) for name, path in paths.items()}
+    archive = directory / f"capture-bank-{time.time_ns()}.tar.gz"
+    with tarfile.open(archive, "w:gz") as stream:
+        for name, path in paths.items():
+            stream.add(path, arcname=name, recursive=False)
+    staging, digest = copy_to_gpu(archive, directory, "capture_bank")
+    script = preamble(commit) + (
+        "import tarfile\nclean()\n"
+        f"archive=pathlib.Path({staging!r})\nassert digest(archive)=={digest!r}\nexpected={hashes!r}\n"
+        "with tarfile.open(archive,'r:gz') as stream:\n"
+        " assert set(stream.getnames())==set(expected),'Unexpected bank archive members.'\n"
+        " for member in stream.getmembers():\n"
+        "  assert member.isfile() and member.name in expected,'Only regular bank files are accepted.'\n"
+        "  source=stream.extractfile(member);assert source is not None\n"
+        "  data=source.read();assert hashlib.sha256(data).hexdigest()==expected[member.name]\n"
+        "  target=root/'csts_data'/member.name\n"
+        "  assert not target.is_symlink(),'Capture input must be physical.'\n"
+        "  if target.exists(): assert target.read_bytes()==data,'Preserve existing capture input.'\n"
+        "  else: target.write_bytes(data)\n"
+        "print(json.dumps({'phase':'native_import_capture','status':'complete','source_commit':commit,'source_inputs':expected}))\n"
+    )
+    return remote(script, directory, "native_import_capture")
+
+
+def native_launch(commit: str, directory: Path, name: str) -> dict[str, Any]:
+    imported = import_capture(commit, directory)
+    # The supervisor is task source fetched at the same commit, never shell text.
+    supervisor = fetch_file("scripts/tranche8_native_supervisor.py", commit, directory)
+    local = directory / "tranche8_native_supervisor.py"
+    local.write_bytes(supervisor)
+    staging, digest = copy_to_gpu(local, directory, "native_supervisor")
+    script = preamble(commit) + (
+        "clean()\n"
+        "checks=json.loads((root/'answer_input_results'/'owner_checks'/commit/'receipt.json').read_text())\n"
+        "assert checks.get('passed') is True and checks.get('source_clean') is True,'Owner checks must pass on the executed clean source.'\n"
+        "assert all(digest(root/p)==value for p,value in checks['owned_source_sha256'].items()),'Checked source changed.'\n"
+        f"name={name!r}\n"
+        "directory=root/'answer_input_results'/'supervisors'/name;directory.mkdir(parents=True,exist_ok=True)\n"
+        "receipt=directory/'receipt.json'\n"
+        "if receipt.exists():\n print(json.dumps({'phase':'native_launch',**json.loads(receipt.read_text())}))\n"
+        "else:\n"
+        f" source=pathlib.Path({staging!r});assert digest(source)=={digest!r}\n"
+        " target=directory/'supervisor.py';shutil.copyfile(source,target)\n"
+        " save(receipt,{'status':'launching','source_commit':commit,'name':name,'started_unix':time.time(),'supervisor_sha256':digest(target)})\n"
+        " environment=os.environ.copy();environment.update({'VIRTUAL_ENV':'/home/machina/jep-format-env','HF_HOME':'/home/machina/jep-model-cache','HF_HUB_OFFLINE':'1','TRANSFORMERS_OFFLINE':'1','PATH':'/home/machina/jep-format-env/bin:/usr/local/cuda/bin:/usr/local/bin:/usr/bin:/bin'})\n"
+        " with (directory/'supervisor.log').open('ab') as log:\n"
+        f"  child=subprocess.Popen([{GPU_PYTHON!r},str(target),'--root',str(root),'--parent-root',str(parent),'--name',name,'--source-commit',commit],cwd=root,env=environment,stdin=subprocess.DEVNULL,stdout=log,stderr=log,start_new_session=True)\n"
+        " print(json.dumps({'phase':'native_launch','status':'running','source_commit':commit,'name':name,'pid':child.pid}))\n"
+    )
+    result = remote(script, directory, "native_launch")
+    result["capture_import"] = imported
     return result
 
 
-def closed_batches(root: Path) -> dict[str, Path]:
-    result = {}
-    for split in EXPECTED:
-        for directory in sorted((root / split).glob("batch_*")):
-            receipt = directory / "receipt.json"
+def native_status(commit: str, directory: Path, name: str) -> dict[str, Any]:
+    script = preamble(commit) + (
+        "import fcntl\n"
+        f"name={name!r}\nresult={{'phase':'native_status','source_commit':commit,'name':name}}\n"
+        "supervisor=root/'answer_input_results'/'supervisors'/name/'receipt.json'\n"
+        "result.update(json.loads(supervisor.read_text()) if supervisor.exists() else {'status':'not_started'})\n"
+        "if result['status'] in {'launching','running'} and time.time()-result.get('started_unix',time.time())>30:\n"
+        " with (supervisor.parent/'supervisor.lock').open('a+') as lock:\n"
+        "  try:\n   fcntl.flock(lock.fileno(),fcntl.LOCK_EX|fcntl.LOCK_NB)\n  except BlockingIOError: pass\n  else: result['status']='interrupted'\n"
+        "summary=root/'answer_input_results'/name/'summary.json'\n"
+        "if summary.exists():\n"
+        " value=json.loads(summary.read_text());result['summary']={key:value[key] for key in ('status','in_flight','source_commit','selection','next_phase','selected','failure_reason','seconds') if key in value}\n"
+        " result['runs']=[{key:item[key] for key in ('name','status','seconds') if key in item} for item in value.get('runs',[])]\n"
+        " if 'result' in value:\n"
+        "  result['result']={key:value['result'][key] for key in ('metrics','selection','selected_training_epoch','selected_training_step','completed_epochs','actual_updates','stop_reason','candidate_test_evaluation_ran') if key in value['result']}\n"
+        "queue=root/'.viper'/'publication_queue'\n"
+        "publication={}\n"
+        "for path in queue.glob('*.json'):\n"
+        " try:\n  status=json.loads(path.read_text()).get('status','unknown');publication[status]=publication.get(status,0)+1\n except (OSError,ValueError): pass\n"
+        "result['publication_counts']=publication;result['free_bytes']=shutil.disk_usage(root).free\n"
+        "print(json.dumps(result,allow_nan=False))\n"
+    )
+    return remote(script, directory, "native_status")
+
+
+def redact(text: str) -> str:
+    expression = r"(?:\bsk-[A-Za-z0-9_-]{16,}|\bgh[pousr]_[A-Za-z0-9_]{16,}|\bgithub_pat_[A-Za-z0-9_]{16,}|\bhf_[A-Za-z0-9_]{16,}|\bya29\.[A-Za-z0-9._-]{16,}|\bAIza[A-Za-z0-9_-]{25,}|\bBearer\s+[A-Za-z0-9._~+/-]{16,})"
+    text = re.sub(expression, "[REDACTED]", text, flags=re.IGNORECASE)
+    return re.sub(r"(?im)^.*(?:authorization|api[_-]?key|access[_-]?token|refresh[_-]?token|password)\s*[:=].*$", "[REDACTED credential assignment]", text)
+
+
+def operation_diagnostics(commit: str, operation: str) -> dict[str, Any]:
+    if operation not in OPERATION_LOGS:
+        raise NativeFailure("Operation logs are outside the fixed allowlist.")
+    directory = MAC_ROOT / commit / operation
+    records = []
+    for label in OPERATION_LOGS[operation]:
+        path = directory / (label + ".stderr")
+        if path.is_file() and not path.is_symlink():
+            text = redact(path.read_text(errors="replace")[-24000:])
+            if text.strip():
+                records.append({"operation": label, "stream": "stderr", "chunks": [text[i:i+12000] for i in range(0, len(text), 12000)]})
+    return {"phase": "native_operation_diagnostics", "status": "complete", "source_commit": commit, "operation": operation, "diagnostics": records}
+
+
+def check_diagnostics(commit: str, directory: Path) -> dict[str, Any]:
+    script = preamble(commit) + (
+        "assert git('rev-parse','HEAD')==commit\ndirectory=root/'answer_input_results'/'owner_checks'/commit\nrecords=[]\n"
+        "for name in ['preflight',*[str(i) for i in range(4)]]:\n"
+        " for suffix in ['stdout','stderr']:\n"
+        "  path=directory/(name+'.'+suffix)\n"
+        "  if path.is_file() and not path.is_symlink():\n"
+        "   text=path.read_text(errors='replace')[-12000:]\n"
+        "   if text.strip(): records.append({'check':name,'stream':suffix,'text':text})\n"
+        "print(json.dumps({'phase':'native_check_diagnostics','status':'complete','source_commit':commit,'diagnostics':records},ensure_ascii=False))\n"
+    )
+    result = remote(script, directory, "native_check_diagnostics")
+    for entry in result.get("diagnostics", []):
+        text = redact(entry.pop("text"))
+        entry["chunks"] = [text[i:i+12000] for i in range(0, len(text), 12000)]
+    return result
+
+
+def native_archive(commit: str, directory: Path) -> dict[str, Any]:
+    script = preamble(commit) + (
+        "clean()\n"
+        "directory=root/'answer_input_results'/'archive_operator';directory.mkdir(parents=True,exist_ok=True)\n"
+        "log_id=str(time.time_ns())\n"
+        "environment=os.environ.copy();environment['VIRTUAL_ENV']='/home/machina/jep-format-env';environment['PATH']='/home/machina/jep-format-env/bin:/usr/local/bin:/usr/bin:/bin'\n"
+        f"command=[{GPU_PYTHON!r},'-m','csts_pilot.proposition_archive','--root',str(root),'--archive-directory','/home/machina/jep-csts-answer-input-20261026/answer_input_results/proposition_capture_full/full_v2_6895d17242704944']\n"
+        "outcome=subprocess.run(command,cwd=root,env=environment,capture_output=True,timeout=600,check=False)\n"
+        "(directory/(log_id+'.stdout')).write_bytes(outcome.stdout);(directory/(log_id+'.stderr')).write_bytes(outcome.stderr)\n"
+        "result={'phase':'native_archive','status':'failed' if outcome.returncode else 'complete','source_commit':commit,'returncode':outcome.returncode,'promotion_waited':False}\n"
+        "for line in outcome.stdout.decode(errors='replace').splitlines():\n"
+        " try: event=json.loads(line)\n except ValueError: continue\n"
+        " if event.get('event')=='capture_archive_batch_complete':\n"
+        "  result.update({key:event[key] for key in ('archives','sealed_bytes','promotion_waited') if key in event})\n"
+        "save(directory/'latest.json',{'result':result,'log_id':log_id})\nprint(json.dumps(result,allow_nan=False))\n"
+    )
+    return remote(script, directory, "native_archive", 660)
+
+
+def capture_diagnostics() -> dict[str, Any]:
+    """Inspect timing and event types only, never prompts or event payload text."""
+    now = time.time()
+    running = []
+    recent = []
+    complete: dict[str, int] = {}
+    failures = 0
+    for split in ("training", "validation"):
+        for directory in sorted((GEN_ROOT / split).glob("batch_*")):
             try:
-                data = json.loads(receipt.read_text())
-                if data.get("status") in {"complete", "failed"}:
-                    result[f"{split}/{directory.name}"] = directory
+                receipt = json.loads((directory / "receipt.json").read_text())
             except (OSError, ValueError):
                 continue
-    return result
-
-
-def counts(root: Path) -> dict[str, int]:
-    complete: dict[str, int] = {}
-    failed = 0
-    for relative, directory in closed_batches(root).items():
-        receipt = json.loads((directory / "receipt.json").read_text())
-        if receipt["status"] == "complete":
-            complete[relative.split("-attempt_")[0]] = receipt["items"]
-        else:
-            failed += 1
-    return {"completed_items": sum(complete.values()), "total_items": 17334, "completed_batches": len(complete), "failed_attempts": failed}
-
-
-def retryable_output_failures(root: Path, capture: Any) -> bool:
-    """Retry response defects only; tools, policy and CLI failures stop work."""
-    failed = 0
-    for directory in closed_batches(root).values():
-        receipt = json.loads((directory / "receipt.json").read_text())
-        if receipt["status"] != "failed":
-            continue
-        failed += 1
-        if receipt.get("returncode") != 0:
-            return False
+            status = receipt.get("status", "unknown")
+            item = {"split": split, "batch": directory.name, "status": status, "items": receipt.get("items"), "started_unix": receipt.get("started_unix")}
+            if isinstance(receipt.get("started_unix"), (int, float)):
+                item["elapsed_seconds"] = round(receipt.get("elapsed_seconds", now - receipt["started_unix"]), 1)
+            if status == "complete":
+                complete[split + "/" + directory.name.split("-attempt_")[0]] = receipt.get("items", 0)
+                recent.append(item)
+            elif status == "failed":
+                failures += 1
+                recent.append(item)
+            elif status == "running":
+                events = directory / "events.jsonl"
+                if events.is_file():
+                    item["last_event_age_seconds"] = round(max(0, now - events.stat().st_mtime), 1)
+                    event_count = 0
+                    last_type = None
+                    with events.open() as stream:
+                        for line in stream:
+                            try:
+                                event = json.loads(line)
+                            except ValueError:
+                                continue
+                            event_count += 1
+                            value = event.get("type")
+                            last_type = value if value in {"thread.started", "turn.started", "item.started", "item.updated", "item.completed", "turn.completed", "turn.failed", "error"} else "unrecognized"
+                    item.update(event_count=event_count, last_cli_event_type=last_type)
+                pid = receipt.get("pid")
+                if isinstance(pid, int) and pid > 1:
+                    try:
+                        os.kill(pid, 0)
+                    except ProcessLookupError:
+                        item["process_alive"] = False
+                    except PermissionError:
+                        item["process_alive"] = True
+                    else:
+                        item["process_alive"] = True
+                    item["pid"] = pid
+                running.append(item)
+    supervisors = []
+    for path in sorted((MAC_ROOT.parent / "full_capture").glob("*/supervisor_receipt.json")):
         try:
-            capture.checked_events(directory / "events.jsonl")
-        except (OSError, ValueError, TypeError, KeyError):
-            return False
-        try:
-            response = json.loads((directory / "response.json").read_text())
-            capture.checked_records(json.loads((directory / "inputs.json").read_text()), response)
-        except (ValueError, TypeError, KeyError):
+            receipt = json.loads(path.read_text())
+        except (OSError, ValueError):
             continue
-        except OSError:
-            return False
-        # An otherwise valid response failed for an unexpected local reason.
-        return False
-    return failed > 0
-
-
-def checkpoint(root: Path, directory: Path, state: dict[str, Any], final: bool = False) -> dict[str, Any]:
-    """Copy closed raw attempts to owner storage; do not delete either copy."""
-    closed = closed_batches(root)
-    added = sorted(set(closed) - set(state.get("archived_batches", [])))
-    if not added and not final:
-        return state
-    index = len(state.get("checkpoints", [])) + 1
-    name = f"capture-checkpoint-{index:04d}-{time.time_ns()}.tar.gz"
-    archive = directory / name
-    with tarfile.open(archive, "w:gz") as stream:
-        for relative in added:
-            stream.add(closed[relative], arcname=f"capture/{relative}", recursive=True)
-        for path in (directory / "proposition_capture.py", directory / "audit_gate.json", root / "launch.json"):
-            stream.add(path, arcname=f"source/{path.name}")
-        if final:
-            for split in EXPECTED:
-                for basename in ("manifest.json", "records.json"):
-                    path = root / split / basename
-                    if path.exists():
-                        stream.add(path, arcname=f"capture/{split}/{basename}")
-            for path in root.glob("propositions_tranche8*.json"):
-                stream.add(path, arcname=f"capture/{path.name}")
-            stream.add(GENERATION_ROOT / "full_inventory", arcname="inventory", recursive=True)
-    archive_hash = sha(archive.read_bytes())
-    name = f"capture-checkpoint-{index:04d}-{archive_hash[:16]}.tar.gz"
-    archive = archive.rename(directory / name)
-    staging = f"/tmp/jep-tranche8-{archive_hash}.tar.gz"
-    run([GCLOUD, "compute", "scp", str(archive), f"jep-csts-format-20261021:{staging}", *GCLOUD_FLAGS], directory, f"checkpoint_{index:04d}_scp", 180)
-    target = f"{GPU_ROOT}/answer_input_results/proposition_capture_full/{root.name}"
-    script = f"import hashlib,pathlib,shutil\ns=pathlib.Path({staging!r})\nb=s.read_bytes()\nassert hashlib.sha256(b).hexdigest()=={archive_hash!r}\nd=pathlib.Path({target!r});d.mkdir(parents=True,exist_ok=True)\np=d/{name!r}\nassert not p.exists() or hashlib.sha256(p.read_bytes()).hexdigest()=={archive_hash!r}\nif not p.exists(): shutil.copyfile(s,p)\nprint('checkpoint_verified')\n"
-    # The SSH account owns staging; permit only owner read for the verified copy.
-    command = "chmod 644 " + shlex.quote(staging) + " && sudo -n -u machina " + GPU_PYTHON + " -c " + shlex.quote(script)
-    run([GCLOUD, "compute", "ssh", "jep-csts-format-20261021", *GCLOUD_FLAGS, "--command=" + command], directory, f"checkpoint_{index:04d}_install", 60)
-    receipt = {"name": name, "sha256": archive_hash, "bytes": archive.stat().st_size, "native_path": f"{target}/{name}", "closed_batch_attempts": len(added), "final": final, "cloud_publication": "pending_native_queue"}
-    state = {"archived_batches": sorted(set(state.get("archived_batches", [])) | set(added)), "checkpoints": [*state.get("checkpoints", []), receipt]}
-    save(root / "checkpoints.json", state)
-    progress("native_checkpoint_saved", counts=counts(root), checkpoint=receipt)
-    return state
-
-
-def full_capture(source_commit: str, concurrency: int = 4) -> dict[str, Any]:
-    directory = WORK_ROOT / "full_capture" / source_commit
-    directory.mkdir(parents=True, exist_ok=True)
-    source = fetch("csts_pilot/proposition_capture.py", source_commit, directory, directory / "proposition_capture.py")
-    gate_bytes = fetch("csts_data/propositions_tranche8_audit_gate.json", source_commit, directory, directory / "audit_gate.json")
-    capture = load_capture(directory / "proposition_capture.py")
-    bindings = verify_gate(json.loads(gate_bytes), capture, source)
-    inventory = verify_inventory(capture)
-    # Same frozen generation settings share one output across controller commits.
-    root = GENERATION_ROOT / ("full_v2_" + bindings["generation_template_sha256"][:16])
-    root.mkdir(parents=True, exist_ok=True)
-    launch = {"generation_source_sha256": sha(source), "audit_gate_sha256": sha(gate_bytes), **bindings, "inventory": EXPECTED, "batch_size": 64, "maximum_one_item_per_source_group_per_request": True}
-    if (root / "launch.json").exists() and json.loads((root / "launch.json").read_text()) != launch:
-        raise ContinuationFailure("Existing full capture launch bindings differ.")
-    save(root / "launch.json", launch)
-    state = json.loads((root / "checkpoints.json").read_text()) if (root / "checkpoints.json").exists() else {}
-    started = time.monotonic()
-    last_checkpoint = started
-    last_checkpoint_items = counts(root)["completed_items"]
-    progress("frozen_gate_and_inventory_verified", counts=counts(root), manifest=launch, source_commit=source_commit)
-    for split, items in inventory.items():
-        output = root / split
-        for attempt in range(1, 4):
-            command = [sys.executable, "-I", str(directory / "proposition_capture.py"), "--inputs", str(GENERATION_ROOT / "full_inventory" / f"{split}_inputs.json"), "--groups", str(GENERATION_ROOT / "full_inventory" / f"{split}_groups.json"), "--output", str(output), "--split", split, "--batch-size", "64", "--concurrency", str(concurrency), "--timeout", "1200"]
-            if output.exists():
-                command.append("--resume")
-            log_id = f"{split}-{time.time_ns()}-attempt{attempt}"
-            with (directory / (log_id + ".stdout")).open("wb") as stdout, (directory / (log_id + ".stderr")).open("wb") as stderr:
-                child = subprocess.Popen(command, cwd=directory, stdin=subprocess.DEVNULL, stdout=stdout, stderr=stderr)
-                while child.poll() is None:
-                    time.sleep(15)
-                    current = counts(root)
-                    progress("generating", split=split, attempt=attempt, counts=current, elapsed_seconds=round(time.monotonic() - started))
-                    if time.monotonic() - last_checkpoint >= 600 or current["completed_items"] - last_checkpoint_items >= 500:
-                        try:
-                            state = checkpoint(root, directory, state)
-                            last_checkpoint = time.monotonic()
-                            last_checkpoint_items = current["completed_items"]
-                        except (OSError, ValueError, subprocess.SubprocessError, ContinuationFailure):
-                            progress("native_checkpoint_retry_pending", split=split, counts=current)
-                            last_checkpoint = time.monotonic()
-                returncode = child.returncode
-            if returncode == 0:
-                manifest = json.loads((output / "manifest.json").read_text())
-                records = json.loads((output / "records.json").read_text())
-                capture.checked_records(items, {"records": records})
-                if manifest.get("status") != "complete" or manifest.get("records_sha256") != sha((output / "records.json").read_bytes()):
-                    raise ContinuationFailure("Completed partition aggregation differs.")
-                break
-            progress("capture_invocation_failed_preserved", split=split, attempt=attempt, counts=counts(root), retry=attempt < 3)
-            state = checkpoint(root, directory, state)
-            if not retryable_output_failures(root, capture):
-                raise ContinuationFailure("Capture stopped on a CLI, event, tool or unexpected local failure; no policy or authentication retry attempted.")
-        else:
-            raise ContinuationFailure(f"{split} exhausted three bounded capture attempts; all raw artifacts preserved.")
-    records = []
-    partitions = {}
-    for split in EXPECTED:
-        records.extend(json.loads((root / split / "records.json").read_text()))
-        partitions[split] = json.loads((root / split / "manifest.json").read_text())
-    capture.checked_records(inventory["training"] + inventory["validation"], {"records": records})
-    save(root / "propositions_tranche8.json", records)
-    manifest = {**launch, "source_commit": source_commit, "records_sha256": sha((root / "propositions_tranche8.json").read_bytes()), "items": len(records), "partitions": partitions, "semantic_fidelity_independently_verified": False, "audit_gate_passed_for_frozen_generation": True}
-    save(root / "propositions_tranche8_manifest.json", manifest)
-    state = checkpoint(root, directory, state, final=True)
-    return {"phase": "full_capture", "status": "complete", "counts": counts(root), "manifest": {**bindings, "items": len(records), "records_sha256": manifest["records_sha256"], "source_commit": source_commit, "capture_source_sha256": sha(source), "audit_gate_sha256": sha(gate_bytes)}, "output_path": str(root), "checkpoints": state.get("checkpoints", []), "next_phase": "native_deploy_checks"}
-
-
-def capture_status(source_commit: str) -> dict[str, Any]:
-    directory = WORK_ROOT / "full_capture" / source_commit
-    path = directory / "supervisor_receipt.json"
-    if not path.exists():
-        return {"phase": "full_capture", "status": "not_started"}
-    receipt = json.loads(path.read_text())
-    root = Path(receipt["output_path"])
-    result = {"phase": "full_capture", "status": receipt["status"], "source_commit": source_commit, "counts": counts(root), "output_path": str(root), "controller_sha256": receipt["controller_sha256"]}
-    if (directory / "result.json").exists():
-        result.update(json.loads((directory / "result.json").read_text()))
-    elif receipt["status"] in {"launching", "running"}:
-        with (root / "supervisor.lock").open("a+") as lock:
+        if receipt.get("output_path") != str(GEN_ROOT):
+            continue
+        item = {key: receipt[key] for key in ("status", "source_commit", "started_unix", "pid") if key in receipt}
+        pid = receipt.get("pid")
+        if isinstance(pid, int) and pid > 1:
             try:
-                fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
-            except BlockingIOError:
-                result["status"] = "running"
+                os.kill(pid, 0)
+            except ProcessLookupError:
+                item["process_alive"] = False
+            except PermissionError:
+                item["process_alive"] = True
             else:
-                # A launcher may be between Popen and acquiring its lock.
-                if time.time() - receipt["started_unix"] > 30:
-                    result["status"] = "interrupted"
-    return result
-
-
-def launch_capture(source_commit: str, concurrency: int) -> dict[str, Any]:
-    """Bind and detach one durable supervisor so the worker remains available."""
-    directory = WORK_ROOT / "full_capture" / source_commit
-    directory.mkdir(parents=True, exist_ok=True)
-    path = directory / "supervisor_receipt.json"
-    if path.exists():
-        return capture_status(source_commit)
-    source = fetch("csts_pilot/proposition_capture.py", source_commit, directory, directory / "proposition_capture.py")
-    gate = fetch("csts_data/propositions_tranche8_audit_gate.json", source_commit, directory, directory / "audit_gate.json")
-    capture = load_capture(directory / "proposition_capture.py")
-    bindings = verify_gate(json.loads(gate), capture, source)
-    verify_inventory(capture)
-    root = GENERATION_ROOT / ("full_v2_" + bindings["generation_template_sha256"][:16])
-    root.mkdir(parents=True, exist_ok=True)
-    controller = directory / "full_capture_controller.py"
-    controller_bytes = Path(__file__).read_bytes()
-    if controller.exists() and controller.read_bytes() != controller_bytes:
-        raise ContinuationFailure("The existing detached controller source differs.")
-    controller.write_bytes(controller_bytes)
-    receipt = {"status": "launching", "source_commit": source_commit, "output_path": str(root), "controller_sha256": sha(controller_bytes), "started_unix": time.time(), "concurrency": concurrency}
-    save(path, receipt)
-    command = [sys.executable, "-I", str(controller), "--phase", "_full_capture_run", "--source-commit", source_commit, "--concurrency", str(concurrency)]
-    with (directory / "supervisor.stdout").open("ab") as stdout, (directory / "supervisor.stderr").open("ab") as stderr:
-        child = subprocess.Popen(command, cwd=directory, stdin=subprocess.DEVNULL, stdout=stdout, stderr=stderr, start_new_session=True)
-    receipt["pid"] = child.pid
-    # The child owns receipt updates after launching; avoid overwriting running.
-    if json.loads(path.read_text()).get("status") == "launching":
-        save(path, receipt)
-    return {**capture_status(source_commit), "status": "running", "pid": child.pid, "manifest": bindings, "next_phase": "full_capture_status"}
-
-
-def supervise_capture(source_commit: str, concurrency: int) -> dict[str, Any]:
-    directory = WORK_ROOT / "full_capture" / source_commit
-    receipt_path = directory / "supervisor_receipt.json"
-    receipt = json.loads(receipt_path.read_text())
-    root = Path(receipt["output_path"])
-    with (root / "supervisor.lock").open("a+") as lock:
-        try:
-            fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
-        except BlockingIOError:
-            raise ContinuationFailure("Another full capture supervisor already owns this frozen bank.") from None
-        receipt.update(status="running", pid=os.getpid())
-        save(receipt_path, receipt)
-        try:
-            result = full_capture(source_commit, concurrency)
-        except Exception as error:
-            result = {"phase": "full_capture", "status": "failed", "counts": counts(root), "error": str(error) if isinstance(error, ContinuationFailure) else "Capture supervisor failed; private logs and raw capture remain preserved."}
-        save(directory / "result.json", result)
-        receipt.update(status=result["status"], finished_unix=time.time())
-        save(receipt_path, receipt)
-        return result
+                item["process_alive"] = True
+        supervisors.append(item)
+    return {"phase": "capture_diagnostics", "status": "complete", "counts": {"completed_items": sum(complete.values()), "total_items": 17334, "completed_batches": len(complete), "failed_attempts": failures, "running_batches": len(running)}, "running": running[:8], "recent_closed": sorted(recent, key=lambda item: item.get("started_unix") or 0, reverse=True)[:8], "supervisors": supervisors[:4], "observed_unix": now}
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", choices=("full_capture", "full_capture_status", "_full_capture_run"), required=True)
+    parser.add_argument("--phase", required=True, choices=("native_deploy", "native_checks", "native_source", "native_import_capture", "native_launch", "native_status", "native_check_diagnostics", "native_operation_diagnostics", "native_archive", "capture_diagnostics"))
     parser.add_argument("--source-commit", required=True)
-    parser.add_argument("--concurrency", type=int, choices=(1, 2, 3, 4), default=4)
+    parser.add_argument("--name", default="proposition_lora_v2")
+    parser.add_argument("--allow-format", action="store_true")
+    parser.add_argument("--path", choices=OWNED)
+    parser.add_argument("--operation", choices=tuple(OPERATION_LOGS))
     args = parser.parse_args()
-    if re.fullmatch(r"[0-9a-f]{40}", args.source_commit) is None:
-        parser.error("source-commit must be a complete Git commit")
+    if re.fullmatch(r"[0-9a-f]{40}", args.source_commit) is None or re.fullmatch(r"[A-Za-z0-9_-]{1,80}", args.name) is None:
+        parser.error("Use a complete source commit and a safe attempt name.")
+    directory = MAC_ROOT / args.source_commit / args.phase
+    directory.mkdir(parents=True, exist_ok=True)
     try:
-        if args.phase == "full_capture":
-            result = launch_capture(args.source_commit, args.concurrency)
-        elif args.phase == "full_capture_status":
-            result = capture_status(args.source_commit)
+        if args.phase == "native_deploy":
+            result = native_deploy(args.source_commit, directory)
+        elif args.phase == "native_checks":
+            result = native_checks(args.source_commit, directory, args.allow_format)
+        elif args.phase == "native_import_capture":
+            result = import_capture(args.source_commit, directory)
+        elif args.phase == "native_source":
+            if args.path is None:
+                raise NativeFailure("native_source requires a fixed allowlisted path.")
+            result = native_source(args.source_commit, directory, args.path)
+        elif args.phase == "native_launch":
+            result = native_launch(args.source_commit, directory, args.name)
+        elif args.phase == "native_check_diagnostics":
+            result = check_diagnostics(args.source_commit, directory)
+        elif args.phase == "native_operation_diagnostics":
+            if args.operation is None:
+                raise NativeFailure("native_operation_diagnostics requires an allowlisted operation.")
+            result = operation_diagnostics(args.source_commit, args.operation)
+        elif args.phase == "native_archive":
+            result = native_archive(args.source_commit, directory)
+        elif args.phase == "capture_diagnostics":
+            result = capture_diagnostics()
         else:
-            result = supervise_capture(args.source_commit, args.concurrency)
+            result = native_status(args.source_commit, directory, args.name)
     except Exception as error:
-        result = {"phase": args.phase, "status": "failed", "error": str(error) if isinstance(error, ContinuationFailure) else "Continuation failed; private logs and raw capture remain preserved."}
+        result = {"phase": args.phase, "status": "failed", "error": str(error) if isinstance(error, NativeFailure) else "Native phase failed; private logs retained."}
         print("OPERATOR_RESULT " + json.dumps(result), flush=True)
         raise SystemExit(1) from None
+    save(directory / "result.json", result)
     print("OPERATOR_RESULT " + json.dumps(result, ensure_ascii=False, allow_nan=False), flush=True)
 
 
