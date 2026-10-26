@@ -498,7 +498,10 @@ def run(root: Path, parent_root: Path, name: str, training_records: Path) -> Non
                 stage_id="train",
                 config=fit,
                 inputs=(
-                    input("initial_model", source=artifact_source(parent, "train", "model")),
+                    input(
+                        "initial_model",
+                        source=artifact_source(parent, "train", "model"),
+                    ),
                     *(
                         input(split, source=artifact_source(prepared, "prepare", split))
                         for split in ("training", "validation")
