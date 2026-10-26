@@ -23,6 +23,20 @@ Reuse sealed baseline predictions. Perform no baseline reproduction, new native-
 
 Stop new training by **2026-10-26 12:30 UTC / 08:30 America/New_York**. Preserve completed artifacts, failed attempts, logs and checkpoints. Complete analysis and result publication. An hourly autonomous task checks progress, repairs justified implementation failures, and continues eligible work; it must inspect actual processes/locks and controller identities before starting anything.
 
+## Recovery handoff — 07:25 UTC
+
+Tranche 5 completed and selected no eligible arm. Its test stage did not run. The [verified result](../training_outputs/csts_tranche5_verified_result.md) records validation scores, selected coefficients, operating behavior and JEP implications.
+
+The original attention attempt `overnight_reviewed` failed during native snapshot publication with `OSError: [Errno 28] No space left on device`, after extracting 13,960/13,960 training occurrences. Its extraction resource usage was 528.6357398340188 seconds; no attention head had started. Its failed artifacts and receipts are preserved. Do not treat its unsealed cache as a completed-stage binding.
+
+Recovery removed only 35 reconstructible verified-object cache copies (14,018,080,682 bytes), after SHA-256 matching each against an existing immutable local-store original. All original stores, artifacts, addresses and failed attempts remain unchanged. The per-file proof is `/home/machina/jep-csts-evidence-attention-20261026/evidence_attention_results/cache-eviction-20261026.json`. Available disk space after eviction was approximately 14.9 GB.
+
+Owner preflight passed again with unchanged reviewed source `934e7d87f485fa8a0739e77255984d3b30ff97cf` and unchanged settings SHA-256 `d7230f45dd6dcc26d2f70ff8a420cb4894ab5bd3717400141149a5d16bb68ca5`. No experiment code or loss/selection settings changed. This is an operational disk recovery, not a new architecture or training-seed rerun.
+
+**Active attention attempt: `overnight_disk_recovery`.** Native controller PID **67924**, parent timeout PID **67923**. Verified it acquired the shared lock internally and began `extract_training`. Do not launch another job. Its receipts are `evidence_attention_results/overnight_disk_recovery-{launch.json,queue.json,controller.log}`; live summary/events are `evidence_attention_results/overnight_disk_recovery/{summary.json,events.jsonl}`. The automatic publisher already discovers this directory.
+
+The retry is conservatively capped at **4,200 total wall seconds**, plus the prior 528.636 extraction seconds: at most 4,728.636 seconds across attempts. This tighter cap counts analysis and waiting too, keeping aggregate GPU use under both the 80-minute extraction allowance and the 120-minute total allowance. All per-stage fit/test/CPU budgets and frozen validation gates still apply. The retry recomputes failed extraction; it reuses only the separately verified sealed Tranche 5 bank through the reviewed controller's existing checks. Check actual native state, ancestry, disk and events before further action. The old controller PIDs in the original handoff have exited.
+
 ## Runtime handoff
 
 - GitHub: `pvd232/JEP`, branch `experiment/csts-matched-baselines-20261026`.
