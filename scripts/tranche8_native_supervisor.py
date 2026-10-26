@@ -25,35 +25,80 @@ def save(path: Path, value: Any) -> None:
     temporary.replace(path)
 
 
-def supervise(root: Path, parent: Path, name: str, commit: str, module: str) -> dict[str, Any]:
+def supervise(
+    root: Path, parent: Path, name: str, commit: str, module: str
+) -> dict[str, Any]:
     root, parent = root.resolve(strict=True), parent.resolve(strict=True)
     directory = root / "answer_input_results" / "supervisors" / name
     receipt_path = directory / "receipt.json"
-    with (directory / "supervisor.lock").open("a+") as lock:
+    with (
+        (directory / "supervisor.lock").open("a+") as lock,
+        (root.parent / (root.name + ".workspace.lock")).open("a+") as workspace_owner,
+    ):
         fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        fcntl.flock(workspace_owner.fileno(), fcntl.LOCK_SH | fcntl.LOCK_NB)
         receipt = json.loads(receipt_path.read_text())
-        if receipt["source_commit"] != commit or receipt["name"] != name or receipt.get("module") != module:
+        if (
+            receipt["source_commit"] != commit
+            or receipt["name"] != name
+            or receipt.get("module") != module
+        ):
             raise ValueError("Supervisor launch binding differs.")
         if receipt["status"] in {"complete", "failed", "timed_out"}:
             return receipt
-        actual = subprocess.check_output(["git", "-C", str(root), "rev-parse", "HEAD"], text=True).strip()
-        dirty = subprocess.check_output(["git", "-C", str(root), "status", "--porcelain", "--untracked-files=no"], text=True).strip()
+        actual = subprocess.check_output(
+            ["git", "-C", str(root), "rev-parse", "HEAD"], text=True
+        ).strip()
+        dirty = subprocess.check_output(
+            ["git", "-C", str(root), "status", "--porcelain", "--untracked-files=all"],
+            text=True,
+        ).strip()
         if actual != commit or dirty:
             raise ValueError("Native source is not the checked clean commit.")
-        checks = json.loads((root / "answer_input_results/owner_checks" / commit / "receipt.json").read_text())
+        checks = json.loads(
+            (
+                root / "answer_input_results/owner_checks" / commit / "receipt.json"
+            ).read_text()
+        )
         if checks.get("passed") is not True or checks.get("source_clean") is not True:
             raise ValueError("Owner checks did not pass on clean source.")
         for path, expected in checks["owned_source_sha256"].items():
             if hashlib.sha256((root / path).read_bytes()).hexdigest() != expected:
                 raise ValueError("Checked native source changed.")
-        if module not in {"csts_pilot.proposition_run", "csts_pilot.proposition_sample"}:
+        if module not in {
+            "csts_pilot.proposition_run",
+            "csts_pilot.proposition_sample",
+        }:
             raise ValueError("Native module is outside the fixed allowlist.")
-        command = [sys.executable, "-m", module, "--root", str(root), "--parent-root", str(parent), "--name", name]
-        receipt.update(status="running", supervisor_pid=os.getpid(), started_unix=time.time())
+        command = [
+            sys.executable,
+            "-m",
+            module,
+            "--root",
+            str(root),
+            "--parent-root",
+            str(parent),
+            "--name",
+            name,
+        ]
+        receipt.update(
+            status="running", supervisor_pid=os.getpid(), started_unix=time.time()
+        )
         save(receipt_path, receipt)
         try:
-            with (directory / "native.stdout").open("ab") as stdout, (directory / "native.stderr").open("ab") as stderr:
-                child = subprocess.Popen(command, cwd=root, stdin=subprocess.DEVNULL, stdout=stdout, stderr=stderr, start_new_session=True)
+            with (
+                (directory / "native.stdout").open("ab") as stdout,
+                (directory / "native.stderr").open("ab") as stderr,
+            ):
+                child = subprocess.Popen(
+                    command,
+                    cwd=root,
+                    stdin=subprocess.DEVNULL,
+                    stdout=stdout,
+                    stderr=stderr,
+                    start_new_session=True,
+                    pass_fds=(workspace_owner.fileno(),),
+                )
                 receipt["native_pid"] = child.pid
                 save(receipt_path, receipt)
                 try:
@@ -65,11 +110,19 @@ def supervise(root: Path, parent: Path, name: str, commit: str, module: str) -> 
                     except subprocess.TimeoutExpired:
                         os.killpg(child.pid, signal.SIGKILL)
                         child.wait()
-                    receipt.update(status="timed_out", error="Native validation exceeded six-hour supervisor allowance.")
+                    receipt.update(
+                        status="timed_out",
+                        error="Native validation exceeded six-hour supervisor allowance.",
+                    )
                 else:
-                    receipt.update(status="complete" if returncode == 0 else "failed", returncode=returncode)
+                    receipt.update(
+                        status="complete" if returncode == 0 else "failed",
+                        returncode=returncode,
+                    )
         except Exception:
-            receipt.update(status="failed", error="Native supervisor failed; task logs retained.")
+            receipt.update(
+                status="failed", error="Native supervisor failed; task logs retained."
+            )
             raise
         finally:
             receipt["finished_unix"] = time.time()
@@ -83,12 +136,24 @@ def main() -> None:
     parser.add_argument("--parent-root", required=True, type=Path)
     parser.add_argument("--name", required=True)
     parser.add_argument("--source-commit", required=True)
-    parser.add_argument("--module", required=True, choices=("csts_pilot.proposition_run", "csts_pilot.proposition_sample"))
+    parser.add_argument(
+        "--module",
+        required=True,
+        choices=("csts_pilot.proposition_run", "csts_pilot.proposition_sample"),
+    )
     args = parser.parse_args()
-    if re.fullmatch(r"[0-9a-f]{40}", args.source_commit) is None or re.fullmatch(r"[A-Za-z0-9_-]{1,80}", args.name) is None:
+    if (
+        re.fullmatch(r"[0-9a-f]{40}", args.source_commit) is None
+        or re.fullmatch(r"[A-Za-z0-9_-]{1,80}", args.name) is None
+    ):
         parser.error("Use a complete commit and safe attempt name.")
-    result = supervise(args.root, args.parent_root, args.name, args.source_commit, args.module)
-    print(json.dumps({"phase": "native_supervisor", **result}, allow_nan=False), flush=True)
+    result = supervise(
+        args.root, args.parent_root, args.name, args.source_commit, args.module
+    )
+    print(
+        json.dumps({"phase": "native_supervisor", **result}, allow_nan=False),
+        flush=True,
+    )
 
 
 if __name__ == "__main__":

@@ -14,7 +14,6 @@ import re
 import shlex
 import shutil
 import subprocess
-import sys
 import tarfile
 import time
 from pathlib import Path
@@ -27,26 +26,65 @@ GPU_ROOT = "/home/machina/jep-csts-proposition-lora-20261026"
 PARENT_ROOT = "/home/machina/jep-csts-qwen-evidence-20261024"
 GPU_PYTHON = "/home/machina/jep-format-env/bin/python"
 GCLOUD = "/Users/machina/google-cloud-sdk/bin/gcloud"
-FLAGS = ["--account=pvd2112@columbia.edu", "--project=mantra-477901", "--zone=asia-northeast3-a", "--tunnel-through-iap"]
-SOURCE_HASHES = {"train.json": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01", "dev.json": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273"}
+FLAGS = [
+    "--account=pvd2112@columbia.edu",
+    "--project=mantra-477901",
+    "--zone=asia-northeast3-a",
+    "--tunnel-through-iap",
+]
+SOURCE_HASHES = {
+    "train.json": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01",
+    "dev.json": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+}
 OPERATION_LOGS = {
-    "native_deploy": ["source_init", "source_fetch", "source_identity", "source_pin", "source_bundle", "source_bundle_scp", "source_bundle_permissions", "native_deploy"],
+    "native_deploy": [
+        "source_init",
+        "source_fetch",
+        "source_identity",
+        "source_pin",
+        "source_bundle",
+        "source_bundle_scp",
+        "source_bundle_permissions",
+        "native_deploy",
+    ],
     "native_checks": ["native_checks"],
-    "native_import_capture": ["capture_bank_scp", "capture_bank_permissions", "native_import_capture"],
-    "native_launch": ["capture_bank_scp", "capture_bank_permissions", "native_import_capture", "native_supervisor_scp", "native_supervisor_permissions", "native_launch"],
+    "native_import_capture": [
+        "capture_bank_scp",
+        "capture_bank_permissions",
+        "native_import_capture",
+    ],
+    "native_launch": [
+        "capture_bank_scp",
+        "capture_bank_permissions",
+        "native_import_capture",
+        "native_supervisor_scp",
+        "native_supervisor_permissions",
+        "native_launch",
+    ],
     "native_status": ["native_status"],
     "native_archive": ["native_archive"],
-    "native_sample": ["native_supervisor_scp", "native_supervisor_permissions", "native_launch"],
+    "native_sample": [
+        "native_supervisor_scp",
+        "native_supervisor_permissions",
+        "native_launch",
+    ],
 }
 OWNED = [
-    "csts_pilot/proposition_capture.py", "csts_pilot/proposition_inputs.py",
-    "csts_pilot/proposition_lora.py", "csts_pilot/proposition_run.py",
-    "csts_pilot/proposition_test.py", "csts_pilot/proposition_sample.py",
+    "csts_pilot/proposition_capture.py",
+    "csts_pilot/proposition_inputs.py",
+    "csts_pilot/proposition_lora.py",
+    "csts_pilot/proposition_run.py",
+    "csts_pilot/proposition_test.py",
+    "csts_pilot/proposition_sample.py",
     "csts_pilot/proposition_archive.py",
-    "tests/test_csts_proposition_capture.py", "tests/test_csts_proposition_inputs.py",
-    "tests/test_csts_proposition_lora.py", "tests/test_csts_proposition_test.py",
+    "csts_pilot/proposition_provenance.py",
+    "tests/test_csts_proposition_capture.py",
+    "tests/test_csts_proposition_inputs.py",
+    "tests/test_csts_proposition_lora.py",
+    "tests/test_csts_proposition_test.py",
     "tests/test_csts_proposition_sample.py",
     "tests/test_csts_proposition_archive.py",
+    "tests/test_csts_proposition_provenance.py",
 ]
 
 
@@ -59,7 +97,9 @@ def sha(data: bytes) -> str:
 
 
 def save(path: Path, value: Any) -> None:
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n")
+    path.write_text(
+        json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n"
+    )
 
 
 def run(argv: list[str], directory: Path, name: str, timeout: int = 120) -> bytes:
@@ -67,50 +107,107 @@ def run(argv: list[str], directory: Path, name: str, timeout: int = 120) -> byte
     (directory / f"{name}.stdout").write_bytes(result.stdout)
     (directory / f"{name}.stderr").write_bytes(result.stderr)
     if result.returncode:
-        raise NativeFailure(f"{name} exited with status {result.returncode}; private logs retained.")
+        raise NativeFailure(
+            f"{name} exited with status {result.returncode}; private logs retained."
+        )
     return result.stdout
 
 
 def gh_path() -> str:
-    executable = shutil.which("gh") or next((str(path) for path in (Path("/opt/homebrew/bin/gh"), Path("/usr/local/bin/gh")) if path.is_file()), None)
+    executable = shutil.which("gh") or next(
+        (
+            str(path)
+            for path in (Path("/opt/homebrew/bin/gh"), Path("/usr/local/bin/gh"))
+            if path.is_file()
+        ),
+        None,
+    )
     if executable is None:
         raise NativeFailure("The existing gh executable is unavailable.")
     return executable
 
 
 def fetch_file(path: str, commit: str, directory: Path) -> bytes:
-    payload = json.loads(run([gh_path(), "api", f"repos/{REPO}/contents/{path}?ref={commit}"], directory, "fetch_" + Path(path).name))
+    payload = json.loads(
+        run(
+            [gh_path(), "api", f"repos/{REPO}/contents/{path}?ref={commit}"],
+            directory,
+            "fetch_" + Path(path).name,
+        )
+    )
     if payload.get("type") != "file" or payload.get("encoding") != "base64":
         raise NativeFailure("Pinned source is not a file.")
     data = base64.b64decode("".join(payload["content"].split()), validate=True)
-    if hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest() != payload.get("sha"):
+    if hashlib.sha1(
+        b"blob " + str(len(data)).encode() + b"\0" + data
+    ).hexdigest() != payload.get("sha"):
         raise NativeFailure("Pinned source Git blob differs.")
     return data
 
 
-def remote(script: str, directory: Path, label: str, timeout: int = 120) -> dict[str, Any]:
+def remote(
+    script: str, directory: Path, label: str, timeout: int = 120
+) -> dict[str, Any]:
     command = "sudo -n -u machina " + GPU_PYTHON + " -c " + shlex.quote(script)
-    output = run([GCLOUD, "compute", "ssh", "jep-csts-format-20261021", *FLAGS, "--command=" + command], directory, label, timeout)
+    output = run(
+        [
+            GCLOUD,
+            "compute",
+            "ssh",
+            "jep-csts-format-20261021",
+            *FLAGS,
+            "--command=" + command,
+        ],
+        directory,
+        label,
+        timeout,
+    )
     return json.loads(output)
 
 
 def copy_to_gpu(path: Path, directory: Path, label: str) -> tuple[str, str]:
     digest = sha(path.read_bytes())
     staging = f"/tmp/jep-tranche8-native-{digest}-{path.name}"
-    run([GCLOUD, "compute", "scp", str(path), f"jep-csts-format-20261021:{staging}", *FLAGS], directory, label + "_scp", 240)
-    run([GCLOUD, "compute", "ssh", "jep-csts-format-20261021", *FLAGS, "--command=chmod 644 " + shlex.quote(staging)], directory, label + "_permissions", 60)
+    run(
+        [
+            GCLOUD,
+            "compute",
+            "scp",
+            str(path),
+            f"jep-csts-format-20261021:{staging}",
+            *FLAGS,
+        ],
+        directory,
+        label + "_scp",
+        240,
+    )
+    run(
+        [
+            GCLOUD,
+            "compute",
+            "ssh",
+            "jep-csts-format-20261021",
+            *FLAGS,
+            "--command=chmod 644 " + shlex.quote(staging),
+        ],
+        directory,
+        label + "_permissions",
+        60,
+    )
     return staging, digest
 
 
 def preamble(commit: str) -> str:
     return (
-        "import pathlib,json,hashlib,subprocess,os,shutil,time\n"
+        "import pathlib,json,hashlib,subprocess,os,shutil,time,fcntl\n"
         f"root=pathlib.Path({GPU_ROOT!r});parent=pathlib.Path({PARENT_ROOT!r})\n"
         f"commit={commit!r}\n"
         "def git(*args):\n return subprocess.check_output(['git','-C',str(root),*args],text=True).strip()\n"
         "def save(p,v):\n p.write_text(json.dumps(v,ensure_ascii=False,indent=2,allow_nan=False)+'\\n')\n"
         "def digest(p):\n return hashlib.sha256(p.read_bytes()).hexdigest()\n"
-        "def clean():\n assert git('rev-parse','HEAD')==commit,'Source commit differs.'\n assert not git('status','--porcelain','--untracked-files=no'),'Tracked source is dirty.'\n"
+        "def workspace_lease(shared=False):\n owner=(root.parent/(root.name+'.workspace.lock')).open('a+')\n fcntl.flock(owner.fileno(),(fcntl.LOCK_SH if shared else fcntl.LOCK_EX)|fcntl.LOCK_NB)\n return owner\n"
+        "def gpu_lease():\n owner=(parent/'.viper/overnight_gpu.lock').open('a+')\n fcntl.flock(owner.fileno(),fcntl.LOCK_EX|fcntl.LOCK_NB)\n return owner\n"
+        "def clean():\n assert git('rev-parse','HEAD')==commit,'Source commit differs.'\n assert not git('status','--porcelain','--untracked-files=all'),'Source is dirty or untracked.'\n"
     )
 
 
@@ -121,32 +218,76 @@ def native_deploy(commit: str, directory: Path) -> dict[str, Any]:
     if not (source / ".git").exists():
         run(["git", "init", str(source)], directory, "source_init")
     helper = "!" + shlex.quote(gh_path()) + " auth git-credential"
-    run(["git", "-C", str(source), "-c", "credential.helper=", "-c", "credential.helper=" + helper, "fetch", "--no-tags", f"https://github.com/{REPO}.git", commit], directory, "source_fetch", 240)
-    actual = run(["git", "-C", str(source), "rev-parse", "FETCH_HEAD"], directory, "source_identity").decode().strip()
+    run(
+        [
+            "git",
+            "-C",
+            str(source),
+            "-c",
+            "credential.helper=",
+            "-c",
+            "credential.helper=" + helper,
+            "fetch",
+            "--no-tags",
+            f"https://github.com/{REPO}.git",
+            commit,
+        ],
+        directory,
+        "source_fetch",
+        240,
+    )
+    actual = (
+        run(
+            ["git", "-C", str(source), "rev-parse", "FETCH_HEAD"],
+            directory,
+            "source_identity",
+        )
+        .decode()
+        .strip()
+    )
     if actual != commit:
         raise NativeFailure("Fetched source differs from the pinned commit.")
-    run(["git", "-C", str(source), "update-ref", "refs/heads/tranche8-pinned", commit], directory, "source_pin")
+    run(
+        ["git", "-C", str(source), "update-ref", "refs/heads/tranche8-pinned", commit],
+        directory,
+        "source_pin",
+    )
     bundle = directory / "source.bundle"
     if bundle.exists():
         bundle = directory / f"source-{time.time_ns()}.bundle"
-    run(["git", "-C", str(source), "bundle", "create", str(bundle), "refs/heads/tranche8-pinned"], directory, "source_bundle", 180)
+    run(
+        [
+            "git",
+            "-C",
+            str(source),
+            "bundle",
+            "create",
+            str(bundle),
+            "refs/heads/tranche8-pinned",
+        ],
+        directory,
+        "source_bundle",
+        180,
+    )
     staging, digest = copy_to_gpu(bundle, directory, "source_bundle")
     script = preamble(commit) + (
+        "workspace_owner=workspace_lease()\ngpu_owner=gpu_lease()\n"
         f"bundle=pathlib.Path({staging!r})\nassert digest(bundle)=={digest!r},'Bundle bytes differ.'\n"
-        "subprocess.run(['git','-C',str(parent),'fetch',str(bundle),'refs/heads/tranche8-pinned'],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)\n"
+        "subprocess.run(['git','-C',str(parent),'fetch',str(bundle),'refs/heads/tranche8-pinned'],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,pass_fds=(workspace_owner.fileno(),gpu_owner.fileno()))\n"
         "if root.exists():\n"
         " assert (root/'.git').is_file(),'Existing native root is not a worktree.'\n"
+        " assert not git('ls-files','--others','--exclude-standard'),'Untracked source must be reviewed before deployment.'\n"
         " dirty=git('diff','HEAD','--name-only').splitlines()\n"
         f" assert set(dirty)<=set({OWNED!r}),'Unexpected local source changes.'\n"
         " for path in dirty:\n"
         "  intended=subprocess.check_output(['git','-C',str(parent),'show',commit+':'+path])\n"
         "  assert (root/path).read_bytes()==intended,'Formatting differs from the published source.'\n"
         " if dirty:\n"
-        "  subprocess.run(['git','-C',str(root),'add','--',*dirty],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)\n"
+        "  subprocess.run(['git','-C',str(root),'add','--',*dirty],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,pass_fds=(workspace_owner.fileno(),gpu_owner.fileno()))\n"
         " if git('rev-parse','HEAD')!=commit:\n"
-        "  subprocess.run(['git','-C',str(root),'checkout','--detach',commit],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)\n"
+        "  subprocess.run(['git','-C',str(root),'checkout','--detach',commit],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,pass_fds=(workspace_owner.fileno(),gpu_owner.fileno()))\n"
         "else:\n"
-        " subprocess.run(['git','-C',str(parent),'worktree','add','--detach',str(root),commit],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)\n"
+        " subprocess.run(['git','-C',str(parent),'worktree','add','--detach',str(root),commit],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,pass_fds=(workspace_owner.fileno(),gpu_owner.fileno()))\n"
         "clean()\n"
         "assert not root.is_symlink(),'Native root must be physical.'\n"
         "(root/'csts_data').mkdir(exist_ok=True)\n"
@@ -166,7 +307,7 @@ def native_deploy(commit: str, directory: Path) -> dict[str, Any]:
 def native_checks(commit: str, directory: Path, allow_format: bool) -> dict[str, Any]:
     """Run owner checks and return only changed task source for publication."""
     script = preamble(commit) + (
-        "import ast\nclean()\n"
+        "import ast\nworkspace_owner=workspace_lease()\ngpu_owner=gpu_lease()\nclean()\n"
         f"paths=[p for p in {OWNED!r} if (root/p).is_file()]\n"
         "required={'csts_pilot/proposition_inputs.py','csts_pilot/proposition_lora.py','csts_pilot/proposition_run.py'}\n"
         "assert required<=set(paths),'Native implementation is incomplete.'\n"
@@ -177,7 +318,7 @@ def native_checks(commit: str, directory: Path, allow_format: bool) -> dict[str,
         "results=[]\n"
         "for index,args in enumerate(commands):\n"
         f" command=[{GPU_PYTHON!r},'-m',*args]\n"
-        " outcome=subprocess.run(command,cwd=root,env=environment,capture_output=True,timeout=600,check=False)\n"
+        " outcome=subprocess.run(command,cwd=root,env=environment,capture_output=True,timeout=600,check=False,pass_fds=(workspace_owner.fileno(),gpu_owner.fileno()))\n"
         " (directory/(str(index)+'.stdout')).write_bytes(outcome.stdout);(directory/(str(index)+'.stderr')).write_bytes(outcome.stderr)\n"
         " results.append({'check':args[0]+(' '+args[1] if len(args)>1 and args[0]=='ruff' else ''),'returncode':outcome.returncode})\n"
         "changed=[]\n"
@@ -186,7 +327,7 @@ def native_checks(commit: str, directory: Path, allow_format: bool) -> dict[str,
         "  text=(root/p).read_text()\n"
         "  assert ast.dump(ast.parse(before[p]))==ast.dump(ast.parse(text)),'Formatting changed the source AST.'\n"
         "  changed.append({'path':p,'chunks':[text[i:i+12000] for i in range(0,len(text),12000)],'sha256':digest(root/p)})\n"
-        f"preflight=subprocess.run([{GPU_PYTHON!r},'-c',\"import json,os,sys;assert sys.prefix=='/home/machina/jep-format-env';assert os.environ.get('VIRTUAL_ENV')==sys.prefix;import torch,viper,ruff,pyrefly;print(json.dumps({{'owner_python_verified':True,'virtual_env_verified':True}}))\"],cwd=root,env=environment,capture_output=True,timeout=60,check=False)\n"
+        f"preflight=subprocess.run([{GPU_PYTHON!r},'-c',\"import json,os,sys;assert sys.prefix=='/home/machina/jep-format-env';assert os.environ.get('VIRTUAL_ENV')==sys.prefix;import torch,viper,ruff,pyrefly;print(json.dumps({{'owner_python_verified':True,'virtual_env_verified':True}}))\"],cwd=root,env=environment,capture_output=True,timeout=60,check=False,pass_fds=(workspace_owner.fileno(),gpu_owner.fileno()))\n"
         "(directory/'preflight.stdout').write_bytes(preflight.stdout);(directory/'preflight.stderr').write_bytes(preflight.stderr);results.append({'check':'owner_environment_preflight','returncode':preflight.returncode})\n"
         "receipt={'source_commit':commit,'checks':results,'passed':all(item['returncode']==0 for item in results),'source_clean':not bool(changed),'owned_source_sha256':{p:digest(root/p) for p in paths}}\n"
         "save(directory/'receipt.json',receipt)\n"
@@ -212,13 +353,32 @@ def native_source(commit: str, directory: Path, path: str) -> dict[str, Any]:
 
 def import_capture(commit: str, directory: Path) -> dict[str, Any]:
     """Install a complete generated bank without exposing it in worker status."""
-    paths = {"propositions_tranche8.json": GEN_ROOT / "propositions_tranche8.json", "propositions_tranche8_manifest.json": GEN_ROOT / "propositions_tranche8_manifest.json"}
+    paths = {
+        name: GEN_ROOT / name
+        for name in (
+            "propositions_tranche8.json",
+            "propositions_tranche8_manifest.json",
+            "propositions_tranche8_provenance.json",
+        )
+    }
     manifest = json.loads(paths["propositions_tranche8_manifest.json"].read_text())
-    if manifest.get("items") != 17334 or manifest.get("records_sha256") != sha(paths["propositions_tranche8.json"].read_bytes()) or set(manifest.get("partitions", {})) != {"training", "validation"} or any(part.get("status") != "complete" for part in manifest["partitions"].values()):
+    if (
+        manifest.get("items") != 17334
+        or manifest.get("records_sha256")
+        != sha(paths["propositions_tranche8.json"].read_bytes())
+        or set(manifest.get("partitions", {})) != {"training", "validation"}
+        or any(
+            part.get("status") != "complete" for part in manifest["partitions"].values()
+        )
+    ):
         raise NativeFailure("Full capture is incomplete or its record binding differs.")
-    gate = fetch_file("csts_data/propositions_tranche8_audit_gate.json", commit, directory)
+    gate = fetch_file(
+        "csts_data/propositions_tranche8_audit_gate.json", commit, directory
+    )
     if sha(gate) != manifest.get("audit_gate_sha256"):
-        raise NativeFailure("Native source gate differs from the completed capture gate.")
+        raise NativeFailure(
+            "Native source gate differs from the completed capture gate."
+        )
     gate_path = directory / "propositions_tranche8_audit_gate.json"
     gate_path.write_bytes(gate)
     paths[gate_path.name] = gate_path
@@ -229,7 +389,7 @@ def import_capture(commit: str, directory: Path) -> dict[str, Any]:
             stream.add(path, arcname=name, recursive=False)
     staging, digest = copy_to_gpu(archive, directory, "capture_bank")
     script = preamble(commit) + (
-        "import tarfile\nclean()\n"
+        "import tarfile\nworkspace_owner=workspace_lease()\nclean()\n"
         f"archive=pathlib.Path({staging!r})\nassert digest(archive)=={digest!r}\nexpected={hashes!r}\n"
         "with tarfile.open(archive,'r:gz') as stream:\n"
         " assert set(stream.getnames())==set(expected),'Unexpected bank archive members.'\n"
@@ -246,10 +406,16 @@ def import_capture(commit: str, directory: Path) -> dict[str, Any]:
     return remote(script, directory, "native_import_capture")
 
 
-def native_launch(commit: str, directory: Path, name: str, module: str = "csts_pilot.proposition_run") -> dict[str, Any]:
+def native_launch(
+    commit: str, directory: Path, name: str, module: str = "csts_pilot.proposition_run"
+) -> dict[str, Any]:
     if module not in {"csts_pilot.proposition_run", "csts_pilot.proposition_sample"}:
         raise NativeFailure("Native launch module is outside the fixed allowlist.")
-    imported = import_capture(commit, directory) if module == "csts_pilot.proposition_run" else None
+    imported = (
+        import_capture(commit, directory)
+        if module == "csts_pilot.proposition_run"
+        else None
+    )
     # The supervisor is task source fetched at the same commit, never shell text.
     supervisor = fetch_file("scripts/tranche8_native_supervisor.py", commit, directory)
     local = directory / "tranche8_native_supervisor.py"
@@ -325,7 +491,11 @@ def native_status(commit: str, directory: Path, name: str) -> dict[str, Any]:
 def redact(text: str) -> str:
     expression = r"(?:\bsk-[A-Za-z0-9_-]{16,}|\bgh[pousr]_[A-Za-z0-9_]{16,}|\bgithub_pat_[A-Za-z0-9_]{16,}|\bhf_[A-Za-z0-9_]{16,}|\bya29\.[A-Za-z0-9._-]{16,}|\bAIza[A-Za-z0-9_-]{25,}|\bBearer\s+[A-Za-z0-9._~+/-]{16,})"
     text = re.sub(expression, "[REDACTED]", text, flags=re.IGNORECASE)
-    return re.sub(r"(?im)^.*(?:authorization|api[_-]?key|access[_-]?token|refresh[_-]?token|password)\s*[:=].*$", "[REDACTED credential assignment]", text)
+    return re.sub(
+        r"(?im)^.*(?:authorization|api[_-]?key|access[_-]?token|refresh[_-]?token|password)\s*[:=].*$",
+        "[REDACTED credential assignment]",
+        text,
+    )
 
 
 def operation_diagnostics(commit: str, operation: str) -> dict[str, Any]:
@@ -338,8 +508,22 @@ def operation_diagnostics(commit: str, operation: str) -> dict[str, Any]:
         if path.is_file() and not path.is_symlink():
             text = redact(path.read_text(errors="replace")[-24000:])
             if text.strip():
-                records.append({"operation": label, "stream": "stderr", "chunks": [text[i:i+12000] for i in range(0, len(text), 12000)]})
-    return {"phase": "native_operation_diagnostics", "status": "complete", "source_commit": commit, "operation": operation, "diagnostics": records}
+                records.append(
+                    {
+                        "operation": label,
+                        "stream": "stderr",
+                        "chunks": [
+                            text[i : i + 12000] for i in range(0, len(text), 12000)
+                        ],
+                    }
+                )
+    return {
+        "phase": "native_operation_diagnostics",
+        "status": "complete",
+        "source_commit": commit,
+        "operation": operation,
+        "diagnostics": records,
+    }
 
 
 def check_diagnostics(commit: str, directory: Path) -> dict[str, Any]:
@@ -356,18 +540,18 @@ def check_diagnostics(commit: str, directory: Path) -> dict[str, Any]:
     result = remote(script, directory, "native_check_diagnostics")
     for entry in result.get("diagnostics", []):
         text = redact(entry.pop("text"))
-        entry["chunks"] = [text[i:i+12000] for i in range(0, len(text), 12000)]
+        entry["chunks"] = [text[i : i + 12000] for i in range(0, len(text), 12000)]
     return result
 
 
 def native_archive(commit: str, directory: Path) -> dict[str, Any]:
     script = preamble(commit) + (
-        "clean()\n"
+        "workspace_owner=workspace_lease(shared=True)\nclean()\n"
         "directory=root/'answer_input_results'/'archive_operator';directory.mkdir(parents=True,exist_ok=True)\n"
         "log_id=str(time.time_ns())\n"
         "environment=os.environ.copy();environment['VIRTUAL_ENV']='/home/machina/jep-format-env';environment['PATH']='/home/machina/jep-format-env/bin:/usr/local/bin:/usr/bin:/bin'\n"
         f"command=[{GPU_PYTHON!r},'-m','csts_pilot.proposition_archive','--root',str(root),'--archive-directory','/home/machina/jep-csts-answer-input-20261026/answer_input_results/proposition_capture_full/full_v2_6895d17242704944']\n"
-        "outcome=subprocess.run(command,cwd=root,env=environment,capture_output=True,timeout=600,check=False)\n"
+        "outcome=subprocess.run(command,cwd=root,env=environment,capture_output=True,timeout=600,check=False,pass_fds=(workspace_owner.fileno(),))\n"
         "(directory/(log_id+'.stdout')).write_bytes(outcome.stdout);(directory/(log_id+'.stderr')).write_bytes(outcome.stderr)\n"
         "result={'phase':'native_archive','status':'failed' if outcome.returncode else 'complete','source_commit':commit,'returncode':outcome.returncode,'promotion_waited':False}\n"
         "for line in outcome.stdout.decode(errors='replace').splitlines():\n"
@@ -393,11 +577,21 @@ def capture_diagnostics() -> dict[str, Any]:
             except (OSError, ValueError):
                 continue
             status = receipt.get("status", "unknown")
-            item = {"split": split, "batch": directory.name, "status": status, "items": receipt.get("items"), "started_unix": receipt.get("started_unix")}
+            item = {
+                "split": split,
+                "batch": directory.name,
+                "status": status,
+                "items": receipt.get("items"),
+                "started_unix": receipt.get("started_unix"),
+            }
             if isinstance(receipt.get("started_unix"), (int, float)):
-                item["elapsed_seconds"] = round(receipt.get("elapsed_seconds", now - receipt["started_unix"]), 1)
+                item["elapsed_seconds"] = round(
+                    receipt.get("elapsed_seconds", now - receipt["started_unix"]), 1
+                )
             if status == "complete":
-                complete[split + "/" + directory.name.split("-attempt_")[0]] = receipt.get("items", 0)
+                complete[split + "/" + directory.name.split("-attempt_")[0]] = (
+                    receipt.get("items", 0)
+                )
                 recent.append(item)
             elif status == "failed":
                 failures += 1
@@ -419,11 +613,23 @@ def capture_diagnostics() -> dict[str, Any]:
                         "connection": r"connection|network|socket|\bdns\b|\btls\b|disconnect",
                         "retrying": r"retry|backoff|reconnect",
                     }
-                    frequencies = {key: len(re.findall(pattern, text, flags=re.IGNORECASE)) for key, pattern in patterns.items()}
-                    item.update(stderr_flags={key: count > 0 for key, count in frequencies.items()}, stderr_counts=frequencies, stderr_bytes_scanned=len(inspected), stderr_scan_truncated=size > len(inspected))
+                    frequencies = {
+                        key: len(re.findall(pattern, text, flags=re.IGNORECASE))
+                        for key, pattern in patterns.items()
+                    }
+                    item.update(
+                        stderr_flags={
+                            key: count > 0 for key, count in frequencies.items()
+                        },
+                        stderr_counts=frequencies,
+                        stderr_bytes_scanned=len(inspected),
+                        stderr_scan_truncated=size > len(inspected),
+                    )
                 events = directory / "events.jsonl"
                 if events.is_file():
-                    item["last_event_age_seconds"] = round(max(0, now - events.stat().st_mtime), 1)
+                    item["last_event_age_seconds"] = round(
+                        max(0, now - events.stat().st_mtime), 1
+                    )
                     event_count = 0
                     last_type = None
                     with events.open() as stream:
@@ -434,7 +640,21 @@ def capture_diagnostics() -> dict[str, Any]:
                                 continue
                             event_count += 1
                             value = event.get("type")
-                            last_type = value if value in {"thread.started", "turn.started", "item.started", "item.updated", "item.completed", "turn.completed", "turn.failed", "error"} else "unrecognized"
+                            last_type = (
+                                value
+                                if value
+                                in {
+                                    "thread.started",
+                                    "turn.started",
+                                    "item.started",
+                                    "item.updated",
+                                    "item.completed",
+                                    "turn.completed",
+                                    "turn.failed",
+                                    "error",
+                                }
+                                else "unrecognized"
+                            )
                     item.update(event_count=event_count, last_cli_event_type=last_type)
                 pid = receipt.get("pid")
                 if isinstance(pid, int) and pid > 1:
@@ -449,14 +669,20 @@ def capture_diagnostics() -> dict[str, Any]:
                     item["pid"] = pid
                 running.append(item)
     supervisors = []
-    for path in sorted((MAC_ROOT.parent / "full_capture").glob("*/supervisor_receipt.json")):
+    for path in sorted(
+        (MAC_ROOT.parent / "full_capture").glob("*/supervisor_receipt.json")
+    ):
         try:
             receipt = json.loads(path.read_text())
         except (OSError, ValueError):
             continue
         if receipt.get("output_path") != str(GEN_ROOT):
             continue
-        item = {key: receipt[key] for key in ("status", "source_commit", "started_unix", "pid") if key in receipt}
+        item = {
+            key: receipt[key]
+            for key in ("status", "source_commit", "started_unix", "pid")
+            if key in receipt
+        }
         pid = receipt.get("pid")
         if isinstance(pid, int) and pid > 1:
             try:
@@ -468,19 +694,54 @@ def capture_diagnostics() -> dict[str, Any]:
             else:
                 item["process_alive"] = True
         supervisors.append(item)
-    return {"phase": "capture_diagnostics", "status": "complete", "counts": {"completed_items": sum(complete.values()), "total_items": 17334, "completed_batches": len(complete), "failed_attempts": failures, "running_batches": len(running)}, "running": running[:8], "recent_closed": sorted(recent, key=lambda item: item.get("started_unix") or 0, reverse=True)[:8], "supervisors": supervisors[:4], "observed_unix": now}
+    return {
+        "phase": "capture_diagnostics",
+        "status": "complete",
+        "counts": {
+            "completed_items": sum(complete.values()),
+            "total_items": 17334,
+            "completed_batches": len(complete),
+            "failed_attempts": failures,
+            "running_batches": len(running),
+        },
+        "running": running[:8],
+        "recent_closed": sorted(
+            recent, key=lambda item: item.get("started_unix") or 0, reverse=True
+        )[:8],
+        "supervisors": supervisors[:4],
+        "observed_unix": now,
+    }
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--phase", required=True, choices=("native_deploy", "native_checks", "native_source", "native_import_capture", "native_launch", "native_sample", "native_status", "native_check_diagnostics", "native_operation_diagnostics", "native_archive", "capture_diagnostics"))
+    parser.add_argument(
+        "--phase",
+        required=True,
+        choices=(
+            "native_deploy",
+            "native_checks",
+            "native_source",
+            "native_import_capture",
+            "native_launch",
+            "native_sample",
+            "native_status",
+            "native_check_diagnostics",
+            "native_operation_diagnostics",
+            "native_archive",
+            "capture_diagnostics",
+        ),
+    )
     parser.add_argument("--source-commit", required=True)
     parser.add_argument("--name", default="proposition_lora_v2")
     parser.add_argument("--allow-format", action="store_true")
     parser.add_argument("--path", choices=OWNED)
     parser.add_argument("--operation", choices=tuple(OPERATION_LOGS))
     args = parser.parse_args()
-    if re.fullmatch(r"[0-9a-f]{40}", args.source_commit) is None or re.fullmatch(r"[A-Za-z0-9_-]{1,80}", args.name) is None:
+    if (
+        re.fullmatch(r"[0-9a-f]{40}", args.source_commit) is None
+        or re.fullmatch(r"[A-Za-z0-9_-]{1,80}", args.name) is None
+    ):
         parser.error("Use a complete source commit and a safe attempt name.")
     directory = MAC_ROOT / args.source_commit / args.phase
     directory.mkdir(parents=True, exist_ok=True)
@@ -499,13 +760,22 @@ def main() -> None:
             result = native_launch(args.source_commit, directory, args.name)
         elif args.phase == "native_sample":
             if args.name == "proposition_lora_v2":
-                raise NativeFailure("Use a separate explicit --name for the frozen sample diagnostic.")
-            result = native_launch(args.source_commit, directory, args.name, "csts_pilot.proposition_sample")
+                raise NativeFailure(
+                    "Use a separate explicit --name for the frozen sample diagnostic."
+                )
+            result = native_launch(
+                args.source_commit,
+                directory,
+                args.name,
+                "csts_pilot.proposition_sample",
+            )
         elif args.phase == "native_check_diagnostics":
             result = check_diagnostics(args.source_commit, directory)
         elif args.phase == "native_operation_diagnostics":
             if args.operation is None:
-                raise NativeFailure("native_operation_diagnostics requires an allowlisted operation.")
+                raise NativeFailure(
+                    "native_operation_diagnostics requires an allowlisted operation."
+                )
             result = operation_diagnostics(args.source_commit, args.operation)
         elif args.phase == "native_archive":
             result = native_archive(args.source_commit, directory)
@@ -513,12 +783,21 @@ def main() -> None:
             result = capture_diagnostics()
         else:
             result = native_status(args.source_commit, directory, args.name)
-    except Exception as error:
-        result = {"phase": args.phase, "status": "failed", "error": str(error) if isinstance(error, NativeFailure) else "Native phase failed; private logs retained."}
+    except Exception as error:  # noqa: BLE001 - publish a bounded safe failure; preserve private logs.
+        result = {
+            "phase": args.phase,
+            "status": "failed",
+            "error": str(error)
+            if isinstance(error, NativeFailure)
+            else "Native phase failed; private logs retained.",
+        }
         print("OPERATOR_RESULT " + json.dumps(result), flush=True)
         raise SystemExit(1) from None
     save(directory / "result.json", result)
-    print("OPERATOR_RESULT " + json.dumps(result, ensure_ascii=False, allow_nan=False), flush=True)
+    print(
+        "OPERATOR_RESULT " + json.dumps(result, ensure_ascii=False, allow_nan=False),
+        flush=True,
+    )
 
 
 if __name__ == "__main__":

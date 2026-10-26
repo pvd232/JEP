@@ -159,6 +159,20 @@ def validate_control(value: Any) -> dict[str, Any]:
             not isinstance(argument, str) or "\x00" in argument for argument in arguments
         ):
             raise ValueError("Operator arguments must be strings")
+        pins = []
+        for index, argument in enumerate(arguments):
+            option = argument.split("=", 1)[0]
+            if option == "--source-commit":
+                pins.append(argument.split("=", 1)[1] if "=" in argument else (
+                    arguments[index + 1] if index + 1 < len(arguments) else None
+                ))
+            elif option.startswith("--") and "--source-commit".startswith(option):
+                raise ValueError("Abbreviated source options are not permitted")
+        target = value.get("target_source_commit", value["source_commit"])
+        if not isinstance(target, str) or not re.fullmatch(r"[0-9a-f]{40}", target):
+            raise ValueError("Target source must be an immutable commit")
+        if pins != [target]:
+            raise ValueError("Operator arguments must bind exactly the declared target source commit")
     return value
 
 
@@ -263,7 +277,7 @@ def supervise(key: str) -> int:
                 receipt["error"] = "Operator exited with a nonzero return code"
             save_json(receipt_path, receipt)
             return returncode
-        except Exception:
+        except Exception:  # noqa: BLE001 - retain the lock until any launched child finishes.
             if child is not None and child.poll() is None:
                 # A failed receipt write must not release serialization while
                 # an already-started operator continues its authorized work.
@@ -328,11 +342,16 @@ def launch(control: dict[str, Any]) -> tuple[Path, subprocess.Popen | None]:
     receipt_path = directory / "receipt.json"
     if receipt_path.exists():
         receipt = read_json(receipt_path)
-        if any(receipt.get(key) != control.get(key) for key in ("action_id", "source_commit", "operator_sha256", "arguments")):
+        if any(receipt.get(key) != control.get(key) for key in ("action_id", "source_commit", "operator_sha256", "arguments")) or (
+            "target_source_commit" in receipt
+            and receipt["target_source_commit"] != control.get("target_source_commit", control["source_commit"])
+        ):
             raise ValueError("Action identity reused with a different operator binding")
+        # Legacy receipts already bind the identical argv, including its source
+        # pin. Adding explicit target metadata cannot authorize another launch.
         return directory, None
     directory.mkdir(parents=True, mode=0o700)
-    receipt = {key: control[key] for key in ("action_id", "source_commit", "operator_sha256", "arguments")}
+    receipt = {key: control[key] for key in ("action_id", "source_commit", "operator_sha256", "arguments", "target_source_commit") if key in control}
     receipt.update(status="preparing", created_at=now())
     save_json(receipt_path, receipt)
     try:
@@ -440,9 +459,8 @@ def run_worker() -> int:
             worker_state = "draining" if stop_requested and active else "stopped" if stop_requested else "running" if active else "waiting"
             status = status_for(active or last, worker_state, error)
             signature = publication_signature(status)
-            if signature != last_signature or time.monotonic() - last_published >= HEARTBEAT_SECONDS:
-                if publish(status):
-                    last_signature, last_published = signature, time.monotonic()
+            if (signature != last_signature or time.monotonic() - last_published >= HEARTBEAT_SECONDS) and publish(status):
+                last_signature, last_published = signature, time.monotonic()
             if stop_requested and active is None:
                 state.update(stop_requested=False, stopped_at=now())
                 save_json(state_path, state)
