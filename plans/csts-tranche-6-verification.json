@@ -1,0 +1,41 @@
+{
+  "status": "passed",
+  "scope": "core+nativecontroller source checks and tiny CPU fits; benchmark attention execution not started",
+  "snapshot_sha256": {
+    "csts_pilot/evidence_attention.py": "9c3fa6288d7e2a725a9647f0577651f8bff15ab59d843be67515ec67c096d349",
+    "csts_pilot/evidence_attention_run.py": "178904501da47710602ceb43095fddc5146f21933078bba15d2ba7fbb359f7a8",
+    "tests/test_csts_evidence_attention.py": "95afd5192cd2ad805935ca79c6fa2e0539e094beea1cc66c33f71d4e0a3d01aa",
+    "configs/csts-evidence-attention.json": "d7230f45dd6dcc26d2f70ff8a420cb4894ab5bd3717400141149a5d16bb68ca5",
+    "plans/csts-tranche-6-evidence-attention.md": "abd0e7ce51905d6dd32b8ce2a80340bc0deff14579c772b87f168a27e36f73af"
+  },
+  "runtime": "/home/machina/jep-format-env/bin/python",
+  "pytest": {
+    "passed": 37,
+    "seconds": 10.05,
+    "command": "python -m pytest -q tests/test_csts_evidence_attention.py"
+  },
+  "ruff": {
+    "status": "passed",
+    "files": 3
+  },
+  "pyrefly": {
+    "errors": 0,
+    "preset": "basic",
+    "production_modules": 2
+  },
+  "preflight": {
+    "passed": true,
+    "inference_started": false,
+    "training_started": false,
+    "scope": "configured cohorts/checkpoint/teacher cache and archived baseline identity; full native stages excluded"
+  },
+  "independent_math": {
+    "checks": 8,
+    "max_gradient_error": 1.724151377224814e-10
+  },
+  "math_syntax": {
+    "expressions": 62,
+    "parse_errors": 0,
+    "single_dollar_characters": false
+  }
+}

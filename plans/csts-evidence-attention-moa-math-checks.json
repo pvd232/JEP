@@ -1,0 +1,47 @@
+{
+  "precision": "NumPy float64",
+  "scope": "independent full attention-rating/span objective formulas; fixed inverted-dropout masks; frozen normalized Q/K inputs; one pair with unequal token lengths and one unlabelled passage",
+  "checks_passed": 8,
+  "maximum_gradient_error": 1.724151377224814e-10,
+  "checks": [
+    {
+      "name": "Q_gradient_span_weight_0.0",
+      "maximum_absolute_error": 1.724151377224814e-10,
+      "tolerance": 1e-07
+    },
+    {
+      "name": "K_gradient_span_weight_0.0",
+      "maximum_absolute_error": 1.3980394619750314e-10,
+      "tolerance": 1e-07
+    },
+    {
+      "name": "V_gradient_span_weight_0.0",
+      "maximum_absolute_error": 6.033001875849209e-11,
+      "tolerance": 1e-07
+    },
+    {
+      "name": "Q_gradient_span_weight_0.1",
+      "maximum_absolute_error": 1.6386202117413262e-10,
+      "tolerance": 1e-07
+    },
+    {
+      "name": "K_gradient_span_weight_0.1",
+      "maximum_absolute_error": 1.4982010076991514e-10,
+      "tolerance": 1e-07
+    },
+    {
+      "name": "V_gradient_span_weight_0.1",
+      "maximum_absolute_error": 6.033001875849209e-11,
+      "tolerance": 1e-07
+    },
+    {
+      "name": "softmax_jacobian",
+      "maximum_absolute_error": 3.7685660148056854e-11,
+      "tolerance": 1e-07
+    },
+    {
+      "name": "nonaffine_layer_norm_zero_mean",
+      "passed": true
+    }
+  ]
+}
