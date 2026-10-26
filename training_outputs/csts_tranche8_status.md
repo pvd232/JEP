@@ -2,7 +2,7 @@
 
 **running — capture_and_source_sample**. Updated Oct 26, 2026, 11:35 AM EDT.
 
-Full training/development generation: **2,688/17,334** accepted structural records; 2 preserved failed attempts. Capture: running. Provider latency has varied; no fixed ETA is asserted.
+Full training/development generation: **2,880/17,334** accepted structural records; 2 preserved failed attempts. Capture: running. Provider latency has varied; no fixed ETA is asserted.
 
 Source sample: complete. Adaptation: not_started. Held-out test: not_released.
 
