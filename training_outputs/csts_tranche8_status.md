@@ -1,10 +1,10 @@
 # Checked propositions and LoRA — live results
 
-**authentication_required — waiting_for_google_cloud_sign_in**. Updated Oct 26, 2026, 10:55 AM EDT.
+**authentication_required — waiting_for_google_cloud_sign_in**. Updated Oct 26, 2026, 10:56 AM EDT.
 
 Google Cloud requires interactive sign-in renewal. Existing local proposition generation continues; native sample, adaptation and test stages await clean owner checks.
 
-Full training/development generation: **2,112/17,334** accepted structural records; 0 preserved failed attempts. Capture: running. Provider latency has varied; no fixed ETA is asserted.
+Full training/development generation: **2,176/17,334** accepted structural records; 0 preserved failed attempts. Capture: running. Provider latency has varied; no fixed ETA is asserted.
 
 Source sample: awaiting_clean_owner_checks. Adaptation: awaiting_clean_owner_checks. Held-out test: not_released.
 
