@@ -1,0 +1,1271 @@
+{
+  "cohort": "earlier 60-pair v1 frozen source diagnostic",
+  "n": 60,
+  "source_groups": 60,
+  "point_metrics": {
+    "saved_qwen_sample": {
+      "spearman": 0.8322018169962705,
+      "mse": 0.02961007371020233
+    },
+    "old_spans": {
+      "spearman": 0.8060183300634904,
+      "mse": 0.03059670451954546
+    },
+    "checked_generated_v1": {
+      "spearman": 0.7511696441841024,
+      "mse": 0.03733071438943067
+    }
+  },
+  "bootstrap": {
+    "unit": "source group; exactly one comparison per group",
+    "draws": 10000,
+    "seed": 61031,
+    "method": "paired percentile bootstrap; within-draw Spearman midranks include duplicated observations and original rating ties",
+    "valid_rank_draws": 10000,
+    "spearman_delta": -0.08103217281216812,
+    "spearman_delta_95_percentile_interval": [
+      -0.19209033120354127,
+      0.008765171064503476
+    ],
+    "bootstrap_fraction_rank_delta_negative": 0.9603,
+    "mse_delta": 0.007720640679228338,
+    "mse_delta_95_percentile_interval": [
+      -0.0025348214439495213,
+      0.018732440754655036
+    ],
+    "bootstrap_fraction_mse_delta_positive": 0.9236,
+    "interpretation": "Conditional development-sample uncertainty for this fixed generation, screening, fallback and encoder policy; one training seed. Bootstrap sign fractions describe resampling outcomes."
+  },
+  "coverage_groups": {
+    "both": {
+      "n": 42,
+      "baseline_mse": 0.02926426284461798,
+      "generated_mse": 0.03374507528337006,
+      "net_mse_contribution": 0.003136568707126461
+    },
+    "one": {
+      "n": 14,
+      "baseline_mse": 0.034306553270116544,
+      "generated_mse": 0.053952576007696026,
+      "net_mse_contribution": 0.004584071972101879
+    },
+    "neither": {
+      "n": 4,
+      "baseline_mse": 0.016803409339138264,
+      "generated_mse": 0.016803409339138264,
+      "net_mse_contribution": 0.0
+    }
+  },
+  "rating_groups": {
+    "1": {
+      "n": 8,
+      "net_mse_contribution": 0.0008687112719498136,
+      "share_of_total_mse_increase": 0.11251802901370608
+    },
+    "2": {
+      "n": 14,
+      "net_mse_contribution": 0.0007957667942697515,
+      "share_of_total_mse_increase": 0.10307004655853078
+    },
+    "3": {
+      "n": 17,
+      "net_mse_contribution": -0.0006848618273231059,
+      "share_of_total_mse_increase": -0.08870531032038088
+    },
+    "4": {
+      "n": 12,
+      "net_mse_contribution": 0.006471856647024573,
+      "share_of_total_mse_increase": 0.8382538335758195
+    },
+    "5": {
+      "n": 9,
+      "net_mse_contribution": 0.0002691677933073085,
+      "share_of_total_mse_increase": 0.0348634011723249
+    }
+  },
+  "leave_one_out_spearman_delta_range": [
+    -0.0986655730743704,
+    -0.05399778953827983
+  ],
+  "largest_mse_regressions": [
+    {
+      "row_id": "train_6978",
+      "sentence1": "People standing in and in front of a booth full of stuffed animals .",
+      "sentence2": "A kid looking over a carnival booth counter at the various toys .",
+      "condition": "type of event",
+      "rating": 4,
+      "target": 0.75,
+      "pair_id": "641f1313d9a1ab0dde42df28bea51734e2b6fb2d7cab55e24acef509c2573c53",
+      "group_id": "cc921c0fa3f3909fc82298c1e17a769b2a439c94fe6459e0d484167d5cbe5c8e",
+      "predictions": {
+        "saved_qwen_sample": 0.5271905660629272,
+        "old_spans": 0.5271905660629272,
+        "checked_generated_v1": 0.26678723096847534
+      },
+      "answer_ids": [
+        "e6aca7316377ecc81ef045599f4a04c4675c769350c7ac990a322da31b4d3706",
+        "71fb918382ad3639e5c6dcde045aeba83a49fe4a0090c58f838e757a8259cd68"
+      ],
+      "old_answers": [
+        "",
+        ""
+      ],
+      "new_answers": [
+        "",
+        "A carnival."
+      ],
+      "replacement_status": {
+        "old_spans": [
+          false,
+          false
+        ],
+        "checked_generated_v1": [
+          false,
+          true
+        ]
+      },
+      "generated_status": [
+        "not_specified",
+        "answered"
+      ],
+      "generated_passes_fidelity": [
+        true,
+        true
+      ],
+      "mse_delta": 0.1838505363037548,
+      "spearman_delta_without_pair": -0.05399778953827983,
+      "removal_change_in_spearman_delta": 0.027034383273888296
+    },
+    {
+      "row_id": "train_2260",
+      "sentence1": "a passenger jet plane sits on a field with a bunch of other planes and a helicopter",
+      "sentence2": "An airport landing area with an airplane that says United States of America parked.",
+      "condition": "type of location",
+      "rating": 4,
+      "target": 0.75,
+      "pair_id": "67c676772c12127c48d60239667009409f26f02454ddb4e702c94df5247a6bf5",
+      "group_id": "752146daec71967621b6dd6024e7dca803f3d622cf9099116694c13e71a86dc2",
+      "predictions": {
+        "saved_qwen_sample": 0.6681621074676514,
+        "old_spans": 0.651362419128418,
+        "checked_generated_v1": 0.40746304392814636
+      },
+      "answer_ids": [
+        "8aed6adee45ffd22dda6197ec642c819f0d2a247be380d82d1308500eb853eb2",
+        "7cca7705719cd921fa006d900837f690cefca5aa9f2307924be84b7088a8a42c"
+      ],
+      "old_answers": [
+        "a passenger jet plane sits on a field with a bunch of other planes and a helicopter",
+        "airport landing area"
+      ],
+      "new_answers": [
+        "A field.",
+        "An airport landing area."
+      ],
+      "replacement_status": {
+        "old_spans": [
+          true,
+          true
+        ],
+        "checked_generated_v1": [
+          true,
+          true
+        ]
+      },
+      "generated_status": [
+        "answered",
+        "answered"
+      ],
+      "generated_passes_fidelity": [
+        true,
+        true
+      ],
+      "mse_delta": 0.11063412562083474,
+      "spearman_delta_without_pair": -0.06697948994566427,
+      "removal_change_in_spearman_delta": 0.014052682866503852
+    },
+    {
+      "row_id": "train_1644",
+      "sentence1": "The dining room has four chairs at the table, and a hard wood floor.",
+      "sentence2": "A metal cart stands in a modern kitchen with hardwood floors and wooden cabinets.",
+      "condition": "name of products",
+      "rating": 2,
+      "target": 0.25,
+      "pair_id": "d53796090bf1968425af04a0e5f703238b193ade7a7b9e21ea810b2e770cb85b",
+      "group_id": "ba330f6c0523670c450404440c48dc12804efcc9895ff13c68e135e63a7795ac",
+      "predictions": {
+        "saved_qwen_sample": 0.3956988751888275,
+        "old_spans": 0.3956988751888275,
+        "checked_generated_v1": 0.5665587782859802
+      },
+      "answer_ids": [
+        "b07b21232d34b6318654b53d4e9232c39c989f36b5670de7ba612014a4c524af",
+        "569edb5a0854a19abab31eb0754ed1dd4414902920b0da74fba566eff1b308a1"
+      ],
+      "old_answers": [
+        "",
+        ""
+      ],
+      "new_answers": [
+        "Four chairs, a table, and hardwood flooring.",
+        "A metal cart, hardwood floors, and wooden cabinets."
+      ],
+      "replacement_status": {
+        "old_spans": [
+          false,
+          false
+        ],
+        "checked_generated_v1": [
+          true,
+          true
+        ]
+      },
+      "generated_status": [
+        "answered",
+        "answered"
+      ],
+      "generated_passes_fidelity": [
+        true,
+        true
+      ],
+      "mse_delta": 0.07898129787862285,
+      "spearman_delta_without_pair": -0.06957460395357906,
+      "removal_change_in_spearman_delta": 0.011457568858589062
+    },
+    {
+      "row_id": "train_1372",
+      "sentence1": "A man and a boy are pulling a horse and cart along a shore.",
+      "sentence2": "A row boat containing two men and some animals bathing near the shore of a body of water.",
+      "condition": "presence of animal",
+      "rating": 4,
+      "target": 0.75,
+      "pair_id": "0a48aba5464b4dc4f8964dbe265f543b321e79d5a30caaec00826a7cdeade3ef",
+      "group_id": "6b7e94ef06469021c28f0b690bb0bddfa373b19d18d6e05e4258632d05672453",
+      "predictions": {
+        "saved_qwen_sample": 0.6094354391098022,
+        "old_spans": 0.5958907604217529,
+        "checked_generated_v1": 0.44701775908470154
+      },
+      "answer_ids": [
+        "ccb14d4b062dbfe1af4f5f8fdf06cde84698ffcf02ef7089fff7f2aa68e1e42c",
+        "86b5c30d3a912b118e4a79f1b205a340873b3bf44027cecf7c40c97dd84f7bcd"
+      ],
+      "old_answers": [
+        "A man and a boy are pulling a horse and cart along a shore",
+        "some animals"
+      ],
+      "new_answers": [
+        "A horse is present.",
+        "Animals are present, bathing near the shore."
+      ],
+      "replacement_status": {
+        "old_spans": [
+          true,
+          true
+        ],
+        "checked_generated_v1": [
+          true,
+          true
+        ]
+      },
+      "generated_status": [
+        "answered",
+        "answered"
+      ],
+      "generated_passes_fidelity": [
+        true,
+        true
+      ],
+      "mse_delta": 0.07203984253180185,
+      "spearman_delta_without_pair": -0.07066695288297042,
+      "removal_change_in_spearman_delta": 0.0103652199291977
+    },
+    {
+      "row_id": "train_3419",
+      "sentence1": "An orange  bus parked in front of a church with a tall clock tower.",
+      "sentence2": "A red car and a red bus cross on a street of two-story brick buildings.",
+      "condition": "color of bus",
+      "rating": 2,
+      "target": 0.25,
+      "pair_id": "23030e7deddabe623de4254a7ea24db6aa1f18610002545706a06f426e5e4965",
+      "group_id": "5cf4efb3c870d86eb6ba4906b9e6147c4af3bd275f014105af1e66b885847b41",
+      "predictions": {
+        "saved_qwen_sample": 0.36068862676620483,
+        "old_spans": 0.5119472742080688,
+        "checked_generated_v1": 0.5286564230918884
+      },
+      "answer_ids": [
+        "5e1e1becbb13f3eb8d77a1bfeaf856b907c29cd007c9824a7104dcf37eb0f463",
+        "b3e8ed7ffb9ce4a82355643f443f95e2a76ca91f7587db4106def9ff58886cbc"
+      ],
+      "old_answers": [
+        "orange",
+        "red bus"
+      ],
+      "new_answers": [
+        "Orange.",
+        "Red."
+      ],
+      "replacement_status": {
+        "old_spans": [
+          true,
+          true
+        ],
+        "checked_generated_v1": [
+          true,
+          true
+        ]
+      },
+      "generated_status": [
+        "answered",
+        "answered"
+      ],
+      "generated_passes_fidelity": [
+        true,
+        true
+      ],
+      "mse_delta": 0.06539743003497733,
+      "spearman_delta_without_pair": -0.0713427277673151,
+      "removal_change_in_spearman_delta": 0.009689445044853029
+    },
+    {
+      "row_id": "train_5778",
+      "sentence1": "one gray puddle jumping in the air in front of another tan dog",
+      "sentence2": "Three dogs chase and wrestle together on a dirt field .",
+      "condition": "type of animal",
+      "rating": 4,
+      "target": 0.75,
+      "pair_id": "05b8c281da13c8f722ff7e09667a743be60878448f3a27c73641d1929f33d672",
+      "group_id": "8bdfd65c14d9fb54c5e8d118a4d9a7bbb78e36b0c3b81bb40a08d5fdf1120857",
+      "predictions": {
+        "saved_qwen_sample": 0.7437998652458191,
+        "old_spans": 0.8584735989570618,
+        "checked_generated_v1": 1
+      },
+      "answer_ids": [
+        "6803f25faedb6a27e7714a33f01ee50c583e5b7b4b11c075fdd3aa4724a36db2",
+        "b908c18195ef926699b7cb820a29b5889931992864839d71687d50efecf4d050"
+      ],
+      "old_answers": [
+        "another tan dog",
+        "Three dogs chase and wrestle together on a dirt field"
+      ],
+      "new_answers": [
+        "Dogs.",
+        "Dogs."
+      ],
+      "replacement_status": {
+        "old_spans": [
+          true,
+          true
+        ],
+        "checked_generated_v1": [
+          true,
+          true
+        ]
+      },
+      "generated_status": [
+        "answered",
+        "answered"
+      ],
+      "generated_passes_fidelity": [
+        true,
+        true
+      ],
+      "mse_delta": 0.06246155832903,
+      "spearman_delta_without_pair": -0.08107551002061675,
+      "removal_change_in_spearman_delta": -4.3337208448623876e-05
+    },
+    {
+      "row_id": "train_338",
+      "sentence1": "A laptop set up on a stand with a standard keyboard and mouse hooked up to it.",
+      "sentence2": "An office desk shows some neatly arranged electronic equipment, including a laptop and computer, both of them on, and some peripheral accessories. ",
+      "condition": "type of furniture",
+      "rating": 4,
+      "target": 0.75,
+      "pair_id": "e21658eaa9f5481c08aed7974108871ed895ad5be8bf1351f2cf852374a7f446",
+      "group_id": "89c24f6bf89cf919fd2e6d928ec74a338342c337847da78294c5fbef75da8b05",
+      "predictions": {
+        "saved_qwen_sample": 0.5190739035606384,
+        "old_spans": 0.4598080515861511,
+        "checked_generated_v1": 0.42566415667533875
+      },
+      "answer_ids": [
+        "6773cc575d695087a2dc51e71b34ba595537abb2c710c97992628f0616ef8784",
+        "61bbfd5c267a164a20f9fd23dbb1467a2fc772800e3b46f535521fd1bf5c6d65"
+      ],
+      "old_answers": [
+        "",
+        "office desk"
+      ],
+      "new_answers": [
+        "A stand supporting a laptop.",
+        "An office desk."
+      ],
+      "replacement_status": {
+        "old_spans": [
+          false,
+          true
+        ],
+        "checked_generated_v1": [
+          true,
+          true
+        ]
+      },
+      "generated_status": [
+        "answered",
+        "answered"
+      ],
+      "generated_passes_fidelity": [
+        true,
+        true
+      ],
+      "mse_delta": 0.05186687724839789,
+      "spearman_delta_without_pair": -0.06973714011899046,
+      "removal_change_in_spearman_delta": 0.011295032693177665
+    },
+    {
+      "row_id": "train_2185",
+      "sentence1": "Two multicolored teddy bears; one is shades of brown and the other is primary colors.",
+      "sentence2": "A  white teddy bear, yellow teddy bear brown teddy bear and a small yelllow teddy bear sitting in a row.",
+      "condition": "color of teddy bears",
+      "rating": 2,
+      "target": 0.25,
+      "pair_id": "eeb2eabb5fddbb2c6a5e40f9cf3cf3f1ed5b954aef580c73101bdb7d2ce3a53b",
+      "group_id": "96e9ad9e517270fd7c7fb2876504c53912ff495e3b5cf7ecfd04fc1bdd2ef209",
+      "predictions": {
+        "saved_qwen_sample": 0.457145094871521,
+        "old_spans": 0.5577350854873657,
+        "checked_generated_v1": 0.543952465057373
+      },
+      "answer_ids": [
+        "d4b72a789765d2f51c1fcff722ddff83b99231df968bf254bb0491533fa44ba6",
+        "697a78caa711a57a0532366317e065072ef2fba65c247bf82d681fad967ec5d5"
+      ],
+      "old_answers": [
+        "Two multicolored teddy bears; one is shades of brown and the other is primary colors.",
+        "white teddy bear, yellow teddy bear brown teddy bear and a small yelllow teddy bear"
+      ],
+      "new_answers": [
+        "One bear has shades of brown; the other has primary colors.",
+        "One white, two yellow, and one brown teddy bear; one of the yellow bears is small."
+      ],
+      "replacement_status": {
+        "old_spans": [
+          true,
+          true
+        ],
+        "checked_generated_v1": [
+          true,
+          true
+        ]
+      },
+      "generated_status": [
+        "answered",
+        "answered"
+      ],
+      "generated_passes_fidelity": [
+        true,
+        true
+      ],
+      "mse_delta": 0.04349896138397469,
+      "spearman_delta_without_pair": -0.07047349231155609,
+      "removal_change_in_spearman_delta": 0.010558680500612039
+    },
+    {
+      "row_id": "train_4822",
+      "sentence1": "A girl in a pink t-shirt and white tennis shoes holds out her racket.",
+      "sentence2": "A woman jumping up to a hit a tennis ball on a tennis court.",
+      "condition": "name of game",
+      "rating": 5,
+      "target": 1,
+      "pair_id": "f870851bb0fa7e81d894ce42fe8b39b5d63deb6f8292a175c732203459c40176",
+      "group_id": "a4d1b677844b5efb88c8dcc864cb44075d565b9dc2e7b53dc758d9ba571981db",
+      "predictions": {
+        "saved_qwen_sample": 0.8401210308074951,
+        "old_spans": 0.7141172289848328,
+        "checked_generated_v1": 0.740074634552002
+      },
+      "answer_ids": [
+        "55ed48a23d27b1ec7b4f1003a90367a7c5c62cedf5e8d0eb8bbf643180eaa84e",
+        "65e6612888bfdc5adbbab9327eee53e6da8b56e9f4eb86893f98caab46c64c97"
+      ],
+      "old_answers": [
+        "",
+        "tennis"
+      ],
+      "new_answers": [
+        "",
+        "Tennis."
+      ],
+      "replacement_status": {
+        "old_spans": [
+          false,
+          true
+        ],
+        "checked_generated_v1": [
+          false,
+          true
+        ]
+      },
+      "generated_status": [
+        "not_specified",
+        "answered"
+      ],
+      "generated_passes_fidelity": [
+        true,
+        true
+      ],
+      "mse_delta": 0.04199991081321741,
+      "spearman_delta_without_pair": -0.0825776590439522,
+      "removal_change_in_spearman_delta": -0.0015454862317840767
+    },
+    {
+      "row_id": "train_2983",
+      "sentence1": "A young lady and a man standing next to each other on a ski slope.",
+      "sentence2": "A woman is skiing in a snowy forest with a dog next to her.",
+      "condition": "number of people",
+      "rating": 3,
+      "target": 0.5,
+      "pair_id": "8851bc814f549514d0664366d4f023364bd6283240d7548e45ba3390eded9485",
+      "group_id": "3ceb2fa10732f15be4f008aee91b07d58b2e494a17f3eeac453117f7125265be",
+      "predictions": {
+        "saved_qwen_sample": 0.23725217580795288,
+        "old_spans": 0.23725217580795288,
+        "checked_generated_v1": 0.17576491832733154
+      },
+      "answer_ids": [
+        "93a67af6ff8460fdd76f25cb4f25f2e9b7f2c3622c83df4364ae6ffe2f674393",
+        "d45ac8d4b4faa263efe7b05203f0fdbf021c39da33876e355f638e19f29f92ea"
+      ],
+      "old_answers": [
+        "",
+        ""
+      ],
+      "new_answers": [
+        "Two people.",
+        "One person."
+      ],
+      "replacement_status": {
+        "old_spans": [
+          false,
+          false
+        ],
+        "checked_generated_v1": [
+          true,
+          true
+        ]
+      },
+      "generated_status": [
+        "answered",
+        "answered"
+      ],
+      "generated_passes_fidelity": [
+        true,
+        true
+      ],
+      "mse_delta": 0.03609196906962708,
+      "spearman_delta_without_pair": -0.08258189327923193,
+      "removal_change_in_spearman_delta": -0.0015497204670638087
+    }
+  ],
+  "largest_mse_improvements": [
+    {
+      "row_id": "train_2301",
+      "sentence1": "A tennis player is in air while extending his arm up to return the ball.",
+      "sentence2": "a woman a woman reaching up so she can hit a tennis ball with her racket",
+      "condition": "gender",
+      "rating": 3,
+      "target": 0.5,
+      "pair_id": "c9cec0c2317c624546f650a6a0e572899030d91d72aab33df05d91a8535576d2",
+      "group_id": "dda9e41e017e97d32dfc4deab0f9a44acdb21a24ba7ef26abb1016afec123983",
+      "predictions": {
+        "saved_qwen_sample": 0.17087659239768982,
+        "old_spans": 0.1625743955373764,
+        "checked_generated_v1": 0.46934282779693604
+      },
+      "answer_ids": [
+        "16e58b05c208930c03c942b29ceb99f1d5f174938b1f35aa4e459a5745935f6f",
+        "e3e3b00a46c7fec3a6a321c1ae44e9bd43e1a305426a981ed16ce91f32384381"
+      ],
+      "old_answers": [
+        "",
+        "a woman"
+      ],
+      "new_answers": [
+        "Male.",
+        "Female."
+      ],
+      "replacement_status": {
+        "old_spans": [
+          false,
+          true
+        ],
+        "checked_generated_v1": [
+          true,
+          true
+        ]
+      },
+      "generated_status": [
+        "answered",
+        "answered"
+      ],
+      "generated_passes_fidelity": [
+        true,
+        true
+      ],
+      "mse_delta": -0.10738235522426809,
+      "spearman_delta_without_pair": -0.08887086961091761,
+      "removal_change_in_spearman_delta": -0.00783869679874949
+    },
+    {
+      "row_id": "train_6771",
+      "sentence1": "A little girl in a pink shirt and a little girl in an orange shirt sitting in the grass .",
+      "sentence2": "This young girl is enjoying the innocence of childhood and warm weather .",
+      "condition": "age of girl",
+      "rating": 4,
+      "target": 0.75,
+      "pair_id": "1eb160a0c83f2e6d6067adec12b097b344fb01c29c479960740239411f27ddfa",
+      "group_id": "20b6ad885282d6fe4a67b191bf9b69eb650eed6de9885f7f275be7ff7ec0a38f",
+      "predictions": {
+        "saved_qwen_sample": 0.4710260033607483,
+        "old_spans": 0.4022294878959656,
+        "checked_generated_v1": 0.7123336791992188
+      },
+      "answer_ids": [
+        "b0897cd47d4ce12fc819cf0bdb38f367dada85d1581da7c86ab144dc29446bd4",
+        "ca8941043005be9bcca9f86f054e6f31fbefe1be678eb0f1cec48cfea1ef196a"
+      ],
+      "old_answers": [
+        "",
+        "young"
+      ],
+      "new_answers": [
+        "Both are young children.",
+        "A young child."
+      ],
+      "replacement_status": {
+        "old_spans": [
+          false,
+          true
+        ],
+        "checked_generated_v1": [
+          true,
+          true
+        ]
+      },
+      "generated_status": [
+        "answered",
+        "answered"
+      ],
+      "generated_passes_fidelity": [
+        true,
+        true
+      ],
+      "mse_delta": -0.07640773907820986,
+      "spearman_delta_without_pair": -0.0986655730743704,
+      "removal_change_in_spearman_delta": -0.01763340026220228
+    },
+    {
+      "row_id": "train_9313",
+      "sentence1": "Construction worker operation heavy machinery on a site next to a railroad and a train .",
+      "sentence2": "A man wearing bright orange construction vest washing down a train with nothing but a long handled scrubber and a wash bucket",
+      "condition": "type of work",
+      "rating": 2,
+      "target": 0.25,
+      "pair_id": "5b7b3651474068797a4e2fe7c27f9989c0dcc8ae592373decaa3f7024bd4b2ce",
+      "group_id": "4d342fc901e5528c44f968d0b2154e89835b4668201bc969e62676de77887f92",
+      "predictions": {
+        "saved_qwen_sample": 0.49071505665779114,
+        "old_spans": 0.49071505665779114,
+        "checked_generated_v1": 0.293018102645874
+      },
+      "answer_ids": [
+        "16a3759b6360636f4cf893599063ca2ee373f8e579325b61edace21b0f6806dc",
+        "cc10bf8106cb663158eac167b080893f2e60f2df7977437fb761a916b076fbfc"
+      ],
+      "old_answers": [
+        "",
+        ""
+      ],
+      "new_answers": [
+        "Operating heavy machinery at a construction site.",
+        "Washing a train with a long-handled scrubber and wash bucket."
+      ],
+      "replacement_status": {
+        "old_spans": [
+          false,
+          false
+        ],
+        "checked_generated_v1": [
+          true,
+          true
+        ]
+      },
+      "generated_status": [
+        "answered",
+        "answered"
+      ],
+      "generated_passes_fidelity": [
+        true,
+        true
+      ],
+      "mse_delta": -0.056093181346512644,
+      "spearman_delta_without_pair": -0.08830410375802533,
+      "removal_change_in_spearman_delta": -0.007271930945857208
+    },
+    {
+      "row_id": "train_3918",
+      "sentence1": "A vase and floral arrangements decorate the unusual center space created by a rounded staircase.",
+      "sentence2": "A vase with red orchids on stems in it on a table in a corner.",
+      "condition": "type of decoration",
+      "rating": 4,
+      "target": 0.75,
+      "pair_id": "d1a165441daf846df7c2fdcf8792d9a68cdb73d75dfe560a4aa691b5902a5e93",
+      "group_id": "dd113daec074a0dc490a106690c6192a93f11acbba2fa5379f048908ccc4f64c",
+      "predictions": {
+        "saved_qwen_sample": 0.5220780372619629,
+        "old_spans": 0.6225850582122803,
+        "checked_generated_v1": 0.720015823841095
+      },
+      "answer_ids": [
+        "a4adaaf700af71d194647d7db4c8c53e9a47b33bf273bb5aa44aca4a79c3be9d",
+        "eda598ebe26182eb7548d4232e66f80a166b6c3822f123dbc54dfeb9deecd19d"
+      ],
+      "old_answers": [
+        "A vase and floral arrangements",
+        "A vase with red orchids on stems in it on a table in a corner"
+      ],
+      "new_answers": [
+        "A vase and floral arrangements.",
+        "Red orchids on stems in a vase."
+      ],
+      "replacement_status": {
+        "old_spans": [
+          true,
+          true
+        ],
+        "checked_generated_v1": [
+          true,
+          true
+        ]
+      },
+      "generated_status": [
+        "answered",
+        "answered"
+      ],
+      "generated_passes_fidelity": [
+        true,
+        true
+      ],
+      "mse_delta": -0.05104937027843093,
+      "spearman_delta_without_pair": -0.08730525333860273,
+      "removal_change_in_spearman_delta": -0.0062730805264346046
+    },
+    {
+      "row_id": "train_1488",
+      "sentence1": "A smiling man hand feeds a giraffe as two other giraffes stand in the background.",
+      "sentence2": "A mother and her baby watch a group of giraffes in a zoo enclosure.",
+      "condition": "type of animals",
+      "rating": 5,
+      "target": 1,
+      "pair_id": "2b30e30947f1f2859988f90d019d842eb924df67c404018a16759f0efdf2a18a",
+      "group_id": "1149fa5902479406b2e7fe97551190a7013ba704ca1f28c4a045d90d8ceff2ab",
+      "predictions": {
+        "saved_qwen_sample": 0.7834794521331787,
+        "old_spans": 0.9589261412620544,
+        "checked_generated_v1": 1
+      },
+      "answer_ids": [
+        "30e9c73c626b194a36c780c89db3a473253701179c4d5ecb5c6d63135db82a9c",
+        "b99d21a013b387b979aab1891eaa0d63a51e52aff31e04706f65519b94a080fc"
+      ],
+      "old_answers": [
+        "giraffe",
+        "giraffes"
+      ],
+      "new_answers": [
+        "Giraffes.",
+        "Giraffes."
+      ],
+      "replacement_status": {
+        "old_spans": [
+          true,
+          true
+        ],
+        "checked_generated_v1": [
+          true,
+          true
+        ]
+      },
+      "generated_status": [
+        "answered",
+        "answered"
+      ],
+      "generated_passes_fidelity": [
+        true,
+        true
+      ],
+      "mse_delta": -0.04688114764854845,
+      "spearman_delta_without_pair": -0.08534182264829893,
+      "removal_change_in_spearman_delta": -0.004309649836130802
+    }
+  ],
+  "most_influential_rank_regressions": [
+    {
+      "row_id": "train_6978",
+      "sentence1": "People standing in and in front of a booth full of stuffed animals .",
+      "sentence2": "A kid looking over a carnival booth counter at the various toys .",
+      "condition": "type of event",
+      "rating": 4,
+      "target": 0.75,
+      "pair_id": "641f1313d9a1ab0dde42df28bea51734e2b6fb2d7cab55e24acef509c2573c53",
+      "group_id": "cc921c0fa3f3909fc82298c1e17a769b2a439c94fe6459e0d484167d5cbe5c8e",
+      "predictions": {
+        "saved_qwen_sample": 0.5271905660629272,
+        "old_spans": 0.5271905660629272,
+        "checked_generated_v1": 0.26678723096847534
+      },
+      "answer_ids": [
+        "e6aca7316377ecc81ef045599f4a04c4675c769350c7ac990a322da31b4d3706",
+        "71fb918382ad3639e5c6dcde045aeba83a49fe4a0090c58f838e757a8259cd68"
+      ],
+      "old_answers": [
+        "",
+        ""
+      ],
+      "new_answers": [
+        "",
+        "A carnival."
+      ],
+      "replacement_status": {
+        "old_spans": [
+          false,
+          false
+        ],
+        "checked_generated_v1": [
+          false,
+          true
+        ]
+      },
+      "generated_status": [
+        "not_specified",
+        "answered"
+      ],
+      "generated_passes_fidelity": [
+        true,
+        true
+      ],
+      "mse_delta": 0.1838505363037548,
+      "spearman_delta_without_pair": -0.05399778953827983,
+      "removal_change_in_spearman_delta": 0.027034383273888296
+    },
+    {
+      "row_id": "train_2260",
+      "sentence1": "a passenger jet plane sits on a field with a bunch of other planes and a helicopter",
+      "sentence2": "An airport landing area with an airplane that says United States of America parked.",
+      "condition": "type of location",
+      "rating": 4,
+      "target": 0.75,
+      "pair_id": "67c676772c12127c48d60239667009409f26f02454ddb4e702c94df5247a6bf5",
+      "group_id": "752146daec71967621b6dd6024e7dca803f3d622cf9099116694c13e71a86dc2",
+      "predictions": {
+        "saved_qwen_sample": 0.6681621074676514,
+        "old_spans": 0.651362419128418,
+        "checked_generated_v1": 0.40746304392814636
+      },
+      "answer_ids": [
+        "8aed6adee45ffd22dda6197ec642c819f0d2a247be380d82d1308500eb853eb2",
+        "7cca7705719cd921fa006d900837f690cefca5aa9f2307924be84b7088a8a42c"
+      ],
+      "old_answers": [
+        "a passenger jet plane sits on a field with a bunch of other planes and a helicopter",
+        "airport landing area"
+      ],
+      "new_answers": [
+        "A field.",
+        "An airport landing area."
+      ],
+      "replacement_status": {
+        "old_spans": [
+          true,
+          true
+        ],
+        "checked_generated_v1": [
+          true,
+          true
+        ]
+      },
+      "generated_status": [
+        "answered",
+        "answered"
+      ],
+      "generated_passes_fidelity": [
+        true,
+        true
+      ],
+      "mse_delta": 0.11063412562083474,
+      "spearman_delta_without_pair": -0.06697948994566427,
+      "removal_change_in_spearman_delta": 0.014052682866503852
+    },
+    {
+      "row_id": "train_1644",
+      "sentence1": "The dining room has four chairs at the table, and a hard wood floor.",
+      "sentence2": "A metal cart stands in a modern kitchen with hardwood floors and wooden cabinets.",
+      "condition": "name of products",
+      "rating": 2,
+      "target": 0.25,
+      "pair_id": "d53796090bf1968425af04a0e5f703238b193ade7a7b9e21ea810b2e770cb85b",
+      "group_id": "ba330f6c0523670c450404440c48dc12804efcc9895ff13c68e135e63a7795ac",
+      "predictions": {
+        "saved_qwen_sample": 0.3956988751888275,
+        "old_spans": 0.3956988751888275,
+        "checked_generated_v1": 0.5665587782859802
+      },
+      "answer_ids": [
+        "b07b21232d34b6318654b53d4e9232c39c989f36b5670de7ba612014a4c524af",
+        "569edb5a0854a19abab31eb0754ed1dd4414902920b0da74fba566eff1b308a1"
+      ],
+      "old_answers": [
+        "",
+        ""
+      ],
+      "new_answers": [
+        "Four chairs, a table, and hardwood flooring.",
+        "A metal cart, hardwood floors, and wooden cabinets."
+      ],
+      "replacement_status": {
+        "old_spans": [
+          false,
+          false
+        ],
+        "checked_generated_v1": [
+          true,
+          true
+        ]
+      },
+      "generated_status": [
+        "answered",
+        "answered"
+      ],
+      "generated_passes_fidelity": [
+        true,
+        true
+      ],
+      "mse_delta": 0.07898129787862285,
+      "spearman_delta_without_pair": -0.06957460395357906,
+      "removal_change_in_spearman_delta": 0.011457568858589062
+    },
+    {
+      "row_id": "train_338",
+      "sentence1": "A laptop set up on a stand with a standard keyboard and mouse hooked up to it.",
+      "sentence2": "An office desk shows some neatly arranged electronic equipment, including a laptop and computer, both of them on, and some peripheral accessories. ",
+      "condition": "type of furniture",
+      "rating": 4,
+      "target": 0.75,
+      "pair_id": "e21658eaa9f5481c08aed7974108871ed895ad5be8bf1351f2cf852374a7f446",
+      "group_id": "89c24f6bf89cf919fd2e6d928ec74a338342c337847da78294c5fbef75da8b05",
+      "predictions": {
+        "saved_qwen_sample": 0.5190739035606384,
+        "old_spans": 0.4598080515861511,
+        "checked_generated_v1": 0.42566415667533875
+      },
+      "answer_ids": [
+        "6773cc575d695087a2dc51e71b34ba595537abb2c710c97992628f0616ef8784",
+        "61bbfd5c267a164a20f9fd23dbb1467a2fc772800e3b46f535521fd1bf5c6d65"
+      ],
+      "old_answers": [
+        "",
+        "office desk"
+      ],
+      "new_answers": [
+        "A stand supporting a laptop.",
+        "An office desk."
+      ],
+      "replacement_status": {
+        "old_spans": [
+          false,
+          true
+        ],
+        "checked_generated_v1": [
+          true,
+          true
+        ]
+      },
+      "generated_status": [
+        "answered",
+        "answered"
+      ],
+      "generated_passes_fidelity": [
+        true,
+        true
+      ],
+      "mse_delta": 0.05186687724839789,
+      "spearman_delta_without_pair": -0.06973714011899046,
+      "removal_change_in_spearman_delta": 0.011295032693177665
+    },
+    {
+      "row_id": "train_2185",
+      "sentence1": "Two multicolored teddy bears; one is shades of brown and the other is primary colors.",
+      "sentence2": "A  white teddy bear, yellow teddy bear brown teddy bear and a small yelllow teddy bear sitting in a row.",
+      "condition": "color of teddy bears",
+      "rating": 2,
+      "target": 0.25,
+      "pair_id": "eeb2eabb5fddbb2c6a5e40f9cf3cf3f1ed5b954aef580c73101bdb7d2ce3a53b",
+      "group_id": "96e9ad9e517270fd7c7fb2876504c53912ff495e3b5cf7ecfd04fc1bdd2ef209",
+      "predictions": {
+        "saved_qwen_sample": 0.457145094871521,
+        "old_spans": 0.5577350854873657,
+        "checked_generated_v1": 0.543952465057373
+      },
+      "answer_ids": [
+        "d4b72a789765d2f51c1fcff722ddff83b99231df968bf254bb0491533fa44ba6",
+        "697a78caa711a57a0532366317e065072ef2fba65c247bf82d681fad967ec5d5"
+      ],
+      "old_answers": [
+        "Two multicolored teddy bears; one is shades of brown and the other is primary colors.",
+        "white teddy bear, yellow teddy bear brown teddy bear and a small yelllow teddy bear"
+      ],
+      "new_answers": [
+        "One bear has shades of brown; the other has primary colors.",
+        "One white, two yellow, and one brown teddy bear; one of the yellow bears is small."
+      ],
+      "replacement_status": {
+        "old_spans": [
+          true,
+          true
+        ],
+        "checked_generated_v1": [
+          true,
+          true
+        ]
+      },
+      "generated_status": [
+        "answered",
+        "answered"
+      ],
+      "generated_passes_fidelity": [
+        true,
+        true
+      ],
+      "mse_delta": 0.04349896138397469,
+      "spearman_delta_without_pair": -0.07047349231155609,
+      "removal_change_in_spearman_delta": 0.010558680500612039
+    }
+  ],
+  "new_v2_subset_separate": {
+    "status": "failed",
+    "epoch_zero_metrics": {
+      "saved_qwen": {
+        "n": 30,
+        "mse_0_1": 0.04185093042714131,
+        "mse_1_5": 0.669614886834261,
+        "spearman": 0.5758418427215707,
+        "prediction_mean": 0.5015633329749107,
+        "target_mean": 0.5,
+        "prediction_std": 0.20274980324297884,
+        "target_std": 0.22360679774997896,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 2,
+            "mean": 0.3346192240715027
+          },
+          "2.0": {
+            "n": 5,
+            "mean": 0.31868474185466766
+          },
+          "3.0": {
+            "n": 15,
+            "mean": 0.49986075758934023
+          },
+          "4.0": {
+            "n": 7,
+            "mean": 0.6693160789353507
+          },
+          "5.0": {
+            "n": 1,
+            "mean": 0.6011139154434204
+          }
+        },
+        "condition_changes": {
+          "n": 0,
+          "correct": 0,
+          "ties": 0,
+          "accuracy_ties_half": null,
+          "difference_mse": null,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        },
+        "operating_point": {
+          "cutoff": 0.3142477869987488,
+          "tp": 8,
+          "fn": 0,
+          "fp": 3,
+          "tn": 4,
+          "recall": 1,
+          "false_negative_rate": 0,
+          "false_positive_rate": 0.42857142857142855,
+          "excluded_middle_rating": 15
+        },
+        "descriptive_cutoffs": {
+          "0.5": {
+            "cutoff": 0.5,
+            "tp": 6,
+            "fn": 2,
+            "fp": 1,
+            "tn": 6,
+            "recall": 0.75,
+            "false_negative_rate": 0.25,
+            "false_positive_rate": 0.14285714285714285,
+            "excluded_middle_rating": 15
+          },
+          "0.75": {
+            "cutoff": 0.75,
+            "tp": 3,
+            "fn": 5,
+            "fp": 0,
+            "tn": 7,
+            "recall": 0.375,
+            "false_negative_rate": 0.625,
+            "false_positive_rate": 0,
+            "excluded_middle_rating": 15
+          }
+        },
+        "errors_by_rating": {
+          "1.0": {
+            "n": 2,
+            "signed_error": 0.3346192240715027,
+            "mse": 0.13211550753528645
+          },
+          "2.0": {
+            "n": 5,
+            "signed_error": 0.06868474185466766,
+            "mse": 0.02653502766189626
+          },
+          "3.0": {
+            "n": 15,
+            "signed_error": -0.00013924241065979003,
+            "mse": 0.026016990790704318
+          },
+          "4.0": {
+            "n": 7,
+            "signed_error": -0.0806839210646493,
+            "mse": 0.04417954130296309
+          },
+          "5.0": {
+            "n": 1,
+            "signed_error": -0.3988860845565796,
+            "mse": 0.15911010845287876
+          }
+        }
+      },
+      "propositions": {
+        "n": 30,
+        "mse_0_1": 0.05753978267137554,
+        "mse_1_5": 0.9206365227420087,
+        "spearman": 0.486511915493704,
+        "prediction_mean": 0.5133678225179513,
+        "target_mean": 0.5,
+        "prediction_std": 0.22962168324313648,
+        "target_std": 0.22360679774997896,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 2,
+            "mean": 0.4151739180088043
+          },
+          "2.0": {
+            "n": 5,
+            "mean": 0.34012899547815323
+          },
+          "3.0": {
+            "n": 15,
+            "mean": 0.49294862846533455
+          },
+          "4.0": {
+            "n": 7,
+            "mean": 0.6954831736428397
+          },
+          "5.0": {
+            "n": 1,
+            "mean": 0.6074302196502686
+          }
+        },
+        "condition_changes": {
+          "n": 0,
+          "correct": 0,
+          "ties": 0,
+          "accuracy_ties_half": null,
+          "difference_mse": null,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        },
+        "operating_point": {
+          "cutoff": 0.2539628744125366,
+          "tp": 8,
+          "fn": 0,
+          "fp": 5,
+          "tn": 2,
+          "recall": 1,
+          "false_negative_rate": 0,
+          "false_positive_rate": 0.7142857142857143,
+          "excluded_middle_rating": 15
+        },
+        "descriptive_cutoffs": {
+          "0.5": {
+            "cutoff": 0.5,
+            "tp": 6,
+            "fn": 2,
+            "fp": 2,
+            "tn": 5,
+            "recall": 0.75,
+            "false_negative_rate": 0.25,
+            "false_positive_rate": 0.2857142857142857,
+            "excluded_middle_rating": 15
+          },
+          "0.75": {
+            "cutoff": 0.75,
+            "tp": 4,
+            "fn": 4,
+            "fp": 0,
+            "tn": 7,
+            "recall": 0.5,
+            "false_negative_rate": 0.5,
+            "false_positive_rate": 0,
+            "excluded_middle_rating": 15
+          }
+        },
+        "errors_by_rating": {
+          "1.0": {
+            "n": 2,
+            "signed_error": 0.4151739180088043,
+            "mse": 0.20780440595908978
+          },
+          "2.0": {
+            "n": 5,
+            "signed_error": 0.09012899547815323,
+            "mse": 0.035887134974277854
+          },
+          "3.0": {
+            "n": 15,
+            "signed_error": -0.0070513715346654255,
+            "mse": 0.03888107849180999
+          },
+          "4.0": {
+            "n": 7,
+            "signed_error": -0.0545168263571603,
+            "mse": 0.056260254790101626
+          },
+          "5.0": {
+            "n": 1,
+            "signed_error": -0.39256978034973145,
+            "mse": 0.1541110324438364
+          }
+        }
+      }
+    },
+    "training_comparisons": 312,
+    "training_source_groups": 291,
+    "validation_comparisons": 30,
+    "validation_source_groups": 30
+  },
+  "input_sha256": "0ced49de7239f5510ddca258a8d47d53ed05f69c80ba28417ea60f6259347b45",
+  "source_code_sha256": "083483f45b711f2d3cf2102bf9752399cd7d667110e7f05cd2846c2da9fbe128"
+}
