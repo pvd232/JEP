@@ -13,7 +13,9 @@ import torch
 from pydantic import Field
 from scipy.linalg import eigvalsh
 from scipy.stats import spearmanr
-from viper.config import EvalConfig
+from viper.config import EvalConfig, MetricConfig
+from viper.metrics import MetricContext
+from viper.metrics import metric as viper_metric
 from viper.stages import StageContext, build, eval
 
 from csts_pilot.baseline_models import (
@@ -24,7 +26,6 @@ from csts_pilot.baseline_models import (
     load_backbone,
     load_tokenizer,
     pad_sequences,
-    passage_keys,
     restore_parameters,
     state_digest,
     token_sequences,
@@ -38,6 +39,16 @@ from jep_pilot.loaders import load_json, load_model
 ARMS = ("A", "B_u", "B_r", "C_u", "C_r", "D")
 MODEL_SHA256 = "8805f9a7241e4e19ffc481341ebad6f1ddb6dd6ff04bbf710f9f0896469e34ff"
 MIN_NORM = 1e-8
+
+
+@viper_metric(metric_id="condition_reference_native_spearman", mode="stateless")
+def native_spearman(context: MetricContext[MetricConfig]) -> float:
+    """Recompute the native arm's ranking in a separate metric worker."""
+    rows = load_json(context.artifacts["predictions"])["A"]
+    value = summarize(rows)["spearman"]
+    if value is None or not math.isfinite(value):
+        raise ValueError("Native Spearman is undefined.")
+    return float(value)
 
 
 def emit(event: str, **values: Any) -> None:
@@ -71,6 +82,21 @@ class AnalysisConfig(EvalConfig):
     bootstrap_draws: int = 2000
     bootstrap_seed: int = 61024
     selected_arm: str | None = None
+
+
+def native_layout(
+    rows: list[dict[str, Any]],
+) -> tuple[list[tuple[str, str]], list[int], list[int]]:
+    """Retain the original two-pair left-then-right forward batch order."""
+    keys: list[tuple[str, str]] = []
+    left, right = [], []
+    for start in range(0, len(rows), 2):
+        selected = rows[start : start + 2]
+        left.extend(range(len(keys), len(keys) + len(selected)))
+        keys.extend((r["condition"], r["sentence1"]) for r in selected)
+        right.extend(range(len(keys), len(keys) + len(selected)))
+        keys.extend((r["condition"], r["sentence2"]) for r in selected)
+    return keys, left, right
 
 
 def sentence_tokens(
@@ -140,7 +166,7 @@ def extract(context: StageContext[ExtractionConfig]) -> None:
         raise ValueError("Input comparison bytes changed.")
     rows = load_json(context.inputs["rows"])
     validate_rows(rows)
-    keys = passage_keys(rows)
+    keys, left_indices, right_indices = native_layout(rows)
     saved = load_model(context.inputs["model"])
     fit = FitConfig.model_validate(saved["config"])
     for name in ("model_id", "revision", "embedding_dimension", "max_length"):
@@ -215,6 +241,9 @@ def extract(context: StageContext[ExtractionConfig]) -> None:
         raise ValueError("Adapter bytes changed during fixed-checkpoint inference.")
     cache = {
         "keys": keys,
+        "row_left_indices": left_indices,
+        "row_right_indices": right_indices,
+        "batching": "original_two_pairs_left_then_right",
         "raw": torch.cat(raw),
         "means": torch.cat(means),
         "reference_keys": reference_keys,
@@ -233,7 +262,8 @@ def extract(context: StageContext[ExtractionConfig]) -> None:
         {
             "split": config.split,
             "rows": len(rows),
-            "unique_passages": len(keys),
+            "unique_passages": len(set(keys)),
+            "passage_occurrences": len(keys),
             "references": len(reference_keys),
             "nonpadding_tokens": tokens,
             "model_sha256": config.model_sha256,
@@ -505,8 +535,12 @@ def analyze(context: StageContext[AnalysisConfig]) -> None:
         raise ValueError("Extracted cache identity differs.")
     keys = [tuple(k) for k in cache["keys"]]
     lookup = {k: i for i, k in enumerate(keys)}
-    left = [lookup[(r["condition"], r["sentence1"])] for r in rows]
-    right = [lookup[(r["condition"], r["sentence2"])] for r in rows]
+    left = cache.get(
+        "row_left_indices", [lookup[(r["condition"], r["sentence1"])] for r in rows]
+    )
+    right = cache.get(
+        "row_right_indices", [lookup[(r["condition"], r["sentence2"])] for r in rows]
+    )
     vectors = representations(cache)
     scores = {
         a: np.sum(vectors[a][left] * vectors[a][right], axis=1, dtype=np.float32)
@@ -589,9 +623,15 @@ def analyze(context: StageContext[AnalysisConfig]) -> None:
         }
         write_json(context.outputs["report"], report)
         emit("transfer_result", **report["transfer"])
+    first_occurrence: dict[tuple[str, str], int] = {}
+    for i, key in enumerate(keys):
+        first_occurrence.setdefault(key, i)
+    unique_indices = list(first_occurrence.values())
+    unique_keys = list(first_occurrence)
+    geometry_vectors = {a: v[unique_indices] for a, v in vectors.items()}
     condition_indices: dict[str, list[int]] = defaultdict(list)
     source_groups: dict[str, set[str]] = defaultdict(set)
-    for i, (c, _) in enumerate(keys):
+    for i, (c, _) in enumerate(unique_keys):
         condition_indices[c].append(i)
     for r in rows:
         source_groups[r["condition"]].add(r["group_id"])
@@ -601,11 +641,11 @@ def analyze(context: StageContext[AnalysisConfig]) -> None:
         for c, ix in condition_indices.items():
             if len(ix) >= 16:
                 condition_results[c] = {
-                    **geometry(vectors[arm][ix]),
+                    **geometry(geometry_vectors[arm][ix]),
                     "source_groups": len(source_groups[c]),
                 }
         geometry_report[arm] = {
-            "global": geometry(vectors[arm]),
+            "global": geometry(geometry_vectors[arm]),
             "within_condition": condition_results,
             "smaller_condition_groups": {
                 c: len(ix) for c, ix in condition_indices.items() if len(ix) < 16
@@ -622,9 +662,9 @@ def analyze(context: StageContext[AnalysisConfig]) -> None:
             },
         )
     reference_lookup = {tuple(k): i for i, k in enumerate(cache["reference_keys"])}
-    raw = cache["raw"].numpy()
+    raw = cache["raw"].numpy()[unique_indices]
     reference = cache["references"].numpy()[
-        [reference_lookup[(c, "")] for c, _ in keys]
+        [reference_lookup[(c, "")] for c, _ in unique_keys]
     ]
     raw_norm, reference_norm = (
         np.linalg.norm(raw, axis=1),
@@ -643,7 +683,9 @@ def analyze(context: StageContext[AnalysisConfig]) -> None:
         "unit_condition_residual_norm": array_summary(
             np.linalg.norm(unit(raw) - unit(reference), axis=1)
         ),
-        "passage_token_count": array_summary(np.asarray(cache["passage_token_counts"])),
+        "passage_token_count": array_summary(
+            np.asarray(cache["passage_token_counts"])[unique_indices]
+        ),
     }
     write_json(
         context.outputs["geometry"],
