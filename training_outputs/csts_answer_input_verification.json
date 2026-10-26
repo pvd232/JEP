@@ -1,0 +1,74 @@
+{
+  "status": "passed",
+  "validation_rows": 1830,
+  "source_groups": 688,
+  "source_commits": {
+    "frozen": "2540590c72dbd197addf40bfef3da66d91c52d93",
+    "trained": "775b315f533acee2435d97d4cbeb599a4f11f524"
+  },
+  "frozen_cpu_vector_replay_max_absolute_error": {
+    "cached_span_conditioned": 0,
+    "cached_span_generic": 0
+  },
+  "checks": [
+    "exact original comparison identities and contents",
+    "accepted cache identity, source containment and teacher checks under original normalization",
+    "transformed input keys, active row indices and finite float32 unit vectors",
+    "saved-vector score replay for both frozen arms",
+    "independent regression, condition-ordering and confusion metrics",
+    "trained transformed-to-original prediction bindings",
+    "selected checkpoint and trace SHA-256 agreement",
+    "original and transformed training-input hashes"
+  ],
+  "paired_group_bootstrap": {
+    "draws": 2000,
+    "unit": "connected source group",
+    "split": "validation",
+    "note": "Conditional on selected systems and seed; not fresh-test or seed uncertainty.",
+    "spearman_difference_percentile_95": {
+      "cached_span_conditioned": [
+        -0.0579643,
+        -0.0361103
+      ],
+      "cached_span_generic": [
+        -0.2064814,
+        -0.1522474
+      ],
+      "answer_projection": [
+        -0.072786953932,
+        -0.045271330588
+      ]
+    }
+  },
+  "answer_collisions": {
+    "exact": 68,
+    "by_rating": {
+      "2": 1,
+      "4": 16,
+      "5": 51
+    },
+    "cosine_mse_contribution_lower_bound": 0.0008538251366120219,
+    "note": "One lost-information mechanism; does not explain the whole deficit."
+  },
+  "trained": {
+    "selected_epoch": 3,
+    "selected_step": 657,
+    "completed_epochs": 8,
+    "actual_updates": 1752,
+    "stop_reason": "validation_patience",
+    "first_epoch_online_training_mse": 0.04926322648904812,
+    "last_epoch_online_training_mse": 0.009894772487182842,
+    "selected_model_sha256": "9b4b8b4a6f101b6b00ffd2063b08771ad8f1a1db8302349ddd495463d3f2d440"
+  },
+  "native_stages": "all succeeded",
+  "validation_gate": "all candidates ineligible",
+  "candidate_test_evaluation_ran": false,
+  "gpu_compute_processes_at_closeout": [],
+  "checks_evidence": {
+    "focused_tests": 18,
+    "ruff": "passed",
+    "pyrefly": "passed",
+    "independent_code_review": "passed"
+  },
+  "native_diagnostics_path": "/home/machina/jep-csts-answer-input-20261026/answer_input_results/combined_diagnostics.json"
+}
