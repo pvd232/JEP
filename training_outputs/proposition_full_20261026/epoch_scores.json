@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at_utc": "2026-10-27T16:35:28+00:00",
+  "updated_at_utc": "2026-10-27T16:36:15+00:00",
   "identity": {
     "run_name": "jep_csts_v1_four_initial_epochs_patience1_20261027",
     "source_commit": "67f816407f786ea038415422a9aefd57d30c92fb",
@@ -171,7 +171,7 @@
       "trace_available": true,
       "completed_epoch": 4,
       "current_epoch": 5,
-      "optimizer_updates": 900,
+      "optimizer_updates": 925,
       "epochs_without_improvement": 0,
       "stop_reason": null,
       "epochs": [
@@ -236,14 +236,14 @@
     },
     "evidence_ratings": {
       "status": "running",
-      "trace_status": "running",
+      "trace_status": "complete",
       "trace_path": "/home/machina/jep-csts-jep-v1-four-epoch-20261027/qwen_evidence_results/jep_csts_v1_four_initial_epochs_patience1_20261027/evidence_ratings_trace.json",
       "trace_available": true,
       "completed_epoch": 5,
       "current_epoch": 5,
       "optimizer_updates": 950,
-      "epochs_without_improvement": 1,
-      "stop_reason": null,
+      "epochs_without_improvement": null,
+      "stop_reason": "validation_patience",
       "epochs": [
         {
           "epoch": 1,
