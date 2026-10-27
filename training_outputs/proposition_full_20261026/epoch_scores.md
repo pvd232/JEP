@@ -26,7 +26,7 @@ Stop after consecutive non-improving validation checks: ratings control **1**; p
 [Missing proposition generation progress](generation_progress.md)
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T15:01:36+00:00**. Run: `jep_csts_v1_four_initial_epochs_patience1_20261027`.
+Updated: **2026-10-27T15:02:19+00:00**. Run: `jep_csts_v1_four_initial_epochs_patience1_20261027`.
 
 Status: **running**. Current stage: **ratings_ratings**.
 
@@ -70,7 +70,7 @@ Stop reason: `fixed_update_budget`.
 
 ## Ratings model: ratings on the full training set
 
-Status: **running**. Completed epochs: **1**. Recorded optimizer updates: **300**.
+Status: **running**. Completed epochs: **1**. Recorded optimizer updates: **325**.
 
 | Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
 |---:|---:|---:|---:|---:|---:|
@@ -87,7 +87,7 @@ Awaiting the first completed epoch.
 
 Monitor: **running**.
 
-Training inputs captured: **8,512/11,909**; missing inputs requested: **9,413**. The current training bank remains frozen.
+Training inputs captured: **8,640/11,909**; missing inputs requested: **9,413**. The current training bank remains frozen.
 
 Held-out sample: **128 validation source groups**, one passage-condition input per group. References and generated answers are kept outside training. Evaluation waits for the current GPU training run to finish.
 
