@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at_utc": "2026-10-27T20:10:15+00:00",
+  "updated_at_utc": "2026-10-27T20:14:45+00:00",
   "identity": {
     "run_name": "jep_csts_v1_full_propositions_converged_patience1_20261027",
     "source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
@@ -257,15 +257,15 @@
     },
     "ratings_ratings": {
       "matched_initial_epoch": null,
-      "status": "running",
-      "trace_status": "running",
+      "status": "succeeded",
+      "trace_status": "complete",
       "trace_path": "/content/jep-full-propositions-20261027/repo/experiments/csts_full_control_3ef6ba06_9bfd9512_ratings_0/runs/ratings_ratings/01M5ZEV9YVDRQT6DC5GZR2MBQP/artifacts/train/trace/trace.json",
-      "trace_available": false,
-      "completed_epoch": 2,
-      "current_epoch": 3,
-      "optimizer_updates": 525,
+      "trace_available": true,
+      "completed_epoch": 3,
+      "current_epoch": null,
+      "optimizer_updates": 570,
       "epochs_without_improvement": null,
-      "stop_reason": null,
+      "stop_reason": "validation_patience",
       "epochs": [
         {
           "epoch": 1,
@@ -296,6 +296,21 @@
           "observed_epoch_seconds": 412.9197058440004,
           "elapsed_seconds": null,
           "proposition_validation_loss": null
+        },
+        {
+          "epoch": 3,
+          "optimizer_updates": 570,
+          "validation_spearman": 0.8669079481433456,
+          "validation_mse_1_5": 0.5517523296314927,
+          "validation_rows": 1576,
+          "training_loss": 0.010466924068334674,
+          "training_loss_kind": "rating_mse_0_1",
+          "epochs_without_improvement": 1,
+          "fit_seconds": 412.7055619620005,
+          "validation_seconds": 32.58013757399931,
+          "observed_epoch_seconds": 445.2951231719999,
+          "elapsed_seconds": null,
+          "proposition_validation_loss": null
         }
       ],
       "notes": []
@@ -306,9 +321,9 @@
       "trace_status": "running",
       "trace_path": "/content/jep-full-propositions-20261027/repo/experiments/csts_qwen_proposition_evidence_3ef6ba06_9bfd9512_evidence_ratings/runs/evidence_ratings/01M5ZF2FVMY44D3DAEHRB7GQWN/artifacts/train/trace/trace.json",
       "trace_available": true,
-      "completed_epoch": 1,
-      "current_epoch": 2,
-      "optimizer_updates": 275,
+      "completed_epoch": 2,
+      "current_epoch": 3,
+      "optimizer_updates": 450,
       "epochs_without_improvement": 0,
       "stop_reason": null,
       "epochs": [
@@ -324,6 +339,21 @@
           "fit_seconds": 413.7831845870005,
           "validation_seconds": 32.29432834600084,
           "observed_epoch_seconds": 446.7473257370002,
+          "elapsed_seconds": null,
+          "proposition_validation_loss": null
+        },
+        {
+          "epoch": 2,
+          "optimizer_updates": 380,
+          "validation_spearman": 0.8711297241464339,
+          "validation_mse_1_5": 0.529969907636887,
+          "validation_rows": 1576,
+          "training_loss": 0.03257318871156418,
+          "training_loss_kind": "rating_mse_0_1",
+          "epochs_without_improvement": 0,
+          "fit_seconds": 397.64031398899897,
+          "validation_seconds": 14.634059216999958,
+          "observed_epoch_seconds": 413.3104794110004,
           "elapsed_seconds": null,
           "proposition_validation_loss": null
         }
