@@ -2,11 +2,14 @@
 
 import copy
 import json
+import os
+import subprocess
+import tempfile
 import unittest
 from pathlib import Path
 
 from csts_pilot.proposition_evidence_run import validate_settings
-from scripts.supervise_proposition_pilot import decision
+from scripts.supervise_proposition_pilot import BRANCH, decision, publish
 
 
 class PilotTests(unittest.TestCase):
@@ -72,6 +75,51 @@ class PilotTests(unittest.TestCase):
         settings["training"]["patience"] = 3
         with self.assertRaisesRegex(ValueError, "patience"):
             validate_settings(settings)
+
+    def test_publisher_uses_existing_publication_transport(self):
+        """Publication uses the supplied connection and preserves other repository files."""
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            root = directory / "source"
+            target = directory / "scores.git"
+            operator = directory / "operator"
+            root.mkdir()
+            operator.mkdir()
+            environment = {
+                **os.environ,
+                "GIT_AUTHOR_NAME": "Pilot test",
+                "GIT_AUTHOR_EMAIL": "pilot@example.invalid",
+                "GIT_COMMITTER_NAME": "Pilot test",
+                "GIT_COMMITTER_EMAIL": "pilot@example.invalid",
+                "JEP_SCORE_REPOSITORY": str(target),
+            }
+
+            def git(*args):
+                return subprocess.check_output(
+                    ["git", *args],
+                    cwd=root,
+                    env=environment,
+                    stderr=subprocess.DEVNULL,
+                    text=True,
+                ).strip()
+
+            git("init", "--bare", str(target))
+            git("init")
+            git("checkout", "-b", BRANCH)
+            (root / "keep.txt").write_text("Preserve existing content.\n")
+            git("add", "keep.txt")
+            git("commit", "-m", "Fixture")
+            git("push", str(target), BRANCH)
+            commit = publish(
+                root, operator, {"scores.md": "Current result.\n"}, environment
+            )
+            self.assertEqual(
+                git("show", commit + ":keep.txt"), "Preserve existing content."
+            )
+            self.assertEqual(git("show", commit + ":scores.md"), "Current result.")
+            self.assertEqual(
+                git("ls-remote", str(target), "refs/heads/" + BRANCH).split()[0], commit
+            )
 
 
 if __name__ == "__main__":

@@ -66,6 +66,7 @@ def publish(
     root: Path, operator: Path, files: dict[str, str], environment: dict[str, str]
 ) -> str:
     """Publish a normal commit over the latest score-table branch."""
+    repository = environment.get("JEP_SCORE_REPOSITORY", "origin")
 
     def git(
         args: list[str], content: str | None = None, extra: dict[str, str] | None = None
@@ -83,7 +84,7 @@ def publish(
         return result.stdout.strip()
 
     for attempt in range(3):
-        git(["fetch", "origin", BRANCH])
+        git(["fetch", repository, BRANCH])
         parent = git(["rev-parse", "FETCH_HEAD"])
         with tempfile.TemporaryDirectory(
             prefix="publication-", dir=operator
@@ -107,7 +108,7 @@ def publish(
                 "Update overnight jep-csts-v1 pilot\n",
             )
         try:
-            git(["push", "origin", f"{commit}:refs/heads/{BRANCH}"])
+            git(["push", repository, f"{commit}:refs/heads/{BRANCH}"])
             return commit
         except subprocess.CalledProcessError:
             if attempt == 2:
