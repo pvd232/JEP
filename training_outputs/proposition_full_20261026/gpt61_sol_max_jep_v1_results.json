@@ -1,0 +1,70 @@
+{
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "max",
+  "metrics": {
+    "n": 2430,
+    "mse_0_1": 0.023512860082304524,
+    "mse_1_5": 0.3762057613168724,
+    "spearman": 0.9199548895630967,
+    "pearson": 0.924977759229853,
+    "prediction_mean": 0.6374691358024691,
+    "target_mean": 0.6217078189300411,
+    "condition_changes": {
+      "n": 877,
+      "correct": 841,
+      "ties": 19,
+      "accuracy_ties_half": 0.9697833523375142
+    }
+  },
+  "manifest": {
+    "study": "C-STS zero-shot frontier LLM baseline",
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "max",
+    "model_snapshot": "gpt-6.1-sol alias; no more specific snapshot returned by CLI",
+    "started_at": "2026-10-27T13:01:42.920018+00:00",
+    "dataset_revision": "jep-csts-v1",
+    "split": "test",
+    "parent_capture_source_sha256": "6861bb6df31b56666f26b09fbbd64c9de8cdf7238493b479d67331a9b393b051",
+    "n": 2430,
+    "batch_size": 64,
+    "workers": 4,
+    "data_sha256": "52a9c0d6b8d9f3fc81e698bae1e2564051cf7ec29e8dc1cb4d68167910bb968d",
+    "rubric_sha256": "813c66acdbc5acb2c99c7c711d045fdc729c39a9b2edf4b0d1cbf9a06845fb3f",
+    "source_sha256": "f73ed28d7479d0ba4acd3a8dd66ae04d0f4f24b4d5a44b41850a0169d9ec1518",
+    "schema_sha256": "52454c14d03860c76645da2f65573d7be79b0e2b99bf3e5d90f3f535de3cc0c3",
+    "order": "SHA256 sol61-max-evaluation-v1:row_id ascending",
+    "labels_provided_to_model": false,
+    "tools_allowed": false,
+    "score_range": [
+      1,
+      5
+    ],
+    "score_increment": 0.1,
+    "metric_normalization": "(score-1)/4",
+    "prompt_selection": "Archived fixed rubric reused byte-for-byte; no new prompt selection or development calls",
+    "sampling_temperature": "CLI/provider default; not overridden",
+    "benchmark_scope": "Published jep-csts-v1 test split: 2430 comparisons; fixed archived rubric and inference settings",
+    "dependency": "batched predictions may share context; confidence intervals must resample source groups"
+  },
+  "elapsed_seconds": 2104.22,
+  "finished_at": "2026-10-27T13:36:47.059034+00:00",
+  "usage": {
+    "input_tokens": 1003436,
+    "cached_input_tokens": 197760,
+    "output_tokens": 253024,
+    "reasoning_output_tokens": 221122
+  },
+  "source_component_bootstrap": {
+    "replicates": 2000,
+    "seed": 61021,
+    "source_groups": 1222,
+    "spearman": [
+      0.9109967557083147,
+      0.9292106441039962
+    ],
+    "mse_0_1": [
+      0.02083986753958587,
+      0.02623681643728383
+    ]
+  }
+}

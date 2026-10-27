@@ -1,13 +1,13 @@
 {
-  "status": "running",
+  "status": "complete",
   "controller_pid": 37356,
   "started_at": "2026-10-27T13:01:42.921109+00:00",
   "model": "gpt-6.1-sol",
   "reasoning_effort": "max",
   "total_rows": 2430,
   "total_batches": 38,
-  "completed_rows": 2368,
-  "completed_batches": 37,
+  "completed_rows": 2430,
+  "completed_batches": 38,
   "batches": [
     {
       "batch": 2,
@@ -563,9 +563,25 @@
         "output_tokens": 5953,
         "reasoning_output_tokens": 5069
       }
+    },
+    {
+      "batch": 37,
+      "rows": 62,
+      "started_at": "2026-10-27T13:32:51.331480+00:00",
+      "finished_at": "2026-10-27T13:36:46.998611+00:00",
+      "elapsed_seconds": 235.677,
+      "returncode": 0,
+      "usage": {
+        "input_tokens": 26920,
+        "cached_input_tokens": 12288,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 6951,
+        "reasoning_output_tokens": 6178
+      }
     }
   ],
   "errors": [],
-  "updated_at": "2026-10-27T13:35:39.262750+00:00",
-  "elapsed_seconds": 2036.42
+  "updated_at": "2026-10-27T13:36:47.001834+00:00",
+  "elapsed_seconds": 2104.16,
+  "finished_at": "2026-10-27T13:36:47.059347+00:00"
 }
