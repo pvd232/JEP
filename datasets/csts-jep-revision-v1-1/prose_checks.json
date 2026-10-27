@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "revision": "jep-csts-v1.1",
+  "scope": "Small adjudication follow-up: revision1.1 README and adjudication report, root README, and13source-score/decision displays. The revision1 bulk-review receipt remains separate.",
+  "manual_review": {
+    "status": "passed",
+    "score_table_rows_checked": 13,
+    "case_score_lines_checked": 13,
+    "decision_lines_read": 13,
+    "numeric_grade_attribution": "User approved inclusion of evaluation_2450. Assistant assigned numeric grade3.",
+    "other_determinations_confirmed": 12,
+    "outputs_reported": {
+      "training": 6051,
+      "validation": 1576,
+      "test": 2431
+    },
+    "root_readme_checked": true,
+    "root_readme_summary": "Read the revision1.1 link, current6051/1576/2431counts and1586exclusions. The old audit is explicitly identified as a version1 snapshot."
+  },
+  "checker_repository": "https://github.com/pvd232/agents",
+  "checker_commit": "68e8399ffc4d051b7c1b2acde933081eb91a44e3",
+  "checker_repository_path": "skills/direct-prose/scripts/check_prose.py",
+  "checker_sha256": "8e4a4417d3ccddde665679212ba3951ec8c6e173672740f8881495aac6bbb26f",
+  "checker_run": {
+    "command": [
+      "./scripts/check_prose.py",
+      "/workspace/scratch/1decdd947133/JEP/datasets/csts-jep-revision-v1-1/README.md",
+      "/workspace/scratch/1decdd947133/JEP/datasets/csts-jep-revision-v1-1/ADJUDICATION.md",
+      "/workspace/scratch/1decdd947133/JEP/README.md"
+    ],
+    "cwd": "/workspace/scratch/1decdd947133/prose_skills/skills/direct-prose",
+    "returncode": 0,
+    "stdout": "direct-prose: clean\n",
+    "stderr": ""
+  },
+  "files": [
+    {
+      "path": "/workspace/scratch/1decdd947133/JEP/datasets/csts-jep-revision-v1-1/README.md",
+      "sha256": "2450f146d75df4502a09066c5e79bca56670ecff4d7f21b3b68212d4bd085ace"
+    },
+    {
+      "path": "/workspace/scratch/1decdd947133/JEP/datasets/csts-jep-revision-v1-1/ADJUDICATION.md",
+      "sha256": "ca55a7d61f639804dbcca8be5a32094170613c3498af9bc4ab57b7e27474740c"
+    },
+    {
+      "path": "/workspace/scratch/1decdd947133/JEP/datasets/csts-jep-revision-v1-1/user_adjudications.json",
+      "sha256": "afe638776ba7797f1aac49ad8be3ffb91f049230ca3dde6c334b7ff559c48d2f"
+    },
+    {
+      "path": "/workspace/scratch/1decdd947133/JEP/datasets/csts-jep-revision-v1-1/changes.json",
+      "sha256": "039961516674b1cbf38eec19354cc0d522b84974a7de08f6a3fb3345ea8f507f"
+    },
+    {
+      "path": "/workspace/scratch/1decdd947133/JEP/datasets/csts-jep-revision-v1-1/review_summary.json",
+      "sha256": "fa94abb8f2d366c23c0cfa42a1954d1a720762c19b2327c0962f86db03426991"
+    },
+    {
+      "path": "/workspace/scratch/1decdd947133/JEP/README.md",
+      "sha256": "1b41952e6b906259dff32351cdca682b3dd3f6393ce62b54cc457efc37f5dbeb"
+    }
+  ],
+  "source_disposition_or_grade_edits_by_prose_reviewer": 0
+}

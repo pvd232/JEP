@@ -4,9 +4,9 @@ Research materials for studying language representations and Colombian transitio
 
 ## C-STS revision
 
-[JEP C-STS revision 1](datasets/csts-jep-revision-v1/README.md) combines the repeated training/test audit with preserved validation V4.2: **6,051 training, 1,576 validation and 2,430 test comparisons**. The package includes ID-keyed annotations, the 25 adjudicated changes, independent initial judgments and verified reconstruction instructions.
+[JEP C-STS revision 1.1](datasets/csts-jep-revision-v1-1/README.md) contains **6,051 training, 1,576 validation and 2,431 test comparisons**. The [resolved adjudications](datasets/csts-jep-revision-v1-1/ADJUDICATION.md) show supplied and audited scores for all thirteen reviewed cases.
 
-The [exclusion audit](datasets/csts-jep-revision-v1/EXCLUSIONS.md) gives a rationale and peer check for each of the **1,587 current exclusions** and **2,532 earlier removals for caption overlap**.
+The [exclusion audit](datasets/csts-jep-revision-v1/EXCLUSIONS.md) documents the version-1 decisions and 2,532 earlier overlap removals. Revision 1.1 restores `evaluation_2450`, leaving **1,586 current exclusions**.
 
 ## Start with the literature
 

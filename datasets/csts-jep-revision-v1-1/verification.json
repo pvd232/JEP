@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "revision": "jep-csts-v1.1",
+  "previous_revision": "jep-csts-v1",
+  "passed": true,
+  "method": "Independent original-CSV caption graph, baseline-plus-overlay joins, complete previous-export comparison and manifest hash checks.",
+  "checks": {
+    "source_csv_sha256": {
+      "train": "118ef935443531a60f3dd5652afd946869f47b134c83fd8da38779912167b652",
+      "validation": "84602c1bcbbe1e6410a78c9cb1cb0f3dac4bf48c0c55ad42dc19558370e4821f"
+    },
+    "source_partition": {
+      "algorithm": "Independent canonical-caption adjacency traversal and documented component hash partition.",
+      "raw_source_rows": {
+        "train": 11342,
+        "validation": 2834
+      },
+      "project_rows": {
+        "training": 6980,
+        "validation": 1830,
+        "test": 2834
+      },
+      "original_training_overlap_removals": 2532
+    },
+    "effective_label_changes": {
+      "training": [],
+      "validation": [],
+      "test": [
+        "evaluation_2450"
+      ]
+    },
+    "evaluation_2450": {
+      "source_index": 2450,
+      "source_condition": "color of animals",
+      "source_rating": 1.0,
+      "previous_status": "invalid",
+      "previous_rating": null,
+      "current_status": "rated",
+      "current_rating": 3,
+      "pair_id": "d8eca15d3307df71295f8d0b8cd84bfc4210848c4461cb6005a52966ec4636ff",
+      "group_id": "ba631c5f339939f4cb72524efe681246539c360320d60abd4f20340209164a29",
+      "assistant_grade_peer_sha256": "753b245e02974505c27705775ccdee2fb2589b909dc9ea35da0f77bbb2554238",
+      "user_approved_inclusion": true,
+      "numerical_grade_assigned_by": "assistant"
+    },
+    "counts": {
+      "training": {
+        "reviewed": 6980,
+        "usable": 6051,
+        "dispositions": {
+          "rated": 6051,
+          "invalid": 920,
+          "excluded_scope": 9
+        },
+        "semantically_rated": 6051,
+        "split_conflicts": 0,
+        "groups": 2635,
+        "pairs": 3424
+      },
+      "validation": {
+        "reviewed": 1830,
+        "usable": 1576,
+        "dispositions": {
+          "adjudicated": 365,
+          "agreement": 1211,
+          "invalid": 253,
+          "excluded_ambiguous": 1
+        },
+        "semantically_rated": 1576,
+        "split_conflicts": 0,
+        "groups": 680,
+        "pairs": 899
+      },
+      "test": {
+        "reviewed": 2834,
+        "usable": 2431,
+        "dispositions": {
+          "invalid": 394,
+          "rated": 2436,
+          "excluded_scope": 4
+        },
+        "semantically_rated": 2436,
+        "split_conflicts": 5,
+        "groups": 1222,
+        "pairs": 1387
+      }
+    },
+    "independent_export_sha256": {
+      "training": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "validation": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "test": "d6b40b7b891ed147befb30801c2f85a8787775adebdd98d134157cbb2a6e9f76"
+    },
+    "export_delta": {
+      "added_test_ids": [
+        "evaluation_2450"
+      ],
+      "all_previous_rows_ratings_pair_ids_groups_and_order_preserved": true,
+      "training_validation_bytes_preserved": true
+    },
+    "caption_overlap": {
+      "exact": {
+        "training/validation": 0,
+        "training/test": 0,
+        "validation/test": 0
+      },
+      "canonical": {
+        "training/validation": 0,
+        "training/test": 0,
+        "validation/test": 0
+      }
+    },
+    "duplicate_conflicts": {
+      "training": [],
+      "validation": [],
+      "test": []
+    },
+    "package_sha256": {
+      "ADJUDICATION.md": "ca55a7d61f639804dbcca8be5a32094170613c3498af9bc4ab57b7e27474740c",
+      "NOTICE.md": "91fb4ac5a1e4a3ef4870242599622345f2c3554b41e18d652a80f9960419c380",
+      "README.md": "2450f146d75df4502a09066c5e79bca56670ecff4d7f21b3b68212d4bd085ace",
+      "changes.json": "039961516674b1cbf38eec19354cc0d522b84974a7de08f6a3fb3345ea8f507f",
+      "independent_grades.json": "ed21e34db390a990a5729af7c52d4d30631157cc2443b7aa2cac64efa0de0713",
+      "reconstruct.py": "4ee13a0ae2444ae2554ffc347924936714e9149f83428e2edeb43ee2348f8abe",
+      "review_summary.json": "fa94abb8f2d366c23c0cfa42a1954d1a720762c19b2327c0962f86db03426991",
+      "rubric.md": "29f380997d41e4e546f7323ae4d117ad58136d4a329b3f567cf18b9d2f44cf21",
+      "source_partition.py": "3f3e91d6ae237898a4f35a843348ac16c6934377e5174c4c9d752c7cd4a34334",
+      "test.base.labels.json": "c26a078e848c2b95d650c2403eee544c4f0208862a4a3ef8eb41b66e1e0d430b",
+      "training.base.labels.json": "c792e7a5cf8cae0dfc6f4678d4d190038203d3489af99c0f27dbb9a51bd5b636",
+      "user_adjudications.json": "afe638776ba7797f1aac49ad8be3ffb91f049230ca3dde6c334b7ff559c48d2f",
+      "validation.labels.json": "9d58f0d713b864d74ccab5d518c5b2d124d6e9a1de5b1f16fb389adc4e89555b"
+    },
+    "old_v1_frozen_package_sha256": {
+      "NOTICE.md": "91fb4ac5a1e4a3ef4870242599622345f2c3554b41e18d652a80f9960419c380",
+      "README.md": "d16783a39942ad9232231b969a8d7854348f6dafe125d79e3a7d71b8e2fc6e22",
+      "changes.json": "80bcf0cb4bce03f76d65e1e2cfbfcf658b5c39e1fd758e8468abbec2f648e62f",
+      "independent_grades.json": "ed21e34db390a990a5729af7c52d4d30631157cc2443b7aa2cac64efa0de0713",
+      "manifest.json": "bffc33c98a7d855f4f963827fd3fbb284aa7a37e5864a08f8ddc45ecdb20f822",
+      "reconstruct.py": "6601678239ec987e3565b91c42be42552fa226bf45e74dd07d63cc017ee35e2f",
+      "review_summary.json": "d1b1233150ef5e3e7325f292c2c98683dafdeb49edf725c7ad08c2043432bf54",
+      "rubric.md": "29f380997d41e4e546f7323ae4d117ad58136d4a329b3f567cf18b9d2f44cf21",
+      "source_partition.py": "3f3e91d6ae237898a4f35a843348ac16c6934377e5174c4c9d752c7cd4a34334",
+      "test.base.labels.json": "c26a078e848c2b95d650c2403eee544c4f0208862a4a3ef8eb41b66e1e0d430b",
+      "training.base.labels.json": "c792e7a5cf8cae0dfc6f4678d4d190038203d3489af99c0f27dbb9a51bd5b636",
+      "validation.labels.json": "9d58f0d713b864d74ccab5d518c5b2d124d6e9a1de5b1f16fb389adc4e89555b",
+      "verification.json": "3fc50d0dca4b1fa539b302623c1b9da5586102272e525d696136e8c47d3e2a12"
+    },
+    "old_v1_documentation_metadata_refresh": {
+      "coverage_receipt_sha256": "889e4d7789f9c79cf80ba2d1e53340bd82d5d17aa96d3154116fcdc9cf3f3644",
+      "adjudication_md_sha256": "8553bc83a0b327a4ac89e353b00281f92adda323287d03c788c4ad7085828944",
+      "label_revision": "jep-csts-v1",
+      "original_labels_and_evidence_preserved": true
+    }
+  },
+  "errors": [],
+  "verifier_sha256": "9ed88689a156cc4153e93c421dec9692a62b0898bbbb1e68960b94a754d6d18b"
+}
