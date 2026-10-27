@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at_utc": "2026-10-27T18:40:44+00:00",
+  "updated_at_utc": "2026-10-27T18:41:14+00:00",
   "identity": {
     "run_name": "jep_csts_v1_full_propositions_converged_patience1_20261027",
     "source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
@@ -114,7 +114,7 @@
       "trace_available": true,
       "completed_epoch": 5,
       "current_epoch": 6,
-      "optimizer_updates": 1000,
+      "optimizer_updates": 1025,
       "epochs_without_improvement": null,
       "stop_reason": null,
       "epochs": [
@@ -227,6 +227,254 @@
       "notes": [],
       "hardware": "NVIDIA A100-SXM4-80GB"
     }
+  },
+  "device_benchmark": {
+    "measured_at_utc": "2026-10-27T18:39:58.882464+00:00",
+    "decision": "Keep both models on the A100. The L4 control would become the slower arm and extend the projected time to finish both models.",
+    "selected_setup": "shared_a100",
+    "source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
+    "checkpoint_sha256": "d6f788a2e2dab84910e52b89d715457fc0f457be123e8e97a0abc83aaff6013d",
+    "checkpoint_epoch": 4,
+    "checkpoint_step": 736,
+    "batch_size": 32,
+    "microbatch_size": 32,
+    "timed_updates_per_control_test": 12,
+    "warmup_updates_per_control_test": 2,
+    "measurements": [
+      {
+        "label": "Ratings control on A100 alongside proposition training",
+        "seconds_per_update": 2.074482516083284
+      },
+      {
+        "label": "Ratings control alone on L4",
+        "seconds_per_update": 3.971243498909947
+      },
+      {
+        "label": "Proposition writing on shared A100",
+        "seconds_per_update": 2.9471617265200076
+      },
+      {
+        "label": "Proposition writing alone on A100",
+        "seconds_per_update": 1.3470737005200135
+      }
+    ],
+    "estimated_matched_epoch_seconds": {
+      "shared_a100": 542.2777576796814,
+      "split_a100_l4": 730.7088037994303
+    },
+    "estimate_scope": "Short training-window estimate for 184 matched updates per arm; validation, checkpoint writes, transfer and startup add time. Actual stopping epochs depend on validation patience.",
+    "l4_model_load_seconds": 76.81342883798061,
+    "a100_model_load_seconds": 6.5694997189993956,
+    "checkpoint_preservation": "All experiment checkpoints and optimizer/RNG state remain on the A100. Disposable timing weights were excluded from scientific results.",
+    "raw_receipts": {
+      "a100": {
+        "purpose": "Disposable device timing; weights are excluded from scientific results.",
+        "gpu": "NVIDIA A100-SXM4-80GB",
+        "source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
+        "checkpoint_sha256": "d6f788a2e2dab84910e52b89d715457fc0f457be123e8e97a0abc83aaff6013d",
+        "checkpoint_epoch": 4,
+        "checkpoint_step": 736,
+        "prepared_sha256": "0b63e159ecb8eb211636b9b509baf6035dc1e22b81f5404c1caaecc78203f67f",
+        "batch_size": 32,
+        "microbatch_size": 32,
+        "warmup_updates": 2,
+        "timed_updates": 12,
+        "seconds_per_update": 2.074482516083284,
+        "median_seconds_per_update": 2.1072583744999065,
+        "update_seconds": [
+          2.115954388999853,
+          2.1173238719993606,
+          2.114052208999965,
+          2.1078999069995916,
+          2.4358188770002016,
+          2.018874192000112,
+          2.0400393700001587,
+          2.1066168420002214,
+          2.086518072000217,
+          2.137823813999603,
+          1.7344225950000691,
+          1.878446054000051
+        ],
+        "training_loss": [
+          0.012802689336240292,
+          0.01192032266408205,
+          0.033077288419008255,
+          0.016201699152588844,
+          0.019786644726991653,
+          0.024144316092133522,
+          0.011310029774904251,
+          0.02452150359749794,
+          0.020339716225862503,
+          0.018334394320845604,
+          0.012723511084914207,
+          0.021674178540706635
+        ],
+        "model_load_seconds": 6.5694997189993956,
+        "peak_cuda_memory_bytes": 17705810944,
+        "torch_version": "2.14.0+cu130"
+      },
+      "l4": {
+        "purpose": "Disposable device timing; weights are excluded from scientific results.",
+        "gpu": "NVIDIA L4",
+        "source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
+        "checkpoint_sha256": "d6f788a2e2dab84910e52b89d715457fc0f457be123e8e97a0abc83aaff6013d",
+        "checkpoint_epoch": 4,
+        "checkpoint_step": 736,
+        "prepared_sha256": "0b63e159ecb8eb211636b9b509baf6035dc1e22b81f5404c1caaecc78203f67f",
+        "batch_size": 32,
+        "microbatch_size": 32,
+        "warmup_updates": 2,
+        "timed_updates": 12,
+        "seconds_per_update": 3.971243498909947,
+        "median_seconds_per_update": 4.012637420993997,
+        "update_seconds": [
+          4.163229053025134,
+          4.093469896004535,
+          3.9318049459834583,
+          4.111465947993565,
+          4.580254242988303,
+          3.774112733954098,
+          3.542510361992754,
+          4.15568559197709,
+          3.92833598802099,
+          4.158006693993229,
+          3.7034099570009857,
+          3.512636573985219
+        ],
+        "training_loss": [
+          0.012523064389824867,
+          0.011775551363825798,
+          0.03369724377989769,
+          0.01640060730278492,
+          0.019784845411777496,
+          0.023964710533618927,
+          0.011270875111222267,
+          0.024714108556509018,
+          0.020247001200914383,
+          0.019016385078430176,
+          0.012721664272248745,
+          0.02174903079867363
+        ],
+        "model_load_seconds": 76.81342883798061,
+        "peak_cuda_memory_bytes": 17705810944,
+        "torch_version": "2.14.0+cu130"
+      },
+      "writing_windows": [
+        {
+          "unix": 1793126143.9749532,
+          "mode": "shared",
+          "epoch": 5,
+          "updates": 875,
+          "elapsed": 2056.591393063,
+          "completed": 4
+        },
+        {
+          "unix": 1793126156.0018303,
+          "mode": "shared",
+          "epoch": 5,
+          "updates": 900,
+          "elapsed": 2130.270436226,
+          "completed": 4
+        },
+        {
+          "unix": 1793126168.029034,
+          "mode": "shared",
+          "epoch": 5,
+          "updates": 900,
+          "elapsed": 2130.270436226,
+          "completed": 4
+        },
+        {
+          "unix": 1793126180.0557957,
+          "mode": "shared",
+          "epoch": 5,
+          "updates": 900,
+          "elapsed": 2130.270436226,
+          "completed": 4
+        },
+        {
+          "unix": 1793126192.0829139,
+          "mode": "shared",
+          "epoch": 5,
+          "updates": 900,
+          "elapsed": 2130.270436226,
+          "completed": 4
+        },
+        {
+          "unix": 1793126204.1104453,
+          "mode": "writing_alone",
+          "epoch": 5,
+          "updates": 900,
+          "elapsed": 2130.270436226,
+          "completed": 4
+        },
+        {
+          "unix": 1793126216.1370938,
+          "mode": "writing_alone",
+          "epoch": 5,
+          "updates": 900,
+          "elapsed": 2130.270436226,
+          "completed": 4
+        },
+        {
+          "unix": 1793126228.1636562,
+          "mode": "writing_alone",
+          "epoch": null,
+          "updates": 920,
+          "elapsed": 2209.700447322,
+          "completed": 5
+        },
+        {
+          "unix": 1793126240.1908529,
+          "mode": "writing_alone",
+          "epoch": 6,
+          "updates": 925,
+          "elapsed": 2216.151547763,
+          "completed": 5
+        },
+        {
+          "unix": 1793126252.2180207,
+          "mode": "writing_alone",
+          "epoch": 6,
+          "updates": 925,
+          "elapsed": 2216.151547763,
+          "completed": 5
+        },
+        {
+          "unix": 1793126264.2454996,
+          "mode": "writing_alone",
+          "epoch": 6,
+          "updates": 950,
+          "elapsed": 2249.8283902760004,
+          "completed": 5
+        },
+        {
+          "unix": 1793126276.2748325,
+          "mode": "writing_alone",
+          "epoch": 6,
+          "updates": 950,
+          "elapsed": 2249.8283902760004,
+          "completed": 5
+        },
+        {
+          "unix": 1793126288.3029466,
+          "mode": "writing_alone",
+          "epoch": 6,
+          "updates": 950,
+          "elapsed": 2249.8283902760004,
+          "completed": 5
+        },
+        {
+          "unix": 1793126300.330271,
+          "mode": "shared_resumed",
+          "epoch": 6,
+          "updates": 975,
+          "elapsed": 2283.4901474790004,
+          "completed": 5
+        }
+      ]
+    },
+    "benchmark_script_sha256": "22ba4733e47636eaab057b749916778d5c6ae5dea2df77f6c0c4d30efafd1bd2"
   },
   "dataset_revision": "jep-csts-v1",
   "test_comparison": {

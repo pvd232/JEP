@@ -28,7 +28,7 @@ Stop after consecutive non-improving validation checks: ratings control **1**; p
 [Missing proposition generation progress](generation_progress.md)
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T18:40:44+00:00**. Run: `jep_csts_v1_full_propositions_converged_patience1_20261027`.
+Updated: **2026-10-27T18:41:14+00:00**. Run: `jep_csts_v1_full_propositions_converged_patience1_20261027`.
 
 Status: **running**. Current stage: **evidence_pretrain**.
 
@@ -57,7 +57,7 @@ Status: **running**. Completed epochs: **4**. Recorded optimizer updates: **900*
 
 ## Proposition model: full-bank writing until held-out loss stops improving
 
-Status: **running**. Completed epochs: **5**. Recorded optimizer updates: **1000**.
+Status: **running**. Completed epochs: **5**. Recorded optimizer updates: **1025**.
 
 | Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
 |---:|---:|---:|---:|---:|---:|
@@ -88,6 +88,23 @@ Awaiting the first completed epoch.
 Status: **pending**. Completed epochs: **0**. Recorded optimizer updates: **0**.
 
 Awaiting the first completed epoch.
+
+## A100 and L4 timing comparison
+
+Keep both models on the A100. The L4 control would become the slower arm and extend the projected time to finish both models.
+
+Control tests used the same epoch-4 checkpoint, optimizer batch 32, and microbatch 32. Each control test measured 12 updates after 2 warmup updates. Writing rates came from the running experiment's trace windows.
+
+| Work and device | Seconds per optimizer update |
+|---|---:|
+| Ratings control on A100 alongside proposition training | 2.074 |
+| Ratings control alone on L4 | 3.971 |
+| Proposition writing on shared A100 | 2.947 |
+| Proposition writing alone on A100 | 1.347 |
+
+All experiment checkpoints and optimizer/RNG state remain on the A100. Disposable timing weights were excluded from scientific results.
+
+Short training-window estimate for 184 matched updates per arm; validation, checkpoint writes, transfer and startup add time. Actual stopping epochs depend on validation patience.
 
 <!-- proposition-validation:start -->
 ## Proposition validation and full-training generation
