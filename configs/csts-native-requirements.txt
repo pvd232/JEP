@@ -1,0 +1,11 @@
+# Optional native runtime prerequisites, from the GoLLIE model card.
+# This is a starting requirements declaration, not a tested lockfile.
+# Validate checkpoint loading on the selected CUDA runtime and retain its
+# resolved package versions before reporting a native result.
+# Source: https://huggingface.co/HiTZ/GoLLIE-7B
+# Model code and tokenizer are pinned separately in extraction_native.py.
+torch>=2.1.0
+transformers>=4.33.1
+accelerate
+sentencepiece
+flash-attn>=2.0.0
