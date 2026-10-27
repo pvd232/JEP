@@ -1,8 +1,8 @@
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T01:55:54+00:00**. Run: `propositions_v41_full_after_indicative`.
+Updated: **2026-10-27T02:10:29+00:00**. Run: `propositions_v41_full_after_indicative`.
 
-Status: **running**. Current stage: **ratings_pretrain**.
+Status: **running**. Current stage: **evidence_pretrain**.
 
 Validation: **1,572 comparisons**, 678 source groups.
 
@@ -18,15 +18,18 @@ Appearance and colour scores are available in the final report. Native epoch tra
 
 ## Ratings arm: auxiliary phase
 
-Status: **running**. Completed epochs: **1**. Recorded optimizer updates: **100**.
+Status: **succeeded**. Completed epochs: **2**. Recorded optimizer updates: **144**.
 
 | Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
 |---:|---:|---:|---:|---:|---:|
 | 1 | 72 | 0.767297 | 1.114983 | 0.079459 | — |
+| 2 | 144 | 0.814361 | 0.880899 | 0.038181 | — |
+
+Stop reason: `fixed_update_budget`.
 
 ## Proposition arm: auxiliary phase
 
-Status: **pending**. Completed epochs: **0**. Recorded optimizer updates: **0**.
+Status: **running**. Completed epochs: **0**. Recorded optimizer updates: **25**.
 
 Awaiting the first completed epoch.
 
