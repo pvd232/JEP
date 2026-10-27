@@ -8,7 +8,7 @@ Held-out sample: **128 validation source groups**, one passage-condition input p
 
 | Proposition checkpoint | Held-out answer loss | Model-reviewed factual accuracy | Reviewed answers |
 |---|---:|---:|---:|
-| After 2 proposition-writing epochs | 0.451316 | Pending | — |
+| After 2 proposition-writing epochs | 0.451316 | 89.1% | 64 |
 | After 4 proposition-writing epochs | 0.378650 | Pending | — |
 
 Loss averages each answer's next-token cross-entropy, then averages answers. Factual checks use free-generated answers and two independent source-only model reviews; they report support, omissions, unsupported assertions and reviewer agreement. These measurements describe proposition writing and do not change the running experiment's stopping rule.
