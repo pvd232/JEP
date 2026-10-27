@@ -1,0 +1,753 @@
+{
+  "schema_version": 1,
+  "revision": "jep-csts-v1",
+  "baseline_commit": "97ffb9a7168b76b5d9cd08d71768e81e4ffb56e3",
+  "changes": [
+    {
+      "row_id": "train_3444",
+      "project_split": "training",
+      "classification": "firm_feature_error",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 3,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "invalid",
+        "rating": null,
+        "usable_for_split": false,
+        "scope": "place names",
+        "value_a": "Broadway / Wall St / New York City",
+        "value_b": "not provided",
+        "rationale": "The condition requests names of places. The second caption gives a light and building but no place name; substituting place type changes the requested feature."
+      }
+    },
+    {
+      "row_id": "train_3721",
+      "project_split": "training",
+      "classification": "firm_count_error",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 3,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "rated",
+        "rating": 1,
+        "usable_for_split": true,
+        "scope": "all described object count",
+        "value_a": "knife + fork + several pizza slices + casserole dish: at least five",
+        "value_b": "plate + pizza slice + salad: three",
+        "rationale": "Even allowing several to mean two or more, the first count is at least five versus three. The count supports established inequality, not possible equality."
+      }
+    },
+    {
+      "row_id": "train_3315",
+      "project_split": "training",
+      "classification": "firm_entity_scope_error",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 3,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "rated",
+        "rating": 5,
+        "usable_for_split": true,
+        "scope": "principal vehicle type",
+        "value_a": "bicycle used by delivery person",
+        "value_b": "bicycle carrying propane tanks",
+        "rationale": "The bicycles are the principal comparable vehicles. Car and bus are incidental neighboring vehicles; the frozen principal-entity rule gives bicycle versus bicycle."
+      }
+    },
+    {
+      "row_id": "train_6564",
+      "project_split": "training",
+      "classification": "firm_unsupported_age_inference",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 1,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "rated",
+        "rating": 3,
+        "usable_for_split": true,
+        "scope": "age category of principal child",
+        "value_a": "baby",
+        "value_b": "child, exact subcategory unspecified",
+        "rationale": "Child is broad enough to include a baby. Shoulder-length hair does not establish an older age category; equality remains possible with underspecification."
+      }
+    },
+    {
+      "row_id": "train_4037",
+      "project_split": "training",
+      "classification": "firm_missing_feature",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 3,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "invalid",
+        "rating": null,
+        "usable_for_split": false,
+        "scope": "television subtype",
+        "value_a": "TV in a box; screen subtype unstated",
+        "value_b": "large flat-screen TV",
+        "rationale": "A box may be packaging and supplies no television subtype. The explicit type condition requires subtype information in both captions; generic TV alone is insufficient."
+      }
+    },
+    {
+      "row_id": "train_6571",
+      "project_split": "training",
+      "classification": "unresolved_feature_scope",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 3,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "excluded_scope",
+        "rating": null,
+        "usable_for_split": false,
+        "scope": "surfer position: posture versus location",
+        "value_a": "riding a large wave; exact posture unstated",
+        "value_b": "flips a perpendicular board; body position unstated",
+        "rationale": "The condition can mean body posture or location relative to wave/board. The captions describe activity and board orientation without fixing a common position feature; different plausible readings change validity or grade.",
+        "alternatives": [
+          {
+            "feature": "surfer body posture",
+            "status": "invalid",
+            "rating": null,
+            "reason": "Riding a wave and board orientation do not provide comparable body postures."
+          },
+          {
+            "feature": "surfer relation to surfing surface or maneuver",
+            "status": "rated",
+            "rating": 3,
+            "reason": "Both give partial surfing-position/activity information, with the second describing a board flip rather than exact rider relation."
+          }
+        ]
+      }
+    },
+    {
+      "row_id": "train_6591",
+      "project_split": "training",
+      "classification": "unresolved_feature_scope",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 1,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "excluded_scope",
+        "rating": null,
+        "usable_for_split": false,
+        "scope": "dog height: stature versus elevation",
+        "value_a": "jumping; stature unstated",
+        "value_b": "running through water toward shore; stature unstated",
+        "rationale": "Height can mean body stature, for which neither caption gives information, or elevation, inferred from jumping versus running. The frozen conventions do not settle this feature ambiguity.",
+        "alternatives": [
+          {
+            "feature": "dog body stature",
+            "status": "invalid",
+            "rating": null,
+            "reason": "Neither caption gives the physical height or stature of the dog."
+          },
+          {
+            "feature": "dog elevation above supporting surface",
+            "status": "rated",
+            "rating": 1,
+            "reason": "A coarse reading contrasts jumping above support with ordinary ground-supported running."
+          }
+        ]
+      }
+    },
+    {
+      "row_id": "train_4511",
+      "project_split": "training",
+      "classification": "firm_synonym_inconsistency",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 3,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "invalid",
+        "rating": null,
+        "usable_for_split": false,
+        "scope": "plate contents",
+        "value_a": "food with no identified category/components",
+        "value_b": "mushrooms, carrots, tomatoes, broccoli, cauliflower",
+        "rationale": "This repeats the exact captions and extracted values of invalid train_4510 under synonymous content/contents of plate. Generic food does not identify the requested contents under the confirmed user boundaries."
+      }
+    },
+    {
+      "row_id": "train_7340",
+      "project_split": "training",
+      "classification": "firm_missing_feature",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 3,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "invalid",
+        "rating": null,
+        "usable_for_split": false,
+        "scope": "nationality of described persons",
+        "value_a": "Asian regional descriptor, no nationality",
+        "value_b": "Chinese vendors; focal walkers nationality unstated",
+        "rationale": "Regional/ethnic description Asian does not establish nationality. The second gives vendor identity while leaving the walkers unspecified. The requested nationality is unavailable rather than partially measured as the same feature."
+      }
+    },
+    {
+      "row_id": "train_7407",
+      "project_split": "training",
+      "classification": "firm_missing_relationship",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 3,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "invalid",
+        "rating": null,
+        "usable_for_split": false,
+        "scope": "family relationship in kitchen",
+        "value_a": "boy and woman, relationship unstated",
+        "value_b": "young man and mother",
+        "rationale": "A domestic boy/woman pair does not establish family relationship. Kitchen context is recoverable, but the requested family role is wholly unprovided in the first caption."
+      }
+    },
+    {
+      "row_id": "train_3338",
+      "project_split": "training",
+      "classification": "synonymous_condition_consistency",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 1,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "rated",
+        "rating": 2,
+        "usable_for_split": true,
+        "scope": "principal sign subtype",
+        "value_a": "stop / traffic-control sign",
+        "value_b": "movie advertisement sign",
+        "rationale": "The same captions receive 2 under synonymous type of signs in train_3339. Both are sign subtypes with a broad relevant category in common and different functions, consistent with the frozen graded subtype rubric."
+      }
+    },
+    {
+      "row_id": "train_4993",
+      "project_split": "training",
+      "classification": "firm_missing_relation",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 3,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "invalid",
+        "rating": null,
+        "usable_for_split": false,
+        "scope": "objects located on a table",
+        "value_a": "pizza, beer mug, salad bowl on outside table",
+        "value_b": "pizza on a white plate; table unstated",
+        "rationale": "The table relation is required by the condition. A plate of pizza does not establish a table or objects on it; comparing meal objects discards the requested location. This follows invalid train_4561 objects on desk."
+      }
+    },
+    {
+      "row_id": "train_5056",
+      "project_split": "training",
+      "classification": "firm_missing_relation",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 3,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "invalid",
+        "rating": null,
+        "usable_for_split": false,
+        "scope": "food located on a table",
+        "value_a": "tomatoes beside wineglass and bottle; table unstated",
+        "value_b": "fruit and vegetables explicitly on black table",
+        "rationale": "A tabletop is not established by tomatoes, a bottle and a wineglass. The required table relation is unavailable in the first caption; follow the same boundary as train_4993."
+      }
+    },
+    {
+      "row_id": "train_5144",
+      "project_split": "training",
+      "classification": "firm_missing_subtype",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 3,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "invalid",
+        "rating": null,
+        "usable_for_split": false,
+        "scope": "animal species",
+        "value_a": "bird, species unidentified",
+        "value_b": "small bird, species unidentified",
+        "rationale": "The explicit species condition requires species information. A generic bird and a small generic bird provide no species identities; the prior rationale acknowledges this missing feature."
+      }
+    },
+    {
+      "row_id": "train_5306",
+      "project_split": "training",
+      "classification": "firm_gender_scope_inconsistency",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 5,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "rated",
+        "rating": 1,
+        "usable_for_split": true,
+        "scope": "gender composition of all described people",
+        "value_a": "woman and man, mixed",
+        "value_b": "woman, female only",
+        "rationale": "The unqualified gender condition includes the explicitly described man at another table. No background exclusion is supplied. Follow the same all-described-person rule as train_4930."
+      }
+    },
+    {
+      "row_id": "train_5177",
+      "project_split": "training",
+      "classification": "firm_missing_posture",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 3,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "invalid",
+        "rating": null,
+        "usable_for_split": false,
+        "scope": "body posture of described people",
+        "value_a": "woman seated holding baby",
+        "value_b": "baby eating in front of adult; both postures unstated",
+        "rationale": "The second caption supplies eating activity and relative location, but no comparable body posture for either person. Eating can occur sitting or standing and does not itself recover the requested posture."
+      }
+    },
+    {
+      "row_id": "train_6745",
+      "project_split": "training",
+      "classification": "unresolved_feature_scope",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 1,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "excluded_scope",
+        "rating": null,
+        "usable_for_split": false,
+        "scope": "dog height: stature versus elevation",
+        "value_a": "wrestling, stature unstated",
+        "value_b": "jumping over fence, stature unstated",
+        "rationale": "This duplicates the ambiguity approved for train_6591. Stature is wholly missing; an elevation reading infers different ground-relative positions. The condition does not specify which feature.",
+        "alternatives": [
+          {
+            "feature": "dog body stature",
+            "status": "invalid",
+            "rating": null,
+            "reason": "Neither caption supplies the dogs physical stature."
+          },
+          {
+            "feature": "dog elevation above supporting ground",
+            "status": "rated",
+            "rating": 1,
+            "reason": "A coarse reading contrasts ordinary ground-supported wrestling with jumping above a fence."
+          }
+        ]
+      }
+    },
+    {
+      "row_id": "evaluation_1884",
+      "project_split": "test",
+      "classification": "unresolved_feature_scope",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 3,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "excluded_scope",
+        "rating": null,
+        "usable_for_split": false,
+        "scope": "animal height: stature versus elevation",
+        "value_a": "dog jumping in grass, stature unstated",
+        "value_b": "dog jumping out of snow, stature unstated",
+        "rationale": "This duplicates the ambiguity approved for train_6591. Stature is missing in both captions, while elevation has partial airborne information; plausible readings change validity.",
+        "alternatives": [
+          {
+            "feature": "animal body stature",
+            "status": "invalid",
+            "rating": null,
+            "reason": "Neither caption supplies the dogs physical stature."
+          },
+          {
+            "feature": "animal elevation above supporting surface",
+            "status": "rated",
+            "rating": 3,
+            "reason": "Both dogs jump, but neither airborne height is specified enough to establish equality."
+          }
+        ]
+      }
+    },
+    {
+      "row_id": "train_3231",
+      "project_split": "training",
+      "classification": "unresolved_feature_scope",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 1,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "excluded_scope",
+        "rating": null,
+        "usable_for_split": false,
+        "scope": "room location: category versus physical placement",
+        "value_a": "kitchen scene; placement within building unstated",
+        "value_b": "bathroom scene; placement within building unstated",
+        "rationale": "A household-location-category reading compares kitchen and bathroom as different. A literal location-of-rooms reading asks their placement within a building, which is wholly missing. Both are ordinary plausible feature interpretations.",
+        "alternatives": [
+          {
+            "feature": "household location category",
+            "status": "rated",
+            "rating": 1,
+            "reason": "The captions identify different household room categories, kitchen and bathroom."
+          },
+          {
+            "feature": "physical placement of rooms within building",
+            "status": "invalid",
+            "rating": null,
+            "reason": "Neither caption identifies where its room lies within the building."
+          }
+        ]
+      }
+    },
+    {
+      "row_id": "train_8991",
+      "project_split": "training",
+      "classification": "firm_missing_origin_relation",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 2,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "invalid",
+        "rating": null,
+        "usable_for_split": false,
+        "scope": "object jumped from",
+        "value_a": "ramp-associated jump",
+        "value_b": "jumping on a wall; launch source unstated",
+        "rationale": "The explicit from condition requests the origin. Jumping on a wall may identify a target or supporting obstacle without establishing a launch point; associated object is not the requested relation."
+      }
+    },
+    {
+      "row_id": "train_1926",
+      "project_split": "training",
+      "classification": "firm_missing_feeding_relation",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 2,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "invalid",
+        "rating": null,
+        "usable_for_split": false,
+        "scope": "actual place animals eat from",
+        "value_a": "foal feeds from trough; older zebra eats from ground",
+        "value_b": "zebras stand in front of a hay cart; eating unstated",
+        "rationale": "The hay cart is a potential feeding source, but the second caption never establishes feeding or its actual source. An available food arrangement cannot substitute for the requested eating relation."
+      }
+    },
+    {
+      "row_id": "train_9267",
+      "project_split": "training",
+      "classification": "unresolved_feature_scope",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 1,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "excluded_scope",
+        "rating": null,
+        "usable_for_split": false,
+        "scope": "perspective: camera viewpoint versus participant role",
+        "value_a": "catching baseball; photographic viewpoint unstated",
+        "value_b": "about to throw baseball; photographic viewpoint unstated",
+        "rationale": "The unqualified condition can request photographic viewpoint, which is missing, or participant-role perspective, where receiver and thrower differ. The frozen conventions do not select a feature.",
+        "alternatives": [
+          {
+            "feature": "photographic camera viewpoint",
+            "status": "invalid",
+            "rating": null,
+            "reason": "Neither caption supplies a camera angle or viewpoint."
+          },
+          {
+            "feature": "baseball participant-role perspective",
+            "status": "rated",
+            "rating": 1,
+            "reason": "Receiving and throwing are different participant roles."
+          }
+        ]
+      }
+    },
+    {
+      "row_id": "train_8676",
+      "project_split": "training",
+      "classification": "gender_scope_consistency",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 5,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "rated",
+        "rating": 3,
+        "usable_for_split": true,
+        "scope": "gender composition of all described people",
+        "value_a": "woman and young customer of unspecified gender",
+        "value_b": "woman",
+        "rationale": "Under unqualified gender, the customer is an explicitly described participant. Female plus unknown may match a female-only group or differ, so the frozen mixed-known/unknown rule gives three."
+      }
+    },
+    {
+      "row_id": "evaluation_2584",
+      "project_split": "test",
+      "classification": "gender_scope_consistency",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 5,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "rated",
+        "rating": 3,
+        "usable_for_split": true,
+        "scope": "gender composition of all described people",
+        "value_a": "boy and friends of unspecified gender playing in background",
+        "value_b": "boy",
+        "rationale": "Unqualified gender includes all mentioned people, including explicitly background friends. The known boy plus friends of unspecified gender may match a male-only group or differ. An explicit background location does not narrow the requested entity scope; the frozen mixed-known/unknown rule gives three."
+      }
+    },
+    {
+      "row_id": "train_4818",
+      "project_split": "training",
+      "classification": "firm_condition_scope_error",
+      "root_decision": "root_approved",
+      "before": {
+        "status": "rated",
+        "rating": 3,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "rated",
+        "rating": 5,
+        "usable_for_split": true,
+        "scope": "person walking in street",
+        "value_a": "pedestrians walking urban street with umbrellas",
+        "value_b": "woman walking in rain past street hydrant with umbrella",
+        "rationale": "The condition supplies activity/location rather than asking gender or person subtype. Both establish the requested pedestrian/street scene. This follows existing train_4674 people-in-living-room scope regardless of gender detail."
+      }
+    }
+  ],
+  "reviewed_retentions": [
+    {
+      "row_id": "train_809",
+      "project_split": "training",
+      "classification": "permitted_indefinite_count",
+      "root_decision": "root_approved_retain",
+      "before": {
+        "status": "rated",
+        "rating": 3,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "rated",
+        "rating": 3,
+        "usable_for_split": true,
+        "scope": "animal count",
+        "value_a": "one cow plus several other cows",
+        "value_b": "three cows",
+        "rationale": "The frozen policy does not define several as at least three. Retain its broad indefinite interpretation allowing two or more; one plus several may total three. A new stricter lower-bound rule would change policy."
+      }
+    },
+    {
+      "row_id": "train_4029",
+      "project_split": "training",
+      "classification": "permitted_spatial_interpretation",
+      "root_decision": "root_approved_retain",
+      "before": {
+        "status": "rated",
+        "rating": 1,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "rated",
+        "rating": 1,
+        "usable_for_split": true,
+        "scope": "dog vantage location",
+        "value_a": "looking in from an open windowsill",
+        "value_b": "front passenger seat of car",
+        "rationale": "The stated ordinary vantage locations support different spatial categories. A coincident car-window interpretation requires additional assumptions; the existing grade remains defensible."
+      }
+    },
+    {
+      "row_id": "train_9889",
+      "project_split": "training",
+      "classification": "permitted_direct_context",
+      "root_decision": "root_approved_retain",
+      "before": {
+        "status": "rated",
+        "rating": 1,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "rated",
+        "rating": 1,
+        "usable_for_split": true,
+        "scope": "body position",
+        "value_a": "ordinary upright active-tennis stance",
+        "value_b": "kneeling",
+        "rationale": "The frozen rubric permits ordinary high-confidence scene/activity implications. Upright active tennis versus explicit kneeling is defensible under that rule; this is not a firm exclusion error."
+      }
+    },
+    {
+      "row_id": "evaluation_930",
+      "project_split": "test",
+      "classification": "permitted_direct_context",
+      "root_decision": "root_approved_retain",
+      "before": {
+        "status": "rated",
+        "rating": 1,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "rated",
+        "rating": 1,
+        "usable_for_split": true,
+        "scope": "facing direction relative to ocean",
+        "value_a": "looking out toward ocean",
+        "value_b": "ocean behind person",
+        "rationale": "Ordinary directional language supports toward versus away. An imagined head turn does not require rejecting the direct reading."
+      }
+    },
+    {
+      "row_id": "train_385",
+      "project_split": "training",
+      "classification": "permitted_direct_context",
+      "root_decision": "root_approved_retain",
+      "before": {
+        "status": "rated",
+        "rating": 5,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "rated",
+        "rating": 5,
+        "usable_for_split": true,
+        "scope": "coarse weather context",
+        "value_a": "snowboarding setting",
+        "value_b": "snow-hill setting",
+        "rationale": "The broad weather-of-area condition permits the same coarse snowy cold context from ordinary activity/scene information. It does not explicitly request current precipitation."
+      }
+    },
+    {
+      "row_id": "train_7519",
+      "project_split": "training",
+      "classification": "permitted_feature_interpretation",
+      "root_decision": "root_approved_retain",
+      "before": {
+        "status": "rated",
+        "rating": 5,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "rated",
+        "rating": 5,
+        "usable_for_split": true,
+        "scope": "water physical phase",
+        "value_a": "liquid green water",
+        "value_b": "liquid murky water",
+        "rationale": "Physical state conventionally refers to solid/liquid/gas. Both support liquid; appearance differs without changing phase. Keep the established feature reading."
+      }
+    },
+    {
+      "row_id": "train_7715",
+      "project_split": "training",
+      "classification": "permitted_broad_category",
+      "root_decision": "root_approved_retain",
+      "before": {
+        "status": "rated",
+        "rating": 3,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "rated",
+        "rating": 3,
+        "usable_for_split": true,
+        "scope": "entertainment type",
+        "value_a": "live music with a flute player",
+        "value_b": "street performance, precise form unspecified",
+        "rationale": "Street performance is a broad actual entertainment category. Live music versus unspecified live street performance supports a partial type comparison under the frozen broad-versus-specific rule."
+      }
+    },
+    {
+      "row_id": "train_6857",
+      "project_split": "training",
+      "classification": "permitted_partial_outfit_interpretation",
+      "root_decision": "root_approved_retain",
+      "before": {
+        "status": "rated",
+        "rating": 1,
+        "usable_for_split": true
+      },
+      "after": {
+        "status": "rated",
+        "rating": 1,
+        "usable_for_split": true,
+        "scope": "explicit worn-item colors",
+        "value_a": "blue helmet",
+        "value_b": "black shirt",
+        "rationale": "The only stated worn colors differ. The comparison train_6574 explicitly mentions an uncolored T-shirt comparable to the second grey hoodie; that partial-garment evidence is absent here, so retaining this existing color grade is defensible."
+      }
+    }
+  ]
+}
