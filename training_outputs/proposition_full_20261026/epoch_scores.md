@@ -1,37 +1,23 @@
-# Overnight pilot: jep-csts-v1
+# Training to patience 2: jep-csts-v1
 
 Training: **6,051** comparisons. Validation: **1,576**. Test: **2,430**.
 
-Both models use validation patience **2**, with an equal **8,100-second** ratings-training budget per model. The morning report deadline is **8:00 a.m. ET, October 27**.
+Both models resume their saved training state after epoch four and continue until two successive validation checks fail to improve Spearman. Time and epoch limits are disabled. [Earlier four-epoch pilot](four_epoch_pilot_scores.md).
 
 [Earlier V4.1 comparison](v41_final_epoch_scores.md)
-
-## Pilot result
-
-| Model | Selected validation Spearman | Test Spearman | Selected ratings epoch |
-|---|---:|---:|---:|
-| Ratings control | 0.875915 | 0.853227 | 4 |
-| Proposition model | 0.875049 | 0.854075 | 4 |
-
-Proposition-model validation difference: **-0.000866**.
-Ratings training stopped because: {'ratings': 'resource_budget', 'evidence': 'resource_budget'}. A resource-budget stop means the overnight time limit ended training before patience 2 was reached.
-
-Missing proposition generation: **not queued; the pilot's validation difference was zero or negative**.
-
-This is a one-seed screening result. Selected checkpoints were frozen before test scoring. [Detailed comparison and source-group intervals](comparison_report.md).
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T10:28:37+00:00**. Run: `jep_csts_v1_existing_propositions_patience2_20261027`.
+Updated: **2026-10-27T11:31:11+00:00**. Run: `jep_csts_v1_patience2_completion_20261027`.
 
-Status: **complete**. Current stage: **none**.
+Status: **running**. Current stage: **ratings_ratings**.
 
 Validation: **1,576 comparisons**, 680 source groups.
 
-Source commit: `8df0a1039bb5be8ddfd8407bdd32aa64a102018a`.
+Source commit: `1719cf9c003a331864da5d3c95f9a2bd32dd51ac`.
 Validation SHA-256: `e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff`.
 Training SHA-256: `9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4`.
 
-Both models start from the same pretrained weights. For the first two epochs, both see the comparisons covered by existing propositions. The ratings model learns ratings; the proposition model learns to write propositions. Both then learn ratings from the full training set. Ratings training uses validation patience 2 and an epoch ceiling of 24.
+Both models start from the same pretrained weights. For the first two epochs, both see the comparisons covered by existing propositions. The ratings model learns ratings; the proposition model learns to write propositions. Both then learn ratings from the full training set. Ratings training continues until validation patience 2 is exhausted, with time and epoch limits disabled.
 
 Rating loss measures error in predicted ratings on the 0–1 scale. Proposition-writing loss measures error in predicted text tokens. Each table counts optimizer updates from the beginning of that training step.
 
@@ -61,7 +47,7 @@ Stop reason: `fixed_update_budget`.
 
 ## Ratings model: ratings on the full training set
 
-Status: **succeeded**. Completed epochs: **4**. Recorded optimizer updates: **760**.
+Status: **running**. Completed epochs: **4**. Recorded optimizer updates: **760**.
 
 | Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
 |---:|---:|---:|---:|---:|---:|
@@ -74,7 +60,7 @@ Stop reason: `resource_budget`.
 
 ## Proposition model: ratings on the full training set
 
-Status: **succeeded**. Completed epochs: **4**. Recorded optimizer updates: **760**.
+Status: **pending**. Completed epochs: **4**. Recorded optimizer updates: **760**.
 
 | Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
 |---:|---:|---:|---:|---:|---:|
