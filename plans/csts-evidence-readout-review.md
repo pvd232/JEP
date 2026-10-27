@@ -36,11 +36,51 @@ The methods distinguish the exact cosine contrast C−B, the fixed-representatio
 | Pyrefly with the actual Python 3.13 environment, four production modules and native driver | Zero errors |
 | Pinned full-bank/checkpoint/tokenizer preflight | Passed: all 11,909 canonical records; all three checkpoints rank 32, width 4,096, 288 adapter tensors |
 | Literal quotation alignment before backbone inference | 12,102 sentence occurrences: 11,267 answered, 806 explicit null, 28 ambiguous-status skips and one repeated-quotation skip; no rating rows removed |
-| Native CPU transport, complete three-seed four-cell fitting and final EVAL | Running; final receipt will be recorded here |
+| Native CPU transport, complete three-seed four-cell fitting and final EVAL | Passed all nine stages, including separate objective worker |
 
 Numerical checks cover differentiable readout gradients and exact padding exclusion; finite source normalization at near-unit null probability; teacher-status and quotation handling; selected-checkpoint replay and independent snapshots; identical trajectories when evidence targets are absent; comparator symmetry and exact cosine initialization; fixed readout hashes through comparator fitting; all five paired bootstrap contrasts and overlapping family membership; exact-pair condition diagnostics with half-credit ties; and restoring two adapters while freezing every parameter. Queue fixtures reject source changes and wait for an occupied GPU lease without starting computation.
 
 The CPU native fixture uses random 5D states and does not load Qwen or use the GPU. The preflight loads tokenizer/checkpoint metadata and verifies source alignment, but does not run the backbone. These checks are implementation evidence, not empirical support for the working hypothesis.
+
+
+## Native receipt and source identity
+
+The full CPU check passed all nine native stages, including held-out EVAL and the separate objective metric worker. It replayed all four cells for seeds 7/8/9, both parent reference bindings and all five contrasts. Fixture values are not scientific results.
+
+| Stage | Native run ID | Result |
+|---|---|---|
+| publish_training | `01M5ZN532GMDTWAZHBB1AWWBPG` | succeeded |
+| publish_validation | `01M5ZN5WY8CHQAWSG02R7T5DPW` | succeeded |
+| fit_7 | `01M5ZN6PWGRMAN4CDYF949GM2N` | succeeded |
+| fit_8 | `01M5ZN7VCNGKPF4JR9DS7WKEA1` | succeeded |
+| fit_9 | `01M5ZN8WC9178SPY38XZHC3BQM` | succeeded |
+| publish_test | `01M5ZN9X0QJ0WHVFT6YYYBVMYS` | succeeded |
+| publish_interventions | `01M5ZNAP9KSVGY2QGF84JH24E9` | succeeded |
+| publish_evaluation | `01M5ZNBF8A74JZ0J553D8M1F5H` | succeeded |
+| evaluate | `01M5ZNC11QSF9GEA2B1TJ65RCJ` | succeeded |
+
+Receipt: `qwen_evidence_results/readout_native_smoke_c11631b6/receipt.json` in the isolated JEP checkout. Fixture source was local preview `776baee5a6dfbe058efaf6f1abdd3fef9dadc8f9`. The six Python source/test files below are byte-identical in that preview, the reviewed checkout and published implementation commit `0f57e244f897dc8fcc8d321ea4b7cb10f571e324`; subsequent changes only finalize this review record.
+
+| File | SHA-256 |
+|---|---|
+| `csts_pilot/evidence_readout.py` | `45b5d2117de7637753710898a92d9c16b2344385d4553286b4f6843ac7126f45` |
+| `csts_pilot/evidence_readout_stages.py` | `36774d9a5099d16aeffe8f0ef4985f8bc2df798f60d9f8a6823c9024d419c707` |
+| `csts_pilot/evidence_readout_retention.py` | `a9dd86b94a8abee8e8a3e8840c45267f23f9fe022ce698a57ecf2725fb3fb21f` |
+| `csts_pilot/evidence_readout_run.py` | `bcf51155f6b76d31c0cdb49f72f9910f676cec100c40ecf67bf579b960e4bf77` |
+| `scripts/check_evidence_readout_native.py` | `170c1930c9b68a48c3a8b84169dfd46ec2800f03587ba6c65f3c4dea3a8bc6cf` |
+| `tests/test_csts_evidence_readout.py` | `258fbfaab2339928831ef875d07b691a54be91664b02935f72dc7e52836c92a9` |
+
+The writing-probe preflight also verified all 121 targets against validation identities and exclusion from training. The longest target uses 23 tokens including EOD, below the fixed ceiling of 64. Real-Qwen writing inference remains part of the unstarted scientific run.
+
+Reproduce the completed code checks in the installed experiment environment:
+
+```bash
+python -m pytest -q tests/test_csts_evidence_readout.py tests/test_csts_evidence_attention.py tests/test_csts_proposition_pretraining.py
+ruff check csts_pilot/evidence_readout*.py tests/test_csts_evidence_readout.py scripts/check_evidence_readout_native.py
+ruff format --check csts_pilot/evidence_readout*.py tests/test_csts_evidence_readout.py scripts/check_evidence_readout_native.py
+pyrefly check --python-interpreter-path /home/machina/jep-format-env/bin/python csts_pilot/evidence_readout.py csts_pilot/evidence_readout_stages.py csts_pilot/evidence_readout_run.py csts_pilot/evidence_readout_retention.py scripts/check_evidence_readout_native.py
+CUDA_VISIBLE_DEVICES="" python -m scripts.check_evidence_readout_native
+```
 
 ## Limits and execution status
 
