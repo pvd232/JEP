@@ -68,7 +68,7 @@ For each readout:
 
 ```math
 \begin{aligned}
-q &= W_q\operatorname{LN}(u), & k_t &= W_k\operatorname{LN}(h_t), \\
+q &= W_q\mathrm{LN}(u), & k_t &= W_k\mathrm{LN}(h_t), \\
 \ell_t &= q^\top k_t/\sqrt{128}, &
 \ell_\emptyset &= q^\top k_\emptyset/\sqrt{128}+b_\emptyset.
 \end{aligned}
@@ -80,7 +80,7 @@ Compute source-conditional content independently of null mass:
 
 ```math
 \begin{aligned}
-\alpha_t &= \operatorname{softmax}_{t\in\mathrm{source}}(\ell_t), &
+\alpha_t &= \mathrm{softmax}_{t\in\mathrm{source}}(\ell_t), &
 v &= \sum_t\alpha_t h_t, \\
 z &= v/\|v\|_2, &
 \widehat{y}_{B,C} &= z_1^\top z_2.
