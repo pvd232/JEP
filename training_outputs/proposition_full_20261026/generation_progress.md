@@ -2,7 +2,7 @@
 
 Monitor: **running**.
 
-Training inputs captured: **3,136/11,909**; missing inputs requested: **9,413**. The current training bank remains frozen.
+Training inputs captured: **3,200/11,909**; missing inputs requested: **9,413**. The current training bank remains frozen.
 
 Held-out sample: **128 validation source groups**, one passage-condition input per group. References and generated answers are kept outside training. Evaluation waits for the current GPU training run to finish.
 
