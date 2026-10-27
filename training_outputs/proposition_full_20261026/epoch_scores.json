@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at_utc": "2026-10-27T16:31:06+00:00",
+  "updated_at_utc": "2026-10-27T16:31:43+00:00",
   "identity": {
     "run_name": "jep_csts_v1_four_initial_epochs_patience1_20261027",
     "source_commit": "67f816407f786ea038415422a9aefd57d30c92fb",
@@ -235,13 +235,13 @@
       "notes": []
     },
     "evidence_ratings": {
-      "status": "pending",
+      "status": "running",
       "trace_status": "running",
       "trace_path": "/home/machina/jep-csts-jep-v1-four-epoch-20261027/qwen_evidence_results/jep_csts_v1_four_initial_epochs_patience1_20261027/evidence_ratings_trace.json",
       "trace_available": true,
       "completed_epoch": 3,
       "current_epoch": 4,
-      "optimizer_updates": 700,
+      "optimizer_updates": 750,
       "epochs_without_improvement": 0,
       "stop_reason": null,
       "epochs": [
@@ -288,7 +288,8 @@
           "elapsed_seconds": null
         }
       ],
-      "notes": []
+      "notes": [],
+      "hardware": "NVIDIA A100-SXM4-40GB"
     }
   },
   "dataset_revision": "jep-csts-v1",
@@ -1582,5 +1583,63 @@
       "hardware": "NVIDIA A100-SXM4-40GB",
       "session": "jep-proposition-20261027"
     }
+  },
+  "training_migration": {
+    "status": "running",
+    "source_commit": "03993d8915cbf76132b5e32f2b1ee0311a8d9870",
+    "experiment_id": "csts_colab_03993d89_evidence_ratings",
+    "hardware": "NVIDIA A100-SXM4-40GB",
+    "parent_sha256": "d5ae3f872de88a5eb7eb7221f86c0f1d0cc30e97b856048b788521b239437780",
+    "config": {
+      "schema_version": 2,
+      "model_id": "Qwen/Qwen3-Embedding-8B",
+      "revision": "c90816d848505624c2434128dfc61132162a0ee9",
+      "max_length": 160,
+      "embedding_dimension": 4096,
+      "encode_batch_size": 4,
+      "device": "cuda",
+      "kind": "lora",
+      "seed": 7,
+      "projection_dimension": 128,
+      "ridge_alphas": [
+        1e-05,
+        0.0001,
+        0.001,
+        0.01,
+        0.1,
+        1.0
+      ],
+      "learning_rate": 2e-05,
+      "batch_size": 32,
+      "microbatch_size": 32,
+      "max_epochs": 24,
+      "start_epoch": 0,
+      "patience": 1,
+      "train_until_patience": true,
+      "weight_decay": 0.01,
+      "schedule": "constant",
+      "warmup_fraction": 0.0,
+      "max_seconds": 8100.0,
+      "lora_rank": 32,
+      "lora_alpha": 32,
+      "lora_dropout": 0.05,
+      "arm": "evidence",
+      "phase": "ratings",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "prepared_sha256": "4da4c950e1f074f09a5b101b577c0208755040a325162a321f98134019212cf5",
+      "parent_sha256": "d5ae3f872de88a5eb7eb7221f86c0f1d0cc30e97b856048b788521b239437780",
+      "head_sha256": "a36df847ac68cb10d636cac54bdd99c1d1b6627e98aca62dd5716bb87e6fee4d",
+      "max_answer_tokens": 64
+    },
+    "inputs": {
+      "training": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "validation": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "prepared": "4da4c950e1f074f09a5b101b577c0208755040a325162a321f98134019212cf5",
+      "parent_model": "d5ae3f872de88a5eb7eb7221f86c0f1d0cc30e97b856048b788521b239437780"
+    },
+    "transition": "Terminal four-epoch writing checkpoint; fresh ratings optimizer as in the original comparison.",
+    "batch_size": 32,
+    "microbatch_size": 32
   }
 }
