@@ -28,7 +28,7 @@ Stop after consecutive non-improving validation checks: ratings control **1**; p
 [Missing proposition generation progress](generation_progress.md)
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T18:45:48+00:00**. Run: `jep_csts_v1_full_propositions_converged_patience1_20261027`.
+Updated: **2026-10-27T18:46:49+00:00**. Run: `jep_csts_v1_full_propositions_converged_patience1_20261027`.
 
 Status: **running**. Current stage: **evidence_pretrain**.
 
@@ -46,7 +46,7 @@ Appearance and colour scores are available in the final report. Native epoch tra
 
 ## Ratings control: matched exposure on the full proposition-covered training comparisons
 
-Status: **running**. Completed epochs: **5**. Recorded optimizer updates: **1075**.
+Status: **running**. Completed epochs: **6**. Recorded optimizer updates: **1104**.
 
 | Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
 |---:|---:|---:|---:|---:|---:|
@@ -55,6 +55,9 @@ Status: **running**. Completed epochs: **5**. Recorded optimizer updates: **1075
 | 3 | 552 | 0.869931 | 0.527240 | 0.029286 | — |
 | 4 | 736 | 0.869917 | 0.525745 | 0.023787 | — |
 | 5 | 920 | 0.867871 | 0.542020 | 0.018940 | — |
+| 6 | 1104 | 0.868375 | 0.548501 | 0.015129 | — |
+
+Stop reason: `fixed_update_budget`.
 
 ## Proposition model: full-bank writing until held-out loss stops improving
 
