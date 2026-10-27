@@ -2,9 +2,9 @@
   "dataset_revision": "jep-csts-v1",
   "test_sha256": "52a9c0d6b8d9f3fc81e698bae1e2564051cf7ec29e8dc1cb4d68167910bb968d",
   "test_rows": 2430,
-  "encoder_source_commit": "67f816407f786ea038415422a9aefd57d30c92fb",
-  "encoder_initial_epochs": 4,
-  "followup_running": true,
+  "encoder_source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
+  "encoder_initial_epochs": 5,
+  "followup_running": false,
   "sol_completed_rows": 2430,
   "sol_completed_batches": [
     0,
@@ -50,39 +50,41 @@
   "models": {
     "ratings": {
       "label": "Ratings model",
-      "initial_epochs": 4,
+      "initial_epochs": 5,
       "full": {
         "n": 2430,
-        "spearman": 0.8557188384851067,
-        "pearson": 0.8745795844750097,
-        "mse_0_1": 0.038520896116577025
+        "spearman": 0.8553747813377185,
+        "mse_0_1": 0.038359250025926606,
+        "pearson": 0.8740112163381123
       },
       "shared": {
         "n": 2430,
-        "spearman": 0.8557188384851067,
-        "pearson": 0.8745795844750097,
-        "mse_0_1": 0.038520896116577025
+        "spearman": 0.8553747813377185,
+        "mse_0_1": 0.038359250025926606,
+        "pearson": 0.8740112163381123
       },
-      "checkpoint_sha256": "530eddea9a3077be8db864194f0915f3f85fbba6045a0c5cb4691423d9d1e26d",
-      "predictions_sha256": "e440cb29af7fbd9e3bc44375ac2fd7c14470f8705fbe7d868f1b732f3a0adb5f"
+      "checkpoint_sha256": "667c124a49be72a6fd8e9fa3df6974830e4ab6a46a10243c360dd46bcc75b534",
+      "predictions_sha256": "031ce3e9f694dbd6a23abd863114f5eff526d93a643c238ac909c2cff5ae5bad",
+      "selected_ratings_epoch": 2
     },
     "evidence": {
       "label": "Proposition model",
-      "initial_epochs": 4,
+      "initial_epochs": 5,
       "full": {
         "n": 2430,
-        "spearman": 0.8543617428925742,
-        "pearson": 0.8720015664150436,
-        "mse_0_1": 0.03884132179509847
+        "spearman": 0.8633983505091756,
+        "mse_0_1": 0.035583919528604686,
+        "pearson": 0.8840376878555528
       },
       "shared": {
         "n": 2430,
-        "spearman": 0.8543617428925742,
-        "pearson": 0.8720015664150436,
-        "mse_0_1": 0.03884132179509847
+        "spearman": 0.8633983505091756,
+        "mse_0_1": 0.035583919528604686,
+        "pearson": 0.8840376878555528
       },
-      "checkpoint_sha256": "a99ccbacf27a3d56ff80b40d135ec05e265048d14f077a9e2d964b3b60649e62",
-      "predictions_sha256": "d9b10b92639016859a1effd2dafdc1d71f31b4c798c7c0d19848eb6ecf08d343"
+      "checkpoint_sha256": "d30c00fc76e70ec639493b7121a8b8c9d7520745733857c1c49f0902fff00f4f",
+      "predictions_sha256": "f686d3f613200387be6d3224c0a5236a3e7841d05ac509887b085d8aaeeefea0",
+      "selected_ratings_epoch": 4
     },
     "sol": {
       "label": "GPT-6.1 Sol (max)",
@@ -100,5 +102,6 @@
       },
       "completed_rows": 2430
     }
-  }
+  },
+  "encoder_selection_sha256": "7558a4f424b10862855975466b4d83a6b658e9c96ab4747ba352508ad529f06d"
 }

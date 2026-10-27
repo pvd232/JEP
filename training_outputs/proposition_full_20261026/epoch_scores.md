@@ -1,22 +1,19 @@
 # Training with validation early stopping: jep-csts-v1
 
 <!-- three-model-comparison:start -->
-Both models train concurrently on the **80 GB A100** where their stages overlap. Each uses effective batch **32** and microbatch **32**. Writing checkpoint selection uses held-out proposition loss; ratings checkpoint selection uses validation Spearman.
-
 ## Test comparison: all three models
 
-Dataset: **jep-csts-v1**, the same **2,430 test examples** for every full-test score. Encoder checkpoints were selected on validation before test scoring.
+Dataset: **jep-csts-v1**. All models are scored on the same **2,430 test examples**. Encoder checkpoints were frozen using validation scores before test evaluation.
 
-| Model | Full-test Spearman | Full-test MSE (0–1) | Test coverage |
+| Model | Full-test Spearman | Raw MSE (0–1) | Test coverage |
 |---|---:|---:|---:|
-| Ratings model | 0.855719 | 0.038521 | 2,430/2,430 |
-| Proposition model | 0.854362 | 0.038841 | 2,430/2,430 |
+| Ratings model | 0.855375 | 0.038359 | 2,430/2,430 |
+| Proposition model | 0.863398 | 0.035584 | 2,430/2,430 |
 | GPT-6.1 Sol (max) | 0.919955 | 0.023513 | 2,430/2,430 |
 
-Encoder scores above come from the completed **4-initial-epoch** comparison.
-The full-bank comparison is training until validation patience is exhausted. Its test scores will replace the encoder rows after checkpoint selection and evaluation finish.
+The full-bank comparison is complete. Both first-phase parents use epoch **5**, with **920 optimizer updates**. Ratings validation selected control epoch **2** and proposition epoch **4**. The Sol score is the existing completed baseline on this same frozen test split.
 
-[Sol capture status and protocol](gpt61_sol_max_jep_v1.md). Test scores do not control training, checkpoint selection or the proposition-generation decision.
+[Detailed comparison and paired intervals](comparison_report.md). [Sol protocol](gpt61_sol_max_jep_v1.md).
 <!-- three-model-comparison:end -->
 
 Training: **6,051** comparisons. Validation: **1,576**. Test: **2,430**.
@@ -28,9 +25,9 @@ Stop after consecutive non-improving validation checks: ratings control **1**; p
 [Missing proposition generation progress](generation_progress.md)
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T20:38:18+00:00**. Run: `jep_csts_v1_full_propositions_converged_patience1_20261027`.
+Updated: **2026-10-27T20:45:04.598762+00:00**. Run: `jep_csts_v1_full_propositions_converged_patience1_20261027`.
 
-Status: **running**. Current stage: **predict_evidence**.
+Status: **complete**. Current stage: **complete**.
 
 Validation: **1,576 comparisons**, 680 source groups.
 
@@ -42,7 +39,7 @@ The proposition model writes answers from the full generated training bank until
 
 Rating loss measures error in predicted ratings on the 0–1 scale. Proposition-writing loss measures error in predicted text tokens. Each table counts optimizer updates from the beginning of that training step.
 
-Appearance and colour scores are available in the final report. Native epoch traces contain overall validation scores. Values are provisional while the comparison is running.
+Appearance and colour scores are available in the final report. Native epoch traces contain overall validation scores. Checkpoint selection and test evaluation are complete.
 
 ## Ratings control: matched exposure on the full proposition-covered training comparisons
 
@@ -116,7 +113,7 @@ Status: **succeeded**. Completed epochs: **5**. Recorded optimizer updates: **95
 
 Stop reason: `validation_patience`.
 
-Recovery: writing output metadata was repaired after native verification ([PR #13](https://github.com/pvd232/JEP/pull/13)). Both selected first-phase parents use epoch **5**, with **920 updates** each. Speculative control epochs 6–7 are retained in the history and excluded from the selected parent. The original test index was restored and verified against its sealed artifact before test scoring. Checkpoint selection was frozen before the test stage.
+Both selected first-phase parents use epoch 5. The control’s speculative epochs 6–7 remain recorded and were excluded from the matched parent. The writing metadata fix is reviewable in [PR #13](https://github.com/pvd232/JEP/pull/13). The original test index was restored byte for byte from a previously sealed artifact before scoring.
 
 ## A100 and L4 timing comparison
 
