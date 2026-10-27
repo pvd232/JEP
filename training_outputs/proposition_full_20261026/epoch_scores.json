@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "updated_at_utc": "2026-10-27T17:56:38+00:00",
+  "updated_at_utc": "2026-10-27T17:59:36+00:00",
   "identity": {
     "run_name": "jep_csts_v1_full_propositions_converged_patience1_20261027",
-    "source_commit": "a11099c8de017d4d0a54943680b2e9a4c247fed6",
+    "source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
     "attempt": "9bfd9512",
     "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
   },
@@ -25,9 +25,9 @@
   "validation_rows": 1576,
   "validation_groups": 680,
   "run_status": "running",
-  "current_stage": "evidence_pretrain",
+  "current_stage": null,
   "summary_path": "/content/jep-full-propositions-20261027/repo/qwen_evidence_results/jep_csts_v1_full_propositions_converged_patience1_20261027/summary.json",
-  "summary_sha256": "2ec096ad7b77c93ae8533d099045cc59a06b0a761bb5c2f6a7e2fe8e3a0732d7",
+  "summary_sha256": "d6bcdaa46c5abba28786136d239da009a3795d1e46567929b14fbe26406bee12",
   "scope": "Training and validation histories only; subgroup epoch scores are unavailable in native traces.",
   "stages": {
     "ratings_pretrain": {
@@ -63,7 +63,7 @@
     },
     "evidence_pretrain": {
       "matched_initial_epoch": null,
-      "status": "running",
+      "status": "pending",
       "trace_status": null,
       "trace_path": null,
       "trace_available": false,
