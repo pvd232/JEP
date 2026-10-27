@@ -1,0 +1,30 @@
+{
+  "phase": "complete",
+  "updated_at_unix": 1793060640.0403004,
+  "exit_code": 0,
+  "manifest": {
+    "model_id": "ZWK/InstructUIE",
+    "revision": "48f45b25a01df1798f8c1c31751a973adb7e8647",
+    "input_sha256": "2007b15e0ca6442021ad148718119122ecc2b6ff509fd21ba217de9059b9da0c",
+    "items": 108,
+    "generation": {
+      "do_sample": false,
+      "num_beams": 1,
+      "max_new_tokens": 128
+    },
+    "device": "cuda",
+    "dtype": "bfloat16",
+    "runner_sha256": "b0b8976d776da55d0359a83104cbf89de4f17eca992dd276771500c036350d94",
+    "schema_scope": "User-supplied relation labels; out-of-domain schema transfer",
+    "prompt_source": "BeyonderXX/InstructUIE configs/instruction_config.json RE[2] and src/uie_dataset.py RE serialization",
+    "checkpoint_source": "/home/machina/jep-instructuie-pilot-20261026/model",
+    "software": {
+      "torch": "2.14.0+cu130",
+      "transformers": "5.20.2"
+    },
+    "gpu": "NVIDIA L4",
+    "load_seconds": 222.632,
+    "status": "complete",
+    "outputs_generated": 108
+  }
+}

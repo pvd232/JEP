@@ -15,6 +15,7 @@ All three archived/candidate representations were available on the same 30 sourc
 | Archived Qwen spans | 30 | 21 | 20 | 20 |
 | Archived generated propositions v1 | 30 | 29 | 30 | 29 |
 | New assistant structured facts | 30 | 29 | 27 | 26 |
+| Actual InstructUIE relation extraction | 30 | 19 | 21 | 19 |
 
 Across all 108 structured inputs, reviewers judged 106 and 98 faithful respectively; both accepted 97. In the 80-input color slice, both accepted 73. Reviewer disagreements remain visible in the evidence files. This pilot favors further inspection of scope, incomplete answers and inference handling. The existing generated-proposition candidate has the highest paired fidelity point count.
 
@@ -22,25 +23,36 @@ These are model-assisted diagnostic judgments. The selected control cohort and s
 
 ## InstructUIE GPU arm
 
-The runner pins `ZWK/InstructUIE` revision `48f45b25a01df1798f8c1c31751a973adb7e8647`. Source-only inputs provide explicit relation options; this is a custom schema-transfer evaluation. Raw generations and parser warnings are retained.
+The actual `ZWK/InstructUIE` checkpoint, revision `48f45b25a01df1798f8c1c31751a973adb7e8647`, generated all 108 outputs on the existing NVIDIA L4 VM. The run used BF16, one beam, deterministic decoding and a 128-token output limit. All prompts fit the 512-token input limit; the maximum was 103 tokens. Loading took 222.6 seconds. The generation manifest records software, hardware, input identity and runner identity.
 
-Execution uses terminal SSH to the existing VM `jep-csts-format-20261021` in `mantra-477901`, zone `asia-northeast3-a`. Live preflight confirmed an idle NVIDIA L4 with 23,034 MiB VRAM, PyTorch 2.14.0+cu130 and Transformers 5.20.2. All 108 extraction prompts fit the official input limit; the longest has 103 tokens.
+The same two readers scored the new raw outputs against their unchanged, previously sealed source-only references. Candidate packets omitted model IDs and similarity ratings. Formats remained visible.
 
-The checkpoint's 12 required files total 45,069,805,378 bytes. Delivery uses the pinned Hugging Face revision through the existing private GCS bucket. Source identities are checked during upload; GPU download checksums are computed during the file write. The model is reusable experiment input.
+| Cohort | Sources | Faithful: reader A | Faithful: reader B | Both faithful |
+|---|---:|---:|---:|---:|
+| All diagnostic inputs | 108 | 91 | 93 | 91 |
+| Color diagnostic | 80 | 74 | 74 | 74 |
+| Selected evidence-helped controls | 28 | 17 | 19 | 17 |
 
-The GPU worker waits for checkpoint delivery and then acquires the existing shared GPU lock. It runs all 108 inputs with BF16 weights, deterministic generation, one beam and a 128-token output limit. Current predictions: zero, with checkpoint transfer in progress.
+The color diagnostic had six failures under the sealed reference policy. Five were abstentions on accepted typical-color inferences: yellow banana and white snow. One output retained a dog's brown and white colors and omitted the other dog's explicit black color. The reference policy accepts ordinary contextual inference; the tested relation-extraction prompt emphasizes mentions in the sentence.
 
-```bash
-/home/machina/jep-format-env/bin/python \
-  /home/machina/jep-instructuie-pilot-20261026/run_instructuie.py \
-  --inputs /home/machina/jep-instructuie-pilot-20261026/inputs.json \
-  --output /home/machina/jep-instructuie-pilot-20261026/outputs.jsonl \
-  --model-path /home/machina/jep-instructuie-pilot-20261026/model \
-  --device cuda --dtype bfloat16 --execute
-```
+Control failures included incomplete activities, partial locations and entity multiplicity. For example, the four-bear caption contains one white bear, two yellow bears and one brown bear. The generated relations contain one white, one yellow and one brown color–bear pair. This exposes a representation issue when repeated entities share a relation value. Reader disagreements remain available in the per-candidate files.
 
-Cleanup released 51,190,583,296 bytes across 184 local files and 56 artifact groups, leaving 54,125,297,664 bytes free before checkpoint copying. It matched sealed publication records, local SHA-256 and live GCS CRC32C/size/generation. Original run records and a durable restoration receipt are retained. Execution state is recorded in `structured_evidence_pilot/instructuie_status.json`.
+There were 11 raw abstentions, 118 parsed triples and two outputs with parser warnings. Semantic review used the preserved raw text. These results characterize this checkpoint, relation prompt and condition-label schema. The matched slice has 28 selected controls and two color sources; its counts describe that diagnostic sample. Archived generated propositions v1 had 29/30 accepted by both readers in the matched slice.
+
+This run measured extraction fidelity. Qwen encoder optimizer updates and new similarity evaluations for this pilot are zero.
+
+## Execution and cleanup
+
+Terminal SSH access is working. Execution used the existing `jep-csts-format-20261021` VM in `mantra-477901`, zone `asia-northeast3-a`, and its shared GPU lock. The 12 checkpoint files total 45,069,805,378 bytes. The private GCS mirror retains each pinned source identity and object generation. Checkpoint hashes were computed during transfer writes.
+
+Cleanup released **51,190,583,296 bytes** across **184 local files** and **56 artifact groups**, leaving 54,125,297,664 bytes free before checkpoint copying. It matched sealed VIPER publication records, local SHA-256 and live GCS CRC32C/size/generation. Run records were retained. The restoration receipt is backed up in the existing private bucket; its immutable address and identity are in `structured_evidence_pilot/cleanup_summary.json`.
+
+After inference, the temporary 45.1 GB checkpoint copy was released. Final free space is **54,127,783,936 bytes (50.4 GiB)**. The private GCS mirror and pinned public source remain available for restoration through the supplied download script.
+
+Execution sources are in `scripts/run_instructuie.py`, `scripts/instructuie_operator/` and `scripts/cleanup_archived_pilot_files.py`. Raw generations, generation provenance, review packets, both completed reviews, source checkpoint addresses and cleanup metadata are in [structured_evidence_pilot](structured_evidence_pilot/).
 
 ## Validation and evidence
 
-Six schema/serialization unit tests pass. All 108 source identities, 108 structured records, two 108-item reference sets and two 168-item review sets have exact coverage. Every archived target is scored on its original source identity. The complete diagnostic inputs, candidates, mappings, reviews, sampling notes and results are in [structured_evidence_pilot](structured_evidence_pilot/).
+Six schema/serialization unit tests pass. All 108 source identities, 108 structured records, two 108-item reference sets and two original 168-item review sets and two new 108-item review sets have exact coverage. Every archived target is scored on its original source identity. The complete diagnostic inputs, candidates, mappings, reviews, sampling notes and results are in [structured_evidence_pilot](structured_evidence_pilot/).
+
+Recompute the additional-arm summary with `python scripts/instructuie_review.py summarize training_outputs/structured_evidence_pilot --review-a training_outputs/structured_evidence_pilot/instructuie_review_a.json --review-b training_outputs/structured_evidence_pilot/instructuie_review_b.json`.

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "source_inputs": 108,
+  "seed": 61038,
+  "outputs_path": "outputs.jsonl",
+  "outputs_sha256": "da62bef2ce88d14dabeb9b5da72205ca6fb6ff5565d12719574494fbde2a1385",
+  "generation_manifest_sha256": "44ac1b08255c6f05690e5d2d75f22e103258551e3809ec423e6236637743810a",
+  "protected_sha256": {
+    "source_inputs.json": "f2e0743d32a6f4d477ecff896748b5060a95ce21ba41b514d98e61d78ac0e6a3",
+    "sampling_manifest.json": "10a37f68558f6805e8730435087e97f8ecd45657ef486ca68e74d2ffd1cb6671",
+    "reference_a.json": "70c60980fc5941c94c852f7cb4ed7c1907569c3be042a6dbdfd40ae81173d943",
+    "reference_b.json": "5253a4301fb8b2d00e6e40a9fa8e26ce17cf53d94e78e0da567713f86834183d",
+    "review_a.json": "22c72b13d50e7fdf178d081b9afbe10a33bd0cdc6e20564fb21d45752c8d5daf",
+    "review_b.json": "0685899b0f3832acf186da5de9d11b9f86ed5890b880ae38fc381d4ff47955d9",
+    "candidate_identity_map.json": "1c5841d58f9f3d9216686d1869bf837b6a75563c562dbe74c9341fb527cd153f",
+    "instructuie_inputs.json": "2007b15e0ca6442021ad148718119122ecc2b6ff509fd21ba217de9059b9da0c"
+  },
+  "packet_sha256": "930bb150ce31eb9c2184e44fe818279e488f49052a519341da1f803d10d766e3",
+  "identity_map_sha256": "ad95a327769858042ed731243ceecec554b408b844e9c12065a342116f3aad92",
+  "review_fields": [
+    "candidate_id",
+    "faithful",
+    "wrong_entity",
+    "omitted_relevant_values",
+    "unsupported_fact",
+    "inference_issue",
+    "reason"
+  ],
+  "review_scope": "Compare raw candidate content with the unchanged source-only reference and its inference criteria; model identity and similarity ratings are withheld."
+}

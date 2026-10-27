@@ -1,5 +1,5 @@
 {
-  "status": "structured_review_complete_instructuie_checkpoint_transfer_in_progress",
+  "status": "structured_and_instructuie_review_complete",
   "source_commit": "769114a4967de1cb8fbb26709a13119e01df1cff",
   "total_sources": 108,
   "shared_archive_matched_sources": 30,
@@ -24,6 +24,13 @@
       "reader_b_faithful": 30,
       "both_faithful": 29,
       "reader_disagreements": 1
+    },
+    "instructuie": {
+      "n": 108,
+      "reader_a_faithful": 91,
+      "reader_b_faithful": 93,
+      "both_faithful": 91,
+      "reader_disagreements": 2
     }
   },
   "matched": {
@@ -47,6 +54,13 @@
       "reader_b_faithful": 30,
       "both_faithful": 29,
       "reader_disagreements": 1
+    },
+    "instructuie": {
+      "n": 30,
+      "reader_a_faithful": 19,
+      "reader_b_faithful": 21,
+      "both_faithful": 19,
+      "reader_disagreements": 2
     }
   },
   "structured_by_cohort": {
@@ -69,12 +83,212 @@
     "a": "70c60980fc5941c94c852f7cb4ed7c1907569c3be042a6dbdfd40ae81173d943",
     "b": "5253a4301fb8b2d00e6e40a9fa8e26ce17cf53d94e78e0da567713f86834183d"
   },
-  "instructuie_predictions": 0,
+  "instructuie_predictions": 108,
   "optimizer_updates": 0,
   "limitations": [
     "Assistant-generated candidate changes generator and representation together.",
     "Two isolated contexts of the same assistant model supplied review judgments.",
     "Archive-matched sample has 28 successful-control sources and 2 color sources.",
     "Extraction-fidelity diagnostic; similarity and training outcomes remain unmeasured."
-  ]
+  ],
+  "by_cohort": {
+    "color_diagnostic": {
+      "all_available": {
+        "assistant_structured": {
+          "n": 80,
+          "reader_a_faithful": 79,
+          "reader_b_faithful": 73,
+          "both_faithful": 73,
+          "reader_disagreements": 6
+        },
+        "archived_qwen_spans": {
+          "n": 2,
+          "reader_a_faithful": 2,
+          "reader_b_faithful": 2,
+          "both_faithful": 2,
+          "reader_disagreements": 0
+        },
+        "archived_generated_v1": {
+          "n": 2,
+          "reader_a_faithful": 2,
+          "reader_b_faithful": 2,
+          "both_faithful": 2,
+          "reader_disagreements": 0
+        },
+        "instructuie": {
+          "n": 80,
+          "reader_a_faithful": 74,
+          "reader_b_faithful": 74,
+          "both_faithful": 74,
+          "reader_disagreements": 0
+        }
+      },
+      "matched": {
+        "assistant_structured": {
+          "n": 2,
+          "reader_a_faithful": 2,
+          "reader_b_faithful": 2,
+          "both_faithful": 2,
+          "reader_disagreements": 0
+        },
+        "archived_qwen_spans": {
+          "n": 2,
+          "reader_a_faithful": 2,
+          "reader_b_faithful": 2,
+          "both_faithful": 2,
+          "reader_disagreements": 0
+        },
+        "archived_generated_v1": {
+          "n": 2,
+          "reader_a_faithful": 2,
+          "reader_b_faithful": 2,
+          "both_faithful": 2,
+          "reader_disagreements": 0
+        },
+        "instructuie": {
+          "n": 2,
+          "reader_a_faithful": 2,
+          "reader_b_faithful": 2,
+          "both_faithful": 2,
+          "reader_disagreements": 0
+        }
+      }
+    },
+    "evidence_helped_control": {
+      "all_available": {
+        "assistant_structured": {
+          "n": 28,
+          "reader_a_faithful": 27,
+          "reader_b_faithful": 25,
+          "both_faithful": 24,
+          "reader_disagreements": 4
+        },
+        "archived_qwen_spans": {
+          "n": 28,
+          "reader_a_faithful": 19,
+          "reader_b_faithful": 18,
+          "both_faithful": 18,
+          "reader_disagreements": 1
+        },
+        "archived_generated_v1": {
+          "n": 28,
+          "reader_a_faithful": 27,
+          "reader_b_faithful": 28,
+          "both_faithful": 27,
+          "reader_disagreements": 1
+        },
+        "instructuie": {
+          "n": 28,
+          "reader_a_faithful": 17,
+          "reader_b_faithful": 19,
+          "both_faithful": 17,
+          "reader_disagreements": 2
+        }
+      },
+      "matched": {
+        "assistant_structured": {
+          "n": 28,
+          "reader_a_faithful": 27,
+          "reader_b_faithful": 25,
+          "both_faithful": 24,
+          "reader_disagreements": 4
+        },
+        "archived_qwen_spans": {
+          "n": 28,
+          "reader_a_faithful": 19,
+          "reader_b_faithful": 18,
+          "both_faithful": 18,
+          "reader_disagreements": 1
+        },
+        "archived_generated_v1": {
+          "n": 28,
+          "reader_a_faithful": 27,
+          "reader_b_faithful": 28,
+          "both_faithful": 27,
+          "reader_disagreements": 1
+        },
+        "instructuie": {
+          "n": 28,
+          "reader_a_faithful": 17,
+          "reader_b_faithful": 19,
+          "both_faithful": 17,
+          "reader_disagreements": 2
+        }
+      }
+    }
+  },
+  "instructuie_by_cohort": {
+    "color_diagnostic": {
+      "n": 80,
+      "reader_a_faithful": 74,
+      "reader_b_faithful": 74,
+      "both_faithful": 74,
+      "reader_disagreements": 0
+    },
+    "evidence_helped_control": {
+      "n": 28,
+      "reader_a_faithful": 17,
+      "reader_b_faithful": 19,
+      "both_faithful": 17,
+      "reader_disagreements": 2
+    }
+  },
+  "instructuie_issue_counts": {
+    "reader_a": {
+      "wrong_entity": 0,
+      "omitted_relevant_values": 17,
+      "unsupported_fact": 0,
+      "inference_issue": 9
+    },
+    "reader_b": {
+      "wrong_entity": 2,
+      "omitted_relevant_values": 14,
+      "unsupported_fact": 1,
+      "inference_issue": 10
+    }
+  },
+  "instructuie_review": {
+    "model_id": "ZWK/InstructUIE",
+    "revision": "48f45b25a01df1798f8c1c31751a973adb7e8647",
+    "outputs_sha256": "da62bef2ce88d14dabeb9b5da72205ca6fb6ff5565d12719574494fbde2a1385",
+    "preparation_sha256": "7d1861f96d01b7ceb823ff793f9361540d7b1d6d191760df75fd44f6b59a169d",
+    "review_a_sha256": "43ef6075336688d5c903317dae29036185bab0d93d5220325da9094c23e47e6c",
+    "review_b_sha256": "6bd458228fc04fc72cbcb2fe3ab716dcf0ca683a8acf53815b15206cdcc83bfd",
+    "reference_sha256": {
+      "a": "70c60980fc5941c94c852f7cb4ed7c1907569c3be042a6dbdfd40ae81173d943",
+      "b": "5253a4301fb8b2d00e6e40a9fa8e26ce17cf53d94e78e0da567713f86834183d"
+    },
+    "matched_source_ids": [
+      "0dc87c0872cde4a4324029da7829ca07047cf8c6fd5df01301793b8ffd664257",
+      "16e58b05c208930c03c942b29ceb99f1d5f174938b1f35aa4e459a5745935f6f",
+      "30e9c73c626b194a36c780c89db3a473253701179c4d5ecb5c6d63135db82a9c",
+      "35d7a26741a0a81bc14bffd1df7e84e70c7fb76de1ec94e538427dea5659593a",
+      "4ac193d415c867ee1f1ed3a1f6273bf89242af3c828fd7d12ed5bf71398fad81",
+      "53fac8e8af7fe6802ab0c574f9db9fa101cca4fb89496fc3320007c0efe8226e",
+      "569edb5a0854a19abab31eb0754ed1dd4414902920b0da74fba566eff1b308a1",
+      "5b875a5072b1bfa4aa85d438f99c673ebde3ff0475403d180f932c95e5a1d9ea",
+      "5d6cb8a102a57a8d52537fe267104b04ae0e53ce992bb23ca65662e2a3f25f4e",
+      "61bbfd5c267a164a20f9fd23dbb1467a2fc772800e3b46f535521fd1bf5c6d65",
+      "624c1eb754ba024affbe5166b6424b7c9ac2bdc43df84a39ff0074440365ec86",
+      "62c4008583a717e9b4101e627089f48c03573c6c4f4e288e485c79f15be08f81",
+      "62ea2bd7f4382ed52b8226293562a81283ae08799a214bc36c028e10555fa212",
+      "657f71e03d08f7d66b213be0823e27cd7c393108064ed1cb28392e64e65d52b8",
+      "66a6e175d1d0297f5a9818ee15a584bdc4aa2db6cfec2b82278de85ef45db895",
+      "6803f25faedb6a27e7714a33f01ee50c583e5b7b4b11c075fdd3aa4724a36db2",
+      "697a78caa711a57a0532366317e065072ef2fba65c247bf82d681fad967ec5d5",
+      "6b01339b52ab67c497b0f9e0c7eabbb8ce23a88f661706860f3033c9b4e7103f",
+      "7c6e5183e006d1df54ed14a470a76385e479221630e40bc169221ab882fa1899",
+      "7cca7705719cd921fa006d900837f690cefca5aa9f2307924be84b7088a8a42c",
+      "7e31182ae71458484d35c0bf7dbf03f47946feab4a5463757c421739646409ed",
+      "7f3f73d06df694933166a4f93390a40abef231772037260e3f296ecfc471c0c4",
+      "827ad4cdfa6e52d9c985ff5c1c51da0b8a6d401e499e453b3f2c99111dc1ff65",
+      "848077bb642c16f62d6f1d07da9f757a1a86349d6c86318b2e7767d7502f39d9",
+      "889efe773939b012900db76e495db918692f63343d5903a79da315d6f8a434e1",
+      "92b7f11d73e32d6a764e2b52114b941166a68c22da3fbd1ce2cbe17ba4ae8f8f",
+      "a4adaaf700af71d194647d7db4c8c53e9a47b33bf273bb5aa44aca4a79c3be9d",
+      "b0897cd47d4ce12fc819cf0bdb38f367dada85d1581da7c86ab144dc29446bd4",
+      "c67fc10fe4d6807c3a67281d33657d6b5405a6264a67825c3916863f27141d8d",
+      "ccfb44703878615bc0b3c3072b055cee9114f0d25d42e83586da16f6e7e65c56"
+    ]
+  }
 }
