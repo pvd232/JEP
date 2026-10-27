@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at_utc": "2026-10-27T18:51:20+00:00",
+  "updated_at_utc": "2026-10-27T20:10:15+00:00",
   "identity": {
     "run_name": "jep_csts_v1_full_propositions_converged_patience1_20261027",
     "source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
@@ -9,7 +9,7 @@
   },
   "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
   "training_policy": {
-    "matched_pretrain_epochs": null,
+    "matched_pretrain_epochs": 5,
     "proposition_until_patience": true,
     "proposition_validation": {
       "path": "csts_data/jep-csts-v1-propositions/full_bank/writing_validation.json",
@@ -25,22 +25,22 @@
   "validation_rows": 1576,
   "validation_groups": 680,
   "run_status": "running",
-  "current_stage": "evidence_pretrain",
+  "current_stage": "evidence_ratings",
   "summary_path": "/content/jep-full-propositions-20261027/repo/qwen_evidence_results/jep_csts_v1_full_propositions_converged_patience1_20261027/summary.json",
-  "summary_sha256": "05d1f9a4796db0643b41e708701e2e8fe4b44944ae84fdc43f1f9fdc2bc0c644",
+  "summary_sha256": "6f668bda2958f51b8552c0a7d741bafe77156eb603d71756290dd83316c19f1a",
   "scope": "Training and validation histories only; subgroup epoch scores are unavailable in native traces.",
   "stages": {
     "ratings_pretrain": {
-      "matched_initial_epoch": null,
-      "status": "running",
-      "trace_status": "running",
-      "trace_path": "/content/jep-full-propositions-20261027/repo/qwen_evidence_results/jep_csts_v1_full_propositions_converged_patience1_20261027/ratings_pretrain_trace.json",
+      "matched_initial_epoch": 5,
+      "status": "succeeded",
+      "trace_status": "complete",
+      "trace_path": "/content/jep-full-propositions-20261027/repo/experiments/csts_full_control_3ef6ba06_9bfd9512_pretrain_7/runs/ratings_pretrain/01M5ZAZ3SFX44ZSC134W9S1R8F/artifacts/train/trace/trace.json",
       "trace_available": true,
-      "completed_epoch": 6,
-      "current_epoch": 7,
-      "optimizer_updates": 1275,
+      "completed_epoch": 7,
+      "current_epoch": null,
+      "optimizer_updates": 1288,
       "epochs_without_improvement": null,
-      "stop_reason": null,
+      "stop_reason": "fixed_update_budget",
       "epochs": [
         {
           "epoch": 1,
@@ -131,19 +131,33 @@
           "observed_epoch_seconds": null,
           "elapsed_seconds": 2339.099540051,
           "proposition_validation_loss": null
+        },
+        {
+          "epoch": 7,
+          "optimizer_updates": 1288,
+          "validation_spearman": 0.8683670680842244,
+          "validation_mse_1_5": 0.5493483700490999,
+          "validation_rows": 1576,
+          "training_loss": 0.011732404642266015,
+          "training_loss_kind": "rating_mse_0_1",
+          "epochs_without_improvement": null,
+          "fit_seconds": null,
+          "validation_seconds": null,
+          "observed_epoch_seconds": null,
+          "elapsed_seconds": 2543.5223168580005,
+          "proposition_validation_loss": null
         }
       ],
-      "notes": [],
-      "hardware": "NVIDIA A100-SXM4-80GB"
+      "notes": []
     },
     "evidence_pretrain": {
-      "matched_initial_epoch": null,
-      "status": "running",
+      "matched_initial_epoch": 5,
+      "status": "succeeded",
       "trace_status": "complete",
       "trace_path": "/content/jep-full-propositions-20261027/repo/qwen_evidence_results/jep_csts_v1_full_propositions_converged_patience1_20261027/evidence_pretrain_trace.json",
       "trace_available": true,
       "completed_epoch": 6,
-      "current_epoch": 6,
+      "current_epoch": null,
       "optimizer_updates": 1104,
       "epochs_without_improvement": 1,
       "stop_reason": "proposition_validation_patience",
@@ -239,38 +253,82 @@
           "proposition_validation_loss": 0.2892187055477426
         }
       ],
-      "notes": [],
-      "hardware": "NVIDIA A100-SXM4-80GB"
+      "notes": []
     },
     "ratings_ratings": {
       "matched_initial_epoch": null,
-      "status": "pending",
-      "trace_status": null,
-      "trace_path": null,
+      "status": "running",
+      "trace_status": "running",
+      "trace_path": "/content/jep-full-propositions-20261027/repo/experiments/csts_full_control_3ef6ba06_9bfd9512_ratings_0/runs/ratings_ratings/01M5ZEV9YVDRQT6DC5GZR2MBQP/artifacts/train/trace/trace.json",
       "trace_available": false,
-      "completed_epoch": 0,
-      "current_epoch": null,
-      "optimizer_updates": 0,
+      "completed_epoch": 2,
+      "current_epoch": 3,
+      "optimizer_updates": 525,
       "epochs_without_improvement": null,
       "stop_reason": null,
-      "epochs": [],
-      "notes": [],
-      "hardware": "NVIDIA A100-SXM4-80GB"
+      "epochs": [
+        {
+          "epoch": 1,
+          "optimizer_updates": 190,
+          "validation_spearman": 0.8702511842320014,
+          "validation_mse_1_5": 0.5431079086038358,
+          "validation_rows": 1576,
+          "training_loss": 0.016649255207061786,
+          "training_loss_kind": "rating_mse_0_1",
+          "epochs_without_improvement": 0,
+          "fit_seconds": 190.93503364000026,
+          "validation_seconds": 14.645412795000084,
+          "observed_epoch_seconds": 206.25368602800154,
+          "elapsed_seconds": null,
+          "proposition_validation_loss": null
+        },
+        {
+          "epoch": 2,
+          "optimizer_updates": 380,
+          "validation_spearman": 0.8718754731182672,
+          "validation_mse_1_5": 0.5189313996608109,
+          "validation_rows": 1576,
+          "training_loss": 0.01305280006169741,
+          "training_loss_kind": "rating_mse_0_1",
+          "epochs_without_improvement": 0,
+          "fit_seconds": 379.39339491099963,
+          "validation_seconds": 32.499374764000095,
+          "observed_epoch_seconds": 412.9197058440004,
+          "elapsed_seconds": null,
+          "proposition_validation_loss": null
+        }
+      ],
+      "notes": []
     },
     "evidence_ratings": {
       "matched_initial_epoch": null,
-      "status": "pending",
-      "trace_status": null,
-      "trace_path": null,
-      "trace_available": false,
-      "completed_epoch": 0,
-      "current_epoch": null,
-      "optimizer_updates": 0,
-      "epochs_without_improvement": null,
+      "status": "running",
+      "trace_status": "running",
+      "trace_path": "/content/jep-full-propositions-20261027/repo/experiments/csts_qwen_proposition_evidence_3ef6ba06_9bfd9512_evidence_ratings/runs/evidence_ratings/01M5ZF2FVMY44D3DAEHRB7GQWN/artifacts/train/trace/trace.json",
+      "trace_available": true,
+      "completed_epoch": 1,
+      "current_epoch": 2,
+      "optimizer_updates": 275,
+      "epochs_without_improvement": 0,
       "stop_reason": null,
-      "epochs": [],
-      "notes": [],
-      "hardware": "NVIDIA A100-SXM4-80GB"
+      "epochs": [
+        {
+          "epoch": 1,
+          "optimizer_updates": 190,
+          "validation_spearman": 0.8541123454435061,
+          "validation_mse_1_5": 0.6160851956936005,
+          "validation_rows": 1576,
+          "training_loss": 0.06050596131808185,
+          "training_loss_kind": "rating_mse_0_1",
+          "epochs_without_improvement": 0,
+          "fit_seconds": 413.7831845870005,
+          "validation_seconds": 32.29432834600084,
+          "observed_epoch_seconds": 446.7473257370002,
+          "elapsed_seconds": null,
+          "proposition_validation_loss": null
+        }
+      ],
+      "notes": []
     }
   },
   "device_benchmark": {
@@ -1783,7 +1841,7 @@
           "accuracy": 0.9375,
           "supported": 63,
           "unsupported_assertion_count": 1,
-          "review_agreement": 1.0,
+          "review_agreement": 1,
           "reviewers": "Two independent GPT-6.1 Sol high calls; model-reviewed, no human adjudication."
         }
       }
@@ -1818,5 +1876,11 @@
     "batch_size": 32,
     "microbatch_size": 32,
     "concurrent_on_one_gpu": true
+  },
+  "operator_recovery": {
+    "reason": "Completed-stage metadata access repaired after native verification",
+    "writing_selected_epoch": 5,
+    "matched_control_updates": 920,
+    "driver_patch_commit": "1d4ad09a79085a019badb7a454e689ac252c5907"
   }
 }

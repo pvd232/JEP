@@ -28,9 +28,9 @@ Stop after consecutive non-improving validation checks: ratings control **1**; p
 [Missing proposition generation progress](generation_progress.md)
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T18:51:20+00:00**. Run: `jep_csts_v1_full_propositions_converged_patience1_20261027`.
+Updated: **2026-10-27T20:10:15+00:00**. Run: `jep_csts_v1_full_propositions_converged_patience1_20261027`.
 
-Status: **running**. Current stage: **evidence_pretrain**.
+Status: **running**. Current stage: **evidence_ratings**.
 
 Validation: **1,576 comparisons**, 680 source groups.
 
@@ -46,7 +46,9 @@ Appearance and colour scores are available in the final report. Native epoch tra
 
 ## Ratings control: matched exposure on the full proposition-covered training comparisons
 
-Status: **running**. Completed epochs: **6**. Recorded optimizer updates: **1275**.
+Status: **succeeded**. Completed epochs: **7**. Recorded optimizer updates: **1288**.
+
+Initial checkpoint used for the matched comparison: **epoch 5**. Extra speculative epochs remain recorded and are excluded from that checkpoint.
 
 | Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
 |---:|---:|---:|---:|---:|---:|
@@ -56,10 +58,15 @@ Status: **running**. Completed epochs: **6**. Recorded optimizer updates: **1275
 | 4 | 736 | 0.869917 | 0.525745 | 0.023787 | — |
 | 5 | 920 | 0.867871 | 0.542020 | 0.018940 | — |
 | 6 | 1104 | 0.868375 | 0.548501 | 0.015129 | — |
+| 7 | 1288 | 0.868367 | 0.549348 | 0.011732 | — |
+
+Stop reason: `fixed_update_budget`.
 
 ## Proposition model: full-bank writing until held-out loss stops improving
 
-Status: **running**. Completed epochs: **6**. Recorded optimizer updates: **1104**.
+Status: **succeeded**. Completed epochs: **6**. Recorded optimizer updates: **1104**.
+
+Initial checkpoint used for the matched comparison: **epoch 5**. Extra speculative epochs remain recorded and are excluded from that checkpoint.
 
 | Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
 |---:|---:|---:|---:|---:|---:|
@@ -85,15 +92,24 @@ Stop reason: `proposition_validation_patience`.
 
 ## Ratings model: ratings on the full training set
 
-Status: **running**. Completed epochs: **0**. Recorded optimizer updates: **0**.
+Status: **running**. Completed epochs: **2**. Recorded optimizer updates: **525**.
 
-Awaiting the first completed epoch.
+| Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 190 | 0.870251 | 0.543108 | 0.016649 | 0 |
+| 2 | 380 | 0.871875 | 0.518931 | 0.013053 | 0 |
+
+This snapshot preserves previously observed epochs; the live trace is temporarily unavailable.
 
 ## Proposition model: ratings on the full training set
 
-Status: **pending**. Completed epochs: **0**. Recorded optimizer updates: **0**.
+Status: **running**. Completed epochs: **1**. Recorded optimizer updates: **275**.
 
-Awaiting the first completed epoch.
+| Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 190 | 0.854112 | 0.616085 | 0.060506 | 0 |
+
+Recovery: the completed writing run passed native verification. Writing epoch **5** and control epoch **5** use the same **920 updates**. Extra control epochs remain recorded and are excluded from the selected parent. Ratings training resumed on the existing A100. [Driver fix: PR #13](https://github.com/pvd232/JEP/pull/13).
 
 ## A100 and L4 timing comparison
 
