@@ -2,23 +2,25 @@
 
 **Dataset:** [JEP C-STS revision 1](README.md). The 13 questions below preserve the published labels pending your decisions. Refer to each case by its source ID.
 
-| ID | Split | Condition | Question |
-|---|---|---|---|
-| `train_205` | training | color of product | Should product color cover the named chair and cabinet or the computers? |
-| `train_688` | training | objects near device | Should the described speakers count under the recorded electronic-device scope? |
-| `train_689` | training | type of device | Which electronic-device type should the described speakers supply? |
-| `train_778` | training | type of animal | Should the condition include the animal represented by the teddy bear? |
-| `train_779` | training | number of animals | Should the recorded bear-figure count include teddy bears? |
-| `train_2038` | validation | type of area involved | Does B’s computer workspace supply partial room-function information under the approved computer-context convention? |
-| `train_8568` | validation | location | Should generic location include B’s explicit airborne position, or does the condition require surrounding venue or ground features? |
-| `train_10241` | validation | position of person | Does ordinary ground-supported skateboarding provide a comparable position, as allowed in the training audit, or is explicit posture required? |
-| `train_11335` | validation | woman stance | Do riding and balancing supply partial stance information, or must seated versus standing be explicitly recoverable? |
-| `train_11341` | validation | means of flotation | Can the man’s stated assistance supply a partial flotation means, or must the physical buoyancy mechanism be identified? |
-| `evaluation_855` | test | number of pizza slices | A leaves slicing state unspecified. Should Extracted A describe only the unstated slice count? |
-| `evaluation_1884` | test | height of animal | Should the stature reading follow frozen train_11207, or should stature and jump elevation remain competing features? |
-| `evaluation_2450` | test | color of animals | Does the stated three-color coat supply partial color information under the colorful convention accepted for train_10852? |
+| ID | Split | Supplied score | V1 audited score | Condition | Question |
+|---|---|---|---|---|---|
+| `train_205` | training | 3/5 | excluded/null | color of product | Should product color cover the named chair and cabinet or the computers? |
+| `train_688` | training | 4/5 | excluded/null | objects near device | Should the described speakers count under the recorded electronic-device scope? |
+| `train_689` | training | 4/5 | excluded/null | type of device | Which electronic-device type should the described speakers supply? |
+| `train_778` | training | 5/5 | excluded/null | type of animal | Should the condition include the animal represented by the teddy bear? |
+| `train_779` | training | 1/5 | excluded/null | number of animals | Should the recorded bear-figure count include teddy bears? |
+| `train_2038` | validation | 4/5 | excluded/null | type of area involved | Does B’s computer workspace supply partial room-function information under the approved computer-context convention? |
+| `train_8568` | validation | 3/5 | excluded/null | location | Should generic location include B’s explicit airborne position, or does the condition require surrounding venue or ground features? |
+| `train_10241` | validation | 2/5 | excluded/null | position of person | Does ordinary ground-supported skateboarding provide a comparable position, as allowed in the training audit, or is explicit posture required? |
+| `train_11335` | validation | 4/5 | excluded/null | woman stance | Do riding and balancing supply partial stance information, or must seated versus standing be explicitly recoverable? |
+| `train_11341` | validation | 3/5 | excluded/null | means of flotation | Can the man’s stated assistance supply a partial flotation means, or must the physical buoyancy mechanism be identified? |
+| `evaluation_855` | test | -1 (source invalid marker) | excluded/null | number of pizza slices | A leaves slicing state unspecified. Should Extracted A describe only the unstated slice count? |
+| `evaluation_1884` | test | 5/5 | excluded/null | height of animal | Should the stature reading follow frozen train_11207, or should stature and jump elevation remain competing features? |
+| `evaluation_2450` | test | 1/5 | excluded/null | color of animals | Does the stated three-color coat supply partial color information under the colorful convention accepted for train_10852? |
 
 ### train_205: `color of product`
+
+**Supplied similarity score:** `3/5`. **V1 audited score:** `excluded/null`.
 
 **Current status:** `invalid`. **Check:** Review exclusion policy.
 
@@ -40,6 +42,8 @@
 
 ### train_688: `objects near device`
 
+**Supplied similarity score:** `4/5`. **V1 audited score:** `excluded/null`.
+
 **Current status:** `invalid`. **Check:** Review exclusion policy.
 
 > **Caption A:** A big monitor on a white desk with a white mouse and a glass on the desk.
@@ -59,6 +63,8 @@
 **Decision needed:** Should the described speakers count under the recorded electronic-device scope?
 
 ### train_689: `type of device`
+
+**Supplied similarity score:** `4/5`. **V1 audited score:** `excluded/null`.
 
 **Current status:** `invalid`. **Check:** Review exclusion policy.
 
@@ -80,6 +86,8 @@
 
 ### train_778: `type of animal`
 
+**Supplied similarity score:** `5/5`. **V1 audited score:** `excluded/null`.
+
 **Current status:** `invalid`. **Check:** Review exclusion policy.
 
 > **Caption A:** Four teddy bears from font sitting on ledge with patchwork grass of countryside behind them, and blue sky with clouds.
@@ -99,6 +107,8 @@
 **Decision needed:** Should the condition include the animal represented by the teddy bear?
 
 ### train_779: `number of animals`
+
+**Supplied similarity score:** `1/5`. **V1 audited score:** `excluded/null`.
 
 **Current status:** `invalid`. **Check:** Review exclusion policy.
 
@@ -120,6 +130,8 @@
 
 ### train_2038: `type of area involved`
 
+**Supplied similarity score:** `4/5`. **V1 audited score:** `excluded/null`.
+
 **Current status:** `invalid`. **Check:** Review exclusion policy.
 
 > **Caption A:** White vertical blinds hang in the windows of a white room with wood flooring, with a bed, a lamp, and a bookshelf with a small television on top of it.
@@ -139,6 +151,8 @@
 **Decision needed:** Does B’s computer workspace supply partial room-function information under the approved computer-context convention?
 
 ### train_8568: `location`
+
+**Supplied similarity score:** `3/5`. **V1 audited score:** `excluded/null`.
 
 **Current status:** `invalid`. **Check:** Review exclusion policy.
 
@@ -160,6 +174,8 @@
 
 ### train_10241: `position of person`
 
+**Supplied similarity score:** `2/5`. **V1 audited score:** `excluded/null`.
+
 **Current status:** `invalid`. **Check:** Review exclusion policy.
 
 > **Caption A:** A closeup of a man skateboarding in a skate park .
@@ -179,6 +195,8 @@
 **Decision needed:** Does ordinary ground-supported skateboarding provide a comparable position, as allowed in the training audit, or is explicit posture required?
 
 ### train_11335: `woman stance`
+
+**Supplied similarity score:** `4/5`. **V1 audited score:** `excluded/null`.
 
 **Current status:** `invalid`. **Check:** Review exclusion policy.
 
@@ -200,6 +218,8 @@
 
 ### train_11341: `means of flotation`
 
+**Supplied similarity score:** `3/5`. **V1 audited score:** `excluded/null`.
+
 **Current status:** `invalid`. **Check:** Review exclusion policy.
 
 > **Caption A:** A man and a small girl floating on an innertube .
@@ -219,6 +239,8 @@
 **Decision needed:** Can the man’s stated assistance supply a partial flotation means, or must the physical buoyancy mechanism be identified?
 
 ### evaluation_855: `number of pizza slices`
+
+**Supplied similarity score:** `-1 (source invalid marker)`. **V1 audited score:** `excluded/null`.
 
 **Current status:** `invalid`. **Check:** Check recorded value.
 
@@ -240,6 +262,8 @@
 
 ### evaluation_1884: `height of animal`
 
+**Supplied similarity score:** `5/5`. **V1 audited score:** `excluded/null`.
+
 **Current status:** `excluded_scope`. **Check:** Review exclusion policy.
 
 > **Caption A:** A dog is jumping in the air in a field of grass .
@@ -259,6 +283,8 @@
 **Decision needed:** Should the stature reading follow frozen train_11207, or should stature and jump elevation remain competing features?
 
 ### evaluation_2450: `color of animals`
+
+**Supplied similarity score:** `1/5`. **V1 audited score:** `excluded/null`.
 
 **Current status:** `invalid`. **Check:** Review exclusion policy.
 
