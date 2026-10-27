@@ -1,0 +1,731 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "revision": "jep-csts-v1",
+  "documentation_base_commit": "16cbde010704ab3ea72d72d949d1f30c5beb8273",
+  "coverage": {
+    "schema_version": 1,
+    "passed": true,
+    "final_mode": true,
+    "checks": {
+      "semantic_coverage": {
+        "rows": 1587,
+        "split_counts": {
+          "training": 929,
+          "validation": 254,
+          "test": 404
+        },
+        "distinct_author_peer_every_row": true,
+        "source_fields_and_dispositions_preserved": true,
+        "original_source_ratings_preserved": true,
+        "flags": {
+          "Policy consistent": 1574,
+          "Review exclusion policy": 12,
+          "Check recorded value": 1
+        }
+      },
+      "rendered_case_format": {
+        "training": {
+          "case_count": 929,
+          "bytes": 690777,
+          "mean_bytes_per_case": 743.6,
+          "reference_shape": "numbered case; quoted captions/scope/values/reason; audit explanation; policy/peer; history"
+        },
+        "validation": {
+          "case_count": 254,
+          "bytes": 205987,
+          "mean_bytes_per_case": 811.0,
+          "reference_shape": "numbered case; quoted captions/scope/values/reason; audit explanation; policy/peer; history"
+        },
+        "test": {
+          "case_count": 404,
+          "bytes": 303743,
+          "mean_bytes_per_case": 751.8,
+          "reference_shape": "numbered case; quoted captions/scope/values/reason; audit explanation; policy/peer; history"
+        }
+      },
+      "markdown_case_text_preserved": true,
+      "caption_terminal_newline_presentation_normalizations": [
+        {
+          "row_id": "train_442",
+          "field": "sentence1"
+        },
+        {
+          "row_id": "train_1670",
+          "field": "sentence1"
+        },
+        {
+          "row_id": "train_1671",
+          "field": "sentence1"
+        },
+        {
+          "row_id": "train_3603",
+          "field": "sentence2"
+        },
+        {
+          "row_id": "train_1256",
+          "field": "sentence2"
+        },
+        {
+          "row_id": "train_1257",
+          "field": "sentence2"
+        }
+      ],
+      "structured_raw_captions_byte_exact": true,
+      "structural_removals": {
+        "rows": 2532,
+        "all_witnesses_paths_groups_and_reasons_exactly_preserved": true,
+        "author_peer_records_preserved": true,
+        "relation_counts": {
+          "direct_caption": 1716,
+          "connected_path": 816
+        }
+      },
+      "test_split_restrictions": {
+        "rows": 5,
+        "all_exact_caption_witnesses_preserved_and_visible": true
+      },
+      "whole_source_coverage": {
+        "upstream": 14176,
+        "usable": 10057,
+        "semantic_or_split_excluded": 1587,
+        "earlier_overlap_excluded": 2532,
+        "disjoint_and_exhaustive": true
+      },
+      "fixed_package_files_sha256": {
+        "NOTICE.md": "91fb4ac5a1e4a3ef4870242599622345f2c3554b41e18d652a80f9960419c380",
+        "README.md": "d16783a39942ad9232231b969a8d7854348f6dafe125d79e3a7d71b8e2fc6e22",
+        "changes.json": "80bcf0cb4bce03f76d65e1e2cfbfcf658b5c39e1fd758e8468abbec2f648e62f",
+        "independent_grades.json": "ed21e34db390a990a5729af7c52d4d30631157cc2443b7aa2cac64efa0de0713",
+        "manifest.json": "bffc33c98a7d855f4f963827fd3fbb284aa7a37e5864a08f8ddc45ecdb20f822",
+        "reconstruct.py": "6601678239ec987e3565b91c42be42552fa226bf45e74dd07d63cc017ee35e2f",
+        "review_summary.json": "d1b1233150ef5e3e7325f292c2c98683dafdeb49edf725c7ad08c2043432bf54",
+        "rubric.md": "29f380997d41e4e546f7323ae4d117ad58136d4a329b3f567cf18b9d2f44cf21",
+        "source_partition.py": "3f3e91d6ae237898a4f35a843348ac16c6934377e5174c4c9d752c7cd4a34334",
+        "test.base.labels.json": "c26a078e848c2b95d650c2403eee544c4f0208862a4a3ef8eb41b66e1e0d430b",
+        "training.base.labels.json": "c792e7a5cf8cae0dfc6f4678d4d190038203d3489af99c0f27dbb9a51bd5b636",
+        "validation.labels.json": "9d58f0d713b864d74ccab5d518c5b2d124d6e9a1de5b1f16fb389adc4e89555b",
+        "verification.json": "3fc50d0dca4b1fa539b302623c1b9da5586102272e525d696136e8c47d3e2a12"
+      },
+      "final_peer_receipt_bindings": {
+        "training_a": {
+          "receipt_sha256": "8ef34023547d6de392d7b5b93be585646a7cba886e291c973c1d0b5ff411fc8d",
+          "draft_sha256": "debff472f22c3bf67d4ea54e8a179a166aaf65076d013d213ca97684b2973581",
+          "reviewed_rows": 465,
+          "all_final_rationales_bound_to_reviewed_draft": true
+        },
+        "training_b": {
+          "receipt_sha256": "5c72c72785008a333e6e6e8e902c41d2d5515d1420b39c8b667967896d72befa",
+          "draft_sha256": "09d45ecfe1916367b0917e76ad92d632edbb9ba57191a70ca0b514dfc69666ca",
+          "reviewed_rows": 464,
+          "all_final_rationales_bound_to_reviewed_draft": true
+        },
+        "validation": {
+          "receipt_sha256": "941e882a3b45eb1b61b74a06345d715d20258a027d2fa07542111d256c6aedef",
+          "draft_sha256": "94de9c322f9a8d035a3fc98c0e700e4add5a13a0e2f79c88fc94c62aaab98fb2",
+          "reviewed_rows": 254,
+          "all_final_rationales_bound_to_reviewed_draft": true
+        },
+        "test": {
+          "receipt_sha256": "b00354f68969ec869ad7290ee73a363545a1e44761393633580c5a9e50652c80",
+          "draft_sha256": "92fc42334598454acae50e45d5a47ff3463c98e9fd6e2f8604a6d6ac8bc50f85",
+          "reviewed_rows": 404,
+          "all_final_rationales_bound_to_reviewed_draft": true
+        }
+      },
+      "prose_evidence": {
+        "original_checker_sha256": "8e4a4417d3ccddde665679212ba3951ec8c6e173672740f8881495aac6bbb26f",
+        "receipt_sha256": "90fca91bb634c53a7b91db144133dcdc4a60e83f415128c51f777b3651c32bdf",
+        "complete_authored_text_sha256": "6e6ded6812673cf8b808dddc0d9c6fad00e92bfac8a9c671367febeb72d65987",
+        "independent_actual_checker_returncode": 0,
+        "independent_actual_checker_stdout": "direct-prose: clean\n",
+        "bound_reports": {
+          "/workspace/scratch/1decdd947133/JEP/training_outputs/csts_jep_v1_exclusion_audit/training.md": "084af3e9a5da96b35848bfb667d73e2e676d49031ac03836e5e1cf23d07467f6",
+          "/workspace/scratch/1decdd947133/JEP/training_outputs/csts_jep_v1_exclusion_audit/validation.md": "abf91a90e1bfea82bfda7c041c111f486bbc7c8e5b04384b3414e92496ba2fbf",
+          "/workspace/scratch/1decdd947133/JEP/training_outputs/csts_jep_v1_exclusion_audit/test.md": "0831e73b8503552d5e5a98bd0b03c0bbde2d2f3b75da16eae99fe3cd1e5c46ca",
+          "/workspace/scratch/1decdd947133/JEP/training_outputs/csts_jep_v1_exclusion_audit/overlap.md": "fc32199a4757b56c50452b70aeffa15935a2458dde914a57b66aa2fc01917a37",
+          "/workspace/scratch/1decdd947133/JEP/datasets/csts-jep-revision-v1/EXCLUSIONS.md": "1ccbe986d49691d2065a8640b8d531377341c39fe3fc4a150697d88878db8a41",
+          "/workspace/scratch/1decdd947133/JEP/datasets/csts-jep-revision-v1/ADJUDICATION.md": "8ac7b234ab8ec975c54f71211346af1cb4be3eaea4b25900be9f2412f855e58e"
+        },
+        "manual_review_status": "passed"
+      }
+    },
+    "errors": [],
+    "pending_evidence": [],
+    "final_files_sha256": {
+      "training_outputs/csts_jep_v1_exclusion_audit/training.md": "084af3e9a5da96b35848bfb667d73e2e676d49031ac03836e5e1cf23d07467f6",
+      "training_outputs/csts_jep_v1_exclusion_audit/validation.md": "abf91a90e1bfea82bfda7c041c111f486bbc7c8e5b04384b3414e92496ba2fbf",
+      "training_outputs/csts_jep_v1_exclusion_audit/test.md": "0831e73b8503552d5e5a98bd0b03c0bbde2d2f3b75da16eae99fe3cd1e5c46ca",
+      "training_outputs/csts_jep_v1_exclusion_audit/overlap.md": "fc32199a4757b56c50452b70aeffa15935a2458dde914a57b66aa2fc01917a37",
+      "training_outputs/csts_jep_v1_exclusion_audit/records.json": "9c9d42304fccd5bfc7ccdc39601893b22a6ce110b59dc2723a1cff1116e778f3",
+      "datasets/csts-jep-revision-v1/EXCLUSIONS.md": "1ccbe986d49691d2065a8640b8d531377341c39fe3fc4a150697d88878db8a41",
+      "datasets/csts-jep-revision-v1/ADJUDICATION.md": "8ac7b234ab8ec975c54f71211346af1cb4be3eaea4b25900be9f2412f855e58e"
+    },
+    "checker_sha256": "6337fd63ff84cfa51ccd1437964064c914a46ce82255e3d1889bd12d8affda45"
+  },
+  "prose": {
+    "schema_version": 1,
+    "original_direct_prose_checker_available": true,
+    "original_checker_repository": "https://github.com/pvd232/agents",
+    "original_checker_commit": "68e8399ffc4d051b7c1b2acde933081eb91a44e3",
+    "original_checker_repository_path": "skills/direct-prose/scripts/check_prose.py",
+    "original_checker_sha256": "8e4a4417d3ccddde665679212ba3951ec8c6e173672740f8881495aac6bbb26f",
+    "original_checker_run": {
+      "command": [
+        "./scripts/check_prose.py",
+        "/workspace/scratch/1decdd947133/exclusion_work/prose_checks/authored_prose.complete.txt",
+        "/workspace/scratch/1decdd947133/JEP/training_outputs/csts_jep_v1_exclusion_audit/training.md",
+        "/workspace/scratch/1decdd947133/JEP/training_outputs/csts_jep_v1_exclusion_audit/validation.md",
+        "/workspace/scratch/1decdd947133/JEP/training_outputs/csts_jep_v1_exclusion_audit/test.md",
+        "/workspace/scratch/1decdd947133/JEP/training_outputs/csts_jep_v1_exclusion_audit/overlap.md",
+        "/workspace/scratch/1decdd947133/JEP/datasets/csts-jep-revision-v1/EXCLUSIONS.md",
+        "/workspace/scratch/1decdd947133/JEP/datasets/csts-jep-revision-v1/ADJUDICATION.md"
+      ],
+      "cwd": "/workspace/scratch/1decdd947133/prose_skills/skills/direct-prose",
+      "returncode": 0,
+      "stdout_path": "/workspace/scratch/1decdd947133/exclusion_work/prose_checks/direct_prose.stdout.txt",
+      "stderr_path": "/workspace/scratch/1decdd947133/exclusion_work/prose_checks/direct_prose.stderr.txt"
+    },
+    "install_command": "python -m pip install --target /workspace/scratch/1decdd947133/prose_tools proselint",
+    "proselint_package_version": "0.16.0",
+    "proselint_source": "Unmodified published PyPI package installed in scratch only.",
+    "project_check_name": "Project brevity and filler check",
+    "project_check_rules": [
+      "semicolon",
+      "em dash",
+      "explanation longer than 38 whitespace-separated words",
+      "selected filler regex: \\b(?:leverag\\w*|delv\\w*|foster\\w*|importantly|it is worth noting|genuinely|robust|comprehensive|nuanced)\\b"
+    ],
+    "scope": "The original direct-prose checker scans complete authored explanation fields plus each listed final report. Supplementary proselint and project checks scan the same explanations with IDs and quoted spans removed. Caption fields, condition strings and fixed extracted source-value fields are omitted from the explanation extraction. This receipt covers the listed inputs and reports.",
+    "sources": [
+      {
+        "path": "/workspace/scratch/1decdd947133/exclusion_work/training_a.draft.json",
+        "sha256": "debff472f22c3bf67d4ea54e8a179a166aaf65076d013d213ca97684b2973581",
+        "rows": 465,
+        "authored_fields": 470
+      },
+      {
+        "path": "/workspace/scratch/1decdd947133/exclusion_work/training_b.draft.json",
+        "sha256": "09d45ecfe1916367b0917e76ad92d632edbb9ba57191a70ca0b514dfc69666ca",
+        "rows": 464,
+        "authored_fields": 477
+      },
+      {
+        "path": "/workspace/scratch/1decdd947133/exclusion_work/validation.draft.json",
+        "sha256": "94de9c322f9a8d035a3fc98c0e700e4add5a13a0e2f79c88fc94c62aaab98fb2",
+        "rows": 254,
+        "authored_fields": 259
+      },
+      {
+        "path": "/workspace/scratch/1decdd947133/exclusion_work/test.draft.json",
+        "sha256": "92fc42334598454acae50e45d5a47ff3463c98e9fd6e2f8604a6d6ac8bc50f85",
+        "rows": 404,
+        "authored_fields": 415
+      },
+      {
+        "path": "/workspace/scratch/1decdd947133/exclusion_work/training_a.peer.json",
+        "sha256": "b603e742fb30895fa1afe61b928704f749688f77e4abb3962e8fc1d0517c619d",
+        "rows": 465,
+        "authored_fields": 468
+      },
+      {
+        "path": "/workspace/scratch/1decdd947133/exclusion_work/training_b.peer.json",
+        "sha256": "19024874151df72b1142a8c4d424c26892a0bfd39eb550b953f497486d9974c5",
+        "rows": 464,
+        "authored_fields": 499
+      },
+      {
+        "path": "/workspace/scratch/1decdd947133/exclusion_work/validation.peer_test.json",
+        "sha256": "f5d5146fce8c70bc7a4bf7333bbdfa144c108bda477075733fe1f6741c96d285",
+        "rows": 254,
+        "authored_fields": 255
+      },
+      {
+        "path": "/workspace/scratch/1decdd947133/exclusion_work/test.peer_validation.json",
+        "sha256": "b73b18fc3f64f21570ee337253c322e9d27d6d1f98e2d4aca92a7426522115d6",
+        "rows": 404,
+        "authored_fields": 406
+      },
+      {
+        "path": "/workspace/scratch/1decdd947133/exclusion_work/training_a.final_peer_review.json",
+        "sha256": "8ef34023547d6de392d7b5b93be585646a7cba886e291c973c1d0b5ff411fc8d",
+        "rows": null,
+        "authored_fields": 465
+      },
+      {
+        "path": "/workspace/scratch/1decdd947133/exclusion_work/training_b.final_peer_receipt.json",
+        "sha256": "5c72c72785008a333e6e6e8e902c41d2d5515d1420b39c8b667967896d72befa",
+        "rows": null,
+        "authored_fields": 0
+      },
+      {
+        "path": "/workspace/scratch/1decdd947133/exclusion_work/test.final_peer_review.json",
+        "sha256": "b00354f68969ec869ad7290ee73a363545a1e44761393633580c5a9e50652c80",
+        "rows": null,
+        "authored_fields": 405
+      },
+      {
+        "path": "/workspace/scratch/1decdd947133/exclusion_work/validation.final_peer_review.json",
+        "sha256": "941e882a3b45eb1b61b74a06345d715d20258a027d2fa07542111d256c6aedef",
+        "rows": null,
+        "authored_fields": 259
+      },
+      {
+        "path": "/workspace/scratch/1decdd947133/exclusion_work/overlap_evidence.json",
+        "sha256": "c41f3f7364c8fd5b679f9e65cdc75c663c921c804e1c6331f35bf92ef2ec4f15",
+        "rows": 2532,
+        "authored_fields": 2532
+      },
+      {
+        "path": "/workspace/scratch/1decdd947133/exclusion_work/overlap.peer.json",
+        "sha256": "447bc2dc8c65adb372388f13801f6d77065f8dd4cc713916bfad8a452fde1e81",
+        "rows": 2532,
+        "authored_fields": 2532
+      },
+      {
+        "path": "/workspace/scratch/1decdd947133/exclusion_work/test_split_restrictions.json",
+        "sha256": "533ec8da3e66a8957b41853c8ea5a2734d3122a85d4fa34fccc19cbda8f94e46",
+        "rows": 5,
+        "authored_fields": 5
+      }
+    ],
+    "authored_fields_checked": 9447,
+    "authored_text_sha256": "8ac18c7c5d946bff81bd3fdceabcfa1bce95757e7dca28478191ae3f538d0de0",
+    "complete_authored_text_sha256": "6e6ded6812673cf8b808dddc0d9c6fad00e92bfac8a9c671367febeb72d65987",
+    "reports": [
+      {
+        "path": "/workspace/scratch/1decdd947133/JEP/training_outputs/csts_jep_v1_exclusion_audit/training.md",
+        "sha256": "084af3e9a5da96b35848bfb667d73e2e676d49031ac03836e5e1cf23d07467f6"
+      },
+      {
+        "path": "/workspace/scratch/1decdd947133/JEP/training_outputs/csts_jep_v1_exclusion_audit/validation.md",
+        "sha256": "abf91a90e1bfea82bfda7c041c111f486bbc7c8e5b04384b3414e92496ba2fbf"
+      },
+      {
+        "path": "/workspace/scratch/1decdd947133/JEP/training_outputs/csts_jep_v1_exclusion_audit/test.md",
+        "sha256": "0831e73b8503552d5e5a98bd0b03c0bbde2d2f3b75da16eae99fe3cd1e5c46ca"
+      },
+      {
+        "path": "/workspace/scratch/1decdd947133/JEP/training_outputs/csts_jep_v1_exclusion_audit/overlap.md",
+        "sha256": "fc32199a4757b56c50452b70aeffa15935a2458dde914a57b66aa2fc01917a37"
+      },
+      {
+        "path": "/workspace/scratch/1decdd947133/JEP/datasets/csts-jep-revision-v1/EXCLUSIONS.md",
+        "sha256": "1ccbe986d49691d2065a8640b8d531377341c39fe3fc4a150697d88878db8a41"
+      },
+      {
+        "path": "/workspace/scratch/1decdd947133/JEP/datasets/csts-jep-revision-v1/ADJUDICATION.md",
+        "sha256": "8ac7b234ab8ec975c54f71211346af1cb4be3eaea4b25900be9f2412f855e58e"
+      }
+    ],
+    "project_surface_flags": 0,
+    "proselint_runs": {
+      "version": {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "-m",
+          "proselint",
+          "version"
+        ],
+        "returncode": 0,
+        "stdout_path": "/workspace/scratch/1decdd947133/exclusion_work/prose_checks/proselint_version.stdout.txt",
+        "stderr_path": "/workspace/scratch/1decdd947133/exclusion_work/prose_checks/proselint_version.stderr.txt"
+      },
+      "config": {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "-m",
+          "proselint",
+          "dump-config"
+        ],
+        "returncode": 0,
+        "stdout_path": "/workspace/scratch/1decdd947133/exclusion_work/prose_checks/proselint_config.stdout.txt",
+        "stderr_path": "/workspace/scratch/1decdd947133/exclusion_work/prose_checks/proselint_config.stderr.txt"
+      },
+      "check": {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "-m",
+          "proselint",
+          "check",
+          "--output-format",
+          "json",
+          "/workspace/scratch/1decdd947133/exclusion_work/prose_checks/authored_prose.txt"
+        ],
+        "returncode": 1,
+        "stdout_path": "/workspace/scratch/1decdd947133/exclusion_work/prose_checks/proselint_check.stdout.txt",
+        "stderr_path": "/workspace/scratch/1decdd947133/exclusion_work/prose_checks/proselint_check.stderr.txt"
+      }
+    },
+    "manual_review": {
+      "status": "passed",
+      "reviewer": "independent_prose_reviewer",
+      "primary_rationales_read": 1587,
+      "alternative_reasons_read": 21,
+      "initial_peer_reasons_read": 1587,
+      "suggested_rationales_and_proposed_rationales_read": 39,
+      "changed_final_peer_reasons_read": 18,
+      "manual_scope": "Read every semantic primary rationale and alternative reason. Read every initial peer reason and suggestion. Compared final peer copies by exact text and read every changed reason. Read all six final report headers, summaries, policy descriptions and review questions. Case explanations match the reviewed authored source. Concrete grammar repairs and the three final wording changes received a final meaning-preservation read.",
+      "last_primary_wording_changes_reviewed": [
+        "train_10489",
+        "train_11084",
+        "evaluation_2243"
+      ],
+      "source_field_policy": "Caption text, recorded scopes, extracted values and dispositions retain their source identity. Authored explanations and reviewer prose receive style review.",
+      "structural_review": {
+        "schema_version": 1,
+        "passed": true,
+        "manual_review": "Every authored structural template read against direct-prose SKILL.md and its review protocol; every row checked for exact template instantiation.",
+        "source_overlap_rows": 2532,
+        "peer_overlap_rows": 2532,
+        "test_restrictions": 5,
+        "template_counts": {
+          "source_direct": 1716,
+          "peer_direct": 1716,
+          "source_connected_row": 530,
+          "peer_connected": 816,
+          "source_connected_rows": 286,
+          "test_restriction": 5
+        },
+        "proof_metadata_unchanged": true,
+        "all_authored_fields_checked": 5069,
+        "source_files_sha256": {
+          "overlap_evidence.json": "c41f3f7364c8fd5b679f9e65cdc75c663c921c804e1c6331f35bf92ef2ec4f15",
+          "test_split_restrictions.json": "533ec8da3e66a8957b41853c8ea5a2734d3122a85d4fa34fccc19cbda8f94e46",
+          "overlap.peer.json": "447bc2dc8c65adb372388f13801f6d77065f8dd4cc713916bfad8a452fde1e81",
+          "overlap_review.json": "c28099c11f02954def5bde0166b6655057509047d75959cc7e44131500cb63dd"
+        },
+        "actual_checker_path": "/workspace/scratch/1decdd947133/prose_skills/skills/direct-prose/scripts/check_prose.py",
+        "actual_checker_sha256": "8e4a4417d3ccddde665679212ba3951ec8c6e173672740f8881495aac6bbb26f",
+        "actual_checker_command": [
+          "./scripts/check_prose.py",
+          "/workspace/scratch/1decdd947133/exclusion_work/structural_authored_prose.txt"
+        ],
+        "actual_checker_cwd": "/workspace/scratch/1decdd947133/prose_skills/skills/direct-prose",
+        "actual_checker_returncode": 0,
+        "actual_checker_stdout": "direct-prose: clean\n",
+        "actual_checker_stderr": "",
+        "complete_authored_text_sha256": "9bf100b8dc864b150a91dee5b6e43a9ebbb006914e4dd43623588ee769ff11f0"
+      },
+      "source_freeze": "All author and peer contexts completed before final hash binding."
+    },
+    "supplementary_proselint_dispositions": {
+      "total": 31,
+      "false_prefix_matches": 22,
+      "project_spelling_choices": 9,
+      "unresolved": 0,
+      "raw_diagnostics_path": "/workspace/scratch/1decdd947133/exclusion_work/prose_checks/proselint_check.stdout.txt",
+      "dispositions": [
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/training_a.draft.json",
+          "row_id": "train_1261",
+          "field": "rationale",
+          "matched_word": "decorative",
+          "disposition": "false_prefix_match",
+          "reason": "The accent suggestion matches the prefix of a longer correctly formed English word."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/training_a.draft.json",
+          "row_id": "train_2793",
+          "field": "rationale",
+          "matched_word": "decorations",
+          "disposition": "false_prefix_match",
+          "reason": "The accent suggestion matches the prefix of a longer correctly formed English word."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/training_a.draft.json",
+          "row_id": "train_2793",
+          "field": "rationale",
+          "matched_word": "Decorations",
+          "disposition": "false_prefix_match",
+          "reason": "The accent suggestion matches the prefix of a longer correctly formed English word."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/training_b.draft.json",
+          "row_id": "train_4957",
+          "field": "rationale",
+          "matched_word": "decorative",
+          "disposition": "false_prefix_match",
+          "reason": "The accent suggestion matches the prefix of a longer correctly formed English word."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/training_b.draft.json",
+          "row_id": "train_4985",
+          "field": "rationale",
+          "matched_word": "decorative",
+          "disposition": "false_prefix_match",
+          "reason": "The accent suggestion matches the prefix of a longer correctly formed English word."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/training_b.draft.json",
+          "row_id": "train_5075",
+          "field": "rationale",
+          "matched_word": "decoration",
+          "disposition": "false_prefix_match",
+          "reason": "The accent suggestion matches the prefix of a longer correctly formed English word."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/training_b.draft.json",
+          "row_id": "train_5421",
+          "field": "rationale",
+          "matched_word": "decor",
+          "disposition": "project_spelling_choice",
+          "reason": "Retain the unaccented form as the project spelling choice."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/validation.draft.json",
+          "row_id": "train_180",
+          "field": "rationale",
+          "matched_word": "decor",
+          "disposition": "project_spelling_choice",
+          "reason": "Retain the unaccented form as the project spelling choice."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/validation.draft.json",
+          "row_id": "train_2146",
+          "field": "rationale",
+          "matched_word": "decor",
+          "disposition": "project_spelling_choice",
+          "reason": "Retain the unaccented form as the project spelling choice."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/test.draft.json",
+          "row_id": "evaluation_28",
+          "field": "rationale",
+          "matched_word": "decoration",
+          "disposition": "false_prefix_match",
+          "reason": "The accent suggestion matches the prefix of a longer correctly formed English word."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/test.draft.json",
+          "row_id": "evaluation_236",
+          "field": "rationale",
+          "matched_word": "decor",
+          "disposition": "project_spelling_choice",
+          "reason": "Retain the unaccented form as the project spelling choice."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/test.draft.json",
+          "row_id": "evaluation_517",
+          "field": "rationale",
+          "matched_word": "decorative",
+          "disposition": "false_prefix_match",
+          "reason": "The accent suggestion matches the prefix of a longer correctly formed English word."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/training_a.peer.json",
+          "row_id": "train_1261",
+          "field": "reason",
+          "matched_word": "decorative",
+          "disposition": "false_prefix_match",
+          "reason": "The accent suggestion matches the prefix of a longer correctly formed English word."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/training_a.peer.json",
+          "row_id": "train_2793",
+          "field": "reason",
+          "matched_word": "decorated",
+          "disposition": "false_prefix_match",
+          "reason": "The accent suggestion matches the prefix of a longer correctly formed English word."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/training_b.peer.json",
+          "row_id": "train_4957",
+          "field": "reason",
+          "matched_word": "decorative",
+          "disposition": "false_prefix_match",
+          "reason": "The accent suggestion matches the prefix of a longer correctly formed English word."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/training_b.peer.json",
+          "row_id": "train_4985",
+          "field": "reason",
+          "matched_word": "decorations",
+          "disposition": "false_prefix_match",
+          "reason": "The accent suggestion matches the prefix of a longer correctly formed English word."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/training_b.peer.json",
+          "row_id": "train_5421",
+          "field": "reason",
+          "matched_word": "decor",
+          "disposition": "project_spelling_choice",
+          "reason": "Retain the unaccented form as the project spelling choice."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/validation.peer_test.json",
+          "row_id": "train_180",
+          "field": "reason",
+          "matched_word": "decor",
+          "disposition": "project_spelling_choice",
+          "reason": "Retain the unaccented form as the project spelling choice."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/validation.peer_test.json",
+          "row_id": "train_2146",
+          "field": "reason",
+          "matched_word": "decor-style",
+          "disposition": "false_prefix_match",
+          "reason": "The accent suggestion matches the prefix of a longer correctly formed English word."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/test.peer_validation.json",
+          "row_id": "evaluation_28",
+          "field": "reason",
+          "matched_word": "decoration",
+          "disposition": "false_prefix_match",
+          "reason": "The accent suggestion matches the prefix of a longer correctly formed English word."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/test.peer_validation.json",
+          "row_id": "evaluation_236",
+          "field": "reason",
+          "matched_word": "decor",
+          "disposition": "project_spelling_choice",
+          "reason": "Retain the unaccented form as the project spelling choice."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/test.peer_validation.json",
+          "row_id": "evaluation_516",
+          "field": "reason",
+          "matched_word": "decorative-holder",
+          "disposition": "false_prefix_match",
+          "reason": "The accent suggestion matches the prefix of a longer correctly formed English word."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/test.peer_validation.json",
+          "row_id": "evaluation_517",
+          "field": "reason",
+          "matched_word": "decorative",
+          "disposition": "false_prefix_match",
+          "reason": "The accent suggestion matches the prefix of a longer correctly formed English word."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/training_a.final_peer_review.json",
+          "row_id": "train_1261",
+          "field": "reason",
+          "matched_word": "decorative",
+          "disposition": "false_prefix_match",
+          "reason": "The accent suggestion matches the prefix of a longer correctly formed English word."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/training_a.final_peer_review.json",
+          "row_id": "train_2793",
+          "field": "reason",
+          "matched_word": "decorated",
+          "disposition": "false_prefix_match",
+          "reason": "The accent suggestion matches the prefix of a longer correctly formed English word."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/test.final_peer_review.json",
+          "row_id": "evaluation_28",
+          "field": "reason",
+          "matched_word": "decoration",
+          "disposition": "false_prefix_match",
+          "reason": "The accent suggestion matches the prefix of a longer correctly formed English word."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/test.final_peer_review.json",
+          "row_id": "evaluation_236",
+          "field": "reason",
+          "matched_word": "decor",
+          "disposition": "project_spelling_choice",
+          "reason": "Retain the unaccented form as the project spelling choice."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/test.final_peer_review.json",
+          "row_id": "evaluation_516",
+          "field": "reason",
+          "matched_word": "decorative-holder",
+          "disposition": "false_prefix_match",
+          "reason": "The accent suggestion matches the prefix of a longer correctly formed English word."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/test.final_peer_review.json",
+          "row_id": "evaluation_517",
+          "field": "reason",
+          "matched_word": "decorative",
+          "disposition": "false_prefix_match",
+          "reason": "The accent suggestion matches the prefix of a longer correctly formed English word."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/validation.final_peer_review.json",
+          "row_id": "train_180",
+          "field": "reason",
+          "matched_word": "decor",
+          "disposition": "project_spelling_choice",
+          "reason": "Retain the unaccented form as the project spelling choice."
+        },
+        {
+          "check": "typography.diacritical_marks",
+          "source": "/workspace/scratch/1decdd947133/exclusion_work/validation.final_peer_review.json",
+          "row_id": "train_2146",
+          "field": "reason",
+          "matched_word": "decor-style",
+          "disposition": "false_prefix_match",
+          "reason": "The accent suggestion matches the prefix of a longer correctly formed English word."
+        }
+      ]
+    },
+    "project_checker_sha256": "f8f1a02b3fe58d38557273f7eeba37826a4dd66fee059cd949d263e546ba2716"
+  },
+  "structural_evidence": {
+    "passed": true,
+    "method": "Root-authored union-find and explicit row-path checks against both original CSVs, independent of evidence generation.",
+    "overlap_rows": 2532,
+    "overlap_types": {
+      "direct_caption": 1716,
+      "connected_path": 816
+    },
+    "test_restrictions": 5,
+    "errors": [],
+    "evidence_sha256": "c41f3f7364c8fd5b679f9e65cdc75c663c921c804e1c6331f35bf92ef2ec4f15",
+    "peer_sha256": "447bc2dc8c65adb372388f13801f6d77065f8dd4cc713916bfad8a452fde1e81",
+    "checker_sha256": "4b000231b5d047f878b96aa79182060f3e29ae1af84684355cd9ec4427ed491e"
+  },
+  "files_sha256": {
+    "training_outputs/csts_jep_v1_exclusion_audit/overlap.md": "fc32199a4757b56c50452b70aeffa15935a2458dde914a57b66aa2fc01917a37",
+    "training_outputs/csts_jep_v1_exclusion_audit/validation.md": "abf91a90e1bfea82bfda7c041c111f486bbc7c8e5b04384b3414e92496ba2fbf",
+    "training_outputs/csts_jep_v1_exclusion_audit/test.md": "0831e73b8503552d5e5a98bd0b03c0bbde2d2f3b75da16eae99fe3cd1e5c46ca",
+    "training_outputs/csts_jep_v1_exclusion_audit/training.md": "084af3e9a5da96b35848bfb667d73e2e676d49031ac03836e5e1cf23d07467f6",
+    "training_outputs/csts_jep_v1_exclusion_audit/records.json": "9c9d42304fccd5bfc7ccdc39601893b22a6ce110b59dc2723a1cff1116e778f3",
+    "datasets/csts-jep-revision-v1/EXCLUSIONS.md": "1ccbe986d49691d2065a8640b8d531377341c39fe3fc4a150697d88878db8a41",
+    "datasets/csts-jep-revision-v1/ADJUDICATION.md": "8ac7b234ab8ec975c54f71211346af1cb4be3eaea4b25900be9f2412f855e58e",
+    "README.md": "79ca5eb33c16cc11f0fdd5e12f9f0cc78a23762dedeefb495ef97768425b3aa0"
+  },
+  "receipts_sha256": {
+    "coverage": "3199ac4d56a1ba93d89cf0e91839320e3be4a7b05083ddec9c77571bfaa9d03f",
+    "prose": "90fca91bb634c53a7b91db144133dcdc4a60e83f415128c51f777b3651c32bdf",
+    "structural": "3979035afc827bfe9b47f56e5759289f13e8c5f70a3903e7cd6728fda211e2fc"
+  }
+}
