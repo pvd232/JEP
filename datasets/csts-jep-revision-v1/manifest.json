@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "revision": "jep-csts-v1",
+  "source": {
+    "dataset": "LivNLP/C-STS-Reannotated",
+    "revision": "058ac842f5f19d27b08ad54f6d4a2c50b3f9578b",
+    "csv_sha256": {
+      "train": "118ef935443531a60f3dd5652afd946869f47b134c83fd8da38779912167b652",
+      "validation": "84602c1bcbbe1e6410a78c9cb1cb0f3dac4bf48c0c55ad42dc19558370e4821f"
+    }
+  },
+  "baseline_commit": "97ffb9a7168b76b5d9cd08d71768e81e4ffb56e3",
+  "counts": {
+    "training": {
+      "reviewed": 6980,
+      "usable": 6051,
+      "dispositions": {
+        "rated": 6051,
+        "invalid": 920,
+        "excluded_scope": 9
+      },
+      "semantically_rated": 6051,
+      "split_conflicts": 0,
+      "groups": 2635,
+      "pairs": 3424
+    },
+    "validation": {
+      "reviewed": 1830,
+      "usable": 1576,
+      "dispositions": {
+        "adjudicated": 365,
+        "agreement": 1211,
+        "invalid": 253,
+        "excluded_ambiguous": 1
+      },
+      "semantically_rated": 1576,
+      "split_conflicts": 0,
+      "groups": 680,
+      "pairs": 899
+    },
+    "test": {
+      "reviewed": 2834,
+      "usable": 2430,
+      "dispositions": {
+        "invalid": 395,
+        "rated": 2435,
+        "excluded_scope": 4
+      },
+      "semantically_rated": 2435,
+      "split_conflicts": 5,
+      "groups": 1222,
+      "pairs": 1387
+    }
+  },
+  "changes": 25,
+  "export_sha256": {
+    "training": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+    "validation": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+    "test": "52a9c0d6b8d9f3fc81e698bae1e2564051cf7ec29e8dc1cb4d68167910bb968d"
+  },
+  "package_sha256": {
+    "NOTICE.md": "91fb4ac5a1e4a3ef4870242599622345f2c3554b41e18d652a80f9960419c380",
+    "README.md": "d16783a39942ad9232231b969a8d7854348f6dafe125d79e3a7d71b8e2fc6e22",
+    "changes.json": "80bcf0cb4bce03f76d65e1e2cfbfcf658b5c39e1fd758e8468abbec2f648e62f",
+    "independent_grades.json": "ed21e34db390a990a5729af7c52d4d30631157cc2443b7aa2cac64efa0de0713",
+    "reconstruct.py": "6601678239ec987e3565b91c42be42552fa226bf45e74dd07d63cc017ee35e2f",
+    "review_summary.json": "d1b1233150ef5e3e7325f292c2c98683dafdeb49edf725c7ad08c2043432bf54",
+    "rubric.md": "29f380997d41e4e546f7323ae4d117ad58136d4a329b3f567cf18b9d2f44cf21",
+    "source_partition.py": "3f3e91d6ae237898a4f35a843348ac16c6934377e5174c4c9d752c7cd4a34334",
+    "test.base.labels.json": "c26a078e848c2b95d650c2403eee544c4f0208862a4a3ef8eb41b66e1e0d430b",
+    "training.base.labels.json": "c792e7a5cf8cae0dfc6f4678d4d190038203d3489af99c0f27dbb9a51bd5b636",
+    "validation.labels.json": "9d58f0d713b864d74ccab5d518c5b2d124d6e9a1de5b1f16fb389adc4e89555b",
+    "verification.json": "3fc50d0dca4b1fa539b302623c1b9da5586102272e525d696136e8c47d3e2a12"
+  }
+}

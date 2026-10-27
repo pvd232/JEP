@@ -210,6 +210,23 @@ def test_reject_time_budget_stop_before_comparison():
         validate_matched_phases(traces, 2)
 
 
+def test_declared_pilot_accepts_resource_stop_and_keeps_trace_reason():
+    """A bounded pilot can score sealed checkpoints while exposing its time limit."""
+    traces = matched_traces()
+    traces["evidence"]["ratings"]["stop_reason"] = "resource_budget"
+    original = copy.deepcopy(traces)
+    validate_matched_phases(traces, 2, allow_budget_censoring=True)
+    assert traces == original
+
+
+def test_declared_pilot_still_rejects_incomplete_first_phase():
+    """The pilot allowance preserves the required matched initial exposure."""
+    traces = matched_traces()
+    traces["evidence"]["pretrain"]["completed_epoch"] = 1
+    with pytest.raises(ValueError, match="Incomplete"):
+        validate_matched_phases(traces, 2, allow_budget_censoring=True)
+
+
 def test_added_tokens_are_included_in_head_compatibility_check():
     assert vocabulary(
         {"model": {"vocab": {"word": 0}}, "added_tokens": [{"content": EOD, "id": 1}]}

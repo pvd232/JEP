@@ -1,0 +1,389 @@
+{
+  "schema_version": 1,
+  "revision": "jep-csts-v1",
+  "baseline_commit": "97ffb9a7168b76b5d9cd08d71768e81e4ffb56e3",
+  "passed": true,
+  "method": "Separate verifier rebuilds source caption graph and joins original CSVs; no import of package partition or reconstruction implementation. Compares all overlays with frozen root adjudications and original reviewer records.",
+  "checks": {
+    "source_csv": {
+      "train": {
+        "rows": 11342,
+        "sha256": "118ef935443531a60f3dd5652afd946869f47b134c83fd8da38779912167b652"
+      },
+      "validation": {
+        "rows": 2834,
+        "sha256": "84602c1bcbbe1e6410a78c9cb1cb0f3dac4bf48c0c55ad42dc19558370e4821f"
+      }
+    },
+    "independent_source_partition": {
+      "algorithm": "Adjacency traversal; connected canonical-caption components, lexicographic minimum component names, documented hash split",
+      "rows": {
+        "training": 6980,
+        "validation": 1830,
+        "test": 2834
+      },
+      "training_overlap_rows_still_excluded": 2532
+    },
+    "baseline_and_overlays": {
+      "source_commit": "97ffb9a7168b76b5d9cd08d71768e81e4ffb56e3",
+      "baseline_training_sha256": "c792e7a5cf8cae0dfc6f4678d4d190038203d3489af99c0f27dbb9a51bd5b636",
+      "baseline_test_sha256": "c26a078e848c2b95d650c2403eee544c4f0208862a4a3ef8eb41b66e1e0d430b",
+      "validation_v4_2_sha256": "9d58f0d713b864d74ccab5d518c5b2d124d6e9a1de5b1f16fb389adc4e89555b",
+      "validation_labels_byte_identical": true,
+      "override_ids": [
+        "train_3444",
+        "train_3721",
+        "train_3315",
+        "train_6564",
+        "train_4037",
+        "train_6571",
+        "train_6591",
+        "train_4511",
+        "train_7340",
+        "train_7407",
+        "train_3338",
+        "train_4993",
+        "train_5056",
+        "train_5144",
+        "train_5306",
+        "train_5177",
+        "train_6745",
+        "evaluation_1884",
+        "train_3231",
+        "train_8991",
+        "train_1926",
+        "train_9267",
+        "train_8676",
+        "evaluation_2584",
+        "train_4818"
+      ],
+      "override_count": 25,
+      "all_match_root_approved_adjudications": true,
+      "adjudications_sha256": "9159e7b0a6b39537596c287236407d7081f339e6b5c865065d213101bdd1c650"
+    },
+    "change_types": {
+      "invalid": 11,
+      "numerical_correction": 8,
+      "excluded_scope": 6
+    },
+    "reviewed_retentions": [
+      "train_809",
+      "train_4029",
+      "train_9889",
+      "evaluation_930",
+      "train_385",
+      "train_7519",
+      "train_7715",
+      "train_6857"
+    ],
+    "independently_recomputed_counts": {
+      "training": {
+        "reviewed": 6980,
+        "usable": 6051,
+        "dispositions": {
+          "rated": 6051,
+          "invalid": 920,
+          "excluded_scope": 9
+        },
+        "semantically_rated": 6051,
+        "split_conflicts": 0,
+        "groups": 2635,
+        "pairs": 3424
+      },
+      "validation": {
+        "reviewed": 1830,
+        "usable": 1576,
+        "dispositions": {
+          "adjudicated": 365,
+          "agreement": 1211,
+          "invalid": 253,
+          "excluded_ambiguous": 1
+        },
+        "semantically_rated": 1576,
+        "split_conflicts": 0,
+        "groups": 680,
+        "pairs": 899
+      },
+      "test": {
+        "reviewed": 2834,
+        "usable": 2430,
+        "dispositions": {
+          "invalid": 395,
+          "rated": 2435,
+          "excluded_scope": 4
+        },
+        "semantically_rated": 2435,
+        "split_conflicts": 5,
+        "groups": 1222,
+        "pairs": 1387
+      }
+    },
+    "independent_export_sha256": {
+      "training": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "validation": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "test": "52a9c0d6b8d9f3fc81e698bae1e2564051cf7ec29e8dc1cb4d68167910bb968d"
+    },
+    "actual_reconstruction_bytes_match_independent_exports": true,
+    "caption_overlap": {
+      "exact": {
+        "training/validation": 0,
+        "training/test": 0,
+        "validation/test": 0
+      },
+      "canonical": {
+        "training/validation": 0,
+        "training/test": 0,
+        "validation/test": 0
+      }
+    },
+    "test_overlap_original_training_validation": {
+      "training": 0,
+      "validation": 0
+    },
+    "duplicates_and_groups": {
+      "training": {
+        "canonical_same_or_swapped_pair_condition_duplicate_groups": 27,
+        "duplicate_extra_rows": 27,
+        "duplicate_row_ids": [
+          [
+            "train_144",
+            "train_145"
+          ],
+          [
+            "train_250",
+            "train_251"
+          ],
+          [
+            "train_550",
+            "train_551"
+          ],
+          [
+            "train_768",
+            "train_769"
+          ],
+          [
+            "train_889",
+            "train_2099"
+          ],
+          [
+            "train_1408",
+            "train_1409"
+          ],
+          [
+            "train_1712",
+            "train_1713"
+          ],
+          [
+            "train_2344",
+            "train_2345"
+          ],
+          [
+            "train_3150",
+            "train_3151"
+          ],
+          [
+            "train_3674",
+            "train_3675"
+          ],
+          [
+            "train_3964",
+            "train_3965"
+          ],
+          [
+            "train_4904",
+            "train_4905"
+          ],
+          [
+            "train_5058",
+            "train_5059"
+          ],
+          [
+            "train_5418",
+            "train_5419"
+          ],
+          [
+            "train_6790",
+            "train_6791"
+          ],
+          [
+            "train_7150",
+            "train_7151"
+          ],
+          [
+            "train_7246",
+            "train_7247"
+          ],
+          [
+            "train_7550",
+            "train_7551"
+          ],
+          [
+            "train_8072",
+            "train_8073"
+          ],
+          [
+            "train_8616",
+            "train_8617"
+          ],
+          [
+            "train_9174",
+            "train_9175"
+          ],
+          [
+            "train_9488",
+            "train_9489"
+          ],
+          [
+            "train_10100",
+            "train_10101"
+          ],
+          [
+            "train_10512",
+            "train_10513"
+          ],
+          [
+            "train_10890",
+            "train_10891"
+          ],
+          [
+            "train_10928",
+            "train_10929"
+          ],
+          [
+            "train_11140",
+            "train_11141"
+          ]
+        ],
+        "duplicate_label_conflicts": [],
+        "caption_group_conflicts": 0
+      },
+      "validation": {
+        "canonical_same_or_swapped_pair_condition_duplicate_groups": 11,
+        "duplicate_extra_rows": 11,
+        "duplicate_row_ids": [
+          [
+            "train_202",
+            "train_203"
+          ],
+          [
+            "train_1198",
+            "train_1199"
+          ],
+          [
+            "train_1992",
+            "train_1993"
+          ],
+          [
+            "train_2112",
+            "train_2113"
+          ],
+          [
+            "train_5060",
+            "train_5061"
+          ],
+          [
+            "train_5384",
+            "train_5385"
+          ],
+          [
+            "train_6146",
+            "train_6147"
+          ],
+          [
+            "train_6676",
+            "train_6677"
+          ],
+          [
+            "train_7080",
+            "train_7081"
+          ],
+          [
+            "train_7580",
+            "train_7581"
+          ],
+          [
+            "train_10998",
+            "train_10999"
+          ]
+        ],
+        "duplicate_label_conflicts": [],
+        "caption_group_conflicts": 0
+      },
+      "test": {
+        "canonical_same_or_swapped_pair_condition_duplicate_groups": 7,
+        "duplicate_extra_rows": 7,
+        "duplicate_row_ids": [
+          [
+            "evaluation_16",
+            "evaluation_17"
+          ],
+          [
+            "evaluation_70",
+            "evaluation_71"
+          ],
+          [
+            "evaluation_134",
+            "evaluation_135"
+          ],
+          [
+            "evaluation_282",
+            "evaluation_283"
+          ],
+          [
+            "evaluation_762",
+            "evaluation_763"
+          ],
+          [
+            "evaluation_978",
+            "evaluation_979"
+          ],
+          [
+            "evaluation_1612",
+            "evaluation_1613"
+          ]
+        ],
+        "duplicate_label_conflicts": [],
+        "caption_group_conflicts": 0
+      }
+    },
+    "independent_manual_review_records": {
+      "total": 9814,
+      "per_artifact": {
+        "semantic_training_a.json": 2000,
+        "semantic_training_b.json": 2000,
+        "semantic_training_c.json": 1600,
+        "semantic_training_d.json": 980,
+        "semantic_training_e.json": 400,
+        "semantic_test.json": 2834
+      },
+      "all_initial_values_preserved": true,
+      "agreement": {
+        "exact": 7891,
+        "adjacent_grade": 1231,
+        "larger_grade_difference": 352,
+        "status_or_scope_difference": 340
+      },
+      "exact_agreement_fraction": 0.8040554310169146,
+      "limitations": "Two training_07 records were exposed during schema inspection. Remaining records were read with prior labels withheld until initial batch decisions were saved."
+    },
+    "package_hashes": {
+      "NOTICE.md": "91fb4ac5a1e4a3ef4870242599622345f2c3554b41e18d652a80f9960419c380",
+      "README.md": "d16783a39942ad9232231b969a8d7854348f6dafe125d79e3a7d71b8e2fc6e22",
+      "changes.json": "80bcf0cb4bce03f76d65e1e2cfbfcf658b5c39e1fd758e8468abbec2f648e62f",
+      "independent_grades.json": "ed21e34db390a990a5729af7c52d4d30631157cc2443b7aa2cac64efa0de0713",
+      "reconstruct.py": "6601678239ec987e3565b91c42be42552fa226bf45e74dd07d63cc017ee35e2f",
+      "review_summary.json": "d1b1233150ef5e3e7325f292c2c98683dafdeb49edf725c7ad08c2043432bf54",
+      "rubric.md": "29f380997d41e4e546f7323ae4d117ad58136d4a329b3f567cf18b9d2f44cf21",
+      "source_partition.py": "3f3e91d6ae237898a4f35a843348ac16c6934377e5174c4c9d752c7cd4a34334",
+      "test.base.labels.json": "c26a078e848c2b95d650c2403eee544c4f0208862a4a3ef8eb41b66e1e0d430b",
+      "training.base.labels.json": "c792e7a5cf8cae0dfc6f4678d4d190038203d3489af99c0f27dbb9a51bd5b636",
+      "validation.labels.json": "9d58f0d713b864d74ccab5d518c5b2d124d6e9a1de5b1f16fb389adc4e89555b"
+    }
+  },
+  "errors": [],
+  "limitations": [
+    "This independently verifies recorded review coverage and package/data integrity; it is not a human label-accuracy estimate.",
+    "Original audit compressed evidence archive remains unavailable for a fresh hash check through the GitHub connector; no such check is claimed."
+  ],
+  "verifier_sha256": "b9429e8b4fecba00bf0190f51c78ed3df6fffdddedd7fa24bb9f797ecc6e60e3"
+}

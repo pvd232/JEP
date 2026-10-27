@@ -460,13 +460,19 @@ def fit_qwen_evidence(context: StageContext[QwenEvidenceConfig]) -> None:
 
 
 def validate_matched_phases(
-    traces: dict[str, dict[str, Any]], phase_a_epochs: int
+    traces: dict[str, dict[str, Any]],
+    phase_a_epochs: int,
+    *,
+    allow_budget_censoring: bool = False,
 ) -> None:
-    """Require identical exposure and a terminal-weight transition into phase B."""
+    """Check exposure and restored weights; permit declared pilot time limits explicitly."""
     first = traces["ratings"]["pretrain"]
+    accepted_stops = {"validation_patience", "epoch_budget"}
+    if allow_budget_censoring:
+        accepted_stops.add("resource_budget")
     for arm in ("ratings", "evidence"):
         a, b = traces[arm]["pretrain"], traces[arm]["ratings"]
-        if b["stop_reason"] not in {"validation_patience", "epoch_budget"}:
+        if b["stop_reason"] not in accepted_stops:
             raise ValueError(
                 "Rating training was budget-censored; preserve its checkpoint before testing."
             )

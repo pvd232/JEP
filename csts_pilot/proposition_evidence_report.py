@@ -181,7 +181,10 @@ def verified_source(root: Path, expected: dict[str, Any]) -> list[dict[str, Any]
     if file_sha256(path) != expected["sha256"]:
         raise ValueError("Report source split bytes changed.")
     rows = read_json(path)
-    if len(rows) != expected["rows"] or len({r["group_id"] for r in rows}) != expected["groups"]:
+    if (
+        len(rows) != expected["rows"]
+        or len({r["group_id"] for r in rows}) != expected["groups"]
+    ):
         raise ValueError("Report source split coverage changed.")
     return rows
 
@@ -210,26 +213,27 @@ def build_report(root: Path, directory: Path) -> dict[str, Any]:
     settings = summary["settings"]
     taxonomy_setting = settings.get("report_cohorts", {"path": COHORTS_PATH})
     taxonomy_path = root / taxonomy_setting["path"]
-    if taxonomy_setting.get("sha256") and file_sha256(taxonomy_path) != taxonomy_setting["sha256"]:
+    if (
+        taxonomy_setting.get("sha256")
+        and file_sha256(taxonomy_path) != taxonomy_setting["sha256"]
+    ):
         raise ValueError("Frozen cohort definitions changed.")
     taxonomy = read_json(taxonomy_path)
     predictions = {
-        split: {
-            arm: read_json(directory / f"{arm}{suffix}")
-            for arm in ARMS
-        }
+        split: {arm: read_json(directory / f"{arm}{suffix}") for arm in ARMS}
         for split, suffix in (
             ("validation", "_validation_predictions.json"),
             ("test", "_predictions.json"),
         )
     }
     sources = {
-        split: verified_source(root, settings["splits"][split])
-        for split in predictions
+        split: verified_source(root, settings["splits"][split]) for split in predictions
     }
     for split, candidates in predictions.items():
         aligned_predictions(candidates, sources[split])
-    if {r["group_id"] for r in sources["validation"]} & {r["group_id"] for r in sources["test"]}:
+    if {r["group_id"] for r in sources["validation"]} & {
+        r["group_id"] for r in sources["test"]
+    }:
         raise ValueError("Validation and test source groups overlap.")
     traces = {
         arm: {
@@ -251,16 +255,24 @@ def build_report(root: Path, directory: Path) -> dict[str, Any]:
         if actual is None or abs(actual - recorded) > 1e-12:
             raise ValueError("Selected validation predictions disagree with selection.")
         test_score = score_rows(predictions["test"][arm], fitted[arm])["spearman"]
-        if test_score is None or abs(test_score - summary["live_scores"][arm]["spearman"]) > 1e-12:
+        if (
+            test_score is None
+            or abs(test_score - summary["live_scores"][arm]["spearman"]) > 1e-12
+        ):
             raise ValueError("Independent test ranking differs from native scoring.")
     cohorts = {}
     for split, values in predictions.items():
         cohorts[split] = {}
         for name, selected in cohort_rows(values, taxonomy, split).items():
             cohorts[split][name] = {
-                "scores": {arm: score_rows(rows, fitted[arm]) for arm, rows in selected.items()},
+                "scores": {
+                    arm: score_rows(rows, fitted[arm]) for arm, rows in selected.items()
+                },
                 "paired_intervals": bootstrap_differences(
-                    selected, fitted, settings["bootstrap_draws"], settings["bootstrap_seed"]
+                    selected,
+                    fitted,
+                    settings["bootstrap_draws"],
+                    settings["bootstrap_seed"],
                 ),
             }
     result = {
@@ -271,7 +283,11 @@ def build_report(root: Path, directory: Path) -> dict[str, Any]:
         "training_traces": traces,
         "calibration": fitted,
         "cohorts": cohorts,
-        "cohort_definitions": {"path": taxonomy_setting["path"], "sha256": file_sha256(taxonomy_path), **taxonomy},
+        "cohort_definitions": {
+            "path": taxonomy_setting["path"],
+            "sha256": file_sha256(taxonomy_path),
+            **taxonomy,
+        },
         "runs": summary["runs"],
         "gpu_stage_seconds": summary["gpu_stage_seconds"],
         "scope": {
@@ -280,7 +296,9 @@ def build_report(root: Path, directory: Path) -> dict[str, Any]:
             "quality_review": "Model-assisted selected-sample fidelity review.",
             "uncertainty": "Paired source-component sampling conditional on this one training seed and frozen validation calibration.",
             "validation": "Current audit labels and fixed exclusions were used for checkpoint selection.",
-            "test": "Tu human-reannotated test labels and source-caption text remain fixed.",
+            "test": "Published jep-csts-v1 test labels and exclusions remain fixed."
+            if settings.get("dataset_revision") == "jep-csts-v1"
+            else "Tu human-reannotated test labels and source-caption text remain fixed.",
             "calibration": "Positive affine fit on selected validation predictions, identity fallback for a nonpositive slope; unclipped rating estimates.",
             "cohorts": "Descriptive appearance family and lexical colour subsets; exploratory subgroup uncertainty.",
         },
@@ -289,15 +307,34 @@ def build_report(root: Path, directory: Path) -> dict[str, Any]:
     output = root / "training_outputs"
     output.mkdir(exist_ok=True)
     write_json(output / "csts_proposition_evidence_results.json", result)
-    lines = ["# Qwen proposition supervision followed by ratings", "", "| Split / cohort | n | Groups | Ratings Spearman | Proposition Spearman | Difference [95% CI] |", "|---|---:|---:|---:|---:|---|"]
+    lines = [
+        "# Qwen proposition supervision followed by ratings",
+        "",
+        "| Split / cohort | n | Groups | Ratings Spearman | Proposition Spearman | Difference [95% CI] |",
+        "|---|---:|---:|---:|---:|---|",
+    ]
     for split, split_cohorts in cohorts.items():
         for name, value in split_cohorts.items():
             a, b = value["scores"]["ratings"], value["scores"]["evidence"]
             difference = value["paired_intervals"]["contrasts"].get("spearman", {})
             interval = difference.get("ci95")
-            formatted = f"{difference['difference']:+.6f} [{interval[0]:+.6f}, {interval[1]:+.6f}]" if interval else "undefined"
+            formatted = (
+                f"{difference['difference']:+.6f} [{interval[0]:+.6f}, {interval[1]:+.6f}]"
+                if interval
+                else "undefined"
+            )
             fmt = lambda number: f"{number:.6f}" if number is not None else "undefined"
-            lines.append(f"| {split} / {name} | {a['n']} | {a['groups']} | {fmt(a['spearman'])} | {fmt(b['spearman'])} | {formatted} |")
-    lines += ["", "Both arms share first-phase comparison exposure, initialization and update counts. The proposition arm receives generation supervision from the frozen partial training bank. Both arms then train on the full ratings training partition with the same learning rate and validation patience. The selected checkpoints were frozen before test scoring.", "", "Rating errors use a separate positive affine calibration fitted on each arm's selected validation predictions. The JSON records raw and calibrated rating errors, group-held-out validation calibration error, exact cohort definitions and paired source-group intervals. Spearman uses the original scores and tie structure.", "", "This experiment uses one training seed. The teacher fidelity assessment was model assisted and sampled. Results describe the available training targets and the fixed C-STS partitions.", ""]
+            lines.append(
+                f"| {split} / {name} | {a['n']} | {a['groups']} | {fmt(a['spearman'])} | {fmt(b['spearman'])} | {formatted} |"
+            )
+    lines += [
+        "",
+        "Both arms share first-phase comparison exposure, initialization and update counts. The proposition arm receives generation supervision from the frozen partial training bank. Both arms then train on the full ratings training partition with the same learning rate and validation patience. The selected checkpoints were frozen before test scoring.",
+        "",
+        "Rating errors use a separate positive affine calibration fitted on each arm's selected validation predictions. The JSON records raw and calibrated rating errors, group-held-out validation calibration error, exact cohort definitions and paired source-group intervals. Spearman uses the original scores and tie structure.",
+        "",
+        "This experiment uses one training seed. The teacher fidelity assessment was model assisted and sampled. Results describe the available training targets and the fixed C-STS partitions.",
+        "",
+    ]
     (output / "csts_proposition_evidence_report.md").write_text("\n".join(lines))
     return result

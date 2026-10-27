@@ -6,17 +6,22 @@ import hashlib
 import json
 import math
 import os
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
-STAGES = ("ratings_pretrain", "evidence_pretrain", "ratings_ratings", "evidence_ratings")
+STAGES = (
+    "ratings_pretrain",
+    "evidence_pretrain",
+    "ratings_ratings",
+    "evidence_ratings",
+)
 
 
 def read_object(path):
     try:
         data = json.loads(path.read_text())
         if not isinstance(data, dict):
-            raise ValueError("Expected a JSON object")
+            return None, "Expected a JSON object"
         return data, None
     except FileNotFoundError:
         return None, "missing"
@@ -50,8 +55,12 @@ def epoch_record(record, stage):
         "validation_spearman": number(validation.get("spearman")),
         "validation_mse_1_5": number(validation.get("mse_1_5")),
         "validation_rows": validation.get("n"),
-        "training_loss": number(record.get("training_objective", record.get("training_mse_0_1"))),
-        "training_loss_kind": "proposition_token_cross_entropy" if stage == "evidence_pretrain" else "rating_mse_0_1",
+        "training_loss": number(
+            record.get("training_objective", record.get("training_mse_0_1"))
+        ),
+        "training_loss_kind": "proposition_token_cross_entropy"
+        if stage == "evidence_pretrain"
+        else "rating_mse_0_1",
         "epochs_without_improvement": record.get("epochs_without_improvement"),
         "fit_seconds": number(record.get("fit_seconds")),
         "validation_seconds": number(record.get("validation_seconds")),
@@ -76,9 +85,15 @@ def trace_candidates(root, directory, summary, stage, overrides):
     if flight.get("name") == stage:
         experiment = flight.get("experiment_id", "")
         if experiment and Path(experiment).name == experiment:
-            live = sorted((root / "experiments" / experiment / "runs" / stage).glob("*/artifacts/train/trace/trace.json"))
+            live = sorted(
+                (root / "experiments" / experiment / "runs" / stage).glob(
+                    "*/artifacts/train/trace/trace.json"
+                )
+            )
             if len(live) > 1:
-                raise ValueError("Multiple native traces require an exact --trace override")
+                raise ValueError(
+                    "Multiple native traces require an exact --trace override"
+                )
             candidates.extend(live)
     return list(dict.fromkeys(candidates))
 
@@ -97,12 +112,25 @@ def collect(root, name, previous=None, overrides=None):
         "attempt": summary.get("attempt"),
         "validation_sha256": settings["splits"]["validation"]["sha256"],
     }
-    cached = (previous or {}).get("stages", {}) if (previous or {}).get("identity") == identity else {}
+    cached = (
+        (previous or {}).get("stages", {})
+        if (previous or {}).get("identity") == identity
+        else {}
+    )
     result = {
         "schema_version": 1,
-        "updated_at_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "updated_at_utc": datetime.now(UTC).isoformat(timespec="seconds"),
         "identity": identity,
         "training_sha256": settings["splits"]["training"]["sha256"],
+        "training_policy": {
+            "patience": settings.get("training", {}).get("patience", 5),
+            "ratings_max_epochs": settings.get("phases", {})
+            .get("ratings", {})
+            .get("max_epochs", 24),
+            "ratings_max_seconds": settings.get("phases", {})
+            .get("ratings", {})
+            .get("max_seconds"),
+        },
         "validation_rows": settings["splits"]["validation"]["rows"],
         "validation_groups": settings["splits"]["validation"].get("groups"),
         "run_status": summary.get("status"),
@@ -115,7 +143,9 @@ def collect(root, name, previous=None, overrides=None):
     for stage in STAGES:
         notes, trace, trace_path = [], None, None
         try:
-            candidates = trace_candidates(root, directory, summary, stage, overrides or {})
+            candidates = trace_candidates(
+                root, directory, summary, stage, overrides or {}
+            )
         except ValueError as error:
             candidates = []
             notes.append(str(error))
@@ -139,12 +169,17 @@ def collect(root, name, previous=None, overrides=None):
                 try:
                     row = epoch_record(raw, stage)
                     if row["epoch"] in history and history[row["epoch"]] != row:
-                        raise ValueError("Conflicting observation for completed epoch " + str(row["epoch"]))
+                        raise ValueError(
+                            "Conflicting observation for completed epoch "
+                            + str(row["epoch"])
+                        )
                     history[row["epoch"]] = row
                 except (KeyError, TypeError, ValueError) as error:
                     notes.append(str(error))
         rows = [history[key] for key in sorted(history)]
-        if rows and [row["epoch"] for row in rows] != list(range(1, rows[-1]["epoch"] + 1)):
+        if rows and [row["epoch"] for row in rows] != list(
+            range(1, rows[-1]["epoch"] + 1)
+        ):
             notes.append("Completed epoch history has a gap")
         native = [run for run in summary.get("runs", []) if run.get("name") == stage]
         status = "pending"
@@ -153,17 +188,27 @@ def collect(root, name, previous=None, overrides=None):
         if native:
             status = native[-1].get("status", status)
         cached_stage = cached.get(stage, {})
-        recorded_updates = (trace or {}).get("actual_updates", (trace or {}).get("updates", 0))
-        recorded_updates = max(recorded_updates, cached_stage.get("optimizer_updates", 0), rows[-1]["optimizer_updates"] if rows else 0)
+        recorded_updates = (trace or {}).get(
+            "actual_updates", (trace or {}).get("updates", 0)
+        )
+        recorded_updates = max(
+            recorded_updates,
+            cached_stage.get("optimizer_updates", 0),
+            rows[-1]["optimizer_updates"] if rows else 0,
+        )
         result["stages"][stage] = {
             "status": status,
             "trace_status": (trace or {}).get("status"),
             "trace_path": str(trace_path) if trace_path else None,
             "trace_available": trace is not None,
             "completed_epoch": rows[-1]["epoch"] if rows else 0,
-            "current_epoch": (trace or {}).get("current_epoch", cached_stage.get("current_epoch")),
+            "current_epoch": (trace or {}).get(
+                "current_epoch", cached_stage.get("current_epoch")
+            ),
             "optimizer_updates": recorded_updates,
-            "epochs_without_improvement": (trace or {}).get("epochs_without_improvement"),
+            "epochs_without_improvement": (trace or {}).get(
+                "epochs_without_improvement"
+            ),
             "stop_reason": (trace or {}).get("stop_reason"),
             "epochs": rows,
             "notes": notes,
@@ -172,37 +217,86 @@ def collect(root, name, previous=None, overrides=None):
 
 
 def formatted(value, digits=6):
-    return "—" if value is None else (f"{value:.{digits}f}" if isinstance(value, float) else str(value))
+    return (
+        "—"
+        if value is None
+        else (f"{value:.{digits}f}" if isinstance(value, float) else str(value))
+    )
 
 
 def markdown(report):
     identity = report["identity"]
     lines = [
-        "# Qwen proposition comparison: per-epoch validation scores", "",
-        f"Updated: **{report['updated_at_utc']}**. Run: `{identity['run_name']}`.", "",
-        f"Status: **{report['run_status']}**. Current stage: **{report['current_stage'] or 'none'}**.", "",
-        f"Validation: **{report['validation_rows']:,} comparisons**, {report['validation_groups']} source groups.", "",
+        "# Qwen proposition comparison: per-epoch validation scores",
+        "",
+        f"Updated: **{report['updated_at_utc']}**. Run: `{identity['run_name']}`.",
+        "",
+        f"Status: **{report['run_status']}**. Current stage: **{report['current_stage'] or 'none'}**.",
+        "",
+        f"Validation: **{report['validation_rows']:,} comparisons**, {report['validation_groups']} source groups.",
+        "",
         f"Source commit: `{identity['source_commit']}`.",
         f"Validation SHA-256: `{identity['validation_sha256']}`.",
-        f"Training SHA-256: `{report['training_sha256']}`.", "",
-        "Both arms use the same initialization, sampled comparisons, optimizer schedule and phase-specific batch order. Auxiliary training lasts two epochs. Ratings training uses validation patience of five epochs and a 24-epoch ceiling.", "",
-        "Auxiliary control loss is rating MSE on the 0–1 scale. Proposition auxiliary loss is token cross-entropy. The loss magnitudes have different meanings. Each table resets its optimizer-update counter at the phase boundary.", "",
-        "Appearance and colour scores are available in the final report. Native epoch traces contain overall validation scores. Values are provisional while the comparison is running.", "",
+        f"Training SHA-256: `{report['training_sha256']}`.",
+        "",
+        (
+            "Both models start from the same pretrained weights. For the first two epochs, both see the comparisons covered by existing propositions. The ratings model learns ratings; the proposition model learns to write propositions. Both then learn ratings from the full training set. "
+            f"Ratings training uses validation patience {report.get('training_policy', {}).get('patience', 5)} and an epoch ceiling of {report.get('training_policy', {}).get('ratings_max_epochs', 24)}."
+        ),
+        "",
+        "Rating loss measures error in predicted ratings on the 0–1 scale. Proposition-writing loss measures error in predicted text tokens. Each table counts optimizer updates from the beginning of that training step.",
+        "",
+        "Appearance and colour scores are available in the final report. Native epoch traces contain overall validation scores. Values are provisional while the comparison is running.",
+        "",
     ]
-    names = {"ratings_pretrain": "Ratings arm: auxiliary phase", "evidence_pretrain": "Proposition arm: auxiliary phase", "ratings_ratings": "Ratings arm: ratings phase", "evidence_ratings": "Proposition arm: ratings phase"}
+    names = {
+        "ratings_pretrain": "Ratings model: first two epochs on the covered subset",
+        "evidence_pretrain": "Proposition model: writing propositions on the covered subset",
+        "ratings_ratings": "Ratings model: ratings on the full training set",
+        "evidence_ratings": "Proposition model: ratings on the full training set",
+    }
     for stage in STAGES:
         data = report["stages"][stage]
-        lines.extend(["## " + names[stage], "", f"Status: **{data['status']}**. Completed epochs: **{data['completed_epoch']}**. Recorded optimizer updates: **{data['optimizer_updates']}**.", ""])
+        lines.extend(
+            [
+                "## " + names[stage],
+                "",
+                f"Status: **{data['status']}**. Completed epochs: **{data['completed_epoch']}**. Recorded optimizer updates: **{data['optimizer_updates']}**.",
+                "",
+            ]
+        )
         if data["epochs"]:
-            lines.extend(["| Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |", "|---:|---:|---:|---:|---:|---:|"])
+            lines.extend(
+                [
+                    "| Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |",
+                    "|---:|---:|---:|---:|---:|---:|",
+                ]
+            )
             for row in data["epochs"]:
-                values = [row[k] for k in ("epoch", "optimizer_updates", "validation_spearman", "validation_mse_1_5", "training_loss", "epochs_without_improvement")]
-                lines.append("| " + " | ".join(formatted(value) for value in values) + " |")
+                values = [
+                    row[k]
+                    for k in (
+                        "epoch",
+                        "optimizer_updates",
+                        "validation_spearman",
+                        "validation_mse_1_5",
+                        "training_loss",
+                        "epochs_without_improvement",
+                    )
+                ]
+                lines.append(
+                    "| " + " | ".join(formatted(value) for value in values) + " |"
+                )
             lines.append("")
         else:
             lines.extend(["Awaiting the first completed epoch.", ""])
         if not data["trace_available"] and data["epochs"]:
-            lines.extend(["This snapshot preserves previously observed epochs; the live trace is temporarily unavailable.", ""])
+            lines.extend(
+                [
+                    "This snapshot preserves previously observed epochs; the live trace is temporarily unavailable.",
+                    "",
+                ]
+            )
         if data["stop_reason"]:
             lines.extend(["Stop reason: `" + data["stop_reason"] + "`.", ""])
         for note in data["notes"]:
@@ -232,7 +326,18 @@ def main():
     temporary = args.output / "epoch_scores.md.tmp"
     temporary.write_text(markdown(report))
     os.replace(temporary, args.output / "epoch_scores.md")
-    print(json.dumps({"status": report["run_status"], "current_stage": report["current_stage"], "epochs": {stage: data["completed_epoch"] for stage, data in report["stages"].items()}}))
+    print(
+        json.dumps(
+            {
+                "status": report["run_status"],
+                "current_stage": report["current_stage"],
+                "epochs": {
+                    stage: data["completed_epoch"]
+                    for stage, data in report["stages"].items()
+                },
+            }
+        )
+    )
 
 
 if __name__ == "__main__":

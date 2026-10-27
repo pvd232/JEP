@@ -43,6 +43,7 @@ from csts_pilot.convergence import (
 from csts_pilot.convergence_run import artifact_path, artifact_source, check_inputs
 from csts_pilot.diagnostics import summarize
 from csts_pilot.evidence_run import evidence_training_outputs
+from csts_pilot.proposition_evidence_report import build_report
 from csts_pilot.proposition_pretraining_stage import (
     PropositionPretrainingPreparationConfig,
     prepare_proposition_pretraining_stage,
@@ -84,8 +85,15 @@ def validate_settings(settings: dict[str, Any]) -> None:
     """Reject unreviewed loss, phase-length or stopping changes before execution."""
     if settings["head"]["sha256"] == "0" * 64:
         raise ValueError("Bind the restored pretrained head before execution.")
-    if settings["arms"] != list(ARMS) or settings["training"]["patience"] != 5:
-        raise ValueError("The reviewed comparison has two arms and patience five.")
+    if settings["arms"] != list(ARMS) or settings["training"]["patience"] not in (2, 5):
+        raise ValueError("The comparison requires both arms and patience two or five.")
+    if settings.get("allow_budget_censored_pilot") and (
+        settings.get("dataset_revision") != "jep-csts-v1"
+        or settings["training"]["patience"] != 2
+    ):
+        raise ValueError(
+            "Budget-censored scoring is reserved for the declared jep-csts-v1 pilot."
+        )
     if (
         settings["phases"]["pretrain"]["max_epochs"] != 2
         or settings["phases"]["ratings"]["max_epochs"] != 24
@@ -134,7 +142,12 @@ def run_study(
     if not isinstance(load_storage_settings(root).destination, LocalStorageDestination):
         raise TypeError("Use local native sealing and asynchronous cloud publication.")
     check_inputs(root, settings)
-    for item in (settings["answers"], settings["provenance"], settings["audit_gate"], settings["head"]):
+    for item in (
+        settings["answers"],
+        settings["provenance"],
+        settings["audit_gate"],
+        settings["head"],
+    ):
         if file_sha256(root / item["path"]) != item["sha256"]:
             raise ValueError("Auxiliary input identity changed.")
     directory = root / "qwen_evidence_results" / name
@@ -158,7 +171,6 @@ def run_study(
                 "Preserve the existing attempt; reconcile any uncertain stage before resuming."
             )
         if summary["status"] == "complete":
-            from csts_pilot.proposition_evidence_report import build_report
             build_report(root, directory)
             return
     else:
@@ -283,7 +295,13 @@ def run_study(
                     else settings["splits"][k]["path"],
                     data_role="training",
                 )
-                for k in ("answers", "training", "validation", "provenance", "audit_gate")
+                for k in (
+                    "answers",
+                    "training",
+                    "validation",
+                    "provenance",
+                    "audit_gate",
+                )
             ),
             outputs=StageOutputs(
                 prepared=output(
@@ -353,7 +371,11 @@ def run_study(
                 directory / f"{arm}_{phase}_trace.json",
             )
             trained[arm] = record
-    validate_matched_phases(traces, settings["phases"]["pretrain"]["max_epochs"])
+    validate_matched_phases(
+        traces,
+        settings["phases"]["pretrain"]["max_epochs"],
+        allow_budget_censoring=settings.get("allow_budget_censored_pilot") is True,
+    )
     candidates = {}
     for arm, record in trained.items():
         selected = traces[arm]["ratings"]["selected"]
@@ -369,7 +391,9 @@ def run_study(
                 "Selected checkpoint, trace and validation predictions disagree."
             )
         shutil.copyfile(
-            artifact_path(record, "train", "validation_predictions", "predictions.json"),
+            artifact_path(
+                record, "train", "validation_predictions", "predictions.json"
+            ),
             directory / f"{arm}_validation_predictions.json",
         )
         candidates[arm] = dict(selected, run=record)
@@ -521,8 +545,6 @@ def run_study(
         status="complete", current_stage=None, publication_status="queued_separately"
     )
     write_json(path, summary)
-    from csts_pilot.proposition_evidence_report import build_report
-
     build_report(root, directory)
 
 
@@ -530,7 +552,9 @@ def main() -> None:
     """Require an explicit execution flag and one owner of the comparison."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--settings", type=Path, default=Path("configs/csts-qwen-proposition-evidence.json")
+        "--settings",
+        type=Path,
+        default=Path("configs/csts-qwen-proposition-evidence.json"),
     )
     parser.add_argument("--name", default="propositions_v41")
     parser.add_argument("--execute", action="store_true")
