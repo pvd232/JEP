@@ -309,7 +309,7 @@ def run_study(
             "path": str(result.path),
             "reference": result.reference.model_dump(mode="json"),
             "local_run_seconds": time.monotonic() - started,
-            "data_role": configured.outputs.values()[0].data_role,
+            "data_role": configured.spec.outputs.values()[0].data_role,
         }
         summary["runs"].append(record)
         summary["in_flight"] = None
