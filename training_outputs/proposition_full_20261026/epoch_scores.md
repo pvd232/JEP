@@ -1,6 +1,6 @@
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T04:08:05+00:00**. Run: `propositions_v41_full_after_indicative`.
+Updated: **2026-10-27T04:12:05+00:00**. Run: `propositions_v41_full_after_indicative`.
 
 Publication: **automatic; VM publisher with 30-second checks**.
 
@@ -59,6 +59,6 @@ Status: **stopped_by_user**. Completed epochs: **2**. Recorded optimizer updates
 
 Publication: **automatic; VM publisher with 30-second checks**.
 
-Status: **running**. Completed epochs: **0**. Recorded optimizer updates: **25**.
+Status: **running**. Completed epochs: **0**. Recorded optimizer updates: **50**.
 
 Awaiting the first completed epoch.
