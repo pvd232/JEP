@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at_utc": "2026-10-27T13:10:09+00:00",
+  "updated_at_utc": "2026-10-27T13:11:54+00:00",
   "identity": {
     "run_name": "jep_csts_v1_proposition_patience1_completion_20261027",
     "source_commit": "636cb33048f41eb8c0e839250df66d36cf46a101",
@@ -211,14 +211,14 @@
     },
     "evidence_ratings": {
       "status": "running",
-      "trace_status": "running",
+      "trace_status": "complete",
       "trace_path": "/home/machina/jep-csts-jep-v1-proposition-patience1-20261027/experiments/csts_finish_636cb330_191bbce7_evidence_ratings/runs/evidence_ratings/01M5YNZFMKVYG5A30ZQDSW27R2/artifacts/train/trace/trace.json",
       "trace_available": true,
-      "completed_epoch": 4,
+      "completed_epoch": 5,
       "current_epoch": 5,
       "optimizer_updates": 950,
-      "epochs_without_improvement": 0,
-      "stop_reason": null,
+      "epochs_without_improvement": null,
+      "stop_reason": "validation_patience",
       "epochs": [
         {
           "epoch": 1,
@@ -274,6 +274,20 @@
           "fit_seconds": 1635.5358283559908,
           "validation_seconds": 86.69694892101688,
           "observed_epoch_seconds": 1723.4929313390166,
+          "elapsed_seconds": null
+        },
+        {
+          "epoch": 5,
+          "optimizer_updates": 950,
+          "validation_spearman": 0.8735786587975386,
+          "validation_mse_1_5": 0.5248370068310301,
+          "validation_rows": 1576,
+          "training_loss": 0.020308938749223272,
+          "training_loss_kind": "rating_mse_0_1",
+          "epochs_without_improvement": 1,
+          "fit_seconds": 1705.5561036429717,
+          "validation_seconds": 90.26161432999652,
+          "observed_epoch_seconds": 1795.8247693710146,
           "elapsed_seconds": null
         }
       ],
