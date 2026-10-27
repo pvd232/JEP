@@ -2,7 +2,7 @@ Both models completed two ratings epochs. The requested dataset switch follows t
 
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T05:29:45+00:00**. Run: `propositions_v41_full_after_indicative`.
+Updated: **2026-10-27T05:32:18+00:00**. Run: `propositions_v41_full_after_indicative`.
 
 Status: **completed_requested_two_epoch_comparison**. Current stage: **comparison_finished**.
 
