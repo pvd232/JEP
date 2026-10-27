@@ -5,7 +5,7 @@
   "encoder_source_commit": "636cb33048f41eb8c0e839250df66d36cf46a101",
   "encoder_initial_epochs": 2,
   "followup_running": true,
-  "sol_completed_rows": 2240,
+  "sol_completed_rows": 2368,
   "sol_completed_batches": [
     0,
     1,
@@ -41,9 +41,11 @@
     31,
     32,
     33,
-    34
+    34,
+    35,
+    36
   ],
-  "shared_row_ids_sha256": "e81cbb1f3cd045880f8ca5b559ea3891e88960e62cc26e5161d7bf0e2be72811",
+  "shared_row_ids_sha256": "ee5e60e84e2c04ecde4404526e8c4ecbeb453965899a6280a905d2784cd98068",
   "models": {
     "ratings": {
       "label": "Ratings model",
@@ -55,10 +57,10 @@
         "mse_0_1": 0.03977941506211169
       },
       "shared": {
-        "n": 2240,
-        "spearman": 0.851528117367851,
-        "pearson": 0.8686283926346067,
-        "mse_0_1": 0.04036035110255311
+        "n": 2368,
+        "spearman": 0.8529979075627805,
+        "pearson": 0.870438367511423,
+        "mse_0_1": 0.03983126330468066
       },
       "checkpoint_sha256": "d9d329dffff497402eddc40c53f4f1a651e13f3f22479bbda0b9d8927086fec6",
       "predictions_sha256": "69d27740148c743a5404c4f5a0941854d49785d959378f1096620765fcb441ab"
@@ -73,10 +75,10 @@
         "mse_0_1": 0.039181198582574704
       },
       "shared": {
-        "n": 2240,
-        "spearman": 0.8536601973480245,
-        "pearson": 0.8703245866526417,
-        "mse_0_1": 0.03939927656655712
+        "n": 2368,
+        "spearman": 0.8537755130571183,
+        "pearson": 0.87045027675036,
+        "mse_0_1": 0.03933250088665999
       },
       "checkpoint_sha256": "20d74e66f590fd9799d8ea44bb09aacbb9d27288e2eab7edc2b2d3325545a229",
       "predictions_sha256": "db853da51ddcfcb7e3096dd49fbf0c2e45082a307451e2a9914635cdad187729"
@@ -85,12 +87,12 @@
       "label": "GPT-6.1 Sol (max)",
       "full": null,
       "shared": {
-        "n": 2240,
-        "spearman": 0.9214300320077053,
-        "pearson": 0.9267673395490538,
-        "mse_0_1": 0.023066685267857143
+        "n": 2368,
+        "spearman": 0.9202929090048818,
+        "pearson": 0.9254583083467358,
+        "mse_0_1": 0.023429054054054054
       },
-      "completed_rows": 2240
+      "completed_rows": 2368
     }
   }
 }
