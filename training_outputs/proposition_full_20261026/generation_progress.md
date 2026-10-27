@@ -2,8 +2,6 @@
 
 Monitor: **running**.
 
-Current evaluation/retry issue: training capture exhausted four retained attempts; inspect capture log.
-
 Training inputs captured: **8,832/11,909**; missing inputs requested: **9,413**. The current training bank remains frozen.
 
 Held-out sample: **128 validation source groups**, one passage-condition input per group. References and generated answers are kept outside training. Evaluation waits for the current GPU training run to finish.
@@ -16,5 +14,3 @@ Held-out sample: **128 validation source groups**, one passage-condition input p
 Loss averages each answer's next-token cross-entropy, then averages answers. Factual checks use free-generated answers and two independent source-only model reviews; they report support, omissions, unsupported assertions and reviewer agreement. These measurements describe proposition writing and do not change the running experiment's stopping rule.
 
 Earlier checkpoints were overwritten by the original trainer; epochs 2 and 4 have retained checkpoints. [Detailed status and results](proposition_validation.json).
-
-Held-out reference review: **125/128** fully correct by both model reviewers; **0** flagged for unsupported assertions; reviewer agreement **99.2%**.
