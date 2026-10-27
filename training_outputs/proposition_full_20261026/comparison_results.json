@@ -6959,13 +6959,14 @@
   "gpu_stage_seconds": 4383.321073387002,
   "scope": {
     "training_seed": 7,
-    "teacher_bank": "Full generated source-only training bank; writing checkpoint selection uses the frozen held-out training groups.",
+    "teacher_bank": "Full generated source-only training bank; writing checkpoint selection uses loss on 121 frozen validation proposition targets.",
     "quality_review": "Model-assisted selected-sample fidelity review.",
     "uncertainty": "Paired source-component sampling conditional on this one training seed and frozen validation calibration.",
     "validation": "Current audit labels and fixed exclusions were used for checkpoint selection.",
     "test": "Published jep-csts-v1 test labels and exclusions remain fixed.",
     "calibration": "Positive affine fit on selected validation predictions, identity fallback for a nonpositive slope; unclipped rating estimates.",
-    "cohorts": "Descriptive appearance family and lexical colour subsets; exploratory subgroup uncertainty."
+    "cohorts": "Descriptive appearance family and lexical colour subsets; exploratory subgroup uncertainty.",
+    "proposition_validation": "The 121 writing-selection condition/passage inputs occur in validation; none occur in training or test. They provide checkpoint-selection loss and receive no optimizer updates."
   },
   "publication": "asynchronous",
   "publication_provenance": {
@@ -6977,6 +6978,12 @@
     "restored_test_index_sha256": "2cc95963ae8fb98b277640d0e6f91e9fc62691814935272a6d806beb27933e41",
     "checkpoint_archive_sha256": "2e8e8efe52687edb10b85f000f6a2f77637677f59ae95729ee1c254d11c37d9d",
     "checkpoint_archive_bytes": 575129600,
-    "checks": "13 existing full-proposition-control and epoch-export tests passed"
+    "checks": "13 existing full-proposition-control and epoch-export tests passed",
+    "shared_generation_head": {
+      "path": "/home/machina/jep-csts-jep-v1-four-epoch-20261027/qwen_data/qwen-evidence-head.safetensors",
+      "bytes": 1242439768,
+      "sha256": "a36df847ac68cb10d636cac54bdd99c1d1b6627e98aca62dd5716bb87e6fee4d"
+    },
+    "native_checkpoint_manifest_sha256": "6da99af85104ff41fd06b85ca25e359f56ba8515dbd76e0e352f3b5a05d456fd"
   }
 }

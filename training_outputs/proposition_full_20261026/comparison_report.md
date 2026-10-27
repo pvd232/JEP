@@ -41,3 +41,5 @@ Writing stopped at epoch 6 and selected epoch 5. The matched ratings parent uses
 Both selected first-phase parents use epoch 5. The control’s speculative epochs 6–7 remain recorded and were excluded from the matched parent. The writing metadata fix is reviewable in [PR #13](https://github.com/pvd232/JEP/pull/13). The original test index was restored byte for byte from a previously sealed artifact before scoring.
 
 Selected model weights and frozen inputs are preserved in `/home/machina/jep-full-propositions-20261027-operator/checkpoints/selected_checkpoints.tar` on the JEP VM. Archive SHA-256: `2e8e8efe52687edb10b85f000f6a2f77637677f59ae95729ee1c254d11c37d9d`. The JSON includes checkpoint hashes, raw and calibrated errors, cohort definitions, and 2,000 paired bootstrap draws.
+
+Writing checkpoint selection used loss on **121 frozen validation proposition targets**. These condition/passage inputs occur in validation and receive no optimizer updates; none occur in training or test. The shared generation head is preserved separately on the JEP VM; its location and SHA-256 are recorded in `checkpoint_manifest.json`.
