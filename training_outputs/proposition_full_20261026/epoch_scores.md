@@ -7,9 +7,9 @@ Both models resume their saved training state after epoch four and continue unti
 [Earlier V4.1 comparison](v41_final_epoch_scores.md)
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T12:31:45+00:00**. Run: `jep_csts_v1_patience2_completion_20261027`.
+Updated: **2026-10-27T12:32:20+00:00**. Run: `jep_csts_v1_patience2_completion_20261027`.
 
-Status: **running**. Current stage: **ratings_ratings**.
+Status: **running**. Current stage: **evidence_ratings**.
 
 Validation: **1,576 comparisons**, 680 source groups.
 
@@ -62,7 +62,7 @@ Stop reason: `validation_patience`.
 
 ## Proposition model: ratings on the full training set
 
-Status: **pending**. Completed epochs: **4**. Recorded optimizer updates: **760**.
+Status: **running**. Completed epochs: **4**. Recorded optimizer updates: **760**.
 
 | Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
 |---:|---:|---:|---:|---:|---:|

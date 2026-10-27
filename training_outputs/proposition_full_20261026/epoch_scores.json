@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at_utc": "2026-10-27T12:31:45+00:00",
+  "updated_at_utc": "2026-10-27T12:32:20+00:00",
   "identity": {
     "run_name": "jep_csts_v1_patience2_completion_20261027",
     "source_commit": "1719cf9c003a331864da5d3c95f9a2bd32dd51ac",
@@ -17,9 +17,9 @@
   "validation_rows": 1576,
   "validation_groups": 680,
   "run_status": "running",
-  "current_stage": "ratings_ratings",
+  "current_stage": "evidence_ratings",
   "summary_path": "/home/machina/jep-csts-jep-v1-patience-completion-20261027/qwen_evidence_results/jep_csts_v1_patience2_completion_20261027/summary.json",
-  "summary_sha256": "c1322ebc518f2088e04383fe9463aa617cd9ad202823fcc34a3160dd562f7697",
+  "summary_sha256": "ffa01cef673fbb083ede833c93b112da9c0f5efd1928310d454634326690425d",
   "scope": "Training and validation histories only; subgroup epoch scores are unavailable in native traces.",
   "stages": {
     "ratings_pretrain": {
@@ -205,7 +205,7 @@
       "notes": []
     },
     "evidence_ratings": {
-      "status": "pending",
+      "status": "running",
       "trace_status": "complete",
       "trace_path": "/home/machina/jep-csts-jep-v1-patience-completion-20261027/qwen_evidence_results/jep_csts_v1_patience2_completion_20261027/evidence_ratings_trace.json",
       "trace_available": true,
