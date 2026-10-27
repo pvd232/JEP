@@ -14,7 +14,7 @@ Dataset: **jep-csts-v1**, the same **2,430 test examples** for every full-test s
 | GPT-6.1 Sol (max) | 0.919955 | 0.023513 | 2,430/2,430 |
 
 Encoder scores above come from the completed **4-initial-epoch** comparison.
-The four-initial-epoch follow-up is training; its test scores will replace the encoder rows after checkpoint selection and test evaluation finish.
+The full-bank comparison is training until validation patience is exhausted. Its test scores will replace the encoder rows after checkpoint selection and evaluation finish.
 
 [Sol capture status and protocol](gpt61_sol_max_jep_v1.md). Test scores do not control training, checkpoint selection or the proposition-generation decision.
 <!-- three-model-comparison:end -->
@@ -28,7 +28,7 @@ Stop after consecutive non-improving validation checks: ratings control **1**; p
 [Missing proposition generation progress](generation_progress.md)
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T18:12:07+00:00**. Run: `jep_csts_v1_full_propositions_converged_patience1_20261027`.
+Updated: **2026-10-27T18:13:35+00:00**. Run: `jep_csts_v1_full_propositions_converged_patience1_20261027`.
 
 Status: **running**. Current stage: **evidence_pretrain**.
 
@@ -46,25 +46,30 @@ Appearance and colour scores are available in the final report. Native epoch tra
 
 ## Ratings control: matched exposure on the full proposition-covered training comparisons
 
-Status: **pending**. Completed epochs: **1**. Recorded optimizer updates: **350**.
+Status: **pending**. Completed epochs: **2**. Recorded optimizer updates: **368**.
 
 | Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
 |---:|---:|---:|---:|---:|---:|
 | 1 | 184 | 0.851194 | 0.637961 | 0.073888 | — |
+| 2 | 368 | 0.865684 | 0.551154 | 0.036752 | — |
+
+Stop reason: `fixed_update_budget`.
 
 ## Proposition model: full-bank writing until held-out loss stops improving
 
-Status: **running**. Completed epochs: **1**. Recorded optimizer updates: **350**.
+Status: **running**. Completed epochs: **2**. Recorded optimizer updates: **368**.
 
 | Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
 |---:|---:|---:|---:|---:|---:|
 | 1 | 184 | 0.473837 | 4.145213 | 2.065912 | 0 |
+| 2 | 368 | 0.456222 | 4.158023 | 0.362596 | 0 |
 
 Held-out proposition loss selects the writing checkpoint:
 
 | Epoch | Held-out proposition loss |
 |---:|---:|
 | 1 | 0.383228 |
+| 2 | 0.319839 |
 
 ## Ratings model: ratings on the full training set
 
@@ -83,14 +88,14 @@ Awaiting the first completed epoch.
 
 Monitor: **complete**.
 
-Training inputs captured: **11,909/11,909**; missing inputs requested: **9,413**. The current training bank remains frozen.
+Training inputs captured: **11,909/11,909**; missing inputs requested: **9,413**. The complete generated bank is frozen for the current full-bank comparison.
 
 Held-out sample: **128 validation source groups**, one passage-condition input per group. References and generated answers are kept outside training. Evaluation uses the retained checkpoints; hardware and progress appear in the detailed status below.
 
 | Proposition checkpoint | Held-out answer loss | Model-reviewed factual accuracy | Reviewed answers |
 |---|---:|---:|---:|
-| After 2 proposition-writing epochs | 0.451316 | 89.1% | 64 |
-| After 4 proposition-writing epochs | 0.378650 | 93.8% | 64 |
+| Earlier subset model: epoch 2 | 0.451316 | 89.1% | 64 |
+| Earlier subset model: epoch 4 | 0.378650 | 93.8% | 64 |
 
 Loss averages each answer's next-token cross-entropy, then averages answers. Factual checks use free-generated answers and two independent source-only model reviews; they report support, omissions, unsupported assertions and reviewer agreement. These measurements describe proposition writing and do not change the running experiment's stopping rule.
 
