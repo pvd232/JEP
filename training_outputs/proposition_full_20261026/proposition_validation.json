@@ -80,5 +80,11 @@
     "reason": "Before any GPU evaluation, separate immutable loss forwards from free generation; preserve loss across generation failures and persist failure status. Dataset, prompts, checkpoints and generation requests are unchanged.",
     "validation": "Zero Pyrefly errors, two CPU tests including forward-reuse on generation failure, final Ruff format/check passed at actual VM paths."
   },
-  "gpu_evaluation": {}
+  "gpu_evaluation": {
+    "status": "transferring_inputs_to_colab",
+    "hardware": "NVIDIA A100-SXM4-40GB",
+    "memory_mib": 40960,
+    "session": "jep-proposition-20261027",
+    "source_training_untouched": true
+  }
 }
