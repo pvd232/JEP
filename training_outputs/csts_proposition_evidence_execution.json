@@ -71,10 +71,23 @@
     "status": "running"
   },
   "indicative_archive": {
-    "status": "queued_asynchronously",
+    "status": "published",
     "pid": 112048,
     "files": 26,
     "bytes": 1485565403,
-    "local_files_preserved": true
+    "local_files_preserved": true,
+    "receipt_reference": {
+      "sha256": "4d5f81072ff35aede4474a2ab60c218f841e36ba668c73eb393e30d34601e816",
+      "bytes": 16529,
+      "stored_at": {
+        "kind": "gcs",
+        "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+        "prefix": "viper",
+        "owner": "pvd232",
+        "workspace": "jep_csts_joint_20261021",
+        "revision": "3798bb42da47afc9a1b730af78d1c056ef23b69ac1b67325b93477646fe5eb57",
+        "path": "csts_proposition_indicative_20261026/publication_receipt.json"
+      }
+    }
   }
 }
