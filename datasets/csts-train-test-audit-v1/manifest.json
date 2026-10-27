@@ -1,0 +1,255 @@
+{
+  "schema_version": 1,
+  "audit_version": 1,
+  "source": {
+    "dataset": "LivNLP/C-STS-Reannotated",
+    "revision": "058ac842f5f19d27b08ad54f6d4a2c50b3f9578b",
+    "csv_sha256": {
+      "train": "118ef935443531a60f3dd5652afd946869f47b134c83fd8da38779912167b652",
+      "validation": "84602c1bcbbe1e6410a78c9cb1cb0f3dac4bf48c0c55ad42dc19558370e4821f"
+    },
+    "project_split": "Original connected-caption training and validation partition; released validation is project test",
+    "original_training_overlap_rows_kept_excluded": 2532
+  },
+  "counts": {
+    "training": {
+      "reviewed": 6980,
+      "semantically_rated": 6067,
+      "usable": 6067,
+      "invalid": 909,
+      "excluded_scope": 4,
+      "split_conflict": 0,
+      "source_valid": 6980,
+      "source_invalid": 0,
+      "corrected_valid_ratings": 3197,
+      "newly_excluded_source_valid": 913,
+      "restored_source_invalid_semantic": 0,
+      "restored_source_invalid_usable": 0,
+      "groups": 2636,
+      "pairs": 3425
+    },
+    "test": {
+      "reviewed": 2834,
+      "semantically_rated": 2436,
+      "usable": 2431,
+      "invalid": 395,
+      "excluded_scope": 3,
+      "split_conflict": 5,
+      "source_valid": 2620,
+      "source_invalid": 214,
+      "corrected_valid_ratings": 794,
+      "newly_excluded_source_valid": 242,
+      "restored_source_invalid_semantic": 58,
+      "restored_source_invalid_usable": 53,
+      "groups": 1222,
+      "pairs": 1387
+    },
+    "validation": {
+      "dispositions": 1830,
+      "usable": 1576,
+      "source_groups": 680,
+      "invalid": 253,
+      "excluded_ambiguous": 1
+    }
+  },
+  "review_provenance": {
+    "assistant_review": true,
+    "human_error_rate_measured": false,
+    "fresh_review": "One source-only manual semantic reading per comparison, partitioned across four assistant contexts.",
+    "focused_review": "Independent assistant context for every proposed exclusion, source-label disagreement and low-confidence first reading.",
+    "focused_counts": {
+      "train_a": 1610,
+      "train_b": 1419,
+      "train_root": 1127,
+      "test": 992,
+      "test_tail": 262
+    },
+    "total_primary_focused": 5410,
+    "root_user_boundary_checks": 389,
+    "root_final_adjudications": 15,
+    "encoder_predictions_inspected": false,
+    "model_training_run": false,
+    "source_labels_withheld_from_fresh_readers": true,
+    "source_labels_visible_as_candidates_in_focused_review": true,
+    "source_parent_commit": "a6a2628b4b51c95df119d4fedb227d30feb02c4d",
+    "first_pass_receipts": [
+      {
+        "partition": "train_a",
+        "first_pass_rows": 2454,
+        "focused_rows": 1610,
+        "first_review_sha256": "15cf51a3d50351911fc928f7d65f4d0e7ae687113afb4a73697c662afd754171",
+        "focused_input_sha256": "e0d946956988aa417e1a70347c0e6fa004049db142f5877a07547ddde8aacb98"
+      },
+      {
+        "partition": "train_b",
+        "first_pass_rows": 2454,
+        "focused_rows": 1419,
+        "first_review_sha256": "d7054706ba73988742c5b4241918e7cda85d1ff51076bdd2d0a9aaf71de1f800",
+        "focused_input_sha256": "efef7c98d9d431339e2bce1637f97c714bfb94eb9e3485e2553951a56ad9fee6"
+      },
+      {
+        "partition": "train_root",
+        "first_pass_rows": 2072,
+        "focused_rows": 1127,
+        "first_review_sha256": "93cb95a88679afb563f23726f3a6b3aff1a82a4eebdfe9ed6e99509ba0d8db1e",
+        "focused_input_sha256": "4414c9142c5bbf2936f53d867bc8dc66e6ac709f6e24e8189c418cf7cb712d80"
+      },
+      {
+        "partition": "test",
+        "first_pass_rows": 2200,
+        "focused_rows": 992,
+        "first_review_sha256": "8a83cc29b2fedcfc95778ed7fe1f8b26f9217fff759c7eaa86a34596a8de6416",
+        "focused_input_sha256": "f1353f2a1043bf437e69b40fcde9ef8b28e8a367af0260117bfb165148871171"
+      },
+      {
+        "partition": "test_tail",
+        "first_pass_rows": 634,
+        "focused_rows": 262,
+        "first_review_sha256": "32a94cc670223d7c3631df5129adb92d7f7ac293abb2c5bd212573e8c969dab3",
+        "focused_input_sha256": "caa9772435b371cd974c9f52fc1cc5670b99b9b7bab0c911e28bf009038ba10c"
+      }
+    ]
+  },
+  "user_decisions": {
+    "inclusion_report_items": [
+      13,
+      27,
+      59,
+      64
+    ],
+    "assistant_numeric_labels": [
+      5,
+      3,
+      3,
+      3
+    ],
+    "confirmed_original_exclusion_items": [
+      6,
+      7,
+      11,
+      14,
+      15,
+      16,
+      26,
+      28,
+      31,
+      50,
+      58,
+      63
+    ],
+    "numeric_grades_for_four_new_inclusions_supplied_by_user": false
+  },
+  "test_original_caption_conflicts": {
+    "evaluation_190": [
+      "training"
+    ],
+    "evaluation_191": [
+      "training"
+    ],
+    "evaluation_712": [
+      "training"
+    ],
+    "evaluation_713": [
+      "training"
+    ],
+    "evaluation_960": [
+      "training"
+    ],
+    "evaluation_961": [
+      "training"
+    ],
+    "evaluation_1022": [
+      "validation"
+    ],
+    "evaluation_1023": [
+      "validation"
+    ]
+  },
+  "test_group_merges": [],
+  "reconstructed_sha256": {
+    "training": "69db590d030881d801f30315d8c93d3b4eba1620ce537bfd4b2867fc59520946",
+    "validation": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+    "test": "4667fdd67696c7289297157f2431c7fca5f1e9b8a096bb322ee0700f4c6d472e"
+  },
+  "legacy_filename_aliases": {
+    "dev.json": "validation.json",
+    "evaluation.json": "test.json"
+  },
+  "rating_transitions": {
+    "training": {
+      "3.0 -> 1": 421,
+      "3.0 -> 5": 325,
+      "2.0 -> 1": 371,
+      "3.0 -> 4": 223,
+      "2.0 -> 2": 281,
+      "5.0 -> 5": 1213,
+      "4.0 -> 5": 909,
+      "1.0 -> 1": 471,
+      "3.0 -> 3": 647,
+      "2.0 -> invalid": 303,
+      "3.0 -> invalid": 404,
+      "1.0 -> 3": 58,
+      "4.0 -> invalid": 71,
+      "1.0 -> 5": 29,
+      "3.0 -> 2": 298,
+      "4.0 -> 3": 216,
+      "4.0 -> 4": 258,
+      "2.0 -> 3": 148,
+      "2.0 -> 4": 29,
+      "1.0 -> invalid": 122,
+      "4.0 -> 2": 29,
+      "2.0 -> 5": 36,
+      "4.0 -> 1": 22,
+      "1.0 -> 2": 21,
+      "5.0 -> 4": 37,
+      "5.0 -> invalid": 9,
+      "3.0 -> excluded_scope": 2,
+      "5.0 -> 3": 18,
+      "1.0 -> 4": 1,
+      "5.0 -> 1": 6,
+      "2.0 -> excluded_scope": 2
+    },
+    "test": {
+      "1.0 -> invalid": 93,
+      "3.0 -> 3": 145,
+      "5.0 -> 5": 919,
+      "2.0 -> 1": 34,
+      "3.0 -> invalid": 62,
+      "4.0 -> 3": 54,
+      "-1.0 -> invalid": 156,
+      "2.0 -> 3": 58,
+      "1.0 -> 3": 67,
+      "4.0 -> 4": 73,
+      "3.0 -> 2": 59,
+      "1.0 -> 1": 368,
+      "4.0 -> 5": 99,
+      "3.0 -> 5": 43,
+      "5.0 -> invalid": 26,
+      "4.0 -> invalid": 33,
+      "3.0 -> 1": 43,
+      "1.0 -> 2": 78,
+      "2.0 -> 2": 79,
+      "-1.0 -> 1": 12,
+      "5.0 -> 3": 39,
+      "4.0 -> 2": 27,
+      "5.0 -> 4": 49,
+      "2.0 -> invalid": 25,
+      "2.0 -> 5": 19,
+      "1.0 -> excluded_scope": 1,
+      "5.0 -> 1": 15,
+      "-1.0 -> 2": 10,
+      "3.0 -> 4": 40,
+      "4.0 -> 1": 10,
+      "-1.0 -> 5": 16,
+      "1.0 -> 5": 17,
+      "2.0 -> 4": 18,
+      "5.0 -> 2": 16,
+      "1.0 -> 4": 9,
+      "-1.0 -> 3": 14,
+      "-1.0 -> 4": 6,
+      "5.0 -> excluded_scope": 2
+    }
+  },
+  "all_dispositions_final": true,
+  "model_predictions_used_for_labels": false
+}

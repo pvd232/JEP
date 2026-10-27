@@ -1,0 +1,448 @@
+{
+  "from_version": 4.1,
+  "to_version": 4.2,
+  "source_report": "https://github.com/pvd232/JEP/blob/a6a2628b4b51c95df119d4fedb227d30feb02c4d/training_outputs/csts_validation_exclusions_full_audit_v4_1_20261027.md",
+  "user_statements": [
+    "I reviewed the first 30 and I support the inclusion of 13 and 27 for the stated review issue",
+    "59 and 64 as well",
+    "also, for all the \"flagged for review\" questions before #64, I agreed with the original rationale, FYI"
+  ],
+  "numeric_ratings_supplied_by_user": false,
+  "counts_before": {
+    "dispositions": 1830,
+    "usable": 1572,
+    "source_groups": 678,
+    "invalid": 257,
+    "excluded_ambiguous": 1
+  },
+  "counts_after": {
+    "dispositions": 1830,
+    "usable": 1576,
+    "source_groups": 680,
+    "invalid": 253,
+    "excluded_ambiguous": 1
+  },
+  "changes": [
+    {
+      "row_id": "train_624",
+      "report_item": 13,
+      "source": {
+        "row_id": "train_624",
+        "sentence1": "There are various food items including pickles, tomatoes, carrots, broccoli; as well as a sippy cup, spoon, fork, and whale napkin.",
+        "sentence2": "A glass of juice sits between two plates of food near pizza hut napkins on a dark yellow tablecloth.",
+        "condition": "number of beverages",
+        "rating": 5.0,
+        "target": 1.0,
+        "pair_id": "6b093535c5928c958b49835444fdab762915a44a79c2f01b4eb1e676dd6550f5",
+        "group_id": "0a861a4bdd1b16db815bfb58ca79967231ab253929cc19d12d6cb5c0585c7b10"
+      },
+      "before": {
+        "label": {
+          "row_id": "train_624",
+          "source_train_row": 624,
+          "original_rating": 5.0,
+          "rating": null,
+          "status": "invalid",
+          "pair_id": "6b093535c5928c958b49835444fdab762915a44a79c2f01b4eb1e676dd6550f5",
+          "group_id": "0a861a4bdd1b16db815bfb58ca79967231ab253929cc19d12d6cb5c0585c7b10"
+        },
+        "audit": {
+          "row_id": "train_624",
+          "status": "invalid",
+          "rating": null,
+          "reviewer_ids": [
+            "scope_v4_part1"
+          ],
+          "rationale": "A sippy cup does not establish a beverage or beverage count. / A cup alone does not establish a beverage count.",
+          "scope_review_version": 4.1,
+          "scope_review_part": 1,
+          "historical_reviewer_ids": [
+            "part1_a",
+            "part1_b"
+          ],
+          "scope": "number of beverages",
+          "value_a": "sippy cup, no drink specified",
+          "value_b": "1 glass of juice",
+          "scope_review_resolution": "fresh_review_confirms_current_label"
+        }
+      },
+      "after": {
+        "label": {
+          "row_id": "train_624",
+          "source_train_row": 624,
+          "original_rating": 5.0,
+          "rating": 5,
+          "status": "adjudicated",
+          "pair_id": "6b093535c5928c958b49835444fdab762915a44a79c2f01b4eb1e676dd6550f5",
+          "group_id": "0a861a4bdd1b16db815bfb58ca79967231ab253929cc19d12d6cb5c0585c7b10",
+          "inclusion_provenance": "user-approved inclusion",
+          "rating_provenance": "assistant application of user-approved inclusion and ordinary meal-context inference; user did not explicitly specify a numerical rating"
+        },
+        "audit": {
+          "row_id": "train_624",
+          "status": "adjudicated",
+          "rating": 5,
+          "reviewer_ids": [
+            "scope_v4_part1",
+            "user_inclusion_v4_2",
+            "assistant_numeric_application_v4_2"
+          ],
+          "rationale": "Ordinary drinking context supplies a recoverable beverage count even when cup contents are unnamed.",
+          "scope_review_version": 4.2,
+          "scope_review_part": 1,
+          "historical_reviewer_ids": [
+            "part1_a",
+            "part1_b"
+          ],
+          "scope": "number of beverages in the described meal",
+          "value_a": "one beverage inferred from a sippy cup among meal items",
+          "value_b": "one glass of juice",
+          "scope_review_resolution": "user_inclusion_with_assistant_numeric_application",
+          "historical_v4_1_decision": {
+            "row_id": "train_624",
+            "status": "invalid",
+            "rating": null,
+            "reviewer_ids": [
+              "scope_v4_part1"
+            ],
+            "rationale": "A sippy cup does not establish a beverage or beverage count. / A cup alone does not establish a beverage count.",
+            "scope_review_version": 4.1,
+            "scope_review_part": 1,
+            "historical_reviewer_ids": [
+              "part1_a",
+              "part1_b"
+            ],
+            "scope": "number of beverages",
+            "value_a": "sippy cup, no drink specified",
+            "value_b": "1 glass of juice",
+            "scope_review_resolution": "fresh_review_confirms_current_label"
+          },
+          "inclusion_provenance": "user-approved inclusion",
+          "rating_provenance": "assistant application of user-approved inclusion and ordinary meal-context inference; user did not explicitly specify a numerical rating",
+          "user_report_item": 13
+        }
+      },
+      "user_decision": "include",
+      "numeric_rating_assigned_by": "assistant",
+      "rationale": "Ordinary drinking context supplies a recoverable beverage count even when cup contents are unnamed."
+    },
+    {
+      "row_id": "train_1075",
+      "report_item": 27,
+      "source": {
+        "row_id": "train_1075",
+        "sentence1": "The bowl of food on the table is next to a couple of forks and glasses.",
+        "sentence2": "A close up shot of a plate with eggs and fruit on a table.",
+        "condition": "amount of food",
+        "rating": 3.0,
+        "target": 0.5,
+        "pair_id": "9cc3372727b3187c728e1046841219f29812a07067806e6e96977b7285fd3d14",
+        "group_id": "1b7367a96e26b4f067ce6fe8dc123b2293390d0a4d4deed5e356b1f1dc1126c7"
+      },
+      "before": {
+        "label": {
+          "row_id": "train_1075",
+          "source_train_row": 1075,
+          "original_rating": 3.0,
+          "rating": null,
+          "status": "invalid",
+          "pair_id": "9cc3372727b3187c728e1046841219f29812a07067806e6e96977b7285fd3d14",
+          "group_id": "1b7367a96e26b4f067ce6fe8dc123b2293390d0a4d4deed5e356b1f1dc1126c7"
+        },
+        "audit": {
+          "row_id": "train_1075",
+          "status": "invalid",
+          "rating": null,
+          "reviewer_ids": [
+            "scope_v4_part1",
+            "scope_v4_part6"
+          ],
+          "rationale": "The vessels do not establish food quantity or serving size in either caption.",
+          "scope_review_version": 4.1,
+          "scope_review_part": 1,
+          "historical_reviewer_ids": [
+            "part1_a",
+            "part1_b"
+          ],
+          "scope": "amount of food",
+          "value_a": "food in bowl; quantity unspecified",
+          "value_b": "eggs and fruit on plate; quantity unspecified",
+          "scope_review_resolution": "focused_semantic_adjudication"
+        }
+      },
+      "after": {
+        "label": {
+          "row_id": "train_1075",
+          "source_train_row": 1075,
+          "original_rating": 3.0,
+          "rating": 3,
+          "status": "adjudicated",
+          "pair_id": "9cc3372727b3187c728e1046841219f29812a07067806e6e96977b7285fd3d14",
+          "group_id": "1b7367a96e26b4f067ce6fe8dc123b2293390d0a4d4deed5e356b1f1dc1126c7",
+          "inclusion_provenance": "user-approved inclusion",
+          "rating_provenance": "assistant application of user-approved inclusion and coarse food-amount comparison; user did not explicitly specify a numerical rating"
+        },
+        "audit": {
+          "row_id": "train_1075",
+          "status": "adjudicated",
+          "rating": 3,
+          "reviewer_ids": [
+            "scope_v4_part1",
+            "scope_v4_part6",
+            "user_inclusion_v4_2",
+            "assistant_numeric_application_v4_2"
+          ],
+          "rationale": "Both provide a serving of food; uncertainty about precise amount supports possible equality, not invalidity.",
+          "scope_review_version": 4.2,
+          "scope_review_part": 1,
+          "historical_reviewer_ids": [
+            "part1_a",
+            "part1_b"
+          ],
+          "scope": "coarse amount of food served",
+          "value_a": "one bowl of food, exact portion size unspecified",
+          "value_b": "one plate of eggs and fruit, exact portion size unspecified",
+          "scope_review_resolution": "user_inclusion_with_assistant_numeric_application",
+          "historical_v4_1_decision": {
+            "row_id": "train_1075",
+            "status": "invalid",
+            "rating": null,
+            "reviewer_ids": [
+              "scope_v4_part1",
+              "scope_v4_part6"
+            ],
+            "rationale": "The vessels do not establish food quantity or serving size in either caption.",
+            "scope_review_version": 4.1,
+            "scope_review_part": 1,
+            "historical_reviewer_ids": [
+              "part1_a",
+              "part1_b"
+            ],
+            "scope": "amount of food",
+            "value_a": "food in bowl; quantity unspecified",
+            "value_b": "eggs and fruit on plate; quantity unspecified",
+            "scope_review_resolution": "focused_semantic_adjudication"
+          },
+          "inclusion_provenance": "user-approved inclusion",
+          "rating_provenance": "assistant application of user-approved inclusion and coarse food-amount comparison; user did not explicitly specify a numerical rating",
+          "user_report_item": 27
+        }
+      },
+      "user_decision": "include",
+      "numeric_rating_assigned_by": "assistant",
+      "rationale": "Both provide a serving of food; uncertainty about precise amount supports possible equality, not invalidity."
+    },
+    {
+      "row_id": "train_1809",
+      "report_item": 59,
+      "source": {
+        "row_id": "train_1809",
+        "sentence1": "A lean cow eats grass in the foreground as a horse climbs the hillside behind.",
+        "sentence2": "A large cow with small horns is sticking its tongue out and is surrounded by green grass.",
+        "condition": "size of cow",
+        "rating": 2.0,
+        "target": 0.25,
+        "pair_id": "9bd6e0de4f0228a1fb1010e60c5ddb78452e39e98f35a57d535c6ec77c3265b7",
+        "group_id": "ceb0277444fbc073a8557963ada993f9645ca9fb1d5d19bdc09dade712381a52"
+      },
+      "before": {
+        "label": {
+          "row_id": "train_1809",
+          "source_train_row": 1809,
+          "original_rating": 2.0,
+          "rating": null,
+          "status": "invalid",
+          "pair_id": "9bd6e0de4f0228a1fb1010e60c5ddb78452e39e98f35a57d535c6ec77c3265b7",
+          "group_id": "ceb0277444fbc073a8557963ada993f9645ca9fb1d5d19bdc09dade712381a52"
+        },
+        "audit": {
+          "row_id": "train_1809",
+          "status": "invalid",
+          "rating": null,
+          "reviewer_ids": [
+            "scope_v4_part1",
+            "scope_v4_part6"
+          ],
+          "rationale": "Lean specifies body condition rather than the cow's overall size, which is unavailable in the first caption.",
+          "scope_review_version": 4.1,
+          "scope_review_part": 1,
+          "historical_reviewer_ids": [
+            "part2_a",
+            "part2_b",
+            "independent_adjudicator"
+          ],
+          "scope": "overall cow size",
+          "value_a": "lean body condition; overall size unstated",
+          "value_b": "large overall size",
+          "scope_review_resolution": "focused_semantic_adjudication"
+        }
+      },
+      "after": {
+        "label": {
+          "row_id": "train_1809",
+          "source_train_row": 1809,
+          "original_rating": 2.0,
+          "rating": 3,
+          "status": "adjudicated",
+          "pair_id": "9bd6e0de4f0228a1fb1010e60c5ddb78452e39e98f35a57d535c6ec77c3265b7",
+          "group_id": "ceb0277444fbc073a8557963ada993f9645ca9fb1d5d19bdc09dade712381a52",
+          "inclusion_provenance": "user-approved inclusion",
+          "rating_provenance": "assistant application of user-approved inclusion and partial body-size information; user did not explicitly specify a numerical rating"
+        },
+        "audit": {
+          "row_id": "train_1809",
+          "status": "adjudicated",
+          "rating": 3,
+          "reviewer_ids": [
+            "scope_v4_part1",
+            "scope_v4_part6",
+            "user_inclusion_v4_2",
+            "assistant_numeric_application_v4_2"
+          ],
+          "rationale": "Both captions supply relevant physical-size information. Lean and large describe partly different dimensions and can coexist, supporting partial agreement.",
+          "scope_review_version": 4.2,
+          "scope_review_part": 1,
+          "historical_reviewer_ids": [
+            "part2_a",
+            "part2_b",
+            "independent_adjudicator"
+          ],
+          "scope": "size and body build of the principal cow",
+          "value_a": "lean cow; body build specified, overall dimensions unspecified",
+          "value_b": "large cow; overall size specified, body build unspecified",
+          "scope_review_resolution": "user_inclusion_with_assistant_numeric_application",
+          "historical_v4_1_decision": {
+            "row_id": "train_1809",
+            "status": "invalid",
+            "rating": null,
+            "reviewer_ids": [
+              "scope_v4_part1",
+              "scope_v4_part6"
+            ],
+            "rationale": "Lean specifies body condition rather than the cow's overall size, which is unavailable in the first caption.",
+            "scope_review_version": 4.1,
+            "scope_review_part": 1,
+            "historical_reviewer_ids": [
+              "part2_a",
+              "part2_b",
+              "independent_adjudicator"
+            ],
+            "scope": "overall cow size",
+            "value_a": "lean body condition; overall size unstated",
+            "value_b": "large overall size",
+            "scope_review_resolution": "focused_semantic_adjudication"
+          },
+          "inclusion_provenance": "user-approved inclusion",
+          "rating_provenance": "assistant application of user-approved inclusion and partial body-size information; user did not explicitly specify a numerical rating",
+          "user_report_item": 59
+        }
+      },
+      "user_decision": "include",
+      "numeric_rating_assigned_by": "assistant",
+      "rationale": "Both captions supply relevant physical-size information. Lean and large describe partly different dimensions and can coexist, supporting partial agreement."
+    },
+    {
+      "row_id": "train_2022",
+      "report_item": 64,
+      "source": {
+        "row_id": "train_2022",
+        "sentence1": "A photo of a computer screen with furniture in the background and sunlight beaming through the window.",
+        "sentence2": "A room with a plant, television, a stack of books and someone with their feet up in it. ",
+        "condition": "type of room",
+        "rating": 3.0,
+        "target": 0.5,
+        "pair_id": "beec4592a43aaeb4c0b3a77aae7e31d45ef1119f70d9d43b72219caecf399b08",
+        "group_id": "3400732723db8ffb075d3f5541fd94e7d6bc3fa49a2e428b9437fe64e10b0776"
+      },
+      "before": {
+        "label": {
+          "row_id": "train_2022",
+          "source_train_row": 2022,
+          "original_rating": 3.0,
+          "rating": null,
+          "status": "invalid",
+          "pair_id": "beec4592a43aaeb4c0b3a77aae7e31d45ef1119f70d9d43b72219caecf399b08",
+          "group_id": "3400732723db8ffb075d3f5541fd94e7d6bc3fa49a2e428b9437fe64e10b0776"
+        },
+        "audit": {
+          "row_id": "train_2022",
+          "status": "invalid",
+          "rating": null,
+          "reviewer_ids": [
+            "scope_v4_part2"
+          ],
+          "rationale": "Neither caption reliably establishes a room type. / Neither furniture list uniquely establishes a specific room type.",
+          "scope_review_version": 4.1,
+          "scope_review_part": 2,
+          "historical_reviewer_ids": [
+            "part2_a",
+            "part2_b"
+          ],
+          "scope": "room type",
+          "value_a": "unspecified furnished room with computer",
+          "value_b": "unspecified furnished room with television and reclining person",
+          "scope_review_resolution": "fresh_review_confirms_current_label"
+        }
+      },
+      "after": {
+        "label": {
+          "row_id": "train_2022",
+          "source_train_row": 2022,
+          "original_rating": 3.0,
+          "rating": 3,
+          "status": "adjudicated",
+          "pair_id": "beec4592a43aaeb4c0b3a77aae7e31d45ef1119f70d9d43b72219caecf399b08",
+          "group_id": "3400732723db8ffb075d3f5541fd94e7d6bc3fa49a2e428b9437fe64e10b0776",
+          "inclusion_provenance": "user-approved inclusion",
+          "rating_provenance": "assistant application of user-approved inclusion and partial room-type information; user did not explicitly specify a numerical rating"
+        },
+        "audit": {
+          "row_id": "train_2022",
+          "status": "adjudicated",
+          "rating": 3,
+          "reviewer_ids": [
+            "scope_v4_part2",
+            "user_inclusion_v4_2",
+            "assistant_numeric_application_v4_2"
+          ],
+          "rationale": "Both descriptions supply a furnished indoor-room context. Their exact functions are not established equally, so room type is only partially determined.",
+          "scope_review_version": 4.2,
+          "scope_review_part": 2,
+          "historical_reviewer_ids": [
+            "part2_a",
+            "part2_b"
+          ],
+          "scope": "type of the furnished indoor room",
+          "value_a": "furnished room with computer and sunlit window; exact function uncertain",
+          "value_b": "furnished room with television, plant, books and relaxed occupant; living-room context",
+          "scope_review_resolution": "user_inclusion_with_assistant_numeric_application",
+          "historical_v4_1_decision": {
+            "row_id": "train_2022",
+            "status": "invalid",
+            "rating": null,
+            "reviewer_ids": [
+              "scope_v4_part2"
+            ],
+            "rationale": "Neither caption reliably establishes a room type. / Neither furniture list uniquely establishes a specific room type.",
+            "scope_review_version": 4.1,
+            "scope_review_part": 2,
+            "historical_reviewer_ids": [
+              "part2_a",
+              "part2_b"
+            ],
+            "scope": "room type",
+            "value_a": "unspecified furnished room with computer",
+            "value_b": "unspecified furnished room with television and reclining person",
+            "scope_review_resolution": "fresh_review_confirms_current_label"
+          },
+          "inclusion_provenance": "user-approved inclusion",
+          "rating_provenance": "assistant application of user-approved inclusion and partial room-type information; user did not explicitly specify a numerical rating",
+          "user_report_item": 64
+        }
+      },
+      "user_decision": "include",
+      "numeric_rating_assigned_by": "assistant",
+      "rationale": "Both descriptions supply a furnished indoor-room context. Their exact functions are not established equally, so room type is only partially determined."
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "from_version": 4.1,
+  "to_version": 4.2,
+  "input_sha256": {
+    "labels": "558e191fed52baed85b2ec98444104cc85d19220109f83c00a0a87800b20e3e6",
+    "audit": "22f4cb0c265b6ae4ff2fe58dfb00259ffd02c483be8b64d44e11ea4efec23ac5",
+    "source": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+    "user": "12364f8c21015a801c6c26167f81337f5557a576cfede250d34b2604e7518f84"
+  },
+  "previous_published_audit_sha256": "845ed43db26743496fbd73dd4e6453d7dd18fb54002f3d8b2a07d3fd7655c412",
+  "unchanged_input_files": true,
+  "all_source_ids_unique_and_preserved": true,
+  "changed_label_rows": [
+    "train_624",
+    "train_1075",
+    "train_1809",
+    "train_2022"
+  ],
+  "changed_audit_rows": [
+    "train_1075",
+    "train_624",
+    "train_1809",
+    "train_2022"
+  ],
+  "exactly_four_dispositions_changed": true,
+  "all_other_1826_label_records_identical": true,
+  "all_other_1826_audit_records_identical": true,
+  "all_previous_1572_usable_rows_identical": true,
+  "source_reconstruction_verified": true,
+  "source_row_order_preserved": true,
+  "source_group_ids_preserved": true,
+  "counts": {
+    "dispositions": 1830,
+    "usable": 1576,
+    "source_groups": 680,
+    "invalid": 253,
+    "excluded_ambiguous": 1
+  },
+  "status_counts": {
+    "agreement": 1211,
+    "adjudicated": 365,
+    "invalid": 253,
+    "excluded_ambiguous": 1
+  },
+  "numeric_ratings_supplied_by_user": false,
+  "model_predictions_inspected": false,
+  "artifact_sha256": {
+    "audit.json": "471a0fd3ddd9a842c3ac87ed5fcbe0c77958f0501a274992c4df1584b99a51c3",
+    "changes.json": "821bd92cb5962bee6f0697e96b78427c33531608e11eb17cbdec27393b5bd8f4",
+    "labels.json": "9d58f0d713b864d74ccab5d518c5b2d124d6e9a1de5b1f16fb389adc4e89555b",
+    "usable_rows.json": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+    "README.md": "77791983d2333c5165e7eb4c6be6efd5d28460561ab84758ec4eb70cfc85ccd9"
+  },
+  "artifact_locations": {
+    "audit.json": "../../training_outputs/csts_validation_audit_v4_2_20261027.json",
+    "usable_rows.json": "reconstruction output validation.json",
+    "changes.json": "changes.json",
+    "labels.json": "labels.json",
+    "README.md": "README.md"
+  }
+}
