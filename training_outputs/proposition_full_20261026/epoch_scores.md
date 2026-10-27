@@ -1,22 +1,5 @@
 # Four initial epochs: jep-csts-v1
 
-<!-- three-model-comparison:start -->
-## Test comparison: all three models
-
-Dataset: **jep-csts-v1**, the same **2,430 test examples** for every full-test score. Encoder checkpoints were selected on validation before test scoring.
-
-| Model | Full-test Spearman | Full-test MSE (0–1) | Test coverage |
-|---|---:|---:|---:|
-| Ratings model | 0.853227 | 0.039779 | 2,430/2,430 |
-| Proposition model | 0.854075 | 0.039181 | 2,430/2,430 |
-| GPT-6.1 Sol (max) | 0.919955 | 0.023513 | 2,430/2,430 |
-
-Encoder scores above come from the completed **2-initial-epoch** comparison.
-The four-initial-epoch follow-up is training; its test scores will replace the encoder rows after checkpoint selection and test evaluation finish.
-
-[Sol capture status and protocol](gpt61_sol_max_jep_v1.md). Test scores do not control training, checkpoint selection or the proposition-generation decision.
-<!-- three-model-comparison:end -->
-
 Training: **6,051** comparisons. Validation: **1,576**. Test: **2,430**.
 
 Stop after consecutive non-improving validation checks: ratings control **1**; proposition model **1**. Keep each model's best validation checkpoint. Time and epoch limits are disabled. Both models receive four matched initial epochs, then train ratings on all 6,051 comparisons. [Completed two-epoch comparison](two_epoch_phase1_scores.md).
@@ -26,7 +9,7 @@ Stop after consecutive non-improving validation checks: ratings control **1**; p
 [Missing proposition generation progress](generation_progress.md)
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T16:41:37+00:00**. Run: `jep_csts_v1_four_initial_epochs_patience1_20261027`.
+Updated: **2026-10-27T16:42:17+00:00**. Run: `jep_csts_v1_four_initial_epochs_patience1_20261027`.
 
 Status: **running**. Current stage: **evidence_ratings**.
 
@@ -84,9 +67,7 @@ Stop reason: `validation_patience`.
 
 ## Proposition model: ratings on the full training set
 
-Training hardware: **NVIDIA A100-SXM4-40GB**. Overall batch: **32**; microbatch: **32**. Ratings control continues on the Asian L4. Both models keep patience 1 and their best validation checkpoints.
-
-Status: **running**. Completed epochs: **5**. Recorded optimizer updates: **950**.
+Status: **succeeded**. Completed epochs: **5**. Recorded optimizer updates: **950**.
 
 | Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
 |---:|---:|---:|---:|---:|---:|
@@ -97,26 +78,3 @@ Status: **running**. Completed epochs: **5**. Recorded optimizer updates: **950*
 | 5 | 950 | 0.872995 | 0.530179 | 0.019706 | 1 |
 
 Stop reason: `validation_patience`.
-
-<!-- proposition-validation:start -->
-## Proposition validation and full-training generation
-
-Monitor: **complete**.
-
-Training inputs captured: **11,909/11,909**; missing inputs requested: **9,413**. The current training bank remains frozen.
-
-Held-out sample: **128 validation source groups**, one passage-condition input per group. References and generated answers are kept outside training. Evaluation uses the retained checkpoints; hardware and progress appear in the detailed status below.
-
-| Proposition checkpoint | Held-out answer loss | Model-reviewed factual accuracy | Reviewed answers |
-|---|---:|---:|---:|
-| After 2 proposition-writing epochs | 0.451316 | 89.1% | 64 |
-| After 4 proposition-writing epochs | 0.378650 | 93.8% | 64 |
-
-Loss averages each answer's next-token cross-entropy, then averages answers. Factual checks use free-generated answers and two independent source-only model reviews; they report support, omissions, unsupported assertions and reviewer agreement. These measurements describe proposition writing and do not change the running experiment's stopping rule.
-
-Earlier checkpoints were overwritten by the original trainer; epochs 2 and 4 have retained checkpoints. [Detailed status and results](proposition_validation.json).
-
-Held-out reference review: **125/128** fully correct by both model reviewers; **0** flagged for unsupported assertions; reviewer agreement **99.2%**.
-
-Training-generation review: **125/128** fully correct by both model reviewers; **1** flagged for unsupported assertions; reviewer agreement **99.2%**.
-<!-- proposition-validation:end -->
