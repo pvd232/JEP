@@ -56,6 +56,12 @@ def decision(summary: dict[str, Any], selection: dict[str, Any]) -> dict[str, An
             arm: selection["candidates"][arm]["epoch"] for arm in scores
         },
         "training_seed": summary["settings"]["training"]["seed"],
+        "patience_by_arm": {
+            arm: summary["settings"]
+            .get("arm_patience", {})
+            .get(arm, summary["settings"]["training"].get("patience", 2))
+            for arm in scores
+        },
         "source_commit": summary["source_commit"],
         "dataset_revision": summary["settings"]["dataset_revision"],
         "scope": "One-seed comparison after both models exhausted validation patience."
@@ -168,6 +174,19 @@ def render(
         prefix[0] = "# Four initial epochs: jep-csts-v1"
         prefix[4] = (
             "Both models continue their saved first-phase checkpoints through epoch four on the same 2,135 covered comparisons. The ratings control learns ratings; the proposition model writes propositions. Both then start fresh full-data ratings training with patience 2 and disabled time and epoch limits. [Completed two-epoch comparison](two_epoch_phase1_scores.md)."
+        )
+    policy = report.get("training_policy", {})
+    if policy.get("train_until_patience"):
+        patience = policy.get("patience", 2)
+        by_arm = policy.get("arm_patience", {})
+        prefix[0] = "# Training with validation early stopping: jep-csts-v1"
+        prefix[4] = (
+            f"Stop after consecutive non-improving validation checks: ratings control **{by_arm.get('ratings', patience)}**; proposition model **{by_arm.get('evidence', patience)}**. Keep each model's best validation checkpoint. Time and epoch limits are disabled."
+        )
+    if policy.get("pretrain_epochs", 2) == 4:
+        prefix[0] = "# Four initial epochs: jep-csts-v1"
+        prefix[4] += (
+            " Both models receive four matched initial epochs, then train ratings on all 6,051 comparisons. [Completed two-epoch comparison](two_epoch_phase1_scores.md)."
         )
     prefix += ["[Missing proposition generation progress](generation_progress.md)", ""]
     if result is not None:

@@ -282,6 +282,7 @@ def restore_first_phase(
         "max_seconds",
         "parent_sha256",
         "train_until_patience",
+        "patience",
     }
     current = config.model_dump(mode="json")
     if any(current[k] != v for k, v in parent["config"].items() if k not in allowed):

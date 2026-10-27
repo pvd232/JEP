@@ -53,11 +53,14 @@ def finish_lora(context: StageContext[FitConfig]) -> None:
         **parent["protocol_config"],
         "train_until_patience": True,
         "start_epoch": context.config.start_epoch,
+        "patience": context.config.patience,
     }
     write_json(context.outputs["trace"], trace)
 
 
-def continuation_config(parent: dict[str, Any]) -> FitConfig:
+def continuation_config(
+    parent: dict[str, Any], patience: int | None = None
+) -> FitConfig:
     """Preserve the optimizer settings while overriding both training ceilings."""
     cfg = dict(parent["config"])
     cfg.update(
@@ -65,6 +68,8 @@ def continuation_config(parent: dict[str, Any]) -> FitConfig:
         max_epochs=max(cfg["max_epochs"], len(parent["epochs"]) + 1),
         train_until_patience=True,
     )
+    if patience is not None:
+        cfg["patience"] = patience
     return FitConfig.model_validate(cfg)
 
 
@@ -92,6 +97,22 @@ def run_completion(root: Path, settings: dict[str, Any], name: str) -> None:
     trusted = frozenset(
         {str(source.repository), str(read_source(parent_root).repository)}
     )
+    completed = None
+    completed_directory = None
+    if settings.get("completed_arm_root"):
+        completed_root = Path(settings["completed_arm_root"])
+        trusted = trusted | {str(read_source(completed_root).repository)}
+        completed_directory = (
+            completed_root / "qwen_evidence_results" / settings["completed_arm_name"]
+        )
+        completed = load_json(completed_directory / "summary.json")
+        if (
+            completed["settings"]["splits"] != settings["splits"]
+            or completed["settings"]["training"] != settings["training"]
+        ):
+            raise ValueError(
+                "The completed control must use the same frozen data and training settings."
+            )
     directory = root / "qwen_evidence_results" / name
     directory.mkdir(parents=True, exist_ok=True)
     path = directory / "summary.json"
@@ -134,6 +155,24 @@ def run_completion(root: Path, settings: dict[str, Any], name: str) -> None:
                     parent_dir / f"{arm}_{phase}_trace.json",
                     directory / f"{arm}_{phase}_trace.json",
                 )
+        if completed is not None and completed_directory is not None:
+            records = [r for r in completed["runs"] if r["name"] == "ratings_ratings"]
+            control_trace = load_json(
+                completed_directory / "ratings_ratings_trace.json"
+            )
+            if (
+                len(records) != 1
+                or records[0]["status"] != "succeeded"
+                or control_trace["stop_reason"] != "validation_patience"
+            ):
+                raise ValueError(
+                    "The preserved control must have finished validation patience."
+                )
+            summary["runs"].extend(records)
+            shutil.copyfile(
+                completed_directory / "ratings_ratings_trace.json",
+                directory / "ratings_ratings_trace.json",
+            )
         write_json(path, summary)
     environment = observe_python_env()
     metrics = tuple(
@@ -157,7 +196,10 @@ def run_completion(root: Path, settings: dict[str, Any], name: str) -> None:
             summary["runs"].append(record)
             write_json(path, summary)
             continue
-        cfg = continuation_config(trace)
+        cfg = continuation_config(
+            trace,
+            settings.get("arm_patience", {}).get(arm, settings["training"]["patience"]),
+        )
         bindings = {
             "parent_last_model": "last_model",
             "parent_resume": "resume_state",

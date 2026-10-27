@@ -123,6 +123,7 @@ def collect(root, name, previous=None, overrides=None):
         "identity": identity,
         "training_sha256": settings["splits"]["training"]["sha256"],
         "training_policy": {
+            "arm_patience": settings.get("arm_patience", {}),
             "pretrain_epochs": settings.get("phases", {})
             .get("pretrain", {})
             .get("max_epochs", 2),
@@ -248,7 +249,7 @@ def markdown(report):
         (
             f"Both models start from the same pretrained weights. For the first {report.get('training_policy', {}).get('pretrain_epochs', 2)} epochs, both see the comparisons covered by existing propositions. The ratings model learns ratings; the proposition model learns to write propositions. Both then learn ratings from the full training set. "
             + (
-                f"Ratings training continues until validation patience {report['training_policy']['patience']} is exhausted, with time and epoch limits disabled."
+                f"Ratings training stops after the configured consecutive non-improving checks: ratings control {report['training_policy'].get('arm_patience', {}).get('ratings', report['training_policy']['patience'])}; proposition model {report['training_policy'].get('arm_patience', {}).get('evidence', report['training_policy']['patience'])}. Training continues with time and epoch limits disabled."
                 if report.get("training_policy", {}).get("train_until_patience")
                 else f"Ratings training uses validation patience {report.get('training_policy', {}).get('patience', 5)} and an epoch ceiling of {report.get('training_policy', {}).get('ratings_max_epochs', 24)}."
             )

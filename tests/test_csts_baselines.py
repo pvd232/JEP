@@ -383,6 +383,47 @@ def test_patience_completion_overrides_both_training_ceilings(
     assert trace["epochs"][-1]["epochs_without_improvement"] == 2
 
 
+def test_shortened_patience_preserves_best_and_completed_epochs(
+    prepared, tmp_path, monkeypatch
+):
+    """Resume with patience one and retain the incumbent after the first decline."""
+    original = stages.summarize
+    curve = iter([0.3, 0.8, 0.9])
+    monkeypatch.setattr(
+        stages, "summarize", lambda rows: {**original(rows), "spearman": next(curve)}
+    )
+    parent = context_for(prepared, tmp_path / "parent_patience_two", patience=2)
+    stages.fit_projection(parent)
+    retained = {key: path.read_bytes() for key, path in parent.outputs.items()}
+    continued = context_for(
+        prepared,
+        tmp_path / "shortened_patience",
+        start_epoch=3,
+        max_epochs=4,
+        patience=1,
+        train_until_patience=True,
+    )
+    continued.inputs.update(
+        {
+            "parent_last_model": parent.outputs["last_model"],
+            "parent_resume": parent.outputs["resume_state"],
+            "parent_trace": parent.outputs["trace"],
+            "parent_model": parent.outputs["model"],
+            "parent_validation_predictions": parent.outputs["validation_predictions"],
+        }
+    )
+    curve = iter([0.7])
+    stages.fit_projection(continued)
+    result = load_json(continued.outputs["trace"])
+    assert result["stop_reason"] == "validation_patience"
+    assert len(result["epochs"]) == 4
+    assert result["epochs"][-1]["epochs_without_improvement"] == 1
+    assert result["epochs"][:3] == load_json(parent.outputs["trace"])["epochs"]
+    assert result["selected"]["epoch"] == 3
+    assert continued.outputs["model"].read_bytes() == retained["model"]
+    assert {key: path.read_bytes() for key, path in parent.outputs.items()} == retained
+
+
 def test_patience_completion_restores_prior_stale_check(
     prepared, tmp_path, monkeypatch
 ):

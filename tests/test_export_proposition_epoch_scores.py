@@ -104,6 +104,20 @@ class EpochPublicationTests(unittest.TestCase):
         self.assertEqual(report["training_policy"]["ratings_max_seconds"], 8100)
         self.assertIn("patience 2", markdown(report))
 
+    def test_per_arm_patience_is_visible_during_the_transition(self):
+        """The table exposes the completed control's patience and shortened proposition patience."""
+        self.summary["settings"]["training"] = {
+            "patience": 2,
+            "train_until_patience": True,
+        }
+        self.summary["settings"]["arm_patience"] = {"ratings": 2, "evidence": 1}
+        self.write(self.directory / "summary.json", self.summary)
+        report = collect(self.root, self.name)
+        self.assertEqual(
+            report["training_policy"]["arm_patience"], {"ratings": 2, "evidence": 1}
+        )
+        self.assertIn("ratings control 2; proposition model 1", markdown(report))
+
     def test_completion_policy_reports_disabled_ceilings_and_live_trace(self):
         """A live continuation takes precedence over its copied parent trace."""
         self.phase_a()

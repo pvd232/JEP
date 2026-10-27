@@ -363,7 +363,11 @@ def test_both_training_phases_share_initialization_and_restore_terminal_adapters
                     }
                     history = load_json(outputs["trace"])["epochs"]
                     cfg4 = cfg.model_copy(
-                        update={"max_epochs": 4, "train_until_patience": True}
+                        update={
+                            "max_epochs": 4,
+                            "train_until_patience": True,
+                            "patience": 1,
+                        }
                     )
                     reference_dir = tmp_path / f"{arm}_uninterrupted_four"
                     reference_dir.mkdir()

@@ -54,6 +54,7 @@ def run_extension(root: Path, settings: dict[str, Any], name: str) -> None:
     if settings["training"] != {
         **parent["settings"]["training"],
         "train_until_patience": True,
+        "patience": settings["training"]["patience"],
     }:
         raise ValueError("The follow-up must preserve the matched optimizer settings.")
     for key in ("splits", "answers", "provenance", "audit_gate", "encoder", "head"):

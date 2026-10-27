@@ -277,6 +277,7 @@ def restore_training(
         raise ValueError("Parent terminal weights, epoch and resume state disagree.")
     allowed = {
         "train_until_patience",
+        "patience",
         "start_epoch",
         "max_epochs",
         "max_seconds",

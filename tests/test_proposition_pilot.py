@@ -49,6 +49,10 @@ class PilotTests(unittest.TestCase):
         self.assertEqual(cfg.max_epochs, 25)
         self.assertEqual(cfg.learning_rate, original.learning_rate)
         self.assertEqual(cfg.patience, 2)
+        shorter = continuation_config(parent, patience=1)
+        self.assertEqual(shorter.patience, 1)
+        self.assertEqual(shorter.start_epoch, cfg.start_epoch)
+        self.assertEqual(shorter.learning_rate, cfg.learning_rate)
 
     def test_generation_uses_selected_validation_scores(self):
         """A positive validation result triggers generation even with lower test scores."""
@@ -122,6 +126,15 @@ class PilotTests(unittest.TestCase):
         self.assertEqual(settings["phases"]["pretrain"]["max_epochs"], 4)
         self.assertTrue(settings["training"]["train_until_patience"])
         self.assertFalse(settings["allow_budget_censored_pilot"])
+        self.assertEqual(settings["training"]["patience"], 1)
+        mixed = json.loads(
+            (
+                Path(__file__).resolve().parents[1]
+                / "configs/csts-qwen-jep-v1-proposition-patience1.json"
+            ).read_text()
+        )
+        validate_settings(mixed)
+        self.assertEqual(mixed["arm_patience"], {"ratings": 2, "evidence": 1})
 
     def test_publisher_uses_existing_publication_transport(self):
         """Publication uses the supplied connection and preserves other repository files."""

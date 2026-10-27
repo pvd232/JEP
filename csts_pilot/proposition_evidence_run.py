@@ -68,6 +68,9 @@ def phase_config(
             **settings["encoder"],
             **settings["training"],
             **settings["phases"][phase],
+            "patience": settings.get("arm_patience", {}).get(
+                arm, settings["training"]["patience"]
+            ),
             "kind": "lora",
             "arm": arm,
             "phase": phase,
@@ -85,8 +88,21 @@ def validate_settings(settings: dict[str, Any]) -> None:
     """Reject unreviewed loss, phase-length or stopping changes before execution."""
     if settings["head"]["sha256"] == "0" * 64:
         raise ValueError("Bind the restored pretrained head before execution.")
-    if settings["arms"] != list(ARMS) or settings["training"]["patience"] not in (2, 5):
-        raise ValueError("The comparison requires both arms and patience two or five.")
+    if settings["arms"] != list(ARMS) or settings["training"]["patience"] not in (
+        1,
+        2,
+        5,
+    ):
+        raise ValueError(
+            "The comparison requires both arms and patience one, two or five."
+        )
+    if any(
+        arm not in ARMS or value not in (1, 2, 5)
+        for arm, value in settings.get("arm_patience", {}).items()
+    ):
+        raise ValueError(
+            "Arm patience must name an existing arm and a supported patience."
+        )
     if settings.get("allow_budget_censored_pilot") and (
         settings.get("dataset_revision") != "jep-csts-v1"
         or settings["training"]["patience"] != 2
@@ -108,6 +124,9 @@ def validate_settings(settings: dict[str, Any]) -> None:
                     **settings["encoder"],
                     **settings["training"],
                     **settings["phases"][phase],
+                    "patience": settings.get("arm_patience", {}).get(
+                        arm, settings["training"]["patience"]
+                    ),
                     "kind": "lora",
                     "arm": arm,
                     "phase": phase,
@@ -160,6 +179,10 @@ def run_study(
         if settings.get("continuation_parent_root")
         else {str(source.repository)}
     )
+    if settings.get("completed_arm_root"):
+        trusted = trusted | {
+            str(read_source(Path(settings["completed_arm_root"])).repository)
+        }
     environment = observe_python_env()
     destination = ViperCloudDestination.model_validate(
         settings["publication_destination"]
