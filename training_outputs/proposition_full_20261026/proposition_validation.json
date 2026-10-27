@@ -1,5 +1,5 @@
 {
-  "status": "running",
+  "status": "complete",
   "protocol": {
     "dataset_revision": "jep-csts-v1",
     "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
@@ -62,7 +62,29 @@
   "generation": {
     "completed_inputs": 11909,
     "newly_completed_inputs": 9413,
-    "unique_inputs": 11909
+    "unique_inputs": 11909,
+    "factual_review": {
+      "n": 128,
+      "fully_correct": 125,
+      "accuracy": 0.9765625,
+      "supported": 127,
+      "unsupported_assertion_count": 1,
+      "review_agreement": 0.9921875,
+      "reviewers": "Two independent GPT-6.1 Sol high calls; model-reviewed, no human adjudication."
+    },
+    "complete": {
+      "status": "complete",
+      "records": 11909,
+      "records_sha256": "72e0857df9527cb3844ed58e92700b319f0ef060a7125996c2590afb382714eb",
+      "raw_reused_receipts": "/Users/machina/.codex/.chatgpt-projects/g-p-6ad6fb9258ac8191b4baa874735994e2/work/csts-jep-v1-full-propositions-20261027/csts_data/jep-csts-v1-propositions/reused_receipts.json",
+      "raw_new_capture": "/Users/machina/.codex/.chatgpt-projects/g-p-6ad6fb9258ac8191b4baa874735994e2/work/proposition-validation-full-20261027/training_capture",
+      "status_counts": {
+        "answered": 11079,
+        "ambiguous": 28,
+        "not_specified": 802
+      },
+      "current_training_bank_changed": false
+    }
   },
   "evaluations": [
     {

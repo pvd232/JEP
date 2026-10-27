@@ -1,6 +1,6 @@
 ## Proposition validation and full-training generation
 
-Monitor: **running**.
+Monitor: **complete**.
 
 Training inputs captured: **11,909/11,909**; missing inputs requested: **9,413**. The current training bank remains frozen.
 
@@ -16,3 +16,5 @@ Loss averages each answer's next-token cross-entropy, then averages answers. Fac
 Earlier checkpoints were overwritten by the original trainer; epochs 2 and 4 have retained checkpoints. [Detailed status and results](proposition_validation.json).
 
 Held-out reference review: **125/128** fully correct by both model reviewers; **0** flagged for unsupported assertions; reviewer agreement **99.2%**.
+
+Training-generation review: **125/128** fully correct by both model reviewers; **1** flagged for unsupported assertions; reviewer agreement **99.2%**.
