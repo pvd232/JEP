@@ -14,3 +14,5 @@ Both arms share first-phase comparison exposure, initialization and update count
 Rating errors use a separate positive affine calibration fitted on each arm's selected validation predictions. The JSON records raw and calibrated rating errors, group-held-out validation calibration error, exact cohort definitions and paired source-group intervals. Spearman uses the original scores and tie structure.
 
 This experiment uses one training seed. The teacher fidelity assessment was model assisted and sampled. Results describe the available training targets and the fixed C-STS partitions.
+
+[Three-seed summary](../../three_seed_replication.md). [Frozen protocol](../../replication_protocol.json).
