@@ -1,22 +1,5 @@
 # Four initial epochs: jep-csts-v1
 
-<!-- three-model-comparison:start -->
-## Test comparison: all three models
-
-Dataset: **jep-csts-v1**, the same **2,430 test examples** for every full-test score. Encoder checkpoints were selected on validation before test scoring.
-
-| Model | Full-test Spearman | Full-test MSE (0–1) | Test coverage |
-|---|---:|---:|---:|
-| Ratings model | 0.853227 | 0.039779 | 2,430/2,430 |
-| Proposition model | 0.854075 | 0.039181 | 2,430/2,430 |
-| GPT-6.1 Sol (max) | 0.919955 | 0.023513 | 2,430/2,430 |
-
-Encoder scores above come from the completed **2-initial-epoch** comparison.
-The four-initial-epoch follow-up is training; its test scores will replace the encoder rows after checkpoint selection and test evaluation finish.
-
-[Sol capture status and protocol](gpt61_sol_max_jep_v1.md). Test scores do not control training, checkpoint selection or the proposition-generation decision.
-<!-- three-model-comparison:end -->
-
 Training: **6,051** comparisons. Validation: **1,576**. Test: **2,430**.
 
 Stop after consecutive non-improving validation checks: ratings control **1**; proposition model **1**. Keep each model's best validation checkpoint. Time and epoch limits are disabled. Both models receive four matched initial epochs, then train ratings on all 6,051 comparisons. [Completed two-epoch comparison](two_epoch_phase1_scores.md).
@@ -26,7 +9,7 @@ Stop after consecutive non-improving validation checks: ratings control **1**; p
 [Missing proposition generation progress](generation_progress.md)
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T13:47:53+00:00**. Run: `jep_csts_v1_four_initial_epochs_patience1_20261027`.
+Updated: **2026-10-27T13:51:50+00:00**. Run: `jep_csts_v1_four_initial_epochs_patience1_20261027`.
 
 Status: **running**. Current stage: **evidence_pretrain**.
 
@@ -57,7 +40,7 @@ Stop reason: `fixed_update_budget`.
 
 ## Proposition model: writing propositions on the covered subset
 
-Status: **running**. Completed epochs: **2**. Recorded optimizer updates: **150**.
+Status: **running**. Completed epochs: **2**. Recorded optimizer updates: **175**.
 
 | Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
 |---:|---:|---:|---:|---:|---:|
