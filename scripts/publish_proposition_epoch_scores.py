@@ -83,7 +83,7 @@ def command(arguments, *, cwd=None, data=None, environment=None, timeout=60, che
 def git(repo, arguments, *, data=None, environment=None, check=True):
     env = os.environ.copy()
     env["GIT_TERMINAL_PROMPT"] = "0"
-    env["GIT_SSH_COMMAND"] = "ssh -o BatchMode=yes -o ConnectTimeout=15"
+    env.setdefault("GIT_SSH_COMMAND", "ssh -o BatchMode=yes -o ConnectTimeout=15")
     if environment:
         env.update(environment)
     return command(["git", *arguments], cwd=repo, data=data, environment=env, check=check)
@@ -101,6 +101,29 @@ def read_remote(transport, owner):
             or identity["validation_sha256"] != "f186e86877e731c96ee9b1c819863b981074bc500dc9aa11c6951ba9fd56e2c9"):
         raise ValueError("Unexpected full experiment identity")
     return envelope
+
+
+def read_local(root, operator, owner):
+    lease = operator / "publication_controller_status.json"
+    previous = json.loads(lease.read_text()) if lease.exists() else {}
+    if previous.get("owner") not in (None, owner) and time.time() - previous.get("checked_unix", 0) < 90:
+        raise RuntimeError("Another epoch publisher has a current heartbeat")
+    output = operator / "epoch_publication"
+    command([sys.executable, str(operator / "export_epoch_scores.py"), "--root", str(root), "--output", str(output)], timeout=30)
+    envelope = {"report": json.loads((output / "epoch_scores.json").read_text()), "markdown": (output / "epoch_scores.md").read_text()}
+    identity = envelope["report"]["identity"]
+    if (identity["source_commit"] != "a6daf0eeea544716d7340f0f24de687e4ba93490"
+            or identity["run_name"] != "propositions_v41_full_after_indicative"
+            or identity["validation_sha256"] != "f186e86877e731c96ee9b1c819863b981074bc500dc9aa11c6951ba9fd56e2c9"):
+        raise ValueError("Unexpected full experiment identity")
+    return envelope
+
+
+def heartbeat(operator, state):
+    if operator is not None:
+        atomic_json(operator / "publication_controller_status.json", {
+            **state, "checked_unix": time.time(), "mode": "native_gpu_process",
+        })
 
 
 def publish(repo, envelope, state_directory):
@@ -147,7 +170,12 @@ def main():
     parser.add_argument("--state-directory", type=Path, required=True)
     parser.add_argument("--poll-seconds", type=float, default=30)
     parser.add_argument("--once", action="store_true")
+    parser.add_argument("--local-root", type=Path)
+    parser.add_argument("--operator-directory", type=Path)
+    parser.add_argument("--cleanup-key", type=Path)
     args = parser.parse_args()
+    if bool(args.local_root) != bool(args.operator_directory):
+        parser.error("Local root and operator directory must be supplied together")
     if args.poll_seconds < 5:
         parser.error("Polling interval must be at least five seconds")
     args.repo = args.repo.resolve()
@@ -157,7 +185,7 @@ def main():
         fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
     except BlockingIOError:
         raise SystemExit("Epoch publisher already running")
-    owner = "mac-publisher-" + hashlib.sha256(str(args.state_directory.resolve()).encode()).hexdigest()[:16]
+    owner = ("native-gpu-publisher-" if args.local_root else "mac-publisher-") + hashlib.sha256(str(args.state_directory.resolve()).encode()).hexdigest()[:16]
     state = {"owner": owner, "pid": os.getpid(), "started_at_utc": utc(), "poll_seconds": args.poll_seconds,
              "status": "starting", "consecutive_failures": 0}
     atomic_json(args.state_directory / "publisher_status.json", state)
@@ -165,7 +193,7 @@ def main():
     while True:
         started = time.monotonic()
         try:
-            envelope = read_remote(args.transport, owner)
+            envelope = read_local(args.local_root, args.operator_directory, owner) if args.local_root else read_remote(args.transport, owner)
             report = envelope["report"]
             current_signature = signature(report)
             result = {"published": False, "reason": "unchanged_local"}
@@ -184,14 +212,19 @@ def main():
                 state["last_published_at_utc"] = utc()
                 print(json.dumps({"at": utc(), **result, "epochs": state["epochs"]}), flush=True)
             atomic_json(args.state_directory / "publisher_status.json", state)
+            heartbeat(args.operator_directory, state)
             if report.get("run_status") in ("complete", "completed", "succeeded"):
                 state["status"] = "complete"
                 atomic_json(args.state_directory / "publisher_status.json", state)
+                heartbeat(args.operator_directory, state)
+                if args.cleanup_key:
+                    args.cleanup_key.unlink(missing_ok=True)
                 return
         except Exception as error:
             state.update(status="retrying", last_checked_at_utc=utc(), last_error=str(error),
                          consecutive_failures=state["consecutive_failures"] + 1)
             atomic_json(args.state_directory / "publisher_status.json", state)
+            heartbeat(args.operator_directory, state)
             print(json.dumps({"at": utc(), "status": "retrying", "error": str(error)}), flush=True)
             if args.once:
                 raise

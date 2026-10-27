@@ -1,8 +1,10 @@
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T02:10:29+00:00**. Run: `propositions_v41_full_after_indicative`.
+Updated: **2026-10-27T02:50:42+00:00**. Run: `propositions_v41_full_after_indicative`. 
 
-Status: **running**. Current stage: **evidence_pretrain**.
+Publication: **manual refresh; continuous publication awaits authorization**.
+
+Status: **running**. Current stage: **ratings_ratings**.
 
 Validation: **1,572 comparisons**, 678 source groups.
 
@@ -29,13 +31,18 @@ Stop reason: `fixed_update_budget`.
 
 ## Proposition arm: auxiliary phase
 
-Status: **running**. Completed epochs: **0**. Recorded optimizer updates: **25**.
+Status: **succeeded**. Completed epochs: **2**. Recorded optimizer updates: **144**.
 
-Awaiting the first completed epoch.
+| Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 72 | 0.453279 | 3.482882 | 4.552642 | — |
+| 2 | 144 | 0.459184 | 4.074551 | 0.580284 | — |
+
+Stop reason: `fixed_update_budget`.
 
 ## Ratings arm: ratings phase
 
-Status: **pending**. Completed epochs: **0**. Recorded optimizer updates: **0**.
+Status: **running**. Completed epochs: **0**. Recorded optimizer updates: **125**.
 
 Awaiting the first completed epoch.
 
