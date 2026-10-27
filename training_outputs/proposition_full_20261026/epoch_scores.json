@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at_utc": "2026-10-27T13:14:40+00:00",
+  "updated_at_utc": "2026-10-27T13:15:23+00:00",
   "identity": {
     "run_name": "jep_csts_v1_proposition_patience1_completion_20261027",
     "source_commit": "636cb33048f41eb8c0e839250df66d36cf46a101",
@@ -294,5 +294,35 @@
       "notes": []
     }
   },
-  "dataset_revision": "jep-csts-v1"
+  "dataset_revision": "jep-csts-v1",
+  "pilot_decision": {
+    "criterion": "Selected proposition-model validation Spearman exceeds the selected ratings-control validation Spearman.",
+    "positive": false,
+    "validation_spearman": {
+      "ratings": 0.8759148798941229,
+      "evidence": 0.8750486487560906
+    },
+    "validation_difference": -0.0008662311380323029,
+    "test_spearman": {
+      "ratings": 0.853227221431671,
+      "evidence": 0.8540749642675822
+    },
+    "test_used_for_generation_decision": false,
+    "selected_epochs": {
+      "ratings": 4,
+      "evidence": 4
+    },
+    "training_seed": 7,
+    "patience_by_arm": {
+      "ratings": 2,
+      "evidence": 1
+    },
+    "source_commit": "636cb33048f41eb8c0e839250df66d36cf46a101",
+    "dataset_revision": "jep-csts-v1",
+    "scope": "One-seed comparison after both models exhausted validation patience.",
+    "stopping_reasons": {
+      "ratings": "validation_patience",
+      "evidence": "validation_patience"
+    }
+  }
 }

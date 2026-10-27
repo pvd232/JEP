@@ -16,11 +16,15 @@
     "evidence": 4
   },
   "training_seed": 7,
-  "source_commit": "8df0a1039bb5be8ddfd8407bdd32aa64a102018a",
+  "patience_by_arm": {
+    "ratings": 2,
+    "evidence": 1
+  },
+  "source_commit": "636cb33048f41eb8c0e839250df66d36cf46a101",
   "dataset_revision": "jep-csts-v1",
-  "scope": "One-seed pilot with existing proposition coverage and a bounded training budget.",
+  "scope": "One-seed comparison after both models exhausted validation patience.",
   "stopping_reasons": {
-    "ratings": "resource_budget",
-    "evidence": "resource_budget"
+    "ratings": "validation_patience",
+    "evidence": "validation_patience"
   }
 }

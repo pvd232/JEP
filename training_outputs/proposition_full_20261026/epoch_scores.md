@@ -7,9 +7,23 @@ Stop after consecutive non-improving validation checks: ratings control **2**; p
 [Earlier V4.1 comparison](v41_final_epoch_scores.md)
 
 [Missing proposition generation progress](generation_progress.md)
+
+## Pilot result
+
+| Model | Selected validation Spearman | Test Spearman | Selected ratings epoch |
+|---|---:|---:|---:|
+| Ratings control | 0.875915 | 0.853227 | 4 |
+| Proposition model | 0.875049 | 0.854075 | 4 |
+
+Proposition-model validation difference: **-0.000866**.
+Ratings training stopped because: {'ratings': 'validation_patience', 'evidence': 'validation_patience'}. A resource-budget stop means the overnight time limit ended training before patience 2 was reached.
+
+Missing proposition generation: **not queued; the pilot's validation difference was zero or negative**.
+
+This is a one-seed screening result. Selected checkpoints were frozen before test scoring. [Detailed comparison and source-group intervals](comparison_report.md).
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T13:14:40+00:00**. Run: `jep_csts_v1_proposition_patience1_completion_20261027`.
+Updated: **2026-10-27T13:15:23+00:00**. Run: `jep_csts_v1_proposition_patience1_completion_20261027`.
 
 Status: **complete**. Current stage: **none**.
 
