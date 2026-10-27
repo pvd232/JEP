@@ -264,7 +264,13 @@ def main() -> None:
         return
     with (args.operator / "watchdog.log").open("ab", buffering=0) as log:
         guard = subprocess.Popen(
-            [sys.executable, __file__, *sys.argv[1:], "--watchdog"],
+            [
+                sys.executable,
+                "-m",
+                "scripts.supervise_proposition_pilot",
+                *sys.argv[1:],
+                "--watchdog",
+            ],
             cwd=args.root,
             env=environment,
             stdin=subprocess.DEVNULL,
