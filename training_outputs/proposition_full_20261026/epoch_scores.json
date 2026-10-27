@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at_utc": "2026-10-27T13:16:22+00:00",
+  "updated_at_utc": "2026-10-27T13:20:58+00:00",
   "identity": {
     "run_name": "jep_csts_v1_four_initial_epochs_patience1_20261027",
     "source_commit": "67f816407f786ea038415422a9aefd57d30c92fb",
@@ -26,15 +26,44 @@
   "stages": {
     "ratings_pretrain": {
       "status": "running",
-      "trace_status": null,
-      "trace_path": null,
-      "trace_available": false,
-      "completed_epoch": 0,
-      "current_epoch": null,
-      "optimizer_updates": 0,
+      "trace_status": "running",
+      "trace_path": "/home/machina/jep-csts-jep-v1-four-epoch-20261027/experiments/csts_finish_67f81640_d6da6161_ratings_pretrain/runs/ratings_pretrain/01M5YR29JQ4WHV7SC1MJ42WSKX/artifacts/train/trace/trace.json",
+      "trace_available": true,
+      "completed_epoch": 2,
+      "current_epoch": 3,
+      "optimizer_updates": 150,
       "epochs_without_improvement": null,
       "stop_reason": null,
-      "epochs": [],
+      "epochs": [
+        {
+          "epoch": 1,
+          "optimizer_updates": 67,
+          "validation_spearman": 0.8106559608996193,
+          "validation_mse_1_5": 0.8676274010913952,
+          "validation_rows": 1576,
+          "training_loss": 0.11895450687535898,
+          "training_loss_kind": "rating_mse_0_1",
+          "epochs_without_improvement": null,
+          "fit_seconds": null,
+          "validation_seconds": null,
+          "observed_epoch_seconds": null,
+          "elapsed_seconds": 654.9761499680171
+        },
+        {
+          "epoch": 2,
+          "optimizer_updates": 134,
+          "validation_spearman": 0.8453686505097764,
+          "validation_mse_1_5": 0.6707989074170114,
+          "validation_rows": 1576,
+          "training_loss": 0.04776657169078972,
+          "training_loss_kind": "rating_mse_0_1",
+          "epochs_without_improvement": null,
+          "fit_seconds": null,
+          "validation_seconds": null,
+          "observed_epoch_seconds": null,
+          "elapsed_seconds": 1315.4090067079815
+        }
+      ],
       "notes": []
     },
     "evidence_pretrain": {
