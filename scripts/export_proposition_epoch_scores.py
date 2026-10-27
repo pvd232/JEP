@@ -123,6 +123,9 @@ def collect(root, name, previous=None, overrides=None):
         "identity": identity,
         "training_sha256": settings["splits"]["training"]["sha256"],
         "training_policy": {
+            "pretrain_epochs": settings.get("phases", {})
+            .get("pretrain", {})
+            .get("max_epochs", 2),
             "train_until_patience": settings.get("training", {}).get(
                 "train_until_patience", False
             ),
@@ -243,7 +246,7 @@ def markdown(report):
         f"Training SHA-256: `{report['training_sha256']}`.",
         "",
         (
-            "Both models start from the same pretrained weights. For the first two epochs, both see the comparisons covered by existing propositions. The ratings model learns ratings; the proposition model learns to write propositions. Both then learn ratings from the full training set. "
+            f"Both models start from the same pretrained weights. For the first {report.get('training_policy', {}).get('pretrain_epochs', 2)} epochs, both see the comparisons covered by existing propositions. The ratings model learns ratings; the proposition model learns to write propositions. Both then learn ratings from the full training set. "
             + (
                 f"Ratings training continues until validation patience {report['training_policy']['patience']} is exhausted, with time and epoch limits disabled."
                 if report.get("training_policy", {}).get("train_until_patience")
@@ -257,7 +260,7 @@ def markdown(report):
         "",
     ]
     names = {
-        "ratings_pretrain": "Ratings model: first two epochs on the covered subset",
+        "ratings_pretrain": f"Ratings model: first {report.get('training_policy', {}).get('pretrain_epochs', 2)} epochs on the covered subset",
         "evidence_pretrain": "Proposition model: writing propositions on the covered subset",
         "ratings_ratings": "Ratings model: ratings on the full training set",
         "evidence_ratings": "Proposition model: ratings on the full training set",

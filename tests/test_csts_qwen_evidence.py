@@ -1,20 +1,28 @@
 """Check causal evidence supervision and the matched Qwen phase transition."""
 
 import copy
+import json
+from types import SimpleNamespace
 
 import pytest
 import torch
 from torch import nn
 from torch.nn import functional as F
 from transformers import Qwen3Config, Qwen3Model
+from viper.resume import load_resume_state
 
-from csts_pilot.baseline_models import EOD, FitConfig
+from csts_pilot import baseline_models
+from csts_pilot import qwen_evidence as module
+from csts_pilot.answers import answer_id
+from csts_pilot.baseline_models import EOD, FitConfig, state_digest, token_sequences
+from csts_pilot.convergence import file_sha256
 from csts_pilot.qwen_evidence import (
     answer_loss_sum,
     evidence_tokens,
     validate_matched_phases,
 )
 from csts_pilot.qwen_head_prepare import vocabulary
+from jep_pilot.loaders import load_json, load_model
 
 
 class Tokenizer:
@@ -35,8 +43,6 @@ class Tokenizer:
 
 
 def test_only_answer_tokens_and_terminator_are_labels():
-    from csts_pilot.answers import answer_id
-    from csts_pilot.baseline_models import token_sequences
 
     row = {"condition": "color", "sentence1": "red car", "sentence2": "blue car"}
     config = FitConfig(kind="lora", device="cpu")
@@ -53,7 +59,6 @@ def test_only_answer_tokens_and_terminator_are_labels():
 
 
 def test_evidence_preparation_batches_vocabulary_and_tokenizer_work():
-    from csts_pilot.answers import answer_id
 
     class CountingTokenizer(Tokenizer):
         vocabulary_calls = 0
@@ -233,18 +238,11 @@ def test_added_tokens_are_included_in_head_compatibility_check():
     ) == {"word": 0, EOD: 1}
 
 
+@pytest.mark.parametrize("initial_epochs", [2, 4])
 def test_both_training_phases_share_initialization_and_restore_terminal_adapters(
-    tmp_path, monkeypatch
+    tmp_path, monkeypatch, initial_epochs
 ):
     """Exercise the complete two-arm transition with real tiny Qwen and PEFT."""
-    import json
-    from types import SimpleNamespace
-
-    from csts_pilot import baseline_models
-    from csts_pilot import qwen_evidence as module
-    from csts_pilot.answers import answer_id
-    from csts_pilot.convergence import file_sha256
-    from jep_pilot.loaders import load_json
 
     class PaddedTokenizer(Tokenizer):
         def pad(self, encoded, **kwargs):
@@ -358,9 +356,119 @@ def test_both_training_phases_share_initialization_and_restore_terminal_adapters
                         numpy_generators={},
                     )
                 )
+                if phase == "pretrain" and initial_epochs == 4:
+                    original_outputs = dict(outputs)
+                    original_bytes = {
+                        k: p.read_bytes() for k, p in outputs.items() if p.exists()
+                    }
+                    history = load_json(outputs["trace"])["epochs"]
+                    cfg4 = cfg.model_copy(
+                        update={"max_epochs": 4, "train_until_patience": True}
+                    )
+                    reference_dir = tmp_path / f"{arm}_uninterrupted_four"
+                    reference_dir.mkdir()
+                    reference_outputs = {
+                        k: reference_dir / p.name for k, p in outputs.items()
+                    }
+                    module.fit_qwen_evidence(
+                        SimpleNamespace(
+                            config=cfg4,
+                            inputs=dict(inputs),
+                            outputs=reference_outputs,
+                            metrics=metrics,
+                            numpy_generators={},
+                        )
+                    )
+                    resumed_dir = tmp_path / f"{arm}_continued_four"
+                    resumed_dir.mkdir()
+                    outputs = {
+                        k: resumed_dir / p.name for k, p in original_outputs.items()
+                    }
+                    resumed_inputs = {
+                        **inputs,
+                        "parent_model": original_outputs["last_model"],
+                        "parent_resume": original_outputs["resume_state"],
+                        "parent_trace": original_outputs["trace"],
+                    }
+                    resumed_cfg = cfg4.model_copy(
+                        update={
+                            "start_epoch": 2,
+                            "parent_sha256": file_sha256(
+                                original_outputs["last_model"]
+                            ),
+                        }
+                    )
+                    with pytest.raises(ValueError, match="frozen training setting"):
+                        module.fit_qwen_evidence(
+                            SimpleNamespace(
+                                config=resumed_cfg.model_copy(
+                                    update={"learning_rate": 3e-5}
+                                ),
+                                inputs=resumed_inputs,
+                                outputs=outputs,
+                                metrics=metrics,
+                                numpy_generators={},
+                            )
+                        )
+                    module.fit_qwen_evidence(
+                        SimpleNamespace(
+                            config=resumed_cfg,
+                            inputs=resumed_inputs,
+                            outputs=outputs,
+                            metrics=metrics,
+                            numpy_generators={},
+                        )
+                    )
+                    resumed = load_json(outputs["trace"])
+                    reference = load_json(reference_outputs["trace"])
+                    assert resumed["epochs"][:2] == history
+                    assert resumed["actual_updates"] == reference["actual_updates"] == 8
+                    assert state_digest(
+                        load_model(outputs["last_model"])["state"]
+                    ) == state_digest(
+                        load_model(reference_outputs["last_model"])["state"]
+                    )
+                    for actual, expected in zip(
+                        resumed["epochs"], reference["epochs"], strict=True
+                    ):
+                        for key in (
+                            "batch_order_sha256",
+                            "training_objective",
+                            "rating_input_tokens",
+                            "validation",
+                        ):
+                            assert actual[key] == expected[key]
+                    actual_state = load_resume_state(outputs["resume_state"])
+                    expected_state = load_resume_state(
+                        reference_outputs["resume_state"]
+                    )
+                    assert (
+                        actual_state.main_process_rng == expected_state.main_process_rng
+                    )
+                    torch.testing.assert_close(
+                        actual_state.dataloader.state_dict["generator_state"],
+                        expected_state.dataloader.state_dict["generator_state"],
+                        rtol=0,
+                        atol=0,
+                    )
+                    for key, value in actual_state.optimizer_state["optimizer"][
+                        "state"
+                    ].items():
+                        for field, tensor in value.items():
+                            torch.testing.assert_close(
+                                tensor,
+                                expected_state.optimizer_state["optimizer"]["state"][
+                                    key
+                                ][field],
+                                rtol=0,
+                                atol=0,
+                            )
+                    assert {
+                        k: original_outputs[k].read_bytes() for k in original_bytes
+                    } == original_bytes
                 traces[arm][phase] = load_json(outputs["trace"])
                 parent = outputs["last_model"]
-        validate_matched_phases(traces, 2)
+        validate_matched_phases(traces, initial_epochs)
         assert traces["evidence"]["pretrain"]["first_shared_adapter_gradient_norm"] > 0
         assert (
             traces["ratings"]["pretrain"]["terminal_trainable_sha256"]

@@ -84,6 +84,15 @@ class EpochPublicationTests(unittest.TestCase):
         self.assertNotIn("do_not_publish_test_scores", json.dumps(report))
         self.assertEqual(report["stages"]["evidence_pretrain"]["completed_epoch"], 0)
 
+    def test_four_epoch_initial_phase_is_named_in_the_report(self):
+        """The public table distinguishes four initial epochs from the prior two."""
+        self.summary["settings"]["phases"] = {"pretrain": {"max_epochs": 4}}
+        self.write(self.directory / "summary.json", self.summary)
+        report = collect(self.root, self.name)
+        self.assertEqual(report["training_policy"]["pretrain_epochs"], 4)
+        self.assertIn("first 4 epochs", markdown(report))
+        self.assertNotIn("first two epochs", markdown(report))
+
     def test_updated_stopping_policy_is_published(self):
         """Readers see the configured patience and wall budget for the current run."""
         self.summary["settings"]["training"] = {"patience": 2}

@@ -10,11 +10,12 @@ from pydantic import Field
 from safetensors.torch import load_file
 from torch import nn
 from torch.nn import functional as F
-from viper.randomness import capture_main_process_rng
+from viper.randomness import capture_main_process_rng, restore_main_process_rng
 from viper.resume import (
     DataLoaderConfiguration,
     DataLoaderResumeState,
     ResumeState,
+    load_resume_state,
     save_resume_state,
 )
 from viper.stages import StageContext, build, train
@@ -261,6 +262,60 @@ def save_first_phase(
     )
 
 
+def restore_first_phase(
+    context: Any,
+    model: nn.Module,
+    optimizer: torch.optim.Optimizer,
+    generator: torch.Generator,
+    rows: int,
+) -> dict[str, Any]:
+    """Restore the exact terminal optimizer, batch generator and random state of phase one."""
+    config = context.config
+    parent = load_json(context.inputs["parent_trace"])
+    saved = load_model(context.inputs["parent_model"])
+    resume = load_resume_state(context.inputs["parent_resume"])
+    state = resume.dataloader.state_dict
+    step = config.start_epoch * ((rows + config.batch_size - 1) // config.batch_size)
+    allowed = {
+        "start_epoch",
+        "max_epochs",
+        "max_seconds",
+        "parent_sha256",
+        "train_until_patience",
+    }
+    current = config.model_dump(mode="json")
+    if any(current[k] != v for k, v in parent["config"].items() if k not in allowed):
+        raise ValueError("Phase-one continuation changed a frozen training setting.")
+    if (
+        parent["status"] != "complete"
+        or parent["stop_reason"] != "fixed_update_budget"
+        or parent["completed_epoch"] != config.start_epoch
+        or len(parent["epochs"]) != config.start_epoch
+        or parent["actual_updates"] != step
+        or parent["training_rows"] != rows
+        or saved["epoch"] != config.start_epoch
+        or saved["step"] != step
+        or state["epoch"] != config.start_epoch
+        or state["step"] != step
+        or state["last_model_sha256"] != config.parent_sha256
+        or parent["terminal_model_sha256"] != config.parent_sha256
+        or state_digest(trainable_state(model)) != parent["terminal_trainable_sha256"]
+    ):
+        raise ValueError("Phase-one weights, history and resume state disagree.")
+    optimizer.load_state_dict(resume.optimizer_state["optimizer"])
+    steps = [float(item["step"]) for item in optimizer.state.values() if "step" in item]
+    if not steps or any(value != step for value in steps):
+        raise ValueError("Phase-one optimizer updates differ from its terminal epoch.")
+    generator.set_state(state["generator_state"])
+    restore_main_process_rng(resume.main_process_rng, context.numpy_generators)
+    if (
+        capture_main_process_rng(context.numpy_generators, capture_legacy_global=True)
+        != resume.main_process_rng
+    ):
+        raise ValueError("Phase-one random state differs from its saved identity.")
+    return parent
+
+
 @train(config=QwenEvidenceConfig)
 def fit_qwen_evidence(context: StageContext[QwenEvidenceConfig]) -> None:
     """Run fixed phase A or the existing patience-selected rating phase B."""
@@ -270,15 +325,19 @@ def fit_qwen_evidence(context: StageContext[QwenEvidenceConfig]) -> None:
             raise ValueError(f"Changed {name} input.")
     if (
         config.kind != "lora"
-        or config.start_epoch
+        or (config.start_epoch and config.phase != "pretrain")
         or config.schedule != "constant"
         or config.warmup_fraction
     ):
         raise ValueError(
             "This comparison requires fresh phase optimizers and constant-rate LoRA."
         )
-    if (config.phase == "ratings") != (config.parent_sha256 is not None):
-        raise ValueError("Only phase B restores a terminal phase-A checkpoint.")
+    if (config.phase == "ratings" or config.start_epoch > 0) != (
+        config.parent_sha256 is not None
+    ):
+        raise ValueError(
+            "A continued phase or ratings phase requires terminal parent weights."
+        )
     prepared = load_json(context.inputs["prepared"])
     fit = config.fit_config()
     reset_rng(config.seed)
@@ -339,12 +398,27 @@ def fit_qwen_evidence(context: StageContext[QwenEvidenceConfig]) -> None:
     step = 0
     started = time.monotonic()
     first_gradient = None
-    for epoch in range(1, config.max_epochs + 1):
+    elapsed_offset = 0.0
+    if config.start_epoch:
+        parent = restore_first_phase(
+            context, model, optimizer, generator, len(training_rows)
+        )
+        initial = parent["initial_trainable_sha256"]
+        initial_rng = parent["initial_rng"]
+        epochs = list(parent["epochs"])
+        step = parent["actual_updates"]
+        first_gradient = parent["first_shared_adapter_gradient_norm"]
+        elapsed_offset = parent["elapsed_seconds"]
+        training.nonpadding_tokens = epochs[-1]["rating_input_tokens"]
+    for epoch in range(config.start_epoch + 1, config.max_epochs + 1):
         model.train()
         order = torch.randperm(len(training_rows), generator=generator)
         total_loss, total_units, input_tokens = 0.0, 0, 0
         for start in range(0, len(order), config.batch_size):
-            if time.monotonic() - started >= config.max_seconds:
+            if (
+                not config.train_until_patience
+                and time.monotonic() - started >= config.max_seconds
+            ):
                 raise TimeoutError(
                     "The fixed first-phase budget was not completed; preserve the attempt."
                 )
@@ -410,7 +484,7 @@ def fit_qwen_evidence(context: StageContext[QwenEvidenceConfig]) -> None:
                         "updates": step,
                         "epochs": epochs,
                         "completed_epoch": epoch - 1,
-                        "elapsed_seconds": time.monotonic() - started,
+                        "elapsed_seconds": elapsed_offset + time.monotonic() - started,
                     },
                 )
         predictions = predict_pairs(model, validation, fit.microbatch_size)
@@ -428,7 +502,7 @@ def fit_qwen_evidence(context: StageContext[QwenEvidenceConfig]) -> None:
             "supervised_units": total_units,
             "answer_input_tokens": input_tokens,
             "rating_input_tokens": training.nonpadding_tokens,
-            "elapsed_seconds": time.monotonic() - started,
+            "elapsed_seconds": elapsed_offset + time.monotonic() - started,
         }
         epochs.append(record)
         save_first_phase(context, model, optimizer, generator, fit, epoch, step)
@@ -449,7 +523,7 @@ def fit_qwen_evidence(context: StageContext[QwenEvidenceConfig]) -> None:
                 "training_rows": len(training_rows),
                 "first_shared_adapter_gradient_norm": first_gradient,
                 "terminal_model_sha256": file_sha256(context.outputs["last_model"]),
-                "elapsed_seconds": time.monotonic() - started,
+                "elapsed_seconds": elapsed_offset + time.monotonic() - started,
                 "stop_reason": "fixed_update_budget"
                 if epoch == config.max_epochs
                 else None,

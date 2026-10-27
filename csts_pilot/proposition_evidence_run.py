@@ -95,11 +95,11 @@ def validate_settings(settings: dict[str, Any]) -> None:
             "Budget-censored scoring is reserved for the declared jep-csts-v1 pilot."
         )
     if (
-        settings["phases"]["pretrain"]["max_epochs"] != 2
+        settings["phases"]["pretrain"]["max_epochs"] not in (2, 4)
         or settings["phases"]["ratings"]["max_epochs"] != 24
     ):
         raise ValueError(
-            "Keep the two-epoch auxiliary phase and 24-epoch rating ceiling."
+            "Use two or four matched initial epochs and the declared ratings configuration."
         )
     for arm in ARMS:
         for phase in ("pretrain", "ratings"):

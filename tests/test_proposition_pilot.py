@@ -11,7 +11,8 @@ from pathlib import Path
 from csts_pilot.baseline_models import FitConfig
 from csts_pilot.complete_proposition_training import continuation_config
 from csts_pilot.proposition_evidence_run import validate_settings
-from scripts.supervise_proposition_pilot import BRANCH, decision, publish
+from scripts.supervise_proposition_pilot import BRANCH, REPORT, decision, publish
+from scripts.wait_proposition_comparison import parent_completed
 
 
 class PilotTests(unittest.TestCase):
@@ -91,6 +92,37 @@ class PilotTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "patience"):
             validate_settings(settings)
 
+    def test_four_epoch_followup_waits_for_both_finished_models_and_publication(self):
+        """A partial, censored or different run cannot start the queued comparison."""
+        self.assertFalse(parent_completed({}, "parent"))
+        report = {
+            "identity": {"run_name": "parent"},
+            "run_status": "complete",
+            "pilot_decision": {
+                "stopping_reasons": {
+                    "ratings": "validation_patience",
+                    "evidence": "resource_budget",
+                }
+            },
+        }
+        self.assertFalse(parent_completed(report, "parent"))
+        report["pilot_decision"]["stopping_reasons"]["evidence"] = "validation_patience"
+        self.assertTrue(parent_completed(report, "parent"))
+        report["run_status"] = "running"
+        self.assertFalse(parent_completed(report, "parent"))
+        with self.assertRaises(ValueError):
+            parent_completed(report, "another")
+        settings = json.loads(
+            (
+                Path(__file__).resolve().parents[1]
+                / "configs/csts-qwen-jep-v1-four-epoch.json"
+            ).read_text()
+        )
+        validate_settings(settings)
+        self.assertEqual(settings["phases"]["pretrain"]["max_epochs"], 4)
+        self.assertTrue(settings["training"]["train_until_patience"])
+        self.assertFalse(settings["allow_budget_censored_pilot"])
+
     def test_publisher_uses_existing_publication_transport(self):
         """Publication uses the supplied connection and preserves other repository files."""
         with tempfile.TemporaryDirectory() as temporary:
@@ -122,7 +154,16 @@ class PilotTests(unittest.TestCase):
             git("init")
             git("checkout", "-b", BRANCH)
             (root / "keep.txt").write_text("Preserve existing content.\n")
-            git("add", "keep.txt")
+            scores = root / REPORT
+            scores.mkdir(parents=True)
+            original = {
+                "run_status": "complete",
+                "training_policy": {"train_until_patience": True},
+            }
+            (scores / "epoch_scores.json").write_text(json.dumps(original))
+            (scores / "epoch_scores.md").write_text("Completed two-epoch comparison.\n")
+            (scores / "generation_progress.md").write_text("Generation progress.\n")
+            git("add", "keep.txt", REPORT)
             git("commit", "-m", "Fixture")
             git("push", str(target), BRANCH)
             commit = publish(
@@ -134,6 +175,36 @@ class PilotTests(unittest.TestCase):
             self.assertEqual(git("show", commit + ":scores.md"), "Current result.")
             self.assertEqual(
                 git("ls-remote", str(target), "refs/heads/" + BRANCH).split()[0], commit
+            )
+            followup = {
+                "run_status": "running",
+                "training_policy": {"train_until_patience": True, "pretrain_epochs": 4},
+            }
+            new_commit = publish(
+                root,
+                operator,
+                {
+                    REPORT + "/epoch_scores.json": json.dumps(followup),
+                    REPORT + "/epoch_scores.md": "Four-epoch comparison.\n",
+                },
+                environment,
+            )
+            self.assertEqual(
+                json.loads(
+                    git(
+                        "show",
+                        new_commit + ":" + REPORT + "/two_epoch_phase1_scores.json",
+                    )
+                ),
+                original,
+            )
+            self.assertEqual(
+                git("show", new_commit + ":" + REPORT + "/two_epoch_phase1_scores.md"),
+                "Completed two-epoch comparison.",
+            )
+            self.assertEqual(
+                git("show", new_commit + ":" + REPORT + "/generation_progress.md"),
+                "Generation progress.",
             )
 
 

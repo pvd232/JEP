@@ -101,6 +101,20 @@ def publish(
                 files[REPORT + "/four_epoch_pilot_scores.md"] = (
                     git(["show", parent + ":" + REPORT + "/epoch_scores.md"]) + "\n"
                 )
+            if (
+                current.get("training_policy", {}).get("pretrain_epochs", 2) == 4
+                and previous.get("training_policy", {}).get("pretrain_epochs", 2) == 2
+            ):
+                if previous.get("run_status") != "complete":
+                    raise ValueError(
+                        "Finish and publish the two-epoch comparison before replacing its table."
+                    )
+                files[REPORT + "/two_epoch_phase1_scores.json"] = (
+                    json.dumps(previous, indent=2) + "\n"
+                )
+                files[REPORT + "/two_epoch_phase1_scores.md"] = (
+                    git(["show", parent + ":" + REPORT + "/epoch_scores.md"]) + "\n"
+                )
         with tempfile.TemporaryDirectory(
             prefix="publication-", dir=operator
         ) as directory:
@@ -150,6 +164,12 @@ def render(
         prefix[4] = (
             "Both models resume their saved training state after epoch four and continue until two successive validation checks fail to improve Spearman. Time and epoch limits are disabled. [Earlier four-epoch pilot](four_epoch_pilot_scores.md)."
         )
+    if report.get("training_policy", {}).get("pretrain_epochs", 2) == 4:
+        prefix[0] = "# Four initial epochs: jep-csts-v1"
+        prefix[4] = (
+            "Both models continue their saved first-phase checkpoints through epoch four on the same 2,135 covered comparisons. The ratings control learns ratings; the proposition model writes propositions. Both then start fresh full-data ratings training with patience 2 and disabled time and epoch limits. [Completed two-epoch comparison](two_epoch_phase1_scores.md)."
+        )
+    prefix += ["[Missing proposition generation progress](generation_progress.md)", ""]
     if result is not None:
         prefix += [
             "## Pilot result",
@@ -283,9 +303,8 @@ def main() -> None:
     if args.watchdog:
         watchdog(args.root, args.name, args.operator, environment, args.deadline)
         return
-    completion = read(args.root / args.settings)["training"].get(
-        "train_until_patience", False
-    )
+    settings = read(args.root / args.settings)
+    completion = settings["training"].get("train_until_patience", False)
     guard = None
     if not completion:
         with (args.operator / "watchdog.log").open("ab", buffering=0) as log:
@@ -312,7 +331,9 @@ def main() -> None:
                 "/home/machina/jep-csts-qwen-evidence-20261024/.viper/overnight_gpu.lock",
                 sys.executable,
                 "-m",
-                "csts_pilot.complete_proposition_training"
+                "csts_pilot.extend_proposition_pretraining"
+                if settings.get("phase1_extension")
+                else "csts_pilot.complete_proposition_training"
                 if completion
                 else "csts_pilot.proposition_evidence_run",
                 "--settings",
