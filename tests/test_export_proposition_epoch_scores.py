@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from export_epoch_scores import collect, markdown
+from scripts.export_proposition_epoch_scores import collect, markdown
 
 
 class EpochPublicationTests(unittest.TestCase):
