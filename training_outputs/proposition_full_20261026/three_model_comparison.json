@@ -5,7 +5,7 @@
   "encoder_source_commit": "636cb33048f41eb8c0e839250df66d36cf46a101",
   "encoder_initial_epochs": 2,
   "followup_running": true,
-  "sol_completed_rows": 2368,
+  "sol_completed_rows": 2430,
   "sol_completed_batches": [
     0,
     1,
@@ -43,9 +43,10 @@
     33,
     34,
     35,
-    36
+    36,
+    37
   ],
-  "shared_row_ids_sha256": "ee5e60e84e2c04ecde4404526e8c4ecbeb453965899a6280a905d2784cd98068",
+  "shared_row_ids_sha256": "33b45f145ac1ec87aabe414ae671e38e23624524aaa79248f01cb17693f91351",
   "models": {
     "ratings": {
       "label": "Ratings model",
@@ -57,10 +58,10 @@
         "mse_0_1": 0.03977941506211169
       },
       "shared": {
-        "n": 2368,
-        "spearman": 0.8529979075627805,
-        "pearson": 0.870438367511423,
-        "mse_0_1": 0.03983126330468066
+        "n": 2430,
+        "spearman": 0.8532272214316708,
+        "pearson": 0.8704440251908008,
+        "mse_0_1": 0.03977941506211169
       },
       "checkpoint_sha256": "d9d329dffff497402eddc40c53f4f1a651e13f3f22479bbda0b9d8927086fec6",
       "predictions_sha256": "69d27740148c743a5404c4f5a0941854d49785d959378f1096620765fcb441ab"
@@ -75,24 +76,29 @@
         "mse_0_1": 0.039181198582574704
       },
       "shared": {
-        "n": 2368,
-        "spearman": 0.8537755130571183,
-        "pearson": 0.87045027675036,
-        "mse_0_1": 0.03933250088665999
+        "n": 2430,
+        "spearman": 0.8540749642675822,
+        "pearson": 0.8707365047359243,
+        "mse_0_1": 0.039181198582574704
       },
       "checkpoint_sha256": "20d74e66f590fd9799d8ea44bb09aacbb9d27288e2eab7edc2b2d3325545a229",
       "predictions_sha256": "db853da51ddcfcb7e3096dd49fbf0c2e45082a307451e2a9914635cdad187729"
     },
     "sol": {
       "label": "GPT-6.1 Sol (max)",
-      "full": null,
-      "shared": {
-        "n": 2368,
-        "spearman": 0.9202929090048818,
-        "pearson": 0.9254583083467358,
-        "mse_0_1": 0.023429054054054054
+      "full": {
+        "n": 2430,
+        "spearman": 0.9199548895630967,
+        "pearson": 0.924977759229853,
+        "mse_0_1": 0.023512860082304524
       },
-      "completed_rows": 2368
+      "shared": {
+        "n": 2430,
+        "spearman": 0.9199548895630967,
+        "pearson": 0.924977759229853,
+        "mse_0_1": 0.023512860082304524
+      },
+      "completed_rows": 2430
     }
   }
 }

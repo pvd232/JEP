@@ -9,20 +9,10 @@ Dataset: **jep-csts-v1**, the same **2,430 test examples** for every full-test s
 |---|---:|---:|---:|
 | Ratings model | 0.853227 | 0.039779 | 2,430/2,430 |
 | Proposition model | 0.854075 | 0.039181 | 2,430/2,430 |
-| GPT-6.1 Sol (max) | Pending | Pending | 2,368/2,430 |
+| GPT-6.1 Sol (max) | 0.919955 | 0.023513 | 2,430/2,430 |
 
 Encoder scores above come from the completed **2-initial-epoch** comparison.
 The four-initial-epoch follow-up is training; its test scores will replace the encoder rows after checkpoint selection and test evaluation finish.
-
-### Intermediate results: identical 2,368 completed examples
-
-Each score below uses exactly the same completed Sol examples. These subset scores remain provisional as more batches finish.
-
-| Model | Shared-subset Spearman | Shared-subset Pearson | Shared-subset MSE (0–1) |
-|---|---:|---:|---:|
-| Ratings model | 0.852998 | 0.870438 | 0.039831 |
-| Proposition model | 0.853776 | 0.870450 | 0.039333 |
-| GPT-6.1 Sol (max) | 0.920293 | 0.925458 | 0.023429 |
 
 [Sol capture status and protocol](gpt61_sol_max_jep_v1.md). Test scores do not control training, checkpoint selection or the proposition-generation decision.
 <!-- three-model-comparison:end -->
@@ -36,7 +26,7 @@ Stop after consecutive non-improving validation checks: ratings control **1**; p
 [Missing proposition generation progress](generation_progress.md)
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T13:35:57+00:00**. Run: `jep_csts_v1_four_initial_epochs_patience1_20261027`.
+Updated: **2026-10-27T13:37:10+00:00**. Run: `jep_csts_v1_four_initial_epochs_patience1_20261027`.
 
 Status: **running**. Current stage: **ratings_pretrain**.
 
