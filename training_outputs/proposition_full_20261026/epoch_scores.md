@@ -1,6 +1,6 @@
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T04:34:05+00:00**. Run: `propositions_v41_full_after_indicative`.
+Updated: **2026-10-27T04:38:05+00:00**. Run: `propositions_v41_full_after_indicative`.
 
 Publication: **automatic; VM publisher with 30-second checks**.
 
@@ -59,6 +59,8 @@ Status: **stopped_by_user**. Completed epochs: **2**. Recorded optimizer updates
 
 Publication: **automatic; VM publisher with 30-second checks**.
 
-Status: **running**. Completed epochs: **0**. Recorded optimizer updates: **200**.
+Status: **running**. Completed epochs: **1**. Recorded optimizer updates: **219**.
 
-Awaiting the first completed epoch.
+| Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 219 | 0.812601 | 0.958263 | 0.053901 | 0 |
