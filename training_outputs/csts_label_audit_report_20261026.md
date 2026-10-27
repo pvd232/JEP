@@ -1,77 +1,42 @@
-# C-STS development scope audit and saved-model update
+# Validation label audit: calibration-policy repair, version 4.1
 
-**Version 4: exhaustive scope review completed.** All **1,830** development comparisons were reviewed. The current set has **1,572 usable comparisons across 678 source groups**, **257 invalid cases**, **one excluded case with ambiguous entity scope**, and **zero pending cases**.
+The preservation bug is repaired. **22 calibration-only rating changes were reverted to their pre-existing version-3 grades**, following the policy specified before the original version-4 scoring. Explicit canonical classes now determine preservation for all 397 focused decisions. The prior implementation matched free-text prefixes and missed some `numeric_calibration` and mixed-tag decisions.
 
-## What changed from version 3
+The validation set retains **1,572 usable comparisons across 678 source groups**, **257 invalid cases** and **one excluded case with unresolved entity scope**. Every usable example ID stays identical to version 4. The three user-adjudicated anchors retain their ratings. Adopted scope and extracted values stay identical for the 22 repaired examples.
 
-| Decision change | Comparisons |
-|---|---:|
-| Previously excluded, restored with a rating | 62 |
-| Accepted numeric rating corrected | 101 |
-| Previously accepted, now excluded | 3 |
-| Total changed dispositions or ratings | 166 |
+## Current validation results
 
-All **29** prior ambiguity exclusions now have ratings. Another **33** cases were restored from the invalid set. The one current ambiguity exclusion, `train_1693`, has a child and an adult as competing referents for the singular person-age condition. The other new exclusions are `train_3209` and `train_7271`.
-
-The [166-case change record](csts_development_scope_changes_v4_20261026.json) includes both complete captions, condition, original rating, version-3 rating, current rating, adopted scope, extracted values and rationale. The [full current audit](csts_development_blind_audit_v4_20261026.json) preserves all 1,830 dispositions and historical votes. [Version 3](https://github.com/pvd232/JEP/blob/d1cff0f531e3994be6e21db63ed20b0b8823868e/training_outputs/csts_label_audit_report_20261026.md) remains archived.
-
-## Review method and label provenance
-
-Six isolated assistant contexts independently reviewed every source comparison, recording the relevant entity or role and extracted feature values before rating. Original supplied labels, prior model-audit labels and encoder scores were withheld during this pass. Three user-adjudicated anchors remained fixed: `train_72`=5, `train_7753`=1, `train_8859`=5.
-
-Focused readers resolved **397** disagreements or scope flags using the captions, rubric and shuffled interpretation options. Disagreement alone supplies no ambiguity exclusion. Each ambiguity exclusion requires concrete competing referents or feature interpretations. Missing precision can support 3 when both captions provide recoverable feature values. A wholly absent requested attribute remains invalid under Tu. The validity clarification was applied to all first-pass outputs before final adjudication.
-
-The final checks preserved **161** existing grades where the difference concerned defensible calibration, and recorded **16** explicit scope/context/color decisions. Root checks adopted ordinary contextual inferences consistently, including Tu's snowy-ground weather example. All adopted scopes and extracted values match the final decisions.
-
-The [compressed evidence archive](csts_development_scope_audit_evidence_v4_20261026.json) preserves inputs, rubric, review policy, six first-pass reviews, 397 focused decisions, quality checks and the semantic freeze. The frozen audit hash was set before rescoring. These labels are assistant-model judgments with three user-adjudicated anchors. Independent human validation remains a subsequent quality estimate.
-
-## Current saved-model results
-
-All metrics reuse saved predictions. Training updates and new encoder inference: **0**.
-
-| Saved model | Original labels, all 1,830 | Original labels, same 1,572 | Current labels, same 1,572 | Label-correction lift on same rows |
-|---|---:|---:|---:|---:|
-| Selected Qwen ratings | 0.782575 | 0.797278 | 0.816461 | +0.019183 |
-| Qwen evidence then ratings | 0.773647 | 0.790045 | 0.816995 | +0.026950 |
-
-| Candidate | Current development Spearman |
-|---|---:|
-| Qwen evidence then ratings | 0.816995 |
-| Selected Qwen ratings | 0.816461 |
-| Qwen ratings pretraining checkpoint | 0.811842 |
-| Same-passage control | 0.811082 |
-| Earlier Qwen LoRA | 0.801630 |
-
-Evidence then ratings exceeds selected Qwen by **0.000533**, with paired source-group bootstrap 95% interval **[-0.011027, +0.011612]**, using 2,000 draws.
-
-Selected Qwen normalized MSE is **0.055850**, and rating-scale MAE is **0.762603**. Evidence then ratings has MSE **0.055503** and MAE **0.749076**. Original-label metrics and all candidate views remain available in the full comparison.
-
-## Why correlation decreased from version 3
-
-The review changes reference targets and usable-example membership. The **1,510** comparisons included in both versions isolate the target revisions:
-
-| Model, same 1,510 comparisons | Version-3 labels | Version-4 labels |
+| Saved model | Published version 4 | Repaired version 4.1 |
 |---|---:|---:|
-| Selected Qwen ratings | 0.833041 | 0.823071 |
-| Evidence then ratings | 0.836027 | 0.824299 |
+| Qwen ratings | 0.816461 | 0.818432 |
+| Evidence then ratings | 0.816995 | 0.818755 |
 
-Adding the 62 restored comparisons then gives the current 1,572-row values above. Model weights and predictions remain fixed throughout these comparisons.
+These are Spearman correlations on the same 1,572 comparisons and saved predictions. Evidence's current advantage is **0.000324**, with paired source-group 95% interval **[-0.011019, +0.011372]** from 2,000 bootstrap draws.
 
-## Answer-input diagnostics
+Qwen normalized MSE is **0.056152**, and rating-scale MAE is **0.766282**. Evidence then ratings has MSE **0.055826** and MAE **0.753175**. The small answer-input cohorts retain their version-4 results.
 
-| Current matched cohort | Original captions | Generated or frozen answers | Adapted answers |
-|---|---:|---:|---:|
-| Retained diagnostic, n=58 | 0.798101 | 0.750420 | Unavailable |
-| Answer-input LoRA, n=25 | 0.788134 | 0.731556 | 0.762812 |
+## Preserved and corrected decisions
 
-These are Spearman values. The full report includes paired source-group intervals for each diagnostic. Independent SciPy and direct-MSE checks reproduced all **35** candidate/cohort views.
+Relative to version 3, the current validation reference restores **62 exclusions**, changes **79 accepted numeric ratings** and excludes **three previously accepted cases**. All **29** earlier ambiguity exclusions have ratings. Current defensible calibration-grade preservations total **183**. Four genuine scope, value or category corrections within the repair review remain adopted, alongside the explicit root color-similarity decision.
 
-## Data and validation profile
+The [22-case repair record](csts_validation_policy_repair_v4_1_20261027.json) includes complete captions, conditions, both ratings, adopted scopes and values, classifications, the 26-case review and merger implementation. The [current audit](csts_validation_audit_v4_1_20261027.json) preserves every source ID and historical vote. The [full comparison](csts_validation_comparison_v4_1_20261027.json) includes original-label metrics, matched cohorts, saved-model identities and paired intervals. The [point summary](csts_validation_point_summary_v4_1_20261027.json) provides compact results.
 
-The [validation profile](../configs/csts-qwen-audited-development.json) points to [1,572 version-4 development rows](csts_development_model_audited_rows_v4_20261026.json). The existing 6,980-row training split and 2,620-row Tu-reannotated test split retain their prior paths, counts and hashes. The selected model's existing human-reannotated test Spearman remains **0.788505**.
+## Meaning of these results
 
-The [ID-and-label release package](../datasets/csts-development-audit-v4/README.md) supplies all 1,830 dispositions, source revision, group IDs and reconstruction instructions. It distributes annotation IDs and labels while leaving source captions with their upstream distributors. Full-caption audit artifacts remain in this private project repository.
+This work revises **validation evaluation targets and checkpoint selection**. The 6,980 training examples, 2,620 Tu-reannotated test examples, saved weights and saved predictions retain their original versions. The existing held-out test result remains **0.788505**. New training, encoder inference and test evaluation in this update: **0**.
 
-Usable development SHA-256: `87af4e9aee2513b2e948ad8669027f7c059c2cba00c64c054893d03bcf370e24`.
+Confidence is stronger for concrete counting, role-scope and binary-scale corrections. Overall label accuracy has a limited evidence base: readers share one assistant model, three selected user adjudications supply the human anchors, and independent human error rates remain unmeasured. Score decreases can reflect corrected targets exposing model errors, harder restored examples, grading choices and residual annotation mistakes. A score decrease supplies no independent label-accuracy estimate.
 
-Frozen audit SHA-256: `e8ffe2bd973ce96a51a1f72b03e0d680bfdeb6e3932a19127f6d32cf4ef5a5ab`.
+The original version-4 performance was known when this implementation repair was reviewed. Per-comparison encoder predictions were withheld from repair classification. The 22 repair choices implement the earlier preservation policy and were fixed before recomputing their scores.
+
+## Data and verification
+
+The [validation profile](../configs/csts-qwen-audited-development.json) points to the [current validation rows](csts_validation_rows_v4_1_20261027.json). All other profile fields and training/test hashes remain fixed. The legacy profile filename is retained for compatibility.
+
+The [ID-and-label package](../datasets/csts-validation-audit-v4-1/README.md) provides the revised labels and reconstruction instructions. Prior [version-4 results](https://github.com/pvd232/JEP/blob/a9c8619fa332d4ed1f4c594135805cec8d5a561c/training_outputs/csts_label_audit_report_20261026.md) and raw evidence remain archived.
+
+Independent checks reproduce all **35** candidate/cohort views with SciPy and direct MSE. The exact package reconstruction example matches every usable row and its SHA-256.
+
+Validation rows SHA-256: `f186e86877e731c96ee9b1c819863b981074bc500dc9aa11c6951ba9fd56e2c9`.
+
+Audit SHA-256: `845ed43db26743496fbd73dd4e6453d7dd18fb54002f3d8b2a07d3fd7655c412`.
