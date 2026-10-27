@@ -24,23 +24,22 @@ These are model-assisted diagnostic judgments. The selected control cohort and s
 
 The runner pins `ZWK/InstructUIE` revision `48f45b25a01df1798f8c1c31751a973adb7e8647`. Source-only inputs provide explicit relation options; this is a custom schema-transfer evaluation. Raw generations and parser warnings are retained.
 
-Execution target: existing GPU VM `jep-csts-format-20261021`, project `mantra-477901`, zone `asia-northeast3-a`, account `pvd2112@columbia.edu`. Existing plans identify an NVIDIA L4; live hardware and disk preflight await access. The shared GPU serialization lock is `/home/machina/jep-csts-qwen-evidence-20261024/.viper/overnight_gpu.lock`.
+Execution uses terminal SSH to the existing VM `jep-csts-format-20261021` in `mantra-477901`, zone `asia-northeast3-a`. Live preflight confirmed an idle NVIDIA L4 with 23,034 MiB VRAM, PyTorch 2.14.0+cu130 and Transformers 5.20.2. All 108 extraction prompts fit the official input limit; the longest has 103 tokens.
 
-The Mac polling worker reached its deadline. Direct browser reconnection redirected to Columbia CAS, where automatic approval review blocked institutional authentication pending explicit user authorization. InstructUIE generated zero predictions. The 108-input arm is staged in this branch for GPU execution after authentication.
+The checkpoint's 12 required files total 45,069,805,378 bytes. Delivery uses the pinned Hugging Face revision through the existing private GCS bucket. Source identities are checked during upload; GPU download checksums are computed during the file write. The model is reusable experiment input.
 
-After copying the runner and source inputs into `/home/machina/jep-instructuie-pilot-20261026`, use:
+The GPU worker waits for checkpoint delivery and then acquires the existing shared GPU lock. It runs all 108 inputs with BF16 weights, deterministic generation, one beam and a 128-token output limit. Current predictions: zero, with checkpoint transfer in progress.
 
 ```bash
-sudo -n -u machina flock -n \
-  /home/machina/jep-csts-qwen-evidence-20261024/.viper/overnight_gpu.lock \
-  /home/machina/jep-format-env/bin/python \
+/home/machina/jep-format-env/bin/python \
   /home/machina/jep-instructuie-pilot-20261026/run_instructuie.py \
   --inputs /home/machina/jep-instructuie-pilot-20261026/inputs.json \
   --output /home/machina/jep-instructuie-pilot-20261026/outputs.jsonl \
+  --model-path /home/machina/jep-instructuie-pilot-20261026/model \
   --device cuda --dtype bfloat16 --execute
 ```
 
-The local container cleanup removed 3.64 MiB of disposable caches. Project records and the reusable Python environment were preserved. Local inventory found no native VIPER artifact stores eligible for verified archive cleanup; GPU-side archival verification awaits access.
+Cleanup released 51,190,583,296 bytes across 184 local files and 56 artifact groups, leaving 54,125,297,664 bytes free before checkpoint copying. It matched sealed publication records, local SHA-256 and live GCS CRC32C/size/generation. Original run records and a durable restoration receipt are retained. Execution state is recorded in `structured_evidence_pilot/instructuie_status.json`.
 
 ## Validation and evidence
 

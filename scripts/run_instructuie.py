@@ -10,6 +10,7 @@ import hashlib
 import importlib.util
 import json
 import sys
+import time
 from pathlib import Path
 
 MODEL = "ZWK/InstructUIE"
@@ -61,6 +62,8 @@ def main():
     parser.add_argument("--inputs", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--model", default=MODEL)
+    parser.add_argument("--model-path", type=Path,
+                        help="Verified local copy of the pinned model snapshot")
     parser.add_argument("--revision", default=REVISION)
     parser.add_argument("--device", choices=["cpu", "cuda"], default="cuda")
     parser.add_argument("--dtype", choices=["float32", "float16", "bfloat16"],
@@ -80,10 +83,14 @@ def main():
         "input_sha256": hashlib.sha256(raw_inputs).hexdigest(),
         "items": len(items), "generation": {"do_sample": False, "num_beams": 1,
         "max_new_tokens": args.max_new_tokens},
+        "device": args.device, "dtype": args.dtype,
+        "runner_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "schema_scope": "User-supplied relation labels; out-of-domain schema transfer",
         "prompt_source": "BeyonderXX/InstructUIE configs/instruction_config.json RE[2] "
                          "and src/uie_dataset.py RE serialization",
     }
+    if args.model_path:
+        manifest["checkpoint_source"] = str(args.model_path)
     missing = [name for name in ["torch", "transformers", "accelerate", "sentencepiece"]
                if importlib.util.find_spec(name) is None]
     if not args.execute or missing:
@@ -92,19 +99,29 @@ def main():
         print(json.dumps(manifest, indent=2))
         return 2 if missing and args.execute else 0
     import torch
+    import transformers
     from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
     if args.device == "cuda" and not torch.cuda.is_available():
         raise RuntimeError("CUDA unavailable; actual model was not executed.")
-    tokenizer = AutoTokenizer.from_pretrained(args.model, revision=args.revision)
+    manifest["software"] = {"torch": torch.__version__,
+                            "transformers": transformers.__version__}
+    if args.device == "cuda":
+        manifest["gpu"] = torch.cuda.get_device_name(0)
+    load_started = time.perf_counter()
+    checkpoint = str(args.model_path) if args.model_path else args.model
+    tokenizer = AutoTokenizer.from_pretrained(checkpoint, revision=args.revision,
+                                              local_files_only=bool(args.model_path))
     model = AutoModelForSeq2SeqLM.from_pretrained(
-        args.model, revision=args.revision,
+        checkpoint, revision=args.revision, local_files_only=bool(args.model_path),
         torch_dtype=getattr(torch, args.dtype),
         device_map={"": args.device}, low_cpu_mem_usage=True,
     ).eval()
+    manifest["load_seconds"] = round(time.perf_counter() - load_started, 3)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("x") as output:
         for item, prompt in zip(items, prompts):
+            started = time.perf_counter()
             batch = tokenizer(prompt, return_tensors="pt", truncation=False)
             if batch["input_ids"].shape[1] > 512:
                 raise ValueError("Input exceeds official 512-token limit; no silent truncation.")
@@ -119,6 +136,9 @@ def main():
                 "parse_warnings": warnings, "model_id": args.model,
                 "revision": args.revision}, ensure_ascii=False) + "\n")
             output.flush()
+            print(json.dumps({"event": "generated", "id": item["id"],
+                              "seconds": round(time.perf_counter() - started, 3)}),
+                  flush=True)
     manifest.update(status="complete", outputs_generated=len(items))
     args.output.with_suffix(args.output.suffix + ".manifest.json").write_text(
         json.dumps(manifest, indent=2) + "\n")
