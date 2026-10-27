@@ -1,6 +1,8 @@
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T02:53:26+00:00**. Run: `propositions_v41_full_after_indicative`.
+Updated: **2026-10-27T03:18:29+00:00**. Run: `propositions_v41_full_after_indicative`.
+
+Publication: **automatic; VM publisher with 30-second checks**.
 
 Status: **running**. Current stage: **ratings_ratings**.
 
@@ -18,6 +20,8 @@ Appearance and colour scores are available in the final report. Native epoch tra
 
 ## Ratings arm: auxiliary phase
 
+Publication: **automatic; VM publisher with 30-second checks**.
+
 Status: **succeeded**. Completed epochs: **2**. Recorded optimizer updates: **144**.
 
 | Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
@@ -28,6 +32,8 @@ Status: **succeeded**. Completed epochs: **2**. Recorded optimizer updates: **14
 Stop reason: `fixed_update_budget`.
 
 ## Proposition arm: auxiliary phase
+
+Publication: **automatic; VM publisher with 30-second checks**.
 
 Status: **succeeded**. Completed epochs: **2**. Recorded optimizer updates: **144**.
 
@@ -40,11 +46,17 @@ Stop reason: `fixed_update_budget`.
 
 ## Ratings arm: ratings phase
 
-Status: **running**. Completed epochs: **0**. Recorded optimizer updates: **125**.
+Publication: **automatic; VM publisher with 30-second checks**.
 
-Awaiting the first completed epoch.
+Status: **running**. Completed epochs: **1**. Recorded optimizer updates: **300**.
+
+| Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 219 | 0.816749 | 0.932301 | 0.036532 | 0 |
 
 ## Proposition arm: ratings phase
+
+Publication: **automatic; VM publisher with 30-second checks**.
 
 Status: **pending**. Completed epochs: **0**. Recorded optimizer updates: **0**.
 
