@@ -100,6 +100,10 @@ class FitConfig(EncoderConfig, TrainConfig):
         ge=1,
         description="Successive validation checks without a strict Spearman improvement before stopping.",
     )
+    train_until_patience: bool = Field(
+        default=False,
+        description="For constant-rate neural fitting, continue until validation patience is exhausted, overriding epoch and wall-time ceilings.",
+    )
     weight_decay: float = Field(
         default=0.01,
         ge=0,
@@ -136,6 +140,14 @@ class FitConfig(EncoderConfig, TrainConfig):
     @model_validator(mode="after")
     def validate_fit(self) -> "FitConfig":
         """Reject ambiguous penalty grids and unsupported continuation schedules."""
+        if self.train_until_patience and (
+            self.kind not in {"projection", "lora"}
+            or self.schedule != "constant"
+            or self.warmup_fraction
+        ):
+            raise ValueError(
+                "Training until patience requires constant-rate neural fitting."
+            )
         if not self.ridge_alphas or len(set(self.ridge_alphas)) != len(
             self.ridge_alphas
         ):

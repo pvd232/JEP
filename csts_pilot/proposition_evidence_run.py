@@ -154,7 +154,12 @@ def run_study(
     directory.mkdir(parents=True, exist_ok=True)
     path = directory / "summary.json"
     source = read_source(root)
-    trusted = frozenset({str(source.repository)})
+    trusted = frozenset(
+        {str(source.repository)}
+        | {str(read_source(Path(settings["continuation_parent_root"])).repository)}
+        if settings.get("continuation_parent_root")
+        else {str(source.repository)}
+    )
     environment = observe_python_env()
     destination = ViperCloudDestination.model_validate(
         settings["publication_destination"]
@@ -204,8 +209,9 @@ def run_study(
                 destination,
             )
             return previous[0]
+        until_patience = settings["training"].get("train_until_patience", False)
         remaining = settings["gpu_budget_seconds"] - summary["gpu_stage_seconds"]
-        if gpu and remaining <= 0:
+        if gpu and not until_patience and remaining <= 0:
             raise TimeoutError("Aggregate compute allowance exhausted.")
         trial = experiment(
             experiment_id=f"csts_qwen_proposition_evidence_{source.commit[:8]}_{summary['attempt']}_{stage_name}",
@@ -240,7 +246,11 @@ def run_study(
         try:
             result = execution.run(
                 plan(experiment=trial, source=source, env=env),
-                timeout_seconds=max(1, int(remaining)) if gpu else 1800,
+                timeout_seconds=None
+                if gpu and until_patience
+                else max(1, int(remaining))
+                if gpu
+                else 1800,
                 trusted_source_repositories=trusted,
             )
         finally:

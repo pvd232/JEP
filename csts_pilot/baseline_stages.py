@@ -3,6 +3,7 @@
 import math
 import shutil
 import time
+from itertools import count
 from pathlib import Path
 from typing import Any
 
@@ -275,6 +276,7 @@ def restore_training(
     ):
         raise ValueError("Parent terminal weights, epoch and resume state disagree.")
     allowed = {
+        "train_until_patience",
         "start_epoch",
         "max_epochs",
         "max_seconds",
@@ -319,7 +321,7 @@ def fit_neural(
     training: FrozenPairs | TokenPairs,
     validation: FrozenPairs | TokenPairs,
 ) -> None:
-    """Train MSE with exact microbatch weighting and five-check validation patience."""
+    """Train rating MSE with exact microbatch weighting and configured validation patience."""
     config = context.config
     parameters = [p for p in model.parameters() if p.requires_grad]
     optimizer = torch.optim.AdamW(
@@ -353,6 +355,13 @@ def fit_neural(
             if selected["validation"]["spearman"] is not None
             else -1.0
         )
+        if config.train_until_patience:
+            stopping = ValidationPatience(config.patience, 0.0)
+            for record in history:
+                score = record["validation"]["spearman"]
+                stopping.observe(score if score is not None else -1.0)
+            if stopping.stale_epochs >= config.patience:
+                raise ValueError("The parent already exhausted validation patience.")
         step = config.start_epoch * updates_per_epoch
     total_updates = config.max_epochs * updates_per_epoch
     scheduler = (
@@ -367,8 +376,13 @@ def fit_neural(
     if config.device == "cuda":
         torch.cuda.reset_peak_memory_stats()
     reason, epoch = "epoch_budget", config.start_epoch
-    for epoch in range(config.start_epoch + 1, config.max_epochs + 1):
-        if len(history) > config.start_epoch:
+    epochs_to_run = (
+        count(config.start_epoch + 1)
+        if config.train_until_patience
+        else range(config.start_epoch + 1, config.max_epochs + 1)
+    )
+    for epoch in epochs_to_run:
+        if not config.train_until_patience and len(history) > config.start_epoch:
             expected_epoch_seconds = 1.25 * history[-1]["observed_epoch_seconds"]
             if (
                 time.monotonic() - started + expected_epoch_seconds
@@ -386,7 +400,10 @@ def fit_neural(
             validation.nonpadding_tokens,
         )
         for start in range(0, len(order), config.batch_size):
-            if time.monotonic() - started >= config.max_seconds:
+            if (
+                not config.train_until_patience
+                and time.monotonic() - started >= config.max_seconds
+            ):
                 raise TimeoutError(
                     "The fitting budget ended inside an epoch; preserve the native attempt for inspection."
                 )

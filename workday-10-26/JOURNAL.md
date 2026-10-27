@@ -51,3 +51,13 @@ python -m pytest -q tests/test_proposition_pilot.py tests/test_export_propositio
 ```
 
 Final `ruff format --check` and `ruff check` passed for all eight files. The external transition and reset controllers passed Pyrefly with zero errors, seven focused tests, and final Ruff checks. The prose check passed for this journal and the new supervisor and pilot-test files. These checks cover setup behavior; new-model training results remain pending until the native runs complete.
+
+## October 27: finish both models at patience 2
+
+The initial overnight pilot reached four full-data ratings epochs for each model and stopped on `resource_budget`. Both models improved their validation Spearman at epoch four. The user requested completion of both models through patience 2, overriding the overnight time limits and epoch ceiling.
+
+Continue from the sealed terminal adapters, AdamW moments, random state, batch-order generator, validation history, and selected incumbent. Preserve the initial training steps and all four completed ratings epochs. The explicit `train_until_patience` setting disables fitting time and epoch limits for constant-rate neural training. The native execution timeout is also disabled for GPU stages in this completion run. A completed training stage must report `validation_patience`.
+
+Use a separate GPU checkout and result directory, leaving the original pilot's source and measurement artifacts intact. Reuse earlier test predictions when the selected model bytes and test cohort remain identical; compute new predictions for a changed selected checkpoint. Continue publishing at the same score-table path and retain the four-epoch report alongside it. Apply the existing validation-only trigger for missing proposition generation after both models finish.
+
+The completion change passed Pyrefly with zero errors and 80 focused tests across the baseline trainer, Qwen evidence trainer, proposition LoRA wrapper, pilot decisions, epoch exporter, and comparison report. Final Ruff format and lint checks passed for all nine changed Python files at the GPU execution paths. The tests verify continuation beyond the old time and epoch limits, restoration of a previously stale validation check, preservation of optimizer state and next batch order, and publication of the live continuation trace.

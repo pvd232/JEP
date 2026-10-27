@@ -8,6 +8,8 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from csts_pilot.baseline_models import FitConfig
+from csts_pilot.complete_proposition_training import continuation_config
 from csts_pilot.proposition_evidence_run import validate_settings
 from scripts.supervise_proposition_pilot import BRANCH, decision, publish
 
@@ -33,6 +35,19 @@ class PilotTests(unittest.TestCase):
                 "evidence": {"epoch": 3, "validation": {"spearman": 0.82}},
             },
         }
+
+    def test_completion_preserves_training_settings_and_survives_old_ceiling(self):
+        """A continuation at the old epoch ceiling still restores its next epoch."""
+        original = FitConfig(
+            kind="lora", schedule="constant", patience=2, max_epochs=24
+        )
+        parent = {"config": original.model_dump(), "epochs": [{}] * 24}
+        cfg = continuation_config(parent)
+        self.assertTrue(cfg.train_until_patience)
+        self.assertEqual(cfg.start_epoch, 24)
+        self.assertEqual(cfg.max_epochs, 25)
+        self.assertEqual(cfg.learning_rate, original.learning_rate)
+        self.assertEqual(cfg.patience, 2)
 
     def test_generation_uses_selected_validation_scores(self):
         """A positive validation result triggers generation even with lower test scores."""

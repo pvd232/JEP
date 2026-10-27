@@ -359,6 +359,68 @@ def test_patience_and_continuation_restore_optimizer_and_next_pair_order(
     )
 
 
+def test_patience_completion_overrides_both_training_ceilings(
+    prepared, tmp_path, monkeypatch
+):
+    """Finish two stale checks even when the declared time and epoch limits are smaller."""
+    original = stages.summarize
+    curve = iter([0.9, 0.8, 0.7])
+    monkeypatch.setattr(
+        stages, "summarize", lambda rows: {**original(rows), "spearman": next(curve)}
+    )
+    context = context_for(
+        prepared,
+        tmp_path / "completion",
+        max_epochs=1,
+        max_seconds=1e-12,
+        patience=2,
+        train_until_patience=True,
+    )
+    stages.fit_projection(context)
+    trace = load_json(context.outputs["trace"])
+    assert trace["stop_reason"] == "validation_patience"
+    assert len(trace["epochs"]) == 3
+    assert trace["epochs"][-1]["epochs_without_improvement"] == 2
+
+
+def test_patience_completion_restores_prior_stale_check(
+    prepared, tmp_path, monkeypatch
+):
+    """The resumed model needs one further stale check after its parent's first stale check."""
+    original = stages.summarize
+    curve = iter([0.3, 0.9, 0.8])
+    monkeypatch.setattr(
+        stages, "summarize", lambda rows: {**original(rows), "spearman": next(curve)}
+    )
+    parent = context_for(prepared, tmp_path / "parent_stale", patience=2)
+    stages.fit_projection(parent)
+    continued = context_for(
+        prepared,
+        tmp_path / "finish_stale",
+        start_epoch=3,
+        max_epochs=4,
+        max_seconds=1e-12,
+        patience=2,
+        train_until_patience=True,
+    )
+    continued.inputs.update(
+        {
+            "parent_last_model": parent.outputs["last_model"],
+            "parent_resume": parent.outputs["resume_state"],
+            "parent_trace": parent.outputs["trace"],
+            "parent_model": parent.outputs["model"],
+            "parent_validation_predictions": parent.outputs["validation_predictions"],
+        }
+    )
+    curve = iter([0.7])
+    stages.fit_projection(continued)
+    trace = load_json(continued.outputs["trace"])
+    assert len(trace["epochs"]) == 4
+    assert trace["stop_reason"] == "validation_patience"
+    assert trace["selected"]["epoch"] == 2
+    assert trace["epochs"][-1]["epochs_without_improvement"] == 2
+
+
 def test_parameter_restore_rejects_broadcastable_wrong_shape():
     """Reject a malformed one-value tensor in place of a full projection matrix."""
     with pytest.raises(ValueError, match="shapes differ"):

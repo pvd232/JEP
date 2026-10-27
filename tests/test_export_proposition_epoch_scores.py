@@ -95,6 +95,22 @@ class EpochPublicationTests(unittest.TestCase):
         self.assertEqual(report["training_policy"]["ratings_max_seconds"], 8100)
         self.assertIn("patience 2", markdown(report))
 
+    def test_completion_policy_reports_disabled_ceilings_and_live_trace(self):
+        """A live continuation takes precedence over its copied parent trace."""
+        self.phase_a()
+        self.summary["settings"]["training"] = {
+            "patience": 2,
+            "train_until_patience": True,
+        }
+        self.write(self.directory / "summary.json", self.summary)
+        self.write(
+            self.directory / "ratings_pretrain_trace.json",
+            {"status": "complete", "epochs": []},
+        )
+        report = collect(self.root, self.name)
+        self.assertEqual(report["stages"]["ratings_pretrain"]["completed_epoch"], 1)
+        self.assertIn("time and epoch limits disabled", markdown(report))
+
     def test_phase_b_copied_trace_structure(self):
         epoch = {
             "epoch": 1,

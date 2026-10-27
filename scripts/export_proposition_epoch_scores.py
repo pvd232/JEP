@@ -94,7 +94,7 @@ def trace_candidates(root, directory, summary, stage, overrides):
                 raise ValueError(
                     "Multiple native traces require an exact --trace override"
                 )
-            candidates.extend(live)
+            candidates = live + candidates
     return list(dict.fromkeys(candidates))
 
 
@@ -123,6 +123,9 @@ def collect(root, name, previous=None, overrides=None):
         "identity": identity,
         "training_sha256": settings["splits"]["training"]["sha256"],
         "training_policy": {
+            "train_until_patience": settings.get("training", {}).get(
+                "train_until_patience", False
+            ),
             "patience": settings.get("training", {}).get("patience", 5),
             "ratings_max_epochs": settings.get("phases", {})
             .get("ratings", {})
@@ -241,7 +244,11 @@ def markdown(report):
         "",
         (
             "Both models start from the same pretrained weights. For the first two epochs, both see the comparisons covered by existing propositions. The ratings model learns ratings; the proposition model learns to write propositions. Both then learn ratings from the full training set. "
-            f"Ratings training uses validation patience {report.get('training_policy', {}).get('patience', 5)} and an epoch ceiling of {report.get('training_policy', {}).get('ratings_max_epochs', 24)}."
+            + (
+                f"Ratings training continues until validation patience {report['training_policy']['patience']} is exhausted, with time and epoch limits disabled."
+                if report.get("training_policy", {}).get("train_until_patience")
+                else f"Ratings training uses validation patience {report.get('training_policy', {}).get('patience', 5)} and an epoch ceiling of {report.get('training_policy', {}).get('ratings_max_epochs', 24)}."
+            )
         ),
         "",
         "Rating loss measures error in predicted ratings on the 0–1 scale. Proposition-writing loss measures error in predicted text tokens. Each table counts optimizer updates from the beginning of that training step.",

@@ -58,7 +58,9 @@ def decision(summary: dict[str, Any], selection: dict[str, Any]) -> dict[str, An
         "training_seed": summary["settings"]["training"]["seed"],
         "source_commit": summary["source_commit"],
         "dataset_revision": summary["settings"]["dataset_revision"],
-        "scope": "One-seed pilot with existing proposition coverage and a bounded training budget.",
+        "scope": "One-seed comparison after both models exhausted validation patience."
+        if summary["settings"]["training"].get("train_until_patience")
+        else "One-seed pilot with existing proposition coverage and a bounded training budget.",
     }
 
 
@@ -86,6 +88,19 @@ def publish(
     for attempt in range(3):
         git(["fetch", repository, BRANCH])
         parent = git(["rev-parse", "FETCH_HEAD"])
+        score_path = REPORT + "/epoch_scores.json"
+        if score_path in files:
+            current = json.loads(files[score_path])
+            previous = json.loads(git(["show", parent + ":" + score_path]))
+            if current.get("training_policy", {}).get(
+                "train_until_patience"
+            ) and not previous.get("training_policy", {}).get("train_until_patience"):
+                files[REPORT + "/four_epoch_pilot_scores.json"] = (
+                    json.dumps(previous, indent=2) + "\n"
+                )
+                files[REPORT + "/four_epoch_pilot_scores.md"] = (
+                    git(["show", parent + ":" + REPORT + "/epoch_scores.md"]) + "\n"
+                )
         with tempfile.TemporaryDirectory(
             prefix="publication-", dir=operator
         ) as directory:
@@ -130,6 +145,11 @@ def render(
         "[Earlier V4.1 comparison](v41_final_epoch_scores.md)",
         "",
     ]
+    if report.get("training_policy", {}).get("train_until_patience"):
+        prefix[0] = "# Training to patience 2: jep-csts-v1"
+        prefix[4] = (
+            "Both models resume their saved training state after epoch four and continue until two successive validation checks fail to improve Spearman. Time and epoch limits are disabled. [Earlier four-epoch pilot](four_epoch_pilot_scores.md)."
+        )
     if result is not None:
         prefix += [
             "## Pilot result",
@@ -263,22 +283,27 @@ def main() -> None:
     if args.watchdog:
         watchdog(args.root, args.name, args.operator, environment, args.deadline)
         return
-    with (args.operator / "watchdog.log").open("ab", buffering=0) as log:
-        guard = subprocess.Popen(
-            [
-                sys.executable,
-                "-m",
-                "scripts.supervise_proposition_pilot",
-                *sys.argv[1:],
-                "--watchdog",
-            ],
-            cwd=args.root,
-            env=environment,
-            stdin=subprocess.DEVNULL,
-            stdout=log,
-            stderr=subprocess.STDOUT,
-            start_new_session=True,
-        )
+    completion = read(args.root / args.settings)["training"].get(
+        "train_until_patience", False
+    )
+    guard = None
+    if not completion:
+        with (args.operator / "watchdog.log").open("ab", buffering=0) as log:
+            guard = subprocess.Popen(
+                [
+                    sys.executable,
+                    "-m",
+                    "scripts.supervise_proposition_pilot",
+                    *sys.argv[1:],
+                    "--watchdog",
+                ],
+                cwd=args.root,
+                env=environment,
+                stdin=subprocess.DEVNULL,
+                stdout=log,
+                stderr=subprocess.STDOUT,
+                start_new_session=True,
+            )
     with (args.operator / "training.log").open("ab", buffering=0) as log:
         child = subprocess.Popen(
             [
@@ -287,7 +312,9 @@ def main() -> None:
                 "/home/machina/jep-csts-qwen-evidence-20261024/.viper/overnight_gpu.lock",
                 sys.executable,
                 "-m",
-                "csts_pilot.proposition_evidence_run",
+                "csts_pilot.complete_proposition_training"
+                if completion
+                else "csts_pilot.proposition_evidence_run",
                 "--settings",
                 args.settings,
                 "--name",
@@ -306,7 +333,7 @@ def main() -> None:
             {
                 "supervisor_pid": os.getpid(),
                 "training_pid": child.pid,
-                "watchdog_pid": guard.pid,
+                "watchdog_pid": guard.pid if guard else None,
                 "deadline": args.deadline,
                 "source_revision": subprocess.check_output(
                     ["git", "rev-parse", "HEAD"], cwd=args.root, text=True
