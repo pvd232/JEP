@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at_utc": "2026-10-27T12:27:34+00:00",
+  "updated_at_utc": "2026-10-27T12:31:09+00:00",
   "identity": {
     "run_name": "jep_csts_v1_patience2_completion_20261027",
     "source_commit": "1719cf9c003a331864da5d3c95f9a2bd32dd51ac",
@@ -108,14 +108,14 @@
     },
     "ratings_ratings": {
       "status": "running",
-      "trace_status": "running",
+      "trace_status": "complete",
       "trace_path": "/home/machina/jep-csts-jep-v1-patience-completion-20261027/experiments/csts_finish_1719cf9c_8b26aa8e_ratings_ratings/runs/ratings_ratings/01M5YJ1PS9QCKCAKVPRWMYQEBE/artifacts/train/trace/trace.json",
       "trace_available": true,
-      "completed_epoch": 5,
+      "completed_epoch": 6,
       "current_epoch": 6,
-      "optimizer_updates": 1125,
-      "epochs_without_improvement": 1,
-      "stop_reason": null,
+      "optimizer_updates": 1140,
+      "epochs_without_improvement": null,
+      "stop_reason": "validation_patience",
       "epochs": [
         {
           "epoch": 1,
@@ -185,6 +185,20 @@
           "fit_seconds": 1645.7692500040284,
           "validation_seconds": 87.30302125395974,
           "observed_epoch_seconds": 1733.0802689489792,
+          "elapsed_seconds": null
+        },
+        {
+          "epoch": 6,
+          "optimizer_updates": 1140,
+          "validation_spearman": 0.872286908848061,
+          "validation_mse_1_5": 0.5252429062593619,
+          "validation_rows": 1576,
+          "training_loss": 0.013873198027919599,
+          "training_loss_kind": "rating_mse_0_1",
+          "epochs_without_improvement": 2,
+          "fit_seconds": 1671.081929861044,
+          "validation_seconds": 87.8814051389927,
+          "observed_epoch_seconds": 1758.969405196025,
           "elapsed_seconds": null
         }
       ],
