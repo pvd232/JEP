@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at_utc": "2026-10-27T17:20:51+00:00",
+  "updated_at_utc": "2026-10-27T17:22:11+00:00",
   "identity": {
     "run_name": "jep_csts_v1_four_initial_epochs_patience1_20261027",
     "source_commit": "67f816407f786ea038415422a9aefd57d30c92fb",
@@ -18,10 +18,10 @@
   },
   "validation_rows": 1576,
   "validation_groups": 680,
-  "run_status": "running",
-  "current_stage": "evaluate_evidence",
+  "run_status": "complete",
+  "current_stage": null,
   "summary_path": "/home/machina/jep-csts-jep-v1-four-epoch-20261027/qwen_evidence_results/jep_csts_v1_four_initial_epochs_patience1_20261027/summary.json",
-  "summary_sha256": "cd21e9c3835ffffb8b57e2e5e4d927af269bfa0a232e900bf984baf9d048c95d",
+  "summary_sha256": "6b694686ba71b0a7ad02bf1719fde86f94406510ac3a24a5464668c7ebec3dc5",
   "scope": "Training and validation histories only; subgroup epoch scores are unavailable in native traces.",
   "stages": {
     "ratings_pretrain": {
@@ -339,9 +339,9 @@
     "dataset_revision": "jep-csts-v1",
     "test_sha256": "52a9c0d6b8d9f3fc81e698bae1e2564051cf7ec29e8dc1cb4d68167910bb968d",
     "test_rows": 2430,
-    "encoder_source_commit": "636cb33048f41eb8c0e839250df66d36cf46a101",
-    "encoder_initial_epochs": 2,
-    "followup_running": true,
+    "encoder_source_commit": "67f816407f786ea038415422a9aefd57d30c92fb",
+    "encoder_initial_epochs": 4,
+    "followup_running": false,
     "sol_completed_rows": 2430,
     "sol_completed_batches": [
       0,
@@ -387,39 +387,39 @@
     "models": {
       "ratings": {
         "label": "Ratings model",
-        "initial_epochs": 2,
+        "initial_epochs": 4,
         "full": {
           "n": 2430,
-          "spearman": 0.8532272214316708,
-          "pearson": 0.8704440251908008,
-          "mse_0_1": 0.03977941506211169
+          "spearman": 0.8557188384851067,
+          "pearson": 0.8745795844750097,
+          "mse_0_1": 0.038520896116577025
         },
         "shared": {
           "n": 2430,
-          "spearman": 0.8532272214316708,
-          "pearson": 0.8704440251908008,
-          "mse_0_1": 0.03977941506211169
+          "spearman": 0.8557188384851067,
+          "pearson": 0.8745795844750097,
+          "mse_0_1": 0.038520896116577025
         },
-        "checkpoint_sha256": "d9d329dffff497402eddc40c53f4f1a651e13f3f22479bbda0b9d8927086fec6",
-        "predictions_sha256": "69d27740148c743a5404c4f5a0941854d49785d959378f1096620765fcb441ab"
+        "checkpoint_sha256": "530eddea9a3077be8db864194f0915f3f85fbba6045a0c5cb4691423d9d1e26d",
+        "predictions_sha256": "e440cb29af7fbd9e3bc44375ac2fd7c14470f8705fbe7d868f1b732f3a0adb5f"
       },
       "evidence": {
         "label": "Proposition model",
-        "initial_epochs": 2,
+        "initial_epochs": 4,
         "full": {
           "n": 2430,
-          "spearman": 0.8540749642675822,
-          "pearson": 0.8707365047359243,
-          "mse_0_1": 0.039181198582574704
+          "spearman": 0.8543617428925742,
+          "pearson": 0.8720015664150436,
+          "mse_0_1": 0.03884132179509847
         },
         "shared": {
           "n": 2430,
-          "spearman": 0.8540749642675822,
-          "pearson": 0.8707365047359243,
-          "mse_0_1": 0.039181198582574704
+          "spearman": 0.8543617428925742,
+          "pearson": 0.8720015664150436,
+          "mse_0_1": 0.03884132179509847
         },
-        "checkpoint_sha256": "20d74e66f590fd9799d8ea44bb09aacbb9d27288e2eab7edc2b2d3325545a229",
-        "predictions_sha256": "db853da51ddcfcb7e3096dd49fbf0c2e45082a307451e2a9914635cdad187729"
+        "checkpoint_sha256": "a99ccbacf27a3d56ff80b40d135ec05e265048d14f077a9e2d964b3b60649e62",
+        "predictions_sha256": "d9b10b92639016859a1effd2dafdc1d71f31b4c798c7c0d19848eb6ecf08d343"
       },
       "sol": {
         "label": "GPT-6.1 Sol (max)",

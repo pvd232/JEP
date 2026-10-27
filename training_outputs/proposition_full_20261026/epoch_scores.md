@@ -7,12 +7,11 @@ Dataset: **jep-csts-v1**, the same **2,430 test examples** for every full-test s
 
 | Model | Full-test Spearman | Full-test MSE (0–1) | Test coverage |
 |---|---:|---:|---:|
-| Ratings model | 0.853227 | 0.039779 | 2,430/2,430 |
-| Proposition model | 0.854075 | 0.039181 | 2,430/2,430 |
+| Ratings model | 0.855719 | 0.038521 | 2,430/2,430 |
+| Proposition model | 0.854362 | 0.038841 | 2,430/2,430 |
 | GPT-6.1 Sol (max) | 0.919955 | 0.023513 | 2,430/2,430 |
 
-Encoder scores above come from the completed **2-initial-epoch** comparison.
-The four-initial-epoch follow-up is training; its test scores will replace the encoder rows after checkpoint selection and test evaluation finish.
+Encoder scores above come from the completed **4-initial-epoch** comparison.
 
 [Sol capture status and protocol](gpt61_sol_max_jep_v1.md). Test scores do not control training, checkpoint selection or the proposition-generation decision.
 <!-- three-model-comparison:end -->
@@ -26,9 +25,9 @@ Stop after consecutive non-improving validation checks: ratings control **1**; p
 [Missing proposition generation progress](generation_progress.md)
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T17:20:51+00:00**. Run: `jep_csts_v1_four_initial_epochs_patience1_20261027`.
+Updated: **2026-10-27T17:22:11+00:00**. Run: `jep_csts_v1_four_initial_epochs_patience1_20261027`.
 
-Status: **running**. Current stage: **evaluate_evidence**.
+Status: **complete**. Current stage: **none**.
 
 Validation: **1,576 comparisons**, 680 source groups.
 
