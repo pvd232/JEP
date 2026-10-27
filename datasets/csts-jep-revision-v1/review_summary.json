@@ -1,0 +1,304 @@
+{
+  "schema_version": 1,
+  "source_commit": "97ffb9a7168b76b5d9cd08d71768e81e4ffb56e3",
+  "coverage": {
+    "training": 6980,
+    "test": 2834,
+    "total": 9814
+  },
+  "initial_agreement": {
+    "exact": 7891,
+    "adjacent_grade": 1231,
+    "larger_grade_difference": 352,
+    "status_or_scope_difference": 340
+  },
+  "initial_exact_agreement_proportion": 0.8040554310169146,
+  "final_changes": 25,
+  "source_adjudication_sha256": "9159e7b0a6b39537596c287236407d7081f339e6b5c865065d213101bdd1c650",
+  "validation_preservation": {
+    "schema_version": 1,
+    "subject_commit": "97ffb9a7168b76b5d9cd08d71768e81e4ffb56e3",
+    "method": "Independent object-by-object validation V4.1/V4.2 comparison and publication-scope review; no fresh validation semantic regrading.",
+    "passed": true,
+    "checks": {
+      "validation_label_ids_unique": true,
+      "validation_audit_ids_unique": true,
+      "validation_label_order_preserved": true,
+      "validation_audit_order_preserved": true,
+      "only_four_label_records_changed": true,
+      "only_four_audit_records_changed": true,
+      "four_numeric_ratings_match": true,
+      "all_other_1826_label_records_identical": true,
+      "all_other_1826_audit_records_identical": true,
+      "previous_1572_usable_records_identical": true,
+      "all_twelve_confirmed_exclusions_preserved": true,
+      "confirmed_age_scope_stays_unresolved": true,
+      "source_provenance_preserved": true,
+      "pair_and_group_ids_preserved": true,
+      "new_inclusion_grades_correctly_attributed": true,
+      "final_counts_match": true,
+      "final_usable_groups_match": true
+    },
+    "expected_changes": {
+      "train_624": 5,
+      "train_1075": 3,
+      "train_1809": 3,
+      "train_2022": 3
+    },
+    "confirmed_exclusion_items": [
+      6,
+      7,
+      11,
+      14,
+      15,
+      16,
+      26,
+      28,
+      31,
+      50,
+      58,
+      63
+    ],
+    "confirmed_exclusion_ids": [
+      "train_180",
+      "train_278",
+      "train_332",
+      "train_625",
+      "train_630",
+      "train_631",
+      "train_1074",
+      "train_1082",
+      "train_1132",
+      "train_1476",
+      "train_1693",
+      "train_2021"
+    ],
+    "final_validation_counts": {
+      "dispositions": 1830,
+      "usable": 1576,
+      "source_groups": 680,
+      "invalid": 253,
+      "excluded_ambiguous": 1
+    },
+    "user_approval_scope": "Four inclusion decisions and twelve original exclusion rationales. New inclusion numerical grades were assigned by the assistant; no blanket human validation is inferred.",
+    "publication_scope": {
+      "suggested_title": "JEP C-STS revision 1",
+      "upstream_dataset": "LivNLP/C-STS-Reannotated",
+      "upstream_revision": "058ac842f5f19d27b08ad54f6d4a2c50b3f9578b",
+      "upstream_dataset_url": "https://huggingface.co/datasets/LivNLP/C-STS-Reannotated",
+      "upstream_reannotation_paper": "https://aclanthology.org/2025.emnlp-main.1373/",
+      "upstream_license_current_card": "CC BY 4.0",
+      "license_evidence": "Official upstream Hugging Face dataset card, retrieved 2026-10-27, explicitly lists cc-by-4.0. The pinned README could not be retrieved via web tool, so this does not independently date the license declaration to the pinned revision.",
+      "license_source_ref": "turn0view0",
+      "is_project_specific_resplit": true,
+      "partition_description": "Project training and validation are a deterministic connected-caption partition of the upstream training CSV after 2,532 overlap rows are removed. Project test comes from the upstream released validation CSV, including semantically audited formerly-invalid rows subject to split guards.",
+      "counts": {
+        "train": 6067,
+        "validation": 1576,
+        "test": 2431
+      },
+      "assistant_annotations": true,
+      "human_error_rate_measured": false,
+      "comparability": "Labels, exclusions and metric denominators differ from upstream and previous project versions. Scores must identify this revision; they do not directly demonstrate improvement over scores computed on earlier labels.",
+      "release_language": "Publish as the project’s versioned C-STS revision. Keep upstream dataset provenance and attribution visible; do not imply that the original C-STS authors have adopted this as their official standard.",
+      "license_notice_needed": "The inspected release files do not include an explicit source license/attribution notice. Add the upstream dataset link, CC BY 4.0 link, original/reannotation citations, and a clear statement of label and partition changes to the release card.",
+      "recommended_merge_scope": "Merge only the audit packages, reconstruction/provenance code and review evidence plus the versioned revision card/check receipts. Avoid merging unrelated experimental training branches merely because the audit commit descends from them."
+    },
+    "dataset_card_draft": "JEP C-STS revision 1 derives from LivNLP/C-STS-Reannotated at revision 058ac842f5f19d27b08ad54f6d4a2c50b3f9578b. It supplies scope-first assistant annotations and preserves recorded user adjudications. The JEP connected-caption project split contains 6,067 training, 1,576 validation and 2,431 test comparisons. Validation V4.2 retains all 1,826 decisions outside four user-approved inclusion restorations; the assistant assigned the four new numerical grades. Source captions and source-row IDs remain traceable, and excluded decisions remain available in the audit. These labels have not been established as independent human ground truth. Evaluation results must name this revision because its labels and denominators differ from earlier releases. Source dataset: LivNLP/C-STS-Reannotated (CC BY 4.0, per its upstream card); this revision changes labels, exclusions and project partitions.",
+    "file_sha256": {
+      "datasets/csts-validation-audit-v4-1/labels.json": "a1ac6be169e973c6e188a2c89fba96f99af52a6a2c2e758c85433d4b69d34f2c",
+      "datasets/csts-validation-audit-v4-2/labels.json": "9d58f0d713b864d74ccab5d518c5b2d124d6e9a1de5b1f16fb389adc4e89555b",
+      "training_outputs/csts_validation_audit_v4_1_20261027.json": "845ed43db26743496fbd73dd4e6453d7dd18fb54002f3d8b2a07d3fd7655c412",
+      "training_outputs/csts_validation_audit_v4_2_20261027.json": "471a0fd3ddd9a842c3ac87ed5fcbe0c77958f0501a274992c4df1584b99a51c3"
+    }
+  },
+  "original_integrity_check": {
+    "schema_version": 1,
+    "commit": "97ffb9a7168b76b5d9cd08d71768e81e4ffb56e3",
+    "method": "Independent CSV adjacency components, label/source joins, export recreation, hashes and duplicate checks; no semantic regrading.",
+    "checks": {
+      "source_csv": {
+        "train": {
+          "rows": 11342,
+          "sha256": "118ef935443531a60f3dd5652afd946869f47b134c83fd8da38779912167b652"
+        },
+        "validation": {
+          "rows": 2834,
+          "sha256": "84602c1bcbbe1e6410a78c9cb1cb0f3dac4bf48c0c55ad42dc19558370e4821f"
+        }
+      },
+      "independent_partition": {
+        "training": 6980,
+        "validation": 1830,
+        "test": 2834,
+        "training_overlap_excluded": 2532
+      },
+      "splits": {
+        "training": {
+          "reviewed": 6980,
+          "usable": 6067,
+          "status_counts": {
+            "rated": 6067,
+            "invalid": 909,
+            "excluded_scope": 4
+          },
+          "groups": 2636,
+          "pairs": 3425,
+          "export_sha256": "69db590d030881d801f30315d8c93d3b4eba1620ce537bfd4b2867fc59520946",
+          "complete_counts": {
+            "reviewed": 6980,
+            "semantically_rated": 6067,
+            "usable": 6067,
+            "invalid": 909,
+            "excluded_scope": 4,
+            "split_conflict": 0,
+            "source_valid": 6980,
+            "source_invalid": 0,
+            "corrected_valid_ratings": 3197,
+            "newly_excluded_source_valid": 913,
+            "restored_source_invalid_semantic": 0,
+            "restored_source_invalid_usable": 0,
+            "groups": 2636,
+            "pairs": 3425
+          }
+        },
+        "validation": {
+          "reviewed": 1830,
+          "usable": 1576,
+          "status_counts": {
+            "adjudicated": 365,
+            "agreement": 1211,
+            "invalid": 253,
+            "excluded_ambiguous": 1
+          },
+          "groups": 680,
+          "pairs": 899,
+          "export_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+        },
+        "test": {
+          "reviewed": 2834,
+          "usable": 2431,
+          "status_counts": {
+            "invalid": 395,
+            "rated": 2436,
+            "excluded_scope": 3
+          },
+          "groups": 1222,
+          "pairs": 1387,
+          "export_sha256": "4667fdd67696c7289297157f2431c7fca5f1e9b8a096bb322ee0700f4c6d472e",
+          "complete_counts": {
+            "reviewed": 2834,
+            "semantically_rated": 2436,
+            "usable": 2431,
+            "invalid": 395,
+            "excluded_scope": 3,
+            "split_conflict": 5,
+            "source_valid": 2620,
+            "source_invalid": 214,
+            "corrected_valid_ratings": 794,
+            "newly_excluded_source_valid": 242,
+            "restored_source_invalid_semantic": 58,
+            "restored_source_invalid_usable": 53,
+            "groups": 1222,
+            "pairs": 1387
+          }
+        }
+      },
+      "caption_overlap": {
+        "exact": {
+          "training:validation": 0,
+          "training:test": 0,
+          "validation:test": 0
+        },
+        "canonical": {
+          "training:validation": 0,
+          "training:test": 0,
+          "validation:test": 0
+        }
+      },
+      "test_overlap_original_partitions": {
+        "training": 0,
+        "validation": 0
+      },
+      "duplicates": {
+        "export_training": {
+          "duplicate_groups": 27,
+          "extra_rows": 27,
+          "conflicts": []
+        },
+        "export_validation": {
+          "duplicate_groups": 11,
+          "extra_rows": 11,
+          "conflicts": []
+        },
+        "export_test": {
+          "duplicate_groups": 7,
+          "extra_rows": 7,
+          "conflicts": []
+        },
+        "review_training": {
+          "duplicate_groups": 27,
+          "extra_rows": 27,
+          "conflicts": []
+        },
+        "review_test": {
+          "duplicate_groups": 8,
+          "extra_rows": 8,
+          "conflicts": []
+        }
+      },
+      "inventory": {
+        "verified": [
+          "datasets/csts-train-test-audit-v1/README.md",
+          "datasets/csts-train-test-audit-v1/freeze.json",
+          "datasets/csts-train-test-audit-v1/independent_verification.json",
+          "datasets/csts-train-test-audit-v1/manifest.json",
+          "datasets/csts-train-test-audit-v1/reconstruct.py",
+          "datasets/csts-train-test-audit-v1/reconstruction_receipt.json",
+          "datasets/csts-train-test-audit-v1/rubric.md",
+          "datasets/csts-train-test-audit-v1/source_partition.py",
+          "datasets/csts-train-test-audit-v1/test.labels.json",
+          "datasets/csts-train-test-audit-v1/training.labels.json",
+          "datasets/csts-train-test-audit-v1/verification.json",
+          "datasets/csts-validation-audit-v4-2/README.md",
+          "datasets/csts-validation-audit-v4-2/changes.json",
+          "datasets/csts-validation-audit-v4-2/labels.json",
+          "datasets/csts-validation-audit-v4-2/verification.json",
+          "training_outputs/csts_test_exclusions_v1_20261027.md",
+          "training_outputs/csts_train_test_audit_report_v1_20261027.md",
+          "training_outputs/csts_train_test_audit_v1_20261027/README.md",
+          "training_outputs/csts_train_test_audit_v1_20261027/test_01.json",
+          "training_outputs/csts_train_test_audit_v1_20261027/test_02.json",
+          "training_outputs/csts_train_test_audit_v1_20261027/test_03.json",
+          "training_outputs/csts_train_test_audit_v1_20261027/training_01.json",
+          "training_outputs/csts_train_test_audit_v1_20261027/training_02.json",
+          "training_outputs/csts_train_test_audit_v1_20261027/training_03.json",
+          "training_outputs/csts_train_test_audit_v1_20261027/training_04.json",
+          "training_outputs/csts_train_test_audit_v1_20261027/training_05.json",
+          "training_outputs/csts_train_test_audit_v1_20261027/training_06.json",
+          "training_outputs/csts_train_test_audit_v1_20261027/training_07.json",
+          "training_outputs/csts_training_exclusions_v1_20261027.md",
+          "training_outputs/csts_validation_audit_v4_2_20261027.json",
+          "training_outputs/csts_validation_user_decisions_v4_2_20261027.json"
+        ],
+        "unavailable": [
+          "training_outputs/csts_train_test_review_evidence_v1_20261027.json.gz"
+        ]
+      },
+      "freeze": {
+        "datasets/csts-train-test-audit-v1/training.labels.json": true,
+        "datasets/csts-train-test-audit-v1/test.labels.json": true,
+        "datasets/csts-train-test-audit-v1/manifest.json": true,
+        "datasets/csts-validation-audit-v4-2/labels.json": true,
+        "training_outputs/csts_validation_audit_v4_2_20261027.json": true,
+        "training_outputs/csts_train_test_review_evidence_v1_20261027.json.gz": "unavailable"
+      }
+    },
+    "errors": [],
+    "warnings": [
+      "Some inventory artifacts were not present in the local materialized subset; listed explicitly."
+    ],
+    "passed": true
+  },
+  "interpretation": "Raw agreement describes the second initial model reading versus the prior model audit. Final changes are independently adjudicated policy errors or unresolved ordinary feature scopes, not a vote over initial numeric grades."
+}
