@@ -26,9 +26,9 @@ Stop after consecutive non-improving validation checks: ratings control **1**; p
 [Missing proposition generation progress](generation_progress.md)
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T13:41:56+00:00**. Run: `jep_csts_v1_four_initial_epochs_patience1_20261027`.
+Updated: **2026-10-27T13:42:35+00:00**. Run: `jep_csts_v1_four_initial_epochs_patience1_20261027`.
 
-Status: **running**. Current stage: **ratings_pretrain**.
+Status: **running**. Current stage: **evidence_pretrain**.
 
 Validation: **1,576 comparisons**, 680 source groups.
 
@@ -44,7 +44,7 @@ Appearance and colour scores are available in the final report. Native epoch tra
 
 ## Ratings model: first 4 epochs on the covered subset
 
-Status: **running**. Completed epochs: **4**. Recorded optimizer updates: **268**.
+Status: **succeeded**. Completed epochs: **4**. Recorded optimizer updates: **268**.
 
 | Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
 |---:|---:|---:|---:|---:|---:|
@@ -57,7 +57,7 @@ Stop reason: `fixed_update_budget`.
 
 ## Proposition model: writing propositions on the covered subset
 
-Status: **pending**. Completed epochs: **0**. Recorded optimizer updates: **0**.
+Status: **running**. Completed epochs: **0**. Recorded optimizer updates: **0**.
 
 Awaiting the first completed epoch.
 
