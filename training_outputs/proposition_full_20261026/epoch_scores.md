@@ -7,7 +7,7 @@ Both models use validation patience **2**, with an equal **8,100-second** rating
 [Earlier V4.1 comparison](v41_final_epoch_scores.md)
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T07:52:56+00:00**. Run: `jep_csts_v1_existing_propositions_patience2_20261027`.
+Updated: **2026-10-27T07:56:31+00:00**. Run: `jep_csts_v1_existing_propositions_patience2_20261027`.
 
 Status: **running**. Current stage: **ratings_ratings**.
 
@@ -47,7 +47,7 @@ Stop reason: `fixed_update_budget`.
 
 ## Ratings model: ratings on the full training set
 
-Status: **running**. Completed epochs: **3**. Recorded optimizer updates: **575**.
+Status: **running**. Completed epochs: **3**. Recorded optimizer updates: **600**.
 
 | Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
 |---:|---:|---:|---:|---:|---:|
