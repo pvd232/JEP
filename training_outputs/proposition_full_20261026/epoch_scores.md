@@ -26,7 +26,7 @@ Stop after consecutive non-improving validation checks: ratings control **1**; p
 [Missing proposition generation progress](generation_progress.md)
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T15:04:21+00:00**. Run: `jep_csts_v1_four_initial_epochs_patience1_20261027`.
+Updated: **2026-10-27T15:05:04+00:00**. Run: `jep_csts_v1_four_initial_epochs_patience1_20261027`.
 
 Status: **running**. Current stage: **ratings_ratings**.
 
@@ -86,6 +86,8 @@ Awaiting the first completed epoch.
 ## Proposition validation and full-training generation
 
 Monitor: **running**.
+
+Current evaluation/retry issue: training capture exhausted four retained attempts; inspect capture log.
 
 Training inputs captured: **8,832/11,909**; missing inputs requested: **9,413**. The current training bank remains frozen.
 
