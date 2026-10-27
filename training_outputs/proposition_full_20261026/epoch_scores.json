@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at_utc": "2026-10-27T10:28:02+00:00",
+  "updated_at_utc": "2026-10-27T10:28:37+00:00",
   "identity": {
     "run_name": "jep_csts_v1_existing_propositions_patience2_20261027",
     "source_commit": "8df0a1039bb5be8ddfd8407bdd32aa64a102018a",
@@ -246,5 +246,31 @@
       "notes": []
     }
   },
-  "dataset_revision": "jep-csts-v1"
+  "dataset_revision": "jep-csts-v1",
+  "pilot_decision": {
+    "criterion": "Selected proposition-model validation Spearman exceeds the selected ratings-control validation Spearman.",
+    "positive": false,
+    "validation_spearman": {
+      "ratings": 0.8759148798941229,
+      "evidence": 0.8750486487560906
+    },
+    "validation_difference": -0.0008662311380323029,
+    "test_spearman": {
+      "ratings": 0.853227221431671,
+      "evidence": 0.8540749642675822
+    },
+    "test_used_for_generation_decision": false,
+    "selected_epochs": {
+      "ratings": 4,
+      "evidence": 4
+    },
+    "training_seed": 7,
+    "source_commit": "8df0a1039bb5be8ddfd8407bdd32aa64a102018a",
+    "dataset_revision": "jep-csts-v1",
+    "scope": "One-seed pilot with existing proposition coverage and a bounded training budget.",
+    "stopping_reasons": {
+      "ratings": "resource_budget",
+      "evidence": "resource_budget"
+    }
+  }
 }

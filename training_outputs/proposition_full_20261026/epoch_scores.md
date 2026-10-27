@@ -5,9 +5,23 @@ Training: **6,051** comparisons. Validation: **1,576**. Test: **2,430**.
 Both models use validation patience **2**, with an equal **8,100-second** ratings-training budget per model. The morning report deadline is **8:00 a.m. ET, October 27**.
 
 [Earlier V4.1 comparison](v41_final_epoch_scores.md)
+
+## Pilot result
+
+| Model | Selected validation Spearman | Test Spearman | Selected ratings epoch |
+|---|---:|---:|---:|
+| Ratings control | 0.875915 | 0.853227 | 4 |
+| Proposition model | 0.875049 | 0.854075 | 4 |
+
+Proposition-model validation difference: **-0.000866**.
+Ratings training stopped because: {'ratings': 'resource_budget', 'evidence': 'resource_budget'}. A resource-budget stop means the overnight time limit ended training before patience 2 was reached.
+
+Missing proposition generation: **not queued; the pilot's validation difference was zero or negative**.
+
+This is a one-seed screening result. Selected checkpoints were frozen before test scoring. [Detailed comparison and source-group intervals](comparison_report.md).
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T10:28:02+00:00**. Run: `jep_csts_v1_existing_propositions_patience2_20261027`.
+Updated: **2026-10-27T10:28:37+00:00**. Run: `jep_csts_v1_existing_propositions_patience2_20261027`.
 
 Status: **complete**. Current stage: **none**.
 
