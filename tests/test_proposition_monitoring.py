@@ -5,7 +5,13 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from csts_pilot.proposition_monitoring import heldout, insert, inventory, review_metrics
+from csts_pilot.proposition_monitoring import (
+    heldout,
+    insert,
+    inventory,
+    read_status,
+    review_metrics,
+)
 from scripts import capture_proposition_inputs as capture
 from scripts import proposition_validation_suite as suite
 
@@ -175,6 +181,20 @@ class MonitoringTests(unittest.TestCase):
                 count = remote.call_count
                 suite.gpu_job(root)
                 self.assertEqual(remote.call_count, count)
+
+    def test_saved_losses_publish_before_review_and_survive_monitor_restart(self):
+        """Retain measured loss while factual review is pending, preserving finished reviews."""
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            measured = {"epoch": 2, "mean_answer_cross_entropy": 0.451316}
+            suite.save(root / "epoch_2_result.json", measured)
+            suite.save(root / "status.json", {"status": "running", "evaluations": []})
+            state = read_status(root)
+            self.assertEqual(state["evaluations"], [measured])
+            self.assertIn("0.451316 | Pending", insert("# Epoch scores", state))
+            reviewed = {**measured, "factual_review": {"accuracy": 0.75, "n": 64}}
+            suite.save(root / "status.json", {"evaluations": [reviewed]})
+            self.assertEqual(read_status(root)["evaluations"], [reviewed])
 
 
 if __name__ == "__main__":

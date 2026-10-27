@@ -128,6 +128,12 @@ def read_status(root: Path) -> dict:
     revision = root / "evaluation_source_revision.json"
     if revision.exists():
         state["evaluation_source_revision"] = json.loads(revision.read_text())
+    evaluations = {row["epoch"]: row for row in state.get("evaluations", [])}
+    for epoch in (2, 4):
+        result = root / f"epoch_{epoch}_result.json"
+        if result.exists() and epoch not in evaluations:
+            evaluations[epoch] = json.loads(result.read_text())
+    state["evaluations"] = [evaluations[epoch] for epoch in sorted(evaluations)]
     return state
 
 
