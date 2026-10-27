@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "validation_rows": 1572,
+  "validation_sha256": "f186e86877e731c96ee9b1c819863b981074bc500dc9aa11c6951ba9fd56e2c9",
+  "updates_per_arm": {
+    "auxiliary": 8,
+    "ratings": 25,
+    "total": 33
+  },
+  "parent_model_sha256": "8805f9a7241e4e19ffc481341ebad6f1ddb6dd6ff04bbf710f9f0896469e34ff",
+  "initial_trainable_sha256": "f6c42d54d12275d2f610201eff0d3737ac00430710940cb4da303a5e00632aa6",
+  "common_batch_order_sha256": "9c28ae4a3085e94579c59e475b89e139b868a8873271192c446a92411fdee4ca",
+  "checks": [
+    "same parent adapter state",
+    "same phase RNG states",
+    "fresh phase optimizers",
+    "same shared comparison batches",
+    "terminal auxiliary to rating phase transition",
+    "complete ordered row identity and label alignment",
+    "independent average-tie ranks and NumPy correlation"
+  ],
+  "spearman": {
+    "baseline": 0.818431612689631,
+    "ratings": 0.8129671350030272,
+    "evidence": 0.8124470132883516
+  },
+  "weights_read": false,
+  "test_scoring_performed": false,
+  "source_output_sha256": {
+    "summary.json": "a0c9268f020192e71b004a5d9f28419d226140e3ce7e61a0b3e7fb1aff89e058",
+    "results.json": "50fbbce9fd9e754a59e2bcdf6d00b86fe58d7b1a26509c4b451b6365e84811b5",
+    "indicative_report.json": "a2ea165f051a8d17d182794880343ffc32c61b83e03ccabe58949a21f9e5b077"
+  }
+}

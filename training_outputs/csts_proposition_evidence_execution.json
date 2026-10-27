@@ -1,5 +1,5 @@
 {
-  "status": "running",
+  "status": "indicative_complete_full_running",
   "source_commit": "a6daf0eeea544716d7340f0f24de687e4ba93490",
   "source_tree": "966023e6fce206d9c42e7fbf3fdee474d7c48e1a",
   "root": "/home/machina/jep-csts-proposition-evidence-20261026",
@@ -41,5 +41,40 @@
     "Frozen validation-selected checkpoints before test scoring",
     "Independent recomputation of test and validation metrics",
     "Paired source-group intervals and explicit subgroup counts"
-  ]
+  ],
+  "initial_full_attempt": {
+    "name": "propositions_v41",
+    "status": "interrupted_for_indicative_priority",
+    "confirmed_updates_before_interruption": 25
+  },
+  "indicative": {
+    "source_commit": "43d960b4d9ff11203f325f168e63e285a2555def",
+    "auxiliary_updates_per_arm": 8,
+    "ratings_updates_per_arm": 25,
+    "baseline_spearman": 0.818431612689631,
+    "ratings_spearman": 0.8129671350030271,
+    "proposition_spearman": 0.8124470132883516,
+    "paired_difference": -0.0005201217146755255,
+    "paired_95ci": [
+      -0.0032885858312302284,
+      0.0021990426661002726
+    ],
+    "comparisons": 1572,
+    "source_groups": 678,
+    "parent_checkpoint_sha256": "8805f9a7241e4e19ffc481341ebad6f1ddb6dd6ff04bbf710f9f0896469e34ff",
+    "status": "complete"
+  },
+  "full_followup": {
+    "source_commit": "a6daf0eeea544716d7340f0f24de687e4ba93490",
+    "run_name": "propositions_v41_full_after_indicative",
+    "pid": 111848,
+    "status": "running"
+  },
+  "indicative_archive": {
+    "status": "queued_asynchronously",
+    "pid": 112048,
+    "files": 26,
+    "bytes": 1485565403,
+    "local_files_preserved": true
+  }
 }
