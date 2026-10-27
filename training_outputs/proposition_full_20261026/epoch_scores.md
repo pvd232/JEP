@@ -23,7 +23,7 @@ Missing proposition generation: **not queued; the pilot's validation difference 
 This is a one-seed screening result. Selected checkpoints were frozen before test scoring. [Detailed comparison and source-group intervals](comparison_report.md).
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T13:15:23+00:00**. Run: `jep_csts_v1_proposition_patience1_completion_20261027`.
+Updated: **2026-10-27T13:15:22+00:00**. Run: `jep_csts_v1_proposition_patience1_completion_20261027`.
 
 Status: **complete**. Current stage: **none**.
 
