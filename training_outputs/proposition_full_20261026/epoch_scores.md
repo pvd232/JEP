@@ -26,7 +26,7 @@ Stop after consecutive non-improving validation checks: ratings control **1**; p
 [Missing proposition generation progress](generation_progress.md)
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T16:31:43+00:00**. Run: `jep_csts_v1_four_initial_epochs_patience1_20261027`.
+Updated: **2026-10-27T16:32:28+00:00**. Run: `jep_csts_v1_four_initial_epochs_patience1_20261027`.
 
 Status: **running**. Current stage: **ratings_ratings**.
 
@@ -70,7 +70,7 @@ Stop reason: `fixed_update_budget`.
 
 ## Ratings model: ratings on the full training set
 
-Status: **running**. Completed epochs: **4**. Recorded optimizer updates: **875**.
+Status: **running**. Completed epochs: **4**. Recorded optimizer updates: **900**.
 
 | Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
 |---:|---:|---:|---:|---:|---:|
@@ -83,13 +83,14 @@ Status: **running**. Completed epochs: **4**. Recorded optimizer updates: **875*
 
 Training hardware: **NVIDIA A100-SXM4-40GB**. Overall batch: **32**; microbatch: **32**. Ratings control continues on the Asian L4. Both models keep patience 1 and their best validation checkpoints.
 
-Status: **running**. Completed epochs: **3**. Recorded optimizer updates: **750**.
+Status: **running**. Completed epochs: **4**. Recorded optimizer updates: **800**.
 
 | Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
 |---:|---:|---:|---:|---:|---:|
 | 1 | 190 | 0.850552 | 0.653380 | 0.065883 | 0 |
 | 2 | 380 | 0.868537 | 0.537077 | 0.036545 | 0 |
 | 3 | 570 | 0.874755 | 0.504934 | 0.029097 | 0 |
+| 4 | 760 | 0.878013 | 0.484305 | 0.023880 | 0 |
 
 <!-- proposition-validation:start -->
 ## Proposition validation and full-training generation
