@@ -9,7 +9,7 @@ Stop after consecutive non-improving validation checks: ratings control **2**; p
 [Missing proposition generation progress](generation_progress.md)
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T13:06:48+00:00**. Run: `jep_csts_v1_proposition_patience1_completion_20261027`.
+Updated: **2026-10-27T13:10:09+00:00**. Run: `jep_csts_v1_proposition_patience1_completion_20261027`.
 
 Status: **running**. Current stage: **evidence_ratings**.
 
@@ -64,7 +64,7 @@ Stop reason: `validation_patience`.
 
 ## Proposition model: ratings on the full training set
 
-Status: **running**. Completed epochs: **4**. Recorded optimizer updates: **925**.
+Status: **running**. Completed epochs: **4**. Recorded optimizer updates: **950**.
 
 | Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
 |---:|---:|---:|---:|---:|---:|
