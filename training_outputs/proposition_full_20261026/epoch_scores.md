@@ -1,5 +1,22 @@
 # Four initial epochs: jep-csts-v1
 
+<!-- three-model-comparison:start -->
+## Test comparison: all three models
+
+Dataset: **jep-csts-v1**, the same **2,430 test examples** for every full-test score. Encoder checkpoints were selected on validation before test scoring.
+
+| Model | Full-test Spearman | Full-test MSE (0–1) | Test coverage |
+|---|---:|---:|---:|
+| Ratings model | 0.853227 | 0.039779 | 2,430/2,430 |
+| Proposition model | 0.854075 | 0.039181 | 2,430/2,430 |
+| GPT-6.1 Sol (max) | 0.919955 | 0.023513 | 2,430/2,430 |
+
+Encoder scores above come from the completed **2-initial-epoch** comparison.
+The four-initial-epoch follow-up is training; its test scores will replace the encoder rows after checkpoint selection and test evaluation finish.
+
+[Sol capture status and protocol](gpt61_sol_max_jep_v1.md). Test scores do not control training, checkpoint selection or the proposition-generation decision.
+<!-- three-model-comparison:end -->
+
 Training: **6,051** comparisons. Validation: **1,576**. Test: **2,430**.
 
 Stop after consecutive non-improving validation checks: ratings control **1**; proposition model **1**. Keep each model's best validation checkpoint. Time and epoch limits are disabled. Both models receive four matched initial epochs, then train ratings on all 6,051 comparisons. [Completed two-epoch comparison](two_epoch_phase1_scores.md).
@@ -9,7 +26,7 @@ Stop after consecutive non-improving validation checks: ratings control **1**; p
 [Missing proposition generation progress](generation_progress.md)
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T15:42:45+00:00**. Run: `jep_csts_v1_four_initial_epochs_patience1_20261027`.
+Updated: **2026-10-27T15:43:27+00:00**. Run: `jep_csts_v1_four_initial_epochs_patience1_20261027`.
 
 Status: **running**. Current stage: **ratings_ratings**.
 
@@ -66,3 +83,22 @@ Status: **running**. Completed epochs: **3**. Recorded optimizer updates: **575*
 Status: **pending**. Completed epochs: **0**. Recorded optimizer updates: **0**.
 
 Awaiting the first completed epoch.
+
+<!-- proposition-validation:start -->
+## Proposition validation and full-training generation
+
+Monitor: **running**.
+
+Training inputs captured: **11,392/11,909**; missing inputs requested: **9,413**. The current training bank remains frozen.
+
+Held-out sample: **128 validation source groups**, one passage-condition input per group. References and generated answers are kept outside training. Evaluation uses the retained checkpoints; hardware and progress appear in the detailed status below.
+
+| Proposition checkpoint | Held-out answer loss | Model-reviewed factual accuracy | Reviewed answers |
+|---|---:|---:|---:|
+| After 2 proposition-writing epochs | 0.451316 | 89.1% | 64 |
+| After 4 proposition-writing epochs | 0.378650 | Pending | — |
+
+Loss averages each answer's next-token cross-entropy, then averages answers. Factual checks use free-generated answers and two independent source-only model reviews; they report support, omissions, unsupported assertions and reviewer agreement. These measurements describe proposition writing and do not change the running experiment's stopping rule.
+
+Earlier checkpoints were overwritten by the original trainer; epochs 2 and 4 have retained checkpoints. [Detailed status and results](proposition_validation.json).
+<!-- proposition-validation:end -->
