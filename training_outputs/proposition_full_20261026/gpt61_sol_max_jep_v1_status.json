@@ -6,8 +6,8 @@
   "reasoning_effort": "max",
   "total_rows": 2430,
   "total_batches": 38,
-  "completed_rows": 512,
-  "completed_batches": 8,
+  "completed_rows": 640,
+  "completed_batches": 10,
   "batches": [
     {
       "batch": 2,
@@ -128,9 +128,39 @@
         "output_tokens": 7111,
         "reasoning_output_tokens": 6214
       }
+    },
+    {
+      "batch": 9,
+      "rows": 64,
+      "started_at": "2026-10-27T13:08:39.904389+00:00",
+      "finished_at": "2026-10-27T13:11:44.427913+00:00",
+      "elapsed_seconds": 184.533,
+      "returncode": 0,
+      "usage": {
+        "input_tokens": 27052,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 5556,
+        "reasoning_output_tokens": 4660
+      }
+    },
+    {
+      "batch": 11,
+      "rows": 64,
+      "started_at": "2026-10-27T13:09:11.033193+00:00",
+      "finished_at": "2026-10-27T13:11:51.746276+00:00",
+      "elapsed_seconds": 160.721,
+      "returncode": 0,
+      "usage": {
+        "input_tokens": 27045,
+        "cached_input_tokens": 0,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 4941,
+        "reasoning_output_tokens": 4050
+      }
     }
   ],
   "errors": [],
-  "updated_at": "2026-10-27T13:09:11.031412+00:00",
-  "elapsed_seconds": 448.13
+  "updated_at": "2026-10-27T13:11:51.749755+00:00",
+  "elapsed_seconds": 608.86
 }
