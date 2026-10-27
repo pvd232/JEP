@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at_utc": "2026-10-27T08:20:36+00:00",
+  "updated_at_utc": "2026-10-27T08:21:11+00:00",
   "identity": {
     "run_name": "jep_csts_v1_existing_propositions_patience2_20261027",
     "source_commit": "8df0a1039bb5be8ddfd8407bdd32aa64a102018a",
@@ -16,9 +16,9 @@
   "validation_rows": 1576,
   "validation_groups": 680,
   "run_status": "running",
-  "current_stage": "ratings_ratings",
+  "current_stage": "evidence_ratings",
   "summary_path": "/home/machina/jep-csts-jep-v1-full-propositions-20261027/qwen_evidence_results/jep_csts_v1_existing_propositions_patience2_20261027/summary.json",
-  "summary_sha256": "e4f388e5c6cf6491e3b145904cc6e71b36fdb35e66fdf974bc2fb52e5991bd60",
+  "summary_sha256": "cdfbafc8515d59158ab90125e140f2636645b5ac8709911a93742a98ea009d46",
   "scope": "Training and validation histories only; subgroup epoch scores are unavailable in native traces.",
   "stages": {
     "ratings_pretrain": {
@@ -106,9 +106,9 @@
       "notes": []
     },
     "ratings_ratings": {
-      "status": "running",
+      "status": "succeeded",
       "trace_status": "complete",
-      "trace_path": "/home/machina/jep-csts-jep-v1-full-propositions-20261027/experiments/csts_qwen_proposition_evidence_8df0a103_6048f746_ratings_ratings/runs/ratings_ratings/01M5Y0F28XG18NQ4HAZF75F3ZV/artifacts/train/trace/trace.json",
+      "trace_path": "/home/machina/jep-csts-jep-v1-full-propositions-20261027/qwen_evidence_results/jep_csts_v1_existing_propositions_patience2_20261027/ratings_ratings_trace.json",
       "trace_available": true,
       "completed_epoch": 4,
       "current_epoch": 4,
@@ -176,7 +176,7 @@
       "notes": []
     },
     "evidence_ratings": {
-      "status": "pending",
+      "status": "running",
       "trace_status": null,
       "trace_path": null,
       "trace_available": false,
