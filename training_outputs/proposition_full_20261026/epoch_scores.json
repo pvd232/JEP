@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at_utc": "2026-10-27T14:10:18+00:00",
+  "updated_at_utc": "2026-10-27T14:13:01+00:00",
   "identity": {
     "run_name": "jep_csts_v1_four_initial_epochs_patience1_20261027",
     "source_commit": "67f816407f786ea038415422a9aefd57d30c92fb",
@@ -295,5 +295,73 @@
         "completed_rows": 2430
       }
     }
+  },
+  "proposition_validation": {
+    "status": "running",
+    "protocol": {
+      "dataset_revision": "jep-csts-v1",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "heldout_source_groups": 128,
+      "selection": "One input per validation source group; SHA256 proposition-validation-v1:id order, no labels or model outputs.",
+      "training_unique_inputs": 11909,
+      "reused_inputs": 2496,
+      "missing_inputs": 9413,
+      "training_bank_unchanged": true,
+      "generation_authorization": "User explicitly requested full training generation and held-out proposition evaluation, independent of pilot score.",
+      "teacher_model": "gpt-6.1-sol",
+      "teacher_reasoning_effort": "high",
+      "teacher_prompt_sha256": "6895d17242704944632757d7c5eb669f3d4d8f959ee23bbdd7ddae00a0f0304e",
+      "teacher_source_sha256": "30ee54ef9b4428fcaf435364db21899fe6a14ea0bb292b7520dcc38933e629dd",
+      "review_prompt_sha256": "1609df1ee771a9bd0e00115bcbba0faaa424cb562f7abf2ef2f01097bba80039",
+      "review_schema": {
+        "type": "object",
+        "properties": {
+          "reviews": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "supported": {
+                  "type": "boolean"
+                },
+                "complete": {
+                  "type": "boolean"
+                },
+                "unsupported_assertion": {
+                  "type": "boolean"
+                },
+                "notes": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "supported",
+                "complete",
+                "unsupported_assertion",
+                "notes"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "reviews"
+        ],
+        "additionalProperties": false
+      },
+      "evaluation_source_sha256": "cde0965edbe220d52eff67ab3b5a284f5ffea8781b753b3f5cf10527f9e217df",
+      "generation_source_sha256": "3ca561ba65c5a8e03d01fc3237bae39d5fafa98f401a91994c304442ac451f08"
+    },
+    "generation": {
+      "completed_inputs": 2624,
+      "newly_completed_inputs": 128,
+      "unique_inputs": 11909
+    },
+    "evaluations": []
   }
 }
