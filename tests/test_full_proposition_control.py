@@ -5,7 +5,9 @@ from pathlib import Path
 
 import pytest
 
+from csts_pilot import convergence_run
 from csts_pilot import full_proposition_control as worker
+from csts_pilot.convergence_run import artifact_source
 from csts_pilot.proposition_evidence_run import validate_settings
 
 
@@ -61,3 +63,30 @@ def test_full_comparison_requires_writing_references_and_patience_one():
     settings["proposition_validation"] = {}
     with pytest.raises(ValueError, match="held-out"):
         validate_settings(settings)
+
+
+def test_validation_selected_parent_preserves_its_data_role(monkeypatch):
+    """A writing checkpoint selected with held-out references keeps validation restriction downstream."""
+    reference = {
+        "sha256": "a" * 64,
+        "bytes": 1,
+        "kind": "resolved_run",
+        "stored_at": {
+            "kind": "local",
+            "workspace": "/tmp/work",
+            "store": ".viper/store",
+            "store_id": "c" * 32,
+            "commit": "b" * 64,
+            "path": "run/resolved.yaml",
+        },
+    }
+    monkeypatch.setattr(
+        convergence_run, "run_artifact", lambda *args, **kwargs: kwargs["data_role"]
+    )
+    assert (
+        artifact_source(
+            {"reference": reference, "data_role": "validation"}, "train", "model"
+        )
+        == "validation"
+    )
+    assert artifact_source({"reference": reference}, "train", "model") == "training"

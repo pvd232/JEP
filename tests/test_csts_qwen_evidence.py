@@ -380,6 +380,7 @@ def test_both_training_phases_share_initialization_and_restore_terminal_adapters
                         "training_objective",
                         "validation_mse",
                         "validation_spearman",
+                        "proposition_validation_loss",
                     )
                 }
                 module.fit_qwen_evidence(

@@ -9,6 +9,22 @@ from csts_pilot.colab_training_status import decorate, markdown
 
 
 class ColabStatusTests(unittest.TestCase):
+    def test_full_bank_report_uses_current_concurrent_hardware(self):
+        """The full-bank experiment supersedes the older migration's hardware description."""
+        report = decorate(
+            {
+                "training_policy": {"proposition_until_patience": True},
+                "stages": {
+                    "evidence_pretrain": {"status": "pending", "trace_available": True}
+                },
+            },
+            Path("/absent/migration.json"),
+        )
+        self.assertEqual(report["stages"]["evidence_pretrain"]["status"], "running")
+        displayed = markdown("## Writing\n", report)
+        self.assertIn("80 GB A100", displayed)
+        self.assertNotIn("Asian L4", displayed)
+
     def test_delegated_training_changes_presentation_without_mutating_native_ack(self):
         """A live A100 trace fixes pending presentation while preserving the original object."""
         with tempfile.TemporaryDirectory() as temporary:

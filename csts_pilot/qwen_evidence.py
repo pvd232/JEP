@@ -13,6 +13,8 @@ from pydantic import Field
 from safetensors.torch import load_file
 from torch import nn
 from torch.nn import functional as F
+from viper.config import MetricConfig
+from viper.metrics import MetricContext, metric
 from viper.randomness import capture_main_process_rng, restore_main_process_rng
 from viper.resume import (
     DataLoaderConfiguration,
@@ -81,6 +83,14 @@ class QwenEvidenceConfig(FitConfig):
         return FitConfig.model_validate(
             {key: getattr(self, key) for key in FitConfig.model_fields}
         )
+
+
+@metric(metric_id="proposition_validation_loss", mode="stateless")
+def heldout_proposition_loss(
+    _context: MetricContext[MetricConfig], value: float
+) -> float:
+    """Record the held-out mean answer cross entropy used to select writing weights."""
+    return value
 
 
 @build(config=PreparationConfig)
@@ -599,6 +609,9 @@ def fit_qwen_evidence(context: StageContext[QwenEvidenceConfig]) -> None:
         if references is not None:
             heldout = proposition_validation_loss(
                 model, head, tokenizer, config, references
+            )
+            context.metrics["proposition_validation_loss"].record(
+                heldout["mean_answer_cross_entropy"], step=epoch
             )
             record["proposition_validation"] = heldout
             improved = (

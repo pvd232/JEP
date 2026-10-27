@@ -109,6 +109,12 @@ def collect(root, name, previous=None, overrides=None):
     if summary is None:
         raise ValueError("Cannot read full-run summary: " + str(error))
     settings = summary["settings"]
+    matched_epoch = summary.get("matched_pretrain_epochs")
+    writing_selection = directory / "writing_selected.json"
+    if matched_epoch is None and writing_selection.exists():
+        selected_writing, selection_error = read_object(writing_selection)
+        if selection_error is None:
+            matched_epoch = selected_writing.get("epoch")
     identity = {
         "run_name": name,
         "source_commit": summary["source_commit"],
@@ -126,6 +132,7 @@ def collect(root, name, previous=None, overrides=None):
         "identity": identity,
         "training_sha256": settings["splits"]["training"]["sha256"],
         "training_policy": {
+            "matched_pretrain_epochs": matched_epoch,
             "proposition_until_patience": settings.get(
                 "proposition_until_patience", False
             ),
@@ -211,6 +218,9 @@ def collect(root, name, previous=None, overrides=None):
             rows[-1]["optimizer_updates"] if rows else 0,
         )
         result["stages"][stage] = {
+            "matched_initial_epoch": matched_epoch
+            if stage.endswith("pretrain")
+            else None,
             "status": status,
             "trace_status": (trace or {}).get("status"),
             "trace_path": str(trace_path) if trace_path else None,
@@ -297,6 +307,13 @@ def markdown(report):
             ]
         )
         if data["epochs"]:
+            if data.get("matched_initial_epoch") is not None:
+                lines.extend(
+                    [
+                        f"Initial checkpoint used for the matched comparison: **epoch {data['matched_initial_epoch']}**. Extra speculative epochs remain recorded and are excluded from that checkpoint.",
+                        "",
+                    ]
+                )
             lines.extend(
                 [
                     "| Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |",

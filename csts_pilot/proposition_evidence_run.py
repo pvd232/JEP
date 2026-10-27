@@ -16,7 +16,8 @@ from viper import api, execution
 from viper.authoring import experiment, input, plan, replicate, stage, variant
 from viper.metrics import FloatComparator, MetricDependency, measure
 from viper.metrics import max as maximize
-from viper.outputs import EvalOutputs, StageOutputs, output
+from viper.metrics import min as minimize
+from viper.outputs import EvalOutputs, OutputDraft, StageOutputs, TrainOutputs, output
 from viper.references import GitFileRef, ResolvedRunRef
 from viper.repository import read_source, resolve_root
 from viper.runtime import (
@@ -54,6 +55,7 @@ from csts_pilot.proposition_pretraining_stage import (
 from csts_pilot.qwen_evidence import (
     QwenEvidenceConfig,
     fit_qwen_evidence,
+    heldout_proposition_loss,
     validate_matched_phases,
 )
 from jep_pilot.loaders import load_json
@@ -307,6 +309,7 @@ def run_study(
             "path": str(result.path),
             "reference": result.reference.model_dump(mode="json"),
             "local_run_seconds": time.monotonic() - started,
+            "data_role": configured.outputs.values()[0].data_role,
         }
         summary["runs"].append(record)
         summary["in_flight"] = None
@@ -481,6 +484,11 @@ def run_study(
                         source=artifact_source(parent, "train", parent_output),
                     )
                 )
+            stage_metrics = (
+                metrics + (measure(heldout_proposition_loss),)
+                if cfg.proposition_until_patience
+                else metrics
+            )
             record = execute(
                 f"{arm}_{phase}",
                 stage(
@@ -488,9 +496,18 @@ def run_study(
                     stage_id="train",
                     config=cfg,
                     inputs=tuple(inputs),
-                    outputs=train_outputs,
-                    metrics=metrics,
-                    objective=maximize(metrics[-1]),
+                    outputs=TrainOutputs[OutputDraft](
+                        **{
+                            key: value.model_copy(update={"data_role": "validation"})
+                            for key, value in train_outputs.items()
+                        }
+                    )
+                    if arm == "evidence" and settings.get("proposition_until_patience")
+                    else train_outputs,
+                    metrics=stage_metrics,
+                    objective=minimize(stage_metrics[-1])
+                    if cfg.proposition_until_patience
+                    else maximize(metrics[-1]),
                     reuse="never",
                 ),
                 gpu=True,
@@ -512,6 +529,10 @@ def run_study(
                     directory / "writing_selected.json",
                     traces[arm][phase]["selected_proposition"],
                 )
+                summary["matched_pretrain_epochs"] = traces[arm][phase][
+                    "selected_proposition"
+                ]["epoch"]
+                write_json(path, summary)
     validate_matched_phases(
         traces,
         traces["evidence"]["pretrain"]["selected_proposition"]["epoch"]

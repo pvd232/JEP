@@ -90,14 +90,14 @@ def artifact_source(
     record: dict[str, Any],
     stage_id: str,
     name: str,
-    role: Literal["training", "eval"] = "training",
+    role: Literal["training", "validation", "eval"] | None = None,
 ) -> Any:
     """Use sealed native references for every cross-stage artifact dependency."""
     return run_artifact(
         ResolvedRunRef.model_validate(record["reference"]),
         StageArtifactRef(stage_id=stage_id, artifact_name=name),
         path=f"inputs/{name}",
-        data_role=role,
+        data_role=role or record.get("data_role", "training"),
     )
 
 
@@ -338,7 +338,7 @@ def run_study(root: Path, settings: dict[str, Any], resume: bool = False) -> Non
     """Use verified local runs downstream while cloud publication proceeds separately."""
     storage = load_storage_settings(root)
     if not isinstance(storage.destination, LocalStorageDestination):
-        raise ValueError(
+        raise TypeError(
             "Select destination = 'local' in viper.toml before this runner starts."
         )
     cloud_destination = ViperCloudDestination.model_validate(
