@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at_utc": "2026-10-27T20:45:04.598762+00:00",
+  "updated_at_utc": "2026-10-27T22:13:42+00:00",
   "identity": {
     "run_name": "jep_csts_v1_full_propositions_converged_patience1_20261027",
     "source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
@@ -9,7 +9,7 @@
   },
   "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
   "training_policy": {
-    "matched_pretrain_epochs": 5,
+    "matched_pretrain_epochs": null,
     "proposition_until_patience": true,
     "proposition_validation": {
       "path": "csts_data/jep-csts-v1-propositions/full_bank/writing_validation.json",
@@ -24,20 +24,20 @@
   },
   "validation_rows": 1576,
   "validation_groups": 680,
-  "run_status": "complete",
-  "current_stage": "complete",
+  "run_status": "running",
+  "current_stage": "evidence_pretrain",
   "summary_path": "/content/jep-full-propositions-20261027/repo/qwen_evidence_results/jep_csts_v1_full_propositions_converged_patience1_20261027/summary.json",
-  "summary_sha256": "489cca750486a3faec86b1a528912122c28e1fe269a91b0ba8d99726fd7878fb",
+  "summary_sha256": "05d1f9a4796db0643b41e708701e2e8fe4b44944ae84fdc43f1f9fdc2bc0c644",
   "scope": "Training and validation histories only; subgroup epoch scores are unavailable in native traces.",
   "stages": {
     "ratings_pretrain": {
-      "matched_initial_epoch": 5,
-      "status": "succeeded",
+      "matched_initial_epoch": null,
+      "status": "running",
       "trace_status": "complete",
-      "trace_path": "/content/jep-full-propositions-20261027/repo/experiments/csts_full_control_3ef6ba06_9bfd9512_pretrain_7/runs/ratings_pretrain/01M5ZAZ3SFX44ZSC134W9S1R8F/artifacts/train/trace/trace.json",
+      "trace_path": "/content/jep-full-propositions-20261027/repo/qwen_evidence_results/jep_csts_v1_full_propositions_converged_patience1_20261027/ratings_pretrain_trace.json",
       "trace_available": true,
       "completed_epoch": 7,
-      "current_epoch": null,
+      "current_epoch": 7,
       "optimizer_updates": 1288,
       "epochs_without_improvement": null,
       "stop_reason": "fixed_update_budget",
@@ -148,16 +148,17 @@
           "proposition_validation_loss": null
         }
       ],
-      "notes": []
+      "notes": [],
+      "hardware": "NVIDIA A100-SXM4-80GB"
     },
     "evidence_pretrain": {
-      "matched_initial_epoch": 5,
-      "status": "succeeded",
+      "matched_initial_epoch": null,
+      "status": "running",
       "trace_status": "complete",
       "trace_path": "/content/jep-full-propositions-20261027/repo/qwen_evidence_results/jep_csts_v1_full_propositions_converged_patience1_20261027/evidence_pretrain_trace.json",
       "trace_available": true,
       "completed_epoch": 6,
-      "current_epoch": null,
+      "current_epoch": 6,
       "optimizer_updates": 1104,
       "epochs_without_improvement": 1,
       "stop_reason": "proposition_validation_patience",
@@ -253,157 +254,38 @@
           "proposition_validation_loss": 0.2892187055477426
         }
       ],
-      "notes": []
+      "notes": [],
+      "hardware": "NVIDIA A100-SXM4-80GB"
     },
     "ratings_ratings": {
       "matched_initial_epoch": null,
-      "status": "succeeded",
-      "trace_status": "complete",
-      "trace_path": "/content/jep-full-propositions-20261027/repo/qwen_evidence_results/jep_csts_v1_full_propositions_converged_patience1_20261027/ratings_ratings_trace.json",
-      "trace_available": true,
-      "completed_epoch": 3,
+      "status": "pending",
+      "trace_status": null,
+      "trace_path": null,
+      "trace_available": false,
+      "completed_epoch": 0,
       "current_epoch": null,
-      "optimizer_updates": 570,
+      "optimizer_updates": 0,
       "epochs_without_improvement": null,
-      "stop_reason": "validation_patience",
-      "epochs": [
-        {
-          "epoch": 1,
-          "optimizer_updates": 190,
-          "validation_spearman": 0.8702511842320014,
-          "validation_mse_1_5": 0.5431079086038358,
-          "validation_rows": 1576,
-          "training_loss": 0.016649255207061786,
-          "training_loss_kind": "rating_mse_0_1",
-          "epochs_without_improvement": 0,
-          "fit_seconds": 190.93503364000026,
-          "validation_seconds": 14.645412795000084,
-          "observed_epoch_seconds": 206.25368602800154,
-          "elapsed_seconds": null,
-          "proposition_validation_loss": null
-        },
-        {
-          "epoch": 2,
-          "optimizer_updates": 380,
-          "validation_spearman": 0.8718754731182672,
-          "validation_mse_1_5": 0.5189313996608109,
-          "validation_rows": 1576,
-          "training_loss": 0.01305280006169741,
-          "training_loss_kind": "rating_mse_0_1",
-          "epochs_without_improvement": 0,
-          "fit_seconds": 379.39339491099963,
-          "validation_seconds": 32.499374764000095,
-          "observed_epoch_seconds": 412.9197058440004,
-          "elapsed_seconds": null,
-          "proposition_validation_loss": null
-        },
-        {
-          "epoch": 3,
-          "optimizer_updates": 570,
-          "validation_spearman": 0.8669079481433456,
-          "validation_mse_1_5": 0.5517523296314927,
-          "validation_rows": 1576,
-          "training_loss": 0.010466924068334674,
-          "training_loss_kind": "rating_mse_0_1",
-          "epochs_without_improvement": 1,
-          "fit_seconds": 412.7055619620005,
-          "validation_seconds": 32.58013757399931,
-          "observed_epoch_seconds": 445.2951231719999,
-          "elapsed_seconds": null,
-          "proposition_validation_loss": null
-        }
-      ],
-      "notes": []
+      "stop_reason": null,
+      "epochs": [],
+      "notes": [],
+      "hardware": "NVIDIA A100-SXM4-80GB"
     },
     "evidence_ratings": {
       "matched_initial_epoch": null,
-      "status": "succeeded",
-      "trace_status": "complete",
-      "trace_path": "/content/jep-full-propositions-20261027/repo/qwen_evidence_results/jep_csts_v1_full_propositions_converged_patience1_20261027/evidence_ratings_trace.json",
-      "trace_available": true,
-      "completed_epoch": 5,
-      "current_epoch": 5,
-      "optimizer_updates": 950,
+      "status": "pending",
+      "trace_status": null,
+      "trace_path": null,
+      "trace_available": false,
+      "completed_epoch": 0,
+      "current_epoch": null,
+      "optimizer_updates": 0,
       "epochs_without_improvement": null,
-      "stop_reason": "validation_patience",
-      "epochs": [
-        {
-          "epoch": 1,
-          "optimizer_updates": 190,
-          "validation_spearman": 0.8541123454435061,
-          "validation_mse_1_5": 0.6160851956936005,
-          "validation_rows": 1576,
-          "training_loss": 0.06050596131808185,
-          "training_loss_kind": "rating_mse_0_1",
-          "epochs_without_improvement": 0,
-          "fit_seconds": 413.7831845870005,
-          "validation_seconds": 32.29432834600084,
-          "observed_epoch_seconds": 446.7473257370002,
-          "elapsed_seconds": null,
-          "proposition_validation_loss": null
-        },
-        {
-          "epoch": 2,
-          "optimizer_updates": 380,
-          "validation_spearman": 0.8711297241464339,
-          "validation_mse_1_5": 0.529969907636887,
-          "validation_rows": 1576,
-          "training_loss": 0.03257318871156418,
-          "training_loss_kind": "rating_mse_0_1",
-          "epochs_without_improvement": 0,
-          "fit_seconds": 397.64031398899897,
-          "validation_seconds": 14.634059216999958,
-          "observed_epoch_seconds": 413.3104794110004,
-          "elapsed_seconds": null,
-          "proposition_validation_loss": null
-        },
-        {
-          "epoch": 3,
-          "optimizer_updates": 570,
-          "validation_spearman": 0.8740149364876366,
-          "validation_mse_1_5": 0.5128516852068538,
-          "validation_rows": 1576,
-          "training_loss": 0.025548374916606453,
-          "training_loss_kind": "rating_mse_0_1",
-          "epochs_without_improvement": 0,
-          "fit_seconds": 189.15015088899963,
-          "validation_seconds": 14.645953346998795,
-          "observed_epoch_seconds": 204.83200367399877,
-          "elapsed_seconds": null,
-          "proposition_validation_loss": null
-        },
-        {
-          "epoch": 4,
-          "optimizer_updates": 760,
-          "validation_spearman": 0.8770609109816897,
-          "validation_mse_1_5": 0.5007558395634576,
-          "validation_rows": 1576,
-          "training_loss": 0.02016390239783869,
-          "training_loss_kind": "rating_mse_0_1",
-          "epochs_without_improvement": 0,
-          "fit_seconds": 188.94521120600075,
-          "validation_seconds": 14.650261093000154,
-          "observed_epoch_seconds": 204.62603021500036,
-          "elapsed_seconds": null,
-          "proposition_validation_loss": null
-        },
-        {
-          "epoch": 5,
-          "optimizer_updates": 950,
-          "validation_spearman": 0.8728643810525594,
-          "validation_mse_1_5": 0.5415773917137817,
-          "validation_rows": 1576,
-          "training_loss": 0.015898581675494374,
-          "training_loss_kind": "rating_mse_0_1",
-          "epochs_without_improvement": 1,
-          "fit_seconds": 189.030746370001,
-          "validation_seconds": 14.648678122001002,
-          "observed_epoch_seconds": 203.68809325800066,
-          "elapsed_seconds": null,
-          "proposition_validation_loss": null
-        }
-      ],
-      "notes": []
+      "stop_reason": null,
+      "epochs": [],
+      "notes": [],
+      "hardware": "NVIDIA A100-SXM4-80GB"
     }
   },
   "device_benchmark": {
@@ -659,9 +541,9 @@
     "dataset_revision": "jep-csts-v1",
     "test_sha256": "52a9c0d6b8d9f3fc81e698bae1e2564051cf7ec29e8dc1cb4d68167910bb968d",
     "test_rows": 2430,
-    "encoder_source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
-    "encoder_initial_epochs": 5,
-    "followup_running": false,
+    "encoder_source_commit": "67f816407f786ea038415422a9aefd57d30c92fb",
+    "encoder_initial_epochs": 4,
+    "followup_running": true,
     "sol_completed_rows": 2430,
     "sol_completed_batches": [
       0,
@@ -707,41 +589,39 @@
     "models": {
       "ratings": {
         "label": "Ratings model",
-        "initial_epochs": 5,
+        "initial_epochs": 4,
         "full": {
           "n": 2430,
-          "spearman": 0.8553747813377185,
-          "mse_0_1": 0.038359250025926606,
-          "pearson": 0.8740112163381123
+          "spearman": 0.8557188384851067,
+          "pearson": 0.8745795844750097,
+          "mse_0_1": 0.038520896116577025
         },
         "shared": {
           "n": 2430,
-          "spearman": 0.8553747813377185,
-          "mse_0_1": 0.038359250025926606,
-          "pearson": 0.8740112163381123
+          "spearman": 0.8557188384851067,
+          "pearson": 0.8745795844750097,
+          "mse_0_1": 0.038520896116577025
         },
-        "checkpoint_sha256": "667c124a49be72a6fd8e9fa3df6974830e4ab6a46a10243c360dd46bcc75b534",
-        "predictions_sha256": "031ce3e9f694dbd6a23abd863114f5eff526d93a643c238ac909c2cff5ae5bad",
-        "selected_ratings_epoch": 2
+        "checkpoint_sha256": "530eddea9a3077be8db864194f0915f3f85fbba6045a0c5cb4691423d9d1e26d",
+        "predictions_sha256": "e440cb29af7fbd9e3bc44375ac2fd7c14470f8705fbe7d868f1b732f3a0adb5f"
       },
       "evidence": {
         "label": "Proposition model",
-        "initial_epochs": 5,
+        "initial_epochs": 4,
         "full": {
           "n": 2430,
-          "spearman": 0.8633983505091756,
-          "mse_0_1": 0.035583919528604686,
-          "pearson": 0.8840376878555528
+          "spearman": 0.8543617428925742,
+          "pearson": 0.8720015664150436,
+          "mse_0_1": 0.03884132179509847
         },
         "shared": {
           "n": 2430,
-          "spearman": 0.8633983505091756,
-          "mse_0_1": 0.035583919528604686,
-          "pearson": 0.8840376878555528
+          "spearman": 0.8543617428925742,
+          "pearson": 0.8720015664150436,
+          "mse_0_1": 0.03884132179509847
         },
-        "checkpoint_sha256": "d30c00fc76e70ec639493b7121a8b8c9d7520745733857c1c49f0902fff00f4f",
-        "predictions_sha256": "f686d3f613200387be6d3224c0a5236a3e7841d05ac509887b085d8aaeeefea0",
-        "selected_ratings_epoch": 4
+        "checkpoint_sha256": "a99ccbacf27a3d56ff80b40d135ec05e265048d14f077a9e2d964b3b60649e62",
+        "predictions_sha256": "d9b10b92639016859a1effd2dafdc1d71f31b4c798c7c0d19848eb6ecf08d343"
       },
       "sol": {
         "label": "GPT-6.1 Sol (max)",
@@ -759,8 +639,7 @@
         },
         "completed_rows": 2430
       }
-    },
-    "encoder_selection_sha256": "7558a4f424b10862855975466b4d83a6b658e9c96ab4747ba352508ad529f06d"
+    }
   },
   "proposition_validation": {
     "status": "complete",
@@ -1919,7 +1798,7 @@
           "accuracy": 0.9375,
           "supported": 63,
           "unsupported_assertion_count": 1,
-          "review_agreement": 1,
+          "review_agreement": 1.0,
           "reviewers": "Two independent GPT-6.1 Sol high calls; model-reviewed, no human adjudication."
         }
       }
@@ -1954,13 +1833,5 @@
     "batch_size": 32,
     "microbatch_size": 32,
     "concurrent_on_one_gpu": true
-  },
-  "operator_recovery": {
-    "reason": "Completed-stage metadata access repaired after native verification",
-    "writing_selected_epoch": 5,
-    "matched_control_updates": 920,
-    "driver_patch_commit": "1d4ad09a79085a019badb7a454e689ac252c5907"
-  },
-  "final_results": "comparison_results.json",
-  "selection_sha256": "7558a4f424b10862855975466b4d83a6b658e9c96ab4747ba352508ad529f06d"
+  }
 }

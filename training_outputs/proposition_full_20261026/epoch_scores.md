@@ -1,19 +1,22 @@
 # Training with validation early stopping: jep-csts-v1
 
 <!-- three-model-comparison:start -->
+Both models train concurrently on the **80 GB A100** where their stages overlap. Each uses effective batch **32** and microbatch **32**. Writing checkpoint selection uses held-out proposition loss; ratings checkpoint selection uses validation Spearman.
+
 ## Test comparison: all three models
 
-Dataset: **jep-csts-v1**. All models are scored on the same **2,430 test examples**. Encoder checkpoints were frozen using validation scores before test evaluation.
+Dataset: **jep-csts-v1**, the same **2,430 test examples** for every full-test score. Encoder checkpoints were selected on validation before test scoring.
 
-| Model | Full-test Spearman | Raw MSE (0–1) | Test coverage |
+| Model | Full-test Spearman | Full-test MSE (0–1) | Test coverage |
 |---|---:|---:|---:|
-| Ratings model | 0.855375 | 0.038359 | 2,430/2,430 |
-| Proposition model | 0.863398 | 0.035584 | 2,430/2,430 |
+| Ratings model | 0.855719 | 0.038521 | 2,430/2,430 |
+| Proposition model | 0.854362 | 0.038841 | 2,430/2,430 |
 | GPT-6.1 Sol (max) | 0.919955 | 0.023513 | 2,430/2,430 |
 
-The full-bank comparison is complete. Both first-phase parents use epoch **5**, with **920 optimizer updates**. Ratings validation selected control epoch **2** and proposition epoch **4**. The Sol score is the existing completed baseline on this same frozen test split.
+Encoder scores above come from the completed **4-initial-epoch** comparison.
+The full-bank comparison is training until validation patience is exhausted. Its test scores will replace the encoder rows after checkpoint selection and evaluation finish.
 
-[Detailed comparison and paired intervals](comparison_report.md). [Sol protocol](gpt61_sol_max_jep_v1.md).
+[Sol capture status and protocol](gpt61_sol_max_jep_v1.md). Test scores do not control training, checkpoint selection or the proposition-generation decision.
 <!-- three-model-comparison:end -->
 
 Training: **6,051** comparisons. Validation: **1,576**. Test: **2,430**.
@@ -25,9 +28,9 @@ Stop after consecutive non-improving validation checks: ratings control **1**; p
 [Missing proposition generation progress](generation_progress.md)
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T20:45:04.598762+00:00**. Run: `jep_csts_v1_full_propositions_converged_patience1_20261027`.
+Updated: **2026-10-27T22:13:42+00:00**. Run: `jep_csts_v1_full_propositions_converged_patience1_20261027`.
 
-Status: **complete**. Current stage: **complete**.
+Status: **running**. Current stage: **evidence_pretrain**.
 
 Validation: **1,576 comparisons**, 680 source groups.
 
@@ -39,13 +42,11 @@ The proposition model writes answers from the full generated training bank until
 
 Rating loss measures error in predicted ratings on the 0–1 scale. Proposition-writing loss measures error in predicted text tokens. Each table counts optimizer updates from the beginning of that training step.
 
-Appearance and colour scores are available in the final report. Native epoch traces contain overall validation scores. Checkpoint selection and test evaluation are complete.
+Appearance and colour scores are available in the final report. Native epoch traces contain overall validation scores. Values are provisional while the comparison is running.
 
 ## Ratings control: matched exposure on the full proposition-covered training comparisons
 
-Status: **succeeded**. Completed epochs: **7**. Recorded optimizer updates: **1288**.
-
-Initial checkpoint used for the matched comparison: **epoch 5**. Extra speculative epochs remain recorded and are excluded from that checkpoint.
+Status: **running**. Completed epochs: **7**. Recorded optimizer updates: **1288**.
 
 | Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
 |---:|---:|---:|---:|---:|---:|
@@ -61,9 +62,7 @@ Stop reason: `fixed_update_budget`.
 
 ## Proposition model: full-bank writing until held-out loss stops improving
 
-Status: **succeeded**. Completed epochs: **6**. Recorded optimizer updates: **1104**.
-
-Initial checkpoint used for the matched comparison: **epoch 5**. Extra speculative epochs remain recorded and are excluded from that checkpoint.
+Status: **running**. Completed epochs: **6**. Recorded optimizer updates: **1104**.
 
 | Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
 |---:|---:|---:|---:|---:|---:|
@@ -89,31 +88,15 @@ Stop reason: `proposition_validation_patience`.
 
 ## Ratings model: ratings on the full training set
 
-Status: **succeeded**. Completed epochs: **3**. Recorded optimizer updates: **570**.
+Status: **running**. Completed epochs: **0**. Recorded optimizer updates: **0**.
 
-| Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
-|---:|---:|---:|---:|---:|---:|
-| 1 | 190 | 0.870251 | 0.543108 | 0.016649 | 0 |
-| 2 | 380 | 0.871875 | 0.518931 | 0.013053 | 0 |
-| 3 | 570 | 0.866908 | 0.551752 | 0.010467 | 1 |
-
-Stop reason: `validation_patience`.
+Awaiting the first completed epoch.
 
 ## Proposition model: ratings on the full training set
 
-Status: **succeeded**. Completed epochs: **5**. Recorded optimizer updates: **950**.
+Status: **pending**. Completed epochs: **0**. Recorded optimizer updates: **0**.
 
-| Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
-|---:|---:|---:|---:|---:|---:|
-| 1 | 190 | 0.854112 | 0.616085 | 0.060506 | 0 |
-| 2 | 380 | 0.871130 | 0.529970 | 0.032573 | 0 |
-| 3 | 570 | 0.874015 | 0.512852 | 0.025548 | 0 |
-| 4 | 760 | 0.877061 | 0.500756 | 0.020164 | 0 |
-| 5 | 950 | 0.872864 | 0.541577 | 0.015899 | 1 |
-
-Stop reason: `validation_patience`.
-
-Both selected first-phase parents use epoch 5. The control’s speculative epochs 6–7 remain recorded and were excluded from the matched parent. The writing metadata fix is reviewable in [PR #13](https://github.com/pvd232/JEP/pull/13). The original test index was restored byte for byte from a previously sealed artifact before scoring.
+Awaiting the first completed epoch.
 
 ## A100 and L4 timing comparison
 
