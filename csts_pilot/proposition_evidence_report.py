@@ -227,8 +227,8 @@ def build_report(root: Path, directory: Path) -> dict[str, Any]:
         split: verified_source(root, settings["splits"][split])
         for split in predictions
     }
-    for split in predictions:
-        aligned_predictions(predictions[split], sources[split])
+    for split, candidates in predictions.items():
+        aligned_predictions(candidates, sources[split])
     if {r["group_id"] for r in sources["validation"]} & {r["group_id"] for r in sources["test"]}:
         raise ValueError("Validation and test source groups overlap.")
     traces = {

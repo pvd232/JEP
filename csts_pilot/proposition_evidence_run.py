@@ -43,13 +43,14 @@ from csts_pilot.convergence import (
 from csts_pilot.convergence_run import artifact_path, artifact_source, check_inputs
 from csts_pilot.diagnostics import summarize
 from csts_pilot.evidence_run import evidence_training_outputs
+from csts_pilot.proposition_pretraining_stage import (
+    PropositionPretrainingPreparationConfig,
+    prepare_proposition_pretraining_stage,
+)
 from csts_pilot.qwen_evidence import (
     QwenEvidenceConfig,
     fit_qwen_evidence,
     validate_matched_phases,
-)
-from csts_pilot.proposition_pretraining_stage import (
-    PropositionPretrainingPreparationConfig, prepare_proposition_pretraining_stage,
 )
 from jep_pilot.loaders import load_json
 from jep_pilot.stages import publish_evaluation_inputs
