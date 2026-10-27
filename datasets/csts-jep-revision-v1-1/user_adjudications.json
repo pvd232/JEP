@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "previous_revision": "jep-csts-v1",
+  "revision": "jep-csts-v1.1",
+  "user_statement": "evaluation_2450 is valid. I agree with the rest of the determinations.",
+  "scope": "Inclusion of evaluation_2450 and confirmation of the other twelve published determinations. The assistant assigned the restored numeric grade.",
+  "decisions": [
+    {
+      "row_id": "train_205",
+      "split": "training",
+      "condition": "color of product",
+      "supplied_score": 3.0,
+      "revision_1_score": null,
+      "revision_1_status": "invalid",
+      "user_decision": "retain_exclusion",
+      "current_score": null,
+      "current_status": "invalid"
+    },
+    {
+      "row_id": "train_688",
+      "split": "training",
+      "condition": "objects near device",
+      "supplied_score": 4.0,
+      "revision_1_score": null,
+      "revision_1_status": "invalid",
+      "user_decision": "retain_exclusion",
+      "current_score": null,
+      "current_status": "invalid"
+    },
+    {
+      "row_id": "train_689",
+      "split": "training",
+      "condition": "type of device",
+      "supplied_score": 4.0,
+      "revision_1_score": null,
+      "revision_1_status": "invalid",
+      "user_decision": "retain_exclusion",
+      "current_score": null,
+      "current_status": "invalid"
+    },
+    {
+      "row_id": "train_778",
+      "split": "training",
+      "condition": "type of animal",
+      "supplied_score": 5.0,
+      "revision_1_score": null,
+      "revision_1_status": "invalid",
+      "user_decision": "retain_exclusion",
+      "current_score": null,
+      "current_status": "invalid"
+    },
+    {
+      "row_id": "train_779",
+      "split": "training",
+      "condition": "number of animals",
+      "supplied_score": 1.0,
+      "revision_1_score": null,
+      "revision_1_status": "invalid",
+      "user_decision": "retain_exclusion",
+      "current_score": null,
+      "current_status": "invalid"
+    },
+    {
+      "row_id": "train_2038",
+      "split": "validation",
+      "condition": "type of area involved",
+      "supplied_score": 4.0,
+      "revision_1_score": null,
+      "revision_1_status": "invalid",
+      "user_decision": "retain_exclusion",
+      "current_score": null,
+      "current_status": "invalid"
+    },
+    {
+      "row_id": "train_8568",
+      "split": "validation",
+      "condition": "location",
+      "supplied_score": 3.0,
+      "revision_1_score": null,
+      "revision_1_status": "invalid",
+      "user_decision": "retain_exclusion",
+      "current_score": null,
+      "current_status": "invalid"
+    },
+    {
+      "row_id": "train_10241",
+      "split": "validation",
+      "condition": "position of person",
+      "supplied_score": 2.0,
+      "revision_1_score": null,
+      "revision_1_status": "invalid",
+      "user_decision": "retain_exclusion",
+      "current_score": null,
+      "current_status": "invalid"
+    },
+    {
+      "row_id": "train_11335",
+      "split": "validation",
+      "condition": "woman stance",
+      "supplied_score": 4.0,
+      "revision_1_score": null,
+      "revision_1_status": "invalid",
+      "user_decision": "retain_exclusion",
+      "current_score": null,
+      "current_status": "invalid"
+    },
+    {
+      "row_id": "train_11341",
+      "split": "validation",
+      "condition": "means of flotation",
+      "supplied_score": 3.0,
+      "revision_1_score": null,
+      "revision_1_status": "invalid",
+      "user_decision": "retain_exclusion",
+      "current_score": null,
+      "current_status": "invalid"
+    },
+    {
+      "row_id": "evaluation_855",
+      "split": "test",
+      "condition": "number of pizza slices",
+      "supplied_score": -1.0,
+      "revision_1_score": null,
+      "revision_1_status": "invalid",
+      "user_decision": "retain_exclusion",
+      "current_score": null,
+      "current_status": "invalid",
+      "documentation_correction": {
+        "field": "value_a",
+        "before": "uncut count unstated",
+        "after": "slice count unspecified",
+        "label_changed": false
+      }
+    },
+    {
+      "row_id": "evaluation_1884",
+      "split": "test",
+      "condition": "height of animal",
+      "supplied_score": 5.0,
+      "revision_1_score": null,
+      "revision_1_status": "excluded_scope",
+      "user_decision": "retain_exclusion",
+      "current_score": null,
+      "current_status": "excluded_scope"
+    },
+    {
+      "row_id": "evaluation_2450",
+      "split": "test",
+      "condition": "color of animals",
+      "supplied_score": 1.0,
+      "revision_1_score": null,
+      "revision_1_status": "invalid",
+      "user_decision": "include",
+      "current_score": 3,
+      "current_status": "rated",
+      "numeric_grade_assigned_by": "assistant",
+      "rationale": "A supplies three unnamed coat colors. B supplies beige. Hue overlap remains uncertain.",
+      "peer_grade_review": {
+        "schema_version": 1,
+        "row_id": "evaluation_2450",
+        "reviewer": "semantic_test",
+        "user_adjudication": {
+          "inclusion_approved": true,
+          "numerical_grade_approved": false
+        },
+        "proposed_status": "rated",
+        "proposed_rating": 3,
+        "scope": "Principal dogs' coat colors, including the stated multicolor appearance.",
+        "value_a": "Two dogs with three coat colors, hues unspecified.",
+        "value_b": "Two beige dogs.",
+        "rationale": "A establishes three coat colors with unnamed hues. B establishes beige. Possible beige overlap and substantial missing hue specificity support a middle similarity grade.",
+        "rubric_basis": "The frozen graded-feature rule assigns 3 to roughly equivalent values with substantial differences or missing specificity. Three-color versus beige appearance supplies partial color information, and hue overlap remains unresolved.",
+        "precedent": {
+          "row_id": "train_10852",
+          "sentence1": "A woman wearing a yellow coat is skiing in the white snow .",
+          "sentence2": "A snowboarder boarding down a hill in a colorful snowsuit .",
+          "condition": "color of clothing",
+          "source_original_rating": 2.0,
+          "audited_rating": 3,
+          "scope": "clothing color",
+          "value_a": "yellow",
+          "value_b": "colorful, hues unspecified",
+          "recorded_rationale": "Colorful clothing could include yellow but does not identify its hues.",
+          "application": "The same partial-hue convention applies. A explicitly supplies color diversity, while the shared beige hue remains possible and unspecified."
+        },
+        "preservation_rule": {
+          "historical_source_rating": 1.0,
+          "current_audited_status": "invalid",
+          "current_audited_rating": null,
+          "calibration_only_preservation_applies": false,
+          "reason": "User-approved inclusion changes the validity disposition and recognizes recoverable partial color information. The preservation rule concerns a defensible current usable grade during calibration-only review. The historical supplied 1.0 remains provenance."
+        },
+        "confidence": "high for grade 3 under the established partial-color convention",
+        "model_predictions_used": false,
+        "dataset_modified": false
+      }
+    }
+  ]
+}

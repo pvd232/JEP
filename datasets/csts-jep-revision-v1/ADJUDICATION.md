@@ -1,6 +1,6 @@
-# Questions for adjudication
+# Adjudication review: resolved
 
-**Dataset:** [JEP C-STS revision 1](README.md). The 13 questions below preserve the published labels pending your decisions. Refer to each case by its source ID.
+**Review snapshot:** JEP C-STS revision 1. [Revision 1.1 records your decisions](../csts-jep-revision-v1-1/ADJUDICATION.md): include `evaluation_2450` and retain the other twelve exclusions. The table preserves supplied and revision-1 audited scores.
 
 | ID | Split | Supplied score | V1 audited score | Condition | Question |
 |---|---|---|---|---|---|

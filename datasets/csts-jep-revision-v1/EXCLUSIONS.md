@@ -1,5 +1,7 @@
 # C-STS revision 1: exclusion audit
 
+**User adjudication is complete.** [Revision 1.1](../csts-jep-revision-v1-1/README.md) restores `evaluation_2450` and confirms the other twelve reviewed determinations. This report preserves the revision-1 audit snapshot.
+
 Every excluded row has a recorded reason and a peer check. The case reports follow the earlier validation format. Dataset labels remain at `jep-csts-v1`.
 
 | Split | Reviewed | Excluded | Retained |

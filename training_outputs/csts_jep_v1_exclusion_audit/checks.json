@@ -135,7 +135,7 @@
       },
       "prose_evidence": {
         "original_checker_sha256": "8e4a4417d3ccddde665679212ba3951ec8c6e173672740f8881495aac6bbb26f",
-        "receipt_sha256": "90fca91bb634c53a7b91db144133dcdc4a60e83f415128c51f777b3651c32bdf",
+        "receipt_sha256": "b7c863cf618fed43f2475be0d4c59bffe5d2f0597a41e4544981d04eff3e0141",
         "complete_authored_text_sha256": "6e6ded6812673cf8b808dddc0d9c6fad00e92bfac8a9c671367febeb72d65987",
         "independent_actual_checker_returncode": 0,
         "independent_actual_checker_stdout": "direct-prose: clean\n",
@@ -144,8 +144,8 @@
           "/workspace/scratch/1decdd947133/JEP/training_outputs/csts_jep_v1_exclusion_audit/validation.md": "abf91a90e1bfea82bfda7c041c111f486bbc7c8e5b04384b3414e92496ba2fbf",
           "/workspace/scratch/1decdd947133/JEP/training_outputs/csts_jep_v1_exclusion_audit/test.md": "0831e73b8503552d5e5a98bd0b03c0bbde2d2f3b75da16eae99fe3cd1e5c46ca",
           "/workspace/scratch/1decdd947133/JEP/training_outputs/csts_jep_v1_exclusion_audit/overlap.md": "fc32199a4757b56c50452b70aeffa15935a2458dde914a57b66aa2fc01917a37",
-          "/workspace/scratch/1decdd947133/JEP/datasets/csts-jep-revision-v1/EXCLUSIONS.md": "1ccbe986d49691d2065a8640b8d531377341c39fe3fc4a150697d88878db8a41",
-          "/workspace/scratch/1decdd947133/JEP/datasets/csts-jep-revision-v1/ADJUDICATION.md": "8ac7b234ab8ec975c54f71211346af1cb4be3eaea4b25900be9f2412f855e58e"
+          "/workspace/scratch/1decdd947133/JEP/datasets/csts-jep-revision-v1/EXCLUSIONS.md": "d53c30b0c79a0daae70592776a05d0de58a4e2e81a9bff35fdfe7f8fcf0cb977",
+          "/workspace/scratch/1decdd947133/JEP/datasets/csts-jep-revision-v1/ADJUDICATION.md": "8553bc83a0b327a4ac89e353b00281f92adda323287d03c788c4ad7085828944"
         },
         "manual_review_status": "passed"
       }
@@ -158,8 +158,8 @@
       "training_outputs/csts_jep_v1_exclusion_audit/test.md": "0831e73b8503552d5e5a98bd0b03c0bbde2d2f3b75da16eae99fe3cd1e5c46ca",
       "training_outputs/csts_jep_v1_exclusion_audit/overlap.md": "fc32199a4757b56c50452b70aeffa15935a2458dde914a57b66aa2fc01917a37",
       "training_outputs/csts_jep_v1_exclusion_audit/records.json": "9c9d42304fccd5bfc7ccdc39601893b22a6ce110b59dc2723a1cff1116e778f3",
-      "datasets/csts-jep-revision-v1/EXCLUSIONS.md": "1ccbe986d49691d2065a8640b8d531377341c39fe3fc4a150697d88878db8a41",
-      "datasets/csts-jep-revision-v1/ADJUDICATION.md": "8ac7b234ab8ec975c54f71211346af1cb4be3eaea4b25900be9f2412f855e58e"
+      "datasets/csts-jep-revision-v1/EXCLUSIONS.md": "d53c30b0c79a0daae70592776a05d0de58a4e2e81a9bff35fdfe7f8fcf0cb977",
+      "datasets/csts-jep-revision-v1/ADJUDICATION.md": "8553bc83a0b327a4ac89e353b00281f92adda323287d03c788c4ad7085828944"
     },
     "checker_sha256": "6337fd63ff84cfa51ccd1437964064c914a46ce82255e3d1889bd12d8affda45"
   },
@@ -311,11 +311,11 @@
       },
       {
         "path": "/workspace/scratch/1decdd947133/JEP/datasets/csts-jep-revision-v1/EXCLUSIONS.md",
-        "sha256": "1ccbe986d49691d2065a8640b8d531377341c39fe3fc4a150697d88878db8a41"
+        "sha256": "d53c30b0c79a0daae70592776a05d0de58a4e2e81a9bff35fdfe7f8fcf0cb977"
       },
       {
         "path": "/workspace/scratch/1decdd947133/JEP/datasets/csts-jep-revision-v1/ADJUDICATION.md",
-        "sha256": "8ac7b234ab8ec975c54f71211346af1cb4be3eaea4b25900be9f2412f855e58e"
+        "sha256": "8553bc83a0b327a4ac89e353b00281f92adda323287d03c788c4ad7085828944"
       }
     ],
     "project_surface_flags": 0,
@@ -697,7 +697,102 @@
         }
       ]
     },
-    "project_checker_sha256": "f8f1a02b3fe58d38557273f7eeba37826a4dd66fee059cd949d263e546ba2716"
+    "project_checker_sha256": "f8f1a02b3fe58d38557273f7eeba37826a4dd66fee059cd949d263e546ba2716",
+    "incremental_review_history": [
+      {
+        "kind": "score_documentation_update",
+        "source_commit": "f9a7b8a1f5ad00a4ec404ff3a43f851b0303b3b0",
+        "report_path": "/workspace/scratch/1decdd947133/JEP/datasets/csts-jep-revision-v1/ADJUDICATION.md",
+        "previous_sha256": "8ac7b234ab8ec975c54f71211346af1cb4be3eaea4b25900be9f2412f855e58e",
+        "current_sha256": "cdf5a7190db17ec9d3340edae1e52349ab809056aae45cbbb86cf66a53b028f7",
+        "score_only_change_verified_by_reconstruction": true,
+        "source_scores_checked": [
+          {
+            "row_id": "train_205",
+            "source_score": 3.0,
+            "displayed_score": "3/5"
+          },
+          {
+            "row_id": "train_688",
+            "source_score": 4.0,
+            "displayed_score": "4/5"
+          },
+          {
+            "row_id": "train_689",
+            "source_score": 4.0,
+            "displayed_score": "4/5"
+          },
+          {
+            "row_id": "train_778",
+            "source_score": 5.0,
+            "displayed_score": "5/5"
+          },
+          {
+            "row_id": "train_779",
+            "source_score": 1.0,
+            "displayed_score": "1/5"
+          },
+          {
+            "row_id": "train_2038",
+            "source_score": 4.0,
+            "displayed_score": "4/5"
+          },
+          {
+            "row_id": "train_8568",
+            "source_score": 3.0,
+            "displayed_score": "3/5"
+          },
+          {
+            "row_id": "train_10241",
+            "source_score": 2.0,
+            "displayed_score": "2/5"
+          },
+          {
+            "row_id": "train_11335",
+            "source_score": 4.0,
+            "displayed_score": "4/5"
+          },
+          {
+            "row_id": "train_11341",
+            "source_score": 3.0,
+            "displayed_score": "3/5"
+          },
+          {
+            "row_id": "evaluation_855",
+            "source_score": -1.0,
+            "displayed_score": "-1 (source invalid marker)"
+          },
+          {
+            "row_id": "evaluation_1884",
+            "source_score": 5.0,
+            "displayed_score": "5/5"
+          },
+          {
+            "row_id": "evaluation_2450",
+            "source_score": 1.0,
+            "displayed_score": "1/5"
+          }
+        ],
+        "manual_review": "Read all13 supplied-score displays and audited-score displays. The existing explanations and questions retain their previously reviewed text."
+      },
+      {
+        "kind": "resolved_adjudication_headers",
+        "manual_review": "Read both resolution headers. Each identifies the revision1 snapshot and links revision1.1 user decisions.",
+        "updated_reports": [
+          {
+            "path": "/workspace/scratch/1decdd947133/JEP/datasets/csts-jep-revision-v1/EXCLUSIONS.md",
+            "previous_sha256": "1ccbe986d49691d2065a8640b8d531377341c39fe3fc4a150697d88878db8a41",
+            "current_sha256": "d53c30b0c79a0daae70592776a05d0de58a4e2e81a9bff35fdfe7f8fcf0cb977"
+          },
+          {
+            "path": "/workspace/scratch/1decdd947133/JEP/datasets/csts-jep-revision-v1/ADJUDICATION.md",
+            "previous_sha256": "cdf5a7190db17ec9d3340edae1e52349ab809056aae45cbbb86cf66a53b028f7",
+            "current_sha256": "8553bc83a0b327a4ac89e353b00281f92adda323287d03c788c4ad7085828944"
+          }
+        ],
+        "original_checker_returncode": 0
+      }
+    ]
   },
   "structural_evidence": {
     "passed": true,
@@ -719,13 +814,20 @@
     "training_outputs/csts_jep_v1_exclusion_audit/test.md": "0831e73b8503552d5e5a98bd0b03c0bbde2d2f3b75da16eae99fe3cd1e5c46ca",
     "training_outputs/csts_jep_v1_exclusion_audit/training.md": "084af3e9a5da96b35848bfb667d73e2e676d49031ac03836e5e1cf23d07467f6",
     "training_outputs/csts_jep_v1_exclusion_audit/records.json": "9c9d42304fccd5bfc7ccdc39601893b22a6ce110b59dc2723a1cff1116e778f3",
-    "datasets/csts-jep-revision-v1/EXCLUSIONS.md": "1ccbe986d49691d2065a8640b8d531377341c39fe3fc4a150697d88878db8a41",
-    "datasets/csts-jep-revision-v1/ADJUDICATION.md": "8ac7b234ab8ec975c54f71211346af1cb4be3eaea4b25900be9f2412f855e58e",
-    "README.md": "79ca5eb33c16cc11f0fdd5e12f9f0cc78a23762dedeefb495ef97768425b3aa0"
+    "datasets/csts-jep-revision-v1/EXCLUSIONS.md": "d53c30b0c79a0daae70592776a05d0de58a4e2e81a9bff35fdfe7f8fcf0cb977",
+    "datasets/csts-jep-revision-v1/ADJUDICATION.md": "8553bc83a0b327a4ac89e353b00281f92adda323287d03c788c4ad7085828944",
+    "README.md": "1b41952e6b906259dff32351cdca682b3dd3f6393ce62b54cc457efc37f5dbeb"
   },
   "receipts_sha256": {
-    "coverage": "3199ac4d56a1ba93d89cf0e91839320e3be4a7b05083ddec9c77571bfaa9d03f",
-    "prose": "90fca91bb634c53a7b91db144133dcdc4a60e83f415128c51f777b3651c32bdf",
+    "coverage": "889e4d7789f9c79cf80ba2d1e53340bd82d5d17aa96d3154116fcdc9cf3f3644",
+    "prose": "b7c863cf618fed43f2475be0d4c59bffe5d2f0597a41e4544981d04eff3e0141",
     "structural": "3979035afc827bfe9b47f56e5759289f13e8c5f70a3903e7cd6728fda211e2fc"
+  },
+  "resolution": {
+    "revision": "jep-csts-v1.1",
+    "restored_id": "evaluation_2450",
+    "other_twelve_determinations_confirmed": true,
+    "source_score": 1,
+    "assistant_assigned_score": 3
   }
 }
