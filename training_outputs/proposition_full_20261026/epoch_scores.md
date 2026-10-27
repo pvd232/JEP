@@ -1,8 +1,6 @@
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T02:50:42+00:00**. Run: `propositions_v41_full_after_indicative`. 
-
-Publication: **manual refresh; continuous publication awaits authorization**.
+Updated: **2026-10-27T02:53:26+00:00**. Run: `propositions_v41_full_after_indicative`.
 
 Status: **running**. Current stage: **ratings_ratings**.
 

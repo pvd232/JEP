@@ -2,6 +2,12 @@
 
 [Per-epoch validation scores](epoch_scores.md) · [Raw history](epoch_scores.json)
 
-The latest completed epochs are published. Training is running on the GPU VM.
+Continuous publication is active through the existing GPU SSH route and connected GitHub tools.
+The publisher checks every 30 seconds and appends each newly completed epoch or stage change.
+Refresh the GitHub page to see new commits.
 
-The user has approved a repository-specific GitHub write key for a native VM publisher. Setup is in progress. It will check every 30 seconds and append completed epochs and stage changes independently of the chat and laptop. The temporary key will be revoked after the experiment.
+The active controller keeps a heartbeat outside the training checkout in
+/home/machina/jep-csts-proposition-indicative-20261026-operator/publication_controller_status.json.
+The hourly completion check provides recovery and final reporting.
+
+The experiment starts from pretrained Qwen3-Embedding-8B. The short continuation pilot is stored separately under training_outputs/proposition_indicative_20261026.
