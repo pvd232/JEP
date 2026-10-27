@@ -237,6 +237,14 @@ def collect(root, name, previous=None, overrides=None):
             "epochs": rows,
             "notes": notes,
         }
+    benchmark_path = directory / "device_benchmark.json"
+    if benchmark_path.exists():
+        benchmark, benchmark_error = read_object(benchmark_path)
+        if benchmark_error is not None:
+            raise ValueError("Cannot read device benchmark: " + benchmark_error)
+        if benchmark["source_commit"] != summary["source_commit"]:
+            raise ValueError("Device benchmark belongs to a different training source.")
+        result["device_benchmark"] = benchmark
     return result
 
 
@@ -370,6 +378,32 @@ def markdown(report):
             lines.extend(["Stop reason: `" + data["stop_reason"] + "`.", ""])
         for note in data["notes"]:
             lines.extend(["Trace note: " + note.replace("\n", " "), ""])
+    if benchmark := report.get("device_benchmark"):
+        lines.extend(
+            [
+                "## A100 and L4 timing comparison",
+                "",
+                benchmark["decision"],
+                "",
+                f"Control tests used the same epoch-{benchmark['checkpoint_epoch']} checkpoint, optimizer batch {benchmark['batch_size']}, and microbatch {benchmark['microbatch_size']}. Each control test measured {benchmark['timed_updates_per_control_test']} updates after {benchmark['warmup_updates_per_control_test']} warmup updates. Writing rates came from the running experiment's trace windows.",
+                "",
+                "| Work and device | Seconds per optimizer update |",
+                "|---|---:|",
+                *[
+                    "| "
+                    + row["label"]
+                    + " | "
+                    + formatted(row["seconds_per_update"], 3)
+                    + " |"
+                    for row in benchmark["measurements"]
+                ],
+                "",
+                benchmark["checkpoint_preservation"],
+                "",
+                benchmark["estimate_scope"],
+                "",
+            ]
+        )
     return "\n".join(lines)
 
 

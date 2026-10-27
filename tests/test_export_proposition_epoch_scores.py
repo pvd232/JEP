@@ -203,6 +203,40 @@ class EpochPublicationTests(unittest.TestCase):
         self.assertEqual(phase["epochs"][0]["validation_spearman"], 0.767296901710081)
         self.assertIn("Conflicting observation", phase["notes"][0])
 
+    def test_device_benchmark_keeps_epoch_history_and_publishes_the_decision(self):
+        """Hardware timings accompany the unchanged scientific epoch observations."""
+        self.phase_a()
+        previous = collect(self.root, self.name)
+        benchmark = {
+            "source_commit": self.summary["source_commit"],
+            "decision": "Keep both models on the A100.",
+            "checkpoint_epoch": 4,
+            "batch_size": 32,
+            "microbatch_size": 32,
+            "timed_updates_per_control_test": 12,
+            "warmup_updates_per_control_test": 2,
+            "checkpoint_preservation": "Saved checkpoints remain on the A100.",
+            "estimate_scope": "Timing estimates depend on validation patience.",
+            "measurements": [
+                {"label": "Shared A100 control", "seconds_per_update": 2.07448},
+                {"label": "L4 control", "seconds_per_update": 3.97124},
+            ],
+        }
+        self.write(self.directory / "device_benchmark.json", benchmark)
+        report = collect(self.root, self.name)
+        self.assertEqual(report["stages"], previous["stages"])
+        self.assertEqual(report["device_benchmark"], benchmark)
+        text = markdown(report)
+        self.assertIn("Keep both models on the A100.", text)
+        self.assertIn("| Shared A100 control | 2.074 |", text)
+        self.assertIn("| L4 control | 3.971 |", text)
+
+    def test_device_benchmark_rejects_another_training_source(self):
+        """A different run's hardware decision cannot appear beside these epochs."""
+        self.write(self.directory / "device_benchmark.json", {"source_commit": "other"})
+        with self.assertRaisesRegex(ValueError, "different training source"):
+            collect(self.root, self.name)
+
 
 if __name__ == "__main__":
     unittest.main()
