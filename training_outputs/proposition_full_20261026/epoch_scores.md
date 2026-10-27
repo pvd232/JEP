@@ -28,7 +28,7 @@ Stop after consecutive non-improving validation checks: ratings control **1**; p
 [Missing proposition generation progress](generation_progress.md)
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T18:37:15+00:00**. Run: `jep_csts_v1_full_propositions_converged_patience1_20261027`.
+Updated: **2026-10-27T18:37:44+00:00**. Run: `jep_csts_v1_full_propositions_converged_patience1_20261027`.
 
 Status: **running**. Current stage: **evidence_pretrain**.
 
@@ -57,7 +57,7 @@ Status: **running**. Completed epochs: **4**. Recorded optimizer updates: **875*
 
 ## Proposition model: full-bank writing until held-out loss stops improving
 
-Status: **running**. Completed epochs: **4**. Recorded optimizer updates: **900**.
+Status: **running**. Completed epochs: **5**. Recorded optimizer updates: **925**.
 
 | Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
 |---:|---:|---:|---:|---:|---:|
@@ -65,6 +65,7 @@ Status: **running**. Completed epochs: **4**. Recorded optimizer updates: **900*
 | 2 | 368 | 0.456222 | 4.158023 | 0.362596 | 0 |
 | 3 | 552 | 0.480442 | 4.088359 | 0.302398 | 0 |
 | 4 | 736 | 0.497221 | 4.051999 | 0.269739 | 0 |
+| 5 | 920 | 0.500324 | 4.027831 | 0.247407 | 0 |
 
 Held-out proposition loss selects the writing checkpoint:
 
@@ -74,6 +75,7 @@ Held-out proposition loss selects the writing checkpoint:
 | 2 | 0.319839 |
 | 3 | 0.297286 |
 | 4 | 0.285763 |
+| 5 | 0.275350 |
 
 ## Ratings model: ratings on the full training set
 
