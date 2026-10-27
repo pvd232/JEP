@@ -1,6 +1,6 @@
 # GPT-6.1 Sol, max reasoning: jep-csts-v1
 
-Status: **running**. Completed **1,984/2,430** test comparisons.
+Status: **running**. Completed **2,048/2,430** test comparisons.
 
 Model: `gpt-6.1-sol`; reasoning effort: `max`. Fixed archived zero-shot rubric; 64 items per fresh request, four requests at a time. The model receives row IDs, both sentences and the condition. Labels are joined after inference; tool use invalidates a batch.
 
