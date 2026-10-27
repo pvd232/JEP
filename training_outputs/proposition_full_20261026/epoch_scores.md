@@ -28,9 +28,9 @@ Stop after consecutive non-improving validation checks: ratings control **1**; p
 [Missing proposition generation progress](generation_progress.md)
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T20:19:46+00:00**. Run: `jep_csts_v1_full_propositions_converged_patience1_20261027`.
+Updated: **2026-10-27T20:38:18+00:00**. Run: `jep_csts_v1_full_propositions_converged_patience1_20261027`.
 
-Status: **running**. Current stage: **evidence_ratings**.
+Status: **running**. Current stage: **predict_evidence**.
 
 Validation: **1,576 comparisons**, 680 source groups.
 
@@ -104,15 +104,19 @@ Stop reason: `validation_patience`.
 
 ## Proposition model: ratings on the full training set
 
-Status: **running**. Completed epochs: **3**. Recorded optimizer updates: **725**.
+Status: **succeeded**. Completed epochs: **5**. Recorded optimizer updates: **950**.
 
 | Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
 |---:|---:|---:|---:|---:|---:|
 | 1 | 190 | 0.854112 | 0.616085 | 0.060506 | 0 |
 | 2 | 380 | 0.871130 | 0.529970 | 0.032573 | 0 |
 | 3 | 570 | 0.874015 | 0.512852 | 0.025548 | 0 |
+| 4 | 760 | 0.877061 | 0.500756 | 0.020164 | 0 |
+| 5 | 950 | 0.872864 | 0.541577 | 0.015899 | 1 |
 
-Recovery: the completed writing run passed native verification. Writing epoch **5** and control epoch **5** use the same **920 updates**. Extra control epochs remain recorded and are excluded from the selected parent. Ratings training resumed on the existing A100. [Driver fix: PR #13](https://github.com/pvd232/JEP/pull/13).
+Stop reason: `validation_patience`.
+
+Recovery: writing output metadata was repaired after native verification ([PR #13](https://github.com/pvd232/JEP/pull/13)). Both selected first-phase parents use epoch **5**, with **920 updates** each. Speculative control epochs 6–7 are retained in the history and excluded from the selected parent. The original test index was restored and verified against its sealed artifact before test scoring. Checkpoint selection was frozen before the test stage.
 
 ## A100 and L4 timing comparison
 
