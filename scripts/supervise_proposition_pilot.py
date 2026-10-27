@@ -92,7 +92,15 @@ def publish(
         return result.stdout.strip()
 
     for attempt in range(3):
-        git(["fetch", repository, BRANCH])
+        git(
+            [
+                "fetch",
+                "--no-auto-maintenance",
+                "--negotiation-tip=HEAD",
+                repository,
+                BRANCH,
+            ]
+        )
         parent = git(["rev-parse", "FETCH_HEAD"])
         score_path = REPORT + "/epoch_scores.json"
         if score_path in files:
@@ -306,6 +314,25 @@ def watchdog(
     )
 
 
+class AttachedTraining:
+    """Observe an existing training process while replacing only its publication owner."""
+
+    def __init__(self, pid: int) -> None:
+        """Keep the live training PID without starting another model process."""
+        self.pid = pid
+        self.returncode: int | None = None
+
+    def poll(self) -> int | None:
+        """Report process exit; the sealed study summary determines training success."""
+        if self.returncode is not None:
+            return self.returncode
+        try:
+            os.kill(self.pid, 0)
+        except ProcessLookupError:
+            self.returncode = 0
+        return self.returncode
+
+
 def main() -> None:
     """Keep training, publication and the morning deadline independent of this chat."""
     parser = argparse.ArgumentParser(description=__doc__)
@@ -316,6 +343,7 @@ def main() -> None:
     parser.add_argument("--git-environment", type=Path, required=True)
     parser.add_argument("--deadline", type=float, required=True)
     parser.add_argument("--watchdog", action="store_true")
+    parser.add_argument("--attach-pid", type=int)
     args = parser.parse_args()
     args.operator.mkdir(parents=True, exist_ok=True)
     environment = {**os.environ, **read(args.git_environment)}
@@ -343,36 +371,40 @@ def main() -> None:
                 start_new_session=True,
             )
     with (args.operator / "training.log").open("ab", buffering=0) as log:
-        child = subprocess.Popen(
-            [
-                "flock",
-                "-n",
-                "/home/machina/jep-csts-qwen-evidence-20261024/.viper/overnight_gpu.lock",
-                sys.executable,
-                "-m",
-                "csts_pilot.extend_proposition_pretraining"
-                if settings.get("phase1_extension")
-                else "csts_pilot.complete_proposition_training"
-                if completion
-                else "csts_pilot.proposition_evidence_run",
-                "--settings",
-                args.settings,
-                "--name",
-                args.name,
-                "--execute",
-            ],
-            cwd=args.root,
-            env=environment,
-            stdin=subprocess.DEVNULL,
-            stdout=log,
-            stderr=subprocess.STDOUT,
-            start_new_session=True,
-        )
+        if args.attach_pid:
+            child = AttachedTraining(args.attach_pid)
+        else:
+            child = subprocess.Popen(
+                [
+                    "flock",
+                    "-n",
+                    "/home/machina/jep-csts-qwen-evidence-20261024/.viper/overnight_gpu.lock",
+                    sys.executable,
+                    "-m",
+                    "csts_pilot.extend_proposition_pretraining"
+                    if settings.get("phase1_extension")
+                    else "csts_pilot.complete_proposition_training"
+                    if completion
+                    else "csts_pilot.proposition_evidence_run",
+                    "--settings",
+                    args.settings,
+                    "--name",
+                    args.name,
+                    "--execute",
+                ],
+                cwd=args.root,
+                env=environment,
+                stdin=subprocess.DEVNULL,
+                stdout=log,
+                stderr=subprocess.STDOUT,
+                start_new_session=True,
+            )
         save(
             args.operator / "launch.json",
             {
                 "supervisor_pid": os.getpid(),
                 "training_pid": child.pid,
+                "attached_training": args.attach_pid is not None,
                 "watchdog_pid": guard.pid if guard else None,
                 "deadline": args.deadline,
                 "source_revision": subprocess.check_output(

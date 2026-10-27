@@ -7,11 +7,18 @@ import subprocess
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from csts_pilot.baseline_models import FitConfig
 from csts_pilot.complete_proposition_training import continuation_config
 from csts_pilot.proposition_evidence_run import validate_settings
-from scripts.supervise_proposition_pilot import BRANCH, REPORT, decision, publish
+from scripts.supervise_proposition_pilot import (
+    BRANCH,
+    REPORT,
+    AttachedTraining,
+    decision,
+    publish,
+)
 from scripts.wait_proposition_comparison import parent_completed
 
 
@@ -135,6 +142,18 @@ class PilotTests(unittest.TestCase):
         )
         validate_settings(mixed)
         self.assertEqual(mixed["arm_patience"], {"ratings": 2, "evidence": 1})
+
+    def test_publication_owner_can_attach_without_restarting_training(self):
+        """Observe a live training PID and let the saved summary decide success after exit."""
+        process = AttachedTraining(os.getpid())
+        self.assertIsNone(process.poll())
+        with patch(
+            "scripts.supervise_proposition_pilot.os.kill",
+            side_effect=ProcessLookupError,
+        ):
+            self.assertEqual(process.poll(), 0)
+        self.assertEqual(process.poll(), 0)
+        self.assertEqual(process.pid, os.getpid())
 
     def test_publisher_uses_existing_publication_transport(self):
         """Publication uses the supplied connection and preserves other repository files."""
