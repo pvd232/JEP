@@ -1,29 +1,31 @@
-# Training to patience 2: jep-csts-v1
+# Training with validation early stopping: jep-csts-v1
 
 Training: **6,051** comparisons. Validation: **1,576**. Test: **2,430**.
 
-Both models resume their saved training state after epoch four and continue until two successive validation checks fail to improve Spearman. Time and epoch limits are disabled. [Earlier four-epoch pilot](four_epoch_pilot_scores.md).
+Stop after consecutive non-improving validation checks: ratings control **2**; proposition model **1**. Keep each model's best validation checkpoint. Time and epoch limits are disabled.
 
 [Earlier V4.1 comparison](v41_final_epoch_scores.md)
+
+[Missing proposition generation progress](generation_progress.md)
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T12:32:20+00:00**. Run: `jep_csts_v1_patience2_completion_20261027`.
+Updated: **2026-10-27T12:41:21+00:00**. Run: `jep_csts_v1_proposition_patience1_completion_20261027`.
 
 Status: **running**. Current stage: **evidence_ratings**.
 
 Validation: **1,576 comparisons**, 680 source groups.
 
-Source commit: `1719cf9c003a331864da5d3c95f9a2bd32dd51ac`.
+Source commit: `636cb33048f41eb8c0e839250df66d36cf46a101`.
 Validation SHA-256: `e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff`.
 Training SHA-256: `9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4`.
 
-Both models start from the same pretrained weights. For the first two epochs, both see the comparisons covered by existing propositions. The ratings model learns ratings; the proposition model learns to write propositions. Both then learn ratings from the full training set. Ratings training continues until validation patience 2 is exhausted, with time and epoch limits disabled.
+Both models start from the same pretrained weights. For the first 2 epochs, both see the comparisons covered by existing propositions. The ratings model learns ratings; the proposition model learns to write propositions. Both then learn ratings from the full training set. Ratings training stops after the configured consecutive non-improving checks: ratings control 2; proposition model 1. Training continues with time and epoch limits disabled.
 
 Rating loss measures error in predicted ratings on the 0–1 scale. Proposition-writing loss measures error in predicted text tokens. Each table counts optimizer updates from the beginning of that training step.
 
 Appearance and colour scores are available in the final report. Native epoch traces contain overall validation scores. Values are provisional while the comparison is running.
 
-## Ratings model: first two epochs on the covered subset
+## Ratings model: first 2 epochs on the covered subset
 
 Status: **succeeded**. Completed epochs: **2**. Recorded optimizer updates: **134**.
 

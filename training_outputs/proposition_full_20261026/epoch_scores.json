@@ -1,14 +1,19 @@
 {
   "schema_version": 1,
-  "updated_at_utc": "2026-10-27T12:32:20+00:00",
+  "updated_at_utc": "2026-10-27T12:41:21+00:00",
   "identity": {
-    "run_name": "jep_csts_v1_patience2_completion_20261027",
-    "source_commit": "1719cf9c003a331864da5d3c95f9a2bd32dd51ac",
-    "attempt": "8b26aa8e",
+    "run_name": "jep_csts_v1_proposition_patience1_completion_20261027",
+    "source_commit": "636cb33048f41eb8c0e839250df66d36cf46a101",
+    "attempt": "191bbce7",
     "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
   },
   "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
   "training_policy": {
+    "arm_patience": {
+      "ratings": 2,
+      "evidence": 1
+    },
+    "pretrain_epochs": 2,
     "train_until_patience": true,
     "patience": 2,
     "ratings_max_epochs": 24,
@@ -18,14 +23,14 @@
   "validation_groups": 680,
   "run_status": "running",
   "current_stage": "evidence_ratings",
-  "summary_path": "/home/machina/jep-csts-jep-v1-patience-completion-20261027/qwen_evidence_results/jep_csts_v1_patience2_completion_20261027/summary.json",
-  "summary_sha256": "ffa01cef673fbb083ede833c93b112da9c0f5efd1928310d454634326690425d",
+  "summary_path": "/home/machina/jep-csts-jep-v1-proposition-patience1-20261027/qwen_evidence_results/jep_csts_v1_proposition_patience1_completion_20261027/summary.json",
+  "summary_sha256": "58428d19883017ab0c01a90bb7acdc569f3775acfb0fc1b4b6da96dddb671c7a",
   "scope": "Training and validation histories only; subgroup epoch scores are unavailable in native traces.",
   "stages": {
     "ratings_pretrain": {
       "status": "succeeded",
       "trace_status": "complete",
-      "trace_path": "/home/machina/jep-csts-jep-v1-patience-completion-20261027/qwen_evidence_results/jep_csts_v1_patience2_completion_20261027/ratings_pretrain_trace.json",
+      "trace_path": "/home/machina/jep-csts-jep-v1-proposition-patience1-20261027/qwen_evidence_results/jep_csts_v1_proposition_patience1_completion_20261027/ratings_pretrain_trace.json",
       "trace_available": true,
       "completed_epoch": 2,
       "current_epoch": null,
@@ -67,7 +72,7 @@
     "evidence_pretrain": {
       "status": "succeeded",
       "trace_status": "complete",
-      "trace_path": "/home/machina/jep-csts-jep-v1-patience-completion-20261027/qwen_evidence_results/jep_csts_v1_patience2_completion_20261027/evidence_pretrain_trace.json",
+      "trace_path": "/home/machina/jep-csts-jep-v1-proposition-patience1-20261027/qwen_evidence_results/jep_csts_v1_proposition_patience1_completion_20261027/evidence_pretrain_trace.json",
       "trace_available": true,
       "completed_epoch": 2,
       "current_epoch": null,
@@ -109,10 +114,10 @@
     "ratings_ratings": {
       "status": "succeeded",
       "trace_status": "complete",
-      "trace_path": "/home/machina/jep-csts-jep-v1-patience-completion-20261027/qwen_evidence_results/jep_csts_v1_patience2_completion_20261027/ratings_ratings_trace.json",
+      "trace_path": "/home/machina/jep-csts-jep-v1-proposition-patience1-20261027/qwen_evidence_results/jep_csts_v1_proposition_patience1_completion_20261027/ratings_ratings_trace.json",
       "trace_available": true,
       "completed_epoch": 6,
-      "current_epoch": 6,
+      "current_epoch": null,
       "optimizer_updates": 1140,
       "epochs_without_improvement": null,
       "stop_reason": "validation_patience",
@@ -207,7 +212,7 @@
     "evidence_ratings": {
       "status": "running",
       "trace_status": "complete",
-      "trace_path": "/home/machina/jep-csts-jep-v1-patience-completion-20261027/qwen_evidence_results/jep_csts_v1_patience2_completion_20261027/evidence_ratings_trace.json",
+      "trace_path": "/home/machina/jep-csts-jep-v1-proposition-patience1-20261027/qwen_evidence_results/jep_csts_v1_proposition_patience1_completion_20261027/evidence_ratings_trace.json",
       "trace_available": true,
       "completed_epoch": 4,
       "current_epoch": null,
