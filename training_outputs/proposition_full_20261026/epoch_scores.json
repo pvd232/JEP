@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at_utc": "2026-10-27T16:34:44+00:00",
+  "updated_at_utc": "2026-10-27T16:35:28+00:00",
   "identity": {
     "run_name": "jep_csts_v1_four_initial_epochs_patience1_20261027",
     "source_commit": "67f816407f786ea038415422a9aefd57d30c92fb",
@@ -239,10 +239,10 @@
       "trace_status": "running",
       "trace_path": "/home/machina/jep-csts-jep-v1-four-epoch-20261027/qwen_evidence_results/jep_csts_v1_four_initial_epochs_patience1_20261027/evidence_ratings_trace.json",
       "trace_available": true,
-      "completed_epoch": 4,
+      "completed_epoch": 5,
       "current_epoch": 5,
-      "optimizer_updates": 925,
-      "epochs_without_improvement": 0,
+      "optimizer_updates": 950,
+      "epochs_without_improvement": 1,
       "stop_reason": null,
       "epochs": [
         {
@@ -299,6 +299,20 @@
           "fit_seconds": 200.8873953950001,
           "validation_seconds": 15.147611479000034,
           "observed_epoch_seconds": 217.03803402500012,
+          "elapsed_seconds": null
+        },
+        {
+          "epoch": 5,
+          "optimizer_updates": 950,
+          "validation_spearman": 0.8729950076327846,
+          "validation_mse_1_5": 0.5301793169630763,
+          "validation_rows": 1576,
+          "training_loss": 0.019706488573264038,
+          "training_loss_kind": "rating_mse_0_1",
+          "epochs_without_improvement": 1,
+          "fit_seconds": 201.07642207900017,
+          "validation_seconds": 15.149991855999815,
+          "observed_epoch_seconds": 216.23465461900014,
           "elapsed_seconds": null
         }
       ],
