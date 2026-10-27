@@ -60,8 +60,8 @@
     "generation_source_sha256": "3ca561ba65c5a8e03d01fc3237bae39d5fafa98f401a91994c304442ac451f08"
   },
   "generation": {
-    "completed_inputs": 10048,
-    "newly_completed_inputs": 7552,
+    "completed_inputs": 11008,
+    "newly_completed_inputs": 8512,
     "unique_inputs": 11909
   },
   "evaluations": [],
@@ -74,6 +74,7 @@
     "review_agreement": 0.9921875,
     "reviewers": "Two independent GPT-6.1 Sol high calls; model-reviewed, no human adjudication."
   },
+  "operator_recovery": "Existing capture continues; monitor resumes after it exits, using the verified Cloud token-file route.",
   "evaluation_source_revision": {
     "previous_sha256": "cde0965edbe220d52eff67ab3b5a284f5ffea8781b753b3f5cf10527f9e217df",
     "execution_sha256": "d754c143af300fa60d0a8dc2b1503a74b68ac7dfa5381f5d719c3e341c40ec9a",
@@ -81,8 +82,10 @@
     "validation": "Zero Pyrefly errors, two CPU tests including forward-reuse on generation failure, final Ruff format/check passed at actual VM paths."
   },
   "gpu_evaluation": {
-    "status": "failed",
-    "error": "Found an incompatible version of torchao. Found version 0.10.0, but only versions above 0.16.0 are supported",
-    "completed_measurements_preserved": true
+    "status": "complete",
+    "epochs": [
+      2,
+      4
+    ]
   }
 }

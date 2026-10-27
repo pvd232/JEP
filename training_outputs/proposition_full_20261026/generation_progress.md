@@ -2,9 +2,7 @@
 
 Monitor: **running**.
 
-Current evaluation/retry issue: Found an incompatible version of torchao. Found version 0.10.0, but only versions above 0.16.0 are supported
-
-Training inputs captured: **10,048/11,909**; missing inputs requested: **9,413**. The current training bank remains frozen.
+Training inputs captured: **11,008/11,909**; missing inputs requested: **9,413**. The current training bank remains frozen.
 
 Held-out sample: **128 validation source groups**, one passage-condition input per group. References and generated answers are kept outside training. Evaluation uses the retained checkpoints; hardware and progress appear in the detailed status below.
 
