@@ -59,7 +59,7 @@ The full CPU check passed all nine native stages, including held-out EVAL and th
 | publish_evaluation | `01M5ZNBF8A74JZ0J553D8M1F5H` | succeeded |
 | evaluate | `01M5ZNC11QSF9GEA2B1TJ65RCJ` | succeeded |
 
-Receipt: `qwen_evidence_results/readout_native_smoke_c11631b6/receipt.json` in the isolated JEP checkout. Fixture source was local preview `776baee5a6dfbe058efaf6f1abdd3fef9dadc8f9`. The six Python source/test files below are byte-identical in that preview, the reviewed checkout and published implementation commit `0f57e244f897dc8fcc8d321ea4b7cb10f571e324`; subsequent changes only finalize this review record.
+Receipt: `qwen_evidence_results/readout_native_smoke_c11631b6/receipt.json` in the isolated JEP checkout. Fixture source was local preview `776baee5a6dfbe058efaf6f1abdd3fef9dadc8f9`. The six Python source/test files below are byte-identical in that preview, the reviewed checkout and published implementation commit `0f57e244f897dc8fcc8d321ea4b7cb10f571e324`. Later documentation changes preserve those Python files.
 
 | File | SHA-256 |
 |---|---|

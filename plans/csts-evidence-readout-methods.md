@@ -62,39 +62,46 @@ This audit reports evidence for interpreting the fixed screen. It does not autom
 
 Use the unchanged condition/passage embedding prompt, explicit terminal EOD, maximum prefix length 160, and the original two-comparison, left-then-right forward layout (four inputs per encode batch). Inputs that exceed the prefix ceiling fail instead of truncating evidence. Source and condition positions are bound by tokenizer character offsets; special/prompt tokens are excluded from source evidence.
 
-Cache final-layer contextual source states `h_t ∈ R^4096`, the mean of condition-prefix states `u`, and normalized EOD vectors. Under causal attention the condition prefix precedes the passage. Its query therefore does not read later passage tokens directly. Each occurrence retains its original comparison binding and source offsets. Cache source states in bfloat16 and compute readouts in float32. Adapter bytes are checked before and after extraction.
+Cache final-layer contextual source states $h_t \in \mathbb{R}^{4096}$, the mean of condition-prefix states $u$, and normalized EOD vectors. Under causal attention the condition prefix precedes the passage. Its query therefore does not read later passage tokens directly. Each occurrence retains its original comparison binding and source offsets. Cache source states in bfloat16 and compute readouts in float32. Adapter bytes are checked before and after extraction.
 
 For each readout:
 
-\[
-q=W_q\operatorname{LN}(u),\qquad k_t=W_k\operatorname{LN}(h_t),\qquad
-\ell_t=q^\top k_t/\sqrt{128},\qquad
-\ell_\emptyset=q^\top k_\emptyset/\sqrt{128}+b_\emptyset.
-\]
+```math
+\begin{aligned}
+q &= W_q\operatorname{LN}(u), & k_t &= W_k\operatorname{LN}(h_t), \\
+\ell_t &= q^\top k_t/\sqrt{128}, &
+\ell_\emptyset &= q^\top k_\emptyset/\sqrt{128}+b_\emptyset.
+\end{aligned}
+```
 
-`W_q,W_k` map 4,096 to 128 for attention scores only. The value and output sentence vectors retain all 4,096 coordinates. There are 1,048,705 readout parameters. Padding logits are `−∞`. A joint softmax over null plus source positions gives evidence probabilities `p`. Unknown irrelevant words are not forbidden at inference.
+$W_q,W_k$ map 4,096 to 128 for attention scores only. The value and output sentence vectors retain all 4,096 coordinates. There are 1,048,705 readout parameters. Padding logits are $-\infty$. A joint softmax over null plus source positions gives evidence probabilities $p$. Unknown irrelevant words are not forbidden at inference.
 
 Compute source-conditional content independently of null mass:
 
-\[
-\alpha_t=\operatorname{softmax}_{t\in\mathrm{source}}(\ell_t),\quad
-v=\sum_t\alpha_t h_t,\quad z=v/\|v\|_2,\quad
-\widehat y_{B,C}=z_1^\top z_2.
-\]
+```math
+\begin{aligned}
+\alpha_t &= \operatorname{softmax}_{t\in\mathrm{source}}(\ell_t), &
+v &= \sum_t\alpha_t h_t, \\
+z &= v/\|v\|_2, &
+\widehat{y}_{B,C} &= z_1^\top z_2.
+\end{aligned}
+```
 
 The separate source softmax remains stable even when joint null probability approaches one. Reject nonfinite and near-zero directions. Null probability is an uncalibrated addressability proxy; it never gates a score, changes a target or removes a row. Ratings alone do not identify null-only parameters.
 
 Answered records supervise the union of uniquely occurring literal **evidence quotations**, using a uniform target on overlapping source tokens. They do not align the possibly paraphrased answer string. `not_specified` targets null. Ambiguous, uncaptured, absent/repeated-quotation and unaligned records contribute zero evidence loss, with explicit coverage reasons. Missing capture never means missing information.
 
-For a rating batch of size `m` and supervised sentence occurrences `S`:
+For a rating batch of size $m$ and supervised sentence occurrences $S$:
 
-\[
-L_r=\frac1m\sum_i(\widehat y_i-y_i)^2,\qquad
-L_e=-\frac1{|S|}\sum_{s\in S}\sum_{t\in\{\emptyset,\mathrm{source}\}}g_{st}\log p_{st},
-\qquad L_B=L_r,\quad L_C=L_r+0.1L_e.
-\]
+```math
+\begin{aligned}
+L_r &= \frac1m\sum_i(\widehat{y}_i-y_i)^2, \\
+L_e &= -\frac1{|S|}\sum_{s\in S}\sum_{t\in\{\emptyset,\mathrm{source}\}}g_{st}\log p_{st}, \\
+L_B &= L_r, \qquad L_C=L_r+0.1L_e.
+\end{aligned}
+```
 
-With no supervised occurrences, `L_e` is a differentiable zero. Exclude padding from the log-probability reduction before multiplying targets, avoiding `0 × −∞`. Sentence occurrences inherit rating-pair sampling frequency; evidence is not rebalanced by unique record.
+With no supervised occurrences, $L_e$ is a differentiable zero. Exclude padding from the log-probability reduction before multiplying targets, avoiding $0 \times (-\infty)$. Sentence occurrences inherit rating-pair sampling frequency; evidence is not rebalanced by unique record.
 
 ## Symmetric comparison intervention
 
@@ -102,10 +109,10 @@ After selecting B and C, freeze their parameters and materialize detached, full-
 
 Fit an 8,193-parameter residual scorer:
 
-\[
-\widehat y_{D,E}=z_1^\top z_2+
- w_\Delta^\top|z_1-z_2|+w_\times^\top(z_1\odot z_2)+b.
-\]
+```math
+\widehat{y}_{D,E}=z_1^\top z_2+
+w_\Delta^\top|z_1-z_2|+w_\times^\top(z_1\odot z_2)+b.
+```
 
 All residual weights and the bias start at zero, so epoch zero reproduces the corresponding cosine score exactly. Both feature blocks include every coordinate. The score is invariant to swapping the two sentences. No null features, condition-specific biases, hidden sentence projection, dropout or test calibration are introduced. Scores are not clipped to [0,1]; report their range and fraction outside the target range.
 
