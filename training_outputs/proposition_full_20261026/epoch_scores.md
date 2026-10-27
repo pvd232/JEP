@@ -28,7 +28,7 @@ Stop after consecutive non-improving validation checks: ratings control **1**; p
 [Missing proposition generation progress](generation_progress.md)
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T18:02:56+00:00**. Run: `jep_csts_v1_full_propositions_converged_patience1_20261027`.
+Updated: **2026-10-27T18:03:47+00:00**. Run: `jep_csts_v1_full_propositions_converged_patience1_20261027`.
 
 Status: **running**. Current stage: **evidence_pretrain**.
 
@@ -56,7 +56,7 @@ Stop reason: `fixed_update_budget`.
 
 ## Proposition model: full-bank writing until held-out loss stops improving
 
-Status: **running**. Completed epochs: **0**. Recorded optimizer updates: **100**.
+Status: **running**. Completed epochs: **0**. Recorded optimizer updates: **125**.
 
 Awaiting the first completed epoch.
 
