@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at_utc": "2026-10-27T06:51:20+00:00",
+  "updated_at_utc": "2026-10-27T06:54:55+00:00",
   "identity": {
     "run_name": "jep_csts_v1_existing_propositions_patience2_20261027",
     "source_commit": "8df0a1039bb5be8ddfd8407bdd32aa64a102018a",
@@ -110,12 +110,27 @@
       "trace_status": "running",
       "trace_path": "/home/machina/jep-csts-jep-v1-full-propositions-20261027/experiments/csts_qwen_proposition_evidence_8df0a103_6048f746_ratings_ratings/runs/ratings_ratings/01M5Y0F28XG18NQ4HAZF75F3ZV/artifacts/train/trace/trace.json",
       "trace_available": true,
-      "completed_epoch": 0,
+      "completed_epoch": 1,
       "current_epoch": 1,
-      "optimizer_updates": 175,
+      "optimizer_updates": 190,
       "epochs_without_improvement": 0,
       "stop_reason": null,
-      "epochs": [],
+      "epochs": [
+        {
+          "epoch": 1,
+          "optimizer_updates": 190,
+          "validation_spearman": 0.8651653516458706,
+          "validation_mse_1_5": 0.5670037998034642,
+          "validation_rows": 1576,
+          "training_loss": 0.041376069206833344,
+          "training_loss_kind": "rating_mse_0_1",
+          "epochs_without_improvement": 0,
+          "fit_seconds": 1642.8588853030233,
+          "validation_seconds": 86.27962810196914,
+          "observed_epoch_seconds": 1729.832623248978,
+          "elapsed_seconds": null
+        }
+      ],
       "notes": []
     },
     "evidence_ratings": {
