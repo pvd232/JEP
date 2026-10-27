@@ -7,7 +7,7 @@ Both models use validation patience **2**, with an equal **8,100-second** rating
 [Earlier V4.1 comparison](v41_final_epoch_scores.md)
 # Qwen proposition comparison: per-epoch validation scores
 
-Updated: **2026-10-27T05:42:33+00:00**. Run: `jep_csts_v1_existing_propositions_patience2_20261027`.
+Updated: **2026-10-27T05:46:38+00:00**. Run: `jep_csts_v1_existing_propositions_patience2_20261027`.
 
 Status: **running**. Current stage: **ratings_pretrain**.
 
@@ -25,9 +25,11 @@ Appearance and colour scores are available in the final report. Native epoch tra
 
 ## Ratings model: first two epochs on the covered subset
 
-Status: **running**. Completed epochs: **0**. Recorded optimizer updates: **50**.
+Status: **running**. Completed epochs: **1**. Recorded optimizer updates: **67**.
 
-Awaiting the first completed epoch.
+| Epoch | Optimizer updates | Validation Spearman | Validation MSE, 1–5 | Training loss | Patience counter |
+|---:|---:|---:|---:|---:|---:|
+| 1 | 67 | 0.810656 | 0.867627 | 0.118955 | — |
 
 ## Proposition model: writing propositions on the covered subset
 
