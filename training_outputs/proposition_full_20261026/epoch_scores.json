@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at_utc": "2026-10-27T15:43:27+00:00",
+  "updated_at_utc": "2026-10-27T15:44:47+00:00",
   "identity": {
     "run_name": "jep_csts_v1_four_initial_epochs_patience1_20261027",
     "source_commit": "67f816407f786ea038415422a9aefd57d30c92fb",
@@ -1467,7 +1467,16 @@
             "ended_at_eod": true
           }
         ],
-        "status": "complete"
+        "status": "complete",
+        "factual_review": {
+          "n": 64,
+          "fully_correct": 60,
+          "accuracy": 0.9375,
+          "supported": 63,
+          "unsupported_assertion_count": 1,
+          "review_agreement": 1.0,
+          "reviewers": "Two independent GPT-6.1 Sol high calls; model-reviewed, no human adjudication."
+        }
       }
     ],
     "evaluation_source_revision": {

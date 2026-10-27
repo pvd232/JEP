@@ -1126,7 +1126,16 @@
           "ended_at_eod": true
         }
       ],
-      "status": "complete"
+      "status": "complete",
+      "factual_review": {
+        "n": 64,
+        "fully_correct": 60,
+        "accuracy": 0.9375,
+        "supported": 63,
+        "unsupported_assertion_count": 1,
+        "review_agreement": 1.0,
+        "reviewers": "Two independent GPT-6.1 Sol high calls; model-reviewed, no human adjudication."
+      }
     }
   ],
   "evaluation_source_revision": {
