@@ -21,10 +21,19 @@ REMOTE_SCRIPT = r'''
 import json
 from pathlib import Path
 import subprocess
+import time
 operator = Path('/home/machina/jep-csts-proposition-indicative-20261026-operator')
 output = operator / 'epoch_publication'
+lease = operator / 'publication_controller_status.json'
+old = json.loads(lease.read_text()) if lease.exists() else {}
+if old.get('owner') not in (None, publisher_owner) and time.time() - old.get('checked_unix', 0) < 90:
+    raise RuntimeError('Another epoch publisher has a current heartbeat')
 command = ['python3', str(operator/'export_epoch_scores.py'), '--root', '/home/machina/jep-csts-proposition-evidence-20261026', '--name', 'propositions_v41_full_after_indicative', '--output', str(output)]
 subprocess.run(command, check=True, capture_output=True, text=True, timeout=30)
+heartbeat = {'owner': publisher_owner, 'mode': 'detached_mac_ssh_publisher', 'status': 'running', 'poll_seconds': 30, 'checked_unix': time.time()}
+temporary = lease.with_suffix('.tmp')
+temporary.write_text(json.dumps(heartbeat))
+temporary.replace(lease)
 print(json.dumps({'report': json.loads((output/'epoch_scores.json').read_text()), 'markdown': (output/'epoch_scores.md').read_text()}))
 '''
 
@@ -51,7 +60,7 @@ def signature(report):
 
 def stale_snapshot(report, published):
     if report.get("identity") != published.get("identity"):
-        return False
+        raise ValueError("Published experiment identity differs")
     for stage, data in published.get("stages", {}).items():
         saved = {row["epoch"]: row for row in data.get("epochs", [])}
         current = {row["epoch"]: row for row in report["stages"].get(stage, {}).get("epochs", [])}
@@ -80,11 +89,17 @@ def git(repo, arguments, *, data=None, environment=None, check=True):
     return command(["git", *arguments], cwd=repo, data=data, environment=env, check=check)
 
 
-def read_remote(transport):
-    result = command([sys.executable, str(transport), "python3", "-"], data=REMOTE_SCRIPT, timeout=95)
+def read_remote(transport, owner):
+    script = "publisher_owner = " + repr(owner) + "\n" + REMOTE_SCRIPT
+    result = command([sys.executable, str(transport), "python3", "-"], data=script, timeout=95)
     envelope = json.loads(result.stdout)
     if not isinstance(envelope.get("report"), dict) or not isinstance(envelope.get("markdown"), str):
         raise ValueError("Invalid remote report envelope")
+    identity = envelope["report"]["identity"]
+    if (identity["source_commit"] != "a6daf0eeea544716d7340f0f24de687e4ba93490"
+            or identity["run_name"] != "propositions_v41_full_after_indicative"
+            or identity["validation_sha256"] != "f186e86877e731c96ee9b1c819863b981074bc500dc9aa11c6951ba9fd56e2c9"):
+        raise ValueError("Unexpected full experiment identity")
     return envelope
 
 
@@ -142,14 +157,15 @@ def main():
         fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
     except BlockingIOError:
         raise SystemExit("Epoch publisher already running")
-    state = {"pid": os.getpid(), "started_at_utc": utc(), "poll_seconds": args.poll_seconds,
+    owner = "mac-publisher-" + hashlib.sha256(str(args.state_directory.resolve()).encode()).hexdigest()[:16]
+    state = {"owner": owner, "pid": os.getpid(), "started_at_utc": utc(), "poll_seconds": args.poll_seconds,
              "status": "starting", "consecutive_failures": 0}
     atomic_json(args.state_directory / "publisher_status.json", state)
     last_signature = None
     while True:
         started = time.monotonic()
         try:
-            envelope = read_remote(args.transport)
+            envelope = read_remote(args.transport, owner)
             report = envelope["report"]
             current_signature = signature(report)
             result = {"published": False, "reason": "unchanged_local"}
