@@ -60,8 +60,8 @@
     "generation_source_sha256": "3ca561ba65c5a8e03d01fc3237bae39d5fafa98f401a91994c304442ac451f08"
   },
   "generation": {
-    "completed_inputs": 9728,
-    "newly_completed_inputs": 7232,
+    "completed_inputs": 10048,
+    "newly_completed_inputs": 7552,
     "unique_inputs": 11909
   },
   "evaluations": [],
@@ -81,10 +81,8 @@
     "validation": "Zero Pyrefly errors, two CPU tests including forward-reuse on generation failure, final Ruff format/check passed at actual VM paths."
   },
   "gpu_evaluation": {
-    "status": "transferring_inputs_to_colab",
-    "hardware": "NVIDIA A100-SXM4-40GB",
-    "memory_mib": 40960,
-    "session": "jep-proposition-20261027",
-    "source_training_untouched": true
+    "status": "failed",
+    "error": "Found an incompatible version of torchao. Found version 0.10.0, but only versions above 0.16.0 are supported",
+    "completed_measurements_preserved": true
   }
 }
