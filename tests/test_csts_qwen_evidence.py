@@ -238,7 +238,7 @@ def test_added_tokens_are_included_in_head_compatibility_check():
     ) == {"word": 0, EOD: 1}
 
 
-@pytest.mark.parametrize("initial_epochs", [2, 4])
+@pytest.mark.parametrize("initial_epochs", [2, 4, "converged"])
 def test_both_training_phases_share_initialization_and_restore_terminal_adapters(
     tmp_path, monkeypatch, initial_epochs
 ):
@@ -270,6 +270,15 @@ def test_both_training_phases_share_initialization_and_restore_terminal_adapters
     monkeypatch.setattr(module, "load_tokenizer", lambda config: PaddedTokenizer())
     head = nn.Linear(16, 32, bias=False).requires_grad_(False)
     monkeypatch.setattr(module, "load_head", lambda *args: head)
+    converged = initial_epochs == "converged"
+    if converged:
+        initial_epochs = 5
+        losses = iter([6.0, 5.0, 4.0, 3.0, 2.0, 2.1])
+        monkeypatch.setattr(
+            module,
+            "proposition_validation_loss",
+            lambda *args: {"mean_answer_cross_entropy": next(losses), "n": 1},
+        )
     rows = [
         {
             "row_id": f"r{i}",
@@ -297,6 +306,20 @@ def test_both_training_phases_share_initialization_and_restore_terminal_adapters
         inputs[name] = tmp_path / f"{name}.json"
         inputs[name].write_text(json.dumps(value))
     inputs["head"] = tmp_path / "unused-head"
+    if converged:
+        inputs["proposition_validation"] = tmp_path / "writing_validation.json"
+        inputs["proposition_validation"].write_text(
+            json.dumps(
+                [
+                    {
+                        "id": answer_id("held out caption", "color"),
+                        "passage": "held out caption",
+                        "condition": "color",
+                        "answer": "red",
+                    }
+                ]
+            )
+        )
     traces = {}
     previous_threads = torch.get_num_threads()
     torch.set_num_threads(2)
@@ -328,13 +351,25 @@ def test_both_training_phases_share_initialization_and_restore_terminal_adapters
                     batch_size=4,
                     microbatch_size=2,
                     learning_rate=2e-5,
-                    max_epochs=2,
+                    max_epochs=(1 if arm == "evidence" else 5)
+                    if converged and phase == "pretrain"
+                    else 2,
                     max_seconds=120,
                     training_sha256=file_sha256(inputs["training"]),
                     validation_sha256=file_sha256(inputs["validation"]),
                     prepared_sha256=file_sha256(inputs["prepared"]),
                     head_sha256="0" * 64,
                     parent_sha256=file_sha256(parent) if parent is not None else None,
+                    proposition_until_patience=converged
+                    and arm == "evidence"
+                    and phase == "pretrain",
+                    proposition_validation_sha256=file_sha256(
+                        inputs["proposition_validation"]
+                    )
+                    if converged
+                    else None,
+                    train_until_patience=converged,
+                    patience=1 if converged else 5,
                 )
                 current = dict(inputs)
                 if parent is not None:
@@ -471,8 +506,19 @@ def test_both_training_phases_share_initialization_and_restore_terminal_adapters
                         k: original_outputs[k].read_bytes() for k in original_bytes
                     } == original_bytes
                 traces[arm][phase] = load_json(outputs["trace"])
-                parent = outputs["last_model"]
-        validate_matched_phases(traces, initial_epochs)
+                parent = (
+                    outputs["model"]
+                    if converged and arm == "evidence"
+                    else outputs["last_model"]
+                )
+                if converged and arm == "evidence" and phase == "pretrain":
+                    assert traces[arm][phase]["completed_epoch"] == 6
+                    assert traces[arm][phase]["selected_proposition"]["epoch"] == 5
+                    assert load_model(outputs["model"])["epoch"] == 5
+                    assert load_model(outputs["last_model"])["epoch"] == 6
+        validate_matched_phases(
+            traces, initial_epochs, converged_propositions=converged
+        )
         assert traces["evidence"]["pretrain"]["first_shared_adapter_gradient_norm"] > 0
         assert (
             traces["ratings"]["pretrain"]["terminal_trainable_sha256"]

@@ -1,0 +1,98 @@
+{
+  "publication_destination": {
+    "kind": "viper_cloud",
+    "owner": "pvd232",
+    "workspace": "jep_csts_joint_20261021"
+  },
+  "gpu_budget_seconds": 21600,
+  "bootstrap_draws": 2000,
+  "bootstrap_seed": 61024,
+  "arms": [
+    "ratings",
+    "evidence"
+  ],
+  "encoder": {
+    "model_id": "Qwen/Qwen3-Embedding-8B",
+    "revision": "c90816d848505624c2434128dfc61132162a0ee9",
+    "embedding_dimension": 4096,
+    "max_length": 160,
+    "encode_batch_size": 4,
+    "device": "cuda"
+  },
+  "max_answer_tokens": 64,
+  "head": {
+    "path": "qwen_data/qwen-evidence-head.safetensors",
+    "sha256": "a36df847ac68cb10d636cac54bdd99c1d1b6627e98aca62dd5716bb87e6fee4d",
+    "model_id": "Qwen/Qwen3-8B-Base",
+    "revision": "49e3418fbbbca6ecbdf9608b4d22e5a407081db4"
+  },
+  "answers": {
+    "path": "csts_data/jep-csts-v1-propositions/full_bank/records.json",
+    "sha256": "72e0857df9527cb3844ed58e92700b319f0ef060a7125996c2590afb382714eb"
+  },
+  "splits": {
+    "training": {
+      "path": "csts_data/jep-csts-v1/train.json",
+      "rows": 6051,
+      "groups": 2635,
+      "sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4"
+    },
+    "validation": {
+      "path": "csts_data/jep-csts-v1/validation.json",
+      "rows": 1576,
+      "groups": 680,
+      "sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+    },
+    "test": {
+      "path": "csts_data/jep-csts-v1/test.json",
+      "rows": 2430,
+      "groups": 1222,
+      "sha256": "52a9c0d6b8d9f3fc81e698bae1e2564051cf7ec29e8dc1cb4d68167910bb968d"
+    }
+  },
+  "training": {
+    "seed": 7,
+    "learning_rate": 2e-05,
+    "batch_size": 32,
+    "microbatch_size": 32,
+    "patience": 1,
+    "weight_decay": 0.01,
+    "schedule": "constant",
+    "warmup_fraction": 0,
+    "lora_rank": 32,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "train_until_patience": true
+  },
+  "phases": {
+    "pretrain": {
+      "max_epochs": 1,
+      "max_seconds": 1800
+    },
+    "ratings": {
+      "max_epochs": 24,
+      "max_seconds": 8100
+    }
+  },
+  "provenance": {
+    "path": "csts_data/jep-csts-v1-propositions/full_bank/provenance.json",
+    "sha256": "1c7f849c6b70b96c54d3c2db40a552534ff64be82a6f17a673be6cf8aaf2f76d"
+  },
+  "audit_gate": {
+    "path": "csts_data/jep-csts-v1-propositions/full_bank/audit_gate.json",
+    "sha256": "1ed74a76ec898775199dbec28a03e5ca8df453cc65ef81a8c46954b749118af7"
+  },
+  "report_cohorts": {
+    "path": "datasets/csts-proposition-evidence-report-cohorts.json",
+    "sha256": "7c5eaf349e6ef863db85b185f8f0c4e1f5192cf036a705eb79bd5435ced211a3"
+  },
+  "dataset_revision": "jep-csts-v1",
+  "allow_budget_censored_pilot": false,
+  "proposition_until_patience": true,
+  "concurrent_ratings_control": true,
+  "gpu_model": "NVIDIA A100-SXM4-80GB",
+  "proposition_validation": {
+    "path": "csts_data/jep-csts-v1-propositions/full_bank/writing_validation.json",
+    "sha256": "bed82db0a94a0a47e9afd99e1a6754fd9b90ca6a4184fe6dc276b7d83420b237"
+  }
+}

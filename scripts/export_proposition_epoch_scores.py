@@ -66,6 +66,9 @@ def epoch_record(record, stage):
         "validation_seconds": number(record.get("validation_seconds")),
         "observed_epoch_seconds": number(record.get("observed_epoch_seconds")),
         "elapsed_seconds": number(record.get("elapsed_seconds")),
+        "proposition_validation_loss": number(
+            record.get("proposition_validation", {}).get("mean_answer_cross_entropy")
+        ),
     }
 
 
@@ -123,6 +126,10 @@ def collect(root, name, previous=None, overrides=None):
         "identity": identity,
         "training_sha256": settings["splits"]["training"]["sha256"],
         "training_policy": {
+            "proposition_until_patience": settings.get(
+                "proposition_until_patience", False
+            ),
+            "proposition_validation": settings.get("proposition_validation"),
             "arm_patience": settings.get("arm_patience", {}),
             "pretrain_epochs": settings.get("phases", {})
             .get("pretrain", {})
@@ -260,12 +267,25 @@ def markdown(report):
         "Appearance and colour scores are available in the final report. Native epoch traces contain overall validation scores. Values are provisional while the comparison is running.",
         "",
     ]
+    if report.get("training_policy", {}).get("proposition_until_patience"):
+        lines[
+            lines.index(
+                next(line for line in lines if line.startswith("Both models start"))
+            )
+        ] = "The proposition model writes answers from the full generated training bank until held-out proposition loss fails to improve for one epoch. Its best writing checkpoint determines the initial epoch count for the ratings control, which uses the same comparisons, batch size, and update count. Both then learn ratings from all 6,051 training comparisons with validation Spearman patience 1. Writing and ratings training have no epoch or wall-time stopping ceiling."
     names = {
         "ratings_pretrain": f"Ratings model: first {report.get('training_policy', {}).get('pretrain_epochs', 2)} epochs on the covered subset",
         "evidence_pretrain": "Proposition model: writing propositions on the covered subset",
         "ratings_ratings": "Ratings model: ratings on the full training set",
         "evidence_ratings": "Proposition model: ratings on the full training set",
     }
+    if report.get("training_policy", {}).get("proposition_until_patience"):
+        names["ratings_pretrain"] = (
+            "Ratings control: matched exposure on the full proposition-covered training comparisons"
+        )
+        names["evidence_pretrain"] = (
+            "Proposition model: full-bank writing until held-out loss stops improving"
+        )
     for stage in STAGES:
         data = report["stages"][stage]
         lines.extend(
@@ -299,6 +319,27 @@ def markdown(report):
                     "| " + " | ".join(formatted(value) for value in values) + " |"
                 )
             lines.append("")
+            if any(
+                row.get("proposition_validation_loss") is not None
+                for row in data["epochs"]
+            ):
+                lines.extend(
+                    [
+                        "Held-out proposition loss selects the writing checkpoint:",
+                        "",
+                        "| Epoch | Held-out proposition loss |",
+                        "|---:|---:|",
+                    ]
+                )
+                lines.extend(
+                    "| "
+                    + str(row["epoch"])
+                    + " | "
+                    + formatted(row.get("proposition_validation_loss"))
+                    + " |"
+                    for row in data["epochs"]
+                )
+                lines.append("")
         else:
             lines.extend(["Awaiting the first completed epoch.", ""])
         if not data["trace_available"] and data["epochs"]:

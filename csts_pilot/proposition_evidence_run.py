@@ -3,7 +3,10 @@
 import argparse
 import fcntl
 import json
+import os
 import shutil
+import subprocess
+import sys
 import time
 import uuid
 from pathlib import Path
@@ -80,6 +83,14 @@ def phase_config(
             "parent_sha256": file_sha256(parent) if parent is not None else None,
             "head_sha256": settings["head"]["sha256"],
             "max_answer_tokens": settings["max_answer_tokens"],
+            "proposition_until_patience": settings.get(
+                "proposition_until_patience", False
+            )
+            and arm == "evidence"
+            and phase == "pretrain",
+            "proposition_validation_sha256": settings.get(
+                "proposition_validation", {}
+            ).get("sha256"),
         }
     )
 
@@ -112,10 +123,18 @@ def validate_settings(settings: dict[str, Any]) -> None:
         )
     if (
         settings["phases"]["pretrain"]["max_epochs"] not in (2, 4)
-        or settings["phases"]["ratings"]["max_epochs"] != 24
-    ):
+        and not settings.get("proposition_until_patience")
+    ) or settings["phases"]["ratings"]["max_epochs"] != 24:
         raise ValueError(
             "Use two or four matched initial epochs and the declared ratings configuration."
+        )
+    if settings.get("proposition_until_patience") and (
+        not settings["training"].get("train_until_patience")
+        or settings["training"]["patience"] != 1
+        or not settings.get("proposition_validation", {}).get("sha256")
+    ):
+        raise ValueError(
+            "Full proposition training requires held-out writing references and patience one without ceilings."
         )
     for arm in ARMS:
         for phase in ("pretrain", "ratings"):
@@ -255,7 +274,9 @@ def run_study(
         )
         write_json(path, summary)
         env = LocalEnvSpec(
-            compute=CUDAComputeSpec(model="NVIDIA L4", count=1)
+            compute=CUDAComputeSpec(
+                model=settings.get("gpu_model", "NVIDIA L4"), count=1
+            )
             if gpu
             else CPUComputeSpec(),
             lockfile=GitFileRef(
@@ -353,15 +374,85 @@ def run_study(
     train_outputs = evidence_training_outputs()
     trained = {}
     traces = {arm: {} for arm in ARMS}
-    for phase in ("pretrain", "ratings"):
-        for arm in ARMS:
+    concurrent = settings.get("concurrent_ratings_control", False)
+    if concurrent:
+        receipt = directory / "ratings_worker_launch.json"
+        if not receipt.exists():
+            with (directory / "ratings_worker.log").open("ab", buffering=0) as log:
+                worker = subprocess.Popen(
+                    [
+                        sys.executable,
+                        "-m",
+                        "csts_pilot.full_proposition_control",
+                        "--root",
+                        str(root),
+                        "--name",
+                        name,
+                    ],
+                    cwd=root,
+                    stdin=subprocess.DEVNULL,
+                    stdout=log,
+                    stderr=subprocess.STDOUT,
+                    start_new_session=True,
+                )
+            write_json(receipt, {"pid": worker.pid, "source_commit": source.commit})
+        else:
+            if not (directory / "ratings_arm_complete.json").exists():
+                os.kill(load_json(receipt)["pid"], 0)
+    schedule = [("pretrain", ARMS), ("ratings", ARMS)]
+    if settings.get("proposition_until_patience"):
+        schedule = (
+            [
+                ("pretrain", ("evidence",)),
+                ("ratings", ("evidence",)),
+                ("pretrain", ("ratings",)),
+                ("ratings", ("ratings",)),
+            ]
+            if concurrent
+            else [("pretrain", ("evidence", "ratings")), ("ratings", ARMS)]
+        )
+    for phase, arms in schedule:
+        for arm in arms:
+            if concurrent and arm == "ratings" and phase == "pretrain":
+                completed = directory / "ratings_arm_complete.json"
+                while not completed.exists():
+                    if (directory / "ratings_worker_error.json").exists():
+                        raise RuntimeError(
+                            "The concurrent control failed; inspect its retained worker error and native outputs."
+                        )
+                    os.kill(
+                        load_json(directory / "ratings_worker_launch.json")["pid"], 0
+                    )
+                    time.sleep(10)
+                records = load_json(completed)["runs"]
+                for existing in records:
+                    if not any(r["name"] == existing["name"] for r in summary["runs"]):
+                        summary["runs"].append(existing)
+                write_json(path, summary)
             parent = trained.get(arm)
+            parent_output = (
+                "model"
+                if arm == "evidence" and settings.get("proposition_until_patience")
+                else "last_model"
+            )
             parent_path = (
-                artifact_path(parent, "train", "last_model", "model.pt")
+                artifact_path(parent, "train", parent_output, "model.pt")
                 if parent is not None
                 else None
             )
             cfg = phase_config(settings, arm, phase, prepared_path, parent_path)
+            if (
+                arm == "ratings"
+                and phase == "pretrain"
+                and settings.get("proposition_until_patience")
+            ):
+                cfg = cfg.model_copy(
+                    update={
+                        "max_epochs": traces["evidence"]["pretrain"][
+                            "selected_proposition"
+                        ]["epoch"]
+                    }
+                )
             inputs = [
                 input(k, path=settings["splits"][k]["path"], data_role="training")
                 for k in ("training", "validation")
@@ -375,11 +466,19 @@ def run_study(
                 inputs.append(
                     input("head", path=settings["head"]["path"], data_role="training")
                 )
+                if settings.get("proposition_until_patience"):
+                    inputs.append(
+                        input(
+                            "proposition_validation",
+                            path=settings["proposition_validation"]["path"],
+                            data_role="validation",
+                        )
+                    )
             if parent is not None:
                 inputs.append(
                     input(
                         "parent_model",
-                        source=artifact_source(parent, "train", "last_model"),
+                        source=artifact_source(parent, "train", parent_output),
                     )
                 )
             record = execute(
@@ -404,10 +503,22 @@ def run_study(
                 directory / f"{arm}_{phase}_trace.json",
             )
             trained[arm] = record
+            if (
+                arm == "evidence"
+                and phase == "pretrain"
+                and settings.get("proposition_until_patience")
+            ):
+                write_json(
+                    directory / "writing_selected.json",
+                    traces[arm][phase]["selected_proposition"],
+                )
     validate_matched_phases(
         traces,
-        settings["phases"]["pretrain"]["max_epochs"],
+        traces["evidence"]["pretrain"]["selected_proposition"]["epoch"]
+        if settings.get("proposition_until_patience")
+        else settings["phases"]["pretrain"]["max_epochs"],
         allow_budget_censoring=settings.get("allow_budget_censored_pilot") is True,
+        converged_propositions=settings.get("proposition_until_patience", False),
     )
     candidates = {}
     for arm, record in trained.items():

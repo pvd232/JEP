@@ -1,5 +1,8 @@
 """Teach the existing Qwen encoder evidence tokens before rating regression."""
 
+import copy
+import itertools
+import math
 import time
 from pathlib import Path
 from types import SimpleNamespace
@@ -63,6 +66,15 @@ class QwenEvidenceConfig(FitConfig):
     parent_sha256: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
     head_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     max_answer_tokens: int = Field(default=64, ge=2)
+    proposition_until_patience: bool = Field(
+        default=False,
+        description="Select writing weights by held-out answer loss, with no epoch ceiling.",
+    )
+    proposition_validation_sha256: str | None = Field(
+        default=None,
+        pattern=r"^[0-9a-f]{64}$",
+        description="Frozen source-disjoint proposition references used only for checkpoint selection.",
+    )
 
     def fit_config(self) -> FitConfig:
         """Keep inference checkpoints compatible with the reviewed rating scorer."""
@@ -205,6 +217,34 @@ def answer_loss_sum(
     return (totals / lengths).sum()
 
 
+@torch.inference_mode()
+def proposition_validation_loss(model, head, tokenizer, config, references):
+    """Measure one mean answer loss per held-out input, preserving the training RNG."""
+    rows = [
+        {
+            "sentence1": r["passage"],
+            "sentence2": r["passage"],
+            "condition": r["condition"],
+        }
+        for r in references
+    ]
+    mapping = {r["id"]: r["answer"] for r in references}
+    sequences = evidence_tokens(
+        rows, mapping, tokenizer, config, config.max_answer_tokens
+    )
+    model.eval()
+    total = 0.0
+    for start in range(0, len(rows), config.microbatch_size):
+        selected = rows[start : start + config.microbatch_size]
+        batch, labels = evidence_batch(selected, sequences, tokenizer, config)
+        hidden = model(**batch).last_hidden_state
+        total += float(answer_loss_sum(hidden, labels, head)) / 2
+    value = total / len(rows)
+    if not math.isfinite(value):
+        raise ValueError("Nonfinite held-out proposition loss.")
+    return {"mean_answer_cross_entropy": value, "n": len(rows)}
+
+
 def load_head(path: Path, config: QwenEvidenceConfig) -> nn.Module:
     """Use a verified pretrained vocabulary projection, frozen during auxiliary training."""
     if file_sha256(path) != config.head_sha256:
@@ -238,10 +278,13 @@ def save_first_phase(
     config: FitConfig,
     epoch: int,
     step: int,
+    *,
+    save_selected: bool = True,
 ) -> None:
     """Persist terminal adapters and optimizer/RNG state before rating training."""
     save_neural(context.outputs["last_model"], model, config, epoch, step)
-    save_neural(context.outputs["model"], model, config, epoch, step)
+    if save_selected:
+        save_neural(context.outputs["model"], model, config, epoch, step)
     save_resume_state(
         context.outputs["resume_state"],
         ResumeState(
@@ -321,6 +364,13 @@ def restore_first_phase(
 def fit_qwen_evidence(context: StageContext[QwenEvidenceConfig]) -> None:
     """Run fixed phase A or the existing patience-selected rating phase B."""
     config = context.config
+    converged_writing = config.proposition_until_patience
+    if converged_writing and (
+        config.arm != "evidence" or config.phase != "pretrain" or config.start_epoch
+    ):
+        raise ValueError(
+            "Held-out writing selection requires a fresh proposition-writing phase."
+        )
     for name in ("training", "validation", "prepared"):
         if file_sha256(context.inputs[name]) != getattr(config, name + "_sha256"):
             raise ValueError(f"Changed {name} input.")
@@ -385,6 +435,28 @@ def fit_qwen_evidence(context: StageContext[QwenEvidenceConfig]) -> None:
     head = (
         load_head(context.inputs["head"], config) if config.arm == "evidence" else None
     )
+    references = None
+    if converged_writing:
+        reference_path = context.inputs["proposition_validation"]
+        if file_sha256(reference_path) != config.proposition_validation_sha256:
+            raise ValueError("Held-out proposition reference identity changed.")
+        references = load_json(reference_path)
+        train_ids = set(prepared["aligned"])
+        if not references or any(r["id"] in train_ids for r in references):
+            raise ValueError(
+                "Held-out proposition inputs overlap training or are empty."
+            )
+        references = [
+            r
+            for r in references
+            if 0
+            < len(tokenizer(r["answer"], add_special_tokens=False)["input_ids"]) + 1
+            <= config.max_answer_tokens
+        ]
+        if not references:
+            raise ValueError(
+                "No held-out proposition reference fits the token ceiling."
+            )
     reset_rng(config.seed + 1000)
     params = [p for p in model.parameters() if p.requires_grad]
     optimizer = torch.optim.AdamW(
@@ -411,7 +483,14 @@ def fit_qwen_evidence(context: StageContext[QwenEvidenceConfig]) -> None:
         first_gradient = parent["first_shared_adapter_gradient_norm"]
         elapsed_offset = parent["elapsed_seconds"]
         training.nonpadding_tokens = epochs[-1]["rating_input_tokens"]
-    for epoch in range(config.start_epoch + 1, config.max_epochs + 1):
+    selected_writing = None
+    stale_epochs = 0
+    epoch_numbers = (
+        itertools.count(1)
+        if converged_writing
+        else range(config.start_epoch + 1, config.max_epochs + 1)
+    )
+    for epoch in epoch_numbers:
         model.train()
         order = torch.randperm(len(training_rows), generator=generator)
         total_loss, total_units, input_tokens = 0.0, 0, 0
@@ -506,12 +585,46 @@ def fit_qwen_evidence(context: StageContext[QwenEvidenceConfig]) -> None:
             "elapsed_seconds": elapsed_offset + time.monotonic() - started,
         }
         epochs.append(record)
-        save_first_phase(context, model, optimizer, generator, fit, epoch, step)
+        save_first_phase(
+            context,
+            model,
+            optimizer,
+            generator,
+            fit,
+            epoch,
+            step,
+            save_selected=not converged_writing,
+        )
+        stopped = False
+        if references is not None:
+            heldout = proposition_validation_loss(
+                model, head, tokenizer, config, references
+            )
+            record["proposition_validation"] = heldout
+            improved = (
+                selected_writing is None
+                or heldout["mean_answer_cross_entropy"]
+                < selected_writing["mean_answer_cross_entropy"]
+            )
+            stale_epochs = 0 if improved else stale_epochs + 1
+            if improved:
+                save_neural(context.outputs["model"], model, fit, epoch, step)
+                selected_writing = {
+                    **heldout,
+                    "epoch": epoch,
+                    "step": step,
+                    "model_sha256": file_sha256(context.outputs["model"]),
+                    "trainable_sha256": state_digest(trainable_state(model)),
+                }
+            record["epochs_without_improvement"] = stale_epochs
+            stopped = stale_epochs >= config.patience
         write_json(context.outputs["validation_predictions"], predictions)
         write_json(
             context.outputs["trace"],
             {
-                "status": "complete" if epoch == config.max_epochs else "running",
+                "status": "complete"
+                if stopped or (not converged_writing and epoch == config.max_epochs)
+                else "running",
                 "arm": config.arm,
                 "phase": "pretrain",
                 "config": config.model_dump(),
@@ -523,14 +636,24 @@ def fit_qwen_evidence(context: StageContext[QwenEvidenceConfig]) -> None:
                 "actual_updates": step,
                 "training_rows": len(training_rows),
                 "first_shared_adapter_gradient_norm": first_gradient,
+                "selected_proposition": selected_writing,
+                "epochs_without_improvement": stale_epochs
+                if converged_writing
+                else None,
                 "terminal_model_sha256": file_sha256(context.outputs["last_model"]),
                 "elapsed_seconds": elapsed_offset + time.monotonic() - started,
-                "stop_reason": "fixed_update_budget"
-                if epoch == config.max_epochs
-                else None,
+                "stop_reason": "proposition_validation_patience"
+                if stopped
+                else (
+                    "fixed_update_budget"
+                    if not converged_writing and epoch == config.max_epochs
+                    else None
+                ),
             },
         )
         print({"arm": config.arm, "phase": "pretrain", **record}, flush=True)
+        if stopped:
+            break
     synchronize(config.device)
 
 
@@ -539,8 +662,28 @@ def validate_matched_phases(
     phase_a_epochs: int,
     *,
     allow_budget_censoring: bool = False,
+    converged_propositions: bool = False,
 ) -> None:
     """Check exposure and restored weights; permit declared pilot time limits explicitly."""
+    if converged_propositions:
+        traces = copy.deepcopy(traces)
+        writing = traces["evidence"]["pretrain"]
+        chosen = writing["selected_proposition"]
+        if (
+            writing["stop_reason"] != "proposition_validation_patience"
+            or chosen["epoch"] != phase_a_epochs
+        ):
+            raise ValueError(
+                "The writing phase must finish held-out loss patience before the matched control."
+            )
+        writing.update(
+            completed_epoch=chosen["epoch"],
+            actual_updates=chosen["step"],
+            epochs=writing["epochs"][: chosen["epoch"]],
+            stop_reason="fixed_update_budget",
+            terminal_trainable_sha256=chosen["trainable_sha256"],
+            terminal_model_sha256=chosen["model_sha256"],
+        )
     first = traces["ratings"]["pretrain"]
     accepted_stops = {"validation_patience", "epoch_budget"}
     if allow_budget_censoring:
