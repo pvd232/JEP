@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated_at_utc": "2026-10-27T18:04:37+00:00",
+  "updated_at_utc": "2026-10-27T18:05:26+00:00",
   "identity": {
     "run_name": "jep_csts_v1_full_propositions_converged_patience1_20261027",
     "source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
@@ -67,12 +67,28 @@
       "trace_status": "running",
       "trace_path": "/content/jep-full-propositions-20261027/repo/qwen_evidence_results/jep_csts_v1_full_propositions_converged_patience1_20261027/evidence_pretrain_trace.json",
       "trace_available": true,
-      "completed_epoch": 0,
-      "current_epoch": 1,
-      "optimizer_updates": 175,
+      "completed_epoch": 1,
+      "current_epoch": 2,
+      "optimizer_updates": 200,
       "epochs_without_improvement": null,
       "stop_reason": null,
-      "epochs": [],
+      "epochs": [
+        {
+          "epoch": 1,
+          "optimizer_updates": 184,
+          "validation_spearman": 0.4738370115511225,
+          "validation_mse_1_5": 4.145213266674456,
+          "validation_rows": 1576,
+          "training_loss": 2.065912472408822,
+          "training_loss_kind": "proposition_token_cross_entropy",
+          "epochs_without_improvement": 0,
+          "fit_seconds": null,
+          "validation_seconds": null,
+          "observed_epoch_seconds": null,
+          "elapsed_seconds": 258.6612473089999,
+          "proposition_validation_loss": 0.38322816013304656
+        }
+      ],
       "notes": [],
       "hardware": "NVIDIA A100-SXM4-80GB"
     },
