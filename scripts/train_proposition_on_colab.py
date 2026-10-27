@@ -25,7 +25,7 @@ from csts_pilot.proposition_evidence_run import phase_config
 from csts_pilot.qwen_evidence import fit_qwen_evidence
 
 
-def run(root: Path, inputs: Path) -> None:
+def run(root: Path, inputs: Path, microbatch_size: int) -> None:
     """Preserve the original phase boundary, examples, optimizer settings and patience."""
     settings = json.loads((inputs / "settings.json").read_text())
     parent = inputs / "parent_model.pt"
@@ -41,6 +41,9 @@ def run(root: Path, inputs: Path) -> None:
     config = phase_config(
         settings, "evidence", "ratings", inputs / "prepared.json", parent
     )
+    if not 1 <= microbatch_size <= config.batch_size:
+        raise ValueError("The microbatch must fit inside the unchanged overall batch.")
+    config = config.model_copy(update={"microbatch_size": microbatch_size})
     if (
         config.start_epoch != 0
         or config.patience != 1
@@ -129,9 +132,10 @@ def main() -> None:
     """Run only the explicitly requested proposition ratings phase."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--inputs", type=Path, default=Path("migration_inputs"))
+    parser.add_argument("--microbatch-size", type=int, default=8)
     args = parser.parse_args()
     root = resolve_root()
-    run(root, root / args.inputs)
+    run(root, root / args.inputs, args.microbatch_size)
 
 
 if __name__ == "__main__":
