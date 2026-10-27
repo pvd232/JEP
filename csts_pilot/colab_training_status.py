@@ -44,6 +44,23 @@ def markdown(body: str, report: dict) -> str:
     if migration.get("concurrent_on_one_gpu"):
         if not any(s.get("trace_available") for s in report.get("stages", {}).values()):
             return body
+        headings = {
+            "ratings_pretrain": "## Ratings control: matched exposure on the full proposition-covered training comparisons\n",
+            "evidence_pretrain": "## Proposition model: full-bank writing until held-out loss stops improving\n",
+            "ratings_ratings": "## Ratings model: ratings on the full training set\n",
+            "evidence_ratings": "## Proposition model: ratings on the full training set\n",
+        }
+        for name, heading in headings.items():
+            if (
+                report.get("stages", {}).get(name, {}).get("status") == "running"
+                and heading in body
+            ):
+                before, after = body.split(heading, 1)
+                body = (
+                    before
+                    + heading
+                    + after.replace("Status: **pending**.", "Status: **running**.", 1)
+                )
         detail = "Both models train concurrently on the **80 GB A100** where their stages overlap. Each uses effective batch **32** and microbatch **32**. Writing checkpoint selection uses held-out proposition loss; ratings checkpoint selection uses validation Spearman.\n\n"
         return body.replace("## ", detail + "## ", 1)
     if not stage.get("trace_available"):

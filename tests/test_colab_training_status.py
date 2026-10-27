@@ -25,6 +25,20 @@ class ColabStatusTests(unittest.TestCase):
         self.assertIn("80 GB A100", displayed)
         self.assertNotIn("Asian L4", displayed)
 
+    def test_concurrent_control_markdown_shows_observed_training(self):
+        """A live concurrent control receives the same status in JSON and Markdown."""
+        report = decorate(
+            {
+                "training_policy": {"proposition_until_patience": True},
+                "stages": {
+                    "ratings_pretrain": {"status": "pending", "trace_available": True}
+                },
+            },
+            Path("/absent/migration.json"),
+        )
+        body = "## Ratings control: matched exposure on the full proposition-covered training comparisons\n\nStatus: **pending**.\n"
+        self.assertIn("Status: **running**.", markdown(body, report))
+
     def test_delegated_training_changes_presentation_without_mutating_native_ack(self):
         """A live A100 trace fixes pending presentation while preserving the original object."""
         with tempfile.TemporaryDirectory() as temporary:
