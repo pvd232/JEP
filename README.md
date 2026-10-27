@@ -6,6 +6,8 @@ Research materials for studying language representations and Colombian transitio
 
 [JEP C-STS revision 1](datasets/csts-jep-revision-v1/README.md) combines the repeated training/test audit with preserved validation V4.2: **6,051 training, 1,576 validation and 2,430 test comparisons**. The package includes ID-keyed annotations, the 25 adjudicated changes, independent initial judgments and verified reconstruction instructions.
 
+The [exclusion audit](datasets/csts-jep-revision-v1/EXCLUSIONS.md) gives a rationale and peer check for each of the **1,587 current exclusions** and **2,532 earlier removals for caption overlap**.
+
 ## Start with the literature
 
 The [two-primer learning guide](learning/README.md) introduces representation and similarity learning, then develops the conditional-language methods through Tu, CASE and related work. Each primer combines explanation, primary papers, worked examples and reading guidance.
