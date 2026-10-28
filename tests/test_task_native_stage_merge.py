@@ -11,6 +11,17 @@ ROOT = Path(__file__).resolve().parent / "fixtures/native_adapter_scope_v5"
 
 
 class StageMergeTest(unittest.TestCase):
+    def test_native_api_whitespace_also_preserves_separate_stage_assignments(self):
+        plan = compile_condition('type of hobby')
+        captures = {
+            'observed_activity': '\n results = [ActivityEvent(trigger="plays",actor=[Entity("A woman")],theme=[Entity("tennis")],place=[])]\n ',
+            'explicit_hobby': ' results = []\n',
+        }
+        graph = normalize_stages(captures, plan, 'knowcoder', 'A woman plays tennis.')
+        self.assertEqual(graph['requested_facet_status'], 'not_specified')
+        self.assertEqual(len(graph['events']), 1)
+        self.assertEqual(set(graph['stage_inputs_sha256']), set(captures))
+
     def test_exposed_count_stage_proposals_only_make_conditional_lower_bound_claims(self):
         cases=json.loads((ROOT/'evidence/count_development_gates_v1.json').read_text())['cases']
         for case in cases:

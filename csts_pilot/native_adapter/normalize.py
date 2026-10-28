@@ -22,7 +22,7 @@ def _constructors(payload, plan, model, count_stage=None, profile="scoped_experi
     if not isinstance(payload, str) or len(payload) > 65536:
         raise ValueError("Native payload must be a bounded string")
     try:
-        tree = ast.parse(payload, mode="exec")
+        tree = ast.parse(payload.strip(), mode="exec")
     except (SyntaxError, RecursionError) as error:
         raise ValueError("Malformed native annotation list") from error
     if len(tree.body) != 1 or sum(1 for _ in ast.walk(tree)) > 10000:
@@ -126,7 +126,7 @@ def normalize_stages(payloads, plan, model, passage, coverage_complete=False, pr
     for stage in stages:
         kwargs = {"count_stage" if count else "task_stage": stage}
         _constructors(payloads[stage],plan,model,profile=profile,**kwargs)
-        statement = ast.parse(payloads[stage],mode="exec").body[0]
+        statement = ast.parse(payloads[stage].strip(),mode="exec").body[0]
         elements.extend(statement.value.elts)
     literal = "[" + ",".join(ast.unparse(element) for element in elements) + "]"
     evidence = normalize_native(literal,plan,model,passage,coverage_complete=coverage_complete,profile=profile)

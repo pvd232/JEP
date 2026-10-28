@@ -1,0 +1,434 @@
+{
+  "purpose": "Offline whitespace-envelope parser audit; not a new model experiment",
+  "original_archive_sha256": "719f09cc9560a18db076ead849a9ada88914d368dcf22a895aca070cade8c70b",
+  "audit_runner_sha256": "8bb826c47ba92e6906987d86efac7beea4d5748f96b7e1019fcbfa6d7ec0bede",
+  "archived_normalizer_sha256": "dd07a706c3fda7d8ccc54618863575c1c5a11ba1a8157453d16aafbb3f073644",
+  "model_calls": 0,
+  "original_outputs_unchanged": true,
+  "cases": [
+    {
+      "case_id": "animal",
+      "original_generation_path": "results/ordinary-native-v3-knowcoder_ie/animal-generation.json",
+      "original_generation_sha256": "8b4639df22e1618fd05ce79c90d444376c30e651f002da93d4b87d1d6ed7d954",
+      "original_result_sha256": "c227e4a1b598e34e11ef0110a596d55da8f8d15dc0583f4cc4c31d69d8717d8e",
+      "raw_payload_sha256": "25af4648fe342571000819bbd21f759a8d02af508da595c7b1c2d0755aded89b",
+      "model_calls": 0,
+      "transport_envelope_transform": "str.strip only; no content edits",
+      "semantic_review_status": "unchanged/unreviewed",
+      "parse_status": "parsed_and_grounded",
+      "evidence": {
+        "condition": "type of animal",
+        "family": "unary_typed_mentions",
+        "plan_sha256": "e45355ed53ece57e8424a0eaa209d15927b57b9f7642750dc479dbdbc3111cf2",
+        "status": "answered",
+        "entities": [
+          {
+            "id": "e0",
+            "type": "Animal",
+            "span": {
+              "text": "elephant",
+              "candidates": [
+                {
+                  "start": 3,
+                  "end": 11
+                }
+              ],
+              "grounding": "unique"
+            },
+            "polarity": "positive",
+            "quantity": {
+              "kind": "unknown",
+              "lower": null,
+              "upper": null,
+              "source_text": "elephant"
+            },
+            "annotation_origins": [
+              "annotation:0"
+            ]
+          }
+        ],
+        "relations": [],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary"
+      }
+    },
+    {
+      "case_id": "animal_color",
+      "original_generation_path": "results/ordinary-native-v3-knowcoder_ie/animal_color-generation.json",
+      "original_generation_sha256": "864c42d7dda83dba133bbf9a4b100c1919f4357b7d2ddbf7200d917f65d186df",
+      "original_result_sha256": "b6e35b6a8a137e5975a83872de81985f1d5b45fd14b9c94318439fe00b1f78ab",
+      "raw_payload_sha256": "1c9aa48bca125d95867cca1f271062a22a1965f65254ea263b65d9dbeb8f9b80",
+      "model_calls": 0,
+      "transport_envelope_transform": "str.strip only; no content edits",
+      "semantic_review_status": "unchanged/unreviewed",
+      "parse_status": "parsed_and_grounded",
+      "evidence": {
+        "condition": "color of animal",
+        "family": "binary_properties_locations",
+        "plan_sha256": "75d2d596dea58ff9c3078948dd09c8cf3be790a96a6319dde0bcb5f67f2885a6",
+        "status": "answered",
+        "entities": [
+          {
+            "id": "e0",
+            "type": "Animal",
+            "span": {
+              "text": "brown",
+              "candidates": [
+                {
+                  "start": 16,
+                  "end": 21
+                }
+              ],
+              "grounding": "unique"
+            },
+            "polarity": "positive",
+            "quantity": {
+              "kind": "unknown",
+              "lower": null,
+              "upper": null,
+              "source_text": "brown"
+            },
+            "annotation_origins": [
+              "annotation:0:subject"
+            ]
+          },
+          {
+            "id": "e1",
+            "type": "Color",
+            "span": {
+              "text": "dog",
+              "candidates": [
+                {
+                  "start": 22,
+                  "end": 25
+                }
+              ],
+              "grounding": "unique"
+            },
+            "polarity": "positive",
+            "quantity": {
+              "kind": "unknown",
+              "lower": null,
+              "upper": null,
+              "source_text": "dog"
+            },
+            "annotation_origins": [
+              "annotation:0:object"
+            ]
+          }
+        ],
+        "relations": [
+          {
+            "predicate": "color",
+            "subject": "e0",
+            "object": "e1",
+            "polarity": "positive",
+            "support_span": {
+              "text": "brown dog",
+              "grounding": "unique",
+              "candidates": [
+                {
+                  "start": 16,
+                  "end": 25
+                }
+              ]
+            }
+          }
+        ],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary"
+      }
+    },
+    {
+      "case_id": "board_color",
+      "original_generation_path": "results/ordinary-native-v3-knowcoder_ie/board_color-generation.json",
+      "original_generation_sha256": "e69359e2ab5811802c26a38416b85dd0df71c420de5db55df2eadbc021b46cd5",
+      "original_result_sha256": "ea28d3925d535682cbd6b81908f6a58c38b2d1941b1cde5b73bbcc0ce916d108",
+      "raw_payload_sha256": "fcf9aad201770a7bd5985e760a0e165e10b41866aaf50bfce382b13439be1be8",
+      "model_calls": 0,
+      "transport_envelope_transform": "str.strip only; no content edits",
+      "semantic_review_status": "unchanged/unreviewed",
+      "parse_status": "parsed_and_grounded",
+      "evidence": {
+        "condition": "color of surfboard",
+        "family": "binary_properties_locations",
+        "plan_sha256": "66b3617247230e3e7258de20295a2d957c6e723844e16f562051420ea9a2e6d3",
+        "status": "not_specified",
+        "entities": [],
+        "relations": [],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary"
+      }
+    },
+    {
+      "case_id": "dog_event",
+      "original_generation_path": "results/ordinary-native-v3-knowcoder_ie/dog_event-generation.json",
+      "original_generation_sha256": "e9a12a4135fefa7c165cc19bc194b3fe4cf1ec20ae1ab30752b7256e755d3541",
+      "original_result_sha256": "94093b38eb78abfbfca68aecb2db81cb8e92ce792a2eb709ac05495443b3af6b",
+      "raw_payload_sha256": "fcf9aad201770a7bd5985e760a0e165e10b41866aaf50bfce382b13439be1be8",
+      "model_calls": 0,
+      "transport_envelope_transform": "str.strip only; no content edits",
+      "semantic_review_status": "unchanged/unreviewed",
+      "parse_status": "parsed_and_grounded",
+      "evidence": {
+        "condition": "action of dog",
+        "family": "actions_events",
+        "plan_sha256": "249bc7b4c192ab4c48740afd8e39185a730591dd2f1daf2521455e89abc13b3f",
+        "status": "not_specified",
+        "entities": [],
+        "relations": [],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary"
+      }
+    },
+    {
+      "case_id": "food",
+      "original_generation_path": "results/ordinary-native-v3-knowcoder_ie/food-generation.json",
+      "original_generation_sha256": "0046808003ba0f3e488da6f2ac86ab09de61f00760a700a3ba44f707753b9dd0",
+      "original_result_sha256": "45ff83f76bf0632bed7654d59416499f6a9fb805542a3b060c337a8ff1d7a72e",
+      "raw_payload_sha256": "bdbca5997417c6377330ced7bf7176163c5b4b307fdbd1192acac033525721ea",
+      "model_calls": 0,
+      "transport_envelope_transform": "str.strip only; no content edits",
+      "semantic_review_status": "unchanged/unreviewed",
+      "parse_status": "parsed_and_grounded",
+      "evidence": {
+        "condition": "type of food",
+        "family": "unary_typed_mentions",
+        "plan_sha256": "9dc5b122e40ffd022bb9a244486388f0f850ae5f4b722f22840af179ec75f580",
+        "status": "answered",
+        "entities": [
+          {
+            "id": "e0",
+            "type": "Food",
+            "span": {
+              "text": "sandwich",
+              "candidates": [
+                {
+                  "start": 37,
+                  "end": 45
+                }
+              ],
+              "grounding": "unique"
+            },
+            "polarity": "positive",
+            "quantity": {
+              "kind": "unknown",
+              "lower": null,
+              "upper": null,
+              "source_text": "sandwich"
+            },
+            "annotation_origins": [
+              "annotation:0"
+            ]
+          },
+          {
+            "id": "e1",
+            "type": "Food",
+            "span": {
+              "text": "pickle",
+              "candidates": [
+                {
+                  "start": 52,
+                  "end": 58
+                }
+              ],
+              "grounding": "unique"
+            },
+            "polarity": "positive",
+            "quantity": {
+              "kind": "unknown",
+              "lower": null,
+              "upper": null,
+              "source_text": "pickle"
+            },
+            "annotation_origins": [
+              "annotation:1"
+            ]
+          }
+        ],
+        "relations": [],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary"
+      }
+    },
+    {
+      "case_id": "helmet",
+      "original_generation_path": "results/ordinary-native-v3-knowcoder_ie/helmet-generation.json",
+      "original_generation_sha256": "1852d5fac7dbbbdc40f96847587b09e46d26442b3e796b06fe9706d82377bb59",
+      "original_result_sha256": "a3806d093fc1928f7762df71c1f706cba83e0de8fa4c52569682744dc0c25973",
+      "raw_payload_sha256": "c3b91d7268babf3df0095208e1222ef0935b78fbc7dbadeb041c39fdd0d9472b",
+      "model_calls": 0,
+      "transport_envelope_transform": "str.strip only; no content edits",
+      "semantic_review_status": "unchanged/unreviewed",
+      "parse_status": "parsed_and_grounded",
+      "evidence": {
+        "condition": "presence of helmets",
+        "family": "unary_typed_mentions",
+        "plan_sha256": "9c27fb890c3829ac80b75332072cfe1509ad9003d62171b6539ee626808e444f",
+        "status": "answered",
+        "entities": [
+          {
+            "id": "e0",
+            "type": "Clothing",
+            "span": {
+              "text": "blue helmets",
+              "candidates": [
+                {
+                  "start": 35,
+                  "end": 47
+                }
+              ],
+              "grounding": "unique"
+            },
+            "polarity": "positive",
+            "quantity": {
+              "kind": "unknown",
+              "lower": null,
+              "upper": null,
+              "source_text": "blue helmets"
+            },
+            "annotation_origins": [
+              "annotation:0"
+            ]
+          }
+        ],
+        "relations": [],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary"
+      }
+    },
+    {
+      "case_id": "person_event",
+      "original_generation_path": "results/ordinary-native-v3-knowcoder_ie/person_event-generation.json",
+      "original_generation_sha256": "3ecccc32161ddb55336447ab86ac94fc9b129e899e4bdf46398b46c40fa5a9a6",
+      "original_result_sha256": "fcc0095b49b8fe1316717d897b4fc6dc5fdd0e4a59bf14835ea2c16ccdb92891",
+      "raw_payload_sha256": "fcf9aad201770a7bd5985e760a0e165e10b41866aaf50bfce382b13439be1be8",
+      "model_calls": 0,
+      "transport_envelope_transform": "str.strip only; no content edits",
+      "semantic_review_status": "unchanged/unreviewed",
+      "parse_status": "parsed_and_grounded",
+      "evidence": {
+        "condition": "motion of person",
+        "family": "actions_events",
+        "plan_sha256": "c8a77fca3e4a800353c04e8a4a23a6c6e3ea86a1f12c51a57e31f9a9a34cd3c5",
+        "status": "not_specified",
+        "entities": [],
+        "relations": [],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary"
+      }
+    },
+    {
+      "case_id": "spatial_qualifier",
+      "original_generation_path": "results/ordinary-native-v3-knowcoder_ie/spatial_qualifier-generation.json",
+      "original_generation_sha256": "8362d2a9532cff04e1c83802af17f0c803223dd2d0887c9355b2bfa107a9e049",
+      "original_result_sha256": "6530f696514851c0dd5d2b587b7de1bba250dea5c46720bb6c354407c7902958",
+      "raw_payload_sha256": "fcf9aad201770a7bd5985e760a0e165e10b41866aaf50bfce382b13439be1be8",
+      "model_calls": 0,
+      "transport_envelope_transform": "str.strip only; no content edits",
+      "semantic_review_status": "unchanged/unreviewed",
+      "parse_status": "parsed_and_grounded",
+      "evidence": {
+        "condition": "location of person",
+        "family": "binary_properties_locations",
+        "plan_sha256": "dfc505d4407da90026c17dcd04115ab1da6e4cc513dcb3e829fa97d8abf43411",
+        "status": "not_specified",
+        "entities": [],
+        "relations": [],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary"
+      }
+    },
+    {
+      "case_id": "vehicle",
+      "original_generation_path": "results/ordinary-native-v3-knowcoder_ie/vehicle-generation.json",
+      "original_generation_sha256": "0572c1e6b8c27c8ee1d585dfe64dc8dbceeb1e49a216fe09e936cfd8a230bbc7",
+      "original_result_sha256": "d6d62955e4cd2d2e07aeaf20fc88f5a2d87e1ebe4bd1f14529ee8fbde09ff3a0",
+      "raw_payload_sha256": "8707791b9a85445cd9dd804dfde8b43bd73662fbd4ece58848225f7233a4dd1f",
+      "model_calls": 0,
+      "transport_envelope_transform": "str.strip only; no content edits",
+      "semantic_review_status": "unchanged/unreviewed",
+      "parse_status": "parsed_and_grounded",
+      "evidence": {
+        "condition": "type of vehicle",
+        "family": "unary_typed_mentions",
+        "plan_sha256": "26131136bcc86193a04c75ec95e7d8b55293f6b852f714c830d097b72f44b763",
+        "status": "answered",
+        "entities": [
+          {
+            "id": "e0",
+            "type": "Vehicle",
+            "span": {
+              "text": "train",
+              "candidates": [
+                {
+                  "start": 2,
+                  "end": 7
+                }
+              ],
+              "grounding": "unique"
+            },
+            "polarity": "positive",
+            "quantity": {
+              "kind": "unknown",
+              "lower": null,
+              "upper": null,
+              "source_text": "train"
+            },
+            "annotation_origins": [
+              "annotation:0"
+            ]
+          }
+        ],
+        "relations": [],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary"
+      }
+    }
+  ]
+}

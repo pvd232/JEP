@@ -19,6 +19,20 @@ class AdapterTest(unittest.TestCase):
     def setUpClass(cls):
         cls.cases = json.loads((ROOT / "evidence/development_gate_cases_v3.json").read_text())["cases"]
 
+    def test_native_api_envelope_whitespace_preserves_annotations(self):
+        plan = compile_condition("type of animal")
+        for model, payload in (("knowcoder", ' results = [Animal("elephant")]'),
+                               ("gollie", ' [Animal(span="elephant")]')):
+            expected = normalize_native(payload.strip(), plan, model, "An elephant stands.")
+            for framed in (payload, "\n\t" + payload + "\n  "):
+                self.assertEqual(normalize_native(framed, plan, model, "An elephant stands."), expected)
+
+    def test_whitespace_is_not_an_empty_list_or_an_extra_statement_escape(self):
+        plan = compile_condition("type of animal")
+        for payload in (" \n\t", ' results = [Animal("elephant")]\nprint("elephant")'):
+            with self.assertRaises(ValueError):
+                normalize_native(payload, plan, "knowcoder", "An elephant stands.")
+
     def test_every_real_development_annotation_has_equivalent_meaning_in_both_native_formats(self):
         for case in self.cases:
             plan = compile_condition(case["condition"])
