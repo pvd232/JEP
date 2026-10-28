@@ -151,3 +151,49 @@ A: saved cosine score. B: token weighting trained with ratings. C: token weighti
 | 2026-10-28 04:51:43 | comparison epoch | 7 | 20 | D validation rho 0.436774, MSE 0.111780; E validation rho 0.414441, MSE 0.124283 |
 | 2026-10-28 04:51:44 | comparison epoch | 7 | 21 | D validation rho 0.437187, MSE 0.111357; E validation rho 0.414367, MSE 0.123802 |
 | 2026-10-28 04:51:45 | comparison epoch | 7 | 22 | D validation rho 0.435851, MSE 0.111775; E validation rho 0.414212, MSE 0.124192 |
+| 2026-10-28 04:52:10 | stage finished | 7 |  | name: fit_7; status: succeeded |
+| 2026-10-28 04:52:17 | stage started | 8 |  | name: fit_8 |
+| 2026-10-28 04:53:28 | readout epoch | 8 | 1 | B validation rho 0.581703, MSE 0.123471; C validation rho 0.339654, MSE 0.137390 |
+| 2026-10-28 04:53:37 | readout epoch | 8 | 2 | B validation rho 0.530675, MSE 0.137100; C validation rho 0.180140, MSE 0.155712 |
+| 2026-10-28 04:53:47 | readout epoch | 8 | 3 | B validation rho 0.572172, MSE 0.125718; C validation rho 0.201945, MSE 0.150150 |
+| 2026-10-28 04:53:57 | readout epoch | 8 | 4 | B validation rho 0.573592, MSE 0.125538; C validation rho 0.359352, MSE 0.133128 |
+| 2026-10-28 04:54:06 | readout epoch | 8 | 5 | B validation rho 0.568951, MSE 0.126089; C validation rho 0.195257, MSE 0.159765 |
+| 2026-10-28 04:54:15 | readout epoch | 8 | 6 | B validation rho 0.566996, MSE 0.126606; C validation rho 0.253984, MSE 0.146664 |
+| 2026-10-28 04:54:25 | readout epoch | 8 | 7 | B validation rho 0.570764, MSE 0.125564; C validation rho 0.249827, MSE 0.148830 |
+| 2026-10-28 04:54:34 | readout epoch | 8 | 8 | B validation rho 0.574787, MSE 0.124681; C validation rho 0.190980, MSE 0.152376 |
+| 2026-10-28 04:54:43 | readout epoch | 8 | 9 | B validation rho 0.569681, MSE 0.125438; C validation rho 0.220458, MSE 0.153231 |
+| 2026-10-28 04:54:55 | comparison epoch | 8 | 1 | D validation rho 0.672595, MSE 0.094275; E validation rho 0.390036, MSE 0.129396 |
+| 2026-10-28 04:54:56 | comparison epoch | 8 | 2 | D validation rho 0.703432, MSE 0.076323; E validation rho 0.414519, MSE 0.118008 |
+| 2026-10-28 04:54:57 | comparison epoch | 8 | 3 | D validation rho 0.715282, MSE 0.075458; E validation rho 0.431783, MSE 0.116616 |
+| 2026-10-28 04:54:58 | comparison epoch | 8 | 4 | D validation rho 0.721273, MSE 0.072104; E validation rho 0.445098, MSE 0.114539 |
+| 2026-10-28 04:54:59 | comparison epoch | 8 | 5 | D validation rho 0.725586, MSE 0.070991; E validation rho 0.456758, MSE 0.112522 |
+| 2026-10-28 04:55:00 | comparison epoch | 8 | 6 | D validation rho 0.727584, MSE 0.070265; E validation rho 0.459180, MSE 0.117252 |
+| 2026-10-28 04:55:00 | comparison epoch | 8 | 7 | D validation rho 0.728554, MSE 0.071595; E validation rho 0.465640, MSE 0.114268 |
+| 2026-10-28 04:55:01 | comparison epoch | 8 | 8 | D validation rho 0.729783, MSE 0.071072; E validation rho 0.470769, MSE 0.112483 |
+| 2026-10-28 04:55:02 | comparison epoch | 8 | 9 | D validation rho 0.730727, MSE 0.072246; E validation rho 0.474022, MSE 0.112513 |
+| 2026-10-28 04:55:03 | comparison epoch | 8 | 10 | D validation rho 0.731305, MSE 0.071129; E validation rho 0.477855, MSE 0.110413 |
+| 2026-10-28 04:55:04 | comparison epoch | 8 | 11 | D validation rho 0.731632, MSE 0.069585; E validation rho 0.479098, MSE 0.111459 |
+| 2026-10-28 04:55:04 | comparison epoch | 8 | 12 | D validation rho 0.731641, MSE 0.069375; E validation rho 0.482531, MSE 0.109679 |
+| 2026-10-28 04:55:05 | comparison epoch | 8 | 13 | D validation rho 0.730754, MSE 0.070610; E validation rho 0.484911, MSE 0.109325 |
+| 2026-10-28 04:55:06 | comparison epoch | 8 | 14 | D validation rho 0.731337, MSE 0.069861; E validation rho 0.485163, MSE 0.109619 |
+| 2026-10-28 04:55:07 | comparison epoch | 8 | 15 | D validation rho 0.730927, MSE 0.069684; E validation rho 0.486494, MSE 0.109260 |
+| 2026-10-28 04:55:07 | comparison epoch | 8 | 16 | D validation rho 0.730365, MSE 0.070617; E validation rho 0.486223, MSE 0.110009 |
+| 2026-10-28 04:55:08 | comparison epoch | 8 | 17 | D validation rho 0.728550, MSE 0.070855; E validation rho 0.487880, MSE 0.109398 |
+| 2026-10-28 04:55:09 | comparison epoch | 8 | 18 | D validation rho 0.728765, MSE 0.070176; E validation rho 0.487618, MSE 0.110111 |
+| 2026-10-28 04:55:10 | comparison epoch | 8 | 19 | D validation rho 0.728248, MSE 0.070306; E validation rho 0.487366, MSE 0.111352 |
+| 2026-10-28 04:55:11 | comparison epoch | 8 | 20 | D validation rho 0.727778, MSE 0.070632; E validation rho 0.488041, MSE 0.109777 |
+| 2026-10-28 04:55:12 | comparison epoch | 8 | 21 | D validation rho 0.726729, MSE 0.070321; E validation rho 0.488073, MSE 0.109865 |
+| 2026-10-28 04:55:12 | comparison epoch | 8 | 22 | D validation rho 0.725816, MSE 0.070809; E validation rho 0.488917, MSE 0.109963 |
+| 2026-10-28 04:55:13 | comparison epoch | 8 | 23 | D validation rho 0.725186, MSE 0.070936; E validation rho 0.487725, MSE 0.112020 |
+| 2026-10-28 04:55:14 | comparison epoch | 8 | 24 | D validation rho 0.725708, MSE 0.076506; E validation rho 0.488345, MSE 0.110504 |
+| 2026-10-28 04:55:15 | comparison epoch | 8 | 25 | D validation rho 0.723108, MSE 0.071172; E validation rho 0.488922, MSE 0.111225 |
+| 2026-10-28 04:55:16 | comparison epoch | 8 | 26 | D validation rho 0.721577, MSE 0.071649; E validation rho 0.488403, MSE 0.110740 |
+| 2026-10-28 04:55:16 | comparison epoch | 8 | 27 | D validation rho 0.721631, MSE 0.071900; E validation rho 0.487357, MSE 0.113709 |
+| 2026-10-28 04:55:17 | comparison epoch | 8 | 28 | D validation rho 0.720524, MSE 0.071919; E validation rho 0.487618, MSE 0.111058 |
+| 2026-10-28 04:55:18 | comparison epoch | 8 | 29 | D validation rho 0.719871, MSE 0.072499; E validation rho 0.486865, MSE 0.113741 |
+| 2026-10-28 04:55:19 | comparison epoch | 8 | 30 | D validation rho 0.720402, MSE 0.076481; E validation rho 0.486538, MSE 0.115444 |
+| 2026-10-28 04:55:32 | stage finished | 8 |  | name: fit_8; status: succeeded |
+| 2026-10-28 04:55:40 | stage started | 9 |  | name: fit_9 |
+| 2026-10-28 04:56:51 | readout epoch | 9 | 1 | B validation rho 0.545021, MSE 0.125585; C validation rho 0.236988, MSE 0.152148 |
+| 2026-10-28 04:57:00 | readout epoch | 9 | 2 | B validation rho 0.578447, MSE 0.126604; C validation rho 0.264137, MSE 0.150158 |
+| 2026-10-28 04:57:10 | readout epoch | 9 | 3 | B validation rho 0.522355, MSE 0.140323; C validation rho 0.305132, MSE 0.140940 |
