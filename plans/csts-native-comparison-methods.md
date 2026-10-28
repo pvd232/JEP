@@ -6,11 +6,11 @@ Status: proposed experiment, awaiting user review. [Plan review](csts-native-com
 
 Can we improve similarity by training Qwen's LoRA weights and the learned comparison together?
 
-**Working hypothesis:** joint training will improve held out similarity over matched cosine training because Qwen can adapt its sentence embeddings to the comparison that scores them. A small regularization study will measure how shrinking the comparison weights affects validation performance.
+**Working hypothesis:** training fresh LoRA factors and the learned comparison together will improve held out similarity relative to the existing ratings model. Qwen can adapt its sentence embeddings to the comparison that scores them. This follow up measures the complete training procedure against that historical control.
 
 The [completed experiment](../training_outputs/csts_readout_convergence_20261028/results.md) held Qwen fixed. A used the final sentence embedding from our proposition trained, similarity trained Qwen model. Adding a learned comparison raised mean test Spearman from 0.863398 to 0.865230. The paired 95% interval for the gain was [0.001108, 0.002569]. Those three comparison fits shared one saved Qwen adapter.
 
-Every new encoder run starts from the original pretrained Qwen3 Embedding 8B checkpoint with freshly initialized LoRA factors and trains directly on similarity ratings. A remains the existing historical reference. The proposed change is to train the fresh comparison and LoRA together, using the same rating error. We keep obtaining each sentence embedding from Qwen's final token. Its values can change as LoRA learns.
+The three new encoder runs start from the original pretrained Qwen3 Embedding 8B checkpoint with freshly initialized LoRA factors and train directly on similarity ratings. A remains the existing historical reference. The proposed change is to train the fresh comparison and LoRA together, using the same rating error. We keep obtaining each sentence embedding from Qwen's final token. Its values can change as LoRA learns.
 
 ## What LoRA changes inside Qwen
 
@@ -83,7 +83,7 @@ For training comparison $i=1,\ldots,N$, let $a_i,b_i$ be the normalized embeddin
 L_r(\theta,\phi)=\frac{1}{N}\sum_{i=1}^{N}(\widehat{y}_i-y_i)^2.
 ```
 
-The embeddings depend on $\theta$. Both LoRA and the comparison receive gradients from this same loss. The cosine control trains $\theta$ using $a_i^\top b_i$. The learned comparison trains $\theta$ and $\phi$ using $f_\phi$.
+The embeddings depend on $\theta$. Both LoRA and the comparison receive gradients from this same loss: the new runs train $\theta$ and $\phi$ using $f_\phi$.
 
 To see the comparison update, define error $\delta_i=\widehat{y}_i-y_i$ and include the bias in an augmented feature vector $x_i\in\mathbb{R}^{2d+1}$:
 
@@ -132,7 +132,7 @@ L_r(\phi)=\frac{1}{N}\|X\phi-(y-s_0)\|_2^2,\qquad
 \mathrm{rank}(X)\leq6051<8193.
 ```
 
-Some changes to the coefficients therefore leave every training prediction unchanged. This establishes flexibility in the fitted coefficients. Validation measures how that flexibility affects new predictions. The completed study already used AdamW weight decay 0.01 and validation stopping, as recorded in its [methods](csts-readout-convergence-methods.md). The new decay study will estimate the contribution of this choice.
+Some changes to the coefficients therefore leave every training prediction unchanged. This flexibility motivates standard fitting controls; their benefit for this task remains an empirical question. The completed study already used AdamW weight decay 0.01 and validation stopping, as recorded in its [methods](csts-readout-convergence-methods.md). Reuse these settings for the joint runs. This keeps regularization a fixed implementation choice.
 
 AdamW applies shrinkage separately from its gradient based update. For optimizer step $t$, let $\eta_t>0$ be the comparison learning rate, $\lambda_\phi\geq0$ its decay coefficient, and $u_t\in\mathbb{R}^{8193}$ Adam's direction computed from its gradient history. Its update has the form
 
@@ -144,35 +144,20 @@ Shrinking $w_d,w_p,c$ toward zero favors the current encoder's cosine score. LoR
 
 Rank 32, adapter dropout 0.05 and validation stopping provide additional controls on fitting. Their settings stay fixed in this experiment.
 
-## Regularization screen using saved embeddings
+## Native training runs
 
-First obtain training and validation embeddings from the original pretrained Qwen checkpoint. Reuse a cache with matching model, prompt, tokenizer and input identities, or extract the final embeddings once and seal them in VIPER Cloud. These embeddings come from the same public checkpoint that initializes the native runs.
+Train three joint models with seeds 7, 8 and 9. Each starts from the original pretrained Qwen with freshly initialized LoRA adapters and a zero initialized comparison, $\phi=0$, then trains directly on human similarity ratings. Every fit updates both LoRA factors and comparison coefficients. Record the public Qwen revision, fresh adapter initialization digest and empty optimizer state for each parent.
 
-Fit comparison heads on those fixed embeddings with comparison decay 0, 0.01 and 0.1. Use seeds 7, 8 and 9, identical batches across decay settings within each seed, zero initialization, AdamW learning rate 0.001, batch size 32 and gradient clipping at 1. Keep initialization eligible. Select the first strictly best validation Spearman; stop after ten further epochs, with a 256 epoch ceiling.
-
-This is nine inexpensive CPU fits sharing one set of features. Select one decay by mean selected validation Spearman across the three seeds. An exact tie chooses stronger decay. Publish every validation curve, selected epoch, MSE and coefficient norm. This selects a comparison decay setting for the first joint experiment; its behavior during joint fitting remains part of the measurement.
-
-Retain the selected frozen pretrained encoder plus comparison for evaluation alongside the native models. This provides a reference using the same comparison decay as joint training. Historical A and the 0.865230 A with comparison result remain separate references with their original training history.
-
-## Paired native training runs
-
-Start each seed from the original pretrained Qwen with fresh LoRA adapters. Copy that exact initial state into two rating runs, each trained directly on human similarity ratings:
-
-| Rating run | Score | Parameters updated |
-| --- | --- | --- |
-| Fresh cosine control | Cosine of the final embeddings | Freshly trained LoRA factors |
-| Fresh learned comparison | Learned symmetric comparison of the final embeddings | Freshly trained LoRA factors and comparison coefficients |
-
-Use seeds 7, 8 and 9. Each seed independently initializes and trains its own LoRA factors. Within a seed, the two rating runs share the exact fresh initialization. These are six rating fits. Initialize each native comparison at $\phi=0$; the CPU screen supplies its decay setting. Record the public Qwen revision, fresh adapter initialization digest and empty optimizer state for each rating parent. A supplies historical reference predictions.
+The complete training count is three native rating fits. Reuse the saved ratings control, A and A with comparison for evaluation. Comparison decay stays at 0.01 throughout. Each native run computes its own embeddings during training.
 
 For every rating fit, use one AdamW optimizer with separate parameter groups:
 
 | Parameters | Learning rate | Weight decay |
 | --- | --- | --- |
 | LoRA factors | 0.00002 | 0.01 |
-| Comparison coefficients, including bias | 0.001 | Selected screen value |
+| Comparison coefficients, including bias | 0.001 | 0.01 |
 
-Use AdamW coefficients 0.9 and 0.999, epsilon $10^{-8}$, batch size 32, microbatch size 2, gradient clipping at 1 over all trained parameters, constant learning rates and rank 32 adapters with scale 32 and dropout 0.05. Preserve matching batch orders within each seed for overlapping epochs. After constructing and restoring every module, reset the rating random state to seed plus 2,000. Use a separate rating batch generator at seed plus 10,000. This aligns adapter dropout within each pair, including the first batch. The encoder uses bfloat16 computation; normalization, comparison and MSE use float32. Joint runs recompute Qwen outputs from token inputs at every update.
+Use AdamW coefficients 0.9 and 0.999, epsilon $10^{-8}$, batch size 32, microbatch size 2, gradient clipping at 1 over all trained parameters, constant learning rates and rank 32 adapters with scale 32 and dropout 0.05. After constructing every module, set the rating random state to seed plus 2,000. Use a separate rating batch generator at seed plus 10,000. Record both states for reproducible resumption. The encoder uses bfloat16 computation; normalization, comparison and MSE use float32. Joint runs recompute Qwen outputs from token inputs at every update.
 
 Evaluate validation Spearman after each epoch, with dropout disabled. Initialization is eligible. Keep the first strictly best checkpoint for each model. Each fit continues until ten epochs have passed since its own last improvement, with an initial ceiling of 48 epochs. Record a ceiling case as incomplete and continue from its saved state before final evaluation. Report both selected and terminal epochs and actual updates. These learning rates define this experiment's starting protocol; their optimality is a separate empirical question.
 
@@ -180,7 +165,9 @@ Evaluate validation Spearman after each epoch, with dropout disabled. Initializa
 
 Use the frozen rating input identities in the [readout configuration](../configs/csts-evidence-readout.json): 6,051 training, 1,576 validation and 2,431 test comparisons. Restore each required input through its sealed VIPER Cloud artifact and verify its declared hash once on loading. Pin the fresh encoder to public Qwen revision `c90816d848505624c2434128dfc61132162a0ee9`, tokenizer, prompt, maximum input length 160 and all 4,096 output coordinates. The [completed run references](../training_outputs/csts_readout_convergence_20261028/cloud-receipts.json) locate historical reference predictions. Retain A's model identity, SHA256 `d30c00fc76e70ec639493b7121a8b8c9d7520745733857c1c49f0902fff00f4f`, as reference provenance. The native fitting inputs are sentence pairs, conditions and their human similarity ratings.
 
-Use training and validation for fitting, decay selection and stopping. Freeze all selected states and the regularization decision before loading test targets. The primary comparison is fresh joint training minus fresh cosine training. Secondary comparisons measure fresh joint training against the selected frozen comparison and both fresh models against historical A and A with comparison. Report each seed, mean Spearman and normalized MSE, with 2,000 paired source group bootstrap draws over the 1,222 test groups. All model differences are recomputed within each draw and averaged across seeds. Report seed variation separately. The existing test supplies exploratory evidence; confirmation uses fresh reserved source groups.
+Use training and validation for fitting and stopping. Freeze all selected states before loading test targets. The primary comparison is each fresh joint model against the saved ratings control from the [completed proposition study](https://github.com/pvd232/JEP/blob/bef8cfb0f8f85a602f0ec86ff9450f9d467fa9d5/training_outputs/proposition_full_20261026/comparison_report.md), which reported Spearman 0.855375 over 2,430 test comparisons. Preserve that control's checkpoint, selected epoch and original training history. Reuse its archived predictions; evaluation from its saved checkpoint can recover any required predictions.
+
+Join reference and new predictions by frozen input identities. Report paired differences on their verified common rows, with row counts, source group counts and input hashes. Also report each new model on all 2,431 current test comparisons. A and A with comparison supply secondary historical references. Report per seed and mean Spearman and normalized MSE, with 2,000 paired source group bootstrap draws. Within each draw, recompute every model difference on the same sampled groups, then average across new seeds. Report seed variation separately. The reused control supplies one historical training seed; intervals describe test source uncertainty conditional on these retained models. The result measures the complete new procedure relative to that saved control, with differences in training history retained in its interpretation. The existing test supplies exploratory evidence; confirmation uses fresh reserved source groups.
 
 Record training and validation loss, validation Spearman, coefficient norms, bias, LoRA factor norms, gradient norms for both parameter groups, prediction ranges, residual score ranges and selected checkpoint hashes. Measure embedding changes against each run's initial validation embeddings using the existing validation forwards. Report the six fixed [edit cases](../configs/csts-readout-interventions.json), condition families and ordering across conditions for the same sentence pair.
 

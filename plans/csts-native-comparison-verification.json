@@ -4,9 +4,9 @@
   "files": {
     "plans/csts-native-comparison-methods.md": {
       "display": 13,
-      "inline": 50,
+      "inline": 48,
       "relative_links": 16,
-      "source_sha256": "9f9989fb85580226a8e1b0b9f08d89d95e4fb3a3f8770340729538964e83bc7d"
+      "source_sha256": "fbd056d72fbf2b158d84e69cc16bf1fb2acb669690f5e060f952a99c93d9778b"
     },
     "plans/csts-readout-convergence-methods.md": {
       "display": 1,
@@ -18,7 +18,7 @@
       "display": 0,
       "inline": 0,
       "relative_links": 4,
-      "source_sha256": "3e48a2aa6b9edfab410ce071e209fbcafebd98711465c68c5e68c8e0c8d05244"
+      "source_sha256": "8aeba307a493a935f63253f8d393cd507f99aaa74e43a06160c26a841f09ee2c"
     }
   },
   "errors": [],
@@ -40,12 +40,18 @@
       "score and LoRA derivation",
       "parameter and input identities",
       "optimizer semantics",
-      "matched training controls",
+      "historical reference coverage and training history",
       "selection and evaluation",
       "artifact restoration and Cloud retention"
     ],
     "visual_inspection": "LoRA, comparison, normalization gradient, LoRA chain rule, rank argument and AdamW displays rasterized from MathJax and inspected",
     "execution_status": "awaiting user review",
-    "scope_correction": "Six fresh LoRA rating fits from the original pretrained Qwen. Historical A is a reference. Regularization screen uses public pretrained embeddings. Proposition training and writing diagnostics removed."
+    "scope_correction": "Three fresh joint LoRA and comparison rating fits from the original pretrained Qwen, seeds 7, 8 and 9. Existing cosine models are reused. Fixed comparison decay 0.01. Proposition training, cosine retraining and the separate regularization screen removed."
+  },
+  "run_count": {
+    "native_joint_rating_fits": 3,
+    "new_cosine_fits": 0,
+    "proposition_fits": 0,
+    "separate_regularization_fits": 0
   }
 }
