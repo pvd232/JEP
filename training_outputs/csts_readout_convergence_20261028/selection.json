@@ -1,0 +1,32 @@
+{
+  "status": "checkpoints_frozen",
+  "test_scores_used_for_selection": false,
+  "source_commit": "fdbcb3461f63cf44d7cb3cde4de27332594e452d",
+  "model_sha256": "766839f3a8166c6e2befc95c0726d96eae0785e09cea5802cf0b5fb0b7e297d2",
+  "models": {
+    "all_seeds": {
+      "sha256": "766839f3a8166c6e2befc95c0726d96eae0785e09cea5802cf0b5fb0b7e297d2"
+    }
+  },
+  "validation_selection": {
+    "rates": {
+      "ratings": "0.0001",
+      "evidence": "3e-05"
+    },
+    "mean_validation_spearman": {
+      "1e-05": {
+        "ratings": 0.7289597848476839,
+        "evidence": 0.6540379057093372
+      },
+      "3e-05": {
+        "ratings": 0.7311690437588748,
+        "evidence": 0.658062880051329
+      },
+      "0.0001": {
+        "ratings": 0.7358020957352472,
+        "evidence": 0.6432903881060573
+      }
+    },
+    "tie_rule": "smallest learning rate"
+  }
+}

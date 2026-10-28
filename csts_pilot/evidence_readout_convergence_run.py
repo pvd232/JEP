@@ -9,6 +9,7 @@ from typing import Any
 
 from viper import execution
 from viper.authoring import experiment, input, plan, replicate, stage, variant
+from viper.config import BuildConfig
 from viper.metrics import max as maximize
 from viper.metrics import measure
 from viper.outputs import EvalOutputs, StageOutputs, TrainOutputs, output
@@ -37,6 +38,7 @@ from csts_pilot.evidence_readout_convergence import (
 from csts_pilot.evidence_readout_run import checked_source, gpu_idle
 from csts_pilot.evidence_readout_stages import ReadoutExtractionConfig, extract_readout
 from jep_pilot.loaders import load_json, load_model, load_state
+from jep_pilot.stages import publish_evaluation_inputs
 
 
 def fit_outputs():
@@ -340,12 +342,43 @@ def run(
                 )
             holdout = directory / "holdout.json"
             _save(holdout, list(range(old["splits"]["test"]["rows"])))
+            published = execute(
+                "publish_test",
+                stage(
+                    publish_evaluation_inputs,
+                    stage_id="publish",
+                    config=BuildConfig(),
+                    inputs=(
+                        input(
+                            "test", path=old["splits"]["test"]["path"], data_role="eval"
+                        ),
+                        input(
+                            "holdout",
+                            path=holdout.relative_to(root).as_posix(),
+                            data_role="eval",
+                        ),
+                    ),
+                    outputs=StageOutputs(
+                        test=output(
+                            path="test.json", loader=load_json, data_role="eval"
+                        ),
+                        holdout=output(
+                            path="holdout.json", loader=load_json, data_role="eval"
+                        ),
+                    ),
+                    reuse="never",
+                ),
+            )
             evaluation_rows = (
-                input("test", path=old["splits"]["test"]["path"], data_role="eval"),
+                input(
+                    "test",
+                    source=stored_source(published, "publish", "test", "test", "eval"),
+                ),
                 input(
                     "holdout",
-                    path=holdout.relative_to(root).as_posix(),
-                    data_role="eval",
+                    source=stored_source(
+                        published, "publish", "holdout", "holdout", "eval"
+                    ),
                 ),
             )
         else:
