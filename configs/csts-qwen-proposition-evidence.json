@@ -1,0 +1,88 @@
+{
+  "publication_destination": {
+    "kind": "viper_cloud",
+    "owner": "pvd232",
+    "workspace": "jep_csts_joint_20261021"
+  },
+  "gpu_budget_seconds": 136800,
+  "bootstrap_draws": 2000,
+  "bootstrap_seed": 61024,
+  "arms": [
+    "ratings",
+    "evidence"
+  ],
+  "encoder": {
+    "model_id": "Qwen/Qwen3-Embedding-8B",
+    "revision": "c90816d848505624c2434128dfc61132162a0ee9",
+    "embedding_dimension": 4096,
+    "max_length": 160,
+    "encode_batch_size": 4,
+    "device": "cuda"
+  },
+  "max_answer_tokens": 64,
+  "head": {
+    "path": "qwen_data/qwen-evidence-head.safetensors",
+    "sha256": "a36df847ac68cb10d636cac54bdd99c1d1b6627e98aca62dd5716bb87e6fee4d",
+    "model_id": "Qwen/Qwen3-8B-Base",
+    "revision": "49e3418fbbbca6ecbdf9608b4d22e5a407081db4"
+  },
+  "answers": {
+    "path": "csts_data/proposition_subset_training_records.json",
+    "sha256": "d20ec3bd9e6176be98743156d67867137715d36c152c033317bb1e49362c3d1f"
+  },
+  "splits": {
+    "training": {
+      "path": "csts_data/train.json",
+      "rows": 6980,
+      "groups": 2674,
+      "sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01"
+    },
+    "validation": {
+      "path": "training_outputs/csts_validation_rows_v4_1_20261027.json",
+      "rows": 1572,
+      "groups": 678,
+      "sha256": "f186e86877e731c96ee9b1c819863b981074bc500dc9aa11c6951ba9fd56e2c9"
+    },
+    "test": {
+      "path": "csts_data/evaluation.json",
+      "rows": 2620,
+      "groups": 1241,
+      "sha256": "2c8b6f2b62740c85c376eacd02ef222c2bfacdfe8df5f772a4dd7d52b6d38f1e"
+    }
+  },
+  "training": {
+    "seed": 7,
+    "learning_rate": 2e-05,
+    "batch_size": 32,
+    "microbatch_size": 2,
+    "patience": 5,
+    "weight_decay": 0.01,
+    "schedule": "constant",
+    "warmup_fraction": 0,
+    "lora_rank": 32,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05
+  },
+  "phases": {
+    "pretrain": {
+      "max_epochs": 2,
+      "max_seconds": 7200
+    },
+    "ratings": {
+      "max_epochs": 24,
+      "max_seconds": 57600
+    }
+  },
+  "provenance": {
+    "path": "csts_data/proposition_subset_training_manifest.json",
+    "sha256": "c4c34c230c713445b34c3165dc6092ae745c782ac9d560e390d6d3112121bd99"
+  },
+  "audit_gate": {
+    "path": "csts_data/propositions_tranche8_audit_gate.json",
+    "sha256": "1ed74a76ec898775199dbec28a03e5ca8df453cc65ef81a8c46954b749118af7"
+  },
+  "report_cohorts": {
+    "path": "datasets/csts-proposition-evidence-report-cohorts.json",
+    "sha256": "7c5eaf349e6ef863db85b185f8f0c4e1f5192cf036a705eb79bd5435ced211a3"
+  }
+}

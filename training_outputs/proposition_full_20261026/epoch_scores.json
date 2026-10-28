@@ -1,0 +1,1837 @@
+{
+  "schema_version": 1,
+  "updated_at_utc": "2026-10-27T22:13:42+00:00",
+  "identity": {
+    "run_name": "jep_csts_v1_full_propositions_converged_patience1_20261027",
+    "source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
+    "attempt": "9bfd9512",
+    "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+  },
+  "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+  "training_policy": {
+    "matched_pretrain_epochs": null,
+    "proposition_until_patience": true,
+    "proposition_validation": {
+      "path": "csts_data/jep-csts-v1-propositions/full_bank/writing_validation.json",
+      "sha256": "bed82db0a94a0a47e9afd99e1a6754fd9b90ca6a4184fe6dc276b7d83420b237"
+    },
+    "arm_patience": {},
+    "pretrain_epochs": 1,
+    "train_until_patience": true,
+    "patience": 1,
+    "ratings_max_epochs": 24,
+    "ratings_max_seconds": 8100
+  },
+  "validation_rows": 1576,
+  "validation_groups": 680,
+  "run_status": "running",
+  "current_stage": "evidence_pretrain",
+  "summary_path": "/content/jep-full-propositions-20261027/repo/qwen_evidence_results/jep_csts_v1_full_propositions_converged_patience1_20261027/summary.json",
+  "summary_sha256": "05d1f9a4796db0643b41e708701e2e8fe4b44944ae84fdc43f1f9fdc2bc0c644",
+  "scope": "Training and validation histories only; subgroup epoch scores are unavailable in native traces.",
+  "stages": {
+    "ratings_pretrain": {
+      "matched_initial_epoch": null,
+      "status": "running",
+      "trace_status": "complete",
+      "trace_path": "/content/jep-full-propositions-20261027/repo/qwen_evidence_results/jep_csts_v1_full_propositions_converged_patience1_20261027/ratings_pretrain_trace.json",
+      "trace_available": true,
+      "completed_epoch": 7,
+      "current_epoch": 7,
+      "optimizer_updates": 1288,
+      "epochs_without_improvement": null,
+      "stop_reason": "fixed_update_budget",
+      "epochs": [
+        {
+          "epoch": 1,
+          "optimizer_updates": 184,
+          "validation_spearman": 0.8511942971477676,
+          "validation_mse_1_5": 0.637960570209638,
+          "validation_rows": 1576,
+          "training_loss": 0.07388785467589924,
+          "training_loss_kind": "rating_mse_0_1",
+          "epochs_without_improvement": null,
+          "fit_seconds": null,
+          "validation_seconds": null,
+          "observed_epoch_seconds": null,
+          "elapsed_seconds": 201.23101735700004,
+          "proposition_validation_loss": null
+        },
+        {
+          "epoch": 2,
+          "optimizer_updates": 368,
+          "validation_spearman": 0.8656840454078584,
+          "validation_mse_1_5": 0.5511539991526211,
+          "validation_rows": 1576,
+          "training_loss": 0.036752421952651125,
+          "training_loss_kind": "rating_mse_0_1",
+          "epochs_without_improvement": null,
+          "fit_seconds": null,
+          "validation_seconds": null,
+          "observed_epoch_seconds": null,
+          "elapsed_seconds": 645.3288394360002,
+          "proposition_validation_loss": null
+        },
+        {
+          "epoch": 3,
+          "optimizer_updates": 552,
+          "validation_spearman": 0.8699310626644988,
+          "validation_mse_1_5": 0.5272397854771451,
+          "validation_rows": 1576,
+          "training_loss": 0.029285863188737108,
+          "training_loss_kind": "rating_mse_0_1",
+          "epochs_without_improvement": null,
+          "fit_seconds": null,
+          "validation_seconds": null,
+          "observed_epoch_seconds": null,
+          "elapsed_seconds": 1083.7404591590002,
+          "proposition_validation_loss": null
+        },
+        {
+          "epoch": 4,
+          "optimizer_updates": 736,
+          "validation_spearman": 0.8699165860446431,
+          "validation_mse_1_5": 0.5257448266006854,
+          "validation_rows": 1576,
+          "training_loss": 0.023786556533361352,
+          "training_loss_kind": "rating_mse_0_1",
+          "epochs_without_improvement": null,
+          "fit_seconds": null,
+          "validation_seconds": null,
+          "observed_epoch_seconds": null,
+          "elapsed_seconds": 1522.7565556719996,
+          "proposition_validation_loss": null
+        },
+        {
+          "epoch": 5,
+          "optimizer_updates": 920,
+          "validation_spearman": 0.8678713175657048,
+          "validation_mse_1_5": 0.5420203494937348,
+          "validation_rows": 1576,
+          "training_loss": 0.018940468348037316,
+          "training_loss_kind": "rating_mse_0_1",
+          "epochs_without_improvement": null,
+          "fit_seconds": null,
+          "validation_seconds": null,
+          "observed_epoch_seconds": null,
+          "elapsed_seconds": 2112.214539288,
+          "proposition_validation_loss": null
+        },
+        {
+          "epoch": 6,
+          "optimizer_updates": 1104,
+          "validation_spearman": 0.8683749760984485,
+          "validation_mse_1_5": 0.5485014233912501,
+          "validation_rows": 1576,
+          "training_loss": 0.015129312092221533,
+          "training_loss_kind": "rating_mse_0_1",
+          "epochs_without_improvement": null,
+          "fit_seconds": null,
+          "validation_seconds": null,
+          "observed_epoch_seconds": null,
+          "elapsed_seconds": 2339.099540051,
+          "proposition_validation_loss": null
+        },
+        {
+          "epoch": 7,
+          "optimizer_updates": 1288,
+          "validation_spearman": 0.8683670680842244,
+          "validation_mse_1_5": 0.5493483700490999,
+          "validation_rows": 1576,
+          "training_loss": 0.011732404642266015,
+          "training_loss_kind": "rating_mse_0_1",
+          "epochs_without_improvement": null,
+          "fit_seconds": null,
+          "validation_seconds": null,
+          "observed_epoch_seconds": null,
+          "elapsed_seconds": 2543.5223168580005,
+          "proposition_validation_loss": null
+        }
+      ],
+      "notes": [],
+      "hardware": "NVIDIA A100-SXM4-80GB"
+    },
+    "evidence_pretrain": {
+      "matched_initial_epoch": null,
+      "status": "running",
+      "trace_status": "complete",
+      "trace_path": "/content/jep-full-propositions-20261027/repo/qwen_evidence_results/jep_csts_v1_full_propositions_converged_patience1_20261027/evidence_pretrain_trace.json",
+      "trace_available": true,
+      "completed_epoch": 6,
+      "current_epoch": 6,
+      "optimizer_updates": 1104,
+      "epochs_without_improvement": 1,
+      "stop_reason": "proposition_validation_patience",
+      "epochs": [
+        {
+          "epoch": 1,
+          "optimizer_updates": 184,
+          "validation_spearman": 0.4738370115511225,
+          "validation_mse_1_5": 4.145213266674456,
+          "validation_rows": 1576,
+          "training_loss": 2.065912472408822,
+          "training_loss_kind": "proposition_token_cross_entropy",
+          "epochs_without_improvement": 0,
+          "fit_seconds": null,
+          "validation_seconds": null,
+          "observed_epoch_seconds": null,
+          "elapsed_seconds": 258.6612473089999,
+          "proposition_validation_loss": 0.38322816013304656
+        },
+        {
+          "epoch": 2,
+          "optimizer_updates": 368,
+          "validation_spearman": 0.4562223547833581,
+          "validation_mse_1_5": 4.1580228532212775,
+          "validation_rows": 1576,
+          "training_loss": 0.36259618558103324,
+          "training_loss_kind": "proposition_token_cross_entropy",
+          "epochs_without_improvement": 0,
+          "fit_seconds": null,
+          "validation_seconds": null,
+          "observed_epoch_seconds": null,
+          "elapsed_seconds": 761.5748872019999,
+          "proposition_validation_loss": 0.31983932778855
+        },
+        {
+          "epoch": 3,
+          "optimizer_updates": 552,
+          "validation_spearman": 0.48044195496520814,
+          "validation_mse_1_5": 4.088358981068051,
+          "validation_rows": 1576,
+          "training_loss": 0.3023984413772536,
+          "training_loss_kind": "proposition_token_cross_entropy",
+          "epochs_without_improvement": 0,
+          "fit_seconds": null,
+          "validation_seconds": null,
+          "observed_epoch_seconds": null,
+          "elapsed_seconds": 1253.500836608,
+          "proposition_validation_loss": 0.297286242492928
+        },
+        {
+          "epoch": 4,
+          "optimizer_updates": 736,
+          "validation_spearman": 0.49722078185523333,
+          "validation_mse_1_5": 4.051999200912703,
+          "validation_rows": 1576,
+          "training_loss": 0.2697387470998978,
+          "training_loss_kind": "proposition_token_cross_entropy",
+          "epochs_without_improvement": 0,
+          "fit_seconds": null,
+          "validation_seconds": null,
+          "observed_epoch_seconds": null,
+          "elapsed_seconds": 1737.0902063550002,
+          "proposition_validation_loss": 0.2857631336558949
+        },
+        {
+          "epoch": 5,
+          "optimizer_updates": 920,
+          "validation_spearman": 0.5003242834624434,
+          "validation_mse_1_5": 4.027830655129071,
+          "validation_rows": 1576,
+          "training_loss": 0.24740735507303407,
+          "training_loss_kind": "proposition_token_cross_entropy",
+          "epochs_without_improvement": 0,
+          "fit_seconds": null,
+          "validation_seconds": null,
+          "observed_epoch_seconds": null,
+          "elapsed_seconds": 2203.350692121,
+          "proposition_validation_loss": 0.27535018053921784
+        },
+        {
+          "epoch": 6,
+          "optimizer_updates": 1104,
+          "validation_spearman": 0.5111559305848661,
+          "validation_mse_1_5": 3.8655501217899597,
+          "validation_rows": 1576,
+          "training_loss": 0.22756745240442458,
+          "training_loss_kind": "proposition_token_cross_entropy",
+          "epochs_without_improvement": 1,
+          "fit_seconds": null,
+          "validation_seconds": null,
+          "observed_epoch_seconds": null,
+          "elapsed_seconds": 2567.6533936630003,
+          "proposition_validation_loss": 0.2892187055477426
+        }
+      ],
+      "notes": [],
+      "hardware": "NVIDIA A100-SXM4-80GB"
+    },
+    "ratings_ratings": {
+      "matched_initial_epoch": null,
+      "status": "pending",
+      "trace_status": null,
+      "trace_path": null,
+      "trace_available": false,
+      "completed_epoch": 0,
+      "current_epoch": null,
+      "optimizer_updates": 0,
+      "epochs_without_improvement": null,
+      "stop_reason": null,
+      "epochs": [],
+      "notes": [],
+      "hardware": "NVIDIA A100-SXM4-80GB"
+    },
+    "evidence_ratings": {
+      "matched_initial_epoch": null,
+      "status": "pending",
+      "trace_status": null,
+      "trace_path": null,
+      "trace_available": false,
+      "completed_epoch": 0,
+      "current_epoch": null,
+      "optimizer_updates": 0,
+      "epochs_without_improvement": null,
+      "stop_reason": null,
+      "epochs": [],
+      "notes": [],
+      "hardware": "NVIDIA A100-SXM4-80GB"
+    }
+  },
+  "device_benchmark": {
+    "measured_at_utc": "2026-10-27T18:39:58.882464+00:00",
+    "decision": "Keep both models on the A100. The L4 control would become the slower arm and extend the projected time to finish both models.",
+    "selected_setup": "shared_a100",
+    "source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
+    "checkpoint_sha256": "d6f788a2e2dab84910e52b89d715457fc0f457be123e8e97a0abc83aaff6013d",
+    "checkpoint_epoch": 4,
+    "checkpoint_step": 736,
+    "batch_size": 32,
+    "microbatch_size": 32,
+    "timed_updates_per_control_test": 12,
+    "warmup_updates_per_control_test": 2,
+    "measurements": [
+      {
+        "label": "Ratings control on A100 alongside proposition training",
+        "seconds_per_update": 2.074482516083284
+      },
+      {
+        "label": "Ratings control alone on L4",
+        "seconds_per_update": 3.971243498909947
+      },
+      {
+        "label": "Proposition writing on shared A100",
+        "seconds_per_update": 2.9471617265200076
+      },
+      {
+        "label": "Proposition writing alone on A100",
+        "seconds_per_update": 1.3470737005200135
+      }
+    ],
+    "estimated_matched_epoch_seconds": {
+      "shared_a100": 542.2777576796814,
+      "split_a100_l4": 730.7088037994303
+    },
+    "estimate_scope": "Short training-window estimate for 184 matched updates per arm; validation, checkpoint writes, transfer and startup add time. Actual stopping epochs depend on validation patience.",
+    "l4_model_load_seconds": 76.81342883798061,
+    "a100_model_load_seconds": 6.5694997189993956,
+    "checkpoint_preservation": "All experiment checkpoints and optimizer/RNG state remain on the A100. Disposable timing weights were excluded from scientific results.",
+    "raw_receipts": {
+      "a100": {
+        "purpose": "Disposable device timing; weights are excluded from scientific results.",
+        "gpu": "NVIDIA A100-SXM4-80GB",
+        "source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
+        "checkpoint_sha256": "d6f788a2e2dab84910e52b89d715457fc0f457be123e8e97a0abc83aaff6013d",
+        "checkpoint_epoch": 4,
+        "checkpoint_step": 736,
+        "prepared_sha256": "0b63e159ecb8eb211636b9b509baf6035dc1e22b81f5404c1caaecc78203f67f",
+        "batch_size": 32,
+        "microbatch_size": 32,
+        "warmup_updates": 2,
+        "timed_updates": 12,
+        "seconds_per_update": 2.074482516083284,
+        "median_seconds_per_update": 2.1072583744999065,
+        "update_seconds": [
+          2.115954388999853,
+          2.1173238719993606,
+          2.114052208999965,
+          2.1078999069995916,
+          2.4358188770002016,
+          2.018874192000112,
+          2.0400393700001587,
+          2.1066168420002214,
+          2.086518072000217,
+          2.137823813999603,
+          1.7344225950000691,
+          1.878446054000051
+        ],
+        "training_loss": [
+          0.012802689336240292,
+          0.01192032266408205,
+          0.033077288419008255,
+          0.016201699152588844,
+          0.019786644726991653,
+          0.024144316092133522,
+          0.011310029774904251,
+          0.02452150359749794,
+          0.020339716225862503,
+          0.018334394320845604,
+          0.012723511084914207,
+          0.021674178540706635
+        ],
+        "model_load_seconds": 6.5694997189993956,
+        "peak_cuda_memory_bytes": 17705810944,
+        "torch_version": "2.14.0+cu130"
+      },
+      "l4": {
+        "purpose": "Disposable device timing; weights are excluded from scientific results.",
+        "gpu": "NVIDIA L4",
+        "source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
+        "checkpoint_sha256": "d6f788a2e2dab84910e52b89d715457fc0f457be123e8e97a0abc83aaff6013d",
+        "checkpoint_epoch": 4,
+        "checkpoint_step": 736,
+        "prepared_sha256": "0b63e159ecb8eb211636b9b509baf6035dc1e22b81f5404c1caaecc78203f67f",
+        "batch_size": 32,
+        "microbatch_size": 32,
+        "warmup_updates": 2,
+        "timed_updates": 12,
+        "seconds_per_update": 3.971243498909947,
+        "median_seconds_per_update": 4.012637420993997,
+        "update_seconds": [
+          4.163229053025134,
+          4.093469896004535,
+          3.9318049459834583,
+          4.111465947993565,
+          4.580254242988303,
+          3.774112733954098,
+          3.542510361992754,
+          4.15568559197709,
+          3.92833598802099,
+          4.158006693993229,
+          3.7034099570009857,
+          3.512636573985219
+        ],
+        "training_loss": [
+          0.012523064389824867,
+          0.011775551363825798,
+          0.03369724377989769,
+          0.01640060730278492,
+          0.019784845411777496,
+          0.023964710533618927,
+          0.011270875111222267,
+          0.024714108556509018,
+          0.020247001200914383,
+          0.019016385078430176,
+          0.012721664272248745,
+          0.02174903079867363
+        ],
+        "model_load_seconds": 76.81342883798061,
+        "peak_cuda_memory_bytes": 17705810944,
+        "torch_version": "2.14.0+cu130"
+      },
+      "writing_windows": [
+        {
+          "unix": 1793126143.9749532,
+          "mode": "shared",
+          "epoch": 5,
+          "updates": 875,
+          "elapsed": 2056.591393063,
+          "completed": 4
+        },
+        {
+          "unix": 1793126156.0018303,
+          "mode": "shared",
+          "epoch": 5,
+          "updates": 900,
+          "elapsed": 2130.270436226,
+          "completed": 4
+        },
+        {
+          "unix": 1793126168.029034,
+          "mode": "shared",
+          "epoch": 5,
+          "updates": 900,
+          "elapsed": 2130.270436226,
+          "completed": 4
+        },
+        {
+          "unix": 1793126180.0557957,
+          "mode": "shared",
+          "epoch": 5,
+          "updates": 900,
+          "elapsed": 2130.270436226,
+          "completed": 4
+        },
+        {
+          "unix": 1793126192.0829139,
+          "mode": "shared",
+          "epoch": 5,
+          "updates": 900,
+          "elapsed": 2130.270436226,
+          "completed": 4
+        },
+        {
+          "unix": 1793126204.1104453,
+          "mode": "writing_alone",
+          "epoch": 5,
+          "updates": 900,
+          "elapsed": 2130.270436226,
+          "completed": 4
+        },
+        {
+          "unix": 1793126216.1370938,
+          "mode": "writing_alone",
+          "epoch": 5,
+          "updates": 900,
+          "elapsed": 2130.270436226,
+          "completed": 4
+        },
+        {
+          "unix": 1793126228.1636562,
+          "mode": "writing_alone",
+          "epoch": null,
+          "updates": 920,
+          "elapsed": 2209.700447322,
+          "completed": 5
+        },
+        {
+          "unix": 1793126240.1908529,
+          "mode": "writing_alone",
+          "epoch": 6,
+          "updates": 925,
+          "elapsed": 2216.151547763,
+          "completed": 5
+        },
+        {
+          "unix": 1793126252.2180207,
+          "mode": "writing_alone",
+          "epoch": 6,
+          "updates": 925,
+          "elapsed": 2216.151547763,
+          "completed": 5
+        },
+        {
+          "unix": 1793126264.2454996,
+          "mode": "writing_alone",
+          "epoch": 6,
+          "updates": 950,
+          "elapsed": 2249.8283902760004,
+          "completed": 5
+        },
+        {
+          "unix": 1793126276.2748325,
+          "mode": "writing_alone",
+          "epoch": 6,
+          "updates": 950,
+          "elapsed": 2249.8283902760004,
+          "completed": 5
+        },
+        {
+          "unix": 1793126288.3029466,
+          "mode": "writing_alone",
+          "epoch": 6,
+          "updates": 950,
+          "elapsed": 2249.8283902760004,
+          "completed": 5
+        },
+        {
+          "unix": 1793126300.330271,
+          "mode": "shared_resumed",
+          "epoch": 6,
+          "updates": 975,
+          "elapsed": 2283.4901474790004,
+          "completed": 5
+        }
+      ]
+    },
+    "benchmark_script_sha256": "22ba4733e47636eaab057b749916778d5c6ae5dea2df77f6c0c4d30efafd1bd2"
+  },
+  "dataset_revision": "jep-csts-v1",
+  "test_comparison": {
+    "dataset_revision": "jep-csts-v1",
+    "test_sha256": "52a9c0d6b8d9f3fc81e698bae1e2564051cf7ec29e8dc1cb4d68167910bb968d",
+    "test_rows": 2430,
+    "encoder_source_commit": "67f816407f786ea038415422a9aefd57d30c92fb",
+    "encoder_initial_epochs": 4,
+    "followup_running": true,
+    "sol_completed_rows": 2430,
+    "sol_completed_batches": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37
+    ],
+    "shared_row_ids_sha256": "33b45f145ac1ec87aabe414ae671e38e23624524aaa79248f01cb17693f91351",
+    "models": {
+      "ratings": {
+        "label": "Ratings model",
+        "initial_epochs": 4,
+        "full": {
+          "n": 2430,
+          "spearman": 0.8557188384851067,
+          "pearson": 0.8745795844750097,
+          "mse_0_1": 0.038520896116577025
+        },
+        "shared": {
+          "n": 2430,
+          "spearman": 0.8557188384851067,
+          "pearson": 0.8745795844750097,
+          "mse_0_1": 0.038520896116577025
+        },
+        "checkpoint_sha256": "530eddea9a3077be8db864194f0915f3f85fbba6045a0c5cb4691423d9d1e26d",
+        "predictions_sha256": "e440cb29af7fbd9e3bc44375ac2fd7c14470f8705fbe7d868f1b732f3a0adb5f"
+      },
+      "evidence": {
+        "label": "Proposition model",
+        "initial_epochs": 4,
+        "full": {
+          "n": 2430,
+          "spearman": 0.8543617428925742,
+          "pearson": 0.8720015664150436,
+          "mse_0_1": 0.03884132179509847
+        },
+        "shared": {
+          "n": 2430,
+          "spearman": 0.8543617428925742,
+          "pearson": 0.8720015664150436,
+          "mse_0_1": 0.03884132179509847
+        },
+        "checkpoint_sha256": "a99ccbacf27a3d56ff80b40d135ec05e265048d14f077a9e2d964b3b60649e62",
+        "predictions_sha256": "d9b10b92639016859a1effd2dafdc1d71f31b4c798c7c0d19848eb6ecf08d343"
+      },
+      "sol": {
+        "label": "GPT-6.1 Sol (max)",
+        "full": {
+          "n": 2430,
+          "spearman": 0.9199548895630967,
+          "pearson": 0.924977759229853,
+          "mse_0_1": 0.023512860082304524
+        },
+        "shared": {
+          "n": 2430,
+          "spearman": 0.9199548895630967,
+          "pearson": 0.924977759229853,
+          "mse_0_1": 0.023512860082304524
+        },
+        "completed_rows": 2430
+      }
+    }
+  },
+  "proposition_validation": {
+    "status": "complete",
+    "protocol": {
+      "dataset_revision": "jep-csts-v1",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "heldout_source_groups": 128,
+      "selection": "One input per validation source group; SHA256 proposition-validation-v1:id order, no labels or model outputs.",
+      "training_unique_inputs": 11909,
+      "reused_inputs": 2496,
+      "missing_inputs": 9413,
+      "training_bank_unchanged": true,
+      "generation_authorization": "User explicitly requested full training generation and held-out proposition evaluation, independent of pilot score.",
+      "teacher_model": "gpt-6.1-sol",
+      "teacher_reasoning_effort": "high",
+      "teacher_prompt_sha256": "6895d17242704944632757d7c5eb669f3d4d8f959ee23bbdd7ddae00a0f0304e",
+      "teacher_source_sha256": "30ee54ef9b4428fcaf435364db21899fe6a14ea0bb292b7520dcc38933e629dd",
+      "review_prompt_sha256": "1609df1ee771a9bd0e00115bcbba0faaa424cb562f7abf2ef2f01097bba80039",
+      "review_schema": {
+        "type": "object",
+        "properties": {
+          "reviews": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "supported": {
+                  "type": "boolean"
+                },
+                "complete": {
+                  "type": "boolean"
+                },
+                "unsupported_assertion": {
+                  "type": "boolean"
+                },
+                "notes": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "supported",
+                "complete",
+                "unsupported_assertion",
+                "notes"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "reviews"
+        ],
+        "additionalProperties": false
+      },
+      "evaluation_source_sha256": "d754c143af300fa60d0a8dc2b1503a74b68ac7dfa5381f5d719c3e341c40ec9a",
+      "generation_source_sha256": "3ca561ba65c5a8e03d01fc3237bae39d5fafa98f401a91994c304442ac451f08"
+    },
+    "generation": {
+      "completed_inputs": 11909,
+      "newly_completed_inputs": 9413,
+      "unique_inputs": 11909,
+      "factual_review": {
+        "n": 128,
+        "fully_correct": 125,
+        "accuracy": 0.9765625,
+        "supported": 127,
+        "unsupported_assertion_count": 1,
+        "review_agreement": 0.9921875,
+        "reviewers": "Two independent GPT-6.1 Sol high calls; model-reviewed, no human adjudication."
+      },
+      "complete": {
+        "status": "complete",
+        "records": 11909,
+        "records_sha256": "72e0857df9527cb3844ed58e92700b319f0ef060a7125996c2590afb382714eb",
+        "raw_reused_receipts": "/Users/machina/.codex/.chatgpt-projects/g-p-6ad6fb9258ac8191b4baa874735994e2/work/csts-jep-v1-full-propositions-20261027/csts_data/jep-csts-v1-propositions/reused_receipts.json",
+        "raw_new_capture": "/Users/machina/.codex/.chatgpt-projects/g-p-6ad6fb9258ac8191b4baa874735994e2/work/proposition-validation-full-20261027/training_capture",
+        "status_counts": {
+          "answered": 11079,
+          "ambiguous": 28,
+          "not_specified": 802
+        },
+        "current_training_bank_changed": false
+      }
+    },
+    "evaluations": [
+      {
+        "references_sha256": "4c3d8e0ffab622900b36d107950b769182b09af35e103a1aede05f916a6aa8eb",
+        "inputs_sha256": "dba9e71ceee74674b129c7c3cf67d127ab12439dc41716d17b45b6edee0483d0",
+        "evaluator_sha256": "d754c143af300fa60d0a8dc2b1503a74b68ac7dfa5381f5d719c3e341c40ec9a",
+        "head_sha256": "a36df847ac68cb10d636cac54bdd99c1d1b6627e98aca62dd5716bb87e6fee4d",
+        "checkpoint_sha256": "7e399e7dbca4e016627989759a5269e5adb8bc5435ad378bb319cbdd0614b124",
+        "epoch": 2,
+        "n": 121,
+        "sample_inputs": 128,
+        "excluded_nonanswered_or_over_token_limit": 7,
+        "mean_answer_cross_entropy": 0.4513163059951799,
+        "generated_candidates": [
+          {
+            "id": "0182563fda8692bab17c088410201ad1dd72d28d0efcd4ca03b945888302bc0f",
+            "passage": "Two boys are helping clean up leaves at the side of the road .",
+            "condition": "age of people involved",
+            "answer": "Young boys.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "2bd804fa26379c90d2e18791c0af6cb9d2ec82878ff54439ac16da2abdb5cfb7",
+            "passage": "a small child racing down a snowy hill on an innertube",
+            "condition": "type of covering on hill",
+            "answer": "Snow.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "38b318c5ca92caddaaae1ce3ca83ba062e9c6e8e37141798e4d759bc541c1b5b",
+            "passage": "A cat laying on the back of a couch in front of a window.",
+            "condition": "type of animal",
+            "answer": "Cat.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "14117027ff81afba95333fc1897898605e77fb3fbb6684c31b4a8752b511572b",
+            "passage": "A young German Shepherd runs with a toy in his mouth .",
+            "condition": "action of dog",
+            "answer": "Running with a toy in his mouth.",
+            "tokens": 8,
+            "ended_at_eod": true
+          },
+          {
+            "id": "74fb510e7dc23c4676dbf3a3ddcb53e7cdcdb0733a7dfbbc8aac508546f8f0c7",
+            "passage": "Two males speaking to each other at a training center .",
+            "condition": "communication method",
+            "answer": "Speaking to each other.",
+            "tokens": 5,
+            "ended_at_eod": true
+          },
+          {
+            "id": "657f71e03d08f7d66b213be0823e27cd7c393108064ed1cb28392e64e65d52b8",
+            "passage": "a plate with a piece of cake and a pat of butter with a fork",
+            "condition": "type of food",
+            "answer": "Cake and butter.",
+            "tokens": 4,
+            "ended_at_eod": true
+          },
+          {
+            "id": "354938d6ae44eac2fcfd7948387c72f8e544f7356f3f0e003009336792256add",
+            "passage": "Two hokey players go head-to-head as the ref frantically gets away .",
+            "condition": "motion of players",
+            "answer": "Head-to-head.",
+            "tokens": 4,
+            "ended_at_eod": true
+          },
+          {
+            "id": "2801fac2281edd490864f8d1527e482b35e8b428497ccd8248c708b95614a3cc",
+            "passage": "A laptop sitting on top of a stack of text books on a desk.",
+            "condition": "type of computer",
+            "answer": "A laptop.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "02f7f322dbcd9580af4ea12748e22417b2a81021c03ed6124805264250348189",
+            "passage": "A two lane road with some cars parked on the side of the street",
+            "condition": "features of street",
+            "answer": "Two lanes, some cars parked on the side.",
+            "tokens": 10,
+            "ended_at_eod": true
+          },
+          {
+            "id": "89546d775c4a003cc7472cf430dcc0f077f30568751a677bce19d69cc8f15b91",
+            "passage": "A man demonstrates that he does not know how to use a skate board.",
+            "condition": "action of person",
+            "answer": "Demonstrating that he does not know how to use a skateboard.",
+            "tokens": 14,
+            "ended_at_eod": true
+          },
+          {
+            "id": "6982369fcbd870c4614c33edd91a7a474ff86ed96c9e6f4762a385dea7884704",
+            "passage": "Many marathon bicyclers riding in a group down a paved road .",
+            "condition": "type of vehicle",
+            "answer": "Bicycles.",
+            "tokens": 4,
+            "ended_at_eod": true
+          },
+          {
+            "id": "8aed6adee45ffd22dda6197ec642c819f0d2a247be380d82d1308500eb853eb2",
+            "passage": "a passenger jet plane sits on a field with a bunch of other planes and a helicopter",
+            "condition": "type of location",
+            "answer": "A field.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "f4f9d9aa707a409a325ca4758789652cb88d6f35453226694b2914971d78443c",
+            "passage": "a man wearing a dark blue button up shirt , cowboy hat , and chaps rides a bucking bronco in a rodeo .",
+            "condition": "color of clothing",
+            "answer": "Dark blue.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "716331bb02f8a8c1cf9b97ec2c88362f84c02ab89fc8c2c4c51afd2f734cc5f0",
+            "passage": "A young man is doing a skating trip on a skateboard ramp .",
+            "condition": "number of persons",
+            "answer": "One person.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "5fd34e4a6bebe6d28134a9110e4af37434a0492b801e5bce72a1f05efab8c712",
+            "passage": "A motorcyclist is performing a trick in midair .",
+            "condition": "number of persons",
+            "answer": "One person.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "2024f05c8030f15ed2cf11504d514efde4e735975df203fa4d4a70c4cb136f07",
+            "passage": "A motorcyclist is flying through the air above a dirt path .",
+            "condition": "location of action",
+            "answer": "Above a dirt path.",
+            "tokens": 5,
+            "ended_at_eod": true
+          },
+          {
+            "id": "7d51b986c7d213a0c9a5884ad70f86a9af1385b597c9739bdb49b44f18e10920",
+            "passage": "A variety of vegan donuts are sitting next to each other in two separate plates on a counter.",
+            "condition": "name of food",
+            "answer": "Donuts.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "a2d0cfcc004ad8aa4f42b5ca3599f487967ad2e4b69d02de77a305fc64486d99",
+            "passage": "A laptop computer on top of a desk next to a bowl with cereals and a cellphone.",
+            "condition": "type of computer",
+            "answer": "A laptop computer.",
+            "tokens": 4,
+            "ended_at_eod": true
+          },
+          {
+            "id": "f0e6bf62eac9b0eba9c8511e896854f515954f8b2ff2e933b0a86b79159113ab",
+            "passage": "A woman is swordfighting with an unseen opponent .",
+            "condition": "number of people",
+            "answer": "One person.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "9e14ee576438f3b8f00001246c0589fdb8f3da8d7bb7c15190060181fde4c7a3",
+            "passage": "A boy in red shorts rides a yellow bodyboard on a breaking wave .",
+            "condition": "type of board being ridden",
+            "answer": "A bodyboard.",
+            "tokens": 4,
+            "ended_at_eod": true
+          },
+          {
+            "id": "cfa9214627f1dcd0f117e9e0ae8cf0bda80c68e492a09c2711948b16fdd05830",
+            "passage": "A baseball player hitting a baseball at home plate with the catcher behind him.",
+            "condition": "type of sport",
+            "answer": "Baseball.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "f3e1472e9c75ade838fa1c4dc995fc769df9077ad488443f980ed7b6bc6e6e5c",
+            "passage": "Two people smiling while riding their bicycles down the road .",
+            "condition": "number of people",
+            "answer": "Two people.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "657340dddf54785d2434c74df872e648714a4c9dd9fa3af0a56038da76a1d350",
+            "passage": "A black dog wearing a red collar is running through snow next to a wooden fence .",
+            "condition": "type of animal",
+            "answer": "Dog.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "18098a4a6b81e4e91219cb27f434898b417d8a38711718061c95579e36ec8012",
+            "passage": "A group of sunbathers gather near some kayaks at the beach .",
+            "condition": "nature of place",
+            "answer": "A beach.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "a4087fcfb794d9ee420c3354a1e811a332931890c557fddaaacb964568bbe059",
+            "passage": "A bathroom with toilet, sink with cabinet and wall mirror, and three bucket containers on the floor.",
+            "condition": "type of room",
+            "answer": "Bathroom.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "f6ba188a0a8cfa9668150297370325aeea9fb403b9c2e2e295e15fcf3d0bc8f3",
+            "passage": "A number of children enjoy themselves on the coast of a city .",
+            "condition": "number of people",
+            "answer": "A number of children.",
+            "tokens": 5,
+            "ended_at_eod": true
+          },
+          {
+            "id": "027bb0de3d01a4e90872ab6c64187daf6d89c35846bbfe77964e6b11d9f2cb7e",
+            "passage": "A young African american boy with red pants standing in front of a house .",
+            "condition": "color of clothes",
+            "answer": "Red.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "6907ec4c127e2d94571243272f283a9a9b17b82a8cc77d9a7bced0a3e1b1c856",
+            "passage": "An orange cat sitting in a bathtub with a dog standing next to him.",
+            "condition": "color of animal",
+            "answer": "Orange.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "99b1db4f9e4a57c799dd0da51ff117e234dc8f3114a1b46132b5d2cf1b3779df",
+            "passage": "A woman sitting down at a table eating a sandwich on a loaf of french bread.",
+            "condition": "gender of person",
+            "answer": "Female.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "1fddaedd8c7639258ca3b6cf7e0fe099752d581efc5a596944a1fc1dc0b5a64e",
+            "passage": "A man is doing a jump as he snowboards down a mountain .",
+            "condition": "substance on ground",
+            "answer": "Snow.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "bfccd8fe17cc932c81083bcdb5d5af6fe94f146c105ba08ba1173675ac60bea7",
+            "passage": "A man is using a donkey to pull a cart full of goods .",
+            "condition": "gender of people",
+            "answer": "Male.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "fbd44f92941ff3b23448e0dddd7565a0300de0af2a62b5e664486f0c6eacd6bc",
+            "passage": "Crowd of people with backpacks line up on the runway to enter the plane",
+            "condition": "number of planes",
+            "answer": "One plane.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "732e6c64636f307fe65caf82ed10614f1ca2169c0b0090b05d3abb1ff3807653",
+            "passage": "A beautiful green valley sits below as a person stands on a hill with a colorful umbrella.",
+            "condition": "location of person",
+            "answer": "On a hill.",
+            "tokens": 4,
+            "ended_at_eod": true
+          },
+          {
+            "id": "f1ff07266c8ed72047b040a1e8f9ebca40974c018baf9ca47ea0f59631d6d83a",
+            "passage": "The surfer in the black bodysuit rides a wave off the coast",
+            "condition": "color of clothes",
+            "answer": "Black.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "c86052dfa73e3aed2bfab98176ab20c78b70caa6f26d13b116a81c2343433345",
+            "passage": "On this table there are oranges, almonds, and a plate of almond topped cookies.",
+            "condition": "type of food",
+            "answer": "Almonds and almond-topped cookies.",
+            "tokens": 8,
+            "ended_at_eod": true
+          },
+          {
+            "id": "ccb48a7b880a8d8b914194615ec38799a76b9b22147b99149db5854a2ba199d7",
+            "passage": "There are three hikers in the vicinity of a mountain .",
+            "condition": "number of people",
+            "answer": "Three.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "643f60808256da9bd686f8dab00295706a65f2f78c18b4fb6cefa16737eff4c3",
+            "passage": "Bottles of booze sit in the background behind a sandwich and a bit of beets.",
+            "condition": "type of food",
+            "answer": "Beets.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "f9f176e103a8d25031c0a99824cd43f4479ebfa628e776a59310511aeeffa321",
+            "passage": "A woman works hard to maintain a fingerhold as she climbs a rock face .",
+            "condition": "type of activity",
+            "answer": "Climbing a rock face.",
+            "tokens": 7,
+            "ended_at_eod": true
+          },
+          {
+            "id": "eb4434502a72fbfd4f69a193c491bd89426ec3a0708d38b4fcb5a086cc3ea770",
+            "passage": "The stove is shiny and has a hand-towel with an A hanging off its handle.",
+            "condition": "type of kitchen equipment",
+            "answer": "Stove.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "a7aa09c3a30c44cb93d393696fc378902e3f3c68cded6ffeffc82e7972b036ba",
+            "passage": "Two dogs holding a single black Frisbee in their mouths",
+            "condition": "number of animals",
+            "answer": "Two dogs.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "e701a488d19b906a334d0bffba86ad182999561d498c55a4a2e17b2ef867e3cf",
+            "passage": "Sitting on a blue table cloth is a fork and a bowl with sausage, noodles and vegetables.",
+            "condition": "types of food items",
+            "answer": "Sausage, noodles, and vegetables.",
+            "tokens": 9,
+            "ended_at_eod": true
+          },
+          {
+            "id": "6839a6ffcaf8bd86f461c52b6fc6aac5b48d226d6972b34e6b013fc59297ddae",
+            "passage": "The young boy in the blue shirt is jumping into the water .",
+            "condition": "color of clothing",
+            "answer": "Blue.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "558ea1f316f8ea1ce8505e98b177ef6746d20676307fda4c442adc13c9642457",
+            "passage": "Singer and a two guitarist performing in front of a crowd .",
+            "condition": "number of musicians",
+            "answer": "Three musicians.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "6bb759dd9419b6db9917456f4a22b2fdf3cf6b1a57325486e317222d17e6214a",
+            "passage": "A person peeks out from a colorful tent in a vast field of snow .",
+            "condition": "number of people",
+            "answer": "One person.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "20e0723eaeca17fe9b66018982474921fb474f6ea028b4a831861b7918c8760f",
+            "passage": "A baby is held by an adult and is sitting on a table at a coffee shop .",
+            "condition": "ages of individuals",
+            "answer": "One adult and one baby.",
+            "tokens": 6,
+            "ended_at_eod": true
+          },
+          {
+            "id": "38fa061eba1d9698dc031fdb698d547b0e0514b6a21f2b8408fb41aa80e805fb",
+            "passage": "A person is on a skateboard in a parking lot on a elevated surface.",
+            "condition": "activity of person",
+            "answer": "Skating on a skateboard.",
+            "tokens": 6,
+            "ended_at_eod": true
+          },
+          {
+            "id": "8b443e49ac08d10b0d8f4b464b72996c7c9ddf39e0f9411d638512471585133c",
+            "passage": "This is a well designed bathroom that is plain and elegant at the same time.",
+            "condition": "name of room",
+            "answer": "Bathroom.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "9df7304b8ca5d1c521e1f13e42594bed618971ca7255522f6986a2869be6bef3",
+            "passage": "The fire truck red and the green pastures make it look just like Christmas.",
+            "condition": "number of fire trucks",
+            "answer": "One fire truck.",
+            "tokens": 4,
+            "ended_at_eod": true
+          },
+          {
+            "id": "2379a90c6fd164dd041206eddeb45607b31b26aa8f69d268d4887a391b4ebadd",
+            "passage": "A kitchen with a refrigerator next to a machine box with a bottle on top.",
+            "condition": "objects in kitchen",
+            "answer": "A refrigerator, a machine box, and a bottle.",
+            "tokens": 11,
+            "ended_at_eod": true
+          },
+          {
+            "id": "657fb05f6595174f0a9a676f2e2f0aab00b762fd5c77b70f0f12bacfe91ff535",
+            "passage": "a boy jumping in the air with a skateboard above a skateboard park obstacle course.",
+            "condition": "position while skateboarding",
+            "answer": "In the air.",
+            "tokens": 4,
+            "ended_at_eod": true
+          },
+          {
+            "id": "47ff7614713efae129bb754701725f5dd43f5cf7a35c57ccd775bc9583377a5f",
+            "passage": "A police officer riding a motorcycle in the middle of a street next to a cone.",
+            "condition": "activity of people",
+            "answer": "Riding a motorcycle.",
+            "tokens": 5,
+            "ended_at_eod": true
+          },
+          {
+            "id": "8c74d28bd2ae2b5fd7df38e05ec52e9a30b02724e80907431e7a3306b5016ec2",
+            "passage": "A bike rider is in the air and spectators are looking on .",
+            "condition": "sport",
+            "answer": "Biking.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "37be89b8cfec59104ca32c1f05e295620e38d7a14c9c55dd44d037732ac70ccf",
+            "passage": "A group of people are running through a street .",
+            "condition": "type of exercise engaged in",
+            "answer": "Running.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "4f7d78ee205a95b4c893b08ad8e92b1b7f01da1f0d2bccbacd68eb710200c8ed",
+            "passage": "A person attached to a snowboard sits on the snow next to a sign.",
+            "condition": "body posture",
+            "answer": "Sitting on snow next to a sign.",
+            "tokens": 9,
+            "ended_at_eod": true
+          },
+          {
+            "id": "e6b2bda02f388ae15061298f79edd4429e6afcf512d0d47ba78c2e62c69330bf",
+            "passage": "A racing car goes through a dirt course while fans watch .",
+            "condition": "car's purpose",
+            "answer": "Racing.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "8e8735f981f8e13f6c8d9df192a35f3a517c546592f1ac67f7a9b6c78475b765",
+            "passage": "A dog running through snow with trees in the background",
+            "condition": "number of animals",
+            "answer": "One dog.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "976ce2ca6043726a7fa927bea76e7143612e0f8f213105b590ed12a9cdf0f57f",
+            "passage": "A dog running through a field with a ball in its mouth",
+            "condition": "position of dog",
+            "answer": "Running through a field.",
+            "tokens": 5,
+            "ended_at_eod": true
+          },
+          {
+            "id": "aefa2db6a20449c9dd688bc8f5c3c11a108c9cd87fef29f4a321326d28c8d2e8",
+            "passage": "A surfer wearing a wetsuit and using a light colored board catches some air .",
+            "condition": "number of people",
+            "answer": "One person.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "fe500c93257f86399a86d356493197462be2a5ce4ee86cd3d2a3fa65e7d2f0b3",
+            "passage": "A dog drags a white rag through an almost-dried up creek .",
+            "condition": "type of animal",
+            "answer": "Dog.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "056faa03b7337d2d4356f24e208637ede50e2bfb29c02744cc31d704a89d5e9d",
+            "passage": "A suite of a house has a living area with sofas and a bay window.",
+            "condition": "living room",
+            "answer": "A suite of a house.",
+            "tokens": 6,
+            "ended_at_eod": true
+          },
+          {
+            "id": "0e6b482a72c747913d1314aa4290b40311893ceebbeab715624861ad7cae57e7",
+            "passage": "A golfer watches his hit after he swings while several onlookers watch in the background .",
+            "condition": "presence of crowd",
+            "answer": "Several onlookers are present.",
+            "tokens": 7,
+            "ended_at_eod": true
+          },
+          {
+            "id": "96378db30e16276b39c0f7588f0c409750cd8c68a94081e85bd8b6607bf473ed",
+            "passage": "A couple of men sitting on top of a surf board on a beach.",
+            "condition": "number of people",
+            "answer": "Two men.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "ae945f55cd9a17851d7239c4ccec1f68c5a1a538417d9ff108a00bea79012f96",
+            "passage": "A dog looking at a tennis ball floating in a pool .",
+            "condition": "type of animal",
+            "answer": "Dog.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "b4bc6a1ead5eb3e3cf8a1a45496adb84c1a53f8761b47cf4b505b444a7ee71b8",
+            "passage": "Three football players , # 16 is throwing the football , # 71 is blocking the other opponent .",
+            "condition": "state of ball",
+            "answer": "In the air, as #16 is throwing it.",
+            "tokens": 12,
+            "ended_at_eod": true
+          }
+        ],
+        "status": "complete",
+        "factual_review": {
+          "n": 64,
+          "fully_correct": 57,
+          "accuracy": 0.890625,
+          "supported": 61,
+          "unsupported_assertion_count": 3,
+          "review_agreement": 0.96875,
+          "reviewers": "Two independent GPT-6.1 Sol high calls; model-reviewed, no human adjudication."
+        }
+      },
+      {
+        "references_sha256": "4c3d8e0ffab622900b36d107950b769182b09af35e103a1aede05f916a6aa8eb",
+        "inputs_sha256": "dba9e71ceee74674b129c7c3cf67d127ab12439dc41716d17b45b6edee0483d0",
+        "evaluator_sha256": "d754c143af300fa60d0a8dc2b1503a74b68ac7dfa5381f5d719c3e341c40ec9a",
+        "head_sha256": "a36df847ac68cb10d636cac54bdd99c1d1b6627e98aca62dd5716bb87e6fee4d",
+        "checkpoint_sha256": "d5ae3f872de88a5eb7eb7221f86c0f1d0cc30e97b856048b788521b239437780",
+        "epoch": 4,
+        "n": 121,
+        "sample_inputs": 128,
+        "excluded_nonanswered_or_over_token_limit": 7,
+        "mean_answer_cross_entropy": 0.3786501195402008,
+        "generated_candidates": [
+          {
+            "id": "0182563fda8692bab17c088410201ad1dd72d28d0efcd4ca03b945888302bc0f",
+            "passage": "Two boys are helping clean up leaves at the side of the road .",
+            "condition": "age of people involved",
+            "answer": "Children.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "2bd804fa26379c90d2e18791c0af6cb9d2ec82878ff54439ac16da2abdb5cfb7",
+            "passage": "a small child racing down a snowy hill on an innertube",
+            "condition": "type of covering on hill",
+            "answer": "Snow.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "38b318c5ca92caddaaae1ce3ca83ba062e9c6e8e37141798e4d759bc541c1b5b",
+            "passage": "A cat laying on the back of a couch in front of a window.",
+            "condition": "type of animal",
+            "answer": "Cat.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "14117027ff81afba95333fc1897898605e77fb3fbb6684c31b4a8752b511572b",
+            "passage": "A young German Shepherd runs with a toy in his mouth .",
+            "condition": "action of dog",
+            "answer": "Running with a toy in his mouth.",
+            "tokens": 8,
+            "ended_at_eod": true
+          },
+          {
+            "id": "74fb510e7dc23c4676dbf3a3ddcb53e7cdcdb0733a7dfbbc8aac508546f8f0c7",
+            "passage": "Two males speaking to each other at a training center .",
+            "condition": "communication method",
+            "answer": "Speaking to each other.",
+            "tokens": 5,
+            "ended_at_eod": true
+          },
+          {
+            "id": "657f71e03d08f7d66b213be0823e27cd7c393108064ed1cb28392e64e65d52b8",
+            "passage": "a plate with a piece of cake and a pat of butter with a fork",
+            "condition": "type of food",
+            "answer": "Cake.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "354938d6ae44eac2fcfd7948387c72f8e544f7356f3f0e003009336792256add",
+            "passage": "Two hokey players go head-to-head as the ref frantically gets away .",
+            "condition": "motion of players",
+            "answer": "Head-to-head.",
+            "tokens": 4,
+            "ended_at_eod": true
+          },
+          {
+            "id": "2801fac2281edd490864f8d1527e482b35e8b428497ccd8248c708b95614a3cc",
+            "passage": "A laptop sitting on top of a stack of text books on a desk.",
+            "condition": "type of computer",
+            "answer": "Laptop.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "02f7f322dbcd9580af4ea12748e22417b2a81021c03ed6124805264250348189",
+            "passage": "A two lane road with some cars parked on the side of the street",
+            "condition": "features of street",
+            "answer": "Two lanes, with some cars parked on the side.",
+            "tokens": 11,
+            "ended_at_eod": true
+          },
+          {
+            "id": "89546d775c4a003cc7472cf430dcc0f077f30568751a677bce19d69cc8f15b91",
+            "passage": "A man demonstrates that he does not know how to use a skate board.",
+            "condition": "action of person",
+            "answer": "Demonstrating that he does not know how to use a skateboard.",
+            "tokens": 14,
+            "ended_at_eod": true
+          },
+          {
+            "id": "6982369fcbd870c4614c33edd91a7a474ff86ed96c9e6f4762a385dea7884704",
+            "passage": "Many marathon bicyclers riding in a group down a paved road .",
+            "condition": "type of vehicle",
+            "answer": "Bicycles.",
+            "tokens": 4,
+            "ended_at_eod": true
+          },
+          {
+            "id": "8aed6adee45ffd22dda6197ec642c819f0d2a247be380d82d1308500eb853eb2",
+            "passage": "a passenger jet plane sits on a field with a bunch of other planes and a helicopter",
+            "condition": "type of location",
+            "answer": "A field.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "f4f9d9aa707a409a325ca4758789652cb88d6f35453226694b2914971d78443c",
+            "passage": "a man wearing a dark blue button up shirt , cowboy hat , and chaps rides a bucking bronco in a rodeo .",
+            "condition": "color of clothing",
+            "answer": "Dark blue.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "716331bb02f8a8c1cf9b97ec2c88362f84c02ab89fc8c2c4c51afd2f734cc5f0",
+            "passage": "A young man is doing a skating trip on a skateboard ramp .",
+            "condition": "number of persons",
+            "answer": "One person.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "5fd34e4a6bebe6d28134a9110e4af37434a0492b801e5bce72a1f05efab8c712",
+            "passage": "A motorcyclist is performing a trick in midair .",
+            "condition": "number of persons",
+            "answer": "One person.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "2024f05c8030f15ed2cf11504d514efde4e735975df203fa4d4a70c4cb136f07",
+            "passage": "A motorcyclist is flying through the air above a dirt path .",
+            "condition": "location of action",
+            "answer": "Above a dirt path.",
+            "tokens": 5,
+            "ended_at_eod": true
+          },
+          {
+            "id": "7d51b986c7d213a0c9a5884ad70f86a9af1385b597c9739bdb49b44f18e10920",
+            "passage": "A variety of vegan donuts are sitting next to each other in two separate plates on a counter.",
+            "condition": "name of food",
+            "answer": "Vegan donuts.",
+            "tokens": 5,
+            "ended_at_eod": true
+          },
+          {
+            "id": "a2d0cfcc004ad8aa4f42b5ca3599f487967ad2e4b69d02de77a305fc64486d99",
+            "passage": "A laptop computer on top of a desk next to a bowl with cereals and a cellphone.",
+            "condition": "type of computer",
+            "answer": "Laptop.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "f0e6bf62eac9b0eba9c8511e896854f515954f8b2ff2e933b0a86b79159113ab",
+            "passage": "A woman is swordfighting with an unseen opponent .",
+            "condition": "number of people",
+            "answer": "One woman.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "9e14ee576438f3b8f00001246c0589fdb8f3da8d7bb7c15190060181fde4c7a3",
+            "passage": "A boy in red shorts rides a yellow bodyboard on a breaking wave .",
+            "condition": "type of board being ridden",
+            "answer": "Bodyboard.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "cfa9214627f1dcd0f117e9e0ae8cf0bda80c68e492a09c2711948b16fdd05830",
+            "passage": "A baseball player hitting a baseball at home plate with the catcher behind him.",
+            "condition": "type of sport",
+            "answer": "Baseball.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "f3e1472e9c75ade838fa1c4dc995fc769df9077ad488443f980ed7b6bc6e6e5c",
+            "passage": "Two people smiling while riding their bicycles down the road .",
+            "condition": "number of people",
+            "answer": "Two people.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "657340dddf54785d2434c74df872e648714a4c9dd9fa3af0a56038da76a1d350",
+            "passage": "A black dog wearing a red collar is running through snow next to a wooden fence .",
+            "condition": "type of animal",
+            "answer": "Dog.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "18098a4a6b81e4e91219cb27f434898b417d8a38711718061c95579e36ec8012",
+            "passage": "A group of sunbathers gather near some kayaks at the beach .",
+            "condition": "nature of place",
+            "answer": "A beach.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "a4087fcfb794d9ee420c3354a1e811a332931890c557fddaaacb964568bbe059",
+            "passage": "A bathroom with toilet, sink with cabinet and wall mirror, and three bucket containers on the floor.",
+            "condition": "type of room",
+            "answer": "Bathroom.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "f6ba188a0a8cfa9668150297370325aeea9fb403b9c2e2e295e15fcf3d0bc8f3",
+            "passage": "A number of children enjoy themselves on the coast of a city .",
+            "condition": "number of people",
+            "answer": "A number of children.",
+            "tokens": 5,
+            "ended_at_eod": true
+          },
+          {
+            "id": "027bb0de3d01a4e90872ab6c64187daf6d89c35846bbfe77964e6b11d9f2cb7e",
+            "passage": "A young African american boy with red pants standing in front of a house .",
+            "condition": "color of clothes",
+            "answer": "Red.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "6907ec4c127e2d94571243272f283a9a9b17b82a8cc77d9a7bced0a3e1b1c856",
+            "passage": "An orange cat sitting in a bathtub with a dog standing next to him.",
+            "condition": "color of animal",
+            "answer": "Orange.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "99b1db4f9e4a57c799dd0da51ff117e234dc8f3114a1b46132b5d2cf1b3779df",
+            "passage": "A woman sitting down at a table eating a sandwich on a loaf of french bread.",
+            "condition": "gender of person",
+            "answer": "Female.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "1fddaedd8c7639258ca3b6cf7e0fe099752d581efc5a596944a1fc1dc0b5a64e",
+            "passage": "A man is doing a jump as he snowboards down a mountain .",
+            "condition": "substance on ground",
+            "answer": "Snow.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "bfccd8fe17cc932c81083bcdb5d5af6fe94f146c105ba08ba1173675ac60bea7",
+            "passage": "A man is using a donkey to pull a cart full of goods .",
+            "condition": "gender of people",
+            "answer": "Male.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "fbd44f92941ff3b23448e0dddd7565a0300de0af2a62b5e664486f0c6eacd6bc",
+            "passage": "Crowd of people with backpacks line up on the runway to enter the plane",
+            "condition": "number of planes",
+            "answer": "One plane.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "732e6c64636f307fe65caf82ed10614f1ca2169c0b0090b05d3abb1ff3807653",
+            "passage": "A beautiful green valley sits below as a person stands on a hill with a colorful umbrella.",
+            "condition": "location of person",
+            "answer": "On a hill.",
+            "tokens": 4,
+            "ended_at_eod": true
+          },
+          {
+            "id": "f1ff07266c8ed72047b040a1e8f9ebca40974c018baf9ca47ea0f59631d6d83a",
+            "passage": "The surfer in the black bodysuit rides a wave off the coast",
+            "condition": "color of clothes",
+            "answer": "Black.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "c86052dfa73e3aed2bfab98176ab20c78b70caa6f26d13b116a81c2343433345",
+            "passage": "On this table there are oranges, almonds, and a plate of almond topped cookies.",
+            "condition": "type of food",
+            "answer": "Almonds and almond-topped cookies.",
+            "tokens": 8,
+            "ended_at_eod": true
+          },
+          {
+            "id": "ccb48a7b880a8d8b914194615ec38799a76b9b22147b99149db5854a2ba199d7",
+            "passage": "There are three hikers in the vicinity of a mountain .",
+            "condition": "number of people",
+            "answer": "Three people.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "643f60808256da9bd686f8dab00295706a65f2f78c18b4fb6cefa16737eff4c3",
+            "passage": "Bottles of booze sit in the background behind a sandwich and a bit of beets.",
+            "condition": "type of food",
+            "answer": "Sandwich and beet juice.",
+            "tokens": 6,
+            "ended_at_eod": true
+          },
+          {
+            "id": "f9f176e103a8d25031c0a99824cd43f4479ebfa628e776a59310511aeeffa321",
+            "passage": "A woman works hard to maintain a fingerhold as she climbs a rock face .",
+            "condition": "type of activity",
+            "answer": "Climbing a rock face.",
+            "tokens": 7,
+            "ended_at_eod": true
+          },
+          {
+            "id": "eb4434502a72fbfd4f69a193c491bd89426ec3a0708d38b4fcb5a086cc3ea770",
+            "passage": "The stove is shiny and has a hand-towel with an A hanging off its handle.",
+            "condition": "type of kitchen equipment",
+            "answer": "Stove.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "a7aa09c3a30c44cb93d393696fc378902e3f3c68cded6ffeffc82e7972b036ba",
+            "passage": "Two dogs holding a single black Frisbee in their mouths",
+            "condition": "number of animals",
+            "answer": "Two dogs.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "e701a488d19b906a334d0bffba86ad182999561d498c55a4a2e17b2ef867e3cf",
+            "passage": "Sitting on a blue table cloth is a fork and a bowl with sausage, noodles and vegetables.",
+            "condition": "types of food items",
+            "answer": "Sausage, noodles, and vegetables.",
+            "tokens": 9,
+            "ended_at_eod": true
+          },
+          {
+            "id": "6839a6ffcaf8bd86f461c52b6fc6aac5b48d226d6972b34e6b013fc59297ddae",
+            "passage": "The young boy in the blue shirt is jumping into the water .",
+            "condition": "color of clothing",
+            "answer": "Blue.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "558ea1f316f8ea1ce8505e98b177ef6746d20676307fda4c442adc13c9642457",
+            "passage": "Singer and a two guitarist performing in front of a crowd .",
+            "condition": "number of musicians",
+            "answer": "Three musicians: one singer and two guitarists.",
+            "tokens": 10,
+            "ended_at_eod": true
+          },
+          {
+            "id": "6bb759dd9419b6db9917456f4a22b2fdf3cf6b1a57325486e317222d17e6214a",
+            "passage": "A person peeks out from a colorful tent in a vast field of snow .",
+            "condition": "number of people",
+            "answer": "One person.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "20e0723eaeca17fe9b66018982474921fb474f6ea028b4a831861b7918c8760f",
+            "passage": "A baby is held by an adult and is sitting on a table at a coffee shop .",
+            "condition": "ages of individuals",
+            "answer": "An adult and a baby.",
+            "tokens": 6,
+            "ended_at_eod": true
+          },
+          {
+            "id": "38fa061eba1d9698dc031fdb698d547b0e0514b6a21f2b8408fb41aa80e805fb",
+            "passage": "A person is on a skateboard in a parking lot on a elevated surface.",
+            "condition": "activity of person",
+            "answer": "Skateboarding.",
+            "tokens": 4,
+            "ended_at_eod": true
+          },
+          {
+            "id": "8b443e49ac08d10b0d8f4b464b72996c7c9ddf39e0f9411d638512471585133c",
+            "passage": "This is a well designed bathroom that is plain and elegant at the same time.",
+            "condition": "name of room",
+            "answer": "Bathroom.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "9df7304b8ca5d1c521e1f13e42594bed618971ca7255522f6986a2869be6bef3",
+            "passage": "The fire truck red and the green pastures make it look just like Christmas.",
+            "condition": "number of fire trucks",
+            "answer": "One fire truck.",
+            "tokens": 4,
+            "ended_at_eod": true
+          },
+          {
+            "id": "2379a90c6fd164dd041206eddeb45607b31b26aa8f69d268d4887a391b4ebadd",
+            "passage": "A kitchen with a refrigerator next to a machine box with a bottle on top.",
+            "condition": "objects in kitchen",
+            "answer": "A refrigerator, a machine box, and a bottle.",
+            "tokens": 11,
+            "ended_at_eod": true
+          },
+          {
+            "id": "657fb05f6595174f0a9a676f2e2f0aab00b762fd5c77b70f0f12bacfe91ff535",
+            "passage": "a boy jumping in the air with a skateboard above a skateboard park obstacle course.",
+            "condition": "position while skateboarding",
+            "answer": "In the air above a skateboard park obstacle course.",
+            "tokens": 10,
+            "ended_at_eod": true
+          },
+          {
+            "id": "47ff7614713efae129bb754701725f5dd43f5cf7a35c57ccd775bc9583377a5f",
+            "passage": "A police officer riding a motorcycle in the middle of a street next to a cone.",
+            "condition": "activity of people",
+            "answer": "Riding a motorcycle in the middle of a street next to a cone.",
+            "tokens": 15,
+            "ended_at_eod": true
+          },
+          {
+            "id": "8c74d28bd2ae2b5fd7df38e05ec52e9a30b02724e80907431e7a3306b5016ec2",
+            "passage": "A bike rider is in the air and spectators are looking on .",
+            "condition": "sport",
+            "answer": "Biking.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "37be89b8cfec59104ca32c1f05e295620e38d7a14c9c55dd44d037732ac70ccf",
+            "passage": "A group of people are running through a street .",
+            "condition": "type of exercise engaged in",
+            "answer": "Running.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "4f7d78ee205a95b4c893b08ad8e92b1b7f01da1f0d2bccbacd68eb710200c8ed",
+            "passage": "A person attached to a snowboard sits on the snow next to a sign.",
+            "condition": "body posture",
+            "answer": "Sitting on the snow next to a sign.",
+            "tokens": 10,
+            "ended_at_eod": true
+          },
+          {
+            "id": "e6b2bda02f388ae15061298f79edd4429e6afcf512d0d47ba78c2e62c69330bf",
+            "passage": "A racing car goes through a dirt course while fans watch .",
+            "condition": "car's purpose",
+            "answer": "Racing.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "8e8735f981f8e13f6c8d9df192a35f3a517c546592f1ac67f7a9b6c78475b765",
+            "passage": "A dog running through snow with trees in the background",
+            "condition": "number of animals",
+            "answer": "One dog.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "976ce2ca6043726a7fa927bea76e7143612e0f8f213105b590ed12a9cdf0f57f",
+            "passage": "A dog running through a field with a ball in its mouth",
+            "condition": "position of dog",
+            "answer": "Running through a field.",
+            "tokens": 5,
+            "ended_at_eod": true
+          },
+          {
+            "id": "aefa2db6a20449c9dd688bc8f5c3c11a108c9cd87fef29f4a321326d28c8d2e8",
+            "passage": "A surfer wearing a wetsuit and using a light colored board catches some air .",
+            "condition": "number of people",
+            "answer": "One person.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "fe500c93257f86399a86d356493197462be2a5ce4ee86cd3d2a3fa65e7d2f0b3",
+            "passage": "A dog drags a white rag through an almost-dried up creek .",
+            "condition": "type of animal",
+            "answer": "Dog.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "056faa03b7337d2d4356f24e208637ede50e2bfb29c02744cc31d704a89d5e9d",
+            "passage": "A suite of a house has a living area with sofas and a bay window.",
+            "condition": "living room",
+            "answer": "A suite of a house has a living area with sofas and a bay window.",
+            "tokens": 16,
+            "ended_at_eod": true
+          },
+          {
+            "id": "0e6b482a72c747913d1314aa4290b40311893ceebbeab715624861ad7cae57e7",
+            "passage": "A golfer watches his hit after he swings while several onlookers watch in the background .",
+            "condition": "presence of crowd",
+            "answer": "Several onlookers are present.",
+            "tokens": 7,
+            "ended_at_eod": true
+          },
+          {
+            "id": "96378db30e16276b39c0f7588f0c409750cd8c68a94081e85bd8b6607bf473ed",
+            "passage": "A couple of men sitting on top of a surf board on a beach.",
+            "condition": "number of people",
+            "answer": "Two men.",
+            "tokens": 3,
+            "ended_at_eod": true
+          },
+          {
+            "id": "ae945f55cd9a17851d7239c4ccec1f68c5a1a538417d9ff108a00bea79012f96",
+            "passage": "A dog looking at a tennis ball floating in a pool .",
+            "condition": "type of animal",
+            "answer": "Dog.",
+            "tokens": 2,
+            "ended_at_eod": true
+          },
+          {
+            "id": "b4bc6a1ead5eb3e3cf8a1a45496adb84c1a53f8761b47cf4b505b444a7ee71b8",
+            "passage": "Three football players , # 16 is throwing the football , # 71 is blocking the other opponent .",
+            "condition": "state of ball",
+            "answer": "Thrown.",
+            "tokens": 2,
+            "ended_at_eod": true
+          }
+        ],
+        "status": "complete",
+        "factual_review": {
+          "n": 64,
+          "fully_correct": 60,
+          "accuracy": 0.9375,
+          "supported": 63,
+          "unsupported_assertion_count": 1,
+          "review_agreement": 1.0,
+          "reviewers": "Two independent GPT-6.1 Sol high calls; model-reviewed, no human adjudication."
+        }
+      }
+    ],
+    "validation_reference_review": {
+      "n": 128,
+      "fully_correct": 125,
+      "accuracy": 0.9765625,
+      "supported": 128,
+      "unsupported_assertion_count": 0,
+      "review_agreement": 0.9921875,
+      "reviewers": "Two independent GPT-6.1 Sol high calls; model-reviewed, no human adjudication."
+    },
+    "evaluation_source_revision": {
+      "previous_sha256": "cde0965edbe220d52eff67ab3b5a284f5ffea8781b753b3f5cf10527f9e217df",
+      "execution_sha256": "d754c143af300fa60d0a8dc2b1503a74b68ac7dfa5381f5d719c3e341c40ec9a",
+      "reason": "Before any GPU evaluation, separate immutable loss forwards from free generation; preserve loss across generation failures and persist failure status. Dataset, prompts, checkpoints and generation requests are unchanged.",
+      "validation": "Zero Pyrefly errors, two CPU tests including forward-reuse on generation failure, final Ruff format/check passed at actual VM paths."
+    },
+    "gpu_evaluation": {
+      "status": "complete",
+      "epochs": [
+        2,
+        4
+      ],
+      "hardware": "NVIDIA A100-SXM4-40GB",
+      "session": "jep-proposition-20261027"
+    }
+  },
+  "training_migration": {
+    "hardware": "NVIDIA A100-SXM4-80GB",
+    "batch_size": 32,
+    "microbatch_size": 32,
+    "concurrent_on_one_gpu": true
+  }
+}

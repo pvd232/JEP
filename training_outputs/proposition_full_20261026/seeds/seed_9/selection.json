@@ -1,0 +1,135 @@
+{
+  "status": "checkpoints_frozen",
+  "candidates": {
+    "evidence": {
+      "epoch": 5,
+      "step": 950,
+      "sha256": "b346d879268db61e82965f4b30e230e355f06d6bfcf145cca2a39816ddf49d1f",
+      "validation": {
+        "n": 1576,
+        "mse_0_1": 0.0315135773865013,
+        "mse_1_5": 0.5042172381840208,
+        "spearman": 0.8761244031408157,
+        "prediction_mean": 0.5865129037023886,
+        "target_mean": 0.6134200507614214,
+        "prediction_std": 0.3534187051305654,
+        "target_std": 0.3852562483034509,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 266,
+            "mean": 0.09039663723354838
+          },
+          "2.0": {
+            "n": 213,
+            "mean": 0.30229778899133486
+          },
+          "3.0": {
+            "n": 302,
+            "mean": 0.4759826939614699
+          },
+          "4.0": {
+            "n": 130,
+            "mean": 0.6769973311859828
+          },
+          "5.0": {
+            "n": 665,
+            "mean": 0.9085007143536008
+          }
+        },
+        "condition_changes": {
+          "n": 551,
+          "correct": 527,
+          "ties": 0,
+          "accuracy_ties_half": 0.956442831215971,
+          "difference_mse": 0.0592987157345182,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "run": {
+        "name": "evidence_ratings",
+        "status": "succeeded",
+        "path": "/content/jep-full-propositions-20261027/repo/experiments/csts_qwen_proposition_evidence_3ef6ba06_8079bfe3_evidence_ratings/runs/evidence_ratings/01M5ZW4QQGCVEGAB21J61C7M0Y/resolved.yaml",
+        "reference": {
+          "sha256": "19e123a7ac3a555d6e2c4a9e345a62f4f098dca0288275c42e6fc1ee80e0c53d",
+          "bytes": 1125,
+          "stored_at": {
+            "kind": "local",
+            "workspace": "/content/jep-full-propositions-20261027/repo",
+            "store": ".viper/store",
+            "store_id": "fa6d98a67253650c48b2e3aca30122a0",
+            "commit": "a68581d67da82956ce20507bc9ce75bb8f847990da9fd5b212f457b944db7af4",
+            "path": "experiments/csts_qwen_proposition_evidence_3ef6ba06_8079bfe3_evidence_ratings/runs/evidence_ratings/01M5ZW4QQGCVEGAB21J61C7M0Y/resolved.yaml"
+          },
+          "kind": "resolved_run"
+        },
+        "local_run_seconds": 2262.885201194,
+        "data_role": "validation",
+        "publication_queue": "/content/jep-full-propositions-20261027/repo/.viper/publication_queue/8883f3aa55477b53a1055e9377f8ba75eb49652beb15779673df4b61e9f974ae.json"
+      }
+    },
+    "ratings": {
+      "epoch": 3,
+      "step": 570,
+      "sha256": "0de2890a5d19b6cc019b814d3bd61a788e716b6a5e79bbfd354be8701cdea237",
+      "validation": {
+        "n": 1576,
+        "mse_0_1": 0.03190692124558249,
+        "mse_1_5": 0.5105107399293198,
+        "spearman": 0.8740206814748447,
+        "prediction_mean": 0.5873292383940555,
+        "target_mean": 0.6134200507614214,
+        "prediction_std": 0.3527804507421552,
+        "target_std": 0.3852562483034509,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 266,
+            "mean": 0.09438467578335728
+          },
+          "2.0": {
+            "n": 213,
+            "mean": 0.2939114695143812
+          },
+          "3.0": {
+            "n": 302,
+            "mean": 0.48621031178534646
+          },
+          "4.0": {
+            "n": 130,
+            "mean": 0.6748774513029135
+          },
+          "5.0": {
+            "n": 665,
+            "mean": 0.9072959851361531
+          }
+        },
+        "condition_changes": {
+          "n": 551,
+          "correct": 530,
+          "ties": 0,
+          "accuracy_ties_half": 0.9618874773139746,
+          "difference_mse": 0.06489367571317665,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "run": {
+        "name": "ratings_ratings",
+        "status": "succeeded",
+        "path": "/content/jep-full-propositions-20261027/repo/experiments/csts_full_control_3ef6ba06_8079bfe3_ratings_0/runs/ratings_ratings/01M5ZW5A6D5FDW8K2TDVXQH0F7/resolved.yaml",
+        "reference": {
+          "sha256": "35f55cc91791fea9026ee976d371e160baa0ffa96214994238ea097344e8e10f",
+          "bytes": 1083,
+          "stored_at": {
+            "kind": "local",
+            "workspace": "/content/jep-full-propositions-20261027/repo",
+            "store": ".viper/store",
+            "store_id": "fa6d98a67253650c48b2e3aca30122a0",
+            "commit": "b5bb5082bb384b5266e02edba7fb63bfa30142ba94a2631c045090b94e48df23",
+            "path": "experiments/csts_full_control_3ef6ba06_8079bfe3_ratings_0/runs/ratings_ratings/01M5ZW5A6D5FDW8K2TDVXQH0F7/resolved.yaml"
+          },
+          "kind": "resolved_run"
+        }
+      }
+    }
+  },
+  "test_scores_used_for_selection": false
+}

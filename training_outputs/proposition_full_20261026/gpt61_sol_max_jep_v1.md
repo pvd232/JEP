@@ -1,0 +1,17 @@
+# GPT-6.1 Sol, max reasoning: jep-csts-v1
+
+Status: **complete**. Completed **2,430/2,430** test comparisons.
+
+Model: `gpt-6.1-sol`; reasoning effort: `max`. Fixed archived zero-shot rubric; 64 items per fresh request, four requests at a time. The model receives row IDs, both sentences and the condition. Labels are joined after inference; tool use invalidates a batch.
+
+Dataset: published jep-csts-v1, 2,430 test comparisons. Same frozen test bytes as the current encoder experiment. Earlier Sol max result: **0.8029168452 Spearman** on 2,620 earlier test comparisons. [Archived baseline](https://github.com/pvd232/JEP/blob/experiment/csts-jep-v1-full-propositions-20261027/training_outputs/csts_sol61_max_report.md).
+
+[Current encoder score table](epoch_scores.md).
+
+| Metric | Value |
+|---|---:|
+| Spearman | 0.919955 |
+| Pearson | 0.924978 |
+| MSE, normalized 0–1 | 0.023513 |
+
+MSE and Spearman were independently checked against NumPy/SciPy. The saved raw responses and source fingerprints precede metric computation. This is one inference pass with the archived prompt.

@@ -1,0 +1,93 @@
+{
+  "status": "indicative_complete_full_running",
+  "source_commit": "a6daf0eeea544716d7340f0f24de687e4ba93490",
+  "source_tree": "966023e6fce206d9c42e7fbf3fdee474d7c48e1a",
+  "root": "/home/machina/jep-csts-proposition-evidence-20261026",
+  "run_directory": "qwen_evidence_results/propositions_v41",
+  "operator_directory": "/home/machina/jep-csts-proposition-evidence-20261026-operator",
+  "supervisor_pid": 109455,
+  "runner_pid": 109456,
+  "started_unix": 1793063368.9178364,
+  "preparation_status": "succeeded",
+  "preparation_seconds": 27.190052549005486,
+  "training_bank": {
+    "captured_inputs": 2880,
+    "answered_inputs": 2486,
+    "stage_a_comparisons": 2303,
+    "stage_a_source_groups": 1626,
+    "fixed_updates_per_arm": 144,
+    "stage_b_comparisons": 6980,
+    "partial_capture": true
+  },
+  "validation": {
+    "rows": 1572,
+    "groups": 678,
+    "sha256": "f186e86877e731c96ee9b1c819863b981074bc500dc9aa11c6951ba9fd56e2c9"
+  },
+  "test": {
+    "rows": 2620,
+    "source": "Tu human reannotations",
+    "sha256": "2c8b6f2b62740c85c376eacd02ef222c2bfacdfe8df5f772a4dd7d52b6d38f1e"
+  },
+  "verification": {
+    "tests_passed": 14,
+    "subtests_passed": 10,
+    "ruff": "passed after import and iteration style cleanup",
+    "training_sources_unchanged": true,
+    "new_similarity_results": "pending"
+  },
+  "checks_before_final_report": [
+    "Matched phase initialization, comparison permutations and fixed auxiliary updates",
+    "Frozen validation-selected checkpoints before test scoring",
+    "Independent recomputation of test and validation metrics",
+    "Paired source-group intervals and explicit subgroup counts"
+  ],
+  "initial_full_attempt": {
+    "name": "propositions_v41",
+    "status": "interrupted_for_indicative_priority",
+    "confirmed_updates_before_interruption": 25
+  },
+  "indicative": {
+    "source_commit": "43d960b4d9ff11203f325f168e63e285a2555def",
+    "auxiliary_updates_per_arm": 8,
+    "ratings_updates_per_arm": 25,
+    "baseline_spearman": 0.818431612689631,
+    "ratings_spearman": 0.8129671350030271,
+    "proposition_spearman": 0.8124470132883516,
+    "paired_difference": -0.0005201217146755255,
+    "paired_95ci": [
+      -0.0032885858312302284,
+      0.0021990426661002726
+    ],
+    "comparisons": 1572,
+    "source_groups": 678,
+    "parent_checkpoint_sha256": "8805f9a7241e4e19ffc481341ebad6f1ddb6dd6ff04bbf710f9f0896469e34ff",
+    "status": "complete"
+  },
+  "full_followup": {
+    "source_commit": "a6daf0eeea544716d7340f0f24de687e4ba93490",
+    "run_name": "propositions_v41_full_after_indicative",
+    "pid": 111848,
+    "status": "running"
+  },
+  "indicative_archive": {
+    "status": "published",
+    "pid": 112048,
+    "files": 26,
+    "bytes": 1485565403,
+    "local_files_preserved": true,
+    "receipt_reference": {
+      "sha256": "4d5f81072ff35aede4474a2ab60c218f841e36ba668c73eb393e30d34601e816",
+      "bytes": 16529,
+      "stored_at": {
+        "kind": "gcs",
+        "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+        "prefix": "viper",
+        "owner": "pvd232",
+        "workspace": "jep_csts_joint_20261021",
+        "revision": "3798bb42da47afc9a1b730af78d1c056ef23b69ac1b67325b93477646fe5eb57",
+        "path": "csts_proposition_indicative_20261026/publication_receipt.json"
+      }
+    }
+  }
+}

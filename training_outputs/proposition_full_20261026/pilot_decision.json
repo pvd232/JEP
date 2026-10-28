@@ -1,0 +1,30 @@
+{
+  "criterion": "Selected proposition-model validation Spearman exceeds the selected ratings-control validation Spearman.",
+  "positive": true,
+  "validation_spearman": {
+    "ratings": 0.8760457137515131,
+    "evidence": 0.878013092241309
+  },
+  "validation_difference": 0.00196737848979589,
+  "test_spearman": {
+    "ratings": 0.8557188384851065,
+    "evidence": 0.8543617428925742
+  },
+  "test_used_for_generation_decision": false,
+  "selected_epochs": {
+    "ratings": 4,
+    "evidence": 4
+  },
+  "training_seed": 7,
+  "patience_by_arm": {
+    "ratings": 1,
+    "evidence": 1
+  },
+  "source_commit": "67f816407f786ea038415422a9aefd57d30c92fb",
+  "dataset_revision": "jep-csts-v1",
+  "scope": "One-seed comparison after both models exhausted validation patience.",
+  "stopping_reasons": {
+    "ratings": "validation_patience",
+    "evidence": "validation_patience"
+  }
+}

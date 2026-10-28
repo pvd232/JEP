@@ -1,0 +1,38 @@
+{
+  "metric_verification": "passed",
+  "n": 2430,
+  "spearman": 0.9199548895630968,
+  "mse_0_1": 0.023512860082304528,
+  "raw_capture_sha256": "b86e26d4e55ba859188d95f48fd7ed57193f80a8dac4203da83756176d5a613b",
+  "predictions_sha256": "39f3ad3c150cbc5006d787f56d012e2a22cd531cb8a6a9c6b0712424992b9e7c",
+  "manifest": {
+    "study": "C-STS zero-shot frontier LLM baseline",
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "max",
+    "model_snapshot": "gpt-6.1-sol alias; no more specific snapshot returned by CLI",
+    "started_at": "2026-10-27T13:01:42.920018+00:00",
+    "dataset_revision": "jep-csts-v1",
+    "split": "test",
+    "parent_capture_source_sha256": "6861bb6df31b56666f26b09fbbd64c9de8cdf7238493b479d67331a9b393b051",
+    "n": 2430,
+    "batch_size": 64,
+    "workers": 4,
+    "data_sha256": "52a9c0d6b8d9f3fc81e698bae1e2564051cf7ec29e8dc1cb4d68167910bb968d",
+    "rubric_sha256": "813c66acdbc5acb2c99c7c711d045fdc729c39a9b2edf4b0d1cbf9a06845fb3f",
+    "source_sha256": "f73ed28d7479d0ba4acd3a8dd66ae04d0f4f24b4d5a44b41850a0169d9ec1518",
+    "schema_sha256": "52454c14d03860c76645da2f65573d7be79b0e2b99bf3e5d90f3f535de3cc0c3",
+    "order": "SHA256 sol61-max-evaluation-v1:row_id ascending",
+    "labels_provided_to_model": false,
+    "tools_allowed": false,
+    "score_range": [
+      1,
+      5
+    ],
+    "score_increment": 0.1,
+    "metric_normalization": "(score-1)/4",
+    "prompt_selection": "Archived fixed rubric reused byte-for-byte; no new prompt selection or development calls",
+    "sampling_temperature": "CLI/provider default; not overridden",
+    "benchmark_scope": "Published jep-csts-v1 test split: 2430 comparisons; fixed archived rubric and inference settings",
+    "dependency": "batched predictions may share context; confidence intervals must resample source groups"
+  }
+}
