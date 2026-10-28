@@ -254,3 +254,37 @@ A: saved cosine score. B: token weighting trained with ratings. C: token weighti
 | 2026-10-28 05:01:26 | readout extraction |  |  | split: test; 4862/4862 |
 | 2026-10-28 05:01:52 | stage finished | 7 |  | name: extract_test_proposition_final; status: succeeded |
 | 2026-10-28 05:01:52 | stage started | 7 |  | name: extract_interventions_proposition_final |
+| 2026-10-28 05:02:32 | readout extraction |  |  | split: interventions; 4/48 |
+| 2026-10-28 05:02:34 | readout extraction |  |  | split: interventions; 48/48 |
+| 2026-10-28 05:02:42 | stage finished | 7 |  | name: extract_interventions_proposition_final; status: succeeded |
+| 2026-10-28 05:02:42 | stage started | 7 |  | name: extract_test_ratings_final |
+| 2026-10-28 05:03:24 | readout extraction |  |  | split: test; 4/4862 |
+| 2026-10-28 05:03:29 | readout extraction |  |  | split: test; 204/4862 |
+| 2026-10-28 05:03:34 | readout extraction |  |  | split: test; 404/4862 |
+| 2026-10-28 05:03:39 | readout extraction |  |  | split: test; 604/4862 |
+| 2026-10-28 05:03:44 | readout extraction |  |  | split: test; 804/4862 |
+| 2026-10-28 05:03:49 | readout extraction |  |  | split: test; 1004/4862 |
+| 2026-10-28 05:03:54 | readout extraction |  |  | split: test; 1204/4862 |
+| 2026-10-28 05:03:58 | readout extraction |  |  | split: test; 1404/4862 |
+| 2026-10-28 05:04:04 | readout extraction |  |  | split: test; 1604/4862 |
+| 2026-10-28 05:04:09 | readout extraction |  |  | split: test; 1804/4862 |
+| 2026-10-28 05:04:13 | readout extraction |  |  | split: test; 2004/4862 |
+| 2026-10-28 05:04:18 | readout extraction |  |  | split: test; 2204/4862 |
+| 2026-10-28 05:04:23 | readout extraction |  |  | split: test; 2404/4862 |
+| 2026-10-28 05:04:29 | readout extraction |  |  | split: test; 2604/4862 |
+| 2026-10-28 05:04:34 | readout extraction |  |  | split: test; 2804/4862 |
+| 2026-10-28 05:04:39 | readout extraction |  |  | split: test; 3004/4862 |
+| 2026-10-28 05:04:44 | readout extraction |  |  | split: test; 3204/4862 |
+| 2026-10-28 05:04:49 | readout extraction |  |  | split: test; 3404/4862 |
+| 2026-10-28 05:04:54 | readout extraction |  |  | split: test; 3604/4862 |
+| 2026-10-28 05:04:59 | readout extraction |  |  | split: test; 3804/4862 |
+| 2026-10-28 05:05:04 | readout extraction |  |  | split: test; 4004/4862 |
+| 2026-10-28 05:05:09 | readout extraction |  |  | split: test; 4204/4862 |
+| 2026-10-28 05:05:14 | readout extraction |  |  | split: test; 4404/4862 |
+| 2026-10-28 05:05:19 | readout extraction |  |  | split: test; 4604/4862 |
+| 2026-10-28 05:05:24 | readout extraction |  |  | split: test; 4804/4862 |
+| 2026-10-28 05:05:25 | readout extraction |  |  | split: test; 4862/4862 |
+| 2026-10-28 05:05:55 | stage finished | 7 |  | name: extract_test_ratings_final; status: succeeded |
+| 2026-10-28 05:05:55 | stage started | 7 |  | name: publish_test |
+| 2026-10-28 05:06:19 | stage finished | 7 |  | name: publish_test; status: succeeded |
+| 2026-10-28 05:06:23 | stage started | 7 |  | name: evaluate |
