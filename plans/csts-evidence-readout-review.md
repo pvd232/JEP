@@ -95,3 +95,9 @@ The configured device is `NVIDIA A100-SXM4-80GB`, verified through the existing 
 Each native stage receives the attempt's absolute `progress.md` path in its recorded configuration. Workers append aggregate measurements under a process shared file lock. The report includes writing retention, extraction counts, separate B/C and D/E validation measurements, final test scores for every seed and all five planned differences. The native CPU fixture supplies a real report path to exercise this cross process stream.
 
 Validation on the Colab runtime: 66 tests passed across the readout, attention and proposition preparation suites; Ruff lint and formatting passed for the five modified Python files; Pyrefly reported zero errors in the four modified production modules. Tests cover A100 device identity, occupied GPU handling, validation phase labels and final Markdown metrics. Training uses the methods document's fixed objectives, inputs, seeds and checkpoint selection rule.
+
+The current native CPU check passed all nine stages from source `f59d2f8c5c64b96940a624a56d385330cf6a11ca`, including the shared Markdown path and the separate evaluation metric worker. Its receipt is `qwen_evidence_results/readout_native_smoke_ad5e6daf/receipt.json` in the Colab checkout.
+
+The active scientific attempt is `evidence_readout_a100_20261028_r1`. Its predecessor ended during retention input preparation at a linked vocabulary head. The active attempt uses a regular copy with the same pinned hash. The earlier three publication records and failure log are preserved in `relaunch-reconciliation.json` beside the checkout. All split files and three model checkpoints match their fixed hashes.
+
+The [live Markdown report](../training_outputs/csts_evidence_readout_20261028/progress.md) receives worker measurements throughout execution. The Mac publisher refreshes the GitHub file every five minutes and publishes the final result immediately.

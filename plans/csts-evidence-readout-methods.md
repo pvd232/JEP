@@ -1,6 +1,6 @@
 # Testing evidence selection and sentence comparison in JEP
 
-Current stage: implementation review.
+Current stage: execution on the Colab A100. [Live results](../training_outputs/csts_evidence_readout_20261028/progress.md).
 
 ## Question and hypothesis
 
