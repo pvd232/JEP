@@ -1,6 +1,6 @@
 # C-STS extraction comparison
 
-Status: the Colab A100 validation screen is complete. The [results and evidence](../training_outputs/csts_extraction_screen_20261028.md) separate operational counts from model-assisted fidelity judgments.
+Status: the Colab A100 captures are complete, but the generic native task adapter remains uncalibrated. The [results and evidence](../training_outputs/csts_extraction_screen_20261028.md) retain the descriptive counts and suspend comparative native conclusions pending in-task diagnostic controls.
 
 ## Question and comparisons
 

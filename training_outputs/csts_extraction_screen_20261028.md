@@ -1,6 +1,6 @@
-# C-STS extraction screen: GPT incumbent retained
+# C-STS native adapter diagnostic: comparison uncalibrated
 
-The screen retained 239 passage/condition inputs from 120 validation comparisons across 110 connected source groups in adjudicated C-STS revision 1.1. Both model-assisted review passes accepted 219/239 GPT proposition outputs, 21/239 KnowCoder outputs and 22/239 GoLLIE outputs. Keep GPT propositions as the incumbent for this contract. The native configurations mostly abstain from supported information.
+The screen retained 239 passage/condition inputs from 120 validation comparisons across 110 connected source groups in adjudicated C-STS revision 1.1. The native runs returned empty lists on 239/239 KnowCoder inputs and 236/239 GoLLIE inputs. The model-assisted acceptance counts below describe those retained outputs. The screen did not establish that its custom condition-to-relation mapping works on in-task positive controls, so comparative conclusions about the native models are suspended. The cause could involve schema mapping, prompt serialization or model capability; this screen does not separate them.
 
 ## Captured outputs
 
@@ -29,7 +29,9 @@ After the native screen showed near-universal abstention, one published relation
 
 GoLLIE reproduced all three reference relations in its author's example. KnowCoder returned four relations: two matched the three-relation reference, two were additional, and the reference's Population(Kurush, 813) relation was missing. The additional relations have not been semantically adjudicated and are not automatically hallucinations. These single-example checks are neither calibration nor benchmark F1.
 
-## Model-assisted fidelity results
+## Descriptive review of the original captured outputs
+
+These counts audit the failed/unvalidated native adapter outputs. They are not a validated comparison of native-model capability. See the subsequent in-task diagnostic before using them for a model-choice decision.
 
 Acceptance requires structural validity and all seven semantic criteria in both separate review passes. Each arm retains all 239 sources, including the original GPT parser failure.
 
@@ -64,6 +66,12 @@ Author sources: [KnowCoder inference wrapper](https://github.com/ICT-GoKnow/Know
 
 ## Decision
 
-Do not advance these KnowCoder/GoLLIE configurations to downstream training. Their published-example controls demonstrate functional generation under familiar schemas, while this zero-shot condition-relation adaptation misses most supported answers. The result applies to the tested checkpoint, prompt, schema and backend combinations.
+Do not train on these captured native outputs. Suspend the comparative native conclusion until a separately sealed target-compatible positive/negative control passes through the actual task adapter. The published-example checks establish functional decoding under familiar schemas; they do not validate the C-STS mapping. Preserve all original runs as diagnostics. Any repaired adapter needs a separate protocol and fresh evaluation.
 
 The matched GPT JSON/Python arms remain the controlled test of code-shaped representation. This native-system screen changes weights, training and interface as well as output syntax, so it does not answer that representation question. Human adjudication and a downstream similarity comparison remain separate work.
+
+## Calibration gap found in further review
+
+The initial review concentrated on protocol identity, capture integrity, syntax, loading and author examples. It missed a task-adapter calibration requirement. All native tasks were converted into one anonymous `ConditionRelation(subject, value)`, including unary type recognition and aggregate counting. The class guideline also carried the long policy as a JSON-escaped single-line string, unlike the multiline class-specific guidelines in the published controls. These are concrete differences to test; none has been isolated as a unique root cause of abstention. Generic `Entity` arguments alone are not a proven bug: the author's KnowCoder example also uses them.
+
+The separately sealed [in-task diagnostic](csts_native_adapter_diagnostic_20261028.md) has now completed. With unchanged GoLLIE weights and decoding, the original and formatting-only variants recovered none of six literal positives; the descriptive task schema recovered four. Both negatives remained empty. KnowCoder remained empty in all variants. This demonstrates an adapter effect for selected GoLLIE cases and leaves KnowCoder unresolved. It is an integration diagnostic rather than a representative model benchmark.

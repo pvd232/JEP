@@ -1,6 +1,6 @@
 # Extraction comparison review
 
-Verdict: **Approve experiment preparation.** Independent design and implementation reviews found no remaining blocking findings after repairs.
+Current status: **native task-adapter calibration is unresolved.** The capture, parsing and reproducibility controls were reviewed, but subsequent adversarial review found that no in-task positive/negative control had validated the generic condition-to-relation mapping. The model-comparison conclusion is suspended. The earlier approvals below document implementation and evidence integrity, not native adapter calibration.
 
 Base: `61a48b2fa580c7457155535bcfafde10426dab83`. Scope: the three extraction modules, package initializer, configuration, optional native requirements, three test modules and [methods](csts-extraction-comparison-methods.md). Python cache exclusions and the preflight receipt complete the publication.
 
@@ -72,3 +72,11 @@ A further review found that transient Codex reconnect notices had invalidated fi
 The review collector received independent review and 21 synthetic checks. Repairs require a completed audit with exit code zero and account for the Mac's `/tmp` path alias. One capacity-only failure with no response received one separately recorded operational recovery; scored answers were never retried. Atomic batch claims prevent duplicate inference during scheduling acceleration. Final counts and paired intervals were recomputed independently from the raw judgments.
 
 The published archive contains all raw proof and origin implementations. Independent extraction verified all 6,095 indexed members and reproduced the exact review packet, counts, intervals and disagreements offline. The [results report](../training_outputs/csts_extraction_screen_20261028.md) records the limited model-assisted interpretation.
+
+## Subsequent design finding: missing in-task adapter calibration
+
+The initial design review accepted a generic binary `ConditionRelation(subject, value)` for every condition without checking whether that mapping is usable on literal positives from the actual task. Unary type recognition, binary attributes and aggregate counts were not separately validated. The control examples subsequently copied from the authors establish functional generation under those schemas; they do not validate this mapping. This is a design gap missed by the earlier review.
+
+The raw outputs and model-assisted arithmetic remain valid descriptions of the attempted configuration. They justify withholding these captured outputs from training. They do not justify ruling out KnowCoder or GoLLIE, or describing the attempted adapter as a validated native baseline.
+
+The separately sealed [48-cell A/B/C diagnostic](../training_outputs/csts_native_adapter_diagnostic_20261028.md) is complete. Original and formatting-only GoLLIE prompts recovered none of six literal positives; the descriptive native schema recovered four. Both negatives remained empty. KnowCoder remained empty throughout. Independent review verified the raw outputs and original prompt identities. This demonstrates a selected-case adapter effect and confirms that the earlier native model-choice conclusion was premature. C changes multiple schema factors together; the diagnostic neither isolates one cause nor supplies a representative model score. Any repaired adapter still needs fresh representative evaluation.

@@ -1,5 +1,5 @@
 {
-  "status": "completed_validation_screen",
+  "status": "completed_capture_screen_native_comparison_uncalibrated",
   "dataset": {
     "revision": "jep-csts-v1.1",
     "split": "validation",
@@ -482,5 +482,19 @@
     "member_index": "artifact-index.json",
     "summary": "csts_extraction_fidelity_20261028.json",
     "relocation_instructions": "csts_extraction_screen_reproduce_20261028.md"
+  },
+  "native_adapter_calibration": {
+    "same_task_controls_before_screen": false,
+    "validated": false,
+    "comparative_conclusion": "suspended",
+    "post_screen_diagnostic": "completed; see csts_native_adapter_diagnostic_20261028.json",
+    "confirmed_differences": [
+      "all conditions mapped to anonymous binary subject/value relation",
+      "JSON-escaped one-line policy vs author multiline class guidelines",
+      "unary typing and aggregate counts not separately calibrated"
+    ],
+    "representative_rerun_completed": false,
+    "gollie_joint_adapter_effect_observed": true,
+    "unique_root_cause_established": false
   }
 }
