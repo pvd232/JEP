@@ -25,13 +25,14 @@ def normalize_record(record):
     source={key:record[key] for key in ('source_id','condition','passage','model')}
     if any(not isinstance(value,str) or not value.strip() for value in source.values()):
         raise ValueError('Source identity, condition, passage and model must be nonempty strings')
-    plan=compile_condition(source['condition'])
+    plan=compile_condition(source['condition'],contract_recipe=record.get('contract_recipe'))
     runtime=record.get('runtime_status','ok')
     if runtime not in {'ok','error','unsupported','truncated'}:
         raise ValueError('Unknown runtime status')
     profile=record.get('profile','positive_anchor')
     raw={**source,'profile':profile,'runtime_status':runtime,
          'task_stage':record.get('task_stage'),'count_stage':record.get('count_stage'),
+         'contract_recipe':record.get('contract_recipe'),
          'external_protocol_sha256':record.get('external_protocol_sha256')}
     if 'raw_output' in record:raw['raw_output']=record['raw_output']
     if 'stage_outputs' in record:raw['stage_outputs']=record['stage_outputs']
@@ -79,6 +80,8 @@ def export_record(result):
             'requested_facet_status':evidence.get('requested_facet_status') if evidence else None,
             'facet_statuses':evidence.get('facet_statuses',{}) if evidence else {},
             'context_annotations_present':evidence.get('context_annotations_present',False) if evidence else False,
+            'contract_recipe':evidence.get('contract_recipe') if evidence else result['raw_capture'].get('contract_recipe'),
+            'resolved_event_role_claims':evidence.get('resolved_event_role_claims') if evidence else None,
             'candidate_grounding_status':evidence.get('candidate_grounding_status','not_applicable') if evidence else 'not_applicable',
             'ambiguity_origins':evidence.get('ambiguity_origins',[]) if evidence else [],
             'external_protocol_sha256':result['raw_capture']['external_protocol_sha256'],
@@ -89,12 +92,13 @@ def main(argv=None):
     parser=argparse.ArgumentParser(description=__doc__)
     sub=parser.add_subparsers(dest='command',required=True)
     compile_parser=sub.add_parser('compile');compile_parser.add_argument('--condition',required=True)
+    compile_parser.add_argument('--contract-recipe',default=None)
     runtime_parser=sub.add_parser('descriptor');runtime_parser.add_argument('--model-alias',choices=tuple(PINNED_MODELS),required=True)
     for command in ('normalize','export'):
         child=sub.add_parser(command);child.add_argument('--input',type=Path,required=True);child.add_argument('--output',type=Path,required=True)
     args=parser.parse_args(argv)
     if args.command=='compile':
-        print(json.dumps(compile_condition(args.condition),ensure_ascii=False,indent=2));return
+        print(json.dumps(compile_condition(args.condition,contract_recipe=args.contract_recipe),ensure_ascii=False,indent=2));return
     if args.command=='descriptor':
         print(json.dumps(descriptor(args.model_alias),ensure_ascii=False,indent=2));return
     value=json.loads(args.input.read_text(),parse_constant=lambda _:(_ for _ in ()).throw(ValueError('Nonfinite JSON is not allowed')))

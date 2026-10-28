@@ -16,6 +16,14 @@ GoLLIE produced supported annotations on all nine sources, including sandwich/pi
 
 The later spatial parser amendment accepts fronted cues that fall outside the two entity spans, while retaining the actual cue positions and an unvalidated-association flag. It neither generates nor repairs a relation. It leaves the eighteen generation prompts unchanged; it is distinct from the model-side task adaptation.
 
+## Final Know-only refinement and regression
+
+The final fixed KnowCoder candidate adds an independent illustration for every spatial predicate and a second action example contrasting a bare verb with the complete object/origin/setting phrase. Its spatial request explicitly uses a 4,096-token context: 2,511 input tokens plus 512 reserved output tokens. Other Know requests retain the 2,048 bound. GoLLIE's prompts are unchanged and its nine development captures were not regenerated.
+
+The single nine-case run fixes `Near(boy, water)` and retains the four entity and two color outputs. It still returns only `fetches` for the dog and regresses the girl's previously recovered throwing phrase to `[]`. All nine outputs parse without truncation. The [independent delta audit](csts_know_refinement_v1_independent_review_20261028.md) verifies all indexed capture bytes and confirms that the six NER/color prompt and input/output token vectors are unchanged. This is a mixed development result, not a complete repair of action extraction. The regression is retained; there is no per-source rollback, answer selection or further exposed prompt iteration. The frozen diagnostic uses this exact final configuration.
+
+The integrated package matches all sixteen reviewed runtime files, and 177 combined tests pass. The [integration receipt](csts_native_adapter_integration_final_20261028.json) distinguishes source hashes, earlier versions and documentation. These software checks do not establish model quality.
+
 ## Symbolic count failures
 
 The first finite count experiment used independent mention/quantity, quantity-binding and identity stages on six exposed sources. All thirty-six calls parsed, but every binding and identity stage was empty. Extracting a number word without its binding does not deliver a count.
@@ -30,4 +38,10 @@ KnowCoder's six outputs parsed and matched source text, but it omitted the unspe
 
 This comparator fails evidence sufficiency. Exact quotation is a mechanical property, not a relevance or completeness judgment. Its fourteen separately frozen contrast controls remain unrun. No count, referent-resolution or downstream readout success is claimed.
 
-The [archive index](csts_native_development_archives_20261028.json) identifies immutable captures and zero-generation setup evidence by SHA-256. Raw generations, actual prompts, token vectors, runtime identities and original result records are retained. Model-assisted/source judgments remain separate from human adjudication. No downstream training or full-test result follows from these development checks.
+The [archive index](csts_native_development_archives_20261028.json) identifies immutable captures and zero-generation setup evidence by SHA-256. The [independent review](csts_native_development_independent_review_20261028.md) checks the ten execution archives: 274 capture/execution hash declarations, 90 explicit indexed byte lengths and 120 generations, including the rejected quote-arm truncation. These integrity counts are not semantic-pass counts. Raw generations, actual prompts, token vectors, runtime identities and original result records are retained. Model-assisted/source judgments remain separate from human adjudication. No downstream training or full-test result follows from these development checks.
+
+Reproduce the read-only CPU audit from the repository root; it makes no model calls and writes a new temporary report directory:
+
+```sh
+python3 tools/audit_csts_native_development_20261028.py --archive-dir training_outputs --include-count-evidence
+```

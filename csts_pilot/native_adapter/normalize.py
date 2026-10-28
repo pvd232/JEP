@@ -13,6 +13,7 @@ import re
 
 from .counts import aggregate_count, quantity_from_text
 from .schema import selected_schemas, plan_digest
+from .task_recipe import spatial_argument_is_preposition_phrase
 
 
 def _constructors(payload, plan, model, count_stage=None, profile="scoped_experimental", task_stage=None):
@@ -176,6 +177,9 @@ def normalize_native(payload, plan, model, passage, coverage_complete=False, cou
                 "semantic_support_validated": False}
     evidence['requested_facet_status_kind']='candidate_prediction'
     evidence['ambiguity_origins']=[]
+    if plan.get('contract_recipe'):
+        evidence['contract_recipe']=plan['contract_recipe']
+        evidence['resolved_event_role_claims']=False if plan.get('event_roles_resolved') is False else None
     if not plan["supported"]:
         evidence["unsupported_reason"] = plan["unsupported_reason"]
         return evidence
@@ -289,6 +293,28 @@ def normalize_native(payload, plan, model, passage, coverage_complete=False, cou
                                           "object": obj, "polarity": polarity,
                                           'answer_role':answer_role,
                                           "support_span": hull(subject, obj)})
+            edge=evidence['relations'][-1]
+            if schema.get('representation')=='spatial_predicate_edge':
+                if any(spatial_argument_is_preposition_phrase(by_id[identity]['span']['text']) for identity in (subject,obj)):
+                    raise ValueError('Spatial arguments require entity/place mentions, not leading preposition phrases')
+                # A fronted cue can precede both entity arguments. Search the
+                # source for consistency only, preserving every matching span.
+                # This deliberately does not certify that a cue attaches to
+                # these arguments or resolve an ambiguous mention occurrence.
+                cues=[]
+                for cue in schema['lexical_cues']:
+                    pattern=r'(?<!\w)'+re.escape(cue).replace(r'\ ',r'\s+')+r'(?!\w)'
+                    for match in re.finditer(pattern,passage,re.I):
+                        cues.append({'text':match.group(),'start':match.start(),'end':match.end()})
+                if not cues:raise ValueError('Model-emitted spatial predicate has no declared source cue')
+                edge.update(representation='spatial_predicate_edge',predicate_from_constructor=True,
+                            predicate_cue_spans=sorted(cues,key=lambda item:(item['start'],item['end'])),
+                            predicate_cue_validation='necessary_lexical_consistency_not_semantic_entailment',
+                            predicate_cue_grounding='matched_in_source',predicate_cue_scope='full_source',
+                            predicate_argument_association_validated=False)
+            elif schema.get('representation')=='verbatim_action_description':
+                edge.update(representation='verbatim_action_description',event_roles_resolved=False,
+                            clause_semantics_decomposed=False,polarity_scope='description_relation_not_embedded_action')
         else:
             trigger = _locations(fields["mention" if model == "gollie" else "trigger"], passage)
             roles = {}

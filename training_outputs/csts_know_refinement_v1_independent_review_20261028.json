@@ -1,0 +1,182 @@
+{
+  "scope": "Final exposed Know-only candidate delta; qualitative review, no human adjudication or representative score.",
+  "model_calls": 0,
+  "captures_modified": false,
+  "rollback_or_selection_performed": false,
+  "current_archive": {
+    "archive": "/tmp/jep-know-refinement-v1-knowcoder_ie-execution-20261028.tar.gz",
+    "sha256": "fce040366eb495629ddd320cb8c27e4ba857c8237e8f74f2ec83feaaf1cc3ee4",
+    "bytes": 1684828,
+    "regular_member_sizes_verified": 96,
+    "unique_indexed_files_verified": 24,
+    "indexes": [
+      {
+        "index": "results/know-refinement-v1-knowcoder_ie-execution-index.json",
+        "hash_declarations_verified": 24,
+        "byte_size_declarations_verified": 0
+      },
+      {
+        "index": "results/know-refinement-v1-knowcoder_ie/capture-index.json",
+        "hash_declarations_verified": 23,
+        "byte_size_declarations_verified": 23
+      }
+    ]
+  },
+  "previous_archive": {
+    "archive": "/tmp/jep-native-task-contract-v2-knowcoder_ie-execution-20261028.tar.gz",
+    "sha256": "c796a45644f260350f6717c038348138d3bf4bef5d079c045529b525a92b9eca",
+    "bytes": 1676904,
+    "regular_member_sizes_verified": 96,
+    "unique_indexed_files_verified": 24,
+    "indexes": [
+      {
+        "index": "results/native-task-contract-v2-knowcoder_ie-execution-index.json",
+        "hash_declarations_verified": 24,
+        "byte_size_declarations_verified": 0
+      },
+      {
+        "index": "results/native-task-contract-v2-knowcoder_ie/capture-index.json",
+        "hash_declarations_verified": 23,
+        "byte_size_declarations_verified": 23
+      }
+    ]
+  },
+  "generated_responses": 9,
+  "final_token_id_2": 9,
+  "truncated_responses": 0,
+  "unchanged_ner_color_cells": [
+    "animal",
+    "food",
+    "helmet",
+    "vehicle",
+    "animal_color",
+    "board_color"
+  ],
+  "all_six_prompt_input_output_id_comparisons_pass": true,
+  "cases": [
+    {
+      "case_id": "animal",
+      "condition": "type of animal",
+      "passage": "An elephant with a red bench on its back and a red and yellow blanket over it's body.",
+      "raw_output": " results = [\n\tAnimal(\"elephant\")\n]",
+      "previous_raw_output": " results = [\n\tAnimal(\"elephant\")\n]",
+      "prompt_identical": true,
+      "input_ids_identical": true,
+      "output_ids_identical": true,
+      "final_output_token_id": 2,
+      "truncated": false,
+      "artifact": "results/know-refinement-v1-knowcoder_ie/animal-generation.json"
+    },
+    {
+      "case_id": "animal_color",
+      "condition": "color of animal",
+      "passage": "a close up of a brown dog, his eyes are glowing because of the flash ",
+      "raw_output": " results = [\n\tColor(Entity(\"dog\"), Entity(\"brown\"))\n]",
+      "previous_raw_output": " results = [\n\tColor(Entity(\"dog\"), Entity(\"brown\"))\n]",
+      "prompt_identical": true,
+      "input_ids_identical": true,
+      "output_ids_identical": true,
+      "final_output_token_id": 2,
+      "truncated": false,
+      "artifact": "results/know-refinement-v1-knowcoder_ie/animal_color-generation.json"
+    },
+    {
+      "case_id": "board_color",
+      "condition": "color of surfboard",
+      "passage": "A male surfer on a white surfboard jumps a wave .",
+      "raw_output": " results = [\n\tColor(Entity(\"surfboard\"), Entity(\"white\"))\n]",
+      "previous_raw_output": " results = [\n\tColor(Entity(\"surfboard\"), Entity(\"white\"))\n]",
+      "prompt_identical": true,
+      "input_ids_identical": true,
+      "output_ids_identical": true,
+      "final_output_token_id": 2,
+      "truncated": false,
+      "artifact": "results/know-refinement-v1-knowcoder_ie/board_color-generation.json"
+    },
+    {
+      "case_id": "dog_event",
+      "condition": "action of dog",
+      "passage": "A dog in a green collar fetches a stick from the dead leaves .",
+      "raw_output": " results = [\n\tActionDescription(Entity(\"dog\"), Entity(\"fetches\"))\n]",
+      "previous_raw_output": " results = [\n\tActionDescription(Entity(\"dog\"), Entity(\"fetches\"))\n]",
+      "prompt_identical": false,
+      "input_ids_identical": false,
+      "output_ids_identical": true,
+      "final_output_token_id": 2,
+      "truncated": false,
+      "artifact": "results/know-refinement-v1-knowcoder_ie/dog_event-generation.json"
+    },
+    {
+      "case_id": "food",
+      "condition": "type of food",
+      "passage": "a close up of a plate of food with a sandwich and a pickle",
+      "raw_output": " results = [\n\tFood(\"sandwich\"),\n\tFood(\"pickle\")\n]",
+      "previous_raw_output": " results = [\n\tFood(\"sandwich\"),\n\tFood(\"pickle\")\n]",
+      "prompt_identical": true,
+      "input_ids_identical": true,
+      "output_ids_identical": true,
+      "final_output_token_id": 2,
+      "truncated": false,
+      "artifact": "results/know-refinement-v1-knowcoder_ie/food-generation.json"
+    },
+    {
+      "case_id": "helmet",
+      "condition": "presence of helmets",
+      "passage": "Five workers in orange outfits and blue helmets work on scaffolding .",
+      "raw_output": " results = [\n\tHelmet(\"blue helmets\")\n]",
+      "previous_raw_output": " results = [\n\tHelmet(\"blue helmets\")\n]",
+      "prompt_identical": true,
+      "input_ids_identical": true,
+      "output_ids_identical": true,
+      "final_output_token_id": 2,
+      "truncated": false,
+      "artifact": "results/know-refinement-v1-knowcoder_ie/helmet-generation.json"
+    },
+    {
+      "case_id": "person_event",
+      "condition": "motion of person",
+      "passage": "A little girl in a pink jacket throws leaves over her head in front of a fence .",
+      "raw_output": " results = []",
+      "previous_raw_output": " results = [\n\tActionDescription(Entity(\"girl\"), Entity(\"throws leaves over her head\"))\n]",
+      "prompt_identical": false,
+      "input_ids_identical": false,
+      "output_ids_identical": false,
+      "final_output_token_id": 2,
+      "truncated": false,
+      "artifact": "results/know-refinement-v1-knowcoder_ie/person_event-generation.json"
+    },
+    {
+      "case_id": "spatial_qualifier",
+      "condition": "location of person",
+      "passage": "A boy in a black swimsuit playing near the water .",
+      "raw_output": " results = [\n\tNear(Entity(\"boy\"), Entity(\"water\"))\n]",
+      "previous_raw_output": " results = []",
+      "prompt_identical": false,
+      "input_ids_identical": false,
+      "output_ids_identical": false,
+      "final_output_token_id": 2,
+      "truncated": false,
+      "artifact": "results/know-refinement-v1-knowcoder_ie/spatial_qualifier-generation.json"
+    },
+    {
+      "case_id": "vehicle",
+      "condition": "type of vehicle",
+      "passage": "A train pumps out steam while going down a track on a cloudy day.",
+      "raw_output": " results = [\n\tVehicle(\"train\")\n]",
+      "previous_raw_output": " results = [\n\tVehicle(\"train\")\n]",
+      "prompt_identical": true,
+      "input_ids_identical": true,
+      "output_ids_identical": true,
+      "final_output_token_id": 2,
+      "truncated": false,
+      "artifact": "results/know-refinement-v1-knowcoder_ie/vehicle-generation.json"
+    }
+  ],
+  "qualitative_findings": [
+    "Near(boy,water) now preserves the source spatial qualifier that was previously omitted.",
+    "Dog remains only fetches: action category retained, but stick object and from-the-leaves phrase absent under full-clause contract.",
+    "Girl changes from throws-leaves-over-head evidence to an empty list despite explicit source motion. This is a regression, not source absence.",
+    "Six NER/color prompts and both input/output token vectors are identical to the prior task-contract captures.",
+    "These observations do not establish a complete semantic gate, transfer or a model ranking. No tuning, rollback or count-success claim follows."
+  ]
+}

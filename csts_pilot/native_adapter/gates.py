@@ -12,10 +12,11 @@ def model_inputs(cases):
     """Expose source/condition plans only; reference annotations never enter prompts."""
     result = []
     for case in cases:
-        plan = compile_condition(case["condition"])
+        plan = compile_condition(case["condition"],contract_recipe=case.get('contract_recipe'))
         result.append({"case_id": case["case_id"], "source_id": case["source_id"],
                        "passage": case["passage"], "condition": case["condition"],
                        "profile": case.get("profile", "positive_anchor"),
+                       **({'contract_recipe':case['contract_recipe']} if case.get('contract_recipe') else {}),
                        "plan": plan, "plan_sha256": plan_digest(plan)})
     return result
 
@@ -48,7 +49,7 @@ def check_case(case, payload, model):
     Exact graph equality is reported separately, never a completeness oracle.
     These exposed smoke cases cannot establish family-wide model fidelity.
     """
-    plan = compile_condition(case["condition"])
+    plan = compile_condition(case["condition"],contract_recipe=case.get('contract_recipe'))
     if case["plan_sha256"] != plan_digest(plan):
         raise ValueError("Development gate plan changed")
     profile = case.get("profile", "positive_anchor")

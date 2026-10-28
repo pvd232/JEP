@@ -1,0 +1,124 @@
+{
+  "all_runtime_files_byte_identical_to_approved_candidate": true,
+  "docs_scope_v5_snapshots_preserved": true,
+  "docs_sha256": {
+    "plans/csts-native-adapter-repair-design-scope-v5.md": "8bdfb5cc7fad6e565850103a375f10784bd450591ba64341719250ac7834c472",
+    "plans/csts-native-adapter-repair-design.md": "2eeff51f407686d573469129d51c5c9176f327943238a698986fe42dacbea272",
+    "plans/csts-native-adapter-repair-interface-scope-v5.md": "423cbca57e99e41cb4c37f79a95fad782ea53f7aa389ccdec684c9df457cff84",
+    "plans/csts-native-adapter-repair-interface.md": "60a0fe0a7bf1fa2636f35fb7746a7fbc9c6ef918ccf3eb7c9f332890412e8655"
+  },
+  "documentation_formatting_amendment": {
+    "formatted_docs_sha256": {
+      "plans/csts-native-adapter-repair-design.md": "2eeff51f407686d573469129d51c5c9176f327943238a698986fe42dacbea272",
+      "plans/csts-native-adapter-repair-interface.md": "60a0fe0a7bf1fa2636f35fb7746a7fbc9c6ef918ccf3eb7c9f332890412e8655"
+    },
+    "model_calls": 0,
+    "previous_docs_sha256": {
+      "plans/csts-native-adapter-repair-design.md": "bf3742b61dcea3f7a8fd0dc67ec1c57c558b807f5c8cdc70a3c4f3893cee83ff",
+      "plans/csts-native-adapter-repair-interface.md": "c12728f6ef3a8881092b12aea5780197df7c81cb1e0aa575e5fd7728eb8295c4"
+    },
+    "runtime_assets_revalidated_byte_identical": 16,
+    "scope": "Spacing and inline formatting in the two current plan documents only; no experiment or runtime changes.",
+    "semantic_contract_changed": false
+  },
+  "existing_scope_v5_tests_and_three_parent_whitespace_regressions_preserved": true,
+  "legacy_extraction_native_changed": false,
+  "main_reports_changed": false,
+  "model_calls": 0,
+  "new_test_relocations": {
+    "test_know_refinement.py": "test_task_native_know_refinement.py",
+    "test_prompt_profiles.py": "test_task_native_prompt_profiles.py",
+    "test_task_contract_recipe.py": "test_task_native_contract_recipe.py"
+  },
+  "runtime_files": {
+    "__init__.py": {
+      "changed": false,
+      "previous_sha256": "b0572fcc34f6a05cbd37dbe1b6ffb14e7b6500c5bb8c93379ee1b2ea27801f1f",
+      "source_sha256": "b0572fcc34f6a05cbd37dbe1b6ffb14e7b6500c5bb8c93379ee1b2ea27801f1f"
+    },
+    "cli.py": {
+      "changed": true,
+      "previous_sha256": "f579eef7cdf17cb7a973cb13c6117a8467a4474f62ddd7208f0c3481dc43a33d",
+      "source_sha256": "508bbbd0c160c3bf763548a2a1f9092dbe1617f46cd07f161e557896639fef32"
+    },
+    "counts.py": {
+      "changed": false,
+      "previous_sha256": "c3db49bc283c7cc30c5881418fddd2506e2d283d2dc6a3c36cada7f4422fce76",
+      "source_sha256": "c3db49bc283c7cc30c5881418fddd2506e2d283d2dc6a3c36cada7f4422fce76"
+    },
+    "demonstrations.json": {
+      "changed": true,
+      "previous_sha256": null,
+      "source_sha256": "23a4c1091997f9953990757561494966b8883fc2aa6ec263c0ca678de0ce9a84"
+    },
+    "export.py": {
+      "changed": false,
+      "previous_sha256": "9591874d15fc0637a030c806036ca75ff4dc0dc566e2903b4eea623f367560f6",
+      "source_sha256": "9591874d15fc0637a030c806036ca75ff4dc0dc566e2903b4eea623f367560f6"
+    },
+    "gates.py": {
+      "changed": true,
+      "previous_sha256": "74fb62e780d160805d7e7d6222672b8515c8a261dd395ae90e2e0250bc1c5150",
+      "source_sha256": "224e0584229dc034ac1873af06520f94944435d8adcc15a3d224897c9fb37731"
+    },
+    "inventory.py": {
+      "changed": false,
+      "previous_sha256": "3caefd6f3492b8244fb7c2c860db6e437b99215c0011196ed891a9096cff765c",
+      "source_sha256": "3caefd6f3492b8244fb7c2c860db6e437b99215c0011196ed891a9096cff765c"
+    },
+    "know_refinement.py": {
+      "changed": true,
+      "previous_sha256": null,
+      "source_sha256": "17cb256ce0a6d139be09d3c02a3ba3d9c59c12f249b9222b3dc3ef712aa94f07"
+    },
+    "know_refinement_demonstrations.json": {
+      "changed": true,
+      "previous_sha256": null,
+      "source_sha256": "8840993e4b080ac783adfda99ec304c881b65b2d9e0957257cc3126bd198a97a"
+    },
+    "normalize.py": {
+      "changed": true,
+      "previous_sha256": "91ba2e447c35aee60b275c5cac5870d14dc1afcd1748da74c5bdda92947a2442",
+      "source_sha256": "48508551042c27d80712201eaef720087c0abf0ebd73b7401803055d92599859"
+    },
+    "prompt_profiles.py": {
+      "changed": true,
+      "previous_sha256": null,
+      "source_sha256": "9ef810de3e06edc9cd5840f9a2b9c3b0d37a677b48bf7022d0324a6217a5c0f7"
+    },
+    "recipe_demonstrations.json": {
+      "changed": true,
+      "previous_sha256": null,
+      "source_sha256": "cfd6dd191d52a548ac7bc3c4e77bc3dd5ee77c24fd959cc54178c9fe4276e028"
+    },
+    "runtime.py": {
+      "changed": false,
+      "previous_sha256": "0ede1154a1625d16e03994b3bb546289c23cf8f979ebea829c6d09be0eb7cbea",
+      "source_sha256": "0ede1154a1625d16e03994b3bb546289c23cf8f979ebea829c6d09be0eb7cbea"
+    },
+    "schema.py": {
+      "changed": true,
+      "previous_sha256": "49782e03ed91519dafff535f02a904489735103e08f6f9f4129ed3c041d7b98d",
+      "source_sha256": "5488f890df70f153c2301d1cba28e4f6c8f9876cf8a38d8e3576629f12493bbf"
+    },
+    "scope_extensions.py": {
+      "changed": false,
+      "previous_sha256": "c5fffd5a03bca8adbc81e7477530f4fa1e6481c341d1db89a0151ca49669f8e3",
+      "source_sha256": "c5fffd5a03bca8adbc81e7477530f4fa1e6481c341d1db89a0151ca49669f8e3"
+    },
+    "task_recipe.py": {
+      "changed": true,
+      "previous_sha256": null,
+      "source_sha256": "39ca5e7c4066484f704e43d1d393e3d89f17e17cb13c5dd5eedba1590bc763f0"
+    }
+  },
+  "source_archive": "training_outputs/csts_native_know_refinement_v1_20261028.tar.gz",
+  "source_archive_sha256": "5edcdc64aec6a4f3dbb83a8511da3f5b103024fe76ced9c2eff14763c38c082d",
+  "source_seal_sha256": "4f1e23dfe170051699cf93efeae2c5ed9220289a2791400117249f308199cbac",
+  "validation": {
+    "cli_failed_row_retained": true,
+    "combined_unittest_tests_passed": 177,
+    "model_calls": 0,
+    "real_cli_compile_normalize_export_passed": true
+  }
+}

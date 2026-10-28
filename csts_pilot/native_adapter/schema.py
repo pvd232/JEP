@@ -13,6 +13,10 @@ import re
 from pathlib import Path
 
 from .scope_extensions import extension_route
+from .prompt_profiles import ZERO_SHOT,identity as prompt_profile_identity,render as render_prompt_profile
+from .prompt_profiles import recipe_identity,render_recipe
+from .task_recipe import CONTRACT_RECIPE,transform_plan,FOOD_DEFINITION,is_plain_food
+from .know_refinement import KNOW_REFINEMENT,identity as know_refinement_identity,render as render_know_refinement
 
 VERSION = "task-aware-native-v2"
 GO_AUTHOR_REVISION = "164c611743fdc1befe71bbdf03e08c5eb4e35957"
@@ -99,7 +103,7 @@ def _spatial_subject(text):
     return "Entity"
 
 
-def compile_condition(condition):
+def _compile_condition_legacy(condition):
     """Return a source-independent native task plan, or an explicit unsupported plan."""
     if not isinstance(condition, str) or not condition.strip():
         raise ValueError("A nonempty condition is required")
@@ -259,6 +263,14 @@ def compile_condition(condition):
     return plan
 
 
+def compile_condition(condition,contract_recipe=None):
+    """Compile from a condition alone; select the new recipe explicitly."""
+    plan=_compile_condition_legacy(condition)
+    if contract_recipe is None:return plan
+    if contract_recipe!=CONTRACT_RECIPE:raise ValueError('Unknown native task-contract recipe')
+    return transform_plan(plan)
+
+
 def backend_schemas(plan, model):
     """Preserve tested backend-specific labels and role fields as declared variants.
 
@@ -274,8 +286,14 @@ def backend_schemas(plan, model):
         name = schema["name"]
         prefix = "Negated" if name.startswith("Negated") else "Uncertain" if name.startswith("Uncertain") else ""
         base = name[len(prefix):]
+        if plan.get('contract_recipe')==CONTRACT_RECIPE and model=='gollie' and is_plain_food(schema):
+            schema['description']=FOOD_DEFINITION+' Original condition scope: '+schema['description']
         if schema["kind"] == "relation":
-            if model == "gollie" and base in {"Color", "Wears", "Sport", "SportParticipation"}:
+            if model=='gollie' and schema.get('representation')=='spatial_predicate_edge':
+                schema['fields']=['subject','reference']
+            elif model=='gollie' and schema.get('representation')=='verbatim_action_description':
+                schema['fields']=['actor','verbal_clause']
+            elif model == "gollie" and base in {"Color", "Wears", "Sport", "SportParticipation"}:
                 label, fields = {"Color": ("HasColor", ["object", "color"]),
                                  "Wears": ("WearsClothing", ["person", "clothing"]),
                                  "Sport": ("PlaysSport", ["participant", "sport"]),
@@ -347,6 +365,8 @@ def render_schema(plan, model, count_stage=None, profile="scoped_experimental", 
             parts.append("class Event:\n\tpass")
     else:
         parts.append("# The following lines describe the task definition")
+    if plan.get('spatial_task_guideline'):
+        parts.append(json.dumps(plan['spatial_task_guideline'],ensure_ascii=False))
     for schema in schemas:
         name, kind = schema["name"], schema["kind"]
         description = schema["description"]
@@ -366,14 +386,15 @@ def render_schema(plan, model, count_stage=None, profile="scoped_experimental", 
         elif kind == "entity":
             body += "\tpass\n"
         elif kind == "relation":
-            body += "\tdef __init__(self, head_entity: Entity, tail_entity: Entity):\n\t\tsuper().__init__(head_entity=head_entity, tail_entity=tail_entity)\n"
+            if schema.get('constructor_style')=='inherited_relation':body+='\tpass\n'
+            else:body += "\tdef __init__(self, head_entity: Entity, tail_entity: Entity):\n\t\tsuper().__init__(head_entity=head_entity, tail_entity=tail_entity)\n"
         else:
             body += "    def __init__(self, trigger: str, actor: List[Entity], theme: List[Entity], place: List[Entity]):\n        self.trigger = trigger\n        self.actor = actor\n        self.theme = theme\n        self.place = place\n"
         parts.append(body)
     return "\n\n".join(parts)
 
 
-def native_prompt(plan, model, passage, count_stage=None, profile="scoped_experimental", task_stage=None):
+def _target_prompt(plan, model, passage, count_stage=None, profile="scoped_experimental", task_stage=None):
     """Join the condition-only schema to quoted source data with model-native framing."""
     if not isinstance(passage, str) or not passage.strip():
         raise ValueError("A nonempty passage is required")
@@ -381,23 +402,38 @@ def native_prompt(plan, model, passage, count_stage=None, profile="scoped_experi
     source = json.dumps(passage, ensure_ascii=False)
     if model == "gollie":
         policy = "Extract the requested positive source-supported annotations. Copy argument spans exactly; return [] when none are supported." if profile == "positive_anchor" else POLICY
-        return schema + "\n\n# " + policy + "\n# This is the text to analyze\ntext = " + source + "\n\n# The annotation instances that take place in the text above\nresult ="
+        target=schema + "\n\n# " + policy + "\n# This is the text to analyze\ntext = " + source + "\n\n# The annotation instances that take place in the text above\nresult ="
+        return target
     system = "You are a highly skilled assistant at digesting and extracting information from textual content. Below is an input containing standard type definitions and textual content. Please complete it with the extracted information in the form of structured code."
     kinds = {schema["kind"] for schema in selected_schemas(plan, model, count_stage, profile, task_stage)}
     subject, kind = ("Relation Classes and related Entity Classes", "Relation") if kinds == {"relation"} else ("Entity Classes", "Entity") if kinds == {"entity"} else ("Event Classes and related Entity Classes", "Event")
     instruction = '\"\"\"\nThis is an object-oriented programming task: Some ' + subject + " are defined above. Please instantiate all the corresponding " + kind + ' Objects in the following sentence.\n\"\"\"'
     experimental_policy = "\n\n" + json.dumps(POLICY) if profile == "scoped_experimental" else ""
-    return system + "\nInput:\n" + schema + experimental_policy + "\n\n" + instruction + "\nsentence = " + source + "\nOutput:\n"
+    target=system + "\nInput:\n" + schema + experimental_policy + "\n\n" + instruction + "\nsentence = " + source + "\nOutput:\n"
+    return target
+
+
+def native_prompt(plan,model,passage,count_stage=None,profile='scoped_experimental',task_stage=None,prompt_profile=None):
+    target=_target_prompt(plan,model,passage,count_stage,profile,task_stage)
+    prompt_profile=prompt_profile or (CONTRACT_RECIPE if plan.get('contract_recipe')==CONTRACT_RECIPE else ZERO_SHOT)
+    if plan.get('contract_recipe')==CONTRACT_RECIPE:
+        schemas=selected_schemas(plan,model,count_stage,profile,task_stage)
+        if prompt_profile==KNOW_REFINEMENT:
+            return render_know_refinement(target,plan,model,schemas,profile,count_stage)
+        if prompt_profile!=CONTRACT_RECIPE:raise ValueError('New contract requires its single fixed prompt recipe')
+        return render_recipe(target,plan,model,schemas,profile,count_stage)
+    if prompt_profile in {CONTRACT_RECIPE,KNOW_REFINEMENT}:raise ValueError('Task recipe requires an explicitly compiled contract plan')
+    return render_prompt_profile(target,model,plan['native_task'],prompt_profile,profile,count_stage,task_stage)
 
 
 def implementation_identity():
     """Bind every runtime module used by schema, projection and aggregation."""
     folder = Path(__file__).parent
-    return {path.name: hashlib.sha256(path.read_bytes()).hexdigest()
-            for path in sorted(folder.glob("*.py"))}
+    files=sorted(folder.glob('*.py'))+sorted(folder.glob('*.json'))
+    return {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in files}
 
 
-def bounded_input(plan, model, passage, count_tokens, max_new_tokens=512, count_stage=None, profile="scoped_experimental", task_stage=None):
+def bounded_input(plan, model, passage, count_tokens, max_new_tokens=512, count_stage=None, profile="scoped_experimental", task_stage=None,prompt_profile=None):
     """Require actual tokenizer accounting; never truncate a source or its schema.
 
     The caller supplies its actual tokenizer's count including special tokens.
@@ -408,14 +444,25 @@ def bounded_input(plan, model, passage, count_tokens, max_new_tokens=512, count_
         raise ValueError("A positive output-token reserve is required")
     if plan["family"] == "aggregate_counts_quantities":
         raise ValueError("Count model dispatch is disabled pending quantity, polarity and composition gates")
-    prompt = native_prompt(plan, model, passage, count_stage=count_stage, profile=profile, task_stage=task_stage)
+    prompt_profile=prompt_profile or (CONTRACT_RECIPE if plan.get('contract_recipe')==CONTRACT_RECIPE else ZERO_SHOT)
+    prompt = native_prompt(plan, model, passage, count_stage=count_stage, profile=profile, task_stage=task_stage,prompt_profile=prompt_profile)
+    target=_target_prompt(plan,model,passage,count_stage=count_stage,profile=profile,task_stage=task_stage)
+    schemas=selected_schemas(plan,model,count_stage,profile,task_stage)
+    if prompt_profile==KNOW_REFINEMENT:
+        profile_receipt=know_refinement_identity(plan,model,schemas,profile,count_stage)
+    elif prompt_profile==CONTRACT_RECIPE:
+        profile_receipt=recipe_identity(plan,model,schemas,profile,count_stage)
+    else:
+        profile_receipt=prompt_profile_identity(prompt_profile,plan['native_task'],profile,count_stage,task_stage)
     tokens = count_tokens(prompt)
     if type(tokens) is not int or tokens < 1:
         raise ValueError("Tokenizer must report a positive exact input-token count")
-    context = 2048 if model == "knowcoder" else 16384
+    context = profile_receipt.get('context_limit',2048) if model == "knowcoder" else 16384
     if tokens + max_new_tokens > context:
         raise ValueError("Native schema/source/output reserve exceeds context; no truncation allowed")
     return {"prompt": prompt, "model": model, "count_stage": count_stage, "profile": profile, "task_stage": task_stage,
+            'prompt_profile':prompt_profile,'prompt_profile_identity':profile_receipt,'contract_recipe':plan.get('contract_recipe'),
+            'target_prompt_sha256':hashlib.sha256(target.encode()).hexdigest(),
             "input_tokens": tokens, "max_new_tokens": max_new_tokens, "context_limit": context,
             "plan_sha256": plan_digest(plan), "prompt_sha256": hashlib.sha256(prompt.encode()).hexdigest(),
             "implementation_sha256": implementation_identity()}
@@ -425,7 +472,7 @@ def verify_bound_input(record, plan, passage, count_tokens):
     """Reject helper, plan, source, prompt or tokenizer-count drift before execution."""
     expected = bounded_input(plan, record["model"], passage, count_tokens,
                              max_new_tokens=record["max_new_tokens"],
-                             count_stage=record["count_stage"], profile=record["profile"], task_stage=record["task_stage"])
+                             count_stage=record["count_stage"], profile=record["profile"], task_stage=record["task_stage"],prompt_profile=record['prompt_profile'])
     if record != expected:
         raise ValueError("Frozen native input identity changed")
     return True

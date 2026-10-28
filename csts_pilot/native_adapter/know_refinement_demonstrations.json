@@ -1,0 +1,43 @@
+{
+  "action_completeness": {
+    "contrast": {
+      "complete_quote": "retrieves a scroll from a cabinet in a quiet gallery",
+      "incomplete_quote": "retrieves"
+    },
+    "know_output": "results = [ActionDescription(Entity(\"An archivist\"), Entity(\"retrieves a scroll from a cabinet in a quiet gallery\"))]",
+    "know_query": "class Entity:\n\tdef __init__(self, name: str):\n\t\tself.name = name\n\nclass Relation:\n\tdef __init__(self, head_entity: Entity, tail_entity: Entity):\n\t\tself.head_entity = head_entity\n\t\tself.tail_entity = tail_entity\n\nclass ActionDescription(Relation):\n\t\"\"\"\n\tDescription: The source-mentioned actor and its contiguous verbal description. Copy the full verb phrase including its stated objects, prepositions, negation and modal qualifiers. Keep the correct actor; do not assign another actor's separate action to this actor. This records a verbatim clause description, not resolved event actor/theme/place roles or an inferred goal, state or persistent hobby. Condition scope: action of person\n\t\"\"\"\n\tdef __init__(self, head_entity: Entity, tail_entity: Entity):\n\t\tsuper().__init__(head_entity=head_entity, tail_entity=tail_entity)\n\n\n\"\"\"\nThis is an object-oriented programming task: Some Relation Classes and related Entity Classes are defined above. Please instantiate all the corresponding Relation Objects in the following sentence.\n\"\"\"\n\"Span completeness: the bare verb \\\"retrieves\\\" is incomplete because the sentence states its object, origin and locative modifier. Copy the complete phrase \\\"retrieves a scroll from a cabinet in a quiet gallery\\\"; do not drop either complement.\"\nsentence = \"An archivist retrieves a scroll from a cabinet in a quiet gallery.\"",
+    "scope": "Second fixed independent retrieval/origin example, used for every action-description stage. The original gardener example remains first.",
+    "sentence": "An archivist retrieves a scroll from a cabinet in a quiet gallery."
+  },
+  "development_selected": true,
+  "spatial_palette": {
+    "illustrated_constructors": [
+      "At",
+      "Near",
+      "On",
+      "Inside",
+      "Outside",
+      "Under",
+      "Above",
+      "Over",
+      "Beside",
+      "InFrontOf",
+      "Behind",
+      "Between",
+      "Around",
+      "Across",
+      "Along",
+      "Through",
+      "From",
+      "Toward",
+      "To",
+      "Into",
+      "OutOf"
+    ],
+    "know_output": "results = [At(Entity(\"An archivist\"), Entity(\"a desk\")), Near(Entity(\"A bronze marker\"), Entity(\"a lantern\")), On(Entity(\"A wooden tray\"), Entity(\"a shelf\")), Inside(Entity(\"A cedar bead\"), Entity(\"a chest\")), Outside(Entity(\"A silver coin\"), Entity(\"a vault\")), Under(Entity(\"A folded cloth\"), Entity(\"a stool\")), Above(Entity(\"A paper glider\"), Entity(\"a pedestal\")), Over(Entity(\"A kite\"), Entity(\"a courtyard\")), Beside(Entity(\"A wicker basket\"), Entity(\"a chair\")), InFrontOf(Entity(\"A marble bust\"), Entity(\"a screen\")), Behind(Entity(\"A brass bell\"), Entity(\"a curtain\")), Between(Entity(\"A pebble\"), Entity(\"two cones\")), Around(Entity(\"A ribbon\"), Entity(\"a column\")), Across(Entity(\"A cyclist\"), Entity(\"a bridge\")), Along(Entity(\"A courier\"), Entity(\"a corridor\")), Through(Entity(\"A train\"), Entity(\"a tunnel\")), From(Entity(\"A clerk\"), Entity(\"a lobby\")), Toward(Entity(\"A visitor\"), Entity(\"an arch\")), To(Entity(\"A messenger\"), Entity(\"a kiosk\")), Into(Entity(\"A beetle\"), Entity(\"a jar\")), OutOf(Entity(\"A butterfly\"), Entity(\"a greenhouse\"))]",
+    "know_query": "class Entity:\n\tdef __init__(self, name: str):\n\t\tself.name = name\n\nclass Relation:\n\tdef __init__(self, head_entity: Entity, tail_entity: Entity):\n\t\tself.head_entity = head_entity\n\t\tself.tail_entity = tail_entity\n\n\"Physical locations and spatial paths only. Exclude attire such as in a swimsuit, ownership, participation and figurative uses. The emitted relation class carries the qualifier. Copy subject/reference entity noun phrases, not leading spatial preposition phrases. Do not replace an unrepresented/unstated relation with At or infer a place from a typical activity. Condition scope: location of entity\"\n\nclass At(Relation):\n\t\"\"\"\n\tDescription: At a stated physical place or location. Not a fallback for a more specific qualifier.\n\t\"\"\"\n\tpass\n\n\nclass Near(Relation):\n\t\"\"\"\n\tDescription: Near or close to the reference. Do not substitute for beside/on/in.\n\t\"\"\"\n\tpass\n\n\nclass On(Relation):\n\t\"\"\"\n\tDescription: On or on top of the reference.\n\t\"\"\"\n\tpass\n\n\nclass Inside(Relation):\n\t\"\"\"\n\tDescription: Inside/in/within a physical reference; not clothing or participation.\n\t\"\"\"\n\tpass\n\n\nclass Outside(Relation):\n\t\"\"\"\n\tDescription: Outside a physical reference.\n\t\"\"\"\n\tpass\n\n\nclass Under(Relation):\n\t\"\"\"\n\tDescription: Under/below/beneath the reference.\n\t\"\"\"\n\tpass\n\n\nclass Above(Relation):\n\t\"\"\"\n\tDescription: Above the reference. Do not replace the word over.\n\t\"\"\"\n\tpass\n\n\nclass Over(Relation):\n\t\"\"\"\n\tDescription: Over the reference; do not infer whether it is static or a path.\n\t\"\"\"\n\tpass\n\n\nclass Beside(Relation):\n\t\"\"\"\n\tDescription: Beside/next to/alongside the reference.\n\t\"\"\"\n\tpass\n\n\nclass InFrontOf(Relation):\n\t\"\"\"\n\tDescription: In front of the reference.\n\t\"\"\"\n\tpass\n\n\nclass Behind(Relation):\n\t\"\"\"\n\tDescription: Behind the reference.\n\t\"\"\"\n\tpass\n\n\nclass Between(Relation):\n\t\"\"\"\n\tDescription: Between stated reference entities; keep their group phrase.\n\t\"\"\"\n\tpass\n\n\nclass Around(Relation):\n\t\"\"\"\n\tDescription: Around/surrounding the reference.\n\t\"\"\"\n\tpass\n\n\nclass Across(Relation):\n\t\"\"\"\n\tDescription: Across the reference.\n\t\"\"\"\n\tpass\n\n\nclass Along(Relation):\n\t\"\"\"\n\tDescription: Along the reference.\n\t\"\"\"\n\tpass\n\n\nclass Through(Relation):\n\t\"\"\"\n\tDescription: Through the reference.\n\t\"\"\"\n\tpass\n\n\nclass From(Relation):\n\t\"\"\"\n\tDescription: From the stated reference/origin.\n\t\"\"\"\n\tpass\n\n\nclass Toward(Relation):\n\t\"\"\"\n\tDescription: Toward the reference; do not assert arrival.\n\t\"\"\"\n\tpass\n\n\nclass To(Relation):\n\t\"\"\"\n\tDescription: To the stated reference/destination; distinct from toward.\n\t\"\"\"\n\tpass\n\n\nclass Into(Relation):\n\t\"\"\"\n\tDescription: Moving into the reference; distinct from static Inside.\n\t\"\"\"\n\tpass\n\n\nclass OutOf(Relation):\n\t\"\"\"\n\tDescription: Moving out of the reference; distinct from static Outside.\n\t\"\"\"\n\tpass\n\n\n\"\"\"\nThis is an object-oriented programming task: Some Relation Classes and related Entity Classes are defined above. Please instantiate all the corresponding Relation Objects in the following sentence.\n\"\"\"\nsentence = \"An archivist is at a desk. A bronze marker lies near a lantern. A wooden tray rests on a shelf. A cedar bead is inside a chest. A silver coin lies outside a vault. A folded cloth lies under a stool. A paper glider floats above a pedestal. A kite travels over a courtyard. A wicker basket stands beside a chair. A marble bust stands in front of a screen. A brass bell hangs behind a curtain. A pebble lies between two cones. A ribbon loops around a column. A cyclist rides across a bridge. A courier walks along a corridor. A train passes through a tunnel. A clerk returns from a lobby. A visitor walks toward an arch. A messenger walks to a kiosk. A beetle crawls into a jar. A butterfly flies out of a greenhouse.\"",
+    "scope": "One fixed independent source/output illustrating every declared predicate; unchanged across all spatial conditions.",
+    "sentence": "An archivist is at a desk. A bronze marker lies near a lantern. A wooden tray rests on a shelf. A cedar bead is inside a chest. A silver coin lies outside a vault. A folded cloth lies under a stool. A paper glider floats above a pedestal. A kite travels over a courtyard. A wicker basket stands beside a chair. A marble bust stands in front of a screen. A brass bell hangs behind a curtain. A pebble lies between two cones. A ribbon loops around a column. A cyclist rides across a bridge. A courier walks along a corridor. A train passes through a tunnel. A clerk returns from a lobby. A visitor walks toward an arch. A messenger walks to a kiosk. A beetle crawls into a jar. A butterfly flies out of a greenhouse."
+  },
+  "target_source_examples": false
+}
