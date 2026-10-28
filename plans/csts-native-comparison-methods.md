@@ -165,7 +165,7 @@ Use AdamW coefficients 0.9 and 0.999, epsilon $10^{-8}$, logical batch size 32, 
 
 Before fitting, profile physical microbatches of 8, 16 and 32 pairs on A100 hardware, or 2, 4 and 8 pairs on L4 hardware. Each profile computes gradients for the same logical batch of the 32 longest training comparisons, then clears gradients. Select the fastest successful candidate and record timing and peak allocation. Verify unchanged parameter bytes and reset random states before the initial validation pass. The logical batch size and pair weighting stay fixed. This profile selects memory use and throughput.
 
-Evaluate validation Spearman after each epoch, with dropout disabled. Initialization is eligible. Keep the first strictly best checkpoint for each model. Each fit continues until ten epochs have passed since its own last improvement, with an initial ceiling of 48 epochs. Record a ceiling case as incomplete and continue from its saved state before final evaluation. Report both selected and terminal epochs and actual updates. These learning rates define this experiment's starting protocol; their optimality is a separate empirical question.
+Evaluate validation Spearman after each epoch, with dropout disabled. Initialization is eligible. Keep the first strictly best checkpoint for each model. Seed 8 completed the original ten epoch patience rule. At the user request, seeds 7 and 9 end training and receive inference from their existing epoch 4 selections. Their sealed snapshots retain completed epochs 11 and 8 respectively. The archived configuration preserves the original fitting settings and their identity. Report selected epochs, retained training epochs and saved updates. These learning rates define this experiment's starting protocol; their optimality is a separate empirical question.
 
 ## Inputs, evaluation and diagnostics
 
@@ -179,7 +179,7 @@ Record training and validation loss, validation Spearman, coefficient norms, bia
 
 ## Implementation and execution contract
 
-The [completed fit scoring driver](../scripts/score_completed_csts_native.py) publishes each finished model's test result while the other fits continue. This reporting schedule was adopted on October 28 at 17:50 Eastern, following the request for test scores and before the first new test evaluation.
+The [completed fit scoring driver](../scripts/score_completed_csts_native.py) publishes each finished model's test result while the other fits continue. This reporting schedule was adopted on October 28 at 17:55 Eastern, following the request for test scores and before the first new test evaluation.
 
 The [native stages](../csts_pilot/native_comparison.py) and [run controller](../csts_pilot/native_comparison_run.py) save and restore LoRA and comparison weights together, with an explicit scorer kind, both optimizer groups, batch order state, random number state, source commit and input hashes. Prediction after restore must use the saved comparison. The existing [cosine training stages](../csts_pilot/baseline_stages.py) and [comparison module](../csts_pilot/evidence_readout.py) supply the components; the [native configuration](../configs/csts-native-comparison.json) binds their joint execution.
 
@@ -200,3 +200,5 @@ The A100 high memory allocation is attempted first, with assigned VRAM verified 
 ## Training budget amendment on October 28
 
 The user requested immediate inference from the existing validation checkpoints after seed 8 test results were available. Seed 7 retains its epoch 4 selection from the sealed epoch 11 snapshot. Seed 9 retains its epoch 4 selection from the sealed epoch 8 snapshot. Training stops at this request and each selected model receives test and fixed edit inference. Seed 8 completed the original patience rule. The report records this timing and the observed training budgets for all three seeds. The selected states continue to use validation Spearman.
+
+The [CPU report](../scripts/report_csts_snapshots.py) reuses the sealed test predictions from all three selected models, verifies their model and input hashes, and computes the paired comparisons and condition diagnostics. Publication receipts precede runtime shutdown.

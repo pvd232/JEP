@@ -6,7 +6,7 @@
       "display": 13,
       "inline": 48,
       "relative_links": 23,
-      "source_sha256": "1198957dc39d95dab96430de842f0d25ccb8ab7a5d598ab807b2834a9260ac7d"
+      "source_sha256": "f26eb6a03189aa654cfd84ef63daaa7fe155f580a1d662214e0bcb2e7a315117"
     },
     "plans/csts-readout-convergence-methods.md": {
       "display": 1,
@@ -18,7 +18,7 @@
       "display": 0,
       "inline": 0,
       "relative_links": 8,
-      "source_sha256": "8113666ec25913598d2d7dad80af1e677636f66a7ef6a0b92ea07440dd6b5653"
+      "source_sha256": "128a6b46a00b7c4189e5f0a32c8977466469935593040263e4ab66b79bf82791"
     }
   },
   "errors": [],
@@ -126,6 +126,13 @@
     "source_sha256": "c59fb0a44c2bd9e32a7e2db8db11aa7ee23b7faa8c8ca08fbc69830777dcd68c",
     "ruff": "passed",
     "python_syntax": "passed",
-    "native_prediction_function": "Original capture_native_comparison; inference from the selected saved bytes."
+    "gpu_execution": "Succeeded for retained seeds 7 and 9, using the original native inference function."
+  },
+  "cpu_report": {
+    "source_sha256": "79897aa647eba641575566be2d9785538914af1f9d67ece51f984be97b6b8756",
+    "ruff": "passed",
+    "python_syntax": "passed",
+    "prediction_metric_recomputation": "Matched all three published test metrics.",
+    "mathematics": "Existing formulas retained; documentation changes describe execution and observed budgets."
   }
 }
