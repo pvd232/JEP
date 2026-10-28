@@ -1,0 +1,117 @@
+{
+  "fixture_hashes": {
+    "count_development_gates_v1.json": "ffc5bc7054a8887967a0cae7399c4b97566fe2f2362a0079ebae3a2628cede9e",
+    "development_gate_cases_v3.json": "01c8b3b8b9f125266fbd3134bf31add91b00d2234d12b157ae0a505abae3387e"
+  },
+  "integration_receipt_verified": true,
+  "legacy_runner_code_identity_note": "Legacy experiment runner still seals its existing four modules; any new native runtime arm must explicitly add the task-aware helpers or bind implementation_identity in its own frozen protocol before capture.",
+  "main_files_modified": false,
+  "model_calls": 0,
+  "module_hashes": {
+    "__init__.py": {
+      "frozen_sha256": "b0572fcc34f6a05cbd37dbe1b6ffb14e7b6500c5bb8c93379ee1b2ea27801f1f",
+      "repo_sha256": "b0572fcc34f6a05cbd37dbe1b6ffb14e7b6500c5bb8c93379ee1b2ea27801f1f"
+    },
+    "cli.py": {
+      "frozen_sha256": "f579eef7cdf17cb7a973cb13c6117a8467a4474f62ddd7208f0c3481dc43a33d",
+      "repo_sha256": "f579eef7cdf17cb7a973cb13c6117a8467a4474f62ddd7208f0c3481dc43a33d"
+    },
+    "counts.py": {
+      "frozen_sha256": "c3db49bc283c7cc30c5881418fddd2506e2d283d2dc6a3c36cada7f4422fce76",
+      "repo_sha256": "c3db49bc283c7cc30c5881418fddd2506e2d283d2dc6a3c36cada7f4422fce76"
+    },
+    "export.py": {
+      "frozen_sha256": "9591874d15fc0637a030c806036ca75ff4dc0dc566e2903b4eea623f367560f6",
+      "repo_sha256": "9591874d15fc0637a030c806036ca75ff4dc0dc566e2903b4eea623f367560f6"
+    },
+    "gates.py": {
+      "frozen_sha256": "74fb62e780d160805d7e7d6222672b8515c8a261dd395ae90e2e0250bc1c5150",
+      "repo_sha256": "74fb62e780d160805d7e7d6222672b8515c8a261dd395ae90e2e0250bc1c5150"
+    },
+    "inventory.py": {
+      "frozen_sha256": "3caefd6f3492b8244fb7c2c860db6e437b99215c0011196ed891a9096cff765c",
+      "repo_sha256": "3caefd6f3492b8244fb7c2c860db6e437b99215c0011196ed891a9096cff765c"
+    },
+    "normalize.py": {
+      "frozen_sha256": "0b4d2b747dd99c3a30cbfcf084ede902c040c6691aa18ed83c82d5d8bce860a5",
+      "repo_sha256": "0b4d2b747dd99c3a30cbfcf084ede902c040c6691aa18ed83c82d5d8bce860a5"
+    },
+    "runtime.py": {
+      "frozen_sha256": "0ede1154a1625d16e03994b3bb546289c23cf8f979ebea829c6d09be0eb7cbea",
+      "repo_sha256": "0ede1154a1625d16e03994b3bb546289c23cf8f979ebea829c6d09be0eb7cbea"
+    },
+    "schema.py": {
+      "frozen_sha256": "49782e03ed91519dafff535f02a904489735103e08f6f9f4129ed3c041d7b98d",
+      "repo_sha256": "49782e03ed91519dafff535f02a904489735103e08f6f9f4129ed3c041d7b98d"
+    },
+    "scope_extensions.py": {
+      "frozen_sha256": "c5fffd5a03bca8adbc81e7477530f4fa1e6481c341d1db89a0151ca49669f8e3",
+      "repo_sha256": "c5fffd5a03bca8adbc81e7477530f4fa1e6481c341d1db89a0151ca49669f8e3"
+    }
+  },
+  "real_cli_checks": [
+    {
+      "command": [
+        "compile",
+        "--condition",
+        "color of animal"
+      ],
+      "exit_code": 0,
+      "output_sha256": "b2148ee2dc5088a95b5f0fea8f27077574abb559acca75255e457563e1b2ef63"
+    },
+    {
+      "command": [
+        "descriptor",
+        "--model-alias",
+        "knowcoder_ie"
+      ],
+      "exit_code": 0,
+      "output_sha256": "3fe81c3594ba7e1a5525a1464dc66b02a9c99ae1bbf51b2007b1043bb2ef1f43"
+    },
+    {
+      "command": [
+        "normalize",
+        "--input",
+        "/tmp/jep-native-adapter-integration-audit-20261028/raw.json",
+        "--output",
+        "/tmp/jep-native-adapter-integration-audit-20261028/normalized.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "export",
+        "--input",
+        "/tmp/jep-native-adapter-integration-audit-20261028/normalized.json",
+        "--output",
+        "/tmp/jep-native-adapter-integration-audit-20261028/common.jsonl"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "retained_rows": 2,
+  "scope_archive_sha256": "ce822907f2f268e8b5ffcc2ce80b49b2e33cd34ad4575b3fcd72212e7498a4aa",
+  "status": "read_only_integration_cli_audit_pass",
+  "test_relocation_checks": {
+    "test_task_native_adapter.py": {
+      "only_import_and_fixture_path_relocation": true,
+      "sha256": "70872dcc520919273e7d2a7070775aa3f658f4fa1abef697508f806fe0d054da"
+    },
+    "test_task_native_counts.py": {
+      "only_import_and_fixture_path_relocation": true,
+      "sha256": "326e6d2e39f46e6395649e08f565c4cb60dfe823a6024cc497ddc7bc3c564ef9"
+    },
+    "test_task_native_export_cli.py": {
+      "only_import_and_fixture_path_relocation": true,
+      "sha256": "a1d0acff5d297b98de9042e9e6f51b573574068f7ef4cd76670438acd4900e41"
+    },
+    "test_task_native_scope_extensions.py": {
+      "only_import_and_fixture_path_relocation": true,
+      "sha256": "3b1e636a74482f057d2355718afd8d800dcabf53ac9c06f3d35d38082f422007"
+    },
+    "test_task_native_stage_merge.py": {
+      "only_import_and_fixture_path_relocation": true,
+      "sha256": "e923870bae636b0914ffa1eaca15410af06461d545943dc120d3e747202d2a51"
+    }
+  }
+}
