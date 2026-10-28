@@ -1,6 +1,11 @@
 # JEP full readout training
 
-Status: recovering the pinned inputs and rebuilding feature caches on the A100.
+**Status checked October 28 at 11:47 a.m. New York time: interrupted.**
+
+Colab no longer lists the A100 assignment. Its disappearance has no established cause. The last streamed measurement was seed 9, epoch 1, at 11:01 a.m. Native Cloud receipts confirm that both feature caches are published. A complete inventory of this experiment's VIPER Cloud workspace found no published fitting run or fitting checkpoint. The controller queued publication after the full fitting stage; intermediate checkpoints remained on the runtime. A replacement A100 request timed out, and fitting has not restarted.
+
+The next launch requires verified Cloud publication of fitting checkpoints during training. The measurements below preserve the interrupted attempt.
+
 
 | UTC | Event | Seed | Step | Metrics or progress |
 | --- | --- | --- | --- | --- |
