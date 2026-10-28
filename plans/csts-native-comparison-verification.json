@@ -6,7 +6,7 @@
       "display": 13,
       "inline": 48,
       "relative_links": 16,
-      "source_sha256": "fbd056d72fbf2b158d84e69cc16bf1fb2acb669690f5e060f952a99c93d9778b"
+      "source_sha256": "bbdc4d77e74fce51b07471652c54e4102c5d3f7cae019f77486d7342feae940b"
     },
     "plans/csts-readout-convergence-methods.md": {
       "display": 1,
@@ -18,7 +18,7 @@
       "display": 0,
       "inline": 0,
       "relative_links": 4,
-      "source_sha256": "8aeba307a493a935f63253f8d393cd507f99aaa74e43a06160c26a841f09ee2c"
+      "source_sha256": "64efcf53c2fb2906e998dc78840367f1d31dbb11279cb62146dc786cf501a5bc"
     }
   },
   "errors": [],
@@ -46,12 +46,23 @@
     ],
     "visual_inspection": "LoRA, comparison, normalization gradient, LoRA chain rule, rank argument and AdamW displays rasterized from MathJax and inspected",
     "execution_status": "awaiting user review",
-    "scope_correction": "Three fresh joint LoRA and comparison rating fits from the original pretrained Qwen, seeds 7, 8 and 9. Existing cosine models are reused. Fixed comparison decay 0.01. Proposition training, cosine retraining and the separate regularization screen removed."
+    "scope_correction": "One initial fresh joint LoRA and comparison fit, seed 7. Strict improvement over the saved ratings control on the same validation rows releases seeds 8 and 9 under unchanged settings. Maximum three fits. Existing cosine models reused; comparison decay fixed at 0.01."
   },
   "run_count": {
-    "native_joint_rating_fits": 3,
+    "initial_native_joint_rating_fits": 1,
+    "conditional_native_joint_rating_fits": 2,
+    "maximum_native_joint_rating_fits": 3,
     "new_cosine_fits": 0,
     "proposition_fits": 0,
     "separate_regularization_fits": 0
+  },
+  "continuation_rule": {
+    "metric": "validation Spearman",
+    "criterion": "selected seed 7 score strictly exceeds saved ratings control score on identical frozen rows at full precision",
+    "follow_on_seeds": [
+      8,
+      9
+    ],
+    "test_use": "executed seed list and selected states frozen before test evaluation"
   }
 }

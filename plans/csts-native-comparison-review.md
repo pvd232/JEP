@@ -2,7 +2,7 @@
 
 Reviewed the [experiment plan](csts-native-comparison-methods.md) once on October 28, 2026. This is a self review of the mathematics, experimental controls and implementation requirements. Status: ready for user review. Native implementation and scientific execution follow that review.
 
-The user's scope corrections are incorporated: three fresh joint training runs start from the original pretrained Qwen and train directly on similarity ratings. Existing cosine models supply the reference predictions. Comparison decay remains fixed at the completed experiment's value of 0.01.
+The user's scope corrections are incorporated: seed 7 runs first, starting from the original pretrained Qwen and training fresh LoRA and comparison weights directly on similarity ratings. A positive validation result releases seeds 8 and 9 under the same configuration. Existing cosine models supply the reference predictions. Comparison decay remains fixed at the completed experiment's value of 0.01.
 
 ## Findings resolved in this pass
 
@@ -10,7 +10,7 @@ The user's scope corrections are incorporated: three fresh joint training runs s
 2. LoRA is defined as trainable factors inside Qwen's attention matrices. The base matrices stay fixed, and the final sentence embedding retains 4,096 coordinates. Matrix dimensions, symmetry, zero initialization and gradients were checked against the [encoder](../csts_pilot/baseline_models.py) and [comparison](../csts_pilot/evidence_readout.py).
 3. The regularization rationale identifies coefficient flexibility as a reason for standard fitting controls. Its empirical benefit remains a measurement question. The joint runs reuse decay 0.01 and validation stopping from the completed experiment.
 4. AdamW decay is specified in the optimizer, with separate LoRA and comparison groups. Comparison decay favors cosine on the current embeddings; LoRA decay favors smaller changes to pretrained matrices. These reference points are stated explicitly.
-5. Seeds 7, 8 and 9 independently initialize fresh LoRA and a zero initialized comparison from the public pretrained Qwen. The plan contains exactly three native rating fits.
+5. Seed 7 runs to its validation stopping point first. Its selected validation Spearman must strictly exceed the saved ratings control on the same frozen rows to release seeds 8 and 9. The comparison uses full precision archived predictions. The plan contains one initial fit and two conditional fits.
 6. Random states are set after constructing every module. Rating dropout and batch order have separate seed rules, and both states are saved for resumption.
 7. Saving, restoring and scoring include both LoRA and comparison state, with an explicit scorer kind. The planned native checks cover parameter groups, gradient flow, partial logical batches and prediction equality after restoration.
 8. Rating inputs and the public checkpoint have explicit identities. Historical reference predictions retain their original Cloud provenance. Each source is verified once when loaded.
@@ -22,7 +22,7 @@ The primary result compares fresh joint training with the existing ratings contr
 
 The existing test supplies exploratory evidence. Paired source group intervals describe uncertainty in that test conditional on retained runs. Fresh reserved source groups supply the confirmation setting.
 
-The plan calls for three native rating fits, using seeds 7, 8 and 9. Each comparison starts at zero, and each parent is the seed's fresh adapter initialization. Native training retains the encoder computation in the gradient graph. Checkpoints and reports use the existing VIPER Cloud and resume facilities with asynchronous publication.
+The plan calls for one initial native rating fit, using seed 7. A positive validation result releases seeds 8 and 9, giving a maximum of three fits. The continuation decision and selected states are fixed before test evaluation. Reporting retains the initial seed result and the conditional nature of any three seed summary. Each comparison starts at zero, and each parent is the seed's fresh adapter initialization. Native training retains the encoder computation in the gradient graph. Checkpoints and reports use the existing VIPER Cloud and resume facilities with asynchronous publication.
 
 ## Verification record
 
