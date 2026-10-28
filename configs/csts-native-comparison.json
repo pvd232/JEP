@@ -1,0 +1,67 @@
+{
+  "publication_destination": {
+    "kind": "viper_cloud",
+    "owner": "pvd232",
+    "workspace": "jep_csts_joint_20261021"
+  },
+  "dataset_revision": "jep-csts-v1.1",
+  "initial_seed": 7,
+  "conditional_seeds": [
+    8,
+    9
+  ],
+  "stage_timeout_seconds": 86400,
+  "encoder": {
+    "model_id": "Qwen/Qwen3-Embedding-8B",
+    "revision": "c90816d848505624c2434128dfc61132162a0ee9",
+    "embedding_dimension": 4096,
+    "max_length": 160,
+    "encode_batch_size": 16,
+    "device": "cuda"
+  },
+  "training": {
+    "learning_rate": 2e-05,
+    "comparison_learning_rate": 0.001,
+    "weight_decay": 0.01,
+    "comparison_weight_decay": 0.01,
+    "batch_size": 32,
+    "microbatch_size": 2,
+    "autotune_microbatch": true,
+    "max_epochs": 48,
+    "patience": 10,
+    "lora_rank": 32,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "max_seconds": 82800
+  },
+  "splits": {
+    "training": {
+      "path": "csts_data/readout/train.json",
+      "rows": 6051,
+      "groups": 2635,
+      "sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4"
+    },
+    "validation": {
+      "path": "csts_data/readout/validation.json",
+      "rows": 1576,
+      "groups": 680,
+      "sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+    },
+    "test": {
+      "path": "csts_data/readout/test.json",
+      "rows": 2431,
+      "groups": 1222,
+      "sha256": "d6b40b7b891ed147befb30801c2f85a8787775adebdd98d134157cbb2a6e9f76"
+    }
+  },
+  "ratings_validation_predictions": "csts_data/native/ratings_validation_predictions.json",
+  "ratings_model": {
+    "path": "csts_data/readout_revised/ratings_final.pt",
+    "sha256": "667c124a49be72a6fd8e9fa3df6974830e4ab6a46a10243c360dd46bcc75b534"
+  },
+  "interventions": {
+    "path": "configs/csts-readout-interventions.json",
+    "sha256": "863914ddc39779b58a18716396309b49ec53aae37895d85083f1484880de80c6"
+  },
+  "bootstrap_draws": 2000
+}

@@ -1,6 +1,6 @@
 # Review of the native comparison plan
 
-Reviewed the [experiment plan](csts-native-comparison-methods.md) once on October 28, 2026. This is a self review of the mathematics, experimental controls and implementation requirements. Status: ready for user review. Native implementation and scientific execution follow that review.
+Reviewed the [experiment plan](csts-native-comparison-methods.md) and its implementation again on October 28, 2026, following the user's execution request. This is a self review of the mathematics, experimental controls and implementation requirements. Status: authorized for execution after the implementation checks below.
 
 The user's scope corrections are incorporated: seed 7 runs first, starting from the original pretrained Qwen and training fresh LoRA and comparison weights directly on similarity ratings. A positive validation result releases seeds 8 and 9 under the same configuration. Existing cosine models supply the reference predictions. Comparison decay remains fixed at the completed experiment's value of 0.01.
 
@@ -26,6 +26,14 @@ The plan calls for one initial native rating fit, using seed 7. A positive valid
 
 ## Verification record
 
-The [mathematical verification receipt](csts-native-comparison-verification.json) records source hashes, numerical gradient checks, MathJax rendering and link checks. Mathematical verification covers the written derivation. The native stage integration checks listed in the plan apply to the forthcoming implementation.
+The [mathematical verification receipt](csts-native-comparison-verification.json) records source hashes, numerical gradient checks, MathJax rendering and link checks. Mathematical verification covers the written derivation. Eight focused tests passed in the existing L4 environment. They exercise LoRA and comparison gradients, frozen base matrices, exact cosine initialization, sentence order symmetry, save and restore of both components, partial logical batch gradients, optimizer and random state restoration across an epoch boundary, the strict validation continuation rule, and asynchronous checkpoint publication. Ruff and Python syntax checks passed locally.
 
 The live private GitHub page requires an authenticated browser. The recorded preview uses local MathJax rendering; saved page inspection remains unobserved.
+
+## Second review before execution
+
+The [native implementation](../csts_pilot/native_comparison.py) preserves both trained components under an explicit scorer kind. Its [controller](../csts_pilot/native_comparison_run.py) binds the reviewed configuration, repeats an incomplete epoch ceiling from the native terminal state, and releases follow on seeds using the saved validation decision. Physical microbatch profiling performs gradient computation with unchanged weights and restores random states before fitting.
+
+The review found an initial blocking network wait in the existing checkpoint wrapper. The native experiment sets its new optional `wait_for_first` argument to false. File copies remain immutable, uploads use the existing VIPER file publication API on a background thread, and the terminal barrier checks every publication before worker release. The previous experiment retains its original default. A focused asynchronous first upload test passed.
+
+The archived ratings validation predictions cover the exact 1,576 frozen rows with identical text and targets. Their full precision Spearman is 0.8718754731182672. This is the continuation threshold. The control is reused. GPU integration, actual hardware identity, epoch measurements and final Cloud receipts will be recorded by execution.

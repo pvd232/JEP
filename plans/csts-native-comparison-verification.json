@@ -5,8 +5,8 @@
     "plans/csts-native-comparison-methods.md": {
       "display": 13,
       "inline": 48,
-      "relative_links": 16,
-      "source_sha256": "bbdc4d77e74fce51b07471652c54e4102c5d3f7cae019f77486d7342feae940b"
+      "relative_links": 20,
+      "source_sha256": "6ea5d351a88b7489d5dbb6e3bfa955ea364e33805866e7f23eea8b46528b99d1"
     },
     "plans/csts-readout-convergence-methods.md": {
       "display": 1,
@@ -17,8 +17,8 @@
     "plans/csts-native-comparison-review.md": {
       "display": 0,
       "inline": 0,
-      "relative_links": 4,
-      "source_sha256": "64efcf53c2fb2906e998dc78840367f1d31dbb11279cb62146dc786cf501a5bc"
+      "relative_links": 6,
+      "source_sha256": "d8dc55ca693b422074dd5388fbe0f3536a2bd9ceb64576b7eea892a44152cd6d"
     }
   },
   "errors": [],
@@ -34,7 +34,7 @@
     "scope": "mathematical verification; native training integration follows plan review"
   },
   "review": {
-    "passes": 1,
+    "passes": 2,
     "type": "self review",
     "scope": [
       "score and LoRA derivation",
@@ -42,10 +42,11 @@
       "optimizer semantics",
       "historical reference coverage and training history",
       "selection and evaluation",
-      "artifact restoration and Cloud retention"
+      "artifact restoration and Cloud retention",
+      "joint implementation, resume state and nonblocking first upload"
     ],
     "visual_inspection": "LoRA, comparison, normalization gradient, LoRA chain rule, rank argument and AdamW displays rasterized from MathJax and inspected",
-    "execution_status": "awaiting user review",
+    "execution_status": "authorized; hardware recovery and native integration in progress",
     "scope_correction": "One initial fresh joint LoRA and comparison fit, seed 7. Strict improvement over the saved ratings control on the same validation rows releases seeds 8 and 9 under unchanged settings. Maximum three fits. Existing cosine models reused; comparison decay fixed at 0.01."
   },
   "run_count": {
@@ -64,5 +65,32 @@
       9
     ],
     "test_use": "executed seed list and selected states frozen before test evaluation"
+  },
+  "integration_checks": {
+    "environment": "existing GCE L4 environment",
+    "tests": 8,
+    "result": "passed",
+    "seconds": 13.95,
+    "coverage": [
+      "adapter and comparison gradients",
+      "frozen base matrices",
+      "cosine initialization and symmetry",
+      "joint checkpoint prediction equality",
+      "partial logical batch weighting",
+      "epoch resume reproduces model state and batch order",
+      "strict validation continuation rule",
+      "first checkpoint publication remains asynchronous"
+    ],
+    "static_checks": [
+      "Ruff passed",
+      "Python compilation passed"
+    ],
+    "actual_gpu_integration": "pending runtime preparation"
+  },
+  "reference_validation": {
+    "rows": 1576,
+    "identical_row_ids": true,
+    "identical_text_and_targets": true,
+    "spearman": 0.8718754731182672
   }
 }

@@ -26,13 +26,13 @@ def module(monkeypatch):
     return loaded
 
 
-def fake_cloud(module, monkeypatch, gate=None, entered=None):
+def fake_cloud(module, monkeypatch, gate=None, entered=None, block_first=False):
     objects = {}
 
     def publish(root, destination, files):
         if (
             gate is not None
-            and len(objects) >= 3
+            and (block_first or len(objects) >= 3)
             and any(k.endswith("resume.pt") for k in files)
         ):
             entered.set()
@@ -102,3 +102,26 @@ def test_first_failed_publication_stops_before_continuation(
         publisher.finish()
     assert len(attempts) == 3
     assert publisher.previous is None
+
+
+def test_first_upload_can_run_without_blocking_and_finish_waits(
+    module, monkeypatch, tmp_path
+):
+    gate, entered = threading.Event(), threading.Event()
+    objects = fake_cloud(module, monkeypatch, gate, entered, block_first=True)
+    source = tmp_path / "active.pt"
+    source.write_bytes(b"sealed initial state")
+    publisher = module.CheckpointCloud(
+        tmp_path, {}, {}, wait_for_first=False, prefix="native/checkpoints"
+    )
+    try:
+        pending = publisher.submit({"resume.pt": source}, {"epoch": 0})
+        assert entered.wait(3)
+        assert not pending.done()
+        source.write_bytes(b"later state")
+    finally:
+        gate.set()
+        publisher.finish()
+    assert b"sealed initial state" in objects.values()
+    assert b"later state" not in objects.values()
+    assert publisher.previous is not None

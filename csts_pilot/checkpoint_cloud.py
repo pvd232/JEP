@@ -16,10 +16,12 @@ from csts_pilot.background_storage import _save
 class CheckpointCloud:
     """Copy completed writes, publish on one CPU thread, and retain receipts."""
 
-    def __init__(self, root, destination, config):
+    def __init__(self, root, destination, config, *, wait_for_first=True, prefix=None):
         self.root = Path(root).resolve(strict=True)
         self.destination = ViperCloudDestination.model_validate(destination)
         self.config = config
+        self.wait_for_first = wait_for_first
+        self.prefix = prefix or "csts_readout_convergence_20261028/checkpoints"
         self.identity = uuid.uuid4().hex
         self.directory = (
             self.root / ".viper" / "checkpoint_publications" / self.identity
@@ -44,12 +46,12 @@ class CheckpointCloud:
         future = self.pool.submit(self._publish, number, directory, files, state)
         self.futures.append(future)
         # Establish a real Cloud round trip before the second fitting epoch.
-        if number == 1:
+        if number == 1 and self.wait_for_first:
             future.result()
         return future
 
     def _publish(self, number, directory, files, state):
-        prefix = f"csts_readout_convergence_20261028/checkpoints/{self.identity}/{number:05d}"
+        prefix = f"{self.prefix}/{self.identity}/{number:05d}"
         metadata = directory / "metadata.json"
         _save(
             metadata, {"config": self.config, "state": state, "previous": self.previous}
