@@ -6,6 +6,9 @@ import io
 import json
 from pathlib import Path
 import tempfile
+import threading
+import time
+import shutil
 import unittest
 from unittest.mock import patch
 
@@ -401,6 +404,85 @@ class ComparisonTest(unittest.TestCase):
         path.write_bytes(experiment.encoded(mapping))
         with self.assertRaisesRegex(ValueError, "review.*changed|Review.*changed"):
             experiment.summarize(self.output, reviews)
+
+    def test_gpt_concurrency_is_bounded_and_records_operator_workers(self):
+        self.seal()
+        guard = threading.Lock()
+        rendezvous = threading.Barrier(2)
+        active, peak, calls = 0, 0, 0
+
+        def capture(folder, *arguments):
+            nonlocal active, peak, calls
+            with guard:
+                active += 1
+                calls += 1
+                peak = max(peak, active)
+                synchronize = calls <= 2
+            try:
+                if synchronize:
+                    rendezvous.wait(timeout=2)
+                time.sleep(0.01)
+                return self.write_capture(folder, self.payload(folder, *arguments))
+            finally:
+                with guard:
+                    active -= 1
+
+        with patch.object(experiment, "capture_codex", side_effect=capture):
+            result = experiment.run_arm(self.output, "gpt_propositions", "unused",
+                                        execute=True, workers=2)
+        self.assertEqual(result["workers"], 2)
+        self.assertEqual(calls, 5)
+        self.assertEqual(peak, 2)
+        self.assertEqual(active, 0)
+        values = experiment.load_results(self.output, ["gpt_propositions"])["gpt_propositions"]
+        self.assertTrue(all(item["valid"] for item in values.values()))
+        attempts = list((self.output / "arm-executions" / "gpt_propositions").glob("attempt-*.json"))
+        self.assertEqual(len(attempts), 1)
+        receipt = experiment.read(attempts[0])
+        self.assertEqual(receipt["workers"], 2)
+        self.assertEqual(receipt["pending_requests"], 5)
+        with patch.object(experiment, "capture_codex") as capture_again:
+            experiment.run_arm(self.output, "gpt_propositions", "unused", execute=True, workers=3)
+            capture_again.assert_not_called()
+        self.assertEqual(experiment.verify_run(self.output), self.config)
+
+    def test_invalid_workers_fail_before_capture(self):
+        for workers in (0, -1, True, False, 1.5, "2", 17):
+            with self.subTest(workers=workers), patch.object(experiment, "capture_codex") as capture:
+                with self.assertRaisesRegex(ValueError, "workers"):
+                    experiment.run_arm(self.output, "gpt_direct", "unused", execute=True,
+                                       workers=workers)
+                capture.assert_not_called()
+
+    def test_native_parallelism_is_rejected_before_model_loading(self):
+        from csts_pilot import extraction_native
+        for arm in experiment.NATIVE_ARMS:
+            with self.subTest(arm=arm), patch.object(extraction_native, "NativeGenerator") as model:
+                with self.assertRaisesRegex(ValueError, "Native arms require workers=1"):
+                    experiment.run_arm(self.output, arm, "unused", execute=True, workers=2)
+                model.assert_not_called()
+
+    def test_all_existing_requests_preflight_before_parallel_capture(self):
+        self.seal()
+        self.run_gpt("gpt_propositions")
+        items = experiment.items_for(self.output, "gpt_propositions")
+        # Leave the final item as an existing incompatible attempt, with earlier
+        # items pending again: none may start until the final mismatch is found.
+        for item in items[:-1]:
+            shutil.rmtree(self.output / "captures" / "gpt_propositions" / item["id"])
+        path = self.output / "captures" / "gpt_propositions" / items[-1]["id"] / "request.json"
+        request = experiment.read(path)
+        request["prompt"] = "incompatible request"
+        path.write_bytes(experiment.encoded(request))
+        with patch.object(experiment, "capture_codex") as capture:
+            with self.assertRaisesRegex(ValueError, "request identity mismatch"):
+                experiment.run_arm(self.output, "gpt_propositions", "unused", execute=True, workers=2)
+            capture.assert_not_called()
+
+    def test_cli_workers_dispatch_is_operator_control(self):
+        result = self.call_cli("run", "--output", self.output, "--arm", "gpt_direct", "--workers", 4)
+        self.assertEqual(result["workers"], 4)
+        self.assertFalse(result["execute"])
 
     def test_bootstrap_keeps_source_components_together(self):
         self.assertEqual(experiment.paired_interval({"one": [1, -1]}, 3), None)

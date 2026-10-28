@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import argparse
 import contextlib
+from concurrent.futures import ThreadPoolExecutor
 import datetime
 import time
 import fcntl
@@ -284,15 +285,23 @@ def validate_payload(payload, arm, item):
     return parse_native(payload, arm, item["passage"])
 
 
-def run_arm(output, arm, cli, execute=False, device="auto"):
-    """Run each source independently; resume only records bound to the frozen request."""
+def run_arm(output, arm, cli, execute=False, device="auto", workers=1):
+    """Capture sources independently with bounded GPT concurrency and no retries.
+
+    One controller lock covers the complete arm. Operator concurrency is recorded
+    separately from the frozen scientific protocol; native generation stays serial.
+    """
+    if type(workers) is not int or not 1 <= workers <= 16:
+        raise ValueError("workers must be an integer from 1 through 16")
+    if arm in NATIVE_ARMS and workers != 1:
+        raise ValueError("Native arms require workers=1; use the GPU batch operator")
     output = Path(output).resolve()
     config = verify_run(output)
     if arm not in config["arms"]:
         raise ValueError("Undeclared arm")
     items = items_for(output, arm)
     if not execute:
-        return {"arm": arm, "requests": len(items), "execute": False,
+        return {"arm": arm, "requests": len(items), "execute": False, "workers": workers,
                 "model": config["model"] if arm.startswith("gpt_") else config["native_models"][arm]}
     with run_lock(output):
         if arm != "gpt_direct":
@@ -304,8 +313,8 @@ def run_arm(output, arm, cli, execute=False, device="auto"):
         closed_book.mkdir(exist_ok=True)
         if any(closed_book.iterdir()):
             raise ValueError("Closed-book inference directory must be empty")
-        from .extraction_native import NativeGenerator
-        native = NativeGenerator(arm, device=device, max_new_tokens=config["max_output_tokens"]) if arm in NATIVE_ARMS else None
+        tasks = []
+        # Check every existing request before any new paid capture can start.
         for item in items:
             identity = item.get("id", item.get("row_id"))
             folder = output/"captures"/arm/identity
@@ -318,6 +327,18 @@ def run_arm(output, arm, cli, execute=False, device="auto"):
                 if read(folder/"request.json") != request:
                     raise ValueError("Completed request identity mismatch")
                 continue
+            tasks.append((item, identity, folder, prompt, request))
+        write_new(output/"arm-executions"/arm/("attempt-" + str(time.time_ns()) + ".json"), {
+            "event": "started", "arm": arm, "workers": workers, "device": device,
+            "pending_requests": len(tasks), "total_requests": len(items),
+            "protocol_sha256": digest((output/"protocol.json").read_bytes()),
+            "started_at": datetime.datetime.now(datetime.timezone.utc).isoformat()})
+        from .extraction_native import NativeGenerator
+        native = NativeGenerator(arm, device=device, max_new_tokens=config["max_output_tokens"]) if arm in NATIVE_ARMS else None
+
+        def capture_item(task):
+            """Write one source's isolated request and preserve its only attempt."""
+            item, identity, folder, prompt, request = task
             folder.mkdir(parents=True)
             write_new(folder/"request.json", request)
             result = {"id": identity, "arm": arm, "valid": False, "payload": None,
@@ -346,7 +367,17 @@ def run_arm(output, arm, cli, execute=False, device="auto"):
             result["elapsed_seconds"] = time.monotonic()-clock
             result["finished_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat()
             write_new(folder/"result.json", result)
-    return {"arm": arm, "requests": len(items), "execute": True}
+
+        if workers == 1:
+            for task in tasks:
+                capture_item(task)
+        else:
+            with ThreadPoolExecutor(max_workers=workers) as pool:
+                # Consume results to propagate unexpected worker failures. Failed
+                # model attempts remain ordinary retained result records above.
+                for _ in pool.map(capture_item, tasks):
+                    pass
+    return {"arm": arm, "requests": len(items), "execute": True, "workers": workers}
 
 
 def seal_references(output, references):
@@ -613,6 +644,7 @@ def main():
             command.add_argument("--cli", default="/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex")
             command.add_argument("--execute", action="store_true")
             command.add_argument("--device", default="auto")
+            command.add_argument("--workers", type=int, default=1)
         if name == "seal-references":
             command.add_argument("--references", type=Path, required=True)
         if name == "review-packet":
