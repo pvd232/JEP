@@ -119,6 +119,9 @@ class ReadoutFitConfig(TrainConfig):
     patience: int = Field(default=5, ge=1)
     comparison_max_epochs: int = Field(default=48, ge=1)
     comparison_patience: int = Field(default=5, ge=1)
+    fit_comparison: bool = True
+    include_initial: bool = False
+    record_attention: bool = False
     training_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     validation_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     training_cache_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
@@ -326,6 +329,7 @@ def train_pair(
     validation_rows: list[dict[str, Any]],
     config: ReadoutFitConfig,
     on_epoch: Any = None,
+    on_checkpoint: Any = None,
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, Any]]:
     """Pure paired fitting engine, also exercised by the CPU integration fixture."""
     validate_cache(training, training_rows)
@@ -361,6 +365,16 @@ def train_pair(
         a: {"spearman": -float("inf"), "epoch": 0, "state": None} for a in ARMS
     }
     history, predictions, gradients = [], {}, {}
+    initial_metrics = {}
+    if config.include_initial:
+        for arm, head in heads.items():
+            values, _, _ = predict(head, validation, config.device)
+            initial_metrics[arm] = metric_values(validation_rows, values)
+            rho = initial_metrics[arm]["spearman"]
+            if rho is None:
+                raise ValueError("Initial validation Spearman is undefined.")
+            best[arm] = {"spearman": rho, "epoch": 0, "state": clone_state(head)}
+            predictions[arm] = values.tolist()
     target = torch.tensor([r["target"] for r in training_rows], device=config.device)
     stale, updates = 0, 0
     for epoch in range(1, config.max_epochs + 1):
@@ -410,10 +424,19 @@ def train_pair(
                 optimizers[arm].step()
                 totals[arm] += float(loss.detach()) * len(ix)
             updates += 1
-        metrics, improved = {}, False
+        metrics, attention, improved = {}, {}, False
         for arm, head in heads.items():
-            values, _, _ = predict(head, validation, config.device)
+            values, weights, null = predict(head, validation, config.device)
             metrics[arm] = metric_values(validation_rows, values)
+            if config.record_attention:
+                attention[arm] = {
+                    **selection_diagnostics(weights, null),
+                    "fraction_mass_over_099": float(
+                        np.mean([float(w.max()) > 0.99 for w in weights])
+                    ),
+                    "query_weight_norm": float(head.query.weight.detach().norm()),
+                    "key_weight_norm": float(head.key.weight.detach().norm()),
+                }
             rho = metrics[arm]["spearman"]
             if rho is None:
                 raise ValueError(
@@ -447,9 +470,28 @@ def train_pair(
             "joint_stale_epochs": stale,
         }
         history.append(record)
-        emit("readout_epoch", seed=config.seed, **record)
+        if config.record_attention:
+            record["attention"] = attention
+        emit(
+            "readout_epoch",
+            seed=config.seed,
+            learning_rate=config.learning_rate,
+            **record,
+        )
         if on_epoch is not None:
             on_epoch(record)
+        if on_checkpoint is not None:
+            on_checkpoint(
+                {
+                    "epoch": epoch,
+                    "updates": updates,
+                    "selected": best,
+                    "last_state": {a: clone_state(h) for a, h in heads.items()},
+                    "optimizer": {a: o.state_dict() for a, o in optimizers.items()},
+                    "generator_state": generator.get_state(),
+                    "joint_stale_epochs": stale,
+                }
+            )
         if stale >= config.patience:
             break
     model = {
@@ -478,6 +520,8 @@ def train_pair(
         "selected_state_sha256": {a: state_digest(best[a]["state"]) for a in ARMS},
         "training_evidence_coverage": training["coverage"],
     }
+    if config.include_initial:
+        trace["initial_validation"] = initial_metrics
     terminal = {
         "optimizer": {a: o.state_dict() for a, o in optimizers.items()},
         "epoch": epoch,
@@ -485,23 +529,24 @@ def train_pair(
         "generator_state": generator.get_state(),
         "joint_stale_epochs": stale,
     }
-    comparison, comparison_trace, comparison_predictions, comparison_terminal = (
-        fit_comparisons(
-            heads,
-            best,
-            training,
-            validation,
-            training_rows,
-            validation_rows,
-            config,
-            on_epoch,
-            len(history),
+    if config.fit_comparison:
+        comparison, comparison_trace, comparison_predictions, comparison_terminal = (
+            fit_comparisons(
+                heads,
+                best,
+                training,
+                validation,
+                training_rows,
+                validation_rows,
+                config,
+                on_epoch,
+                len(history),
+            )
         )
-    )
-    model["comparisons"] = comparison
-    trace["comparison"] = comparison_trace
-    predictions.update(comparison_predictions)
-    terminal["comparison"] = comparison_terminal
+        model["comparisons"] = comparison
+        trace["comparison"] = comparison_trace
+        predictions.update(comparison_predictions)
+        terminal["comparison"] = comparison_terminal
     return model, trace, predictions, terminal
 
 
@@ -515,8 +560,9 @@ def fit_comparisons(
     config: ReadoutFitConfig,
     on_epoch: Any = None,
     step_offset: int = 0,
+    include_parent: bool = False,
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, Any]]:
-    """Fit D/E only after freezing B/C, so the comparison intervention is identifiable."""
+    """Fit comparisons on frozen B/C vectors, optionally including A's final vectors."""
     vectors: dict[str, dict[str, torch.Tensor]] = {}
     before = {}
     for arm, head in heads.items():
@@ -530,9 +576,15 @@ def fit_comparisons(
             .to(config.device)
             for name, cache in (("training", training), ("validation", validation))
         }
+    if include_parent:
+        vectors["parent"] = {
+            name: cache["eod_vectors"].float().detach().to(config.device)
+            for name, cache in (("training", training), ("validation", validation))
+        }
+    comparison_arms = tuple(vectors)
     comparators = {
         arm: SymmetricComparison(training["embedding_dimension"]).to(config.device)
-        for arm in ARMS
+        for arm in comparison_arms
     }
     optimizers = {
         arm: torch.optim.AdamW(
@@ -561,7 +613,7 @@ def fit_comparisons(
     history, stale, updates = [], 0, 0
     for epoch in range(1, config.comparison_max_epochs + 1):
         order = torch.randperm(len(training_rows), generator=generator).tolist()
-        totals = {a: 0.0 for a in ARMS}
+        totals = {a: 0.0 for a in comparison_arms}
         for start in range(0, len(order), config.batch_size):
             ix = order[start : start + config.batch_size]
             for arm, comparator in comparators.items():
@@ -603,11 +655,16 @@ def fit_comparisons(
             "updates_per_arm": updates,
             "order_sha256": object_sha256(order),
             "validation": metrics,
-            "training_objective": {a: totals[a] / len(order) for a in ARMS},
+            "training_objective": {a: totals[a] / len(order) for a in comparison_arms},
             "joint_stale_epochs": stale,
         }
         history.append(record)
-        emit("comparison_epoch", seed=config.seed, **record)
+        emit(
+            "comparison_epoch",
+            seed=config.seed,
+            learning_rate=config.learning_rate,
+            **record,
+        )
         if on_epoch is not None:
             on_epoch(record)
         if stale >= config.comparison_patience:

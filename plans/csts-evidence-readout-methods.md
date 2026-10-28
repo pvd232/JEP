@@ -2,6 +2,8 @@
 
 Completed on the Colab A100. [Results](../training_outputs/csts_evidence_readout_20261028/progress.md). [Diagnosis and proposed follow up](../training_outputs/csts_evidence_readout_20261028/diagnosis.md).
 
+The [next fitting run](csts-readout-convergence-methods.md) selects learning rates, trains B/C to a validation plateau and fits comparisons for A, D and E.
+
 ## Question and hypothesis
 
 The [previous experiment](https://github.com/pvd232/JEP/blob/bef8cfb0f8f85a602f0ec86ff9450f9d467fa9d5/training_outputs/proposition_full_20261026/comparison_report.md) improved test Spearman from 0.855375 to 0.863398 after training Qwen to write propositions before learning similarity ratings. The paired difference was 0.008024, with a 95% interval of [−0.000163, 0.015949]. The models used one backbone seed and different numbers of rating updates. This experiment examines how evidence selection and sentence comparison contribute to that result.

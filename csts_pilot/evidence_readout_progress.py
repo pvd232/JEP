@@ -46,14 +46,14 @@ def append(event: str, **values: Any) -> None:
         return
     aliases = {"ratings": "B", "evidence": "C"}
     if event == "comparison_epoch":
-        aliases = {"ratings": "D", "evidence": "E"}
+        aliases = {"ratings": "D", "evidence": "E", "parent": "A with comparison"}
     details = []
     for arm, metrics in values.get("validation", {}).items():
         details.append(
             f"{aliases.get(arm, arm)} validation rho {_number(metrics.get('spearman'))}, "
             f"MSE {_number(metrics.get('mse_0_1'))}"
         )
-    for key in ("name", "split", "checkpoint", "status", "error_type"):
+    for key in ("name", "split", "checkpoint", "status", "error_type", "learning_rate"):
         if key in values:
             details.append(f"{key}: {values[key]}")
     completed = values.get("completed", values.get("done"))
@@ -92,11 +92,19 @@ def append(event: str, **values: Any) -> None:
                     "evidence_comparison": "E",
                     "A_parent": "A",
                     "R_ratings_parent": "Ratings reference",
+                    "parent_comparison": "A with comparison",
                 }.get(name, name)
                 text += (
                     f"| {seed if seed in {'7', '8', '9'} else 'reference'} | {label} | "
                     f"{_number(metrics.get('spearman'))} | {_number(metrics.get('mse_0_1'))} |\n"
                 )
+        if "primary_A_comparison_minus_A" in values:
+            primary = values["primary_A_comparison_minus_A"]
+            bounds = primary["group_bootstrap_95"]
+            text += (
+                f"\nMean A with comparison minus A Spearman: {_number(primary['mean'])}. "
+                f"95% interval: [{_number(bounds['low'])}, {_number(bounds['high'])}].\n"
+            )
         contrast = values["primary_C_minus_B"]
         interval = contrast["group_bootstrap_95"]
         text += (

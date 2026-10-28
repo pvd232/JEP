@@ -1,0 +1,13 @@
+# Review of convergence fitting and comparisons
+
+The implementation reuses the verified native caches and the existing B/C architecture. The search fits three learning rates across three head seeds. It selects one rate per objective using mean validation Spearman. D/E then receive the selected, frozen B/C vectors. A third comparison function receives A's final vectors.
+
+The review checked that the fitting worker receives training and validation inputs, all candidates cover the same seeds, tie handling is deterministic and any candidate reaching its epoch ceiling blocks selection. Initialization is eligible. Each epoch saves current and selected weights, optimizer state and the batch generator. Completed candidates retain their terminal states. Comparison fitting verifies that B/C weights stay fixed and receive zero gradients. A's additional comparison begins at its exact cosine score.
+
+The evaluation worker checks the frozen selection, model hashes, cache hashes, encoder identity, full test row coverage and separation of test groups from fitting groups. It reports every selected model and nine contrasts. The primary new contrast is A with comparison minus A. Comparison fitting uses the same rate, batches and stopping policy for A, D and E. The B/C comparison includes the independently chosen rates under equal tuning resources.
+
+Validation so far: 72 tests passed on the Colab project environment before the final metric binding was added. Ruff lint, formatting and Python syntax checks pass on the prepared source. The added tests cover complete seed coverage, selection by objective, the smaller rate tie rule, rejection of incomplete fits, initialization selection, retained checkpoint state, exact A cosine initialization and frozen B/C parameters. The real two stage native CPU fixture also covers stored model transport and the separate evaluation metric worker.
+
+The Mac connection used for Colab terminated during the final check. The native fixture and scientific launch remain pending that connection. The runtime was last verified as an idle NVIDIA A100 with 80 GB memory. The scientific fitting and evaluation have not started.
+
+The Markdown publisher uses the existing Colab CLI and GitHub CLI credentials on the Mac. It mirrors one fixed aggregate report, commits changed content at most every five minutes and publishes terminal success or failure immediately. SHA guards protect updates to the report. It retains a status receipt and avoids duplicate commits for unchanged content. Source text and per example predictions stay in the existing runtime. Three additional publisher tests passed locally, covering terminal markers, immediate final publication and unchanged content.

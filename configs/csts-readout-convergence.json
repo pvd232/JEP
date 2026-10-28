@@ -1,0 +1,21 @@
+{
+  "previous_source_commit": "f59d2f8c5c64b96940a624a56d385330cf6a11ca",
+  "previous_summary": "qwen_evidence_results/evidence_readout_a100_20261028_r1/summary.json",
+  "gpu_model": "NVIDIA A100-SXM4-80GB",
+  "stage_timeout_seconds": 21600,
+  "bootstrap_draws": 2000,
+  "fit": {
+    "device": "cuda",
+    "seeds": [7, 8, 9],
+    "learning_rates": [0.00001, 0.00003, 0.0001],
+    "query_dim": 128,
+    "evidence_weight": 0.1,
+    "weight_decay": 0.01,
+    "batch_size": 32,
+    "max_epochs": 256,
+    "patience": 10,
+    "comparison_learning_rate": 0.001,
+    "comparison_max_epochs": 256,
+    "comparison_patience": 10
+  }
+}
