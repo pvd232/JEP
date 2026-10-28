@@ -5,8 +5,8 @@
     "plans/csts-native-comparison-methods.md": {
       "display": 13,
       "inline": 48,
-      "relative_links": 20,
-      "source_sha256": "6ea5d351a88b7489d5dbb6e3bfa955ea364e33805866e7f23eea8b46528b99d1"
+      "relative_links": 22,
+      "source_sha256": "35c40585f80b834e838a8de0ab828a63a96740dd1cbe1d7a3dd88656a179dae4"
     },
     "plans/csts-readout-convergence-methods.md": {
       "display": 1,
@@ -18,7 +18,7 @@
       "display": 0,
       "inline": 0,
       "relative_links": 6,
-      "source_sha256": "d8dc55ca693b422074dd5388fbe0f3536a2bd9ceb64576b7eea892a44152cd6d"
+      "source_sha256": "9f961415ddf63236a5de82c36c8383a19dc5726778d3c74167b35696d49768e2"
     }
   },
   "errors": [],
@@ -46,7 +46,7 @@
       "joint implementation, resume state and nonblocking first upload"
     ],
     "visual_inspection": "LoRA, comparison, normalization gradient, LoRA chain rule, rank argument and AdamW displays rasterized from MathJax and inspected",
-    "execution_status": "authorized; hardware recovery and native integration in progress",
+    "execution_status": "Seed 7 running on GCE L4; A100 recovery and conditional L4 workers preparing",
     "scope_correction": "One initial fresh joint LoRA and comparison fit, seed 7. Strict improvement over the saved ratings control on the same validation rows releases seeds 8 and 9 under unchanged settings. Maximum three fits. Existing cosine models reused; comparison decay fixed at 0.01."
   },
   "run_count": {
@@ -59,7 +59,7 @@
   },
   "continuation_rule": {
     "metric": "validation Spearman",
-    "criterion": "selected seed 7 score strictly exceeds saved ratings control score on identical frozen rows at full precision",
+    "criterion": "A completed published training epoch has selected validation Spearman strictly above the saved ratings control on identical frozen rows. Seed 7 continues to validation patience.",
     "follow_on_seeds": [
       8,
       9
@@ -68,9 +68,9 @@
   },
   "integration_checks": {
     "environment": "existing GCE L4 environment",
-    "tests": 8,
+    "tests": 9,
     "result": "passed",
-    "seconds": 13.95,
+    "seconds": 8.05,
     "coverage": [
       "adapter and comparison gradients",
       "frozen base matrices",
@@ -85,7 +85,8 @@
       "Ruff passed",
       "Python compilation passed"
     ],
-    "actual_gpu_integration": "pending runtime preparation"
+    "actual_gpu_integration": "pending runtime preparation",
+    "scope": "joint fitting, exact epoch recovery including destination profiling, and asynchronous publication"
   },
   "reference_validation": {
     "rows": 1576,

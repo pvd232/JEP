@@ -179,8 +179,18 @@ def context_for(path, cfg, parent=None):
     )
 
 
-def test_epoch_resume_reproduces_weights_optimizer_and_batch_order(tmp_path):
-    cfg = config_for(tmp_path)
+@pytest.mark.parametrize("autotune", [False, True])
+def test_epoch_resume_reproduces_weights_optimizer_and_batch_order(
+    tmp_path, monkeypatch, autotune
+):
+    cfg = config_for(tmp_path).model_copy(update={"autotune_microbatch": autotune})
+    if autotune:
+
+        def profile(*args):
+            reset_rng(990)
+            return cfg.microbatch_size, []
+
+        monkeypatch.setattr("csts_pilot.native_comparison.tune_microbatch", profile)
     data = fixture_data()
     reset_rng(7)
     initial = JointEncoder(TinyAdapter(), 4)

@@ -325,6 +325,9 @@ def fit_joint(context, model, training, validation):
             shutil.copyfile(context.inputs["parent_" + name], context.outputs[name])
         if file_sha256(context.outputs["model"]) != selected["sha256"]:
             raise ValueError("Restored selected checkpoint hash differs.")
+        if config.autotune_microbatch:
+            microbatch, profile = tune_microbatch(model, training, targets, config)
+            restore_main_process_rng(parent.main_process_rng, context.numpy_generators)
     else:
         microbatch, profile = tune_microbatch(model, training, targets, config)
         if initial_digest != state_digest(trainable_state(model)):

@@ -12,10 +12,10 @@ from viper.authoring import experiment, input, plan, replicate, stage, variant
 from viper.metrics import max as maximize
 from viper.metrics import measure
 from viper.outputs import TrainOutputs, output
-from viper.references import GitFileRef
+from viper.references import GitFileRef, ResolvedFileRef
 from viper.repository import read_source
 from viper.runtime import CUDAComputeSpec, LocalEnvSpec, observe_python_env
-from viper.storage import ViperCloudDestination, publish_resolved_files
+from viper.storage import ViperCloud, ViperCloudDestination, publish_resolved_files
 
 from csts_pilot.background_storage import _save, drain_publications, queue_publication
 from csts_pilot.convergence import (
@@ -81,7 +81,9 @@ def continuation_decision(training_rows, reference_rows, validation_rows):
     }
 
 
-def run_fit(root, settings, directory, commit, seed, gate_path=None):
+def run_fit(
+    root, settings, directory, commit, seed, gate_path=None, resume_snapshot=None
+):
     checked_source(root, commit)
     if seed not in (7, 8, 9):
         raise ValueError("Use a declared study seed.")
@@ -122,6 +124,35 @@ def run_fit(root, settings, directory, commit, seed, gate_path=None):
     parent = None
     ceiling = settings["training"]["max_epochs"]
     start_epoch = 0
+    snapshot_inputs = {}
+    if resume_snapshot is not None:
+        snapshot = load_json(resume_snapshot)
+        if snapshot["seed"] != seed or snapshot["settings_sha256"] != file_sha256(
+            root / "configs/csts-native-comparison.json"
+        ):
+            raise ValueError("Recovery snapshot seed or scientific settings differ.")
+        recovery = directory / "restored_epoch"
+        recovery.mkdir()
+        required = {
+            "parent_resume",
+            "parent_last_model",
+            "parent_model",
+            "parent_validation_predictions",
+            "parent_initial_vectors",
+        }
+        if set(snapshot["files"]) != required:
+            raise ValueError("Recovery requires the complete joint epoch state.")
+        for name, raw in snapshot["files"].items():
+            reference = ResolvedFileRef.model_validate(raw)
+            target = recovery / name
+            ViperCloud.for_reference(root, reference.stored_at).fetch_to_path(
+                reference, target
+            )
+            snapshot_inputs[name] = target
+        start_epoch = snapshot["completed_epoch"]
+        if start_epoch < 1 or start_epoch >= ceiling:
+            raise ValueError("Recovery epoch must precede the declared ceiling.")
+        summary["recovery_snapshot"] = snapshot
     while True:
         config = NativeComparisonConfig(
             **settings["encoder"],
@@ -152,6 +183,22 @@ def run_fit(root, settings, directory, commit, seed, gate_path=None):
                     ("parent_model", "model"),
                     ("parent_validation_predictions", "validation_predictions"),
                     ("parent_initial_vectors", "initial_vectors"),
+                )
+            )
+        elif snapshot_inputs:
+            bindings.extend(
+                input(
+                    name, path=path.relative_to(root).as_posix(), data_role="training"
+                )
+                for name, path in snapshot_inputs.items()
+            )
+            provenance = recovery / "snapshot.json"
+            _save(provenance, snapshot)
+            bindings.append(
+                input(
+                    "recovery_provenance",
+                    path=provenance.relative_to(root).as_posix(),
+                    data_role="training",
                 )
             )
         metrics = tuple(
@@ -303,6 +350,7 @@ def main():
     parser.add_argument("--commit", required=True)
     parser.add_argument("--seed", required=True, type=int)
     parser.add_argument("--gate", type=Path)
+    parser.add_argument("--resume-snapshot", type=Path)
     args = parser.parse_args()
     root = args.root.resolve(strict=True)
     lock_path = Path("/tmp/jep-gpu.lock")
@@ -317,6 +365,7 @@ def main():
             args.commit,
             args.seed,
             args.gate,
+            args.resume_snapshot,
         )
 
 
