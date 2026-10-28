@@ -5,8 +5,8 @@
     "plans/csts-native-comparison-methods.md": {
       "display": 13,
       "inline": 50,
-      "relative_links": 18,
-      "source_sha256": "716dc567623582b33c598a97e22d230d67db57482c40c453e3e6cd9e2581bfd0"
+      "relative_links": 16,
+      "source_sha256": "9f9989fb85580226a8e1b0b9f08d89d95e4fb3a3f8770340729538964e83bc7d"
     },
     "plans/csts-readout-convergence-methods.md": {
       "display": 1,
@@ -18,7 +18,7 @@
       "display": 0,
       "inline": 0,
       "relative_links": 4,
-      "source_sha256": "7cdf830828561d554a0106023939d4ba924cb661751d88bbe87f5e58e84a6bb7"
+      "source_sha256": "3e48a2aa6b9edfab410ce071e209fbcafebd98711465c68c5e68c8e0c8d05244"
     }
   },
   "errors": [],
@@ -46,6 +46,6 @@
     ],
     "visual_inspection": "LoRA, comparison, normalization gradient, LoRA chain rule, rank argument and AdamW displays rasterized from MathJax and inspected",
     "execution_status": "awaiting user review",
-    "scope_correction": "Every native encoder starts from the original pretrained Qwen with fresh LoRA. A is a frozen reference. Six rating fits and three shared writing fits."
+    "scope_correction": "Six fresh LoRA rating fits from the original pretrained Qwen. Historical A is a reference. Regularization screen uses public pretrained embeddings. Proposition training and writing diagnostics removed."
   }
 }

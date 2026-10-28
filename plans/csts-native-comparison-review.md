@@ -2,7 +2,7 @@
 
 Reviewed the [experiment plan](csts-native-comparison-methods.md) once on October 28, 2026. This is a self review of the mathematics, experimental controls and implementation requirements. Status: ready for user review. Native implementation and scientific execution follow that review.
 
-The user clarified the execution scope: every new encoder begins with the original pretrained Qwen and fresh LoRA adapters. A serves as an existing frozen reference. This scope correction is reflected in the run counts, initialization requirements and evaluation comparisons below.
+The user clarified the execution scope: every new encoder begins with the original pretrained Qwen and fresh LoRA adapters, then trains directly on similarity ratings. A serves as a historical reference. This scope correction is reflected in the run counts, initialization requirements, inputs and evaluation comparisons below.
 
 ## Findings resolved in this pass
 
@@ -10,18 +10,18 @@ The user clarified the execution scope: every new encoder begins with the origin
 2. LoRA is defined as trainable factors inside Qwen's attention matrices. The base matrices stay fixed, and the final sentence embedding retains 4,096 coordinates. Matrix dimensions, symmetry, zero initialization and gradients were checked against the [encoder](../csts_pilot/baseline_models.py) and [comparison](../csts_pilot/evidence_readout.py).
 3. The regularization rationale now separates coefficient flexibility from measured generalization. The completed experiment already used decay 0.01 and validation stopping. The proposed CPU screen measures decay 0, 0.01 and 0.1, selects using validation, and retains a frozen reference at the selected setting. The native study measures how that setting transfers to jointly changing embeddings.
 4. AdamW decay is specified in the optimizer, with separate LoRA and comparison groups. Comparison decay favors cosine on the current embeddings; LoRA decay favors smaller changes to pretrained matrices. These reference points are stated explicitly.
-5. The writing training ceiling was separated from the 64 token diagnostic generation limit. Complete accepted training answers determine the training ceiling through deterministic tokenization. The five pass writing phase has explicit optimizer settings and a shared terminal checkpoint for each fresh pair.
-6. Random states are reset after constructing every module. The plan gives writing, rating dropout and batch order separate seed rules so comparison initialization preserves matching dropout exposure within a pair.
+5. The two rating runs within each seed share the same freshly initialized LoRA factors and start directly from the public pretrained encoder. The regularization screen also uses embeddings from that public checkpoint. The fitting loss in both arms is rating MSE.
+6. Random states are reset after constructing every module. The plan gives rating dropout and batch order separate seed rules so comparison initialization preserves matching dropout exposure within a pair.
 7. Saving, restoring and scoring must include both LoRA and comparison state, with an explicit scorer kind. The planned native checks cover parameter groups, gradient flow, partial logical batches and prediction equality after restoration.
-8. Required writing inputs are resolved through their original Cloud provenance and pinned hashes before their stage. The completed run receipts identify retained model and feature artifacts. Each source is verified once when loaded.
+8. Rating inputs and the original public checkpoint have explicit identities. Historical reference predictions retain their original Cloud provenance. Each source is verified once when loaded.
 
 ## Experimental interpretation
 
-The primary result will compare fresh joint training with fresh cosine training after a shared proposition phase within each seed. The fresh seeds independently initialize and train their LoRA and writing stages on the same public pretrained Qwen checkpoint. A supplies existing reference scores and saved embeddings for the CPU comparison screen.
+The primary result will compare fresh joint training with fresh cosine training from identical adapter initializations within each seed. The fresh seeds independently initialize and train their LoRA factors on the same public pretrained Qwen checkpoint. A supplies historical reference scores. This isolates the scoring function and its gradient into LoRA while holding the rating data and initialization fixed within each pair.
 
 The existing test supplies exploratory evidence. Paired source group intervals describe uncertainty in that test conditional on retained runs. Fresh reserved source groups supply the confirmation setting. The regularization screen selects a declared candidate for the native experiment, and all screen settings remain reportable.
 
-The plan calls for nine CPU comparison fits, six native rating fits and three shared writing fits. Fixed features are reused for the CPU screen while A's encoder stays frozen. Each native comparison starts at zero, and each rating parent is the seed's newly trained proposition checkpoint. Native training retains the encoder computation in the gradient graph. Checkpoints and reports use the existing VIPER Cloud and resume facilities with asynchronous publication.
+The plan calls for nine CPU comparison fits and six native rating fits. The CPU screen shares cached embeddings from the original pretrained encoder, with one extraction if a matching cache is needed. Each native comparison starts at zero, and each rating parent is the seed's fresh adapter initialization. Native training retains the encoder computation in the gradient graph. Checkpoints and reports use the existing VIPER Cloud and resume facilities with asynchronous publication.
 
 ## Verification record
 
