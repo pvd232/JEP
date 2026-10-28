@@ -101,3 +101,15 @@ The current native CPU check passed all nine stages from source `f59d2f8c5c64b96
 The active scientific attempt is `evidence_readout_a100_20261028_r1`. Its predecessor ended during retention input preparation at a linked vocabulary head. The active attempt uses a regular copy with the same pinned hash. The earlier three publication records and failure log are preserved in `relaunch-reconciliation.json` beside the checkout. All split files and three model checkpoints match their fixed hashes.
 
 The [live Markdown report](../training_outputs/csts_evidence_readout_20261028/progress.md) receives worker measurements throughout execution. The Mac publisher refreshes the GitHub file every five minutes and publishes the final result immediately.
+
+## Review after execution
+
+All 14 scientific stages completed. The [diagnosis](../training_outputs/csts_evidence_readout_20261028/diagnosis.md) records attention saturation, seed dependent token positions, the effect of step size and fixed pooling controls. The original scientific outcomes remain in the results report.
+
+The new scripts operate on retained native artifacts. The fitting probe uses training and validation, one seed and one epoch at each of three declared rates. Its original rate reproduces the archived epoch one scores for B and C exactly. Each probe setting starts from identical weights and batch order. Its output retains every setting, intermediate measurements and terminal parameters with optimizer states. The probe acquires the shared GPU lock. Selected scientific checkpoints retain their original paths and bytes.
+
+The review identified a missing control in the original design: direct comparison of the final summary with simple sentence token pooling and teacher quotation pooling. These checks now expose the representation change alongside attention instability. The proposed follow up retains A's score, includes a learned comparison on A itself and makes initialization eligible for validation selection.
+
+Validation after adding diagnostics: 69 tests passed across four relevant suites. Ruff lint and formatting passed for the two scripts and their tests. Three new tests verify position statistics with variable sentence lengths, the distinction between matching positions and matching vectors under edits, and quotation pooling over full coordinate values.
+
+The diagnostic scripts report aggregate measurements. Their JSON contains input hashes, numerical summaries and the six fixed case names. Source sentences and individual natural data predictions remain in the existing runtime. Conclusions about gradients refer to an explicitly fixed batch, teacher agreement refers to training inputs and the step size probe concerns one head seed. Further fitting and test evaluation are a separate proposed experiment.

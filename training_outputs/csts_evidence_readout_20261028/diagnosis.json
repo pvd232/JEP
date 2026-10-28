@@ -1,0 +1,2443 @@
+{
+  "status": "complete",
+  "analysis_script_sha256": "b2740c93d1ec95597c18a8674e1cad995520f2eff9fb42387396b55c9932eb62",
+  "study_source": "f59d2f8c5c64b96940a624a56d385330cf6a11ca",
+  "study_summary_sha256": "bb1c092f93d5fd87fc7a0877efdc7eb931bee923275604652c201f7eb2c966bb",
+  "role": "exploratory diagnosis of the completed study",
+  "splits": {
+    "training": {
+      "rows": 6051,
+      "cache_rows_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "parent_model_sha256": "d30c00fc76e70ec639493b7121a8b8c9d7520745733857c1c49f0902fff00f4f",
+      "pooling": {
+        "first": {
+          "n": 6051,
+          "mse_0_1": 0.24811047906323272,
+          "spearman": 0.019426425752281023,
+          "prediction_quantiles": [
+            -0.0022348500788211823,
+            0.3237033784389496,
+            0.7837473154067993,
+            0.9992638230323792,
+            1.0000011920928955
+          ]
+        },
+        "last": {
+          "n": 6051,
+          "mse_0_1": 0.12551790050551917,
+          "spearman": 0.5943237278956076,
+          "prediction_quantiles": [
+            -0.17908135056495667,
+            0.1643437296152115,
+            0.40466371178627014,
+            0.7963573336601257,
+            0.9660283327102661
+          ]
+        },
+        "mean": {
+          "n": 6051,
+          "mse_0_1": 0.1890911959842527,
+          "spearman": 0.1342571758163912,
+          "prediction_quantiles": [
+            0.22920964658260345,
+            0.6919947266578674,
+            0.7836980223655701,
+            0.865175724029541,
+            0.9587640166282654
+          ]
+        },
+        "mean_unit_tokens": {
+          "n": 6051,
+          "mse_0_1": 0.1867549243448327,
+          "spearman": 0.14762310905165055,
+          "prediction_quantiles": [
+            0.23311194777488708,
+            0.6887375712394714,
+            0.7792955636978149,
+            0.8593412637710571,
+            0.9569178223609924
+          ]
+        },
+        "A": {
+          "n": 6051,
+          "mse_0_1": 0.015485905951623772,
+          "spearman": 0.9253970583257524,
+          "prediction_quantiles": [
+            -0.10619530081748962,
+            0.05930517613887787,
+            0.6628443598747253,
+            0.9818423390388489,
+            0.9980907440185547
+          ]
+        }
+      }
+    },
+    "validation": {
+      "rows": 1576,
+      "cache_rows_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "parent_model_sha256": "d30c00fc76e70ec639493b7121a8b8c9d7520745733857c1c49f0902fff00f4f",
+      "pooling": {
+        "first": {
+          "n": 1576,
+          "mse_0_1": 0.2236641969903767,
+          "spearman": 0.04741353177628251,
+          "prediction_quantiles": [
+            -0.0033988370560109615,
+            0.3291441351175308,
+            0.7766038477420807,
+            0.9993646144866943,
+            1.0000011920928955
+          ]
+        },
+        "last": {
+          "n": 1576,
+          "mse_0_1": 0.1291901619712709,
+          "spearman": 0.5575921923009417,
+          "prediction_quantiles": [
+            -0.07081953436136246,
+            0.16934692859649658,
+            0.40244151651859283,
+            0.7931256592273712,
+            0.9614132046699524
+          ]
+        },
+        "mean": {
+          "n": 1576,
+          "mse_0_1": 0.17431022869057172,
+          "spearman": 0.11599887744850612,
+          "prediction_quantiles": [
+            0.5263309478759766,
+            0.6964853405952454,
+            0.7842045724391937,
+            0.8681337833404541,
+            0.9473825097084045
+          ]
+        },
+        "mean_unit_tokens": {
+          "n": 1576,
+          "mse_0_1": 0.17208097070626296,
+          "spearman": 0.12683581100539187,
+          "prediction_quantiles": [
+            0.5171392560005188,
+            0.6920226216316223,
+            0.7798601984977722,
+            0.8614491820335388,
+            0.9428673982620239
+          ]
+        },
+        "A": {
+          "n": 1576,
+          "mse_0_1": 0.031344012490759195,
+          "spearman": 0.8767885994003682,
+          "prediction_quantiles": [
+            -0.08420422673225403,
+            0.07237434387207031,
+            0.6573488712310791,
+            0.9801808893680573,
+            0.9987276792526245
+          ]
+        }
+      }
+    },
+    "interventions": {
+      "rows": 24,
+      "cache_rows_sha256": "863914ddc39779b58a18716396309b49ec53aae37895d85083f1484880de80c6",
+      "parent_model_sha256": "d30c00fc76e70ec639493b7121a8b8c9d7520745733857c1c49f0902fff00f4f",
+      "pooling": {
+        "first": {
+          "n": 24,
+          "mse_0_1": 0.20934424217576164,
+          "spearman": -0.017182739329142556,
+          "prediction_quantiles": [
+            0.27213579416275024,
+            0.2986269682645798,
+            0.6464142501354218,
+            0.9295508325099944,
+            0.9991048574447632
+          ]
+        },
+        "last": {
+          "n": 24,
+          "mse_0_1": 0.11762880744418391,
+          "spearman": 0.757618312375286,
+          "prediction_quantiles": [
+            0.2262255847454071,
+            0.2613473743200302,
+            0.4637700021266937,
+            0.661803925037384,
+            0.8305845856666565
+          ]
+        },
+        "mean": {
+          "n": 24,
+          "mse_0_1": 0.18364119649518265,
+          "spearman": 0.20713908915129547,
+          "prediction_quantiles": [
+            0.6565012335777283,
+            0.6754852294921875,
+            0.7466937601566315,
+            0.8593340694904327,
+            0.9268725514411926
+          ]
+        },
+        "mean_unit_tokens": {
+          "n": 24,
+          "mse_0_1": 0.1821292359996424,
+          "spearman": 0.22416421976647044,
+          "prediction_quantiles": [
+            0.6543821096420288,
+            0.6740150451660156,
+            0.7485478818416595,
+            0.8601486146450043,
+            0.9298059940338135
+          ]
+        },
+        "A": {
+          "n": 24,
+          "mse_0_1": 0.029194223773605272,
+          "spearman": 0.8796317484507068,
+          "prediction_quantiles": [
+            0.02826077863574028,
+            0.09138293191790581,
+            0.790999174118042,
+            0.9727798700332642,
+            0.9757335186004639
+          ]
+        }
+      }
+    }
+  },
+  "seeds": {
+    "7": {
+      "selected_epoch": {
+        "ratings": 1,
+        "evidence": 3
+      },
+      "gradient_diagnostics": {
+        "1": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 0.4179720878601074,
+          "weighted_evidence_norm": 0.3374210596084595,
+          "evidence_to_rating_ratio": 0.8072813219082517,
+          "cosine": -0.13873890042304993
+        },
+        "2": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 1.148245930671692,
+          "weighted_evidence_norm": 1.3216540813446045,
+          "evidence_to_rating_ratio": 1.1510200437387779,
+          "cosine": 0.0630936324596405
+        },
+        "3": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 1.7853553295135498,
+          "weighted_evidence_norm": 1.1539751291275024,
+          "evidence_to_rating_ratio": 0.6463559998680612,
+          "cosine": 0.1450868844985962
+        },
+        "4": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 1.7256001234054565,
+          "weighted_evidence_norm": 1.8409749269485474,
+          "evidence_to_rating_ratio": 1.0668606834098966,
+          "cosine": 0.07478025555610657
+        },
+        "5": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 1.9849674701690674,
+          "weighted_evidence_norm": 1.90570068359375,
+          "evidence_to_rating_ratio": 0.9600664556137205,
+          "cosine": 0.2778339385986328
+        },
+        "6": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 1.5309168100357056,
+          "weighted_evidence_norm": 1.5719331502914429,
+          "evidence_to_rating_ratio": 1.0267920111575368,
+          "cosine": 0.13556507229804993
+        },
+        "7": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 2.28926157951355,
+          "weighted_evidence_norm": 1.7396345138549805,
+          "evidence_to_rating_ratio": 0.7599107631136846,
+          "cosine": -0.0020130854099988937
+        },
+        "8": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 1.0277217626571655,
+          "weighted_evidence_norm": 1.298194169998169,
+          "evidence_to_rating_ratio": 1.2631766857225046,
+          "cosine": 0.05041838064789772
+        }
+      },
+      "arms": {
+        "ratings": {
+          "gradient_probe": {
+            "scope": "query_and_key_weights_that_affect_similarity",
+            "rating_norm": 1.0979435443878174,
+            "weighted_evidence_norm": 22.71470069885254,
+            "evidence_to_rating_ratio": 20.688404986722354,
+            "cosine": -0.05364997684955597
+          },
+          "training": {
+            "occurrences": 12102,
+            "top_token_first_fraction": 0.26425384234010907,
+            "top_token_last_fraction": 0.16683192860684184,
+            "top_position_deciles": [
+              3386,
+              995,
+              1251,
+              755,
+              628,
+              840,
+              602,
+              684,
+              816,
+              2145
+            ],
+            "mean_first_token_mass": 0.26409142331471946,
+            "mean_last_token_mass": 0.1667389162430045,
+            "mean_entropy": 0.012765444070134541,
+            "top_mass_quantiles": [
+              0.4771948456764221,
+              0.9999988079071045,
+              1,
+              1,
+              1
+            ],
+            "mass_over_099_fraction": 0.9657907783837383,
+            "scores": {
+              "n": 6051,
+              "mse_0_1": 0.18382623977506016,
+              "spearman": 0.2617488046251678,
+              "prediction_quantiles": [
+                -0.08499632775783539,
+                0.210142582654953,
+                0.451052188873291,
+                0.9147858619689941,
+                1.000000238418579
+              ]
+            },
+            "query_norm_quantiles": [
+              67.07926177978516,
+              117.16199188232422,
+              142.79307556152344,
+              175.1745147705078,
+              180.90982055664062
+            ],
+            "key_norm_quantiles": [
+              6.780423164367676,
+              14.108770179748536,
+              21.589214324951172,
+              36.85857810974122,
+              95.24370574951172
+            ],
+            "source_logit_range_quantiles": [
+              115.81988525390625,
+              372.64845886230466,
+              578.15283203125,
+              968.8059814453121,
+              1619.4808349609375
+            ],
+            "largest_softmax_diagonal_derivative_quantiles": [
+              0,
+              0,
+              1.987509256099675e-39,
+              0.0000012012794968541093,
+              0.24999728798866272
+            ],
+            "mean_null_probability": 0.0012054150161967825,
+            "teacher_units": 12073,
+            "teacher_ce": 372.2546966206432,
+            "teacher_top1_agreement": 0.5173527706452414,
+            "teacher_support_mass": 0.5174097509675637,
+            "query_weight_norm": 10.361723899841309,
+            "key_weight_norm": 10.915440559387207
+          },
+          "validation": {
+            "occurrences": 3152,
+            "top_token_first_fraction": 0.25380710659898476,
+            "top_token_last_fraction": 0.16021573604060912,
+            "top_position_deciles": [
+              843,
+              228,
+              342,
+              237,
+              191,
+              225,
+              143,
+              186,
+              229,
+              528
+            ],
+            "mean_first_token_mass": 0.2530563411721473,
+            "mean_last_token_mass": 0.1602149286498979,
+            "mean_entropy": 0.011852342200882418,
+            "top_mass_quantiles": [
+              0.504562258720398,
+              0.999996542930603,
+              1,
+              1,
+              1
+            ],
+            "mass_over_099_fraction": 0.9670050761421319,
+            "scores": {
+              "n": 1576,
+              "mse_0_1": 0.17788518186964666,
+              "spearman": 0.25587217202337,
+              "prediction_quantiles": [
+                -0.02311893180012703,
+                0.21463623642921448,
+                0.4450696259737015,
+                0.8677159547805786,
+                1.000000238418579
+              ]
+            },
+            "query_norm_quantiles": [
+              74.90505981445312,
+              116.39081573486328,
+              142.33558654785156,
+              174.83993530273438,
+              180.90982055664062
+            ],
+            "key_norm_quantiles": [
+              7.0614824295043945,
+              13.915003204345703,
+              21.47773551940918,
+              36.55294952392578,
+              91.07211303710938
+            ],
+            "source_logit_range_quantiles": [
+              169.97265625,
+              370.0238891601563,
+              567.3577880859375,
+              922.1604858398438,
+              1683.7601318359375
+            ],
+            "largest_softmax_diagonal_derivative_quantiles": [
+              0,
+              0,
+              3.125032611223765e-36,
+              0.000003509122734612904,
+              0.2499791830778122
+            ],
+            "mean_null_probability": 0.002537809185143939,
+            "teacher_units": 0,
+            "teacher_ce": null,
+            "teacher_top1_agreement": null,
+            "teacher_support_mass": null,
+            "query_weight_norm": 10.361723899841309,
+            "key_weight_norm": 10.915440559387207
+          },
+          "interventions": {
+            "occurrences": 48,
+            "top_token_first_fraction": 0.3333333333333333,
+            "top_token_last_fraction": 0.08333333333333333,
+            "top_position_deciles": [
+              16,
+              0,
+              4,
+              0,
+              6,
+              9,
+              8,
+              1,
+              0,
+              4
+            ],
+            "mean_first_token_mass": 0.3333333333333333,
+            "mean_last_token_mass": 0.0833333373057037,
+            "mean_entropy": 0.00024833254160562464,
+            "top_mass_quantiles": [
+              0.9985935091972351,
+              1,
+              1,
+              1,
+              1
+            ],
+            "mass_over_099_fraction": 1,
+            "scores": {
+              "n": 24,
+              "mse_0_1": 0.19948044890187025,
+              "spearman": 0.1400160027433797,
+              "prediction_quantiles": [
+                0.15485510230064392,
+                0.15868154168128967,
+                0.6081713438034058,
+                0.7068762183189392,
+                0.999025821685791
+              ]
+            },
+            "query_norm_quantiles": [
+              110.3765640258789,
+              110.79281616210938,
+              115.34516143798828,
+              131.24867248535156,
+              131.76051330566406
+            ],
+            "key_norm_quantiles": [
+              10.675522804260254,
+              14.92346477508545,
+              23.30274200439453,
+              38.77345542907716,
+              61.75710678100586
+            ],
+            "source_logit_range_quantiles": [
+              150.3941192626953,
+              255.0916748046875,
+              343.0052185058594,
+              519.1669616699219,
+              603.349365234375
+            ],
+            "largest_softmax_diagonal_derivative_quantiles": [
+              0,
+              0,
+              6.496010035435026e-29,
+              3.974554019237075e-9,
+              0.0014045388670638204
+            ],
+            "mean_null_probability": 0,
+            "teacher_units": 0,
+            "teacher_ce": null,
+            "teacher_top1_agreement": null,
+            "teacher_support_mass": null,
+            "query_weight_norm": 10.361723899841309,
+            "key_weight_norm": 10.915440559387207
+          },
+          "selected_tokens_under_relevant_edits": [
+            {
+              "case": "car_color",
+              "base_top_position": 1,
+              "relevant_top_position": 1,
+              "base_top_mass": 1,
+              "relevant_top_mass": 1,
+              "selected_state_exactly_equal": true,
+              "selected_state_cosine": 1.0000011920928955
+            },
+            {
+              "case": "dog_color",
+              "base_top_position": 1,
+              "relevant_top_position": 1,
+              "base_top_mass": 1,
+              "relevant_top_mass": 1,
+              "selected_state_exactly_equal": true,
+              "selected_state_cosine": 1.0000009536743164
+            },
+            {
+              "case": "shirt_color",
+              "base_top_position": 4,
+              "relevant_top_position": 4,
+              "base_top_mass": 1,
+              "relevant_top_mass": 1,
+              "selected_state_exactly_equal": true,
+              "selected_state_cosine": 1.0000007152557373
+            },
+            {
+              "case": "cat_posture",
+              "base_top_position": 6,
+              "relevant_top_position": 5,
+              "base_top_mass": 0.9999406337738037,
+              "relevant_top_mass": 1,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.4872317910194397
+            },
+            {
+              "case": "cup_count",
+              "base_top_position": 5,
+              "relevant_top_position": 5,
+              "base_top_mass": 1,
+              "relevant_top_mass": 1,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.8210976719856262
+            },
+            {
+              "case": "ball_location",
+              "base_top_position": 5,
+              "relevant_top_position": 8,
+              "base_top_mass": 1,
+              "relevant_top_mass": 0.9985935091972351,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.4386131465435028
+            }
+          ]
+        },
+        "evidence": {
+          "gradient_probe": {
+            "scope": "query_and_key_weights_that_affect_similarity",
+            "rating_norm": 1.764699101448059,
+            "weighted_evidence_norm": 2.0446372032165527,
+            "evidence_to_rating_ratio": 1.1586322005484022,
+            "cosine": 0.03120938502252102
+          },
+          "training": {
+            "occurrences": 12102,
+            "top_token_first_fraction": 0.06635266898033383,
+            "top_token_last_fraction": 0.12460750289208396,
+            "top_position_deciles": [
+              1708,
+              1106,
+              1097,
+              814,
+              822,
+              1224,
+              827,
+              753,
+              877,
+              2874
+            ],
+            "mean_first_token_mass": 0.06604921835297603,
+            "mean_last_token_mass": 0.10849778659403095,
+            "mean_entropy": 1.1643552289244994,
+            "top_mass_quantiles": [
+              0.09784624725580215,
+              0.3088657855987549,
+              0.5849291384220123,
+              0.9517791092395782,
+              1
+            ],
+            "mass_over_099_fraction": 0.0436291522062469,
+            "scores": {
+              "n": 6051,
+              "mse_0_1": 0.13806565032074383,
+              "spearman": 0.38589538900660436,
+              "prediction_quantiles": [
+                -0.10903298109769821,
+                0.2883053421974182,
+                0.5507426857948303,
+                0.7788353562355042,
+                1.0000001192092896
+              ]
+            },
+            "query_norm_quantiles": [
+              11.711200714111328,
+              17.90784454345703,
+              21.4754056930542,
+              24.539533615112305,
+              39.13874816894531
+            ],
+            "key_norm_quantiles": [
+              8.085701942443848,
+              13.630449295043945,
+              16.356666564941406,
+              19.21553440093994,
+              34.39462661743164
+            ],
+            "source_logit_range_quantiles": [
+              2.2139852046966553,
+              6.604454803466797,
+              10.4356689453125,
+              16.55910129547119,
+              101.57398223876953
+            ],
+            "largest_softmax_diagonal_derivative_quantiles": [
+              3.436463082411717e-13,
+              0.04589563459157944,
+              0.21711410582065582,
+              0.24886561036109925,
+              0.25
+            ],
+            "mean_null_probability": 0.02460656157404924,
+            "teacher_units": 12073,
+            "teacher_ce": 4.860264903932482,
+            "teacher_top1_agreement": 0.6713327259173362,
+            "teacher_support_mass": 0.648770609915449,
+            "query_weight_norm": 9.300827026367188,
+            "key_weight_norm": 12.550216674804688
+          },
+          "validation": {
+            "occurrences": 3152,
+            "top_token_first_fraction": 0.06218274111675127,
+            "top_token_last_fraction": 0.1310279187817259,
+            "top_position_deciles": [
+              387,
+              254,
+              306,
+              227,
+              213,
+              307,
+              242,
+              181,
+              236,
+              799
+            ],
+            "mean_first_token_mass": 0.06418242580856136,
+            "mean_last_token_mass": 0.1145028366270783,
+            "mean_entropy": 1.2201764906193242,
+            "top_mass_quantiles": [
+              0.1295965313911438,
+              0.3018519252538681,
+              0.5620185136795044,
+              0.9433824956417084,
+              1
+            ],
+            "mass_over_099_fraction": 0.03648477157360406,
+            "scores": {
+              "n": 1576,
+              "mse_0_1": 0.1418073511518882,
+              "spearman": 0.2930072900497714,
+              "prediction_quantiles": [
+                0.03423691168427467,
+                0.31536589562892914,
+                0.556305319070816,
+                0.7812574505805969,
+                0.9999998807907104
+              ]
+            },
+            "query_norm_quantiles": [
+              12.665435791015625,
+              17.542804718017578,
+              21.28900146484375,
+              24.28129596710205,
+              39.13874816894531
+            ],
+            "key_norm_quantiles": [
+              8.514081954956055,
+              13.480944061279297,
+              16.23825454711914,
+              19.120250701904297,
+              34.17164993286133
+            ],
+            "source_logit_range_quantiles": [
+              2.4575328826904297,
+              6.324817228317261,
+              9.994863033294678,
+              15.973811149597168,
+              64.43319702148438
+            ],
+            "largest_softmax_diagonal_derivative_quantiles": [
+              7.671301816003506e-9,
+              0.053411959484219555,
+              0.22010496258735657,
+              0.24911012053489684,
+              0.25
+            ],
+            "mean_null_probability": 0.025913334172670086,
+            "teacher_units": 0,
+            "teacher_ce": null,
+            "teacher_top1_agreement": null,
+            "teacher_support_mass": null,
+            "query_weight_norm": 9.300827026367188,
+            "key_weight_norm": 12.550216674804688
+          },
+          "interventions": {
+            "occurrences": 48,
+            "top_token_first_fraction": 0,
+            "top_token_last_fraction": 0.10416666666666667,
+            "top_position_deciles": [
+              0,
+              0,
+              1,
+              0,
+              2,
+              13,
+              0,
+              16,
+              7,
+              9
+            ],
+            "mean_first_token_mass": 0.07717493978513328,
+            "mean_last_token_mass": 0.13317625579141654,
+            "mean_entropy": 1.072950940579176,
+            "top_mass_quantiles": [
+              0.2835760712623596,
+              0.3885350972414017,
+              0.6280643343925476,
+              0.9133708477020264,
+              0.917035698890686
+            ],
+            "mass_over_099_fraction": 0,
+            "scores": {
+              "n": 24,
+              "mse_0_1": 0.1999019416776752,
+              "spearman": -0.03121273946115411,
+              "prediction_quantiles": [
+                0.30477795004844666,
+                0.42380176186561586,
+                0.5156486928462982,
+                0.6377367496490478,
+                0.7592464089393616
+              ]
+            },
+            "query_norm_quantiles": [
+              14.152610778808594,
+              14.207405090332031,
+              16.01426601409912,
+              19.12246322631836,
+              19.14041519165039
+            ],
+            "key_norm_quantiles": [
+              10.822648048400879,
+              13.4830961227417,
+              15.98924446105957,
+              18.022458839416505,
+              28.017730712890625
+            ],
+            "source_logit_range_quantiles": [
+              1.3199576139450073,
+              2.4902825355529785,
+              5.997319221496582,
+              7.9746503829956055,
+              8.834693908691406
+            ],
+            "largest_softmax_diagonal_derivative_quantiles": [
+              0.07608122378587723,
+              0.07912454009056091,
+              0.23302336037158966,
+              0.2497919648885727,
+              0.25
+            ],
+            "mean_null_probability": 0.05077697661181446,
+            "teacher_units": 0,
+            "teacher_ce": null,
+            "teacher_top1_agreement": null,
+            "teacher_support_mass": null,
+            "query_weight_norm": 9.300827026367188,
+            "key_weight_norm": 12.550216674804688
+          },
+          "selected_tokens_under_relevant_edits": [
+            {
+              "case": "car_color",
+              "base_top_position": 6,
+              "relevant_top_position": 6,
+              "base_top_mass": 0.8895657658576965,
+              "relevant_top_mass": 0.4728119969367981,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.8306621313095093
+            },
+            {
+              "case": "dog_color",
+              "base_top_position": 5,
+              "relevant_top_position": 5,
+              "base_top_mass": 0.7679383158683777,
+              "relevant_top_mass": 0.47217658162117004,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.7601922154426575
+            },
+            {
+              "case": "shirt_color",
+              "base_top_position": 5,
+              "relevant_top_position": 3,
+              "base_top_mass": 0.5000285506248474,
+              "relevant_top_mass": 0.4005321264266968,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.37655916810035706
+            },
+            {
+              "case": "cat_posture",
+              "base_top_position": 5,
+              "relevant_top_position": 5,
+              "base_top_mass": 0.6556159853935242,
+              "relevant_top_mass": 0.4649936854839325,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.9285275340080261
+            },
+            {
+              "case": "cup_count",
+              "base_top_position": 9,
+              "relevant_top_position": 10,
+              "base_top_mass": 0.7883233428001404,
+              "relevant_top_mass": 0.6258342266082764,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.4058668613433838
+            },
+            {
+              "case": "ball_location",
+              "base_top_position": 10,
+              "relevant_top_position": 10,
+              "base_top_mass": 0.6352973580360413,
+              "relevant_top_mass": 0.5768728256225586,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.9554079174995422
+            }
+          ]
+        }
+      },
+      "initial_validation": {
+        "occurrences": 3152,
+        "top_token_first_fraction": 0.05266497461928934,
+        "top_token_last_fraction": 0.30774111675126903,
+        "top_position_deciles": [
+          279,
+          191,
+          241,
+          188,
+          189,
+          250,
+          199,
+          212,
+          276,
+          1127
+        ],
+        "mean_first_token_mass": 0.06345673307639353,
+        "mean_last_token_mass": 0.08399221449907217,
+        "mean_entropy": 2.7250477619431344,
+        "top_mass_quantiles": [
+          0.04359981790184975,
+          0.07571307718753814,
+          0.10078081861138344,
+          0.1397433966398239,
+          0.27848294377326965
+        ],
+        "mass_over_099_fraction": 0,
+        "scores": {
+          "n": 1576,
+          "mse_0_1": 0.16924265627900423,
+          "spearman": 0.1387604192086468,
+          "prediction_quantiles": [
+            0.5116918683052063,
+            0.6782543361186981,
+            0.774011105298996,
+            0.8569275438785553,
+            0.9419156908988953
+          ]
+        },
+        "query_norm_quantiles": [
+          5.297739505767822,
+          6.012846946716309,
+          6.468087673187256,
+          7.065410137176514,
+          7.601444721221924
+        ],
+        "key_norm_quantiles": [
+          4.963653564453125,
+          6.059759426116943,
+          6.544034957885742,
+          7.067561340332031,
+          8.401687622070312
+        ],
+        "source_logit_range_quantiles": [
+          0.336539626121521,
+          0.6536707997322082,
+          0.9564915001392365,
+          1.3385707497596742,
+          2.1151626110076904
+        ],
+        "largest_softmax_diagonal_derivative_quantiles": [
+          0.0416988730430603,
+          0.06998061016201973,
+          0.09062404558062553,
+          0.12021518126130104,
+          0.20093020796775818
+        ],
+        "mean_null_probability": 0.0597585434895387,
+        "teacher_units": 0,
+        "teacher_ce": null,
+        "teacher_top1_agreement": null,
+        "teacher_support_mass": null,
+        "query_weight_norm": 6.53317403793335,
+        "key_weight_norm": 6.527485370635986
+      },
+      "initial_gradient_probe": {
+        "scope": "query_and_key_weights_that_affect_similarity",
+        "rating_norm": 0.4179720878601074,
+        "weighted_evidence_norm": 0.3374210596084595,
+        "evidence_to_rating_ratio": 0.8072813219082517,
+        "cosine": -0.13873890042304993
+      }
+    },
+    "8": {
+      "selected_epoch": {
+        "ratings": 1,
+        "evidence": 4
+      },
+      "gradient_diagnostics": {
+        "1": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 0.5505066514015198,
+          "weighted_evidence_norm": 0.31919264793395996,
+          "evidence_to_rating_ratio": 0.5798161513967836,
+          "cosine": 0.15052103996276855
+        },
+        "2": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 1.7259230613708496,
+          "weighted_evidence_norm": 1.931942105293274,
+          "evidence_to_rating_ratio": 1.1193674553249144,
+          "cosine": 0.12246233969926834
+        },
+        "3": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 1.3639018535614014,
+          "weighted_evidence_norm": 1.2248553037643433,
+          "evidence_to_rating_ratio": 0.898052378597491,
+          "cosine": -0.008842702955007553
+        },
+        "4": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 1.1652462482452393,
+          "weighted_evidence_norm": 1.30046546459198,
+          "evidence_to_rating_ratio": 1.1160434685375467,
+          "cosine": 0.12074687331914902
+        },
+        "5": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 1.5504966974258423,
+          "weighted_evidence_norm": 1.7807263135910034,
+          "evidence_to_rating_ratio": 1.1484876533741684,
+          "cosine": 0.13215187191963196
+        },
+        "6": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 1.8142528533935547,
+          "weighted_evidence_norm": 1.9098973274230957,
+          "evidence_to_rating_ratio": 1.0527183814817425,
+          "cosine": 0.31945475935935974
+        },
+        "7": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 1.4809191226959229,
+          "weighted_evidence_norm": 1.3105541467666626,
+          "evidence_to_rating_ratio": 0.8849599729530663,
+          "cosine": -0.059578657150268555
+        },
+        "8": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 1.9807791709899902,
+          "weighted_evidence_norm": 1.3611961603164673,
+          "evidence_to_rating_ratio": 0.6872023798776841,
+          "cosine": -0.007290960755199194
+        },
+        "9": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 1.106236457824707,
+          "weighted_evidence_norm": 2.445122480392456,
+          "evidence_to_rating_ratio": 2.2103072657725655,
+          "cosine": -0.15894672274589539
+        }
+      },
+      "arms": {
+        "ratings": {
+          "gradient_probe": {
+            "scope": "query_and_key_weights_that_affect_similarity",
+            "rating_norm": 0,
+            "weighted_evidence_norm": 46.2033576965332,
+            "evidence_to_rating_ratio": null,
+            "cosine": null
+          },
+          "training": {
+            "occurrences": 12102,
+            "top_token_first_fraction": 0.0010742026111386547,
+            "top_token_last_fraction": 0.9319120806478268,
+            "top_position_deciles": [
+              28,
+              40,
+              43,
+              45,
+              78,
+              123,
+              107,
+              106,
+              72,
+              11460
+            ],
+            "mean_first_token_mass": 0.001079025647514626,
+            "mean_last_token_mass": 0.9319579092529828,
+            "mean_entropy": 0.001630462554259503,
+            "top_mass_quantiles": [
+              0.5495638847351074,
+              1,
+              1,
+              1,
+              1
+            ],
+            "mass_over_099_fraction": 0.9956205585853578,
+            "scores": {
+              "n": 6051,
+              "mse_0_1": 0.12031673708270527,
+              "spearman": 0.6104073205163059,
+              "prediction_quantiles": [
+                -0.06431819498538971,
+                0.17570260167121887,
+                0.4043894112110138,
+                0.7955657243728638,
+                0.9660274982452393
+              ]
+            },
+            "query_norm_quantiles": [
+              68.43364715576172,
+              113.52668762207031,
+              128.8798828125,
+              154.0818634033203,
+              195.03465270996094
+            ],
+            "key_norm_quantiles": [
+              6.222456932067871,
+              12.033754444122314,
+              24.0903263092041,
+              42.202171325683594,
+              119.39299774169922
+            ],
+            "source_logit_range_quantiles": [
+              165.0464630126953,
+              667.7131896972656,
+              1018.5084228515625,
+              1355.7188598632813,
+              1982.8685302734375
+            ],
+            "largest_softmax_diagonal_derivative_quantiles": [
+              0,
+              0,
+              0,
+              0,
+              0.24754342436790466
+            ],
+            "mean_null_probability": 0.014655805671220259,
+            "teacher_units": 12073,
+            "teacher_ce": 784.7756080978168,
+            "teacher_top1_agreement": 0.13352108009608216,
+            "teacher_support_mass": 0.13341411546592408,
+            "query_weight_norm": 9.224774360656738,
+            "key_weight_norm": 10.123091697692871
+          },
+          "validation": {
+            "occurrences": 3152,
+            "top_token_first_fraction": 0.0006345177664974619,
+            "top_token_last_fraction": 0.9213197969543148,
+            "top_position_deciles": [
+              13,
+              16,
+              15,
+              14,
+              21,
+              51,
+              35,
+              22,
+              23,
+              2942
+            ],
+            "mean_first_token_mass": 0.0006345061881638064,
+            "mean_last_token_mass": 0.9212302597192075,
+            "mean_entropy": 0.0012319873542969595,
+            "top_mass_quantiles": [
+              0.5866625308990479,
+              1,
+              1,
+              1,
+              1
+            ],
+            "mass_over_099_fraction": 0.9949238578680203,
+            "scores": {
+              "n": 1576,
+              "mse_0_1": 0.12347095470098297,
+              "spearman": 0.581702517449529,
+              "prediction_quantiles": [
+                -0.04578039050102234,
+                0.18469882011413574,
+                0.4053120017051697,
+                0.7925694286823273,
+                0.961412250995636
+              ]
+            },
+            "query_norm_quantiles": [
+              77.84146118164062,
+              112.66619186401367,
+              129.06824493408203,
+              153.99424743652344,
+              195.03465270996094
+            ],
+            "key_norm_quantiles": [
+              6.415099143981934,
+              11.846296882629394,
+              23.60218620300293,
+              41.78002014160156,
+              117.5535888671875
+            ],
+            "source_logit_range_quantiles": [
+              157.77117919921875,
+              641.2667785644531,
+              1003.4240112304688,
+              1360.6518676757814,
+              1902.3582763671875
+            ],
+            "largest_softmax_diagonal_derivative_quantiles": [
+              0,
+              0,
+              0,
+              0,
+              0.24248962104320526
+            ],
+            "mean_null_probability": 0.01655610406383399,
+            "teacher_units": 0,
+            "teacher_ce": null,
+            "teacher_top1_agreement": null,
+            "teacher_support_mass": null,
+            "query_weight_norm": 9.224774360656738,
+            "key_weight_norm": 10.123091697692871
+          },
+          "interventions": {
+            "occurrences": 48,
+            "top_token_first_fraction": 0,
+            "top_token_last_fraction": 1,
+            "top_position_deciles": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              48
+            ],
+            "mean_first_token_mass": 0,
+            "mean_last_token_mass": 1,
+            "mean_entropy": 0,
+            "top_mass_quantiles": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "mass_over_099_fraction": 1,
+            "scores": {
+              "n": 24,
+              "mse_0_1": 0.11762895369391257,
+              "spearman": 0.757618312375286,
+              "prediction_quantiles": [
+                0.226225346326828,
+                0.2613471567630768,
+                0.4637696295976639,
+                0.6618034064769744,
+                0.8305838108062744
+              ]
+            },
+            "query_norm_quantiles": [
+              99.07157897949219,
+              99.07665252685547,
+              108.70330429077148,
+              132.0950164794922,
+              132.9719696044922
+            ],
+            "key_norm_quantiles": [
+              8.24958610534668,
+              11.656289196014404,
+              26.159805297851562,
+              45.672014236450195,
+              63.78337097167969
+            ],
+            "source_logit_range_quantiles": [
+              513.53857421875,
+              567.2425170898438,
+              694.4451293945312,
+              933.8895263671875,
+              955.7030639648438
+            ],
+            "largest_softmax_diagonal_derivative_quantiles": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_null_probability": 0,
+            "teacher_units": 0,
+            "teacher_ce": null,
+            "teacher_top1_agreement": null,
+            "teacher_support_mass": null,
+            "query_weight_norm": 9.224774360656738,
+            "key_weight_norm": 10.123091697692871
+          },
+          "selected_tokens_under_relevant_edits": [
+            {
+              "case": "car_color",
+              "base_top_position": 10,
+              "relevant_top_position": 10,
+              "base_top_mass": 1,
+              "relevant_top_mass": 1,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.3175053298473358
+            },
+            {
+              "case": "dog_color",
+              "base_top_position": 9,
+              "relevant_top_position": 9,
+              "base_top_mass": 1,
+              "relevant_top_mass": 1,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.2152000367641449
+            },
+            {
+              "case": "shirt_color",
+              "base_top_position": 11,
+              "relevant_top_position": 11,
+              "base_top_mass": 1,
+              "relevant_top_mass": 1,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.22912578284740448
+            },
+            {
+              "case": "cat_posture",
+              "base_top_position": 9,
+              "relevant_top_position": 9,
+              "base_top_mass": 1,
+              "relevant_top_mass": 1,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.46789196133613586
+            },
+            {
+              "case": "cup_count",
+              "base_top_position": 10,
+              "relevant_top_position": 10,
+              "base_top_mass": 1,
+              "relevant_top_mass": 1,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.6053009033203125
+            },
+            {
+              "case": "ball_location",
+              "base_top_position": 11,
+              "relevant_top_position": 11,
+              "base_top_mass": 1,
+              "relevant_top_mass": 1,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.6599322557449341
+            }
+          ]
+        },
+        "evidence": {
+          "gradient_probe": {
+            "scope": "query_and_key_weights_that_affect_similarity",
+            "rating_norm": 1.1287137269973755,
+            "weighted_evidence_norm": 1.8292828798294067,
+            "evidence_to_rating_ratio": 1.6206792174803242,
+            "cosine": -0.1493777483701706
+          },
+          "training": {
+            "occurrences": 12102,
+            "top_token_first_fraction": 0.10403239134027434,
+            "top_token_last_fraction": 0.09262931746818708,
+            "top_position_deciles": [
+              2511,
+              1133,
+              1175,
+              850,
+              889,
+              1215,
+              840,
+              692,
+              674,
+              2123
+            ],
+            "mean_first_token_mass": 0.10027099629948037,
+            "mean_last_token_mass": 0.09056671333340444,
+            "mean_entropy": 1.0106453925455066,
+            "top_mass_quantiles": [
+              0.11181994527578354,
+              0.3320829331874848,
+              0.6526525318622589,
+              0.9891761362552642,
+              1
+            ],
+            "mass_over_099_fraction": 0.09717402082300446,
+            "scores": {
+              "n": 6051,
+              "mse_0_1": 0.12756204525992476,
+              "spearman": 0.45065380321838666,
+              "prediction_quantiles": [
+                -0.01856745034456253,
+                0.25965115427970886,
+                0.5526340007781982,
+                0.831038236618042,
+                0.9999991655349731
+              ]
+            },
+            "query_norm_quantiles": [
+              11.410104751586914,
+              18.710952377319337,
+              21.706892013549805,
+              24.78944835662842,
+              42.574241638183594
+            ],
+            "key_norm_quantiles": [
+              8.351502418518066,
+              13.752752590179444,
+              17.284268379211426,
+              20.270551872253417,
+              34.92742156982422
+            ],
+            "source_logit_range_quantiles": [
+              2.6400201320648193,
+              7.1669347286224365,
+              11.55881643295288,
+              18.56333026885986,
+              75.29046630859375
+            ],
+            "largest_softmax_diagonal_derivative_quantiles": [
+              7.07951378086063e-18,
+              0.010706707648932935,
+              0.20674411952495575,
+              0.24860711991786957,
+              0.25
+            ],
+            "mean_null_probability": 0.05417479335855249,
+            "teacher_units": 12073,
+            "teacher_ce": 5.458819575409679,
+            "teacher_top1_agreement": 0.6980866396090449,
+            "teacher_support_mass": 0.6691034831533098,
+            "query_weight_norm": 9.716117858886719,
+            "key_weight_norm": 13.570655822753906
+          },
+          "validation": {
+            "occurrences": 3152,
+            "top_token_first_fraction": 0.0942258883248731,
+            "top_token_last_fraction": 0.09168781725888325,
+            "top_position_deciles": [
+              617,
+              298,
+              299,
+              259,
+              232,
+              313,
+              212,
+              182,
+              183,
+              557
+            ],
+            "mean_first_token_mass": 0.09258070099611963,
+            "mean_last_token_mass": 0.0909543855798048,
+            "mean_entropy": 1.050549213179414,
+            "top_mass_quantiles": [
+              0.13481856882572174,
+              0.32349091172218325,
+              0.6358940303325653,
+              0.9850866496562958,
+              1
+            ],
+            "mass_over_099_fraction": 0.08756345177664974,
+            "scores": {
+              "n": 1576,
+              "mse_0_1": 0.13312834577413454,
+              "spearman": 0.3593515232682776,
+              "prediction_quantiles": [
+                -0.007374998182058334,
+                0.24350324273109436,
+                0.5671743452548981,
+                0.818615198135376,
+                0.9999979734420776
+              ]
+            },
+            "query_norm_quantiles": [
+              12.67854118347168,
+              18.433636093139647,
+              21.484615325927734,
+              24.816219329833984,
+              42.53306579589844
+            ],
+            "key_norm_quantiles": [
+              8.477426528930664,
+              13.530353546142578,
+              17.11634635925293,
+              20.11141586303711,
+              34.60886764526367
+            ],
+            "source_logit_range_quantiles": [
+              2.4146525859832764,
+              7.083533573150635,
+              11.017072677612305,
+              17.766844367980962,
+              53.79802703857422
+            ],
+            "largest_softmax_diagonal_derivative_quantiles": [
+              1.109780178865094e-8,
+              0.0146909398958087,
+              0.2092510461807251,
+              0.24886341243982316,
+              0.25
+            ],
+            "mean_null_probability": 0.05388101325770144,
+            "teacher_units": 0,
+            "teacher_ce": null,
+            "teacher_top1_agreement": null,
+            "teacher_support_mass": null,
+            "query_weight_norm": 9.716117858886719,
+            "key_weight_norm": 13.570655822753906
+          },
+          "interventions": {
+            "occurrences": 48,
+            "top_token_first_fraction": 0.041666666666666664,
+            "top_token_last_fraction": 0.16666666666666666,
+            "top_position_deciles": [
+              3,
+              5,
+              8,
+              4,
+              2,
+              2,
+              0,
+              8,
+              8,
+              8
+            ],
+            "mean_first_token_mass": 0.09043403213763668,
+            "mean_last_token_mass": 0.13586315708501692,
+            "mean_entropy": 1.1163569850226243,
+            "top_mass_quantiles": [
+              0.2299024760723114,
+              0.41046043336391447,
+              0.5678934156894684,
+              0.8563004672527316,
+              0.9825571179389954
+            ],
+            "mass_over_099_fraction": 0,
+            "scores": {
+              "n": 24,
+              "mse_0_1": 0.15290896501875087,
+              "spearman": 0.3149649163807369,
+              "prediction_quantiles": [
+                0.43971389532089233,
+                0.46403388381004335,
+                0.6394312083721161,
+                0.9082336306571961,
+                0.9981679916381836
+              ]
+            },
+            "query_norm_quantiles": [
+              14.620563507080078,
+              14.875077247619629,
+              16.759892463684082,
+              19.542469024658203,
+              19.61177635192871
+            ],
+            "key_norm_quantiles": [
+              10.878011703491211,
+              13.88132905960083,
+              16.54835319519043,
+              19.170143699645998,
+              21.489166259765625
+            ],
+            "source_logit_range_quantiles": [
+              3.196962356567383,
+              4.098044395446777,
+              6.994710683822632,
+              9.377266693115237,
+              14.449298858642578
+            ],
+            "largest_softmax_diagonal_derivative_quantiles": [
+              0.017138628289103508,
+              0.12260598167777062,
+              0.21636484563350677,
+              0.24967388361692427,
+              0.24996599555015564
+            ],
+            "mean_null_probability": 0.1619237769045867,
+            "teacher_units": 0,
+            "teacher_ce": null,
+            "teacher_top1_agreement": null,
+            "teacher_support_mass": null,
+            "query_weight_norm": 9.716117858886719,
+            "key_weight_norm": 13.570655822753906
+          },
+          "selected_tokens_under_relevant_edits": [
+            {
+              "case": "car_color",
+              "base_top_position": 1,
+              "relevant_top_position": 2,
+              "base_top_mass": 0.4041372537612915,
+              "relevant_top_mass": 0.7634435892105103,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.4197232723236084
+            },
+            {
+              "case": "dog_color",
+              "base_top_position": 2,
+              "relevant_top_position": 2,
+              "base_top_mass": 0.7392287254333496,
+              "relevant_top_mass": 0.9825571179389954,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.5886978507041931
+            },
+            {
+              "case": "shirt_color",
+              "base_top_position": 4,
+              "relevant_top_position": 5,
+              "base_top_mass": 0.3317141532897949,
+              "relevant_top_mass": 0.8884871602058411,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.49172186851501465
+            },
+            {
+              "case": "cat_posture",
+              "base_top_position": 4,
+              "relevant_top_position": 4,
+              "base_top_mass": 0.8157750368118286,
+              "relevant_top_mass": 0.8425061702728271,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.6308407783508301
+            },
+            {
+              "case": "cup_count",
+              "base_top_position": 10,
+              "relevant_top_position": 10,
+              "base_top_mass": 0.9008524417877197,
+              "relevant_top_mass": 0.3122658133506775,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.6053009033203125
+            },
+            {
+              "case": "ball_location",
+              "base_top_position": 6,
+              "relevant_top_position": 3,
+              "base_top_mass": 0.5523595213890076,
+              "relevant_top_mass": 0.2299024760723114,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.34946930408477783
+            }
+          ]
+        }
+      },
+      "initial_validation": {
+        "occurrences": 3152,
+        "top_token_first_fraction": 0.16338832487309646,
+        "top_token_last_fraction": 0.024111675126903553,
+        "top_position_deciles": [
+          723,
+          277,
+          311,
+          229,
+          264,
+          342,
+          283,
+          221,
+          293,
+          209
+        ],
+        "mean_first_token_mass": 0.07315941916797594,
+        "mean_last_token_mass": 0.055130018290666494,
+        "mean_entropy": 2.7291322265784754,
+        "top_mass_quantiles": [
+          0.0388207770884037,
+          0.07352580577135086,
+          0.09633750095963478,
+          0.13291769921779634,
+          0.21179351210594177
+        ],
+        "mass_over_099_fraction": 0,
+        "scores": {
+          "n": 1576,
+          "mse_0_1": 0.1736567151623663,
+          "spearman": 0.11176521763277626,
+          "prediction_quantiles": [
+            0.5076934099197388,
+            0.6875739991664886,
+            0.7814965844154358,
+            0.8661071360111237,
+            0.9486669898033142
+          ]
+        },
+        "query_norm_quantiles": [
+          5.403634071350098,
+          6.023232316970825,
+          6.421179294586182,
+          6.834881067276001,
+          7.617160797119141
+        ],
+        "key_norm_quantiles": [
+          4.8113603591918945,
+          5.944423484802246,
+          6.425788402557373,
+          6.914762496948242,
+          8.3291015625
+        ],
+        "source_logit_range_quantiles": [
+          0.262694776058197,
+          0.6656508684158325,
+          0.9291316866874695,
+          1.2493061304092408,
+          1.8982332944869995
+        ],
+        "largest_softmax_diagonal_derivative_quantiles": [
+          0.03731372207403183,
+          0.06811975836753845,
+          0.08705658838152885,
+          0.11525058373808861,
+          0.16693700850009918
+        ],
+        "mean_null_probability": 0.05848877143639561,
+        "teacher_units": 0,
+        "teacher_ce": null,
+        "teacher_top1_agreement": null,
+        "teacher_support_mass": null,
+        "query_weight_norm": 6.535808086395264,
+        "key_weight_norm": 6.534330368041992
+      },
+      "initial_gradient_probe": {
+        "scope": "query_and_key_weights_that_affect_similarity",
+        "rating_norm": 0.5505066514015198,
+        "weighted_evidence_norm": 0.31919264793395996,
+        "evidence_to_rating_ratio": 0.5798161513967836,
+        "cosine": 0.15052103996276855
+      }
+    },
+    "9": {
+      "selected_epoch": {
+        "ratings": 2,
+        "evidence": 3
+      },
+      "gradient_diagnostics": {
+        "1": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 0.5072146058082581,
+          "weighted_evidence_norm": 0.43975138664245605,
+          "evidence_to_rating_ratio": 0.8669927514049052,
+          "cosine": -0.4895099401473999
+        },
+        "2": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 1.340745210647583,
+          "weighted_evidence_norm": 1.5221545696258545,
+          "evidence_to_rating_ratio": 1.1353048719007919,
+          "cosine": 0.05392184853553772
+        },
+        "3": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 1.6056863069534302,
+          "weighted_evidence_norm": 2.179165840148926,
+          "evidence_to_rating_ratio": 1.3571553987301508,
+          "cosine": 0.06454071402549744
+        },
+        "4": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 1.292834997177124,
+          "weighted_evidence_norm": 1.6270241737365723,
+          "evidence_to_rating_ratio": 1.2584932936446978,
+          "cosine": 0.2500416934490204
+        },
+        "5": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 1.3815335035324097,
+          "weighted_evidence_norm": 1.4381461143493652,
+          "evidence_to_rating_ratio": 1.0409780947564458,
+          "cosine": 0.19828976690769196
+        },
+        "6": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 2.671680212020874,
+          "weighted_evidence_norm": 1.5639652013778687,
+          "evidence_to_rating_ratio": 0.5853863775840434,
+          "cosine": 0.05126773566007614
+        },
+        "7": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 1.451912522315979,
+          "weighted_evidence_norm": 1.5912964344024658,
+          "evidence_to_rating_ratio": 1.0960002134730213,
+          "cosine": 0.05006031319499016
+        },
+        "8": {
+          "scope": "query_and_key_weights_that_affect_similarity",
+          "rating_norm": 1.9163429737091064,
+          "weighted_evidence_norm": 1.6465671062469482,
+          "evidence_to_rating_ratio": 0.8592235987172987,
+          "cosine": 0.1907007098197937
+        }
+      },
+      "arms": {
+        "ratings": {
+          "gradient_probe": {
+            "scope": "query_and_key_weights_that_affect_similarity",
+            "rating_norm": 6.931959648832196e-19,
+            "weighted_evidence_norm": 48.38139343261719,
+            "evidence_to_rating_ratio": 69794684163760005000,
+            "cosine": 1.3110052973774877e-11
+          },
+          "training": {
+            "occurrences": 12102,
+            "top_token_first_fraction": 0.0012394645513138325,
+            "top_token_last_fraction": 0.8318459758717567,
+            "top_position_deciles": [
+              260,
+              326,
+              249,
+              174,
+              123,
+              183,
+              141,
+              129,
+              132,
+              10385
+            ],
+            "mean_first_token_mass": 0.0012107082087256444,
+            "mean_last_token_mass": 0.8318477411159435,
+            "mean_entropy": 0.0023339332981555097,
+            "top_mass_quantiles": [
+              0.4987014830112457,
+              1,
+              1,
+              1,
+              1
+            ],
+            "mass_over_099_fraction": 0.9929763675425549,
+            "scores": {
+              "n": 6051,
+              "mse_0_1": 0.1228724509535979,
+              "spearman": 0.6056195795368369,
+              "prediction_quantiles": [
+                -0.08297813683748245,
+                0.17089584469795227,
+                0.4040425419807434,
+                0.7916756868362427,
+                0.9999999403953552
+              ]
+            },
+            "query_norm_quantiles": [
+              75.87793731689453,
+              125.95914459228516,
+              149.7748031616211,
+              174.34962463378906,
+              188.21408081054688
+            ],
+            "key_norm_quantiles": [
+              7.231881618499756,
+              16.42675075531006,
+              31.61463451385498,
+              56.58370018005372,
+              133.05433654785156
+            ],
+            "source_logit_range_quantiles": [
+              102.04827880859375,
+              686.9412658691407,
+              1167.582763671875,
+              1658.6748413085936,
+              2566.27587890625
+            ],
+            "largest_softmax_diagonal_derivative_quantiles": [
+              0,
+              0,
+              0,
+              1.512636671989876e-39,
+              0.2499983310699463
+            ],
+            "mean_null_probability": 0.01961646968064909,
+            "teacher_units": 12073,
+            "teacher_ce": 835.6343012714725,
+            "teacher_top1_agreement": 0.21502526298351693,
+            "teacher_support_mass": 0.21503075923973392,
+            "query_weight_norm": 11.050812721252441,
+            "key_weight_norm": 11.90685749053955
+          },
+          "validation": {
+            "occurrences": 3152,
+            "top_token_first_fraction": 0.0009517766497461929,
+            "top_token_last_fraction": 0.8324873096446701,
+            "top_position_deciles": [
+              66,
+              72,
+              58,
+              34,
+              49,
+              69,
+              42,
+              32,
+              33,
+              2697
+            ],
+            "mean_first_token_mass": 0.0009517766497461929,
+            "mean_last_token_mass": 0.8324253973394165,
+            "mean_entropy": 0.0027795102269590655,
+            "top_mass_quantiles": [
+              0.5236677527427673,
+              1,
+              1,
+              1,
+              1
+            ],
+            "mass_over_099_fraction": 0.9923857868020305,
+            "scores": {
+              "n": 1576,
+              "mse_0_1": 0.1266038600530798,
+              "spearman": 0.5784467251432364,
+              "prediction_quantiles": [
+                -0.06350734829902649,
+                0.16987871378660202,
+                0.40365080535411835,
+                0.7888199388980865,
+                0.9999998211860657
+              ]
+            },
+            "query_norm_quantiles": [
+              75.60839080810547,
+              125.12783508300781,
+              149.3728256225586,
+              174.04737854003906,
+              182.5977325439453
+            ],
+            "key_norm_quantiles": [
+              7.593505859375,
+              16.50201416015625,
+              31.727705001831055,
+              55.963192749023435,
+              134.121337890625
+            ],
+            "source_logit_range_quantiles": [
+              216.17527770996094,
+              664.1619201660156,
+              1146.930908203125,
+              1656.4398559570313,
+              2333.73095703125
+            ],
+            "largest_softmax_diagonal_derivative_quantiles": [
+              0,
+              0,
+              0,
+              1.8703959619156202e-32,
+              0.24943983554840088
+            ],
+            "mean_null_probability": 0.022316191708706756,
+            "teacher_units": 0,
+            "teacher_ce": null,
+            "teacher_top1_agreement": null,
+            "teacher_support_mass": null,
+            "query_weight_norm": 11.050812721252441,
+            "key_weight_norm": 11.90685749053955
+          },
+          "interventions": {
+            "occurrences": 48,
+            "top_token_first_fraction": 0,
+            "top_token_last_fraction": 1,
+            "top_position_deciles": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              48
+            ],
+            "mean_first_token_mass": 0,
+            "mean_last_token_mass": 1,
+            "mean_entropy": 0,
+            "top_mass_quantiles": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ],
+            "mass_over_099_fraction": 1,
+            "scores": {
+              "n": 24,
+              "mse_0_1": 0.11762895369391257,
+              "spearman": 0.757618312375286,
+              "prediction_quantiles": [
+                0.226225346326828,
+                0.2613471567630768,
+                0.4637696295976639,
+                0.6618034064769744,
+                0.8305838108062744
+              ]
+            },
+            "query_norm_quantiles": [
+              125.8848648071289,
+              127.1314926147461,
+              138.44712829589844,
+              152.2697296142578,
+              153.14089965820312
+            ],
+            "key_norm_quantiles": [
+              9.113871574401855,
+              18.35222816467285,
+              33.12799072265625,
+              65.79957580566406,
+              93.94368743896484
+            ],
+            "source_logit_range_quantiles": [
+              705.0172729492188,
+              831.8927001953125,
+              1068.9326171875,
+              1244.8067626953125,
+              1288.095703125
+            ],
+            "largest_softmax_diagonal_derivative_quantiles": [
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "mean_null_probability": 0,
+            "teacher_units": 0,
+            "teacher_ce": null,
+            "teacher_top1_agreement": null,
+            "teacher_support_mass": null,
+            "query_weight_norm": 11.050812721252441,
+            "key_weight_norm": 11.90685749053955
+          },
+          "selected_tokens_under_relevant_edits": [
+            {
+              "case": "car_color",
+              "base_top_position": 10,
+              "relevant_top_position": 10,
+              "base_top_mass": 1,
+              "relevant_top_mass": 1,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.3175053298473358
+            },
+            {
+              "case": "dog_color",
+              "base_top_position": 9,
+              "relevant_top_position": 9,
+              "base_top_mass": 1,
+              "relevant_top_mass": 1,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.2152000367641449
+            },
+            {
+              "case": "shirt_color",
+              "base_top_position": 11,
+              "relevant_top_position": 11,
+              "base_top_mass": 1,
+              "relevant_top_mass": 1,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.22912578284740448
+            },
+            {
+              "case": "cat_posture",
+              "base_top_position": 9,
+              "relevant_top_position": 9,
+              "base_top_mass": 1,
+              "relevant_top_mass": 1,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.46789196133613586
+            },
+            {
+              "case": "cup_count",
+              "base_top_position": 10,
+              "relevant_top_position": 10,
+              "base_top_mass": 1,
+              "relevant_top_mass": 1,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.6053009033203125
+            },
+            {
+              "case": "ball_location",
+              "base_top_position": 11,
+              "relevant_top_position": 11,
+              "base_top_mass": 1,
+              "relevant_top_mass": 1,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.6599322557449341
+            }
+          ]
+        },
+        "evidence": {
+          "gradient_probe": {
+            "scope": "query_and_key_weights_that_affect_similarity",
+            "rating_norm": 2.2075812816619873,
+            "weighted_evidence_norm": 1.4642809629440308,
+            "evidence_to_rating_ratio": 0.6632965114841164,
+            "cosine": -0.118625208735466
+          },
+          "training": {
+            "occurrences": 12102,
+            "top_token_first_fraction": 0.053544868616757564,
+            "top_token_last_fraction": 0.033382911915385886,
+            "top_position_deciles": [
+              1819,
+              1351,
+              1424,
+              975,
+              946,
+              1306,
+              971,
+              922,
+              1040,
+              1348
+            ],
+            "mean_first_token_mass": 0.05378198455254637,
+            "mean_last_token_mass": 0.03509855584776102,
+            "mean_entropy": 1.249534710537216,
+            "top_mass_quantiles": [
+              0.10903601348400116,
+              0.2892383933067322,
+              0.5514232218265533,
+              0.9413117885589599,
+              1
+            ],
+            "mass_over_099_fraction": 0.03561394810775079,
+            "scores": {
+              "n": 6051,
+              "mse_0_1": 0.13663602874830616,
+              "spearman": 0.40638411908344224,
+              "prediction_quantiles": [
+                0.01491993572562933,
+                0.2994077503681183,
+                0.5409497022628784,
+                0.7823514938354492,
+                1
+              ]
+            },
+            "query_norm_quantiles": [
+              11.162968635559082,
+              16.92306270599365,
+              20.68545913696289,
+              23.152894973754883,
+              40.16546630859375
+            ],
+            "key_norm_quantiles": [
+              9.489542961120605,
+              13.850595092773437,
+              16.570722579956055,
+              19.595846557617186,
+              33.2640266418457
+            ],
+            "source_logit_range_quantiles": [
+              1.488423466682434,
+              6.023575639724731,
+              9.967763900756836,
+              18.433935737609854,
+              49.584835052490234
+            ],
+            "largest_softmax_diagonal_derivative_quantiles": [
+              1.449516950913221e-9,
+              0.055243904516100895,
+              0.21869151294231415,
+              0.2488737389445305,
+              0.25
+            ],
+            "mean_null_probability": 0.06440067584198782,
+            "teacher_units": 12073,
+            "teacher_ce": 4.545666019513476,
+            "teacher_top1_agreement": 0.7143212126232088,
+            "teacher_support_mass": 0.6758147280919051,
+            "query_weight_norm": 9.256074905395508,
+            "key_weight_norm": 12.573714256286621
+          },
+          "validation": {
+            "occurrences": 3152,
+            "top_token_first_fraction": 0.044416243654822336,
+            "top_token_last_fraction": 0.03267766497461929,
+            "top_position_deciles": [
+              424,
+              345,
+              367,
+              250,
+              253,
+              343,
+              301,
+              232,
+              287,
+              350
+            ],
+            "mean_first_token_mass": 0.046287663054368426,
+            "mean_last_token_mass": 0.03423016182689667,
+            "mean_entropy": 1.3335859739430629,
+            "top_mass_quantiles": [
+              0.1126103475689888,
+              0.27428055405616764,
+              0.5214848220348358,
+              0.9094552099704742,
+              1
+            ],
+            "mass_over_099_fraction": 0.01998730964467005,
+            "scores": {
+              "n": 1576,
+              "mse_0_1": 0.14094011259821645,
+              "spearman": 0.30513156544063175,
+              "prediction_quantiles": [
+                0.0735422819852829,
+                0.3233109563589096,
+                0.5594366490840912,
+                0.7835800051689148,
+                0.9988266825675964
+              ]
+            },
+            "query_norm_quantiles": [
+              11.925456047058105,
+              16.77628364562988,
+              20.527812004089355,
+              23.152894973754883,
+              40.16546630859375
+            ],
+            "key_norm_quantiles": [
+              9.308022499084473,
+              13.65828800201416,
+              16.427522659301758,
+              19.459042739868163,
+              32.8498420715332
+            ],
+            "source_logit_range_quantiles": [
+              2.161439895629883,
+              5.703702640533447,
+              9.329230308532715,
+              17.307260322570805,
+              50.472679138183594
+            ],
+            "largest_softmax_diagonal_derivative_quantiles": [
+              7.593346396106426e-9,
+              0.08234642744064331,
+              0.22096344828605652,
+              0.24889995604753495,
+              0.25
+            ],
+            "mean_null_probability": 0.06549421548256322,
+            "teacher_units": 0,
+            "teacher_ce": null,
+            "teacher_top1_agreement": null,
+            "teacher_support_mass": null,
+            "query_weight_norm": 9.256074905395508,
+            "key_weight_norm": 12.573714256286621
+          },
+          "interventions": {
+            "occurrences": 48,
+            "top_token_first_fraction": 0,
+            "top_token_last_fraction": 0.10416666666666667,
+            "top_position_deciles": [
+              0,
+              3,
+              8,
+              5,
+              3,
+              5,
+              1,
+              11,
+              7,
+              5
+            ],
+            "mean_first_token_mass": 0.013483906369515353,
+            "mean_last_token_mass": 0.15214794104880033,
+            "mean_entropy": 1.2389038217564423,
+            "top_mass_quantiles": [
+              0.2648274600505829,
+              0.31869322061538696,
+              0.5284013152122498,
+              0.9245223999023438,
+              0.983085572719574
+            ],
+            "mass_over_099_fraction": 0,
+            "scores": {
+              "n": 24,
+              "mse_0_1": 0.14195444780058727,
+              "spearman": 0.4908912660708783,
+              "prediction_quantiles": [
+                0.37141063809394836,
+                0.4439722001552582,
+                0.5074733793735504,
+                0.883936983346939,
+                0.9677920341491699
+              ]
+            },
+            "query_norm_quantiles": [
+              13.004781723022461,
+              13.147130966186523,
+              14.835583686828613,
+              17.27960968017578,
+              17.40631866455078
+            ],
+            "key_norm_quantiles": [
+              12.102316856384277,
+              13.789893245697021,
+              15.922379493713379,
+              18.64699363708496,
+              22.582910537719727
+            ],
+            "source_logit_range_quantiles": [
+              2.645876884460449,
+              3.2192182540893555,
+              4.583636283874512,
+              7.183320045471191,
+              11.160689353942871
+            ],
+            "largest_softmax_diagonal_derivative_quantiles": [
+              0.01662832871079445,
+              0.0697603963315487,
+              0.23150648921728134,
+              0.2498125433921814,
+              0.249846950173378
+            ],
+            "mean_null_probability": 0.19067530112806708,
+            "teacher_units": 0,
+            "teacher_ce": null,
+            "teacher_top1_agreement": null,
+            "teacher_support_mass": null,
+            "query_weight_norm": 9.256074905395508,
+            "key_weight_norm": 12.573714256286621
+          },
+          "selected_tokens_under_relevant_edits": [
+            {
+              "case": "car_color",
+              "base_top_position": 3,
+              "relevant_top_position": 5,
+              "base_top_mass": 0.40208932757377625,
+              "relevant_top_mass": 0.3270622193813324,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.3950369358062744
+            },
+            {
+              "case": "dog_color",
+              "base_top_position": 2,
+              "relevant_top_position": 2,
+              "base_top_mass": 0.32206180691719055,
+              "relevant_top_mass": 0.3376999497413635,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.5886978507041931
+            },
+            {
+              "case": "shirt_color",
+              "base_top_position": 9,
+              "relevant_top_position": 5,
+              "base_top_mass": 0.3108331859111786,
+              "relevant_top_mass": 0.5676980018615723,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.2993607521057129
+            },
+            {
+              "case": "cat_posture",
+              "base_top_position": 4,
+              "relevant_top_position": 4,
+              "base_top_mass": 0.9215701818466187,
+              "relevant_top_mass": 0.983085572719574,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.6308407783508301
+            },
+            {
+              "case": "cup_count",
+              "base_top_position": 5,
+              "relevant_top_position": 7,
+              "base_top_mass": 0.34871238470077515,
+              "relevant_top_mass": 0.37652990221977234,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.2922981083393097
+            },
+            {
+              "case": "ball_location",
+              "base_top_position": 4,
+              "relevant_top_position": 4,
+              "base_top_mass": 0.4097835123538971,
+              "relevant_top_mass": 0.8896597623825073,
+              "selected_state_exactly_equal": false,
+              "selected_state_cosine": 0.5199465751647949
+            }
+          ]
+        }
+      },
+      "initial_validation": {
+        "occurrences": 3152,
+        "top_token_first_fraction": 0.0717005076142132,
+        "top_token_last_fraction": 0.14086294416243655,
+        "top_position_deciles": [
+          399,
+          309,
+          357,
+          271,
+          229,
+          296,
+          234,
+          221,
+          305,
+          531
+        ],
+        "mean_first_token_mass": 0.06298753828800704,
+        "mean_last_token_mass": 0.0713538748887604,
+        "mean_entropy": 2.7227138134882534,
+        "top_mass_quantiles": [
+          0.043992236256599426,
+          0.07599116042256356,
+          0.10022490844130516,
+          0.1394577756524086,
+          0.25226128101348877
+        ],
+        "mass_over_099_fraction": 0,
+        "scores": {
+          "n": 1576,
+          "mse_0_1": 0.1687364962673991,
+          "spearman": 0.1339679215862781,
+          "prediction_quantiles": [
+            0.49640902876853943,
+            0.6748765707015991,
+            0.7712673544883728,
+            0.8557978272438049,
+            0.9336843490600586
+          ]
+        },
+        "query_norm_quantiles": [
+          5.422041893005371,
+          6.303122520446777,
+          6.834818601608276,
+          7.104712009429932,
+          7.703400135040283
+        ],
+        "key_norm_quantiles": [
+          4.89113187789917,
+          6.013848304748535,
+          6.503796577453613,
+          6.9949675559997555,
+          8.213850021362305
+        ],
+        "source_logit_range_quantiles": [
+          0.26856574416160583,
+          0.6996068477630615,
+          0.9926145076751709,
+          1.3483869552612304,
+          2.114231586456299
+        ],
+        "largest_softmax_diagonal_derivative_quantiles": [
+          0.04205692186951637,
+          0.07021650224924088,
+          0.09017987549304962,
+          0.12000930532813073,
+          0.1886255294084549
+        ],
+        "mean_null_probability": 0.06156423193494775,
+        "teacher_units": 0,
+        "teacher_ce": null,
+        "teacher_top1_agreement": null,
+        "teacher_support_mass": null,
+        "query_weight_norm": 6.5298309326171875,
+        "key_weight_norm": 6.533493995666504
+      },
+      "initial_gradient_probe": {
+        "scope": "query_and_key_weights_that_affect_similarity",
+        "rating_norm": 0.5072146058082581,
+        "weighted_evidence_norm": 0.43975138664245605,
+        "evidence_to_rating_ratio": 0.8669927514049052,
+        "cosine": -0.4895099401473999
+      }
+    }
+  },
+  "training_teacher_pooling": {
+    "A": {
+      "n": 5382,
+      "mse_0_1": 0.01432433091269705,
+      "spearman": 0.9279453459028117,
+      "prediction_quantiles": [
+        -0.10619530081748962,
+        0.05208817310631275,
+        0.6639517843723297,
+        0.9830033898353577,
+        0.9980907440185547
+      ]
+    },
+    "mean": {
+      "n": 5382,
+      "mse_0_1": 0.1908838725347701,
+      "spearman": 0.15156646916549252,
+      "prediction_quantiles": [
+        0.22920964658260345,
+        0.6919948816299438,
+        0.7829225361347198,
+        0.864266461133957,
+        0.9587640166282654
+      ]
+    },
+    "quotation": {
+      "n": 5382,
+      "mse_0_1": 0.1708300500759194,
+      "spearman": 0.16025262479752683,
+      "prediction_quantiles": [
+        0.10716767609119415,
+        0.5485958397388458,
+        0.7156458497047424,
+        0.8519887685775758,
+        1.0000004768371582
+      ]
+    }
+  },
+  "analysis_script_archive": "/content/jep-evidence-readout-20261028/diagnostics-r2.source.py"
+}
+

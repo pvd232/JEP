@@ -320,3 +320,18 @@ Mean C−B Spearman: -0.172441. 95% interval: [-0.199812, -0.143328].
 | interaction | -0.035779 | 0.037014 | [-0.057634, -0.014947] |
 
 Evaluation status: succeeded.
+
+
+## Investigation after completion
+
+The [diagnosis and proposed follow up](diagnosis.md) records two findings: large attention scores concentrated B on one token, and replacing A's final summary with sentence token averages removed a useful representation. The investigation reuses retained states from this run.
+
+A fixed one epoch probe uses seed 7 and the same 190 updates at each declared learning rate. Every setting uses training and validation. A's validation Spearman is 0.876789.
+
+| Learning rate | B validation Spearman | C validation Spearman |
+| --- | ---: | ---: |
+| 0.001 | 0.255872 | 0.221737 |
+| 0.0001 | 0.739193 | 0.601113 |
+| 0.00001 | 0.696973 | 0.615708 |
+
+The original rate reproduces both archived epoch one validation scores exactly. The smaller rates substantially reduce attention concentration. The proposed next experiment retains A's score and learns an additional contribution from evidence, with a matching control trained on ratings. This investigation includes 69 passing tests. [Diagnostic measurements](diagnosis.json) and [all step size measurements](step_size_probe.json) retain the results.
