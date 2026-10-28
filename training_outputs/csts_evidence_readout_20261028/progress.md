@@ -288,3 +288,35 @@ A: saved cosine score. B: token weighting trained with ratings. C: token weighti
 | 2026-10-28 05:05:55 | stage started | 7 |  | name: publish_test |
 | 2026-10-28 05:06:19 | stage finished | 7 |  | name: publish_test; status: succeeded |
 | 2026-10-28 05:06:23 | stage started | 7 |  | name: evaluate |
+| 2026-10-28 05:09:12 | readout final scores |  |  |  |
+
+## Test results
+
+| Seed | Model | Spearman | MSE |
+| --- | --- | --- | --- |
+| reference | A | 0.863398 | 0.035636 |
+| reference | Ratings reference | 0.855771 | 0.038254 |
+| 7 | B | 0.258904 | 0.187356 |
+| 7 | C | 0.310429 | 0.151798 |
+| 7 | D | 0.437993 | 0.123757 |
+| 7 | E | 0.438058 | 0.130912 |
+| 8 | B | 0.590147 | 0.132040 |
+| 8 | C | 0.359009 | 0.143940 |
+| 8 | D | 0.737624 | 0.075859 |
+| 8 | E | 0.497190 | 0.120186 |
+| 9 | B | 0.595156 | 0.130217 |
+| 9 | C | 0.257447 | 0.161495 |
+| 9 | D | 0.734073 | 0.077587 |
+| 9 | E | 0.349780 | 0.144767 |
+
+Mean C−B Spearman: -0.172441. 95% interval: [-0.199812, -0.143328].
+
+| Comparison | Mean Spearman change | Mean MSE change | Spearman 95% interval |
+| --- | --- | --- | --- |
+| C_minus_B | -0.172441 | 0.002540 | [-0.199812, -0.143328] |
+| E_minus_D | -0.208220 | 0.039554 | [-0.230545, -0.184972] |
+| D_minus_B | 0.155160 | -0.057470 | [0.136752, 0.173265] |
+| E_minus_C | 0.119381 | -0.020456 | [0.102063, 0.136005] |
+| interaction | -0.035779 | 0.037014 | [-0.057634, -0.014947] |
+
+Evaluation status: succeeded.
