@@ -1,6 +1,6 @@
 # Joint LoRA and comparison training
 
-Updated: 2026-10-28 16:34:11 EDT.
+Updated: 2026-10-28 16:57:42 EDT.
 
 [Methods](../../plans/csts-native-comparison-methods.md) · [Review](../../plans/csts-native-comparison-review.md) · [Configuration](../../configs/csts-native-comparison.json)
 
@@ -12,12 +12,14 @@ The previous Colab A100 assignment disappeared during the terminal interruption.
 
 | Seed | Hardware observation | Optimizer updates | Completed epochs | Best validation Spearman | Sealed Cloud checkpoints | Native run status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 7 | NVIDIA L4, 16350 MiB, 100 % | 200 | 1 | 0.859860461286118 | 2 | running |
+| 7 | NVIDIA L4, 16352 MiB, 100 % | 575 | 3 | 0.8751512974333209 | 4 | running |
 
 ## Completed epochs
 
 | Epoch | Updates | Training MSE | Validation Spearman | Validation MSE | Selected epoch |
 | --- | --- | --- | --- | --- | --- |
-| 1 | 190 | 0.064171 | 0.859860461 | 0.037323 | 1 |
+| 1 | 190 | 0.064171 | 0.859860461 | 0.037323 | 3 |
+| 2 | 380 | 0.036076 | 0.871742952 | 0.032889 | 3 |
+| 3 | 570 | 0.027544 | 0.875151297 | 0.031849 | 3 |
 
 Epoch checkpoint copies publish through the native VIPER Cloud file API on a background thread. The fitting stage checks every pending publication at completion. Each task owned GPU is shut down after its required uploads and evaluation work complete.
