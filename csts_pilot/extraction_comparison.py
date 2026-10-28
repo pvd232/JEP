@@ -81,7 +81,8 @@ def source_id(passage, condition):
 
 def code_identity():
     """Bind runs to the exact implementation, including uncommitted changes."""
-    files = ("extraction_comparison.py", "extraction_formats.py", "extraction_native.py")
+    files = ("extraction_comparison.py", "extraction_formats.py", "extraction_native.py",
+             "transport_revalidation.py")
     return {name: digest((Path(__file__).parent / name).read_bytes()) for name in files}
 
 
@@ -218,21 +219,9 @@ def prompt_for(item, arm):
 
 
 def completed_codex(events, response):
-    """Accept only completed tool-free Codex turns and a strict common envelope."""
-    completed = 0
-    for event in events:
-        if event.get("type") in ("error", "turn.failed"):
-            raise ValueError("Codex inference failed")
-        if event.get("type") == "turn.completed":
-            completed += 1
-        item = event.get("item", {})
-        if item.get("type") not in (None, "agent_message", "reasoning"):
-            raise ValueError("Closed-book violation: " + str(item.get("type")))
-    if completed != 1:
-        raise ValueError("Expected exactly one completed inference turn")
-    if not isinstance(response, dict) or set(response) != {"payload"} or not isinstance(response["payload"], str):
-        raise ValueError("Invalid common output envelope")
-    return response["payload"]
+    """Accept one agreeing tool-free final answer, permitting known transport notices."""
+    from .transport_revalidation import validate_completed_capture
+    return validate_completed_capture(events, response)
 
 
 def capture_codex(folder, prompt, config, cli, closed_book):

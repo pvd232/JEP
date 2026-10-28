@@ -36,6 +36,21 @@ When multiple incompatible readings remain, include only relations supported
 under those readings. Return only the native list of relation constructors.
 Do not include similarity scores, explanations, Markdown fences or other code."""
 
+KNOWCODER_AUTHOR_REVISION = "b7859789fc7641e03916074088859aa592332ad3"
+KNOWCODER_INFERENCE_SOURCE = (
+    "https://github.com/ICT-GoKnow/KnowCoder/blob/" + KNOWCODER_AUTHOR_REVISION
+    + "/eval/src/inference.py"
+)
+KNOWCODER_SYSTEM = (
+    "You are a highly skilled assistant at digesting "
+    "and extracting information from textual content. "
+    "Below is an input containing standard type definitions "
+    "and textual content. Please complete it with the "
+    "extracted information in the form of structured code."
+)
+KNOWCODER_STOP = '"""'
+
+
 NATIVE_MODELS = {
     "knowcoder": {
         "model_id": "golaxy/KnowCoder-7B-base",
@@ -87,7 +102,7 @@ def build_native_prompt(item: dict[str, Any], arm: str) -> str:
     docstring = json.dumps(guideline, ensure_ascii=False)
     sentence = json.dumps(passage, ensure_ascii=False)
     if arm == "knowcoder":
-        return (
+        query = (
             "class Entity:\n"
             "    def __init__(self, name: str):\n"
             "        self.name = name\n\n"
@@ -101,9 +116,11 @@ def build_native_prompt(item: dict[str, Any], arm: str) -> str:
             "        super().__init__(head_entity, tail_entity)\n\n"
             '"""This is an object-oriented programming task: instantiate all '
             'corresponding Relation Objects in the following sentence."""\n'
-            "sentence = " + sentence + "\n"
-            "results ="
+            "sentence = " + sentence
         )
+        # Match both the authors' SFT template and inference.py build_prompt:
+        # the model generates the complete results assignment after Output:.
+        return KNOWCODER_SYSTEM + "\nInput:\n" + query + "\nOutput:\n"
     return (
         "# Relation definitions\n"
         "@dataclass\n"
@@ -205,6 +222,18 @@ def parse_native(payload: str, arm: str, passage: str) -> dict[str, Any]:
         "native_relations": relations,
         "semantic_validation": "required",
     }
+
+
+def native_payload(raw_decoded: str, arm: str) -> tuple[str, str]:
+    """Match the author's stop delimiter while preserving raw decoded bytes.
+
+    VLLM's stop='triple quote' excludes the delimiter from returned text. The
+    Transformers stop criterion stops token generation; this projects the same
+    returned payload. The raw decoded generation remains a separate artifact.
+    """
+    if arm == "knowcoder" and KNOWCODER_STOP in raw_decoded:
+        return raw_decoded.split(KNOWCODER_STOP, 1)[0], "author_stop_string"
+    return raw_decoded, "model_or_length"
 
 
 def check_token_budget(input_tokens: int, max_new_tokens: int, context_limit: int) -> None:
@@ -328,9 +357,20 @@ class NativeGenerator:
         if arm == "gollie" and not torch.cuda.is_available():
             raise RuntimeError("GoLLIE compatibility execution requires a CUDA runtime")
         revision = self.descriptor["revision"]
+        tokenizer_options = {"revision": revision, "trust_remote_code": False}
+        if arm == "knowcoder":
+            # The authors encode the entire wrapped prompt with a fast tokenizer,
+            # legacy=False, left padding and default added special tokens.
+            tokenizer_options.update(use_fast=True, legacy=False, padding_side="left")
         self.tokenizer = AutoTokenizer.from_pretrained(
-            self.descriptor["model_id"], revision=revision, trust_remote_code=False
+            self.descriptor["model_id"], **tokenizer_options
         )
+        self.stopping_criteria = None
+        if arm == "knowcoder":
+            from transformers import StoppingCriteriaList, StopStringCriteria
+            self.stopping_criteria = StoppingCriteriaList([
+                StopStringCriteria(self.tokenizer, stop_strings=[KNOWCODER_STOP])
+            ])
         options = {
             "revision": revision,
             "torch_dtype": torch.bfloat16,
@@ -358,6 +398,14 @@ class NativeGenerator:
         self.environment = runtime_metadata(torch)
         self.environment["resolved_model_revision"] = resolved
         self.environment.update(implementation)
+        if arm == "knowcoder":
+            self.environment["author_prompt_source"] = KNOWCODER_INFERENCE_SOURCE
+            self.environment["author_prompt_revision"] = KNOWCODER_AUTHOR_REVISION
+            self.environment["tokenizer_settings"] = {
+                "use_fast": True, "legacy": False, "padding_side": "left",
+                "add_special_tokens": True,
+            }
+            self.environment["stop_string"] = KNOWCODER_STOP
 
     def generate(self, item: dict[str, Any]) -> dict[str, Any]:
         """Preserve exact prompt/suffix and surface exhausted token budgets."""
@@ -373,20 +421,30 @@ class NativeGenerator:
             input_tokens, self.max_new_tokens, self.descriptor["context_limit"]
         )
         batch = {key: value.to(self.model.device) for key, value in batch.items()}
+        generation_options = {}
+        if getattr(self, "stopping_criteria", None) is not None:
+            generation_options["stopping_criteria"] = self.stopping_criteria
         with self.torch.inference_mode():
             output = self.model.generate(
                 **batch, max_new_tokens=self.max_new_tokens,
                 do_sample=False, num_beams=1, num_return_sequences=1,
-                pad_token_id=self.tokenizer.eos_token_id,
+                pad_token_id=self.tokenizer.eos_token_id, **generation_options,
             )
         suffix = output[0, input_tokens:]
         generated_tokens = int(suffix.shape[0])
         finished = bool(generated_tokens and suffix[-1].item() == eos)
+        raw_decoded = self.tokenizer.decode(suffix, skip_special_tokens=True)
+        payload, stop_reason = native_payload(raw_decoded, self.arm)
         return {
-            "payload": self.tokenizer.decode(suffix, skip_special_tokens=True),
+            "payload": payload,
+            "raw_decoded_generation": raw_decoded,
+            "stop_reason": "eos" if finished else stop_reason,
             "prompt": prompt,
             "input_tokens": input_tokens,
             "output_tokens": generated_tokens,
-            "truncated": generated_tokens >= self.max_new_tokens and not finished,
+            "truncated": (
+                generated_tokens >= self.max_new_tokens and not finished
+                and stop_reason != "author_stop_string"
+            ),
             "environment": dict(self.environment),
         }

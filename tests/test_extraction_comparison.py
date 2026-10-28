@@ -95,7 +95,9 @@ class ComparisonTest(unittest.TestCase):
     def write_capture(self, folder, payload):
         """Retain synthetic raw artifacts through the real result-validation path."""
         response = {"payload": payload}
-        events = [{"type": "item.completed", "item": {"type": "agent_message"}},
+        events = [{"type": "thread.started", "thread_id": "fixture-thread"},
+                  {"type": "turn.started"},
+                  {"type": "item.completed", "item": {"type": "agent_message", "text": json.dumps(response)}},
                   {"type": "turn.completed"}]
         (folder / "response.json").write_bytes(experiment.encoded(response))
         (folder / "events.jsonl").write_text(
@@ -192,7 +194,9 @@ class ComparisonTest(unittest.TestCase):
                                split="test", protocol_lock=self.output / "protocol.json")
 
     def test_codex_tool_use_failure_and_extra_envelope_are_rejected(self):
-        valid = [{"type": "item.completed", "item": {"type": "agent_message"}},
+        valid = [{"type": "thread.started", "thread_id": "fixture-thread"},
+                 {"type": "turn.started"},
+                 {"type": "item.completed", "item": {"type": "agent_message", "text": json.dumps({"payload": "3"})}},
                  {"type": "turn.completed"}]
         self.assertEqual(experiment.completed_codex(valid, {"payload": "3"}), "3")
         for events, response in (

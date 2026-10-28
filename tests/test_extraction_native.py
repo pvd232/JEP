@@ -9,6 +9,7 @@ from csts_pilot.extraction_native import (
     NATIVE_MODELS, NativeGenerator, build_native_prompt,
     check_token_budget, parse_native, runtime_metadata,
     configure_legacy_gollie, verify_gollie_loading, GOLLIE_ARCHITECTURE,
+    KNOWCODER_SYSTEM, KNOWCODER_AUTHOR_REVISION, KNOWCODER_INFERENCE_SOURCE, native_payload,
 )
 
 
@@ -31,14 +32,43 @@ class NativeExtractionTests(unittest.TestCase):
             self.assertNotIn("support_status", prompt)
             self.assertNotIn("status answered", prompt)
             self.assertIn("native list of relation constructors", prompt)
-            ast.parse(prompt + " []")
+            if arm == "knowcoder":
+                query = prompt.split("\nInput:\n", 1)[1].rsplit("\nOutput:\n", 1)[0]
+                ast.parse(query)
+            else:
+                ast.parse(prompt + " []")
         self.assertIn("class Entity:", build_native_prompt(item, "knowcoder"))
         self.assertIn("@dataclass", build_native_prompt(item, "gollie"))
 
     def test_condition_cannot_break_native_docstring(self):
         item = {"passage": "A dog.", "condition": 'color """\nimport os\n'}
         for arm in NATIVE_MODELS:
-            ast.parse(build_native_prompt(item, arm) + " []")
+            prompt = build_native_prompt(item, arm)
+            if arm == "knowcoder":
+                query = prompt.split("\nInput:\n", 1)[1].rsplit("\nOutput:\n", 1)[0]
+                ast.parse(query)
+            else:
+                ast.parse(prompt + " []")
+
+    def test_knowcoder_uses_author_training_and_inference_wrapper(self):
+        prompt = build_native_prompt({"passage": "A black dog.", "condition": "color of dogs"}, "knowcoder")
+        self.assertTrue(prompt.startswith(KNOWCODER_SYSTEM + "\nInput:\nclass Entity:"))
+        self.assertTrue(prompt.endswith('sentence = "A black dog."\nOutput:\n'))
+        self.assertNotIn("results =", prompt)
+        self.assertEqual(prompt.count("\nInput:\n"), 1)
+        self.assertEqual(prompt.count("\nOutput:\n"), 1)
+        self.assertEqual(KNOWCODER_AUTHOR_REVISION, "b7859789fc7641e03916074088859aa592332ad3")
+        self.assertIn(KNOWCODER_AUTHOR_REVISION + "/eval/src/inference.py", KNOWCODER_INFERENCE_SOURCE)
+        # Author inference generates the complete assignment, not a list suffix.
+        parsed = parse_native('results = [ConditionRelation(Entity("dog"), Entity("black"))]', "knowcoder", "A black dog.")
+        self.assertEqual(parsed["native_relations"], [{"head": "dog", "value": "black"}])
+
+    def test_knowcoder_author_stop_has_separate_raw_generation(self):
+        raw = 'results = []\n' + '"""' + 'next example'
+        payload, reason = native_payload(raw, "knowcoder")
+        self.assertEqual(payload, 'results = []\n')
+        self.assertEqual(reason, "author_stop_string")
+        self.assertEqual(native_payload(raw, "gollie"), (raw, "model_or_length"))
 
     def test_knowcoder_keeps_repeated_subject_instances(self):
         raw = (

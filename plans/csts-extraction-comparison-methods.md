@@ -1,6 +1,6 @@
 # C-STS extraction comparison
 
-Status: prepared for review. This PR reports no new inference, fidelity scores or similarity results.
+Status: the Colab A100 validation screen is complete. The [results and evidence](../training_outputs/csts_extraction_screen_20261028.md) separate operational counts from model-assisted fidelity judgments.
 
 ## Question and comparisons
 
@@ -104,7 +104,11 @@ python -m csts_pilot.extraction_comparison run --output /path/to/extraction-vali
 python -m csts_pilot.extraction_comparison run --output /path/to/extraction-validation --arm gollie --device auto
 ```
 
-GPT readiness does not establish native-model readiness. After generation, create review packets and complete human reviews:
+KnowCoder uses the authors' system and Input/Output wrapper, fast tokenizer with `legacy=False`, and triple-quote stop delimiter from [the pinned inference code](https://github.com/ICT-GoKnow/KnowCoder/blob/b7859789fc7641e03916074088859aa592332ad3/eval/src/inference.py). Its raw decoded generation is retained alongside the payload returned before that delimiter. The first prompt omitted this wrapper and produced 239 empty lists; retain it as a diagnostic run. The corrected prompt has its own frozen protocol and does not overwrite those captures.
+
+The A100 screen joins GPT propositions, GoLLIE and corrected KnowCoder from separately frozen origin runs. Validate each origin with its own exact implementation, require identical source/reference bytes, and declare the loader and prompt amendments before joining source IDs. The standalone assembly operator seals the origin manifest and blinded packet together. Model-assisted reviewers use separate closed-book contexts and shuffled orders; their judgments remain distinct from human adjudication.
+
+After generation, create review packets and complete explicitly identified reviews:
 
 ```bash
 python -m csts_pilot.extraction_comparison review-packet --output /path/to/extraction-validation
@@ -118,7 +122,7 @@ Without `--reviews`, summarization reports operational counts rather than semant
 python -m csts_pilot.extraction_comparison prepare --config configs/csts-extraction-comparison.json --data-dir /path/to/jep-csts-v1.1 --output /path/to/extraction-test --split test --protocol-lock /path/to/extraction-validation/protocol.json
 ```
 
-The same arm execution commands then operate on the test directory. Preserve complete coverage for direct scoring and source-only propositions. No inference has been launched as part of preparation.
+The same arm execution commands then operate on the test directory. Preserve complete coverage for direct scoring and source-only propositions. The current execution screen uses validation only; it does not refresh the full-test baseline.
 
 ## Research basis
 

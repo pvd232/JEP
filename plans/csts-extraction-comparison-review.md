@@ -41,7 +41,7 @@ The primary prompt excludes typical-color assumptions, while the earlier pilot r
 
 The [machine-readable preflight](../training_outputs/csts_extraction_comparison_preflight_20261027.json) records input identities, source hashes and exact request counts.
 
-Final reviewed SHA-256 identities:
+Initial prepared implementation SHA-256 identities (before the execution amendments below):
 
 | File | SHA-256 |
 |---|---|
@@ -53,8 +53,22 @@ Final reviewed SHA-256 identities:
 
 ## Remaining execution evidence
 
-Live signed-in Codex capture and native GPU loading/generation require execution evidence. The optional native requirements are a starting declaration, with package versions recorded after loading; they are not a tested environment lock. GoLLIE requires its pinned custom model code, CUDA and flash-attention.
+Live Codex captures and native A100 generation have now been exercised. Runtime package versions are retained with native captures. GoLLIE uses the reviewed stock-SDPA compatibility backend and unchanged checkpoint tensors; numerical parity with the authors' FlashAttention implementation remains unverified.
 
 Reviewer independence and human adjudication require operator oversight. A supplied reviewer identifier does not establish independent human review. GPT model weights cannot be pinned through the available alias. Native output lacks the richer GPT support metadata and therefore requires semantic review.
 
-This PR establishes preparation, capture controls, safe parsing, review and reporting. It reports no new model-performance result and launches no Qwen training.
+## Execution amendments and further review
+
+The preparation review did not catch the missing KnowCoder inference wrapper. The first live run produced 239 empty lists; an audit of the pinned author training template and inference code found the mismatch. Preserve that run as a diagnostic. The corrected author wrapper, tokenizer settings and stop delimiter are frozen in a separate run, with the original raw generations retained and no semantic repair.
+
+The GoLLIE loader initially rejected Transformers 5.20's default `rope_scaling` alias. Independent review approved accepting only the validated unscaled alias while continuing to reject scaled configurations. A regression reproduces the actual modern property alias.
+
+Both amendments received independent code review. All 61 extraction tests, eight transport-amendment tests and compile checks pass. A separate inference-free assembly integration check exercises multiple origin protocols, absent-response transport, fixed denominators, paired component intervals, duplicate review rejection and tamper detection. The assembly operator keeps original request protocol hashes unchanged and declares every origin and amendment.
+
+The blinded screen uses two separate model-assisted review passes. Their agreement is not proof of human validity; disagreements remain available for adjudication. No Qwen training has launched.
+
+A further review found that transient Codex reconnect notices had invalidated five otherwise complete captures. A narrow parser amendment revalidated the original responses offline, checked final-message agreement and preserved every original byte. It recovered all 120 direct scores without new model calls; proposition recovery remains a separate sensitivity audit, preserving the primary panel.
+
+The review collector received independent review and 21 synthetic checks. Repairs require a completed audit with exit code zero and account for the Mac's `/tmp` path alias. One capacity-only failure with no response received one separately recorded operational recovery; scored answers were never retried. Atomic batch claims prevent duplicate inference during scheduling acceleration. Final counts and paired intervals were recomputed independently from the raw judgments.
+
+The published archive contains all raw proof and origin implementations. Independent extraction verified all 6,095 indexed members and reproduced the exact review packet, counts, intervals and disagreements offline. The [results report](../training_outputs/csts_extraction_screen_20261028.md) records the limited model-assisted interpretation.
