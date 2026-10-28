@@ -60,41 +60,4 @@ Review covers equal seed coverage, rate selection using validation alone, tie ha
 
 ## Proposed next step: train Qwen and the comparison together
 
-This section proposes a new experiment. The completed measurements above used frozen Qwen features. The [results](../training_outputs/csts_readout_convergence_20261028/results.md#what-this-changes) motivate adapting Qwen's LoRA weights together with the comparison function. The working hypothesis is that joint fitting can improve similarity by adapting the final sentence vector to the learned coordinate weights.
-
-For training comparison $i=1,\ldots,N$, let $x_{i1},x_{i2}$ be the two input texts, each containing the condition and one sentence, and let $y_i\in[0,1]$ be the normalized human rating. The vector $\theta\in\mathbb{R}^{p}$ contains Qwen's $p$ trainable LoRA parameters. The underlying pretrained model weights stay fixed. Let $e_\theta(x)\in\mathbb{R}^{4096}$ be Qwen's final token vector with a finite positive length. The vector $\phi\in\mathbb{R}^{8193}$ contains the comparison parameters $w_d,w_p,c$ defined above.
-
-Normalize the final vector and use the learned comparison in the rating objective:
-
-```math
-\begin{aligned}
-z_\theta(x)
-&=\frac{e_\theta(x)}{\|e_\theta(x)\|_2},\\
-\widehat{y}_i
-&=f_\phi\bigl(z_\theta(x_{i1}),z_\theta(x_{i2})\bigr),\\
-L_r(\theta,\phi)
-&=\frac{1}{N}\sum_{i=1}^{N}(\widehat{y}_i-y_i)^2.
-\end{aligned}
-```
-
-Here $z_\theta(x)\in\mathbb{R}^{4096}$ has unit length and $f_\phi$ is the symmetric function above. Both $\theta$ and $\phi$ receive rating gradients. Initialize $\phi$ at zero to begin at the encoder's cosine score. The existing `last_token_pool()` in the [encoder](../csts_pilot/baseline_models.py) supplies the normalized final vector, and `SymmetricComparison` in the [head implementation](../csts_pilot/evidence_readout.py) supplies the comparison. Joint fitting is proposed work.
-
-The chain rule explains the change in learning. Write $z_{ij}=z_\theta(x_{ij})$ and $J_{ij}=\partial z_{ij}/\partial\theta\in\mathbb{R}^{4096\times p}$, where $j\in\{1,2\}$ identifies the sentence. Differentiating each squared rating error gives
-
-```math
-\nabla_\theta L_r
-=\frac{2}{N}\sum_{i=1}^{N}(\widehat{y}_i-y_i)
-\sum_{j=1}^{2}J_{ij}^{\top}\nabla_{z_{ij}}f_\phi(z_{i1},z_{i2}).
-```
-
-The gradient of the score with respect to each sentence vector has 4,096 coordinates. At equal coordinates, the absolute difference term uses a subgradient. Multiplication by $J_{ij}^{\top}$ gives a gradient with $p$ coordinates for the LoRA parameters. The comparison can therefore teach Qwen how to change its representation. The completed study optimized the comparison on cached vectors; the proposed study keeps the encoder forward pass in the training graph.
-
-Use paired cosine and learned comparison runs for each of two starting points: the current A adapter and fresh LoRA adapters on the original pretrained Qwen3 Embedding 8B checkpoint. Within each pair, match the encoder initialization, training rows, batches, tuning resources and stopping policy. The fresh pair shares the same proposition training phase, then uses its assigned score from the first rating update. The continuation pair measures the value of further fitting from A. Compare both joint models with the existing frozen A plus comparison reference. Additional adapter seeds and fresh reserved evaluation examples provide the next confirmation setting.
-
-A simultaneous proposition objective is a separate proposed factor. Define $L_p(\theta)$ as the existing scalar mean causal cross entropy for writing the accepted proposition answers, implemented by `answer_loss_sum()` in the [writing stage](../csts_pilot/qwen_evidence.py). With a validation selected scalar weight $\lambda_p\geq0$, the joint objective would be
-
-```math
-L(\theta,\phi)=L_r(\theta,\phi)+\lambda_p L_p(\theta).
-```
-
-The writing targets and the quotation positions used by C define different losses. Treat $\lambda_p$ as its own experimental choice. The first native comparison test can preserve the original proposition then ratings schedule; a subsequent matched test can measure simultaneous writing supervision.
+The [native comparison plan](csts-native-comparison-methods.md) now contains the full comparison derivation, the LoRA explanation, the joint gradient, the regularization screen and the paired training protocol. It follows our discussion of how the completed frozen encoder experiment differs from joint training. The [plan review](csts-native-comparison-review.md) records one review pass. Status: awaiting user review.

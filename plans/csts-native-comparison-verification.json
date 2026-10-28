@@ -1,0 +1,50 @@
+{
+  "engine": "MathJax 3.2.2, SVG output",
+  "destination": "GitHub Markdown",
+  "files": {
+    "plans/csts-native-comparison-methods.md": {
+      "display": 13,
+      "inline": 49,
+      "relative_links": 18,
+      "source_sha256": "72f6d9345319cfacacbe5799d29c1c70960f2c4aa980a69d52b4f9ec48e1875a"
+    },
+    "plans/csts-readout-convergence-methods.md": {
+      "display": 1,
+      "inline": 4,
+      "relative_links": 11,
+      "source_sha256": "4b646d1a04964ceb6babeb4c03b29a993413504b888229950c405e6762dc7a12"
+    },
+    "plans/csts-native-comparison-review.md": {
+      "display": 0,
+      "inline": 0,
+      "relative_links": 4,
+      "source_sha256": "5692c79029a8f235d134caac395aacb56df8e9fb4d0ada16331906201f9fc88d"
+    }
+  },
+  "errors": [],
+  "github_live_browser": "Live private GitHub page unobserved; local MathJax Markdown preview used. GitHub fenced math and inline dollar boundaries selected.",
+  "gradient_check": {
+    "method": "float64 central differences on a deterministic LoRA factor, normalization and comparison fixture",
+    "parameters_checked": 21,
+    "step": 1e-06,
+    "tolerance": 1e-07,
+    "maximum_absolute_gradient_error": 6.519830786366754e-10,
+    "sentence_swap_error": 0.0,
+    "zero_comparison_cosine_error": 0.0,
+    "scope": "mathematical verification; native training integration follows plan review"
+  },
+  "review": {
+    "passes": 1,
+    "type": "self review",
+    "scope": [
+      "score and LoRA derivation",
+      "parameter and input identities",
+      "optimizer semantics",
+      "matched training controls",
+      "selection and evaluation",
+      "artifact restoration and Cloud retention"
+    ],
+    "visual_inspection": "LoRA, comparison, normalization gradient, LoRA chain rule, rank argument and AdamW displays rasterized from MathJax and inspected",
+    "execution_status": "awaiting user review"
+  }
+}
