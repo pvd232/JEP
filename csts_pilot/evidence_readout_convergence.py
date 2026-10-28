@@ -90,6 +90,7 @@ class ConvergedFitConfig(TrainConfig):
     comparison_learning_rate: float = Field(default=0.001, gt=0)
     comparison_max_epochs: int = Field(default=256, ge=1)
     comparison_patience: int = Field(default=10, ge=1)
+    parent_model_sha256: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
     training_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     validation_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     training_cache_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
@@ -184,6 +185,11 @@ def fit_converged_readouts(context: StageContext[ConvergedFitConfig]) -> None:
         load_json(context.inputs["training"]),
         load_json(context.inputs["validation"]),
     )
+    if config.parent_model_sha256 is not None and any(
+        cache["model_sha256"] != config.parent_model_sha256
+        for cache in (training, validation)
+    ):
+        raise ValueError("The readout caches use another frozen encoder.")
     candidates: dict[str, Any] = {}
     traces: dict[str, Any] = {"status": "running", "candidates": {}, "comparisons": {}}
     step = 0

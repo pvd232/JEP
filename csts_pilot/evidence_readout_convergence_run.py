@@ -11,7 +11,7 @@ from viper import execution
 from viper.authoring import experiment, input, plan, replicate, stage, variant
 from viper.metrics import max as maximize
 from viper.metrics import measure
-from viper.outputs import EvalOutputs, TrainOutputs, output
+from viper.outputs import EvalOutputs, StageOutputs, TrainOutputs, output
 from viper.references import GitFileRef
 from viper.repository import read_source
 from viper.runtime import CUDAComputeSpec, LocalEnvSpec, observe_python_env
@@ -34,7 +34,8 @@ from csts_pilot.evidence_readout_convergence import (
     fit_converged_readouts,
     refit_evaluation_metric,
 )
-from csts_pilot.evidence_readout_run import checked_source, gpu_idle, validate_settings
+from csts_pilot.evidence_readout_run import checked_source, gpu_idle
+from csts_pilot.evidence_readout_stages import ReadoutExtractionConfig, extract_readout
 from jep_pilot.loaders import load_json, load_model, load_state
 
 
@@ -54,18 +55,19 @@ def fit_outputs():
 
 
 def initialize_progress(path: Path, source: str, hardware: str):
-    path.write_text(
-        "# JEP readouts trained to a validation plateau\n\n"
-        f"Source: `{source}`. Hardware: {hardware}.\n\n"
-        "Rates: 0.00001, 0.00003, 0.0001. Seeds: 7, 8, 9. "
-        "Select one rate per objective by mean best validation Spearman. "
-        "Continue until ten epochs pass without validation improvement. "
-        "An epoch ceiling is reported as an incomplete fit.\n\n"
-        "Fit D, E and the same comparison on A's final vectors after selecting B/C. "
-        "Qwen stays frozen. Sentence vectors retain all 4,096 coordinates.\n\n"
-        "## Progress\n\n| UTC | Event | Seed | Step | Metrics or progress |\n"
-        "| --- | --- | --- | --- | --- |\n"
-    )
+    with path.open("a" if path.exists() else "w") as stream:
+        stream.write(
+            "# JEP readouts trained to a validation plateau\n\n"
+            f"Source: `{source}`. Hardware: {hardware}.\n\n"
+            "Rates: 0.00001, 0.00003, 0.0001. Seeds: 7, 8, 9. "
+            "Select one rate per objective by mean best validation Spearman. "
+            "Continue until ten epochs pass without validation improvement. "
+            "An epoch ceiling is reported as an incomplete fit.\n\n"
+            "Fit D, E and the same comparison on A's final vectors after selecting B/C. "
+            "Qwen stays frozen. Sentence vectors retain all 4,096 coordinates.\n\n"
+            "## Progress\n\n| UTC | Event | Seed | Step | Metrics or progress |\n"
+            "| --- | --- | --- | --- | --- |\n"
+        )
 
 
 def run(
@@ -83,8 +85,27 @@ def run(
     ):
         raise ValueError("Require the completed pinned parent study.")
     old = previous["settings"]
-    validate_settings(root, old)
+    # Cached readout fitting uses the encoder identity and captured evidence,
+    # independently of the earlier writing audit and its vocabulary head.
+    for split in ("training", "validation", "test"):
+        item = old["splits"][split]
+        if file_sha256(root / item["path"]) != item["sha256"]:
+            raise ValueError(f"Changed readout cohort: {split}.")
+    for name in ("records", "provenance", "audit_gate", "cohorts", "interventions"):
+        item = old[name]
+        if file_sha256(root / item["path"]) != item["sha256"]:
+            raise ValueError(f"Changed readout input: {name}.")
     records = {r["name"]: r for r in previous["runs"]}
+    recovered = settings.get("cache_recovery_summary")
+    if recovered:
+        recovery = load_json(root / recovered)
+        if (
+            recovery.get("status") != "complete"
+            or recovery.get("parent_model_sha256")
+            != old["models"]["proposition_final"]["sha256"]
+        ):
+            raise ValueError("Require complete caches from the pinned encoder.")
+        records.update({r["name"]: r for r in recovery["runs"]})
     source, environment = read_source(root), observe_python_env()
     destination = ViperCloudDestination.model_validate(old["publication_destination"])
     path = directory / "summary.json"
@@ -159,10 +180,12 @@ def run(
         return record
 
     try:
-        caches = {
-            s: records[f"extract_{s}_proposition_final"]
-            for s in ("training", "validation", "test", "interventions")
-        }
+        cache_splits = (
+            ("training", "validation")
+            if recovered
+            else ("training", "validation", "test", "interventions")
+        )
+        caches = {s: records[f"extract_{s}_proposition_final"] for s in cache_splits}
         hashes = {
             s: file_sha256(artifact_path(r, "extract", "cache", "cache.pt"))
             for s, r in caches.items()
@@ -189,6 +212,7 @@ def run(
                 stage_id="fit",
                 config=ConvergedFitConfig(
                     **settings["fit"],
+                    parent_model_sha256=old["models"]["proposition_final"]["sha256"],
                     progress_path=str(progress_path),
                     **{
                         f"{s}_sha256": old["splits"][s]["sha256"]
@@ -212,6 +236,7 @@ def run(
             "test_scores_used_for_selection": False,
             "source_commit": source.commit,
             "model_sha256": file_sha256(model_path),
+            "models": {"all_seeds": {"sha256": file_sha256(model_path)}},
             "validation_selection": load_json(
                 artifact_path(fitted, "fit", "selection", "selection.json")
             ),
@@ -221,7 +246,76 @@ def run(
         summary["selection_sha256"] = file_sha256(selection_path)
         _save(path, summary)
         # The fitting worker receives training and validation inputs exclusively.
-        published = records["publish_test"]
+        if recovered:
+            for split in ("test", "interventions"):
+                item = old["splits"][split] if split == "test" else old["interventions"]
+                record = execute(
+                    f"extract_{split}",
+                    stage(
+                        extract_readout,
+                        stage_id="extract",
+                        config=ReadoutExtractionConfig(
+                            **old["encoder"],
+                            progress_path=str(progress_path),
+                            split=split,
+                            rows_sha256=item["sha256"],
+                            model_sha256=old["models"]["proposition_final"]["sha256"],
+                            selection_sha256=summary["selection_sha256"],
+                        ),
+                        inputs=(
+                            input(
+                                "model",
+                                path=old["models"]["proposition_final"]["path"],
+                                data_role="training",
+                            ),
+                            input("rows", path=item["path"], data_role="eval"),
+                            input(
+                                "selection",
+                                path=selection_path.relative_to(root).as_posix(),
+                                data_role="training",
+                            ),
+                        ),
+                        outputs=StageOutputs(
+                            cache=output(
+                                path="cache.pt", loader=load_model, data_role="eval"
+                            ),
+                            diagnostics=output(
+                                path="diagnostics.json",
+                                loader=load_json,
+                                data_role="eval",
+                            ),
+                        ),
+                        reuse="never",
+                    ),
+                )
+                caches[split] = record
+                hashes[split] = file_sha256(
+                    artifact_path(record, "extract", "cache", "cache.pt")
+                )
+            holdout = directory / "holdout.json"
+            _save(holdout, list(range(old["splits"]["test"]["rows"])))
+            evaluation_rows = (
+                input("test", path=old["splits"]["test"]["path"], data_role="eval"),
+                input(
+                    "holdout",
+                    path=holdout.relative_to(root).as_posix(),
+                    data_role="eval",
+                ),
+            )
+        else:
+            published = records["publish_test"]
+            evaluation_rows = (
+                input(
+                    "test",
+                    source=stored_source(published, "publish", "test", "test", "eval"),
+                ),
+                input(
+                    "holdout",
+                    source=stored_source(
+                        published, "publish", "holdout", "holdout", "eval"
+                    ),
+                ),
+            )
         bindings = [
             input("model", source=stored_source(fitted, "fit", "model", "model")),
             input(
@@ -229,16 +323,7 @@ def run(
                 path=selection_path.relative_to(root).as_posix(),
                 data_role="training",
             ),
-            input(
-                "test",
-                source=stored_source(published, "publish", "test", "test", "eval"),
-            ),
-            input(
-                "holdout",
-                source=stored_source(
-                    published, "publish", "holdout", "holdout", "eval"
-                ),
-            ),
+            *evaluation_rows,
             input(
                 "cache",
                 source=stored_source(
