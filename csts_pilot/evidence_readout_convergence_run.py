@@ -197,18 +197,51 @@ def run(
         bindings.extend(
             input(
                 f"{s}_cache",
-                source=stored_source(caches[s], "extract", "cache", f"{s}_cache"),
+                **(
+                    {
+                        "path": artifact_path(caches[s], "extract", "cache", "cache.pt")
+                        .relative_to(root)
+                        .as_posix(),
+                        "data_role": "training",
+                    }
+                    if recovered
+                    else {
+                        "source": stored_source(
+                            caches[s], "extract", "cache", f"{s}_cache"
+                        )
+                    }
+                ),
             )
             for s in ("training", "validation")
         )
+        if recovered:
+            bindings.append(
+                input("cache_provenance", path=recovered, data_role="training")
+            )
         candidate_runs = settings.get("candidate_runs", {})
         for seed, record in candidate_runs.items():
             bindings.append(
                 input(
                     f"candidates_{seed}",
-                    source=stored_source(
-                        record, "fit", "candidates", f"candidates_{seed}"
+                    **(
+                        {"path": record["local_candidates"], "data_role": "training"}
+                        if record.get("local_candidates")
+                        else {
+                            "source": stored_source(
+                                record, "fit", "candidates", f"candidates_{seed}"
+                            )
+                        }
                     ),
+                )
+            )
+        if candidate_runs:
+            candidate_provenance = directory / "candidate_provenance.json"
+            _save(candidate_provenance, candidate_runs)
+            bindings.append(
+                input(
+                    "candidate_provenance",
+                    path=candidate_provenance.relative_to(root).as_posix(),
+                    data_role="training",
                 )
             )
         metrics = tuple(
