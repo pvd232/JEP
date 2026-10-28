@@ -1,6 +1,6 @@
 # Joint LoRA and comparison training
 
-Updated: 2026-10-28 17:44:29 EDT.
+Updated: 2026-10-28 17:49:04 EDT.
 
 [Methods](../../plans/csts-native-comparison-methods.md) · [Review](../../plans/csts-native-comparison-review.md) · [Configuration](../../configs/csts-native-comparison.json)
 
@@ -10,9 +10,9 @@ Seed 7 fitting source: `09e79e89a6373a083aafa165aad2dea7e6d1ee32`. Follow on fit
 
 | Seed | Hardware | Optimizer updates | Completed epochs | Best validation Spearman | Sealed Cloud checkpoints | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 7 | NVIDIA L4, 16352 MiB, 100 % | 1350 | 7 | 0.8789204517574798 | 8 | running |
-| 8 | NVIDIA A100-SXM4-40GB | 1725 | 9 | 0.876899 | 8 | running |
-| 9 | NVIDIA L4 | 700 | 3 | 0.875347 | 4 | running |
+| 7 | NVIDIA L4, 16352 MiB, 100 % | 1400 | 7 | 0.8789204517574798 | 8 | running |
+| 8 | NVIDIA A100-SXM4-40GB | 1925 | 10 | 0.876899 | 9 | running |
+| 9 | NVIDIA L4 | 775 | 4 | 0.877087 | 5 | running |
 
 ## Validation history
 
@@ -34,8 +34,10 @@ Seed 7 fitting source: `09e79e89a6373a083aafa165aad2dea7e6d1ee32`. Follow on fit
 | 8 | 7 | 0.875681000 | 0.031366 |
 | 8 | 8 | 0.869135000 | 0.033846 |
 | 8 | 9 | 0.874076000 | 0.032357 |
+| 8 | 10 | 0.872898000 | 0.034396 |
 | 9 | 1 | 0.859669000 | 0.038450 |
 | 9 | 2 | 0.871050000 | 0.033351 |
 | 9 | 3 | 0.875347000 | 0.031563 |
+| 9 | 4 | 0.877087000 | 0.031273 |
 
 VIPER publishes immutable epoch states asynchronously while fitting continues. Every selected model, terminal state, optimizer, trace and prediction artifact is checked through Cloud publication receipts before a worker is shut down. Seed 8 resumed its complete epoch 2 state after its first A100 assignment became unavailable. Final test evaluation follows frozen selection of all three models.
