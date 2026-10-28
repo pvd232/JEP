@@ -1,6 +1,6 @@
 # Joint LoRA and comparison training
 
-Updated: 2026-10-28 18:35:57 EDT.
+Updated: 2026-10-28 18:38:05 EDT.
 
 [Methods](../../plans/csts-native-comparison-methods.md) · [Review](../../plans/csts-native-comparison-review.md) · [Configuration](../../configs/csts-native-comparison.json)
 
@@ -10,9 +10,9 @@ Seed 7 fitting source: `09e79e89a6373a083aafa165aad2dea7e6d1ee32`. Follow on fit
 
 | Seed | Hardware | Optimizer updates | Completed epochs | Best validation Spearman | Sealed Cloud checkpoints | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 7 | NVIDIA L4, 16352 MiB, 100 % | 2200 | 11 | 0.8789204517574798 | 12 | running |
+| 7 | NVIDIA L4, 16352 MiB, 100 % | 2225 | 11 | 0.8789204517574798 | 12 | running |
 | 8 | NVIDIA A100-SXM4-40GB | 2450 | 13 | 0.8768987411388853 | 13 | stopped after confirmed Cloud publication |
-| 9 | NVIDIA L4 | 1525 | 8 | 0.877087 | 9 | running |
+| 9 | NVIDIA L4 | 1550 | 8 | 0.877087 | 9 | running |
 
 ## Validation history
 
