@@ -1,6 +1,11 @@
 # Color diagnostic results
 
-Preliminary results use color labels proposed by one model author. Human review remains pending.
+The diagnostic is complete. The proposition arm had a lower implied-color embedding margin in all three seeds (mean difference -0.0420; corrected interval [-0.0835, -0.0038]). Explicitly naming the color increased its relative margin by +0.0730. These findings support weaker use of implied colors as a candidate explanation for the original C-STS color regression.
+
+Exact color readout improved by 20 percentage points, and wrong-object answers fell by 3.89 percentage points. Readout scores depend on the frozen vocabulary head and English parser. Some control answers repeated text or used non-English color words, which can affect those scores.
+
+One model authored the probe and expected color labels. The run omitted the two-person label check specified in the plan. This is a completed exploratory result; the unvalidated labels limit interpretation, especially for implied colors.
+
 All 13 model states were evaluated on the same 100 families. Each family contains four caption variants.
 The 520 caption-condition inputs are reused across states.
 
@@ -50,4 +55,4 @@ The margin identity is m = s(anchor, matching) − s(anchor, mismatching) = (d_m
 C averages the target-condition and distractor-condition margins; condition-independent scores give C = 0.
 Q = m_explicit − m_implicit. Stage contrasts satisfy final gap = D_A + D_B.
 The JSON files retain per-state readouts, implied-label scores, control color-invention rates, family margins and source hashes.
-Human label review and the recorded probe-provenance checks determine eligibility for a confirmatory interpretation.
+The shared-correct geometry comparison remains unresolved: each seed fell below the required 20 represented families. A confirmatory study would require independently reviewed labels fixed before model evaluation.
