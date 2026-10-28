@@ -1,0 +1,50 @@
+{
+  "additional_gpt_calls": 0,
+  "current_code_sha256": "3b08549fcffd1af8930389f794cd425f515f8642b77107bd91abce1690a07f49",
+  "executed_encoder_code_sha256": "698f8aa70819deff9933b2d29a87134da6132455cb293c6db01195708f5a608b",
+  "experiment": "csts-proposition-similarity-120-20261028-v1",
+  "hashes": {
+    "direct.json": "e9beb89b03bf58667b41e8738b0f7a9fbd9266d9f92b71df81ab23a3f2b0c70d",
+    "encoding_receipt.json": "f42f2a4ca710fa19f8faa0a856a477dcb5758417c86f22359260961d67c71d69",
+    "execution_seal.json": "ee2c4e06223b7e5fdf87edb30ccee01e2d716832f6ce738bf5aa5c512341c4e9",
+    "gpu_outputs.tar.gz": "cfc387fccd5506dbcc394bb084095c894e4515e515523df28aa038377ea11753",
+    "inputs.json": "4c0a4d691b9ae1f7659927ed776ed31ddf6bc418c3968a8fd5de5ebfd901ce17",
+    "labels.json": "0b13d1ecf0a9620fa16e6a2144cf900b6a8be8dfc8ae8e5752a0a33de14b09b9",
+    "origin.json": "a1faf2360bd08a8ee45b56679a775b1f61b9d14c0118b649cb721026c26858e1",
+    "output_recovery.json": "ae15a245e32d15e205ad7b68a6e42b57d4622218e4a6906b23ba55103727a97f",
+    "predictions.json": "a7a91ad96fbd1ce4f742c4f3a03f3bb028b2da192ac09f0f97524cea13e9966d",
+    "preparation.json": "0d7265ea3f151b929cf17729be02d5597d83fb5b1a511c4d6c9d214a12a29db9",
+    "preparation_original.py": "d4efcb6f5c056d96fbed79c08e9a940c997bc88cebfdd920d94d7bd959670c99",
+    "provenance_amendment.json": "3ed3dca0a08771d1ddfed9ba23e49faeee47c298d41227dcd22d37f39d1d5263",
+    "results.json": "1e3461e2b234303265dbc9bb12792609a5710b9862d2cdc3b27b6c82952c9a79"
+  },
+  "origin_archive": {
+    "path": "../csts_extraction_screen_artifacts_20261028.tar.gz",
+    "sha256": "02ac804d78e54549fe057c2c7086c43fa16555a9a6ea7c5f483b72c9fd91b472"
+  },
+  "primary_results": {
+    "gpt_direct": {
+      "mse_0_1": 0.029848958333333335,
+      "mse_1_5": 0.47758333333333336,
+      "n": 120,
+      "spearman": 0.8863650783239838
+    },
+    "propositions_with_fallback": {
+      "mse_0_1": 0.13213471894837917,
+      "mse_1_5": 2.1141555031740666,
+      "n": 120,
+      "spearman": 0.583556485099929
+    },
+    "raw": {
+      "mse_0_1": 0.14996832011317365,
+      "mse_1_5": 2.3994931218107785,
+      "n": 120,
+      "spearman": 0.36785783418984846
+    }
+  },
+  "recovery_note": "The raw recovery receipt says empty set; only set serialization is directly established by the traceback. The raw receipt is retained byte-identical.",
+  "repeated_gpu_encoding_calls": 0,
+  "review": "../../plans/csts-proposition-similarity-review-20261028.md",
+  "source_commit": "b78b477cfaf64ada8612db8a7afc96d163dad5c9",
+  "status": "completed_using_retained_outputs_after_receipt_only_failure"
+}

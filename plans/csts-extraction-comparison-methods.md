@@ -73,7 +73,7 @@ The direct GPT refresh scores the selected validation pairs and, after locked pr
 
 The common export preserves source identity, condition, status, reason and canonical evidence, together with capture_path and capture_sha256 for retained-output provenance. Preserve multiplicity and uncertainty through the canonical representation. Export requires complete structurally valid coverage; it does not certify semantic correctness.
 
-This PR prepares extraction and export, with no Qwen training. Higher fidelity alone does not establish better similarity. A later downstream comparison must hold encoder weights, readout, training budget and source pairs fixed. Report full-cohort failure handling and accepted-output coverage, so dropping hard sources cannot masquerade as improved similarity. Any learned readout uses training data alone.
+The extraction study prepared evidence and export without Qwen training. A subsequent [paired similarity comparison](../training_outputs/csts_proposition_similarity_120_20261028.md) now evaluates original text and refreshed GPT propositions with the same frozen Qwen encoder and cosine scorer on all 120 validation pairs. It uses a declared original-text fallback for unanswered evidence, with no training or calibration. A learned-readout comparison remains separate work; it must hold encoder weights, training budget and source pairs fixed and learn from training data alone.
 
 ## Run
 
