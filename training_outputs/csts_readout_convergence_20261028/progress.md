@@ -327,6 +327,166 @@ Fit D, E and the same comparison on A's final vectors after selecting B/C. Qwen 
 | UTC | Event | Seed | Step | Metrics or progress |
 | --- | --- | --- | --- | --- |
 | 2026-10-28 17:39:16 | stage started |  |  | name: fit |
+| 2026-10-28 17:40:19 | rates selected |  |  | name: {'rates': {'ratings': '0.0001', 'evidence': '3e-05'}, 'mean_validation_spearman': {'1e-05': {'ratings': 0.7289597848476839, 'evidence': 0.6540379057093372}, '3e-05': {'ratings': 0.7311690437588748, 'evidence': 0.658062880051329}, '0.0001': {'ratings': 0.7358020957352472, 'evidence': 0.6432903881060573}}, 'tie_rule': 'smallest learning rate'} |
+| 2026-10-28 17:40:19 | comparison started | 7 |  | name: A with comparison, D, E |
+| 2026-10-28 17:40:30 | comparison epoch | 7 | 1 | D validation rho 0.756639, MSE 0.063631; E validation rho 0.683031, MSE 0.080764; A with comparison validation rho 0.877052, MSE 0.031171; learning_rate: 0.001 |
+| 2026-10-28 17:40:31 | checkpoint published | 7 | 1 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00001; status: sealed |
+| 2026-10-28 17:40:32 | comparison epoch | 7 | 2 | D validation rho 0.763765, MSE 0.061887; E validation rho 0.693520, MSE 0.078526; A with comparison validation rho 0.877000, MSE 0.031145; learning_rate: 0.001 |
+| 2026-10-28 17:40:33 | checkpoint published | 7 | 2 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00002; status: sealed |
+| 2026-10-28 17:40:34 | comparison epoch | 7 | 3 | D validation rho 0.768351, MSE 0.060850; E validation rho 0.701995, MSE 0.075910; A with comparison validation rho 0.876859, MSE 0.031543; learning_rate: 0.001 |
+| 2026-10-28 17:40:34 | checkpoint published | 7 | 3 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00003; status: sealed |
+| 2026-10-28 17:40:35 | comparison epoch | 7 | 4 | D validation rho 0.771335, MSE 0.060960; E validation rho 0.709063, MSE 0.075355; A with comparison validation rho 0.876673, MSE 0.031592; learning_rate: 0.001 |
+| 2026-10-28 17:40:35 | checkpoint published | 7 | 4 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00004; status: sealed |
+| 2026-10-28 17:40:36 | comparison epoch | 7 | 5 | D validation rho 0.772947, MSE 0.062538; E validation rho 0.714055, MSE 0.075678; A with comparison validation rho 0.876792, MSE 0.030999; learning_rate: 0.001 |
+| 2026-10-28 17:40:37 | checkpoint published | 7 | 5 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00005; status: sealed |
+| 2026-10-28 17:40:37 | comparison epoch | 7 | 6 | D validation rho 0.773686, MSE 0.060922; E validation rho 0.715862, MSE 0.073228; A with comparison validation rho 0.876938, MSE 0.034276; learning_rate: 0.001 |
+| 2026-10-28 17:40:38 | checkpoint published | 7 | 6 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00006; status: sealed |
+| 2026-10-28 17:40:38 | comparison epoch | 7 | 7 | D validation rho 0.774532, MSE 0.059435; E validation rho 0.718156, MSE 0.072888; A with comparison validation rho 0.876716, MSE 0.031485; learning_rate: 0.001 |
+| 2026-10-28 17:40:39 | checkpoint published | 7 | 7 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00007; status: sealed |
+| 2026-10-28 17:40:39 | comparison epoch | 7 | 8 | D validation rho 0.774770, MSE 0.060324; E validation rho 0.719730, MSE 0.072831; A with comparison validation rho 0.876588, MSE 0.031092; learning_rate: 0.001 |
+| 2026-10-28 17:40:40 | checkpoint published | 7 | 8 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00008; status: sealed |
+| 2026-10-28 17:40:41 | comparison epoch | 7 | 9 | D validation rho 0.774848, MSE 0.059455; E validation rho 0.721216, MSE 0.072310; A with comparison validation rho 0.876443, MSE 0.031672; learning_rate: 0.001 |
+| 2026-10-28 17:40:41 | checkpoint published | 7 | 9 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00009; status: sealed |
+| 2026-10-28 17:40:42 | comparison epoch | 7 | 10 | D validation rho 0.774833, MSE 0.061581; E validation rho 0.721665, MSE 0.073211; A with comparison validation rho 0.876409, MSE 0.033546; learning_rate: 0.001 |
+| 2026-10-28 17:40:42 | checkpoint published | 7 | 10 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00010; status: sealed |
+| 2026-10-28 17:40:43 | comparison epoch | 7 | 11 | D validation rho 0.774301, MSE 0.060908; E validation rho 0.723942, MSE 0.075416; A with comparison validation rho 0.875971, MSE 0.031212; learning_rate: 0.001 |
+| 2026-10-28 17:40:44 | checkpoint published | 7 | 11 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00011; status: sealed |
+| 2026-10-28 17:40:44 | comparison epoch | 7 | 12 | D validation rho 0.774295, MSE 0.060416; E validation rho 0.723568, MSE 0.072226; A with comparison validation rho 0.876134, MSE 0.032029; learning_rate: 0.001 |
+| 2026-10-28 17:40:45 | checkpoint published | 7 | 12 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00012; status: sealed |
+| 2026-10-28 17:40:45 | comparison epoch | 7 | 13 | D validation rho 0.774123, MSE 0.061598; E validation rho 0.723473, MSE 0.072277; A with comparison validation rho 0.876130, MSE 0.033806; learning_rate: 0.001 |
+| 2026-10-28 17:40:46 | checkpoint published | 7 | 13 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00013; status: sealed |
+| 2026-10-28 17:40:46 | comparison epoch | 7 | 14 | D validation rho 0.773388, MSE 0.059959; E validation rho 0.723724, MSE 0.072457; A with comparison validation rho 0.875759, MSE 0.032127; learning_rate: 0.001 |
+| 2026-10-28 17:40:47 | checkpoint published | 7 | 14 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00014; status: sealed |
+| 2026-10-28 17:40:48 | comparison epoch | 7 | 15 | D validation rho 0.772901, MSE 0.060449; E validation rho 0.723454, MSE 0.072337; A with comparison validation rho 0.875700, MSE 0.032536; learning_rate: 0.001 |
+| 2026-10-28 17:40:48 | checkpoint published | 7 | 15 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00015; status: sealed |
+| 2026-10-28 17:40:49 | comparison epoch | 7 | 16 | D validation rho 0.772627, MSE 0.062750; E validation rho 0.723415, MSE 0.072714; A with comparison validation rho 0.875505, MSE 0.033585; learning_rate: 0.001 |
+| 2026-10-28 17:40:49 | checkpoint published | 7 | 16 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00016; status: sealed |
+| 2026-10-28 17:40:50 | comparison epoch | 7 | 17 | D validation rho 0.772146, MSE 0.061451; E validation rho 0.723439, MSE 0.073098; A with comparison validation rho 0.875187, MSE 0.032560; learning_rate: 0.001 |
+| 2026-10-28 17:40:51 | checkpoint published | 7 | 17 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00017; status: sealed |
+| 2026-10-28 17:40:51 | comparison epoch | 7 | 18 | D validation rho 0.771944, MSE 0.066190; E validation rho 0.722784, MSE 0.080194; A with comparison validation rho 0.874970, MSE 0.032409; learning_rate: 0.001 |
+| 2026-10-28 17:40:52 | checkpoint published | 7 | 18 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00018; status: sealed |
+| 2026-10-28 17:40:52 | comparison epoch | 7 | 19 | D validation rho 0.770869, MSE 0.061505; E validation rho 0.722991, MSE 0.072760; A with comparison validation rho 0.874462, MSE 0.031870; learning_rate: 0.001 |
+| 2026-10-28 17:40:53 | checkpoint published | 7 | 19 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00019; status: sealed |
+| 2026-10-28 17:40:53 | comparison epoch | 7 | 20 | D validation rho 0.770293, MSE 0.062520; E validation rho 0.722622, MSE 0.074076; A with comparison validation rho 0.874330, MSE 0.031751; learning_rate: 0.001 |
+| 2026-10-28 17:40:54 | checkpoint published | 7 | 20 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00020; status: sealed |
+| 2026-10-28 17:40:55 | comparison epoch | 7 | 21 | D validation rho 0.769419, MSE 0.061585; E validation rho 0.722408, MSE 0.072878; A with comparison validation rho 0.874023, MSE 0.031842; learning_rate: 0.001 |
+| 2026-10-28 17:40:55 | comparison started | 8 |  | name: A with comparison, D, E |
+| 2026-10-28 17:40:55 | checkpoint published | 7 | 21 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00021; status: sealed |
+| 2026-10-28 17:41:05 | comparison epoch | 8 | 1 | D validation rho 0.749469, MSE 0.072288; E validation rho 0.660969, MSE 0.090265; A with comparison validation rho 0.876996, MSE 0.035021; learning_rate: 0.001 |
+| 2026-10-28 17:41:06 | checkpoint published | 8 | 1 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00022; status: sealed |
+| 2026-10-28 17:41:07 | comparison epoch | 8 | 2 | D validation rho 0.755363, MSE 0.062682; E validation rho 0.669641, MSE 0.081654; A with comparison validation rho 0.877045, MSE 0.031527; learning_rate: 0.001 |
+| 2026-10-28 17:41:07 | checkpoint published | 8 | 2 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00023; status: sealed |
+| 2026-10-28 17:41:08 | comparison epoch | 8 | 3 | D validation rho 0.760056, MSE 0.063548; E validation rho 0.677216, MSE 0.080426; A with comparison validation rho 0.876904, MSE 0.032590; learning_rate: 0.001 |
+| 2026-10-28 17:41:08 | checkpoint published | 8 | 3 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00024; status: sealed |
+| 2026-10-28 17:41:09 | comparison epoch | 8 | 4 | D validation rho 0.763242, MSE 0.061905; E validation rho 0.683656, MSE 0.080164; A with comparison validation rho 0.876676, MSE 0.031105; learning_rate: 0.001 |
+| 2026-10-28 17:41:10 | checkpoint published | 8 | 4 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00025; status: sealed |
+| 2026-10-28 17:41:10 | comparison epoch | 8 | 5 | D validation rho 0.765594, MSE 0.061095; E validation rho 0.688037, MSE 0.079270; A with comparison validation rho 0.876887, MSE 0.031278; learning_rate: 0.001 |
+| 2026-10-28 17:41:11 | checkpoint published | 8 | 5 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00026; status: sealed |
+| 2026-10-28 17:41:11 | comparison epoch | 8 | 6 | D validation rho 0.767183, MSE 0.060854; E validation rho 0.691797, MSE 0.078875; A with comparison validation rho 0.876758, MSE 0.031192; learning_rate: 0.001 |
+| 2026-10-28 17:41:12 | checkpoint published | 8 | 6 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00027; status: sealed |
+| 2026-10-28 17:41:12 | comparison epoch | 8 | 7 | D validation rho 0.767784, MSE 0.060813; E validation rho 0.694470, MSE 0.078564; A with comparison validation rho 0.876481, MSE 0.031057; learning_rate: 0.001 |
+| 2026-10-28 17:41:13 | checkpoint published | 8 | 7 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00028; status: sealed |
+| 2026-10-28 17:41:14 | comparison epoch | 8 | 8 | D validation rho 0.768126, MSE 0.060846; E validation rho 0.696441, MSE 0.078430; A with comparison validation rho 0.876486, MSE 0.032029; learning_rate: 0.001 |
+| 2026-10-28 17:41:14 | checkpoint published | 8 | 8 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00029; status: sealed |
+| 2026-10-28 17:41:15 | comparison epoch | 8 | 9 | D validation rho 0.768272, MSE 0.062046; E validation rho 0.697499, MSE 0.079258; A with comparison validation rho 0.876511, MSE 0.032199; learning_rate: 0.001 |
+| 2026-10-28 17:41:16 | comparison epoch | 8 | 10 | D validation rho 0.768220, MSE 0.060946; E validation rho 0.698734, MSE 0.078055; A with comparison validation rho 0.875987, MSE 0.032050; learning_rate: 0.001 |
+| 2026-10-28 17:41:16 | checkpoint published | 8 | 9 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00030; status: sealed |
+| 2026-10-28 17:41:17 | checkpoint published | 8 | 10 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00031; status: sealed |
+| 2026-10-28 17:41:17 | comparison epoch | 8 | 11 | D validation rho 0.768371, MSE 0.063043; E validation rho 0.699041, MSE 0.078442; A with comparison validation rho 0.876143, MSE 0.031476; learning_rate: 0.001 |
+| 2026-10-28 17:41:18 | checkpoint published | 8 | 11 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00032; status: sealed |
+| 2026-10-28 17:41:18 | comparison epoch | 8 | 12 | D validation rho 0.768131, MSE 0.060874; E validation rho 0.699958, MSE 0.077806; A with comparison validation rho 0.876067, MSE 0.032969; learning_rate: 0.001 |
+| 2026-10-28 17:41:19 | checkpoint published | 8 | 12 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00033; status: sealed |
+| 2026-10-28 17:41:19 | comparison epoch | 8 | 13 | D validation rho 0.768110, MSE 0.061036; E validation rho 0.700855, MSE 0.078800; A with comparison validation rho 0.875862, MSE 0.032420; learning_rate: 0.001 |
+| 2026-10-28 17:41:20 | checkpoint published | 8 | 13 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00034; status: sealed |
+| 2026-10-28 17:41:21 | comparison epoch | 8 | 14 | D validation rho 0.767885, MSE 0.061010; E validation rho 0.700690, MSE 0.077718; A with comparison validation rho 0.875560, MSE 0.033704; learning_rate: 0.001 |
+| 2026-10-28 17:41:22 | checkpoint published | 8 | 14 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00035; status: sealed |
+| 2026-10-28 17:41:22 | comparison epoch | 8 | 15 | D validation rho 0.767802, MSE 0.061965; E validation rho 0.700831, MSE 0.077812; A with comparison validation rho 0.875430, MSE 0.032389; learning_rate: 0.001 |
+| 2026-10-28 17:41:23 | checkpoint published | 8 | 15 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00036; status: sealed |
+| 2026-10-28 17:41:23 | comparison epoch | 8 | 16 | D validation rho 0.767090, MSE 0.061265; E validation rho 0.700711, MSE 0.077787; A with comparison validation rho 0.874632, MSE 0.031595; learning_rate: 0.001 |
+| 2026-10-28 17:41:24 | checkpoint published | 8 | 16 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00037; status: sealed |
+| 2026-10-28 17:41:24 | comparison epoch | 8 | 17 | D validation rho 0.766894, MSE 0.061438; E validation rho 0.700465, MSE 0.078059; A with comparison validation rho 0.875264, MSE 0.032378; learning_rate: 0.001 |
+| 2026-10-28 17:41:25 | checkpoint published | 8 | 17 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00038; status: sealed |
+| 2026-10-28 17:41:25 | comparison epoch | 8 | 18 | D validation rho 0.766575, MSE 0.061486; E validation rho 0.700212, MSE 0.077940; A with comparison validation rho 0.874860, MSE 0.032180; learning_rate: 0.001 |
+| 2026-10-28 17:41:26 | checkpoint published | 8 | 18 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00039; status: sealed |
+| 2026-10-28 17:41:27 | comparison epoch | 8 | 19 | D validation rho 0.766495, MSE 0.061710; E validation rho 0.700001, MSE 0.078377; A with comparison validation rho 0.874652, MSE 0.032845; learning_rate: 0.001 |
+| 2026-10-28 17:41:27 | checkpoint published | 8 | 19 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00040; status: sealed |
+| 2026-10-28 17:41:28 | comparison epoch | 8 | 20 | D validation rho 0.766209, MSE 0.063206; E validation rho 0.699518, MSE 0.078375; A with comparison validation rho 0.873830, MSE 0.031981; learning_rate: 0.001 |
+| 2026-10-28 17:41:28 | checkpoint published | 8 | 20 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00041; status: sealed |
+| 2026-10-28 17:41:29 | comparison epoch | 8 | 21 | D validation rho 0.765786, MSE 0.061983; E validation rho 0.699016, MSE 0.078594; A with comparison validation rho 0.874791, MSE 0.034716; learning_rate: 0.001 |
+| 2026-10-28 17:41:30 | checkpoint published | 8 | 21 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00042; status: sealed |
+| 2026-10-28 17:41:30 | comparison epoch | 8 | 22 | D validation rho 0.764935, MSE 0.062060; E validation rho 0.698997, MSE 0.078272; A with comparison validation rho 0.874156, MSE 0.032090; learning_rate: 0.001 |
+| 2026-10-28 17:41:31 | checkpoint published | 8 | 22 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00043; status: sealed |
+| 2026-10-28 17:41:31 | comparison epoch | 8 | 23 | D validation rho 0.764752, MSE 0.062576; E validation rho 0.698706, MSE 0.078541; A with comparison validation rho 0.873831, MSE 0.032158; learning_rate: 0.001 |
+| 2026-10-28 17:41:31 | comparison started | 9 |  | name: A with comparison, D, E |
+| 2026-10-28 17:41:32 | checkpoint published | 8 | 23 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00044; status: sealed |
+| 2026-10-28 17:41:42 | comparison epoch | 9 | 1 | D validation rho 0.743201, MSE 0.066808; E validation rho 0.676492, MSE 0.081003; A with comparison validation rho 0.876937, MSE 0.034439; learning_rate: 0.001 |
+| 2026-10-28 17:41:43 | checkpoint published | 9 | 1 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00045; status: sealed |
+| 2026-10-28 17:41:43 | comparison epoch | 9 | 2 | D validation rho 0.750793, MSE 0.063944; E validation rho 0.684612, MSE 0.077980; A with comparison validation rho 0.876928, MSE 0.034289; learning_rate: 0.001 |
+| 2026-10-28 17:41:44 | checkpoint published | 9 | 2 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00046; status: sealed |
+| 2026-10-28 17:41:44 | comparison epoch | 9 | 3 | D validation rho 0.755551, MSE 0.064332; E validation rho 0.690386, MSE 0.078361; A with comparison validation rho 0.876901, MSE 0.032081; learning_rate: 0.001 |
+| 2026-10-28 17:41:45 | checkpoint published | 9 | 3 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00047; status: sealed |
+| 2026-10-28 17:41:45 | comparison epoch | 9 | 4 | D validation rho 0.759696, MSE 0.062658; E validation rho 0.695841, MSE 0.076056; A with comparison validation rho 0.877107, MSE 0.032456; learning_rate: 0.001 |
+| 2026-10-28 17:41:46 | checkpoint published | 9 | 4 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00048; status: sealed |
+| 2026-10-28 17:41:47 | comparison epoch | 9 | 5 | D validation rho 0.761752, MSE 0.063595; E validation rho 0.699158, MSE 0.076239; A with comparison validation rho 0.876909, MSE 0.031504; learning_rate: 0.001 |
+| 2026-10-28 17:41:47 | checkpoint published | 9 | 5 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00049; status: sealed |
+| 2026-10-28 17:41:48 | comparison epoch | 9 | 6 | D validation rho 0.763088, MSE 0.062917; E validation rho 0.701661, MSE 0.076169; A with comparison validation rho 0.876817, MSE 0.034799; learning_rate: 0.001 |
+| 2026-10-28 17:41:48 | checkpoint published | 9 | 6 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00050; status: sealed |
+| 2026-10-28 17:41:49 | comparison epoch | 9 | 7 | D validation rho 0.764656, MSE 0.061545; E validation rho 0.704275, MSE 0.074817; A with comparison validation rho 0.876719, MSE 0.031015; learning_rate: 0.001 |
+| 2026-10-28 17:41:50 | checkpoint published | 9 | 7 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00051; status: sealed |
+| 2026-10-28 17:41:50 | comparison epoch | 9 | 8 | D validation rho 0.765569, MSE 0.061382; E validation rho 0.705970, MSE 0.075164; A with comparison validation rho 0.876627, MSE 0.031405; learning_rate: 0.001 |
+| 2026-10-28 17:41:51 | checkpoint published | 9 | 8 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00052; status: sealed |
+| 2026-10-28 17:41:51 | comparison epoch | 9 | 9 | D validation rho 0.765903, MSE 0.061566; E validation rho 0.707222, MSE 0.075669; A with comparison validation rho 0.876719, MSE 0.033091; learning_rate: 0.001 |
+| 2026-10-28 17:41:52 | checkpoint published | 9 | 9 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00053; status: sealed |
+| 2026-10-28 17:41:52 | comparison epoch | 9 | 10 | D validation rho 0.765957, MSE 0.065452; E validation rho 0.708264, MSE 0.076209; A with comparison validation rho 0.876323, MSE 0.032303; learning_rate: 0.001 |
+| 2026-10-28 17:41:53 | checkpoint published | 9 | 10 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00054; status: sealed |
+| 2026-10-28 17:41:54 | comparison epoch | 9 | 11 | D validation rho 0.766284, MSE 0.061243; E validation rho 0.709871, MSE 0.073922; A with comparison validation rho 0.876376, MSE 0.031200; learning_rate: 0.001 |
+| 2026-10-28 17:41:54 | checkpoint published | 9 | 11 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00055; status: sealed |
+| 2026-10-28 17:41:55 | comparison epoch | 9 | 12 | D validation rho 0.766395, MSE 0.061265; E validation rho 0.710664, MSE 0.074239; A with comparison validation rho 0.875936, MSE 0.031293; learning_rate: 0.001 |
+| 2026-10-28 17:41:55 | checkpoint published | 9 | 12 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00056; status: sealed |
+| 2026-10-28 17:41:56 | comparison epoch | 9 | 13 | D validation rho 0.766385, MSE 0.061316; E validation rho 0.711188, MSE 0.074205; A with comparison validation rho 0.876161, MSE 0.032202; learning_rate: 0.001 |
+| 2026-10-28 17:41:57 | comparison epoch | 9 | 14 | D validation rho 0.766278, MSE 0.061562; E validation rho 0.711456, MSE 0.073940; A with comparison validation rho 0.875751, MSE 0.031676; learning_rate: 0.001 |
+| 2026-10-28 17:41:57 | checkpoint published | 9 | 13 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00057; status: sealed |
+| 2026-10-28 17:41:58 | checkpoint published | 9 | 14 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00058; status: sealed |
+| 2026-10-28 17:41:58 | comparison epoch | 9 | 15 | D validation rho 0.766081, MSE 0.061521; E validation rho 0.711894, MSE 0.073994; A with comparison validation rho 0.875879, MSE 0.033426; learning_rate: 0.001 |
+| 2026-10-28 17:41:59 | checkpoint published | 9 | 15 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00059; status: sealed |
+| 2026-10-28 17:41:59 | comparison epoch | 9 | 16 | D validation rho 0.766032, MSE 0.063533; E validation rho 0.711960, MSE 0.074876; A with comparison validation rho 0.875711, MSE 0.034744; learning_rate: 0.001 |
+| 2026-10-28 17:42:01 | comparison epoch | 9 | 17 | D validation rho 0.765489, MSE 0.062681; E validation rho 0.712372, MSE 0.075291; A with comparison validation rho 0.875343, MSE 0.031644; learning_rate: 0.001 |
+| 2026-10-28 17:42:01 | checkpoint published | 9 | 16 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00060; status: sealed |
+| 2026-10-28 17:42:02 | checkpoint published | 9 | 17 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00061; status: sealed |
+| 2026-10-28 17:42:02 | comparison epoch | 9 | 18 | D validation rho 0.765299, MSE 0.061843; E validation rho 0.712161, MSE 0.073699; A with comparison validation rho 0.874837, MSE 0.031644; learning_rate: 0.001 |
+| 2026-10-28 17:42:03 | checkpoint published | 9 | 18 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00062; status: sealed |
+| 2026-10-28 17:42:03 | comparison epoch | 9 | 19 | D validation rho 0.764985, MSE 0.061874; E validation rho 0.712224, MSE 0.073946; A with comparison validation rho 0.874741, MSE 0.031851; learning_rate: 0.001 |
+| 2026-10-28 17:42:04 | checkpoint published | 9 | 19 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00063; status: sealed |
+| 2026-10-28 17:42:04 | comparison epoch | 9 | 20 | D validation rho 0.764412, MSE 0.062011; E validation rho 0.712169, MSE 0.073815; A with comparison validation rho 0.874567, MSE 0.032124; learning_rate: 0.001 |
+| 2026-10-28 17:42:05 | checkpoint published | 9 | 20 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00064; status: sealed |
+| 2026-10-28 17:42:05 | comparison epoch | 9 | 21 | D validation rho 0.763899, MSE 0.063520; E validation rho 0.712002, MSE 0.074747; A with comparison validation rho 0.874565, MSE 0.032356; learning_rate: 0.001 |
+| 2026-10-28 17:42:06 | checkpoint published | 9 | 21 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00065; status: sealed |
+| 2026-10-28 17:42:06 | comparison epoch | 9 | 22 | D validation rho 0.763833, MSE 0.062290; E validation rho 0.711458, MSE 0.073998; A with comparison validation rho 0.873922, MSE 0.032050; learning_rate: 0.001 |
+| 2026-10-28 17:42:07 | checkpoint published | 9 | 22 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00066; status: sealed |
+| 2026-10-28 17:42:08 | comparison epoch | 9 | 23 | D validation rho 0.763112, MSE 0.062476; E validation rho 0.711288, MSE 0.074128; A with comparison validation rho 0.873665, MSE 0.031862; learning_rate: 0.001 |
+| 2026-10-28 17:42:08 | checkpoint published | 9 | 23 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00067; status: sealed |
+| 2026-10-28 17:42:09 | comparison epoch | 9 | 24 | D validation rho 0.763437, MSE 0.064793; E validation rho 0.711263, MSE 0.074991; A with comparison validation rho 0.874366, MSE 0.035292; learning_rate: 0.001 |
+| 2026-10-28 17:42:10 | comparison epoch | 9 | 25 | D validation rho 0.762333, MSE 0.062774; E validation rho 0.710816, MSE 0.074321; A with comparison validation rho 0.873919, MSE 0.032992; learning_rate: 0.001 |
+| 2026-10-28 17:42:10 | checkpoint published | 9 | 24 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00068; status: sealed |
+| 2026-10-28 17:42:11 | checkpoint published | 9 | 25 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00069; status: sealed |
+| 2026-10-28 17:42:11 | comparison epoch | 9 | 26 | D validation rho 0.762238, MSE 0.064606; E validation rho 0.710436, MSE 0.075189; A with comparison validation rho 0.873458, MSE 0.032434; learning_rate: 0.001 |
+| 2026-10-28 17:42:12 | checkpoint published | 9 | 26 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00070; status: sealed |
+| 2026-10-28 17:42:12 | comparison epoch | 9 | 27 | D validation rho 0.761471, MSE 0.063573; E validation rho 0.710045, MSE 0.074860; A with comparison validation rho 0.873565, MSE 0.033503; learning_rate: 0.001 |
+| 2026-10-28 17:42:14 | checkpoint published | 9 | 27 | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00071; status: sealed |
+| 2026-10-28 17:42:15 | checkpoint published |  |  | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00072; status: sealed |
+| 2026-10-28 17:42:21 | checkpoint published |  |  | name: Cloud checkpoint 1702802689404f9cac66e2119e843408/00073; status: sealed |
+| 2026-10-28 17:42:21 | fitting complete |  |  | name: Learning rates and all checkpoints selected using validation |
+| 2026-10-28 17:43:12 | stage finished |  |  | name: fit; status: succeeded |
+| 2026-10-28 17:43:12 | stage started |  |  | name: extract_test |
+| 2026-10-28 17:43:51 | readout extraction |  |  | split: test; 4/4862 |
+| 2026-10-28 17:43:56 | readout extraction |  |  | split: test; 204/4862 |
+| 2026-10-28 17:44:01 | readout extraction |  |  | split: test; 404/4862 |
+| 2026-10-28 17:44:06 | readout extraction |  |  | split: test; 604/4862 |
+| 2026-10-28 17:44:11 | readout extraction |  |  | split: test; 804/4862 |
+| 2026-10-28 17:44:16 | readout extraction |  |  | split: test; 1004/4862 |
+| 2026-10-28 17:44:21 | readout extraction |  |  | split: test; 1204/4862 |
+| 2026-10-28 17:44:26 | readout extraction |  |  | split: test; 1404/4862 |
+| 2026-10-28 17:44:31 | readout extraction |  |  | split: test; 1604/4862 |
 
 
 <details>
