@@ -140,6 +140,25 @@ class NativeExtractionTests(unittest.TestCase):
             for name in GOLLIE_ARCHITECTURE:
                 self.assertEqual(getattr(config, name), before[name])
 
+    def test_gollie_modern_rope_scaling_alias_is_unscaled(self):
+        class ModernConfig(SimpleNamespace):
+            @property
+            def rope_scaling(self):
+                return self.rope_parameters
+
+        config = ModernConfig(
+            **GOLLIE_ARCHITECTURE,
+            rope_parameters={"rope_theta": 1000000.0, "rope_type": "default"},
+        )
+        configure_legacy_gollie(config)
+        self.assertEqual(config.rope_parameters["rope_theta"], 10000)
+        for invalid in (
+            {"rope_theta": 1000000.0, "rope_type": "linear", "factor": 2},
+            {"rope_theta": 1000000.0, "rope_type": "default", "factor": 2},
+        ):
+            with self.assertRaises(ValueError):
+                configure_legacy_gollie(ModernConfig(**GOLLIE_ARCHITECTURE, rope_parameters=invalid))
+
     def test_gollie_conversion_rejects_unreviewed_architecture(self):
         for name, value in (("hidden_size", 2048), ("rms_norm_eps", 1e-6),
                             ("attention_bias", True), ("rope_theta", 10000)):

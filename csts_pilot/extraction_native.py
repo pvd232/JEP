@@ -257,12 +257,18 @@ def configure_legacy_gollie(config: Any) -> dict[str, Any]:
             raise ValueError("Unexpected pinned GoLLIE architecture field: " + name)
     if getattr(config, "mlp_bias", False) or getattr(config, "pretraining_tp", 1) != 1:
         raise ValueError("Unexpected GoLLIE MLP bias or tensor-parallel configuration")
-    if getattr(config, "rope_scaling", None) is not None:
-        raise ValueError("Pinned GoLLIE requires unscaled rotary embeddings")
     parameters = getattr(config, "rope_parameters", None)
+    legacy_scaling = getattr(config, "rope_scaling", None)
+    # Transformers 5.20 exposes rope_scaling as an alias for rope_parameters,
+    # including the unscaled/default dictionary. Its presence is not scaling.
+    if legacy_scaling is not None and (parameters is None or legacy_scaling != parameters):
+        raise ValueError("Pinned GoLLIE requires unscaled rotary embeddings")
     if parameters is not None:
         if not isinstance(parameters, dict) or parameters.get("rope_type", "default") != "default":
             raise ValueError("Unexpected modern GoLLIE rotary configuration")
+        factor = parameters.get("factor", 1)
+        if isinstance(factor, bool) or factor != 1:
+            raise ValueError("Pinned GoLLIE requires unscaled rotary embeddings")
         original_base = parameters.get("rope_theta", getattr(config, "rope_theta", None))
     else:
         original_base = getattr(config, "rope_theta", None)
