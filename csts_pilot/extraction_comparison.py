@@ -23,6 +23,7 @@ import tempfile
 import unicodedata
 
 from .extraction_formats import FORMATS, build_prompt, parse_payload, canonical_text
+from .codex_transport import codex_environment
 
 ROOT = Path(__file__).resolve().parents[1]
 GPT_ARMS = {"gpt_propositions": "propositions", "gpt_json": "json", "gpt_python": "python"}
@@ -82,7 +83,7 @@ def source_id(passage, condition):
 def code_identity():
     """Bind runs to the exact implementation, including uncommitted changes."""
     files = ("extraction_comparison.py", "extraction_formats.py", "extraction_native.py",
-             "transport_revalidation.py")
+             "transport_revalidation.py", "codex_transport.py")
     return {name: digest((Path(__file__).parent / name).read_bytes()) for name in files}
 
 
@@ -226,6 +227,7 @@ def completed_codex(events, response):
 
 def capture_codex(folder, prompt, config, cli, closed_book):
     """Capture one fresh signed-in Codex process; bound runtime and preserve raw logs."""
+    environment, tls = codex_environment()
     schema = folder / "schema.json"
     write_new(schema, ENVELOPE)
     command = [str(cli), "--no-daemon", "--ask-for-approval", "never", "exec",
@@ -234,17 +236,19 @@ def capture_codex(folder, prompt, config, cli, closed_book):
                "--model", config["model"], "-c", 'model_reasoning_effort="max"',
                "--json", "--color", "never", "--output-schema", str(schema),
                "--output-last-message", str(folder/"response.json"), "-"]
-    version = subprocess.run([str(cli), "--version"], capture_output=True, text=True, check=True)
+    version = subprocess.run([str(cli), "--version"], capture_output=True, text=True, check=True,
+                             env=environment)
     write_new(folder / "runtime.json", {
         "cli_version": version.stdout.strip(), "requested_model": config["model"],
         "reasoning_effort": config["reasoning_effort"],
+        "tls": tls,
         "provider_output_token_cap": None,
         "output_cap_limitation": "Codex exposes no verified provider output-token control."
     })
     write_new(folder / "command.json", command)
     with (folder/"events.jsonl").open("x") as out, (folder/"stderr.log").open("x") as err:
         process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=out, stderr=err,
-                                   text=True, start_new_session=True)
+                                   text=True, start_new_session=True, env=environment)
         try:
             process.communicate(prompt, timeout=config["timeout_seconds"])
         except subprocess.TimeoutExpired:

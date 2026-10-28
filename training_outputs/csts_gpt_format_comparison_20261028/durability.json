@@ -1,0 +1,29 @@
+{
+  "artifact_uploads": "asynchronous; verify every queue has completed before releasing a runtime or final closeout",
+  "checkpoint": {
+    "bytes": 122764915,
+    "cloud_revision": "5941843dbb19a0df3428a2444d47efad8262f727158e5c8a08f3069e2241b0a3",
+    "readback": {
+      "bytes": 122764915,
+      "path": "/private/tmp/jep-gpt-format-trained-checkpoint-20261028/verification/proposition_final.pt",
+      "sha256": "d30c00fc76e70ec639493b7121a8b8c9d7520745733857c1c49f0902fff00f4f"
+    },
+    "sha256": "d30c00fc76e70ec639493b7121a8b8c9d7520745733857c1c49f0902fff00f4f",
+    "uri": "viper://pvd232/jep_csts_joint_20261021@5941843dbb19a0df3428a2444d47efad8262f727158e5c8a08f3069e2241b0a3/recovered_checkpoints/proposition_final_20261028/proposition_final.pt"
+  },
+  "generation_results": "pending; no similarity conclusion is reported",
+  "matched_batch_protocol_sha256": "bbcc27cd1ab9cd821c76d20bbae297f945a9d3c4d273162f34ec58e585506f56",
+  "matched_batch_schedule_sha256": "afe616f7caa283a3f3109ed857dac2f3f4c3000cd7075ddac86af13ca3c1f50c",
+  "prior_artifact_proof": {
+    "bytes": 3210,
+    "sha256": "b98014929292cc27c40deacfc3a5ff0add78118e7abb6903c13ec36b774fae8d",
+    "stored_at": {
+      "kind": "viper_cloud",
+      "owner": "pvd232",
+      "path": "durability/csts-format-comparison-20261028/recovery-and-publisher/combined-recovery-receipt.json",
+      "revision": "968c6e27f524a485be1ecc391e2be941357e0db4b25ca5aae4db4e348749bd8a",
+      "workspace": "jep_csts_joint_20261021"
+    }
+  },
+  "status": "checkpoint_and_prior_artifacts_cloud_verified_new_generation_in_progress"
+}
