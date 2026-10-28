@@ -2,6 +2,8 @@
 
 Current status: **native task-adapter calibration is unresolved.** The capture, parsing and reproducibility controls were reviewed, but subsequent adversarial review found that no in-task positive/negative control had validated the generic condition-to-relation mapping. The model-comparison conclusion is suspended. The earlier approvals below document implementation and evidence integrity, not native adapter calibration.
 
+Later repair evidence is in the [author-backend calibration](../training_outputs/csts_native_backend_calibration_20261028.md) and [development progression](../training_outputs/csts_native_development_progression_20261028.md). Both pinned author backends run. The revised schemas recover evidence that the generic mapping missed, while incomplete actions and failed symbolic/quote count checks still prevent a general quality claim. The earlier runtime and score descriptions below retain their historical scope.
+
 Base: `61a48b2fa580c7457155535bcfafde10426dab83`. Scope: the three extraction modules, package initializer, configuration, optional native requirements, three test modules and [methods](csts-extraction-comparison-methods.md). Python cache exclusions and the preflight receipt complete the publication.
 
 ## Design review

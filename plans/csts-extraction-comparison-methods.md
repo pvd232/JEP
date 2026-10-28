@@ -1,6 +1,6 @@
 # C-STS extraction comparison
 
-Status: the Colab A100 captures are complete, but the generic native task adapter remains uncalibrated. The [results and evidence](../training_outputs/csts_extraction_screen_20261028.md) retain the descriptive counts and suspend comparative native conclusions pending in-task diagnostic controls.
+Status: native author-backend calibration is complete; substantive task qualification remains incomplete. See the [backend calibration](../training_outputs/csts_native_backend_calibration_20261028.md) and [exposed development progression](../training_outputs/csts_native_development_progression_20261028.md). The original [screen](../training_outputs/csts_extraction_screen_20261028.md) is a preserved historical configuration, and its native ranking remains withdrawn. The original modern compatibility-loader description below applies to that screen; the later calibration and repair captures use the separately pinned author backends.
 
 ## Question and comparisons
 
