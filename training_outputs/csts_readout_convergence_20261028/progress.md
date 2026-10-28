@@ -5,8 +5,8 @@ The nine seed and learning rate candidates are split across two L4s and an A100.
 | Seed | GPU | Last reported status | Sealed checkpoint receipts |
 | --- | --- | --- | --- |
 | 7 | L4 | succeeded | 43 |
-| 8 | A100 | running | 44 |
-| 9 | L4 | running | 39 |
+| 8 | A100 | published | 44 |
+| 9 | L4 | succeeded | 41 |
 
 ## Seed 7
 
@@ -211,6 +211,7 @@ Hardware: NVIDIA A100-SXM4-40GB. Source: `bf167d773df10cf097a3be7e5966b69c299d92
 | 2026-10-28 17:29:13 | checkpoint published | 8 | 13 | name: Cloud checkpoint 1e20177c943c4837802273141c1f8b04/00043; status: sealed |
 | 2026-10-28 17:29:16 | checkpoint published | 8 |  | name: Cloud checkpoint 1e20177c943c4837802273141c1f8b04/00044; status: sealed |
 | 2026-10-28 17:29:16 | head grid complete |  |  | name: Candidate grid published; status: succeeded |
+| 2026-10-28 17:30:01 | stage finished | 8 |  | name: Head candidates complete; native publication queued; status: succeeded |
 
 
 ## Seed 9
@@ -305,6 +306,10 @@ Hardware: NVIDIA L4. Source: `bf167d773df10cf097a3be7e5966b69c299d9227`.
 | 2026-10-28 17:29:34 | checkpoint published | 9 | 8 | name: Cloud checkpoint 94dd93c1adf24fb98387388761c5389e/00037; status: sealed |
 | 2026-10-28 17:29:43 | checkpoint published | 9 | 9 | name: Cloud checkpoint 94dd93c1adf24fb98387388761c5389e/00038; status: sealed |
 | 2026-10-28 17:29:53 | checkpoint published | 9 | 10 | name: Cloud checkpoint 94dd93c1adf24fb98387388761c5389e/00039; status: sealed |
+| 2026-10-28 17:30:02 | checkpoint published | 9 | 11 | name: Cloud checkpoint 94dd93c1adf24fb98387388761c5389e/00040; status: sealed |
+| 2026-10-28 17:30:18 | checkpoint published | 9 |  | name: Cloud checkpoint 94dd93c1adf24fb98387388761c5389e/00041; status: sealed |
+| 2026-10-28 17:30:18 | head grid complete |  |  | name: Candidate grid published; status: succeeded |
+| 2026-10-28 17:31:03 | stage finished | 9 |  | name: Head candidates complete; native publication queued; status: succeeded |
 
 
 <details>
