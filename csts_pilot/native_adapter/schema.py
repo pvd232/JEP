@@ -396,8 +396,8 @@ def render_schema(plan, model, count_stage=None, profile="scoped_experimental", 
 
 def _target_prompt(plan, model, passage, count_stage=None, profile="scoped_experimental", task_stage=None):
     """Join the condition-only schema to quoted source data with model-native framing."""
-    if not isinstance(passage, str) or not passage.strip():
-        raise ValueError("A nonempty passage is required")
+    if not isinstance(passage, str):
+        raise ValueError("A string passage is required")
     schema = render_schema(plan, model, count_stage=count_stage, profile=profile, task_stage=task_stage)
     source = json.dumps(passage, ensure_ascii=False)
     if model == "gollie":

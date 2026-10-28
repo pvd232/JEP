@@ -4,6 +4,8 @@ Current status: **native task-adapter calibration is unresolved.** The capture, 
 
 Later repair evidence is in the [author-backend calibration](../training_outputs/csts_native_backend_calibration_20261028.md) and [development progression](../training_outputs/csts_native_development_progression_20261028.md). Both pinned author backends run. The revised schemas recover evidence that the generic mapping missed, while incomplete actions and failed symbolic/quote count checks still prevent a general quality claim. The earlier runtime and score descriptions below retain their historical scope.
 
+The completed [final design/code review](csts-native-final-review-20261028.md) and [final diagnostic results](../training_outputs/csts_native_final_results_20261028.md) supersede that development status. The input/runtime repairs pass their checks; neither current native configuration passes the evidence-quality gate. The empty-input recovery has a separate origin and does not overwrite the original scores.
+
 Base: `61a48b2fa580c7457155535bcfafde10426dab83`. Scope: the three extraction modules, package initializer, configuration, optional native requirements, three test modules and [methods](csts-extraction-comparison-methods.md). Python cache exclusions and the preflight receipt complete the publication.
 
 ## Design review

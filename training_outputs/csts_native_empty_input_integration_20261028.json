@@ -1,0 +1,91 @@
+{
+  "all_16_runtime_assets_byte_identical_to_reviewed_empty_input_core": true,
+  "changed_runtime_files": [
+    "schema.py",
+    "normalize.py"
+  ],
+  "committed": false,
+  "docs_before_sha256": {
+    "plans/csts-native-adapter-repair-design.md": "2eeff51f407686d573469129d51c5c9176f327943238a698986fe42dacbea272",
+    "plans/csts-native-adapter-repair-interface.md": "60a0fe0a7bf1fa2636f35fb7746a7fbc9c6ef918ccf3eb7c9f332890412e8655"
+  },
+  "docs_sha256": {
+    "plans/csts-native-adapter-repair-design.md": "ab0fd2842daced6d6f339b7627d56a65fe42de6b754d89a049aab70952440764",
+    "plans/csts-native-adapter-repair-interface.md": "de49713e1a89926c0a1e707ce9d03c6f73f7f4b48c684b856c1eba2bc9a0b02b"
+  },
+  "documentation_completion_amendment": {
+    "completed_recovery_receipt": "training_outputs/csts_native_empty_input_first_generation_recovery_20261028.json",
+    "completed_recovery_receipt_sha256": "2cee1182e85d6faa4a5b73e545bab7a124d0691beb5c34b9aed1e5faad615448",
+    "docs": {
+      "plans/csts-native-adapter-repair-design.md": {
+        "after_sha256": "ab0fd2842daced6d6f339b7627d56a65fe42de6b754d89a049aab70952440764",
+        "before_sha256": "7780f53738afbb00975b0c8afb3bb5cdc42d4985d598e4396c6c667e00dffd24"
+      },
+      "plans/csts-native-adapter-repair-interface.md": {
+        "after_sha256": "de49713e1a89926c0a1e707ce9d03c6f73f7f4b48c684b856c1eba2bc9a0b02b",
+        "before_sha256": "0a029f036c6bad5b934afee290b37139be8683453f1a7b27b46cf952ffc69853"
+      }
+    },
+    "model_calls_by_this_amendment": 0,
+    "prior_integration_receipt_sha256": "e54b214015f6ceca13237599ae80f4cb115138a22a9c54a846691ffaa6cbf709",
+    "runtime_assets_changed": false
+  },
+  "new_fixtures_sha256": {
+    "tests/fixtures/native_adapter_empty_input/know-refinement-requests.json": "3f4d2af8b2c80b8d949e6f324e4c8a887eb21d8573dfdc2209a8be24159380ff",
+    "tests/fixtures/native_adapter_empty_input/tests/fixtures/pre_empty_input_normalize.py": "48508551042c27d80712201eaef720087c0abf0ebd73b7401803055d92599859",
+    "tests/fixtures/native_adapter_empty_input/tests/fixtures/pre_empty_input_schema.py": "5488f890df70f153c2301d1cba28e4f6c8f9876cf8a38d8e3576629f12493bbf"
+  },
+  "nonempty_generation_strings_unchanged": true,
+  "nonempty_prompt_comparisons": 18,
+  "other_14_runtime_assets_byte_identical_to_prior_core": true,
+  "prior_integration_receipt": "training_outputs/csts_native_adapter_integration_final_20261028.json",
+  "prior_integration_receipt_and_archives_preserved": true,
+  "prior_integration_receipt_sha256": "850ca6568ceb9b2a9543d693267d1dbe4763ea6c54ab7d4ace96e20edbb8d607",
+  "progression_or_results_changed": false,
+  "recovery": {
+    "expected_model_source_slots": 14,
+    "first_attempt_diagnostic_failures_preserved": true,
+    "origin": "mechanical_empty_input_first_neural_generation_recovery_v1",
+    "original_diagnostic_and_provider_historical": true,
+    "planned_execution_receipt": "training_outputs/csts_native_empty_input_first_generation_recovery_20261028.json",
+    "quality_qualified": false,
+    "status": "PENDING_SEPARATE_CAPTURE_AND_REPLAY"
+  },
+  "runtime_files_sha256": {
+    "__init__.py": "b0572fcc34f6a05cbd37dbe1b6ffb14e7b6500c5bb8c93379ee1b2ea27801f1f",
+    "cli.py": "508bbbd0c160c3bf763548a2a1f9092dbe1617f46cd07f161e557896639fef32",
+    "counts.py": "c3db49bc283c7cc30c5881418fddd2506e2d283d2dc6a3c36cada7f4422fce76",
+    "demonstrations.json": "23a4c1091997f9953990757561494966b8883fc2aa6ec263c0ca678de0ce9a84",
+    "export.py": "9591874d15fc0637a030c806036ca75ff4dc0dc566e2903b4eea623f367560f6",
+    "gates.py": "224e0584229dc034ac1873af06520f94944435d8adcc15a3d224897c9fb37731",
+    "inventory.py": "3caefd6f3492b8244fb7c2c860db6e437b99215c0011196ed891a9096cff765c",
+    "know_refinement.py": "17cb256ce0a6d139be09d3c02a3ba3d9c59c12f249b9222b3dc3ef712aa94f07",
+    "know_refinement_demonstrations.json": "8840993e4b080ac783adfda99ec304c881b65b2d9e0957257cc3126bd198a97a",
+    "normalize.py": "285f29fc0167080c7d8892695e2ebbf888d9afd63cdee0c66b003144b497f702",
+    "prompt_profiles.py": "9ef810de3e06edc9cd5840f9a2b9c3b0d37a677b48bf7022d0324a6217a5c0f7",
+    "recipe_demonstrations.json": "cfd6dd191d52a548ac7bc3c4e77bc3dd5ee77c24fd959cc54178c9fe4276e028",
+    "runtime.py": "0ede1154a1625d16e03994b3bb546289c23cf8f979ebea829c6d09be0eb7cbea",
+    "schema.py": "f43bdba441948004fe479942179cea9da0f7e42470d16cdede55b916a87dbc47",
+    "scope_extensions.py": "c5fffd5a03bca8adbc81e7477530f4fa1e6481c341d1db89a0151ca49669f8e3",
+    "task_recipe.py": "39ca5e7c4066484f704e43d1d393e3d89f17e17cb13c5dd5eedba1590bc763f0"
+  },
+  "schema_examples_ontology_context_and_forced_output_unchanged": true,
+  "scope": "Only source-passage validation guards in schema._target_prompt and normalize.normalize_native permit empty and whitespace strings while still rejecting nonstrings.",
+  "source_archive": "training_outputs/csts_native_empty_input_v1_20261028.tar.gz",
+  "source_archive_sha256": "08ba88ca5d21892fab2febf72b7ec85636894968715eae6c3d9f74570f16702d",
+  "source_seal_sha256": "1b5159f5e3e303e79ef91823c9cec6cbd79b464e4a8e7a11dee9c3bb8a7521b5",
+  "status": "APPROVED_MECHANICAL_EMPTY_INPUT_CORE_INTEGRATED",
+  "test_relocation": {
+    "changes": "Repository package imports and fixture/source paths only.",
+    "repository": "tests/test_task_native_empty_input.py",
+    "repository_sha256": "f5c4b787cb08cc611dde367a5b4bdb6b39e8b074eebc6c24ef2e75aa9e90c83f",
+    "source": "tests/test_empty_input.py",
+    "source_sha256": "efb02f651aaab14c6c98c1dc4cd7c50d052c8e9b17591982ade41207c0a826ce"
+  },
+  "validation": {
+    "integrated_tests_passed": 185,
+    "model_calls": 0,
+    "new_empty_input_regression_tests": 8,
+    "public_entrypoint_tests_passed_separately": 4
+  }
+}

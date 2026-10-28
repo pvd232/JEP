@@ -183,8 +183,8 @@ def normalize_native(payload, plan, model, passage, coverage_complete=False, cou
     if not plan["supported"]:
         evidence["unsupported_reason"] = plan["unsupported_reason"]
         return evidence
-    if not isinstance(passage, str) or not passage.strip():
-        raise ValueError("A nonempty source passage is required")
+    if not isinstance(passage, str):
+        raise ValueError("A string source passage is required")
     definitions = {schema["name"]: schema for schema in selected_schemas(plan, model, count_stage, profile, task_stage)}
     annotations = _constructors(payload, plan, model, count_stage, profile, task_stage)
     evidence["capability_profile"] = profile
