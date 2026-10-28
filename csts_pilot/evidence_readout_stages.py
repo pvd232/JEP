@@ -490,6 +490,9 @@ def train_pair(
                     "optimizer": {a: o.state_dict() for a, o in optimizers.items()},
                     "generator_state": generator.get_state(),
                     "joint_stale_epochs": stale,
+                    "history": history,
+                    "predictions": predictions,
+                    "gradient_diagnostics": gradients,
                 }
             )
         if stale >= config.patience:
@@ -561,6 +564,7 @@ def fit_comparisons(
     on_epoch: Any = None,
     step_offset: int = 0,
     include_parent: bool = False,
+    on_checkpoint: Any = None,
 ) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any], dict[str, Any]]:
     """Fit comparisons on frozen B/C vectors, optionally including A's final vectors."""
     vectors: dict[str, dict[str, torch.Tensor]] = {}
@@ -667,6 +671,20 @@ def fit_comparisons(
         )
         if on_epoch is not None:
             on_epoch(record)
+        if on_checkpoint is not None:
+            on_checkpoint(
+                {
+                    "epoch": epoch,
+                    "updates": updates,
+                    "selected": best,
+                    "last_state": {a: clone_state(c) for a, c in comparators.items()},
+                    "optimizer": {a: o.state_dict() for a, o in optimizers.items()},
+                    "generator_state": generator.get_state(),
+                    "joint_stale_epochs": stale,
+                    "history": history,
+                    "predictions": predictions,
+                }
+            )
         if stale >= config.comparison_patience:
             break
     after = {a: state_digest(clone_state(h)) for a, h in heads.items()}

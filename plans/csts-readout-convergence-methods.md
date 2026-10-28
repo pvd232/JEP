@@ -48,6 +48,10 @@ Record rating loss, quotation loss, teacher agreement, query and key weight norm
 
 ## Execution and review
 
+The recovery divides fitting across two L4 workers and an A100 worker when available. Each worker fits one seed at every declared learning rate. The coordinator collects all nine candidates and applies the original mean validation selection across seeds. D, E and the comparison on A then use the globally selected rates. Every worker uses the same sealed feature files and records its actual hardware.
+
+Each fitting epoch saves an immutable copy of its current and selected weights, optimizer, batch generator and history. A CPU thread publishes these snapshots through VIPER's existing file publication API. The first snapshot completes a Cloud restore with a matching hash before the second epoch. Later uploads proceed during fitting. Completed candidate bundles, comparison checkpoints and publication receipts are retained through the same native API. Fitting completion waits for these receipts.
+
 The [configuration](../configs/csts-readout-convergence.json) declares the grid and stopping rules. The [native stages](../csts_pilot/evidence_readout_convergence.py) fit and evaluate the models. The [controller](../csts_pilot/evidence_readout_convergence_run.py) consumes the rebuilt native artifacts under the shared GPU lock on a Colab A100 with 40 GB memory. Cache extraction, fitting and evaluation use native VIPER runs. The existing publication queue invokes VIPER Cloud promotion in separate processes as each stage completes. Publication receipts record the sealed Cloud references.
 
 Review covers equal seed coverage, rate selection using validation alone, tie handling, rejection of incomplete fits, initialization selection, checkpoint retention, full coordinate values and frozen B/C parameters during comparison fitting. The initial validation run passed 72 tests across the relevant suites. Three publisher tests also passed. The additional native CPU fixture remains available for integration checks. Scientific execution uses the committed source and configuration. The Markdown stream reports extraction, every epoch and the final results.

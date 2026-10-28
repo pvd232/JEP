@@ -201,6 +201,16 @@ def run(
             )
             for s in ("training", "validation")
         )
+        candidate_runs = settings.get("candidate_runs", {})
+        for seed, record in candidate_runs.items():
+            bindings.append(
+                input(
+                    f"candidates_{seed}",
+                    source=stored_source(
+                        record, "fit", "candidates", f"candidates_{seed}"
+                    ),
+                )
+            )
         metrics = tuple(
             measure(m)
             for m in (training_objective, validation_mse, validation_spearman)
@@ -213,6 +223,9 @@ def run(
                 config=ConvergedFitConfig(
                     **settings["fit"],
                     parent_model_sha256=old["models"]["proposition_final"]["sha256"],
+                    checkpoint_root=str(root),
+                    checkpoint_destination=destination.model_dump(mode="json"),
+                    use_candidate_inputs=bool(candidate_runs),
                     progress_path=str(progress_path),
                     **{
                         f"{s}_sha256": old["splits"][s]["sha256"]

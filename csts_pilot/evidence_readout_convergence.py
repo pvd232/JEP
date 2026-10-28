@@ -19,6 +19,7 @@ from viper.resume import (
 from viper.stages import StageContext, eval, train
 
 from csts_pilot import evidence_readout_progress as progress
+from csts_pilot.checkpoint_cloud import CheckpointCloud
 from csts_pilot.convergence import write_json
 from csts_pilot.evidence_readout import (
     ARMS,
@@ -79,6 +80,10 @@ class ConvergedFitConfig(TrainConfig):
 
     device: Literal["cpu", "cuda"] = "cuda"
     progress_path: str | None = None
+    checkpoint_root: str | None = None
+    checkpoint_destination: dict[str, str] | None = None
+    heads_only: bool = False
+    use_candidate_inputs: bool = False
     seeds: tuple[int, ...] = (7, 8, 9)
     learning_rates: tuple[float, ...] = (0.00001, 0.00003, 0.0001)
     query_dim: int = Field(default=128, ge=1)
@@ -193,6 +198,13 @@ def fit_converged_readouts(context: StageContext[ConvergedFitConfig]) -> None:
     candidates: dict[str, Any] = {}
     traces: dict[str, Any] = {"status": "running", "candidates": {}, "comparisons": {}}
     step = 0
+    cloud = (
+        CheckpointCloud(
+            config.checkpoint_root, config.checkpoint_destination, config.model_dump()
+        )
+        if config.checkpoint_root
+        else None
+    )
 
     def record_epoch(record):
         nonlocal step
@@ -223,8 +235,40 @@ def fit_converged_readouts(context: StageContext[ConvergedFitConfig]) -> None:
                 ),
             ),
         )
+        if cloud is not None:
+            cloud.submit(
+                {"resume.pt": context.outputs["resume_state"]},
+                {
+                    k: current[k]
+                    for k in ("phase", "seed", "learning_rate", "epoch")
+                    if k in current
+                },
+            )
 
-    for rate in sorted(config.learning_rates):
+    if config.use_candidate_inputs:
+        for seed in config.seeds:
+            bundle = load_model(context.inputs[f"candidates_{seed}"])
+            for rate in config.learning_rates:
+                key = str(rate)
+                item = bundle[key][str(seed)]
+                if item["model"]["parent_model_sha256"] != training["model_sha256"]:
+                    raise ValueError(
+                        "Candidate encoder differs from the pinned parent."
+                    )
+                expected = fit_config(config, seed, rate).model_dump()
+                expected.pop("progress_path", None)
+                observed = {
+                    k: v
+                    for k, v in item["model"]["config"].items()
+                    if k != "progress_path"
+                }
+                if observed != expected:
+                    raise ValueError(
+                        "Candidate rows, feature hashes or fitting settings differ."
+                    )
+                candidates.setdefault(key, {})[str(seed)] = item
+                traces["candidates"].setdefault(key, {})[str(seed)] = item["trace"]
+    for rate in () if config.use_candidate_inputs else sorted(config.learning_rates):
         key = str(rate)
         candidates[key], traces["candidates"][key] = {}, {}
         for seed in config.seeds:
@@ -253,12 +297,49 @@ def fit_converged_readouts(context: StageContext[ConvergedFitConfig]) -> None:
             traces["candidates"][key][str(seed)] = trace
             torch.save(candidates, context.outputs["candidates"])
             write_json(context.outputs["trace"], traces)
+            if cloud is not None:
+                cloud.submit(
+                    {
+                        "candidates.pt": context.outputs["candidates"],
+                        "trace.json": context.outputs["trace"],
+                    },
+                    {
+                        "phase": "candidate_complete",
+                        "seed": seed,
+                        "learning_rate": rate,
+                    },
+                )
             progress.append(
                 "candidate_finished",
                 name=f"B/C rate {rate}; epochs {len(trace['epochs'])}; selected {trace['selected_epoch']}",
                 seed=seed,
                 status=trace["stop_reason"],
             )
+    torch.save(candidates, context.outputs["candidates"])
+    if config.heads_only:
+        selection = {
+            "status": "awaiting_global_validation_selection",
+            "seeds": list(config.seeds),
+        }
+        write_json(context.outputs["selection"], selection)
+        traces.update(status="complete", config=config.model_dump())
+        write_json(context.outputs["trace"], traces)
+        write_json(
+            context.outputs["validation_predictions"],
+            {
+                rate: {seed: item["predictions"] for seed, item in group.items()}
+                for rate, group in candidates.items()
+            },
+        )
+        torch.save(
+            {"head_candidates": True, "selection": selection}, context.outputs["model"]
+        )
+        if cloud is not None:
+            cloud.finish()
+        progress.append(
+            "head_grid_complete", name="Candidate grid published", status="succeeded"
+        )
+        return
     selection = select_rates(candidates, config.seeds)
     write_json(context.outputs["selection"], selection)
     progress.append("rates_selected", name=str(selection))
@@ -288,6 +369,9 @@ def fit_converged_readouts(context: StageContext[ConvergedFitConfig]) -> None:
             comparison_config,
             record_epoch,
             include_parent=True,
+            on_checkpoint=lambda current, seed=seed: checkpoint(
+                {**current, "seed": seed, "phase": "comparison"}
+            ),
         )
         if trace["budget_censored"]:
             raise ValueError(
@@ -327,6 +411,21 @@ def fit_converged_readouts(context: StageContext[ConvergedFitConfig]) -> None:
             "comparisons": comparison_terminal,
         }
     )
+    if cloud is not None:
+        cloud.submit(
+            {
+                name: context.outputs[name]
+                for name in (
+                    "model",
+                    "candidates",
+                    "selection",
+                    "trace",
+                    "validation_predictions",
+                )
+            },
+            {"phase": "complete"},
+        )
+        cloud.finish()
     progress.append(
         "fitting_complete",
         name="Learning rates and all checkpoints selected using validation",

@@ -1,5 +1,7 @@
 # Review of convergence fitting and comparisons
 
+Recovery adds one seed per GPU, combines all nine candidates for the original global selection, and publishes fitting checkpoints each epoch through the existing VIPER API. The first snapshot requires a matching Cloud restore before continuing. Two focused tests passed for immutable checkpoint bytes during a delayed upload and for stopping continuation when the first publication fails. Ruff and syntax checks passed. Live publication and fitting checks are recorded in the recovery stream.
+
 The implementation uses the existing B/C architecture. Training and validation features are rebuilt from the pinned model and input files, recovered through sealed VIPER Cloud references. The search fits three learning rates across three head seeds. It selects one rate per objective using mean validation Spearman. D/E then receive the selected, frozen B/C vectors. A third comparison function receives A's final vectors.
 
 The review checked that the fitting worker receives training and validation inputs, all candidates cover the same seeds, tie handling is deterministic and any candidate reaching its epoch ceiling blocks selection. Initialization is eligible. Each epoch saves current and selected weights, optimizer state and the batch generator. Completed candidates retain their terminal states. Comparison fitting verifies that B/C weights stay fixed and receive zero gradients. A's additional comparison begins at its exact cosine score.
