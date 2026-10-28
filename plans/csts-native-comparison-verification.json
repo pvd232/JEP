@@ -6,7 +6,7 @@
       "display": 13,
       "inline": 48,
       "relative_links": 23,
-      "source_sha256": "de1acfaf64c20cb870bef7577a6285db55f6653a01739e6b8c76d4778713d4af"
+      "source_sha256": "1198957dc39d95dab96430de842f0d25ccb8ab7a5d598ab807b2834a9260ac7d"
     },
     "plans/csts-readout-convergence-methods.md": {
       "display": 1,
@@ -18,7 +18,7 @@
       "display": 0,
       "inline": 0,
       "relative_links": 8,
-      "source_sha256": "12c6ba7f76b40b96df4c2e67362198feea9c14a6331864ba82c7188ea7955968"
+      "source_sha256": "8113666ec25913598d2d7dad80af1e677636f66a7ef6a0b92ea07440dd6b5653"
     }
   },
   "errors": [],
@@ -121,5 +121,11 @@
       "tests/test_native_publication_handoff.py": "44ba0e7b6073538c16e17e57bf2f5a38aee42aae346bc182dcb5cc2817a7b654"
     },
     "existing_fits": "Original immutable fitting code; completed local native outputs feed a separate scoring process while native publication continues."
+  },
+  "snapshot_scoring": {
+    "source_sha256": "c59fb0a44c2bd9e32a7e2db8db11aa7ee23b7faa8c8ca08fbc69830777dcd68c",
+    "ruff": "passed",
+    "python_syntax": "passed",
+    "native_prediction_function": "Original capture_native_comparison; inference from the selected saved bytes."
   }
 }

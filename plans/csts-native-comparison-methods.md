@@ -196,3 +196,7 @@ The A100 high memory allocation is attempted first, with assigned VRAM verified 
 - Hu et al.: [LoRA: Low Rank Adaptation of Large Language Models](https://arxiv.org/pdf/2106.09685), Section 4.1, 2021, for the adapter parameterization.
 - Loshchilov and Hutter: [Decoupled Weight Decay Regularization](https://arxiv.org/pdf/1711.05101), Section 2 and Algorithm 2, ICLR 2019, for AdamW.
 - PyTorch: [AdamW, version 2.14](https://docs.pytorch.org/docs/2.14/generated/torch.optim.AdamW.html), optimizer update and parameter group definitions.
+
+## Training budget amendment on October 28
+
+The user requested immediate inference from the existing validation checkpoints after seed 8 test results were available. Seed 7 retains its epoch 4 selection from the sealed epoch 11 snapshot. Seed 9 retains its epoch 4 selection from the sealed epoch 8 snapshot. Training stops at this request and each selected model receives test and fixed edit inference. Seed 8 completed the original patience rule. The report records this timing and the observed training budgets for all three seeds. The selected states continue to use validation Spearman.
