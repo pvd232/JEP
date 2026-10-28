@@ -14,6 +14,13 @@ spec = importlib.util.spec_from_file_location(
 finalization = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(finalization)
 
+completed_spec = importlib.util.spec_from_file_location(
+    "completed_native_scoring",
+    Path(__file__).parents[1] / "scripts/score_completed_csts_native.py",
+)
+completed = importlib.util.module_from_spec(completed_spec)
+completed_spec.loader.exec_module(completed)
+
 
 def rows():
     return [
@@ -56,3 +63,32 @@ def test_source_group_bootstrap_identity_and_seed_variation():
     assert result["seed_difference_sample_std"] == 0
     assert result["group_bootstrap_95"]["low"] == 0
     assert result["group_bootstrap_95"]["high"] == 0
+
+
+def test_completed_score_freezes_the_model_and_remaining_protocol():
+    selected = {"sha256": "a" * 64, "epoch": 3}
+    fitted = {
+        "status": "succeeded",
+        "cloud_status": "published",
+        "selected": selected,
+        "seed": 8,
+        "source_commit": "b" * 40,
+    }
+    trace = {"selected": selected, "budget_censored": False}
+    protocol = {"settings_sha256": "c" * 64, "executed_seeds": [7, 8, 9]}
+    frozen = completed.frozen_selection(fitted, trace, "c" * 64, protocol)
+    assert frozen["selected_model_sha256"] == {"8": "a" * 64}
+    assert frozen["executed_seeds"] == [7, 8, 9]
+    for changed in (
+        {"status": "running"},
+        {"cloud_status": "pending"},
+        {"seed": 99},
+    ):
+        with pytest.raises(ValueError):
+            completed.frozen_selection({**fitted, **changed}, trace, "c" * 64, protocol)
+    with pytest.raises(ValueError):
+        completed.frozen_selection(
+            fitted, {**trace, "budget_censored": True}, "c" * 64, protocol
+        )
+    with pytest.raises(ValueError):
+        completed.frozen_selection(fitted, trace, "d" * 64, protocol)
