@@ -1,0 +1,231 @@
+{
+  "bootstrap": {
+    "comparisons": {
+      "json_minus_gpt_direct": {
+        "mse_0_1": {
+          "defined_draws": 2000,
+          "difference": -0.0008425856194769245,
+          "interval": [
+            -0.012192093309438422,
+            0.009549369693725827
+          ]
+        },
+        "role": "reference",
+        "spearman": {
+          "defined_draws": 2000,
+          "difference": -0.004848664454885632,
+          "interval": [
+            -0.0471096390681893,
+            0.0388911487784071
+          ]
+        }
+      },
+      "json_minus_propositions": {
+        "mse_0_1": {
+          "defined_draws": 2000,
+          "difference": 0.0030838162526166807,
+          "interval": [
+            -0.0023335678935860627,
+            0.008571888173994738
+          ]
+        },
+        "role": "primary",
+        "spearman": {
+          "defined_draws": 2000,
+          "difference": -0.01070812214308281,
+          "interval": [
+            -0.03328723357735492,
+            0.009871766924411357
+          ]
+        }
+      },
+      "propositions_minus_gpt_direct": {
+        "mse_0_1": {
+          "defined_draws": 2000,
+          "difference": -0.003926401872093605,
+          "interval": [
+            -0.015018135144656235,
+            0.005831683962547647
+          ]
+        },
+        "role": "reference",
+        "spearman": {
+          "defined_draws": 2000,
+          "difference": 0.005859457688197178,
+          "interval": [
+            -0.033807587800941154,
+            0.049598192891071965
+          ]
+        }
+      },
+      "propositions_minus_raw": {
+        "mse_0_1": {
+          "defined_draws": 2000,
+          "difference": 0.0027401868373297077,
+          "interval": [
+            -0.0019700391057456902,
+            0.00827177970158014
+          ]
+        },
+        "role": "reference",
+        "spearman": {
+          "defined_draws": 2000,
+          "difference": -0.003317317403544906,
+          "interval": [
+            -0.023967283606870043,
+            0.014966030091136633
+          ]
+        }
+      },
+      "python_minus_gpt_direct": {
+        "mse_0_1": {
+          "defined_draws": 2000,
+          "difference": 0.000751665664393341,
+          "interval": [
+            -0.011070320936538708,
+            0.01140965170110889
+          ]
+        },
+        "role": "reference",
+        "spearman": {
+          "defined_draws": 2000,
+          "difference": -0.012301377377339273,
+          "interval": [
+            -0.05726509626908552,
+            0.03464290306230619
+          ]
+        }
+      },
+      "python_minus_json": {
+        "mse_0_1": {
+          "defined_draws": 2000,
+          "difference": 0.0015942512838702655,
+          "interval": [
+            -0.00271565954943444,
+            0.007549744880056198
+          ]
+        },
+        "role": "primary",
+        "spearman": {
+          "defined_draws": 2000,
+          "difference": -0.0074527129224536415,
+          "interval": [
+            -0.026097898578918095,
+            0.007154808941651496
+          ]
+        }
+      },
+      "python_minus_propositions": {
+        "mse_0_1": {
+          "defined_draws": 2000,
+          "difference": 0.004678067536486946,
+          "interval": [
+            -0.00029446924064475635,
+            0.009996949340430723
+          ]
+        },
+        "role": "primary",
+        "spearman": {
+          "defined_draws": 2000,
+          "difference": -0.01816083506553645,
+          "interval": [
+            -0.042568741670441536,
+            0.002453617872487304
+          ]
+        }
+      },
+      "raw_minus_gpt_direct": {
+        "mse_0_1": {
+          "defined_draws": 2000,
+          "difference": -0.006666588709423313,
+          "interval": [
+            -0.01902285118227127,
+            0.003868339200045719
+          ]
+        },
+        "role": "reference",
+        "spearman": {
+          "defined_draws": 2000,
+          "difference": 0.009176775091742084,
+          "interval": [
+            -0.034747842417651956,
+            0.05796627683554888
+          ]
+        }
+      }
+    },
+    "draws": 2000,
+    "interval": "paired percentile 95%",
+    "seed": 42,
+    "unit": "connected_source_component"
+  },
+  "fallback": {
+    "json": {
+      "pairs_with_any": 18,
+      "pairs_with_both": 7,
+      "pairs_with_one": 11,
+      "reason_counts": {
+        "ambiguous": 3,
+        "failure:unresolved_entity_reference": 1,
+        "not_specified": 21
+      },
+      "side_occurrences": 25
+    },
+    "propositions": {
+      "pairs_with_any": 15,
+      "pairs_with_both": 6,
+      "pairs_with_one": 9,
+      "reason_counts": {
+        "ambiguous": 2,
+        "not_specified": 19
+      },
+      "side_occurrences": 21
+    },
+    "python": {
+      "pairs_with_any": 23,
+      "pairs_with_both": 7,
+      "pairs_with_one": 16,
+      "reason_counts": {
+        "ambiguous": 4,
+        "failure:unresolved_entity_reference": 4,
+        "not_specified": 22
+      },
+      "side_occurrences": 30
+    }
+  },
+  "groups": 110,
+  "metrics": {
+    "gpt_direct": {
+      "mse_0_1": 0.029848958333333335,
+      "mse_1_5": 0.47758333333333336,
+      "n": 120,
+      "spearman": 0.8863650783239838
+    },
+    "json": {
+      "mse_0_1": 0.02900637271385641,
+      "mse_1_5": 0.46410196342170257,
+      "n": 120,
+      "spearman": 0.8815164138690982
+    },
+    "propositions": {
+      "mse_0_1": 0.02592255646123973,
+      "mse_1_5": 0.4147609033798357,
+      "n": 120,
+      "spearman": 0.892224536012181
+    },
+    "python": {
+      "mse_0_1": 0.030600623997726676,
+      "mse_1_5": 0.4896099839636268,
+      "n": 120,
+      "spearman": 0.8740637009466445
+    },
+    "raw": {
+      "mse_0_1": 0.023182369623910022,
+      "mse_1_5": 0.37091791398256035,
+      "n": 120,
+      "spearman": 0.8955418534157259
+    }
+  },
+  "mse_policy": "Unclipped cosine against (rating-1)/4; no fitted calibration.",
+  "n": 120
+}

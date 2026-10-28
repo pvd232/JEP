@@ -1,0 +1,30 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "pip",
+    "uninstall",
+    "-y",
+    "torchao"
+  ],
+  "failed_v1_receipt_sha256": "3226ab1e5e6981f4cf76b310f21d64b2a3f3ce25c2ae4b21266815ed514ee299",
+  "preflight_returncode": 0,
+  "reason": "Unused optional torchao0.10.0 rejected by PEFT0.21.2 before first scoring batch; declared model uses plain BF16 LoRA, no quantization.",
+  "returncode": 0,
+  "started_unix": 1793203511.4254868,
+  "status": "passed",
+  "torchao_after": null,
+  "versions_after": {
+    "numpy": "2.1.3",
+    "peft": "0.21.2",
+    "torch": "2.11.0+cu130",
+    "transformers": "5.20.2"
+  },
+  "versions_before": {
+    "numpy": "2.1.3",
+    "peft": "0.21.2",
+    "torch": "2.11.0+cu130",
+    "torchao": "0.10.0",
+    "transformers": "5.20.2"
+  }
+}

@@ -1,0 +1,258 @@
+{
+  "checkpoint_sha256": "d30c00fc76e70ec639493b7121a8b8c9d7520745733857c1c49f0902fff00f4f",
+  "comparisons": {
+    "json_minus_gpt_direct": {
+      "mse_0_1": {
+        "defined_draws": 2000,
+        "difference": -0.000842585619476928,
+        "interval": [
+          -0.012192093309438422,
+          0.00954936969372582
+        ]
+      },
+      "spearman": {
+        "defined_draws": 2000,
+        "difference": -0.004848664454885632,
+        "interval": [
+          -0.04710963906818941,
+          0.038891148778407214
+        ]
+      }
+    },
+    "json_minus_propositions": {
+      "mse_0_1": {
+        "defined_draws": 2000,
+        "difference": 0.0030838162526166772,
+        "interval": [
+          -0.0023335678935860627,
+          0.008571888173994738
+        ]
+      },
+      "spearman": {
+        "defined_draws": 2000,
+        "difference": -0.010708122143082921,
+        "interval": [
+          -0.03328723357735492,
+          0.009871766924411357
+        ]
+      }
+    },
+    "propositions_minus_gpt_direct": {
+      "mse_0_1": {
+        "defined_draws": 2000,
+        "difference": -0.003926401872093605,
+        "interval": [
+          -0.015018135144656235,
+          0.00583168396254764
+        ]
+      },
+      "spearman": {
+        "defined_draws": 2000,
+        "difference": 0.005859457688197289,
+        "interval": [
+          -0.03380758780094126,
+          0.04959819289107174
+        ]
+      }
+    },
+    "propositions_minus_raw": {
+      "mse_0_1": {
+        "defined_draws": 2000,
+        "difference": 0.0027401868373297077,
+        "interval": [
+          -0.0019700391057456907,
+          0.008271779701580141
+        ]
+      },
+      "spearman": {
+        "defined_draws": 2000,
+        "difference": -0.003317317403544684,
+        "interval": [
+          -0.023967283606870154,
+          0.01496603009113663
+        ]
+      }
+    },
+    "python_minus_gpt_direct": {
+      "mse_0_1": {
+        "defined_draws": 2000,
+        "difference": 0.000751665664393341,
+        "interval": [
+          -0.011070320936538711,
+          0.011409651701108886
+        ]
+      },
+      "spearman": {
+        "defined_draws": 2000,
+        "difference": -0.012301377377339273,
+        "interval": [
+          -0.05726509626908563,
+          0.0346429030623064
+        ]
+      }
+    },
+    "python_minus_json": {
+      "mse_0_1": {
+        "defined_draws": 2000,
+        "difference": 0.001594251283870269,
+        "interval": [
+          -0.00271565954943444,
+          0.007549744880056198
+        ]
+      },
+      "spearman": {
+        "defined_draws": 2000,
+        "difference": -0.0074527129224536415,
+        "interval": [
+          -0.026097898578918095,
+          0.007154808941651599
+        ]
+      }
+    },
+    "python_minus_propositions": {
+      "mse_0_1": {
+        "defined_draws": 2000,
+        "difference": 0.004678067536486946,
+        "interval": [
+          -0.0002944692406447597,
+          0.009996949340430723
+        ]
+      },
+      "spearman": {
+        "defined_draws": 2000,
+        "difference": -0.018160835065536562,
+        "interval": [
+          -0.04256874167044143,
+          0.0024536178724875206
+        ]
+      }
+    },
+    "raw_minus_gpt_direct": {
+      "mse_0_1": {
+        "defined_draws": 2000,
+        "difference": -0.006666588709423313,
+        "interval": [
+          -0.019022851182271268,
+          0.0038683392000457154
+        ]
+      },
+      "spearman": {
+        "defined_draws": 2000,
+        "difference": 0.009176775091741973,
+        "interval": [
+          -0.03474784241765207,
+          0.05796627683554888
+        ]
+      }
+    }
+  },
+  "fallback": {
+    "json": {
+      "pairs_with_any": 18,
+      "pairs_with_both": 7,
+      "pairs_with_one": 11,
+      "reason_counts": {
+        "ambiguous": 3,
+        "failure:unresolved_entity_reference": 1,
+        "not_specified": 21
+      },
+      "side_occurrences": 25
+    },
+    "propositions": {
+      "pairs_with_any": 15,
+      "pairs_with_both": 6,
+      "pairs_with_one": 9,
+      "reason_counts": {
+        "ambiguous": 2,
+        "not_specified": 19
+      },
+      "side_occurrences": 21
+    },
+    "python": {
+      "pairs_with_any": 23,
+      "pairs_with_both": 7,
+      "pairs_with_one": 16,
+      "reason_counts": {
+        "ambiguous": 4,
+        "failure:unresolved_entity_reference": 4,
+        "not_specified": 22
+      },
+      "side_occurrences": 30
+    }
+  },
+  "groups": 110,
+  "limits": [
+    "Conditional on frozen generations; shared batch-context variation excluded.",
+    "Previously exposed validation set; no teacher retraining or semantic fidelity measurement."
+  ],
+  "metrics": {
+    "gpt_direct": {
+      "mse_0_1": 0.029848958333333335,
+      "mse_1_5": 0.47758333333333336,
+      "n": 120,
+      "spearman": 0.8863650783239839
+    },
+    "json": {
+      "mse_0_1": 0.029006372713856407,
+      "mse_1_5": 0.4641019634217025,
+      "n": 120,
+      "spearman": 0.8815164138690983
+    },
+    "propositions": {
+      "mse_0_1": 0.02592255646123973,
+      "mse_1_5": 0.4147609033798357,
+      "n": 120,
+      "spearman": 0.8922245360121812
+    },
+    "python": {
+      "mse_0_1": 0.030600623997726676,
+      "mse_1_5": 0.4896099839636268,
+      "n": 120,
+      "spearman": 0.8740637009466447
+    },
+    "raw": {
+      "mse_0_1": 0.023182369623910022,
+      "mse_1_5": 0.37091791398256035,
+      "n": 120,
+      "spearman": 0.8955418534157259
+    }
+  },
+  "n": 120,
+  "receipt_sha256": "e66a1563781eefece55f58428a438d6329e7adf1ae33ae297b46cb265e515f50",
+  "source_fallbacks": {
+    "json": {
+      "ambiguous": 3,
+      "failure:unresolved_entity_reference": 1,
+      "not_specified": 21
+    },
+    "propositions": {
+      "ambiguous": 2,
+      "not_specified": 19
+    },
+    "python": {
+      "ambiguous": 4,
+      "failure:unresolved_entity_reference": 4,
+      "not_specified": 22
+    }
+  },
+  "sources": 239,
+  "status": "verified",
+  "vectors": {
+    "json": {
+      "max_cosine_absolute_error": 6.231481708418585e-08,
+      "max_unit_norm_error": 1.1920928955078125e-07
+    },
+    "propositions": {
+      "max_cosine_absolute_error": 9.006304613201621e-08,
+      "max_unit_norm_error": 1.1920928955078125e-07
+    },
+    "python": {
+      "max_cosine_absolute_error": 7.642125954276935e-08,
+      "max_unit_norm_error": 5.960464477539063e-08
+    },
+    "raw": {
+      "max_cosine_absolute_error": 7.862837780869825e-08,
+      "max_unit_norm_error": 1.1920928955078125e-07
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "command": [
+    "/Library/Frameworks/Python.framework/Versions/3.14/bin/python3",
+    "/tmp/jep-gpt-format-batches-20261028-v1/capture_batches.py",
+    "--root",
+    "/tmp/jep-gpt-format-batches-20261028-v1",
+    "--cli",
+    "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex",
+    "--ca-file",
+    "/tmp/jep-gpt-format-batches-20261028-v1/operator/verified-ca.pem",
+    "--ca-proof",
+    "/tmp/jep-gpt-format-batches-20261028-v1/operator/ca-proof.json",
+    "--workers",
+    "8",
+    "--publication-hook",
+    "/tmp/jep-viper-format-durability-20261028/batch_publication.py",
+    "--execute",
+    "--seal",
+    "/tmp/jep-gpt-format-batches-20261028-v1/operator/ramp8/runtime_seal.worker8.json"
+  ],
+  "generation_code_sha256": "aff2dbe57c893157697c0e7f221cc5630cde0b53d0401f7a3160ddff811f903d",
+  "new_pid": 1210,
+  "new_runtime_seal_sha256": "bb8345c79c460fb8833fe0ba290ec0a3a7f9d3d3e121de16b53a780b6770780b",
+  "no_source_response_retries": true,
+  "original_scientific_protocol_sha256": "bbcc27cd1ab9cd821c76d20bbae297f945a9d3c4d273162f34ec58e585506f56",
+  "previous_closed_jobs": 18,
+  "publication_asynchronous": true,
+  "started_unix": 1793201897.771255,
+  "status": "resumed_eight_workers",
+  "workers_total": 8
+}
