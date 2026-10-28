@@ -1,0 +1,576 @@
+{
+  "audit_model_calls": 0,
+  "results": {
+    "knowcoder": {
+      "archive": "/tmp/jep-count-evidence-v1-knowcoder-execution-20261028.tar.gz",
+      "sha256": "92ec727c2c1dc712032c01112689806c4367405271b9d4e36d30f8c6606ad30f",
+      "bytes": 1638607,
+      "files": 97,
+      "index_entries": 15,
+      "all_index_hashes_verified": true,
+      "summary": {
+        "cost_gain_claimed": false,
+        "count_accuracy_evaluated": false,
+        "count_repair_claimed": false,
+        "evidence_sufficiency": "unreviewed",
+        "failed_sources": 0,
+        "model_calls": 6,
+        "parsed_sources": 6,
+        "phase": "exposed_six",
+        "planned_sources": 6,
+        "scene_count_reasoning": "deferred_downstream"
+      },
+      "rows": [
+        {
+          "id": "0a7d36e084bd22ea9dc3c763c84b3c2bbbc7e37f7876d3971665079e307a0a9e",
+          "source": {
+            "condition": "number of people",
+            "id": "0a7d36e084bd22ea9dc3c763c84b3c2bbbc7e37f7876d3971665079e307a0a9e",
+            "passage": "Three people look up at a man on a ladder against a brick wall ."
+          },
+          "runtime_status": "ok",
+          "raw_output": " results = [\n\tCountEvidence(\"Three people\"),\n\tCountEvidence(\"a man\")\n]",
+          "quotes": [
+            "Three people",
+            "a man"
+          ],
+          "parse_valid": true,
+          "truncated": false,
+          "error": "",
+          "parser_record": {
+            "ambiguity_origins": [],
+            "candidate_grounding_status": "unique_exact_occurrences",
+            "condition": "number of people",
+            "model": "knowcoder",
+            "numeric_count_interpreted": false,
+            "parse_status": "accepted",
+            "quotes": [
+              {
+                "grounding_status": "unique",
+                "quote": "Three people",
+                "quote_id": "quote_0001",
+                "span_candidates": [
+                  {
+                    "end": 12,
+                    "start": 0
+                  }
+                ]
+              },
+              {
+                "grounding_status": "unique",
+                "quote": "a man",
+                "quote_id": "quote_0002",
+                "span_candidates": [
+                  {
+                    "end": 29,
+                    "start": 24
+                  }
+                ]
+              }
+            ],
+            "raw_payload": " results = [\n\tCountEvidence(\"Three people\"),\n\tCountEvidence(\"a man\")\n]",
+            "raw_payload_sha256": "71d7f0be89c622981d818d2f0c566db290ac0a0980021ccd5115d0a0f8cb0513",
+            "rejection_reasons": [],
+            "representation": "uninterpreted_count_relevant_source_assertions",
+            "semantic_support_validated": false,
+            "status": "candidate_assertions"
+          },
+          "model_calls": 1
+        },
+        {
+          "id": "11c0d8914453aec9c3b5364f1acb3f28293bdf2f727791568aa72df1f1a2d84e",
+          "source": {
+            "condition": "number of animals",
+            "id": "11c0d8914453aec9c3b5364f1acb3f28293bdf2f727791568aa72df1f1a2d84e",
+            "passage": "Two black dogs run through the snow with a red toy in one dog 's mouth ."
+          },
+          "runtime_status": "ok",
+          "raw_output": " results = [\n\tCountEvidence(\"Two black dogs\")\n]",
+          "quotes": [
+            "Two black dogs"
+          ],
+          "parse_valid": true,
+          "truncated": false,
+          "error": "",
+          "parser_record": {
+            "ambiguity_origins": [],
+            "candidate_grounding_status": "unique_exact_occurrences",
+            "condition": "number of animals",
+            "model": "knowcoder",
+            "numeric_count_interpreted": false,
+            "parse_status": "accepted",
+            "quotes": [
+              {
+                "grounding_status": "unique",
+                "quote": "Two black dogs",
+                "quote_id": "quote_0001",
+                "span_candidates": [
+                  {
+                    "end": 14,
+                    "start": 0
+                  }
+                ]
+              }
+            ],
+            "raw_payload": " results = [\n\tCountEvidence(\"Two black dogs\")\n]",
+            "raw_payload_sha256": "974fbed799b3773bb3b42275098841281478b5fb0ba331fc5f31c551c1db12e6",
+            "rejection_reasons": [],
+            "representation": "uninterpreted_count_relevant_source_assertions",
+            "semantic_support_validated": false,
+            "status": "candidate_assertions"
+          },
+          "model_calls": 1
+        },
+        {
+          "id": "7507127642c646106a0ede6e36b0c349ae5c7ae184fbcc3ceb7fe8cda9a355be",
+          "source": {
+            "condition": "number of people",
+            "id": "7507127642c646106a0ede6e36b0c349ae5c7ae184fbcc3ceb7fe8cda9a355be",
+            "passage": "A number of children enjoy themselves on the coast of a city ."
+          },
+          "runtime_status": "ok",
+          "raw_output": " results = []",
+          "quotes": [],
+          "parse_valid": true,
+          "truncated": false,
+          "error": "",
+          "parser_record": {
+            "ambiguity_origins": [],
+            "candidate_grounding_status": "no_candidate_assertions",
+            "condition": "number of people",
+            "model": "knowcoder",
+            "numeric_count_interpreted": false,
+            "parse_status": "accepted",
+            "quotes": [],
+            "raw_payload": " results = []",
+            "raw_payload_sha256": "fcf9aad201770a7bd5985e760a0e165e10b41866aaf50bfce382b13439be1be8",
+            "rejection_reasons": [],
+            "representation": "uninterpreted_count_relevant_source_assertions",
+            "semantic_support_validated": false,
+            "status": "no_candidate_assertions"
+          },
+          "model_calls": 1
+        },
+        {
+          "id": "b2a6650564ccf6aa6ff9bca716fdbc30fab8a17c2848eb3446547d29ac22eb29",
+          "source": {
+            "condition": "number of animals",
+            "id": "b2a6650564ccf6aa6ff9bca716fdbc30fab8a17c2848eb3446547d29ac22eb29",
+            "passage": "A brown and white greyhound wearing a red number five is caught in midair racing ."
+          },
+          "runtime_status": "ok",
+          "raw_output": " results = [\n\tCountEvidence(\"wearing a red number five\")\n]",
+          "quotes": [
+            "wearing a red number five"
+          ],
+          "parse_valid": true,
+          "truncated": false,
+          "error": "",
+          "parser_record": {
+            "ambiguity_origins": [],
+            "candidate_grounding_status": "unique_exact_occurrences",
+            "condition": "number of animals",
+            "model": "knowcoder",
+            "numeric_count_interpreted": false,
+            "parse_status": "accepted",
+            "quotes": [
+              {
+                "grounding_status": "unique",
+                "quote": "wearing a red number five",
+                "quote_id": "quote_0001",
+                "span_candidates": [
+                  {
+                    "end": 53,
+                    "start": 28
+                  }
+                ]
+              }
+            ],
+            "raw_payload": " results = [\n\tCountEvidence(\"wearing a red number five\")\n]",
+            "raw_payload_sha256": "3ab4d05d4b6b1ec851afb6d78c47140ad170ad614ae638ca36a1de4d0f3250c2",
+            "rejection_reasons": [],
+            "representation": "uninterpreted_count_relevant_source_assertions",
+            "semantic_support_validated": false,
+            "status": "candidate_assertions"
+          },
+          "model_calls": 1
+        },
+        {
+          "id": "3165c2eace681157890fd25ee5c9a441c2dbea2abc7fd49492a56f16f6803670",
+          "source": {
+            "condition": "number of wheels",
+            "id": "3165c2eace681157890fd25ee5c9a441c2dbea2abc7fd49492a56f16f6803670",
+            "passage": "a boy in green jacket is riding a small motocross bike through the mud ."
+          },
+          "runtime_status": "ok",
+          "raw_output": " results = []",
+          "quotes": [],
+          "parse_valid": true,
+          "truncated": false,
+          "error": "",
+          "parser_record": {
+            "ambiguity_origins": [],
+            "candidate_grounding_status": "no_candidate_assertions",
+            "condition": "number of wheels",
+            "model": "knowcoder",
+            "numeric_count_interpreted": false,
+            "parse_status": "accepted",
+            "quotes": [],
+            "raw_payload": " results = []",
+            "raw_payload_sha256": "fcf9aad201770a7bd5985e760a0e165e10b41866aaf50bfce382b13439be1be8",
+            "rejection_reasons": [],
+            "representation": "uninterpreted_count_relevant_source_assertions",
+            "semantic_support_validated": false,
+            "status": "no_candidate_assertions"
+          },
+          "model_calls": 1
+        },
+        {
+          "id": "929a87372d3bad3712d71e2e02cb9751f1f39e266c26222d1f0838ab9a140cd8",
+          "source": {
+            "condition": "number of women",
+            "id": "929a87372d3bad3712d71e2e02cb9751f1f39e266c26222d1f0838ab9a140cd8",
+            "passage": "Two older women with a baby that has a pacifier in its mouth , the baby wears an orange and brown dress ."
+          },
+          "runtime_status": "ok",
+          "raw_output": " results = [\n\tCountEvidence(\"Two older women\"),\n\tCountEvidence(\"a baby\")\n]",
+          "quotes": [
+            "Two older women",
+            "a baby"
+          ],
+          "parse_valid": true,
+          "truncated": false,
+          "error": "",
+          "parser_record": {
+            "ambiguity_origins": [],
+            "candidate_grounding_status": "unique_exact_occurrences",
+            "condition": "number of women",
+            "model": "knowcoder",
+            "numeric_count_interpreted": false,
+            "parse_status": "accepted",
+            "quotes": [
+              {
+                "grounding_status": "unique",
+                "quote": "Two older women",
+                "quote_id": "quote_0001",
+                "span_candidates": [
+                  {
+                    "end": 15,
+                    "start": 0
+                  }
+                ]
+              },
+              {
+                "grounding_status": "unique",
+                "quote": "a baby",
+                "quote_id": "quote_0002",
+                "span_candidates": [
+                  {
+                    "end": 27,
+                    "start": 21
+                  }
+                ]
+              }
+            ],
+            "raw_payload": " results = [\n\tCountEvidence(\"Two older women\"),\n\tCountEvidence(\"a baby\")\n]",
+            "raw_payload_sha256": "332d7e97073b0c27085b50b9a67031bc4cfed81b0bd4dd14fb734ac2affdeb37",
+            "rejection_reasons": [],
+            "representation": "uninterpreted_count_relevant_source_assertions",
+            "semantic_support_validated": false,
+            "status": "candidate_assertions"
+          },
+          "model_calls": 1
+        }
+      ]
+    },
+    "gollie": {
+      "archive": "/tmp/jep-count-evidence-v1-gollie-execution-20261028.tar.gz",
+      "sha256": "119d59f9fe91b6855c1bce386c36c7cd281f4744cd2468df2d5112d5a5d2785e",
+      "bytes": 1616434,
+      "files": 98,
+      "index_entries": 15,
+      "all_index_hashes_verified": true,
+      "summary": {
+        "cost_gain_claimed": false,
+        "count_accuracy_evaluated": false,
+        "count_repair_claimed": false,
+        "evidence_sufficiency": "unreviewed",
+        "failed_sources": 1,
+        "model_calls": 6,
+        "parsed_sources": 5,
+        "phase": "exposed_six",
+        "planned_sources": 6,
+        "scene_count_reasoning": "deferred_downstream"
+      },
+      "rows": [
+        {
+          "id": "0a7d36e084bd22ea9dc3c763c84b3c2bbbc7e37f7876d3971665079e307a0a9e",
+          "source": {
+            "condition": "number of people",
+            "id": "0a7d36e084bd22ea9dc3c763c84b3c2bbbc7e37f7876d3971665079e307a0a9e",
+            "passage": "Three people look up at a man on a ladder against a brick wall ."
+          },
+          "runtime_status": "ok",
+          "raw_output": "[CountEvidence(span=\"Three people\"),CountEvidence(span=\"a man\")]\n",
+          "quotes": [
+            "Three people",
+            "a man"
+          ],
+          "parse_valid": true,
+          "truncated": false,
+          "error": "",
+          "parser_record": {
+            "ambiguity_origins": [],
+            "candidate_grounding_status": "unique_exact_occurrences",
+            "condition": "number of people",
+            "model": "gollie",
+            "numeric_count_interpreted": false,
+            "parse_status": "accepted",
+            "quotes": [
+              {
+                "grounding_status": "unique",
+                "quote": "Three people",
+                "quote_id": "quote_0001",
+                "span_candidates": [
+                  {
+                    "end": 12,
+                    "start": 0
+                  }
+                ]
+              },
+              {
+                "grounding_status": "unique",
+                "quote": "a man",
+                "quote_id": "quote_0002",
+                "span_candidates": [
+                  {
+                    "end": 29,
+                    "start": 24
+                  }
+                ]
+              }
+            ],
+            "raw_payload": "[CountEvidence(span=\"Three people\"),CountEvidence(span=\"a man\")]\n",
+            "raw_payload_sha256": "a56d2c66958d26b11f1c22857988b41d41d018cc0294671b7295e7743443943a",
+            "rejection_reasons": [],
+            "representation": "uninterpreted_count_relevant_source_assertions",
+            "semantic_support_validated": false,
+            "status": "candidate_assertions"
+          },
+          "model_calls": 1
+        },
+        {
+          "id": "11c0d8914453aec9c3b5364f1acb3f28293bdf2f727791568aa72df1f1a2d84e",
+          "source": {
+            "condition": "number of animals",
+            "id": "11c0d8914453aec9c3b5364f1acb3f28293bdf2f727791568aa72df1f1a2d84e",
+            "passage": "Two black dogs run through the snow with a red toy in one dog 's mouth ."
+          },
+          "runtime_status": "ok",
+          "raw_output": "[CountEvidence(span=\"Two black dogs\"),CountEvidence(span=\"one dog\")]\n",
+          "quotes": [
+            "Two black dogs",
+            "one dog"
+          ],
+          "parse_valid": true,
+          "truncated": false,
+          "error": "",
+          "parser_record": {
+            "ambiguity_origins": [],
+            "candidate_grounding_status": "unique_exact_occurrences",
+            "condition": "number of animals",
+            "model": "gollie",
+            "numeric_count_interpreted": false,
+            "parse_status": "accepted",
+            "quotes": [
+              {
+                "grounding_status": "unique",
+                "quote": "Two black dogs",
+                "quote_id": "quote_0001",
+                "span_candidates": [
+                  {
+                    "end": 14,
+                    "start": 0
+                  }
+                ]
+              },
+              {
+                "grounding_status": "unique",
+                "quote": "one dog",
+                "quote_id": "quote_0002",
+                "span_candidates": [
+                  {
+                    "end": 61,
+                    "start": 54
+                  }
+                ]
+              }
+            ],
+            "raw_payload": "[CountEvidence(span=\"Two black dogs\"),CountEvidence(span=\"one dog\")]\n",
+            "raw_payload_sha256": "b944282b50846ce05cc447b07cfec2d21ed9a79df293eae3e331031b666b81eb",
+            "rejection_reasons": [],
+            "representation": "uninterpreted_count_relevant_source_assertions",
+            "semantic_support_validated": false,
+            "status": "candidate_assertions"
+          },
+          "model_calls": 1
+        },
+        {
+          "id": "7507127642c646106a0ede6e36b0c349ae5c7ae184fbcc3ceb7fe8cda9a355be",
+          "source": {
+            "condition": "number of people",
+            "id": "7507127642c646106a0ede6e36b0c349ae5c7ae184fbcc3ceb7fe8cda9a355be",
+            "passage": "A number of children enjoy themselves on the coast of a city ."
+          },
+          "runtime_status": "ok",
+          "raw_output": "[CountEvidence(span=\"number of children\")]\n",
+          "quotes": [
+            "number of children"
+          ],
+          "parse_valid": true,
+          "truncated": false,
+          "error": "",
+          "parser_record": {
+            "ambiguity_origins": [],
+            "candidate_grounding_status": "unique_exact_occurrences",
+            "condition": "number of people",
+            "model": "gollie",
+            "numeric_count_interpreted": false,
+            "parse_status": "accepted",
+            "quotes": [
+              {
+                "grounding_status": "unique",
+                "quote": "number of children",
+                "quote_id": "quote_0001",
+                "span_candidates": [
+                  {
+                    "end": 20,
+                    "start": 2
+                  }
+                ]
+              }
+            ],
+            "raw_payload": "[CountEvidence(span=\"number of children\")]\n",
+            "raw_payload_sha256": "49c8e0b267687b6de16854716504f9f8ca6926cba456ccd34776feaeb82019a2",
+            "rejection_reasons": [],
+            "representation": "uninterpreted_count_relevant_source_assertions",
+            "semantic_support_validated": false,
+            "status": "candidate_assertions"
+          },
+          "model_calls": 1
+        },
+        {
+          "id": "b2a6650564ccf6aa6ff9bca716fdbc30fab8a17c2848eb3446547d29ac22eb29",
+          "source": {
+            "condition": "number of animals",
+            "id": "b2a6650564ccf6aa6ff9bca716fdbc30fab8a17c2848eb3446547d29ac22eb29",
+            "passage": "A brown and white greyhound wearing a red number five is caught in midair racing ."
+          },
+          "runtime_status": "truncated",
+          "raw_output": "[CountEvidence(span=\"A brown and white greyhound\")]\n\n# The following lines describe the task definition\n@dataclass\nclass CountEvidence(Entity):\n    \"\"\"An exact quoted source assertion or noun phrase relevant to number of animals. Target: animals, including species terms. This object preserves source wording, including denial; it does not assert positive entity presence or a computed count.\"\"\"\n    span: str\n\n# Quote the smallest exact source noun phrase or clause needed as count evidence. Preserve every relevant cardinal or vague quantity, article, denial, uncertainty, subset, inclusion, distinctness and repeated-reference cue. Keep a longer clause when needed to preserve attachment, scope or how mentions relate; isolated noun phrases must not lose watching-versus-including meaning. Exclude irrelevant identifier numbers and background clauses. Do not infer unmentioned parts or people. Do not return totals, paraphrases, numeric interpretations, identity links or positive-presence facts. Return [] only when no evidence about the requested target is stated. Never copy the whole caption by default.\n# This is the text to analyze\ntext = \"A brown and white greyhound wearing a red number five is caught in midair racing .\"\n\n# The annotation instances that take place in the text above are listed here\nresult = [CountEvidence(span=\"A brown and white greyhound\")]\n\n# The following lines describe the task definition\n@dataclass\nclass CountEvidence(Entity):\n    \"\"\"An exact quoted source assertion or noun phrase relevant to number of animals. Target: animals, including species terms. This object preserves source wording, including denial; it does not assert positive entity presence or a computed count.\"\"\"\n    span: str\n\n# Quote the smallest exact source noun phrase or clause needed as count evidence. Preserve every relevant cardinal or vague quantity, article, denial, uncertainty, subset, inclusion, distinctness and repeated-reference cue. Keep a longer clause when needed to preserve attachment, scope or how mentions relate; isolated noun phrases must not lose watching-versus-including meaning. Exclude irrelevant identifier numbers and background clauses. Do not infer unmentioned parts or people. Do not return totals, paraphrases, numeric interpretations, identity links or positive-presence facts",
+          "quotes": [],
+          "parse_valid": false,
+          "truncated": true,
+          "error": "Native output budget exhausted",
+          "parser_record": null,
+          "model_calls": 1
+        },
+        {
+          "id": "3165c2eace681157890fd25ee5c9a441c2dbea2abc7fd49492a56f16f6803670",
+          "source": {
+            "condition": "number of wheels",
+            "id": "3165c2eace681157890fd25ee5c9a441c2dbea2abc7fd49492a56f16f6803670",
+            "passage": "a boy in green jacket is riding a small motocross bike through the mud ."
+          },
+          "runtime_status": "ok",
+          "raw_output": "[]\n",
+          "quotes": [],
+          "parse_valid": true,
+          "truncated": false,
+          "error": "",
+          "parser_record": {
+            "ambiguity_origins": [],
+            "candidate_grounding_status": "no_candidate_assertions",
+            "condition": "number of wheels",
+            "model": "gollie",
+            "numeric_count_interpreted": false,
+            "parse_status": "accepted",
+            "quotes": [],
+            "raw_payload": "[]\n",
+            "raw_payload_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+            "rejection_reasons": [],
+            "representation": "uninterpreted_count_relevant_source_assertions",
+            "semantic_support_validated": false,
+            "status": "no_candidate_assertions"
+          },
+          "model_calls": 1
+        },
+        {
+          "id": "929a87372d3bad3712d71e2e02cb9751f1f39e266c26222d1f0838ab9a140cd8",
+          "source": {
+            "condition": "number of women",
+            "id": "929a87372d3bad3712d71e2e02cb9751f1f39e266c26222d1f0838ab9a140cd8",
+            "passage": "Two older women with a baby that has a pacifier in its mouth , the baby wears an orange and brown dress ."
+          },
+          "runtime_status": "ok",
+          "raw_output": "[CountEvidence(span=\"Two older women\"),CountEvidence(span=\"baby\")]\n",
+          "quotes": [
+            "Two older women",
+            "baby"
+          ],
+          "parse_valid": true,
+          "truncated": false,
+          "error": "",
+          "parser_record": {
+            "ambiguity_origins": [
+              {
+                "origin": "multiple_exact_source_occurrences",
+                "quote_id": "quote_0002"
+              }
+            ],
+            "candidate_grounding_status": "multiple_exact_occurrences",
+            "condition": "number of women",
+            "model": "gollie",
+            "numeric_count_interpreted": false,
+            "parse_status": "accepted",
+            "quotes": [
+              {
+                "grounding_status": "unique",
+                "quote": "Two older women",
+                "quote_id": "quote_0001",
+                "span_candidates": [
+                  {
+                    "end": 15,
+                    "start": 0
+                  }
+                ]
+              },
+              {
+                "grounding_status": "ambiguous",
+                "quote": "baby",
+                "quote_id": "quote_0002",
+                "span_candidates": [
+                  {
+                    "end": 27,
+                    "start": 23
+                  },
+                  {
+                    "end": 71,
+                    "start": 67
+                  }
+                ]
+              }
+            ],
+            "raw_payload": "[CountEvidence(span=\"Two older women\"),CountEvidence(span=\"baby\")]\n",
+            "raw_payload_sha256": "f9f1eb127d0dfc00bec37901199768ffe9ee47980d4b4067906cbcfdd582a127",
+            "rejection_reasons": [],
+            "representation": "uninterpreted_count_relevant_source_assertions",
+            "semantic_support_validated": false,
+            "status": "ambiguous_candidate_grounding"
+          },
+          "model_calls": 1
+        }
+      ]
+    }
+  }
+}

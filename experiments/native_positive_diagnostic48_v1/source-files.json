@@ -1,0 +1,51 @@
+{
+  "kind": "Byte-identical source inspection subset; execute the complete frozen provider archive",
+  "provider_archive_sha256": "ea06d13eadaaa7127d7a0555de689a107c05018eaaa9b942d8c9e2ce2faea6bd",
+  "files": [
+    {
+      "file": "build_protocol.py",
+      "sha256": "a9202bbaa1ee6997cd4a0c0667ecbbe16b9bf3deb02e7b0df2551f47b1f5d6e5"
+    },
+    {
+      "file": "driver_runtime_shim.py",
+      "sha256": "49deab6692f62ac9f0b5eea8a9d2ce0022806ba4f567385f5acf6f7f154e50fd"
+    },
+    {
+      "file": "evaluate_native.py",
+      "sha256": "3f1d1e2e898f426bf4019ea2e476dd0315b3751bf1129380aba767297e25dd89"
+    },
+    {
+      "file": "gollie_backend_support.py",
+      "sha256": "4307e70c583529af74ec25a7e031af545fd42c40e6a0ff602e5850f8e001bf3d"
+    },
+    {
+      "file": "gollie_pinned/modeling_flash_llama.py",
+      "sha256": "39ed69a0a8f40344981ba6c142074ea315769a770d959ef214aab41d181a6dbd"
+    },
+    {
+      "file": "legacy_support/modern_parser_support.py",
+      "sha256": "18e99e74822f7ac802e2663594e01db49df2285f94b5f7bc609a701df0fb450b"
+    },
+    {
+      "file": "legacy_support/run_legacy.py",
+      "sha256": "fd1747e4dd44049451de1f3a5ab75d714026cd9666c1b13952aa870f65b3b2aa"
+    },
+    {
+      "file": "native_capture.py",
+      "sha256": "5b465a5799cf39cde9947bfec781a5e901183711a76dfa1e29743427e194eaff"
+    },
+    {
+      "file": "native_capture_backends.py",
+      "sha256": "0ee44e417a3976a10037e9ed6d8e5336788572713b3a272f388c70f97f386e07"
+    },
+    {
+      "file": "native_cpu_codec.py",
+      "sha256": "ccaab11b51195cc3da1f957100eadd2c6678cee4ecbd4b4b4d03ac47dacd017b"
+    },
+    {
+      "file": "seal_support.py",
+      "sha256": "14e138c403595f0754186e7cdd526a522afeeea26012114f6a3ae373c8107b18"
+    }
+  ],
+  "inspection_scope": "Runtime Python only; executed provider tests remain in immutable archive to avoid accidental test collection from this incomplete inspection subset"
+}

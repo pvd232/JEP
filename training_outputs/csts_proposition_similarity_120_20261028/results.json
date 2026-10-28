@@ -1,0 +1,112 @@
+{
+  "answered_pairs_only": {
+    "metrics": {
+      "gpt_direct": {
+        "mse_0_1": 0.027818287037037037,
+        "mse_1_5": 0.4450925925925926,
+        "n": 108,
+        "spearman": 0.9005084799554064
+      },
+      "propositions_with_fallback": {
+        "mse_0_1": 0.13001538706212315,
+        "mse_1_5": 2.0802461929939704,
+        "n": 108,
+        "spearman": 0.6132119507407735
+      },
+      "raw": {
+        "mse_0_1": 0.14983049946745036,
+        "mse_1_5": 2.397287991479206,
+        "n": 108,
+        "spearman": 0.3892225758350132
+      }
+    },
+    "n": 108,
+    "role": "status-defined descriptive sensitivity; no fidelity-judge filtering"
+  },
+  "bootstrap": {
+    "comparisons": {
+      "propositions_minus_gpt_direct": {
+        "mse_0_1": {
+          "defined_draws": 2000,
+          "difference": 0.10228576061504582,
+          "interval": [
+            0.07314656310830704,
+            0.13046453918156303
+          ]
+        },
+        "spearman": {
+          "defined_draws": 2000,
+          "difference": -0.30280859322405485,
+          "interval": [
+            -0.41983020027831147,
+            -0.19582562529500022
+          ]
+        }
+      },
+      "propositions_minus_raw": {
+        "mse_0_1": {
+          "defined_draws": 2000,
+          "difference": -0.017833601164794488,
+          "interval": [
+            -0.031854988099533854,
+            -0.005947780237740945
+          ]
+        },
+        "spearman": {
+          "defined_draws": 2000,
+          "difference": 0.2156986509100805,
+          "interval": [
+            0.06765352772896509,
+            0.3700928458033295
+          ]
+        }
+      },
+      "raw_minus_gpt_direct": {
+        "mse_0_1": {
+          "defined_draws": 2000,
+          "difference": 0.12011936177984031,
+          "interval": [
+            0.08628443431682792,
+            0.15452067051290772
+          ]
+        },
+        "spearman": {
+          "defined_draws": 2000,
+          "difference": -0.5185072441341354,
+          "interval": [
+            -0.6724911493268708,
+            -0.3661103813545016
+          ]
+        }
+      }
+    },
+    "draws": 2000,
+    "interval": "paired percentile 95%",
+    "seed": 42,
+    "unit": "connected_source_component"
+  },
+  "fallback_pairs": 12,
+  "groups": 110,
+  "metrics": {
+    "gpt_direct": {
+      "mse_0_1": 0.029848958333333335,
+      "mse_1_5": 0.47758333333333336,
+      "n": 120,
+      "spearman": 0.8863650783239838
+    },
+    "propositions_with_fallback": {
+      "mse_0_1": 0.13213471894837917,
+      "mse_1_5": 2.1141555031740666,
+      "n": 120,
+      "spearman": 0.583556485099929
+    },
+    "raw": {
+      "mse_0_1": 0.14996832011317365,
+      "mse_1_5": 2.3994931218107785,
+      "n": 120,
+      "spearman": 0.36785783418984846
+    }
+  },
+  "mse_policy": "Unclipped cosine against (rating-1)/4; no fitted calibration.",
+  "n": 120
+}

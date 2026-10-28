@@ -1,0 +1,26 @@
+{
+  "status": "ready_cpu_discovery_verified",
+  "started_at": 1793163631.4137237,
+  "model_calls": false,
+  "gpu_calls": false,
+  "global_cache_or_symlinks_modified": false,
+  "activation_scope": "PATH prefix for future task model subprocess only",
+  "method": "Supplement real ldconfig -p text with verified real driver; no cache is built or changed",
+  "supersedes_unexecuted_helper": "alternate-cache v1 rejected because glibc may write its global auxiliary cache",
+  "real_ldconfig": "/usr/sbin/ldconfig",
+  "real_ldconfig_sha256": "bfd5df90c7f070feab584435f106f254ffffaa268a04de5b5c3bd61d59c092f3",
+  "driver": "/usr/lib64-nvidia/libcuda.so",
+  "driver_resolved": "/usr/lib64-nvidia/libcuda.so.580.82.07",
+  "driver_sha256": "20e6ceff0c67aa902f74c662719108677c758651d9bb1e1eff738835c681f82b",
+  "path_prefix": "/content/jep-native-author-calibration-20261028/environments/triton-driver-discovery-v2/bin",
+  "declared_driver_supplement": "libcuda.so.1 (libc6,x86-64) => /usr/lib64-nvidia/libcuda.so.1",
+  "triton_driver_dirs": [
+    "/usr/lib64-nvidia"
+  ],
+  "wrapper_sha256": "96143e6a5ecd3a93cf97d0275e64c099dd3f3cca236c8f1d1d7e8a31408b21ff",
+  "original_listing_sha256": "65e6db27f7a83d36d72b697ddc140b89d068a1caaa00992918dd5e4451836351",
+  "supplemented_listing_sha256": "dea126c95647c56be2ce5fdf9954246ee5e6ab7d4bda4bbcb7c73d813532e23d",
+  "wrapper_rejects_unexpected_arguments": true,
+  "gpu_kernel_check_pending": true,
+  "finished_at": 1793163632.7612593
+}

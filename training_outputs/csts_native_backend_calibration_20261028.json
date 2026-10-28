@@ -1,0 +1,41 @@
+{
+  "status": "backend_controls_complete_task_calibration_in_progress",
+  "knowcoder": {
+    "checkpoints": [
+      "golaxy/KnowCoder-7B-base@4a7a076f573fe87fe0a97670c63c64214484742f",
+      "golaxy/KnowCoder-7B-IE@90ba076763dfb2e9efefd84a0e599f15ae533597"
+    ],
+    "canonical_cells": 30,
+    "same_prompt_and_input_and_output_ids_as_modern_fp16": 30,
+    "truncated": 0,
+    "schema_failures": 0,
+    "nonempty_by_checkpoint": {
+      "base": 4,
+      "ie": 7
+    }
+  },
+  "gollie": {
+    "checkpoint": "HiTZ/GoLLIE-7B@d3e41fef45f6a7d438c46ba7d9fce5d0d486c7a9",
+    "fixtures": 5,
+    "same_output_ids_original_flash_vs_stock434_eager": 5,
+    "same_input_and_output_ids_original_flash_vs_prior520_sdpa_targets": 4,
+    "applicable_prior_targets": 4,
+    "prefill_logit_max_abs_difference_range": [
+      0.09375,
+      0.1875
+    ],
+    "general_numerical_parity_claimed": false
+  },
+  "representative_quality_score": false,
+  "route_production_approved": false,
+  "locked_or_fresh_native_calls": 0,
+  "artifacts_sha256": {
+    "csts_native_backend_knowcoder_20261028.tar.gz": "f0c2296ac6c70b5953491debc48aa09858ca7c8d6ed4334c6ebd6b56a264b265",
+    "csts_native_backend_gollie_20261028.tar.gz": "c3e3f901ff21adc1a75f3bf9ca34ef6d572ced022d6b5a4dfaf3abceae1682f9",
+    "csts_native_backend_knowcoder_audit_20261028.json": "3482abc6f0e7626ffa304c1d1664df95a30f99dde08af0ca73a86aa5373995b3",
+    "csts_native_backend_gollie_audit_20261028.json": "b8f22e0b688e549dd4c0520d3e75541faf26482f5df4d067cba64ebed81370c4",
+    "csts_native_gollie_artifact_audit_20261028.json": "8caeb672bc09a34767369c27a10eb6127791062f037f53cd2827a9f1b6095418",
+    "csts_native_gollie_driver_discovery_20261028.json": "4e67a2813087b42714d618ad55f733645489450096c7af3a58f16cdd544dbbd7",
+    "csts_native_adapter_relocation_audit_20261028.json": "7ab5b5453ba120f95b298ac3e3b0765658607afa1c17cf7ae7862f0fb3747fb2"
+  }
+}
