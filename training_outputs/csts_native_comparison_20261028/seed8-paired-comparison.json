@@ -1,0 +1,84 @@
+{
+  "seed": 8,
+  "selected_model_sha256": "32740a9863c4c09c61904b1279d3b1398b653e9e474a0817b1f408dc4e565417",
+  "full_current_test": {
+    "n": 2431,
+    "mse_0_1": 0.04021542836182116,
+    "spearman": 0.8571184506617501
+  },
+  "paired_ratings_control": {
+    "rows": 2430,
+    "groups": 1222,
+    "reference": {
+      "n": 2430,
+      "mse_0_1": 0.038359250025926606,
+      "spearman": 0.8553747813377185
+    },
+    "per_seed": {
+      "8": {
+        "n": 2430,
+        "mse_0_1": 0.04022124615928261,
+        "spearman": 0.8570828345284162
+      }
+    },
+    "spearman_difference_per_seed": {
+      "8": 0.001708053190697667
+    },
+    "mean_spearman_difference": 0.001708053190697667,
+    "seed_difference_sample_std": null,
+    "group_bootstrap_95": {
+      "groups": 1222,
+      "requested_draws": 2000,
+      "defined_draws": 2000,
+      "skipped_draws": 0,
+      "low": -0.0036298957407463832,
+      "high": 0.007490972817705441,
+      "mse_low": -0.00017037550244367454,
+      "mse_high": 0.0038088686707771634,
+      "scope": "Test-source uncertainty conditional on the retained training seeds; no checkpoint-selection correction."
+    },
+    "per_seed_group_bootstrap_95": {
+      "8": {
+        "groups": 1222,
+        "requested_draws": 2000,
+        "defined_draws": 2000,
+        "skipped_draws": 0,
+        "low": -0.0036298957407463832,
+        "high": 0.007490972817705441,
+        "mse_low": -0.00017037550244367454,
+        "mse_high": 0.0038088686707771634,
+        "scope": "Test-source uncertainty conditional on the retained training seeds; no checkpoint-selection correction."
+      }
+    }
+  },
+  "current_prediction_sha256": "6df53b18c14dd4f6c7d5d65cc55902eb2de41273c2fae5edad83385d6deb3de2",
+  "control_prediction_sha256": "031ce3e9f694dbd6a23abd863114f5eff526d93a643c238ac909c2cff5ae5bad",
+  "current_prediction_reference": {
+    "sha256": "6df53b18c14dd4f6c7d5d65cc55902eb2de41273c2fae5edad83385d6deb3de2",
+    "bytes": 1230379,
+    "stored_at": {
+      "kind": "gcs",
+      "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+      "prefix": "viper",
+      "owner": "pvd232",
+      "workspace": "jep_csts_joint_20261021",
+      "revision": "5616fe01bfd51442d5007a1b4fb29283979bcac657c9dc9837622cd593d7365b",
+      "path": "csts_native_comparison_20261028/seed8/completed_test/test_predictions.json"
+    }
+  },
+  "cloud_references": {
+    "csts_native_comparison_20261028/seed8/completed_test/paired-comparison.json": {
+      "sha256": "28f2d0df62fd088b3b8dd0e0937ff1f7124b8da9d5fc3c73cc5782a8908ee37b",
+      "bytes": 2334,
+      "stored_at": {
+        "kind": "gcs",
+        "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+        "prefix": "viper",
+        "owner": "pvd232",
+        "workspace": "jep_csts_joint_20261021",
+        "revision": "1c3b995c0c4e4cfd55fcb57493714c90fc89ec81f780ef96d3dff6e4bf4c6875",
+        "path": "csts_native_comparison_20261028/seed8/completed_test/paired-comparison.json"
+      }
+    }
+  }
+}

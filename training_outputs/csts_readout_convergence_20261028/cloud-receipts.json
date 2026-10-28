@@ -1,0 +1,242 @@
+{
+  "status": "published",
+  "seed_runs": {
+    "7": {
+      "status": "published",
+      "reference": {
+        "sha256": "824b34e44278d98b3d1db501ec8ba08c56869a5d5790b6eaf991174e19771ea3",
+        "bytes": 1012,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "ca3d5b05a42df2b051eba8e20fec004e023cde7a48282fd783a5f877cb550a82",
+          "path": "experiments/csts_farm_bf167d77_seed7_301e3d89/runs/fit/01M61RE44TH7QBY2RRFDX0VXEV/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "hardware": "NVIDIA L4"
+    },
+    "8": {
+      "status": "published",
+      "reference": {
+        "sha256": "d6d75936a37cfdc52ce5d615e6e4c0e9660c593da8448ebcfba4d201a4503800",
+        "bytes": 1013,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "a24b7edb43109849eaac21ade988cec549d5ab794a38a02e341d60a732a1440a",
+          "path": "experiments/csts_farm_bf167d77_seed8_dc55780f/runs/fit/01M61RGKRTXMHCVCE93G2CXQMN/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "hardware": "NVIDIA A100-SXM4-40GB"
+    },
+    "9": {
+      "status": "published",
+      "reference": {
+        "sha256": "9ca38c9ce786571cc0b659bd0b7edcf64d468af86970a1a186ef09fc1f8c4c30",
+        "bytes": 1013,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "d808484656e9dd0323ea87250c52fec19b6ae538f2d7adba52b4094d93a68bba",
+          "path": "experiments/csts_farm_bf167d77_seed9_a76e351d/runs/fit/01M61RGPBVAVSWX2ZRZZSBQQAZ/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "hardware": "NVIDIA L4"
+    }
+  },
+  "final_runs": {
+    "fit": {
+      "status": "published",
+      "reference": {
+        "sha256": "f22f6bb031a6dfaf39911a2a11dd4c5234097155023e4cf0d9afd2358ff1a810",
+        "bytes": 1011,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "9fef99b06f196cd2fad31a862be388f5abd51a3c5121cb74bebac3b7d2e39c31",
+          "path": "experiments/csts_refit_fdbcb346_1d57cf4f_fit/runs/fit/01M61SGH4ZDS1HNSKRXY8EDDRE/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      }
+    },
+    "extract_test": {
+      "status": "published",
+      "reference": {
+        "sha256": "7e76dc59e8d6bfacaba3995a6350764c18d9620c8be8ab515ca50a0b6973bc5f",
+        "bytes": 1047,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "ab8a6a825ea6b525b1b8566d0ada1c33f368973870779587e1506b10a6b741d1",
+          "path": "experiments/csts_refit_fdbcb346_1d57cf4f_extract_test/runs/extract_test/01M61SQQ94KC6XF9RN94KEPR9T/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      }
+    },
+    "extract_interventions": {
+      "status": "published",
+      "reference": {
+        "sha256": "97f5ed9ff6647bd7070723ccbd81080c355b3720426672c464da44e6afc8933b",
+        "bytes": 1083,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "9d4c9aec759387ab0a33d872d05e86d78362d9eee021197ab9feccaa40506f75",
+          "path": "experiments/csts_refit_fdbcb346_1d57cf4f_extract_interventions/runs/extract_interventions/01M61SXEV0MSYQ382J2BN32ZAN/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      }
+    },
+    "publish_test": {
+      "status": "published",
+      "reference": {
+        "sha256": "fe652857dfea6b56d6a439feb5f4da76f0aae77dea21bf8f8a7b8a5a48a81e59",
+        "bytes": 1051,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "5e074f7d0a84ace33e789c524d41f06bee2ad5f2b76503f97697ec853b0b9caa",
+          "path": "experiments/csts_recovered_eval_80c4f63ec7_publish_test/runs/publish_test/01M61T3X4YGMM29FBYN5F825JR/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      }
+    },
+    "evaluate": {
+      "status": "published",
+      "reference": {
+        "sha256": "82a82630f40f96d6253417633c26c0cb4f2b13fee0477086af08a972fbc5fab1",
+        "bytes": 1035,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "375eb393634c2642b7ae4fc4bf22da559764c3510577561b0f517565fb37a099",
+          "path": "experiments/csts_recovered_eval_971354b4f5_evaluate/runs/evaluate/01M61T4MYB489PRE4KWQN0X110/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      }
+    }
+  },
+  "candidate_bundles": {
+    "7": {
+      "seed": 7,
+      "source_commit": "bf167d773df10cf097a3be7e5966b69c299d9227",
+      "hardware": "NVIDIA L4",
+      "candidate_reference": {
+        "sha256": "fe3d8c4a0bd43fdeec0fa40e30ef75381d6f473c5a17ec588181598f5b70e9df",
+        "bytes": 101117754,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "7391ff89455b36eb92235fdae94b4441eae0cf88a6747e0fb420d04837284a1c",
+          "path": "csts_readout_convergence_20261028/checkpoints/fc24256b28f748e2a0816b85f0edd645/00043/candidates.pt"
+        }
+      },
+      "receipt_reference": {
+        "sha256": "1c99e1e03747e6ae289f23547197903bca546013bb671188cacd93e294db0872",
+        "bytes": 2562,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "f0f13804552868476438c750651c49547da3c2bc81ead30c66033997ec2ed41a",
+          "path": "csts_readout_convergence_20261028/checkpoints/fc24256b28f748e2a0816b85f0edd645/00043/receipt.json"
+        }
+      }
+    },
+    "8": {
+      "seed": 8,
+      "source_commit": "bf167d773df10cf097a3be7e5966b69c299d9227",
+      "hardware": "NVIDIA A100-SXM4-40GB",
+      "candidate_reference": {
+        "sha256": "7aa0808215e41eacc871bb2c66a2be5a85a31e6b62f99c0593be9202b77e2800",
+        "bytes": 101118458,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "4219410172356390381af95bcbf17c0cb147cd19c47bc5d64d661275fe0e25bc",
+          "path": "csts_readout_convergence_20261028/checkpoints/1e20177c943c4837802273141c1f8b04/00044/candidates.pt"
+        }
+      },
+      "receipt_reference": {
+        "sha256": "2ea4d6255564054022ea88701a648c33ffbff5b97fe17277df0da8164d716eab",
+        "bytes": 2562,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "02d70b3e80b0956157124c90e72bb519b942bc49dd5b8938e1cf5d7faae4125e",
+          "path": "csts_readout_convergence_20261028/checkpoints/1e20177c943c4837802273141c1f8b04/00044/receipt.json"
+        }
+      }
+    },
+    "9": {
+      "seed": 9,
+      "source_commit": "bf167d773df10cf097a3be7e5966b69c299d9227",
+      "hardware": "NVIDIA L4",
+      "candidate_reference": {
+        "sha256": "1beac5286f93e05cbd33e6d5a9c9f61f12770e3829dd65f3640e557aa9d0d31e",
+        "bytes": 101116218,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "eeb0b437cfaa05fcdf293ef9fc57615492aa90f379e7daa9b5924b3b5deea4ee",
+          "path": "csts_readout_convergence_20261028/checkpoints/94dd93c1adf24fb98387388761c5389e/00041/candidates.pt"
+        }
+      },
+      "receipt_reference": {
+        "sha256": "971f8202720115cbd675bce595c328a902072d50a37c49e015778283c69223ec",
+        "bytes": 2562,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "6d95be78b7ef84ea45d616a61256006c0343c1015ac427d3db0a4bc8301ec5b9",
+          "path": "csts_readout_convergence_20261028/checkpoints/94dd93c1adf24fb98387388761c5389e/00041/receipt.json"
+        }
+      }
+    }
+  },
+  "final_report_sha256": "39d34c897ac47ed54eb093fc1332eecc5a9b06739c90d0394cff68f2186ae35a"
+}

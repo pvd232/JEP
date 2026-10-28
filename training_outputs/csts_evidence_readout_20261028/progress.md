@@ -1,0 +1,337 @@
+# JEP evidence selection and sentence comparison
+
+Source: `f59d2f8c5c64b96940a624a56d385330cf6a11ca`
+
+Hardware: NVIDIA A100-SXM4-80GB
+
+Seeds: 7, 8, 9. Training: 6,051 comparisons. Validation: 1,576. Test: 2,431.
+
+A: saved cosine score. B: token weighting trained with ratings. C: token weighting trained with ratings and evidence. D: fitted comparison of B vectors. E: fitted comparison of C vectors.
+
+## Live progress
+
+| UTC | Event | Seed | Step | Metrics or progress |
+| --- | --- | --- | --- | --- |
+| 2026-10-28 04:35:25 | stage started | 7 |  | name: publish_proposition_final |
+| 2026-10-28 04:36:05 | stage finished | 7 |  | name: publish_proposition_final; status: succeeded |
+| 2026-10-28 04:36:05 | stage started | 7 |  | name: publish_proposition_writing_epoch5 |
+| 2026-10-28 04:36:45 | stage finished | 7 |  | name: publish_proposition_writing_epoch5; status: succeeded |
+| 2026-10-28 04:36:45 | stage started | 7 |  | name: publish_ratings_final |
+| 2026-10-28 04:37:24 | stage finished | 7 |  | name: publish_ratings_final; status: succeeded |
+| 2026-10-28 04:37:24 | stage started | 7 |  | name: writing_retention |
+| 2026-10-28 04:38:39 | writing retention |  |  | checkpoint: writing; 16/121 |
+| 2026-10-28 04:38:50 | writing retention |  |  | checkpoint: writing; 32/121 |
+| 2026-10-28 04:38:52 | writing retention |  |  | checkpoint: writing; 48/121 |
+| 2026-10-28 04:38:53 | writing retention |  |  | checkpoint: writing; 64/121 |
+| 2026-10-28 04:38:55 | writing retention |  |  | checkpoint: writing; 80/121 |
+| 2026-10-28 04:38:56 | writing retention |  |  | checkpoint: writing; 96/121 |
+| 2026-10-28 04:38:58 | writing retention |  |  | checkpoint: writing; 112/121 |
+| 2026-10-28 04:38:59 | writing retention |  |  | checkpoint: writing; 121/121 |
+| 2026-10-28 04:39:07 | writing retention |  |  | checkpoint: after_ratings; 16/121 |
+| 2026-10-28 04:39:14 | writing retention |  |  | checkpoint: after_ratings; 32/121 |
+| 2026-10-28 04:39:16 | writing retention |  |  | checkpoint: after_ratings; 48/121 |
+| 2026-10-28 04:39:17 | writing retention |  |  | checkpoint: after_ratings; 64/121 |
+| 2026-10-28 04:39:19 | writing retention |  |  | checkpoint: after_ratings; 80/121 |
+| 2026-10-28 04:39:20 | writing retention |  |  | checkpoint: after_ratings; 96/121 |
+| 2026-10-28 04:39:22 | writing retention |  |  | checkpoint: after_ratings; 112/121 |
+| 2026-10-28 04:39:22 | writing retention |  |  | checkpoint: after_ratings; 121/121 |
+| 2026-10-28 04:39:23 | writing retention scores |  |  | writing answer CE 0.277840, exact agreement 0.375000; after_ratings answer CE 4.954078, exact agreement 0.000000; paired CE change 4.676239 |
+| 2026-10-28 04:39:49 | stage finished | 7 |  | name: writing_retention; status: succeeded |
+| 2026-10-28 04:39:49 | stage started | 7 |  | name: extract_training_proposition_final |
+| 2026-10-28 04:40:33 | readout extraction |  |  | split: training; 4/12102 |
+| 2026-10-28 04:40:38 | readout extraction |  |  | split: training; 204/12102 |
+| 2026-10-28 04:40:43 | readout extraction |  |  | split: training; 404/12102 |
+| 2026-10-28 04:40:48 | readout extraction |  |  | split: training; 604/12102 |
+| 2026-10-28 04:40:53 | readout extraction |  |  | split: training; 804/12102 |
+| 2026-10-28 04:40:58 | readout extraction |  |  | split: training; 1004/12102 |
+| 2026-10-28 04:41:03 | readout extraction |  |  | split: training; 1204/12102 |
+| 2026-10-28 04:41:08 | readout extraction |  |  | split: training; 1404/12102 |
+| 2026-10-28 04:41:13 | readout extraction |  |  | split: training; 1604/12102 |
+| 2026-10-28 04:41:18 | readout extraction |  |  | split: training; 1804/12102 |
+| 2026-10-28 04:41:23 | readout extraction |  |  | split: training; 2004/12102 |
+| 2026-10-28 04:41:28 | readout extraction |  |  | split: training; 2204/12102 |
+| 2026-10-28 04:41:33 | readout extraction |  |  | split: training; 2404/12102 |
+| 2026-10-28 04:41:38 | readout extraction |  |  | split: training; 2604/12102 |
+| 2026-10-28 04:41:42 | readout extraction |  |  | split: training; 2804/12102 |
+| 2026-10-28 04:41:48 | readout extraction |  |  | split: training; 3004/12102 |
+| 2026-10-28 04:41:53 | readout extraction |  |  | split: training; 3204/12102 |
+| 2026-10-28 04:41:58 | readout extraction |  |  | split: training; 3404/12102 |
+| 2026-10-28 04:42:02 | readout extraction |  |  | split: training; 3604/12102 |
+| 2026-10-28 04:42:07 | readout extraction |  |  | split: training; 3804/12102 |
+| 2026-10-28 04:42:12 | readout extraction |  |  | split: training; 4004/12102 |
+| 2026-10-28 04:42:17 | readout extraction |  |  | split: training; 4204/12102 |
+| 2026-10-28 04:42:22 | readout extraction |  |  | split: training; 4404/12102 |
+| 2026-10-28 04:42:27 | readout extraction |  |  | split: training; 4604/12102 |
+| 2026-10-28 04:42:32 | readout extraction |  |  | split: training; 4804/12102 |
+| 2026-10-28 04:42:37 | readout extraction |  |  | split: training; 5004/12102 |
+| 2026-10-28 04:42:42 | readout extraction |  |  | split: training; 5204/12102 |
+| 2026-10-28 04:42:47 | readout extraction |  |  | split: training; 5404/12102 |
+| 2026-10-28 04:42:52 | readout extraction |  |  | split: training; 5604/12102 |
+| 2026-10-28 04:42:57 | readout extraction |  |  | split: training; 5804/12102 |
+| 2026-10-28 04:43:02 | readout extraction |  |  | split: training; 6004/12102 |
+| 2026-10-28 04:43:07 | readout extraction |  |  | split: training; 6204/12102 |
+| 2026-10-28 04:43:12 | readout extraction |  |  | split: training; 6404/12102 |
+| 2026-10-28 04:43:17 | readout extraction |  |  | split: training; 6604/12102 |
+| 2026-10-28 04:43:22 | readout extraction |  |  | split: training; 6804/12102 |
+| 2026-10-28 04:43:27 | readout extraction |  |  | split: training; 7004/12102 |
+| 2026-10-28 04:43:32 | readout extraction |  |  | split: training; 7204/12102 |
+| 2026-10-28 04:43:37 | readout extraction |  |  | split: training; 7404/12102 |
+| 2026-10-28 04:43:42 | readout extraction |  |  | split: training; 7604/12102 |
+| 2026-10-28 04:43:47 | readout extraction |  |  | split: training; 7804/12102 |
+| 2026-10-28 04:43:52 | readout extraction |  |  | split: training; 8004/12102 |
+| 2026-10-28 04:43:57 | readout extraction |  |  | split: training; 8204/12102 |
+| 2026-10-28 04:44:02 | readout extraction |  |  | split: training; 8404/12102 |
+| 2026-10-28 04:44:07 | readout extraction |  |  | split: training; 8604/12102 |
+| 2026-10-28 04:44:12 | readout extraction |  |  | split: training; 8804/12102 |
+| 2026-10-28 04:44:17 | readout extraction |  |  | split: training; 9004/12102 |
+| 2026-10-28 04:44:22 | readout extraction |  |  | split: training; 9204/12102 |
+| 2026-10-28 04:44:27 | readout extraction |  |  | split: training; 9404/12102 |
+| 2026-10-28 04:44:32 | readout extraction |  |  | split: training; 9604/12102 |
+| 2026-10-28 04:44:37 | readout extraction |  |  | split: training; 9804/12102 |
+| 2026-10-28 04:44:42 | readout extraction |  |  | split: training; 10004/12102 |
+| 2026-10-28 04:44:48 | readout extraction |  |  | split: training; 10204/12102 |
+| 2026-10-28 04:44:53 | readout extraction |  |  | split: training; 10404/12102 |
+| 2026-10-28 04:44:58 | readout extraction |  |  | split: training; 10604/12102 |
+| 2026-10-28 04:45:03 | readout extraction |  |  | split: training; 10804/12102 |
+| 2026-10-28 04:45:08 | readout extraction |  |  | split: training; 11004/12102 |
+| 2026-10-28 04:45:13 | readout extraction |  |  | split: training; 11204/12102 |
+| 2026-10-28 04:45:18 | readout extraction |  |  | split: training; 11404/12102 |
+| 2026-10-28 04:45:23 | readout extraction |  |  | split: training; 11604/12102 |
+| 2026-10-28 04:45:28 | readout extraction |  |  | split: training; 11804/12102 |
+| 2026-10-28 04:45:33 | readout extraction |  |  | split: training; 12004/12102 |
+| 2026-10-28 04:45:35 | readout extraction |  |  | split: training; 12102/12102 |
+| 2026-10-28 04:46:29 | stage finished | 7 |  | name: extract_training_proposition_final; status: succeeded |
+| 2026-10-28 04:46:29 | stage started | 7 |  | name: extract_validation_proposition_final |
+| 2026-10-28 04:47:13 | readout extraction |  |  | split: validation; 4/3152 |
+| 2026-10-28 04:47:18 | readout extraction |  |  | split: validation; 204/3152 |
+| 2026-10-28 04:47:23 | readout extraction |  |  | split: validation; 404/3152 |
+| 2026-10-28 04:47:28 | readout extraction |  |  | split: validation; 604/3152 |
+| 2026-10-28 04:47:33 | readout extraction |  |  | split: validation; 804/3152 |
+| 2026-10-28 04:47:38 | readout extraction |  |  | split: validation; 1004/3152 |
+| 2026-10-28 04:47:43 | readout extraction |  |  | split: validation; 1204/3152 |
+| 2026-10-28 04:47:48 | readout extraction |  |  | split: validation; 1404/3152 |
+| 2026-10-28 04:47:53 | readout extraction |  |  | split: validation; 1604/3152 |
+| 2026-10-28 04:47:59 | readout extraction |  |  | split: validation; 1804/3152 |
+| 2026-10-28 04:48:04 | readout extraction |  |  | split: validation; 2004/3152 |
+| 2026-10-28 04:48:09 | readout extraction |  |  | split: validation; 2204/3152 |
+| 2026-10-28 04:48:14 | readout extraction |  |  | split: validation; 2404/3152 |
+| 2026-10-28 04:48:19 | readout extraction |  |  | split: validation; 2604/3152 |
+| 2026-10-28 04:48:24 | readout extraction |  |  | split: validation; 2804/3152 |
+| 2026-10-28 04:48:29 | readout extraction |  |  | split: validation; 3004/3152 |
+| 2026-10-28 04:48:33 | readout extraction |  |  | split: validation; 3152/3152 |
+| 2026-10-28 04:48:53 | stage finished | 7 |  | name: extract_validation_proposition_final; status: succeeded |
+| 2026-10-28 04:49:00 | stage started | 7 |  | name: fit_7 |
+| 2026-10-28 04:50:10 | readout epoch | 7 | 1 | B validation rho 0.255872, MSE 0.177885; C validation rho 0.221737, MSE 0.150908 |
+| 2026-10-28 04:50:19 | readout epoch | 7 | 2 | B validation rho 0.152632, MSE 0.199155; C validation rho 0.233072, MSE 0.149474 |
+| 2026-10-28 04:50:29 | readout epoch | 7 | 3 | B validation rho 0.039977, MSE 0.201632; C validation rho 0.293007, MSE 0.141807 |
+| 2026-10-28 04:50:38 | readout epoch | 7 | 4 | B validation rho 0.070237, MSE 0.195947; C validation rho 0.147994, MSE 0.170601 |
+| 2026-10-28 04:50:48 | readout epoch | 7 | 5 | B validation rho 0.043362, MSE 0.215740; C validation rho 0.247820, MSE 0.152598 |
+| 2026-10-28 04:50:57 | readout epoch | 7 | 6 | B validation rho 0.044341, MSE 0.171840; C validation rho 0.181657, MSE 0.161553 |
+| 2026-10-28 04:51:06 | readout epoch | 7 | 7 | B validation rho 0.053798, MSE 0.166360; C validation rho 0.207463, MSE 0.155944 |
+| 2026-10-28 04:51:16 | readout epoch | 7 | 8 | B validation rho 0.066286, MSE 0.164494; C validation rho 0.216461, MSE 0.151931 |
+| 2026-10-28 04:51:28 | comparison epoch | 7 | 1 | D validation rho 0.315054, MSE 0.129944; E validation rho 0.317128, MSE 0.134520 |
+| 2026-10-28 04:51:29 | comparison epoch | 7 | 2 | D validation rho 0.334231, MSE 0.128188; E validation rho 0.334135, MSE 0.132670 |
+| 2026-10-28 04:51:30 | comparison epoch | 7 | 3 | D validation rho 0.374386, MSE 0.117072; E validation rho 0.350843, MSE 0.129889 |
+| 2026-10-28 04:51:30 | comparison epoch | 7 | 4 | D validation rho 0.400948, MSE 0.119021; E validation rho 0.365759, MSE 0.127769 |
+| 2026-10-28 04:51:31 | comparison epoch | 7 | 5 | D validation rho 0.409784, MSE 0.114121; E validation rho 0.375574, MSE 0.126780 |
+| 2026-10-28 04:51:32 | comparison epoch | 7 | 6 | D validation rho 0.410401, MSE 0.114822; E validation rho 0.379682, MSE 0.129689 |
+| 2026-10-28 04:51:33 | comparison epoch | 7 | 7 | D validation rho 0.424484, MSE 0.112756; E validation rho 0.387894, MSE 0.126614 |
+| 2026-10-28 04:51:34 | comparison epoch | 7 | 8 | D validation rho 0.428264, MSE 0.111854; E validation rho 0.392926, MSE 0.126185 |
+| 2026-10-28 04:51:34 | comparison epoch | 7 | 9 | D validation rho 0.432186, MSE 0.111953; E validation rho 0.399952, MSE 0.124466 |
+| 2026-10-28 04:51:35 | comparison epoch | 7 | 10 | D validation rho 0.431586, MSE 0.111564; E validation rho 0.401049, MSE 0.126158 |
+| 2026-10-28 04:51:36 | comparison epoch | 7 | 11 | D validation rho 0.436701, MSE 0.110963; E validation rho 0.409029, MSE 0.125539 |
+| 2026-10-28 04:51:37 | comparison epoch | 7 | 12 | D validation rho 0.435937, MSE 0.110981; E validation rho 0.408061, MSE 0.124024 |
+| 2026-10-28 04:51:38 | comparison epoch | 7 | 13 | D validation rho 0.438337, MSE 0.110591; E validation rho 0.409688, MSE 0.124106 |
+| 2026-10-28 04:51:38 | comparison epoch | 7 | 14 | D validation rho 0.438936, MSE 0.110621; E validation rho 0.413032, MSE 0.123840 |
+| 2026-10-28 04:51:39 | comparison epoch | 7 | 15 | D validation rho 0.435608, MSE 0.112654; E validation rho 0.412314, MSE 0.124546 |
+| 2026-10-28 04:51:40 | comparison epoch | 7 | 16 | D validation rho 0.438529, MSE 0.110905; E validation rho 0.412603, MSE 0.126361 |
+| 2026-10-28 04:51:41 | comparison epoch | 7 | 17 | D validation rho 0.439329, MSE 0.111016; E validation rho 0.415460, MSE 0.123780 |
+| 2026-10-28 04:51:42 | comparison epoch | 7 | 18 | D validation rho 0.435659, MSE 0.113191; E validation rho 0.413077, MSE 0.129386 |
+| 2026-10-28 04:51:42 | comparison epoch | 7 | 19 | D validation rho 0.433994, MSE 0.115513; E validation rho 0.413504, MSE 0.128138 |
+| 2026-10-28 04:51:43 | comparison epoch | 7 | 20 | D validation rho 0.436774, MSE 0.111780; E validation rho 0.414441, MSE 0.124283 |
+| 2026-10-28 04:51:44 | comparison epoch | 7 | 21 | D validation rho 0.437187, MSE 0.111357; E validation rho 0.414367, MSE 0.123802 |
+| 2026-10-28 04:51:45 | comparison epoch | 7 | 22 | D validation rho 0.435851, MSE 0.111775; E validation rho 0.414212, MSE 0.124192 |
+| 2026-10-28 04:52:10 | stage finished | 7 |  | name: fit_7; status: succeeded |
+| 2026-10-28 04:52:17 | stage started | 8 |  | name: fit_8 |
+| 2026-10-28 04:53:28 | readout epoch | 8 | 1 | B validation rho 0.581703, MSE 0.123471; C validation rho 0.339654, MSE 0.137390 |
+| 2026-10-28 04:53:37 | readout epoch | 8 | 2 | B validation rho 0.530675, MSE 0.137100; C validation rho 0.180140, MSE 0.155712 |
+| 2026-10-28 04:53:47 | readout epoch | 8 | 3 | B validation rho 0.572172, MSE 0.125718; C validation rho 0.201945, MSE 0.150150 |
+| 2026-10-28 04:53:57 | readout epoch | 8 | 4 | B validation rho 0.573592, MSE 0.125538; C validation rho 0.359352, MSE 0.133128 |
+| 2026-10-28 04:54:06 | readout epoch | 8 | 5 | B validation rho 0.568951, MSE 0.126089; C validation rho 0.195257, MSE 0.159765 |
+| 2026-10-28 04:54:15 | readout epoch | 8 | 6 | B validation rho 0.566996, MSE 0.126606; C validation rho 0.253984, MSE 0.146664 |
+| 2026-10-28 04:54:25 | readout epoch | 8 | 7 | B validation rho 0.570764, MSE 0.125564; C validation rho 0.249827, MSE 0.148830 |
+| 2026-10-28 04:54:34 | readout epoch | 8 | 8 | B validation rho 0.574787, MSE 0.124681; C validation rho 0.190980, MSE 0.152376 |
+| 2026-10-28 04:54:43 | readout epoch | 8 | 9 | B validation rho 0.569681, MSE 0.125438; C validation rho 0.220458, MSE 0.153231 |
+| 2026-10-28 04:54:55 | comparison epoch | 8 | 1 | D validation rho 0.672595, MSE 0.094275; E validation rho 0.390036, MSE 0.129396 |
+| 2026-10-28 04:54:56 | comparison epoch | 8 | 2 | D validation rho 0.703432, MSE 0.076323; E validation rho 0.414519, MSE 0.118008 |
+| 2026-10-28 04:54:57 | comparison epoch | 8 | 3 | D validation rho 0.715282, MSE 0.075458; E validation rho 0.431783, MSE 0.116616 |
+| 2026-10-28 04:54:58 | comparison epoch | 8 | 4 | D validation rho 0.721273, MSE 0.072104; E validation rho 0.445098, MSE 0.114539 |
+| 2026-10-28 04:54:59 | comparison epoch | 8 | 5 | D validation rho 0.725586, MSE 0.070991; E validation rho 0.456758, MSE 0.112522 |
+| 2026-10-28 04:55:00 | comparison epoch | 8 | 6 | D validation rho 0.727584, MSE 0.070265; E validation rho 0.459180, MSE 0.117252 |
+| 2026-10-28 04:55:00 | comparison epoch | 8 | 7 | D validation rho 0.728554, MSE 0.071595; E validation rho 0.465640, MSE 0.114268 |
+| 2026-10-28 04:55:01 | comparison epoch | 8 | 8 | D validation rho 0.729783, MSE 0.071072; E validation rho 0.470769, MSE 0.112483 |
+| 2026-10-28 04:55:02 | comparison epoch | 8 | 9 | D validation rho 0.730727, MSE 0.072246; E validation rho 0.474022, MSE 0.112513 |
+| 2026-10-28 04:55:03 | comparison epoch | 8 | 10 | D validation rho 0.731305, MSE 0.071129; E validation rho 0.477855, MSE 0.110413 |
+| 2026-10-28 04:55:04 | comparison epoch | 8 | 11 | D validation rho 0.731632, MSE 0.069585; E validation rho 0.479098, MSE 0.111459 |
+| 2026-10-28 04:55:04 | comparison epoch | 8 | 12 | D validation rho 0.731641, MSE 0.069375; E validation rho 0.482531, MSE 0.109679 |
+| 2026-10-28 04:55:05 | comparison epoch | 8 | 13 | D validation rho 0.730754, MSE 0.070610; E validation rho 0.484911, MSE 0.109325 |
+| 2026-10-28 04:55:06 | comparison epoch | 8 | 14 | D validation rho 0.731337, MSE 0.069861; E validation rho 0.485163, MSE 0.109619 |
+| 2026-10-28 04:55:07 | comparison epoch | 8 | 15 | D validation rho 0.730927, MSE 0.069684; E validation rho 0.486494, MSE 0.109260 |
+| 2026-10-28 04:55:07 | comparison epoch | 8 | 16 | D validation rho 0.730365, MSE 0.070617; E validation rho 0.486223, MSE 0.110009 |
+| 2026-10-28 04:55:08 | comparison epoch | 8 | 17 | D validation rho 0.728550, MSE 0.070855; E validation rho 0.487880, MSE 0.109398 |
+| 2026-10-28 04:55:09 | comparison epoch | 8 | 18 | D validation rho 0.728765, MSE 0.070176; E validation rho 0.487618, MSE 0.110111 |
+| 2026-10-28 04:55:10 | comparison epoch | 8 | 19 | D validation rho 0.728248, MSE 0.070306; E validation rho 0.487366, MSE 0.111352 |
+| 2026-10-28 04:55:11 | comparison epoch | 8 | 20 | D validation rho 0.727778, MSE 0.070632; E validation rho 0.488041, MSE 0.109777 |
+| 2026-10-28 04:55:12 | comparison epoch | 8 | 21 | D validation rho 0.726729, MSE 0.070321; E validation rho 0.488073, MSE 0.109865 |
+| 2026-10-28 04:55:12 | comparison epoch | 8 | 22 | D validation rho 0.725816, MSE 0.070809; E validation rho 0.488917, MSE 0.109963 |
+| 2026-10-28 04:55:13 | comparison epoch | 8 | 23 | D validation rho 0.725186, MSE 0.070936; E validation rho 0.487725, MSE 0.112020 |
+| 2026-10-28 04:55:14 | comparison epoch | 8 | 24 | D validation rho 0.725708, MSE 0.076506; E validation rho 0.488345, MSE 0.110504 |
+| 2026-10-28 04:55:15 | comparison epoch | 8 | 25 | D validation rho 0.723108, MSE 0.071172; E validation rho 0.488922, MSE 0.111225 |
+| 2026-10-28 04:55:16 | comparison epoch | 8 | 26 | D validation rho 0.721577, MSE 0.071649; E validation rho 0.488403, MSE 0.110740 |
+| 2026-10-28 04:55:16 | comparison epoch | 8 | 27 | D validation rho 0.721631, MSE 0.071900; E validation rho 0.487357, MSE 0.113709 |
+| 2026-10-28 04:55:17 | comparison epoch | 8 | 28 | D validation rho 0.720524, MSE 0.071919; E validation rho 0.487618, MSE 0.111058 |
+| 2026-10-28 04:55:18 | comparison epoch | 8 | 29 | D validation rho 0.719871, MSE 0.072499; E validation rho 0.486865, MSE 0.113741 |
+| 2026-10-28 04:55:19 | comparison epoch | 8 | 30 | D validation rho 0.720402, MSE 0.076481; E validation rho 0.486538, MSE 0.115444 |
+| 2026-10-28 04:55:32 | stage finished | 8 |  | name: fit_8; status: succeeded |
+| 2026-10-28 04:55:40 | stage started | 9 |  | name: fit_9 |
+| 2026-10-28 04:56:51 | readout epoch | 9 | 1 | B validation rho 0.545021, MSE 0.125585; C validation rho 0.236988, MSE 0.152148 |
+| 2026-10-28 04:57:00 | readout epoch | 9 | 2 | B validation rho 0.578447, MSE 0.126604; C validation rho 0.264137, MSE 0.150158 |
+| 2026-10-28 04:57:10 | readout epoch | 9 | 3 | B validation rho 0.522355, MSE 0.140323; C validation rho 0.305132, MSE 0.140940 |
+| 2026-10-28 04:57:20 | readout epoch | 9 | 4 | B validation rho 0.564410, MSE 0.129043; C validation rho 0.228701, MSE 0.151861 |
+| 2026-10-28 04:57:31 | readout epoch | 9 | 5 | B validation rho 0.555972, MSE 0.132871; C validation rho 0.214062, MSE 0.153768 |
+| 2026-10-28 04:57:41 | readout epoch | 9 | 6 | B validation rho 0.493688, MSE 0.150740; C validation rho 0.243379, MSE 0.146839 |
+| 2026-10-28 04:57:51 | readout epoch | 9 | 7 | B validation rho 0.539988, MSE 0.136936; C validation rho 0.171846, MSE 0.164460 |
+| 2026-10-28 04:58:00 | readout epoch | 9 | 8 | B validation rho 0.511200, MSE 0.139151; C validation rho 0.241358, MSE 0.171223 |
+| 2026-10-28 04:58:13 | comparison epoch | 9 | 1 | D validation rho 0.672653, MSE 0.083349; E validation rho 0.324811, MSE 0.135255 |
+| 2026-10-28 04:58:13 | comparison epoch | 9 | 2 | D validation rho 0.702044, MSE 0.076502; E validation rho 0.342827, MSE 0.132285 |
+| 2026-10-28 04:58:14 | comparison epoch | 9 | 3 | D validation rho 0.711827, MSE 0.076683; E validation rho 0.355340, MSE 0.134938 |
+| 2026-10-28 04:58:15 | comparison epoch | 9 | 4 | D validation rho 0.717970, MSE 0.072329; E validation rho 0.371091, MSE 0.129341 |
+| 2026-10-28 04:58:16 | comparison epoch | 9 | 5 | D validation rho 0.720677, MSE 0.072731; E validation rho 0.377679, MSE 0.128304 |
+| 2026-10-28 04:58:17 | comparison epoch | 9 | 6 | D validation rho 0.722677, MSE 0.073469; E validation rho 0.386556, MSE 0.126863 |
+| 2026-10-28 04:58:17 | comparison epoch | 9 | 7 | D validation rho 0.724520, MSE 0.070609; E validation rho 0.393687, MSE 0.126026 |
+| 2026-10-28 04:58:18 | comparison epoch | 9 | 8 | D validation rho 0.725267, MSE 0.070746; E validation rho 0.397235, MSE 0.126015 |
+| 2026-10-28 04:58:19 | comparison epoch | 9 | 9 | D validation rho 0.726250, MSE 0.071531; E validation rho 0.400971, MSE 0.126088 |
+| 2026-10-28 04:58:20 | comparison epoch | 9 | 10 | D validation rho 0.726958, MSE 0.071929; E validation rho 0.405322, MSE 0.124945 |
+| 2026-10-28 04:58:20 | comparison epoch | 9 | 11 | D validation rho 0.726721, MSE 0.070409; E validation rho 0.410815, MSE 0.124582 |
+| 2026-10-28 04:58:21 | comparison epoch | 9 | 12 | D validation rho 0.726778, MSE 0.070257; E validation rho 0.411965, MSE 0.123948 |
+| 2026-10-28 04:58:22 | comparison epoch | 9 | 13 | D validation rho 0.726647, MSE 0.070536; E validation rho 0.415543, MSE 0.124810 |
+| 2026-10-28 04:58:23 | comparison epoch | 9 | 14 | D validation rho 0.726558, MSE 0.070266; E validation rho 0.413541, MSE 0.124686 |
+| 2026-10-28 04:58:24 | comparison epoch | 9 | 15 | D validation rho 0.726385, MSE 0.070305; E validation rho 0.417689, MSE 0.123555 |
+| 2026-10-28 04:58:24 | comparison epoch | 9 | 16 | D validation rho 0.726567, MSE 0.073120; E validation rho 0.415256, MSE 0.125386 |
+| 2026-10-28 04:58:25 | comparison epoch | 9 | 17 | D validation rho 0.725344, MSE 0.070561; E validation rho 0.419681, MSE 0.124749 |
+| 2026-10-28 04:58:26 | comparison epoch | 9 | 18 | D validation rho 0.725298, MSE 0.070751; E validation rho 0.417456, MSE 0.124073 |
+| 2026-10-28 04:58:27 | comparison epoch | 9 | 19 | D validation rho 0.724077, MSE 0.070781; E validation rho 0.419338, MSE 0.123969 |
+| 2026-10-28 04:58:28 | comparison epoch | 9 | 20 | D validation rho 0.723647, MSE 0.070969; E validation rho 0.417097, MSE 0.124463 |
+| 2026-10-28 04:58:28 | comparison epoch | 9 | 21 | D validation rho 0.721087, MSE 0.073716; E validation rho 0.418530, MSE 0.124057 |
+| 2026-10-28 04:58:29 | comparison epoch | 9 | 22 | D validation rho 0.721395, MSE 0.071379; E validation rho 0.418214, MSE 0.123530 |
+| 2026-10-28 04:58:42 | stage finished | 9 |  | name: fit_9; status: succeeded |
+| 2026-10-28 04:58:42 | stage started | 7 |  | name: extract_test_proposition_final |
+| 2026-10-28 04:59:24 | readout extraction |  |  | split: test; 4/4862 |
+| 2026-10-28 04:59:29 | readout extraction |  |  | split: test; 204/4862 |
+| 2026-10-28 04:59:34 | readout extraction |  |  | split: test; 404/4862 |
+| 2026-10-28 04:59:39 | readout extraction |  |  | split: test; 604/4862 |
+| 2026-10-28 04:59:44 | readout extraction |  |  | split: test; 804/4862 |
+| 2026-10-28 04:59:49 | readout extraction |  |  | split: test; 1004/4862 |
+| 2026-10-28 04:59:54 | readout extraction |  |  | split: test; 1204/4862 |
+| 2026-10-28 04:59:59 | readout extraction |  |  | split: test; 1404/4862 |
+| 2026-10-28 05:00:04 | readout extraction |  |  | split: test; 1604/4862 |
+| 2026-10-28 05:00:09 | readout extraction |  |  | split: test; 1804/4862 |
+| 2026-10-28 05:00:14 | readout extraction |  |  | split: test; 2004/4862 |
+| 2026-10-28 05:00:19 | readout extraction |  |  | split: test; 2204/4862 |
+| 2026-10-28 05:00:24 | readout extraction |  |  | split: test; 2404/4862 |
+| 2026-10-28 05:00:29 | readout extraction |  |  | split: test; 2604/4862 |
+| 2026-10-28 05:00:34 | readout extraction |  |  | split: test; 2804/4862 |
+| 2026-10-28 05:00:39 | readout extraction |  |  | split: test; 3004/4862 |
+| 2026-10-28 05:00:44 | readout extraction |  |  | split: test; 3204/4862 |
+| 2026-10-28 05:00:49 | readout extraction |  |  | split: test; 3404/4862 |
+| 2026-10-28 05:00:54 | readout extraction |  |  | split: test; 3604/4862 |
+| 2026-10-28 05:00:59 | readout extraction |  |  | split: test; 3804/4862 |
+| 2026-10-28 05:01:04 | readout extraction |  |  | split: test; 4004/4862 |
+| 2026-10-28 05:01:09 | readout extraction |  |  | split: test; 4204/4862 |
+| 2026-10-28 05:01:14 | readout extraction |  |  | split: test; 4404/4862 |
+| 2026-10-28 05:01:19 | readout extraction |  |  | split: test; 4604/4862 |
+| 2026-10-28 05:01:24 | readout extraction |  |  | split: test; 4804/4862 |
+| 2026-10-28 05:01:26 | readout extraction |  |  | split: test; 4862/4862 |
+| 2026-10-28 05:01:52 | stage finished | 7 |  | name: extract_test_proposition_final; status: succeeded |
+| 2026-10-28 05:01:52 | stage started | 7 |  | name: extract_interventions_proposition_final |
+| 2026-10-28 05:02:32 | readout extraction |  |  | split: interventions; 4/48 |
+| 2026-10-28 05:02:34 | readout extraction |  |  | split: interventions; 48/48 |
+| 2026-10-28 05:02:42 | stage finished | 7 |  | name: extract_interventions_proposition_final; status: succeeded |
+| 2026-10-28 05:02:42 | stage started | 7 |  | name: extract_test_ratings_final |
+| 2026-10-28 05:03:24 | readout extraction |  |  | split: test; 4/4862 |
+| 2026-10-28 05:03:29 | readout extraction |  |  | split: test; 204/4862 |
+| 2026-10-28 05:03:34 | readout extraction |  |  | split: test; 404/4862 |
+| 2026-10-28 05:03:39 | readout extraction |  |  | split: test; 604/4862 |
+| 2026-10-28 05:03:44 | readout extraction |  |  | split: test; 804/4862 |
+| 2026-10-28 05:03:49 | readout extraction |  |  | split: test; 1004/4862 |
+| 2026-10-28 05:03:54 | readout extraction |  |  | split: test; 1204/4862 |
+| 2026-10-28 05:03:58 | readout extraction |  |  | split: test; 1404/4862 |
+| 2026-10-28 05:04:04 | readout extraction |  |  | split: test; 1604/4862 |
+| 2026-10-28 05:04:09 | readout extraction |  |  | split: test; 1804/4862 |
+| 2026-10-28 05:04:13 | readout extraction |  |  | split: test; 2004/4862 |
+| 2026-10-28 05:04:18 | readout extraction |  |  | split: test; 2204/4862 |
+| 2026-10-28 05:04:23 | readout extraction |  |  | split: test; 2404/4862 |
+| 2026-10-28 05:04:29 | readout extraction |  |  | split: test; 2604/4862 |
+| 2026-10-28 05:04:34 | readout extraction |  |  | split: test; 2804/4862 |
+| 2026-10-28 05:04:39 | readout extraction |  |  | split: test; 3004/4862 |
+| 2026-10-28 05:04:44 | readout extraction |  |  | split: test; 3204/4862 |
+| 2026-10-28 05:04:49 | readout extraction |  |  | split: test; 3404/4862 |
+| 2026-10-28 05:04:54 | readout extraction |  |  | split: test; 3604/4862 |
+| 2026-10-28 05:04:59 | readout extraction |  |  | split: test; 3804/4862 |
+| 2026-10-28 05:05:04 | readout extraction |  |  | split: test; 4004/4862 |
+| 2026-10-28 05:05:09 | readout extraction |  |  | split: test; 4204/4862 |
+| 2026-10-28 05:05:14 | readout extraction |  |  | split: test; 4404/4862 |
+| 2026-10-28 05:05:19 | readout extraction |  |  | split: test; 4604/4862 |
+| 2026-10-28 05:05:24 | readout extraction |  |  | split: test; 4804/4862 |
+| 2026-10-28 05:05:25 | readout extraction |  |  | split: test; 4862/4862 |
+| 2026-10-28 05:05:55 | stage finished | 7 |  | name: extract_test_ratings_final; status: succeeded |
+| 2026-10-28 05:05:55 | stage started | 7 |  | name: publish_test |
+| 2026-10-28 05:06:19 | stage finished | 7 |  | name: publish_test; status: succeeded |
+| 2026-10-28 05:06:23 | stage started | 7 |  | name: evaluate |
+| 2026-10-28 05:09:12 | readout final scores |  |  |  |
+
+## Test results
+
+| Seed | Model | Spearman | MSE |
+| --- | --- | --- | --- |
+| reference | A | 0.863398 | 0.035636 |
+| reference | Ratings reference | 0.855771 | 0.038254 |
+| 7 | B | 0.258904 | 0.187356 |
+| 7 | C | 0.310429 | 0.151798 |
+| 7 | D | 0.437993 | 0.123757 |
+| 7 | E | 0.438058 | 0.130912 |
+| 8 | B | 0.590147 | 0.132040 |
+| 8 | C | 0.359009 | 0.143940 |
+| 8 | D | 0.737624 | 0.075859 |
+| 8 | E | 0.497190 | 0.120186 |
+| 9 | B | 0.595156 | 0.130217 |
+| 9 | C | 0.257447 | 0.161495 |
+| 9 | D | 0.734073 | 0.077587 |
+| 9 | E | 0.349780 | 0.144767 |
+
+Mean C−B Spearman: -0.172441. 95% interval: [-0.199812, -0.143328].
+
+| Comparison | Mean Spearman change | Mean MSE change | Spearman 95% interval |
+| --- | --- | --- | --- |
+| C_minus_B | -0.172441 | 0.002540 | [-0.199812, -0.143328] |
+| E_minus_D | -0.208220 | 0.039554 | [-0.230545, -0.184972] |
+| D_minus_B | 0.155160 | -0.057470 | [0.136752, 0.173265] |
+| E_minus_C | 0.119381 | -0.020456 | [0.102063, 0.136005] |
+| interaction | -0.035779 | 0.037014 | [-0.057634, -0.014947] |
+
+Evaluation status: succeeded.
+
+
+## Investigation after completion
+
+The [diagnosis and proposed follow up](diagnosis.md) records two findings: large attention scores concentrated B on one token, and replacing A's final summary with sentence token averages removed a useful representation. The investigation reuses retained states from this run.
+
+A fixed one epoch probe uses seed 7 and the same 190 updates at each declared learning rate. Every setting uses training and validation. A's validation Spearman is 0.876789.
+
+| Learning rate | B validation Spearman | C validation Spearman |
+| --- | ---: | ---: |
+| 0.001 | 0.255872 | 0.221737 |
+| 0.0001 | 0.739193 | 0.601113 |
+| 0.00001 | 0.696973 | 0.615708 |
+
+The original rate reproduces both archived epoch one validation scores exactly. The smaller rates substantially reduce attention concentration. The proposed next experiment retains A's score and learns an additional contribution from evidence, with a matching control trained on ratings. This investigation includes 69 passing tests. [Diagnostic measurements](diagnosis.json) and [all step size measurements](step_size_probe.json) retain the results.

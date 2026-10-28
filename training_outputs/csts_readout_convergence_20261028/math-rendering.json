@@ -1,0 +1,42 @@
+{
+  "engine": "MathJax 3.2.2, SVG output",
+  "destination": "GitHub Markdown",
+  "files": {
+    "plans/csts-evidence-readout-methods.md": {
+      "display": 8,
+      "inline": 46,
+      "relative_links": 15,
+      "source_sha256": "cbbea3246c8fb9331008379ea8da94d0aa91b6ce633ec4fc7f5bc4b5bf665d37"
+    },
+    "plans/csts-readout-convergence-methods.md": {
+      "display": 4,
+      "inline": 25,
+      "relative_links": 13,
+      "source_sha256": "2676af2daa15724c676579d33481b86455631d1f43b1b61d326102919adb08a3"
+    },
+    "training_outputs/csts_readout_convergence_20261028/results.md": {
+      "display": 0,
+      "inline": 0,
+      "relative_links": 9,
+      "source_sha256": "8c3bae1e66921cc225c9b4857ee9e4abdb053488c64d7eea40b2724b4037c82a"
+    }
+  },
+  "errors": [],
+  "github_live_browser": "Private repository requires an authenticated browser; live page not observed. GitHub Markdown API before edits recognized inline math and math display fences.",
+  "visual_inspection": {
+    "status": "passed",
+    "method": "MathJax SVG rasterized locally; four representative displays inspected",
+    "equations": [
+      "condition and token scores",
+      "symmetric comparison",
+      "joint rating objective",
+      "chain rule into LoRA"
+    ]
+  },
+  "review": {
+    "dimensions": "passed",
+    "symbols_and_indices": "passed",
+    "derivation": "chain rule checked, nonzero normalization and absolute difference subgradient stated",
+    "scope": "Formatting and proposed method documentation; scientific result files unchanged"
+  }
+}

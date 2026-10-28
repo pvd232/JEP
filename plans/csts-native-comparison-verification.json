@@ -1,0 +1,138 @@
+{
+  "engine": "MathJax 3.2.2, SVG output",
+  "destination": "GitHub Markdown",
+  "files": {
+    "plans/csts-native-comparison-methods.md": {
+      "display": 13,
+      "inline": 48,
+      "relative_links": 23,
+      "source_sha256": "f26eb6a03189aa654cfd84ef63daaa7fe155f580a1d662214e0bcb2e7a315117"
+    },
+    "plans/csts-readout-convergence-methods.md": {
+      "display": 1,
+      "inline": 4,
+      "relative_links": 11,
+      "source_sha256": "4b646d1a04964ceb6babeb4c03b29a993413504b888229950c405e6762dc7a12"
+    },
+    "plans/csts-native-comparison-review.md": {
+      "display": 0,
+      "inline": 0,
+      "relative_links": 8,
+      "source_sha256": "128a6b46a00b7c4189e5f0a32c8977466469935593040263e4ab66b79bf82791"
+    }
+  },
+  "errors": [],
+  "github_live_browser": "Live private GitHub page unobserved; local MathJax Markdown preview used. GitHub fenced math and inline dollar boundaries selected.",
+  "gradient_check": {
+    "method": "float64 central differences on a deterministic LoRA factor, normalization and comparison fixture",
+    "parameters_checked": 21,
+    "step": 1e-06,
+    "tolerance": 1e-07,
+    "maximum_absolute_gradient_error": 6.519830786366754e-10,
+    "sentence_swap_error": 0.0,
+    "zero_comparison_cosine_error": 0.0,
+    "scope": "mathematical verification; native training integration follows plan review"
+  },
+  "review": {
+    "passes": 2,
+    "type": "self review",
+    "scope": [
+      "score and LoRA derivation",
+      "parameter and input identities",
+      "optimizer semantics",
+      "historical reference coverage and training history",
+      "selection and evaluation",
+      "artifact restoration and Cloud retention",
+      "joint implementation, resume state and nonblocking first upload"
+    ],
+    "visual_inspection": "LoRA, comparison, normalization gradient, LoRA chain rule, rank argument and AdamW displays rasterized from MathJax and inspected",
+    "execution_status": "Seed 7 running on GCE L4; A100 recovery and conditional L4 workers preparing",
+    "scope_correction": "One initial fresh joint LoRA and comparison fit, seed 7. Strict improvement over the saved ratings control on the same validation rows releases seeds 8 and 9 under unchanged settings. Maximum three fits. Existing cosine models reused; comparison decay fixed at 0.01."
+  },
+  "run_count": {
+    "initial_native_joint_rating_fits": 1,
+    "conditional_native_joint_rating_fits": 2,
+    "maximum_native_joint_rating_fits": 3,
+    "new_cosine_fits": 0,
+    "proposition_fits": 0,
+    "separate_regularization_fits": 0
+  },
+  "continuation_rule": {
+    "metric": "validation Spearman",
+    "criterion": "A completed published training epoch has selected validation Spearman strictly above the saved ratings control on identical frozen rows. Seed 7 continues to validation patience.",
+    "follow_on_seeds": [
+      8,
+      9
+    ],
+    "test_use": "executed seed list and selected states frozen before test evaluation"
+  },
+  "integration_checks": {
+    "environment": "existing GCE L4 environment",
+    "tests": 9,
+    "result": "passed",
+    "seconds": 8.05,
+    "coverage": [
+      "adapter and comparison gradients",
+      "frozen base matrices",
+      "cosine initialization and symmetry",
+      "joint checkpoint prediction equality",
+      "partial logical batch weighting",
+      "epoch resume reproduces model state and batch order",
+      "strict validation continuation rule",
+      "first checkpoint publication remains asynchronous"
+    ],
+    "static_checks": [
+      "Ruff passed",
+      "Python compilation passed"
+    ],
+    "actual_gpu_integration": "pending runtime preparation",
+    "scope": "joint fitting, exact epoch recovery including destination profiling, and asynchronous publication"
+  },
+  "reference_validation": {
+    "rows": 1576,
+    "identical_row_ids": true,
+    "identical_text_and_targets": true,
+    "spearman": 0.8718754731182672
+  },
+  "finalization": {
+    "focused_tests": 2,
+    "seconds": 7.24,
+    "lint": "passed",
+    "syntax": "passed",
+    "scope": "Reference cohort identities and source group inference fixtures; final GPU prediction execution follows completed fitting.",
+    "driver_sha256": "2b30df26f3a21b87f8d219f82c77145e9a67ea95d6a028b772c0cb719b45b64d"
+  },
+  "completed_fit_scoring": {
+    "tests": 4,
+    "seconds": 7.45,
+    "lint": "passed",
+    "mathematics": "Existing equations retained; reporting schedule prose updated.",
+    "driver_sha256": "6552c3e430ea3549c06e3e7583e9d42a8c0b36daab0e9e3e084ff4c2e49bfde3",
+    "reuse": "Sealed predictions checked against selected model and rows; no repeated GPU prediction pass."
+  },
+  "asynchronous_completion": {
+    "tests": 6,
+    "seconds": 7.11,
+    "lint": "passed",
+    "source_sha256": {
+      "csts_pilot/native_comparison_run.py": "13b3a4b75a09510efc68792b528602c0541ee68e56c24dd7f5daa89409a0e118",
+      "scripts/score_completed_csts_native.py": "d288fc01e16029b175755f8e41158ad3ae0f31a8887b483a4f8624d8c3cbf93f",
+      "tests/test_native_comparison_finalization.py": "e86005d290b05b84f7aa688406d57ffe2d54975e38034499134e8b5ffcd5bee6",
+      "tests/test_native_publication_handoff.py": "44ba0e7b6073538c16e17e57bf2f5a38aee42aae346bc182dcb5cc2817a7b654"
+    },
+    "existing_fits": "Original immutable fitting code; completed local native outputs feed a separate scoring process while native publication continues."
+  },
+  "snapshot_scoring": {
+    "source_sha256": "c59fb0a44c2bd9e32a7e2db8db11aa7ee23b7faa8c8ca08fbc69830777dcd68c",
+    "ruff": "passed",
+    "python_syntax": "passed",
+    "gpu_execution": "Succeeded for retained seeds 7 and 9, using the original native inference function."
+  },
+  "cpu_report": {
+    "source_sha256": "79897aa647eba641575566be2d9785538914af1f9d67ece51f984be97b6b8756",
+    "ruff": "passed",
+    "python_syntax": "passed",
+    "prediction_metric_recomputation": "Matched all three published test metrics.",
+    "mathematics": "Existing formulas retained; documentation changes describe execution and observed budgets."
+  }
+}

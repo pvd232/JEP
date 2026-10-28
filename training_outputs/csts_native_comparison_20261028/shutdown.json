@@ -1,0 +1,32 @@
+{
+  "status": "all_task_gpus_stopped",
+  "completion": {
+    "status": "complete; all task GPUs stopped",
+    "utc": "2026-10-28T22:51:56.339128+00:00",
+    "commit": "7a304e580071e73f0123bc78fdfc420268c9500b",
+    "mean": {
+      "spearman": 0.8570389538241435,
+      "mse_0_1": 0.039163408309679175
+    },
+    "gce_state": "TERMINATED"
+  },
+  "gce_shutdown_check": {
+    "gpu_busy": false,
+    "other_jobs": []
+  },
+  "colab": {
+    "jep-native-comparison-a100-20261028": {
+      "status": "stopped",
+      "cloud_status": "published",
+      "seed": 8
+    },
+    "jep-native-comparison-l4-20261028": {
+      "status": "stopped",
+      "cloud_status": "published",
+      "seed": 9,
+      "test_publication": "published",
+      "checkpoint_uploads": "published"
+    }
+  },
+  "recorded_utc": "2026-10-28T22:52:05.295018+00:00"
+}

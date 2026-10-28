@@ -1,0 +1,35 @@
+{
+  "focused_tests": {
+    "passed": 4,
+    "seconds": 11.96
+  },
+  "source_commit": "d912e9b34e43ffada90c304246263fa2dff49f1f",
+  "source_sha256": {
+    "test_comparison_diagnostics.py": "440d02a2798c58a019e01e362d6ddf5a92446a59687403589ba86df29e37f162",
+    "analyze_csts_comparison.py": "eb6291c5a4b3f914e3efc50279da0feed85a610238a352b89f13e09532140207",
+    "finalize_csts_comparison_diagnostics.py": "88f58a726d3e86e50bdb03e72b891f5c5bd44d85dcd224faa4b5dd73b7c17b6b",
+    "capture_csts_control_vectors.py": "c0e2ab639bdc05d5578631d26b45f7c790e7949f03d76397f2a182b8d952ebb0"
+  },
+  "encoder_updates": 0,
+  "cosine_probe_reproduction": "All three published cosine margins reproduced within 1e-10.",
+  "existing_scorer_parity": "The saved scorer algebra matches the native symmetric comparison in the focused test.",
+  "control_replay": {
+    "archived_rows": 2430,
+    "current_rows": 2431,
+    "archived_spearman": 0.8553747813377185,
+    "replayed_common_spearman": 0.8554706264622842,
+    "maximum_absolute_score_difference": 0.06981325149536133,
+    "mean_absolute_score_difference": 0.0027890934428744353,
+    "interpretation": "The replay uses the unchanged checkpoint on the current full cohort, with L4 inference and batches of 64. The original published predictions retain their original hardware and batch history."
+  },
+  "math_rendering": {
+    "document_sha256": "295acd47a21fe8387e3a098addbfc5e9d13bb72468d1a93f0cc647674f074afd",
+    "github_math_fences": 3,
+    "delimiter_check": "passed",
+    "macro_filter_check": "passed",
+    "relative_links": "passed",
+    "dimensions_and_algebra": "reviewed against the saved symmetric comparison and residual expansion",
+    "deployed_github_rendering": "unobserved",
+    "mathjax_engine_rendering": "unobserved"
+  }
+}
