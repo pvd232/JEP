@@ -4,6 +4,7 @@ import argparse
 import fcntl
 import json
 import subprocess
+import sys
 import uuid
 from pathlib import Path
 
@@ -296,7 +297,61 @@ def run_fit(
         _save(directory / "continuation.json", gate)
         summary["continuation"] = gate
     _save(summary_path, summary)
-    # Fitting has ended. The worker remains owned until every native run is durable.
+    queue_completed_publication(root, directory, summary)
+    # Returning releases the GPU lock. The independent publisher owns the wait.
+    print(
+        json.dumps(
+            {
+                "seed": seed,
+                "status": "succeeded",
+                "selected": summary["selected"],
+                "cloud_status": "pending",
+            }
+        ),
+        flush=True,
+    )
+
+
+def queue_completed_publication(root, directory, summary):
+    """Leave completed native artifacts available immediately for the next stage."""
+    if summary.get("status") != "succeeded":
+        raise ValueError("Queue publication after the native fit completes.")
+    summary_path = directory / "summary.json"
+    summary["cloud_status"] = "pending"
+    _save(summary_path, summary)
+    with (directory / "publication.log").open("ab") as log:
+        subprocess.Popen(
+            [
+                sys.executable,
+                "-m",
+                "csts_pilot.native_comparison_run",
+                "--root",
+                str(root),
+                "--output",
+                str(directory),
+                "--publish-completed",
+            ],
+            cwd=root,
+            stdin=subprocess.DEVNULL,
+            stdout=log,
+            stderr=subprocess.STDOUT,
+            start_new_session=True,
+        )
+
+
+def publish_completed(root, directory):
+    """Finish publication independently of GPU computation and its lease."""
+    summary_path = directory / "summary.json"
+    summary = load_json(summary_path)
+    if summary.get("status") != "succeeded":
+        raise ValueError("Publication requires a completed native fit.")
+    destination = ViperCloudDestination.model_validate(
+        load_json(root / "configs/csts-native-comparison.json")[
+            "publication_destination"
+        ]
+    )
+    seed = summary["seed"]
+    report = directory / "progress.md"
     drain_publications(root, retry_failed=True)
     for item in summary["runs"]:
         publication = load_json(Path(item["publication_queue"]))
@@ -305,6 +360,9 @@ def run_fit(
                 "Keep this worker until its native run publication succeeds."
             )
         item["cloud_reference"] = publication["reference"]
+    summary["terminal"] = next(
+        item for item in summary["runs"] if item["name"] == summary["terminal"]["name"]
+    )
     summary["cloud_status"] = "published"
     _save(summary_path, summary)
     files = {
@@ -347,12 +405,18 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
-    parser.add_argument("--commit", required=True)
-    parser.add_argument("--seed", required=True, type=int)
+    parser.add_argument("--commit")
+    parser.add_argument("--seed", type=int)
+    parser.add_argument("--publish-completed", action="store_true")
     parser.add_argument("--gate", type=Path)
     parser.add_argument("--resume-snapshot", type=Path)
     args = parser.parse_args()
     root = args.root.resolve(strict=True)
+    if args.publish_completed:
+        publish_completed(root, args.output)
+        return
+    if args.commit is None or args.seed is None:
+        parser.error("Fitting requires --commit and --seed.")
     lock_path = Path("/tmp/jep-gpu.lock")
     if not lock_path.exists():
         lock_path.touch(mode=0o664)

@@ -5,7 +5,16 @@ import fcntl
 import shutil
 import subprocess
 import uuid
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+
+from viper import execution
+from viper.authoring import experiment, input, plan, replicate, stage, variant
+from viper.outputs import StageOutputs, output
+from viper.references import GitFileRef
+from viper.repository import read_source
+from viper.runtime import CUDAComputeSpec, LocalEnvSpec, observe_python_env
+from viper.storage import ViperCloudDestination, publish_resolved_files
 
 from csts_pilot.background_storage import _save, drain_publications, queue_publication
 from csts_pilot.convergence import file_sha256
@@ -15,19 +24,15 @@ from csts_pilot.evidence_attention_run import stored_source
 from csts_pilot.evidence_readout_run import checked_source
 from csts_pilot.native_comparison import NativeScoreConfig, capture_native_comparison
 from jep_pilot.loaders import load_json
-from viper import execution
-from viper.authoring import experiment, input, plan, replicate, stage, variant
-from viper.outputs import StageOutputs, output
-from viper.references import GitFileRef
-from viper.repository import read_source
-from viper.runtime import CUDAComputeSpec, LocalEnvSpec, observe_python_env
-from viper.storage import ViperCloudDestination, publish_resolved_files
 
 
 def frozen_selection(fitted, trace, settings_sha256, protocol):
     """Require completed selection and preserve the committed remaining fit rules."""
-    if fitted.get("status") != "succeeded" or fitted.get("cloud_status") != "published":
-        raise ValueError("Test scoring requires a completed, published fit.")
+    if (
+        fitted.get("status") != "succeeded"
+        or fitted.get("terminal", {}).get("status") != "succeeded"
+    ):
+        raise ValueError("Test scoring requires a completed, sealed native fit.")
     if trace.get("budget_censored", True) or trace["selected"] != fitted["selected"]:
         raise ValueError("The completed fit and selected checkpoint must agree.")
     if protocol["settings_sha256"] != settings_sha256 or protocol["executed_seeds"] != [
@@ -73,7 +78,9 @@ def score(root, fit_path, references_path, protocol_path):
         settings["publication_destination"]
     )
     prefix = f"csts_native_comparison_20261028/seed{seed}/completed_test"
-    selected_refs = publish_resolved_files(
+    publications = ThreadPoolExecutor(max_workers=1)
+    selected_future = publications.submit(
+        publish_resolved_files,
         root,
         destination,
         {
@@ -81,23 +88,12 @@ def score(root, fit_path, references_path, protocol_path):
             for name in ("selection.json", "score.py")
         },
     )
-    _save(
-        directory / "selection-publication.json",
-        {
-            "status": "published",
-            "references": {
-                k: v.model_dump(mode="json") for k, v in selected_refs.items()
-            },
-        },
-    )
-    # Selection and the remaining fitting rules have a durable pretest seal.
+    # Native local inputs seal selection before inference. Cloud work overlaps it.
     source, environment = read_source(root), observe_python_env()
     hardware = subprocess.check_output(
         ["nvidia-smi", "--query-gpu=name", "--format=csv,noheader"], text=True
     ).strip()
-    model_record = dict(
-        fitted["terminal"], reference=fitted["terminal"]["cloud_reference"]
-    )
+    model_record = fitted["terminal"]
     summary = {
         "status": "scoring",
         "seed": seed,
@@ -227,6 +223,18 @@ def score(root, fit_path, references_path, protocol_path):
             )
         summary["in_flight"] = None
         _save(directory / "summary.json", summary)
+    # GPU computation is complete. Publication completion now gates shutdown.
+    selected_refs = selected_future.result()
+    publications.shutdown(wait=True)
+    _save(
+        directory / "selection-publication.json",
+        {
+            "status": "published",
+            "references": {
+                k: v.model_dump(mode="json") for k, v in selected_refs.items()
+            },
+        },
+    )
     drain_publications(root, retry_failed=True)
     for record in summary["runs"].values():
         receipt = load_json(Path(record["publication_queue"]))
@@ -259,14 +267,43 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("root", "fit", "references", "protocol"):
         parser.add_argument("--" + name, required=True, type=Path)
+    parser.add_argument("--allow-completed-uploader", action="store_true")
     args = parser.parse_args()
     with Path("/tmp/jep-gpu.lock").open("r+") as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        if subprocess.check_output(
+        try:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            if not args.allow_completed_uploader:
+                raise
+            fitted = load_json(args.fit)
+            frozen_selection(
+                fitted,
+                load_json(Path(fitted["trace"])),
+                file_sha256(args.root / "configs/csts-native-comparison.json"),
+                load_json(args.protocol),
+            )
+        active = subprocess.check_output(
             ["nvidia-smi", "--query-compute-apps=pid", "--format=csv,noheader"],
             text=True,
-        ).strip():
-            raise RuntimeError("Wait for the fitting GPU process to finish.")
+        ).strip()
+        if active:
+            fitted = load_json(args.fit)
+            for pid in active.splitlines():
+                command = (
+                    (Path("/proc") / pid.strip() / "cmdline")
+                    .read_bytes()
+                    .decode()
+                    .split("\0")
+                )
+                if (
+                    not args.allow_completed_uploader
+                    or "csts_pilot.native_comparison_run" not in command
+                    or "--root" not in command
+                    or command[command.index("--root") + 1] != str(args.root)
+                    or "--seed" not in command
+                    or command[command.index("--seed") + 1] != str(fitted["seed"])
+                ):
+                    raise RuntimeError("The GPU has an unrelated active computation.")
         score(args.root, args.fit, args.references, args.protocol)
 
 

@@ -52,6 +52,12 @@ The [final scoring driver](../scripts/finalize_csts_native_comparison.py) freeze
 
 Two [focused final scoring checks](../tests/test_native_comparison_finalization.py) passed in 7.24 seconds. They check reference subset ordering, changed inputs, duplicate identities and the source group bootstrap with identical predictions. Ruff and syntax checks passed. This review covers orchestration and reporting; final GPU prediction execution follows completion of the three fits. Cloud receipts and GitHub delivery precede final worker shutdown. Shared GPU locks and process inspection preserve unrelated work.
 
-The reporting schedule now publishes a finished fit's test score while the remaining fits continue under the same committed validation rule. Each scored model has completed patience and Cloud publication. The aggregate report retains all three selected models and the conditional seed summary.
+The reporting schedule now publishes a finished fit's test score while the remaining fits continue under the same committed validation rule. Each scored model has completed patience and has sealed native outputs. The aggregate report retains all three selected models and the conditional seed summary.
 
 Final aggregation reuses each completed model's sealed test and edit predictions. It verifies the selected model hash, input hashes and original metadata before including those values. Four focused scoring and reuse checks passed in 7.45 seconds.
+
+## Review of asynchronous completion
+
+The scoring driver accepts a completed native fit while its Cloud publication remains pending, reads its sealed local model reference, and publishes selection evidence concurrently with GPU inference. The completion publisher runs as an independent CPU process for subsequent invocations of the fitting controller. Existing fitting processes retain their original code; a completed fit can hand its GPU to scoring while its original uploader finishes. The scorer checks the completed trace, immutable model selection and process identity before this handoff. Runtime shutdown requires successful native run queues and final publication receipts.
+
+Six focused checks passed in 7.11 seconds. They cover exact cohort joins, source group inference, frozen selection with Cloud publication pending, prediction reuse, return from a pending upload, and withholding the completion receipt until publication succeeds. Ruff passed. Fitting weights, learning rates and stopping rules retain their committed identities.

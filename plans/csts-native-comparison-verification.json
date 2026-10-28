@@ -6,7 +6,7 @@
       "display": 13,
       "inline": 48,
       "relative_links": 23,
-      "source_sha256": "e6be0422c4a91284c9e7c6112fc773b41540e0e79c63cc7cf397485d53af16c0"
+      "source_sha256": "de1acfaf64c20cb870bef7577a6285db55f6653a01739e6b8c76d4778713d4af"
     },
     "plans/csts-readout-convergence-methods.md": {
       "display": 1,
@@ -18,7 +18,7 @@
       "display": 0,
       "inline": 0,
       "relative_links": 8,
-      "source_sha256": "b085fccea5ec6eb6b89589c55295ddae4aff6de906ceec00187d98ea361b7f3c"
+      "source_sha256": "12c6ba7f76b40b96df4c2e67362198feea9c14a6331864ba82c7188ea7955968"
     }
   },
   "errors": [],
@@ -109,5 +109,17 @@
     "mathematics": "Existing equations retained; reporting schedule prose updated.",
     "driver_sha256": "6552c3e430ea3549c06e3e7583e9d42a8c0b36daab0e9e3e084ff4c2e49bfde3",
     "reuse": "Sealed predictions checked against selected model and rows; no repeated GPU prediction pass."
+  },
+  "asynchronous_completion": {
+    "tests": 6,
+    "seconds": 7.11,
+    "lint": "passed",
+    "source_sha256": {
+      "csts_pilot/native_comparison_run.py": "13b3a4b75a09510efc68792b528602c0541ee68e56c24dd7f5daa89409a0e118",
+      "scripts/score_completed_csts_native.py": "d288fc01e16029b175755f8e41158ad3ae0f31a8887b483a4f8624d8c3cbf93f",
+      "tests/test_native_comparison_finalization.py": "e86005d290b05b84f7aa688406d57ffe2d54975e38034499134e8b5ffcd5bee6",
+      "tests/test_native_publication_handoff.py": "44ba0e7b6073538c16e17e57bf2f5a38aee42aae346bc182dcb5cc2817a7b654"
+    },
+    "existing_fits": "Original immutable fitting code; completed local native outputs feed a separate scoring process while native publication continues."
   }
 }

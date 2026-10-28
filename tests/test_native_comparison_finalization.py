@@ -73,6 +73,7 @@ def test_completed_score_freezes_the_model_and_remaining_protocol():
         "selected": selected,
         "seed": 8,
         "source_commit": "b" * 40,
+        "terminal": {"status": "succeeded"},
     }
     trace = {"selected": selected, "budget_censored": False}
     protocol = {"settings_sha256": "c" * 64, "executed_seeds": [7, 8, 9]}
@@ -81,7 +82,7 @@ def test_completed_score_freezes_the_model_and_remaining_protocol():
     assert frozen["executed_seeds"] == [7, 8, 9]
     for changed in (
         {"status": "running"},
-        {"cloud_status": "pending"},
+        {"terminal": {"status": "failed"}},
         {"seed": 99},
     ):
         with pytest.raises(ValueError):
@@ -92,6 +93,9 @@ def test_completed_score_freezes_the_model_and_remaining_protocol():
         )
     with pytest.raises(ValueError):
         completed.frozen_selection(fitted, trace, "d" * 64, protocol)
+    assert completed.frozen_selection(
+        {**fitted, "cloud_status": "pending"}, trace, "c" * 64, protocol
+    )["selected_model_sha256"] == {"8": "a" * 64}
 
 
 def test_reusing_completed_scores_checks_selected_model_and_test():
