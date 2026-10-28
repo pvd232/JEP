@@ -31,6 +31,10 @@ The selected C heads place their attention across several tokens and follow quot
 
 **Working hypothesis:** A's final sentence vectors retain condition relevant meaning that a small symmetric comparison can use more accurately than cosine. Keep A's vectors as the main representation and use the learned comparison as the current candidate improvement. Quotation supervision supplies a separate measurement of evidence selection; its contribution to better similarity requires further study.
 
+The baseline is the Qwen model after proposition training and similarity training, as documented in the [original comparison](https://github.com/pvd232/JEP/blob/bef8cfb0f8f85a602f0ec86ff9450f9d467fa9d5/training_outputs/proposition_full_20261026/comparison_report.md). Its training used the final sentence vector with cosine. This study held those LoRA weights fixed, as implemented by `extract_readout()` in the [extraction stage](../../csts_pilot/evidence_readout_stages.py). All three seeds train new heads on that one backbone.
+
+**Interpretation:** A uses the representation and score through which Qwen received its rating supervision. B/C introduce another way to combine the same frozen token states. We infer that this training history can favor A's representation. The measured B/C results therefore describe adding these heads after the original training. Joint training would also allow Qwen's token states to adapt to the new heads and loss. The gain from comparing A's fixed vectors gives direct motivation for the [proposed joint comparison experiment](../../plans/csts-readout-convergence-methods.md#proposed-next-step-train-qwen-and-the-comparison-together).
+
 This is an exploratory result on the existing test set, which informed the follow up. The intervals measure uncertainty across test source groups conditional on these three head seeds and this one frozen backbone. Confirmation calls for fresh reserved examples and additional backbone seeds.
 
 ## Paired comparisons
@@ -110,3 +114,4 @@ All three seed fitting runs and all five final stages have published VIPER Cloud
 Candidate fitting source: `bf167d773df10cf097a3be7e5966b69c299d9227`. Global selection, comparison fitting, extraction and evaluation functions: `fdbcb3461f63cf44d7cb3cde4de27332594e452d`. The final controller repair seals evaluation rows through the existing native publication stage. The retained model and feature hashes were used for the completed evaluation.
 
 [Frozen selection](selection.json) records the model hash and the validation selection. [Methods](../../plans/csts-readout-convergence-methods.md) and [code review](../../plans/csts-readout-convergence-review.md) describe the implementation, checks and evaluation binding repair. The [execution stream](progress.md) retains the recovery history.
+

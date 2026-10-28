@@ -2,7 +2,7 @@
 
 Completed on the Colab A100. [Results](../training_outputs/csts_evidence_readout_20261028/progress.md). [Diagnosis and proposed follow up](../training_outputs/csts_evidence_readout_20261028/diagnosis.md).
 
-The [next fitting run](csts-readout-convergence-methods.md) selects learning rates, trains B/C to a validation plateau and fits comparisons for A, D and E.
+The [completed follow up](csts-readout-convergence-methods.md) selected learning rates, trained B/C to a validation plateau and fitted comparisons for A, D and E. Its [results](../training_outputs/csts_readout_convergence_20261028/results.md) discuss the trained Qwen baseline and proposed joint training.
 
 ## Question and hypothesis
 
@@ -17,11 +17,11 @@ All five models use the same final proposition checkpoint: Qwen3 Embedding 8B wi
 For each sentence, Qwen reads the condition, then the sentence, then an end of document token. Let $e_1,e_2\in\mathbb{R}^{4096}$ be its final layer vectors at that last token for the two sentences. Divide each vector by its length, then take their dot product:
 
 ```math
-\widehat y_A
+\widehat{y}_A
 =\frac{e_1^\top e_2}{\|e_1\|_2\|e_2\|_2}.
 ```
 
-This is cosine similarity. A uses the saved model parameters and supplies the reference score for evaluating B through E.
+The vectors have positive length. This is cosine similarity. A uses the saved model parameters and supplies the reference score for evaluating B through E. The final token selection is implemented by `last_token_pool()` in the [encoder](../csts_pilot/baseline_models.py).
 
 ## B: learn which sentence tokens to average, using ratings
 
@@ -31,13 +31,13 @@ Average the condition vectors to obtain $u$. Two learned matrices $W_q,W_k\in\ma
 
 ```math
 \begin{aligned}
-u&=\frac1n\sum_{j=1}^{n}r_j,\\
+u&=\frac{1}{n}\sum_{j=1}^{n}r_j,\\
 q&=W_q\mathrm{LN}(u),\qquad k_t=W_k\mathrm{LN}(h_t),\\
 \ell_t&=\frac{q^\top k_t}{\sqrt{128}}.
 \end{aligned}
 ```
 
-Here LN subtracts each vector's coordinate mean, then divides by the square root of (coordinate variance plus $10^{-5}$) for stability. Token scoring uses 128 coordinates and square root scaling. Averaging the condition vectors and choosing 128 are design choices to test.
+Here $u\in\mathbb{R}^{4096}$ is the condition average, $q,k_t\in\mathbb{R}^{128}$ are the query and key vectors, and $\ell_t\in\mathbb{R}$ is the token score. LN subtracts each vector's coordinate mean, then divides by the square root of (coordinate variance plus $10^{-5}$) for stability. Averaging the condition vectors and choosing 128 are design choices to test. `EvidenceReadout.forward()` in the [head implementation](../csts_pilot/evidence_readout.py) performs these operations.
 
 Convert the token scores into positive weights summing to one. Average the original sentence vectors using those weights, then divide by the result's length:
 
@@ -47,12 +47,12 @@ Convert the token scores into positive weights summing to one. Average the origi
 \qquad z=\frac{v}{\|v\|_2}.
 ```
 
-The index $a$ runs over sentence tokens. Compute $z$ separately for each sentence. B predicts $\widehat y_B=z_1^\top z_2$. The resulting sentence vectors have 4,096 coordinates.
+The index $a$ runs over sentence tokens. The weights $\alpha_t$ are scalars, and $v,z\in\mathbb{R}^{4096}$. The implementation requires $v$ to have a finite positive length. Compute $z$ separately for each sentence. B predicts $\widehat{y}_B=z_1^\top z_2$.
 
 For comparison $i$, convert the human rating to $y_i=(\mathrm{rating}_i-1)/4$. For a batch of $m$ comparisons, minimize mean squared error:
 
 ```math
-L_r=\frac1m\sum_{i=1}^{m}(\widehat y_i-y_i)^2,
+L_r=\frac{1}{m}\sum_{i=1}^{m}(\widehat{y}_i-y_i)^2,
 \qquad L_B=L_r.
 ```
 
@@ -72,7 +72,7 @@ p_t&=\frac{\exp(\ell_t)}{Z},\qquad t=0,\ldots,T.
 \end{aligned}
 ```
 
-For labeled sentence occurrence $s$, $p_{st}$ and $g_{st}$ are predicted and target probabilities. Valid quotations divide probability equally across the union of their overlapping tokens. A teacher record marking the property as unspecified assigns all probability to option zero. Evidence supervision covers complete quotations with unique matches and explicit unspecified records. Rating supervision covers every comparison.
+For labeled sentence occurrence $s=1,\ldots,S$, $p_{st}$ and $g_{st}$ are predicted and target probabilities. Valid quotations divide probability equally across the union of their overlapping tokens. A teacher record marking the property as unspecified assigns all probability to option zero. Evidence supervision covers complete quotations with unique matches and explicit unspecified records. Rating supervision covers every comparison. `quotation_target()` and `selection_loss()` in the [head implementation](../csts_pilot/evidence_readout.py) define the targets and loss.
 
 Since target probabilities sum to one, substituting the expression for $p$ gives the evidence loss below. Average it over $S$ labeled occurrences, then add it to rating loss:
 
@@ -81,13 +81,13 @@ Since target probabilities sum to one, substituting the expression for $p$ gives
 E_s&=-\sum_{t=0}^{T_s}g_{st}\log p_{st}
 =\log Z_s-\sum_{t=0}^{T_s}g_{st}\ell_{st},\\
 \frac{\partial E_s}{\partial\ell_{st}}&=p_{st}-g_{st},\\
-L_e&=\frac1S\sum_{s=1}^{S}E_s,\qquad L_C=L_r+0.1L_e.
+L_e&=\frac{1}{S}\sum_{s=1}^{S}E_s,\qquad L_C=L_r+0.1L_e.
 \end{aligned}
 ```
 
 $T_s$ is its sentence token count and $Z_s$ its probability denominator. The derivative sets each token's training signal to predicted probability minus target probability. Set $L_e=0$ for a batch containing zero labeled occurrences.
 
-C's prediction is also $\widehat y_C=z_1^\top z_2$, using its own learned token weights.
+C's prediction is also $\widehat{y}_C=z_1^\top z_2$, using its own learned token weights.
 
 Both models construct $z$ using weights over sentence tokens. The unspecified property probability supplies an addressability diagnostic. For example, joint probabilities 0.90 for the unspecified option and 0.06/0.04 for two tokens produce sentence weights 0.60/0.40. Independent normalization keeps token weights stable across the full range of unspecified property probabilities. Initialize $k_0$ and $b_0$ at zero. C's evidence loss supplies their training gradients.
 
@@ -105,14 +105,14 @@ f(z_1,z_2)
 \end{aligned}
 ```
 
-Here $j$ indexes coordinates, $\odot$ multiplies matching coordinates, $w_d,w_p\in\mathbb{R}^{4096}$ are learned weights, and $b$ is a scalar. The formula gives the same score in either sentence order. Starting all 8,193 new parameters at zero reproduces cosine exactly.
+Here $j$ indexes coordinates, $\odot$ multiplies matching coordinates, $w_d,w_p\in\mathbb{R}^{4096}$ are learned weights, and $b\in\mathbb{R}$ is a scalar. The inputs $z_1,z_2\in\mathbb{R}^{4096}$ have unit length. The formula gives the same score in either sentence order. Starting all 8,193 new parameters at zero reproduces cosine exactly. `SymmetricComparison.forward()` in the [comparison implementation](../csts_pilot/evidence_readout.py) calculates this score.
 
 **D** applies this function to B's selected, frozen vectors. **E** applies it to C's selected, frozen vectors. Writing $f_D,f_E$ for the separately fitted functions and superscripts B/C for the vectors they receive:
 
 ```math
 \begin{aligned}
-\widehat y_D&=f_D(z_1^B,z_2^B),\\
-\widehat y_E&=f_E(z_1^C,z_2^C),\qquad L_D=L_E=L_r.
+\widehat{y}_D&=f_D(z_1^B,z_2^B),\\
+\widehat{y}_E&=f_E(z_1^C,z_2^C),\qquad L_D=L_E=L_r.
 \end{aligned}
 ```
 
@@ -141,4 +141,4 @@ Check the following:
 
 A positive mean C−B Spearman difference, with its interval above zero and the predicted edit behavior, supports evidence supervision. D beating B or E beating C supports this comparison function. E beating D includes fitting new comparison weights. C beating A and matching B supports fitting the averaging procedure using ratings. Improved quotation agreement with stable similarity scores motivates further work on sentence comparison.
 
-This benchmark has already informed project decisions. Plan replication using fresh material and independent backbone seeds. The [review](csts-evidence-readout-review.md) records completed code checks and execution details. CPU fixtures verify calculations and workflow execution. The controller waits for the shared A100 to become idle. Progress streams to native logs and `progress.md`; `summary.json` identifies final reports.
+This benchmark has already informed project decisions. Plan replication using fresh material and independent backbone seeds. The [review](csts-evidence-readout-review.md) records completed code checks and execution details. CPU fixtures verify calculations and workflow execution. The controller waits for the shared A100 to become idle. The [execution stream](../training_outputs/csts_evidence_readout_20261028/progress.md) records native progress, and the follow up [Cloud references](../training_outputs/csts_readout_convergence_20261028/cloud-receipts.json) identify the durable reports.

@@ -32,7 +32,7 @@ For any pair of unit sentence vectors $a,b\in\mathbb{R}^{4096}$, use
 f(a,b)=a^\top b+w_d^\top|a-b|+w_p^\top(a\odot b)+c.
 ```
 
-The first term is cosine similarity. The learned weights score absolute coordinate differences and matching coordinate products. The function has 8,193 parameters and gives the same prediction when sentence order is reversed. Initialize all additional parameters at zero. The initial function then equals the original cosine score for that representation.
+The first term is cosine similarity. The learned vectors $w_d,w_p\in\mathbb{R}^{4096}$ score absolute coordinate differences and matching coordinate products; $\odot$ denotes multiplication of matching coordinates, and $c\in\mathbb{R}$ is a learned constant. The function maps two unit vectors to a scalar. It has 8,193 parameters and gives the same prediction when sentence order is reversed. Initialize all additional parameters at zero. The initial function then equals the original cosine score for that representation. `SymmetricComparison.forward()` in the [implementation](../csts_pilot/evidence_readout.py) realizes this function.
 
 Fit all three comparison functions with ratings MSE, AdamW, learning rate 0.001, weight decay 0.01, batch size 32 and clipping at 1. Use the same batches for all three functions, with permutation seed equal to head seed plus 10,000. Initialization is eligible for selection. Select each function's first strictly best validation Spearman. Continue until ten epochs have passed since any function improved, with the same 256 epoch ceiling and explicit incomplete status.
 
@@ -57,3 +57,44 @@ Each fitting epoch saves an immutable copy of its current and selected weights, 
 The [configuration](../configs/csts-readout-convergence.json) declares the grid and stopping rules. The [native stages](../csts_pilot/evidence_readout_convergence.py) fit and evaluate the models. The [controller](../csts_pilot/evidence_readout_convergence_run.py) consumes the rebuilt native artifacts under the shared GPU lock on a Colab A100 with 40 GB memory. Cache extraction, fitting and evaluation use native VIPER runs. The existing publication queue invokes VIPER Cloud promotion in separate processes as each stage completes. Publication receipts record the sealed Cloud references.
 
 Review covers equal seed coverage, rate selection using validation alone, tie handling, rejection of incomplete fits, initialization selection, checkpoint retention, full coordinate values and frozen B/C parameters during comparison fitting. Five focused tests passed in the L4 environment. The earlier implementation passed 72 related tests and three publisher tests. The completed native evaluation exercised stored model transport, sealed test inputs and the separate metric worker. Scientific execution uses the committed source and configuration. The Markdown stream reports extraction, every epoch and the final results.
+
+## Proposed next step: train Qwen and the comparison together
+
+This section proposes a new experiment. The completed measurements above used frozen Qwen features. The [results](../training_outputs/csts_readout_convergence_20261028/results.md#what-this-changes) motivate adapting Qwen's LoRA weights together with the comparison function. The working hypothesis is that joint fitting can improve similarity by adapting the final sentence vector to the learned coordinate weights.
+
+For training comparison $i=1,\ldots,N$, let $x_{i1},x_{i2}$ be the two input texts, each containing the condition and one sentence, and let $y_i\in[0,1]$ be the normalized human rating. The vector $\theta\in\mathbb{R}^{p}$ contains Qwen's $p$ trainable LoRA parameters. The underlying pretrained model weights stay fixed. Let $e_\theta(x)\in\mathbb{R}^{4096}$ be Qwen's final token vector with a finite positive length. The vector $\phi\in\mathbb{R}^{8193}$ contains the comparison parameters $w_d,w_p,c$ defined above.
+
+Normalize the final vector and use the learned comparison in the rating objective:
+
+```math
+\begin{aligned}
+z_\theta(x)
+&=\frac{e_\theta(x)}{\|e_\theta(x)\|_2},\\
+\widehat{y}_i
+&=f_\phi\bigl(z_\theta(x_{i1}),z_\theta(x_{i2})\bigr),\\
+L_r(\theta,\phi)
+&=\frac{1}{N}\sum_{i=1}^{N}(\widehat{y}_i-y_i)^2.
+\end{aligned}
+```
+
+Here $z_\theta(x)\in\mathbb{R}^{4096}$ has unit length and $f_\phi$ is the symmetric function above. Both $\theta$ and $\phi$ receive rating gradients. Initialize $\phi$ at zero to begin at the encoder's cosine score. The existing `last_token_pool()` in the [encoder](../csts_pilot/baseline_models.py) supplies the normalized final vector, and `SymmetricComparison` in the [head implementation](../csts_pilot/evidence_readout.py) supplies the comparison. Joint fitting is proposed work.
+
+The chain rule explains the change in learning. Write $z_{ij}=z_\theta(x_{ij})$ and $J_{ij}=\partial z_{ij}/\partial\theta\in\mathbb{R}^{4096\times p}$, where $j\in\{1,2\}$ identifies the sentence. Differentiating each squared rating error gives
+
+```math
+\nabla_\theta L_r
+=\frac{2}{N}\sum_{i=1}^{N}(\widehat{y}_i-y_i)
+\sum_{j=1}^{2}J_{ij}^{\top}\nabla_{z_{ij}}f_\phi(z_{i1},z_{i2}).
+```
+
+The gradient of the score with respect to each sentence vector has 4,096 coordinates. At equal coordinates, the absolute difference term uses a subgradient. Multiplication by $J_{ij}^{\top}$ gives a gradient with $p$ coordinates for the LoRA parameters. The comparison can therefore teach Qwen how to change its representation. The completed study optimized the comparison on cached vectors; the proposed study keeps the encoder forward pass in the training graph.
+
+Use paired cosine and learned comparison runs for each of two starting points: the current A adapter and fresh LoRA adapters on the original pretrained Qwen3 Embedding 8B checkpoint. Within each pair, match the encoder initialization, training rows, batches, tuning resources and stopping policy. The fresh pair shares the same proposition training phase, then uses its assigned score from the first rating update. The continuation pair measures the value of further fitting from A. Compare both joint models with the existing frozen A plus comparison reference. Additional adapter seeds and fresh reserved evaluation examples provide the next confirmation setting.
+
+A simultaneous proposition objective is a separate proposed factor. Define $L_p(\theta)$ as the existing scalar mean causal cross entropy for writing the accepted proposition answers, implemented by `answer_loss_sum()` in the [writing stage](../csts_pilot/qwen_evidence.py). With a validation selected scalar weight $\lambda_p\geq0$, the joint objective would be
+
+```math
+L(\theta,\phi)=L_r(\theta,\phi)+\lambda_p L_p(\theta).
+```
+
+The writing targets and the quotation positions used by C define different losses. Treat $\lambda_p$ as its own experimental choice. The first native comparison test can preserve the original proposition then ratings schedule; a subsequent matched test can measure simultaneous writing supervision.
