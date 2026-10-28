@@ -1,0 +1,311 @@
+{
+  "vector_capture": {
+    "status": "published",
+    "references": {
+      "csts_comparison_diagnosis_20261028/inputs/control_test.pt": {
+        "sha256": "3c53ba1fed8e45f179143d227c957d407f21369437fcddfcbe8e54583265fd9a",
+        "bytes": 79609548,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "2dd1a1e69ec2edaae7ff4c1bb068850f905418e4914f0e4b3c8278863f224ca6",
+          "path": "csts_comparison_diagnosis_20261028/inputs/control_test.pt"
+        }
+      },
+      "csts_comparison_diagnosis_20261028/inputs/control_training.pt": {
+        "sha256": "0f433c306939e8a6f5ff31723ca24a589410a1f9b3c34119738e8ef79ee0e069",
+        "bytes": 196577384,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "8db647fdb7493ba7d2bd6cb202e7fb1f76743e2a70c941113edc10e6ba0bef5b",
+          "path": "csts_comparison_diagnosis_20261028/inputs/control_training.pt"
+        }
+      },
+      "csts_comparison_diagnosis_20261028/inputs/control_validation.pt": {
+        "sha256": "7217614d1fd7cd4a53f000ebb16beb87d9f7fbc06013824277023a88081a312e",
+        "bytes": 50991862,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "1cd38e48dc71852678b22998bc39a150b6e99ec6cae739b186e9073f168139a2",
+          "path": "csts_comparison_diagnosis_20261028/inputs/control_validation.pt"
+        }
+      }
+    }
+  },
+  "color_vectors": {
+    "status": "published",
+    "references": {
+      "csts_comparison_diagnosis_20261028/inputs/color/base-embeddings.npz": {
+        "sha256": "92955ce97eb2bb86d82df8e18cafeadeb8b19913973d94e359af881deb19161d",
+        "bytes": 8580494,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "d2272e82b04263150a40acfd41bd0bbe5e9b776c7fcb8068cf9642259cef8669",
+          "path": "csts_comparison_diagnosis_20261028/inputs/color/base-embeddings.npz"
+        }
+      },
+      "csts_comparison_diagnosis_20261028/inputs/color/diagnostic_protocol.json": {
+        "sha256": "c621d752a0f34f95c0bd37084b72fec46b3a66cb7e787d8e75036c7722a03aa0",
+        "bytes": 1277,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "d2272e82b04263150a40acfd41bd0bbe5e9b776c7fcb8068cf9642259cef8669",
+          "path": "csts_comparison_diagnosis_20261028/inputs/color/diagnostic_protocol.json"
+        }
+      },
+      "csts_comparison_diagnosis_20261028/inputs/color/models.json": {
+        "sha256": "1594531128b1146fc7382fca6f0344e3900677e815400e02101f3fe56d027655",
+        "bytes": 3235,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "d2272e82b04263150a40acfd41bd0bbe5e9b776c7fcb8068cf9642259cef8669",
+          "path": "csts_comparison_diagnosis_20261028/inputs/color/models.json"
+        }
+      },
+      "csts_comparison_diagnosis_20261028/inputs/color/probe.json": {
+        "sha256": "0dcbae5f5eac129286aacb9455991ccc60c5d25a739c0633f8ff7a5a688c3323",
+        "bytes": 263390,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "d2272e82b04263150a40acfd41bd0bbe5e9b776c7fcb8068cf9642259cef8669",
+          "path": "csts_comparison_diagnosis_20261028/inputs/color/probe.json"
+        }
+      },
+      "csts_comparison_diagnosis_20261028/inputs/color/seed7_P_A-embeddings.npz": {
+        "sha256": "f9d531d85f327637be5df0bd0a199d3acb7e72b40f55e214682f2be3226e6dff",
+        "bytes": 8580494,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "d2272e82b04263150a40acfd41bd0bbe5e9b776c7fcb8068cf9642259cef8669",
+          "path": "csts_comparison_diagnosis_20261028/inputs/color/seed7_P_A-embeddings.npz"
+        }
+      },
+      "csts_comparison_diagnosis_20261028/inputs/color/seed7_P_B-embeddings.npz": {
+        "sha256": "b67126324cc56ec7a05250d95f4c4bc2225be26815cb0ae84174af45df2f8d16",
+        "bytes": 8580494,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "d2272e82b04263150a40acfd41bd0bbe5e9b776c7fcb8068cf9642259cef8669",
+          "path": "csts_comparison_diagnosis_20261028/inputs/color/seed7_P_B-embeddings.npz"
+        }
+      },
+      "csts_comparison_diagnosis_20261028/inputs/color/seed7_R_A-embeddings.npz": {
+        "sha256": "d678f0d698147aaba8ffd30bd130db42c53b588b71e7b58060acc826d1b0e75f",
+        "bytes": 8580494,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "d2272e82b04263150a40acfd41bd0bbe5e9b776c7fcb8068cf9642259cef8669",
+          "path": "csts_comparison_diagnosis_20261028/inputs/color/seed7_R_A-embeddings.npz"
+        }
+      },
+      "csts_comparison_diagnosis_20261028/inputs/color/seed7_R_B-embeddings.npz": {
+        "sha256": "5ac8f70980aa9712450de3de65cc1b3973baca28974865db65ffd6bf9e932f7b",
+        "bytes": 8580494,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "d2272e82b04263150a40acfd41bd0bbe5e9b776c7fcb8068cf9642259cef8669",
+          "path": "csts_comparison_diagnosis_20261028/inputs/color/seed7_R_B-embeddings.npz"
+        }
+      },
+      "csts_comparison_diagnosis_20261028/inputs/color/seed8_P_A-embeddings.npz": {
+        "sha256": "3a89caf21c7c8a4658b45f2e3bf04c33f63873fe2b2da94dc0fcffe453cff17f",
+        "bytes": 8580494,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "d2272e82b04263150a40acfd41bd0bbe5e9b776c7fcb8068cf9642259cef8669",
+          "path": "csts_comparison_diagnosis_20261028/inputs/color/seed8_P_A-embeddings.npz"
+        }
+      },
+      "csts_comparison_diagnosis_20261028/inputs/color/seed8_P_B-embeddings.npz": {
+        "sha256": "bbc56a3b8949e1f55595ff68da0690de975f533cc1485d82abab40f9a3b122a5",
+        "bytes": 8580494,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "d2272e82b04263150a40acfd41bd0bbe5e9b776c7fcb8068cf9642259cef8669",
+          "path": "csts_comparison_diagnosis_20261028/inputs/color/seed8_P_B-embeddings.npz"
+        }
+      },
+      "csts_comparison_diagnosis_20261028/inputs/color/seed8_R_A-embeddings.npz": {
+        "sha256": "41b7a336d38d4ec7142698895f105e79cce144c0f841389212920824c293dfaa",
+        "bytes": 8580494,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "d2272e82b04263150a40acfd41bd0bbe5e9b776c7fcb8068cf9642259cef8669",
+          "path": "csts_comparison_diagnosis_20261028/inputs/color/seed8_R_A-embeddings.npz"
+        }
+      },
+      "csts_comparison_diagnosis_20261028/inputs/color/seed8_R_B-embeddings.npz": {
+        "sha256": "2a8031e54c0819de6dcb49c590a163ca32b2a57543958869ef5a236d57f80d5c",
+        "bytes": 8580494,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "d2272e82b04263150a40acfd41bd0bbe5e9b776c7fcb8068cf9642259cef8669",
+          "path": "csts_comparison_diagnosis_20261028/inputs/color/seed8_R_B-embeddings.npz"
+        }
+      },
+      "csts_comparison_diagnosis_20261028/inputs/color/seed9_P_A-embeddings.npz": {
+        "sha256": "5dd46dffecc06e829f8f11b418d0727b3553e1a0a79432c3c79e8f776ca90b3d",
+        "bytes": 8580494,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "d2272e82b04263150a40acfd41bd0bbe5e9b776c7fcb8068cf9642259cef8669",
+          "path": "csts_comparison_diagnosis_20261028/inputs/color/seed9_P_A-embeddings.npz"
+        }
+      },
+      "csts_comparison_diagnosis_20261028/inputs/color/seed9_P_B-embeddings.npz": {
+        "sha256": "f95f6aa77de0e432afa56acf4814ad8e999329644896ca14a16fd9b5f5a5734f",
+        "bytes": 8580494,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "d2272e82b04263150a40acfd41bd0bbe5e9b776c7fcb8068cf9642259cef8669",
+          "path": "csts_comparison_diagnosis_20261028/inputs/color/seed9_P_B-embeddings.npz"
+        }
+      },
+      "csts_comparison_diagnosis_20261028/inputs/color/seed9_R_A-embeddings.npz": {
+        "sha256": "8f282abb978419ebde49b275543af02cb96347db2081f07cc0c2558a3e17f48a",
+        "bytes": 8580494,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "d2272e82b04263150a40acfd41bd0bbe5e9b776c7fcb8068cf9642259cef8669",
+          "path": "csts_comparison_diagnosis_20261028/inputs/color/seed9_R_A-embeddings.npz"
+        }
+      },
+      "csts_comparison_diagnosis_20261028/inputs/color/seed9_R_B-embeddings.npz": {
+        "sha256": "7772cc764da79b2adc418b7a976b2f20d41a31ce665c2f7533995db3c7d57c23",
+        "bytes": 8580494,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "d2272e82b04263150a40acfd41bd0bbe5e9b776c7fcb8068cf9642259cef8669",
+          "path": "csts_comparison_diagnosis_20261028/inputs/color/seed9_R_B-embeddings.npz"
+        }
+      }
+    }
+  },
+  "original_comparisons": {
+    "sha256": "766839f3a8166c6e2befc95c0726d96eae0785e09cea5802cf0b5fb0b7e297d2",
+    "bytes": 26512875,
+    "stored_at": {
+      "kind": "gcs",
+      "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+      "prefix": "viper",
+      "owner": "pvd232",
+      "workspace": "jep_csts_joint_20261021",
+      "revision": "625ce7e691ebfe86a3e92c9f801da5f0b3f48735a4db9f415cc7323731560fdf",
+      "path": "experiments/csts_refit_fdbcb346_1d57cf4f_fit/runs/fit/01M61SGH4ZDS1HNSKRXY8EDDRE/artifacts/fit/model/model.pt"
+    }
+  },
+  "source": {
+    "commit": "d912e9b34e43ffada90c304246263fa2dff49f1f",
+    "protocol": {
+      "status": "fixed_before_new_head_fit",
+      "recorded_utc": "2026-10-28T23:33:58.065850+00:00",
+      "existing_encoder_sha256": "d30c00fc76e70ec639493b7121a8b8c9d7520745733857c1c49f0902fff00f4f",
+      "ratings_control_sha256": "667c124a49be72a6fd8e9fa3df6974830e4ab6a46a10243c360dd46bcc75b534",
+      "head_seed": 7,
+      "head_epochs": 21,
+      "head_learning_rate": 0.001,
+      "weight_decay": 0.01,
+      "batch_size": 32,
+      "clip_norm": 1,
+      "permutation_seed": 10007,
+      "selection": "First strictly best validation Spearman including initialization.",
+      "new_encoder_updates": 0,
+      "color_intervals": {
+        "draws": 10000,
+        "confidence": 0.9833333333333333,
+        "contrasts": [
+          "implicit_margin",
+          "Q",
+          "C"
+        ]
+      },
+      "interaction_interval": {
+        "draws": 2000,
+        "confidence": 0.95,
+        "unit": "Source groups; all four scores evaluated on the same rows."
+      },
+      "scope": "Exploratory analysis after earlier test reporting. One existing seed 7 encoder pair and one new comparison fit.",
+      "files_sha256": {
+        "scripts/capture_csts_control_vectors.py": "c0e2ab639bdc05d5578631d26b45f7c790e7949f03d76397f2a182b8d952ebb0",
+        "scripts/analyze_csts_comparison.py": "eb6291c5a4b3f914e3efc50279da0feed85a610238a352b89f13e09532140207",
+        "tests/test_comparison_diagnostics.py": "440d02a2798c58a019e01e362d6ddf5a92446a59687403589ba86df29e37f162",
+        "plans/csts-comparison-diagnostics-methods.md": "295acd47a21fe8387e3a098addbfc5e9d13bb72468d1a93f0cc647674f074afd"
+      }
+    }
+  }
+}

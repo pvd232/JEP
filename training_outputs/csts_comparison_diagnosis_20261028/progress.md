@@ -1,5 +1,7 @@
-# Comparison diagnostics
+# Comparison diagnostics complete
 
-Replaying the existing comparison on saved color vectors and reviewing individual errors. The ratings control receives one frozen encoding pass and one small CPU comparison fit.
+The saved color replay, individual error review and frozen ratings control comparison are complete. Code, models, vector caches, predictions and reports have sealed VIPER Cloud publications.
 
-[Methods](../../plans/csts-comparison-diagnostics-methods.md) · [Protocol](protocol.json)
+The task VM is stopped.
+
+[Report](report.md) · [Case notes](case-notes.md) · [Examples](cases.md) · [Implied label review](implied-label-review.md) · [Cloud receipts](cloud-receipts.json) · [Methods](../../plans/csts-comparison-diagnostics-methods.md)
