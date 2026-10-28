@@ -511,6 +511,52 @@ Fit D, E and the same comparison on A's final vectors after selecting B/C. Qwen 
 | 2026-10-28 17:47:09 | stage finished |  |  | name: extract_interventions; status: succeeded |
 | 2026-10-28 17:47:09 | stage started |  |  | name: evaluate |
 | 2026-10-28 17:47:09 | controller failed |  |  | error_type: ValidationError |
+| 2026-10-28 17:49:51 | evaluation binding repaired |  |  | name: Seal test rows and holdout indices with the existing native build stage |
+| 2026-10-28 17:49:51 | stage started |  |  | name: publish_test |
+| 2026-10-28 17:50:13 | stage finished |  |  | name: publish_test; status: succeeded |
+| 2026-10-28 17:50:16 | stage started |  |  | name: evaluate |
+| 2026-10-28 17:53:38 | readout final scores |  |  |  |
+
+## Test results
+
+| Seed | Model | Spearman | MSE |
+| --- | --- | --- | --- |
+| reference | A | 0.863398 | 0.035636 |
+| 7 | B | 0.707125 | 0.089866 |
+| 7 | C | 0.647899 | 0.103268 |
+| 7 | D | 0.753125 | 0.070028 |
+| 7 | E | 0.716361 | 0.084751 |
+| 7 | A with comparison | 0.864672 | 0.034940 |
+| 8 | B | 0.702160 | 0.087774 |
+| 8 | C | 0.631321 | 0.104469 |
+| 8 | D | 0.743052 | 0.075807 |
+| 8 | E | 0.694009 | 0.088293 |
+| 8 | A with comparison | 0.865373 | 0.034902 |
+| 9 | B | 0.710974 | 0.088112 |
+| 9 | C | 0.668775 | 0.095439 |
+| 9 | D | 0.758132 | 0.069087 |
+| 9 | E | 0.724579 | 0.080519 |
+| 9 | A with comparison | 0.865646 | 0.035552 |
+
+Mean A with comparison minus A Spearman: 0.001833. 95% interval: [0.001108, 0.002569].
+
+Mean C−B Spearman: -0.057421. 95% interval: [-0.072073, -0.042191].
+
+| Comparison | Mean Spearman change | Mean MSE change | Spearman 95% interval |
+| --- | --- | --- | --- |
+| A_comparison_minus_A | 0.001833 | -0.000505 | [0.001108, 0.002569] |
+| D_minus_A | -0.111961 | 0.036005 | [-0.128541, -0.096727] |
+| E_minus_A | -0.151748 | 0.048885 | [-0.171034, -0.133617] |
+| B_minus_A | -0.156645 | 0.052948 | [-0.177335, -0.136874] |
+| C_minus_A | -0.214066 | 0.065422 | [-0.235647, -0.191408] |
+| C_minus_B | -0.057421 | 0.012474 | [-0.072073, -0.042191] |
+| E_minus_D | -0.039787 | 0.012881 | [-0.050917, -0.028491] |
+| D_minus_B | 0.044683 | -0.016944 | [0.036194, 0.053467] |
+| E_minus_C | 0.062318 | -0.016537 | [0.052710, 0.071996] |
+
+Evaluation status: succeeded.
+
+Evaluation status: succeeded.
 
 
 <details>
