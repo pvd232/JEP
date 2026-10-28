@@ -1,6 +1,6 @@
 # Joint LoRA and comparison training
 
-Updated: 2026-10-28 17:02:26 EDT.
+Updated: 2026-10-28 17:07:02 EDT.
 
 [Methods](../../plans/csts-native-comparison-methods.md) · [Review](../../plans/csts-native-comparison-review.md) · [Configuration](../../configs/csts-native-comparison.json)
 
@@ -12,7 +12,7 @@ The previous Colab A100 assignment disappeared during the terminal interruption.
 
 | Seed | Hardware observation | Optimizer updates | Completed epochs | Best validation Spearman | Sealed Cloud checkpoints | Native run status |
 | --- | --- | --- | --- | --- | --- | --- |
-| 7 | NVIDIA L4, 16352 MiB, 100 % | 650 | 3 | 0.8751512974333209 | 4 | running |
+| 7 | NVIDIA L4, 16352 MiB, 100 % | 750 | 3 | 0.8751512974333209 | 4 | running |
 
 ## Completed epochs
 
