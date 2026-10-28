@@ -12,11 +12,4 @@ A: saved cosine score. B: token weighting trained with ratings. C: token weighti
 
 | UTC | Event | Seed | Step | Metrics or progress |
 | --- | --- | --- | --- | --- |
-| 2026-10-28 04:29:56 | stage started | 7 |  | name: publish_proposition_final |
-| 2026-10-28 04:30:36 | stage finished | 7 |  | name: publish_proposition_final; status: succeeded |
-| 2026-10-28 04:30:36 | stage started | 7 |  | name: publish_proposition_writing_epoch5 |
-| 2026-10-28 04:31:15 | stage finished | 7 |  | name: publish_proposition_writing_epoch5; status: succeeded |
-| 2026-10-28 04:31:15 | stage started | 7 |  | name: publish_ratings_final |
-| 2026-10-28 04:31:55 | stage finished | 7 |  | name: publish_ratings_final; status: succeeded |
-| 2026-10-28 04:31:55 | stage started | 7 |  | name: writing_retention |
-| 2026-10-28 04:31:55 | study failed |  |  | error_type: PathError |
+| 2026-10-28 04:35:25 | stage started | 7 |  | name: publish_proposition_final |
