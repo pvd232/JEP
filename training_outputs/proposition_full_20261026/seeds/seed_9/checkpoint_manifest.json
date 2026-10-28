@@ -1,0 +1,39 @@
+{
+  "training_seed": 9,
+  "run_name": "jep_csts_v1_full_propositions_seed9_20261027",
+  "source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
+  "driver_sha256": "57c5d314c22574aab001f82ec428dff4c7a37adc73d1a3f2a1974b3f1328284c",
+  "settings_sha256": "64185e545d360fba33f7f4d463518091e3778107a21b6cbe4d0f4a5b796ff477",
+  "selection_sha256": "5fe242d9ce9dc4635051d35bac30c04b539f51082507066a488d765d35b47e96",
+  "matched_pretrain_epoch": 3,
+  "matched_pretrain_updates": 552,
+  "shared_frozen_inputs_archive_sha256": "2e8e8efe52687edb10b85f000f6a2f77637677f59ae95729ee1c254d11c37d9d",
+  "shared_generation_head": {
+    "path": "qwen_data/qwen-evidence-head.safetensors",
+    "sha256": "a36df847ac68cb10d636cac54bdd99c1d1b6627e98aca62dd5716bb87e6fee4d",
+    "model_id": "Qwen/Qwen3-8B-Base",
+    "revision": "49e3418fbbbca6ecbdf9608b4d22e5a407081db4"
+  },
+  "models": {
+    "proposition_writing.pt": {
+      "source": "/content/jep-full-propositions-20261027/repo/experiments/csts_qwen_proposition_evidence_3ef6ba06_8079bfe3_evidence_pretrain/runs/evidence_pretrain/01M5ZT5TQRMRPV7NF5HJZ0VNDB/artifacts/train/model/model.pt",
+      "bytes": 122764915,
+      "sha256": "2afdcfa8d3cc24f54723328e80b251ac19de4824406936cdcf2dfaf67468e329"
+    },
+    "ratings_matched.pt": {
+      "source": "/content/jep-full-propositions-20261027/repo/experiments/csts_full_control_3ef6ba06_8079bfe3_pretrain_3/runs/ratings_pretrain/01M5ZV6X19AAXTMM0ARWX4ABNG/artifacts/train/last_model/model.pt",
+      "bytes": 122764915,
+      "sha256": "7d17c21a227c19b7c21aa1e83f69147f1fe8ff8a6a1cf03db7fa1e10d7d3d159"
+    },
+    "ratings_selected.pt": {
+      "source": "/content/jep-full-propositions-20261027/repo/experiments/csts_full_control_3ef6ba06_8079bfe3_ratings_0/runs/ratings_ratings/01M5ZW5A6D5FDW8K2TDVXQH0F7/artifacts/train/model/model.pt",
+      "bytes": 122764915,
+      "sha256": "0de2890a5d19b6cc019b814d3bd61a788e716b6a5e79bbfd354be8701cdea237"
+    },
+    "proposition_selected.pt": {
+      "source": "/content/jep-full-propositions-20261027/repo/experiments/csts_qwen_proposition_evidence_3ef6ba06_8079bfe3_evidence_ratings/runs/evidence_ratings/01M5ZW4QQGCVEGAB21J61C7M0Y/artifacts/train/model/model.pt",
+      "bytes": 122764915,
+      "sha256": "b346d879268db61e82965f4b30e230e355f06d6bfcf145cca2a39816ddf49d1f"
+    }
+  }
+}

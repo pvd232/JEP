@@ -1,6 +1,6 @@
 # Three-seed replication: full-bank proposition supervision
 
-Status: **running**. Completed seeds: **2/3**. Preregistered seeds: **7, 8, 9**.
+Status: **complete**. Completed seeds: **3/3**. Preregistered seeds: **7, 8, 9**.
 
 Both the ratings control and proposition model are trained for each new seed, starting from the pinned pretrained backbone with fresh adapters. Only the training seed changes. The dataset, teacher bank, writing references, learning rate, batch sizes and patience policy are frozen. Writing and ratings stages stop under the same validation policy used for seed 7.
 
@@ -8,15 +8,15 @@ Both the ratings control and proposition model are trained for each new seed, st
 |---:|---:|---:|---:|---|
 | 7 | 0.855375 | 0.863398 | +0.008024 | complete |
 | 8 | 0.853183 | 0.854933 | +0.001750 | complete |
-| 9 | — | — | — | running |
+| 9 | 0.853866 | 0.860513 | +0.006646 | complete |
 
-Each score uses the same **2,430 test examples**. Checkpoints are selected on validation and frozen before test scoring. Completed training seeds: 7, 8.
+Each score uses the same **2,430 test examples**. Checkpoints are selected on validation and frozen before test scoring. Completed training seeds: 7, 8, 9.
 
 | Metric, overall cohort | Control mean ± SD | Proposition mean ± SD | Paired difference mean ± SD |
 |---|---:|---:|---:|
-| Validation Spearman | 0.871280 ± 0.000842 | 0.875124 ± 0.002739 | 0.003844 ± 0.001898 |
-| Test Spearman | 0.854279 ± 0.001550 | 0.859165 ± 0.005986 | 0.004887 ± 0.004436 |
-| Test raw MSE, 0–1 | 0.038867 ± 0.000718 | 0.037397 ± 0.002564 | -0.001470 ± 0.001846 |
+| Validation Spearman | 0.872194 ± 0.001690 | 0.875457 ± 0.002021 | 0.003264 ± 0.001676 |
+| Test Spearman | 0.854141 ± 0.001122 | 0.859615 ± 0.004304 | 0.005473 ± 0.003297 |
+| Test raw MSE, 0–1 | 0.038994 ± 0.000553 | 0.037270 ± 0.001826 | -0.001724 ± 0.001377 |
 
 SD is calculated across completed training seeds. Appearance and colour results, per-seed paired intervals, selected epochs and checkpoint identities are included in the JSON. All preregistered seeds are reported.
 
