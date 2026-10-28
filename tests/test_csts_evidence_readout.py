@@ -424,6 +424,65 @@ def test_queue_waits_for_lease_without_starting_a_stage(tmp_path, monkeypatch):
     assert receipt["status"] == "queued" and receipt["identity"] == identity
 
 
+@pytest.mark.parametrize(
+    ("name", "processes", "idle"),
+    [
+        ("NVIDIA A100-SXM4-80GB", "", True),
+        ("NVIDIA A100-SXM4-80GB", "123", False),
+    ],
+)
+def test_a100_lease_checks_compute_processes(monkeypatch, name, processes, idle):
+    import csts_pilot.evidence_readout_run as runner
+
+    replies = iter([name + "\n", processes])
+    monkeypatch.setattr(
+        runner.subprocess, "check_output", lambda *a, **k: next(replies)
+    )
+    assert runner.gpu_idle("NVIDIA A100-SXM4-80GB") is idle
+
+
+def test_a100_request_rejects_another_accelerator(monkeypatch):
+    import csts_pilot.evidence_readout_run as runner
+
+    monkeypatch.setattr(
+        runner.subprocess, "check_output", lambda *a, **k: "NVIDIA L4\n"
+    )
+    with pytest.raises(ValueError, match="Expected one NVIDIA A100"):
+        runner.gpu_idle("NVIDIA A100-SXM4-80GB")
+
+
+def test_markdown_keeps_validation_phases_and_final_test_metrics_distinct(tmp_path):
+    from csts_pilot import evidence_readout_progress as progress
+
+    path = tmp_path / "progress.md"
+    progress.initialize(path, "a" * 40, "NVIDIA A100-SXM4-80GB")
+    progress.configure(str(path))
+    metrics = {"spearman": 0.8, "mse_0_1": 0.04}
+    try:
+        for event in ("readout_epoch", "comparison_epoch"):
+            progress.append(event, seed=7, epoch=1, validation={"ratings": metrics})
+        contrast = {
+            "mean": 0.01,
+            "mse_delta_mean": -0.002,
+            "group_bootstrap_95": {"low": 0.001, "high": 0.02},
+        }
+        progress.append(
+            "readout_final_scores",
+            results={"A_parent": metrics, "7": {"ratings": metrics}},
+            primary_C_minus_B=contrast,
+            contrasts={"C_minus_B": contrast},
+        )
+        progress.append("stage_finished", name="evaluate", status="succeeded")
+    finally:
+        progress.configure(None)
+    text = path.read_text()
+    assert "B validation rho 0.800000" in text
+    assert "D validation rho 0.800000" in text
+    assert "| 7 | B | 0.800000 | 0.040000 |" in text
+    assert "C_minus_B" in text and "-0.002000" in text
+    assert "Evaluation status: succeeded." in text
+
+
 def test_prospective_intervention_file_has_complete_literal_bindings():
     import json
 

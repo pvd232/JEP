@@ -26,6 +26,7 @@ from viper.runtime import (
 )
 from viper.storage import ViperCloudDestination
 
+from csts_pilot import evidence_readout_progress as progress
 from csts_pilot.answers import answer_id
 from csts_pilot.background_storage import _save, queue_publication
 from csts_pilot.condition_reference import native_layout
@@ -170,6 +171,11 @@ def run_study(
         raise ValueError(
             "Preserve the existing attempt; recovery must reconcile sealed native runs explicitly."
         )
+    progress_path = directory / "progress.md"
+    progress.initialize(
+        progress_path, source.commit, settings.get("gpu_model", "NVIDIA L4")
+    )
+    progress.configure(str(progress_path))
     summary: dict[str, Any] = {
         "status": "running",
         "source_commit": source.commit,
@@ -196,13 +202,16 @@ def run_study(
         )
         summary["in_flight"] = {"name": label, "experiment_id": trial.experiment_id}
         _save(path, summary)
+        progress.append("stage_started", name=label, seed=seed)
         started = time.monotonic()
         result = execution.run(
             plan(
                 experiment=trial,
                 source=source,
                 env=LocalEnvSpec(
-                    compute=CUDAComputeSpec(model="NVIDIA L4", count=1)
+                    compute=CUDAComputeSpec(
+                        model=settings.get("gpu_model", "NVIDIA L4"), count=1
+                    )
                     if gpu
                     else CPUComputeSpec(),
                     lockfile=GitFileRef(
@@ -226,6 +235,7 @@ def run_study(
         summary["runs"].append(record)
         summary["in_flight"] = None
         _save(path, summary)
+        progress.append("stage_finished", name=label, status=result.status, seed=seed)
         if result.status != "succeeded":
             raise RuntimeError(f"Native readout stage failed: {label}.")
         record["publication_queue"] = str(
@@ -274,6 +284,7 @@ def run_study(
                 stage_id="extract",
                 config=ReadoutExtractionConfig(
                     **settings["encoder"],
+                    progress_path=str(progress_path),
                     split=split,
                     rows_sha256=item["sha256"],
                     model_sha256=settings["models"][parent_name]["sha256"],
@@ -327,6 +338,7 @@ def run_study(
                 stage_id="retention",
                 config=ReadoutRetentionConfig(
                     **settings["encoder"],
+                    progress_path=str(progress_path),
                     **settings["retention"],
                     writing_model_sha256=settings["models"][
                         "proposition_writing_epoch5"
@@ -421,6 +433,7 @@ def run_study(
                     config=ReadoutFitConfig.model_validate(
                         {
                             **settings["training"],
+                            "progress_path": str(progress_path),
                             "seed": seed,
                             **{
                                 f"{s}_sha256": settings["splits"][s]["sha256"]
@@ -582,6 +595,7 @@ def run_study(
                 stage_id="evaluate",
                 eval_id="csts_evidence_readout",
                 config=ReadoutEvaluationConfig(
+                    progress_path=str(progress_path),
                     selection_sha256=summary["selection_sha256"],
                     rows_sha256=settings["splits"]["test"]["sha256"],
                     cache_sha256=file_sha256(
@@ -624,6 +638,7 @@ def run_study(
         )
         _save(path, summary)
     except BaseException as error:
+        progress.append("study_failed", error_type=type(error).__name__)
         summary.update(status="failed", error_type=type(error).__name__)
         _save(path, summary)
         raise
@@ -644,8 +659,8 @@ def queue_identity(
     }
 
 
-def gpu_idle() -> bool:
-    """Require an L4 with no active compute process, in addition to shared leases."""
+def gpu_idle(expected_model: str = "NVIDIA L4") -> bool:
+    """Check the configured accelerator and its active compute processes."""
     names = (
         subprocess.check_output(
             ["nvidia-smi", "--query-gpu=name", "--format=csv,noheader"], text=True
@@ -653,8 +668,8 @@ def gpu_idle() -> bool:
         .strip()
         .splitlines()
     )
-    if names != ["NVIDIA L4"]:
-        raise ValueError("This request is restricted to one NVIDIA L4.")
+    if names != [expected_model]:
+        raise ValueError(f"Expected one {expected_model}; observed {names}.")
     processes = subprocess.check_output(
         ["nvidia-smi", "--query-compute-apps=pid", "--format=csv,noheader,nounits"],
         text=True,
@@ -710,7 +725,7 @@ def queue_study(root: Path, settings_path: Path, name: str, source_commit: str) 
                     except BlockingIOError:
                         acquired = False
                         break
-                if acquired and gpu_idle():
+                if acquired and gpu_idle(settings.get("gpu_model", "NVIDIA L4")):
                     validate_settings(root, settings)
                     state.update(
                         status="running", started_utc=datetime.now(UTC).isoformat()

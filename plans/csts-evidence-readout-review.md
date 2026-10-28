@@ -43,9 +43,9 @@ Numerical checks cover differentiable readout gradients and exact padding exclus
 The CPU native fixture uses random 5D states and does not load Qwen or use the GPU. The preflight loads tokenizer/checkpoint metadata and verifies source alignment, but does not run the backbone. These checks are implementation evidence, not empirical support for the working hypothesis.
 
 
-## Native receipt and source identity
+## Original native receipt and source identity
 
-The full CPU check passed all nine native stages, including held-out EVAL and the separate objective metric worker. It replayed all four cells for seeds 7/8/9, both parent reference bindings and all five contrasts. Fixture values are not scientific results.
+The original CPU check passed all nine native stages, including held-out EVAL and the separate objective metric worker. It replayed all four cells for seeds 7/8/9, both parent reference bindings and all five contrasts. Fixture values describe the transport check.
 
 | Stage | Native run ID | Result |
 |---|---|---|
@@ -59,7 +59,7 @@ The full CPU check passed all nine native stages, including held-out EVAL and th
 | publish_evaluation | `01M5ZNBF8A74JZ0J553D8M1F5H` | succeeded |
 | evaluate | `01M5ZNC11QSF9GEA2B1TJ65RCJ` | succeeded |
 
-Receipt: `qwen_evidence_results/readout_native_smoke_c11631b6/receipt.json` in the isolated JEP checkout. Fixture source was local preview `776baee5a6dfbe058efaf6f1abdd3fef9dadc8f9`. The six Python source/test files below are byte-identical in that preview, the reviewed checkout and published implementation commit `0f57e244f897dc8fcc8d321ea4b7cb10f571e324`. Later documentation changes preserve those Python files.
+Receipt: `qwen_evidence_results/readout_native_smoke_c11631b6/receipt.json` in the isolated JEP checkout. Fixture source was local preview `776baee5a6dfbe058efaf6f1abdd3fef9dadc8f9`. The hashes below identify the six files in that preview and published implementation commit `0f57e244f897dc8fcc8d321ea4b7cb10f571e324`. The A100 reporting update has its own validation record below.
 
 | File | SHA-256 |
 |---|---|
@@ -86,4 +86,12 @@ CUDA_VISIBLE_DEVICES="" python -m scripts.check_evidence_readout_native
 
 Three head seeds condition on one backbone seed and one teacher policy. The benchmark has already informed project decisions. Bootstrap intervals omit selection and project-wide search uncertainty. Attention agreement is not causal faithfulness, null probability is uncalibrated/length-sensitive, family subsets overlap, and six synthetic cases do not establish generality. The same validation set is used in two fitting phases. The restricted comparator cannot rule out richer cross-coordinate or token-level comparison on a negative result.
 
-No revised scientific training, real-Qwen retention audit or GPU inference has run for this PR. CPU fixtures do not answer the scientific questions. The L4 queue implementation is included for the reviewed source; this PR leaves scientific execution unstarted so the complete design can be reviewed.
+Scientific execution follows the A100 launch checks below.
+
+## A100 execution and Markdown reporting update
+
+The configured device is `NVIDIA A100-SXM4-80GB`, verified through the existing Colab session. The runtime uses Python 3.13.16, Torch 2.14.0, Transformers 5.20.2 and PEFT 0.21.2. The controller checks the exact configured device and active compute processes, then holds the shared GPU lease through execution.
+
+Each native stage receives the attempt's absolute `progress.md` path in its recorded configuration. Workers append aggregate measurements under a process shared file lock. The report includes writing retention, extraction counts, separate B/C and D/E validation measurements, final test scores for every seed and all five planned differences. The native CPU fixture supplies a real report path to exercise this cross process stream.
+
+Validation on the Colab runtime: 66 tests passed across the readout, attention and proposition preparation suites; Ruff lint and formatting passed for the five modified Python files; Pyrefly reported zero errors in the four modified production modules. Tests cover A100 device identity, occupied GPU handling, validation phase labels and final Markdown metrics. Training uses the methods document's fixed objectives, inputs, seeds and checkpoint selection rule.

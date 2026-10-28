@@ -7,6 +7,7 @@ import torch
 from pydantic import Field
 from viper.stages import StageContext, build
 
+from csts_pilot import evidence_readout_progress as progress
 from csts_pilot.answers import answer_id
 from csts_pilot.baseline_models import (
     EOD,
@@ -35,6 +36,7 @@ class ReadoutRetentionConfig(EncoderConfig):
     """Keep the existing writing targets and vocabulary projection fixed."""
 
     writing_model_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    progress_path: str | None = None
     final_model_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     targets_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     head_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
@@ -106,6 +108,7 @@ def restore_frozen_adapter(
 def audit_writing_retention(context: StageContext[ReadoutRetentionConfig]) -> None:
     """Compare fixed writer/final adapters, using no gradients and no new teacher labels."""
     config = context.config
+    progress.configure(config.progress_path)
     for name, digest in (
         ("writing_model", config.writing_model_sha256),
         ("final_model", config.final_model_sha256),
@@ -257,8 +260,7 @@ def audit_writing_retention(context: StageContext[ReadoutRetentionConfig]) -> No
                 "Adapter bytes changed during writing retention inference."
             )
         all_records[label] = records
-    write_json(
-        context.outputs["report"],
-        retention_summary(all_records["writing"], all_records["after_ratings"]),
-    )
+    report = retention_summary(all_records["writing"], all_records["after_ratings"])
+    write_json(context.outputs["report"], report)
+    emit("writing_retention_scores", results=report)
     write_json(context.outputs["predictions"], all_records)

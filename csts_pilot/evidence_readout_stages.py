@@ -24,6 +24,7 @@ from viper.resume import (
 )
 from viper.stages import StageContext, build, eval, train
 
+from csts_pilot import evidence_readout_progress as progress
 from csts_pilot.baseline_models import (
     PROMPT,
     EncoderConfig,
@@ -67,6 +68,7 @@ from jep_pilot.loaders import load_json, load_model
 def emit(event: str, **values: Any) -> None:
     """Stream finite, caption-free progress to the native worker log."""
     print(json.dumps({"event": event, **values}, allow_nan=False), flush=True)
+    progress.append(event, **values)
 
 
 @declare_metric(metric_id="readout_test_evidence_advantage", mode="stateless")
@@ -93,6 +95,7 @@ class ReadoutExtractionConfig(EncoderConfig):
     """Bind the frozen adapter, original rows, and optional training teacher."""
 
     model_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    progress_path: str | None = None
     rows_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     split: Literal["training", "validation", "test", "interventions"]
     records_sha256: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
@@ -105,6 +108,7 @@ class ReadoutFitConfig(TrainConfig):
     """Fit both heads in lockstep; neither head chooses the other's checkpoint."""
 
     seed: int = Field(default=7, ge=0)
+    progress_path: str | None = None
     device: Literal["cpu", "cuda"] = "cuda"
     query_dim: int = Field(default=128, ge=1)
     evidence_weight: float = Field(default=0.1, gt=0, allow_inf_nan=False)
@@ -125,6 +129,7 @@ class ReadoutEvaluationConfig(EvalConfig):
     """Evaluate frozen seed pairs on one complete held-out cohort."""
 
     device: Literal["cpu", "cuda"] = "cuda"
+    progress_path: str | None = None
     rows_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     cache_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     intervention_rows_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
@@ -162,6 +167,7 @@ def checked_selection(path: Path, expected: str) -> dict[str, str]:
 def extract_readout(context: StageContext[ReadoutExtractionConfig]) -> None:
     """Cache source states, causal condition means, and the exact parent EOD readout."""
     config, started = context.config, time.monotonic()
+    progress.configure(config.progress_path)
     if config.split in {"test", "interventions"}:
         if config.selection_sha256 is None:
             raise ValueError("Held-out extraction requires a frozen selection hash.")
@@ -645,6 +651,7 @@ def fit_comparisons(
 def fit_readout(context: StageContext[ReadoutFitConfig]) -> None:
     """Select heads by validation Spearman and seal selected and terminal states separately."""
     config = context.config
+    progress.configure(config.progress_path)
     for name, expected in (
         ("training", config.training_sha256),
         ("validation", config.validation_sha256),
@@ -849,6 +856,7 @@ def intervention_diagnostics(
 def evaluate_readout(context: StageContext[ReadoutEvaluationConfig]) -> None:
     """Score all frozen heads, the parent, and prospective synthetic interventions."""
     config = context.config
+    progress.configure(config.progress_path)
     if (
         checked_selection(context.inputs["selection"], config.selection_sha256)
         != config.model_sha256
@@ -1023,4 +1031,5 @@ def evaluate_readout(context: StageContext[ReadoutEvaluationConfig]) -> None:
         "readout_final_scores",
         results=results,
         primary_C_minus_B=report["primary_C_minus_B"],
+        contrasts=contrasts,
     )

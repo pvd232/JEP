@@ -29,6 +29,7 @@ from csts_pilot.convergence import (
 )
 from csts_pilot.convergence_run import artifact_path
 from csts_pilot.evidence_attention_run import stored_source
+from csts_pilot.evidence_readout_progress import initialize as initialize_progress
 from csts_pilot.evidence_readout_stages import (
     ReadoutEvaluationConfig,
     evaluate_readout,
@@ -59,6 +60,8 @@ def main() -> None:
     attempt = uuid.uuid4().hex[:8]
     directory = root / "qwen_evidence_results" / f"readout_native_smoke_{attempt}"
     directory.mkdir(parents=True)
+    progress_path = directory / "progress.md"
+    initialize_progress(progress_path, source.commit, "CPU fixture")
     records = []
 
     def execute(label, configured, seed=7):
@@ -151,6 +154,7 @@ def main() -> None:
         cfg = fixture.config().model_copy(
             update={
                 "seed": seed,
+                "progress_path": str(progress_path),
                 "training_sha256": file_sha256(directory / "training.json"),
                 "validation_sha256": file_sha256(directory / "validation.json"),
                 "training_cache_sha256": file_sha256(directory / "training.pt"),
