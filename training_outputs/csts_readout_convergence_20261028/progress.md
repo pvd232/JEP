@@ -4,9 +4,9 @@ The nine seed and learning rate candidates are split across two L4s and an A100.
 
 | Seed | GPU | Last reported status | Sealed checkpoint receipts |
 | --- | --- | --- | --- |
-| 7 | L4 | succeeded | 43 |
+| 7 | L4 | published | 43 |
 | 8 | A100 | published | 44 |
-| 9 | L4 | succeeded | 41 |
+| 9 | L4 | published | 41 |
 
 ## Seed 7
 
@@ -310,6 +310,23 @@ Hardware: NVIDIA L4. Source: `bf167d773df10cf097a3be7e5966b69c299d9227`.
 | 2026-10-28 17:30:18 | checkpoint published | 9 |  | name: Cloud checkpoint 94dd93c1adf24fb98387388761c5389e/00041; status: sealed |
 | 2026-10-28 17:30:18 | head grid complete |  |  | name: Candidate grid published; status: succeeded |
 | 2026-10-28 17:31:03 | stage finished | 9 |  | name: Head candidates complete; native publication queued; status: succeeded |
+
+
+## Combined selection and evaluation
+
+# JEP readouts trained to a validation plateau
+
+Source: `fdbcb3461f63cf44d7cb3cde4de27332594e452d`. Hardware: NVIDIA A100-SXM4-40GB.
+
+Rates: 0.00001, 0.00003, 0.0001. Seeds: 7, 8, 9. Select one rate per objective by mean best validation Spearman. Continue until ten epochs pass without validation improvement. An epoch ceiling is reported as an incomplete fit.
+
+Fit D, E and the same comparison on A's final vectors after selecting B/C. Qwen stays frozen. Sentence vectors retain all 4,096 coordinates.
+
+## Progress
+
+| UTC | Event | Seed | Step | Metrics or progress |
+| --- | --- | --- | --- | --- |
+| 2026-10-28 17:39:16 | stage started |  |  | name: fit |
 
 
 <details>
