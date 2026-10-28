@@ -118,7 +118,32 @@ def edit_diagnostics(rows):
     ]
 
 
-def finalize(root, directory, summaries, published_test, historical, control_dir):
+def completed_score_source(completed, seed, model_sha256, test_sha256, split):
+    """Reuse a prediction snapshot only for the same frozen model and test."""
+    if (
+        completed.get("status") != "complete"
+        or completed.get("cloud_status") != "published"
+        or completed.get("seed") != int(seed)
+        or completed.get("selected_model_sha256") != model_sha256
+        or completed.get("test_sha256") != test_sha256
+        or completed["selection"]["selected_model_sha256"].get(seed) != model_sha256
+    ):
+        raise ValueError(
+            "Completed predictions require matching model and input identities."
+        )
+    record = completed["runs"][split]
+    return dict(record, reference=record["cloud_reference"])
+
+
+def finalize(
+    root,
+    directory,
+    summaries,
+    published_test,
+    historical,
+    control_dir,
+    completed_scores=None,
+):
     directory.mkdir(parents=True, exist_ok=True)
     settings = load_json(root / "configs/csts-native-comparison.json")
     source, environment = read_source(root), observe_python_env()
@@ -292,6 +317,7 @@ def finalize(root, directory, summaries, published_test, historical, control_dir
     if training_groups & {r["group_id"] for r in rows}:
         raise ValueError("Test source groups overlap fitting groups.")
     predictions, edits, diagnostics = {}, {}, {}
+    completed_scores = completed_scores or {}
     for seed in summaries:
         for split in ("test", "edits"):
             if split == "test":
@@ -305,6 +331,45 @@ def finalize(root, directory, summaries, published_test, historical, control_dir
                     "rows", path=settings["interventions"]["path"], data_role="eval"
                 )
                 digest = settings["interventions"]["sha256"]
+            if seed in completed_scores:
+                previous = completed_score_source(
+                    completed_scores[seed],
+                    seed,
+                    selection["selected_model_sha256"][seed],
+                    settings["splits"]["test"]["sha256"],
+                    split,
+                )
+                retained = archive(
+                    "retained_score_" + seed + "_" + split,
+                    stored_source(previous, "predict", "predictions", "test", "eval"),
+                    stored_source(
+                        previous, "predict", "diagnostics", "holdout", "eval"
+                    ),
+                    "eval",
+                )
+                values = load_json(
+                    artifact_path(retained, "archive", "test", "test.json")
+                )
+                metadata = load_json(
+                    artifact_path(retained, "archive", "holdout", "holdout.json")
+                )
+                if (
+                    metadata["model_sha256"] != selection["selected_model_sha256"][seed]
+                    or metadata["rows_sha256"] != digest
+                ):
+                    raise ValueError(
+                        "Retained prediction metadata differs from the selected model or rows."
+                    )
+                if split == "test":
+                    checked, values_array = align_reference(rows, values)
+                    if len(checked) != len(rows):
+                        raise ValueError(
+                            "Retained predictions must cover the frozen test cohort."
+                        )
+                    predictions[seed], diagnostics[seed] = values_array, metadata
+                else:
+                    edits[seed] = edit_diagnostics(values)
+                continue
             scored = execute(
                 "score_" + seed + "_" + split,
                 stage(
@@ -554,6 +619,7 @@ def main():
             refs["published_test"],
             refs["historical_evaluation"],
             Path(refs["ratings_control_directory"]),
+            refs.get("completed_scores"),
         )
 
 

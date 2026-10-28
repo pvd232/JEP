@@ -92,3 +92,21 @@ def test_completed_score_freezes_the_model_and_remaining_protocol():
         )
     with pytest.raises(ValueError):
         completed.frozen_selection(fitted, trace, "d" * 64, protocol)
+
+
+def test_reusing_completed_scores_checks_selected_model_and_test():
+    saved = {
+        "status": "complete",
+        "cloud_status": "published",
+        "seed": 8,
+        "selected_model_sha256": "a" * 64,
+        "test_sha256": "b" * 64,
+        "selection": {"selected_model_sha256": {"8": "a" * 64}},
+        "runs": {"test": {"cloud_reference": {"sha256": "c" * 64}}},
+    }
+    ref = finalization.completed_score_source(saved, "8", "a" * 64, "b" * 64, "test")
+    assert ref["reference"] == saved["runs"]["test"]["cloud_reference"]
+    with pytest.raises(ValueError):
+        finalization.completed_score_source(saved, "8", "d" * 64, "b" * 64, "test")
+    with pytest.raises(ValueError):
+        finalization.completed_score_source(saved, "8", "a" * 64, "d" * 64, "test")
