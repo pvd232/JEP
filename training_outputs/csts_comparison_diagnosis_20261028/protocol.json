@@ -1,0 +1,36 @@
+{
+  "status": "fixed_before_new_head_fit",
+  "recorded_utc": "2026-10-28T23:33:58.065850+00:00",
+  "existing_encoder_sha256": "d30c00fc76e70ec639493b7121a8b8c9d7520745733857c1c49f0902fff00f4f",
+  "ratings_control_sha256": "667c124a49be72a6fd8e9fa3df6974830e4ab6a46a10243c360dd46bcc75b534",
+  "head_seed": 7,
+  "head_epochs": 21,
+  "head_learning_rate": 0.001,
+  "weight_decay": 0.01,
+  "batch_size": 32,
+  "clip_norm": 1,
+  "permutation_seed": 10007,
+  "selection": "First strictly best validation Spearman including initialization.",
+  "new_encoder_updates": 0,
+  "color_intervals": {
+    "draws": 10000,
+    "confidence": 0.9833333333333333,
+    "contrasts": [
+      "implicit_margin",
+      "Q",
+      "C"
+    ]
+  },
+  "interaction_interval": {
+    "draws": 2000,
+    "confidence": 0.95,
+    "unit": "Source groups; all four scores evaluated on the same rows."
+  },
+  "scope": "Exploratory analysis after earlier test reporting. One existing seed 7 encoder pair and one new comparison fit.",
+  "files_sha256": {
+    "scripts/capture_csts_control_vectors.py": "c0e2ab639bdc05d5578631d26b45f7c790e7949f03d76397f2a182b8d952ebb0",
+    "scripts/analyze_csts_comparison.py": "eb6291c5a4b3f914e3efc50279da0feed85a610238a352b89f13e09532140207",
+    "tests/test_comparison_diagnostics.py": "440d02a2798c58a019e01e362d6ddf5a92446a59687403589ba86df29e37f162",
+    "plans/csts-comparison-diagnostics-methods.md": "295acd47a21fe8387e3a098addbfc5e9d13bb72468d1a93f0cc647674f074afd"
+  }
+}
