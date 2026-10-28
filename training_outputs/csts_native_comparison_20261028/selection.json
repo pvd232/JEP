@@ -1,0 +1,575 @@
+{
+  "7": {
+    "executed_seeds": [
+      7,
+      8,
+      9
+    ],
+    "selected_model_sha256": {
+      "7": "be85df7eba3b88d19e9121d149bf20c2b99d73a257b57bd65e06008bb8b4ab4f"
+    },
+    "selection": {
+      "epoch": 4,
+      "step": 760,
+      "sha256": "be85df7eba3b88d19e9121d149bf20c2b99d73a257b57bd65e06008bb8b4ab4f",
+      "validation": {
+        "n": 1576,
+        "mse_0_1": 0.029810176717273904,
+        "mse_1_5": 0.47696282747638247,
+        "spearman": 0.8789204517574798,
+        "prediction_mean": 0.6263377092079009,
+        "target_mean": 0.6134200507614214,
+        "prediction_std": 0.34925663575343585,
+        "target_std": 0.3852562483034509,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 266,
+            "mean": 0.12326426546376451
+          },
+          "2.0": {
+            "n": 213,
+            "mean": 0.3374257270998798
+          },
+          "3.0": {
+            "n": 302,
+            "mean": 0.5446980725357075
+          },
+          "4.0": {
+            "n": 130,
+            "mean": 0.705738033927404
+          },
+          "5.0": {
+            "n": 665,
+            "mean": 0.9416593878340901
+          }
+        },
+        "condition_changes": {
+          "n": 551,
+          "correct": 530,
+          "ties": 0,
+          "accuracy_ties_half": 0.9618874773139746,
+          "difference_mse": 0.0627986637974028,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      }
+    },
+    "training_status": "stopped_by_request",
+    "stopping_amendment": "Score the existing best validation checkpoints immediately.",
+    "amendment_after_seed8_test": true,
+    "retained_checkpoint": {
+      "status": "training_stopped_for_inference",
+      "seed": 7,
+      "owned_pids": [
+        858634,
+        858845
+      ],
+      "native_parent_pids": [
+        858634
+      ],
+      "checkpoint_receipt_path": "/home/machina/jep-native-comparison-20261028/runrepo/.viper/checkpoint_publications/3d5d7f6304264a7d8beff917ffcae1f3/00012/receipt.json",
+      "checkpoint_receipt": {
+        "status": "published",
+        "state": {
+          "seed": 7,
+          "epoch": 11,
+          "step": 2090
+        },
+        "previous": {
+          "sha256": "6be7d2499983d1104e3e9f1cda6bc25d2ec01447d3bc0a2589c04cc32f5f7440",
+          "bytes": 4405,
+          "stored_at": {
+            "kind": "gcs",
+            "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+            "prefix": "viper",
+            "owner": "pvd232",
+            "workspace": "jep_csts_joint_20261021",
+            "revision": "a9b1a5408cd492e3e4f9ea0eaa17c5917056fcf4cdd8110643ac895e93e42303",
+            "path": "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00011/receipt.json"
+          }
+        },
+        "references": {
+          "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/last_model.pt": {
+            "sha256": "6ea36b44fd313bfd664e2491a28e628ce2c77dcaa04e202704a0b29ee2cd8530",
+            "bytes": 122821491,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_csts_joint_20261021",
+              "revision": "0670c6f09efdccf3c2fe27eefcb8234e39edef71c40465fc2ed45fb92a1ed585",
+              "path": "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/last_model.pt"
+            }
+          },
+          "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/metadata.json": {
+            "sha256": "84bdcdbe6c6caf6d9ca4f051e7b5b8013d153e5edf4fa46299a409e8d37f5273",
+            "bytes": 1969,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_csts_joint_20261021",
+              "revision": "0670c6f09efdccf3c2fe27eefcb8234e39edef71c40465fc2ed45fb92a1ed585",
+              "path": "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/metadata.json"
+            }
+          },
+          "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/model.pt": {
+            "sha256": "be85df7eba3b88d19e9121d149bf20c2b99d73a257b57bd65e06008bb8b4ab4f",
+            "bytes": 122801515,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_csts_joint_20261021",
+              "revision": "0670c6f09efdccf3c2fe27eefcb8234e39edef71c40465fc2ed45fb92a1ed585",
+              "path": "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/model.pt"
+            }
+          },
+          "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/predictions.json": {
+            "sha256": "ba5df58e3767a0e8951077b0cd2d40eee85b5fcab204e9655cf39249f33858f3",
+            "bytes": 794268,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_csts_joint_20261021",
+              "revision": "0670c6f09efdccf3c2fe27eefcb8234e39edef71c40465fc2ed45fb92a1ed585",
+              "path": "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/predictions.json"
+            }
+          },
+          "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/resume.pt": {
+            "sha256": "70c90c97424dd51e4f2a7809eea0c89dd37275530de1e65e4dd0d218a73da5af",
+            "bytes": 245703940,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_csts_joint_20261021",
+              "revision": "0670c6f09efdccf3c2fe27eefcb8234e39edef71c40465fc2ed45fb92a1ed585",
+              "path": "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/resume.pt"
+            }
+          },
+          "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/trace.json": {
+            "sha256": "42319b27c5579ed546cde5258d21f21301521e2b54f1e3e5719e9d2fedbba57e",
+            "bytes": 26815,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_csts_joint_20261021",
+              "revision": "0670c6f09efdccf3c2fe27eefcb8234e39edef71c40465fc2ed45fb92a1ed585",
+              "path": "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/trace.json"
+            }
+          }
+        },
+        "receipt_reference": {
+          "sha256": "2f657b4bcaa5c082e34b45c82b0af90372b51621a57b2844329a28d3fbc6ffae",
+          "bytes": 4405,
+          "stored_at": {
+            "kind": "gcs",
+            "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+            "prefix": "viper",
+            "owner": "pvd232",
+            "workspace": "jep_csts_joint_20261021",
+            "revision": "15efd5104866e7a94036f0f3765ca83feab1f6d56c1ed7373b190aca81aab0ec",
+            "path": "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/receipt.json"
+          }
+        }
+      },
+      "checkpoint_directory": "/home/machina/jep-native-comparison-20261028/runrepo/.viper/checkpoint_publications/3d5d7f6304264a7d8beff917ffcae1f3/00012",
+      "completed_epoch": 11,
+      "selected": {
+        "epoch": 4,
+        "step": 760,
+        "sha256": "be85df7eba3b88d19e9121d149bf20c2b99d73a257b57bd65e06008bb8b4ab4f",
+        "validation": {
+          "n": 1576,
+          "mse_0_1": 0.029810176717273904,
+          "mse_1_5": 0.47696282747638247,
+          "spearman": 0.8789204517574798,
+          "prediction_mean": 0.6263377092079009,
+          "target_mean": 0.6134200507614214,
+          "prediction_std": 0.34925663575343585,
+          "target_std": 0.3852562483034509,
+          "mean_prediction_by_rating": {
+            "1.0": {
+              "n": 266,
+              "mean": 0.12326426546376451
+            },
+            "2.0": {
+              "n": 213,
+              "mean": 0.3374257270998798
+            },
+            "3.0": {
+              "n": 302,
+              "mean": 0.5446980725357075
+            },
+            "4.0": {
+              "n": 130,
+              "mean": 0.705738033927404
+            },
+            "5.0": {
+              "n": 665,
+              "mean": 0.9416593878340901
+            }
+          },
+          "condition_changes": {
+            "n": 551,
+            "correct": 530,
+            "ties": 0,
+            "accuracy_ties_half": 0.9618874773139746,
+            "difference_mse": 0.0627986637974028,
+            "unit": "Within-pair comparisons. These reuse captions and are dependent."
+          }
+        }
+      },
+      "model_path": "/home/machina/jep-native-comparison-20261028/runrepo/.viper/checkpoint_publications/3d5d7f6304264a7d8beff917ffcae1f3/00012/model.pt",
+      "trace_path": "/home/machina/jep-native-comparison-20261028/runrepo/.viper/checkpoint_publications/3d5d7f6304264a7d8beff917ffcae1f3/00012/trace.json",
+      "operator_request": "Stop training and score the existing best validation checkpoint.",
+      "stopping_rule_amended_after_seed8_test": true,
+      "time_utc": "2026-10-28T22:38:35Z"
+    },
+    "reporting_source_commit": "3e596b2d854358190ff4d51a190ae833d78a0964",
+    "test_reference": {
+      "sha256": "d6b40b7b891ed147befb30801c2f85a8787775adebdd98d134157cbb2a6e9f76",
+      "bytes": 1137281,
+      "stored_at": {
+        "kind": "gcs",
+        "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+        "prefix": "viper",
+        "owner": "pvd232",
+        "workspace": "jep_csts_joint_20261021",
+        "revision": "95213879df4b2563407b5ee6ec93ec7a5ee36e8bebdd6e4d7a62bf4b7c3b707a",
+        "path": "csts_data/readout/test.json"
+      }
+    }
+  },
+  "8": {
+    "executed_seeds": [
+      7,
+      8,
+      9
+    ],
+    "completed_seeds": [
+      8
+    ],
+    "selected_model_sha256": {
+      "8": "32740a9863c4c09c61904b1279d3b1398b653e9e474a0817b1f408dc4e565417"
+    },
+    "selection": {
+      "epoch": 3,
+      "step": 570,
+      "sha256": "32740a9863c4c09c61904b1279d3b1398b653e9e474a0817b1f408dc4e565417",
+      "validation": {
+        "n": 1576,
+        "mse_0_1": 0.033206014021876895,
+        "mse_1_5": 0.5312962243500303,
+        "spearman": 0.8768987411388853,
+        "prediction_mean": 0.5714674066600914,
+        "target_mean": 0.6134200507614214,
+        "prediction_std": 0.3656544113487157,
+        "target_std": 0.3852562483034509,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 266,
+            "mean": 0.0659331449104431
+          },
+          "2.0": {
+            "n": 213,
+            "mean": 0.26178161555052926
+          },
+          "3.0": {
+            "n": 302,
+            "mean": 0.46659890626439987
+          },
+          "4.0": {
+            "n": 130,
+            "mean": 0.6405162733334762
+          },
+          "5.0": {
+            "n": 665,
+            "mean": 0.9069999203197938
+          }
+        },
+        "condition_changes": {
+          "n": 551,
+          "correct": 531,
+          "ties": 0,
+          "accuracy_ties_half": 0.9637023593466425,
+          "difference_mse": 0.0651904208530763,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      }
+    },
+    "settings_sha256": "827133aae1a18b2a1db384d90a15004191a8d8cfaeadd77dae8b047e3a853ab7",
+    "fitting_source_commit": "15776f8e2110df648379eed65331c5decbd4dd8a",
+    "reporting_protocol": {
+      "executed_seeds": [
+        7,
+        8,
+        9
+      ],
+      "settings_sha256": "827133aae1a18b2a1db384d90a15004191a8d8cfaeadd77dae8b047e3a853ab7",
+      "reporting_source_commit": "3511b0c2e741c64ef85a35956f82a59cc58acb3c",
+      "adopted_utc": "2026-10-28T21:55:28.758415+00:00",
+      "request": "Publish test scores from completed fits while other fits continue.",
+      "remaining_training_rule": "Use the committed configuration: first strictly best validation Spearman, ten epochs of patience, extend an incomplete ceiling.",
+      "reporting_rule": "Freeze each completed selected model before test prediction; reuse immutable predictions for the final aggregate."
+    }
+  },
+  "9": {
+    "executed_seeds": [
+      7,
+      8,
+      9
+    ],
+    "selected_model_sha256": {
+      "9": "c29d346cc4d8f0306446d9f51bceb1d39bc85edf4bb7b17241079190b8528a36"
+    },
+    "selection": {
+      "epoch": 4,
+      "step": 760,
+      "sha256": "c29d346cc4d8f0306446d9f51bceb1d39bc85edf4bb7b17241079190b8528a36",
+      "validation": {
+        "n": 1576,
+        "mse_0_1": 0.031272785427745566,
+        "mse_1_5": 0.500364566843929,
+        "spearman": 0.8770867451452016,
+        "prediction_mean": 0.5942480412647506,
+        "target_mean": 0.6134200507614214,
+        "prediction_std": 0.36630203434540476,
+        "target_std": 0.3852562483034509,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 266,
+            "mean": 0.07455939043285255
+          },
+          "2.0": {
+            "n": 213,
+            "mean": 0.29313764584736085
+          },
+          "3.0": {
+            "n": 302,
+            "mean": 0.49714858242810167
+          },
+          "4.0": {
+            "n": 130,
+            "mean": 0.6762925622554926
+          },
+          "5.0": {
+            "n": 665,
+            "mean": 0.9266269047009318
+          }
+        },
+        "condition_changes": {
+          "n": 551,
+          "correct": 530,
+          "ties": 0,
+          "accuracy_ties_half": 0.9618874773139746,
+          "difference_mse": 0.06311546332757505,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      }
+    },
+    "training_status": "stopped_by_request",
+    "stopping_amendment": "Score the existing best validation checkpoints immediately.",
+    "amendment_after_seed8_test": true,
+    "retained_checkpoint": {
+      "status": "training_stopped_for_inference",
+      "seed": 9,
+      "owned_pids": [
+        11158,
+        11398
+      ],
+      "native_parent_pids": [
+        11158
+      ],
+      "checkpoint_receipt_path": "/content/jep-native-comparison-20261028/repo/.viper/checkpoint_publications/46159eed51034b9e93df0f8fdf2cc3af/00009/receipt.json",
+      "checkpoint_receipt": {
+        "status": "published",
+        "state": {
+          "seed": 9,
+          "epoch": 8,
+          "step": 1520
+        },
+        "previous": {
+          "sha256": "b8886dd28d420799cea448c14f9ad30385fa5c7f5fcfb4cb566fb5007774d163",
+          "bytes": 4404,
+          "stored_at": {
+            "kind": "gcs",
+            "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+            "prefix": "viper",
+            "owner": "pvd232",
+            "workspace": "jep_csts_joint_20261021",
+            "revision": "f4d43352a3023804e5b68ef2e331d9bea314344a7f5779b6824164d242014037",
+            "path": "csts_native_comparison_20261028/checkpoints/46159eed51034b9e93df0f8fdf2cc3af/00008/receipt.json"
+          }
+        },
+        "references": {
+          "csts_native_comparison_20261028/checkpoints/46159eed51034b9e93df0f8fdf2cc3af/00009/last_model.pt": {
+            "sha256": "50052196c25aa98daf896dd3a818d932640f4e304bb724adfe6bac2cf2c0a2aa",
+            "bytes": 122821491,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_csts_joint_20261021",
+              "revision": "6157efba4fea35e125cf6a53704a186d1d11edfbf1c86edcdcdeab1ad128ccd5",
+              "path": "csts_native_comparison_20261028/checkpoints/46159eed51034b9e93df0f8fdf2cc3af/00009/last_model.pt"
+            }
+          },
+          "csts_native_comparison_20261028/checkpoints/46159eed51034b9e93df0f8fdf2cc3af/00009/metadata.json": {
+            "sha256": "a0b613827c80cbdf459c5579e3ace4d3335848708776806b483262306a656f6f",
+            "bytes": 1958,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_csts_joint_20261021",
+              "revision": "6157efba4fea35e125cf6a53704a186d1d11edfbf1c86edcdcdeab1ad128ccd5",
+              "path": "csts_native_comparison_20261028/checkpoints/46159eed51034b9e93df0f8fdf2cc3af/00009/metadata.json"
+            }
+          },
+          "csts_native_comparison_20261028/checkpoints/46159eed51034b9e93df0f8fdf2cc3af/00009/model.pt": {
+            "sha256": "c29d346cc4d8f0306446d9f51bceb1d39bc85edf4bb7b17241079190b8528a36",
+            "bytes": 122801515,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_csts_joint_20261021",
+              "revision": "6157efba4fea35e125cf6a53704a186d1d11edfbf1c86edcdcdeab1ad128ccd5",
+              "path": "csts_native_comparison_20261028/checkpoints/46159eed51034b9e93df0f8fdf2cc3af/00009/model.pt"
+            }
+          },
+          "csts_native_comparison_20261028/checkpoints/46159eed51034b9e93df0f8fdf2cc3af/00009/predictions.json": {
+            "sha256": "564d4460253835495a9116689fe5f6d8cb5a8ae4604f43cf75e6958a5ed06a94",
+            "bytes": 794450,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_csts_joint_20261021",
+              "revision": "6157efba4fea35e125cf6a53704a186d1d11edfbf1c86edcdcdeab1ad128ccd5",
+              "path": "csts_native_comparison_20261028/checkpoints/46159eed51034b9e93df0f8fdf2cc3af/00009/predictions.json"
+            }
+          },
+          "csts_native_comparison_20261028/checkpoints/46159eed51034b9e93df0f8fdf2cc3af/00009/resume.pt": {
+            "sha256": "4018db48d872789d931aaa6b637b90fdf139994ec99155ad88f1ec0fd05b1dec",
+            "bytes": 245701700,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_csts_joint_20261021",
+              "revision": "6157efba4fea35e125cf6a53704a186d1d11edfbf1c86edcdcdeab1ad128ccd5",
+              "path": "csts_native_comparison_20261028/checkpoints/46159eed51034b9e93df0f8fdf2cc3af/00009/resume.pt"
+            }
+          },
+          "csts_native_comparison_20261028/checkpoints/46159eed51034b9e93df0f8fdf2cc3af/00009/trace.json": {
+            "sha256": "9bde2d03be4e20a6f21070e3337fd663f50dd488b74005e52885f3cc841ba9e3",
+            "bytes": 20460,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_csts_joint_20261021",
+              "revision": "6157efba4fea35e125cf6a53704a186d1d11edfbf1c86edcdcdeab1ad128ccd5",
+              "path": "csts_native_comparison_20261028/checkpoints/46159eed51034b9e93df0f8fdf2cc3af/00009/trace.json"
+            }
+          }
+        },
+        "receipt_reference": {
+          "sha256": "c852ce79410aa94b5964bdc4b4aa0ff3849a51c0c06f5064c0db01fce089e429",
+          "bytes": 4404,
+          "stored_at": {
+            "kind": "gcs",
+            "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+            "prefix": "viper",
+            "owner": "pvd232",
+            "workspace": "jep_csts_joint_20261021",
+            "revision": "0c4ddf505e7c537d8c7925297549d147f49da3927f6270523207dcf62ff3baa1",
+            "path": "csts_native_comparison_20261028/checkpoints/46159eed51034b9e93df0f8fdf2cc3af/00009/receipt.json"
+          }
+        }
+      },
+      "checkpoint_directory": "/content/jep-native-comparison-20261028/repo/.viper/checkpoint_publications/46159eed51034b9e93df0f8fdf2cc3af/00009",
+      "completed_epoch": 8,
+      "selected": {
+        "epoch": 4,
+        "step": 760,
+        "sha256": "c29d346cc4d8f0306446d9f51bceb1d39bc85edf4bb7b17241079190b8528a36",
+        "validation": {
+          "n": 1576,
+          "mse_0_1": 0.031272785427745566,
+          "mse_1_5": 0.500364566843929,
+          "spearman": 0.8770867451452016,
+          "prediction_mean": 0.5942480412647506,
+          "target_mean": 0.6134200507614214,
+          "prediction_std": 0.36630203434540476,
+          "target_std": 0.3852562483034509,
+          "mean_prediction_by_rating": {
+            "1.0": {
+              "n": 266,
+              "mean": 0.07455939043285255
+            },
+            "2.0": {
+              "n": 213,
+              "mean": 0.29313764584736085
+            },
+            "3.0": {
+              "n": 302,
+              "mean": 0.49714858242810167
+            },
+            "4.0": {
+              "n": 130,
+              "mean": 0.6762925622554926
+            },
+            "5.0": {
+              "n": 665,
+              "mean": 0.9266269047009318
+            }
+          },
+          "condition_changes": {
+            "n": 551,
+            "correct": 530,
+            "ties": 0,
+            "accuracy_ties_half": 0.9618874773139746,
+            "difference_mse": 0.06311546332757505,
+            "unit": "Within-pair comparisons. These reuse captions and are dependent."
+          }
+        }
+      },
+      "model_path": "/content/jep-native-comparison-20261028/repo/.viper/checkpoint_publications/46159eed51034b9e93df0f8fdf2cc3af/00009/model.pt",
+      "trace_path": "/content/jep-native-comparison-20261028/repo/.viper/checkpoint_publications/46159eed51034b9e93df0f8fdf2cc3af/00009/trace.json",
+      "operator_request": "Stop training and score the existing best validation checkpoint.",
+      "stopping_rule_amended_after_seed8_test": true,
+      "time_utc": "2026-10-28T22:38:30Z"
+    },
+    "reporting_source_commit": "3e596b2d854358190ff4d51a190ae833d78a0964",
+    "test_reference": {
+      "sha256": "d6b40b7b891ed147befb30801c2f85a8787775adebdd98d134157cbb2a6e9f76",
+      "bytes": 1137281,
+      "stored_at": {
+        "kind": "gcs",
+        "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+        "prefix": "viper",
+        "owner": "pvd232",
+        "workspace": "jep_csts_joint_20261021",
+        "revision": "95213879df4b2563407b5ee6ec93ec7a5ee36e8bebdd6e4d7a62bf4b7c3b707a",
+        "path": "csts_data/readout/test.json"
+      }
+    }
+  }
+}

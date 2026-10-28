@@ -1,0 +1,369 @@
+{
+  "status": "complete",
+  "seed": 7,
+  "selected_model_sha256": "be85df7eba3b88d19e9121d149bf20c2b99d73a257b57bd65e06008bb8b4ab4f",
+  "selected_epoch": 4,
+  "terminal_epoch": 11,
+  "training_status": "stopped_by_request",
+  "selection": {
+    "executed_seeds": [
+      7,
+      8,
+      9
+    ],
+    "selected_model_sha256": {
+      "7": "be85df7eba3b88d19e9121d149bf20c2b99d73a257b57bd65e06008bb8b4ab4f"
+    },
+    "selection": {
+      "epoch": 4,
+      "step": 760,
+      "sha256": "be85df7eba3b88d19e9121d149bf20c2b99d73a257b57bd65e06008bb8b4ab4f",
+      "validation": {
+        "n": 1576,
+        "mse_0_1": 0.029810176717273904,
+        "mse_1_5": 0.47696282747638247,
+        "spearman": 0.8789204517574798,
+        "prediction_mean": 0.6263377092079009,
+        "target_mean": 0.6134200507614214,
+        "prediction_std": 0.34925663575343585,
+        "target_std": 0.3852562483034509,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 266,
+            "mean": 0.12326426546376451
+          },
+          "2.0": {
+            "n": 213,
+            "mean": 0.3374257270998798
+          },
+          "3.0": {
+            "n": 302,
+            "mean": 0.5446980725357075
+          },
+          "4.0": {
+            "n": 130,
+            "mean": 0.705738033927404
+          },
+          "5.0": {
+            "n": 665,
+            "mean": 0.9416593878340901
+          }
+        },
+        "condition_changes": {
+          "n": 551,
+          "correct": 530,
+          "ties": 0,
+          "accuracy_ties_half": 0.9618874773139746,
+          "difference_mse": 0.0627986637974028,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      }
+    },
+    "training_status": "stopped_by_request",
+    "stopping_amendment": "Score the existing best validation checkpoints immediately.",
+    "amendment_after_seed8_test": true,
+    "retained_checkpoint": {
+      "status": "training_stopped_for_inference",
+      "seed": 7,
+      "owned_pids": [
+        858634,
+        858845
+      ],
+      "native_parent_pids": [
+        858634
+      ],
+      "checkpoint_receipt_path": "/home/machina/jep-native-comparison-20261028/runrepo/.viper/checkpoint_publications/3d5d7f6304264a7d8beff917ffcae1f3/00012/receipt.json",
+      "checkpoint_receipt": {
+        "status": "published",
+        "state": {
+          "seed": 7,
+          "epoch": 11,
+          "step": 2090
+        },
+        "previous": {
+          "sha256": "6be7d2499983d1104e3e9f1cda6bc25d2ec01447d3bc0a2589c04cc32f5f7440",
+          "bytes": 4405,
+          "stored_at": {
+            "kind": "gcs",
+            "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+            "prefix": "viper",
+            "owner": "pvd232",
+            "workspace": "jep_csts_joint_20261021",
+            "revision": "a9b1a5408cd492e3e4f9ea0eaa17c5917056fcf4cdd8110643ac895e93e42303",
+            "path": "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00011/receipt.json"
+          }
+        },
+        "references": {
+          "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/last_model.pt": {
+            "sha256": "6ea36b44fd313bfd664e2491a28e628ce2c77dcaa04e202704a0b29ee2cd8530",
+            "bytes": 122821491,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_csts_joint_20261021",
+              "revision": "0670c6f09efdccf3c2fe27eefcb8234e39edef71c40465fc2ed45fb92a1ed585",
+              "path": "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/last_model.pt"
+            }
+          },
+          "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/metadata.json": {
+            "sha256": "84bdcdbe6c6caf6d9ca4f051e7b5b8013d153e5edf4fa46299a409e8d37f5273",
+            "bytes": 1969,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_csts_joint_20261021",
+              "revision": "0670c6f09efdccf3c2fe27eefcb8234e39edef71c40465fc2ed45fb92a1ed585",
+              "path": "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/metadata.json"
+            }
+          },
+          "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/model.pt": {
+            "sha256": "be85df7eba3b88d19e9121d149bf20c2b99d73a257b57bd65e06008bb8b4ab4f",
+            "bytes": 122801515,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_csts_joint_20261021",
+              "revision": "0670c6f09efdccf3c2fe27eefcb8234e39edef71c40465fc2ed45fb92a1ed585",
+              "path": "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/model.pt"
+            }
+          },
+          "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/predictions.json": {
+            "sha256": "ba5df58e3767a0e8951077b0cd2d40eee85b5fcab204e9655cf39249f33858f3",
+            "bytes": 794268,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_csts_joint_20261021",
+              "revision": "0670c6f09efdccf3c2fe27eefcb8234e39edef71c40465fc2ed45fb92a1ed585",
+              "path": "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/predictions.json"
+            }
+          },
+          "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/resume.pt": {
+            "sha256": "70c90c97424dd51e4f2a7809eea0c89dd37275530de1e65e4dd0d218a73da5af",
+            "bytes": 245703940,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_csts_joint_20261021",
+              "revision": "0670c6f09efdccf3c2fe27eefcb8234e39edef71c40465fc2ed45fb92a1ed585",
+              "path": "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/resume.pt"
+            }
+          },
+          "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/trace.json": {
+            "sha256": "42319b27c5579ed546cde5258d21f21301521e2b54f1e3e5719e9d2fedbba57e",
+            "bytes": 26815,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_csts_joint_20261021",
+              "revision": "0670c6f09efdccf3c2fe27eefcb8234e39edef71c40465fc2ed45fb92a1ed585",
+              "path": "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/trace.json"
+            }
+          }
+        },
+        "receipt_reference": {
+          "sha256": "2f657b4bcaa5c082e34b45c82b0af90372b51621a57b2844329a28d3fbc6ffae",
+          "bytes": 4405,
+          "stored_at": {
+            "kind": "gcs",
+            "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+            "prefix": "viper",
+            "owner": "pvd232",
+            "workspace": "jep_csts_joint_20261021",
+            "revision": "15efd5104866e7a94036f0f3765ca83feab1f6d56c1ed7373b190aca81aab0ec",
+            "path": "csts_native_comparison_20261028/checkpoints/3d5d7f6304264a7d8beff917ffcae1f3/00012/receipt.json"
+          }
+        }
+      },
+      "checkpoint_directory": "/home/machina/jep-native-comparison-20261028/runrepo/.viper/checkpoint_publications/3d5d7f6304264a7d8beff917ffcae1f3/00012",
+      "completed_epoch": 11,
+      "selected": {
+        "epoch": 4,
+        "step": 760,
+        "sha256": "be85df7eba3b88d19e9121d149bf20c2b99d73a257b57bd65e06008bb8b4ab4f",
+        "validation": {
+          "n": 1576,
+          "mse_0_1": 0.029810176717273904,
+          "mse_1_5": 0.47696282747638247,
+          "spearman": 0.8789204517574798,
+          "prediction_mean": 0.6263377092079009,
+          "target_mean": 0.6134200507614214,
+          "prediction_std": 0.34925663575343585,
+          "target_std": 0.3852562483034509,
+          "mean_prediction_by_rating": {
+            "1.0": {
+              "n": 266,
+              "mean": 0.12326426546376451
+            },
+            "2.0": {
+              "n": 213,
+              "mean": 0.3374257270998798
+            },
+            "3.0": {
+              "n": 302,
+              "mean": 0.5446980725357075
+            },
+            "4.0": {
+              "n": 130,
+              "mean": 0.705738033927404
+            },
+            "5.0": {
+              "n": 665,
+              "mean": 0.9416593878340901
+            }
+          },
+          "condition_changes": {
+            "n": 551,
+            "correct": 530,
+            "ties": 0,
+            "accuracy_ties_half": 0.9618874773139746,
+            "difference_mse": 0.0627986637974028,
+            "unit": "Within-pair comparisons. These reuse captions and are dependent."
+          }
+        }
+      },
+      "model_path": "/home/machina/jep-native-comparison-20261028/runrepo/.viper/checkpoint_publications/3d5d7f6304264a7d8beff917ffcae1f3/00012/model.pt",
+      "trace_path": "/home/machina/jep-native-comparison-20261028/runrepo/.viper/checkpoint_publications/3d5d7f6304264a7d8beff917ffcae1f3/00012/trace.json",
+      "operator_request": "Stop training and score the existing best validation checkpoint.",
+      "stopping_rule_amended_after_seed8_test": true,
+      "time_utc": "2026-10-28T22:38:35Z"
+    },
+    "reporting_source_commit": "3e596b2d854358190ff4d51a190ae833d78a0964",
+    "test_reference": {
+      "sha256": "d6b40b7b891ed147befb30801c2f85a8787775adebdd98d134157cbb2a6e9f76",
+      "bytes": 1137281,
+      "stored_at": {
+        "kind": "gcs",
+        "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+        "prefix": "viper",
+        "owner": "pvd232",
+        "workspace": "jep_csts_joint_20261021",
+        "revision": "95213879df4b2563407b5ee6ec93ec7a5ee36e8bebdd6e4d7a62bf4b7c3b707a",
+        "path": "csts_data/readout/test.json"
+      }
+    }
+  },
+  "test_sha256": "d6b40b7b891ed147befb30801c2f85a8787775adebdd98d134157cbb2a6e9f76",
+  "runs": {
+    "test": {
+      "name": "test",
+      "status": "succeeded",
+      "path": "/home/machina/jep-native-comparison-20261028/runrepo/experiments/native_snapshot_s7_test_9f8f2680a4/runs/test/01M62ASD9PWC2KCGETVK19DPTT/resolved.yaml",
+      "reference": {
+        "sha256": "dfa4d2d8a0671e34cc1451d06e6aa68488498268df3965c5b399e8dc53f3d410",
+        "bytes": 1054,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-native-comparison-20261028/runrepo",
+          "store": ".viper/store",
+          "store_id": "fa4df7e61483976fe91a4fc2f2c0d0f0",
+          "commit": "7c27c69eab9b331efccac4bb177c6fe4ff721802d135e5e59bee137d0275b134",
+          "path": "experiments/native_snapshot_s7_test_9f8f2680a4/runs/test/01M62ASD9PWC2KCGETVK19DPTT/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "publication_queue": "/home/machina/jep-native-comparison-20261028/runrepo/.viper/publication_queue/ad4ff6cda9d43842645a312f1871c788d8a9020bde1c05ac985500e36fe31a54.json",
+      "cloud_reference": {
+        "sha256": "5a91cce585f9726f49355f2cd9f999c50be18da7b2e019a4d4bdf131218df8fe",
+        "bytes": 1016,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "b61edb5ea0401f14257d8948f4c5c42a346285a3f017fc5f027bb69b38aff678",
+          "path": "experiments/native_snapshot_s7_test_9f8f2680a4/runs/test/01M62ASD9PWC2KCGETVK19DPTT/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      }
+    },
+    "edits": {
+      "name": "edits",
+      "status": "succeeded",
+      "path": "/home/machina/jep-native-comparison-20261028/runrepo/experiments/native_snapshot_s7_edits_9cb3927739/runs/edits/01M62AZ7TM9WP1CCDPYKTAT0NN/resolved.yaml",
+      "reference": {
+        "sha256": "84fa3fe7d97574250218aa739a89fd39e56fa312d50362ec04172cbd97dcaba8",
+        "bytes": 1058,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-native-comparison-20261028/runrepo",
+          "store": ".viper/store",
+          "store_id": "fa4df7e61483976fe91a4fc2f2c0d0f0",
+          "commit": "2ced0735ece85b3cb6d6bef3629cf1776d65ea52b1f657627b53cf217bb55843",
+          "path": "experiments/native_snapshot_s7_edits_9cb3927739/runs/edits/01M62AZ7TM9WP1CCDPYKTAT0NN/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "publication_queue": "/home/machina/jep-native-comparison-20261028/runrepo/.viper/publication_queue/c12a8a6f938f5e6ef5431aefb25e83a9b8fb76e8293d026b2f8dbaa026b6a68e.json",
+      "cloud_reference": {
+        "sha256": "e50979aa088ff07c8b01b7e36548ab5b49952ccb0c47b8557ea75fd9ed74fdc6",
+        "bytes": 1020,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_csts_joint_20261021",
+          "revision": "74ff28596ea86b1460b57a2994263032f8c3e25ac58961b6ecfe314f7c5527d9",
+          "path": "experiments/native_snapshot_s7_edits_9cb3927739/runs/edits/01M62AZ7TM9WP1CCDPYKTAT0NN/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      }
+    }
+  },
+  "in_flight": null,
+  "test": {
+    "n": 2431,
+    "mse_0_1": 0.03784199460534423,
+    "mse_1_5": 0.6054719136855077,
+    "spearman": 0.8586440328325272,
+    "prediction_mean": 0.6383163949703787,
+    "target_mean": 0.6216577540106952,
+    "prediction_std": 0.351177141027932,
+    "target_std": 0.4011538372905175,
+    "mean_prediction_by_rating": {
+      "1.0": {
+        "n": 482,
+        "mean": 0.1737714564404547
+      },
+      "2.0": {
+        "n": 269,
+        "mean": 0.372706720487779
+      },
+      "3.0": {
+        "n": 375,
+        "mean": 0.5042592595418294
+      },
+      "4.0": {
+        "n": 194,
+        "mean": 0.6957832279893541
+      },
+      "5.0": {
+        "n": 1111,
+        "mean": 0.9393807720966322
+      }
+    },
+    "condition_changes": {
+      "n": 878,
+      "correct": 844,
+      "ties": 0,
+      "accuracy_ties_half": 0.9612756264236902,
+      "difference_mse": 0.08016438283261544,
+      "unit": "Within-pair comparisons. These reuse captions and are dependent."
+    }
+  },
+  "cloud_status": "published"
+}

@@ -1,13 +1,16 @@
-# Test scores from completed fits
+# Fresh Qwen LoRA and learned comparison
 
-| Seed | Test rows | Spearman | Normalized MSE | Selected epoch | Terminal epoch |
-| --- | --- | --- | --- | --- | --- |
-| 8 | 2431 | 0.857118451 | 0.040215428 | 3 | 13 |
+Saved validation selections received test inference. The user ended the remaining training budgets after seed 8 test reporting.
 
-Seed 8 completed the committed validation stopping rule. This score uses its frozen selected model. Seeds 7 and 9 continue under their committed validation rule. The final report will give the three seed mean, paired historical comparisons and source group intervals.
+| Seed | Test Spearman | Normalized MSE | Selected epoch | Retained epoch |
+| --- | --- | --- | --- | --- |
+| 7 | 0.858644033 | 0.037841995 | 4 | 11 |
+| 8 | 0.857118451 | 0.040215428 | 3 | 13 |
+| 9 | 0.855354378 | 0.039432802 | 4 | 8 |
+| Mean | 0.857038954 | 0.039163408 | | |
 
-[Methods](../../plans/csts-native-comparison-methods.md) · [Score and selection](seed8-test.json) · [Cloud receipts](seed8-test-cloud-receipts.json)
+On 2,430 verified common test rows, mean Spearman gain over the saved ratings control is **0.001627**, with paired source group 95% interval **[-0.003210, 0.007040]** from 2,000 draws.
 
-On the 2430 verified common test rows, seed 8 has Spearman 0.857082835 and the saved ratings control has 0.855374781. The paired gain is **0.001708**, with source group 95% interval **[-0.003630, 0.007491]** from 2,000 draws.
+The user ended seeds 7 and 9 after seed 8 test reporting and requested inference from their existing validation selections. Seed 8 completed the original stopping rule. The three seed summary is conditional on the initial validation decision. Intervals describe test source uncertainty for these retained models. The historical control retains its original training history.
 
-[Paired comparison and provenance](seed8-paired-comparison.json)
+[Methods](../../plans/csts-native-comparison-methods.md) · [Diagnostics](results.json) · [Fit traces](fit-traces.json) · [Cloud receipts](cloud-receipts.json)
