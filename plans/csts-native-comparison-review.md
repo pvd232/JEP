@@ -2,6 +2,8 @@
 
 Reviewed the [experiment plan](csts-native-comparison-methods.md) once on October 28, 2026. This is a self review of the mathematics, experimental controls and implementation requirements. Status: ready for user review. Native implementation and scientific execution follow that review.
 
+The user clarified the execution scope: every new encoder begins with the original pretrained Qwen and fresh LoRA adapters. A serves as an existing frozen reference. This scope correction is reflected in the run counts, initialization requirements and evaluation comparisons below.
+
 ## Findings resolved in this pass
 
 1. The training comparison is explicit: original A trained LoRA through cosine, the completed experiment fitted a comparison on fixed embeddings, and the proposed experiment updates LoRA and comparison together. Both native arms use rating MSE.
@@ -15,11 +17,11 @@ Reviewed the [experiment plan](csts-native-comparison-methods.md) once on Octobe
 
 ## Experimental interpretation
 
-The primary result will compare fresh joint training with fresh cosine training after a shared proposition phase within each seed. Continued fitting from A supplies a separate paired result. Three continuation seeds share the historical A adapter; the fresh seeds independently initialize and train their LoRA and writing stages on the same public pretrained Qwen checkpoint.
+The primary result will compare fresh joint training with fresh cosine training after a shared proposition phase within each seed. The fresh seeds independently initialize and train their LoRA and writing stages on the same public pretrained Qwen checkpoint. A supplies existing reference scores and saved embeddings for the CPU comparison screen.
 
 The existing test supplies exploratory evidence. Paired source group intervals describe uncertainty in that test conditional on retained runs. Fresh reserved source groups supply the confirmation setting. The regularization screen selects a declared candidate for the native experiment, and all screen settings remain reportable.
 
-The plan calls for nine CPU comparison fits, twelve native rating fits and three shared writing fits. Fixed features are reused for the CPU screen. Native training retains the encoder computation in the gradient graph. Checkpoints and reports use the existing VIPER Cloud and resume facilities with asynchronous publication.
+The plan calls for nine CPU comparison fits, six native rating fits and three shared writing fits. Fixed features are reused for the CPU screen while A's encoder stays frozen. Each native comparison starts at zero, and each rating parent is the seed's newly trained proposition checkpoint. Native training retains the encoder computation in the gradient graph. Checkpoints and reports use the existing VIPER Cloud and resume facilities with asynchronous publication.
 
 ## Verification record
 
