@@ -88,7 +88,7 @@ python -m csts_pilot.extraction_comparison prepare --config configs/csts-extract
 python -m csts_pilot.extraction_comparison seal-references --output /path/to/extraction-validation --references /path/to/source-only-references.json
 ```
 
-Preparation freezes config, source and prompt fingerprints in `protocol.json`; there is no separate freeze command. The default `run` prints a dry-run plan. Add `--execute` to launch a configured arm:
+Preparation freezes config, source and prompt fingerprints in `protocol.json`; there is no separate freeze command. The default `run` prints a dry-run plan. Add `--execute` to launch a configured arm. GPT capture supports `--workers` from 1 to 16, with isolated per-source requests; the default is 1. The operator setting is retained separately from the scientific protocol:
 
 ```bash
 python -m csts_pilot.extraction_comparison run --output /path/to/extraction-validation --arm gpt_direct --cli /path/to/codex
@@ -97,7 +97,7 @@ python -m csts_pilot.extraction_comparison run --output /path/to/extraction-vali
 python -m csts_pilot.extraction_comparison run --output /path/to/extraction-validation --arm gpt_python --cli /path/to/codex
 ```
 
-Native arms additionally require their pinned config and optional torch/transformers runtime. GoLLIE also requires CUDA and flash-attn according to its model card. Native GPU loading and inference have not been exercised by this preparation. Their dry-run commands are:
+Native arms require their pinned config and the recorded torch/transformers runtime. On the Colab A100, GoLLIE uses the stock Llama SDPA compatibility backend with its unchanged checkpoint tensors. The adapter validates all 291 learned tensor names and the legacy implementation's actual rotary base of 10000, overriding the inconsistent base of 1000000 in its configuration. Kernel and normalization rounding can differ from the original custom FlashAttention implementation. This is a checkpoint comparison with a recorded compatibility backend; exact numerical parity and reproduction of published scores are unverified. Their dry-run commands are:
 
 ```bash
 python -m csts_pilot.extraction_comparison run --output /path/to/extraction-validation --arm knowcoder --device auto

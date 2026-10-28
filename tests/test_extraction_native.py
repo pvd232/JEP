@@ -8,6 +8,7 @@ from unittest.mock import patch
 from csts_pilot.extraction_native import (
     NATIVE_MODELS, NativeGenerator, build_native_prompt,
     check_token_budget, parse_native, runtime_metadata,
+    configure_legacy_gollie, verify_gollie_loading, GOLLIE_ARCHITECTURE,
 )
 
 
@@ -122,6 +123,54 @@ class NativeExtractionTests(unittest.TestCase):
         self.assertEqual(observed["cuda_version"], "test-cuda")
         self.assertEqual(observed["packages"]["transformers"], "observed-version")
         self.assertIn("python", observed)
+
+    def test_gollie_conversion_restores_actual_legacy_rope_base(self):
+        for parameters in (None, {"rope_type": "default", "rope_theta": 1000000}):
+            config = SimpleNamespace(
+                **GOLLIE_ARCHITECTURE, rope_theta=1000000,
+                rope_scaling=None, rope_parameters=parameters,
+            )
+            before = dict(vars(config))
+            receipt = configure_legacy_gollie(config)
+            self.assertEqual(config.rope_theta, 10000)
+            if parameters is not None:
+                self.assertEqual(config.rope_parameters["rope_theta"], 10000)
+            self.assertEqual(receipt["implementation"], "stock_llama_sdpa_legacy_gollie")
+            self.assertEqual(receipt["original_config_rope_theta"], 1000000)
+            for name in GOLLIE_ARCHITECTURE:
+                self.assertEqual(getattr(config, name), before[name])
+
+    def test_gollie_conversion_rejects_unreviewed_architecture(self):
+        for name, value in (("hidden_size", 2048), ("rms_norm_eps", 1e-6),
+                            ("attention_bias", True), ("rope_theta", 10000)):
+            config = SimpleNamespace(**GOLLIE_ARCHITECTURE, rope_theta=1000000, rope_scaling=None)
+            setattr(config, name, value)
+            with self.assertRaises(ValueError):
+                configure_legacy_gollie(config)
+
+    def test_gollie_loading_rejects_missing_renamed_and_partial_tensors(self):
+        names = {"model.embed_tokens.weight", "model.norm.weight", "lm_head.weight"}
+        suffixes = (
+            "input_layernorm.weight", "post_attention_layernorm.weight",
+            "self_attn.q_proj.weight", "self_attn.k_proj.weight",
+            "self_attn.v_proj.weight", "self_attn.o_proj.weight",
+            "mlp.gate_proj.weight", "mlp.up_proj.weight", "mlp.down_proj.weight",
+        )
+        for layer in range(32):
+            names.update("model.layers." + str(layer) + "." + name for name in suffixes)
+        report = {key: [] for key in ("missing_keys", "unexpected_keys", "mismatched_keys", "error_msgs")}
+        model = SimpleNamespace(named_parameters=lambda: ((name, None) for name in names))
+        verify_gollie_loading(model, report)
+        for category in report:
+            invalid_report = dict(report, **{category: ["model.layers.0.self_attn.q_proj.weight"]})
+            with self.assertRaises(ValueError):
+                verify_gollie_loading(model, invalid_report)
+        renamed = set(names)
+        renamed.remove("lm_head.weight")
+        renamed.add("new_lm_head.weight")
+        changed_model = SimpleNamespace(named_parameters=lambda: ((name, None) for name in renamed))
+        with self.assertRaises(ValueError):
+            verify_gollie_loading(changed_model, report)
 
     def test_exhausted_generation_is_marked_truncated(self):
         class Scalar:

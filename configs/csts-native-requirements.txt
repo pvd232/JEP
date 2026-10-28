@@ -1,11 +1,8 @@
-# Optional native runtime prerequisites, from the GoLLIE model card.
-# This is a starting requirements declaration, not a tested lockfile.
-# Validate checkpoint loading on the selected CUDA runtime and retain its
-# resolved package versions before reporting a native result.
-# Source: https://huggingface.co/HiTZ/GoLLIE-7B
-# Model code and tokenizer are pinned separately in extraction_native.py.
-torch>=2.1.0
-transformers>=4.33.1
-accelerate
+# Runtime observed on the requested Colab A100 for this screen.
+# Checkpoint and tokenizer revisions are pinned in extraction_native.py.
+# GoLLIE uses stock Llama SDPA with verified legacy architecture and RoPE
+# base 10000; its original FlashAttention package is unnecessary here.
+torch==2.14.0
+transformers==5.20.2
+accelerate==1.15.0
 sentencepiece
-flash-attn>=2.0.0

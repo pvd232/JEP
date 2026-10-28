@@ -6,6 +6,12 @@ ablation. Native outputs retain subject/value strings; omitted quotes, entity
 counts and inference labels must be assessed in blinded semantic review.
 No generated Python is executed.
 
+GoLLIE loads the exact pinned tensors through a stock Llama SDPA compatibility
+backend. Its original custom code hardcodes rotary base 10,000, although its
+config says 1,000,000; the adapter restores that actual rotary base and checks
+all 291 parameter names and the loading report. Kernel/rounding differences
+remain, so this backend does not claim bit parity with the authors' flash code.
+
 Prompt sources:
 https://github.com/ICT-GoKnow/KnowCoder/blob/master/Cases.md (RE, SFT)
 https://github.com/hitz-zentroa/GoLLIE/blob/main/notebooks/Relation%20Extraction.ipynb
@@ -229,12 +235,79 @@ def runtime_metadata(torch_module: Any) -> dict[str, Any]:
     }
 
 
+GOLLIE_ARCHITECTURE = {
+    "model_type": "llama", "hidden_size": 4096, "intermediate_size": 11008,
+    "num_hidden_layers": 32, "num_attention_heads": 32,
+    "num_key_value_heads": 32, "vocab_size": 32016,
+    "max_position_embeddings": 16384, "rms_norm_eps": 1e-5,
+    "hidden_act": "silu", "attention_bias": False,
+    "tie_word_embeddings": False,
+}
+
+
+def configure_legacy_gollie(config: Any) -> dict[str, Any]:
+    """Validate pinned architecture and restore the custom code's rotary base.
+
+    The checkpoint's modeling_flash_llama.py constructs FlashRotaryEmbedding
+    with base=10000. This check prevents silently interpreting its weights with
+    the contradictory rope_theta=1000000 supplied by config.json.
+    """
+    for name, expected in GOLLIE_ARCHITECTURE.items():
+        if getattr(config, name, None) != expected:
+            raise ValueError("Unexpected pinned GoLLIE architecture field: " + name)
+    if getattr(config, "mlp_bias", False) or getattr(config, "pretraining_tp", 1) != 1:
+        raise ValueError("Unexpected GoLLIE MLP bias or tensor-parallel configuration")
+    if getattr(config, "rope_scaling", None) is not None:
+        raise ValueError("Pinned GoLLIE requires unscaled rotary embeddings")
+    parameters = getattr(config, "rope_parameters", None)
+    if parameters is not None:
+        if not isinstance(parameters, dict) or parameters.get("rope_type", "default") != "default":
+            raise ValueError("Unexpected modern GoLLIE rotary configuration")
+        original_base = parameters.get("rope_theta", getattr(config, "rope_theta", None))
+    else:
+        original_base = getattr(config, "rope_theta", None)
+    if original_base != 1000000:
+        raise ValueError("Pinned GoLLIE config rotary base changed")
+    config.rope_theta = 10000
+    if parameters is not None:
+        config.rope_parameters = dict(parameters, rope_theta=10000)
+    return {
+        "implementation": "stock_llama_sdpa_legacy_gollie",
+        "rope_base": 10000,
+        "original_config_rope_theta": original_base,
+        "numerical_caveat": (
+            "Exact pinned checkpoint tensors and legacy architecture; SDPA/rotary "
+            "kernel rounding may differ from the authors' custom FlashAttention. "
+            "No bit-parity or published-score reproduction claim."
+        ),
+    }
+
+
+def verify_gollie_loading(model: Any, loading_info: dict[str, Any]) -> None:
+    """Reject every dropped, renamed, missing or mismatched checkpoint parameter."""
+    for name in ("missing_keys", "unexpected_keys", "mismatched_keys", "error_msgs"):
+        if name not in loading_info or loading_info[name]:
+            raise ValueError("GoLLIE checkpoint loading is not exact: " + name)
+    expected = {"model.embed_tokens.weight", "model.norm.weight", "lm_head.weight"}
+    layer_parameters = (
+        "input_layernorm.weight", "post_attention_layernorm.weight",
+        "self_attn.q_proj.weight", "self_attn.k_proj.weight",
+        "self_attn.v_proj.weight", "self_attn.o_proj.weight",
+        "mlp.gate_proj.weight", "mlp.up_proj.weight", "mlp.down_proj.weight",
+    )
+    for index in range(32):
+        expected.update("model.layers." + str(index) + "." + name for name in layer_parameters)
+    actual = {name for name, parameter in model.named_parameters()}
+    if len(expected) != 291 or actual != expected:
+        raise ValueError("GoLLIE loaded parameter names differ from all 291 pinned tensors")
+
+
 class NativeGenerator:
     """Load one pinned native model once and generate deterministic raw suffixes.
 
-    GoLLIE's model card requires its pinned custom flash-attention code and a
-    CUDA runtime. Missing optional dependencies fail at load time. A successful
-    load is not a claim that this setup reproduces published benchmark scores.
+    GoLLIE uses the documented stock-SDPA compatibility backend with its actual
+    legacy rotary base. Missing optional dependencies fail at load time. Loading
+    the checkpoint does not establish parity with its authors' flash backend.
     """
 
     def __init__(self, arm: str, device: str = "auto", max_new_tokens: int = 1024):
@@ -243,11 +316,11 @@ class NativeGenerator:
         check_token_budget(1, max_new_tokens, self.descriptor["context_limit"])
         self.max_new_tokens = max_new_tokens
         import torch
-        from transformers import AutoModelForCausalLM, AutoTokenizer
+        from transformers import AutoModelForCausalLM, AutoTokenizer, LlamaConfig, LlamaForCausalLM
 
         self.torch = torch
         if arm == "gollie" and not torch.cuda.is_available():
-            raise RuntimeError("Native GoLLIE requires CUDA and flash-attn per its model card")
+            raise RuntimeError("GoLLIE compatibility execution requires a CUDA runtime")
         revision = self.descriptor["revision"]
         self.tokenizer = AutoTokenizer.from_pretrained(
             self.descriptor["model_id"], revision=revision, trust_remote_code=False
@@ -256,18 +329,29 @@ class NativeGenerator:
             "revision": revision,
             "torch_dtype": torch.bfloat16,
             "device_map": device if device != "auto" else "auto",
-            "trust_remote_code": arm == "gollie",
+            "trust_remote_code": False,
         }
+        implementation = {"implementation": "native_transformers_auto"}
         if arm == "gollie":
-            options["code_revision"] = revision
-        self.model = AutoModelForCausalLM.from_pretrained(
-            self.descriptor["model_id"], **options
-        ).eval()
+            config = LlamaConfig.from_pretrained(self.descriptor["model_id"], revision=revision)
+            implementation = configure_legacy_gollie(config)
+            self.model, loading_info = LlamaForCausalLM.from_pretrained(
+                self.descriptor["model_id"], config=config,
+                attn_implementation="sdpa", output_loading_info=True, **options
+            )
+            verify_gollie_loading(self.model, loading_info)
+            self.model.eval()
+            implementation["verified_parameter_tensors"] = 291
+        else:
+            self.model = AutoModelForCausalLM.from_pretrained(
+                self.descriptor["model_id"], **options
+            ).eval()
         resolved = getattr(self.model.config, "_commit_hash", None)
         if resolved is not None and resolved != revision:
             raise RuntimeError("Loaded native checkpoint revision differs from pinned identity")
         self.environment = runtime_metadata(torch)
         self.environment["resolved_model_revision"] = resolved
+        self.environment.update(implementation)
 
     def generate(self, item: dict[str, Any]) -> dict[str, Any]:
         """Preserve exact prompt/suffix and surface exhausted token budgets."""
