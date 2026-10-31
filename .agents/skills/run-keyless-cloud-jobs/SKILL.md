@@ -31,7 +31,7 @@ operation and report the required grant; continue independent preparation.
 4. Resolve the existing project environment and dependency lock. Reuse
    completed measurements and checkpoints.
 
-For a failed Mac connector, use [the existing-VM Mac relay](references/mac-relay.md).
+For native Mac commands, apply [Connect Mac Relay](https://github.com/pvd232/agents/blob/main/skills/connect-mac-relay/SKILL.md).
 Keep cloud workloads on their intended VM and Mac commands on the Mac.
 
 ## Provision identity once

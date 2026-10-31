@@ -32,10 +32,14 @@ place during development-host setup. Route Mac applications to the Mac and
 company work to the existing Aether VM. The Aether connection can administer
 the Columbia rollout through its established IAP route.
 
-For Mac CLI work when its direct connector is unavailable, use the private
-reverse SSH relay through Aether and `mac-command`. Verify the returned Mac
-hostname and user before using Mac paths. Aether's direct file tools refer to
-the VM. See the cloud skill's Mac relay reference for bootstrap instructions.
+For native Mac CLI work, apply
+[Connect Mac Relay](.agents/skills/connect-mac-relay/SKILL.md). Prefer
+Columbia's `/opt/cloud-dev/columbia/bin/mac-command` for academic and personal
+work; use Aether's relay for company work. Both routes are configured. Verify
+the actual Mac hostname and user before using Mac paths. Connector file tools
+refer to the VM. Maintain shared skills through the canonical
+[agents collection](https://github.com/pvd232/agents/tree/main/skills) and its
+[deployment workflow](https://github.com/pvd232/agents/blob/main/deploy/skill-sync/README.md).
 
 Use the verified columbia-vm connection for development-host commands and
 files. Preserve active work and report further acceptance checks from observed

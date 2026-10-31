@@ -37,16 +37,29 @@ disk was snapshotted first. The worker remained `TERMINATED` throughout;
 guest token/API verification must run when it is next intentionally started.
 Existing experiment files and runtimes were preserved.
 
-The Mac relay is live and independently verified as
-`Peters-MacBook-Air-9.local`, user `machina`. It reuses Aether's connection;
-no ngrok subscription or extra VM is required. NumPy 2.5.4 was installed in
-the Python interpreter actually used by the Mac's Google Cloud CLI. The
-shell and LaunchAgent retain site-package access, and a fresh IAP SSH call
-succeeded without the NumPy warning. The bootstrap now handles this dependency.
-The obsolete ngrok-backed Local Mac Terminal connector was removed and its
-exclusive ngrok agent stopped after the relay passed file create/read/delete
-checks. Aether Dev VM has the user-requested full-access app permission;
-agents can use its working `mac-command` route now.
+The Mac relay is live through both Columbia and Aether. Each VM independently
+verified `Peters-MacBook-Air-9.local`, user `machina`, and a temporary Mac file
+write/read/delete. Columbia's LaunchAgent recovered automatically after its
+SSH child process was terminated: service PID 96850 changed to 97629, followed
+by a fresh Mac identity check through the direct Columbia plugin. Both VM
+listeners bind privately to `127.0.0.1:22022`.
+
+Use Columbia for academic and personal Mac commands and Aether for company
+work. Each VM has its own SSH key, pinned Mac host key and separate Mac
+LaunchAgent. The bootstrap accepts `--profile VM_PROFILE.json`, with
+optional `--port` and `--label`, and preserves Aether's defaults when no
+profile is supplied. Run it on the Mac with `profiles/columbia.json` for the
+Columbia route. No extra VM or ngrok subscription is required.
+
+NumPy 2.5.4 is installed in the Python interpreter actually used by the Mac's
+Google Cloud CLI. The shell and LaunchAgents enable site-package access;
+fresh IAP connections pass without the NumPy warning. The bootstrap checks
+and restores this dependency if a later SDK environment needs it.
+The obsolete ngrok-backed Local Mac Terminal connector and its exclusive
+ngrok process were removed. The standalone Connect Mac Relay personal skill
+is installed and documents both routes. The canonical shared source and
+content-verifying deployment adapter live in the
+[agents collection](https://github.com/pvd232/agents/blob/main/deploy/skill-sync/README.md).
 
 The direct ChatGPT plugin **columbia-vm** is installed and verified. Its
 Columbia-hosted tunnel client uses the OpenAI service-account runtime key
