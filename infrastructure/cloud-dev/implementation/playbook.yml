@@ -1,0 +1,9 @@
+---
+- name: Configure a persistent cloud development VM
+  hosts: all
+  gather_facts: false
+  become: false
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  roles:
+    - cloud_dev
