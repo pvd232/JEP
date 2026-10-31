@@ -43,8 +43,10 @@ no ngrok subscription or extra VM is required. NumPy 2.5.4 was installed in
 the Python interpreter actually used by the Mac's Google Cloud CLI. The
 shell and LaunchAgent retain site-package access, and a fresh IAP SSH call
 succeeded without the NumPy warning. The bootstrap now handles this dependency.
-The older direct Mac connector still points at its exhausted ngrok endpoint;
-agents can use the working `mac-command` route now.
+The obsolete ngrok-backed Local Mac Terminal connector was removed and its
+exclusive ngrok agent stopped after the relay passed file create/read/delete
+checks. Aether Dev VM has the user-requested full-access app permission;
+agents can use its working `mac-command` route now.
 
 Columbia's separate direct ChatGPT connector is the remaining access step.
 Its tunnel client and service are installed, but registration and its own
