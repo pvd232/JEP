@@ -48,14 +48,23 @@ exclusive ngrok agent stopped after the relay passed file create/read/delete
 checks. Aether Dev VM has the user-requested full-access app permission;
 agents can use its working `mac-command` route now.
 
-Columbia's separate direct ChatGPT connector is the remaining access step.
-Its tunnel client and service are installed, but registration and its own
-restricted runtime key are pending OpenAI organization/workspace authorization.
-The cloud-browser Google sign-in stopped at passkey verification. The
-supported terminal registration route also requires a provisioned tunnel
-management credential; no admin profile is present. This does not block the
-working Mac relay or the installed project environment. Phone access,
-tunnel recovery, reboot recovery and snapshot restore have not been accepted.
+The direct ChatGPT plugin **columbia-vm** is installed and verified. Its
+Columbia-hosted tunnel client uses the OpenAI service-account runtime key
+created as `columbia-tunnel`, with Tunnels Read and Use. The protected key
+file is mode 0600. Health and readiness returned HTTP 200, and a controlled
+tunnel-process termination recovered automatically with a new PID and an
+incremented restart count.
+
+Actual calls through the direct Columbia plugin returned
+`dev.c.pvd-dev-232.internal` and `pvd2112_columbia_edu`. Direct file write
+and read calls round-tripped `columbia-direct-mcp-20261031-ok`. The receipt is
+`/var/lib/cloud-dev/columbia/receipts/direct-tunnel-activation-20261031.json`.
+These calls used Columbia's own connection after the administrative SSH
+session ended. The Mac relay remains available for native Mac CLI work.
+
+A post-activation disk snapshot, `columbia-dev-backup-20261031-152649-0`,
+was created in `pvd-dev-232`. Phone use, host reboot recovery, runtime-key
+replacement and full snapshot restore remain acceptance checks.
 
 Recovery snapshots: `columbia-dev-backup-20261031-142059-0` in `pvd-dev-232`
 and `jep-gpu-format-dev-backup-20261031-142054-0` in `mantra-477901`.
