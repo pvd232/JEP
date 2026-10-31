@@ -21,7 +21,7 @@ def key_pair(path):
     return public.read_text().strip()
 
 
-def configure(state, user, port, host_key):
+def configure(state, user, port, host_key, gcloud_bin=None):
     if not re.fullmatch(r'[A-Za-z_][A-Za-z0-9_.-]{0,63}', user):
         raise ValueError('Invalid Mac short username')
     if not 1024 <= port <= 65535:
@@ -34,7 +34,9 @@ def configure(state, user, port, host_key):
     known_hosts.write_text('[127.0.0.1]:' + str(port) + ' ' + host_key + '\n')
     known_hosts.chmod(0o600)
     config = state / 'config.json'
-    config.write_text(json.dumps({'mac_user': user, 'port': port}, indent=2) + '\n')
+    if gcloud_bin and (not Path(gcloud_bin).is_absolute() or '\n' in gcloud_bin):
+        raise ValueError('The Mac Google Cloud CLI path must be absolute')
+    config.write_text(json.dumps({'mac_user': user, 'port': port, 'gcloud_bin': gcloud_bin}, indent=2) + '\n')
     config.chmod(0o600)
 
 
@@ -45,7 +47,10 @@ def ssh_argv(state, key, arguments):
         raise ValueError('Invalid saved relay configuration')
     if not arguments:
         raise ValueError('A Mac command is required after --')
-    remote = '/bin/zsh -lc ' + shlex.quote(shlex.join(arguments))
+    code = shlex.join(arguments)
+    if config.get('gcloud_bin'):
+        code = 'export PATH=' + shlex.quote(str(Path(config['gcloud_bin']).parent)) + ':"$PATH"\n' + code
+    remote = '/bin/zsh -lc ' + shlex.quote(code)
     return ['ssh', '-p', str(port), '-i', str(key), '-o', 'BatchMode=yes', '-o', 'IdentitiesOnly=yes', '-o', 'ConnectTimeout=10', '-o', 'StrictHostKeyChecking=yes', '-o', 'UserKnownHostsFile=' + str(state / 'known_hosts'), '--', user + '@127.0.0.1', remote]
 
 
@@ -86,6 +91,7 @@ def main():
     setup.add_argument('--mac-user', required=True)
     setup.add_argument('--port', type=int, default=22022)
     setup.add_argument('--host-key', required=True)
+    setup.add_argument('--gcloud-bin')
     subcommands.add_parser('run').add_argument('arguments', nargs=argparse.REMAINDER)
     args = parser.parse_args()
     if args.operation == 'public-key':
@@ -96,7 +102,7 @@ def main():
     elif args.operation == 'verify':
         verify(args.state_root, args.key_file)
     elif args.operation == 'configure':
-        configure(args.state_root, args.mac_user, args.port, args.host_key)
+        configure(args.state_root, args.mac_user, args.port, args.host_key, args.gcloud_bin)
         print('Mac relay identity configured; awaiting the outbound Mac tunnel')
     else:
         arguments = args.arguments[1:] if args.arguments[:1] == ['--'] else args.arguments

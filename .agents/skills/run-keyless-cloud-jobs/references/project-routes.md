@@ -9,7 +9,7 @@ Confirm these recorded targets against live inventory.
 | Company development | `aether-dev-peter-vm`, project `aether-dev-peter`, `us-central1-a` | Existing `Aether Dev VM`; Linux user `peter_aetherlabs_live` |
 
 The prepared Columbia workload account is
-`columbia-dev-jobs@pvd-dev-232.iam.gserviceaccount.com`, initially Compute
+`dev-vm@pvd-dev-232.iam.gserviceaccount.com`, initially Compute
 Viewer on that project. JEP GPU workers can share a dedicated JEP workload
 account scoped to their actual artifact buckets and cloud tasks. Discover
 existing identities before choosing an account.

@@ -18,6 +18,7 @@ relay_project='aether-dev-peter'
 relay_zone='us-central1-a'
 relay_account='peter@aetherlabs.live'
 relay_helper='/opt/cloud-dev/aether/bin/mac_relay.py'
+relay_gcloud=$(command -v gcloud)
 relay_cloud=(--project="$relay_project" --zone="$relay_zone" --account="$relay_account" --tunnel-through-iap --quiet)
 if ! gcloud auth print-access-token --account="$relay_account" >/dev/null 2>&1; then
   gcloud auth login "$relay_account"
@@ -42,14 +43,13 @@ if [ -z "$relay_host_key" ]; then
   echo 'Could not read the local SSH server public host key.' >&2
   exit 1
 fi
-printf -v relay_config_command 'python3 %q configure --mac-user %q --host-key %q --port 22022' "$relay_helper" "$relay_mac_user" "$relay_host_key"
+printf -v relay_config_command 'python3 %q configure --mac-user %q --host-key %q --port 22022 --gcloud-bin %q' "$relay_helper" "$relay_mac_user" "$relay_host_key" "$relay_gcloud"
 gcloud compute ssh "$relay_target" "${relay_cloud[@]}" --command="$relay_config_command"
 
 relay_label='live.aetherlabs.chatgpt-mac-relay'
 relay_plist="$HOME/Library/LaunchAgents/$relay_label.plist"
 relay_logs="$HOME/Library/Logs/ChatGPTMacRelay"
 mkdir -p "$HOME/Library/LaunchAgents" "$relay_logs"
-relay_gcloud=$(command -v gcloud)
 python3 - "$relay_plist" "$relay_label" "$relay_logs" "$relay_gcloud" "$relay_target" "$relay_project" "$relay_zone" "$relay_account" <<'PY'
 import os,plistlib,sys
 path,label,logs,gcloud,target,project,zone,account=sys.argv[1:]

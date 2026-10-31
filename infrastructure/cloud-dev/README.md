@@ -43,7 +43,7 @@ Existing GPU experiments have received no commands or changes.
 | JEP checkout | `/home/pvd2112_columbia_edu/columbia-worktrees/jep` |
 | JEP environment, caches and data | `/home/pvd2112_columbia_edu/columbia-projects/jep` |
 | JEP cloud configuration | `/etc/cloud-dev/columbia/projects/jep` |
-| Shared keyless job identity | `columbia-dev-jobs@pvd-dev-232.iam.gserviceaccount.com` |
+| Shared keyless job identity | `dev-vm@pvd-dev-232.iam.gserviceaccount.com` |
 | JEP job IDs, logs and checkpoints | `/var/lib/cloud-dev/columbia/projects/jep` |
 | Project job resource caps | Shared limit of 1 CPU; memory cap chosen from live available RAM with host headroom |
 | GPU training | Existing dedicated worker and IAP route |
@@ -155,7 +155,7 @@ Google Cloud workload credentials remain separate from this SSH transport.
 ## Attached workload account
 
 The host uses the dedicated service account
-`columbia-dev-jobs@pvd-dev-232.iam.gserviceaccount.com`, attached to dev with
+`dev-vm@pvd-dev-232.iam.gserviceaccount.com`, attached to dev with
 the `cloud-platform` access scope. Its initial IAM grant is
 `roles/compute.viewer` on `pvd-dev-232`, which supports inspecting VM state.
 Further access belongs in explicit resource-scoped `job_identity.iam_bindings`;

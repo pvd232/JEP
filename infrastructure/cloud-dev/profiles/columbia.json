@@ -30,8 +30,8 @@
   },
   "job_identity": {
     "mode": "attached_service_account",
-    "service_account_id": "columbia-dev-jobs",
-    "service_account_email": "columbia-dev-jobs@pvd-dev-232.iam.gserviceaccount.com",
+    "service_account_id": "dev-vm",
+    "service_account_email": "dev-vm@pvd-dev-232.iam.gserviceaccount.com",
     "oauth_scopes": ["https://www.googleapis.com/auth/cloud-platform"],
     "iam_bindings": [
       {"scope": "project", "resource": "pvd-dev-232", "role": "roles/compute.viewer"}
@@ -44,6 +44,6 @@
     "secret_references": [],
     "backup_uri": null,
     "backup_retention_days": 14,
-    "runtime_service_account": "columbia-dev-jobs@pvd-dev-232.iam.gserviceaccount.com"
+    "runtime_service_account": "dev-vm@pvd-dev-232.iam.gserviceaccount.com"
   }
 }

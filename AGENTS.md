@@ -22,7 +22,7 @@ configuration and secret values out of Git, command arguments and reports.
 
 Use explicit account, GCP project and zone arguments for cloud operations.
 Administrator provisioning uses `pvd2112@columbia.edu`. Google Cloud jobs use
-`columbia-dev-jobs@pvd-dev-232.iam.gserviceaccount.com`, the dedicated account
+`dev-vm@pvd-dev-232.iam.gserviceaccount.com`, the existing dedicated account
 attached to dev. SDKs and the Google Cloud CLI obtain short-lived credentials
 from VM metadata. Keep job environments free of user ADC files and downloaded
 service-account private keys. Initial grants are Compute Viewer on the
