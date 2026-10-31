@@ -55,6 +55,13 @@ def main():
         observed = urllib.request.build_opener(urllib.request.ProxyHandler({})).open(request, timeout=3).read().decode().rsplit('/', 1)[-1]
         if observed != target[key]:
             raise RuntimeError('Target identity mismatch: ' + key)
+    identity = profile.get('job_identity', {})
+    if identity.get('mode') == 'attached_service_account':
+        for route, expected in [('email', identity['service_account_email']), ('scopes', identity['oauth_scopes'])]:
+            request = urllib.request.Request('http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/' + route, headers={'Metadata-Flavor': 'Google'})
+            observed = urllib.request.build_opener(urllib.request.ProxyHandler({})).open(request, timeout=3).read().decode().strip()
+            if (observed != expected if route == 'email' else set(observed.splitlines()) != set(expected)):
+                raise RuntimeError('Provision the configured keyless VM job identity before installing host tooling')
     user = pwd.getpwnam(target['linux_user'])
     if os.getuid() != user.pw_uid:
         raise RuntimeError('Run as configured development user')
@@ -70,7 +77,7 @@ def main():
     install = Path(profile['paths']['install_root'])
     state = Path(profile['paths']['state_root'])
     config = Path(profile['paths']['config_root'])
-    managed = [config / 'profile.json', install / 'toolchain.lock.json'] + [install / 'bin' / name for name in ['cloud_job.py', 'mcp_stdio.py', 'activate.py', 'project.py', 'preflight.py', 'probe_mcp.py', 'cloud-job', 'cloud-mcp', 'cloud-project']]
+    managed = [config / 'profile.json', install / 'toolchain.lock.json'] + [install / 'bin' / name for name in ['cloud_job.py', 'mcp_stdio.py', 'activate.py', 'project.py', 'preflight.py', 'probe_mcp.py', 'probe_identity.py', 'cloud-job', 'cloud-mcp', 'cloud-project']]
     before = {str(p): p.read_bytes() if p.exists() else None for p in managed}
     for directory in [install, state, config]:
         run(['sudo', '-n', 'install', '-d', '-m', '0700', '-o', user.pw_name, '-g', str(user.pw_gid), str(directory)])
@@ -154,7 +161,7 @@ def main():
                 profile['transport'][key] = value
     write(config / 'profile.json', json.dumps(profile, indent=2) + '\n')
     write(lock_path, json.dumps(lock, indent=2) + '\n')
-    for filename in ['cloud_job.py', 'mcp_stdio.py', 'activate.py', 'project.py', 'probe_mcp.py']:
+    for filename in ['cloud_job.py', 'mcp_stdio.py', 'activate.py', 'project.py', 'probe_mcp.py', 'probe_identity.py']:
         write(install / 'bin' / filename, (source / filename).read_bytes(), 0o700)
     write(install / 'bin/preflight.py', (source.parent / 'tools/preflight.py').read_bytes(), 0o700)
     for name, script in [('cloud-job', 'cloud_job.py'), ('cloud-mcp', 'mcp_stdio.py'), ('cloud-project', 'project.py')]:

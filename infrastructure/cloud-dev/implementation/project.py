@@ -49,7 +49,6 @@ def project_profile(host, definition):
     profile.setdefault('resolved', {})['project_environment'] = {
         'VIRTUAL_ENV': str(runtime / 'venv'),
         'CLOUDSDK_CONFIG': str(config / 'gcloud'),
-        'GOOGLE_APPLICATION_CREDENTIALS': str(config / 'gcloud' / 'application_default_credentials.json'),
         'XDG_CACHE_HOME': str(runtime / 'cache'),
         'HF_HOME': str(runtime / 'cache' / 'huggingface'),
         'UV_CACHE_DIR': str(runtime / 'cache' / 'uv'),
@@ -58,6 +57,13 @@ def project_profile(host, definition):
         'CLOUD_PROJECT_DATA': str(runtime / 'data'),
         'CLOUD_DEV_CONFIG': str(config / 'profile.json'),
     }
+    identity = host.get('job_identity', {})
+    if identity.get('mode') == 'attached_service_account':
+        profile['resolved']['project_environment'].update({
+            'CLOUDSDK_CORE_ACCOUNT': identity['service_account_email'],
+            'CLOUDSDK_CORE_PROJECT': host['target']['gcp_project'],
+            'CLOUDSDK_COMPUTE_ZONE': host['target']['zone'],
+        })
     profile['resolved']['project_runtime'] = str(runtime)
     return profile
 
@@ -65,11 +71,21 @@ def project_profile(host, definition):
 def project_environment(profile):
     environment = os.environ.copy()
     # Do not inherit common account-level credentials into a project process.
-    for key in ['GOOGLE_OAUTH_ACCESS_TOKEN', 'CLOUDSDK_AUTH_ACCESS_TOKEN', 'CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE']:
+    for key in ['GOOGLE_APPLICATION_CREDENTIALS', 'GOOGLE_OAUTH_ACCESS_TOKEN', 'CLOUDSDK_AUTH_ACCESS_TOKEN', 'CLOUDSDK_AUTH_ACCESS_TOKEN_FILE', 'CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE', 'CLOUDSDK_AUTH_IMPERSONATE_SERVICE_ACCOUNT']:
         environment.pop(key, None)
-    environment.update(profile['resolved']['project_environment'])
-    environment['PATH'] = ':'.join([
-        str(Path(environment['VIRTUAL_ENV']) / 'bin'),
+    settings = profile['resolved'].get('project_environment', {})
+    environment.update(settings)
+    identity = profile.get('job_identity', {})
+    if identity.get('mode') == 'attached_service_account':
+        environment['CLOUDSDK_CONFIG'] = settings.get('CLOUDSDK_CONFIG', str(Path(profile['paths']['config_root']) / 'gcloud-jobs'))
+        environment['CLOUDSDK_CORE_ACCOUNT'] = identity['service_account_email']
+        environment['CLOUDSDK_CORE_PROJECT'] = profile['target']['gcp_project']
+        environment['CLOUDSDK_COMPUTE_ZONE'] = profile['target']['zone']
+        adc = Path(environment['CLOUDSDK_CONFIG']) / 'application_default_credentials.json'
+        if adc.exists():
+            raise RuntimeError('Keyless jobs require a cloud configuration directory without a local ADC credential file: ' + str(adc))
+    prefixes = [str(Path(settings['VIRTUAL_ENV']) / 'bin')] if settings.get('VIRTUAL_ENV') else []
+    environment['PATH'] = ':'.join(prefixes + [
         profile['resolved']['node_bin_dir'], profile['resolved']['bin_dir'],
         environment.get('PATH', '/usr/bin:/bin'),
     ])
@@ -132,8 +148,7 @@ def setup(host, definition):
     rendered_config = json.dumps(profile, indent=2) + '\n'
     changed = changed or rendered_config != previous_config
     write(config_file, rendered_config)
-    # Explicit ADC path deliberately fails until project credentials are provisioned.
-    # gcloud CLI credentials are separately stored under this project's gcloud/.
+    # The separate SDK directory has no user ADC file; SDKs use VM metadata.
     job_name = 'cloud-dev-' + profile['profile'] + '-job@.service'
     template = (Path(host['paths']['state_root']) / ('cloud-dev-' + host['profile'] + '-job@.service')).read_text()
     template = template.replace(str(Path(host['paths']['config_root']) / 'profile.json'), str(config_file))
@@ -152,7 +167,7 @@ def setup(host, definition):
             subprocess.run(['sudo', '-n', 'install', '-m', '0644', str(source), destination], check=True)
     if units_changed:
         subprocess.run(['sudo', '-n', 'systemctl', 'daemon-reload'], check=True)
-    print(json.dumps({'project': definition['id'], 'changed': changed, 'workspace': str(workspace), 'state': str(state), 'memory_max_mib': limits['memory_max_mib'], 'credentials': 'project login required; no credentials copied'}, indent=2))
+    print(json.dumps({'project': definition['id'], 'changed': changed, 'workspace': str(workspace), 'state': str(state), 'memory_max_mib': limits['memory_max_mib'], 'credentials': profile.get('job_identity', {}).get('mode', 'unconfigured')}, indent=2))
 
 
 def main():

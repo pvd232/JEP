@@ -16,6 +16,12 @@ work that must survive chat disconnection. Use the same project selector for
 configuration and secret values out of Git, command arguments and reports.
 
 Use explicit account, GCP project and zone arguments for cloud operations.
+Administrator provisioning uses `pvd2112@columbia.edu`. Google Cloud jobs use
+`columbia-dev-jobs@pvd-dev-232.iam.gserviceaccount.com`, the dedicated account
+attached to dev. SDKs and the Google Cloud CLI obtain short-lived credentials
+from VM metadata. Keep job environments free of user ADC files and downloaded
+service-account private keys. Initial grants are Compute Viewer on the
+Columbia project; declare further resource-specific grants in the host profile.
 Keep existing GPU experiments, checkpoints, checkouts and their IAP route in
 place during development-host setup. Route Mac applications to the Mac and
 company work to the existing Aether VM. The Aether connection can administer

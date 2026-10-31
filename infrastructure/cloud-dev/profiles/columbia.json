@@ -28,6 +28,15 @@
     "https_hostname": null,
     "oauth_issuer": null
   },
+  "job_identity": {
+    "mode": "attached_service_account",
+    "service_account_id": "columbia-dev-jobs",
+    "service_account_email": "columbia-dev-jobs@pvd-dev-232.iam.gserviceaccount.com",
+    "oauth_scopes": ["https://www.googleapis.com/auth/cloud-platform"],
+    "iam_bindings": [
+      {"scope": "project", "resource": "pvd-dev-232", "role": "roles/compute.viewer"}
+    ]
+  },
   "project": {
     "repository_urls": ["https://github.com/pvd232/JEP.git"],
     "bootstrap_commands": [],
@@ -35,6 +44,6 @@
     "secret_references": [],
     "backup_uri": null,
     "backup_retention_days": 14,
-    "runtime_service_account": null
+    "runtime_service_account": "columbia-dev-jobs@pvd-dev-232.iam.gserviceaccount.com"
   }
 }

@@ -3,7 +3,7 @@
 Use one persistent Devbox for trusted academic projects. The host profile
 installs the terminal connection, pinned tooling and durable job runner once.
 Each project definition creates its own checkout, Python environment, cloud
-login directory, caches, data and job records. Adding a project requires a new
+configuration directory, caches, data and job records. Adding a project requires a new
 JSON definition and the same setup command.
 
 JEP uses the existing VM `dev`, GCP project `pvd-dev-232`, zone
@@ -13,8 +13,9 @@ tested on Aether, with a separate Columbia installation and authorization.
 
 ## Deployment status: October 31, 2026
 
-Implementation and verification locally and on the live Aether Linux VM are
-complete: 14 tests passed, and Ansible syntax validation passed. The rollout
+The original shared-host implementation passed 14 tests locally and on the
+live Aether Linux VM, plus Ansible syntax validation. The keyless identity
+extension has additional verification recorded in the PR. The rollout
 source is staged at
 `/home/peter_aetherlabs_live/aether-worktrees/columbia-devbox-rollout-20261031`.
 Its durable validation job `a669f2713d544319ad70e0cb5e69085e` finished with
@@ -41,7 +42,8 @@ Existing GPU experiments have received no commands or changes.
 | Host tooling and tunnel | `/opt/cloud-dev/columbia`; one host connection |
 | JEP checkout | `/home/pvd2112_columbia_edu/columbia-worktrees/jep` |
 | JEP environment, caches and data | `/home/pvd2112_columbia_edu/columbia-projects/jep` |
-| JEP cloud logins and configuration | `/etc/cloud-dev/columbia/projects/jep` |
+| JEP cloud configuration | `/etc/cloud-dev/columbia/projects/jep` |
+| Shared keyless job identity | `columbia-dev-jobs@pvd-dev-232.iam.gserviceaccount.com` |
 | JEP job IDs, logs and checkpoints | `/var/lib/cloud-dev/columbia/projects/jep` |
 | Project job resource caps | Shared limit of 1 CPU; memory cap chosen from live available RAM with host headroom |
 | GPU training | Existing dedicated worker and IAP route |
@@ -59,6 +61,7 @@ From this directory:
 
 ```bash
 python3 tools/deploy.py --profile profiles/columbia.json plan
+python3 tools/identity.py --profile profiles/columbia.json plan
 python3 implementation/project.py --host-profile profiles/columbia.json \
   plan --definition projects/jep.json
 python3 -m unittest discover -s tests -v
@@ -78,6 +81,16 @@ Run from a machine with Google Cloud CLI and a current Columbia login:
 ```bash
 python3 tools/deploy.py --profile profiles/columbia.json inventory \
   --receipt receipts/columbia-inventory.json
+```
+
+Inspect existing work on dev before changing its attached identity. Google
+requires the VM to stop for an account/scope change [2]. The identity helper
+snapshots its disks and refuses to restart while recorded durable jobs are
+active. It also requires the explicit restart flag:
+
+```bash
+python3 tools/identity.py --profile profiles/columbia.json apply \
+  --allow-restart --receipt receipts/columbia-identity.json
 python3 tools/deploy.py --profile profiles/columbia.json apply \
   --project-definition projects/jep.json \
   --receipt receipts/columbia-before-install.json
@@ -115,6 +128,32 @@ Secure MCP Tunnel design already working on Aether; the HTTP/OAuth fallback
 remains an undeployed alternative. DNS ownership and an inbound VM IP are
 unnecessary for the selected tunnel route.
 
+## Keyless Google Cloud jobs
+
+The host uses the dedicated service account
+`columbia-dev-jobs@pvd-dev-232.iam.gserviceaccount.com`, attached to dev with
+the `cloud-platform` access scope. Its initial IAM grant is
+`roles/compute.viewer` on `pvd-dev-232`, which supports inspecting VM state.
+Further access belongs in explicit resource-scoped `job_identity.iam_bindings`;
+for example, a specific artifact bucket can receive its required object role
+after inventory identifies it. The job identity has no provisioning grant.
+
+Google supplies short-lived metadata tokens, and SDKs refresh them through
+Application Default Credentials [3]. All terminal, host-job and project-job
+environments select the attached account. They remove inherited Google
+credential overrides, keep Google Cloud SDK state in a separate directory,
+and reject a local user ADC file. No service-account private key is created.
+Project environments share this VM account's IAM permissions.
+
+The administrator identity still performs initial IAM/VM provisioning. The
+Secure MCP Tunnel uses its own protected runtime credential. Those are
+separate from Google Cloud job authentication.
+
+The installed `probe_identity.py` verifies the metadata email, a short-lived
+token and a permitted Compute API request. It returns identity, token lifetime
+and HTTP status; it never prints or persists the token. The deployment
+`verify` command runs this probe before testing the terminal server.
+
 ## Use a project environment
 
 The installed wrappers live in `/opt/cloud-dev/columbia/bin`; use that absolute
@@ -137,11 +176,11 @@ interrupted after a reboot. systemd owns execution and process-group
 cancellation. CPU and memory caps apply to the project's submitted jobs together. Foreground `run`
 selects the environment and working directory.
 
-Project Google Cloud CLI login and ADC are stored separately under the
-project's `gcloud/` directory. Provision them through the project environment,
-or configure an approved workload identity. Their values are never copied
-from another host or checked into this repository. The job record stores
-environment variable names and configuration references.
+Project Google Cloud SDK configuration lives under the project's `gcloud/`
+directory. SDKs obtain credentials from VM metadata. Use the attached service
+account in explicit job `--account` arguments. The job record stores environment
+variable names and configuration references. Keep user logins on the
+administrator route.
 
 For another project, copy `projects/jep.json`, change its id, repository and
 pinned commit, then run installed `project.py setup --definition FILE` with
@@ -160,3 +199,5 @@ reboot. Record evidence under `receipts/`; keep private recovery material out
 of Git.
 
 [1]: https://docs.cloud.google.com/iam/docs/best-practices-service-accounts
+[2]: https://docs.cloud.google.com/compute/docs/instances/change-service-account
+[3]: https://docs.cloud.google.com/docs/authentication/application-default-credentials

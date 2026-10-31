@@ -7,11 +7,11 @@ import signal
 import subprocess
 import sys
 import threading
+from project import project_environment
 
 profile = json.loads(Path(os.environ.get('CLOUD_DEV_CONFIG', '/etc/cloud-dev/profile.json')).read_text())
 target = profile['target']
-environment = os.environ.copy()
-environment['PATH'] = profile['resolved']['node_bin_dir'] + ':' + profile['resolved']['bin_dir'] + ':' + environment.get('PATH', '/usr/bin:/bin')
+environment = project_environment(profile)
 environment['HOME'] = profile['resolved']['linux_home']
 command = [profile['resolved']['node'], profile['resolved']['desktop_commander_entry'], '--no-onboarding']
 child = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=sys.stderr, cwd=profile['paths']['workspace_root'], env=environment)
@@ -26,6 +26,8 @@ instructions += (
     "For project jobs use cloud-project --project PROJECT_ID submit --cwd PATH -- COMMAND ARGUMENTS; retrieve results with cloud-project --project PROJECT_ID status ID or logs ID. "
     "Project environments share the host's trust boundary. " + profile.get('project_instructions', '')
 )
+if profile.get('job_identity', {}).get('mode') == 'attached_service_account':
+    instructions += ' Google Cloud jobs use attached service account ' + profile['job_identity']['service_account_email'] + ' through automatically refreshed metadata credentials. Use that account explicitly in job cloud commands; administrator provisioning uses the separate profile target.gcp_account. Do not run user auth login or install service-account key files in job environments.'
 
 
 def forward_input():

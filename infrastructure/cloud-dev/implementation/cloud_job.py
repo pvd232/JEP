@@ -64,13 +64,10 @@ def run_job(profile, job_id):
 
         signal.signal(signal.SIGTERM, stop)
         signal.signal(signal.SIGINT, stop)
-        environment = os.environ.copy()
-        environment['PATH'] = profile['resolved']['node_bin_dir'] + ':' + profile['resolved']['bin_dir'] + ':' + environment.get('PATH', '/usr/bin:/bin')
-        if profile.get('project_id'):
-            from project import project_environment
-            environment = project_environment(profile)
         with (directory / 'output.log').open('ab', buffering=0) as output:
             try:
+                from project import project_environment
+                environment = project_environment(profile)
                 child = subprocess.Popen(command, cwd=data['cwd'], env=environment, stdout=output, stderr=subprocess.STDOUT)
                 data['child_pid'] = child.pid
                 save(path, data)

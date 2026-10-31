@@ -24,7 +24,7 @@ def run(argv, **kwargs):
 
 def inspect_instance(profile):
     target = profile['target']
-    result = run(cloud(profile, 'compute', 'instances', 'describe', target['vm_name'], '--zone=' + target['zone'], '--format=json(name,status,disks)'), capture_output=True)
+    result = run(cloud(profile, 'compute', 'instances', 'describe', target['vm_name'], '--zone=' + target['zone'], '--format=json(name,status,disks,serviceAccounts)'), capture_output=True)
     instance = json.loads(result.stdout)
     if instance['name'] != target['vm_name'] or instance['status'] != 'RUNNING':
         raise RuntimeError('Configured VM must be running; deployment does not start or reboot it')
@@ -66,17 +66,25 @@ def main():
     base = Path(__file__).resolve().parent.parent
     target = host['target']
     if args.operation == 'plan':
-        print(json.dumps({'target': target, 'paths': host['paths'], 'sequence': ['verify live metadata and capacity', 'snapshot attached persistent disks', 'copy reviewed source bundle over IAP', 'install pinned host tooling', 'create specified project environment', 'register its own tunnel and runtime key', 'verify, then take a recovery snapshot'], 'deployed': False}, indent=2))
+        print(json.dumps({'target': target, 'paths': host['paths'], 'job_identity': host.get('job_identity'), 'sequence': ['verify live metadata and capacity', 'provision keyless job identity using identity.py; controlled stop/start if needed', 'snapshot attached persistent disks', 'copy reviewed source bundle over IAP', 'install pinned host tooling', 'create specified project environment', 'register its own tunnel and runtime key', 'verify keyless API access and terminal connection, then take a recovery snapshot'], 'deployed': False}, indent=2))
         return
     if args.operation == 'inventory':
         run([sys.executable, str(base / 'tools/preflight.py'), '--profile', str(args.profile), '--remote'] + (['--output', str(args.receipt)] if args.receipt else []))
         return
     instance = inspect_instance(host)
     if args.operation == 'verify':
+        identity_command = '/usr/bin/python3 ' + shlex.quote(host['paths']['install_root'] + '/bin/probe_identity.py') + ' --profile ' + shlex.quote(host['paths']['config_root'] + '/profile.json')
+        if host.get('job_identity'):
+            run(ssh_arguments(host) + ['--command', identity_command])
         command = 'CLOUD_DEV_CONFIG=' + shlex.quote(host['paths']['config_root'] + '/profile.json') + ' /usr/bin/python3 ' + shlex.quote(host['paths']['install_root'] + '/bin/probe_mcp.py')
         run(ssh_arguments(host) + ['--command', command])
         return
     if args.operation == 'apply':
+        configured_identity = host.get('job_identity')
+        if configured_identity:
+            from identity import matches
+            if not matches(instance, configured_identity):
+                raise RuntimeError('Provision the keyless VM job identity using tools/identity.py before host deployment')
         # Metadata checks happen before snapshots and before guest filesystem writes.
         run([sys.executable, str(base / 'tools/preflight.py'), '--profile', str(args.profile), '--remote'])
     receipt = {'profile': host['profile'], 'target': target, 'snapshots': snapshots(host, instance), 'consistency': 'GCP crash-consistent persistent-disk snapshots; restore test pending'}

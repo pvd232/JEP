@@ -42,6 +42,27 @@ def load_profile(path):
             raise ValueError(f"paths.{key} must be absolute and contain only letters, digits, underscores, periods, slashes, or hyphens")
         if path_value == "/" or ".." in Path(path_value).parts or "REPLACE" in path_value:
             raise ValueError(f"Unsafe or unresolved paths.{key}")
+    identity = data.get('job_identity', {})
+    if identity:
+        if identity.get('mode') != 'attached_service_account':
+            raise ValueError('Only attached_service_account job identity is supported')
+        account_id = identity.get('service_account_id', '')
+        if not re.fullmatch(r'[a-z][a-z0-9-]{4,28}[a-z0-9]', account_id):
+            raise ValueError('Invalid service account id')
+        expected_email = account_id + '@' + target['gcp_project'] + '.iam.gserviceaccount.com'
+        if identity.get('service_account_email') != expected_email:
+            raise ValueError('Job service account must belong to the target project')
+        if identity.get('oauth_scopes') != ['https://www.googleapis.com/auth/cloud-platform']:
+            raise ValueError('Use the cloud-platform access scope and constrain access with IAM')
+        for binding in identity.get('iam_bindings', []):
+            if binding.get('scope') not in ['project', 'bucket'] or not re.fullmatch(r'roles/[A-Za-z0-9_.]+', binding.get('role', '')):
+                raise ValueError('Invalid scoped IAM binding')
+            if binding['role'] in ['roles/owner', 'roles/editor']:
+                raise ValueError('Broad Owner/Editor job roles are unsupported')
+            if binding['scope'] == 'project' and binding.get('resource') != target['gcp_project']:
+                raise ValueError('Project IAM binding must target the configured GCP project')
+            if binding['scope'] == 'bucket' and not re.fullmatch(r'[a-z0-9][a-z0-9._-]{1,220}[a-z0-9]', binding.get('resource', '')):
+                raise ValueError('Invalid bucket IAM resource')
     return data
 
 
@@ -113,6 +134,8 @@ def collect(profile):
     result["os_release"] = os_info.read_text()[:5000] if os_info.exists() else None
     result["architecture"] = platform.machine()
     result["cpu_count"] = os.cpu_count()
+    result['attached_service_account'] = metadata('instance/service-accounts/default/email')
+    result['attached_service_account_scopes'] = metadata('instance/service-accounts/default/scopes')
     result["memory_kib"] = {
         line.split(':')[0]: int(line.split()[1])
         for line in Path('/proc/meminfo').read_text().splitlines()
