@@ -4,6 +4,12 @@ Reuse the already authenticated Aether Dev VM connector and a private reverse
 SSH tunnel from the Mac to that VM. This requires no additional VM, public
 MCP listener, DNS name or ngrok subscription. The Mac must remain online.
 
+Use this route only for a Mac relay the user has authorized. A quota or
+network failure can justify the approved relay; an authentication or
+authorization denial requires the proper access grant. Follow platform
+approval requirements before enabling Remote Login, adding SSH trust or
+installing a persistent connection. Preserve existing access controls.
+
 Implementation: `infrastructure/cloud-dev/tools/mac_relay.py` and
 `tools/start_mac_relay.sh` in [JEP PR 16](https://github.com/pvd232/JEP/pull/16).
 The VM helper and `mac-command` wrapper are installed under
