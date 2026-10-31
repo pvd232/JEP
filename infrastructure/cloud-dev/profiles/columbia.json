@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "profile": "columbia",
+  "connection_name": "Columbia Dev VM",
+  "project_instructions": "JEP is project jep. Keep its GPU experiments on their existing worker and IAP route. Keep company projects on the existing Aether VM.",
+  "target": {
+    "gcp_project": "pvd-dev-232",
+    "zone": "us-central1-a",
+    "vm_name": "dev",
+    "gcp_account": "pvd2112@columbia.edu",
+    "linux_user": "pvd2112_columbia_edu",
+    "ssh_via_iap": true
+  },
+  "paths": {
+    "workspace_root": "/home/pvd2112_columbia_edu/columbia-worktrees",
+    "project_root": "/home/pvd2112_columbia_edu/columbia-projects",
+    "install_root": "/opt/cloud-dev/columbia",
+    "state_root": "/var/lib/cloud-dev/columbia",
+    "config_root": "/etc/cloud-dev/columbia"
+  },
+  "transport": {
+    "preferred": "secure_tunnel",
+    "fallback": "https_oauth",
+    "selected": null,
+    "tunnel_id": null,
+    "platform_organization_id": null,
+    "chatgpt_workspace_id": null,
+    "https_hostname": null,
+    "oauth_issuer": null
+  },
+  "project": {
+    "repository_urls": ["https://github.com/pvd232/JEP.git"],
+    "bootstrap_commands": [],
+    "verify_commands": [],
+    "secret_references": [],
+    "backup_uri": null,
+    "backup_retention_days": 14,
+    "runtime_service_account": null
+  }
+}
