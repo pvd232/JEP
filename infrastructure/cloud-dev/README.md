@@ -69,6 +69,8 @@ python3 -m unittest discover -s tests -v
 
 The tested baseline is Ubuntu 24.04, Python 3.12+, x86_64 and systemd. The
 installer verifies live GCP metadata and free disk before installation.
+
+The installer applies a version and asset-hash guarded Desktop Commander file-preview overlay, including when it reuses an installed npm release. The overlay changes only widget assets: filename-first rows, bounded mobile layout and read-only gzip/base64 JSON packet excerpts. Tool responses and raw Copy source text remain unchanged. Its source is [desktop_commander_preview.py](implementation/desktop_commander_preview.py) and [desktop_commander_preview_ui.js](implementation/desktop_commander_preview_ui.js); [the focused check](tests/check_desktop_commander_preview.mjs) observes the generated widget with explicit external packet paths and keeps screenshots outside the checkout.
 The project setup also checks available memory. Existing workspaces keep
 their current branch and working tree; a new checkout starts at the explicit
 commit in `projects/jep.json`. Install research dependencies from the chosen

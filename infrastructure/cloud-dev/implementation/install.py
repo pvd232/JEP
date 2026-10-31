@@ -16,6 +16,8 @@ import urllib.request
 import zipfile
 import shlex
 
+from desktop_commander_preview import apply_overlay
+
 
 def download(url):
     request = urllib.request.Request(url, headers={'User-Agent': 'cloud-dev-setup'})
@@ -128,6 +130,8 @@ def main():
     if lock.get('package_lock_sha256') and lock['package_lock_sha256'] != package_digest:
         raise RuntimeError('Pinned npm lockfile checksum mismatch')
     lock['package_lock_sha256'] = package_digest
+    # UI-only overlay also applies when the pinned npm release is reused.
+    preview_changed = apply_overlay(package_dir / 'node_modules/@wonderwhy-er/desktop-commander')
     tunnel_dir = install / 'releases' / ('tunnel-client-' + lock['tunnel_client_version'])
     tunnel = tunnel_dir / 'tunnel-client'
     if not tunnel.exists():
@@ -187,7 +191,7 @@ def main():
     status = 'configured; client verification required' if profile['transport'].get('tunnel_id') else 'awaiting_tunnel_registration_and_runtime_key'
     write(state / 'receipts/install.json', json.dumps({'target': target, 'lock': lock, 'paths': profile['paths'], 'connection_status': status}, indent=2))
     print(json.dumps({'installed': True, 'profile': str(config / 'profile.json'), 'lock': lock, 'tunnel_binary': str(tunnel)}, indent=2))
-    changed = changed or any((p.read_bytes() if p.exists() else None) != before[str(p)] for p in managed)
+    changed = preview_changed or changed or any((p.read_bytes() if p.exists() else None) != before[str(p)] for p in managed)
     print('CLOUD_DEV_CHANGED=' + ('1' if changed else '0'))
 
 
