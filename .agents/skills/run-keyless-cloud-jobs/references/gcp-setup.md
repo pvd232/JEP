@@ -12,7 +12,9 @@ Inspect and pin its revision for a rollout.
    The generator makes no cloud changes.
 3. Review `tools/identity.py --profile PROFILE plan`. Declare IAM grants for
    observed resources. Grant a specific artifact bucket its required object
-   role when checkpoint writes need it. Job accounts need no IAM-admin grant.
+   role when checkpoint writes need it. Apply only grants authorized for the
+   named resource, following platform approval requirements. Job accounts need
+   no IAM-admin grant.
 4. Apply with `tools/identity.py --profile PROFILE apply`. For a running idle
    host whose identity must change, use `--allow-restart` after inspecting
    active work. The helper snapshots disks, checks durable/GPU jobs and records
