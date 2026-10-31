@@ -2,6 +2,7 @@
 # Run once on the Mac. Reuse Aether's authenticated connector and private SSH relay.
 set -euo pipefail
 export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+export CLOUDSDK_PYTHON_SITEPACKAGES=1
 if [ "$(uname -s)" != Darwin ]; then
   echo 'Run this setup on your Mac.' >&2
   exit 1
@@ -19,6 +20,11 @@ relay_zone='us-central1-a'
 relay_account='peter@aetherlabs.live'
 relay_helper='/opt/cloud-dev/aether/bin/mac_relay.py'
 relay_gcloud=$(command -v gcloud)
+# Install into the interpreter gcloud actually uses, not the shell's Python.
+relay_python=$("$relay_gcloud" info --format='value(basic.python_location)')
+if ! "$relay_python" -c 'import numpy' >/dev/null 2>&1; then
+  "$relay_python" -m pip install --only-binary=:all: numpy
+fi
 relay_cloud=(--project="$relay_project" --zone="$relay_zone" --account="$relay_account" --tunnel-through-iap --quiet)
 if ! gcloud auth print-access-token --account="$relay_account" >/dev/null 2>&1; then
   gcloud auth login "$relay_account"
@@ -54,7 +60,7 @@ python3 - "$relay_plist" "$relay_label" "$relay_logs" "$relay_gcloud" "$relay_ta
 import os,plistlib,sys
 path,label,logs,gcloud,target,project,zone,account=sys.argv[1:]
 command=[gcloud,'compute','ssh',target,'--project='+project,'--zone='+zone,'--account='+account,'--tunnel-through-iap','--quiet','--','-N','-T','-o','ExitOnForwardFailure=yes','-o','ServerAliveInterval=30','-o','ServerAliveCountMax=3','-R','127.0.0.1:22022:127.0.0.1:22']
-data={'Label':label,'ProgramArguments':command,'RunAtLoad':True,'KeepAlive':True,'ThrottleInterval':15,'StandardOutPath':logs+'/stdout.log','StandardErrorPath':logs+'/stderr.log','EnvironmentVariables':{'PATH':os.environ['PATH']}}
+data={'Label':label,'ProgramArguments':command,'RunAtLoad':True,'KeepAlive':True,'ThrottleInterval':15,'StandardOutPath':logs+'/stdout.log','StandardErrorPath':logs+'/stderr.log','EnvironmentVariables':{'PATH':os.environ['PATH'],'CLOUDSDK_PYTHON_SITEPACKAGES':'1'}}
 with open(path,'wb') as stream: plistlib.dump(data,stream)
 os.chmod(path,0o600)
 PY
