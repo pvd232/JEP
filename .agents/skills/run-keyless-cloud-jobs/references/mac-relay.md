@@ -19,6 +19,14 @@ The VM helper and `mac-command` wrapper are installed under
 4. Use `mac-command COMMAND ARGUMENTS` for Mac CLI work. The underlying
    process runs on macOS. Direct Aether file tools still refer to the VM.
 
+For the repeated NumPy/IAP warning, install NumPy into the exact Python shown
+by `gcloud info --format='value(basic.python_location)'`, using that Python's
+`-m pip install --only-binary=:all: numpy`. Persist
+`CLOUDSDK_PYTHON_SITEPACKAGES=1` in the shell and relay service environment.
+Verify a fresh IAP SSH call no longer emits the warning. Recheck after an SDK
+upgrade that replaces its Python environment. The bootstrap handles the
+dependency and LaunchAgent environment automatically.
+
 The SSH transport key is distinct from Google service-account credentials.
 Google background jobs continue using their VM's keyless workload identity.
 IAP still needs its configured GCP firewall rule; an existing working IAP SSH
