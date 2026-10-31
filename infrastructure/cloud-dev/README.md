@@ -13,27 +13,53 @@ tested on Aether, with a separate Columbia installation and authorization.
 
 ## Deployment status: October 31, 2026
 
-The original shared-host implementation passed 14 tests locally and on the
-live Aether Linux VM, plus Ansible syntax validation. The keyless identity
-extension has additional verification recorded in the PR. The rollout
-source is staged at
-`/home/peter_aetherlabs_live/aether-worktrees/columbia-devbox-rollout-20261031`.
-Its durable validation job `a669f2713d544319ad70e0cb5e69085e` finished with
-exit code 0. Deployment on Columbia is pending. The live Aether connector
-works and has the existing Columbia
-SSH/IAP configuration. Columbia's saved Google login requires interactive
-reauthentication; its instance inventory and SSH connection both stopped at
-that authentication check. The user reports that the Mac is online and
-credentials have been provisioned. The endpoints exposed to this chat still
-return an ngrok monthly-request-limit error and an alternate-route connection
-failure; the hosted device list also still shows its old Mac entry offline.
-The refreshed Mac route needs to become callable in this chat.
+The shared host and JEP environment are installed on `dev` in `pvd-dev-232`.
+Live inventory verified Ubuntu 24.04.5, 2 CPUs, about 8 GiB RAM and 89 GiB
+free root storage before installation. The existing attached account
+`dev-vm@pvd-dev-232.iam.gserviceaccount.com` and its `cloud-platform` scope
+already matched the profile, so the host required no restart. Its Compute
+Viewer grant was applied and a metadata-issued token passed a real Compute
+API request with HTTP 200; no token value was recorded.
 
-The remaining access dependencies are Columbia reauthentication and a new
-Secure MCP Tunnel registration/runtime key associated with the intended
-ChatGPT workspace. No Columbia capacity, service recovery, phone access,
-ten-minute disconnection, reboot or restore check has passed in this rollout.
-Existing GPU experiments have received no commands or changes.
+The real stdio terminal server passed initialization, command execution and
+file write/read checks. Reapplying the host installer reported
+`CLOUD_DEV_CHANGED=0`; project setup reported `changed: false`. JEP job
+`70c04ace84e746c98714b0aa1b0e8ae7` ran for ten minutes after the SSH session
+closed, wrote twenty checkpoint heartbeats and exited successfully. Source
+validation passed 28 local tests; earlier Linux validation and Ansible syntax
+validation passed on Aether.
+
+The existing JEP L4 worker `jep-csts-format-20261021` in `mantra-477901`,
+`asia-northeast3-a`, now has
+`jep-gpu-jobs@mantra-477901.iam.gserviceaccount.com` attached with the
+`cloud-platform` scope and an initial Compute Viewer grant. Its 200 GiB boot
+disk was snapshotted first. The worker remained `TERMINATED` throughout;
+guest token/API verification must run when it is next intentionally started.
+Existing experiment files and runtimes were preserved.
+
+The Mac relay is live and independently verified as
+`Peters-MacBook-Air-9.local`, user `machina`. It reuses Aether's connection;
+no ngrok subscription or extra VM is required. NumPy 2.5.4 was installed in
+the Python interpreter actually used by the Mac's Google Cloud CLI. The
+shell and LaunchAgent retain site-package access, and a fresh IAP SSH call
+succeeded without the NumPy warning. The bootstrap now handles this dependency.
+The older direct Mac connector still points at its exhausted ngrok endpoint;
+agents can use the working `mac-command` route now.
+
+Columbia's separate direct ChatGPT connector is the remaining access step.
+Its tunnel client and service are installed, but registration and its own
+restricted runtime key are pending OpenAI organization/workspace authorization.
+The cloud-browser Google sign-in stopped at passkey verification. The
+supported terminal registration route also requires a provisioned tunnel
+management credential; no admin profile is present. This does not block the
+working Mac relay or the installed project environment. Phone access,
+tunnel recovery, reboot recovery and snapshot restore have not been accepted.
+
+Recovery snapshots: `columbia-dev-backup-20261031-142059-0` in `pvd-dev-232`
+and `jep-gpu-format-dev-backup-20261031-142054-0` in `mantra-477901`.
+The project skill is published and referenced by JEP and the agents collection.
+Personal Skills registration is tracked separately; its service returned HTTP
+422 despite local package validation.
 
 ## What is shared and what belongs to JEP
 
@@ -214,9 +240,9 @@ registration. Shared implementation files remain the same.
 
 ## Acceptance still required on Columbia
 
-After activation, run the real stdio probe with `tools/deploy.py ... verify`,
-then make command and file calls from a phone through Columbia Dev VM. Test
-a ten-minute job across chat disconnection, tunnel process recovery, a safe
+The real stdio probe and ten-minute detached project job passed. After
+activation, make command and file calls from a phone through Columbia Dev VM.
+Test tunnel process recovery, a safe
 reboot with a checkpoint-aware job, credential replacement, a post-activation
 snapshot, and recovery onto a separate test VM. Check active work before any
 reboot. Record evidence under `receipts/`; keep private recovery material out
