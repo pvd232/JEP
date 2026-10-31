@@ -9,6 +9,15 @@ Default Google Cloud workloads to the service account attached to their VM.
 Use short-lived metadata credentials with automatic SDK refresh. Keep initial
 administrator provisioning and the ChatGPT connection as separate authentication.
 
+## Authorization
+
+Work within the projects, instances and resources authorized by the user.
+Follow platform and connector approval requirements for every action. Keep
+IAM changes, service-account attachment, restarts and SSH access changes
+within that authorization. Use the narrowest resource permissions required.
+When an operation is denied for security or access reasons, stop that
+operation and report the required grant; continue independent preparation.
+
 ## Resolve the host and workload
 
 1. Inspect project instructions and current VM inventory. Read
@@ -39,9 +48,9 @@ stopped after updating its identity. Save a recovery snapshot and the prior
 account/scopes before a running-host change.
 
 When access is denied, name the exact principal, permission and resource
-requiring an administrator grant. Continue independent preparation. Use
-administrator access already authorized for setup without asking again for
-routine, reversible work.
+requiring an administrator grant. Prepare the proposed resource and role
+changes for the authorized administrator and follow the applicable approval
+requirements before applying them.
 
 ## Run with metadata credentials
 
