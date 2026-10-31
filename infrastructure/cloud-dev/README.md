@@ -60,8 +60,10 @@ tunnel recovery, reboot recovery and snapshot restore have not been accepted.
 Recovery snapshots: `columbia-dev-backup-20261031-142059-0` in `pvd-dev-232`
 and `jep-gpu-format-dev-backup-20261031-142054-0` in `mantra-477901`.
 The project skill is published and referenced by JEP and the agents collection.
-Personal Skills registration is tracked separately; its service returned HTTP
-422 despite local package validation.
+Personal Skills registration is complete. The publishing safety scan accepted
+an updated package with explicit authorization and platform-approval boundaries.
+Run Keyless Cloud Jobs is installed in the personal skill directory; the project
+copy and agents collection references use the same authorization rules.
 
 ## What is shared and what belongs to JEP
 
