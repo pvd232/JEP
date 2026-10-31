@@ -5,9 +5,9 @@ by default before GCP CPU or GPU execution. Use attached workload identities and
 both development hosts and GPU workers. Keep the worker's existing project
 runtime and checkpoints; preserve active GPU jobs and stopped-worker state.
 
-The intended persistent development host is `dev` in GCP project `pvd-dev-232`,
+The persistent development host is `dev` in GCP project `pvd-dev-232`,
 zone `us-central1-a`, account `pvd2112@columbia.edu`, Linux user
-`pvd2112_columbia_edu`. Its connection name is **Columbia Dev VM**. Read
+`pvd2112_columbia_edu`. Its installed ChatGPT plugin is **columbia-vm**, serving Columbia Dev VM. Read
 `infrastructure/cloud-dev/README.md` for deployment status before using it.
 
 Verify live host identity and repository status before changes. Use
@@ -37,7 +37,7 @@ reverse SSH relay through Aether and `mac-command`. Verify the returned Mac
 hostname and user before using Mac paths. Aether's direct file tools refer to
 the VM. See the cloud skill's Mac relay reference for bootstrap instructions.
 
-Until Columbia deployment is accepted, preserve and use the established
-authorized execution routes. Report each acceptance check from observed
+Use the verified columbia-vm connection for development-host commands and
+files. Preserve active work and report further acceptance checks from observed
 evidence. This setup adds project environments to a shared host; all projects
 on that host share its Linux-user and VM security boundary.
