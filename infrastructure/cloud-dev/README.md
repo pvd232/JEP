@@ -130,6 +130,13 @@ unnecessary for the selected tunnel route.
 
 ## Keyless Google Cloud jobs
 
+Apply the `run-keyless-cloud-jobs` skill for CPU and GPU execution. To prepare
+an existing GPU worker, collect its live instance JSON and use
+`tools/make_gpu_profile.py` with its verified Linux user. The identity helper
+checks GPU process PIDs as well as durable job records, and preserves an
+already stopped worker's state. Keep the GPU's existing runtime; identity
+provisioning does not require installing the full development-host stack.
+
 The host uses the dedicated service account
 `columbia-dev-jobs@pvd-dev-232.iam.gserviceaccount.com`, attached to dev with
 the `cloud-platform` access scope. Its initial IAM grant is

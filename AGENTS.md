@@ -1,5 +1,10 @@
 # JEP execution
 
+Apply the personal skill `run-keyless-cloud-jobs` by default before GCP CPU or
+GPU execution. Use attached workload identities and durable job records for
+both development hosts and GPU workers. Keep the worker's existing project
+runtime and checkpoints; preserve active GPU jobs and stopped-worker state.
+
 The intended persistent development host is `dev` in GCP project `pvd-dev-232`,
 zone `us-central1-a`, account `pvd2112@columbia.edu`, Linux user
 `pvd2112_columbia_edu`. Its connection name is **Columbia Dev VM**. Read

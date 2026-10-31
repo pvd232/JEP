@@ -5,6 +5,7 @@ import importlib.util
 import json
 import io
 import os
+import shlex
 from pathlib import Path
 import subprocess
 import sys
@@ -21,6 +22,7 @@ import preflight
 import install
 import identity
 import probe_identity
+import make_gpu_profile
 
 
 class CloudDevelopmentTests(unittest.TestCase):
@@ -123,6 +125,62 @@ class CloudDevelopmentTests(unittest.TestCase):
                 identity.apply(self.host, False, self.root / 'receipt.json')
             self.assertEqual(command.call_count, 1)
             snapshot.assert_not_called()
+
+    def test_active_gpu_process_blocks_identity_migration(self):
+        instance = {'name': 'dev', 'status': 'RUNNING', 'serviceAccounts': []}
+        responses = [subprocess.CompletedProcess([], 0, stdout=json.dumps(instance)), subprocess.CompletedProcess([], 0, stdout='[{"gpu_pid":4219,"status":"gpu-active"}]')]
+        with mock.patch.object(identity, 'run', side_effect=responses), mock.patch.object(identity, 'snapshots') as snapshot:
+            with self.assertRaisesRegex(RuntimeError, 'finish or checkpoint'):
+                identity.apply(self.host, True, self.root / 'receipt.json')
+            snapshot.assert_not_called()
+
+    def test_gpu_process_inventory_queries_real_command_interface(self):
+        binary = self.root / 'bin'
+        binary.mkdir()
+        fake = binary / 'nvidia-smi'
+        fake.write_text('#!/bin/sh\nprintf "4219\\n"\n')
+        fake.chmod(0o755)
+        environment = dict(os.environ, PATH=str(binary) + ':' + os.environ.get('PATH', '/usr/bin:/bin'))
+        result = subprocess.run(shlex.split(identity.active_jobs_command(self.host)), env=environment, check=True, capture_output=True, text=True)
+        self.assertEqual(json.loads(result.stdout), [{'gpu_pid': 4219, 'status': 'gpu-active'}])
+
+    def test_stopped_worker_stays_stopped_after_identity_change(self):
+        configured = self.host['job_identity']
+        instance = {'name': 'dev', 'status': 'TERMINATED', 'serviceAccounts': []}
+        policy = {'bindings': [{'role': 'roles/compute.viewer', 'members': ['serviceAccount:' + configured['service_account_email']]}]}
+        commands = []
+
+        def run(command, **kwargs):
+            commands.append(command)
+            if 'set-service-account' in command:
+                instance['serviceAccounts'] = [{'email': configured['service_account_email'], 'scopes': configured['oauth_scopes']}]
+            data = policy if 'get-iam-policy' in command else instance
+            return subprocess.CompletedProcess(command, 0, stdout=json.dumps(data))
+
+        with mock.patch.object(identity, 'run', side_effect=run), mock.patch.object(identity, 'snapshots', return_value=[{'snapshot': 'test-recovery'}]), mock.patch.object(identity.subprocess, 'run', return_value=subprocess.CompletedProcess([], 0, stdout='{}')), contextlib.redirect_stdout(io.StringIO()):
+            identity.apply(self.host, False, self.root / 'receipt.json')
+        self.assertTrue(any('set-service-account' in command for command in commands))
+        self.assertFalse(any(action in command for command in commands for action in ['stop', 'start', 'ssh']))
+        self.assertFalse(json.loads((self.root / 'receipt.json').read_text())['restarted'])
+
+    def test_gpu_profile_uses_observed_worker_and_clears_host_transport(self):
+        instance = {'name': 'gpu-test', 'zone': 'zones/us-central1-b', 'selfLink': 'https://www.googleapis.com/compute/v1/projects/pvd-dev-232/zones/us-central1-b/instances/gpu-test', 'guestAccelerators': [{'acceleratorCount': 1}]}
+        original = copy.deepcopy(self.host)
+        profile = make_gpu_profile.make_profile(self.host, instance, 'gpu_user', 'jep-gpu-test', 'jep-gpu-jobs')
+        self.assertEqual(profile['target']['zone'], 'us-central1-b')
+        self.assertEqual(profile['target']['linux_user'], 'gpu_user')
+        self.assertEqual(profile['job_identity']['service_account_email'], 'jep-gpu-jobs@pvd-dev-232.iam.gserviceaccount.com')
+        self.assertNotIn('resolved', profile)
+        self.assertIsNone(profile['transport']['tunnel_id'])
+        self.assertEqual(self.host, original)
+
+    def test_gpu_profile_rejects_unobserved_gpu_or_wrong_project(self):
+        instance = {'name': 'gpu-test', 'zone': 'zones/us-central1-b', 'selfLink': 'https://www.googleapis.com/compute/v1/projects/pvd-dev-232/zones/us-central1-b/instances/gpu-test', 'guestAccelerators': []}
+        with self.assertRaisesRegex(ValueError, 'no GPU'):
+            make_gpu_profile.make_profile(self.host, instance, 'gpu_user', 'jep-gpu-test', 'jep-gpu-jobs')
+        instance['selfLink'] = instance['selfLink'].replace('pvd-dev-232', 'another-project')
+        with self.assertRaisesRegex(ValueError, 'selfLink'):
+            make_gpu_profile.make_profile(self.host, instance, 'gpu_user', 'jep-gpu-test', 'jep-gpu-jobs')
 
     def test_identity_setup_is_idempotent_when_account_and_grants_match(self):
         configured = self.host['job_identity']
