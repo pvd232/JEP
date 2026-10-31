@@ -13,12 +13,20 @@ tested on Aether, with a separate Columbia installation and authorization.
 
 ## Deployment status: October 31, 2026
 
-Implementation and local verification are complete. Deployment on Columbia
-is pending. The live Aether connector works and has the existing Columbia
+Implementation and verification locally and on the live Aether Linux VM are
+complete: 14 tests passed, and Ansible syntax validation passed. The rollout
+source is staged at
+`/home/peter_aetherlabs_live/aether-worktrees/columbia-devbox-rollout-20261031`.
+Its durable validation job `a669f2713d544319ad70e0cb5e69085e` finished with
+exit code 0. Deployment on Columbia is pending. The live Aether connector
+works and has the existing Columbia
 SSH/IAP configuration. Columbia's saved Google login requires interactive
 reauthentication; its instance inventory and SSH connection both stopped at
-that authentication check. Both Mac connectors are unavailable, and the
-hosted device list reports the Mac offline.
+that authentication check. The user reports that the Mac is online and
+credentials have been provisioned. The endpoints exposed to this chat still
+return an ngrok monthly-request-limit error and an alternate-route connection
+failure; the hosted device list also still shows its old Mac entry offline.
+The refreshed Mac route needs to become callable in this chat.
 
 The remaining access dependencies are Columbia reauthentication and a new
 Secure MCP Tunnel registration/runtime key associated with the intended
