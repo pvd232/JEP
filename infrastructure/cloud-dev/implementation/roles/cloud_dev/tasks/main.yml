@@ -56,11 +56,14 @@
     - project.py
     - probe_identity.py
 
-- name: Copy profile validation and inventory tool
+- name: Copy profile validation and Mac relay tooling
   ansible.builtin.copy:
-    src: "{{ playbook_dir }}/../tools/preflight.py"
-    dest: "/home/{{ cloud_dev_profile.target.linux_user }}/cloud-dev-setup/cloud-dev-plan/tools/preflight.py"
+    src: "{{ playbook_dir }}/../tools/{{ item }}"
+    dest: "/home/{{ cloud_dev_profile.target.linux_user }}/cloud-dev-setup/cloud-dev-plan/tools/{{ item }}"
     mode: '0700'
+  loop:
+    - preflight.py
+    - mac_relay.py
 
 - name: Copy the VM profile
   ansible.builtin.copy:

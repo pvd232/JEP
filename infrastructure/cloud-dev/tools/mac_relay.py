@@ -7,6 +7,7 @@ from pathlib import Path
 import re
 import shlex
 import subprocess
+import time
 
 
 def key_pair(path):
@@ -48,12 +49,39 @@ def ssh_argv(state, key, arguments):
     return ['ssh', '-p', str(port), '-i', str(key), '-o', 'BatchMode=yes', '-o', 'IdentitiesOnly=yes', '-o', 'ConnectTimeout=10', '-o', 'StrictHostKeyChecking=yes', '-o', 'UserKnownHostsFile=' + str(state / 'known_hosts'), '--', user + '@127.0.0.1', remote]
 
 
+def check_server():
+    result = subprocess.run(['sudo', '-n', '/usr/sbin/sshd', '-T'], check=True, capture_output=True, text=True)
+    settings = dict(line.split(None, 1) for line in result.stdout.splitlines() if ' ' in line)
+    if settings.get('gatewayports') not in ['no', 'clientspecified']:
+        raise RuntimeError('Relay requires GatewayPorts no or clientspecified to preserve the loopback binding')
+    if settings.get('allowtcpforwarding') not in ['yes', 'remote']:
+        raise RuntimeError('SSH remote forwarding is disabled on the relay host')
+
+
+def verify(state, key):
+    port = int(json.loads((state / 'config.json').read_text())['port'])
+    for attempt in range(20):
+        result = subprocess.run(['ss', '-ltnH', 'sport = :' + str(port)], check=True, capture_output=True, text=True)
+        addresses = [line.split()[3] for line in result.stdout.splitlines() if line.strip()]
+        if addresses:
+            if any(address not in ['127.0.0.1:' + str(port), '[::1]:' + str(port)] for address in addresses):
+                raise RuntimeError('Relay listener has an unexpected non-loopback address')
+            hostname = subprocess.check_output(ssh_argv(state, key, ['hostname']), text=True, timeout=15).strip()
+            user = subprocess.check_output(ssh_argv(state, key, ['id', '-un']), text=True, timeout=15).strip()
+            print(json.dumps({'loopback_listener': True, 'mac_hostname': hostname, 'mac_user': user}))
+            return
+        time.sleep(1)
+    raise RuntimeError('Mac reverse tunnel is not listening yet; inspect the Mac relay LaunchAgent log')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--state-root', type=Path, default=Path('/var/lib/cloud-dev/aether/mac-relay'))
     parser.add_argument('--key-file', type=Path, default=Path.home() / '.ssh/chatgpt_mac_relay_ed25519')
     subcommands = parser.add_subparsers(dest='operation', required=True)
     subcommands.add_parser('public-key')
+    subcommands.add_parser('check-server')
+    subcommands.add_parser('verify')
     setup = subcommands.add_parser('configure')
     setup.add_argument('--mac-user', required=True)
     setup.add_argument('--port', type=int, default=22022)
@@ -62,6 +90,11 @@ def main():
     args = parser.parse_args()
     if args.operation == 'public-key':
         print(key_pair(args.key_file))
+    elif args.operation == 'check-server':
+        check_server()
+        print('SSH relay policy supports private loopback forwarding')
+    elif args.operation == 'verify':
+        verify(args.state_root, args.key_file)
     elif args.operation == 'configure':
         configure(args.state_root, args.mac_user, args.port, args.host_key)
         print('Mac relay identity configured; awaiting the outbound Mac tunnel')

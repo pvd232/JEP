@@ -77,7 +77,7 @@ def main():
     install = Path(profile['paths']['install_root'])
     state = Path(profile['paths']['state_root'])
     config = Path(profile['paths']['config_root'])
-    managed = [config / 'profile.json', install / 'toolchain.lock.json'] + [install / 'bin' / name for name in ['cloud_job.py', 'mcp_stdio.py', 'activate.py', 'project.py', 'preflight.py', 'probe_mcp.py', 'probe_identity.py', 'cloud-job', 'cloud-mcp', 'cloud-project']]
+    managed = [config / 'profile.json', install / 'toolchain.lock.json'] + [install / 'bin' / name for name in ['cloud_job.py', 'mcp_stdio.py', 'activate.py', 'project.py', 'preflight.py', 'probe_mcp.py', 'probe_identity.py', 'mac_relay.py', 'cloud-job', 'cloud-mcp', 'cloud-project', 'mac-command']]
     before = {str(p): p.read_bytes() if p.exists() else None for p in managed}
     for directory in [install, state, config]:
         run(['sudo', '-n', 'install', '-d', '-m', '0700', '-o', user.pw_name, '-g', str(user.pw_gid), str(directory)])
@@ -164,6 +164,8 @@ def main():
     for filename in ['cloud_job.py', 'mcp_stdio.py', 'activate.py', 'project.py', 'probe_mcp.py', 'probe_identity.py']:
         write(install / 'bin' / filename, (source / filename).read_bytes(), 0o700)
     write(install / 'bin/preflight.py', (source.parent / 'tools/preflight.py').read_bytes(), 0o700)
+    write(install / 'bin/mac_relay.py', (source.parent / 'tools/mac_relay.py').read_bytes(), 0o700)
+    write(install / 'bin/mac-command', '#!/bin/sh\nexec /usr/bin/python3 ' + shlex.quote(str(install / 'bin/mac_relay.py')) + ' --state-root ' + shlex.quote(str(state / 'mac-relay')) + ' run -- "$@"\n', 0o700)
     for name, script in [('cloud-job', 'cloud_job.py'), ('cloud-mcp', 'mcp_stdio.py'), ('cloud-project', 'project.py')]:
         write(install / 'bin' / name, '#!/bin/sh\nexport CLOUD_DEV_CONFIG=' + shlex.quote(str(config / 'profile.json')) + '\nexec /usr/bin/python3 ' + shlex.quote(str(install / 'bin' / script)) + ' "$@"\n', 0o700)
     template = ('[Unit]\nDescription=Cloud development durable job %i\nAfter=network-online.target\nWants=network-online.target\n\n[Service]\nType=oneshot\nUser=' + user.pw_name + '\nGroup=' + str(user.pw_gid) + '\nEnvironment=CLOUD_DEV_CONFIG=' + str(config / 'profile.json') + '\nUMask=0077\nExecStart=/usr/bin/python3 ' + str(install / 'bin/cloud_job.py') + ' _run %i\nExecStopPost=/usr/bin/python3 ' + str(install / 'bin/cloud_job.py') + ' _finalize %i\nTimeoutStartSec=infinity\nTimeoutStopSec=15\nKillMode=control-group\nRemainAfterExit=yes\n\n[Install]\nWantedBy=multi-user.target\n')

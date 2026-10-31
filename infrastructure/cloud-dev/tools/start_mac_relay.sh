@@ -19,6 +19,10 @@ relay_zone='us-central1-a'
 relay_account='peter@aetherlabs.live'
 relay_helper='/opt/cloud-dev/aether/bin/mac_relay.py'
 relay_cloud=(--project="$relay_project" --zone="$relay_zone" --account="$relay_account" --tunnel-through-iap --quiet)
+if ! gcloud auth print-access-token --account="$relay_account" >/dev/null 2>&1; then
+  gcloud auth login "$relay_account"
+fi
+gcloud compute ssh "$relay_target" "${relay_cloud[@]}" --command="python3 $relay_helper check-server"
 relay_public_key=$(gcloud compute ssh "$relay_target" "${relay_cloud[@]}" --command="python3 $relay_helper public-key")
 case "$relay_public_key" in
   'ssh-ed25519 '*) ;;
@@ -56,4 +60,5 @@ os.chmod(path,0o600)
 PY
 launchctl bootout "gui/$(id -u)/$relay_label" >/dev/null 2>&1 || true
 launchctl bootstrap "gui/$(id -u)" "$relay_plist"
+gcloud compute ssh "$relay_target" "${relay_cloud[@]}" --command="python3 $relay_helper verify"
 echo 'Mac relay installed. The connection uses the existing Aether VM and reconnects automatically.'
