@@ -137,6 +137,23 @@ checks GPU process PIDs as well as durable job records, and preserves an
 already stopped worker's state. Keep the GPU's existing runtime; identity
 provisioning does not require installing the full development-host stack.
 
+The reusable skill is included under `.agents/skills/run-keyless-cloud-jobs`
+at the repository root and is loaded by the project instructions.
+
+## Mac connection through the existing VM
+
+The private reverse SSH relay reuses Aether's authenticated terminal connector.
+It creates no additional VM, public MCP listener or ngrok subscription. The VM
+helper is `tools/mac_relay.py`; run `tools/start_mac_relay.sh` once on the Mac
+after enabling Remote Login for the intended local user. It installs a user
+LaunchAgent that reconnects automatically. The VM side listens on loopback
+port 22022, and its dedicated SSH key is restricted and its Mac host key pinned.
+Use `/opt/cloud-dev/aether/bin/mac-command hostname` to verify the Mac route.
+
+Google Cloud workload credentials remain separate from this SSH transport.
+
+## Attached workload account
+
 The host uses the dedicated service account
 `columbia-dev-jobs@pvd-dev-232.iam.gserviceaccount.com`, attached to dev with
 the `cloud-platform` access scope. Its initial IAM grant is

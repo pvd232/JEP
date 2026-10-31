@@ -1,7 +1,7 @@
 # JEP execution
 
-Apply the personal skill `run-keyless-cloud-jobs` by default before GCP CPU or
-GPU execution. Use attached workload identities and durable job records for
+Read [.agents/skills/run-keyless-cloud-jobs/SKILL.md](.agents/skills/run-keyless-cloud-jobs/SKILL.md)
+by default before GCP CPU or GPU execution. Use attached workload identities and durable job records for
 both development hosts and GPU workers. Keep the worker's existing project
 runtime and checkpoints; preserve active GPU jobs and stopped-worker state.
 
@@ -31,6 +31,11 @@ Keep existing GPU experiments, checkpoints, checkouts and their IAP route in
 place during development-host setup. Route Mac applications to the Mac and
 company work to the existing Aether VM. The Aether connection can administer
 the Columbia rollout through its established IAP route.
+
+For Mac CLI work when its direct connector is unavailable, use the private
+reverse SSH relay through Aether and `mac-command`. Verify the returned Mac
+hostname and user before using Mac paths. Aether's direct file tools refer to
+the VM. See the cloud skill's Mac relay reference for bootstrap instructions.
 
 Until Columbia deployment is accepted, preserve and use the established
 authorized execution routes. Report each acceptance check from observed
