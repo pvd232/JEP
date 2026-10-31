@@ -34,23 +34,18 @@ operation and report the required grant; continue independent preparation.
 For native Mac commands, apply [Connect Mac Relay](https://github.com/pvd232/agents/blob/main/skills/connect-mac-relay/SKILL.md).
 Keep cloud workloads on their intended VM and Mac commands on the Mac.
 
-## Provision identity once
+## Verify the attached identity
 
-Follow [GCP setup](references/gcp-setup.md). Create or reuse a dedicated
-workload service account and declare IAM roles for observed resources. Apply
-IAM once, attach the account with the `cloud-platform` scope, and let IAM
-determine access. Generate no service-account private-key file.
+Read [identity preflight](references/gcp-setup.md). Require the VM's existing
+attached service account to match the project configuration. Verify its
+metadata identity and a permitted API operation before starting the job.
 
-For a running VM, inspect durable jobs and GPU process PIDs before a
-stop/start required for an attachment change. Let active jobs finish or use
-their documented checkpoint procedure. Keep an already stopped GPU worker
-stopped after updating its identity. Save a recovery snapshot and the prior
-account/scopes before a running-host change.
-
-When access is denied, name the exact principal, permission and resource
-requiring an administrator grant. Prepare the proposed resource and role
-changes for the authorized administrator and follow the applicable approval
-requirements before applying them.
+Keep routine job execution scoped to the existing account and its granted
+permissions. If the account or resource grant is missing, report the exact
+principal, permission and resource requiring an administrator grant. Treat
+IAM changes, service-account attachment and VM power changes as separately
+requested infrastructure work under the project's reviewed setup workflow.
+Preserve active jobs and the existing state of stopped GPU workers.
 
 ## Run with metadata credentials
 
