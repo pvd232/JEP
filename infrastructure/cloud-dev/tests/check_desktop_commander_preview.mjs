@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 /** Focused pinned-asset and native widget observer. Private inputs stay outside Git. */
 import assert from 'node:assert/strict';
+import { createRequire } from 'node:module';
+import { Script } from 'node:vm';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { cp, readFile, writeFile, mkdir, mkdtemp, chmod } from 'node:fs/promises';
@@ -34,16 +36,28 @@ const helperPath = path.join(root, 'implementation/desktop_commander_preview_ui.
 const sha = (value) => createHash('sha256').update(value).digest('hex');
 await mkdir(evidence, { recursive: true, mode: 0o700 });
 await chmod(evidence, 0o700);
+async function copyPreviewPackage(destination) {
+    await cp(path.join(packageRoot, 'dist/ui'), path.join(destination, 'dist/ui'), { recursive: true });
+    await cp(path.join(packageRoot, 'package.json'), path.join(destination, 'package.json'));
+    for (const name of ['dist/server.js', 'dist/handlers/terminal-handlers.js']) {
+        await mkdir(path.dirname(path.join(destination, name)), { recursive: true });
+        await cp(path.join(packageRoot, name), path.join(destination, name));
+    }
+}
 const stage = await mkdtemp(path.join(evidence, 'candidate-'));
-await cp(path.join(packageRoot, 'dist/ui'), path.join(stage, 'dist/ui'), { recursive: true });
-await cp(path.join(packageRoot, 'package.json'), path.join(stage, 'package.json'));
+await copyPreviewPackage(stage);
 const modelOwner = path.join(packageRoot, 'dist/handlers/filesystem-handlers.js');
 const modelHash = sha(await readFile(modelOwner));
 const apply = () => JSON.parse(execFileSync(python, [overlay, '--package', stage], { encoding: 'utf8', stdio: 'pipe' }));
 assert.equal(apply().changed, true, 'overlay applied');
 assert.equal(apply().changed, false, 'overlay idempotent');
+const upgradeReport = JSON.parse(execFileSync(python, [path.join(root, 'tests/check_desktop_commander_preview_upgrade.py'), '--installed', packageRoot, '--upgraded', stage], { encoding: 'utf8', stdio: 'pipe' }));
 const runtimePath = path.join(stage, 'dist/ui/file-preview/preview-runtime.js');
 execFileSync(process.execPath, ['--check', runtimePath], { stdio: 'pipe' });
+const manifest = JSON.parse(await readFile(path.join(stage, 'dist/ui/file-preview/.compact-preview-overlay.json'), 'utf8'));
+for (const name of Object.keys(manifest.sha256).filter((name) => name.endsWith('.js'))) {
+    execFileSync(process.execPath, ['--check', path.join(stage, name)], { stdio: 'pipe' });
+}
 const runtime = await readFile(runtimePath, 'utf8');
 const helper = await readFile(helperPath, 'utf8');
 assert(runtime.includes(helper.replaceAll('export function ', 'function ')), 'same helper is served');
@@ -57,8 +71,7 @@ assert.throws(apply, /Command failed/, 'installed drift rejected');
 await writeFile(cssPath, css);
 assert.equal(apply().changed, false);
 const driftStage = await mkdtemp(path.join(evidence, 'drift-'));
-await cp(path.join(packageRoot, 'dist/ui'), path.join(driftStage, 'dist/ui'), { recursive: true });
-await cp(path.join(packageRoot, 'package.json'), path.join(driftStage, 'package.json'));
+await copyPreviewPackage(driftStage);
 const driftCss = path.join(driftStage, 'dist/ui/file-preview/styles.css');
 await writeFile(driftCss, 'upstream changed');
 const untouchedRuntimeHash = sha(await readFile(path.join(driftStage, 'dist/ui/file-preview/preview-runtime.js')));
@@ -70,8 +83,7 @@ assert.equal(sha(await readFile(path.join(driftStage, 'dist/ui/file-preview/prev
 const reportingRelease = await mkdtemp(path.join(evidence, 'installer-'));
 const reportingPackage = path.join(reportingRelease, 'node_modules/@wonderwhy-er/desktop-commander');
 await mkdir(reportingPackage, { recursive: true });
-await cp(path.join(packageRoot, 'dist/ui'), path.join(reportingPackage, 'dist/ui'), { recursive: true });
-await cp(path.join(packageRoot, 'package.json'), path.join(reportingPackage, 'package.json'));
+await copyPreviewPackage(reportingPackage);
 const reportingProbe = [
     'import ast,sys',
     'from pathlib import Path',
@@ -121,6 +133,52 @@ for (let i = 0; i < 40; i++) deep = { child: deep };
 assert((await helperCase(gzipSync(Buffer.from(JSON.stringify(deep))).toString('base64'))).notice.includes('Preview unavailable'));
 assert.equal(api.dcPacketPreviewBody({ fileType: 'text', filePath: '/fixture/code.js' }, escaped), undefined);
 
+
+const requireFromPackage = createRequire(path.join(packageRoot, 'package.json'));
+const zod = await import(pathToFileURL(requireFromPackage.resolve('zod')).href);
+const schemaSource = await readFile(path.join(packageRoot, 'dist/tools/schemas.js'), 'utf8');
+const schemaStart = schemaSource.indexOf('export const ReadProcessOutputArgsSchema');
+const schemaEnd = schemaSource.indexOf('export const ', schemaStart + 1);
+const processSchema = new Function('z', schemaSource.slice(schemaStart, schemaEnd).replace('export const ', 'const ')
+    + ';return ReadProcessOutputArgsSchema;')(zod.z);
+const managerSource = await readFile(path.join(packageRoot, 'dist/terminal-manager.js'), 'utf8');
+const managerStart = managerSource.indexOf('export class TerminalManager');
+const managerEnd = managerSource.indexOf('export const terminalManager', managerStart);
+const NativeManager = new Function(managerSource.slice(managerStart, managerEnd).replace('export class ', 'class ')
+    + ';return TerminalManager;')();
+const nativeManager = new NativeManager();
+const processSource = await readFile(path.join(packageRoot, 'dist/tools/improved-process-tools.js'), 'utf8');
+const processStart = processSource.indexOf('export async function readProcessOutput(');
+const processEnd = processSource.indexOf('export async function ', processStart + 1);
+const nativeRead = new Function('ReadProcessOutputArgsSchema', 'MAX_PROCESS_WAIT_MS', 'MAX_BUFFERED_OUTPUT_CHARS',
+    'configManager', 'terminalManager', 'getProcessWaitLimit', 'formatProcessStateMessage',
+    processSource.slice(processStart, processEnd).replace('export async function ', 'async function ')
+    + ';return readProcessOutput;')(
+        processSchema, 30000, 50 * 1024 * 1024, { getConfig: async () => ({ fileReadLineLimit: 1000 }) },
+        nativeManager, (timeout, cap) => ({ waitMs: Math.min(timeout, cap) }), () => '');
+const handlerSource = await readFile(path.join(stage, 'dist/handlers/terminal-handlers.js'), 'utf8');
+const handlerStart = handlerSource.indexOf('export async function handleReadProcessOutput(');
+const handlerEnd = handlerSource.indexOf('export async function ', handlerStart + 1);
+const nativeHandler = new Function('ReadProcessOutputArgsSchema', 'readProcessOutput',
+    handlerSource.slice(handlerStart, handlerEnd).replace('export async function ', 'async function ')
+    + ';return handleReadProcessOutput;')(processSchema, nativeRead);
+const session = {
+    outputLines: Array.from({ length: 400 }, (_, i) => '  \u001b[31mline ' + i + ' <script>untrusted</script> left\u0000right ' + 'x'.repeat(120) + '\r').concat(['']),
+    lastReadIndex: 0, lastReadOpenLine: '', evictedLines: 0, startTime: new Date(0),
+};
+nativeManager.completedSessions.set(4242, { session, exitCode: 0, endTime: new Date(1234) });
+const processArgs = { pid: 4242, offset: 0, length: 400, timeout_ms: 0 };
+const originalResult = await nativeRead(processArgs);
+session.lastReadIndex = 0; session.lastReadOpenLine = '';
+const processResult = await nativeHandler(processArgs);
+assert.deepEqual(processSchema.parse({ ...processArgs, path: '/fixture/unrelated.js' }), processArgs, 'native schema accepts and strips ambiguous path');
+assert.deepEqual(processResult.content, originalResult.content, 'native handler preserves original returned blocks');
+assert.equal(session.lastReadIndex, 400, 'native offset0 advances only its original read');
+assert.deepEqual(processResult._meta, { 'desktop-commander/preview': { kind: 'process_output', pid: 4242 } });
+assert.equal(processResult.structuredContent, undefined, 'stdout is not duplicated into structuredContent');
+const expectedProcessText = processResult.content.map((block) => block.text).join('\n');
+const processDisplay = expectedProcessText.slice(0, 48 * 1024).split('\n').slice(0, 240).join('\n');
+
 const cases = [];
 for (const packetPath of packetPaths) {
     const content = await readFile(packetPath, 'utf8');
@@ -142,17 +200,65 @@ cases.push(
 );
 
 cases.push({ ...cases[0], dark: true });
+cases.push({ name: 'file-order.js', packetPath: '/fixture/file-order.js', type: 'text', content: 'const exact = 1;\n', ordinary: true, order: 'file-result-first' });
+
+
+const snapshotCase = {
+    name: 'Process 4242 output', process: true, args: processArgs, result: processResult,
+    content: expectedProcessText, expected: processDisplay,
+};
+cases.push(
+    { ...snapshotCase, scenario: 'known-input-first' },
+    { ...snapshotCase, scenario: 'generic-host-no-persistence', fallbackHost: true, noToolInfo: true },
+    { ...snapshotCase, scenario: 'ambiguous-pid-path', noToolInfo: true, unavailable: true, args: { ...processArgs, path: '/fixture/unrelated.js' } },
+    { ...snapshotCase, scenario: 'unknown-input-first', noToolInfo: true },
+    { ...snapshotCase, scenario: 'unknown-result-first', noToolInfo: true, order: 'result-first' },
+    { ...snapshotCase, scenario: 'metadata-only-result-first', noToolInfo: true, order: 'result-first', args: {} },
+    { ...snapshotCase, scenario: 'late-file-race', noToolInfo: true, race: true },
+    { ...snapshotCase, scenario: 'rendered-file-context-race', noToolInfo: true, readyFile: true },
+    { ...snapshotCase, scenario: 'directory-child-handoff', noToolInfo: true, directoryHandoff: true },
+    { ...snapshotCase, scenario: 'missing-identity', unavailable: true, result: { content: processResult.content } },
+    { ...snapshotCase, scenario: 'missing-identity-result-first', noToolInfo: true, order: 'result-first', unavailable: true, result: { content: processResult.content } },
+    { ...snapshotCase, scenario: 'missing-text', unavailable: true, result: { ...processResult, content: [] } },
+    { ...snapshotCase, scenario: 'mismatched-pid', unavailable: true, args: { ...processArgs, pid: 4243 } },
+    { ...snapshotCase, scenario: 'unsupported-multiple-blocks', unavailable: true, result: { ...processResult, content: [{ type: 'text', text: 'first' }, { type: 'text', text: 'second' }] } },
+    { ...snapshotCase, scenario: 'present-empty-text', content: '', expected: '', result: { ...processResult, content: [{ type: 'text', text: '' }] } },
+);
 
 const nativeResources = await import(pathToFileURL(path.join(stage, 'dist/ui/resources.js')).href);
 const resource = await nativeResources.getFilePreviewResourceText();
 assert(resource.includes('Content-Security-Policy'), 'native CSP/inliner boundary is used');
-const HARNESS = `<!doctype html><meta name="viewport" content="width=device-width, initial-scale=1"><style>
+const HARNESS = String.raw`<!doctype html><meta name="viewport" content="width=device-width, initial-scale=1"><style>
 html,body{margin:0;color-scheme:light dark;background:light-dark(#fff,#1e1e2e);font-family:system-ui}main{padding:8px}iframe{display:block;width:100%;height:760px;border:0}
 </style><main><iframe id="widget" title="Actual file preview"></iframe></main><script>
 (async()=>{
   const fixture=await fetch('/case').then(r=>r.json());
   const widget=document.getElementById('widget');
-  window.__reads=[];window.__modelUpdates=0;window.__hostErrors=[];
+  widget.dataset.fallbackHost=fixture.fallbackHost?'true':'false';
+  window.__reads=[];window.__calls=[];window.__modelUpdates=0;window.__nonemptyModelUpdates=0;
+  let raceStarted=false;
+  const send=(method,params)=>widget.contentWindow.postMessage({jsonrpc:'2.0',method,params},'*');
+  const exerciseContext=()=>{
+    send('ui/notifications/host-context-changed',{displayMode:'fullscreen'});
+    send('ui/notifications/host-context-changed',{displayMode:'inline'});
+    const child=widget.contentWindow;
+    child.dispatchEvent(new Event('focus'));
+    child.document.dispatchEvent(new Event('visibilitychange'));
+  };
+  const deliverProcess=()=>{
+    if(fixture.readyFile||fixture.directoryHandoff)window.__beforeProcess={
+      calls:[...window.__calls],reads:widget.contentWindow.__stateReads,writes:widget.contentWindow.__stateWrites
+    };
+    if(fixture.order==='result-first'){
+      send('ui/notifications/tool-result',fixture.result);
+      setTimeout(()=>send('ui/notifications/tool-input',{arguments:fixture.args}),25);
+    }else{
+      send('ui/notifications/tool-input',{arguments:fixture.args});
+      setTimeout(()=>send('ui/notifications/tool-result',fixture.result),fixture.readyFile?150:25);
+    }
+    setTimeout(exerciseContext,90);
+  };
+  window.__deliverProcess=deliverProcess;
   window.addEventListener('message',(event)=>{
     if(event.source!==widget.contentWindow)return;
     const m=event.data;if(!m||m.jsonrpc!=='2.0')return;
@@ -160,22 +266,50 @@ html,body{margin:0;color-scheme:light dark;background:light-dark(#fff,#1e1e2e);f
     if(m.method==='ui/initialize')reply({
       protocolVersion:m.params.protocolVersion,hostInfo:{name:'offline-preview-review',version:'1'},
       hostCapabilities:{serverTools:{},updateModelContext:{text:{}}},
-      hostContext:{theme:fixture.theme,displayMode:'inline',availableDisplayModes:['inline'],containerDimensions:{width:374}}
+      hostContext:{theme:fixture.theme,displayMode:'inline',availableDisplayModes:['inline','fullscreen'],
+        containerDimensions:{width:374},
+        ...(fixture.noToolInfo?{}:{toolInfo:{tool:{name:fixture.process?'read_process_output':'read_file',inputSchema:{type:'object'}}}})}
     });
     else if(m.method==='ui/notifications/initialized'){
-      event.source.postMessage({jsonrpc:'2.0',method:'ui/notifications/tool-input',params:{arguments:fixture.args}},'*');
+      exerciseContext();
+      if(fixture.directoryHandoff)send('ui/notifications/tool-input',{arguments:{path:'/fixture/dir'}});
+      else if(fixture.race||fixture.readyFile)send('ui/notifications/tool-input',{arguments:{path:fixture.readyFile?'/fixture/ready.md':'/fixture/late-file.js',...(fixture.readyFile?{offset:20,length:2}:{})}});
+      else if(fixture.process)setTimeout(deliverProcess,20);
+      else if(fixture.order==='file-result-first'){
+        send('ui/notifications/tool-result',fixture.result);
+        setTimeout(()=>send('ui/notifications/tool-input',{arguments:fixture.args}),25);
+      }else send('ui/notifications/tool-input',{arguments:fixture.args});
     }else if(m.method==='tools/call'){
+      window.__calls.push(m.params.name);
       if(m.params.name==='read_file'){
         window.__reads.push(m.params.arguments);
-        reply(fixture.result);
+        if(fixture.directoryHandoff){
+          const directory=m.params.arguments.path==='/fixture/dir';
+          reply({content:[{type:'text',text:directory?'[FILE] child.js':'const child = 1;'}],
+            structuredContent:{fileName:directory?'dir':'child.js',filePath:directory?'/fixture/dir':'/fixture/dir/child.js',fileType:directory?'directory':'text'}});
+        }else if(fixture.readyFile){
+          reply({content:[{type:'text',text:'[Reading 2 lines from line 20 (total: 100 lines, 78 remaining)]\n\n# Existing partial file\nbody'}],
+            structuredContent:{fileName:'ready.md',filePath:'/fixture/ready.md',fileType:'markdown'}});
+          if(!raceStarted){raceStarted=true;setTimeout(deliverProcess,150);}
+        }else if(fixture.race&&!raceStarted){
+          raceStarted=true;deliverProcess();
+          setTimeout(()=>reply({content:[{type:'text',text:'late file must not replace process output'}],
+            structuredContent:{fileName:'late-file.js',filePath:'/fixture/late-file.js',fileType:'text'}}),120);
+        }else reply(fixture.result);
       }else reply({content:[]});
     }else if(m.method==='ui/update-model-context'){
-      window.__modelUpdates++;reply({});
+      window.__modelUpdates++;if(m.params.content?.length)window.__nonemptyModelUpdates++;reply({});
     }else if(m.id!==undefined)reply({});
   });
   widget.srcdoc=await fetch('/resource').then(r=>r.text());
 })();
 </script>`;
+for (const [name, document] of [['native-resource', resource], ['offline-host', HARNESS]]) {
+    const start = document.indexOf('<script>') + '<script>'.length;
+    const end = document.lastIndexOf('</script>');
+    assert(start >= '<script>'.length && end > start, 'inline script exists');
+    new Script(document.slice(start, end), { filename: name + '.js' });
+}
 let current;
 const server = createServer((request, response) => {
     response.setHeader('Cache-Control', 'no-store');
@@ -186,8 +320,9 @@ const server = createServer((request, response) => {
         response.setHeader('Content-Type', 'application/json');
         response.end(JSON.stringify({
             theme: current.dark ? 'dark' : 'light',
-            args: { path: current.packetPath, ...current.args },
-            result: { content: [{ type: 'text', text: current.content }], structuredContent: {
+            process: current.process, noToolInfo: current.noToolInfo, fallbackHost: current.fallbackHost, order: current.order, race: current.race, readyFile: current.readyFile, directoryHandoff: current.directoryHandoff,
+            args: current.process ? current.args : { path: current.packetPath, ...current.args },
+            result: current.process ? current.result : { content: [{ type: 'text', text: current.content }], structuredContent: {
                 fileName: current.name, filePath: current.packetPath, fileType: current.type,
             } },
         }));
@@ -201,26 +336,78 @@ const { chromium } = await import(pathToFileURL(path.join(playwrightRoot, 'index
 const browser = await chromium.launch({ executablePath: browserBinary, headless: true, args: ['--no-sandbox'] });
 const context = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
 await context.addInitScript(() => {
+    window.__stateReads = 0; window.__stateWrites = 0;
+    const stale = { payload: { fileName: 'stale.js', filePath: '/fixture/stale-saved.js', fileType: 'text', content: 'stale saved file must not activate' } };
+    if (window.frameElement?.dataset.fallbackHost !== 'true') {
+        window.openai = { setWidgetState: () => { window.__stateWrites++; } };
+        Object.defineProperty(window.openai, 'widgetState', { get: () => { window.__stateReads++; return stale; } });
+    } else {
+        for (const method of ['getItem', 'setItem']) {
+            const original = Storage.prototype[method];
+            Storage.prototype[method] = function(key, ...args) {
+                if (String(key).startsWith('desktop-commander:widget-state')) {
+                    if (method === 'getItem') window.__stateReads++;
+                    else window.__stateWrites++;
+                }
+                return original.call(this, key, ...args);
+            };
+        }
+    }
     Object.defineProperty(navigator, 'clipboard', { configurable: true, value: {
         writeText: async (text) => { window.__dcCopied = text; },
     } });
 });
-const report = { stage, modelFacingOwnerSha256: modelHash, helperSha256: sha(helper), runtimeSha256: sha(runtime), cases: [] };
+const report = { stage, upgradeReport, modelFacingOwnerSha256: modelHash, helperSha256: sha(helper), runtimeSha256: sha(runtime), cases: [] };
 try {
     const page = await context.newPage();
     const errors = [];
-    page.on('pageerror', (error) => errors.push(error.name));
+    page.on('pageerror', (error) => errors.push({ name: error.name, frames: error.stack?.split('\n').slice(1, 4) }));
     for (let index = 0; index < cases.length; index++) {
         current = cases[index];
         await page.emulateMedia({ colorScheme: current.dark ? 'dark' : 'light' });
         await page.goto('http://127.0.0.1:' + server.address().port + '/?case=' + index);
         const frame = page.frameLocator('#widget');
+        if (current.directoryHandoff) {
+            const before = frame.locator('#compact-toggle');
+            await before.waitFor({ state: 'visible' });
+            if (await before.getAttribute('aria-expanded') !== 'true') await before.click();
+            await frame.locator('.dir-row-file').first().click();
+            await before.locator('.compact-label').filter({ hasText: 'child.js' }).waitFor();
+            await frame.locator('#dir-back').waitFor({ state: 'visible' });
+            await page.evaluate(() => window.__deliverProcess());
+            await frame.locator('#compact-toggle .compact-label').filter({ hasText: current.name }).waitFor();
+        }
+        const assertProcessBoundary = async () => {
+            await page.waitForTimeout(220);
+            const calls = await page.evaluate(() => window.__calls);
+            const baseline = (current.readyFile || current.directoryHandoff) ? await page.evaluate(() => window.__beforeProcess) : null;
+            if (baseline) assert(baseline.calls.includes('read_file'), 'real prior file view activated');
+            assert.deepEqual(calls, baseline?.calls ?? (current.race ? ['read_file'] : []), 'no further tool calls for process snapshot');
+            const state = await frame.locator('body').evaluate(() => ({ reads: window.__stateReads, writes: window.__stateWrites }));
+            assert.deepEqual(state, baseline ? { reads: baseline.reads, writes: baseline.writes } : { reads: current.race ? 1 : 0, writes: 0 }, 'no process state restoration or persistence');
+            if (current.fallbackHost) assert.equal(await frame.locator('body').evaluate(() => window.name), '', 'generic host does not create a persistent widget id');
+            assert.equal(await frame.locator('#open-in-folder,#open-in-editor,#load-before,#load-after,#dir-back,.line-num').count(), 0, 'no filesystem controls or line anchors');
+            assert.equal(await page.evaluate((ready) => ready ? window.__nonemptyModelUpdates : window.__modelUpdates, current.readyFile || current.directoryHandoff), 0, 'no process filesystem annotation context');
+        };
+        if (current.unavailable) {
+            await frame.locator('.compact-row').filter({ hasText: 'Process output unavailable from this host.' }).waitFor();
+            await assertProcessBoundary();
+            assert.equal(await frame.locator('#copy-source,.output-preview').count(), 0, 'unavailable data is not invented');
+            report.cases.push({ scenario: current.scenario, passed: true });
+            continue;
+        }
         const toggle = frame.locator('#compact-toggle');
-        await toggle.waitFor({ state: 'visible', timeout: 15000 });
+        try { await toggle.waitFor({ state: 'visible', timeout: 15000 }); }
+        catch (error) { console.error(JSON.stringify({ scenario: current.scenario ?? current.name, errors })); throw error; }
         assert.equal(await toggle.locator('.compact-label').textContent(), current.name, 'actual filename first');
-        assert((await toggle.getAttribute('aria-label')).startsWith(current.packetPath), 'accessible full path');
-        await toggle.click();
-        if (current.decoded) {
+        assert((await toggle.getAttribute('aria-label')).startsWith(current.process ? current.name : current.packetPath), 'accessible source identity');
+        if (await toggle.getAttribute('aria-expanded') !== 'true') await toggle.click();
+        if (current.process) {
+            await assertProcessBoundary();
+            const body = await frame.locator('.output-preview code').textContent();
+            assert.equal(sha(body), sha(current.expected), 'exact native output excerpt including header/whitespace/CRLF/ANSI');
+            assert.equal(await frame.locator('.output-preview script').count(), 0, 'stdout is inert escaped text');
+        } else if (current.decoded) {
             await frame.locator('.notice').filter({ hasText: 'Decoded JSON preview' }).waitFor();
             const body = await frame.locator('.packet-preview code').textContent();
             assert.equal(sha(body), sha(current.expected), 'exact packet preview body');
@@ -280,10 +467,12 @@ try {
         }
         assert.equal(metrics.horizontalOverflow, false, 'no mobile page overflow');
         assert.equal(await frame.locator('#copy-source').getAttribute('aria-label'),
-            current.type === 'unsupported' ? 'Copy original encoded source' : 'Copy source');
+            current.process ? 'Copy output snapshot' : current.type === 'unsupported' ? 'Copy original encoded source' : 'Copy source');
         const reads = await page.evaluate(() => window.__reads);
-        assert.equal(reads.length, 1, 'one faithful UI read');
-        assert.deepEqual(reads[0], { path: current.packetPath, ...current.args, origin: 'ui' });
+        if (!current.process) {
+            assert.equal(reads.length, 1, 'one faithful UI read');
+            assert.deepEqual(reads[0], { path: current.packetPath, ...current.args, origin: 'ui' });
+        }
         if (current.decoded) {
             const image = path.join(evidence, current.dark ? 'mobile-dark.png' : 'mobile-' + index + '.png');
             await page.screenshot({ path: image });
@@ -294,18 +483,19 @@ try {
             for (let i = 0; i < 100 && window.__dcCopied === undefined; i++) await new Promise((resolve) => setTimeout(resolve, 10));
         });
         const copied = await frame.locator('body').evaluate(() => window.__dcCopied);
-        const rawSource = current.content.replace(/^\[Reading [^\]]+\]\r?\n(?:\r?\n)?/, '');
+        const rawSource = current.process ? current.content : current.content.replace(/^\[Reading [^\]]+\]\r?\n(?:\r?\n)?/, '');
         assert.equal(typeof copied, 'string', 'native copy handler called');
         assert.equal(sha(copied), sha(rawSource), 'copy retains original text');
-        if (current.type === 'unsupported') {
-            await frame.locator('.packet-preview code').evaluate((element) => {
+        if (current.process || current.type === 'unsupported') {
+            await frame.locator(current.process ? '.output-preview code' : '.packet-preview code').evaluate((element) => {
                 const selection = window.getSelection();
                 const range = document.createRange();range.selectNodeContents(element);
                 selection.removeAllRanges();selection.addRange(range);
                 document.dispatchEvent(new Event('selectionchange'));
             });
             await page.waitForTimeout(300);
-            assert.equal(await page.evaluate(() => window.__modelUpdates), 0, 'decoded view has no file selection context');
+            assert.equal(await page.evaluate((ready) => ready ? window.__nonemptyModelUpdates : window.__modelUpdates, current.readyFile || current.directoryHandoff), 0, 'projected view has no file selection context');
+            if (current.process) await assertProcessBoundary();
         }
         if (current.ordinary) {
             await frame.locator('.line-content').first().evaluate((element) => {
@@ -317,7 +507,7 @@ try {
             await page.waitForTimeout(300);
             assert((await page.evaluate(() => window.__modelUpdates)) > 0, 'ordinary native selection observer is active');
         }
-        report.cases.push({ name: current.name, theme: current.dark ? 'dark' : 'light', passed: true, sourceSha256: sha(current.content), ...metrics });
+        report.cases.push({ name: current.name, scenario: current.scenario, theme: current.dark ? 'dark' : 'light', passed: true, sourceSha256: sha(current.content), ...metrics });
     }
     assert.deepEqual(errors, [], 'native widget browser errors');
     report.passed = true;

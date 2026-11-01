@@ -138,9 +138,104 @@ export function dcPacketPreviewBody(payload, renderRawFallback) {
 }
 
 export function dcPacketFooter(payload, fallback) {
-    return dcIsPacket(payload) ? 'PACKET' : fallback;
+    return dcIsProcessSnapshot(payload) ? 'OUTPUT SNAPSHOT' : dcIsPacket(payload) ? 'PACKET' : fallback;
 }
 
 export function dcCopySourceLabel(payload) {
-    return dcIsPacket(payload) ? 'Copy original encoded source' : 'Copy source';
+    return dcIsProcessSnapshot(payload) ? 'Copy output snapshot' : dcIsPacket(payload) ? 'Copy original encoded source' : 'Copy source';
+}
+
+/** One widget instance consumes its own original tool-result notification. */
+export function dcIsProcessSnapshot(payload) {
+    return payload?.previewKind === 'process_output';
+}
+
+export function dcProcessSnapshotBody(payload, renderRawFallback) {
+    if (!dcIsProcessSnapshot(payload)) return undefined;
+    const excerpt = dcExcerpt(payload.content);
+    return {
+        notice: excerpt.truncated ? 'Output excerpt' : payload.isError ? 'Process output error' : undefined,
+        html: '<div class="panel-content source-content output-preview">' + renderRawFallback('') + '</div>',
+    };
+}
+
+export function dcBindProcessSnapshot(container, payload) {
+    if (!dcIsProcessSnapshot(payload)) return;
+    const code = container.querySelector('.output-preview code');
+    if (code) code.textContent = dcExcerpt(payload.content).content;
+}
+
+export function dcCreateProcessPreview(callbacks) {
+    let mode = 'unknown';
+    let inputPid;
+    let inputSeen = false;
+    let pending;
+    let shown;
+    const validPid = (pid) => Number.isSafeInteger(pid);
+    const identity = (result) => result?._meta?.['desktop-commander/preview'];
+    const knownProcessTool = () => callbacks.getToolName() === 'read_process_output';
+    const display = () => {
+        const meta = identity(pending);
+        const toolName = callbacks.getToolName();
+        if (!meta || meta.kind !== 'process_output' || !validPid(meta.pid)
+            || (toolName && toolName !== 'read_process_output')
+            || (inputSeen && inputPid !== meta.pid)
+            || !Array.isArray(pending.content)
+            || pending.content.length !== 1
+            || pending.content.some((block) => block.type !== 'text' || typeof block.text !== 'string')) {
+            shown = undefined;
+            callbacks.unavailable();
+            return;
+        }
+        if (shown === pending) return;
+        shown = pending;
+        callbacks.show({
+            previewKind: 'process_output', pid: meta.pid,
+            fileName: 'Process ' + meta.pid + ' output', filePath: '', fileType: 'unsupported',
+            content: pending.content[0].text,
+            isError: pending.isError === true,
+        });
+    };
+    return {
+        allowsFileState: () => mode === 'file',
+        input(args) {
+            const processInput = args && Object.hasOwn(args, 'pid');
+            const fileInput = (typeof args?.path === 'string' && args.path.length > 0) || (typeof args?.file_path === 'string' && args.file_path.length > 0);
+            if (mode === 'process' || knownProcessTool() || processInput) {
+                mode = 'process';
+                inputSeen = processInput || fileInput;
+                inputPid = validPid(args?.pid) && !fileInput ? args.pid : undefined;
+                if (inputSeen && inputPid === undefined) { shown = undefined; callbacks.unavailable(); }
+                else if (pending) display();
+                else callbacks.loading();
+                return true;
+            }
+            if (fileInput) {
+                mode = 'file';
+                if (pending) {
+                    const saved = pending;
+                    pending = undefined;
+                    queueMicrotask(() => callbacks.replay(saved));
+                }
+                return false;
+            }
+            // Unknown invocation identity may not activate a cached file.
+            callbacks.unavailable();
+            return true;
+        },
+        result(result) {
+            const meta = identity(result);
+            if (mode === 'process' || knownProcessTool() || meta?.kind === 'process_output') {
+                mode = 'process';
+                pending = result;
+                display();
+                return true;
+            }
+            if (mode === 'unknown') {
+                pending = result;
+                return true;
+            }
+            return false;
+        },
+    };
 }

@@ -130,7 +130,7 @@ def main():
     if lock.get('package_lock_sha256') and lock['package_lock_sha256'] != package_digest:
         raise RuntimeError('Pinned npm lockfile checksum mismatch')
     lock['package_lock_sha256'] = package_digest
-    # UI-only overlay also applies when the pinned npm release is reused.
+    # Preview adapters also apply when the pinned npm release is reused.
     preview_changed = apply_overlay(package_dir / 'node_modules/@wonderwhy-er/desktop-commander')
     tunnel_dir = install / 'releases' / ('tunnel-client-' + lock['tunnel_client_version'])
     tunnel = tunnel_dir / 'tunnel-client'
