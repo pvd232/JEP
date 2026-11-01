@@ -18,7 +18,7 @@ BASE_SHA256 = {
     "dist/ui/file-preview/src/file-type-handlers.js": "327a7d1adfa3eccf12d70daab593212b6d140bc847aca6e27931496e652dccc2",
     "dist/ui/shared/compact-row.js": "59e78661a42ad39d199a5a0c439cf5ae48811ab244c109e8294e66be4faa4769",
 }
-BASE_SHA256.update({'dist/server.js': '8772e70baa8a19b6a3799b0d012392f96b4db67149971fa6eb9453d90993eced', 'dist/handlers/terminal-handlers.js': 'e0e67f4ed78e421bd42dc438fb48f5994347f14437a5c2516fb9ed197405236d', 'dist/ui/file-preview/src/panel-actions.js': 'b0aa001defdbf956090d2430a8b86c9f3aff6d3c406aa34f2bbd1cc84ff87d22'})
+BASE_SHA256.update({'dist/ui/resources.js': 'dd2f1bdd601b4762270609af30b4f4826f3862c0a36a7179489d29dbb17f0235', 'dist/server.js': '8772e70baa8a19b6a3799b0d012392f96b4db67149971fa6eb9453d90993eced', 'dist/handlers/terminal-handlers.js': 'e0e67f4ed78e421bd42dc438fb48f5994347f14437a5c2516fb9ed197405236d', 'dist/ui/file-preview/src/panel-actions.js': 'b0aa001defdbf956090d2430a8b86c9f3aff6d3c406aa34f2bbd1cc84ff87d22'})
 V1_FINGERPRINT = '5f95fcda3cd38e50dfa3464833edba3e766664c0fd37971154bc3e588f5d1286'
 V1_SHA256 = {'dist/ui/file-preview/styles.css': '7d3faadf0ffb27937dcf9cea7ad0216c6ffd40ef9df775b7d0aed7a088a97423', 'dist/ui/file-preview/preview-runtime.js': '502a8ad06863ccad96160dac9c802fa947422524fa72b7a605f1f95a51dc5229', 'dist/ui/file-preview/src/app.js': 'a1606725147982b54e02336f58de64c30bff4aba92f53e2b83328f3e28c854be', 'dist/ui/file-preview/src/document-layout.js': '00f617aed493947e3d28cc9d587a2d187f7425fff43338eec439e46d11f87232', 'dist/ui/file-preview/src/file-type-handlers.js': '3c849b255026b21fbc9bebcdaa656bd968cb2635e7f6e58ae45d4fdee6f9f257', 'dist/ui/shared/compact-row.js': '622ca3fb2e88622b4cc24604fd99cad94869ba48c6094c654f7e46423c7c1949', 'dist/ui/file-preview/src/compact-preview.js': '206ded1abd6a0d65ff1f5a1f1c3b1cc0124ad4efcb1c20d892d2cad5fe80107d'}
 HELPER_PATH = "dist/ui/file-preview/src/compact-preview.js"
@@ -174,6 +174,12 @@ def build_process_overlay(previous, helper):
     source = {name: value.decode("utf8") for name, value in previous.items()}
     old_helper = source[HELPER_PATH]
     source[HELPER_PATH] = helper
+    # Only the auto-sized file preview may shrink to its compact row. Keep
+    # configuration widgets and every other native host height policy intact.
+    resource_path = "dist/ui/resources.js"
+    source[resource_path] = replace_once(source[resource_path],
+        "getText: getFilePreviewResourceText,\n        getMeta: getUiResourceMeta",
+        "getText: getFilePreviewResourceText,\n        getMeta: () => ({ ...getUiResourceMeta(), 'openai/widgetHeightHint': 32, 'openai/widgetMinFrameHeight': 32 })")
     server = "dist/server.js"
     source[server] = replace_once(source[server],
         "inputSchema: zodToJsonSchema(ReadProcessOutputArgsSchema),",

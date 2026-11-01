@@ -227,6 +227,13 @@ cases.push(
 
 const nativeResources = await import(pathToFileURL(path.join(stage, 'dist/ui/resources.js')).href);
 const resource = await nativeResources.getFilePreviewResourceText();
+const compactEnvelope = await nativeResources.readUiResource('ui://desktop-commander/file-preview');
+assert.equal(compactEnvelope.contents[0]._meta['openai/widgetHeightHint'], 32);
+assert.equal(compactEnvelope.contents[0]._meta['openai/widgetMinFrameHeight'], 32);
+const configEnvelope = await nativeResources.readUiResource('ui://desktop-commander/config-editor');
+assert.equal(configEnvelope.contents[0]._meta['openai/widgetHeightHint'], undefined);
+assert.equal(configEnvelope.contents[0]._meta['openai/widgetMinFrameHeight'], undefined);
+assert.deepEqual(compactEnvelope.contents[0]._meta.ui, configEnvelope.contents[0]._meta.ui, 'existing CSP metadata retained');
 assert(resource.includes('Content-Security-Policy'), 'native CSP/inliner boundary is used');
 const HARNESS = String.raw`<!doctype html><meta name="viewport" content="width=device-width, initial-scale=1"><style>
 html,body{margin:0;color-scheme:light dark;background:light-dark(#fff,#1e1e2e);font-family:system-ui}main{padding:8px}iframe{display:block;width:100%;height:760px;border:0}
