@@ -1,0 +1,105 @@
+{
+  "purpose": "Standalone parser replay. Public IDs/titles/counts and structural keys retained; opaque continuation tokens replaced with fixture strings. Full historical caches are not included.",
+  "sources": {
+    "case03": {
+      "original_path": "/workspace/scratch/8a7e64850a04/inventory_work/public_catalog_cache/case03_playlist.json",
+      "original_sha256": "caf9fedd11ca281bd195071e5a3a6e055a64976881e610fafcb7714e20261f4c",
+      "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4Id_lrAgBRDGf-k_bwEYH6_",
+      "sanitized_fixture": "case03_first_page.json",
+      "sanitized_sha256": "247216a601e681ed15e180c80dc83ae381ccca249ff32e06c8a2ca645e352f51",
+      "primary_list_path": [
+        "contents",
+        "twoColumnBrowseResultsRenderer",
+        "tabs",
+        0,
+        "tabRenderer",
+        "content",
+        "sectionListRenderer",
+        "contents",
+        0,
+        "itemSectionRenderer",
+        "contents"
+      ],
+      "primary_target_id": "PLbtegW3d3L4Id_lrAgBRDGf-k_bwEYH6_",
+      "declared_items": 898,
+      "first_page_appearances": 100
+    },
+    "casanare": {
+      "original_path": "/workspace/scratch/8a7e64850a04/inventory_work/public_catalog_cache/subcaso_casanare_playlist.json",
+      "original_sha256": "76ee6686da3226277bb378a2aa9f2821129ad94de8f75c415e369c420aa1a389",
+      "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4JR1Y_bfCDS_C8sdKE6195K",
+      "sanitized_fixture": "casanare_first_page.json",
+      "sanitized_sha256": "85593f02cc0e108b7be29efdd5f4f41cae45492b7257bda25f03f94dec7a382e",
+      "primary_list_path": [
+        "contents",
+        "twoColumnBrowseResultsRenderer",
+        "tabs",
+        0,
+        "tabRenderer",
+        "content",
+        "sectionListRenderer",
+        "contents",
+        0,
+        "itemSectionRenderer",
+        "contents"
+      ],
+      "primary_target_id": "PLbtegW3d3L4JR1Y_bfCDS_C8sdKE6195K",
+      "declared_items": 20,
+      "first_page_appearances": 19
+    },
+    "audiencias": {
+      "original_path": "/workspace/scratch/8a7e64850a04/inventory_work/public_catalog_cache/deep_audiencias_playlist.json",
+      "original_sha256": "11faeea9ffe3414ba39784bc9c0da1d0cc11a81e4e46b668b4fde1c43e06df22",
+      "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4JAstPux8ji9-h9balFGI6M",
+      "sanitized_fixture": "audiencias_first_page.json",
+      "sanitized_sha256": "c28324fd88a9f18ce40f04c6eccdffa004c9f7ccc7c9109f231b210cf5d2d82d",
+      "primary_list_path": [
+        "contents",
+        "twoColumnBrowseResultsRenderer",
+        "tabs",
+        0,
+        "tabRenderer",
+        "content",
+        "sectionListRenderer",
+        "contents",
+        0,
+        "itemSectionRenderer",
+        "contents"
+      ],
+      "primary_target_id": "PLbtegW3d3L4JAstPux8ji9-h9balFGI6M",
+      "declared_items": 44,
+      "first_page_appearances": 42
+    }
+  },
+  "channel_terminals": {
+    "deep_channel_videos": {
+      "original_path": "/workspace/scratch/8a7e64850a04/inventory_work/public_catalog_cache/deep_channel_videos_89.json",
+      "original_sha256": "9febfda7cce8a88341e5553fae8e6a3e356e0d01137e09afbde7071f3158894a",
+      "sanitized_fixture": "deep_channel_videos_terminal.json",
+      "sanitized_sha256": "f2430389e83a1d35e320e2c80cfe12ef481feaf46ac170866f9462b16fc9089b",
+      "terminal_page": 89,
+      "terminal_items": 23,
+      "original_continuation_shapes": [],
+      "original_continuation_remaining": false,
+      "full_catalog_items": 2663,
+      "full_catalog_sha256": "da05d1788e7470154e14c3240fe6119590f47e42d08bd8bb6dd63f13abe97a41",
+      "limitation": "Reduced terminal structure proves this observed parser case; it does not recreate or independently re-enumerate the full channel catalog."
+    },
+    "deep_channel_streams": {
+      "original_path": "/workspace/scratch/8a7e64850a04/inventory_work/public_catalog_cache/deep_channel_streams_29.json",
+      "original_sha256": "087bf43ecc45a9151ad116d642aed5be2caf483ff0b87ea1cb626e3c90a3716f",
+      "sanitized_fixture": "deep_channel_streams_terminal.json",
+      "sanitized_sha256": "333753b2ce0df66bae79b522f02b98a5cbe993d5bbccd3f0d562a3e2213cce80",
+      "terminal_page": 29,
+      "terminal_items": 7,
+      "original_continuation_shapes": [],
+      "original_continuation_remaining": false,
+      "full_catalog_items": 847,
+      "full_catalog_sha256": "7f0e9bdabcf81c3deb46e25f56994af5bf400f80e6012a0626c4cf43731316e4",
+      "limitation": "Reduced terminal structure proves this observed parser case; it does not recreate or independently re-enumerate the full channel catalog."
+    }
+  },
+  "created_at": "2026-11-03T17:34:41.810093+00:00",
+  "old_parser_source": "/workspace/scratch/8a7e64850a04/inventory_work/extend_public_catalog.py",
+  "old_parser_source_sha256": "daf73c1960432f09d9c95a954e5c3f35f782275155d2838c312b0a2492262f0b"
+}

@@ -1,0 +1,2084 @@
+{
+  "schema_version": "1.2",
+  "generated_at": "2026-11-03T17:46:43.700952+00:00",
+  "python": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+  "network_concurrency_limit": 2,
+  "http_429_policy": "Stop the active batch; no retry loop",
+  "scope_contract": "Broad discovery metadata is kept separate from substantive Case 03–Casanare inclusion decisions. This crawler fetches no transcripts or media.",
+  "snapshot_selection_rule": "Prefer an exhausted, count-reconciled include-unavailable view. Preserve the default-visible snapshot under alternate_snapshot_views; its earlier discrepancy remains historical evidence, not an unresolved selected-view gap.",
+  "count_definitions": {
+    "returned_memberships": "Returned list positions, including unavailable placeholders and repeated appearances",
+    "visible_memberships": "Legacy alias of returned_memberships; NOT playable video count",
+    "normal_title_memberships": "Returned positions with a nonempty public title, excluding known unavailable placeholders; playability not implied",
+    "unique_video_ids": "Distinct public video IDs within the collection; includes placeholder IDs",
+    "hidden_unavailable_count": "Numeric hidden count explicitly stated by the selected view; placeholders returned by Show unavailable are counted separately",
+    "unavailable_placeholder_memberships": "Returned blank-title placeholder positions revealed by the normal unavailable-item action",
+    "count_reconciled": "Declared count equals returned positions plus any explicitly numbered entries still hidden",
+    "pagination_exhausted": "No actual primary-list continuation remains, with no crawl error or cycle; does not establish complete historical availability"
+  },
+  "collections": [
+    {
+      "collection_key": "deep_channel_videos",
+      "collection_id": "UCay5mclHBbWQTQ8fhoNCWow:videos",
+      "collection_type": "channel_surface",
+      "source_role": "reused_channel_discovery",
+      "source_url": "https://www.youtube.com/@jepcolombia/videos",
+      "title": "JEP Colombia / videos",
+      "scope": "All-channel discovery metadata only; no Casanare admission implied",
+      "status": "reused_terminal_snapshot",
+      "pagination_exhausted": true,
+      "count_reconciled": null,
+      "declared_items": null,
+      "visible_memberships": 2663,
+      "unique_video_ids": 2663,
+      "hidden_unavailable_count": null,
+      "notices": [],
+      "errors": [],
+      "pending_token_sha256": [],
+      "provenance": {
+        "catalog_path": "inventory_work/deep_channel_videos_full_public_catalog.json",
+        "catalog_sha256": "da05d1788e7470154e14c3240fe6119590f47e42d08bd8bb6dd63f13abe97a41",
+        "terminal_cache_path": "inventory_work/public_catalog_cache/deep_channel_videos_89.json",
+        "terminal_cache_sha256": "9febfda7cce8a88341e5553fae8e6a3e356e0d01137e09afbde7071f3158894a",
+        "terminal_continuation_shapes": [],
+        "original_fetch_time": "Not stored by original crawler; reused snapshot, not refetched"
+      },
+      "returned_memberships": 2663,
+      "normal_title_memberships": 2663,
+      "unavailable_placeholder_memberships": 0,
+      "duplicate_memberships": 0
+    },
+    {
+      "collection_key": "deep_channel_streams",
+      "collection_id": "UCay5mclHBbWQTQ8fhoNCWow:streams",
+      "collection_type": "channel_surface",
+      "source_role": "reused_channel_discovery",
+      "source_url": "https://www.youtube.com/@jepcolombia/streams",
+      "title": "JEP Colombia / streams",
+      "scope": "All-channel discovery metadata only; no Casanare admission implied",
+      "status": "reused_terminal_snapshot",
+      "pagination_exhausted": true,
+      "count_reconciled": null,
+      "declared_items": null,
+      "visible_memberships": 847,
+      "unique_video_ids": 847,
+      "hidden_unavailable_count": null,
+      "notices": [],
+      "errors": [],
+      "pending_token_sha256": [],
+      "provenance": {
+        "catalog_path": "inventory_work/deep_channel_streams_full_public_catalog.json",
+        "catalog_sha256": "7f0e9bdabcf81c3deb46e25f56994af5bf400f80e6012a0626c4cf43731316e4",
+        "terminal_cache_path": "inventory_work/public_catalog_cache/deep_channel_streams_29.json",
+        "terminal_cache_sha256": "087bf43ecc45a9151ad116d642aed5be2caf483ff0b87ea1cb626e3c90a3716f",
+        "terminal_continuation_shapes": [],
+        "original_fetch_time": "Not stored by original crawler; reused snapshot, not refetched"
+      },
+      "returned_memberships": 847,
+      "normal_title_memberships": 847,
+      "unavailable_placeholder_memberships": 0,
+      "duplicate_memberships": 0
+    },
+    {
+      "collection_key": "channel_shorts",
+      "collection_id": "UCay5mclHBbWQTQ8fhoNCWow:shorts",
+      "collection_type": "channel_surface",
+      "source_role": "supplemental_channel_discovery",
+      "source_url": "https://www.youtube.com/@jepcolombia/shorts",
+      "title": "JEP Colombia / Shorts",
+      "scope": "Shorts discovery metadata only; no unrelated substantive content inspected and no full-hearing equivalence assumed",
+      "started_at": "2026-11-03T17:46:43.475001+00:00",
+      "declared_items": null,
+      "notices": [],
+      "pages": [
+        {
+          "page_index": 0,
+          "response_path": "inventory_work/reverse_audit/caches/channel_shorts/page_000.json",
+          "list_json_path": [
+            "contents",
+            "twoColumnBrowseResultsRenderer",
+            "tabs",
+            2,
+            "tabRenderer",
+            "content",
+            "richGridRenderer",
+            "contents"
+          ],
+          "items": 48,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/@jepcolombia/shorts",
+            "response_url": "https://www.youtube.com/@jepcolombia/shorts",
+            "method": "GET",
+            "http_status": 200,
+            "content_type": "text/html; charset=utf-8",
+            "fetched_at": "2026-11-03T17:38:25.438154+00:00",
+            "sha256": "57217332b82fba0ea638e33af544f645373c89b3d1c543355ff72e2b2c470004",
+            "bytes": 1239522
+          }
+        },
+        {
+          "page_index": 1,
+          "response_path": "inventory_work/reverse_audit/caches/channel_shorts/page_001.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 16,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:39:59.288993+00:00",
+            "sha256": "34bb2549a4d1fc4fcdb88757f44e450737b9109c344166a4fc5db0a22eeb5e12",
+            "bytes": 101728,
+            "request_token_sha256": "cc16d3aaad5d2fe43e16e78ee747ead0dec72f4e7c7338987c4b7479058f57fb"
+          }
+        }
+      ],
+      "errors": [],
+      "discovery_provenance": {
+        "source_path": "inventory_work/public_catalog_cache/deep_channel_videos.json",
+        "source_sha256": "4b8d2e50f078a544794447f5cd9c2070b452c2529cdc542926cd0dd229d0e697",
+        "json_path": [
+          "contents",
+          "twoColumnBrowseResultsRenderer",
+          "tabs",
+          2,
+          "tabRenderer",
+          "endpoint"
+        ],
+        "observed_url": "/@jepcolombia/shorts"
+      },
+      "target_id": "70f18b91-0000-2d22-bc30-d4f547e63994",
+      "ignored_outer_continuations": 4,
+      "pending_token_sha256": [],
+      "status": "exhausted_count_unknown",
+      "pagination_exhausted": true,
+      "count_reconciled": null,
+      "unaccounted_declared_items": null,
+      "returned_memberships": 64,
+      "visible_memberships": 64,
+      "normal_title_memberships": 64,
+      "unavailable_placeholder_memberships": 0,
+      "unique_video_ids": 64,
+      "duplicate_memberships": 0,
+      "finished_at": "2026-11-03T17:46:43.502604+00:00"
+    },
+    {
+      "collection_key": "case03",
+      "cache_key": "case03__unavailable",
+      "snapshot_view": "include_unavailable",
+      "collection_id": "PLbtegW3d3L4Id_lrAgBRDGf-k_bwEYH6_",
+      "collection_type": "playlist",
+      "source_role": "core_declared_source",
+      "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4Id_lrAgBRDGf-k_bwEYH6_",
+      "scope": "Broad Case 03; discovery metadata only",
+      "original_fixture": "inventory_work/public_catalog_cache/case03_playlist.json",
+      "started_at": "2026-11-03T17:45:50.006278+00:00",
+      "pages": [
+        {
+          "page_index": 0,
+          "response_path": "inventory_work/reverse_audit/caches/case03__unavailable/page_000.json",
+          "list_json_path": [
+            "contents",
+            "twoColumnBrowseResultsRenderer",
+            "tabs",
+            0,
+            "tabRenderer",
+            "content",
+            "sectionListRenderer",
+            "contents",
+            0,
+            "itemSectionRenderer",
+            "contents"
+          ],
+          "items": 100,
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:35:26.757216+00:00",
+            "sha256": "dad2b8fae129215ce1cc7ee92f23182dde1ead06c5b5a4bf5521dd5505ec60b4",
+            "bytes": 1254558,
+            "normal_public_action_provenance": {
+              "cache_path": "inventory_work/reverse_audit/caches/case03/page_008.json",
+              "cache_sha256": "19cb06fc50f90852ba94a2b9816287fd5a9c2b3b240168f989087d7bd9513957",
+              "json_path": [
+                "sidebar",
+                "playlistSidebarRenderer",
+                "items",
+                0,
+                "playlistSidebarPrimaryInfoRenderer",
+                "menu",
+                "menuRenderer",
+                "items",
+                0,
+                "menuNavigationItemRenderer",
+                "navigationEndpoint",
+                "browseEndpoint"
+              ],
+              "action_label": "Show unavailable videos"
+            }
+          }
+        },
+        {
+          "page_index": 1,
+          "response_path": "inventory_work/reverse_audit/caches/case03__unavailable/page_001.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 100,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:35:30.568255+00:00",
+            "sha256": "8a60a194d2289d9b3c30607256c01b9550bf8a8264caf7f46208bb22db9f9160",
+            "bytes": 1224048,
+            "request_token_sha256": "049d1907b77bcf97e1f493a7de89689279fe64c2b99834271ae3f2e147726a51"
+          }
+        },
+        {
+          "page_index": 2,
+          "response_path": "inventory_work/reverse_audit/caches/case03__unavailable/page_002.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 100,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:35:33.807684+00:00",
+            "sha256": "823d31f6cfb3337001e38705bda0d9c2005fc9e7d340593afb6fb96a96703200",
+            "bytes": 1221570,
+            "request_token_sha256": "d2af25209b5ad0ccdcf32f633229ce9901c39ebd123b0a175913691ecf15061a"
+          }
+        },
+        {
+          "page_index": 3,
+          "response_path": "inventory_work/reverse_audit/caches/case03__unavailable/page_003.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 100,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:35:37.663003+00:00",
+            "sha256": "5b6d01dcf9185fc675a4dc73c94f0de229e5adc8909a06dc29dffb3681278187",
+            "bytes": 1220132,
+            "request_token_sha256": "3f2a3a8a813b3737baf3c7aad8438f86397e8818a70e4745abcc988a5dd90259"
+          }
+        },
+        {
+          "page_index": 4,
+          "response_path": "inventory_work/reverse_audit/caches/case03__unavailable/page_004.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 100,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:35:44.323142+00:00",
+            "sha256": "11737aef2c25e9fd2a2a1009f039f43b108941aea17665fdc3548ae0d8b30977",
+            "bytes": 1220982,
+            "request_token_sha256": "df005853219d9f2c46eac526afacda86ae44831c37fa2b07affcef659f65a3f6"
+          }
+        },
+        {
+          "page_index": 5,
+          "response_path": "inventory_work/reverse_audit/caches/case03__unavailable/page_005.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 100,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:35:48.030194+00:00",
+            "sha256": "b2bcce23ed16f53731d48502205edc71704b86b3f13fb77f551a8e9444859507",
+            "bytes": 1221533,
+            "request_token_sha256": "2ce48480e6d975ad2bb7d5aafddd063de2862158617188d66088c32c221a8141"
+          }
+        },
+        {
+          "page_index": 6,
+          "response_path": "inventory_work/reverse_audit/caches/case03__unavailable/page_006.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 100,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:35:51.374164+00:00",
+            "sha256": "2b566ca1a55968d1ff71fd71dc1a2d499e196f307a2d87111c8f3e0e10b41ab1",
+            "bytes": 1220849,
+            "request_token_sha256": "72484d0f4dc10a9b88ce6b28d1d2cf134c4a6df080ac89ebea30150693d5fd25"
+          }
+        },
+        {
+          "page_index": 7,
+          "response_path": "inventory_work/reverse_audit/caches/case03__unavailable/page_007.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 100,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:35:54.941420+00:00",
+            "sha256": "ac4a8d7c8749cb8f2fbdad2ec3d25cae9e7c7465103c4a3f35f9a8fb7ca5560c",
+            "bytes": 1220197,
+            "request_token_sha256": "e32bd4d01a12b4554889e95ba256cd34bb324ad1d90febf33a7418890a97a4af"
+          }
+        },
+        {
+          "page_index": 8,
+          "response_path": "inventory_work/reverse_audit/caches/case03__unavailable/page_008.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 98,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:35:58.496489+00:00",
+            "sha256": "aba9b9c32869b83e4c0f7a0c5345804340ebecf30e3937b5041cf8f4ccd405fa",
+            "bytes": 1191820,
+            "request_token_sha256": "93445562f7e9f8179a29fc2bc31db14df180f06408f0338fe1e9b0f83561d078"
+          }
+        }
+      ],
+      "errors": [],
+      "pending_token_sha256": [],
+      "ignored_outer_continuations": 1,
+      "notice_observations": [
+        {
+          "page_index": 7,
+          "response_path": "inventory_work/reverse_audit/caches/case03__unavailable/page_007.json",
+          "text": "Unavailable videos will be hidden during playback"
+        },
+        {
+          "page_index": 8,
+          "response_path": "inventory_work/reverse_audit/caches/case03__unavailable/page_008.json",
+          "text": "Unavailable videos will be hidden during playback"
+        }
+      ],
+      "declared_count_observations": [
+        {
+          "page_index": 0,
+          "value": 898
+        },
+        {
+          "page_index": 1,
+          "value": 898
+        },
+        {
+          "page_index": 2,
+          "value": 898
+        },
+        {
+          "page_index": 3,
+          "value": 898
+        },
+        {
+          "page_index": 4,
+          "value": 898
+        },
+        {
+          "page_index": 5,
+          "value": 898
+        },
+        {
+          "page_index": 6,
+          "value": 898
+        },
+        {
+          "page_index": 7,
+          "value": 898
+        },
+        {
+          "page_index": 8,
+          "value": 898
+        }
+      ],
+      "title": "Caso 03 de la JEP | Falsos positivos",
+      "notices": [
+        "Unavailable videos will be hidden during playback"
+      ],
+      "hidden_unavailable_notice": false,
+      "declared_items": 898,
+      "hidden_unavailable_count": 0,
+      "target_id": "PLbtegW3d3L4Id_lrAgBRDGf-k_bwEYH6_",
+      "default_view_video_ids_not_returned": [],
+      "hidden_only_video_ids": [
+        "KnwzIgiijTA",
+        "n1HYbvijKKI",
+        "6S-j34I6qYs"
+      ],
+      "status": "exhausted_with_unavailable",
+      "pagination_exhausted": true,
+      "count_reconciled": true,
+      "unaccounted_declared_items": 0,
+      "returned_memberships": 898,
+      "visible_memberships": 898,
+      "normal_title_memberships": 895,
+      "unavailable_placeholder_memberships": 3,
+      "unique_video_ids": 898,
+      "duplicate_memberships": 0,
+      "finished_at": "2026-11-03T17:45:50.473534+00:00"
+    },
+    {
+      "collection_key": "casanare",
+      "cache_key": "casanare__unavailable",
+      "snapshot_view": "include_unavailable",
+      "collection_id": "PLbtegW3d3L4JR1Y_bfCDS_C8sdKE6195K",
+      "collection_type": "playlist",
+      "source_role": "core_declared_source",
+      "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4JR1Y_bfCDS_C8sdKE6195K",
+      "scope": "Casanare collection; individual scope review required",
+      "original_fixture": "inventory_work/public_catalog_cache/subcaso_casanare_playlist.json",
+      "started_at": "2026-11-03T17:45:50.694740+00:00",
+      "pages": [
+        {
+          "page_index": 0,
+          "response_path": "inventory_work/reverse_audit/caches/casanare__unavailable/page_000.json",
+          "list_json_path": [
+            "contents",
+            "twoColumnBrowseResultsRenderer",
+            "tabs",
+            0,
+            "tabRenderer",
+            "content",
+            "sectionListRenderer",
+            "contents",
+            0,
+            "itemSectionRenderer",
+            "contents"
+          ],
+          "items": 20,
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:36:02.284137+00:00",
+            "sha256": "a1a896a677fb3036bf76c99fe36475153431305c1b03a935943dd5ae8bd2333b",
+            "bytes": 282999,
+            "normal_public_action_provenance": {
+              "cache_path": "inventory_work/reverse_audit/caches/casanare/page_000.json",
+              "cache_sha256": "9851b933005caf853178f8404743465ba914cff12fddc6766b87b5680d2a9d45",
+              "json_path": [
+                "sidebar",
+                "playlistSidebarRenderer",
+                "items",
+                0,
+                "playlistSidebarPrimaryInfoRenderer",
+                "menu",
+                "menuRenderer",
+                "items",
+                0,
+                "menuNavigationItemRenderer",
+                "navigationEndpoint",
+                "browseEndpoint"
+              ],
+              "action_label": "Show unavailable videos"
+            }
+          }
+        }
+      ],
+      "errors": [],
+      "pending_token_sha256": [],
+      "ignored_outer_continuations": 1,
+      "notice_observations": [
+        {
+          "page_index": 0,
+          "response_path": "inventory_work/reverse_audit/caches/casanare__unavailable/page_000.json",
+          "text": "Unavailable videos will be hidden during playback"
+        }
+      ],
+      "declared_count_observations": [
+        {
+          "page_index": 0,
+          "value": 20
+        }
+      ],
+      "title": "Subcaso Casanare",
+      "notices": [
+        "Unavailable videos will be hidden during playback"
+      ],
+      "hidden_unavailable_notice": false,
+      "declared_items": 20,
+      "hidden_unavailable_count": 0,
+      "target_id": "PLbtegW3d3L4JR1Y_bfCDS_C8sdKE6195K",
+      "default_view_video_ids_not_returned": [],
+      "hidden_only_video_ids": [
+        "o6q9K9GMm4E"
+      ],
+      "status": "exhausted_with_unavailable",
+      "pagination_exhausted": true,
+      "count_reconciled": true,
+      "unaccounted_declared_items": 0,
+      "returned_memberships": 20,
+      "visible_memberships": 20,
+      "normal_title_memberships": 19,
+      "unavailable_placeholder_memberships": 1,
+      "unique_video_ids": 20,
+      "duplicate_memberships": 0,
+      "finished_at": "2026-11-03T17:45:50.712407+00:00"
+    },
+    {
+      "collection_key": "audiencias",
+      "cache_key": "audiencias__unavailable",
+      "snapshot_view": "include_unavailable",
+      "collection_id": "PLbtegW3d3L4JAstPux8ji9-h9balFGI6M",
+      "collection_type": "playlist",
+      "source_role": "core_declared_source",
+      "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4JAstPux8ji9-h9balFGI6M",
+      "scope": "Mixed hearings; individual Casanare scope review required",
+      "original_fixture": "inventory_work/public_catalog_cache/deep_audiencias_playlist.json",
+      "started_at": "2026-11-03T17:45:50.899092+00:00",
+      "pages": [
+        {
+          "page_index": 0,
+          "response_path": "inventory_work/reverse_audit/caches/audiencias__unavailable/page_000.json",
+          "list_json_path": [
+            "contents",
+            "twoColumnBrowseResultsRenderer",
+            "tabs",
+            0,
+            "tabRenderer",
+            "content",
+            "sectionListRenderer",
+            "contents",
+            0,
+            "itemSectionRenderer",
+            "contents"
+          ],
+          "items": 44,
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:36:05.434997+00:00",
+            "sha256": "41b39da9438eabfd32a1a84fdb2da810c8107d78c1045678918e0b5c52c32c67",
+            "bytes": 570730,
+            "normal_public_action_provenance": {
+              "cache_path": "inventory_work/reverse_audit/caches/audiencias/page_000.json",
+              "cache_sha256": "099ebb476b76c35cb6f67bde6a2f2d8b71c106410f55ce9506979960412d5063",
+              "json_path": [
+                "sidebar",
+                "playlistSidebarRenderer",
+                "items",
+                0,
+                "playlistSidebarPrimaryInfoRenderer",
+                "menu",
+                "menuRenderer",
+                "items",
+                0,
+                "menuNavigationItemRenderer",
+                "navigationEndpoint",
+                "browseEndpoint"
+              ],
+              "action_label": "Show unavailable videos"
+            }
+          }
+        }
+      ],
+      "errors": [],
+      "pending_token_sha256": [],
+      "ignored_outer_continuations": 1,
+      "notice_observations": [
+        {
+          "page_index": 0,
+          "response_path": "inventory_work/reverse_audit/caches/audiencias__unavailable/page_000.json",
+          "text": "Unavailable videos will be hidden during playback"
+        }
+      ],
+      "declared_count_observations": [
+        {
+          "page_index": 0,
+          "value": 44
+        }
+      ],
+      "title": "Audiencias & Diligencias | JEP | HD",
+      "notices": [
+        "Unavailable videos will be hidden during playback"
+      ],
+      "hidden_unavailable_notice": false,
+      "declared_items": 44,
+      "hidden_unavailable_count": 0,
+      "target_id": "PLbtegW3d3L4JAstPux8ji9-h9balFGI6M",
+      "default_view_video_ids_not_returned": [],
+      "hidden_only_video_ids": [
+        "6S-j34I6qYs",
+        "UoQwxCMYJGQ"
+      ],
+      "status": "exhausted_with_unavailable",
+      "pagination_exhausted": true,
+      "count_reconciled": true,
+      "unaccounted_declared_items": 0,
+      "returned_memberships": 44,
+      "visible_memberships": 44,
+      "normal_title_memberships": 42,
+      "unavailable_placeholder_memberships": 2,
+      "unique_video_ids": 43,
+      "duplicate_memberships": 1,
+      "finished_at": "2026-11-03T17:45:50.957398+00:00"
+    },
+    {
+      "collection_key": "regimen",
+      "cache_key": "regimen",
+      "snapshot_view": "default_visible",
+      "collection_id": "PLbtegW3d3L4L_sf8wgB26KHOPY3sCOSv9",
+      "collection_type": "playlist",
+      "source_role": "core_declared_source",
+      "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4L_sf8wgB26KHOPY3sCOSv9",
+      "scope": "Mixed conditionality proceedings; individual scope review required",
+      "original_fixture": "inventory_work/public_catalog_cache/deeper_regimen_playlist.json",
+      "started_at": "2026-11-03T17:38:47.954814+00:00",
+      "pages": [
+        {
+          "page_index": 0,
+          "response_path": "inventory_work/reverse_audit/caches/regimen/page_000.json",
+          "list_json_path": [
+            "contents",
+            "twoColumnBrowseResultsRenderer",
+            "tabs",
+            0,
+            "tabRenderer",
+            "content",
+            "sectionListRenderer",
+            "contents",
+            0,
+            "itemSectionRenderer",
+            "contents"
+          ],
+          "items": 4,
+          "request": {
+            "requested_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4L_sf8wgB26KHOPY3sCOSv9",
+            "response_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4L_sf8wgB26KHOPY3sCOSv9",
+            "method": "GET",
+            "http_status": 200,
+            "content_type": "text/html; charset=utf-8",
+            "fetched_at": "2026-11-03T17:25:51.774323+00:00",
+            "sha256": "4779faefbdb897f8c63687bd1a7ea83d5f6107d9ffca19639936aedb6277a166",
+            "bytes": 929873
+          }
+        }
+      ],
+      "errors": [],
+      "pending_token_sha256": [],
+      "ignored_outer_continuations": 1,
+      "notice_observations": [],
+      "declared_count_observations": [
+        {
+          "page_index": 0,
+          "value": 4
+        }
+      ],
+      "title": "Régimen de Condicionalidad",
+      "notices": [],
+      "hidden_unavailable_notice": false,
+      "declared_items": 4,
+      "hidden_unavailable_count": 0,
+      "target_id": "PLbtegW3d3L4L_sf8wgB26KHOPY3sCOSv9",
+      "status": "exhausted_reconciled",
+      "pagination_exhausted": true,
+      "count_reconciled": true,
+      "unaccounted_declared_items": 0,
+      "returned_memberships": 4,
+      "visible_memberships": 4,
+      "normal_title_memberships": 4,
+      "unavailable_placeholder_memberships": 0,
+      "unique_video_ids": 4,
+      "duplicate_memberships": 0,
+      "finished_at": "2026-11-03T17:38:47.961945+00:00"
+    },
+    {
+      "collection_key": "memoria_casanare",
+      "cache_key": "memoria_casanare",
+      "snapshot_view": "default_visible",
+      "collection_id": "PLbtegW3d3L4LXHjmpwCMYpO2tzpRtOUco",
+      "collection_type": "playlist",
+      "source_role": "core_declared_source",
+      "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4LXHjmpwCMYpO2tzpRtOUco",
+      "scope": "Casanare memory collection; substantive type review required",
+      "original_fixture": "inventory_work/public_catalog_cache/deep_memory_playlist.json",
+      "started_at": "2026-11-03T17:38:48.135886+00:00",
+      "pages": [
+        {
+          "page_index": 0,
+          "response_path": "inventory_work/reverse_audit/caches/memoria_casanare/page_000.json",
+          "list_json_path": [
+            "contents",
+            "twoColumnBrowseResultsRenderer",
+            "tabs",
+            0,
+            "tabRenderer",
+            "content",
+            "sectionListRenderer",
+            "contents",
+            0,
+            "itemSectionRenderer",
+            "contents"
+          ],
+          "items": 24,
+          "request": {
+            "requested_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4LXHjmpwCMYpO2tzpRtOUco",
+            "response_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4LXHjmpwCMYpO2tzpRtOUco",
+            "method": "GET",
+            "http_status": 200,
+            "content_type": "text/html; charset=utf-8",
+            "fetched_at": "2026-11-03T17:25:55.129547+00:00",
+            "sha256": "f36c5121fb4ee125cd3ce070f050ffc7c9ffd2a9cb57843257293f51e5a79f19",
+            "bytes": 1180657
+          }
+        }
+      ],
+      "errors": [],
+      "pending_token_sha256": [],
+      "ignored_outer_continuations": 1,
+      "notice_observations": [],
+      "declared_count_observations": [
+        {
+          "page_index": 0,
+          "value": 24
+        }
+      ],
+      "title": "Camino de la Memoria - Casanare",
+      "notices": [],
+      "hidden_unavailable_notice": false,
+      "declared_items": 24,
+      "hidden_unavailable_count": 0,
+      "target_id": "PLbtegW3d3L4LXHjmpwCMYpO2tzpRtOUco",
+      "status": "exhausted_reconciled",
+      "pagination_exhausted": true,
+      "count_reconciled": true,
+      "unaccounted_declared_items": 0,
+      "returned_memberships": 24,
+      "visible_memberships": 24,
+      "normal_title_memberships": 24,
+      "unavailable_placeholder_memberships": 0,
+      "unique_video_ids": 24,
+      "duplicate_memberships": 0,
+      "finished_at": "2026-11-03T17:38:48.157312+00:00"
+    },
+    {
+      "collection_key": "region_antioquia",
+      "cache_key": "region_antioquia",
+      "snapshot_view": "default_visible",
+      "collection_id": "PLbtegW3d3L4IzLqaub8l87_fTQvSiZ47C",
+      "collection_type": "playlist",
+      "source_role": "supplemental_regional_membership",
+      "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4IzLqaub8l87_fTQvSiZ47C",
+      "scope": "Supplemental regional membership join: Antioquia; metadata only",
+      "original_fixture": "inventory_work/public_catalog_cache/channel_playlists.json",
+      "started_at": "2026-11-03T17:43:05.663839+00:00",
+      "pages": [
+        {
+          "page_index": 0,
+          "response_path": "inventory_work/reverse_audit/caches/region_antioquia/page_000.json",
+          "list_json_path": [
+            "contents",
+            "twoColumnBrowseResultsRenderer",
+            "tabs",
+            0,
+            "tabRenderer",
+            "content",
+            "sectionListRenderer",
+            "contents",
+            0,
+            "itemSectionRenderer",
+            "contents"
+          ],
+          "items": 18,
+          "request": {
+            "requested_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4IzLqaub8l87_fTQvSiZ47C",
+            "response_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4IzLqaub8l87_fTQvSiZ47C",
+            "method": "GET",
+            "http_status": 200,
+            "content_type": "text/html; charset=utf-8",
+            "fetched_at": "2026-11-03T17:35:37.246223+00:00",
+            "sha256": "446cfdc99d76db5506dd16399d18cf7d7c41502f4d44af5b73d072df9ace7f4f",
+            "bytes": 1101974
+          }
+        }
+      ],
+      "errors": [],
+      "pending_token_sha256": [],
+      "ignored_outer_continuations": 1,
+      "notice_observations": [],
+      "declared_count_observations": [
+        {
+          "page_index": 0,
+          "value": 18
+        }
+      ],
+      "title": "Caso 03 | Subcaso Antioquia",
+      "notices": [],
+      "hidden_unavailable_notice": false,
+      "declared_items": 18,
+      "hidden_unavailable_count": 0,
+      "target_id": "PLbtegW3d3L4IzLqaub8l87_fTQvSiZ47C",
+      "status": "exhausted_reconciled",
+      "pagination_exhausted": true,
+      "count_reconciled": true,
+      "unaccounted_declared_items": 0,
+      "returned_memberships": 18,
+      "visible_memberships": 18,
+      "normal_title_memberships": 18,
+      "unavailable_placeholder_memberships": 0,
+      "unique_video_ids": 18,
+      "duplicate_memberships": 0,
+      "finished_at": "2026-11-03T17:43:05.687178+00:00"
+    },
+    {
+      "collection_key": "region_costa_caribe",
+      "cache_key": "region_costa_caribe",
+      "snapshot_view": "default_visible",
+      "collection_id": "PLbtegW3d3L4IjZw5ZdFqDEr3H8x3dZ_sh",
+      "collection_type": "playlist",
+      "source_role": "supplemental_regional_membership",
+      "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4IjZw5ZdFqDEr3H8x3dZ_sh",
+      "scope": "Supplemental regional membership join: Costa Caribe / La Popa; metadata only",
+      "original_fixture": "inventory_work/public_catalog_cache/channel_playlists.json",
+      "started_at": "2026-11-03T17:43:05.918142+00:00",
+      "pages": [
+        {
+          "page_index": 0,
+          "response_path": "inventory_work/reverse_audit/caches/region_costa_caribe/page_000.json",
+          "list_json_path": [
+            "contents",
+            "twoColumnBrowseResultsRenderer",
+            "tabs",
+            0,
+            "tabRenderer",
+            "content",
+            "sectionListRenderer",
+            "contents",
+            0,
+            "itemSectionRenderer",
+            "contents"
+          ],
+          "items": 100,
+          "request": {
+            "requested_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4IjZw5ZdFqDEr3H8x3dZ_sh",
+            "response_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4IjZw5ZdFqDEr3H8x3dZ_sh",
+            "method": "GET",
+            "http_status": 200,
+            "content_type": "text/html; charset=utf-8",
+            "fetched_at": "2026-11-03T17:35:41.305693+00:00",
+            "sha256": "f7f61679e8ec9567ba366de24f09196aed8bd919dfeb4fa83af60b99e892b4fc",
+            "bytes": 2112495
+          }
+        },
+        {
+          "page_index": 1,
+          "response_path": "inventory_work/reverse_audit/caches/region_costa_caribe/page_001.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 100,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:35:44.826638+00:00",
+            "sha256": "fe5c7a72e0e1fd56eb78f995fcf955c287f84b5d975e9b62d1978d7c7bf89ff2",
+            "bytes": 1219594,
+            "request_token_sha256": "74dae89f78927836a113ef359ee016f566649985f98cbc277c053b82ec27fa43"
+          }
+        },
+        {
+          "page_index": 2,
+          "response_path": "inventory_work/reverse_audit/caches/region_costa_caribe/page_002.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 48,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:35:50.207333+00:00",
+            "sha256": "5017792b6f49f7edbf90cc7ce3d1ebbc42ba4dfd62c5262281aff65f4244b2ae",
+            "bytes": 593345,
+            "request_token_sha256": "c3c27ad6134993565bbbf0a6c28935d5bcace0b75f8680709c3f21c1e5330922"
+          }
+        }
+      ],
+      "errors": [],
+      "pending_token_sha256": [],
+      "ignored_outer_continuations": 1,
+      "notice_observations": [],
+      "declared_count_observations": [
+        {
+          "page_index": 0,
+          "value": 248
+        },
+        {
+          "page_index": 1,
+          "value": 248
+        },
+        {
+          "page_index": 2,
+          "value": 248
+        }
+      ],
+      "title": "Caso 03 | Subcaso Costa Caribe| La Popa",
+      "notices": [],
+      "hidden_unavailable_notice": false,
+      "declared_items": 248,
+      "hidden_unavailable_count": 0,
+      "target_id": "PLbtegW3d3L4IjZw5ZdFqDEr3H8x3dZ_sh",
+      "status": "exhausted_reconciled",
+      "pagination_exhausted": true,
+      "count_reconciled": true,
+      "unaccounted_declared_items": 0,
+      "returned_memberships": 248,
+      "visible_memberships": 248,
+      "normal_title_memberships": 248,
+      "unavailable_placeholder_memberships": 0,
+      "unique_video_ids": 248,
+      "duplicate_memberships": 0,
+      "finished_at": "2026-11-03T17:43:06.090639+00:00"
+    },
+    {
+      "collection_key": "region_norte_santander",
+      "cache_key": "region_norte_santander",
+      "snapshot_view": "default_visible",
+      "collection_id": "PLbtegW3d3L4KerLKcosDcd9FpE8CPQJVk",
+      "collection_type": "playlist",
+      "source_role": "supplemental_regional_membership",
+      "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4KerLKcosDcd9FpE8CPQJVk",
+      "scope": "Supplemental regional membership join: Norte de Santander; metadata only",
+      "original_fixture": "inventory_work/public_catalog_cache/channel_playlists.json",
+      "started_at": "2026-11-03T17:43:06.288285+00:00",
+      "pages": [
+        {
+          "page_index": 0,
+          "response_path": "inventory_work/reverse_audit/caches/region_norte_santander/page_000.json",
+          "list_json_path": [
+            "contents",
+            "twoColumnBrowseResultsRenderer",
+            "tabs",
+            0,
+            "tabRenderer",
+            "content",
+            "sectionListRenderer",
+            "contents",
+            0,
+            "itemSectionRenderer",
+            "contents"
+          ],
+          "items": 10,
+          "request": {
+            "requested_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4KerLKcosDcd9FpE8CPQJVk",
+            "response_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4KerLKcosDcd9FpE8CPQJVk",
+            "method": "GET",
+            "http_status": 200,
+            "content_type": "text/html; charset=utf-8",
+            "fetched_at": "2026-11-03T17:35:55.140048+00:00",
+            "sha256": "7929c683668af1e5e772e76d6845eac42811555e3a96554dac0d15a4b78f2624",
+            "bytes": 1004253
+          }
+        }
+      ],
+      "errors": [],
+      "pending_token_sha256": [],
+      "ignored_outer_continuations": 1,
+      "notice_observations": [],
+      "declared_count_observations": [
+        {
+          "page_index": 0,
+          "value": 10
+        }
+      ],
+      "title": "Caso 03 de la JEP | Subcaso Norte de Santander",
+      "notices": [],
+      "hidden_unavailable_notice": false,
+      "declared_items": 10,
+      "hidden_unavailable_count": 0,
+      "target_id": "PLbtegW3d3L4KerLKcosDcd9FpE8CPQJVk",
+      "status": "exhausted_reconciled",
+      "pagination_exhausted": true,
+      "count_reconciled": true,
+      "unaccounted_declared_items": 0,
+      "returned_memberships": 10,
+      "visible_memberships": 10,
+      "normal_title_memberships": 10,
+      "unavailable_placeholder_memberships": 0,
+      "unique_video_ids": 10,
+      "duplicate_memberships": 0,
+      "finished_at": "2026-11-03T17:43:06.303403+00:00"
+    },
+    {
+      "collection_key": "region_huila",
+      "cache_key": "region_huila",
+      "snapshot_view": "default_visible",
+      "collection_id": "PLbtegW3d3L4Jxv0UENoIIqo3WYHoNQ3GA",
+      "collection_type": "playlist",
+      "source_role": "supplemental_regional_membership",
+      "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4Jxv0UENoIIqo3WYHoNQ3GA",
+      "scope": "Supplemental regional membership join: Huila; metadata only",
+      "original_fixture": "inventory_work/public_catalog_cache/channel_playlists.json",
+      "started_at": "2026-11-03T17:43:06.452110+00:00",
+      "pages": [
+        {
+          "page_index": 0,
+          "response_path": "inventory_work/reverse_audit/caches/region_huila/page_000.json",
+          "list_json_path": [
+            "contents",
+            "twoColumnBrowseResultsRenderer",
+            "tabs",
+            0,
+            "tabRenderer",
+            "content",
+            "sectionListRenderer",
+            "contents",
+            0,
+            "itemSectionRenderer",
+            "contents"
+          ],
+          "items": 100,
+          "request": {
+            "requested_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4Jxv0UENoIIqo3WYHoNQ3GA",
+            "response_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4Jxv0UENoIIqo3WYHoNQ3GA",
+            "method": "GET",
+            "http_status": 200,
+            "content_type": "text/html; charset=utf-8",
+            "fetched_at": "2026-11-03T17:37:41.999346+00:00",
+            "sha256": "7f97b0f9f2b30d87b0c7cdce1e4739adba5112e6b7310e1ce8c52d072c93b61f",
+            "bytes": 2110215
+          }
+        },
+        {
+          "page_index": 1,
+          "response_path": "inventory_work/reverse_audit/caches/region_huila/page_001.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 86,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:37:45.483587+00:00",
+            "sha256": "81377630e0a52d61d1e988c2554df1a0549060f755b890aff9bc380ada868812",
+            "bytes": 1050309,
+            "request_token_sha256": "324041d99b3d362388fef180210509ea00e3471e591561ba8015ccc60d92c822"
+          }
+        }
+      ],
+      "errors": [],
+      "pending_token_sha256": [],
+      "ignored_outer_continuations": 1,
+      "notice_observations": [],
+      "declared_count_observations": [
+        {
+          "page_index": 0,
+          "value": 186
+        },
+        {
+          "page_index": 1,
+          "value": 186
+        }
+      ],
+      "title": "Caso 03 | Subcaso Huila",
+      "notices": [],
+      "hidden_unavailable_notice": false,
+      "declared_items": 186,
+      "hidden_unavailable_count": 0,
+      "target_id": "PLbtegW3d3L4Jxv0UENoIIqo3WYHoNQ3GA",
+      "status": "exhausted_reconciled",
+      "pagination_exhausted": true,
+      "count_reconciled": true,
+      "unaccounted_declared_items": 0,
+      "returned_memberships": 186,
+      "visible_memberships": 186,
+      "normal_title_memberships": 186,
+      "unavailable_placeholder_memberships": 0,
+      "unique_video_ids": 186,
+      "duplicate_memberships": 0,
+      "finished_at": "2026-11-03T17:43:06.606336+00:00"
+    },
+    {
+      "collection_key": "region_meta",
+      "cache_key": "region_meta__unavailable",
+      "snapshot_view": "include_unavailable",
+      "collection_id": "PLbtegW3d3L4IP1S5w5_jxrCtI686L03dh",
+      "collection_type": "playlist",
+      "source_role": "supplemental_regional_membership",
+      "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4IP1S5w5_jxrCtI686L03dh",
+      "scope": "Supplemental regional membership join: Meta; metadata only",
+      "original_fixture": "inventory_work/public_catalog_cache/channel_playlists.json",
+      "started_at": "2026-11-03T17:45:51.155199+00:00",
+      "pages": [
+        {
+          "page_index": 0,
+          "response_path": "inventory_work/reverse_audit/caches/region_meta__unavailable/page_000.json",
+          "list_json_path": [
+            "contents",
+            "twoColumnBrowseResultsRenderer",
+            "tabs",
+            0,
+            "tabRenderer",
+            "content",
+            "sectionListRenderer",
+            "contents",
+            0,
+            "itemSectionRenderer",
+            "contents"
+          ],
+          "items": 101,
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:39:03.011631+00:00",
+            "sha256": "76d9de339093f1c9b3dfe43c007843129d28fbfb024fa645dbd49ec2849f912a",
+            "bytes": 1263634,
+            "normal_public_action_provenance": {
+              "cache_path": "inventory_work/reverse_audit/caches/region_meta/page_001.json",
+              "cache_sha256": "478ffcc014df0b46caff825389355ae02d07a8af895f9c674d4453ef192582f1",
+              "json_path": [
+                "sidebar",
+                "playlistSidebarRenderer",
+                "items",
+                0,
+                "playlistSidebarPrimaryInfoRenderer",
+                "menu",
+                "menuRenderer",
+                "items",
+                0,
+                "menuNavigationItemRenderer",
+                "navigationEndpoint",
+                "browseEndpoint"
+              ],
+              "action_label": "Show unavailable videos"
+            }
+          }
+        },
+        {
+          "page_index": 1,
+          "response_path": "inventory_work/reverse_audit/caches/region_meta__unavailable/page_001.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 69,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:39:06.899166+00:00",
+            "sha256": "945c17ef75a3c1e53a3add0a9418a930db3b1e1f5091b2e7b53455712a4c6503",
+            "bytes": 851253,
+            "request_token_sha256": "11258484206e58b25362b26fbb636810d9b4a21f8eb5c6d4a5881c42cb46a9a8"
+          }
+        }
+      ],
+      "errors": [],
+      "pending_token_sha256": [],
+      "ignored_outer_continuations": 1,
+      "notice_observations": [
+        {
+          "page_index": 0,
+          "response_path": "inventory_work/reverse_audit/caches/region_meta__unavailable/page_000.json",
+          "text": "Unavailable videos will be hidden during playback"
+        },
+        {
+          "page_index": 1,
+          "response_path": "inventory_work/reverse_audit/caches/region_meta__unavailable/page_001.json",
+          "text": "Unavailable videos will be hidden during playback"
+        }
+      ],
+      "declared_count_observations": [
+        {
+          "page_index": 0,
+          "value": 170
+        },
+        {
+          "page_index": 1,
+          "value": 170
+        }
+      ],
+      "title": "Caso 03 | Subcaso Meta",
+      "notices": [
+        "Unavailable videos will be hidden during playback"
+      ],
+      "hidden_unavailable_notice": false,
+      "declared_items": 170,
+      "hidden_unavailable_count": 0,
+      "target_id": "PLbtegW3d3L4IP1S5w5_jxrCtI686L03dh",
+      "default_view_video_ids_not_returned": [],
+      "hidden_only_video_ids": [
+        "n1HYbvijKKI"
+      ],
+      "status": "exhausted_with_unavailable",
+      "pagination_exhausted": true,
+      "count_reconciled": true,
+      "unaccounted_declared_items": 0,
+      "returned_memberships": 170,
+      "visible_memberships": 170,
+      "normal_title_memberships": 169,
+      "unavailable_placeholder_memberships": 1,
+      "unique_video_ids": 170,
+      "duplicate_memberships": 0,
+      "finished_at": "2026-11-03T17:45:51.282214+00:00"
+    },
+    {
+      "collection_id": "https://www.jep.gov.co/macrocasos/caso03.html#casanare-labelled-cards",
+      "collection_key": "web_case03_casanare_cards",
+      "collection_type": "official_web_page_section",
+      "source_role": "core_declared_source",
+      "source_url": "https://www.jep.gov.co/macrocasos/caso03.html",
+      "title": "Official JEP Case 03 page — Casanare-labelled hearing cards",
+      "scope": "Only active cards whose heading explicitly says Casanare. HTML comments and other regional cards excluded; heading/thumbnail link disagreement preserved.",
+      "status": "observed_cards_extracted",
+      "pagination_exhausted": null,
+      "count_reconciled": null,
+      "declared_items": null,
+      "returned_memberships": 7,
+      "visible_memberships": 7,
+      "unique_video_ids": 5,
+      "casanare_labelled_cards": 7,
+      "all_active_cards": 43,
+      "cards": [
+        {
+          "card_index": 20,
+          "heading": "​ 20 de septiembre de 2023: Audiencia de Reconocimiento de Verdad | Caso 03 | Subcaso Casanare",
+          "video_ids": [
+            "cSKgOHGfLQw"
+          ],
+          "multiple_video_ids": false
+        },
+        {
+          "card_index": 21,
+          "heading": "​ 20 de septiembre de 2023: Audiencia de Reconocimiento de Verdad | Caso 03 | Subcaso Casanare",
+          "video_ids": [
+            "i1WWWhIL7_Y"
+          ],
+          "multiple_video_ids": false
+        },
+        {
+          "card_index": 22,
+          "heading": "​ 19 de septiembre de 2023: Audiencia de Reconocimiento de Verdad | Caso 03 | Subcaso Casanare",
+          "video_ids": [
+            "i1WWWhIL7_Y"
+          ],
+          "multiple_video_ids": false
+        },
+        {
+          "card_index": 23,
+          "heading": "​ 19 de septiembre de 2023: Audiencia de Reconocimiento de Verdad | Caso 03 | Subcaso Casanare",
+          "video_ids": [
+            "cGyu3lTjqso"
+          ],
+          "multiple_video_ids": false
+        },
+        {
+          "card_index": 24,
+          "heading": "​ 19 de septiembre de 2023: Audiencia de Reconocimiento de Verdad | Caso 03 | Subcaso Casanare",
+          "video_ids": [
+            "Pq0tmcvNp9g"
+          ],
+          "multiple_video_ids": false
+        },
+        {
+          "card_index": 25,
+          "heading": "​ 18 de septiembre de 2023: Audiencia de Reconocimiento de Verdad | Caso 03 | Subcaso Casanare",
+          "video_ids": [
+            "Pq0tmcvNp9g"
+          ],
+          "multiple_video_ids": false
+        },
+        {
+          "card_index": 26,
+          "heading": "​ 18 de septiembre de 2023: Audiencia de Reconocimiento de Verdad | Caso 03 | Subcaso Casanare",
+          "video_ids": [
+            "efeJV8Q4CwE"
+          ],
+          "multiple_video_ids": false
+        }
+      ],
+      "provenance": {
+        "requested_url": "https://www.jep.gov.co/macrocasos/caso03.html",
+        "response_url": "https://www.jep.gov.co/macrocasos/caso03.html",
+        "method": "GET",
+        "http_status": 200,
+        "content_type": "text/html",
+        "fetched_at": "2026-11-03T17:24:55.800852+00:00",
+        "sha256": "a3971d0194e88df1c42e0ce20ecc21b668e2d3a021c9816beb72bb4d82e854d4",
+        "bytes": 180545
+      },
+      "errors": [],
+      "pending_token_sha256": [],
+      "normal_title_memberships": 7,
+      "unavailable_placeholder_memberships": 0,
+      "duplicate_memberships": 2
+    }
+  ],
+  "alternate_snapshot_views": [
+    {
+      "collection_key": "case03",
+      "cache_key": "case03",
+      "snapshot_view": "default_visible",
+      "collection_id": "PLbtegW3d3L4Id_lrAgBRDGf-k_bwEYH6_",
+      "collection_type": "playlist",
+      "source_role": "core_declared_source",
+      "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4Id_lrAgBRDGf-k_bwEYH6_",
+      "scope": "Broad Case 03; discovery metadata only",
+      "original_fixture": "inventory_work/public_catalog_cache/case03_playlist.json",
+      "started_at": "2026-11-03T17:38:46.880885+00:00",
+      "pages": [
+        {
+          "page_index": 0,
+          "response_path": "inventory_work/reverse_audit/caches/case03/page_000.json",
+          "list_json_path": [
+            "contents",
+            "twoColumnBrowseResultsRenderer",
+            "tabs",
+            0,
+            "tabRenderer",
+            "content",
+            "sectionListRenderer",
+            "contents",
+            0,
+            "itemSectionRenderer",
+            "contents"
+          ],
+          "items": 100,
+          "request": {
+            "requested_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4Id_lrAgBRDGf-k_bwEYH6_",
+            "response_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4Id_lrAgBRDGf-k_bwEYH6_",
+            "method": "GET",
+            "http_status": 200,
+            "content_type": "text/html; charset=utf-8",
+            "fetched_at": "2026-11-03T17:24:32.524219+00:00",
+            "sha256": "d5363984c2486b40f875c2b5389616af6bb99326ae430dc01967d9c42157ecb0",
+            "bytes": 2123581
+          }
+        },
+        {
+          "page_index": 1,
+          "response_path": "inventory_work/reverse_audit/caches/case03/page_001.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 100,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:24:36.835663+00:00",
+            "sha256": "d0b358b5bcfb1a24c4a0ad3907b593208a8be729ffd7c80e7176e58cf3a91828",
+            "bytes": 1224219,
+            "request_token_sha256": "9c6aae9ba2e04aa21eb6367ba3af0496f190757e1e420b7b85fe0460d6daf87a"
+          }
+        },
+        {
+          "page_index": 2,
+          "response_path": "inventory_work/reverse_audit/caches/case03/page_002.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 100,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:25:19.620009+00:00",
+            "sha256": "8e1ca8acfe186d1a92176a01f247156f0ebd8020216c1532c591c3b3990f855d",
+            "bytes": 1222115,
+            "request_token_sha256": "8f3327003f9b5655c07c5e77f50a4b8e34fbca756e6001de7faf03c57c6db522"
+          }
+        },
+        {
+          "page_index": 3,
+          "response_path": "inventory_work/reverse_audit/caches/case03/page_003.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 100,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:25:23.491157+00:00",
+            "sha256": "4db392744ea18c43b7f76ea37b454a4525a97d0a6eedcffb1617e2f0dfe8d3bc",
+            "bytes": 1220578,
+            "request_token_sha256": "5c2f0ba2cf7f2434d9d7e3a3bc66940220c92f586927cc8916a893df963fc847"
+          }
+        },
+        {
+          "page_index": 4,
+          "response_path": "inventory_work/reverse_audit/caches/case03/page_004.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 100,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:25:27.121243+00:00",
+            "sha256": "4bb3275439178171c97adc1a44efecc223f29dc3cb5da98e7d3603f8a87b7a16",
+            "bytes": 1221455,
+            "request_token_sha256": "bc7788d10fa5d2e99b31392e15ff819970919eb481146f2e1294787091a8bb29"
+          }
+        },
+        {
+          "page_index": 5,
+          "response_path": "inventory_work/reverse_audit/caches/case03/page_005.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 100,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:25:30.640600+00:00",
+            "sha256": "a05a342014bec3cec31a078cfea0ac75a112241f8b5f733a8a1cf379d9634462",
+            "bytes": 1221618,
+            "request_token_sha256": "2dffe9f87a575e1f8fa16e6e4b4d6df90ae146d4ba56e3ce8ac25d896c983209"
+          }
+        },
+        {
+          "page_index": 6,
+          "response_path": "inventory_work/reverse_audit/caches/case03/page_006.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 100,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:25:34.550066+00:00",
+            "sha256": "15488e9c5bb6a7f828320922db5c54701397b7dac965bb0dbc7a24fd16280791",
+            "bytes": 1220695,
+            "request_token_sha256": "0cfb64064fb8a71e2302e2e1022b02900718adf25b818323b02c3ffaf2e40cda"
+          }
+        },
+        {
+          "page_index": 7,
+          "response_path": "inventory_work/reverse_audit/caches/case03/page_007.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 100,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:25:38.231455+00:00",
+            "sha256": "c17bd2012a75ed9902f6d3de01bfb890c5e9f766f0fc26120c429be09fe8f673",
+            "bytes": 1220836,
+            "request_token_sha256": "142f45a24c1a9ae11bba95d85a797e33b655cccd3072097649ef685c6079b5ca"
+          }
+        },
+        {
+          "page_index": 8,
+          "response_path": "inventory_work/reverse_audit/caches/case03/page_008.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 95,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:25:41.588955+00:00",
+            "sha256": "22711d4a2126f562014d1ee0fe0ba4d7c09672c0d8a68c9873ce3bd7a1d63f91",
+            "bytes": 1161120,
+            "request_token_sha256": "8d0d100909ee71cdf408e49282986c73e49acbe9a5be37fb5f09b3580473e752"
+          }
+        }
+      ],
+      "errors": [],
+      "pending_token_sha256": [],
+      "ignored_outer_continuations": 1,
+      "notice_observations": [
+        {
+          "page_index": 7,
+          "response_path": "inventory_work/reverse_audit/caches/case03/page_007.json",
+          "text": "Unavailable videos are hidden"
+        },
+        {
+          "page_index": 8,
+          "response_path": "inventory_work/reverse_audit/caches/case03/page_008.json",
+          "text": "Unavailable videos are hidden"
+        }
+      ],
+      "declared_count_observations": [
+        {
+          "page_index": 0,
+          "value": 898
+        },
+        {
+          "page_index": 1,
+          "value": 898
+        },
+        {
+          "page_index": 2,
+          "value": 898
+        },
+        {
+          "page_index": 3,
+          "value": 898
+        },
+        {
+          "page_index": 4,
+          "value": 898
+        },
+        {
+          "page_index": 5,
+          "value": 898
+        },
+        {
+          "page_index": 6,
+          "value": 898
+        },
+        {
+          "page_index": 7,
+          "value": 898
+        },
+        {
+          "page_index": 8,
+          "value": 898
+        }
+      ],
+      "title": "Caso 03 de la JEP | Falsos positivos",
+      "notices": [
+        "Unavailable videos are hidden"
+      ],
+      "hidden_unavailable_notice": true,
+      "declared_items": 898,
+      "hidden_unavailable_count": 0,
+      "target_id": "PLbtegW3d3L4Id_lrAgBRDGf-k_bwEYH6_",
+      "status": "exhausted_count_mismatch",
+      "pagination_exhausted": true,
+      "count_reconciled": false,
+      "unaccounted_declared_items": 3,
+      "returned_memberships": 895,
+      "visible_memberships": 895,
+      "normal_title_memberships": 895,
+      "unavailable_placeholder_memberships": 0,
+      "unique_video_ids": 895,
+      "duplicate_memberships": 0,
+      "finished_at": "2026-11-03T17:38:47.353439+00:00"
+    },
+    {
+      "collection_key": "casanare",
+      "cache_key": "casanare",
+      "snapshot_view": "default_visible",
+      "collection_id": "PLbtegW3d3L4JR1Y_bfCDS_C8sdKE6195K",
+      "collection_type": "playlist",
+      "source_role": "core_declared_source",
+      "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4JR1Y_bfCDS_C8sdKE6195K",
+      "scope": "Casanare collection; individual scope review required",
+      "original_fixture": "inventory_work/public_catalog_cache/subcaso_casanare_playlist.json",
+      "started_at": "2026-11-03T17:38:47.562825+00:00",
+      "pages": [
+        {
+          "page_index": 0,
+          "response_path": "inventory_work/reverse_audit/caches/casanare/page_000.json",
+          "list_json_path": [
+            "contents",
+            "twoColumnBrowseResultsRenderer",
+            "tabs",
+            0,
+            "tabRenderer",
+            "content",
+            "sectionListRenderer",
+            "contents",
+            0,
+            "itemSectionRenderer",
+            "contents"
+          ],
+          "items": 19,
+          "request": {
+            "requested_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4JR1Y_bfCDS_C8sdKE6195K",
+            "response_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4JR1Y_bfCDS_C8sdKE6195K",
+            "method": "GET",
+            "http_status": 200,
+            "content_type": "text/html; charset=utf-8",
+            "fetched_at": "2026-11-03T17:25:44.996491+00:00",
+            "sha256": "fc1a36dd7a5f9eefbd00bd4e6c02fd0adc8a41bff2deaac43cd3ac4cf171b3da",
+            "bytes": 1115957
+          }
+        }
+      ],
+      "errors": [],
+      "pending_token_sha256": [],
+      "ignored_outer_continuations": 1,
+      "notice_observations": [
+        {
+          "page_index": 0,
+          "response_path": "inventory_work/reverse_audit/caches/casanare/page_000.json",
+          "text": "1 unavailable video is hidden"
+        }
+      ],
+      "declared_count_observations": [
+        {
+          "page_index": 0,
+          "value": 20
+        }
+      ],
+      "title": "Subcaso Casanare",
+      "notices": [
+        "1 unavailable video is hidden"
+      ],
+      "hidden_unavailable_notice": true,
+      "declared_items": 20,
+      "hidden_unavailable_count": 1,
+      "target_id": "PLbtegW3d3L4JR1Y_bfCDS_C8sdKE6195K",
+      "status": "exhausted_with_unavailable",
+      "pagination_exhausted": true,
+      "count_reconciled": true,
+      "unaccounted_declared_items": 0,
+      "returned_memberships": 19,
+      "visible_memberships": 19,
+      "normal_title_memberships": 19,
+      "unavailable_placeholder_memberships": 0,
+      "unique_video_ids": 19,
+      "duplicate_memberships": 0,
+      "finished_at": "2026-11-03T17:38:47.578644+00:00"
+    },
+    {
+      "collection_key": "audiencias",
+      "cache_key": "audiencias",
+      "snapshot_view": "default_visible",
+      "collection_id": "PLbtegW3d3L4JAstPux8ji9-h9balFGI6M",
+      "collection_type": "playlist",
+      "source_role": "core_declared_source",
+      "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4JAstPux8ji9-h9balFGI6M",
+      "scope": "Mixed hearings; individual Casanare scope review required",
+      "original_fixture": "inventory_work/public_catalog_cache/deep_audiencias_playlist.json",
+      "started_at": "2026-11-03T17:38:47.743415+00:00",
+      "pages": [
+        {
+          "page_index": 0,
+          "response_path": "inventory_work/reverse_audit/caches/audiencias/page_000.json",
+          "list_json_path": [
+            "contents",
+            "twoColumnBrowseResultsRenderer",
+            "tabs",
+            0,
+            "tabRenderer",
+            "content",
+            "sectionListRenderer",
+            "contents",
+            0,
+            "itemSectionRenderer",
+            "contents"
+          ],
+          "items": 42,
+          "request": {
+            "requested_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4JAstPux8ji9-h9balFGI6M",
+            "response_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4JAstPux8ji9-h9balFGI6M",
+            "method": "GET",
+            "http_status": 200,
+            "content_type": "text/html; charset=utf-8",
+            "fetched_at": "2026-11-03T17:25:48.395884+00:00",
+            "sha256": "17d95f13946ba4669f8a1b6059b3de1403c04c18238e5e658fae83ea8c7ff9f1",
+            "bytes": 1400694
+          }
+        }
+      ],
+      "errors": [],
+      "pending_token_sha256": [],
+      "ignored_outer_continuations": 1,
+      "notice_observations": [
+        {
+          "page_index": 0,
+          "response_path": "inventory_work/reverse_audit/caches/audiencias/page_000.json",
+          "text": "2 unavailable videos are hidden"
+        }
+      ],
+      "declared_count_observations": [
+        {
+          "page_index": 0,
+          "value": 44
+        }
+      ],
+      "title": "Audiencias & Diligencias | JEP | HD",
+      "notices": [
+        "2 unavailable videos are hidden"
+      ],
+      "hidden_unavailable_notice": true,
+      "declared_items": 44,
+      "hidden_unavailable_count": 2,
+      "target_id": "PLbtegW3d3L4JAstPux8ji9-h9balFGI6M",
+      "status": "exhausted_with_unavailable",
+      "pagination_exhausted": true,
+      "count_reconciled": true,
+      "unaccounted_declared_items": 0,
+      "returned_memberships": 42,
+      "visible_memberships": 42,
+      "normal_title_memberships": 42,
+      "unavailable_placeholder_memberships": 0,
+      "unique_video_ids": 41,
+      "duplicate_memberships": 1,
+      "finished_at": "2026-11-03T17:38:47.785281+00:00"
+    },
+    {
+      "collection_key": "region_meta",
+      "cache_key": "region_meta",
+      "snapshot_view": "default_visible",
+      "collection_id": "PLbtegW3d3L4IP1S5w5_jxrCtI686L03dh",
+      "collection_type": "playlist",
+      "source_role": "supplemental_regional_membership",
+      "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4IP1S5w5_jxrCtI686L03dh",
+      "scope": "Supplemental regional membership join: Meta; metadata only",
+      "original_fixture": "inventory_work/public_catalog_cache/channel_playlists.json",
+      "started_at": "2026-11-03T17:43:06.819431+00:00",
+      "pages": [
+        {
+          "page_index": 0,
+          "response_path": "inventory_work/reverse_audit/caches/region_meta/page_000.json",
+          "list_json_path": [
+            "contents",
+            "twoColumnBrowseResultsRenderer",
+            "tabs",
+            0,
+            "tabRenderer",
+            "content",
+            "sectionListRenderer",
+            "contents",
+            0,
+            "itemSectionRenderer",
+            "contents"
+          ],
+          "items": 100,
+          "request": {
+            "requested_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4IP1S5w5_jxrCtI686L03dh",
+            "response_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4IP1S5w5_jxrCtI686L03dh",
+            "method": "GET",
+            "http_status": 200,
+            "content_type": "text/html; charset=utf-8",
+            "fetched_at": "2026-11-03T17:37:48.878771+00:00",
+            "sha256": "a083c841d0a21e4a7aedf6210fcf64c7e81517d9954d0f41c731dc394dfb4066",
+            "bytes": 2125921
+          }
+        },
+        {
+          "page_index": 1,
+          "response_path": "inventory_work/reverse_audit/caches/region_meta/page_001.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 69,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T17:37:52.057271+00:00",
+            "sha256": "1cb1062c12035f6621cca27fb37cf25cb26654742fa7de05fe7407ae5e554897",
+            "bytes": 851227,
+            "request_token_sha256": "04d034e15d0f5fff4d8220ac4506371b805cbb2ece86cac0311dc7f85777c677"
+          }
+        }
+      ],
+      "errors": [],
+      "pending_token_sha256": [],
+      "ignored_outer_continuations": 1,
+      "notice_observations": [
+        {
+          "page_index": 0,
+          "response_path": "inventory_work/reverse_audit/caches/region_meta/page_000.json",
+          "text": "Unavailable videos are hidden"
+        },
+        {
+          "page_index": 1,
+          "response_path": "inventory_work/reverse_audit/caches/region_meta/page_001.json",
+          "text": "Unavailable videos are hidden"
+        }
+      ],
+      "declared_count_observations": [
+        {
+          "page_index": 0,
+          "value": 170
+        },
+        {
+          "page_index": 1,
+          "value": 170
+        }
+      ],
+      "title": "Caso 03 | Subcaso Meta",
+      "notices": [
+        "Unavailable videos are hidden"
+      ],
+      "hidden_unavailable_notice": true,
+      "declared_items": 170,
+      "hidden_unavailable_count": 0,
+      "target_id": "PLbtegW3d3L4IP1S5w5_jxrCtI686L03dh",
+      "status": "exhausted_count_mismatch",
+      "pagination_exhausted": true,
+      "count_reconciled": false,
+      "unaccounted_declared_items": 1,
+      "returned_memberships": 169,
+      "visible_memberships": 169,
+      "normal_title_memberships": 169,
+      "unavailable_placeholder_memberships": 0,
+      "unique_video_ids": 169,
+      "duplicate_memberships": 0,
+      "finished_at": "2026-11-03T17:43:06.957026+00:00"
+    }
+  ],
+  "unique_video_ids": 3606,
+  "membership_count": 5203,
+  "unavailable_placeholder_unique_ids": 5,
+  "unavailable_placeholders": [
+    {
+      "video_id": "KnwzIgiijTA",
+      "url": "https://www.youtube.com/watch?v=KnwzIgiijTA",
+      "title": null,
+      "memberships": [
+        {
+          "collection_id": "PLbtegW3d3L4Id_lrAgBRDGf-k_bwEYH6_",
+          "collection_key": "case03",
+          "position": 896,
+          "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4Id_lrAgBRDGf-k_bwEYH6_",
+          "snapshot_view": "include_unavailable",
+          "visibility_basis": "Only returned by observed public Show unavailable videos action; absent from exhausted default view"
+        }
+      ],
+      "limitation": "Public listing placeholder; title/content unavailable in this view. No playability or Casanare scope inferred."
+    },
+    {
+      "video_id": "n1HYbvijKKI",
+      "url": "https://www.youtube.com/watch?v=n1HYbvijKKI",
+      "title": null,
+      "memberships": [
+        {
+          "collection_id": "PLbtegW3d3L4Id_lrAgBRDGf-k_bwEYH6_",
+          "collection_key": "case03",
+          "position": 897,
+          "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4Id_lrAgBRDGf-k_bwEYH6_",
+          "snapshot_view": "include_unavailable",
+          "visibility_basis": "Only returned by observed public Show unavailable videos action; absent from exhausted default view"
+        },
+        {
+          "collection_id": "PLbtegW3d3L4IP1S5w5_jxrCtI686L03dh",
+          "collection_key": "region_meta",
+          "position": 19,
+          "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4IP1S5w5_jxrCtI686L03dh",
+          "snapshot_view": "include_unavailable",
+          "visibility_basis": "Only returned by observed public Show unavailable videos action; absent from exhausted default view"
+        }
+      ],
+      "limitation": "Public listing placeholder; title/content unavailable in this view. No playability or Casanare scope inferred."
+    },
+    {
+      "video_id": "6S-j34I6qYs",
+      "url": "https://www.youtube.com/watch?v=6S-j34I6qYs",
+      "title": null,
+      "memberships": [
+        {
+          "collection_id": "PLbtegW3d3L4Id_lrAgBRDGf-k_bwEYH6_",
+          "collection_key": "case03",
+          "position": 898,
+          "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4Id_lrAgBRDGf-k_bwEYH6_",
+          "snapshot_view": "include_unavailable",
+          "visibility_basis": "Only returned by observed public Show unavailable videos action; absent from exhausted default view"
+        },
+        {
+          "collection_id": "PLbtegW3d3L4JAstPux8ji9-h9balFGI6M",
+          "collection_key": "audiencias",
+          "position": 6,
+          "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4JAstPux8ji9-h9balFGI6M",
+          "snapshot_view": "include_unavailable",
+          "visibility_basis": "Only returned by observed public Show unavailable videos action; absent from exhausted default view"
+        }
+      ],
+      "limitation": "Public listing placeholder; title/content unavailable in this view. No playability or Casanare scope inferred."
+    },
+    {
+      "video_id": "o6q9K9GMm4E",
+      "url": "https://www.youtube.com/watch?v=o6q9K9GMm4E",
+      "title": null,
+      "memberships": [
+        {
+          "collection_id": "PLbtegW3d3L4JR1Y_bfCDS_C8sdKE6195K",
+          "collection_key": "casanare",
+          "position": 20,
+          "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4JR1Y_bfCDS_C8sdKE6195K",
+          "snapshot_view": "include_unavailable",
+          "visibility_basis": "Only returned by observed public Show unavailable videos action; absent from exhausted default view"
+        }
+      ],
+      "limitation": "Public listing placeholder; title/content unavailable in this view. No playability or Casanare scope inferred."
+    },
+    {
+      "video_id": "UoQwxCMYJGQ",
+      "url": "https://www.youtube.com/watch?v=UoQwxCMYJGQ",
+      "title": null,
+      "memberships": [
+        {
+          "collection_id": "PLbtegW3d3L4JAstPux8ji9-h9balFGI6M",
+          "collection_key": "audiencias",
+          "position": 7,
+          "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4JAstPux8ji9-h9balFGI6M",
+          "snapshot_view": "include_unavailable",
+          "visibility_basis": "Only returned by observed public Show unavailable videos action; absent from exhausted default view"
+        }
+      ],
+      "limitation": "Public listing placeholder; title/content unavailable in this view. No playability or Casanare scope inferred."
+    }
+  ],
+  "bounded_watch_metadata_records": 97,
+  "bounded_watch_metadata_errors": 0,
+  "playlist_response_pages_in_selected_snapshots": 22,
+  "complete_reverse_audit_claimed": false
+}

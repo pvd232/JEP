@@ -17,7 +17,7 @@ The recursive [source manifest](source_manifest.json) covers **116 files across 
 
 ## Workbook and companion files
 
-The single workbook has five tabs: **Summary**, **Transcripts**, **English summaries**, **Recording gaps** and **Files**. Transcripts contains one row per distinct transcript or supplied segment, with concise evidence and clickable original Drive and YouTube links. English summaries provides a substantive account for each of the 93 records. Click an ID to move between the inventory and its summary. Seven hearing categories have distinct colors, explained by the Summary legend. Recording gaps identifies the exact material or verification needed for 15 records, with original links, case-file locators and a blank column for newly supplied recording links. Files retains links to all 116 originals, including alternate versions and supporting documents.
+The single workbook has seven tabs: **Summary**, **Transcripts**, **English summaries**, **Recording gaps**, **Videos**, **Crawl sources** and **Files**. Transcripts contains one row per distinct transcript or supplied segment, with concise evidence and clickable original Drive and YouTube links. English summaries provides a substantive account for each of the 93 records. Click an ID to move between the inventory and its summary. Seven hearing categories have distinct colors, explained by the Summary legend. Recording gaps identifies the exact material or verification needed for 15 records, with original links, case-file locators and a blank column for newly supplied recording links. Videos adds the reverse recording-to-source map and explicit scope decisions. Crawl sources records collection counts, pagination and unavailable-item accounting. Files retains links to all 116 originals, including alternate versions and supporting documents.
 
 | Artifact | Purpose |
 |---|---|
@@ -31,7 +31,14 @@ The single workbook has five tabs: **Summary**, **Transcripts**, **English summa
 | [Recording gaps](recording_gaps.json) | Eleven unlocated recording records, two missing continuations and two content/coverage checks, with precise retrieval requirements. |
 | [Completion review](completion_review.json) | Further search coverage, access evidence, corrected classifications and public judicial locators. |
 | [Recording request draft](recording_request.md) | Spanish request naming the required sessions, parts and verification points. Prepared for review; not sent. |
-| [Video coverage method](video_coverage_method.md) | Fixed Casanare scope, complete source pagination and a two-way video/transcript audit. The reverse audit remains pending. |
+| [Video coverage method](video_coverage_method.md) | Fixed Casanare scope, source pagination and the implemented two-way video/transcript audit. |
+| [Pagination and reverse-audit report](reverse_audit_report.md) | Reproduced failure, live correction, final source accounting, reverse-map counts and residual limitations. |
+| [Video inventory](video_inventory.json) | One row per reviewed video ID, with scope, source coverage, concise evidence and links. |
+| [Reverse mapping review](reverse_mapping_review.json) | Detailed evidence for every admitted recording, known partial coverage and verified alternate uploads. |
+| [Scope decisions](scope_decisions.json) | Casanare candidate inclusion/exclusion decisions; unresolved formats remain outside the confirmed corpus. |
+| [Broad metadata scope register](broad_metadata_scope.json) | Every broad Case 03 playlist ID accounted for without admitting other territorial subcases. |
+| [Crawl manifest](crawl_manifest.json) | Sources, successful pages, terminal states, unavailable positions and request accounting. |
+| [Pagination implementation](pagination_fix/README.md) | Corrected crawler, sanitized replay fixtures and exact reproduction commands. |
 | [Crawl readiness review](crawl_readiness_review.json) | Retained channel terminal-page checks, a missed Case 03 playlist continuation, and the Casanare playlist's hidden unavailable item. |
 | [Summary JSON](summary.json) | Counts, categories and access notes. |
 
@@ -47,15 +54,15 @@ Evidence pointers use the source spreadsheet's **Order** values, source-local ti
 
 ### Video verification
 
-The search covered the JEP Colombia channel’s complete available **2,663 Videos listings and 847 Live listings** as of the review date. Deeper checks resolved all 13 initial candidates and located four previously unmatched recordings. All 105 source transcript files were readable. The final public-interface check also accessed the Zamir recording that initially appeared to require sign-in. See the [summary](summary.json) and [matching audit](matching_audit.json).
+The search used retained JEP Colombia channel catalogs containing **2,663 Videos listings and 847 Live listings**. Their terminal pages were rechecked in this audit, but the earlier collector did not record original fetch times and these two surfaces were not refetched. Deeper checks resolved all 13 initial candidates and located four previously unmatched recordings. All 105 source transcript files were readable. The final public-interface check also accessed the Zamir recording that initially appeared to require sign-in. See the [summary](summary.json), [matching audit](matching_audit.json) and [source-accounting limits](reverse_audit_report.md).
 
-Those channel listings were used to find matches for the supplied transcripts; they are not a count of Casanare hearings. The supplied-file inventory is complete, but a comprehensive reverse audit of all relevant public videos against our transcript collection is not. The [video coverage method](video_coverage_method.md) fixes that audit's scope and completion criteria. Public Casanare videos can lack a supplied transcript even when the video itself is readily available.
+Those channel listings were used to find matches for the supplied transcripts; they are not a count of Casanare hearings. The subsequent [reverse audit](reverse_audit_report.md) corrects the broad-playlist pagination defect, accounts for collection membership and compares each admitted video with the supplied inventory. Its coverage claim is bounded by the declared public sources and recorded scope/access uncertainties. Public Casanare videos can lack a supplied transcript even when the recording itself is readily available. A video-ID count is not a certified hearing or transcript count.
 
 Public automatic captions were compared locally with source passages. Caption anchors and reported ranges are **approximate**; independent manual audio listening and exact spoken-word boundaries remain unverified. The 3 and 4 December 2024 hearings retain **metadata-only** matches because captions are unavailable on their public pages. Principal participant lists may be incomplete. These limitations appear in the [inventory](inventory.json).
 
 Material findings in the [record evidence](inventory.json) include:
 
-- **Casanare:** four recognition-hearing files cover 18 September 2023 morning/afternoon, 19 September morning and 20 September morning: four sessions across three dates. The folder omits 19 September afternoon.
+- **Casanare:** four recognition-hearing files cover 18 September 2023 morning/afternoon, 19 September morning and 20 September morning. Public-caption checks establish separate afternoon recordings on both 19 and 20 September, with no corresponding supplied transcripts located; see Videos and the [new content checks](new_content_checks.json).
 - **Two proceedings in one upload:** the 6 December 2019 protective-measures hearing (`VV-030`) precedes the voluntary statement (`VV-029`), with a caption boundary near **50:36**. The source’s reserved label remains documented.
 - **Date and name errors:** source filenames and video metadata contain errors resolved through recorded content. Solano’s recording repeatedly gives **27 July 2020**; the filename/footer and a court citation give **29 July**, so the conflict remains visible.
 - **Time references:** Angarita’s transcript begins near video **24:05**, and Paguay’s near **17:41**. Aranguren’s **5:40:49** reference cites a different recording; his own closing matches near **5:24:44–5:24:52**.
@@ -67,9 +74,11 @@ Material findings in the [record evidence](inventory.json) include:
 
 ## Remaining gaps and original sources
 
-Public matching remains incomplete. **Eleven transcript records have no located public recording.** In two verified matches, the available upload omits approximately the final third of `VV-015` and final tenth of `VV-038`. Their rows explicitly flag **PARTIAL COVERAGE**. The latest pass found no additional verified public recording; it supplied more precise recording locators and corrected metadata.
+Public matching remains incomplete. **Eleven transcript records have no located public recording.** In two verified matches, the available upload omits approximately the final third of `VV-015` and final tenth of `VV-038`. Their rows explicitly flag **PARTIAL COVERAGE**. The earlier recording-retrieval review supplied precise missing-asset locators and corrected metadata. The subsequent reverse audit verified one alternate upload for an already matched source and identified additional public recordings without a supplied-source mapping; it did not resolve these eleven recording-side gaps.
 
-The remaining dependencies are recorded individually in **Recording gaps**:
+The recording-side dependencies are recorded individually in **Recording gaps**. The separate **Videos** tab identifies supplied-source gaps; these two directions must not be added together. The reverse pass also verified a second upload of the 5 July 2019 Marco Fabián García Céspedes procedural session, linking it to existing record `VV-057`; it does not create a new transcript row.
+
+The recording-side dependencies include:
 
 - **VV-015:** continuation after the public upload ends around **03:56:20**, during source P0758, through P1076, including the later **15:48 hearing-clock restart**. The supplied source has no formal close.
 - **VV-038:** final segment after the public upload ends around **07:09**, from the remainder of P1411 through the **18:32/18:33 hearing-clock close** at P1495. P1496–P1528 is an appended participant roster.

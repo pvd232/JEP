@@ -1,0 +1,101 @@
+{
+  "as_of": "2026-11-03",
+  "method": "Read the public YouTube transcript panel and compare bounded opening, middle and closing anchors with the supplied-source review. Automatic captions establish recording identity; no word-for-word audio equivalence is claimed.",
+  "checks": [
+    {
+      "video_id": "uTjViv5Vtpc",
+      "url": "https://www.youtube.com/watch?v=uTjViv5Vtpc",
+      "finding": "Distinct recorded questionnaire response attributed to Edwin Leonardo Toro Ramírez; no corresponding supplied transcript located. Ordered comparison with VV-017, VV-018 and VV-025 confirms a different opening, compact training answer and closing route sequence.",
+      "confidence": "Public content checked; recording date is metadata-only",
+      "duration_text": "11:35",
+      "anchors": [
+        {
+          "new_video_range": "00:00:08–00:00:24",
+          "evidence": "Speaker introduces himself and says he is answering a questionnaire sent by the JEP; the automatic-caption name is imperfect."
+        },
+        {
+          "new_video_range": "00:03:28–00:03:58",
+          "evidence": "Question asks who sent him to precision-rifle training after arrival at Brigada 16; answer names Colonel Jorge Arturo Romero."
+        },
+        {
+          "new_video_range": "00:08:52–00:09:34; 00:10:30–00:11:29",
+          "evidence": "Later answers discuss Brigada 16, Torres, Soto, the Yopal–Aguazul route and a Sprint vehicle. Music interrupts the account at 11:29."
+        }
+      ],
+      "review_limits": "The public title/description supplies 21 October 2019; no spoken date was observed. This is an asynchronous answer. The source comparison found no exact 12-word sequence shared with the three candidate documents; manual sequence review corroborated the distinction. Whole-session completeness is unproven."
+    },
+    {
+      "video_id": "cSKgOHGfLQw",
+      "url": "https://www.youtube.com/watch?v=cSKgOHGfLQw",
+      "related_transcript_id": "CAS03-20230920-AM",
+      "finding": "Distinct 20 September 2023 afternoon recognition session, after the supplied same-day source’s lunch adjournment.",
+      "confidence": "High: explicit afternoon description and dated caption resumption/close",
+      "duration_text": "2:51:45",
+      "anchors": [
+        {
+          "new_video_range": "00:05:47–00:06:36",
+          "evidence": "Magistrate greets the afternoon, resumes the hearing on Wednesday20September 2023 and expressly refers to this afternoon component. The caption’s clock rendering is garbled and is not treated as an exact hearing time."
+        },
+        {
+          "new_video_range": "00:07:00–00:07:20",
+          "evidence": "Gildardo Antonio Jiménez Castrillón is called to make his acknowledgment."
+        },
+        {
+          "new_video_range": "02:49:44–02:50:08",
+          "evidence": "Hearing closes at 17:45 on Wednesday20September 2023."
+        }
+      ],
+      "review_limits": "Bounded public-caption check; exact spoken-word boundaries and earlier uncaptioned introduction not audited. Absence is relative to the supplied inventory."
+    },
+    {
+      "video_id": "cGyu3lTjqso",
+      "url": "https://www.youtube.com/watch?v=cGyu3lTjqso",
+      "related_transcript_id": "CAS03-20230919-AM",
+      "finding": "Distinct 19 September 2023 afternoon recognition session; the supplied same-day source ends at the morning lunch adjournment.",
+      "confidence": "High: public description and dated caption resumption/close",
+      "duration_text": "4:38:09",
+      "anchors": [
+        {
+          "new_video_range": "00:28:50–00:29:21",
+          "evidence": "Presiding magistrate explicitly resumes the hearing at 16:02 on Tuesday19September 2023 in Yopal."
+        },
+        {
+          "new_video_range": "00:32:06–00:34:13",
+          "evidence": "The afternoon proceeds to Marcolino Puerto Jiménez’s declaration."
+        },
+        {
+          "new_video_range": "04:36:34–04:37:04",
+          "evidence": "Presiding magistrate suspends the session at 20:09 on19September 2023."
+        }
+      ],
+      "review_limits": "Bounded public-caption check; first available caption is 28:50 and is not certified as the exact audio start. Absence is relative to the supplied inventory, not all transcripts that may exist."
+    },
+    {
+      "video_id": "FoAy5Qfphcs",
+      "url": "https://www.youtube.com/watch?v=FoAy5Qfphcs",
+      "related_video_id": "ztGtBj4AbQA",
+      "transcript_id": "VV-057",
+      "finding": "Same procedural session as the established VV-057 recording; alternate upload, not an additional missing transcript.",
+      "confidence": "High: ordered public-caption content anchors",
+      "duration_text": "31:50",
+      "anchors": [
+        {
+          "new_video_range": "00:00:08–00:00:54",
+          "existing_video_range": "00:00:08–00:00:57",
+          "evidence": "Óscar Parra installs Marco Fabián García Céspedes’s version at 09:33 on 5 July 2019 and cites Auto 090 of 11 June."
+        },
+        {
+          "new_video_range": "00:17:48–00:18:04",
+          "existing_video_range": "00:17:49–00:17:59",
+          "evidence": "Defense repeats its request to suspend and arrange a new date."
+        },
+        {
+          "new_video_range": "00:30:58–00:31:41",
+          "existing_video_range": "00:30:58–00:31:41",
+          "evidence": "Hearing suspended at 10:03; continuation scheduled for 26 July 2019 at 13:30, then closing music."
+        }
+      ],
+      "review_limits": "Separate video IDs retained. Checks establish same-session coverage, not byte identity or every-frame equivalence. Caption cue boundaries vary slightly."
+    }
+  ]
+}
