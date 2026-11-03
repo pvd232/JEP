@@ -17,7 +17,7 @@ The recursive [source manifest](source_manifest.json) covers **116 files across 
 
 ## Workbook and companion files
 
-The single workbook has four tabs: **Summary**, **Transcripts**, **English summaries** and **Files**. Transcripts contains one row per distinct transcript or supplied segment, with concise evidence and clickable original Drive and YouTube links. English summaries provides a substantive account for each of the 93 records. Click an ID to move between the inventory and its summary. Seven hearing categories have distinct colors, explained by the Summary legend. Files retains links to all 116 originals, including alternate versions and supporting documents.
+The single workbook has five tabs: **Summary**, **Transcripts**, **English summaries**, **Recording gaps** and **Files**. Transcripts contains one row per distinct transcript or supplied segment, with concise evidence and clickable original Drive and YouTube links. English summaries provides a substantive account for each of the 93 records. Click an ID to move between the inventory and its summary. Seven hearing categories have distinct colors, explained by the Summary legend. Recording gaps identifies the exact material or verification needed for 15 records, with original links, case-file locators and a blank column for newly supplied recording links. Files retains links to all 116 originals, including alternate versions and supporting documents.
 
 | Artifact | Purpose |
 |---|---|
@@ -28,6 +28,9 @@ The single workbook has four tabs: **Summary**, **Transcripts**, **English summa
 | [Source manifest](source_manifest.json) | Recursive folder/file metadata and record assignments. |
 | [Version comparisons](version_comparisons.json) | Twelve consolidation decisions and content-overlap measurements. |
 | [Matching audit](matching_audit.json) | Additional review decisions and caption-anchor evidence. |
+| [Recording gaps](recording_gaps.json) | Eleven unlocated recording records, two missing continuations and two content/coverage checks, with precise retrieval requirements. |
+| [Completion review](completion_review.json) | Further search coverage, access evidence, corrected classifications and public judicial locators. |
+| [Recording request draft](recording_request.md) | Spanish request naming the required sessions, parts and verification points. Prepared for review; not sent. |
 | [Summary JSON](summary.json) | Counts, categories and access notes. |
 
 ## Evidence and findings
@@ -53,10 +56,22 @@ Material findings in the [record evidence](inventory.json) include:
 - **Date and name errors:** source filenames and video metadata contain errors resolved through recorded content. Solano’s recording repeatedly gives **27 July 2020**; the filename/footer and a court citation give **29 July**, so the conflict remains visible.
 - **Time references:** Angarita’s transcript begins near video **24:05**, and Paguay’s near **17:41**. Aranguren’s **5:40:49** reference cites a different recording; his own closing matches near **5:24:44–5:24:52**.
 - **A composite transcript:** `VV-071` contains Rodolfo Leal Galindo's sworn declaration on **12 and 20 August 2021**. The source closes the first session at P0246, opens the continuation at P0256 and closes it at P0512. Both sessions remain in one row linked to the complete original document; neither has a located public-video match.
+- **Classification and submission date:** `VV-011` is Clovis Duque's **sworn declaration**, established by its opening and oath despite the template heading. `VV-022` is Sarmiento Valbuena's recorded extension **submitted on 22 July 2021**; its actual recording day is unverified. These corrections appear in the inventory and English summaries.
+- **Written-continuation labels:** the Auto 055 annex uses this terminology for Pereira (`VV-056`) and Puentes (`VV-019`), whose source transcripts contain dialogue. Each follows an earlier written statement. The medium and publication history require clarification; the label does not establish that no recording exists. Pereira's source says **22 July 2020**, while one Auto 055 footnote says **29 July** and quotes matching content. Both dates were searched.
+- **Access and protected identity:** the openings of `VV-064` and `VV-067` expressly describe private, reserved hearings and audio/video recording. Their later publication status remains unconfirmed. The [Auto 055 annex](https://es.scribd.com/document/649822528/Anexo-Auto-SRVR-SUB-D-055-14-julio-2022), Table 5, p. 21, entry 6 and footnote 5, records identity protection for the `VV-065` declarant. NRAS/XYZ remain unexpanded labels for that declarant; the identity-protection order does not establish that the entire recording is nonpublic.
 - **Source-quality issues:** `CAS03-20230920-AM` Order 49 contains unrelated parliamentary/mental-health discussion labelled `NO_SUSTANTIVO`; it is excluded from the English summary. The March and April 2026 sources contain inconsistent location or template headings, so the summaries identify the proceeding from the spoken opening. Such text should be reviewed against source audio before use as reference transcription.
 
 ## Remaining gaps and original sources
 
-Public matching remains incomplete. **Eleven recordings are unlocated.** In two verified matches, the available upload omits approximately the final third of `VV-015` and final tenth of `VV-038`. Completing coverage requires the missing original public-recording URLs or continuations. Their rows explicitly flag **PARTIAL COVERAGE**.
+Public matching remains incomplete. **Eleven transcript records have no located public recording.** In two verified matches, the available upload omits approximately the final third of `VV-015` and final tenth of `VV-038`. Their rows explicitly flag **PARTIAL COVERAGE**. The latest pass found no additional verified public recording; it supplied more precise recording locators and corrected metadata.
+
+The remaining dependencies are recorded individually in **Recording gaps**:
+
+- **VV-015:** continuation after the public upload ends around **03:56:20**, during source P0758, through P1076, including the later **15:48 hearing-clock restart**. The supplied source has no formal close.
+- **VV-038:** final segment after the public upload ends around **07:09**, from the remainder of P1411 through the **18:32/18:33 hearing-clock close** at P1495. P1496–P1528 is an appended participant roster.
+- **Sworn declarations:** the published evidence index places Duque, Mojica, Leal, NRAS/XYZ and Páez in **Cuaderno territorial de la Br16**, with entry numbers recorded in the gap rows. Leal also has a **Cuaderno General Décimo Sexta Brigada** reference; the two names have not been established to identify the same volume. No individual recording filenames or public playback links were supplied by that index.
+- **3/4 December 2024:** identified uploads need usable captions or playable recording content to verify the opening and source-ending offsets. For 4 December, the saved `t=38031s` position is not a verified transcript boundary.
+
+The [Spanish request draft](recording_request.md) asks the source owner or recording custodian for these exact assets and their access status. It has **not been sent**. For case-file copies and access, the [JEP's published instructions](https://www.jep.gov.co/ServicioAlCiudadano/Paginas/preguntas.aspx), questions 41–42, direct requests to the relevant Secretaría Judicial and specify access by the person concerned, their representative or someone expressly authorized. Public or redacted recording links can be supplied where available. A missing search result does not prove permanent nonpublication.
 
 Sources: [Datos](https://drive.google.com/drive/folders/1uP7V1HzzWd78VSk39NS-EYqKW1KAl16I), [Casanare recognition hearings](https://drive.google.com/drive/folders/1H_k2zlJ_VZbCyDBybZP9JKv5xqpjZ53h), and [versiones voluntarias transcripts](https://drive.google.com/drive/folders/15Xxxz53sCe2xQ6OJbWR_7FEX3-9Hf4uj). These outputs publish metadata, English summaries, concise evidence pointers and original links. Full source transcripts remain in Drive with their existing access settings.

@@ -22,8 +22,8 @@
   "uncertain": 0,
   "unmatched": 11,
   "categories": {
-    "Statements / submissions": 68,
-    "Sworn declarations": 4,
+    "Statements / submissions": 67,
+    "Sworn declarations": 5,
     "Recognition hearings": 4,
     "Victim observations": 4,
     "Conditionality / truth contribution": 10,
@@ -32,14 +32,14 @@
   },
   "public_video_listings_reviewed": 2663,
   "public_livestream_listings_reviewed": 847,
-  "access_note": "All 105 transcript files were readable. 80 matches have public-caption checks, including 2 partial uploads (VV-015, VV-038); 2 rely on metadata. 11 public recordings remain unlocated.",
-  "date_note": "Source/video date errors are preserved with their resolution. Solano: recording says 27 Jul 2020; filename/footer and a court citation say 29 Jul. VV-071 is one original transcript combining 12 and 20 Aug 2021.",
+  "access_note": "All 105 transcript files were readable. 80 matches have public-caption checks, including 2 partial uploads; 2 rely on metadata. 11 recordings remain unlocated. Two sources explicitly describe private/reserved hearings; one protects the declarant’s identity.",
+  "date_note": "Solano: recorded date 27 Jul 2020 conflicts with filename/footer and a court citation. VV-071 combines 12/20 Aug 2021. VV-022: 22 Jul 2021 is submission date; recording day unknown. VV-056: source says 22 Jul 2020; one citation says 29 Jul.",
   "english_summaries": {
     "count": 93,
-    "substantive_words": 37363,
+    "substantive_words": 37378,
     "min_words": 298,
-    "median_words": 411,
-    "max_words": 438,
+    "median_words": 412,
+    "max_words": 444,
     "method": "Source-based English summaries of principal roles, attributed claims, positions, outcomes and open questions. Long texts selectively reviewed across sections; row-specific limits and concise source pointers included. Not independent audio verification."
   },
   "source_quality_findings": [
@@ -59,6 +59,34 @@
         "OBS-RC05-20260424"
       ],
       "finding": "Template/location headings conflict with spoken proceedings; summaries use the spoken opening."
+    },
+    {
+      "unique_id": "VV-011",
+      "finding": "Opening and oath establish a sworn declaration; category corrected from the template’s voluntary-statement label."
+    },
+    {
+      "unique_id": "VV-022",
+      "finding": "22 July 2021 is the recorded extension’s submission date; the actual recording date is unverified."
+    },
+    {
+      "unique_id": "VV-065",
+      "finding": "Protected NRAS/XYZ labels retained for the declarant; the output does not infer a separate second protected person from the filename."
     }
-  ]
+  ],
+  "recording_gaps": 15,
+  "recording_retrieval_gaps": 13,
+  "content_verification_gaps": 2,
+  "explicitly_private_reserved_source_ids": [
+    "VV-064",
+    "VV-067"
+  ],
+  "protected_identity_source_ids": [
+    "VV-065"
+  ],
+  "completion_review": {
+    "new_verified_public_recordings": 0,
+    "reviewed_gap_records": 15,
+    "result": "No additional public recording verified. Exact missing assets, access evidence and case-file locators recorded. Mapping remains incomplete.",
+    "next_dependency": "Original/public recording pointers, missing continuations, or usable captions/media from the source owner or authorized recording custodian."
+  }
 }
