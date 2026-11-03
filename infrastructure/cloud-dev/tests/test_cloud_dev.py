@@ -274,9 +274,82 @@ class CloudDevelopmentTests(unittest.TestCase):
     def test_interrupted_job_requires_explicit_resume_command(self):
         profile, _ = self.configured_project()
         identifier, directory = self.queued_job(profile, status='running')
+        record_path = directory / 'job.json'
+        previous = json.loads(record_path.read_text())
+        previous.update(
+            exit_code=-15, finished_at='2026-11-02T06:46:46Z',
+            error='previous attempt', service_result='signal', child_pid=123,
+            checkpoint='/retained/checkpoint',
+        )
+        record_path.write_text(json.dumps(previous))
+        (directory / 'output.log').write_text('previous output\n')
         cloud_job.run_job(profile, identifier)
-        self.assertEqual(json.loads((directory / 'job.json').read_text())['status'], 'interrupted')
-        self.assertFalse((directory / 'output.log').exists())
+        interrupted = json.loads(record_path.read_text())
+        self.assertEqual(interrupted['status'], 'interrupted')
+        for field, value in previous.items():
+            if field != 'status':
+                self.assertEqual(interrupted[field], value)
+        self.assertEqual((directory / 'output.log').read_text(), 'previous output\n')
+
+    def test_resumed_child_observes_only_current_attempt_metadata(self):
+        profile, _ = self.configured_project()
+        identifier, directory = self.queued_job(profile, status='interrupted')
+        record_path = directory / 'job.json'
+        observed_path = self.root / 'running-observation.json'
+        checkpoint = self.root / 'checkpoint'
+        checkpoint.write_text('step 12')
+        child = (
+            "import json, os, sys, time\n"
+            "from pathlib import Path\n"
+            "record_path, observed_path = map(Path, sys.argv[1:])\n"
+            "deadline = time.monotonic() + 5\n"
+            "while time.monotonic() < deadline:\n"
+            "    record = json.loads(record_path.read_text())\n"
+            "    if record.get('child_pid') == os.getpid():\n"
+            "        observed_path.write_text(json.dumps({'record': record, 'pid': os.getpid()}))\n"
+            "        print('resumed ' + Path(record['checkpoint']).read_text())\n"
+            "        break\n"
+            "    time.sleep(0.01)\n"
+            "else:\n"
+            "    raise SystemExit('New child PID was not recorded')\n"
+        )
+        previous = json.loads(record_path.read_text())
+        previous.update(
+            resume_argv=[sys.executable, '-c', child, str(record_path), str(observed_path)],
+            exit_code=-15, finished_at='2026-11-02T06:46:46Z',
+            error='previous attempt', service_result='signal', child_pid=123,
+            checkpoint=str(checkpoint),
+        )
+        record_path.write_text(json.dumps(previous))
+        (directory / 'output.log').write_text('previous output\n')
+        before_spawn = []
+        project_environment = project.project_environment
+
+        def observe_started_record(current_profile):
+            before_spawn.append(json.loads(record_path.read_text()))
+            return project_environment(current_profile)
+
+        with mock.patch.object(project, 'project_environment', side_effect=observe_started_record):
+            self.assertEqual(cloud_job.run_job(profile, identifier), 0)
+        self.assertEqual(len(before_spawn), 1)
+        self.assertEqual(before_spawn[0]['status'], 'running')
+        for field in ('exit_code', 'finished_at', 'error', 'service_result', 'child_pid'):
+            self.assertNotIn(field, before_spawn[0])
+        observed = json.loads(observed_path.read_text())
+        running = observed['record']
+        self.assertEqual(running['status'], 'running')
+        self.assertEqual(running['child_pid'], observed['pid'])
+        for field in ('exit_code', 'finished_at', 'error', 'service_result'):
+            self.assertNotIn(field, running)
+        self.assertEqual(running['checkpoint'], str(checkpoint))
+        self.assertEqual(running['resume_argv'], previous['resume_argv'])
+        completed = json.loads(record_path.read_text())
+        self.assertEqual((completed['status'], completed['exit_code']), ('succeeded', 0))
+        self.assertEqual(completed['child_pid'], observed['pid'])
+        self.assertNotEqual(completed['finished_at'], previous['finished_at'])
+        self.assertNotIn('error', completed)
+        self.assertNotIn('service_result', completed)
+        self.assertEqual((directory / 'output.log').read_text(), 'previous output\nresumed step 12\n')
 
     def test_resume_command_reads_checkpoint_and_log_is_persistent(self):
         profile, config = self.configured_project()
