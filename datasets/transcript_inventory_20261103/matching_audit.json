@@ -3120,11 +3120,56 @@
       "review": "deep_unmatched.json",
       "status": "Investigated; matching public video not located.",
       "public_video": "",
-      "evidence": "Public Auto 055 p.344 cites the 12 August 2021 sworn declaration, agreeing with the source. No matching public video located in the complete JEP Videos/Live listings or date searches.",
-      "timestamps": "Local source markers, first/last observed: 1:00:00 / 02:29:27; counters may restart. YouTube alignment unverified.",
+      "evidence": "Source P0246/P0256/P0512 establish 12 and 20 Aug 2021 sessions. Published JEP Auto 055/2022, PDF p.287, notes 1821–1822 corroborates both dates. Complete JEP catalog and targeted date/name searches found no matching video.",
+      "timestamps": "Source session clocks: 12 Aug closes 16:01; 20 Aug opens 08:07 and closes 11:11. These are hearing clock times, not YouTube offsets. Public alignment unverified.",
       "ordered_content_blocks": null,
       "content_anchors": [],
-      "limits": []
+      "limits": [
+        "Summary review identified a two-date composite source (12 and 20 August 2021); neither session has a located public recording."
+      ],
+      "source_session_anchors": [
+        {
+          "anchor": "P0003",
+          "date": "2021-08-12",
+          "detail": "Opening at 14:13 on 12 August."
+        },
+        {
+          "anchor": "P0246",
+          "date": "2021-08-12",
+          "detail": "Adjournment at 16:01 on 12 August; continuation set for 20 August at 08:00."
+        },
+        {
+          "anchor": "P0256–P0257",
+          "date": "2021-08-20",
+          "detail": "Resumption at 08:07 on Friday 20 August, expressly continuing the 12 August declaration."
+        },
+        {
+          "anchor": "P0512",
+          "date": "2021-08-20",
+          "detail": "Closing at 11:11 on 20 August."
+        }
+      ],
+      "public_date_corroboration": {
+        "document": "JEP Auto SRVR-SUB-D-055 of 14 July 2022",
+        "url": "https://www.coljuristas.org/observatorio_jep/documentos/sala_de_reconocimiento/Auto_SRVR-SUB-D-055_14-julio-2022.pdf",
+        "pdf_page": 287,
+        "footnote": 1821,
+        "pointer": "Footnote 1821 cites the sworn declaration of Rodolfo Leal Galindo dated 20 August 2021; immediately following footnote 1822 cites 12 August 2021."
+      },
+      "continuation_search": {
+        "official_catalog_items": 3510,
+        "queries": [
+          "\"Rodolfo Leal Galindo\" \"20 de agosto de 2021\"",
+          "\"Rodolfo Leal\" JEP declaración video YouTube",
+          "site:youtube.com JEP Casanare \"20210820\"",
+          "site:youtube.com \"Rodolfo Leal\"",
+          "site:youtube.com \"Leal Galindo\"",
+          "JEP \"declaración\" \"20 de agosto de 2021\"",
+          "JEP \"20210820\" \"declaración\""
+        ],
+        "result": "Unmatched; no verified public video URL for either session.",
+        "limits": "A complete cached channel-title catalog and targeted web searches cannot exclude unlisted uploads, alternate titles, later publication or other repositories. Do not label the recording nonexistent or inaccessible without direct evidence."
+      }
     },
     {
       "unique_id": "VV-039",
