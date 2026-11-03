@@ -55,6 +55,8 @@ def run_job(profile, job_id):
             command = data['resume_argv']
         else:
             command = data['argv']
+        for field in ('exit_code', 'finished_at', 'error', 'service_result', 'child_pid'):
+            data.pop(field, None)
         data.update(status='running', started_at=now(), worker_pid=os.getpid())
         save(path, data)
         cancelled = [False]
