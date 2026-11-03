@@ -1,0 +1,68 @@
+{
+  "as_of": "2026-11-03",
+  "scope": "Case 03, Subcase Casanare and directly connected Casanare proceedings already represented in the supplied collection. Broad channel/playlist metadata is discovery material only.",
+  "status": "Method defined; comprehensive reverse audit pending. Playlist traversal requires correction before completion can be certified.",
+  "source_reviews": [
+    {
+      "source_url": "https://www.youtube.com/@jepcolombia/videos",
+      "listing_count": 2663,
+      "pages": 90,
+      "terminal_page_items": 23,
+      "terminal_continuation_detected": false,
+      "result": "Retained channel surface reaches a terminal page; this is not a Casanare-only video count."
+    },
+    {
+      "source_url": "https://www.youtube.com/@jepcolombia/streams",
+      "listing_count": 847,
+      "pages": 30,
+      "terminal_page_items": 7,
+      "terminal_continuation_detected": false,
+      "result": "Retained channel surface reaches a terminal page; this is not a Casanare-only video count."
+    },
+    {
+      "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4Id_lrAgBRDGf-k_bwEYH6_",
+      "saved_listing_count": 100,
+      "displayed_video_count": 898,
+      "saved_continuation_remaining": false,
+      "actual_video_list_continuation_present": true,
+      "result": "Earlier completion flag is incorrect. The parser omitted continuationItemViewModel with nested innertubeCommand. This broad playlist covers multiple territories; only Casanare candidates may enter the corpus.",
+      "evidence_path": "contents.twoColumnBrowseResultsRenderer.tabs[0].tabRenderer.content.sectionListRenderer.contents[0].itemSectionRenderer.contents[100].continuationItemViewModel.continuationCommand.innertubeCommand.continuationCommand.token"
+    },
+    {
+      "source_url": "https://www.youtube.com/playlist?list=PLbtegW3d3L4JR1Y_bfCDS_C8sdKE6195K",
+      "visible_listing_count": 19,
+      "displayed_video_count": 20,
+      "hidden_unavailable_item_count": 1,
+      "alert": "1 unavailable video is hidden",
+      "result": "Visible count plus the explicit hidden-item count reconciles to the header. Record the inaccessible item even when its ID is not exposed. An outer-section continuation must not be mistaken for more playlist-video entries.",
+      "evidence_path": "alerts[0].alertWithButtonRenderer.text.simpleText"
+    }
+  ],
+  "required_crawl_controls": [
+    "Extract only the actual list containers, excluding recommendations.",
+    "Handle both observed continuation shapes with their structural parent roles.",
+    "Retain pending and failed requests until resolved; require successful pagination exhaustion for completion.",
+    "Preserve unavailable-item counts/IDs and unexplained count discrepancies.",
+    "Deduplicate exact video IDs while retaining playlist memberships.",
+    "Apply a recorded Casanare scope decision before substantive processing."
+  ],
+  "retained_cache_evidence": [
+    {
+      "path": "inventory_work/public_catalog_cache/deep_channel_videos_89.json",
+      "sha256": "9febfda7cce8a88341e5553fae8e6a3e356e0d01137e09afbde7071f3158894a"
+    },
+    {
+      "path": "inventory_work/public_catalog_cache/deep_channel_streams_29.json",
+      "sha256": "087bf43ecc45a9151ad116d642aed5be2caf483ff0b87ea1cb626e3c90a3716f"
+    },
+    {
+      "path": "inventory_work/public_catalog_cache/case03_playlist.json",
+      "sha256": "caf9fedd11ca281bd195071e5a3a6e055a64976881e610fafcb7714e20261f4c"
+    },
+    {
+      "path": "inventory_work/public_catalog_cache/subcaso_casanare_playlist.json",
+      "sha256": "76ee6686da3226277bb378a2aa9f2821129ad94de8f75c415e369c420aa1a389"
+    }
+  ],
+  "data_unchanged": "The 93-row transcript inventory and existing match decisions are unchanged by this readiness review."
+}

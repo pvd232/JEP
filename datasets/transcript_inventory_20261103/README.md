@@ -31,6 +31,8 @@ The single workbook has five tabs: **Summary**, **Transcripts**, **English summa
 | [Recording gaps](recording_gaps.json) | Eleven unlocated recording records, two missing continuations and two content/coverage checks, with precise retrieval requirements. |
 | [Completion review](completion_review.json) | Further search coverage, access evidence, corrected classifications and public judicial locators. |
 | [Recording request draft](recording_request.md) | Spanish request naming the required sessions, parts and verification points. Prepared for review; not sent. |
+| [Video coverage method](video_coverage_method.md) | Fixed Casanare scope, complete source pagination and a two-way video/transcript audit. The reverse audit remains pending. |
+| [Crawl readiness review](crawl_readiness_review.json) | Retained channel terminal-page checks, a missed Case 03 playlist continuation, and the Casanare playlist's hidden unavailable item. |
 | [Summary JSON](summary.json) | Counts, categories and access notes. |
 
 ## Evidence and findings
@@ -46,6 +48,8 @@ Evidence pointers use the source spreadsheet's **Order** values, source-local ti
 ### Video verification
 
 The search covered the JEP Colombia channel’s complete available **2,663 Videos listings and 847 Live listings** as of the review date. Deeper checks resolved all 13 initial candidates and located four previously unmatched recordings. All 105 source transcript files were readable. The final public-interface check also accessed the Zamir recording that initially appeared to require sign-in. See the [summary](summary.json) and [matching audit](matching_audit.json).
+
+Those channel listings were used to find matches for the supplied transcripts; they are not a count of Casanare hearings. The supplied-file inventory is complete, but a comprehensive reverse audit of all relevant public videos against our transcript collection is not. The [video coverage method](video_coverage_method.md) fixes that audit's scope and completion criteria. Public Casanare videos can lack a supplied transcript even when the video itself is readily available.
 
 Public automatic captions were compared locally with source passages. Caption anchors and reported ranges are **approximate**; independent manual audio listening and exact spoken-word boundaries remain unverified. The 3 and 4 December 2024 hearings retain **metadata-only** matches because captions are unavailable on their public pages. Principal participant lists may be incomplete. These limitations appear in the [inventory](inventory.json).
 
