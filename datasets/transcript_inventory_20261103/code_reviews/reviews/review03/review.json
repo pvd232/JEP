@@ -1,0 +1,188 @@
+{
+  "review_id": "review03_scope",
+  "reviewed_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "mode": "independent completed code/data-boundary review",
+  "verdict": "Request changes",
+  "scope": {
+    "code": [
+      {
+        "file": "workbook_build/assemble_outputs.py",
+        "symbols": [
+          "main",
+          "coverage_label",
+          "collections_module_count"
+        ],
+        "lines": [
+          49,
+          216
+        ]
+      },
+      {
+        "file": "pagination_fix/crawl_public_catalog.py",
+        "symbols": [
+          "export_all",
+          "HtmlTree",
+          "html_nodes",
+          "html_text",
+          "youtube_id",
+          "web_seed"
+        ],
+        "lines": [
+          579,
+          744
+        ]
+      }
+    ],
+    "data": [
+      "scope_decisions.json",
+      "broad_metadata_scope.json",
+      "video_inventory.json",
+      "public_catalog.json.gz",
+      "public_memberships.json.gz"
+    ],
+    "governing_boundary": "JEP Case03 Casanare and directly connected proceedings represented in supplied corpus; generic person/Case03 labels alone cannot establish inclusion, and exclusion needs affirmative territory or format evidence.",
+    "excluded": [
+      "Network requests, new public-content research, testimony/audio inspection, mutation of canonical files, publication."
+    ]
+  },
+  "reviewed_sha256": {
+    "workbook_build/assemble_outputs.py": "ec06e9fbe1a5afc2aee19020b70e173351013e7b0495719b4449f8b2d7dbcaed",
+    "pagination_fix/crawl_public_catalog.py": "8e7ba646de4edc9ee86045201eb7405077a8d670598f245969778b2e5d8936f6",
+    "scope_decisions.json": "b49bb97967d26c9421b51dc2d3aac6363da7ea4ae5b8c98fa18b98f37f5e5766",
+    "broad_metadata_scope.json": "e0529d204f0512919fde6aded76daaf98d698dd61b439732670e9e5fc58aa9af",
+    "video_inventory.json": "878f42bf80d3cd0bd6ac70d6767e27b4b7f839aa4eba35350307d21a3ca38675",
+    "public_catalog.json.gz": "64fb33a5c43c1ad2644e18506cd482d5fa7472dfd298e9b06162525fab0f0cc8",
+    "public_memberships.json.gz": "74a5683824c461fdd6302af357790f68a35271bd711e22a3e13f33070951d079",
+    "crawl_manifest.json": "7eb203576902747ea2116c0138e5993e963a708d2cc73c37b25b7edd0993a8aa",
+    "inventory.json": "e261e1b82e9fe41b62aba96277ab54b5f377839a0fc428797dae8d005756b404",
+    "reverse_mapping_review.json": "6c8db273082b2c641f799e98996e92650472c9bb451d0ffaab61200ea631af55",
+    "new_content_checks.json": "de557498893bf7e2fb1905f6d136ba60eb8aeb1aa41003619a3cac010d439592",
+    "summary.json": "eff0ec882313b47fcb26ce48a494af4f1c6aacb832f7151528c8e25fa974a35b"
+  },
+  "invariants": [
+    "Every confirmed inclusion must carry Casanare evidence, not merely broad playlist membership.",
+    "Every exclusion must cite evidence that actually supports its territory or recording-format decision.",
+    "Included IDs in the broad scope register must also be included in the main scope/coverage projection; shared scope decisions must agree.",
+    "Source appearances, video IDs and scope decisions remain separate; conflicting web-card dates do not overwrite verified recording identity."
+  ],
+  "findings": [
+    {
+      "id": "R03-F1",
+      "severity": "P1",
+      "blocks_approval": true,
+      "title": "Unsupported non-hearing exclusions suppress 74 primary-proceeding candidates from scope follow-up",
+      "locations": [
+        {
+          "file": "broad_metadata_scope.json",
+          "line": 3915,
+          "symbol": "records[video_id=BHfnWY4b_mI].scope_decision/scope_group/evidence"
+        },
+        {
+          "file": "broad_metadata_scope.json",
+          "line": 11312,
+          "symbol": "records[video_id=WGhhJLrHEeo].scope_decision/scope_group/evidence"
+        },
+        {
+          "file": "broad_metadata_scope.json",
+          "line": 7302,
+          "symbol": "records[video_id=K_IXrokQqnM].scope_group/evidence"
+        },
+        {
+          "file": "broad_metadata_scope.json",
+          "line": 7854,
+          "symbol": "records[video_id=Lv387B0laD0].scope_group/evidence"
+        },
+        {
+          "file": "workbook_build/assemble_outputs.py",
+          "line": 197,
+          "symbol": "main: copies the broad scope register without a supporting-evidence check"
+        }
+      ],
+      "invariant": "An unknown recording format or territory must not become an affirmative contextual/non-hearing exclusion.",
+      "observed": "74 of the 114 non_hearing_or_context rows have dated named-person/unit proceeding titles, including multi-hour recordings, but carry the identical assertion that the title establishes contextual/explanatory/commemorative/announcement material. All 74 have no cached catalog description and no checked regional-playlist membership. They do not enter the published broad scope-unconfirmed set of 13.",
+      "counterexample": {
+        "video_id": "BHfnWY4b_mI",
+        "title": "20240909 | Félix Juan Carlos Araque Leal",
+        "duration": "1:59:07",
+        "published_decision": "excluded",
+        "published_group": "non_hearing_or_context",
+        "actual_title_supports_context_classification": false,
+        "description": null,
+        "regional_memberships": []
+      },
+      "current_data_impact": "The affirmed exclusion reason and residual-review count are not substantiated for these 74 rows. This does not establish that any belongs to Casanare, and does not itself invalidate the 128 positively admitted IDs. It blocks the claim that every broader candidate has completed an evidence-supported scope decision.",
+      "smallest_repair": "Review bounded official descriptions or territorial memberships for the listed 74 IDs. Where metadata positively establishes another case/territory, keep exclusion with that exact reason. Where it establishes contextual/derivative format, retain the format exclusion with a pointer. Otherwise use scope_unconfirmed. Do not widen the Casanare corpus merely from a person name or duration. Do not use a catch-all negative classifier as affirmative non-hearing evidence.",
+      "focused_observer": "scope_risk_candidates.json provides the exact 74 IDs. Each final decision must replace the unsupported blanket reason with a specific public metadata pointer, or become scope_unconfirmed. In particular the four cited examples must not remain non_hearing_or_context solely from their supplied titles.",
+      "evidence_artifact": "scope_risk_candidates.json"
+    },
+    {
+      "id": "R03-F2",
+      "severity": "P2",
+      "blocks_approval": false,
+      "title": "Assembler silently accepts contradictory or unprojected scope decisions",
+      "locations": [
+        {
+          "file": "workbook_build/assemble_outputs.py",
+          "line": 74,
+          "symbol": "main: broad register loaded but used only for reported counts"
+        },
+        {
+          "file": "workbook_build/assemble_outputs.py",
+          "line": 96,
+          "symbol": "main: rows iterate solely over scope records"
+        },
+        {
+          "file": "workbook_build/assemble_outputs.py",
+          "line": 182,
+          "symbol": "main: broad counts copied independently"
+        }
+      ],
+      "invariant": "An admitted broad-register candidate must be represented by the main scope and reverse map; shared registers must agree before a complete workbook can be published.",
+      "observed": "The baseline registers agree, but there is no guard comparing them. The actual assembler succeeds if a later broad-only scope decision is promoted without adding it to the main register, and also succeeds if overlapping registers disagree.",
+      "counterexample": "The offline observer synthetically promotes existing broad-only j7YryvmCbBw and adds a reverse review. main() succeeds, reports 97 broad inclusions, but emits the unchanged 128-row admitted view and no row for that ID. A second synthetic fixture changes O25PKSrxRuA to excluded only in the broad register; main() succeeds with that ID still Included in Videos.",
+      "current_data_impact": "None observed in the frozen snapshot: all current included broad IDs are projected and every current shared decision agrees. This is a reproducible next-update reliability defect, relevant to the present tie-out work.",
+      "smallest_repair": "Before writing outputs, validate that the broad included-ID set is a subset of the main included-ID set, that every shared scope decision agrees, and that all admitted IDs have a reverse review. Raise a targeted consistency error instead of copying contradictory totals. Keep unresolved broader-only records in the separate register unless they are promoted.",
+      "focused_observer": "Run observe_scope_join.py against the repaired assembler; both synthetic inconsistent fixtures must be rejected. The unmodified published inputs must still pass.",
+      "evidence_artifact": "scope_join_observer.json"
+    }
+  ],
+  "positive_observations": {
+    "main_scope_rows": 207,
+    "included": 128,
+    "excluded": 72,
+    "scope_unconfirmed": 7,
+    "broad_rows": 898,
+    "broad_included": 96,
+    "duplicate_main_scope_ids": 0,
+    "duplicate_broad_scope_ids": 0,
+    "duplicate_video_inventory_ids": 0,
+    "main_scope_vs_video_status_mismatches": 0,
+    "shared_main_broad_status_mismatches": 0,
+    "included_broad_ids_absent_main": 0,
+    "existing_transcript_video_links_outside_confirmed_scope": 0,
+    "regional_membership_join_mismatches": 0,
+    "included_ids_in_other_region_playlists": 0,
+    "undispositioned_discovery_ids_with_Casanare_Yopal_Brigada16_or_TorresEscalante_metadata": 0,
+    "publisher_check": "127 included IDs are present in the discovery catalog and identify the official JEP channel ID. The 128th is the already-linked alternate publisher f6dkdTyATco, carried by existing source evidence rather than a discovery-channel claim.",
+    "web_card_check": "Five unique web-card video IDs are scoped and preserve conflicting heading dates as separate memberships; verified video identity dates take precedence."
+  },
+  "mechanical_evidence": {
+    "runtime": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "command": "$CODEX_PRIMARY_RUNTIME_PYTHON inventory_work/tieout_review_20261103/reviews/review03/observe_scope_join.py",
+    "exit_code": 0,
+    "result": {
+      "reviewed_commit": "620cc5eb85860ff77a837058903321876de82b15",
+      "baseline_scope_registers_consistent": true,
+      "promoted_broad_only_candidate_silently_omitted": true,
+      "conflicting_overlap_silently_accepted": true,
+      "synthetic_fixture_ids_are_not_research_reclassifications": true
+    },
+    "interpretation": "Exit 0 means the counterexample was successfully observed, not that the missing guard passes."
+  },
+  "residual_limits": [
+    "No new territorial or hearing-format conclusion was made from external sources in this review.",
+    "The 74-row list is a metadata review queue, not 74 newly admitted recordings.",
+    "Original source transcripts and raw response payloads were not copied into the review reports.",
+    "Parent supplied later official event evidence for Psa0P7IaEBo and XXsg70ZuTyE; excluding those memorial implementation events under the fixed hearing/statement boundary is reasonable when the cited evidence is retained. This suggestion is not a mutation or re-review of the frozen snapshot."
+  ]
+}

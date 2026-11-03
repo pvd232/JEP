@@ -1,0 +1,123 @@
+{
+  "reviewed_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "python": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+  "tested_code_sha256": {
+    "crawler": "8e7ba646de4edc9ee86045201eb7405077a8d670598f245969778b2e5d8936f6",
+    "reporter": "ea4e3149ada39fd968a78f283e64df882d1ba186883019fa435625446040a4d2"
+  },
+  "failed_proof_report": {
+    "exit_code": 0,
+    "error": null,
+    "input_reproduction_all_passed": false,
+    "input_replay_all_passed": false,
+    "input_replay_exit_code": 1,
+    "generated_report": true,
+    "claims_reproduction_passed_all": true,
+    "claims_replay_passed_all": true
+  },
+  "failed_crawl_cli": {
+    "exit_code": 0,
+    "error": null,
+    "transport_stub_calls": 1,
+    "status": "error",
+    "pagination_exhausted": false,
+    "error_count": 1
+  },
+  "cached_live_probe": {
+    "exit_code": 0,
+    "error": null,
+    "network_calls": 0,
+    "proof_passed": true,
+    "proof_at": "2026-11-03T20:40:51.800466+00:00",
+    "actual_page_fetch_times": [
+      "2026-11-03T17:24:32.524219+00:00",
+      "2026-11-03T17:24:36.835663+00:00"
+    ],
+    "proof_field_names": [
+      "at",
+      "collection",
+      "command",
+      "errors",
+      "examples",
+      "first_page_appearances",
+      "new_video_ids_beyond_first_page",
+      "next_page_appearances",
+      "passed"
+    ],
+    "freshness_or_cache_evidence": {}
+  },
+  "publication_integrity": {
+    "frozen_file_count": 45,
+    "changed_frozen_files": [],
+    "fixture_hash_checks": [
+      {
+        "label": "case03",
+        "reduced_sha_matches": true,
+        "original_sha_matches": true
+      },
+      {
+        "label": "casanare",
+        "reduced_sha_matches": true,
+        "original_sha_matches": true
+      },
+      {
+        "label": "audiencias",
+        "reduced_sha_matches": true,
+        "original_sha_matches": true
+      },
+      {
+        "label": "deep_channel_videos",
+        "reduced_sha_matches": true,
+        "original_sha_matches": true
+      },
+      {
+        "label": "deep_channel_streams",
+        "reduced_sha_matches": true,
+        "original_sha_matches": true
+      }
+    ],
+    "script_sha256": "8e7ba646de4edc9ee86045201eb7405077a8d670598f245969778b2e5d8936f6",
+    "replay_script_sha_matches": true,
+    "catalog_validation_script_sha_matches": true,
+    "workbook_sha_matches_receipt": true,
+    "workbook_bytes_match_receipt": true,
+    "data_files_scanned": [
+      "source_manifest.json",
+      "standalone_replay_result.json",
+      "live_pagination_proof.json",
+      "recording_gaps.json",
+      "video_details.json",
+      "scope_decisions.json",
+      "workbook_validation.json",
+      "crawl_sources.json",
+      "new_content_checks.json",
+      "matching_audit.json",
+      "crawl_readiness_review.json",
+      "english_summaries.json",
+      "reverse_mapping_review.json",
+      "public_catalog.json.gz",
+      "video_inventory.json",
+      "public_memberships.json.gz",
+      "catalog_validation.json",
+      "completion_review.json",
+      "crawl_manifest.json",
+      "broad_metadata_scope.json",
+      "version_comparisons.json",
+      "inventory.json",
+      "pagination_reproduction.json",
+      "standalone_replay.json",
+      "summary.json",
+      "pagination_fix/fixtures/audiencias_first_page.json",
+      "pagination_fix/fixtures/fixture_manifest.json",
+      "pagination_fix/fixtures/case03_first_page.json",
+      "pagination_fix/fixtures/deep_channel_streams_terminal.json",
+      "pagination_fix/fixtures/casanare_first_page.json",
+      "pagination_fix/fixtures/deep_channel_videos_terminal.json"
+    ],
+    "excluded_payload_findings": [],
+    "fixture_tokens_are_synthetic": true,
+    "fixture_token_count": 4,
+    "embedded_workbook_executable_parts": []
+  },
+  "network_requests": 0
+}

@@ -1,8 +1,9 @@
-"""Attach native Excel hyperlinks to the artifact-tool authored workbook.
+"""Attach native Excel hyperlinks and table filters to the authored workbook.
 
 The artifact runtime does not implement HYPERLINK evaluation or a link-range
 API. Keep displayed labels authored by artifact-tool, then add standard OOXML
 link relationships so links work without requiring a recalculation.
+The exported tables also need explicit AutoFilter ranges in their table parts.
 """
 import json
 import posixpath
@@ -34,6 +35,24 @@ late_elements = {
     'controls', 'webPublishItems', 'tableParts', 'extLst',
 }
 external_count = internal_count = 0
+table_filter_count = 0
+for xml_path in list(entries):
+    if not (xml_path.startswith('xl/tables/') and xml_path.endswith('.xml')):
+        continue
+    root = ET.fromstring(entries[xml_path])
+    if root.tag != f'{{{MAIN}}}table':
+        continue
+    table_ref = root.get('ref')
+    if not table_ref:
+        raise ValueError(f'Table has no range: {xml_path}')
+    auto_filter = root.find(f'{{{MAIN}}}autoFilter')
+    if auto_filter is None:
+        auto_filter = ET.Element(f'{{{MAIN}}}autoFilter')
+        # SpreadsheetML requires autoFilter before sortState/tableColumns.
+        root.insert(0, auto_filter)
+    auto_filter.set('ref', table_ref)
+    table_filter_count += 1
+    entries[xml_path] = ET.tostring(root, xml_declaration=True, encoding='UTF-8', standalone=True)
 for name, xml_path in sheet_paths.items():
     sheet_links = [x for x in links if x['sheet'] == name]
     if not sheet_links:
@@ -67,4 +86,4 @@ with ZipFile(temp, 'w', ZIP_DEFLATED) as z:
     for name, content in entries.items():
         z.writestr(name, content)
 temp.replace(workbook_path)
-print(json.dumps({'native_external_links': external_count, 'native_internal_links': internal_count}))
+print(json.dumps({'native_external_links': external_count, 'native_internal_links': internal_count, 'table_filters': table_filter_count}))

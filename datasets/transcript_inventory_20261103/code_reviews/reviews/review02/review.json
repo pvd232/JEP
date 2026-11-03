@@ -1,0 +1,142 @@
+{
+  "review_id": "review02_completeness",
+  "base_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "reviewed_at_utc": "2026-11-03T20:27:00.128304+00:00",
+  "mode": "independent completed code review",
+  "verdict": "Request changes",
+  "reviewed_files": [
+    {
+      "path": "pagination_fix/crawl_public_catalog.py",
+      "sha256": "8e7ba646de4edc9ee86045201eb7405077a8d670598f245969778b2e5d8936f6"
+    },
+    {
+      "path": "crawl_manifest.json",
+      "sha256": "7eb203576902747ea2116c0138e5993e963a708d2cc73c37b25b7edd0993a8aa"
+    },
+    {
+      "path": "catalog_validation.json",
+      "sha256": "21af7fd536296402861c6720169689e8a65904e0380377d5d30ab01de701ae6f"
+    },
+    {
+      "path": "live_pagination_proof.json",
+      "sha256": "16f910238296ad579282dfc6ee3ee04dbc8a5e13f8135b5cb0867245adaf77d4"
+    },
+    {
+      "path": "pagination_fix/README.md",
+      "sha256": "13ff9d5a450ff58a9843d1ea95b112c51b41566cad630f8dc490923d1e31582b"
+    }
+  ],
+  "scope_symbols": [
+    "request",
+    "completion",
+    "observed_unavailable_action",
+    "load_initial",
+    "load_next",
+    "crawl_one",
+    "reused_channel",
+    "crawl_shorts",
+    "export_all",
+    "related parsing helpers and command dispatch"
+  ],
+  "invariants": [
+    "Missing/failed sources and pages remain explicit.",
+    "Terminal response alone cannot hide earlier gaps.",
+    "Appearances, IDs, hidden counts and unavailable placeholders remain distinct.",
+    "Cached evidence is not represented as a fresh fetch."
+  ],
+  "findings": [
+    {
+      "id": "R02-01",
+      "severity": "P1",
+      "blocking": true,
+      "file": "pagination_fix/crawl_public_catalog.py",
+      "lines": [
+        454,
+        474
+      ],
+      "symbol": "reused_channel",
+      "invariant": "A missing middle page cannot be reported as exhausted channel pagination.",
+      "observed": "valid examines only the terminal raw response, recorded error flags and continuation_remaining.",
+      "counterexample": {
+        "id": "R02-01",
+        "scenario": "Derived channel catalog has pages 0 and 2; page 1 is absent. Its retained terminal response has no continuation.",
+        "expected": "Incomplete channel snapshot; missing page 1 must be reported.",
+        "observed": {
+          "status": "reused_terminal_snapshot",
+          "pagination_exhausted": true,
+          "errors": [],
+          "accepted_page_numbers": [
+            0,
+            2
+          ],
+          "returned_memberships": 2
+        },
+        "defect_reproduced": true
+      },
+      "smallest_repair": "Require consecutive page indexes and per-page raw evidence/ID agreement; validate primary-list continuation closure while accounting separately for known non-video branches.",
+      "focused_observer": "observer.py R02-01 must return an incomplete/error result after repair; retain acceptance of the complete actual channel page sequences.",
+      "current_data_impact": "No current missing-video evidence: all 120 retained response pages agree with the derived ordered IDs and branch-aware continuation checks.",
+      "status": "Open"
+    },
+    {
+      "id": "R02-02",
+      "severity": "P2",
+      "blocking": true,
+      "file": "pagination_fix/crawl_public_catalog.py",
+      "lines": [
+        585,
+        597
+      ],
+      "symbol": "export_all",
+      "invariant": "Every declared source must remain visible, including sources without a state file.",
+      "observed": "A core playlist is added only when its state.json exists.",
+      "counterexample": {
+        "id": "R02-02",
+        "scenario": "Only Casanare has a state file; four other declared core playlists were never crawled. Both channel fixtures are valid.",
+        "expected": "Every declared core source appears, with an explicit missing/not-started status for uncrawled sources.",
+        "observed": {
+          "exported_collection_keys": [
+            "casanare",
+            "deep_channel_streams",
+            "deep_channel_videos"
+          ],
+          "omitted_required_core_sources": [
+            "audiencias",
+            "case03",
+            "memoria_casanare",
+            "regimen"
+          ],
+          "all_exported_sources_report_exhausted": true,
+          "all_exported_sources_have_no_errors": true
+        },
+        "defect_reproduced": true
+      },
+      "smallest_repair": "Preserve the expected source set and emit incomplete/missing entries for absent required sources; record explicitly requested optional sources.",
+      "focused_observer": "observer.py R02-02 must include all four missing core keys with incomplete statuses after repair.",
+      "current_data_impact": "All ten selected playlist states are present in the published snapshot and reconcile; this snapshot does not trigger the omission.",
+      "status": "Open"
+    }
+  ],
+  "mechanical_evidence": {
+    "command": "$CODEX_PRIMARY_RUNTIME_PYTHON inventory_work/tieout_review_20261103/reviews/review02/observer.py",
+    "exit_code": 0,
+    "observer_sha256": "d756443a05b520efbcdb7344947f48a63488955a0bdcba3ba10443c91d894429",
+    "receipt_sha256": "5e00a752d97e969e463027dc6d31180a0d92da177af1cfb07ee302aea0e384de",
+    "network_requests": 0,
+    "counterexamples_reproduced": 2,
+    "retained_channel_responses_checked": 120,
+    "retained_channel_replay_passed": true,
+    "published_snapshot_checks": {
+      "all_ten_playlist_states_present": true,
+      "all_ten_playlist_counts_reconcile": true,
+      "all_selected_completed_surfaces_have_no_errors_or_pending": true
+    }
+  },
+  "exclusions": [
+    "Substantive video/transcript matching and Casanare admission",
+    "Excel, summaries and source-file deduplication",
+    "Fresh network enumeration and unavailable content",
+    "Original retrieval timestamps and request-token submission provenance"
+  ],
+  "mutations": "Only this review directory; no baseline, production, shared-cache or remote mutations."
+}

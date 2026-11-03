@@ -1,0 +1,63 @@
+{
+  "reviewed_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "module_path": "inventory_work/merge_deep_results.py",
+  "module_sha256": "58101fbfb916625e811a4ca5cbcf7cf05581aec0c84d7c79d508a8edb0e5e96a",
+  "synthetic_observers": [
+    {
+      "case": "High identity confidence with explicit metadata-only evidence",
+      "expected_content_verified": false,
+      "actual": {
+        "unique_id": "SYNTHETIC-METADATA",
+        "confidence": "High",
+        "content_verified": false,
+        "verification_level": "Metadata only",
+        "playability": null
+      },
+      "invariant_passed": true
+    },
+    {
+      "case": "Rejected earlier candidate clears content verification",
+      "expected_content_verified": false,
+      "actual": {
+        "unique_id": "SYNTHETIC-DOWNGRADE",
+        "confidence": "Unmatched",
+        "content_verified": false,
+        "verification_level": "Public recording not located",
+        "playability": null
+      },
+      "invariant_passed": true
+    },
+    {
+      "case": "A formerly metadata-only record can acquire affirmative evidence",
+      "expected_content_verified": true,
+      "actual": {
+        "unique_id": "SDSJ-20241203",
+        "confidence": "High",
+        "content_verified": true,
+        "verification_level": "Public captions checked",
+        "playability": null
+      },
+      "invariant_passed": true
+    }
+  ],
+  "frozen_gap_ownership": {
+    "gap_count": 15,
+    "gap_counts_by_type": {
+      "Unmatched recording": 11,
+      "Missing continuation": 2,
+      "Content / coverage verification": 2
+    },
+    "exact_expected_gap_set_and_types": true,
+    "source_links_agree": true,
+    "recording_links_agree": true,
+    "source_dates_agree": true,
+    "unmatched_records_have_no_claimed_link_or_verification": true,
+    "no_candidate_records_silently_omitted": true,
+    "private_source_ids": [
+      "VV-064",
+      "VV-067"
+    ],
+    "protected_alias_retained": true
+  },
+  "synthetic_scope_note": "Synthetic cases are not new hearing matches or research data."
+}

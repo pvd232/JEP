@@ -39,9 +39,12 @@ def seconds(value):
     if str(value).isdigit():
         return int(value)
     if re.fullmatch(r'\d+(?::\d{2}){1,2}', str(value)):
+        parts=[int(n) for n in str(value).split(':')]
+        if parts[-1] >= 60 or (len(parts)==3 and parts[-2] >= 60):
+            return None
         total=0
-        for n in str(value).split(':'):
-            total=total*60+int(n)
+        for n in parts:
+            total=total*60+n
         return total
     return None
 
@@ -65,6 +68,28 @@ def coverage_label(record):
     return status or 'Coverage unconfirmed'
 
 
+def validate_review_inputs(current, scope, reverse, broad):
+    """Reject ambiguous keys, contradictory scope, and lost source-video edges."""
+    for label, rows, key in [('source',current,'unique_id'),('main scope',scope['records'],'video_id'),('reverse',reverse['videos'],'video_id'),('broad scope',broad['records'],'video_id')]:
+        identifiers=[r.get(key) for r in rows]
+        if any(not x for x in identifiers) or len(identifiers)!=len(set(identifiers)):
+            raise ValueError('Missing or duplicate '+label+' identifiers')
+    main_scope={r['video_id']:r['scope_decision'] for r in scope['records']}
+    for row in broad['records']:
+        vid=row['video_id'];decision=row['scope_decision']
+        if vid in main_scope and decision!=main_scope[vid]:
+            raise ValueError('Conflicting main/broad scope decisions: '+vid)
+        if decision=='included' and main_scope.get(vid)!='included':
+            raise ValueError('Broad inclusion absent from main included map: '+vid)
+    pattern=re.compile(r'(?:youtu\.be/|youtube\.com/(?:watch\?v=|live/))([A-Za-z0-9_-]{11})')
+    forward={(r['unique_id'],vid) for r in current for vid in pattern.findall(r.get('youtube_url',''))}
+    backward={(uid,r['video_id']) for r in reverse['videos'] for uid in r.get('transcript_ids',[])}
+    if forward!=backward:
+        raise ValueError('Forward/reverse edge mismatch: missing='+repr(sorted(forward-backward))+' extra='+repr(sorted(backward-forward)))
+    if any(main_scope.get(vid)!='included' for _,vid in forward):
+        raise ValueError('A supplied transcript video link is outside the included scope map')
+
+
 def main():
     scope=read(BASE/'scope_decisions_initial.json')
     reverse=read(BASE/'reverse_mapping_review.json')
@@ -75,6 +100,7 @@ def main():
     controls=read(BASE/'root_content_checks.json')
     current=read(OUT/'inventory.json')
     stats=read(OUT/'summary.json')
+    validate_review_inputs(current,scope,reverse,broad)
     current_by_id={r['unique_id']:r for r in current}
     review_by_id={r['video_id']:r for r in reverse['videos']}
     catalog_by_id={r['video_id']:r for r in catalog}
@@ -130,6 +156,8 @@ def main():
             coll=coll_by_id.get(m.get('collection_id'),{})
             label=coll.get('title',m.get('collection_key','Collection'))
             pos=m.get('position')
+            if m.get('membership_status')=='historical_not_in_latest_listing':
+                label+=' · historical listing only'
             collection_labels.append(label+(f' · position {pos}' if pos else ''))
         if not collection_labels:
             collection_labels=s.get('discovery_collections',[])
@@ -158,8 +186,6 @@ def main():
         if c.get('unavailable_placeholder_count') is not None:
             unavailable=c['unavailable_placeholder_count']
         pages=len(c.get('pages',[])) or c.get('pages_checked')
-        if c['collection_key']=='deep_channel_videos': pages=90
-        if c['collection_key']=='deep_channel_streams': pages=30
         if c.get('collection_type')=='official_web_page_section': pages=1
         evidence=[]
         if c.get('pagination_exhausted'): evidence.append('Primary-list pagination reached a terminal page.')
@@ -170,6 +196,7 @@ def main():
         if c.get('unaccounted_declared_items'): evidence.append(str(c['unaccounted_declared_items'])+' declared positions remain unexplained.')
         if c.get('errors'): evidence.append('Errors: '+str(c['errors']))
         if c.get('status')=='reused_terminal_snapshot': evidence.append('Reuses earlier channel snapshot; original fetch time was not recorded. Terminal page checked with both continuation formats; not refetched.')
+        if c.get('source_role')=='fresh_channel_discovery': evidence.append('Fresh public traversal: '+c['original_fetch_time']+' to '+c['finished_at']+'. Every response has a retrieval receipt. Historical listing differences are retained separately.')
         if c.get('status')!='reused_terminal_snapshot' and c.get('provenance',{}).get('original_fetch_time'): evidence.append(c['provenance']['original_fetch_time'])
         source_rows.append(dict(title=c.get('title',c['collection_key']),role=c.get('scope','Metadata discovery'),declared_items=c.get('declared_items'),visible_memberships=c.get('normal_title_memberships',c.get('visible_memberships')),unique_video_ids=c.get('unique_video_ids'),unavailable_positions=unavailable,pages_checked=pages,status_label=c.get('status','Unknown').replace('_',' '),evidence=' '.join(dict.fromkeys(evidence)),source_url=c['source_url'],supplemental=c.get('supplemental',False) or c['collection_key'].startswith('region_')))
 

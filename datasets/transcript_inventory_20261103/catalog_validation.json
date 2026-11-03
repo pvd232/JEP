@@ -1,126 +1,92 @@
 {
-  "checked_at": "2026-11-03T17:47:21.670781+00:00",
+  "checked_at": "2026-11-03T21:10:47.751237+00:00",
   "all_passed": true,
   "checks": [
     {
-      "check": "One node per public ID; membership union equals catalog",
-      "passed": true,
-      "detail": 3606
-    },
-    {
-      "check": "Every membership has a unique collection-position key",
-      "passed": true,
-      "detail": 5203
-    },
-    {
-      "check": "Catalog and manifest counts agree",
+      "check": "Current and historical membership counts reconcile",
       "passed": true,
       "detail": null
     },
     {
-      "check": "All10selected playlists exhaust and reconcile",
+      "check": "Distinct current and retained discovery IDs reconcile",
       "passed": true,
       "detail": null
     },
     {
-      "check": "Every completed surface has no pending/errors",
+      "check": "Current collection-position keys are unique",
       "passed": true,
       "detail": null
     },
     {
-      "check": "Five distinct unavailable placeholders retained",
-      "passed": true,
-      "detail": [
-        "KnwzIgiijTA",
-        "n1HYbvijKKI",
-        "6S-j34I6qYs",
-        "o6q9K9GMm4E",
-        "UoQwxCMYJGQ"
-      ]
-    },
-    {
-      "check": "case03 expanded view preserves exact ordinary list order and adds expected placeholders",
+      "check": "Historical-only upload retained without implying unavailability",
       "passed": true,
       "detail": null
     },
     {
-      "check": "casanare expanded view preserves exact ordinary list order and adds expected placeholders",
+      "check": "All ten declared playlists exhaust and reconcile",
       "passed": true,
       "detail": null
     },
     {
-      "check": "audiencias expanded view preserves exact ordinary list order and adds expected placeholders",
+      "check": "Fresh Videos and Live have all 118 successful page receipts",
       "passed": true,
       "detail": null
     },
     {
-      "check": "region_meta expanded view preserves exact ordinary list order and adds expected placeholders",
+      "check": "Shared scope decisions agree and broad admissions enter main map",
       "passed": true,
       "detail": null
     },
     {
-      "check": "Unavailable placeholder owners remain unknown",
+      "check": "All 84 source-video relationships agree in both directions",
       "passed": true,
       "detail": null
     },
     {
-      "check": "Metadata request set97 complete without errors",
+      "check": "Source identities, assignments, original links and nonmetric fields preserved",
       "passed": true,
       "detail": null
     },
     {
-      "check": "Stable public channel ID format",
+      "check": "English summaries and recursive source manifest preserved byte-for-byte",
       "passed": true,
       "detail": null
     },
     {
-      "check": "Shorts terminal64 honest undeclared total",
+      "check": "128 admitted uploads reconcile as 83 linked plus 17 checked and 28 metadata source gaps",
       "passed": true,
       "detail": null
     },
     {
-      "check": "All catalog nodes expose original public source URLs",
+      "check": "Four scope uncertainties remain explicit",
       "passed": true,
       "detail": null
     },
     {
-      "check": "Standalone reduced-fixture replay passes",
+      "check": "Final workbook validation passed and checksum matches",
       "passed": true,
       "detail": null
     },
     {
-      "check": "Derived publication data contains no raw player/request fields or signed media URLs",
+      "check": "Final standalone reduced-fixture replay passed",
       "passed": true,
-      "detail": []
+      "detail": 14
     },
     {
-      "check": "Original response hashes preserved in reduced fixtures",
+      "check": "Published discovery metadata excludes raw players, credentials and signed media URLs",
       "passed": true,
       "detail": null
     }
   ],
-  "script_sha256": "8e7ba646de4edc9ee86045201eb7405077a8d670598f245969778b2e5d8936f6",
   "counts": {
     "unique_video_ids": 3606,
+    "current_unique_video_ids": 3605,
     "membership_count": 5203,
-    "unavailable_placeholder_unique_ids": 5,
-    "bounded_watch_metadata_records": 97,
-    "bounded_watch_metadata_errors": 0
+    "current_membership_count": 5202,
+    "historical_membership_count": 1,
+    "unavailable_placeholder_unique_ids": 5
   },
-  "publication_files_scanned": [
-    "catalog.json",
-    "memberships.json",
-    "crawl_manifest.json",
-    "video_details.json",
-    "pagination_reproduction.json",
-    "live_pagination_proof.json",
-    "standalone_replay.json",
-    "standalone_replay_result.json",
-    "fixtures/audiencias_first_page.json",
-    "fixtures/fixture_manifest.json",
-    "fixtures/case03_first_page.json",
-    "fixtures/deep_channel_streams_terminal.json",
-    "fixtures/casanare_first_page.json",
-    "fixtures/deep_channel_videos_terminal.json"
-  ]
+  "script_sha256": "9ef7355d1aeb63d1dacc272b60c8299927ce0f87e595de0135601d7841603c6f",
+  "fresh_integration_receipt": "code_reviews/fresh_channel_integration_receipt.json",
+  "workbook_validation": "workbook_validation.json"
 }

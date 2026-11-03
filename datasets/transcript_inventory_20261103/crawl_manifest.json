@@ -1,83 +1,3356 @@
 {
-  "schema_version": "1.2",
-  "generated_at": "2026-11-03T17:46:43.700952+00:00",
+  "schema_version": "1.3",
+  "generated_at": "2026-11-03T20:28:54.535610+00:00",
   "python": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
   "network_concurrency_limit": 2,
   "http_429_policy": "Stop the active batch; no retry loop",
   "scope_contract": "Broad discovery metadata is kept separate from substantive Case 03–Casanare inclusion decisions. This crawler fetches no transcripts or media.",
-  "snapshot_selection_rule": "Prefer an exhausted, count-reconciled include-unavailable view. Preserve the default-visible snapshot under alternate_snapshot_views; its earlier discrepancy remains historical evidence, not an unresolved selected-view gap.",
+  "snapshot_selection_rule": "Prefer an exhausted, count-reconciled include-unavailable view. Preserve the default-visible snapshot under alternate_snapshot_views; its earlier discrepancy remains historical evidence, not an unresolved selected-view gap. Videos and Live now use the timestamped fresh exhausted receipt chains. Earlier appearances absent from those chains are retained under the same collection ID with is_current=false; no additional collection is created.",
   "count_definitions": {
     "returned_memberships": "Returned list positions, including unavailable placeholders and repeated appearances",
     "visible_memberships": "Legacy alias of returned_memberships; NOT playable video count",
     "normal_title_memberships": "Returned positions with a nonempty public title, excluding known unavailable placeholders; playability not implied",
-    "unique_video_ids": "Distinct public video IDs within the collection; includes placeholder IDs",
+    "unique_video_ids": "At collection level: distinct IDs in its selected snapshot. At manifest level: distinct IDs across all retained current and historical memberships.",
     "hidden_unavailable_count": "Numeric hidden count explicitly stated by the selected view; placeholders returned by Show unavailable are counted separately",
     "unavailable_placeholder_memberships": "Returned blank-title placeholder positions revealed by the normal unavailable-item action",
     "count_reconciled": "Declared count equals returned positions plus any explicitly numbered entries still hidden",
-    "pagination_exhausted": "No actual primary-list continuation remains, with no crawl error or cycle; does not establish complete historical availability"
+    "pagination_exhausted": "No actual primary-list continuation remains, with no crawl error or cycle; does not establish complete historical availability",
+    "membership_count": "All retained membership rows, including explicitly historical appearances; current_membership_count + historical_membership_count.",
+    "current_membership_count": "Membership rows in the selected snapshot for each collection. is_current defaults to true on unchanged baseline playlist/Shorts/web rows; per-source timestamps govern recency.",
+    "historical_membership_count": "Retained prior appearances with is_current=false and membership_status=historical_not_in_latest_listing. Not added to selected collection returned_memberships.",
+    "current_unique_video_ids": "Distinct IDs with at least one is_current=true (or unchanged legacy) membership in a selected source snapshot.",
+    "historical_only_unique_video_ids": "Retained discovery IDs without any current selected-snapshot membership. Not a deletion, availability or scope determination.",
+    "retained_memberships": "For refreshed channel collections: selected returned_memberships plus retained historical_memberships.",
+    "membership_status": "current_selected_snapshot or historical_not_in_latest_listing on refreshed channel rows/nodes; unchanged legacy rows imply current for their selected baseline snapshot."
   },
   "collections": [
     {
       "collection_key": "deep_channel_videos",
       "collection_id": "UCay5mclHBbWQTQ8fhoNCWow:videos",
       "collection_type": "channel_surface",
-      "source_role": "reused_channel_discovery",
       "source_url": "https://www.youtube.com/@jepcolombia/videos",
       "title": "JEP Colombia / videos",
-      "scope": "All-channel discovery metadata only; no Casanare admission implied",
-      "status": "reused_terminal_snapshot",
+      "source_role": "fresh_channel_discovery",
+      "scope": "Channel listing metadata only; separate Casanare scope admission required",
+      "started_at": "2026-11-03T20:20:47.186454+00:00",
+      "pages": [
+        {
+          "page_index": 0,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_000.json",
+          "list_json_path": [
+            "selected_tab",
+            "richGridRenderer",
+            "contents"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/@jepcolombia/videos",
+            "response_url": "https://www.youtube.com/@jepcolombia/videos",
+            "method": "GET",
+            "http_status": 200,
+            "content_type": "text/html; charset=utf-8",
+            "fetched_at": "2026-11-03T20:19:11.924638+00:00",
+            "sha256": "9488bbddde378c855716d4f3b6ac85359b269a43fb1ac1404590471ccb461305",
+            "bytes": 1305671
+          },
+          "response_json_file_sha256": "32d9949a7493f72041059fad3e6641720bda88f43dbca0531db1c6935deed771",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_000.meta.json",
+          "request_receipt_file_sha256": "e7b3635370d78b4ea8092f3972223b7faf9edad789fe3fa81a727d2909871235"
+        },
+        {
+          "page_index": 1,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_001.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:20:47.202976+00:00",
+            "sha256": "1eee5cfaa4ff0a50c1a4e79fb444fbec95b336b98dac6851a6d869ef1d5190ce",
+            "bytes": 424783,
+            "request_token_sha256": "d7e8decbff0fdcd24f91bc3afb5720d338b30450627a8fa39e3f23ba858bd85b",
+            "parsed_response_sha256": "5a62b9e9ceeb65c9b0fd40d995fcf6e102b5cb5431c87b9dbe4f1a0c6037b156"
+          },
+          "response_json_file_sha256": "bb5bd20d5662b6586590ed182ead4db3db80d3375ceb7f5ecde25181e73358b1",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_001.meta.json",
+          "request_receipt_file_sha256": "7285dee8508a8832669226250ff3c271572340c49b1bc64313f6711218111178"
+        },
+        {
+          "page_index": 2,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_002.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:20:53.246894+00:00",
+            "sha256": "e15cca9d0c5c8d501680bb3b7acba7761679700df4abfcc68fa211cfa00ad7a3",
+            "bytes": 424998,
+            "request_token_sha256": "2a6f12211cfa69eb6171f3e5fd262425946e211eebfd5f82627ffa930d03cc45",
+            "parsed_response_sha256": "d5f845a9dd36d415c73dfbeacf4e59b66b80a40dcc99ed2683e816219eb80a74"
+          },
+          "response_json_file_sha256": "ec75f9161d3f8705ce3ea9780e5d8834ad01724caec2a08a35162a0eb258fbf9",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_002.meta.json",
+          "request_receipt_file_sha256": "b0deb25c878a42d51498671402283a769da5b30ce6207484716223f8e4c75b50"
+        },
+        {
+          "page_index": 3,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_003.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:20:57.350909+00:00",
+            "sha256": "3529a3846e67fb75b844b690e8c3ce0d817b3caf1c06bb747b10b67f5d99792c",
+            "bytes": 424575,
+            "request_token_sha256": "251f4fbab747ac52fa676d714edc99b7a593fd49199b1a71838be8494e32b5eb",
+            "parsed_response_sha256": "4d8d8702b8c4c4d63fe1c77c749fbc85a1aca06eacc07bfc6fa8f6fb68f9cb61"
+          },
+          "response_json_file_sha256": "f6a7e3cde560bc996722e97871860ffcf853174d69572c4ba4b737d4999de0a0",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_003.meta.json",
+          "request_receipt_file_sha256": "64e80ed6b0a539665e424c821f943ebe8164a383d3d9f4700bdb228ee884648b"
+        },
+        {
+          "page_index": 4,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_004.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:21:00.763733+00:00",
+            "sha256": "60679db4f3c4bfe1fd7bf5f47070e2c175acd76725e1f807ec4b3f1c67481950",
+            "bytes": 424050,
+            "request_token_sha256": "23ec7f6b40215b3cbc5d5d36e96d71c05253f77d94dd617e045f0ce7ecf84081",
+            "parsed_response_sha256": "c4277b281d46321416cc88223c42c629c918aecfab83b976f9595e7a57c53dae"
+          },
+          "response_json_file_sha256": "f6a0bb72999bf73cc3c1788b85ad34e2ad5567006ab6caa2113b94945dc89ba3",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_004.meta.json",
+          "request_receipt_file_sha256": "15eba1a24df5b3460c11700bc8a9334619c9a5cbac24d5c30a24c4147596a0b3"
+        },
+        {
+          "page_index": 5,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_005.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:21:04.364568+00:00",
+            "sha256": "7b797fc4458c2a6b1df1cb266906a19a51ef00dcdc412f1d49251956abb18169",
+            "bytes": 425602,
+            "request_token_sha256": "f08ebf2e4abb0285977f91961130e4369fe129bb958254c5b433294170c08b06",
+            "parsed_response_sha256": "02b563f8f07e29561d7e2bbdaca246c1a3d6c684bac81c46a12378992ed4e819"
+          },
+          "response_json_file_sha256": "2734ba261abbac9fe7bcffd2657768491e8aa40f86972a3d92c6d4eaf0700e50",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_005.meta.json",
+          "request_receipt_file_sha256": "c379c59702cda9126eaca1467d82a3769588f1abc827ae6a2f5f581a9d55cf09"
+        },
+        {
+          "page_index": 6,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_006.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:21:08.669964+00:00",
+            "sha256": "db4ec010ce4977a7c48ad81f279eced54e30cb69e4297ae69722813215a03f59",
+            "bytes": 424748,
+            "request_token_sha256": "88379867145458b7cb838e38eb3917527360944d04b9533cf7964dbab2196be3",
+            "parsed_response_sha256": "e56e8dbff65d3ac2b8625432a76ec3b4dd03f1eac60bd11649439eb3f88499e1"
+          },
+          "response_json_file_sha256": "808308740cb701d2ca9492f8ae78c609169bec013b3ccbe6c7c6f0bffe1aa9d4",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_006.meta.json",
+          "request_receipt_file_sha256": "eac396059b95f0715be4be84bfe2259c96f28858cba589a320124c2b44e3421c"
+        },
+        {
+          "page_index": 7,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_007.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:21:13.555037+00:00",
+            "sha256": "22119c9ac5879294770f2fd634f7631dc42b017b2d12a4bb8e2e25b86c695205",
+            "bytes": 425299,
+            "request_token_sha256": "9f72d5898e95dcf5521d4f52e4727affe9712419c117a4b37d4096ed04f5941d",
+            "parsed_response_sha256": "255352dab72307afaf06aceebf660011bd8f0a8c2ff3dc83558e1610429d10db"
+          },
+          "response_json_file_sha256": "7e2cbd3e86bb2691d800435c17d1e7e806c60bf57b9b9ee3c22b636bdb20f469",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_007.meta.json",
+          "request_receipt_file_sha256": "6bd13c46b2d12dd6d2f55516e524c7a191aad34716c4fdd16945f7539f1151c1"
+        },
+        {
+          "page_index": 8,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_008.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:21:17.320789+00:00",
+            "sha256": "7693b0034ac6a410e91780ef7e7b121ea778b36cea81735db07e5b1b63bed7ae",
+            "bytes": 425387,
+            "request_token_sha256": "8e34e832856465b0d42291c5b3c30b8dbeaea53a2207e26e628d33259da6fda5",
+            "parsed_response_sha256": "a0d471f2782ac1f1406ec0f075496100690e16f3ecd38911495794eec32f4cd0"
+          },
+          "response_json_file_sha256": "596d13c24ea2cc3678c6f1cc9768672018bf3895db83868e30c694da6e68caee",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_008.meta.json",
+          "request_receipt_file_sha256": "2f359452893395f5d507580dc4884824afcf795aebcbf6df704b43427753967a"
+        },
+        {
+          "page_index": 9,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_009.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:21:22.611640+00:00",
+            "sha256": "d1f284bb944883b36a43234448676328dd2cae49b38ca3d3da1c3e81f119d5cc",
+            "bytes": 425006,
+            "request_token_sha256": "8539e4566958cc18849345b8af559eac2250975ca17c0ef688d84537a5af614e",
+            "parsed_response_sha256": "af3db6590dd54ab921d4f1f6aeaf678471ec0649cadd71771daa5bf16bf769d0"
+          },
+          "response_json_file_sha256": "00461934f6993974eed7b9506daa420d8101127b1faf3f1ab76b867773805cc5",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_009.meta.json",
+          "request_receipt_file_sha256": "7e2d5223fcfa10a6c0c9b94232325adc98d752d83118857fb822b6ab977c933d"
+        },
+        {
+          "page_index": 10,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_010.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:21:26.409854+00:00",
+            "sha256": "75c25b9e04620c1e766af64b44cfe66856f3dbad2cd595713b2f6e56e5c32f47",
+            "bytes": 426167,
+            "request_token_sha256": "d7d8fd292efbb0fe358eaf58f18dd9bd8ca2bd54f66ea5d8f3aafbfe40a1491c",
+            "parsed_response_sha256": "62ffa40614d76cf48c94be3b9bdcbfbe578fd906c84bee730c2ce437517dea14"
+          },
+          "response_json_file_sha256": "0336eac83a6c497cf74ac44fea0739ade285c61a471d75111db6fb97db84510a",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_010.meta.json",
+          "request_receipt_file_sha256": "8d2fe9bfce452905fff429109ac40a60b696e9aeb25f0650dd497afb91a091ab"
+        },
+        {
+          "page_index": 11,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_011.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:21:30.522341+00:00",
+            "sha256": "45c00fb317e3356bfd347d678686f24e59b9987df92f1303018a1c2744156f75",
+            "bytes": 426707,
+            "request_token_sha256": "2930c594abaafa96890dca43f00fdad69a5cbc7fc6c9d3a97282c3d251ce870f",
+            "parsed_response_sha256": "4eb0c74dd59e752923453d734cc2e6e723ea3ee631a936c5fda56b7d978e6e14"
+          },
+          "response_json_file_sha256": "023724d3a5b180cb9f2c99d4a71a43f0e3cefc7b08cd3b55cd42a900684c8cc1",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_011.meta.json",
+          "request_receipt_file_sha256": "80c792c8f68c0c1c179ddc63bd7baa8ca296109d750329548db40e70ba41f9dd"
+        },
+        {
+          "page_index": 12,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_012.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:21:34.543832+00:00",
+            "sha256": "c96550614618a9db8b974b54ef87d9744405d88b6816f16db69c6795bc2b6ae6",
+            "bytes": 426365,
+            "request_token_sha256": "59fdc65edc665dba1dfa06cdab05b8ed792591916a0218aa8094801aaeb02011",
+            "parsed_response_sha256": "bbc789c9607515531e7bf93cae05084f9c3830aa2d666d0b86f6ec5e9dd0f499"
+          },
+          "response_json_file_sha256": "51d0c346e08e4f4ceb91b89a98c6315c7d8ca83f6a15288f97ceb91285a3e46e",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_012.meta.json",
+          "request_receipt_file_sha256": "dae821a129bbd95f86f7f0bdcd6081c95aef2a65801b50132115eacf45ae05a2"
+        },
+        {
+          "page_index": 13,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_013.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:21:39.070610+00:00",
+            "sha256": "39ea37754f5d91be53ed432c46d52a77678fec7a81f5a8c95c5c660bcbeb05f5",
+            "bytes": 426553,
+            "request_token_sha256": "065757aeacbf86a60f3159c5dcd9b3ea698b949e7172fc925c2e78aec3fa8e9f",
+            "parsed_response_sha256": "7770255a241e82da4d0e4482ab2ccebc75a8fdbbd7df7e9edc6e6d13f9d5107c"
+          },
+          "response_json_file_sha256": "d358b331e0cdc8c247527056043a30655c5894d58fb94880873e22cd3938dad5",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_013.meta.json",
+          "request_receipt_file_sha256": "64200ab9cfb4a7a5a304d49078bb926d779994cc497c0547732499ee8fd16fb9"
+        },
+        {
+          "page_index": 14,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_014.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:21:44.532162+00:00",
+            "sha256": "80df2801a4d22b7e8cc7d2d2dc378eaf0c2897eb87339014acbab264ef607a33",
+            "bytes": 426668,
+            "request_token_sha256": "86d890cd01d0ec0c76c19a6c199ca5e4b4f5d473ccf3c6469862ea4304343859",
+            "parsed_response_sha256": "a89f89188d4ea237a6dc923e7b278a5b30df3a9631889568a534733995ca61ad"
+          },
+          "response_json_file_sha256": "55ab81d0d64016d0450ffc9b3fc68b77d26fd8f88a355217f195c2e56c7a5d18",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_014.meta.json",
+          "request_receipt_file_sha256": "26d2cf976e32451d598023b8cf1d4b4b5fc0a51ba251fb0f73e0b52766107f8e"
+        },
+        {
+          "page_index": 15,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_015.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:21:48.286215+00:00",
+            "sha256": "9300c81fa525769e2c03dd8a6b9730a7f0565d7037565a9ab9a04cbba3444bac",
+            "bytes": 425590,
+            "request_token_sha256": "62cc40e8ee59d3dafdff6f613322fbd11f2f1d1b0726205f1c3116e0ec9ac6f0",
+            "parsed_response_sha256": "2882c12d6e3423b2b2a6b5b7d916650c6f5b67253cc76662056bbd1e761c7295"
+          },
+          "response_json_file_sha256": "ab4b220ef22efefc748949a28584919c74ba62c1043267b9581dce07663c0df0",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_015.meta.json",
+          "request_receipt_file_sha256": "ff1bd70d39e47dc456075dfc30a905ff6f5f654510a966011561b174f8a45bf4"
+        },
+        {
+          "page_index": 16,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_016.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:21:53.942185+00:00",
+            "sha256": "635ef07b4ea42738026e6eac0ae8f1e06a01dd91e6e350a58a08e90b073ef2ff",
+            "bytes": 425569,
+            "request_token_sha256": "9e4b46192a45d91c210711887e40d2c94ac19387fe8f537dc7cb1945ccff3943",
+            "parsed_response_sha256": "185139fba8095f1c572a449a6fd3bb4a18caf750559c489900235cc552d661bd"
+          },
+          "response_json_file_sha256": "cd235cc5c052133d45f55f575e7d2a6c74a35776fbbd65ee5b0edb2c12849839",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_016.meta.json",
+          "request_receipt_file_sha256": "849c99d42f8de6ca9f81ce7e9671c0880cdd264707e3cee582b7a85ba2b7de96"
+        },
+        {
+          "page_index": 17,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_017.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:21:58.223497+00:00",
+            "sha256": "f43fab8f304dac40a72e7b94bbc035466a93f425215432fac125c580fc2e83d9",
+            "bytes": 425906,
+            "request_token_sha256": "448480d1075e4570d452509a8236e3e24df0c404bad03068755bc1ba7e30d832",
+            "parsed_response_sha256": "324c7122814add866b160f812e386d51cb2fb1c673d36520c9d337cedb9ed7fe"
+          },
+          "response_json_file_sha256": "568d66c2d80d4a0dc004f25fc807e0b4f35eb43364a923e76d1b8a6157a49917",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_017.meta.json",
+          "request_receipt_file_sha256": "a68877ef8cc489a5416bf7a2e7f85c133b1a57543ad6aa2c67a21b47f58a202e"
+        },
+        {
+          "page_index": 18,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_018.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:22:01.620543+00:00",
+            "sha256": "9d577d52e3ead91fb79ea7d1432b2ef2b2fa266236b2381eccb68dfbd12998c1",
+            "bytes": 426250,
+            "request_token_sha256": "37a623039434cb52b0ca35736eeb7e704a5ef5c86a28945d55dd29e7043cc82f",
+            "parsed_response_sha256": "c07a3d6a9b523799c09b352f1f27237968752726a627e8b3dd55e0d0a33b6041"
+          },
+          "response_json_file_sha256": "e95a4517f24fb3d7401a701df37036d8e3ad5517b239ae759155877c5c608409",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_018.meta.json",
+          "request_receipt_file_sha256": "3bb93369ee8dd1070e784bcb4fb7c7f1340eb49696e5c60e61931a59351bfa0a"
+        },
+        {
+          "page_index": 19,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_019.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:22:05.668538+00:00",
+            "sha256": "2a1531a710d0423cc7d92d52f80fbe6611ac9fca34af708e23e20b7d0572374b",
+            "bytes": 426530,
+            "request_token_sha256": "66abb658352973857a58a9d78c76e88d6096aae48fb7077719cf2e7f4b7c0a31",
+            "parsed_response_sha256": "a192b9d214d9413c4ad7b80982cda3491db6ed49ec3111a03e38809de29f541d"
+          },
+          "response_json_file_sha256": "14906795d8f406ef098a4057366afc2d1caab97efff4cfcb933a92743a57b52e",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_019.meta.json",
+          "request_receipt_file_sha256": "6b8bfe6818343c5a67a328c0c1721efccd968976f6af946d4632b2b098f1f2d6"
+        },
+        {
+          "page_index": 20,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_020.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:22:09.225558+00:00",
+            "sha256": "69029fb9b955213b7e0d73ccdbfcacb178955eddb8ae126bfd3cca81e0fb1718",
+            "bytes": 425818,
+            "request_token_sha256": "ca8d6ed01ba4a629d8c554e4b343ee663b9150eda9408d9ddb88c5ffd665418e",
+            "parsed_response_sha256": "37406d4b13cd08b8b89f78cd6e12e909794c9b925287d2299beec7bc87d942f5"
+          },
+          "response_json_file_sha256": "ff94ec9e57b09f9996ef8e622763d7c97d60581bb368ab6a1eb667710a53fc7e",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_020.meta.json",
+          "request_receipt_file_sha256": "9c5808b8bd11a64193f1de3fab6813791c68310d167ed3caa45a36bacf06801f"
+        },
+        {
+          "page_index": 21,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_021.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:22:13.814557+00:00",
+            "sha256": "71c3c5c85fb9d67eb75eca3b9fd21dc8bb66539f0b860f34ad97a921447cb0db",
+            "bytes": 425367,
+            "request_token_sha256": "549a030e45b0daea37c945894b98382fa817cc544e6af83ed2f5cf1d98b0a103",
+            "parsed_response_sha256": "81fd88d4b3bea88c8128553d05ed8d1a6e26faab6dec2c5b2aa6b15eed08ab78"
+          },
+          "response_json_file_sha256": "abd3e00dbffb0e749717713d8cfbe1805252d770d261049946393bc409750f89",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_021.meta.json",
+          "request_receipt_file_sha256": "b59a9219486c31e13ab9f78577e03bb522ab99b4da04bb72ad4d4165e1265ff4"
+        },
+        {
+          "page_index": 22,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_022.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:22:17.141843+00:00",
+            "sha256": "3349131cfba2acfd4975ae7984f1d263e547a6234af3234b9614f6c2f67cb2ab",
+            "bytes": 425630,
+            "request_token_sha256": "38d0686aafb0b65c066595dafc19ea944d58912397231de920caa3f47227e8fd",
+            "parsed_response_sha256": "718c1a32b4da61ecb7e709e99c99899b65eb8895521804c0617ab3c379f147db"
+          },
+          "response_json_file_sha256": "8ac10c7823abb8a2ed100fa221e1262ec0d4ae6579759bddfd49e4b5d43f1ea9",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_022.meta.json",
+          "request_receipt_file_sha256": "d05bb4b49c18675466d20eca1f4112fbdf707965d4547c41a107e1b908099bae"
+        },
+        {
+          "page_index": 23,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_023.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:22:21.060715+00:00",
+            "sha256": "8143667f26f0cc1841bb3c66ad2c25a1e652294f56c353b6067fa9413bbf59c8",
+            "bytes": 425174,
+            "request_token_sha256": "fea485610a89c00be9b23f47c57815abc5b66c47c476a317c5a568b3811ee908",
+            "parsed_response_sha256": "4b5f785378c74b657dcf6335ccb03f87e509b270569eb12fab90d757200d2ca5"
+          },
+          "response_json_file_sha256": "9fab5ddebbb96e00b838f5a6dcee05f676c327a2269c05247af45f1a96ddaeb0",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_023.meta.json",
+          "request_receipt_file_sha256": "827d0ead40f2ab0d8b81d450a903ba187ad1005d5618c09f72dd61f8b31edbd2"
+        },
+        {
+          "page_index": 24,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_024.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:22:25.239624+00:00",
+            "sha256": "aca6e4fc479250c92c20e5ae2e5fc8b68060c5f9ae6cb9d8f558a957b956a5ca",
+            "bytes": 424883,
+            "request_token_sha256": "3d4bf0d64aa4edf70dbfc49d159160907846e3a35ee7570425047dd9c0a3803a",
+            "parsed_response_sha256": "cfa95f77fe2fb8f50b6dcee78790fafa2df82cdd916392353d96083f6023601d"
+          },
+          "response_json_file_sha256": "c06d5c6432fae24574ca809674041857ca1045fd7ef95a1ba48d2fd51de88267",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_024.meta.json",
+          "request_receipt_file_sha256": "c064657c8c10580f731df4fb791dab3bee4d763ad2da6138fcab4ed757094ab6"
+        },
+        {
+          "page_index": 25,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_025.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:22:29.136116+00:00",
+            "sha256": "a75d8438558f5e4d1ee69874fb57c142f3811f6eebcd025b880e5b17a51b4ee4",
+            "bytes": 425288,
+            "request_token_sha256": "33675d74bdb4a39ff9dcd987cdeaa819b785de6d659431fdfb1665c416516c67",
+            "parsed_response_sha256": "7bdb419fe3e4e3b893b4fa0ebceb3aabb08c7bb811dd7902faae508e0510dc22"
+          },
+          "response_json_file_sha256": "28f152b8d1331d166ad94a9f9d75911c98808eb1926b045d15e5241fb92df26e",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_025.meta.json",
+          "request_receipt_file_sha256": "91d092153088b6b074beb0e91b27b5813c0a7d0c3440c7106881751a1239d4c4"
+        },
+        {
+          "page_index": 26,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_026.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:22:33.025671+00:00",
+            "sha256": "13e62f8b8841ef960f8ac9a4f4ff10527cf217ad2282a56cd1ede31db0d4df6a",
+            "bytes": 424767,
+            "request_token_sha256": "787f797fdd88240b02fcb04e3a34763f871c46f1bda0e32fc2323e7e676a6f9e",
+            "parsed_response_sha256": "994157d861086c00f362f708ac0e76b370fb4b7c1e3a63af6b15301581b92e2f"
+          },
+          "response_json_file_sha256": "49a921f87b986d123b5ce19ae409f0e7bf320eefd6e2de91747edbc2223b6914",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_026.meta.json",
+          "request_receipt_file_sha256": "ec6f53b4adad15f18fadf88add7b428193a657fc4d72fd06523b92a632fb8dd0"
+        },
+        {
+          "page_index": 27,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_027.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:22:36.722499+00:00",
+            "sha256": "cba7ad765e951f0cafcc425cb29714f64aced33bbbfe16aa13fc235d7067339a",
+            "bytes": 426120,
+            "request_token_sha256": "4574a18b236f6f415c2fea0dd528439c273648697e41d623c233d5dd72686ef3",
+            "parsed_response_sha256": "7f89549657dd9861a5c8ee397093a27a1ec0db6d41e1e83b7181ef58dd079ca1"
+          },
+          "response_json_file_sha256": "b5dfc867b89942c98988e5f4ccc9f709210b7926273fb8f95f789ae8ff7609f2",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_027.meta.json",
+          "request_receipt_file_sha256": "55f298a2c357d85cc3949a7bf5c428a451a9098d02080b1614833544b5284daa"
+        },
+        {
+          "page_index": 28,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_028.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:22:41.617702+00:00",
+            "sha256": "cfe3ec588423b760389d0cc414f6250a4c83652732d9f336c6f5e3ab9ec5c818",
+            "bytes": 425730,
+            "request_token_sha256": "445dbe67c11902899ca8b30890f5ea3fc741cf20e9c350b645d36a5f2b003c97",
+            "parsed_response_sha256": "1e5250411f0ea098dc6335bbe517e8f75b86f36906051c13b019936f9014a16a"
+          },
+          "response_json_file_sha256": "fca2f1639b4e3b7887cd7bdb4b970058d2b227961bb72b8eb3e543f9bc4257f3",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_028.meta.json",
+          "request_receipt_file_sha256": "21cc5e61f9d03559470d1303196edcc292d6907a0ad716e82aef439eff163507"
+        },
+        {
+          "page_index": 29,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_029.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:22:46.326025+00:00",
+            "sha256": "3f7d8e2b46af73d92fbecd158edd8e0520cc3fbb9267636b8d08aba99da31d2d",
+            "bytes": 425265,
+            "request_token_sha256": "01d9e40c040021b776099c25fac887bb1546a57988a63935d0ae625af0ca9be7",
+            "parsed_response_sha256": "311aa625373c8fe33da4f1ce7643328435a01e3dedaf9fd8b3726b0707c5fe5f"
+          },
+          "response_json_file_sha256": "cc87c47271b04b6e6f9336b9a3379a5e86c7171a4a360f5f566775946ff652f7",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_029.meta.json",
+          "request_receipt_file_sha256": "551e7c10e53e41dd86557e87c54d2c06b7f47d24283299f8e321a8f6a2d92c35"
+        },
+        {
+          "page_index": 30,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_030.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:22:50.071096+00:00",
+            "sha256": "47ce12a9ef11ecb395870a458e2af9aff9bb1796f296ea4fb10d6b28fd30b85c",
+            "bytes": 425977,
+            "request_token_sha256": "ef12c1de9b60cfa7c4e4a3c40245b3a9210d0a9f6c3210eb6b963a9ffe8148e4",
+            "parsed_response_sha256": "698ce52b166c51c53f92e749f975d4abd9b5a5b152c388c0c14b0d6c58d95772"
+          },
+          "response_json_file_sha256": "4dd0bdb581ca71f1a7a6b5475ea652cf5cd7c529ba1344bcab162d9408a6a001",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_030.meta.json",
+          "request_receipt_file_sha256": "a34c2071a1177627e6ae1b3517f7f1f9aaf0ccf84f8e01de067c66f6a6448e41"
+        },
+        {
+          "page_index": 31,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_031.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:22:53.746422+00:00",
+            "sha256": "98a081fce8c9daa366b2a70815c1a017f645dbf9c51b59366a561eaadd9d507e",
+            "bytes": 421705,
+            "request_token_sha256": "862590d98878defbf3557340adb9358787d996c891c37b90db3f0fab2ab8a126",
+            "parsed_response_sha256": "9767dcc15edee506c0b9cdefa38bc3edce23d0b8a3b0805425e65d503d6db33f"
+          },
+          "response_json_file_sha256": "f5cc4a3e487724f39449213ac2b530e144a24e73151d23c4a77a8bf57223f883",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_031.meta.json",
+          "request_receipt_file_sha256": "7ed2025eee07f12d351ef727941e04ccc0b8864e03d2240897643b82eeb5970c"
+        },
+        {
+          "page_index": 32,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_032.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:22:57.590820+00:00",
+            "sha256": "ae3126bb25df802912133c261cd52c0ae7f4418e56ef4eb5f4b32d1f13188472",
+            "bytes": 423696,
+            "request_token_sha256": "d4be07b944a53030e8424ed41190749e498308adfabf99f79727f907f31f4754",
+            "parsed_response_sha256": "dc466af7320ca73c9bb8b41334cc590d78f1205e2f3d555a901325f8b85189b7"
+          },
+          "response_json_file_sha256": "724ddb4f382cf02b728f82b8928089aabbbc546397b436c927052ffc4f39cdf5",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_032.meta.json",
+          "request_receipt_file_sha256": "a792c56de24a7ef81bcb66c2e3a98e88a06bbda577159d13b69e88e29fe6a4b6"
+        },
+        {
+          "page_index": 33,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_033.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:23:01.445898+00:00",
+            "sha256": "6d86f69c23a98ea7132c17501e10da2c12d6281cbade65664ecd8a58a6857bf1",
+            "bytes": 425138,
+            "request_token_sha256": "f205ef6554f56ea9d79764e3edc4efca4fb6b934a42b0c344c2b01e5d81b4bdd",
+            "parsed_response_sha256": "743f6aaf8856196511e65068304f9f32b4bc928f3b94a003e9d7f999b494a92f"
+          },
+          "response_json_file_sha256": "e4b39960478fa284172945bb41cc5502cc142b0649424ff03c97c02ab596ca20",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_033.meta.json",
+          "request_receipt_file_sha256": "627631b029ee5dc2fd8825dcdb0a2f4093fe7d4aa84effe5d38c65296fd18a6a"
+        },
+        {
+          "page_index": 34,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_034.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:23:05.488972+00:00",
+            "sha256": "c880ce28e715a9bee14b523e237e9d59307b32456bf22ff9116de952abc6d13c",
+            "bytes": 423015,
+            "request_token_sha256": "6cd3620ee7a0d003d05ea8126410baa8105fdd7bda17a6fcce146f63ce0c5330",
+            "parsed_response_sha256": "5f59941eca6fdca0ad75d27d35b1195117025ecada55fa818e36e38981deb593"
+          },
+          "response_json_file_sha256": "e7c8808873c9d7ae5bcd792fa96331b6438f81b76d375533273fc37b915bbec8",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_034.meta.json",
+          "request_receipt_file_sha256": "3fd827cdd3168255649de580bb766d3faa5df83b34aa9db88a8173aa52d0023f"
+        },
+        {
+          "page_index": 35,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_035.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:23:09.584204+00:00",
+            "sha256": "f76b2a0dfbe18160d1730ea1e5d6a1d100de425aeabf271c0f960c81a627f62c",
+            "bytes": 419165,
+            "request_token_sha256": "ed1d2763dd98f1834e7577aa4f301f9dab7222cafea6766ba49ae309c725a06d",
+            "parsed_response_sha256": "09e0e77e10da68f11d4be737a7fa0fbdcc77172a7b1bac130a546023f7596a51"
+          },
+          "response_json_file_sha256": "01be18b8cf8113940e0eee25740c3fca1a0e4190ba2e7257927f0ff8d182f575",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_035.meta.json",
+          "request_receipt_file_sha256": "cc83233631da5ad50777717375954b9d741253ad5f8cb33df3c4bcab1bdbfca8"
+        },
+        {
+          "page_index": 36,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_036.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:23:14.112672+00:00",
+            "sha256": "1c058be476852d80a1c4e8dcdc5cdaaaef2ec8ad3caf5b0383f8965bef58c38d",
+            "bytes": 421767,
+            "request_token_sha256": "b31df81d8c4b0303ec1fa9dec069f6e79bb65dc8ebeab1f67b31b8b675f6bb31",
+            "parsed_response_sha256": "5d13459c708b156766efd198c6f000a7960954151a3ffeaffb73e6c9eea08a10"
+          },
+          "response_json_file_sha256": "893b13f069bf10e6433685de36409957bd7c9e4531e432325aca0c5f60e2410b",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_036.meta.json",
+          "request_receipt_file_sha256": "190c5dce787105a55e8d121ffc85565d38b41de14982f7d9a38e48977c185252"
+        },
+        {
+          "page_index": 37,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_037.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:23:18.054563+00:00",
+            "sha256": "3c0cc31d61204a57ad2dfb23f1891e13b9d391e53a5d8777de8d42d2263e6ad9",
+            "bytes": 423344,
+            "request_token_sha256": "6ae10fcf5fafafaa88f4ac2641b8dda4e439af60944028d482657ca173e12284",
+            "parsed_response_sha256": "29ee8c725f51d5c2b32e74cf3dd7bbd8503f87d6330486f57e2560c6a399afdd"
+          },
+          "response_json_file_sha256": "a92a0788dbfb89b0665dd0a4e22ac99d6bbd205c2f7ae16275ed942e393ed12c",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_037.meta.json",
+          "request_receipt_file_sha256": "79fcf3e842efa7c10de84ad5fbbd0ea60b2d4c93780575e163e67cb664a48062"
+        },
+        {
+          "page_index": 38,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_038.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:23:21.823031+00:00",
+            "sha256": "32781d32406a5f3ad5e2bdabcb9e7dd34790f76e2130fd813efa9960f0d86f48",
+            "bytes": 425332,
+            "request_token_sha256": "54e8d5d2561500cc7cd9dedb67f39f26f8d4b6cd1d081ee2cdba15721939875b",
+            "parsed_response_sha256": "012cb883286f5e6248d43f3d637130992350094225c9e97482b0c762a46237bd"
+          },
+          "response_json_file_sha256": "f8c38ef120ed3c116a692063c97c89e81c65a3c7e3f8e03cdd0a5e4b889916cd",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_038.meta.json",
+          "request_receipt_file_sha256": "19546a74b09f21d7d535b1a3c82b71a59f2429cd7163ac4d5e9cc08a042213d5"
+        },
+        {
+          "page_index": 39,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_039.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:23:26.225233+00:00",
+            "sha256": "fbc801ad3e4a3fe3273fd938beccdbb0ab7c86d8718f5e32143e133e57b05f7e",
+            "bytes": 424737,
+            "request_token_sha256": "66a725bd114b41375ec77c150355bb86395a96d705863edef5aa1ca46df21c65",
+            "parsed_response_sha256": "e5e6bd6982216028d8727d9184115bda86afcfb349a1c7fedb972a0fe8f9337b"
+          },
+          "response_json_file_sha256": "5392d4681f8906da209457b67022af0e8b3b85af574651dee21b1a3b7558721d",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_039.meta.json",
+          "request_receipt_file_sha256": "de942e41e0fa5492057f90ddc25a144e8125cdfd1830925e18cb229c76775b3d"
+        },
+        {
+          "page_index": 40,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_040.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:23:30.616409+00:00",
+            "sha256": "d9b641950e8a1f7e6c2b0c548dc2520beca0c9cc9f9d84d1d3f00719b862154d",
+            "bytes": 424461,
+            "request_token_sha256": "18275ef73998d365512d15a463625c9cb1922ec304a803ef0b771bc6c4eb2fc1",
+            "parsed_response_sha256": "a6975416623521e996f284f9c9250ad9019a6854421b70caf6e975e6a208496f"
+          },
+          "response_json_file_sha256": "c214514ae4d54eb5706361d11ac004aa7de56617e84ea477381bfe67112241b6",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_040.meta.json",
+          "request_receipt_file_sha256": "7877efa6d57791a8435720ca909f17b0b884a6335b91e2c0796ec9b65ee82faf"
+        },
+        {
+          "page_index": 41,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_041.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:23:34.553081+00:00",
+            "sha256": "4ea0fe5c5157c1dde13bb53831bbfdb2651e8da21563c86b4d354a0be460727a",
+            "bytes": 427112,
+            "request_token_sha256": "4d9cd310db7ec7b37a378c00ca7fa3f8189b8f7487d37546b3f19b445f7946aa",
+            "parsed_response_sha256": "a2a0a60f98f213ce036e0c9e2a6aee90f5339c8279197640af4faff8b807aaac"
+          },
+          "response_json_file_sha256": "8fad8417bf9afa4d15b655a037fcbf1cf3d9b293355154c91dd32237f1b92626",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_041.meta.json",
+          "request_receipt_file_sha256": "3fb17016547a2726f5317df8e8099b99d58813b44f3cbb77431594e561676a20"
+        },
+        {
+          "page_index": 42,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_042.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:23:39.529043+00:00",
+            "sha256": "92877c0764bbcec2cbe968628ec08ed1ccdc134cfc191a64a0052ba2e26571eb",
+            "bytes": 426683,
+            "request_token_sha256": "f9f8ea094d24f50e0a8423f163d71b009ed11434c417f570790ef958ae60f41b",
+            "parsed_response_sha256": "521013998fec4b92c9f868f91341512ea6f5b1032d9a18627744a8b1dacfc7cd"
+          },
+          "response_json_file_sha256": "a8ae860af42ae68afc8f6dce7434cc1248ec623d659bb17e6a0a3929402fc5c2",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_042.meta.json",
+          "request_receipt_file_sha256": "65623465f23de8781dd76908675fb3c69e5a21375012c3fb2ed45602308c44d3"
+        },
+        {
+          "page_index": 43,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_043.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:23:43.080444+00:00",
+            "sha256": "06bb55de966711b2263e9d212acad1e99f4dedc7816a86333e7b2e3cd908f204",
+            "bytes": 426195,
+            "request_token_sha256": "0bc565e069adc43b24291bdfea05e321d1d43f3bfc382384e1593a7a5841e653",
+            "parsed_response_sha256": "ed3d3addfa55beff810ab4f053ea665709d5d75dd0196dd215c4ecca385cf1d9"
+          },
+          "response_json_file_sha256": "da1b779bbcd680d8e80b819e64482c25fecb13c0e7e48261359e1dbf53967e3d",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_043.meta.json",
+          "request_receipt_file_sha256": "c2515d79651e0112d7f5f6845a690f5b6d5f56a0f7ced8b839bf865570c53bce"
+        },
+        {
+          "page_index": 44,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_044.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:23:46.787264+00:00",
+            "sha256": "e9c1d9d6a6f5659cb6eaeb2b5fa82fa4559f70d36bab40d38266c69aaa8972be",
+            "bytes": 425501,
+            "request_token_sha256": "49a762d15e6903ac17d9a6518aa1d319962311c2d62cedb166f3793325a8adb2",
+            "parsed_response_sha256": "acf0b5f942b065879b8ac12d85e80cc002345a083bfcaeb3db1486d15783785f"
+          },
+          "response_json_file_sha256": "f0efc47e7393ab396908c0af66395702f27f0f139e0e2a8cd57f3b4b84bc8201",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_044.meta.json",
+          "request_receipt_file_sha256": "91cfe8a35ca5a225a99d4474f6c6b69619abb9f282e2c40b1576fe4b96542a0b"
+        },
+        {
+          "page_index": 45,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_045.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:23:50.578994+00:00",
+            "sha256": "5ce853bc33e62c7ef85e720fbc33fe8e45b300c3467c780557f95b19cdd8df94",
+            "bytes": 425505,
+            "request_token_sha256": "54d1d5aadd73a190cd2036df8cae5fd1c33e96efe8e541c701cea6bb9f16ba35",
+            "parsed_response_sha256": "77db979ec042fc4f0ade7ef011379c1c60abf5653d47089163a36de2e371b4be"
+          },
+          "response_json_file_sha256": "36214ff8fa34062fe9f89a0c206e4dd5aa8e4e10a96de0cb28e7a1dde4696536",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_045.meta.json",
+          "request_receipt_file_sha256": "94f308f42e69648c790677f05a6ad0194c64e6310ea3b860b9b722dec77643ca"
+        },
+        {
+          "page_index": 46,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_046.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:23:54.904838+00:00",
+            "sha256": "8c52ff04cd4b4f645cdafb3e6c1cdbd216b8518bbc93a9194c40b72c74d6a71c",
+            "bytes": 425308,
+            "request_token_sha256": "27bbfeb1bc006f711021c48ed650d418fe62a4d8b99e589d2d70e6010ed47c0d",
+            "parsed_response_sha256": "7497608ec20afb18c7329a4f17dd54ae6d5422bf7e841b8a134019d4840d8c67"
+          },
+          "response_json_file_sha256": "a067a6b2884f476677022d973474783dab06e0de889a42ed4b9a63aa31f6bcfa",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_046.meta.json",
+          "request_receipt_file_sha256": "c4f7015281965fdfda8d5d00b61dc15648c1c7a05c75949f769c4d868834724c"
+        },
+        {
+          "page_index": 47,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_047.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:23:58.700266+00:00",
+            "sha256": "55a8919bfa49d9269e1afa2da51e83ce93fd26c88b8014a822c420da34845448",
+            "bytes": 425381,
+            "request_token_sha256": "ae8d52d4c2e1409399f9c41a2733b0fec4f5371a28502f98bc24851c6e3396dc",
+            "parsed_response_sha256": "d4575642bea426a5a1c6c15e928785a78bb904285409405db50d6b30fbb61bd0"
+          },
+          "response_json_file_sha256": "e0fd6822a2a508333f5fbb9a9767f9385f3972c72a1a48495885f9c3a9087b21",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_047.meta.json",
+          "request_receipt_file_sha256": "f3b77e258f688e39287e676c919f065cea994c41350ab8226eb15ab8ccbfda4f"
+        },
+        {
+          "page_index": 48,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_048.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:24:02.749106+00:00",
+            "sha256": "82ee7063b9ca03b9efeda7e8057d22ea589ca002a6f2584b7b19ccbd0aaee174",
+            "bytes": 425452,
+            "request_token_sha256": "18c53004b5a6fdcb8c190b94a73b5d502e13a3611eb4fcf50c931baf20e98455",
+            "parsed_response_sha256": "3610162f6181ad53741617e051921c8875b6c3707e765099ad05fe0890958eb9"
+          },
+          "response_json_file_sha256": "108cdf1e36c47799eb6d6f7875503b2367c504f1443aa4cd6babd5153db5d5fa",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_048.meta.json",
+          "request_receipt_file_sha256": "c22bc72b2b883850fa9d10f15021f1af27ef252e6afadbd70afaa085b482321b"
+        },
+        {
+          "page_index": 49,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_049.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:24:06.871584+00:00",
+            "sha256": "846fcf178e0c79175d6d957dbfc8bf3b60f541de29e68e026c2b5f08f60dc524",
+            "bytes": 425659,
+            "request_token_sha256": "c0eb0dc75518e4e308785c845cbb767e97262ce4e67a9ee4111ce1a7d5a78b66",
+            "parsed_response_sha256": "5bbb0c2820404da50967c9f52ef4b441be84151a05a6188cf6966fb709451cfd"
+          },
+          "response_json_file_sha256": "f4695f914eccf843dd783ff83fccfcfe94729d7bb335153044445eaec4cbca53",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_049.meta.json",
+          "request_receipt_file_sha256": "2d416599933e904262f99c598256f9af71d1bdfba86aa143dccb35bce66059a1"
+        },
+        {
+          "page_index": 50,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_050.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:24:10.448600+00:00",
+            "sha256": "73f315bd19edd72ec7e7735776bdde4e005c50d09d128c69a71aa4cdbabb3888",
+            "bytes": 426238,
+            "request_token_sha256": "e928c42d0f7c2964d7d1d2d1e868585fab58c89cc9b7dae9be7496ab0e7e9062",
+            "parsed_response_sha256": "7c77e2de2bc6e15862159887d95b76cc69dc3b171bb634c105c9c37f06a870c6"
+          },
+          "response_json_file_sha256": "72b3e299f056cfc2777c958dd77eaedb2075416ec7a4b9c8a38fa4a79fca1d94",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_050.meta.json",
+          "request_receipt_file_sha256": "3e8769bdc70ae1ba752aaddb43be0ef5da48769c6d29c0f2049ac1168d5b11a6"
+        },
+        {
+          "page_index": 51,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_051.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:24:15.078976+00:00",
+            "sha256": "d1b8a79a2254f0cf689ddee187face5fbdd1c6aaac930d73b7c7228fb164466d",
+            "bytes": 425143,
+            "request_token_sha256": "7927627e3da2dbc7d4de1ec6184256b93fe295b2d408975107ec1010661be8fc",
+            "parsed_response_sha256": "39b77b70b2bb9d90260d709152ce3d69c230719357f16dbcbccb28ac8124d7f0"
+          },
+          "response_json_file_sha256": "dc9e872cb4b0824f66bd452f357ace45bbbac46c4acb898a34b5d529557807a7",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_051.meta.json",
+          "request_receipt_file_sha256": "8a04c213410e39f696a52d821892a5d933c2ab47d0e6f8b579c4e5a5b2841daf"
+        },
+        {
+          "page_index": 52,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_052.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:24:18.896181+00:00",
+            "sha256": "504cf99b6bb2e7199f4b853d38cef66bd64f9adf9a7326546740e2d5d7a16e64",
+            "bytes": 424141,
+            "request_token_sha256": "025c459659439c5a4824202a60446b95ebcd306ddc950a183ffc9d89ccf18616",
+            "parsed_response_sha256": "806505188821cf5288128776051e7963b6928a9deb2dae09525d813c382364c6"
+          },
+          "response_json_file_sha256": "adab218b57d9aa0e63aa0b3777e5aa1c4ace7fdf2e321748937b7c855fc69e97",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_052.meta.json",
+          "request_receipt_file_sha256": "719855e24b06e099ad83deba9b9624159426868f38e41eceb7aafad31ac72442"
+        },
+        {
+          "page_index": 53,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_053.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:24:22.645763+00:00",
+            "sha256": "d08db5a592f9161304f7bcabdbdfe21dae2ae47c92f3acfe39a93a6d0b02a45d",
+            "bytes": 425631,
+            "request_token_sha256": "b617132be149b6e3cf9b2288c5b1ea7e9f30daf8d06700e8b66dad73d570280b",
+            "parsed_response_sha256": "efb30139474d37d5c15c45ab8a819c214179936dbf19fc1c6eaad9bba037f2ea"
+          },
+          "response_json_file_sha256": "c7cbcbf164c1741dc5063b648b9af8cf12ad3001b22e4ba4c1d4822e884d6ffd",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_053.meta.json",
+          "request_receipt_file_sha256": "2a79c55ff7a59a0430154af13005a62bf80d096e23ddc4111bdbac26895186e9"
+        },
+        {
+          "page_index": 54,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_054.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:24:27.369212+00:00",
+            "sha256": "0b2474b020700e0f1227e9f5bcfe256791e595e92abdfcbdd478dd6846b93916",
+            "bytes": 426271,
+            "request_token_sha256": "327fb0e9dcb011e52fea347176854f5e3e6e05a62a7a442f167449d103dfed75",
+            "parsed_response_sha256": "e58eb4129be3b806cf48e9616305188b088e226122c274b7a9012769bfa04b53"
+          },
+          "response_json_file_sha256": "d41fc7d1a770bbdc6b6b0db89cb5ea462dc8159a9a3696bf882f792c7e9270b9",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_054.meta.json",
+          "request_receipt_file_sha256": "ce9569c44f7d4c5cd32c1e173d68065d21a7892e4451e770cc478c4a5f29d6a2"
+        },
+        {
+          "page_index": 55,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_055.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:24:31.078832+00:00",
+            "sha256": "d5c2464b3c07da8c69a60a9a266d0b6f8036ffa169293ede5838f5f1b4f35d4f",
+            "bytes": 426994,
+            "request_token_sha256": "3d0448f51b4943a60c4086867c827c8af73dfad1609f9cff3060522ee4162c10",
+            "parsed_response_sha256": "683bbd72df09834a98524a19f6c5466bd053e037f424308c63aa6c38304f473b"
+          },
+          "response_json_file_sha256": "75f6f8530f8a7d3cd5f69560380d25eebdd66dfc550ffc8ec8c974fc5630aaa5",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_055.meta.json",
+          "request_receipt_file_sha256": "6d3e068fdcf5e1fcf9f346868dd593295abc0edce1d834910bb2659dc6250b96"
+        },
+        {
+          "page_index": 56,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_056.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:24:35.052932+00:00",
+            "sha256": "3c5911aa6f60ee7fe1b7cf573aed8201dadc828ba96b5b196b11999c501acc3e",
+            "bytes": 425372,
+            "request_token_sha256": "67725ee9ef8907bfc01017d9c2578a7169692a85fd976b235c5f5a0ba822c826",
+            "parsed_response_sha256": "b9373ca0fba952fbda025093ff7e4a19605f3308a01ada70cf162a55ce35b06a"
+          },
+          "response_json_file_sha256": "de3c876ee3f45ef61b730c21ebb211f6043296e098406fab79c856d7be4aed3d",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_056.meta.json",
+          "request_receipt_file_sha256": "29b35919d7cf3a3e05f6fba169e7532dd4ead32239b5f148fa90b27c6699fad8"
+        },
+        {
+          "page_index": 57,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_057.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:24:39.285155+00:00",
+            "sha256": "a009eaa9007e8783721fb4bc6c0c03e0a893f29e9f3906b2f1a8f3385d7ed24d",
+            "bytes": 425065,
+            "request_token_sha256": "7aa5cbe74f0c588b51b76bc339d346850ceea54c2806d0ffb03d5c9cb4a27c70",
+            "parsed_response_sha256": "6ec466762a51182769292446d1dc3a9eca21e4cfe22678807f53269e548b09d5"
+          },
+          "response_json_file_sha256": "1af8e9515e5f367d3482dd12925f1b8778c44b47df5ccf65da79f5178e9d6b70",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_057.meta.json",
+          "request_receipt_file_sha256": "0740f37f3d3ae385891e8122611c4e3a536338c0eb53386391647a0f040b49be"
+        },
+        {
+          "page_index": 58,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_058.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:24:42.856589+00:00",
+            "sha256": "a84d4b56f5d164c98909365d0556e630e19a4dfdd3f7f7db4b06402b927373cb",
+            "bytes": 426046,
+            "request_token_sha256": "34e16839eb4512a1cf0d2e33bde6912333fb4a26a137ecfc885144e1c7b39262",
+            "parsed_response_sha256": "066a90981a3c63be3dc12b7d06d19c5114107d705871e085e5903ae0ff111b2d"
+          },
+          "response_json_file_sha256": "219a8a32f3d733c264abcfd15422de7763c30d0a04e02f3d7fde417897ceef7c",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_058.meta.json",
+          "request_receipt_file_sha256": "b2cf1eb14df8cd39528f1433b9c665b41dce3f5589b7444ae238580c92fd4001"
+        },
+        {
+          "page_index": 59,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_059.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:24:47.219104+00:00",
+            "sha256": "271eca290edd07c32bb6164024c96f295064c46fbdb4ce4e4aca8160de36f244",
+            "bytes": 425038,
+            "request_token_sha256": "73556647dfc5f7bfa0790d344e5178f5dff91096728706520543fa26f32fc627",
+            "parsed_response_sha256": "e876d9ee0b30c3d6b5fe98a648ee86109f891d1822dc73e7a6bc1e227f88e73f"
+          },
+          "response_json_file_sha256": "7e000c79b0b8ba7a71904117d514048d64340179a2d26c8e4e73a255475cd506",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_059.meta.json",
+          "request_receipt_file_sha256": "378d887c6f266ff98488b712a20cd092f9c95b52a4b638845e3d01117c94f5af"
+        },
+        {
+          "page_index": 60,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_060.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:24:51.376756+00:00",
+            "sha256": "875845fb752509ba0cf07ac068e4041ac692999d51a6929f4a9a43581239655e",
+            "bytes": 425703,
+            "request_token_sha256": "9d1ef1bdf4ca67cbdc3ff739e58980009404002c8a3d65adc6e8f68c0604c6e1",
+            "parsed_response_sha256": "1ef7ec4df460bb579dc0d1742f14e6fcfe1ea3fb6124267be81d507cc587c491"
+          },
+          "response_json_file_sha256": "bc5d77d54e7ba4a9a110c38cb5874fdb19bf2bae3892c062593ea6a43175140c",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_060.meta.json",
+          "request_receipt_file_sha256": "2c0eac9532717d6d34359fd14d8fa6ee37aeec986701a6229fe15c2e8d2b78dd"
+        },
+        {
+          "page_index": 61,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_061.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:24:55.285037+00:00",
+            "sha256": "6000acd629235f2c476e6168e89b543b5a7f4b5609932bcc0c015e41ea39a3e0",
+            "bytes": 426090,
+            "request_token_sha256": "0d15adb75012c49b1744c69feb7a85a07551b05363c2ffb6a4d64d4d8223f16f",
+            "parsed_response_sha256": "f669dd598183b58ee0165b394006100f9a21f330f840038142e67c3de55a488a"
+          },
+          "response_json_file_sha256": "39e44c68c56e44702990c9332f148d0d0e0766d15fd01cf80e848de03c4fd3cc",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_061.meta.json",
+          "request_receipt_file_sha256": "bcdf70e529471c50c61cb92026eaec642c36a81c4ad15318e5e5767e3c4b6c7d"
+        },
+        {
+          "page_index": 62,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_062.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:25:00.611483+00:00",
+            "sha256": "9f5385a3899b2540cea9396224dc757ca4e5ad6eefa326de2d4fbddbaa427a6b",
+            "bytes": 426207,
+            "request_token_sha256": "14444e0e83dc14eb511f1860dd0175f119566266bda6237c53552e936ca949ce",
+            "parsed_response_sha256": "90b2b8d8206c9d92a797f2d3e09d1cc9dac9522c1ff4b887a91c7af2118863af"
+          },
+          "response_json_file_sha256": "a6ccd20002f27db37ff42652c620391910bde23c07488368af1ae770792f5e4b",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_062.meta.json",
+          "request_receipt_file_sha256": "8329bdd5582e41c4ff0db021460eaab685ea5e363411bf8e58d0946130b397a6"
+        },
+        {
+          "page_index": 63,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_063.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:25:04.478624+00:00",
+            "sha256": "b1f198ab1312d84b528c2d3f2ad930108705e188a561f1114dee446b154690eb",
+            "bytes": 425129,
+            "request_token_sha256": "1b09b0ad7dfd57bb475672fa9a9ad06745b8effdd210c6ee76236581381cd7ce",
+            "parsed_response_sha256": "7faf578871eab33d29de6638eef90ad8e761c6418f88d7a2cb99762950171d65"
+          },
+          "response_json_file_sha256": "685edcd7bbe26f99ec63d81c05e5ad0cbaea3db176a21fcabf89f34d6a322f6c",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_063.meta.json",
+          "request_receipt_file_sha256": "7594a930ba381527d71cc795aae52fdc575b25c4d102ca890cf20d6a5cced452"
+        },
+        {
+          "page_index": 64,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_064.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:25:08.843310+00:00",
+            "sha256": "d0f114a7c50d05cabaab197d9ddf9943f63e446fd9c0c4d2445c97cd0a9cae6b",
+            "bytes": 426283,
+            "request_token_sha256": "f3543691c514b09bcb1f91a7169ef3ad24740baf8493c7842214ddabdcb42b71",
+            "parsed_response_sha256": "6dc552b2cd2b181e42124ee4b669924b3c13f17673908c8cdb27714b521fc19e"
+          },
+          "response_json_file_sha256": "01f02103424d8a8bb3ee8057b210706bd2d75869fad9a9c30abd9aabf91de74b",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_064.meta.json",
+          "request_receipt_file_sha256": "487e47986e7859cb393c371461b3c095e55a56d335c7bbf27af934897c29c14d"
+        },
+        {
+          "page_index": 65,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_065.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:25:12.575394+00:00",
+            "sha256": "e5bf66b441084cb298c51fe1402631495bf2c3c86c7a4dfc468b07fe2da8a781",
+            "bytes": 426969,
+            "request_token_sha256": "8655a98640d409a21eb4e18a55da681f76fa7d7e1162d5b6256876111e777849",
+            "parsed_response_sha256": "b53000d7b30783a66aa8c783e9f9ae54dc28250b6ba80df01ad2960f9e6a02ce"
+          },
+          "response_json_file_sha256": "0b59e47e13eb5ae9869f3c43525e82f3b544f0f0735a7ec35b167a4e16212538",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_065.meta.json",
+          "request_receipt_file_sha256": "617bfbde858844a9b25b0dee3966c803490503c26f06dbd2ac542d335185293f"
+        },
+        {
+          "page_index": 66,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_066.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:25:16.906111+00:00",
+            "sha256": "9cdba723a13f753d7efb5949e423e1a9faf2bf21ea9775387e88bc5cfc45881f",
+            "bytes": 425790,
+            "request_token_sha256": "bc2de75a76bda305939ec97efd8543a8f503efadcd47ccdde7e2ade5d669e8c4",
+            "parsed_response_sha256": "98d3e623aecc8938f706000783ec7a8d6fd8e3cafa435afe938cd61dc9d5d068"
+          },
+          "response_json_file_sha256": "8961392e9a560fdcb88c7ddc557642b42ab2cfff687d56cc19e224b5c88d682e",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_066.meta.json",
+          "request_receipt_file_sha256": "64df170f6b08954de5ddf85a4a47dd0bc3db60d38388330524a41a1481b9ad37"
+        },
+        {
+          "page_index": 67,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_067.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:25:20.579312+00:00",
+            "sha256": "0e869a495864e5f46214c0d44eb9b415cb84d07bbd9862109b48c3ca09529f04",
+            "bytes": 423967,
+            "request_token_sha256": "56e157f30eff4d0d387c02b8b2c54b729dddf12fadd05e336d7070c212c38ced",
+            "parsed_response_sha256": "a941d7b3110471f4813913d0a9a0e41d0678bf9fe7d42c4d4bc66100406c1d77"
+          },
+          "response_json_file_sha256": "39faa4c854a99310f5d97b7ecc022cdafca6c6606f174a385cee5cb83c4f2438",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_067.meta.json",
+          "request_receipt_file_sha256": "3434993582644e45d920761f7c5f229e9ce13fd60f3c0146af8f29ffc9e8489a"
+        },
+        {
+          "page_index": 68,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_068.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:25:24.391286+00:00",
+            "sha256": "09b2381edc4d3f7b11b6f3b53112267cc96c477c7cebeff0664b549dba6a977d",
+            "bytes": 424963,
+            "request_token_sha256": "00a3130bf761cc8f18cc5140c3a078b95f95ed24a24e85ff2e93e218fb979100",
+            "parsed_response_sha256": "ea36e7cbdb29d32a82e34fec9fd125d04d725e042e9f99b49573e0640ee142d9"
+          },
+          "response_json_file_sha256": "14f50aa320aca3857b06ba307900ac3e5348536189bf6b76ff1330e144cdcc25",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_068.meta.json",
+          "request_receipt_file_sha256": "6c617fe6dffeb426dc226e445b32b9bfa78685dc770968e016e2e663165a0ad3"
+        },
+        {
+          "page_index": 69,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_069.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:25:30.311269+00:00",
+            "sha256": "8000c76508190ef042ea2ab0aba0a4e8fc37b61ce09eb3db449b7071bacfe13c",
+            "bytes": 425318,
+            "request_token_sha256": "85dd54d1126736a0f0d79c1830b9a82d562846c8f1e282a0b08d45ed4123e77a",
+            "parsed_response_sha256": "7ea77538189f4a50272106217897c347de1447f77dc27928637025b3cac94e0f"
+          },
+          "response_json_file_sha256": "a10044e565f359c004b57b1fcf2b2e0c47d856131b7f8ce683a7f33ee81b2e79",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_069.meta.json",
+          "request_receipt_file_sha256": "b8d516d7732b07cd2205c13e4af2257d0f4aafc51baf5ad4f0953ca6cfed389d"
+        },
+        {
+          "page_index": 70,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_070.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:25:34.650754+00:00",
+            "sha256": "ee9168dc0aa8579bf2269ed667b35af61ac65b5a7b30d404b305d7b05291e2bd",
+            "bytes": 423872,
+            "request_token_sha256": "64e093050d4528ab21c7111eed2e4be00e6e74b1a1ec4e20dacd26b9a9f1d38d",
+            "parsed_response_sha256": "6af6cb02fbcc7da69194a2634e1285d60981b7eb9916c8c2bee139b5b5ee68e1"
+          },
+          "response_json_file_sha256": "a909ea39e36d4bd58e7f94445584adc3f2f27a65e48f21a65d2d6058203e883a",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_070.meta.json",
+          "request_receipt_file_sha256": "a27f6b49f3d33e8e4068ab5ce80a6fbdecc3cd13634a4bb2a700ee1ea5a51313"
+        },
+        {
+          "page_index": 71,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_071.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:25:38.754471+00:00",
+            "sha256": "c108c26aafc48fe590cb55886f80f4f2e6ec09959eb61132c8aeedc92bfd41e5",
+            "bytes": 424771,
+            "request_token_sha256": "064cc7b16b99439f35c73edf86be85e14fdac72044af272cd8ba0010131fe2ae",
+            "parsed_response_sha256": "8d6aaffd64d6d264f3d8b9187a7ea75cb4ee037611370ba53417c26decacbe00"
+          },
+          "response_json_file_sha256": "c0469d5f14bbe1370d47cec64c94f12ab451f5bee6b2d7556ac1331cb48704e0",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_071.meta.json",
+          "request_receipt_file_sha256": "b479163765244d24bd90a6783bd6a516bf9b94b1e25e0226b174cdab43279363"
+        },
+        {
+          "page_index": 72,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_072.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:25:42.705498+00:00",
+            "sha256": "35e6d115b49d7758ad7fcf82e35bd8346300453c70ce3c69c82a7d4b80f93e6b",
+            "bytes": 424421,
+            "request_token_sha256": "483f96a9c15f158348b1df95eee387114b5b9c2219cfd32833a674cdebe5ae75",
+            "parsed_response_sha256": "ab7b6f06920b9cc2093109a5d8c63d21342eeaf7f84a90da38b1c8a3a0127658"
+          },
+          "response_json_file_sha256": "9700a9cb28695c4df1474936a1ae19b815f633f3df617ea4df20fabe4b524f8d",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_072.meta.json",
+          "request_receipt_file_sha256": "1273323fd37099455448b7887600630b64d63a193fcf707b778ea812a9d59b21"
+        },
+        {
+          "page_index": 73,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_073.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:25:46.606537+00:00",
+            "sha256": "81545a6a72fb9dcc1fe18e96ba029c20d19eb9aea4fe6c87e8530e972ab7e8e0",
+            "bytes": 425447,
+            "request_token_sha256": "7ae56488d9dff1bebdc4001b37a472fdc36c891279caa664a82e232b4ed14163",
+            "parsed_response_sha256": "371bc87191e764e1cfb1afa529ae3df73c9b5c479e00c6ce9fdf9b13d4be7533"
+          },
+          "response_json_file_sha256": "4a76bafc52a81fca63ebfbc88db4acfc18dc1828f7fddcf854cda1f27802707c",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_073.meta.json",
+          "request_receipt_file_sha256": "f8b50bdd9458d7b68fbdfd73f7be28ac2fab9d834b442d1f5f1442d3d3b0ec68"
+        },
+        {
+          "page_index": 74,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_074.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:25:50.689117+00:00",
+            "sha256": "c57d42c8c735b84755a68ace2c0a5796c3c7890651dc184a1e03871359848c38",
+            "bytes": 425959,
+            "request_token_sha256": "7ec2cc10aedc3008540918f11c82f8d46d78beb0da6ec21e90c54ce139843ea3",
+            "parsed_response_sha256": "40be80a2d9d1bf800cfd0864137437cf5d0594f97bcf5b373db6e75382af775f"
+          },
+          "response_json_file_sha256": "40a89cb5e1511d24cfdf9201446a1f5d4ffb1134b389ee75a637bfb7c969e578",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_074.meta.json",
+          "request_receipt_file_sha256": "3b722f2a36f539902dabbf6ddcf0c11d5cf08d33e29d876b71aed2567205337c"
+        },
+        {
+          "page_index": 75,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_075.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:25:54.500943+00:00",
+            "sha256": "7b181485a19f9122f31dec2d85f009ca7c21c074aaf6573abbb7143abad51a16",
+            "bytes": 423681,
+            "request_token_sha256": "1a99261ef25c23b67e495dd010d17f50efb82f32e7ff83ae4a7dc260aa4b5509",
+            "parsed_response_sha256": "209b1c296255effcdbb4b96cd8db212f4606108fd56f8585fcc2b0037d98ca62"
+          },
+          "response_json_file_sha256": "f2d81c7f5f4e881d1908d83dd6915b13de899c6d64945e9e5c1e8ac8f9c893a1",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_075.meta.json",
+          "request_receipt_file_sha256": "7358580ab8f057fe4d3e6e412d7db282e09bae207fb9490ff4ed72a0d31e9621"
+        },
+        {
+          "page_index": 76,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_076.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:25:58.668306+00:00",
+            "sha256": "98ddcb86655d209ddc97d08e14bc2b9b90a3ec498c0bd2a96adc014639ccd16c",
+            "bytes": 426741,
+            "request_token_sha256": "6d2432d26b16dd8a55d7e78db4066c886828754d1213e5443a28b36d9a1ab1ea",
+            "parsed_response_sha256": "3ae39169eeb93bbfbb68aa66fc066c4a1a35b4cec3b9c1ce3caa6f8ac549e756"
+          },
+          "response_json_file_sha256": "16e01fb4546323cb5a970235dbabc5e78407952d641222769a6e01c6cb8ecb3c",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_076.meta.json",
+          "request_receipt_file_sha256": "f5131bd3828beb519dd29ef0c119f88c4f9639411fb589dc306aa2738d0ea8eb"
+        },
+        {
+          "page_index": 77,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_077.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:26:02.548874+00:00",
+            "sha256": "d28096c5c3bd306f1e5514ef3ac138a5da2018d2bbc3f18b9d7054982ac970bd",
+            "bytes": 425779,
+            "request_token_sha256": "ee7ee03f782505a6413763139feb3f5ed0c177b2f79c1a1c7bfc0bf5e1667be7",
+            "parsed_response_sha256": "f3610aba1af466c645536b0b97cad7adf6ba4b27c7e40dd546296c0ec94907ff"
+          },
+          "response_json_file_sha256": "587fe33c6576366659ce6bf04761b88d7e2e2dfad423f62ee53d0f68e29664a1",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_077.meta.json",
+          "request_receipt_file_sha256": "7bba8003a92384b2ae1ceefe805b18e79d2246661d5f679ea879c3b463efab77"
+        },
+        {
+          "page_index": 78,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_078.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:26:07.112021+00:00",
+            "sha256": "264c7c261d95d4c16af6334de2e1ab37436c4ea482f03f223d97c88fb0aa7ee7",
+            "bytes": 425285,
+            "request_token_sha256": "9178c95f461982390ad18910aa070b1fd479b96552174dc832beb9526641cc76",
+            "parsed_response_sha256": "2f5d5ec17b5a0cf09829b14eff88a4e6177fe2cf62309c92b591cc546cf9229f"
+          },
+          "response_json_file_sha256": "e21ee844c9bcfb5a69db3cc07015fb7d55e47e5e97c89ad03aa6752b7c034f0c",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_078.meta.json",
+          "request_receipt_file_sha256": "d013c5f5bfac990a0fc61b3d39aa18a636779735fb5d7d6894d22bf680f77e38"
+        },
+        {
+          "page_index": 79,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_079.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:26:11.731698+00:00",
+            "sha256": "9ef01d7cc7c4c77e28e79647dbd6f2e81287852bf8048ed6dab8e77a7a93b47a",
+            "bytes": 425224,
+            "request_token_sha256": "1c13d0d9ab157083b303167d0025e37813d1c0415c363ed363e0f4416fecf1f4",
+            "parsed_response_sha256": "9424587d0b90c354f1672b001107a88e3c09e4dc76dac96fdb8f796b125af735"
+          },
+          "response_json_file_sha256": "9e73a9e1139b6e7ad7abb10623fbc1180f5cc8413c7fd3ad6abf17c90902b466",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_079.meta.json",
+          "request_receipt_file_sha256": "8068dd7a06dedddd4b55f4c8548d7f5969dabf2eec9448249399dce2865ff8bf"
+        },
+        {
+          "page_index": 80,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_080.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:26:15.534668+00:00",
+            "sha256": "de280da702167bd4d726b6806a5e4d6a2a3258abd704664523d401e53e93b39b",
+            "bytes": 424935,
+            "request_token_sha256": "b4c1ebc62450a2b7bdc5a33431009586fc9d50be7ab92be21d7f1d96a2d3f8bc",
+            "parsed_response_sha256": "861ed8b1bf07a02dc2ca65645f6d48e1f49efd62e95d9ed3ce1f90099349ceaf"
+          },
+          "response_json_file_sha256": "d0d88524b9bf0a574b91f0474912e89d920e8399c2e130d1a1c0f55ebf9e7648",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_080.meta.json",
+          "request_receipt_file_sha256": "c09c26a576513e3a61b7b9565da26996b75eae35cbbfae25cf542133e30fda5b"
+        },
+        {
+          "page_index": 81,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_081.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:26:19.498490+00:00",
+            "sha256": "124f7e935357f2d0a7a12e2ea68b221fe122b3103f6401b7ed6e81e5f9e6565b",
+            "bytes": 426730,
+            "request_token_sha256": "3dbf43c99347c2002747fc8d28b20e2527649a5a5e4182893378b56e0eb799db",
+            "parsed_response_sha256": "15362d1069f7a1750846b2859054388c2e94b1c9fedb207df6fc24e73f8e7fdd"
+          },
+          "response_json_file_sha256": "813af8ff50e8f04ba55f1ca23fa06a0c66ffa2f406a6ed9a3b63471aa876a8cc",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_081.meta.json",
+          "request_receipt_file_sha256": "95d8bd0f1d8f11265905d50d02e4ac2173cde395c95014ab59b07983789ebd68"
+        },
+        {
+          "page_index": 82,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_082.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:26:23.556546+00:00",
+            "sha256": "7bede75c3078f9da95a41f493b49626984680370b67a6f4461168576a2d8df58",
+            "bytes": 426132,
+            "request_token_sha256": "2668f656cc8f13384c4e7a425b0133e636b8d6261a6665585d7e32d599e5e4bb",
+            "parsed_response_sha256": "fd08632c658165cd652a045434145ccc0b90c97ebfcb427047b860980d4ad32c"
+          },
+          "response_json_file_sha256": "8d2985955de1cb8ca4487b53a952ee79857a3e0fd542a14f53dc0a4dcee275f6",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_082.meta.json",
+          "request_receipt_file_sha256": "cf045ef1dd96a0025fd5227e586fcaa55986f759988ef675395c95617cc315e1"
+        },
+        {
+          "page_index": 83,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_083.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:26:27.501849+00:00",
+            "sha256": "555fde5c892895f1bd60276583b6f5c2f443268798e6be4f96131f91e0cfde7e",
+            "bytes": 424507,
+            "request_token_sha256": "8f384718d5fb5b56310326d2d4bae6fd8a14a5162fb2ef520d33b27646722c23",
+            "parsed_response_sha256": "443c85d61273845fb505078b2e0f545abe4bb3e90b1533433b9323ebd319991e"
+          },
+          "response_json_file_sha256": "77aa11bf7bf1c5bf407f371537d6f55681d65afd94cc408f19ba53eaf2119501",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_083.meta.json",
+          "request_receipt_file_sha256": "81f834aab056b449612c7b1a3490f4acb5bdab0b6de8014f4adb542a077a5842"
+        },
+        {
+          "page_index": 84,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_084.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:26:31.778191+00:00",
+            "sha256": "13d3a8a7858efd1992d856533f43d7b18aded16e0eeca8a32377e4d8e1a2de87",
+            "bytes": 426366,
+            "request_token_sha256": "ddd737215b6c61efcb2494782c1407ea3a529a3c3c2526b2bd9250764a061ef6",
+            "parsed_response_sha256": "48332df87e8f0bd5cb393d3328c7a3b38d1465b552093e1f9baf843e69b7bb9f"
+          },
+          "response_json_file_sha256": "11e64dbcc80adfb8bfc5a8996b2d248a5f5624ab4b0b92af2ffc6976b001b72f",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_084.meta.json",
+          "request_receipt_file_sha256": "5b1600cbdd758948ba63d019821d086b29f4437af66e5aa4a9892a4f4df28371"
+        },
+        {
+          "page_index": 85,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_085.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:26:35.754921+00:00",
+            "sha256": "629eedf07c27e3b3a7a74f7cb5187d2a0f5899d865ba59f0ffda63f972e650ef",
+            "bytes": 427165,
+            "request_token_sha256": "f39182121618c1212dc9dfb038723d0eabbc6b3fa40980dd4c5a33da4c66096f",
+            "parsed_response_sha256": "0476c2458a3b2e0980fc82d48b15ccd37ef4207ce589fb6f099bb8f3031d885c"
+          },
+          "response_json_file_sha256": "09ecc839d29bd04b60936988e01a6e5b5f41362e54f9865ac72bedde4af2db68",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_085.meta.json",
+          "request_receipt_file_sha256": "73b4c25b38a1c630a4c33e7c52c9c3a941681d8e1f1d0b496768eb5243c506e9"
+        },
+        {
+          "page_index": 86,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_086.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:26:39.844070+00:00",
+            "sha256": "1262197eb9c91ffca19daef8e0f2aa399f81e60daaf383ef13f724f207c52cf1",
+            "bytes": 425422,
+            "request_token_sha256": "8d5f0bd338fe757d2af4a9a65336c7bfef76aed6b32b512ccc3cf45d691700e8",
+            "parsed_response_sha256": "dcdb0fae84913164131bfc7e6a1ef3711f6440f9cbe1a1836f91e510543b815a"
+          },
+          "response_json_file_sha256": "12f8bab3efcda131262b696133e4f33f5686960829d86f1a09e0a3813555b7bb",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_086.meta.json",
+          "request_receipt_file_sha256": "b3f705a5e56a617c7c40dcb14ad6b52097e3f3a400a6ad9f08f117541ad8bf90"
+        },
+        {
+          "page_index": 87,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_087.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:26:43.909222+00:00",
+            "sha256": "2b8df3df5c43bd425be927333b7f9d825a65b369b2933383d3a4f7dc833d71fb",
+            "bytes": 425872,
+            "request_token_sha256": "21b6dfbbf335dd43b7b1d4f1a792c0d4bdd0960332eed56baa1f95ffc0ddc34a",
+            "parsed_response_sha256": "823e69b1b86a96a21b974653cb8281e021235bc66f41a5728e9275100290b88f"
+          },
+          "response_json_file_sha256": "995c0171d4cef669b9df8ebfd8a75602d3ae286e44ccc516b85487062f9e8d30",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_087.meta.json",
+          "request_receipt_file_sha256": "30ea95a5d2552a219ed7acef95691fa7c84195bc880938e6c6744c9b4064ee9d"
+        },
+        {
+          "page_index": 88,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_088.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 23,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:26:47.870914+00:00",
+            "sha256": "ad7ddfd1fe95258c08d7d5f2c8911e80e7da416d429cba1574f790fd2976e621",
+            "bytes": 322017,
+            "request_token_sha256": "aa2d060cbe2c6a25da2651ed418a9436b53ed6a7c32f237ec72d448698c71d4e",
+            "parsed_response_sha256": "95de0d9bf6ac3780198b0a851744d1d8a18a2543ba46334fb92dd1454ad75794"
+          },
+          "response_json_file_sha256": "ad09eb63db2441fc0bb1473b894a65e5b2f0921092953917de38fa33fd59be3d",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_088.meta.json",
+          "request_receipt_file_sha256": "8ef98740d239d133aa39be03a9bf9a00feff7edefc10a9ea78daa007738b3bc8"
+        }
+      ],
+      "errors": [],
+      "declared_items": null,
+      "original_fetch_time": "2026-11-03T20:19:11.924638+00:00",
+      "selected_tab_title": "Videos",
+      "target_id": "6b02fe7e-0000-2bc3-99bf-d4f547f841bc",
+      "pending_token_sha256": [],
+      "status": "exhausted_count_unknown",
       "pagination_exhausted": true,
       "count_reconciled": null,
-      "declared_items": null,
-      "visible_memberships": 2663,
-      "unique_video_ids": 2663,
-      "hidden_unavailable_count": null,
-      "notices": [],
-      "errors": [],
-      "pending_token_sha256": [],
-      "provenance": {
-        "catalog_path": "inventory_work/deep_channel_videos_full_public_catalog.json",
-        "catalog_sha256": "da05d1788e7470154e14c3240fe6119590f47e42d08bd8bb6dd63f13abe97a41",
-        "terminal_cache_path": "inventory_work/public_catalog_cache/deep_channel_videos_89.json",
-        "terminal_cache_sha256": "9febfda7cce8a88341e5553fae8e6a3e356e0d01137e09afbde7071f3158894a",
-        "terminal_continuation_shapes": [],
-        "original_fetch_time": "Not stored by original crawler; reused snapshot, not refetched"
-      },
+      "unaccounted_declared_items": null,
       "returned_memberships": 2663,
+      "visible_memberships": 2663,
       "normal_title_memberships": 2663,
       "unavailable_placeholder_memberships": 0,
-      "duplicate_memberships": 0
+      "unique_video_ids": 2663,
+      "duplicate_memberships": 0,
+      "finished_at": "2026-11-03T20:26:51.601385+00:00",
+      "pages_checked": 89,
+      "retained_memberships": 2663,
+      "historical_memberships": 0,
+      "historical_video_ids": [],
+      "fresh_state_collection_key": "channel_videos",
+      "previous_selected_snapshot": {
+        "collection_key": "deep_channel_videos",
+        "collection_id": "UCay5mclHBbWQTQ8fhoNCWow:videos",
+        "collection_type": "channel_surface",
+        "source_role": "reused_channel_discovery",
+        "source_url": "https://www.youtube.com/@jepcolombia/videos",
+        "title": "JEP Colombia / videos",
+        "scope": "All-channel discovery metadata only; no Casanare admission implied",
+        "status": "reused_terminal_snapshot",
+        "pagination_exhausted": true,
+        "count_reconciled": null,
+        "declared_items": null,
+        "visible_memberships": 2663,
+        "unique_video_ids": 2663,
+        "hidden_unavailable_count": null,
+        "notices": [],
+        "errors": [],
+        "pending_token_sha256": [],
+        "provenance": {
+          "catalog_path": "inventory_work/deep_channel_videos_full_public_catalog.json",
+          "catalog_sha256": "da05d1788e7470154e14c3240fe6119590f47e42d08bd8bb6dd63f13abe97a41",
+          "terminal_cache_path": "inventory_work/public_catalog_cache/deep_channel_videos_89.json",
+          "terminal_cache_sha256": "9febfda7cce8a88341e5553fae8e6a3e356e0d01137e09afbde7071f3158894a",
+          "terminal_continuation_shapes": [],
+          "original_fetch_time": "Not stored by original crawler; reused snapshot, not refetched"
+        },
+        "returned_memberships": 2663,
+        "normal_title_memberships": 2663,
+        "unavailable_placeholder_memberships": 0,
+        "duplicate_memberships": 0
+      },
+      "provenance": {
+        "state_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/state.json",
+        "state_sha256": "689c089543b48cd6f17ad37d2eaa408c6ee3cb17e6b48efed7a18b80b700b2b1",
+        "original_fetch_time": "2026-11-03T20:19:11.924638+00:00",
+        "last_response_fetched_at": "2026-11-03T20:26:47.870914+00:00",
+        "finished_at": "2026-11-03T20:26:51.601385+00:00",
+        "basis": "Fresh exhausted selected channel surface; retained per-page request receipts and parsed-cache hashes."
+      }
     },
     {
       "collection_key": "deep_channel_streams",
       "collection_id": "UCay5mclHBbWQTQ8fhoNCWow:streams",
       "collection_type": "channel_surface",
-      "source_role": "reused_channel_discovery",
       "source_url": "https://www.youtube.com/@jepcolombia/streams",
       "title": "JEP Colombia / streams",
-      "scope": "All-channel discovery metadata only; no Casanare admission implied",
-      "status": "reused_terminal_snapshot",
+      "source_role": "fresh_channel_discovery",
+      "scope": "Channel listing metadata only; separate Casanare scope admission required",
+      "started_at": "2026-11-03T20:26:51.644176+00:00",
+      "pages": [
+        {
+          "page_index": 0,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_000.json",
+          "list_json_path": [
+            "selected_tab",
+            "richGridRenderer",
+            "contents"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/@jepcolombia/streams",
+            "response_url": "https://www.youtube.com/@jepcolombia/streams",
+            "method": "GET",
+            "http_status": 200,
+            "content_type": "text/html; charset=utf-8",
+            "fetched_at": "2026-11-03T20:26:51.644307+00:00",
+            "sha256": "f94333a930cc291f22ff0bbad5fe0801c46c6b45c0fc0020a3621123e965c9c2",
+            "bytes": 1304956
+          },
+          "response_json_file_sha256": "9ec3fa304f0d6b1677ef5d8f57b87b87f6057c30d3539f1817d92a2b8b912b64",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_000.meta.json",
+          "request_receipt_file_sha256": "ecac13fad9894ae1017f3371c57c53327d497ce6a390cb80ec09974a74041801"
+        },
+        {
+          "page_index": 1,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_001.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:26:55.933294+00:00",
+            "sha256": "5842e334f6241e557d2afb68763ce24254ab0b9eb8ce89c371d747de2cfb41e9",
+            "bytes": 426202,
+            "request_token_sha256": "e5b5bb1181eb2954a71bd626eab9ff34c3bed2ac42548cde3ce70cdc622cdb7a",
+            "parsed_response_sha256": "85fce870b5bc5c4f9acc79d2a0416f1128f90ba790d114c7f49fd21d46fd403e"
+          },
+          "response_json_file_sha256": "e904af005eeaf631d5a5f35f9f509a581ceb3fe55581d3c28219823e81d43201",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_001.meta.json",
+          "request_receipt_file_sha256": "7541710cb88ed6565bb15482fe67140c3f234e9645cd4ec5864ee9b9fac9d623"
+        },
+        {
+          "page_index": 2,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_002.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:27:00.467143+00:00",
+            "sha256": "6d60015ec43094209ff87958f9c81010ea8f01f9a8efe2f3283f1caef00bc986",
+            "bytes": 425972,
+            "request_token_sha256": "1e71675ed44e116a486ce6de467f06831d7209906d5d26c98d7f46d451795aec",
+            "parsed_response_sha256": "cc2beb26f71782c46112a6cddf5edf4f5bdb999d7d35d2640eefc4116ff837ee"
+          },
+          "response_json_file_sha256": "6545868c0f3b35253a6a310d22d1da701ca025c08fd2e82f22d03577efc97f8e",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_002.meta.json",
+          "request_receipt_file_sha256": "6a28988a7381be7dbb0823bbfb411415da1c0fda964c23539df7b6dd704bc483"
+        },
+        {
+          "page_index": 3,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_003.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:27:04.161021+00:00",
+            "sha256": "8b580d022babc3314716b6d9e0c3bb50f4fd2d1c0a811021fd9eabf6c21b1227",
+            "bytes": 426547,
+            "request_token_sha256": "e1a30757219adb818b774440f2d6d25407cf0b14d146e0f5f14bf09848fdef20",
+            "parsed_response_sha256": "8d20490d9a39c101ffc6e834b171fbe568cbc4fbc87c1eaac093c56a84481b08"
+          },
+          "response_json_file_sha256": "36a879c143e339e22b5eab170c51f43a8589acf6927a94c435da1fc9ecb5c545",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_003.meta.json",
+          "request_receipt_file_sha256": "95ad6e0b1f0f38434adc82ab32afedfcb76ef025740b7655241d5e2b47fb2132"
+        },
+        {
+          "page_index": 4,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_004.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:27:08.898464+00:00",
+            "sha256": "b803e3d151398dc8c7b76a8451438190fe23101145261eb3dc5c026047b58922",
+            "bytes": 426770,
+            "request_token_sha256": "8835fa9935f09418876e7a1f3e37214361546f40b87c46730f046a7e885a57cc",
+            "parsed_response_sha256": "40c4e7f0068f992fc10f7746bfaf4a6961e8a0599192b8b60c8f98023cb658ab"
+          },
+          "response_json_file_sha256": "e1ced13cb92bfe6e46a026fdb76a799487eb55f4969b63f9f1e0dfe2d80d8371",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_004.meta.json",
+          "request_receipt_file_sha256": "5002229f9e38c60b777bc53d46dfb72c9d28024e8104889768379a6d56be977b"
+        },
+        {
+          "page_index": 5,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_005.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:27:13.011462+00:00",
+            "sha256": "8a33b01a971a153148ab587971b5722fdb01782a5f24675e062a4bdd50216667",
+            "bytes": 426162,
+            "request_token_sha256": "761b7a84edc58550332ed59639ced2ef1ce22504f9c3ec5d5924ec3113a67df6",
+            "parsed_response_sha256": "dfe4f29594661b06c6e5baedb766e8c361849e81f13305c4557e53f486aff3ed"
+          },
+          "response_json_file_sha256": "34d792ce4c838e30536b872f566c02c8063dc0534c60c41b57d6a03f79d13164",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_005.meta.json",
+          "request_receipt_file_sha256": "bba52a465d688947f62a9f62f6574dd654d74f0b5a6ad425e2fa4c6a72b0a0b6"
+        },
+        {
+          "page_index": 6,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_006.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:27:18.532256+00:00",
+            "sha256": "77ba72907cdd6f660f8fa0003e5614fe65c76a94abd30a6ca4c9e8bb55adb771",
+            "bytes": 426082,
+            "request_token_sha256": "eff9a6317e55469f9d2c4cc551dc42e2d04f122904f4e1f318f862bd54cba779",
+            "parsed_response_sha256": "d7c78ce4b311cea7e5d7ffee704ccbedd1b761dee3291e184829862f9b8d765c"
+          },
+          "response_json_file_sha256": "33252d009cd15f36498d6adda05f1b55ff907f19f5291aec4fdae91657697e5a",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_006.meta.json",
+          "request_receipt_file_sha256": "cf65e6f4eb8735ed3cd429da30a8c106793967a8cba301c9a2d4aa740e004ebe"
+        },
+        {
+          "page_index": 7,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_007.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:27:22.312773+00:00",
+            "sha256": "69ea157688f0127eeddf6396f6dff533a5177fbcb82d3d31100dec23d5fa79df",
+            "bytes": 425869,
+            "request_token_sha256": "cf42fe33dabc7ce37758f3f2914f0a8cb739842d42278d8dae46eb72d9575453",
+            "parsed_response_sha256": "1a822cb94d0ebdf19d18920beced6798e36a9a0ecbcaf0e8ee2dc0f991abe2fb"
+          },
+          "response_json_file_sha256": "3bc00ad975d196e11ed59a05aee0c3971aeb7f9a62e00141cac79ae9df5ae9a0",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_007.meta.json",
+          "request_receipt_file_sha256": "04e2fc2fb7003252f4144a4a906c18aff452876a76d0b998c53c28fc9855b8ef"
+        },
+        {
+          "page_index": 8,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_008.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:27:26.607564+00:00",
+            "sha256": "7386edc01c10e12ed77fa8bca2c9104104f4ff38b332fb8db82fd168516e141c",
+            "bytes": 426004,
+            "request_token_sha256": "081cc6549bdf06afe3feef1442652996bf854b653c826b4d6612e23d743dc338",
+            "parsed_response_sha256": "538c0798c62e708c5c50891b0ffb6933df915046107d68aaf5c0ba9d3d9b5ef4"
+          },
+          "response_json_file_sha256": "7be1506e4e65d7e6fc809fc178eeebed5a9f30b98d9cdee1c03b8f1d2a3c32bf",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_008.meta.json",
+          "request_receipt_file_sha256": "ae3eebace37b0553e7a504231b2aa3ac7aa76c090b15966cb15b3f3112f6d9fe"
+        },
+        {
+          "page_index": 9,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_009.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:27:30.591932+00:00",
+            "sha256": "ab3af6f506b9b3b6af1cdc0cd98507b23336e1f968100d79c91aab377dc39f82",
+            "bytes": 426272,
+            "request_token_sha256": "9931ef6fcec8bdab68e92380cf312c02827e726ee07df11b606dd20e9d9891a2",
+            "parsed_response_sha256": "9a71e2b655f389a79238e35aff2b0f2a21d8f5b40a11e01eae97d21784917bb5"
+          },
+          "response_json_file_sha256": "8b7a378f86c38c588d80e85b2222da5ac9478bd326e654f2a17667e58393514c",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_009.meta.json",
+          "request_receipt_file_sha256": "ff51dcc94257175f07c57cedb97501060f03ad5b99200df16c37d293b6651912"
+        },
+        {
+          "page_index": 10,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_010.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:27:35.672204+00:00",
+            "sha256": "bfd996b5427673279b301852a2e7d1eea42f63826401b72cba31fe72155423d5",
+            "bytes": 426318,
+            "request_token_sha256": "c4cc5c665d20b71f99ffa44f5e63afba5cd97be139591539f8d7b5760832cfd8",
+            "parsed_response_sha256": "82c12bef34196c7776ef4d15450cc120dd712aa45ba9c7a764921ec339a8fdf1"
+          },
+          "response_json_file_sha256": "1018fc80a653cc424bdbb9d81f2ef74b3ab999cb323d579a284f2e886dfb7743",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_010.meta.json",
+          "request_receipt_file_sha256": "1584b031668f682dec75c3335e29821c57f1f1673217a96a795366d0181ee97a"
+        },
+        {
+          "page_index": 11,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_011.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:27:40.292023+00:00",
+            "sha256": "e66c19aaf68b3174b7670989c48dc6f420e87b0baafe6d24b1130194d1575019",
+            "bytes": 425670,
+            "request_token_sha256": "335aeb1332503565e0fac049f8cd0e7136c15f07db7857a2f1b2906d1595f099",
+            "parsed_response_sha256": "be2aca9116f0fc7ccb8350e30a436c2127b33d8e41f2c360d8d973ff32d545d5"
+          },
+          "response_json_file_sha256": "0e44fdd9b65f6581deaaeac86558a78ff78cc8726dd566c3af5998dab088ca1b",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_011.meta.json",
+          "request_receipt_file_sha256": "186ff4ea1a88e3dbd93ea3457e683cba4beb9fed72e4d8f4df79ac23ae4200ba"
+        },
+        {
+          "page_index": 12,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_012.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:27:43.999442+00:00",
+            "sha256": "4ddf0969b8e85870e537476635c74d38fcfb7634728ed19a4d8b26c5a0b8d9a9",
+            "bytes": 426285,
+            "request_token_sha256": "135f22aec94710df7862d43cdb6e703cb6af5dc4b557fef7b4a721088e748be0",
+            "parsed_response_sha256": "f9e711b88d922bcaf4962a7cc598d479bd5b2f750e9b624aa38fb6fecf0ece6b"
+          },
+          "response_json_file_sha256": "dea321ed5f7a214d4d255d33351497db2af7f65ca6844402b0a608aabca85876",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_012.meta.json",
+          "request_receipt_file_sha256": "ffa6a93f0f423f31111b93277084456aaadab7f3ecca9e418538b42cb9dc10b8"
+        },
+        {
+          "page_index": 13,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_013.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:27:47.805977+00:00",
+            "sha256": "9d371f98b3f6b250f2cd7011cbc6a2df74cce5f2315b9909cced5dec03148ba4",
+            "bytes": 425993,
+            "request_token_sha256": "45842d555d26620e08775eb61d2a5d656c0b4d18c8cb774e9429182623cae9d6",
+            "parsed_response_sha256": "b9d384b77b028913cd0f86686a6af7b32ecef970483b62795f4920e1eed1d265"
+          },
+          "response_json_file_sha256": "37a9a1e46887a96eb492f8d6f7423366b345795a11faf89a27ec2c6169c586e9",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_013.meta.json",
+          "request_receipt_file_sha256": "60ad3c8f36cfa7e63f7f87865989af5b552030f84d090b1da877423e3637f4eb"
+        },
+        {
+          "page_index": 14,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_014.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:27:51.622627+00:00",
+            "sha256": "7f636b08fff1101e62915e5e94ac382be96d973c00b44634466e07ae6ceb85d1",
+            "bytes": 424951,
+            "request_token_sha256": "951a1238e1a18af76021e2949df0a9e5af985b91b22fe4de9bf7b6df9d9209ec",
+            "parsed_response_sha256": "b631c82da5d397de8abb51ab2fa5095959e0c2fc142aecb8916ce006c8fa2deb"
+          },
+          "response_json_file_sha256": "984b527a16b17f206fbff1e453a40d18db4c1feb47ec6fc724f191919c19f88c",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_014.meta.json",
+          "request_receipt_file_sha256": "5caf5152c2a17db36e93adb9ce6941e98e02085d1575281d5642878e51e47179"
+        },
+        {
+          "page_index": 15,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_015.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:27:56.090309+00:00",
+            "sha256": "075640b37d09887f51cd256c2ef3b3b3d1d8b2ee1b1889723980e631f81a5d2d",
+            "bytes": 426414,
+            "request_token_sha256": "e06a6e4631ca1390812667e1a9bedfb6d320f90681adae5d59fa0b6bae2a5885",
+            "parsed_response_sha256": "08cb3373d6bfae7a78aa79e0b02d5a7cc9c25c7f27eea0594d0b2196df80bbb9"
+          },
+          "response_json_file_sha256": "306cf98209c704417ea2243bf8794376d0b1a39399dfc09d7bda3bf460aa4f51",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_015.meta.json",
+          "request_receipt_file_sha256": "4ee47b27071db8351eadc70103cf8765fd734f22257d8c5a1778330f315538ee"
+        },
+        {
+          "page_index": 16,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_016.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:27:59.928799+00:00",
+            "sha256": "10582ce5a4ab9225c835cdefb5a0dd4cd74008b7587cab58aa9cdc17ad3a133f",
+            "bytes": 426568,
+            "request_token_sha256": "7f09b62c0c0133c6089ae5478fe9acf0812886dbeb0ca388fcc7d4bffe1051a4",
+            "parsed_response_sha256": "dcad5a8582d2231539a5ff228b9a54d62beef489dd3b62d8774ab1e0c7b1dbff"
+          },
+          "response_json_file_sha256": "b6fc440720eac84c7c790d93600d8a77ec56bfc18f92ebda9c9dd177ff7fa43d",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_016.meta.json",
+          "request_receipt_file_sha256": "b9598ccb627ca0eda19669cd03446093cd24fb4d29d468a340cf894c08f23dfc"
+        },
+        {
+          "page_index": 17,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_017.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:28:03.924259+00:00",
+            "sha256": "1e62d9747ecf9dd5d80b70aec455bae85e7134db08f52aa17a5e160d73cf1a0a",
+            "bytes": 426703,
+            "request_token_sha256": "b7e3c0f0c142aaeb3f0cf7450c925acd10b0572d54641eb13d8205948f231a23",
+            "parsed_response_sha256": "b14677a9478046c6960cf620f0452a24f4afaa39c0851442f862333d52513b73"
+          },
+          "response_json_file_sha256": "4d74f46be3d1805f4afde92f5e32f94a6f65c76551ca1bed10d8a4ff202fe840",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_017.meta.json",
+          "request_receipt_file_sha256": "46d0d87570b895d227fd3e7f46f9ffffe95aa300dfdc481ef28efd8bb2400b16"
+        },
+        {
+          "page_index": 18,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_018.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:28:08.289133+00:00",
+            "sha256": "178a18bb982514bcb174e7fd3281e5c6c3aae23744e0ddc56e581b90414c1ad2",
+            "bytes": 426353,
+            "request_token_sha256": "40c867172c0f7a6dc4e4e9d4e957b426b29642a9c0961abc178f45da84f7f68a",
+            "parsed_response_sha256": "7212ec1b52e46a453c9853645ba569b8b14c8d85761d2f93faec2e78404360bd"
+          },
+          "response_json_file_sha256": "c4e4aebb52a031424ad69c3110dadb0dcb0c8b0dbb3d4ed21fd86c4f5c4f9ccf",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_018.meta.json",
+          "request_receipt_file_sha256": "bc4c6f945ab43b8025979ad60e7874dd30cdea99ad2e9f0159f6684a5d5d1415"
+        },
+        {
+          "page_index": 19,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_019.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:28:12.064285+00:00",
+            "sha256": "d308ee9c34e66f219e57a420930153cba8d9071ac28997c1e8047837d01cfb50",
+            "bytes": 426030,
+            "request_token_sha256": "e16b57117376cc0f1521c5fb3120ddaf105d24d5d9300e195578b96a762c661e",
+            "parsed_response_sha256": "f0af3e5d6f51d2f9924a38e4b41208b5cd4f199a51a6b90b89fd241c25663f8c"
+          },
+          "response_json_file_sha256": "8567f5dffc29b3cb545e6562873538d5b4095c5eaabd265cfb8d88b980188454",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_019.meta.json",
+          "request_receipt_file_sha256": "370cf0f357767e52962b60d36e69eb517a83d9eb4c0e8ddbe61643fbf8f1d3b8"
+        },
+        {
+          "page_index": 20,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_020.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:28:16.510289+00:00",
+            "sha256": "2f203cb3161398763a5b805e4c19fd319b41c5a0c8766c6cb473af3ec37c9fb2",
+            "bytes": 426030,
+            "request_token_sha256": "8f121b419c938a56741937b3d9517aa2cfccf6ac67f4fb85f0bfa3c4ce0dc99c",
+            "parsed_response_sha256": "068af5a55ccbe81220e6eae796b4d78193ad7fcbf0c15dbe0e2abb1f6dc1f58e"
+          },
+          "response_json_file_sha256": "656f1139072340bd2e39ed142ea1bed76a71b838e6ec28757608f232935a992e",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_020.meta.json",
+          "request_receipt_file_sha256": "2184d26fd94cd7b9e55a9eabab4a88c18498290fd3810b3c2596e6a4e12c2c73"
+        },
+        {
+          "page_index": 21,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_021.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:28:20.598647+00:00",
+            "sha256": "69626c31b5ee3935e8e49199937bcb5624fe3c61a3b0a2395a4d0520e7f323b8",
+            "bytes": 426113,
+            "request_token_sha256": "8ac8db1f2ec8aa372f85bf55a521600f87e2e09f15a20d4de59d50e2f584d80e",
+            "parsed_response_sha256": "6ab8a7626494fe9d380980628763967fc4f30efebf0d7135b3336fad0d239023"
+          },
+          "response_json_file_sha256": "78e9f9b627e70e1fc24a0b9a0b3e586e9b8eb96cbe2f2012181d865904e82b78",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_021.meta.json",
+          "request_receipt_file_sha256": "a64befd08d810c49363e5e54921430e05cfd01d8e633fa238d0532a29a09f946"
+        },
+        {
+          "page_index": 22,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_022.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:28:24.381169+00:00",
+            "sha256": "e0eb50f2aba46c99ce9e1994eae9eb446ac8147d3159325e7f6b5f0e2eba92fa",
+            "bytes": 426274,
+            "request_token_sha256": "7e7cc22961ffb557474c5c892238ac410e26b56d712edd0bfbcce5dc64dcd225",
+            "parsed_response_sha256": "0ac7350dbfb483724a30a8535bd89e1cf3f60c4f4430216caa51cf7d7dfd3182"
+          },
+          "response_json_file_sha256": "4ee2c459fd57e90e3bc76d54739b93a5ad56d50fe4a7e850332881831ce3752d",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_022.meta.json",
+          "request_receipt_file_sha256": "a131e26930f0cb96512d16ff6b6344828681f745a967b84f8cf303635706871d"
+        },
+        {
+          "page_index": 23,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_023.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:28:28.491455+00:00",
+            "sha256": "b3e7c790e7fdbb2bafa3f9715fdd69876f9a69f695757debe1e89b8a739f0e30",
+            "bytes": 426470,
+            "request_token_sha256": "bc1f9807dcf4383d44664d29e8841925c1c2ab019ebe6b219d16ee3a75b79a3e",
+            "parsed_response_sha256": "588c2906e32757bafb856feb955158d3edd201d4e934584fe725ccb829057927"
+          },
+          "response_json_file_sha256": "4df17dc9c5138a56d870665e71f32ac0353032101afb45ae07ea77d392b24641",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_023.meta.json",
+          "request_receipt_file_sha256": "313bcbf635fa8fb5bdad0465e99437d383516710713535ee36de32ba749431ed"
+        },
+        {
+          "page_index": 24,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_024.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:28:32.489979+00:00",
+            "sha256": "1a94998dd8b3320a746fd58fe62de4f03b2dff786990ea391d56198f1f8e5d22",
+            "bytes": 426294,
+            "request_token_sha256": "8ad74259ad7a10309d2733dd9e2a66ecb40505bb774815834b6148166b639229",
+            "parsed_response_sha256": "bdc2a35a0a70dec49eb522624c758e6e7b4f05e819830b9df50f8246bc5ee241"
+          },
+          "response_json_file_sha256": "f4d544ab8742878bb679b948dd9059bbdd05c0ffedeada18ecf09c89666e75ee",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_024.meta.json",
+          "request_receipt_file_sha256": "584c74828d3d02231d12cc4d9e8059641a877f4f37d3c7341e1a0367999fc581"
+        },
+        {
+          "page_index": 25,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_025.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:28:36.988793+00:00",
+            "sha256": "b15d51bc640c9cddd544c3429ecbe562e2036052e63df8e80f929aa24d980b89",
+            "bytes": 426610,
+            "request_token_sha256": "4e70163a1e33c97b0a68d7ce824071f5f9552037bbe16dfffb1978b0a2b92966",
+            "parsed_response_sha256": "08fcd391259ee534a22b5afe00e0275e49a38da1b69cc4524402e43df5d437e7"
+          },
+          "response_json_file_sha256": "9b0fa0bc01fda582c2dac358fad25477019a0c50c65c3d36357129ca85550618",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_025.meta.json",
+          "request_receipt_file_sha256": "52b45a16c2a8e047c017dd602bd9858abc3721a7051beea080d3f27d003390df"
+        },
+        {
+          "page_index": 26,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_026.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:28:42.409151+00:00",
+            "sha256": "f94f8ff1cc827b7f0161b04c89c5497a1693dd89c28caa09fc95deb01efd20f3",
+            "bytes": 425307,
+            "request_token_sha256": "c5dbe68d4de6327bc49c3ce0e39a1eb21e4103b2d3d7d6e414e0cfee2d1ee701",
+            "parsed_response_sha256": "14e30b5e6af8537fd9610a4b4fd7ddd84daab837989c53392f33969fce3f662c"
+          },
+          "response_json_file_sha256": "d51992df047f2a08071f048fc54bd5f4e213cfeaa482edca55f2be9ffdca4fab",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_026.meta.json",
+          "request_receipt_file_sha256": "039db2705c7a008e3577383b0efa383c87c0fa2fdabd47a7dd6e7e3d0af12bd8"
+        },
+        {
+          "page_index": 27,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_027.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 30,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:28:46.193714+00:00",
+            "sha256": "6fb85336f976e6368b1bb32ba35505206ea5ebf2b5f8461de347bb3c0247b282",
+            "bytes": 426023,
+            "request_token_sha256": "cca5952bdd156391af769b7551753e53c1be8dfbe75c698cb87f32e3055e7a27",
+            "parsed_response_sha256": "ab377edfb00fc793648746281bc9d970bdee651cece83e4b4ecc0ec2c1095937"
+          },
+          "response_json_file_sha256": "d8931171769401126127347cfd7664a4243d9312c7bdbcbf0bd7861d6451506f",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_027.meta.json",
+          "request_receipt_file_sha256": "2c8b7cef1ec1cae9a44ff2466554469e4bcfc13cd45de434db89d52058dbbaba"
+        },
+        {
+          "page_index": 28,
+          "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_028.json",
+          "list_json_path": [
+            "onResponseReceivedActions",
+            0,
+            "appendContinuationItemsAction",
+            "continuationItems"
+          ],
+          "items": 6,
+          "ignored_action_targets": [],
+          "request": {
+            "requested_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "response_url": "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false",
+            "method": "POST",
+            "http_status": 200,
+            "content_type": "application/json; charset=UTF-8",
+            "fetched_at": "2026-11-03T20:28:50.216789+00:00",
+            "sha256": "6e6942ad960837c2e162fbcea288f0e41bb2a41fa041069d8a1d1d9d157a4c81",
+            "bytes": 85503,
+            "request_token_sha256": "6013be54046f7db37f373ae242507027e9114ece39b321f1001ee54157a1f161",
+            "parsed_response_sha256": "49514f82c794cfa5fee3915192718c95324353f2f059aab9c9ec4400dd720a60"
+          },
+          "response_json_file_sha256": "c91c92519f5ba504fbd7fcc6100fa0a3ad5175092d26c2f957c710434651340d",
+          "request_receipt_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_028.meta.json",
+          "request_receipt_file_sha256": "a754ad1409f0f36364203d58a64e1bd75409e9d85830381401139f2173b20e9f"
+        }
+      ],
+      "errors": [],
+      "declared_items": null,
+      "original_fetch_time": "2026-11-03T20:26:51.644307+00:00",
+      "selected_tab_title": "Live",
+      "target_id": "6b071f63-0000-27cc-abd3-d4f547f72dfc",
+      "pending_token_sha256": [],
+      "status": "exhausted_count_unknown",
       "pagination_exhausted": true,
       "count_reconciled": null,
-      "declared_items": null,
-      "visible_memberships": 847,
-      "unique_video_ids": 847,
-      "hidden_unavailable_count": null,
-      "notices": [],
-      "errors": [],
-      "pending_token_sha256": [],
-      "provenance": {
-        "catalog_path": "inventory_work/deep_channel_streams_full_public_catalog.json",
-        "catalog_sha256": "7f0e9bdabcf81c3deb46e25f56994af5bf400f80e6012a0626c4cf43731316e4",
-        "terminal_cache_path": "inventory_work/public_catalog_cache/deep_channel_streams_29.json",
-        "terminal_cache_sha256": "087bf43ecc45a9151ad116d642aed5be2caf483ff0b87ea1cb626e3c90a3716f",
-        "terminal_continuation_shapes": [],
-        "original_fetch_time": "Not stored by original crawler; reused snapshot, not refetched"
-      },
-      "returned_memberships": 847,
-      "normal_title_memberships": 847,
+      "unaccounted_declared_items": null,
+      "returned_memberships": 846,
+      "visible_memberships": 846,
+      "normal_title_memberships": 846,
       "unavailable_placeholder_memberships": 0,
-      "duplicate_memberships": 0
+      "unique_video_ids": 846,
+      "duplicate_memberships": 0,
+      "finished_at": "2026-11-03T20:28:54.535610+00:00",
+      "pages_checked": 29,
+      "retained_memberships": 847,
+      "historical_memberships": 1,
+      "historical_video_ids": [
+        "Pg8DvszQMME"
+      ],
+      "fresh_state_collection_key": "channel_streams",
+      "previous_selected_snapshot": {
+        "collection_key": "deep_channel_streams",
+        "collection_id": "UCay5mclHBbWQTQ8fhoNCWow:streams",
+        "collection_type": "channel_surface",
+        "source_role": "reused_channel_discovery",
+        "source_url": "https://www.youtube.com/@jepcolombia/streams",
+        "title": "JEP Colombia / streams",
+        "scope": "All-channel discovery metadata only; no Casanare admission implied",
+        "status": "reused_terminal_snapshot",
+        "pagination_exhausted": true,
+        "count_reconciled": null,
+        "declared_items": null,
+        "visible_memberships": 847,
+        "unique_video_ids": 847,
+        "hidden_unavailable_count": null,
+        "notices": [],
+        "errors": [],
+        "pending_token_sha256": [],
+        "provenance": {
+          "catalog_path": "inventory_work/deep_channel_streams_full_public_catalog.json",
+          "catalog_sha256": "7f0e9bdabcf81c3deb46e25f56994af5bf400f80e6012a0626c4cf43731316e4",
+          "terminal_cache_path": "inventory_work/public_catalog_cache/deep_channel_streams_29.json",
+          "terminal_cache_sha256": "087bf43ecc45a9151ad116d642aed5be2caf483ff0b87ea1cb626e3c90a3716f",
+          "terminal_continuation_shapes": [],
+          "original_fetch_time": "Not stored by original crawler; reused snapshot, not refetched"
+        },
+        "returned_memberships": 847,
+        "normal_title_memberships": 847,
+        "unavailable_placeholder_memberships": 0,
+        "duplicate_memberships": 0
+      },
+      "provenance": {
+        "state_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/state.json",
+        "state_sha256": "a240c56f7a1e2f73883bc73d548660dcd5d4cec92cfe55004acc163f786632ac",
+        "original_fetch_time": "2026-11-03T20:26:51.644307+00:00",
+        "last_response_fetched_at": "2026-11-03T20:28:50.216789+00:00",
+        "finished_at": "2026-11-03T20:28:54.535610+00:00",
+        "basis": "Fresh exhausted selected channel surface; retained per-page request receipts and parsed-cache hashes."
+      }
     },
     {
       "collection_key": "channel_shorts",
@@ -2080,5 +5353,111 @@
   "bounded_watch_metadata_records": 97,
   "bounded_watch_metadata_errors": 0,
   "playlist_response_pages_in_selected_snapshots": 22,
-  "complete_reverse_audit_claimed": false
+  "complete_reverse_audit_claimed": false,
+  "baseline_generated_at": "2026-11-03T17:46:43.700952+00:00",
+  "generated_at_basis": "Latest retained fresh-snapshot completion time; deterministic local integration, not a new network fetch.",
+  "current_membership_count": 5202,
+  "historical_membership_count": 1,
+  "current_unique_video_ids": 3605,
+  "historical_only_unique_video_ids": 1,
+  "historical_only_video_ids": [
+    "Pg8DvszQMME"
+  ],
+  "channel_refresh_pages": 118,
+  "source_changes": [
+    {
+      "change": "replace_reused_channel_surface_with_fresh_receipt_chain",
+      "collection_id": "UCay5mclHBbWQTQ8fhoNCWow:videos",
+      "collection_key": "deep_channel_videos",
+      "previous_returned_memberships": 2663,
+      "current_returned_memberships": 2663,
+      "historical_memberships_retained": 0,
+      "added_video_ids": [],
+      "not_in_latest_listing_video_ids": [],
+      "pages_checked": 89,
+      "fresh_state_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/state.json",
+      "fresh_state_sha256": "689c089543b48cd6f17ad37d2eaa408c6ee3cb17e6b48efed7a18b80b700b2b1",
+      "fresh_first_fetched_at": "2026-11-03T20:19:11.924638+00:00",
+      "fresh_finished_at": "2026-11-03T20:26:51.601385+00:00",
+      "baseline": {
+        "commit": "620cc5eb85860ff77a837058903321876de82b15",
+        "memberships_path": "inventory_work/tieout_review_20261103/base/public_memberships.json.gz",
+        "memberships_sha256": "74a5683824c461fdd6302af357790f68a35271bd711e22a3e13f33070951d079",
+        "manifest_sha256": "7eb203576902747ea2116c0138e5993e963a708d2cc73c37b25b7edd0993a8aa"
+      }
+    },
+    {
+      "change": "replace_reused_channel_surface_with_fresh_receipt_chain",
+      "collection_id": "UCay5mclHBbWQTQ8fhoNCWow:streams",
+      "collection_key": "deep_channel_streams",
+      "previous_returned_memberships": 847,
+      "current_returned_memberships": 846,
+      "historical_memberships_retained": 1,
+      "added_video_ids": [],
+      "not_in_latest_listing_video_ids": [
+        "Pg8DvszQMME"
+      ],
+      "pages_checked": 29,
+      "fresh_state_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/state.json",
+      "fresh_state_sha256": "a240c56f7a1e2f73883bc73d548660dcd5d4cec92cfe55004acc163f786632ac",
+      "fresh_first_fetched_at": "2026-11-03T20:26:51.644307+00:00",
+      "fresh_finished_at": "2026-11-03T20:28:54.535610+00:00",
+      "baseline": {
+        "commit": "620cc5eb85860ff77a837058903321876de82b15",
+        "memberships_path": "inventory_work/tieout_review_20261103/base/public_memberships.json.gz",
+        "memberships_sha256": "74a5683824c461fdd6302af357790f68a35271bd711e22a3e13f33070951d079",
+        "manifest_sha256": "7eb203576902747ea2116c0138e5993e963a708d2cc73c37b25b7edd0993a8aa"
+      }
+    }
+  ],
+  "channel_identity_normalization": {
+    "rule": "Use the verified owner of each selected channel surface. lockupViewModel metadata text may contain view counts and recency; it is not an owner name.",
+    "basis": [
+      {
+        "collection_id": "UCay5mclHBbWQTQ8fhoNCWow:videos",
+        "collection_key": "deep_channel_videos",
+        "channel_id": "UCay5mclHBbWQTQ8fhoNCWow",
+        "channel_name": "JEP Colombia",
+        "selected_tab_title": "Videos",
+        "source_url": "https://www.youtube.com/@jepcolombia/videos",
+        "json_pointer": "metadata.channelMetadataRenderer",
+        "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_000.json",
+        "response_json_file_sha256": "32d9949a7493f72041059fad3e6641720bda88f43dbca0531db1c6935deed771",
+        "request_response_sha256": "9488bbddde378c855716d4f3b6ac85359b269a43fb1ac1404590471ccb461305",
+        "fetched_at": "2026-11-03T20:19:11.924638+00:00",
+        "normalization": {
+          "rows": 2663,
+          "channel_ids_replaced": 2663,
+          "channel_names_replaced": 2663
+        }
+      },
+      {
+        "collection_id": "UCay5mclHBbWQTQ8fhoNCWow:streams",
+        "collection_key": "deep_channel_streams",
+        "channel_id": "UCay5mclHBbWQTQ8fhoNCWow",
+        "channel_name": "JEP Colombia",
+        "selected_tab_title": "Live",
+        "source_url": "https://www.youtube.com/@jepcolombia/streams",
+        "json_pointer": "metadata.channelMetadataRenderer",
+        "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_000.json",
+        "response_json_file_sha256": "9ec3fa304f0d6b1677ef5d8f57b87b87f6057c30d3539f1817d92a2b8b912b64",
+        "request_response_sha256": "f94333a930cc291f22ff0bbad5fe0801c46c6b45c0fc0020a3621123e965c9c2",
+        "fetched_at": "2026-11-03T20:26:51.644307+00:00",
+        "normalization": {
+          "rows": 846,
+          "channel_ids_replaced": 846,
+          "channel_names_replaced": 846
+        }
+      }
+    ]
+  },
+  "integration_inputs": {
+    "baseline_commit": "620cc5eb85860ff77a837058903321876de82b15",
+    "baseline_sha256": {
+      "crawl_manifest.json": "7eb203576902747ea2116c0138e5993e963a708d2cc73c37b25b7edd0993a8aa",
+      "public_memberships.json.gz": "74a5683824c461fdd6302af357790f68a35271bd711e22a3e13f33070951d079",
+      "public_catalog.json.gz": "64fb33a5c43c1ad2644e18506cd482d5fa7472dfd298e9b06162525fab0f0cc8"
+    },
+    "catalog_merge_rule": "Preserve baseline titles, watch metadata and evidence; append fresh observed titles, fill missing listing durations, normalize fresh channel owners and annotate current/historical membership."
+  }
 }

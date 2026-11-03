@@ -31,7 +31,8 @@
     "Partial supplied transcript; opening formalities omitted": 2,
     "Partial supplied transcript; morning portion absent": 1,
     "Supplied transcript linked by metadata; content/coverage unverified": 2,
-    "No supplied transcript located for public-metadata session": 41,
+    "No supplied transcript located for public-metadata session": 28,
+    "No supplied transcript located; public identity content checked": 13,
     "Supplied transcript located; same-session alternate upload verified": 1,
     "No supplied transcript located; distinct afternoon session content verified": 2,
     "No supplied transcript located; distinct session content verified": 1,
@@ -4282,35 +4283,39 @@
       "url": "https://www.youtube.com/watch?v=1M2x7H2vH74",
       "title": "Caso 03 | Gustavo Enrique Soto Bracamonte | Subcaso Casanare | Versión I | 20181207",
       "transcript_ids": [],
-      "coverage_status": "No supplied transcript located for public-metadata session",
+      "coverage_status": "No supplied transcript located; public identity content checked",
       "public_session_date": "2018-12-07",
-      "date_basis": "Official public-title date independently corroborated by the cited Auto 055 bibliography; this specific upload has not received a content check.",
+      "date_basis": "Opening date and participant agree with official title.",
       "public_participant": "Gustavo Enrique Soto Bracamonte",
       "evidence": [
         {
-          "claim": "Official Casanare title identifies Gustavo Enrique Soto Bracamonte on 2018-12-07.",
+          "claim": "Opening identifies Gustavo Enrique Soto Bracamonte and 7 December 2018 at 08:34, under Auto 061.",
           "public_url": "https://www.youtube.com/watch?v=1M2x7H2vH74",
-          "pointer": "Official public title; channel catalog."
+          "pointer": "00:00:35–00:00:55"
         },
         {
-          "claim": "Compared with all 93 supplied records and their established session identities. No corresponding transcript record found; mentions of this person in other hearings do not constitute a transcript of this session.",
-          "source": "outputs/jep_transcripts_20261103/inventory.json"
-        },
-        {
-          "claim": "The public decision independently cites this named participant and hearing date. This corroborates session metadata, not the content of this specific upload.",
-          "public_url": "https://www.coljuristas.org/observatorio_jep/documentos/sala_de_reconocimiento/Auto_SRVR-SUB-D-055_14-julio-2022.pdf#page=37",
-          "pointer": "Auto SRVR-SUB-D-055, 14 July 2022, PDF p. 37; citation to Gustavo Enrique Soto Bracamonte, 2018-12-07."
+          "claim": "Reviewed supplied-session index contains no corresponding source; same-person candidate checks are retained when applicable.",
+          "source": "review05/metadata_gap_audit.json"
         }
       ],
       "source_anchors": [],
-      "video_offsets": [],
-      "duplicate_relation": "No duplicate or alternate-upload relationship established.",
-      "related_video_ids": [],
-      "coverage_gap": "No supplied source session located.",
-      "review_limits": [
-        "Absence decision is against the supplied 93-record inventory, not all possible Drive holdings or all JEP records. Public name/date metadata supports the candidate session; this upload has not received a new content check."
+      "video_offsets": [
+        {
+          "offsets": "00:00:35–00:00:55",
+          "verification": "Opening identifies Gustavo Enrique Soto Bracamonte and 7 December 2018 at 08:34, under Auto 061."
+        }
       ],
-      "basis": "Public title plus complete supplied-session index comparison",
+      "duplicate_relation": "The later opening explicitly resumes the 7 December 2018 statement. Its current 1 March 2019 date remains title-based; not an established alternate copy.",
+      "related_video_ids": [
+        "xHM6s1lT4M0"
+      ],
+      "coverage_gap": "No supplied source for this public recording located in the 93-record inventory.",
+      "review_limits": [
+        "Only the specified caption anchors were used for this conclusion; automatic captions can contain errors. No full-audio equivalence or unique-hearing count is certified.",
+        "Opening date and participant agree with official title.",
+        "Compared against the supplied 93-record inventory, not all JEP or Drive holdings."
+      ],
+      "basis": "Bounded public caption anchors plus reviewed 93-record supplied-session index",
       "independent_date_corroboration": true,
       "metadata_check": {
         "title": "Caso 03 | Gustavo Enrique Soto Bracamonte | Subcaso Casanare | Versión I | 20181207",
@@ -4321,7 +4326,8 @@
         "upload_date": "2022-12-28T08:56:10-08:00",
         "playability": "OK"
       },
-      "review_confidence": "Metadata-supported; recording content or coverage remains unverified"
+      "review_confidence": "Metadata-supported; recording content or coverage remains unverified",
+      "recording_kind": "Voluntary statement"
     },
     {
       "video_id": "3ycn0O2KA3U",
@@ -4368,35 +4374,39 @@
       "url": "https://www.youtube.com/watch?v=4-L2pa3TLSQ",
       "title": "Caso 03 | Jaime Alberto Rivera Mahecha | Subcaso Casanare | 20190225",
       "transcript_ids": [],
-      "coverage_status": "No supplied transcript located for public-metadata session",
+      "coverage_status": "No supplied transcript located; public identity content checked",
       "public_session_date": "2019-02-25",
-      "date_basis": "Official public-title date independently corroborated by the cited Auto 055 bibliography; this specific upload has not received a content check.",
+      "date_basis": "Opening and closing date agree with title; the earlier statement date is explicitly distinguished.",
       "public_participant": "Jaime Alberto Rivera Mahecha",
       "evidence": [
         {
-          "claim": "Official Casanare title identifies Jaime Alberto Rivera Mahecha on 2019-02-25.",
+          "claim": "Opening and closing identify Jaime Alberto Rivera Mahecha on 25 February 2019. The opening explicitly resumes the statement begun on 6 December 2018; these are connected sessions on different dates, not established duplicate uploads.",
           "public_url": "https://www.youtube.com/watch?v=4-L2pa3TLSQ",
-          "pointer": "Official public title; channel catalog."
+          "pointer": "00:00:55–00:01:44; 05:58:28–05:58:43"
         },
         {
-          "claim": "Compared with all 93 supplied records and their established session identities. No corresponding transcript record found; mentions of this person in other hearings do not constitute a transcript of this session.",
-          "source": "outputs/jep_transcripts_20261103/inventory.json"
-        },
-        {
-          "claim": "The public decision independently cites this named participant and hearing date. This corroborates session metadata, not the content of this specific upload.",
-          "public_url": "https://www.coljuristas.org/observatorio_jep/documentos/sala_de_reconocimiento/Auto_SRVR-SUB-D-055_14-julio-2022.pdf#page=71",
-          "pointer": "Auto SRVR-SUB-D-055, 14 July 2022, PDF p. 71; citation to Jaime Alberto Rivera Mahecha, 2019-02-25."
+          "claim": "Reviewed supplied-session index contains no corresponding source; same-person candidate checks are retained when applicable.",
+          "source": "review05/metadata_gap_audit.json"
         }
       ],
       "source_anchors": [],
-      "video_offsets": [],
-      "duplicate_relation": "No duplicate or alternate-upload relationship established.",
-      "related_video_ids": [],
-      "coverage_gap": "No supplied source session located.",
-      "review_limits": [
-        "Absence decision is against the supplied 93-record inventory, not all possible Drive holdings or all JEP records. Public name/date metadata supports the candidate session; this upload has not received a new content check."
+      "video_offsets": [
+        {
+          "offsets": "00:00:55–00:01:44; 05:58:28–05:58:43",
+          "verification": "Opening and closing identify Jaime Alberto Rivera Mahecha on 25 February 2019. The opening explicitly resumes the statement begun on 6 December 2018; these are connected sessions on different dates, not established duplicate uploads."
+        }
       ],
-      "basis": "Public title plus complete supplied-session index comparison",
+      "duplicate_relation": "The later opening explicitly resumes the 6 December 2018 statement on 25 February 2019; distinct dated recording segments, not alternate copies.",
+      "related_video_ids": [
+        "KpZNfys5EgQ"
+      ],
+      "coverage_gap": "No supplied source for this public recording located in the 93-record inventory.",
+      "review_limits": [
+        "Only the specified caption anchors were used for this conclusion; automatic captions can contain errors. No full-audio equivalence or unique-hearing count is certified.",
+        "Opening and closing date agree with title; the earlier statement date is explicitly distinguished.",
+        "Compared against the supplied 93-record inventory, not all JEP or Drive holdings."
+      ],
+      "basis": "Bounded public caption anchors plus reviewed 93-record supplied-session index",
       "independent_date_corroboration": true,
       "metadata_check": {
         "title": "Caso 03 | Jaime Alberto Rivera Mahecha | Subcaso Casanare | 20190225",
@@ -4407,7 +4417,8 @@
         "upload_date": "2023-08-31T07:32:42-07:00",
         "playability": "OK"
       },
-      "review_confidence": "Metadata-supported; recording content or coverage remains unverified"
+      "review_confidence": "Metadata-supported; recording content or coverage remains unverified",
+      "recording_kind": "Voluntary-statement continuation"
     },
     {
       "video_id": "47aMQasQwdY",
@@ -4460,30 +4471,37 @@
       "url": "https://www.youtube.com/watch?v=5GR24Fuq30c",
       "title": "Caso 03 | Jholman Farley Cuevas Arenas | Subcaso Casanare | 20190916",
       "transcript_ids": [],
-      "coverage_status": "No supplied transcript located for public-metadata session",
+      "coverage_status": "No supplied transcript located; public identity content checked",
       "public_session_date": "2019-09-16",
-      "date_basis": "Date in official public title; hearing content not checked in this reverse pass.",
+      "date_basis": "Opening and closing date agree with title.",
       "public_participant": "Jholman Farley Cuevas Arenas",
       "evidence": [
         {
-          "claim": "Official Casanare title identifies Jholman Farley Cuevas Arenas on 2019-09-16.",
+          "claim": "Opening identifies Jholman Farley Cuevas Arenas on 16 September 2019 at 08:37; closing repeats that date and names the participant.",
           "public_url": "https://www.youtube.com/watch?v=5GR24Fuq30c",
-          "pointer": "Official public title; channel catalog."
+          "pointer": "00:01:08–00:01:31; 02:47:30–02:47:56"
         },
         {
-          "claim": "Compared with all 93 supplied records and their established session identities. No corresponding transcript record found; mentions of this person in other hearings do not constitute a transcript of this session.",
-          "source": "outputs/jep_transcripts_20261103/inventory.json"
+          "claim": "Reviewed supplied-session index contains no corresponding source; same-person candidate checks are retained when applicable.",
+          "source": "review05/metadata_gap_audit.json"
         }
       ],
       "source_anchors": [],
-      "video_offsets": [],
+      "video_offsets": [
+        {
+          "offsets": "00:01:08–00:01:31; 02:47:30–02:47:56",
+          "verification": "Opening identifies Jholman Farley Cuevas Arenas on 16 September 2019 at 08:37; closing repeats that date and names the participant."
+        }
+      ],
       "duplicate_relation": "No duplicate or alternate-upload relationship established.",
       "related_video_ids": [],
-      "coverage_gap": "No supplied source session located.",
+      "coverage_gap": "No supplied source for this public recording located in the 93-record inventory.",
       "review_limits": [
-        "Absence decision is against the supplied 93-record inventory, not all possible Drive holdings or all JEP records. Public name/date metadata supports the candidate session; this upload has not received a new content check."
+        "Only the specified caption anchors were used for this conclusion; automatic captions can contain errors. No full-audio equivalence or unique-hearing count is certified.",
+        "Opening and closing date agree with title.",
+        "Compared against the supplied 93-record inventory, not all JEP or Drive holdings."
       ],
-      "basis": "Public title plus complete supplied-session index comparison",
+      "basis": "Bounded public caption anchors plus reviewed 93-record supplied-session index",
       "metadata_check": {
         "title": "Caso 03 | Jholman Farley Cuevas Arenas | Subcaso Casanare | 20190916",
         "channel_name": "JEP Colombia",
@@ -4493,7 +4511,8 @@
         "upload_date": "2023-08-31T07:31:11-07:00",
         "playability": "OK"
       },
-      "review_confidence": "Metadata-supported; recording content or coverage remains unverified"
+      "review_confidence": "Metadata-supported; recording content or coverage remains unverified",
+      "recording_kind": "Voluntary statement"
     },
     {
       "video_id": "5iBLj_sZ5Pc",
@@ -5134,40 +5153,39 @@
       "url": "https://www.youtube.com/watch?v=KpZNfys5EgQ",
       "title": "Caso 03 | Jaime Alberto Rivera Mahecha | Subcaso Casanare | 20181206",
       "transcript_ids": [],
-      "coverage_status": "No supplied transcript located for public-metadata session",
+      "coverage_status": "No supplied transcript located; public identity content checked",
       "public_session_date": "2018-12-06",
-      "date_basis": "Official public-title date independently corroborated by the cited Auto 055 bibliography; this specific upload has not received a content check.",
+      "date_basis": "Opening date and participant agree with official title.",
       "public_participant": "Jaime Alberto Rivera Mahecha",
       "evidence": [
         {
-          "claim": "Official Casanare title identifies Jaime Alberto Rivera Mahecha on 2018-12-06.",
+          "claim": "Opening identifies Jaime Alberto Rivera Mahecha, 6 December 2018 at 13:14, and Auto 76.",
           "public_url": "https://www.youtube.com/watch?v=KpZNfys5EgQ",
-          "pointer": "Official public title; channel catalog."
+          "pointer": "00:00:51–00:01:10"
         },
         {
-          "claim": "Compared with all 93 supplied records and their established session identities. No corresponding transcript record found; mentions of this person in other hearings do not constitute a transcript of this session.",
-          "source": "outputs/jep_transcripts_20261103/inventory.json"
-        },
-        {
-          "claim": "Auto 055 independently cites Jaime Alberto Rivera Mahecha 6 Dec 2018. An inconsistent annex date should not override both this citation and the public title.",
-          "public_url": "https://www.coljuristas.org/observatorio_jep/documentos/sala_de_reconocimiento/Auto_SRVR-SUB-D-055_14-julio-2022.pdf#page=55",
-          "pointer": "Auto SRVR-SUB-D-055, 14 Jul 2022, PDF p.55, footnote 349."
-        },
-        {
-          "claim": "The public decision independently cites this named participant and hearing date. This corroborates session metadata, not the content of this specific upload.",
-          "public_url": "https://www.coljuristas.org/observatorio_jep/documentos/sala_de_reconocimiento/Auto_SRVR-SUB-D-055_14-julio-2022.pdf#page=55",
-          "pointer": "Auto SRVR-SUB-D-055, 14 July 2022, PDF p. 55, footnote 349; citation to Jaime Alberto Rivera Mahecha, 2018-12-06."
+          "claim": "Reviewed supplied-session index contains no corresponding source; same-person candidate checks are retained when applicable.",
+          "source": "review05/metadata_gap_audit.json"
         }
       ],
       "source_anchors": [],
-      "video_offsets": [],
-      "duplicate_relation": "No duplicate or alternate-upload relationship established.",
-      "related_video_ids": [],
-      "coverage_gap": "No supplied source session located.",
-      "review_limits": [
-        "Absence decision is against the supplied 93-record inventory, not all possible Drive holdings or all JEP records. Public name/date metadata supports the candidate session; this upload has not received a new content check."
+      "video_offsets": [
+        {
+          "offsets": "00:00:51–00:01:10",
+          "verification": "Opening identifies Jaime Alberto Rivera Mahecha, 6 December 2018 at 13:14, and Auto 76."
+        }
       ],
-      "basis": "Public title plus complete supplied-session index comparison",
+      "duplicate_relation": "The later opening explicitly resumes the 6 December 2018 statement on 25 February 2019; distinct dated recording segments, not alternate copies.",
+      "related_video_ids": [
+        "4-L2pa3TLSQ"
+      ],
+      "coverage_gap": "No supplied source for this public recording located in the 93-record inventory.",
+      "review_limits": [
+        "Only the specified caption anchors were used for this conclusion; automatic captions can contain errors. No full-audio equivalence or unique-hearing count is certified.",
+        "Opening date and participant agree with official title.",
+        "Compared against the supplied 93-record inventory, not all JEP or Drive holdings."
+      ],
+      "basis": "Bounded public caption anchors plus reviewed 93-record supplied-session index",
       "independent_date_corroboration": true,
       "metadata_check": {
         "title": "Caso 03 | Jaime Alberto Rivera Mahecha | Subcaso Casanare | 20181206",
@@ -5178,7 +5196,8 @@
         "upload_date": "2023-07-19T09:54:02-07:00",
         "playability": "OK"
       },
-      "review_confidence": "Metadata-supported; recording content or coverage remains unverified"
+      "review_confidence": "Metadata-supported; recording content or coverage remains unverified",
+      "recording_kind": "Voluntary statement"
     },
     {
       "video_id": "NmU4Q32oLMM",
@@ -5322,35 +5341,37 @@
       "url": "https://www.youtube.com/watch?v=U2k8Iaa-bd4",
       "title": "Caso 03 | Wilson Rodríguez | Subcaso Casanare | 20200203",
       "transcript_ids": [],
-      "coverage_status": "No supplied transcript located for public-metadata session",
+      "coverage_status": "No supplied transcript located; public identity content checked",
       "public_session_date": "2020-02-03",
-      "date_basis": "Official public-title date independently corroborated by the cited Auto 055 bibliography; this specific upload has not received a content check.",
+      "date_basis": "Year remains title-based with an explicit 2019/2020 caption conflict. Identity is checked; exact spoken year is not certified.",
       "public_participant": "Wilson Rodríguez",
       "evidence": [
         {
-          "claim": "Official Casanare title identifies Wilson Rodríguez on 2020-02-03.",
+          "claim": "Opening identifies Wilson Rodríguez and 3 February, under Auto 230 of 6 November. The title gives 2020, while the automatic captions render 2019.",
           "public_url": "https://www.youtube.com/watch?v=U2k8Iaa-bd4",
-          "pointer": "Official public title; channel catalog."
+          "pointer": "00:00:28–00:01:04"
         },
         {
-          "claim": "Compared with all 93 supplied records and their established session identities. No corresponding transcript record found; mentions of this person in other hearings do not constitute a transcript of this session.",
-          "source": "outputs/jep_transcripts_20261103/inventory.json"
-        },
-        {
-          "claim": "The public decision independently cites this named participant and hearing date. This corroborates session metadata, not the content of this specific upload.",
-          "public_url": "https://www.coljuristas.org/observatorio_jep/documentos/sala_de_reconocimiento/Auto_SRVR-SUB-D-055_14-julio-2022.pdf#page=172",
-          "pointer": "Auto SRVR-SUB-D-055, 14 July 2022, PDF p. 172, footnote 1126; citation to Wilson Rodríguez, 2020-02-03."
+          "claim": "Reviewed supplied-session index contains no corresponding source; same-person candidate checks are retained when applicable.",
+          "source": "review05/metadata_gap_audit.json"
         }
       ],
       "source_anchors": [],
-      "video_offsets": [],
+      "video_offsets": [
+        {
+          "offsets": "00:00:28–00:01:04",
+          "verification": "Opening identifies Wilson Rodríguez and 3 February, under Auto 230 of 6 November. The title gives 2020, while the automatic captions render 2019."
+        }
+      ],
       "duplicate_relation": "No duplicate or alternate-upload relationship established.",
       "related_video_ids": [],
-      "coverage_gap": "No supplied source session located.",
+      "coverage_gap": "No supplied source for this public recording located in the 93-record inventory.",
       "review_limits": [
-        "Absence decision is against the supplied 93-record inventory, not all possible Drive holdings or all JEP records. Public name/date metadata supports the candidate session; this upload has not received a new content check."
+        "Only the specified caption anchors were used for this conclusion; automatic captions can contain errors. No full-audio equivalence or unique-hearing count is certified.",
+        "Year remains title-based with an explicit 2019/2020 caption conflict. Identity is checked; exact spoken year is not certified.",
+        "Compared against the supplied 93-record inventory, not all JEP or Drive holdings."
       ],
-      "basis": "Public title plus complete supplied-session index comparison",
+      "basis": "Bounded public caption anchors plus reviewed 93-record supplied-session index",
       "independent_date_corroboration": true,
       "metadata_check": {
         "title": "Caso 03 | Wilson Rodríguez | Subcaso Casanare | 20200203",
@@ -5361,7 +5382,8 @@
         "upload_date": "2023-07-21T11:45:02-07:00",
         "playability": "OK"
       },
-      "review_confidence": "Metadata-supported; recording content or coverage remains unverified"
+      "review_confidence": "Metadata-supported; recording content or coverage remains unverified",
+      "recording_kind": "Voluntary statement"
     },
     {
       "video_id": "VOFlxqzJqLw",
@@ -5414,35 +5436,37 @@
       "url": "https://www.youtube.com/watch?v=VSpKiFEOBSg",
       "title": "Caso 03 | Orlando Rivas Tovar | Subcaso Casanare | 20191128",
       "transcript_ids": [],
-      "coverage_status": "No supplied transcript located for public-metadata session",
+      "coverage_status": "No supplied transcript located; public identity content checked",
       "public_session_date": "2019-11-28",
-      "date_basis": "Official public-title date independently corroborated by the cited Auto 055 bibliography; this specific upload has not received a content check.",
+      "date_basis": "Opening date, participant and Yopal location agree with official metadata.",
       "public_participant": "Orlando Rivas Tovar",
       "evidence": [
         {
-          "claim": "Official Casanare title identifies Orlando Rivas Tovar on 2019-11-28.",
+          "claim": "Opening identifies Orlando Rivas Tovar, 28 November 2019 at 12:04 in Yopal, and Auto 231 of 6 November.",
           "public_url": "https://www.youtube.com/watch?v=VSpKiFEOBSg",
-          "pointer": "Official public title; channel catalog."
+          "pointer": "00:00:47–00:01:20"
         },
         {
-          "claim": "Compared with all 93 supplied records and their established session identities. No corresponding transcript record found; mentions of this person in other hearings do not constitute a transcript of this session.",
-          "source": "outputs/jep_transcripts_20261103/inventory.json"
-        },
-        {
-          "claim": "The public decision independently cites this named participant and hearing date. This corroborates session metadata, not the content of this specific upload.",
-          "public_url": "https://www.coljuristas.org/observatorio_jep/documentos/sala_de_reconocimiento/Auto_SRVR-SUB-D-055_14-julio-2022.pdf#page=160",
-          "pointer": "Auto SRVR-SUB-D-055, 14 July 2022, PDF p. 160, footnote 1027; citation to Orlando Rivas Tovar, 2019-11-28."
+          "claim": "Reviewed supplied-session index contains no corresponding source; same-person candidate checks are retained when applicable.",
+          "source": "review05/metadata_gap_audit.json"
         }
       ],
       "source_anchors": [],
-      "video_offsets": [],
+      "video_offsets": [
+        {
+          "offsets": "00:00:47–00:01:20",
+          "verification": "Opening identifies Orlando Rivas Tovar, 28 November 2019 at 12:04 in Yopal, and Auto 231 of 6 November."
+        }
+      ],
       "duplicate_relation": "No duplicate or alternate-upload relationship established.",
       "related_video_ids": [],
-      "coverage_gap": "No supplied source session located.",
+      "coverage_gap": "No supplied source for this public recording located in the 93-record inventory.",
       "review_limits": [
-        "Absence decision is against the supplied 93-record inventory, not all possible Drive holdings or all JEP records. Public name/date metadata supports the candidate session; this upload has not received a new content check."
+        "Only the specified caption anchors were used for this conclusion; automatic captions can contain errors. No full-audio equivalence or unique-hearing count is certified.",
+        "Opening date, participant and Yopal location agree with official metadata.",
+        "Compared against the supplied 93-record inventory, not all JEP or Drive holdings."
       ],
-      "basis": "Public title plus complete supplied-session index comparison",
+      "basis": "Bounded public caption anchors plus reviewed 93-record supplied-session index",
       "independent_date_corroboration": true,
       "metadata_check": {
         "title": "Caso 03 | Orlando Rivas Tovar | Subcaso Casanare | 20191128",
@@ -5453,37 +5477,45 @@
         "upload_date": "2024-04-16T07:21:20-07:00",
         "playability": "OK"
       },
-      "review_confidence": "Metadata-supported; recording content or coverage remains unverified"
+      "review_confidence": "Metadata-supported; recording content or coverage remains unverified",
+      "recording_kind": "Voluntary statement"
     },
     {
       "video_id": "YbtWpt_e_FA",
       "url": "https://www.youtube.com/watch?v=YbtWpt_e_FA",
       "title": "Caso 03, Subcaso Casanare || Versión voluntaria Carlos Ovidio Saavedra Sáenz - 14/01/2020",
       "transcript_ids": [],
-      "coverage_status": "No supplied transcript located for public-metadata session",
+      "coverage_status": "No supplied transcript located; public identity content checked",
       "public_session_date": "2020-01-14",
-      "date_basis": "Date in official public title; hearing content not checked in this reverse pass.",
+      "date_basis": "Opening date and participant agree with title; the full hearing is not audio-certified.",
       "public_participant": "Carlos Ovidio Saavedra Sáenz",
       "evidence": [
         {
-          "claim": "Official Casanare title identifies Carlos Ovidio Saavedra Sáenz on 2020-01-14.",
+          "claim": "Opening identifies General Carlos Ovidio Saavedra Sáenz, 14 January 2020, and Auto 227 of 8 November 2019.",
           "public_url": "https://www.youtube.com/watch?v=YbtWpt_e_FA",
-          "pointer": "Official public title; channel catalog."
+          "pointer": "00:00:44–00:01:10"
         },
         {
-          "claim": "Compared with all 93 supplied records and their established session identities. No corresponding transcript record found; mentions of this person in other hearings do not constitute a transcript of this session.",
-          "source": "outputs/jep_transcripts_20261103/inventory.json"
+          "claim": "Reviewed supplied-session index contains no corresponding source; same-person candidate checks are retained when applicable.",
+          "source": "review05/metadata_gap_audit.json"
         }
       ],
       "source_anchors": [],
-      "video_offsets": [],
+      "video_offsets": [
+        {
+          "offsets": "00:00:44–00:01:10",
+          "verification": "Opening identifies General Carlos Ovidio Saavedra Sáenz, 14 January 2020, and Auto 227 of 8 November 2019."
+        }
+      ],
       "duplicate_relation": "No duplicate or alternate-upload relationship established.",
       "related_video_ids": [],
-      "coverage_gap": "No supplied source session located.",
+      "coverage_gap": "No supplied source for this public recording located in the 93-record inventory.",
       "review_limits": [
-        "Absence decision is against the supplied 93-record inventory, not all possible Drive holdings or all JEP records. Public name/date metadata supports the candidate session; this upload has not received a new content check."
+        "Only the specified caption anchors were used for this conclusion; automatic captions can contain errors. No full-audio equivalence or unique-hearing count is certified.",
+        "Opening date and participant agree with title; the full hearing is not audio-certified.",
+        "Compared against the supplied 93-record inventory, not all JEP or Drive holdings."
       ],
-      "basis": "Public title plus complete supplied-session index comparison",
+      "basis": "Bounded public caption anchors plus reviewed 93-record supplied-session index",
       "metadata_check": {
         "title": "Caso 03, Subcaso Casanare || Versión voluntaria Carlos Ovidio Saavedra Sáenz - 14/01/2020",
         "channel_name": "JEP Colombia",
@@ -5493,42 +5525,45 @@
         "upload_date": "2023-12-21T16:12:59-08:00",
         "playability": "OK"
       },
-      "review_confidence": "Metadata-supported; recording content or coverage remains unverified"
+      "review_confidence": "Metadata-supported; recording content or coverage remains unverified",
+      "recording_kind": "Voluntary statement"
     },
     {
       "video_id": "Z7O6PZdr4qw",
       "url": "https://www.youtube.com/watch?v=Z7O6PZdr4qw",
       "title": "Caso 03 | Jaime Alexander Romero Vargas | Subcaso Casanare | 20190621",
       "transcript_ids": [],
-      "coverage_status": "No supplied transcript located for public-metadata session",
+      "coverage_status": "No supplied transcript located; public identity content checked",
       "public_session_date": "2019-06-21",
-      "date_basis": "Official public-title date independently corroborated by the cited Auto 055 bibliography; this specific upload has not received a content check.",
+      "date_basis": "Spoken date and participant agree with title; garbled automatic-caption clock is not adopted.",
       "public_participant": "Jaime Alexander Romero Vargas",
       "evidence": [
         {
-          "claim": "Official Casanare title identifies Jaime Alexander Romero Vargas on 2019-06-21.",
+          "claim": "Opening identifies Jaime Alexander Romero Vargas, 21 June 2019 and Auto 075 of 28 May.",
           "public_url": "https://www.youtube.com/watch?v=Z7O6PZdr4qw",
-          "pointer": "Official public title; channel catalog."
+          "pointer": "00:01:07–00:01:28"
         },
         {
-          "claim": "Compared with all 93 supplied records and their established session identities. No corresponding transcript record found; mentions of this person in other hearings do not constitute a transcript of this session.",
-          "source": "outputs/jep_transcripts_20261103/inventory.json"
-        },
-        {
-          "claim": "The public decision independently cites this named participant and hearing date. This corroborates session metadata, not the content of this specific upload.",
-          "public_url": "https://www.coljuristas.org/observatorio_jep/documentos/sala_de_reconocimiento/Auto_SRVR-SUB-D-055_14-julio-2022.pdf#page=58",
-          "pointer": "Auto SRVR-SUB-D-055, 14 July 2022, PDF p. 58, footnote 364; citation to Jaime Alexander Romero Vargas, 2019-06-21."
+          "claim": "Reviewed supplied-session index contains no corresponding source; same-person candidate checks are retained when applicable.",
+          "source": "review05/metadata_gap_audit.json"
         }
       ],
       "source_anchors": [],
-      "video_offsets": [],
+      "video_offsets": [
+        {
+          "offsets": "00:01:07–00:01:28",
+          "verification": "Opening identifies Jaime Alexander Romero Vargas, 21 June 2019 and Auto 075 of 28 May."
+        }
+      ],
       "duplicate_relation": "No duplicate or alternate-upload relationship established.",
       "related_video_ids": [],
-      "coverage_gap": "No supplied source session located.",
+      "coverage_gap": "No supplied source for this public recording located in the 93-record inventory.",
       "review_limits": [
-        "Absence decision is against the supplied 93-record inventory, not all possible Drive holdings or all JEP records. Public name/date metadata supports the candidate session; this upload has not received a new content check."
+        "Only the specified caption anchors were used for this conclusion; automatic captions can contain errors. No full-audio equivalence or unique-hearing count is certified.",
+        "Spoken date and participant agree with title; garbled automatic-caption clock is not adopted.",
+        "Compared against the supplied 93-record inventory, not all JEP or Drive holdings."
       ],
-      "basis": "Public title plus complete supplied-session index comparison",
+      "basis": "Bounded public caption anchors plus reviewed 93-record supplied-session index",
       "independent_date_corroboration": true,
       "metadata_check": {
         "title": "Caso 03 | Jaime Alexander Romero Vargas | Subcaso Casanare | 20190621",
@@ -5539,7 +5574,8 @@
         "upload_date": "2023-07-19T14:38:48-07:00",
         "playability": "OK"
       },
-      "review_confidence": "Metadata-supported; recording content or coverage remains unverified"
+      "review_confidence": "Metadata-supported; recording content or coverage remains unverified",
+      "recording_kind": "Voluntary statement"
     },
     {
       "video_id": "bEhPkdaC4bc",
@@ -5788,33 +5824,23 @@
       "url": "https://www.youtube.com/watch?v=eKrYlu79rGo",
       "title": "Caso 03 | Jorge Antonio Solano Galvis | Subcaso Casanare | 20191015",
       "transcript_ids": [],
-      "coverage_status": "No supplied transcript located for public-metadata session",
+      "coverage_status": "No supplied transcript located; public identity content checked",
       "public_session_date": "2019-10-15",
-      "date_basis": "Official public-title date independently corroborated by the cited Auto 055 bibliography; this specific upload has not received a content check.",
+      "date_basis": "Dated closing confirms title; distinct format and supplied-source opening exclude VV-041 equivalence.",
       "public_participant": "Jorge Antonio Solano Galvis",
       "evidence": [
         {
-          "claim": "Official Casanare title identifies Jorge Antonio Solano Galvis on 2019-10-15.",
+          "claim": "Solano recorded questionnaire supplement: counsel explains that question 14 is answered by video alongside written answers; closing gives 15 October 2019 at 15:45. Supplied VV-041 opens on 27 July 2020.",
           "public_url": "https://www.youtube.com/watch?v=eKrYlu79rGo",
-          "pointer": "Official public title; channel catalog."
+          "pointer": "00:00:08–00:01:02; 00:44:13–00:44:25"
         },
         {
-          "claim": "Compared with all 93 supplied records and their established session identities. No corresponding transcript record found; mentions of this person in other hearings do not constitute a transcript of this session.",
-          "source": "outputs/jep_transcripts_20261103/inventory.json"
+          "claim": "Reviewed supplied-session index contains no corresponding source; same-person candidate checks are retained when applicable.",
+          "source": "review05/metadata_gap_audit.json"
         },
         {
-          "claim": "Same-person supplied sessions have dates: VV-041 2020-07-27. Their presence alone does not establish coverage of this upload.",
-          "source": "Supplied source openings and completed forward content checks."
-        },
-        {
-          "claim": "Auto 055 independently identifies Solano’s written voluntary statement of 15 Oct 2019; video may be its recorded supplement, distinct from the supplied July 2020 hearing.",
-          "public_url": "https://www.coljuristas.org/observatorio_jep/documentos/sala_de_reconocimiento/Auto_SRVR-SUB-D-055_14-julio-2022.pdf#page=190",
-          "pointer": "Auto SRVR-SUB-D-055, 14 Jul 2022, PDF p.190, footnote 1261."
-        },
-        {
-          "claim": "The public decision independently cites this named participant and hearing date. This corroborates session metadata, not the content of this specific upload.",
-          "public_url": "https://www.coljuristas.org/observatorio_jep/documentos/sala_de_reconocimiento/Auto_SRVR-SUB-D-055_14-julio-2022.pdf#page=187",
-          "pointer": "Auto SRVR-SUB-D-055, 14 July 2022, PDF p. 187; citation to Jorge Antonio Solano Galvis, 2019-10-15."
+          "claim": "Source opening dates and ordered content comparison distinguish the existing same-person supplied record(s).",
+          "source": "review05/priority_content_checks.json"
         }
       ],
       "source_anchors": [
@@ -5825,17 +5851,23 @@
           "supports": "Supplied opening explicitly gives 27 Jul 2020; source filename 29 Jul is a retained conflict."
         }
       ],
-      "video_offsets": [],
+      "video_offsets": [
+        {
+          "offsets": "00:00:08–00:01:02; 00:44:13–00:44:25",
+          "verification": "Solano recorded questionnaire supplement: counsel explains that question 14 is answered by video alongside written answers; closing gives 15 October 2019 at 15:45. Supplied VV-041 opens on 27 July 2020."
+        }
+      ],
       "duplicate_relation": "No duplicate or alternate-upload relationship established.",
       "related_video_ids": [
         "6-WiBJDqsQg"
       ],
-      "coverage_gap": "No supplied source session located.",
+      "coverage_gap": "No supplied source for this public recording located in the 93-record inventory.",
       "review_limits": [
-        "Absence decision is against the supplied 93-record inventory, not all possible Drive holdings or all JEP records. Public name/date metadata supports the candidate session; this upload has not received a new content check.",
-        "A same-person source exists for another date. Because public metadata elsewhere contains date errors, an opening-content check is needed before treating the session distinction as content verified."
+        "Only the specified caption anchors were used for this conclusion; automatic captions can contain errors. No full-audio equivalence or unique-hearing count is certified.",
+        "Dated closing confirms title; distinct format and supplied-source opening exclude VV-041 equivalence.",
+        "Compared against the supplied 93-record inventory, not all JEP or Drive holdings."
       ],
-      "basis": "Public title plus complete supplied-session index comparison",
+      "basis": "Bounded public caption anchors plus reviewed 93-record supplied-session index",
       "related_transcript_ids": [
         "VV-041"
       ],
@@ -5849,7 +5881,8 @@
         "upload_date": "2022-12-28T11:04:38-08:00",
         "playability": "OK"
       },
-      "review_confidence": "Metadata-supported; recording content or coverage remains unverified"
+      "review_confidence": "Metadata-supported; recording content or coverage remains unverified",
+      "recording_kind": "Recorded questionnaire response"
     },
     {
       "video_id": "j-P6L41InvE",
@@ -6137,35 +6170,37 @@
       "url": "https://www.youtube.com/watch?v=uIHoKm5tM-o",
       "title": "Caso 03 | Henry William Torres | Subcaso Casanare | 20191211",
       "transcript_ids": [],
-      "coverage_status": "No supplied transcript located for public-metadata session",
+      "coverage_status": "No supplied transcript located; public identity content checked",
       "public_session_date": "2019-12-11",
-      "date_basis": "Official public-title date independently corroborated by the cited Auto 055 bibliography; this specific upload has not received a content check.",
+      "date_basis": "Opening date and participant agree with title.",
       "public_participant": "Henry William Torres",
       "evidence": [
         {
-          "claim": "Official Casanare title identifies Henry William Torres on 2019-12-11.",
+          "claim": "Opening identifies Henry William Torres Escalante, 11 December 2019 at 09:13, including consideration of his pactum veritatis; closing schedules continuation on 18 December.",
           "public_url": "https://www.youtube.com/watch?v=uIHoKm5tM-o",
-          "pointer": "Official public title; channel catalog."
+          "pointer": "00:00:48–00:01:33; 06:11:22–06:11:55"
         },
         {
-          "claim": "Compared with all 93 supplied records and their established session identities. No corresponding transcript record found; mentions of this person in other hearings do not constitute a transcript of this session.",
-          "source": "outputs/jep_transcripts_20261103/inventory.json"
-        },
-        {
-          "claim": "The public decision independently cites this named participant and hearing date. This corroborates session metadata, not the content of this specific upload.",
-          "public_url": "https://www.coljuristas.org/observatorio_jep/documentos/sala_de_reconocimiento/Auto_SRVR-SUB-D-055_14-julio-2022.pdf#page=29",
-          "pointer": "Auto SRVR-SUB-D-055, 14 July 2022, PDF p. 29; citation to Henry William Torres, 2019-12-11."
+          "claim": "Reviewed supplied-session index contains no corresponding source; same-person candidate checks are retained when applicable.",
+          "source": "review05/metadata_gap_audit.json"
         }
       ],
       "source_anchors": [],
-      "video_offsets": [],
+      "video_offsets": [
+        {
+          "offsets": "00:00:48–00:01:33; 06:11:22–06:11:55",
+          "verification": "Opening identifies Henry William Torres Escalante, 11 December 2019 at 09:13, including consideration of his pactum veritatis; closing schedules continuation on 18 December."
+        }
+      ],
       "duplicate_relation": "No duplicate or alternate-upload relationship established.",
       "related_video_ids": [],
-      "coverage_gap": "No supplied source session located.",
+      "coverage_gap": "No supplied source for this public recording located in the 93-record inventory.",
       "review_limits": [
-        "Absence decision is against the supplied 93-record inventory, not all possible Drive holdings or all JEP records. Public name/date metadata supports the candidate session; this upload has not received a new content check."
+        "Only the specified caption anchors were used for this conclusion; automatic captions can contain errors. No full-audio equivalence or unique-hearing count is certified.",
+        "Opening date and participant agree with title.",
+        "Compared against the supplied 93-record inventory, not all JEP or Drive holdings."
       ],
-      "basis": "Public title plus complete supplied-session index comparison",
+      "basis": "Bounded public caption anchors plus reviewed 93-record supplied-session index",
       "independent_date_corroboration": true,
       "metadata_check": {
         "title": "Caso 03 | Henry William Torres | Subcaso Casanare | 20191211",
@@ -6176,7 +6211,8 @@
         "upload_date": "2024-04-16T10:14:58-07:00",
         "playability": "OK"
       },
-      "review_confidence": "Metadata-supported; recording content or coverage remains unverified"
+      "review_confidence": "Metadata-supported; recording content or coverage remains unverified",
+      "recording_kind": "Voluntary statement"
     },
     {
       "video_id": "uTjViv5Vtpc",
@@ -6283,23 +6319,23 @@
       "url": "https://www.youtube.com/watch?v=w49HGaeBNRk",
       "title": "Caso 03 | Leonardo Toro Ramírez | Subcaso Casanare | Versión II | 20190515",
       "transcript_ids": [],
-      "coverage_status": "No supplied transcript located for public-metadata session",
+      "coverage_status": "No supplied transcript located; public identity content checked",
       "public_session_date": "2019-05-15",
-      "date_basis": "Date in official public title; hearing content not checked in this reverse pass.",
+      "date_basis": "Title and opening give 15 May; closing automatic captions render 14 May. Conflict retained; no full testimony occurs.",
       "public_participant": "Leonardo Toro Ramírez",
       "evidence": [
         {
-          "claim": "Official Casanare title identifies Leonardo Toro Ramírez on 2019-05-15.",
+          "claim": "Toro procedural installation: opening gives 15 May 2019 at 08:40; missing defense counsel prevents continuation and the proceeding is adjourned. Supplied VV-017 and VV-018 open on 20 February and 27 June 2019.",
           "public_url": "https://www.youtube.com/watch?v=w49HGaeBNRk",
-          "pointer": "Official public title; channel catalog."
+          "pointer": "00:00:50–00:01:06; 00:06:33–00:07:05; 00:10:52–00:11:09"
         },
         {
-          "claim": "Compared with all 93 supplied records and their established session identities. No corresponding transcript record found; mentions of this person in other hearings do not constitute a transcript of this session.",
-          "source": "outputs/jep_transcripts_20261103/inventory.json"
+          "claim": "Reviewed supplied-session index contains no corresponding source; same-person candidate checks are retained when applicable.",
+          "source": "review05/metadata_gap_audit.json"
         },
         {
-          "claim": "Same-person supplied sessions have dates: VV-017 2019-02-20; VV-018 2019-06-27. Their presence alone does not establish coverage of this upload.",
-          "source": "Supplied source openings and completed forward content checks."
+          "claim": "Source opening dates and ordered content comparison distinguish the existing same-person supplied record(s).",
+          "source": "review05/priority_content_checks.json"
         }
       ],
       "source_anchors": [
@@ -6316,18 +6352,24 @@
           "supports": "Supplied 27 Jun 2019 continuation installation."
         }
       ],
-      "video_offsets": [],
+      "video_offsets": [
+        {
+          "offsets": "00:00:50–00:01:06; 00:06:33–00:07:05; 00:10:52–00:11:09",
+          "verification": "Toro procedural installation: opening gives 15 May 2019 at 08:40; missing defense counsel prevents continuation and the proceeding is adjourned. Supplied VV-017 and VV-018 open on 20 February and 27 June 2019."
+        }
+      ],
       "duplicate_relation": "No duplicate or alternate-upload relationship established.",
       "related_video_ids": [
         "Dlfn1RekIeA",
         "VB-J8_VU7dk"
       ],
-      "coverage_gap": "No supplied source session located.",
+      "coverage_gap": "No supplied source for this public recording located in the 93-record inventory.",
       "review_limits": [
-        "Absence decision is against the supplied 93-record inventory, not all possible Drive holdings or all JEP records. Public name/date metadata supports the candidate session; this upload has not received a new content check.",
-        "A same-person source exists for another date. Because public metadata elsewhere contains date errors, an opening-content check is needed before treating the session distinction as content verified."
+        "Only the specified caption anchors were used for this conclusion; automatic captions can contain errors. No full-audio equivalence or unique-hearing count is certified.",
+        "Title and opening give 15 May; closing automatic captions render 14 May. Conflict retained; no full testimony occurs.",
+        "Compared against the supplied 93-record inventory, not all JEP or Drive holdings."
       ],
-      "basis": "Public title plus complete supplied-session index comparison",
+      "basis": "Bounded public caption anchors plus reviewed 93-record supplied-session index",
       "related_transcript_ids": [
         "VV-017",
         "VV-018"
@@ -6341,7 +6383,8 @@
         "upload_date": "2022-12-28T08:59:52-08:00",
         "playability": "OK"
       },
-      "review_confidence": "Metadata-supported; recording content or coverage remains unverified"
+      "review_confidence": "Metadata-supported; recording content or coverage remains unverified",
+      "recording_kind": "Procedural installation / adjournment"
     },
     {
       "video_id": "wg4UGYvV_gs",
@@ -6394,35 +6437,39 @@
       "url": "https://www.youtube.com/watch?v=xHM6s1lT4M0",
       "title": "Caso 03 | Gustavo Enrique Soto Bracamonte | Subcaso Casanare | Versión II | 20190301",
       "transcript_ids": [],
-      "coverage_status": "No supplied transcript located for public-metadata session",
+      "coverage_status": "No supplied transcript located; public identity content checked",
       "public_session_date": "2019-03-01",
-      "date_basis": "Official public-title date independently corroborated by the cited Auto 055 bibliography; this specific upload has not received a content check.",
+      "date_basis": "1 March 2019 comes from the title; the checked opening dates the earlier statement, not this continuation.",
       "public_participant": "Gustavo Enrique Soto Bracamonte",
       "evidence": [
         {
-          "claim": "Official Casanare title identifies Gustavo Enrique Soto Bracamonte on 2019-03-01.",
+          "claim": "Opening identifies Gustavo Soto and explicitly resumes his 7 December 2018 statement.",
           "public_url": "https://www.youtube.com/watch?v=xHM6s1lT4M0",
-          "pointer": "Official public title; channel catalog."
+          "pointer": "00:00:08–00:00:49"
         },
         {
-          "claim": "Compared with all 93 supplied records and their established session identities. No corresponding transcript record found; mentions of this person in other hearings do not constitute a transcript of this session.",
-          "source": "outputs/jep_transcripts_20261103/inventory.json"
-        },
-        {
-          "claim": "The public decision independently cites this named participant and hearing date. This corroborates session metadata, not the content of this specific upload.",
-          "public_url": "https://www.coljuristas.org/observatorio_jep/documentos/sala_de_reconocimiento/Auto_SRVR-SUB-D-055_14-julio-2022.pdf#page=32",
-          "pointer": "Auto SRVR-SUB-D-055, 14 July 2022, PDF p. 32; citation to Gustavo Enrique Soto Bracamonte, 2019-03-01."
+          "claim": "Reviewed supplied-session index contains no corresponding source; same-person candidate checks are retained when applicable.",
+          "source": "review05/metadata_gap_audit.json"
         }
       ],
       "source_anchors": [],
-      "video_offsets": [],
-      "duplicate_relation": "No duplicate or alternate-upload relationship established.",
-      "related_video_ids": [],
-      "coverage_gap": "No supplied source session located.",
-      "review_limits": [
-        "Absence decision is against the supplied 93-record inventory, not all possible Drive holdings or all JEP records. Public name/date metadata supports the candidate session; this upload has not received a new content check."
+      "video_offsets": [
+        {
+          "offsets": "00:00:08–00:00:49",
+          "verification": "Opening identifies Gustavo Soto and explicitly resumes his 7 December 2018 statement."
+        }
       ],
-      "basis": "Public title plus complete supplied-session index comparison",
+      "duplicate_relation": "The later opening explicitly resumes the 7 December 2018 statement. Its current 1 March 2019 date remains title-based; not an established alternate copy.",
+      "related_video_ids": [
+        "1M2x7H2vH74"
+      ],
+      "coverage_gap": "No supplied source for this public recording located in the 93-record inventory.",
+      "review_limits": [
+        "Only the specified caption anchors were used for this conclusion; automatic captions can contain errors. No full-audio equivalence or unique-hearing count is certified.",
+        "1 March 2019 comes from the title; the checked opening dates the earlier statement, not this continuation.",
+        "Compared against the supplied 93-record inventory, not all JEP or Drive holdings."
+      ],
+      "basis": "Bounded public caption anchors plus reviewed 93-record supplied-session index",
       "independent_date_corroboration": true,
       "metadata_check": {
         "title": "Caso 03 | Gustavo Enrique Soto Bracamonte | Subcaso Casanare | Versión II | 20190301",
@@ -6433,42 +6480,45 @@
         "upload_date": "2022-12-28T08:57:44-08:00",
         "playability": "OK"
       },
-      "review_confidence": "Metadata-supported; recording content or coverage remains unverified"
+      "review_confidence": "Metadata-supported; recording content or coverage remains unverified",
+      "recording_kind": "Voluntary-statement continuation"
     },
     {
       "video_id": "xuxtUERYNxk",
       "url": "https://www.youtube.com/watch?v=xuxtUERYNxk",
       "title": "Caso 03 | Wilson Rodríguez Mimisica | Subcaso Casanare | 20191202",
       "transcript_ids": [],
-      "coverage_status": "No supplied transcript located for public-metadata session",
+      "coverage_status": "No supplied transcript located; public identity content checked",
       "public_session_date": "2019-12-02",
-      "date_basis": "Official public-title date independently corroborated by the cited Auto 055 bibliography; this specific upload has not received a content check.",
+      "date_basis": "Opening and closing agree on 2 December 2019.",
       "public_participant": "Wilson Rodríguez Mimisica",
       "evidence": [
         {
-          "claim": "Official Casanare title identifies Wilson Rodríguez Mimisica on 2019-12-02.",
+          "claim": "Wilson Rodríguez proceeding on 2 December 2019: the participant was not transported to the hearing, so the court records preparations and closes at 09:38. This is not a completed voluntary statement.",
           "public_url": "https://www.youtube.com/watch?v=xuxtUERYNxk",
-          "pointer": "Official public title; channel catalog."
+          "pointer": "00:00:30–00:01:05; 00:02:32–00:03:24; 00:10:55–00:11:58"
         },
         {
-          "claim": "Compared with all 93 supplied records and their established session identities. No corresponding transcript record found; mentions of this person in other hearings do not constitute a transcript of this session.",
-          "source": "outputs/jep_transcripts_20261103/inventory.json"
-        },
-        {
-          "claim": "The public decision independently cites this named participant and hearing date. This corroborates session metadata, not the content of this specific upload.",
-          "public_url": "https://www.coljuristas.org/observatorio_jep/documentos/sala_de_reconocimiento/Auto_SRVR-SUB-D-055_14-julio-2022.pdf#page=195",
-          "pointer": "Auto SRVR-SUB-D-055, 14 July 2022, PDF p. 195; citation to Wilson Rodríguez Mimisica, 2019-12-02."
+          "claim": "Reviewed supplied-session index contains no corresponding source; same-person candidate checks are retained when applicable.",
+          "source": "review05/metadata_gap_audit.json"
         }
       ],
       "source_anchors": [],
-      "video_offsets": [],
+      "video_offsets": [
+        {
+          "offsets": "00:00:30–00:01:05; 00:02:32–00:03:24; 00:10:55–00:11:58",
+          "verification": "Wilson Rodríguez proceeding on 2 December 2019: the participant was not transported to the hearing, so the court records preparations and closes at 09:38. This is not a completed voluntary statement."
+        }
+      ],
       "duplicate_relation": "No duplicate or alternate-upload relationship established.",
       "related_video_ids": [],
-      "coverage_gap": "No supplied source session located.",
+      "coverage_gap": "No supplied source for this public recording located in the 93-record inventory.",
       "review_limits": [
-        "Absence decision is against the supplied 93-record inventory, not all possible Drive holdings or all JEP records. Public name/date metadata supports the candidate session; this upload has not received a new content check."
+        "Only the specified caption anchors were used for this conclusion; automatic captions can contain errors. No full-audio equivalence or unique-hearing count is certified.",
+        "Opening and closing agree on 2 December 2019.",
+        "Compared against the supplied 93-record inventory, not all JEP or Drive holdings."
       ],
-      "basis": "Public title plus complete supplied-session index comparison",
+      "basis": "Bounded public caption anchors plus reviewed 93-record supplied-session index",
       "independent_date_corroboration": true,
       "metadata_check": {
         "title": "Caso 03 | Wilson Rodríguez Mimisica | Subcaso Casanare | 20191202",
@@ -6479,7 +6529,8 @@
         "upload_date": "2024-04-16T06:54:48-07:00",
         "playability": "OK"
       },
-      "review_confidence": "Metadata-supported; recording content or coverage remains unverified"
+      "review_confidence": "Metadata-supported; recording content or coverage remains unverified",
+      "recording_kind": "Procedural installation / adjournment"
     },
     {
       "video_id": "zTUcmpzH124",

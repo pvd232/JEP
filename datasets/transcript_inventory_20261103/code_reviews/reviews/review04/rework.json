@@ -1,0 +1,154 @@
+{
+  "review": "R04 source identity and duplicate/version consolidation",
+  "created_at_utc": "2026-11-03T20:53:08.208000+00:00",
+  "reviewed_frozen_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "verdict": "Assigned repairs pass focused independent replay. No canonical ID or source assignment changes.",
+  "findings": {
+    "R04-01": {
+      "status": "repaired",
+      "change": "Persistent accepted record-ID registry keyed by immutable Drive file IDs; generator reuses accepted group identities, rejects conflicting merges/splits, and allocates unused draft IDs only for groups with no accepted member.",
+      "script_before_sha256": "d54568ba8380e3697ce818d5f50033642e065ff097e8c9c175219a89d4f27fd2",
+      "script_after_sha256": "84d7b26d0506b0e1506053f0b20e419791692e6a07d9c972e2db578eca6d8766",
+      "locations": {
+        "read_record_id_registry": {
+          "start_line": 12,
+          "end_line": 31
+        },
+        "resolve_record_ids": {
+          "start_line": 34,
+          "end_line": 90
+        }
+      },
+      "registry_records": 93,
+      "registry_source_file_ids": 105,
+      "rename_regression_before": 57,
+      "rename_regression_after": 0
+    },
+    "R04-02": {
+      "status": "corrected in assigned output comparison register",
+      "change": "Recomputed all twelve metric rows from retained extracted text; corrected four numeric fields across three rows; containment and all consolidation decisions unchanged.",
+      "metrics_before_sha256": "9573cd1460473c5cc007104cf209675fc6c6b8a08efa2970f5872fd471a29f57",
+      "metrics_after_sha256": "d07b46404a2b0dddb2b1fced637609ac7c3c66d3c8351fb9ef4289e44bf23979",
+      "changed_fields": [
+        {
+          "record_id": "VV-008",
+          "field": "shared_fivegrams",
+          "before": 34104,
+          "after": 34102
+        },
+        {
+          "record_id": "VV-010",
+          "field": "words",
+          "before": [
+            34761,
+            38244
+          ],
+          "after": [
+            34761,
+            38245
+          ]
+        },
+        {
+          "record_id": "VV-010",
+          "field": "shared_fivegrams",
+          "before": 15051,
+          "after": 15050
+        },
+        {
+          "record_id": "VV-027",
+          "field": "words",
+          "before": [
+            46111,
+            42353
+          ],
+          "after": [
+            46111,
+            42354
+          ]
+        }
+      ],
+      "normalizer": {
+        "description": "lowercase; Unicode NFD; discard combining characters; Unicode re.findall(r\"\\w+\"); distinct five-token tuple sets; containment rounded to 3 decimals",
+        "source_file": "inventory_work/tieout_review_20261103/reviews/review04/verify_rework.py",
+        "functions": [
+          "tokens",
+          "grams"
+        ],
+        "source_sha256": "74d29984aa3d52215b51384a59f9edb77982388ff8b2ee7410157718bd7822c3",
+        "unicode_version": "15.0.0"
+      },
+      "extraction": {
+        "retained_cache": "inventory_work/versiones_text_private.json",
+        "retained_cache_sha256": "d4587e11d70d15c7a93fab8c1a1b2f77770e66e61435c357e159c3cc88377c3b",
+        "source": "Existing retained source-text extractions, not re-fetched or modified"
+      }
+    }
+  },
+  "verification": {
+    "command": "\"$CODEX_PRIMARY_RUNTIME_PYTHON\" inventory_work/tieout_review_20261103/reviews/review04/verify_rework.py",
+    "checks": 26,
+    "all_checks_passed": true,
+    "actual_generator_runs": 2,
+    "generator_output_writes": "Intercepted in memory",
+    "current_canonical_records_preserved": 93,
+    "current_source_assignments_preserved": 105,
+    "generated_vv_record_ids_preserved": 75,
+    "generated_vv_source_assignments_preserved": 87,
+    "renamed_record": {
+      "target_source_file_id": "1PN1Snb8AnIUiJtuykAqEc3KMGBbhvcrc",
+      "before": "VV-057",
+      "after": "VV-057",
+      "changed_record_ids": 0,
+      "canonical_source_count": 75,
+      "actual_generator_executions": 2,
+      "filesystem_writes": "All generator Path.write_text calls intercepted in memory"
+    },
+    "new_group_allocation": "VV-076; existing and absent accepted record IDs reserved",
+    "version_rows_reproduced": 12
+  },
+  "modified_owned_paths": [
+    "inventory_work/build_versiones_rows.py",
+    "inventory_work/tieout_review_20261103/accepted_record_ids.json",
+    "outputs/jep_transcripts_20261103/version_comparisons.json"
+  ],
+  "source_archives": [
+    {
+      "original": "inventory_work/build_versiones_rows.py",
+      "copy": "inventory_work/tieout_review_20261103/reviews/review04/rework_source/build_versiones_rows.py",
+      "sha256": "84d7b26d0506b0e1506053f0b20e419791692e6a07d9c972e2db578eca6d8766"
+    },
+    {
+      "original": "inventory_work/tieout_review_20261103/accepted_record_ids.json",
+      "copy": "inventory_work/tieout_review_20261103/reviews/review04/rework_source/tieout_review_20261103/accepted_record_ids.json",
+      "sha256": "e5af781dc522e730e92d7c14a1e902952f77130cde274546fe4b5f91e3fa9e0f"
+    }
+  ],
+  "artifact_hashes": {
+    "inventory_work/build_versiones_rows.py": "84d7b26d0506b0e1506053f0b20e419791692e6a07d9c972e2db578eca6d8766",
+    "inventory_work/tieout_review_20261103/accepted_record_ids.json": "e5af781dc522e730e92d7c14a1e902952f77130cde274546fe4b5f91e3fa9e0f",
+    "outputs/jep_transcripts_20261103/version_comparisons.json": "d07b46404a2b0dddb2b1fced637609ac7c3c66d3c8351fb9ef4289e44bf23979",
+    "inventory_work/tieout_review_20261103/reviews/review04/verify_rework.py": "c0553359eaf13068073ba52d1e517b06c9d7e635c9223ae0b6459b4c69c91969",
+    "inventory_work/tieout_review_20261103/reviews/review04/rework_observations.json": "67baddd67fc04ae71e5a242910ebaefe4371f6654d8b03d4e902fc89b448eb49"
+  },
+  "parent_followups": [
+    {
+      "reason": "Outside this repair ownership",
+      "path": "inventory_work/versiones_version_pairs.json",
+      "action": "Synchronize the same four numeric fields if this retained historical generator input will be run again; otherwise it will still produce the old evidence numbers. No source group/identity change is needed."
+    },
+    {
+      "reason": "Parent owns canonical inventory/workbook regeneration",
+      "action": "Update downstream duplicate-note text wherever VV-008 says 34,104 shared spans to 34,102 and VV-010 says 15,051 to 15,050; rebuild artifact from the corrected register."
+    },
+    {
+      "reason": "Publication is parent-owned",
+      "action": "Publish repaired script and registry together, preserving registry path relative to script (tieout_review_20261103/accepted_record_ids.json); private text caches must not be published."
+    }
+  ],
+  "limits": [
+    "No full inventory regeneration, source edit, original-source re-extraction or network activity was performed.",
+    "Registry covers accepted source records; a new group receives a draft ID and must enter the reviewed registry before later source snapshots to make that new ID persistent.",
+    "Metric replay uses the retained source-text extraction snapshot. Individual raw and normalized extraction hashes are in rework_observations.json.",
+    "93 remains a count of consolidated source records, not a count of unique hearing dates or recording segments."
+  ]
+}

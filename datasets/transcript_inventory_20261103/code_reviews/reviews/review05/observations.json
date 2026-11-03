@@ -1,0 +1,66 @@
+{
+  "reviewed_code_sha256": {
+    "/workspace/scratch/8a7e64850a04/inventory_work/tieout_review_20261103/base/workbook_build/assemble_outputs.py": "ec06e9fbe1a5afc2aee19020b70e173351013e7b0495719b4449f8b2d7dbcaed",
+    "/workspace/scratch/8a7e64850a04/inventory_work/tieout_review_20261103/reviews/review05/working_build_mapping_review.py": "f409e2bc23f999f55e4363f083c116cb56af2c3f556f47aeaba827837921a0e1"
+  },
+  "baseline": {
+    "accepted": true,
+    "forward_edges": 84,
+    "reverse_edges": 84,
+    "dropped_forward_edges": [],
+    "reverse_only_edges": []
+  },
+  "published_counts": {
+    "included": 128,
+    "linked_uploads": 83,
+    "no_source_content_checked": 4,
+    "no_source_metadata_basis": 41,
+    "partial_supplied_source": 6,
+    "forward_edges": 84,
+    "reverse_edges": 84,
+    "edge_sets_equal": true
+  },
+  "missing_reverse_edge": {
+    "accepted": true,
+    "forward_edges": 84,
+    "reverse_edges": 83,
+    "dropped_forward_edges": [
+      [
+        "VV-029",
+        "eM8ZrqhZbgQ"
+      ]
+    ],
+    "reverse_only_edges": []
+  },
+  "duplicate_reverse_id": {
+    "accepted": true,
+    "forward_edges": 84,
+    "reverse_edges": 83,
+    "dropped_forward_edges": [
+      [
+        "VV-029",
+        "eM8ZrqhZbgQ"
+      ]
+    ],
+    "reverse_only_edges": []
+  },
+  "unlinked_candidate": {
+    "fixture": "Synthetic unlinked upload with the exact principal and date of VV-057; no content evidence",
+    "coverage_status": "No supplied transcript located for public-metadata session",
+    "related_transcript_ids": [
+      "VV-057",
+      "VV-059",
+      "VV-058",
+      "VV-060"
+    ],
+    "source_anchors": [],
+    "transcript_ids": [],
+    "absence_claimed": true
+  },
+  "reproduced_findings": [
+    "R05-F1: reverse row omits a forward edge without rejection",
+    "R05-F1: duplicate reverse video ID silently overwrites an edge",
+    "R05-F2: unlinked same-principal/same-date upload is automatically labelled absent"
+  ],
+  "all_invariants_preserved": false
+}

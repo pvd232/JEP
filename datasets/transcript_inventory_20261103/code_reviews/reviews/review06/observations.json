@@ -1,0 +1,150 @@
+{
+  "review_id": "review06",
+  "base_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "assembler_sha256": "ec06e9fbe1a5afc2aee19020b70e173351013e7b0495719b4449f8b2d7dbcaed",
+  "workbook_sha256": "b1715e2102adabf278ea36d406f06f2147555a5906d1368015e57a570d241cee",
+  "published_data_checks": [
+    {
+      "check": "Known partial supplied transcripts",
+      "actual": [
+        "VV-012",
+        "VV-015",
+        "VV-016",
+        "VV-025",
+        "VV-047",
+        "VV-053"
+      ],
+      "expected": [
+        "VV-012",
+        "VV-015",
+        "VV-016",
+        "VV-025",
+        "VV-047",
+        "VV-053"
+      ],
+      "passed": true
+    },
+    {
+      "check": "Video projection preserves the same partial set",
+      "actual": [
+        "VV-012",
+        "VV-015",
+        "VV-016",
+        "VV-025",
+        "VV-047",
+        "VV-053"
+      ],
+      "expected": [
+        "VV-012",
+        "VV-015",
+        "VV-016",
+        "VV-025",
+        "VV-047",
+        "VV-053"
+      ],
+      "passed": true
+    },
+    {
+      "check": "Forward missing-recording gaps remain distinct",
+      "actual": [
+        "VV-015",
+        "VV-038"
+      ],
+      "expected": [
+        "VV-015",
+        "VV-038"
+      ],
+      "passed": true
+    },
+    {
+      "check": "Shared upload retains both transcript segments",
+      "actual": [
+        "VV-029",
+        "VV-030"
+      ],
+      "expected": [
+        "VV-029",
+        "VV-030"
+      ],
+      "passed": true
+    },
+    {
+      "check": "Composite declaration retains both dates",
+      "actual": "2021-08-12; 2021-08-20",
+      "expected": "2021-08-12; 2021-08-20",
+      "passed": true
+    },
+    {
+      "check": "Composite clock labels remain explicit",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "Metadata-only records have no verified source offsets",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "All Excel durations preserve seconds and elapsed-hour formatting",
+      "actual": [],
+      "expected": [],
+      "passed": true
+    },
+    {
+      "check": "All Excel timestamp text preserves the source distinctions",
+      "actual": [],
+      "expected": [],
+      "passed": true
+    },
+    {
+      "check": "All Excel source and video dates preserve ISO days/composites",
+      "actual": [],
+      "expected": [],
+      "passed": true
+    },
+    {
+      "check": "Summary partial-source formula",
+      "actual": 6,
+      "expected": 6,
+      "passed": true
+    },
+    {
+      "check": "Valid duration examples",
+      "actual": {
+        "0:00": 0,
+        "02:03": 123,
+        "4:59:59": 17999,
+        "25740": 25740
+      },
+      "expected": {
+        "0:00": 0,
+        "02:03": 123,
+        "4:59:59": 17999,
+        "25740": 25740
+      },
+      "passed": true
+    }
+  ],
+  "published_data_all_passed": true,
+  "cell_counts": {
+    "durations": 197,
+    "source_dates": 93,
+    "video_dates": 152,
+    "populated_video_timestamp_cells": 87
+  },
+  "malformed_duration_counterexample": {
+    "actual": {
+      "1:99": 159,
+      "04:60:00": 18000,
+      "01:00:60": 3660
+    },
+    "expected": {
+      "1:99": null,
+      "04:60:00": null,
+      "01:00:60": null
+    },
+    "fixed": false
+  }
+}

@@ -1,0 +1,406 @@
+{
+  "all_checks_passed": true,
+  "checks": [
+    {
+      "check": "actual generator preserves all 75 accepted VV IDs",
+      "passed": true,
+      "compared_items": 75
+    },
+    {
+      "check": "actual generator preserves all 87 VV source assignments",
+      "passed": true,
+      "compared_items": 75
+    },
+    {
+      "check": "all 93 current canonical IDs and 105 assignments remain accepted",
+      "passed": true,
+      "compared_items": 93
+    },
+    {
+      "check": "registry preserves all 93 accepted records and 105 source assignments",
+      "passed": true,
+      "actual": [
+        93,
+        105
+      ],
+      "expected": [
+        93,
+        105
+      ]
+    },
+    {
+      "check": "title-only rename preserves all accepted IDs",
+      "passed": true,
+      "compared_items": 75
+    },
+    {
+      "check": "renamed VV-057 retains its accepted ID",
+      "passed": true,
+      "actual": "VV-057",
+      "expected": "VV-057"
+    },
+    {
+      "check": "metadata order does not affect IDs",
+      "passed": true,
+      "compared_items": 75
+    },
+    {
+      "check": "merging two established records is rejected",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "check": "splitting an established source group is rejected",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "check": "changing preferred source preserves record identity",
+      "passed": true,
+      "actual": "VV-003",
+      "expected": "VV-003"
+    },
+    {
+      "check": "new alternate preserves its existing group ID",
+      "passed": true,
+      "compared_items": 75
+    },
+    {
+      "check": "only a truly new source group receives a new ID",
+      "passed": true,
+      "compared_items": 76
+    },
+    {
+      "check": "absent accepted records still reserve their IDs",
+      "passed": true,
+      "compared_items": 1
+    },
+    {
+      "check": "recomputed duplicate metrics VV-003",
+      "passed": true,
+      "compared_items": 3
+    },
+    {
+      "check": "recomputed duplicate metrics VV-004",
+      "passed": true,
+      "compared_items": 3
+    },
+    {
+      "check": "recomputed duplicate metrics VV-008",
+      "passed": true,
+      "compared_items": 3
+    },
+    {
+      "check": "recomputed duplicate metrics VV-009",
+      "passed": true,
+      "compared_items": 3
+    },
+    {
+      "check": "recomputed duplicate metrics VV-010",
+      "passed": true,
+      "compared_items": 3
+    },
+    {
+      "check": "recomputed duplicate metrics VV-018",
+      "passed": true,
+      "compared_items": 3
+    },
+    {
+      "check": "recomputed duplicate metrics VV-021",
+      "passed": true,
+      "compared_items": 3
+    },
+    {
+      "check": "recomputed duplicate metrics VV-027",
+      "passed": true,
+      "compared_items": 3
+    },
+    {
+      "check": "recomputed duplicate metrics VV-028",
+      "passed": true,
+      "compared_items": 3
+    },
+    {
+      "check": "recomputed duplicate metrics VV-031",
+      "passed": true,
+      "compared_items": 3
+    },
+    {
+      "check": "recomputed duplicate metrics VV-042",
+      "passed": true,
+      "compared_items": 3
+    },
+    {
+      "check": "recomputed duplicate metrics VV-006",
+      "passed": true,
+      "compared_items": 3
+    },
+    {
+      "check": "private caches and prior draft outputs are untouched",
+      "passed": true,
+      "compared_items": 6
+    }
+  ],
+  "rename_observer": {
+    "target_source_file_id": "1PN1Snb8AnIUiJtuykAqEc3KMGBbhvcrc",
+    "before": "VV-057",
+    "after": "VV-057",
+    "changed_record_ids": 0,
+    "canonical_source_count": 75,
+    "actual_generator_executions": 2,
+    "filesystem_writes": "All generator Path.write_text calls intercepted in memory"
+  },
+  "pair_recomputations": [
+    {
+      "record_id": "VV-003",
+      "canonical_id": "1VTbDJfuZ3eW1ZqXVma19-dzqOgulb_Yn",
+      "variant_id": "1rPj9QScd1qhisMa7B4kb1vCFJc6iqTFO",
+      "words": [
+        42600,
+        38671
+      ],
+      "shared_fivegrams": 20768,
+      "containment": 0.546,
+      "extracted_text_sha256": {
+        "1VTbDJfuZ3eW1ZqXVma19-dzqOgulb_Yn": "9df09240059749345d1108e0d16f864febcf553832895c857a832df0efaaeeea",
+        "1rPj9QScd1qhisMa7B4kb1vCFJc6iqTFO": "870096d47d4b6cd5d548ae1784f9abd6e30f1c96f8edb18d46bc7661acb6408e"
+      },
+      "normalized_token_sha256": {
+        "1VTbDJfuZ3eW1ZqXVma19-dzqOgulb_Yn": "28c8d2b1f6fd0d984ab5226759985b3bdd7aa842ced2b5425c63421a95555000",
+        "1rPj9QScd1qhisMa7B4kb1vCFJc6iqTFO": "4f0d048e089d6b8bbb566f6fdae200a53bab238aca7d15da4196ce8d5d92cfdb"
+      }
+    },
+    {
+      "record_id": "VV-004",
+      "canonical_id": "1w_141oY2AwUeVRpPbDeCi42PQMHYastO",
+      "variant_id": "1Vayhl49aPPvuV0Dj3-21S2Dq3x-QC3Co",
+      "words": [
+        42750,
+        37530
+      ],
+      "shared_fivegrams": 12683,
+      "containment": 0.34,
+      "extracted_text_sha256": {
+        "1w_141oY2AwUeVRpPbDeCi42PQMHYastO": "de9473d9d5e014d039e649575117d9344b3518fb8b28cd95c3f1d3b9c1f22dc2",
+        "1Vayhl49aPPvuV0Dj3-21S2Dq3x-QC3Co": "7fbdf92ec74f2467842a58b6f3a1d957e1ed73230b0f579bd9e85ceb01c338f4"
+      },
+      "normalized_token_sha256": {
+        "1w_141oY2AwUeVRpPbDeCi42PQMHYastO": "6c1d171b497621eda1d9f37f5de4f082f99c994bb13e649e87a2dc0b9622e239",
+        "1Vayhl49aPPvuV0Dj3-21S2Dq3x-QC3Co": "afc18d8dc7fa78d146d579aa224d95ebc8300775051c73989723b18058e72eb1"
+      }
+    },
+    {
+      "record_id": "VV-008",
+      "canonical_id": "1tRVbwGNQTacBvxF_dUPmHV8nifZpCZAi",
+      "variant_id": "1-ARRyyLfWO_n6FOAAlrqCxTbnikxpcDX",
+      "words": [
+        54540,
+        55429
+      ],
+      "shared_fivegrams": 34102,
+      "containment": 0.639,
+      "extracted_text_sha256": {
+        "1tRVbwGNQTacBvxF_dUPmHV8nifZpCZAi": "9089784f91ec1b89e39832b73a7a52054200d7805c06fb65dd44cb551bfb8e76",
+        "1-ARRyyLfWO_n6FOAAlrqCxTbnikxpcDX": "d995c64c1e5f33447b29329ccde99732f4424f4c45cd3465ef06c64120af7287"
+      },
+      "normalized_token_sha256": {
+        "1tRVbwGNQTacBvxF_dUPmHV8nifZpCZAi": "884c37bfb39dddde9d990e81608e3cbbf9d640396797614ceb839065e13a18d5",
+        "1-ARRyyLfWO_n6FOAAlrqCxTbnikxpcDX": "b410131c38a970d4294ff794e86eed0d0092ef64edc71de024405881e01a7182"
+      }
+    },
+    {
+      "record_id": "VV-009",
+      "canonical_id": "1kKRYVXFwif0UpeJ8RhfyE69c2i4B6kgX",
+      "variant_id": "1_nsbeJ-LM0VieYUX6LMRPXV_NKWEEf-w",
+      "words": [
+        23233,
+        25006
+      ],
+      "shared_fivegrams": 8067,
+      "containment": 0.368,
+      "extracted_text_sha256": {
+        "1kKRYVXFwif0UpeJ8RhfyE69c2i4B6kgX": "15ebfad1b70fd8a9171875685d36e31a6ab225e19aa5b86add16b627a7f58331",
+        "1_nsbeJ-LM0VieYUX6LMRPXV_NKWEEf-w": "a40c09f8e195f321e2f6e4fbfd2968a1df41f3948598eb4b969af4b6d95de3d7"
+      },
+      "normalized_token_sha256": {
+        "1kKRYVXFwif0UpeJ8RhfyE69c2i4B6kgX": "77253361dbc551819f9ac3a19e911163254e486bef14f1ac4f5051dee0a6074b",
+        "1_nsbeJ-LM0VieYUX6LMRPXV_NKWEEf-w": "62b24631b0f46ea766e1969a9b41c334c9134c3746c25f56992a0e80f7485f72"
+      }
+    },
+    {
+      "record_id": "VV-010",
+      "canonical_id": "13DBfSrX8l_ebf5ApZQAMphm-FysuAlUK",
+      "variant_id": "1h2FWYVK_BkSqZ8QuVUHZycguXJfoTs5_",
+      "words": [
+        34761,
+        38245
+      ],
+      "shared_fivegrams": 15050,
+      "containment": 0.443,
+      "extracted_text_sha256": {
+        "13DBfSrX8l_ebf5ApZQAMphm-FysuAlUK": "1021f0ffc86b4638499e70fec43ef87d1fda6ef68c97c39e57b06bce7dcde83b",
+        "1h2FWYVK_BkSqZ8QuVUHZycguXJfoTs5_": "e14b0955501bfa1b27d39ab04c92b8a2fce670072edf40d632e6d8956531195c"
+      },
+      "normalized_token_sha256": {
+        "13DBfSrX8l_ebf5ApZQAMphm-FysuAlUK": "100532ed5b78a8283845206591bd248d33960a03537b1e2d02459c7bef4c80c0",
+        "1h2FWYVK_BkSqZ8QuVUHZycguXJfoTs5_": "c3338f23f4478545ac1f47f63b11373b1e40a5ca7ff6b30ec60cffbc22475726"
+      }
+    },
+    {
+      "record_id": "VV-018",
+      "canonical_id": "1M3ZDIAUsXP39UUCMNWstam3midHpGOoo",
+      "variant_id": "11prwivwz_DHd4JMo6Lhe4Gq92m7U2AWi",
+      "words": [
+        29841,
+        29432
+      ],
+      "shared_fivegrams": 16648,
+      "containment": 0.572,
+      "extracted_text_sha256": {
+        "1M3ZDIAUsXP39UUCMNWstam3midHpGOoo": "34ccdbb262152063d178447ecd29337e5fd32ef27e7cd6be4e86b0ed6608a859",
+        "11prwivwz_DHd4JMo6Lhe4Gq92m7U2AWi": "5e215989479becb64c9d679a9b474399a2fdff918897d923d9754845c5602973"
+      },
+      "normalized_token_sha256": {
+        "1M3ZDIAUsXP39UUCMNWstam3midHpGOoo": "5d1c29d8cfa25a40cece8f5a957157ec933d787e89fc329b91461d3ee743f09e",
+        "11prwivwz_DHd4JMo6Lhe4Gq92m7U2AWi": "f967fbed722feb4ddafecbd0912035ccd8c4f4e7149bc3acc3a538c725bc163b"
+      }
+    },
+    {
+      "record_id": "VV-021",
+      "canonical_id": "1kec9P5SdbfJy4XxximR5_L6awtJMDCBO",
+      "variant_id": "1AVG-23Dpi-NWiYqjyJObwxId9KzgtUlg",
+      "words": [
+        42568,
+        42183
+      ],
+      "shared_fivegrams": 16577,
+      "containment": 0.398,
+      "extracted_text_sha256": {
+        "1kec9P5SdbfJy4XxximR5_L6awtJMDCBO": "4f19c66fd1897b513ced5b01938694c3c6f44304104a7ba8de0577aa681c4c4c",
+        "1AVG-23Dpi-NWiYqjyJObwxId9KzgtUlg": "fadabb75a174cda8e375cfdc8828e471ad8dce2da8c2d71c72f20a2656c3c222"
+      },
+      "normalized_token_sha256": {
+        "1kec9P5SdbfJy4XxximR5_L6awtJMDCBO": "569ca0388cd440e69250f56e90a1c225c87b1ff9a9355f4460426720735220e5",
+        "1AVG-23Dpi-NWiYqjyJObwxId9KzgtUlg": "7a4cff48260162686a06278b0acc9a6b55dd8048bab704c9f0820d9f1ed244a4"
+      }
+    },
+    {
+      "record_id": "VV-027",
+      "canonical_id": "17sB2S1nRbSX7GDan43p1-ZraYiYl2ui0",
+      "variant_id": "1kMopRdBxnzCfUUZUAD9TrDredNwYCvC8",
+      "words": [
+        46111,
+        42354
+      ],
+      "shared_fivegrams": 14186,
+      "containment": 0.339,
+      "extracted_text_sha256": {
+        "17sB2S1nRbSX7GDan43p1-ZraYiYl2ui0": "142adc019627dff39bf03e01784d01d9b30b26fb1ddd2968cb677b3aa2014afa",
+        "1kMopRdBxnzCfUUZUAD9TrDredNwYCvC8": "aacf18ed3853f77a41407885e8a9af89e755bf061bfd9239f386fcdc6615de3b"
+      },
+      "normalized_token_sha256": {
+        "17sB2S1nRbSX7GDan43p1-ZraYiYl2ui0": "1e003b14cc829f039b1fde3663b544000c56d4c21eee59230fcc7c538fe15584",
+        "1kMopRdBxnzCfUUZUAD9TrDredNwYCvC8": "b8b40a1aa4c0b84d1f8592a7016c6318f2263f42855804b9889eed1a77887754"
+      }
+    },
+    {
+      "record_id": "VV-028",
+      "canonical_id": "15j_EE9zVj-tNdJqdGHrapM5UnzJCXbvL",
+      "variant_id": "1oO2gzqIQDSPK10taloqgX309oXO91vFA",
+      "words": [
+        38872,
+        41704
+      ],
+      "shared_fivegrams": 26498,
+      "containment": 0.693,
+      "extracted_text_sha256": {
+        "15j_EE9zVj-tNdJqdGHrapM5UnzJCXbvL": "5251b2a3e97c9616a3f3ed8a641da1af5408ae05744782a47b1f1d9f56c400ee",
+        "1oO2gzqIQDSPK10taloqgX309oXO91vFA": "db6422a67d92962b8d7b5735ed10adcbae6ae7bed0d1f2f6382ce62bed775a6e"
+      },
+      "normalized_token_sha256": {
+        "15j_EE9zVj-tNdJqdGHrapM5UnzJCXbvL": "bf2dee62f0a1db069a070d5695d32b9e1ec5e1eccb0bc1373ba907bf8eabfa75",
+        "1oO2gzqIQDSPK10taloqgX309oXO91vFA": "145476c9e6de4fca28dcde8b74d9e19a705c6653e0f340f1fe26ee746d9dd456"
+      }
+    },
+    {
+      "record_id": "VV-031",
+      "canonical_id": "1kKD2dUYz-USwnur2KTonUq3LFygfJZ4b",
+      "variant_id": "1HJiCGOoJtfhCQhogm34lpu2TYRbsAjes",
+      "words": [
+        28006,
+        24894
+      ],
+      "shared_fivegrams": 14023,
+      "containment": 0.569,
+      "extracted_text_sha256": {
+        "1kKD2dUYz-USwnur2KTonUq3LFygfJZ4b": "4297c370487191d271d0c827d148f25ecefa4c4211b3a49b7698b1f3c5fe9238",
+        "1HJiCGOoJtfhCQhogm34lpu2TYRbsAjes": "6234daca2136ed3850d99e1110f3e8675eb2ef326df21540b06794887fd3011a"
+      },
+      "normalized_token_sha256": {
+        "1kKD2dUYz-USwnur2KTonUq3LFygfJZ4b": "53af65a4aa88bfc99038eb11a6bc546c1e6a321d063a904a34a86d5f8fef9ea6",
+        "1HJiCGOoJtfhCQhogm34lpu2TYRbsAjes": "75e3ee1b3f58bd1ed41cb6af2a15c32acd5ae7685a56eb4e08b5fafa758672d0"
+      }
+    },
+    {
+      "record_id": "VV-042",
+      "canonical_id": "1YaBgJ-MWeIEZP_ncF9q3JSF1zBerzvmk",
+      "variant_id": "1Z78hcb5nameQ2IdZdIltjGdN59OZdMMX",
+      "words": [
+        36478,
+        38865
+      ],
+      "shared_fivegrams": 15749,
+      "containment": 0.443,
+      "extracted_text_sha256": {
+        "1YaBgJ-MWeIEZP_ncF9q3JSF1zBerzvmk": "40c3acfb8138ba0e4446276727716e4963b5c9c21b7f3953e3e4b167ef103508",
+        "1Z78hcb5nameQ2IdZdIltjGdN59OZdMMX": "bc5602ce0138b955cf21ebef8e53fd6d5aec624812ecf790071d89333beabb58"
+      },
+      "normalized_token_sha256": {
+        "1YaBgJ-MWeIEZP_ncF9q3JSF1zBerzvmk": "fbf0eb082519eb5c6e26f19985fce38967103b9bed954ac166c5e5258ecfdbc4",
+        "1Z78hcb5nameQ2IdZdIltjGdN59OZdMMX": "a87d64b05b0fd4fba6bc60fd80dea731b47ae7c2814dfa5ec3806b2044dc11da"
+      }
+    },
+    {
+      "record_id": "VV-006",
+      "canonical_id": "1Lj_G5aFBrdZ8x1MV2xWKrK_R-JBO3dnT",
+      "variant_id": "1mItfHk3W54vx0FITbtkm93YwtH2pwo4q",
+      "words": [
+        58638,
+        10229
+      ],
+      "shared_fivegrams": 1448,
+      "containment": 0.143,
+      "extracted_text_sha256": {
+        "1Lj_G5aFBrdZ8x1MV2xWKrK_R-JBO3dnT": "0ef8c630d8a320562a2525b8501cc7d07456a49edcecbe43f93c9ba1a1aa28b7",
+        "1mItfHk3W54vx0FITbtkm93YwtH2pwo4q": "c3b6e50d904d36a10ee8487c1e80177c605d805b111dcde19e3ce686598b09bd"
+      },
+      "normalized_token_sha256": {
+        "1Lj_G5aFBrdZ8x1MV2xWKrK_R-JBO3dnT": "512a9d17ba1210936db98cf7ec5190eb6913e5e5552ed3ad0b482304f4954a68",
+        "1mItfHk3W54vx0FITbtkm93YwtH2pwo4q": "b7472b2c055d9690ce103f6002f550602018beabe55751b5033a4ed24844829d"
+      }
+    }
+  ],
+  "normalizer": {
+    "description": "lowercase; Unicode NFD; discard combining characters; Unicode re.findall(r\"\\w+\"); distinct five-token tuple sets; containment rounded to 3 decimals",
+    "source_file": "inventory_work/tieout_review_20261103/reviews/review04/verify_rework.py",
+    "functions": [
+      "tokens",
+      "grams"
+    ],
+    "source_sha256": "74d29984aa3d52215b51384a59f9edb77982388ff8b2ee7410157718bd7822c3",
+    "unicode_version": "15.0.0"
+  },
+  "extraction": {
+    "retained_cache": "inventory_work/versiones_text_private.json",
+    "retained_cache_sha256": "d4587e11d70d15c7a93fab8c1a1b2f77770e66e61435c357e159c3cc88377c3b",
+    "source": "Existing retained source-text extractions, not re-fetched or modified"
+  },
+  "file_sha256": {
+    "inventory_work/build_versiones_rows.py": "84d7b26d0506b0e1506053f0b20e419791692e6a07d9c972e2db578eca6d8766",
+    "inventory_work/tieout_review_20261103/accepted_record_ids.json": "e5af781dc522e730e92d7c14a1e902952f77130cde274546fe4b5f91e3fa9e0f",
+    "outputs/jep_transcripts_20261103/version_comparisons.json": "d07b46404a2b0dddb2b1fced637609ac7c3c66d3c8351fb9ef4289e44bf23979",
+    "inventory_work/tieout_review_20261103/reviews/review04/verify_rework.py": "c0553359eaf13068073ba52d1e517b06c9d7e635c9223ae0b6459b4c69c91969"
+  }
+}

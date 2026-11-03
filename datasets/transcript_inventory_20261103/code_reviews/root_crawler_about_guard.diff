@@ -1,0 +1,20 @@
+--- before/crawl_public_catalog.py
++++ after/crawl_public_catalog.py
+@@ -496,9 +496,14 @@
+                 actions = [a.get(k) for root in ["onResponseReceivedActions", "onResponseReceivedCommands", "onResponseReceivedEndpoints"] for a in raw.get(root, []) for k in ["appendContinuationItemsAction", "reloadContinuationItemsCommand"] if a.get(k)]
+                 matching = [a for a in actions if a.get("targetId") == target]
+                 if not matching and not page.get("items"):
+-                    # The original collector also visited an About branch. It
+-                    # contributes no video entries and does not close the grid.
+-                    receipts.append({"page_index": index, "response_path": str(raw_path), "sha256": sha(raw_path.read_bytes()), "items": 0, "role": "non_video_branch"})
++                    # Only the positively identified historical About branch
++                    # may be skipped. An empty derived projection cannot prove
++                    # that a wrong-target raw response contains no videos.
++                    about_items = actions[0].get("continuationItems", []) if len(actions) == 1 else []
++                    about_branch = bool(about_items) and all(isinstance(i, dict) and set(i) == {"aboutChannelRenderer"} for i in about_items)
++                    if not about_branch or all_tokens(raw):
++                        raise ValueError("Unrecognized non-primary channel response")
++                    receipts.append({"page_index": index, "response_path": str(raw_path), "sha256": sha(raw_path.read_bytes()), "items": 0, "role": "verified_about_branch"})
+                     continue
+                 if not pending:
+                     raise ValueError("No preceding primary continuation supports this page")

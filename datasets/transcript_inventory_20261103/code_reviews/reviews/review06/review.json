@@ -1,0 +1,234 @@
+{
+  "review_id": "review06",
+  "reviewer": "/root/review06_timestamps",
+  "base_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "review_mode": "independent",
+  "verdict": "Approve",
+  "approval_scope": "Current published temporal projection and directional coverage evidence; one nonblocking duration-input defect remains for repair.",
+  "blocking_findings": 0,
+  "scope": {
+    "code": [
+      "workbook_build/assemble_outputs.py:seconds, coverage_label, video offsets/duration projection and coverage counts",
+      "workbook_build/build_workbook.mjs:source/video dates, elapsed durations, timestamp cells, partial-coverage labels and summary formulas"
+    ],
+    "data": [
+      "reverse_mapping_review.json",
+      "new_content_checks.json",
+      "recording_gaps.json",
+      "video_inventory.json",
+      "inventory.json",
+      "JEP_transcript_inventory.xlsx"
+    ],
+    "excluded": [
+      "new network retrieval",
+      "independent audio listening",
+      "word-for-word completeness certification",
+      "scope classification outside timestamp/coverage direction",
+      "modification or publication of source materials"
+    ]
+  },
+  "invariants": [
+    "Source hearing clocks, source counters, and YouTube elapsed positions retain their labels and must not be silently converted into each other.",
+    "Missing public-recording continuation and missing supplied-source coverage remain separate directions and overlapping counts are not added.",
+    "A shared upload retains distinct transcript segments; a multi-date source retains each dated session.",
+    "The workbook preserves JSON dates, elapsed-second durations and evidence text; caption cues stay approximate."
+  ],
+  "findings": [
+    {
+      "id": "R06-01",
+      "severity": "P2",
+      "blocking": false,
+      "file": "workbook_build/assemble_outputs.py",
+      "lines": [
+        36,
+        45
+      ],
+      "symbol": "seconds",
+      "invariant": "Malformed clock-style duration components must be flagged as unknown or rejected, not silently normalized into a plausible duration.",
+      "observed": {
+        "1:99": 159,
+        "04:60:00": 18000,
+        "01:00:60": 3660
+      },
+      "failure_scenario": "A malformed external duration_text such as1:99 passes the regex, becomes159seconds, and reaches the workbook as0:02:39 via the duration selection at lines143–144 and the Excel conversion at build_workbook.mjs152/158.",
+      "current_data_impact": "None found. All197 nonempty published duration cells exactly reproduce their reviewed second counts; no invalid colon component was observed in the reviewed duration inputs.",
+      "smallest_repair": "Validate seconds<60 for two/three-component durations and minutes<60 for three-component durations before arithmetic. ReturnNone (matching the existing invalid-input contract) or raise a specific validation error. Keep unbounded hours and legitimate two-component minute durations.",
+      "focused_observer": "observe_temporal_projection.py --require-fixed exits1 on the frozen implementation; after repair these three malformed inputs must returnNone while the valid examples and current workbook checks remain green."
+    }
+  ],
+  "mechanical_evidence": {
+    "observer": "observe_temporal_projection.py",
+    "receipt": "observations.json",
+    "command": "CODEX_PRIMARY_RUNTIME_PYTHON observe_temporal_projection.py --require-fixed",
+    "exit_code": 1,
+    "meaning": "Published-data checks pass; exit1 is solely the reproduced malformed-duration finding.",
+    "duration_cells": 197,
+    "source_date_cells": 93,
+    "video_date_cells": 152,
+    "populated_video_timestamp_cells": 87,
+    "partial_supplied_records": [
+      "VV-012",
+      "VV-015",
+      "VV-016",
+      "VV-025",
+      "VV-047",
+      "VV-053"
+    ],
+    "forward_missing_continuations": [
+      "VV-015",
+      "VV-038"
+    ],
+    "colon_duration_inputs_checked": 217,
+    "malformed_current_colon_inputs": [],
+    "reviewed_hashes_unchanged": true,
+    "supporting_local_hashes_unchanged": true
+  },
+  "manual_boundary_checks": [
+    {
+      "record": "VV-012",
+      "video_id": "rIQrbJY5QbE",
+      "source_anchors": [
+        "P0004",
+        "P0005"
+      ],
+      "public_caption_range": [
+        "00:24:05–00:24:28",
+        "09:53:58–09:54:24"
+      ],
+      "finding": "Source starts after procedural preliminaries; closing identity matches. Clock text is not used as elapsed time."
+    },
+    {
+      "record": "VV-015",
+      "video_id": "O25PKSrxRuA",
+      "source_anchors": [
+        "P0004–P0008",
+        "P0757–P0758",
+        "P1015"
+      ],
+      "public_caption_range": [
+        "00:21:57–00:22:04",
+        "03:55:16–03:55:33"
+      ],
+      "finding": "Opening formalities are summarized. Source hearing-clock14:10 matches elapsed03:55:16, while later source resumption15:48 has no located continuation. Both gap directions are retained separately."
+    },
+    {
+      "record": "VV-016",
+      "video_id": "ATktSr_bK5Y",
+      "source_anchors": [
+        "P0008",
+        "P0072"
+      ],
+      "public_caption_range": [
+        "03:20:51–03:21:10",
+        "03:57:35–03:57:53"
+      ],
+      "finding": "Supplied afternoon segment has hearing clocks13:58–14:35; morning upload portion is absent from supplied source."
+    },
+    {
+      "record": "VV-025",
+      "video_id": "kzsidY3b75k",
+      "source_anchors": [
+        "P0011",
+        "P0684"
+      ],
+      "public_caption_range": [
+        "00:09:53–00:10:07",
+        "03:11:50–03:13:03",
+        "03:16:52–03:17:03"
+      ],
+      "finding": "Opening source counter differs from public elapsed time; later public formal closing follows the source last exchange. Approximate retained interval is justified."
+    },
+    {
+      "record": "VV-047",
+      "video_id": "m5dObnmugKc",
+      "source_anchors": [
+        "P0007",
+        "P0008"
+      ],
+      "public_caption_range": [
+        "00:17:41–00:17:57",
+        "05:45:04–05:45:27"
+      ],
+      "finding": "Source begins at general questions after installation; dated closing is present."
+    },
+    {
+      "record": "VV-053",
+      "video_id": "p2CITFhwOz4",
+      "source_anchors": [
+        "P0004–P0006"
+      ],
+      "public_caption_range": [
+        "00:03:08–00:03:20",
+        "00:26:11–00:26:26"
+      ],
+      "finding": "Source explicitly begins transcription at03:06 and summarizes counsel presentation; first aligned cue03:08 is appropriately approximate."
+    },
+    {
+      "record": "VV-038",
+      "video_id": "6IEmoeSuTRQ",
+      "source_anchors": [
+        "P1411",
+        "P1495"
+      ],
+      "public_caption_range": [
+        "07:08:04–07:08:53"
+      ],
+      "finding": "Public end occurs during P1411. Supplied source reaches18:32/18:33 hearing-clock closing; this is a missing recording continuation, not a missing supplied-transcript portion."
+    },
+    {
+      "record": "VV-029/VV-030",
+      "video_id": "eM8ZrqhZbgQ",
+      "public_caption_range": [
+        "00:49:56–00:51:26"
+      ],
+      "finding": "Protective-measures close and voluntary-statement opening meet at the approximate00:50:36 cue; separate transcript links and ranges are preserved."
+    },
+    {
+      "record": "VV-071",
+      "video_id": null,
+      "source_anchors": [
+        "P0246",
+        "P0256",
+        "P0512"
+      ],
+      "finding": "12August2021 close16:01 and20August2021 opening08:07/close11:11 are source hearing clocks, explicitly not YouTube offsets; both dates survive as text."
+    }
+  ],
+  "reviewed_hashes": {
+    "workbook_build/assemble_outputs.py": "ec06e9fbe1a5afc2aee19020b70e173351013e7b0495719b4449f8b2d7dbcaed",
+    "workbook_build/build_workbook.mjs": "b12a5d8b38b1e541aa8ed7321f2029b3d4db31f3e0a5987810be554eaf19cae1",
+    "reverse_mapping_review.json": "6c8db273082b2c641f799e98996e92650472c9bb451d0ffaab61200ea631af55",
+    "new_content_checks.json": "de557498893bf7e2fb1905f6d136ba60eb8aeb1aa41003619a3cac010d439592",
+    "recording_gaps.json": "71ac1bf29a3202812b03df5d058fdebdfc4cbb0bd981dff5df9718cab6bb8401",
+    "video_inventory.json": "878f42bf80d3cd0bd6ac70d6767e27b4b7f839aa4eba35350307d21a3ca38675",
+    "inventory.json": "e261e1b82e9fe41b62aba96277ab54b5f377839a0fc428797dae8d005756b404",
+    "summary.json": "eff0ec882313b47fcb26ce48a494af4f1c6aacb832f7151528c8e25fa974a35b",
+    "JEP_transcript_inventory.xlsx": "b1715e2102adabf278ea36d406f06f2147555a5906d1368015e57a570d241cee",
+    "README.md": "a9d84b9a8948dfc81eb29b68174be34eadcd5d2b6733f041dad435575bcd9e5d",
+    "reverse_audit_report.md": "796e730ba91262dd52d75df285e58770eb45dff373460f67c16e88fa636102e5"
+  },
+  "supporting_local_source_hashes": {
+    "inventory_work/summary_sources/VV-012.json": "2826cd8d9280cac4a2c78cd8e9c2dea85325382720a2265a0f4064eae4688991",
+    "inventory_work/summary_sources/VV-015.json": "89696f3ad2c8860105293e7cc7ebb10ead818f8ec1fba718979d663409d8cc73",
+    "inventory_work/summary_sources/VV-016.json": "95c1254d10a0ed7568d75c998292947892d132d49ba420425a4e67c60f80d5db",
+    "inventory_work/summary_sources/VV-025.json": "a4401f96474d96b08dc2bed89da0a7c88b9798d179130e11370bd9de645ea945",
+    "inventory_work/summary_sources/VV-038.json": "ad5a6403db564f3fd5d9f0756d0610f4ba4393915d7ad4ac8bec9d7158c57896",
+    "inventory_work/summary_sources/VV-047.json": "952908ea48ddc71722bf8f74754f0eb5eb8f0487528709296a4a7acb5e597750",
+    "inventory_work/summary_sources/VV-053.json": "e27c48fcd4b39205dd667aa073502c91db18d857c8ce47bf6cfabb63376bb3b3",
+    "inventory_work/summary_sources/VV-071.json": "c4f22478fa7eca46460bc2eb747694d8ba455cfbc50d844fbac8af7c5dcb10cd",
+    "inventory_work/public_captions/O25PKSrxRuA_dom.json": "fe380dca5f41000baf9494043cea7e032f9acd281fc10f364f1a5456cf1aed06",
+    "inventory_work/public_captions/6IEmoeSuTRQ_dom.json": "640a42136b9a036fbe7155bf103406fb73a1bb2b7553439cbb355d96cf2f877c",
+    "inventory_work/public_captions/ATktSr_bK5Y.txt": "b32b0e429b13b94beed2384a1e85afd89a6762b897530d1367ee7beb92e37b5f",
+    "inventory_work/public_captions/p2CITFhwOz4.txt": "752a1885bef2c509b39e173e48b4bba7bf755db07d0351747284723fd7e3d760",
+    "inventory_work/public_captions/kzsidY3b75k.txt": "30467b90fa7f6bbf64827cebbebc7e3fc5201d91c206fb0d0ee8ce59a4ff9575",
+    "inventory_work/public_captions/rIQrbJY5QbE_dom.json": "279199693d95d1cfb6f5a1d431ffa8197b56329912085d189a18d7c88280578b",
+    "inventory_work/public_captions/m5dObnmugKc_dom.json": "4b363d8dfd1fed54c83a608fcfe1f08f81692d0459b190ade795acb746289ca3",
+    "inventory_work/public_captions/eM8ZrqhZbgQ.txt": "5d3978608ae85b5782206c641922310dbcbeaefb1928ea5c0a5143ab223b1d56"
+  },
+  "residual_limits": [
+    "Retained automatic captions support session identity and approximate anchors, not exact audio boundaries or complete word coverage.",
+    "The four new_content_checks entries were reviewed for internal timing consistency and explicit limits; no new audio review or caption re-export was performed.",
+    "Known supplied-coverage gaps are a lower bound established by the reviewed passages, not a certification that every other opening/recess/insert has a verbatim transcript."
+  ],
+  "mutations": "Only review06 observer/report files were written. Frozen snapshot, production files, original sources and shared caches were left unchanged."
+}

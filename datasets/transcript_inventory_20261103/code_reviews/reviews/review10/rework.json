@@ -1,0 +1,86 @@
+{
+  "review_number": 10,
+  "reworked_at": "2026-11-03T20:51:24.131019+00:00",
+  "authorization": "Parent instruction after independent review; edits restricted to inventory_work/reverse_audit/refresh_channel_catalogs.py",
+  "shared_files_edited": [
+    "inventory_work/reverse_audit/refresh_channel_catalogs.py"
+  ],
+  "before_sha256": "0cabb13c3c085059d30ce2e0656154737b717f26938ba2cea095066f089c8999",
+  "after_sha256": "7d88578aab80676b1bf44dd7e8d1df78e7560e00614914bea0c5a0f5e3cfbe3b",
+  "current_dependency_sha256": "903447bf358adff4467b5207441e33770c8c319c0917a481a6fde6cb377764d6",
+  "changed_functions": [
+    {
+      "function": "refresh",
+      "change": "Hash the actual retained initial HTML bytes, re-extract ytInitialData and reject an inconsistent page_000.json before consuming any items; validate and retain the selected tab endpoint."
+    },
+    {
+      "function": "validate_selected_surface",
+      "change": "Require the observed endpoint to identify the requested surface at the official handle or canonical channel path on YouTube; reject an incorrect surface or foreign origin."
+    }
+  ],
+  "findings": [
+    {
+      "id": "R10-01",
+      "closed": true,
+      "observed_error": "Initial parsed cache does not match retained HTML",
+      "recorded_memberships_before_rejection": 0
+    },
+    {
+      "id": "R10-02",
+      "closed": true,
+      "observed_error": "Selected channel surface does not match requested streams: /@jepcolombia/videos",
+      "recorded_memberships_before_rejection": 0
+    }
+  ],
+  "verification": {
+    "commands": [
+      "$CODEX_PRIMARY_RUNTIME_PYTHON inventory_work/tieout_review_20261103/reviews/review10/observe_fresh_integrity.py --refresh /workspace/scratch/8a7e64850a04/inventory_work/reverse_audit/refresh_channel_catalogs.py --catalog /workspace/scratch/8a7e64850a04/inventory_work/reverse_audit/crawl_public_catalog.py --output /workspace/scratch/8a7e64850a04/inventory_work/tieout_review_20261103/reviews/review10/rework_observations.json --require-fixed",
+      "$CODEX_PRIMARY_RUNTIME_PYTHON inventory_work/tieout_review_20261103/reviews/review10/observe_rework_replay.py"
+    ],
+    "exit_codes": [
+      0,
+      0
+    ],
+    "focused_failure_controls_passed": 7,
+    "focused_failure_controls_total": 7,
+    "receipt_pages_checked": 118,
+    "full_function_replay_pages": 118,
+    "membership_counts": {
+      "videos": 2663,
+      "streams": 846
+    },
+    "all_memberships_and_page_receipts_preserved": true,
+    "selected_surface_endpoints_retained": true,
+    "retained_fresh_files_checked": 241,
+    "retained_fresh_files_unchanged": true,
+    "actual_network_requests": 0,
+    "full_replay_intercepted_request_attempts": 0,
+    "exact_diff_inspected": true,
+    "changed_functions_reread": true,
+    "frozen_review_receipts_unchanged": true
+  },
+  "evidence_sha256": {
+    "review.json": "91b9d1ccaebcb335fafb5e975984aa8fcbb2521eddecae0a0b3e6a17facd6aa2",
+    "review.md": "146cb1ec8ff05247cc2b94104f9c97b7a7131df70135b2100b902487ddddc00d",
+    "observations.json": "55964f3caf6073c54872f089e861c628e5d3e38ff17f52f62017bdb8603fa403",
+    "observe_fresh_integrity.py": "af3525d25628a1b7120346800412843842085e2b1b9c3cb26db51185ea694a8f",
+    "observe_rework_replay.py": "21a5e436a2b9e363d62cbcd3f4f1c7517337a6c689b8c284f18273efc0293adb",
+    "rework_observations.json": "afd3380eb8b065c63b5a0ab0da1920033713adabf47111b46250c97f784b09c4",
+    "rework_replay.json": "666ba0aad89fb3c3bd89c9ad0392f9f20743a8c676682fbb901dc5ce241ab49e",
+    "rework.diff": "1ddfeb5cef3091d7e09a78bf2bdedcc286c15cfb23ecd93ac539e63f18ae009e"
+  },
+  "verdict": "Approve the repaired fresh-channel traversal within this review boundary; the frozen 118-page data is consistent and both reproduced code findings are closed.",
+  "remaining_integration_obligations": [
+    "R03-F2: reject contradictory broad/main scope decisions and omitted broad inclusions before output writes.",
+    "R05-F1: reject duplicate reverse IDs and preserve the full forward/reverse edge set before output writes.",
+    "R05-F2: new unlinked uploads begin coverage-unconfirmed until explicit reviewed session comparison.",
+    "Use fresh traversal for current source accounting while preserving prior discovery memberships and unavailable placeholders. Pg8DvszQMME must not disappear from historical provenance solely because it is absent from the refreshed Live listing."
+  ],
+  "limits": [
+    "Raw first-page HTML bytes and normalized continuation JSON are retained and checked; original continuation HTTP bytes are not retained verbatim.",
+    "Request bodies are inferred from the reviewed caller and recorded token fingerprints; this is not a packet capture.",
+    "Absence from a channel listing does not establish deletion, unlisted privacy or video unavailability.",
+    "No new territory or hearing-content determinations; no full match certification; no packet capture or transcript changes."
+  ],
+  "published": false
+}

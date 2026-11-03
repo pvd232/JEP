@@ -1,0 +1,102 @@
+{
+  "reviewed_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "hashes": {
+    "workbook_build/build_workbook.mjs": "b12a5d8b38b1e541aa8ed7321f2029b3d4db31f3e0a5987810be554eaf19cae1",
+    "workbook_build/add_native_links.py": "3bc91c3e7cd0afdc3d2a34c90cf5dc5d2f011bdde4360d786c1802fb7062a5ce",
+    "workbook_build/validate_outputs.py": "b7225b038883384433ea0b56e6a5e241d966f4f5b3dd6b136bd855240252de2f",
+    "JEP_transcript_inventory.xlsx": "b1715e2102adabf278ea36d406f06f2147555a5906d1368015e57a570d241cee"
+  },
+  "all_observed_current_data_checks_passed": false,
+  "comparison_counts": {
+    "Sheet set": 1,
+    "Cell projection": 5497,
+    "Date": 243,
+    "External link": 557,
+    "Transcript video links": 93,
+    "Video source links": 207,
+    "Video duration": 207,
+    "Source modified date within 1ms": 116,
+    "Category color": 816,
+    "Internal destination parsed": 395,
+    "Internal destination exists": 395,
+    "No data formula": 6791,
+    "Internal record identity": 389,
+    "Cached summary": 22,
+    "Freeze": 6,
+    "Table": 6,
+    "Full filter": 6,
+    "Unique native link cells": 7
+  },
+  "problems": [
+    {
+      "check": "Full filter:Transcripts",
+      "actual": "None",
+      "expected": "A1:N94"
+    },
+    {
+      "check": "Full filter:English summaries",
+      "actual": "None",
+      "expected": "A1:K94"
+    },
+    {
+      "check": "Full filter:Recording gaps",
+      "actual": "None",
+      "expected": "A1:I16"
+    },
+    {
+      "check": "Full filter:Videos",
+      "actual": "None",
+      "expected": "A1:P208"
+    },
+    {
+      "check": "Full filter:Crawl sources",
+      "actual": "None",
+      "expected": "A1:J15"
+    },
+    {
+      "check": "Full filter:Files",
+      "actual": "None",
+      "expected": "A1:G117"
+    }
+  ],
+  "source_records": 93,
+  "source_files": 116,
+  "summaries": 93,
+  "native_external_hyperlinks": 725,
+  "native_internal_hyperlinks": 395,
+  "transcript_video_edges": 84,
+  "reverse_source_edges": 84,
+  "cached_formula_cells_checked": 22,
+  "max_transcript_urls": 2,
+  "max_video_source_links": 2,
+  "worksheet_shapes": {
+    "Summary": [
+      64,
+      6
+    ],
+    "Transcripts": [
+      94,
+      14
+    ],
+    "English summaries": [
+      94,
+      11
+    ],
+    "Recording gaps": [
+      16,
+      9
+    ],
+    "Videos": [
+      208,
+      16
+    ],
+    "Crawl sources": [
+      15,
+      10
+    ],
+    "Files": [
+      117,
+      7
+    ]
+  }
+}

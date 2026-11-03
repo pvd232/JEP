@@ -1,0 +1,53 @@
+--- before/refresh_channel_catalogs.py
++++ after/refresh_channel_catalogs.py
+@@ -9,6 +9,7 @@
+ import argparse
+ import json
+ from pathlib import Path
++from urllib.parse import urlparse
+ import crawl_public_catalog as catalog
+ 
+ 
+@@ -33,6 +34,19 @@
+     return catalog.parse_list(unwrapped)
+ 
+ 
++def validate_selected_surface(tab, surface):
++    """Bind the selected tab to the requested official channel surface."""
++    endpoint = tab.get('endpoint', {}).get('commandMetadata', {}).get('webCommandMetadata', {}).get('url')
++    parsed = urlparse(endpoint or '')
++    path = parsed.path.rstrip('/')
++    expected_paths = {'/@jepcolombia/' + surface, '/channel/' + catalog.JEP_CHANNEL + '/' + surface}
++    if (parsed.scheme not in ('', 'https')
++            or (parsed.netloc and parsed.hostname not in ('youtube.com', 'www.youtube.com'))
++            or path not in expected_paths):
++        raise ValueError('Selected channel surface does not match requested ' + surface + ': ' + str(endpoint))
++    return endpoint
++
++
+ def refresh(surface, output, max_pages):
+     """Exhaust one public channel grid or preserve its exact incomplete state."""
+     directory = output / surface
+@@ -54,9 +68,12 @@
+         if first.exists():
+             data = catalog.read(first)
+             receipt = catalog.read(directory / 'page_000.meta.json')
+-            html = (directory / 'initial.html').read_text()
+-            if receipt['requested_url'] != url or catalog.sha(html.encode()) != receipt['sha256']:
++            raw = (directory / 'initial.html').read_bytes()
++            if receipt['requested_url'] != url or catalog.sha(raw) != receipt['sha256']:
+                 raise ValueError('Initial response URL or checksum mismatch')
++            html = raw.decode()
++            if data != catalog.assigned(html, 'ytInitialData'):
++                raise ValueError('Initial parsed cache does not match retained HTML')
+         else:
+             raw, receipt = catalog.request(url)
+             html = raw.decode()
+@@ -72,6 +89,7 @@
+         selected = [t['tabRenderer'] for t in tabs if t.get('tabRenderer', {}).get('selected')]
+         if len(selected) != 1:
+             raise ValueError('Expected one selected channel surface')
++        result['selected_tab_url'] = validate_selected_surface(selected[0], surface)
+         grid = selected[0].get('content', {}).get('richGridRenderer')
+         if not grid or not grid.get('targetId'):
+             raise ValueError('Selected channel surface has no identifiable primary grid')

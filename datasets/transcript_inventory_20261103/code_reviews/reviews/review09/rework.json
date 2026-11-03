@@ -1,0 +1,96 @@
+{
+  "finding": "R09-F01",
+  "base_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "fixed_file": "inventory_work/reverse_audit/finish_report.py",
+  "base_file_sha256": "ea4e3149ada39fd968a78f283e64df882d1ba186883019fa435625446040a4d2",
+  "fixed_file_sha256": "2160911d720d61553ecf5990fe6c3b174f090acc56c0daceb041e4869e0ef096",
+  "command": "\"$CODEX_PRIMARY_RUNTIME_PYTHON\" inventory_work/tieout_review_20261103/reviews/review09/observe_report_rework.py",
+  "python": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+  "observer_sha256": "90a97855e4d7f1701482170de5424879bc2ecf0fa84dbb3a4bc624f1a8a146c1",
+  "frozen_review_sha256": {
+    "review.md": "86d8edbe8afc980cb1309b8befab61c223cb63090206e7583ad143160199a932",
+    "review.json": "03c1fbd4bcf6d1a9ff74291ea981a591fc5efadce1ca285bb5ef3ba50c563601",
+    "observations.json": "34732fee702ef5982a2405dc666b3714946e0804f1ac3d84c670d1a11f23376c",
+    "observe_publication.py": "faffc1d77d0c987e087f6a3ffb69f0a32ce142d257cf0df383ec6f49d9ef7652"
+  },
+  "cases": [
+    {
+      "exit_code": 0,
+      "error": null,
+      "name": "valid_frozen_inputs",
+      "summary_unchanged": true,
+      "report_unchanged": true,
+      "passed": true
+    },
+    {
+      "exit_code": 1,
+      "error": "Pagination reproduction: validation failed (14/15 checks passed)",
+      "name": "original_failed_proof",
+      "summary_unchanged": true,
+      "report_unchanged": true,
+      "passed": true
+    },
+    {
+      "exit_code": 1,
+      "error": "Pagination reproduction: validation failed (14/15 checks passed)",
+      "name": "failed_check_despite_true_aggregate",
+      "summary_unchanged": true,
+      "report_unchanged": true,
+      "passed": true
+    },
+    {
+      "exit_code": 1,
+      "error": "Standalone replay receipt: all_passed must be true",
+      "name": "false_replay_aggregate",
+      "summary_unchanged": true,
+      "report_unchanged": true,
+      "passed": true
+    },
+    {
+      "exit_code": 1,
+      "error": "Standalone replay receipt: successful exit_code 0 is required",
+      "name": "nonzero_replay_exit",
+      "summary_unchanged": true,
+      "report_unchanged": true,
+      "passed": true
+    },
+    {
+      "exit_code": 1,
+      "error": "Standalone replay receipt: successful exit_code 0 is required",
+      "name": "missing_replay_exit",
+      "summary_unchanged": true,
+      "report_unchanged": true,
+      "passed": true
+    },
+    {
+      "exit_code": 1,
+      "error": "Standalone replay: validation failed (13/14 checks passed)",
+      "name": "failed_full_replay_check",
+      "summary_unchanged": true,
+      "report_unchanged": true,
+      "passed": true
+    },
+    {
+      "exit_code": 1,
+      "error": "Standalone replay receipt: check count disagrees with its full report",
+      "name": "inconsistent_replay_count",
+      "summary_unchanged": true,
+      "report_unchanged": true,
+      "passed": true
+    },
+    {
+      "exit_code": 1,
+      "error": "Pagination reproduction: every check must have a boolean passed result",
+      "name": "nonboolean_check_result",
+      "summary_unchanged": true,
+      "report_unchanged": true,
+      "passed": true
+    }
+  ],
+  "checks": 9,
+  "all_passed": true,
+  "network_requests": 0,
+  "changed_frozen_files": [],
+  "shared_output_writes": 0,
+  "verdict": "R09-F01 repaired"
+}

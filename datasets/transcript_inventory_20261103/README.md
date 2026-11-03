@@ -42,6 +42,12 @@ The single workbook has seven tabs: **Summary**, **Transcripts**, **English summ
 | [Crawl readiness review](crawl_readiness_review.json) | Retained channel terminal-page checks, a missed Case 03 playlist continuation, and the Casanare playlist's hidden unavailable item. |
 | [Summary JSON](summary.json) | Counts, categories and access notes. |
 
+## Ten-review tieout
+
+Ten independent subagent code reviews found 20 issues. The [review register](code_reviews/ten_review_summary.md) distinguishes existing-output corrections from guards for future runs and records reproduced failures and repair checks. The 93 record identities and all source-file assignments remain unchanged. Corrected duplicate measurements do not change consolidation decisions; native filters and exact clickable links were repaired and validated. All 74 challenged exclusion rationales now have specific case/territorial evidence.
+
+The reverse map retains **128 included uploads: 83 linked to supplied records and 45 without supplied-source mappings**. Of those 45, **17 have bounded public-content identity/format checks and 28 remain metadata-based**. Two checked uploads are procedural installations/adjournments, and two are recorded questionnaire responses. Different dates and continuations are retained explicitly; 45 uploads is not a certified count of 45 additional unique hearings. **Four main-register candidates remain scope unconfirmed**, including the unavailable Casanare playlist item; the overlapping broad Case 03 register retains 13 unresolved IDs. See [tieout decisions](tieout_data_decisions.json) and the [updated reverse audit](reverse_audit_report.md).
+
 ## Evidence and findings
 
 ### English-summary method
@@ -54,7 +60,7 @@ Evidence pointers use the source spreadsheet's **Order** values, source-local ti
 
 ### Video verification
 
-The search used retained JEP Colombia channel catalogs containing **2,663 Videos listings and 847 Live listings**. Their terminal pages were rechecked in this audit, but the earlier collector did not record original fetch times and these two surfaces were not refetched. Deeper checks resolved all 13 initial candidates and located four previously unmatched recordings. All 105 source transcript files were readable. The final public-interface check also accessed the Zamir recording that initially appeared to require sign-in. See the [summary](summary.json), [matching audit](matching_audit.json) and [source-accounting limits](reverse_audit_report.md).
+The final review freshly traversed JEP Colombia’s **2,663 Videos listings and 846 Live listings** across **118 pages**, with dated request receipts on 3 November 2026. One earlier Live listing is absent from the fresh list but remains playable; its procedural opening identifies Huila, so its historical discovery is retained outside Casanare. The older snapshots remain historical evidence, with their unknown original fetch times stated explicitly. Deeper checks resolved all 13 initial candidates and located four previously unmatched recordings. All 105 source transcript files were readable. The final public-interface check also accessed the Zamir recording that initially appeared to require sign-in. See the [summary](summary.json), [matching audit](matching_audit.json) and [source-accounting limits](reverse_audit_report.md).
 
 Those channel listings were used to find matches for the supplied transcripts; they are not a count of Casanare hearings. The subsequent [reverse audit](reverse_audit_report.md) corrects the broad-playlist pagination defect, accounts for collection membership and compares each admitted video with the supplied inventory. Its coverage claim is bounded by the declared public sources and recorded scope/access uncertainties. Public Casanare videos can lack a supplied transcript even when the recording itself is readily available. A video-ID count is not a certified hearing or transcript count.
 

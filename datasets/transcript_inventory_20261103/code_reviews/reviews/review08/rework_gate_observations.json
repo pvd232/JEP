@@ -1,0 +1,70 @@
+{
+  "postprocessor_sha256": "e556f6080cd0b422fa7386aa842a2cf3b7ca386323f2a28bf0e53668d4221d26",
+  "validator_sha256": "66ff07a2c805428b2f42f556d2aa985b5457d7cd68a7ca6be756e0c5cd4cc728",
+  "checks": {
+    "postprocessor_added_six_filters": true,
+    "only_table_xml_parts_changed": true,
+    "intact_copy_passes": true,
+    "missing_forward_link_rejected_for_correct_reason": true,
+    "missing_reverse_link_rejected_for_correct_reason": true,
+    "missing_filter_rejected_for_correct_reason": true
+  },
+  "all_passed": true,
+  "filter_ranges": {
+    "Transcripts": [
+      "A1:N94"
+    ],
+    "English summaries": [
+      "A1:K94"
+    ],
+    "Recording gaps": [
+      "A1:I16"
+    ],
+    "Videos": [
+      "A1:P208"
+    ],
+    "Crawl sources": [
+      "A1:J15"
+    ],
+    "Files": [
+      "A1:G117"
+    ]
+  },
+  "changed_zip_parts": [
+    "xl/tables/table1.xml",
+    "xl/tables/table2.xml",
+    "xl/tables/table3.xml",
+    "xl/tables/table4.xml",
+    "xl/tables/table5.xml",
+    "xl/tables/table6.xml"
+  ],
+  "cases": {
+    "valid": {
+      "exit_code": 0,
+      "all_passed": true,
+      "failed_checks": []
+    },
+    "missing_forward": {
+      "exit_code": 1,
+      "all_passed": false,
+      "failed_checks": [
+        "Exact transcript video edges VV-028"
+      ]
+    },
+    "missing_reverse": {
+      "exit_code": 1,
+      "all_passed": false,
+      "failed_checks": [
+        "Exact video source edges eM8ZrqhZbgQ"
+      ]
+    },
+    "missing_filter": {
+      "exit_code": 1,
+      "all_passed": false,
+      "failed_checks": [
+        "Explicit table filter Transcripts"
+      ]
+    }
+  },
+  "method": "Review-only copies of frozen XLSX; native helper with empty links adds filters; actual fixed validator; no artifact build or openpyxl save"
+}

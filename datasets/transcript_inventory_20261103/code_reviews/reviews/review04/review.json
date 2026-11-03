@@ -1,0 +1,206 @@
+{
+  "review_id": "review04_duplicates",
+  "reviewer": "/root/review04_duplicates",
+  "reviewed_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "mode": "independent completed code review",
+  "verdict": "Request changes",
+  "verdict_scope": "Historical source-ID generator requires a guard or stable registry for future regeneration; existing 93-record consolidation and many-to-many links accepted",
+  "current_inventory_accepted": true,
+  "source_changes": false,
+  "network_calls": 0,
+  "scope": [
+    "source identity and consolidation",
+    "version grouping and source-link preservation",
+    "composite source record handling",
+    "many-to-many forward/reverse recording links"
+  ],
+  "invariants": [
+    "116 distinct file IDs and105 transcript/notes assignments",
+    "93 distinct source records with each source assigned once",
+    "12 nonprimary files accounted in version register",
+    "all original links retained",
+    "forward and reverse edge sets identical",
+    "same-session alternate uploads do not create extra source records",
+    "different dated sessions or proceeding segments are not merged by shared name/video ID"
+  ],
+  "reviewed_files": [
+    {
+      "kind": "published_snapshot",
+      "path": "inventory_work/tieout_review_20261103/base/inventory.json",
+      "sha256": "e261e1b82e9fe41b62aba96277ab54b5f377839a0fc428797dae8d005756b404",
+      "scope": "declared review scope"
+    },
+    {
+      "kind": "published_snapshot",
+      "path": "inventory_work/tieout_review_20261103/base/source_manifest.json",
+      "sha256": "f149b5a672485751ba3033f14cc006b6ae668ef8bc5322c3f4c609615d336cf9",
+      "scope": "declared review scope"
+    },
+    {
+      "kind": "published_snapshot",
+      "path": "inventory_work/tieout_review_20261103/base/version_comparisons.json",
+      "sha256": "9573cd1460473c5cc007104cf209675fc6c6b8a08efa2970f5872fd471a29f57",
+      "scope": "declared review scope"
+    },
+    {
+      "kind": "published_snapshot",
+      "path": "inventory_work/tieout_review_20261103/base/reverse_mapping_review.json",
+      "sha256": "6c8db273082b2c641f799e98996e92650472c9bb451d0ffaab61200ea631af55",
+      "scope": "declared review scope"
+    },
+    {
+      "kind": "published_snapshot",
+      "path": "inventory_work/tieout_review_20261103/base/video_inventory.json",
+      "sha256": "878f42bf80d3cd0bd6ac70d6767e27b4b7f839aa4eba35350307d21a3ca38675",
+      "scope": "declared review scope"
+    },
+    {
+      "kind": "published_snapshot",
+      "path": "inventory_work/tieout_review_20261103/base/new_content_checks.json",
+      "sha256": "de557498893bf7e2fb1905f6d136ba60eb8aeb1aa41003619a3cac010d439592",
+      "scope": "declared review scope"
+    },
+    {
+      "kind": "published_snapshot",
+      "path": "inventory_work/tieout_review_20261103/base/workbook_build/assemble_outputs.py",
+      "sha256": "ec06e9fbe1a5afc2aee19020b70e173351013e7b0495719b4449f8b2d7dbcaed",
+      "scope": "declared review scope"
+    },
+    {
+      "kind": "historical_supporting_working_script",
+      "path": "inventory_work/build_versiones_rows.py",
+      "sha256": "d54568ba8380e3697ce818d5f50033642e065ff097e8c9c175219a89d4f27fd2",
+      "scope": "declared review scope"
+    },
+    {
+      "kind": "historical_supporting_working_script",
+      "path": "inventory_work/finalize_versiones_rows.py",
+      "sha256": "8c36a5ff51e1dd432032e19a8482a9b3a08fe51ee803103375cbbc4c669db31c",
+      "scope": "declared review scope"
+    },
+    {
+      "kind": "historical_supporting_working_script",
+      "path": "inventory_work/assemble_inventory.py",
+      "sha256": "a22a464333023607d34b83805fa0e699efa0987ba656084b784c69c82818317d",
+      "scope": "declared review scope"
+    },
+    {
+      "kind": "historical_supporting_working_script",
+      "path": "inventory_work/build_root_rows.py",
+      "sha256": "d96d0ffd71ae3b8a2d012af902c4bcec0daebcb05adbc6263bb5443b9d1bc5b0",
+      "scope": "declared review scope"
+    },
+    {
+      "kind": "historical_supporting_working_script",
+      "path": "inventory_work/build_casanare_rows.py",
+      "sha256": "389b675af21182fad1ed579abf1c8a9b29e4d008bbc9fd8427700e9b10a045a9",
+      "scope": "declared review scope"
+    },
+    {
+      "kind": "historical_supporting_working_script",
+      "path": "inventory_work/merge_deep_results.py",
+      "sha256": "722420947c7d7826f20ffdbd0c3400acc3ec62e5371d63b681d02553d865d82f",
+      "scope": "declared review scope"
+    },
+    {
+      "kind": "historical_supporting_working_script",
+      "path": "inventory_work/compare_identity_captions.py",
+      "sha256": "b432fb90071163ad1fac3950aec900b0461fbb4822f1b8880faa9bf64e27ac42",
+      "scope": "declared review scope"
+    },
+    {
+      "kind": "historical_supporting_working_script",
+      "path": "inventory_work/merge_completion_review.py",
+      "sha256": "58e292ba901ce5302f4b2069327832b5d908b011a62ce03d75c937a88c38830a",
+      "scope": "identity and consolidation paths; merge_completion_review only source-ID and composite/gap updates"
+    }
+  ],
+  "findings": [
+    {
+      "id": "R04-01",
+      "severity": "P2",
+      "blocking": true,
+      "blocking_scope": "Future regeneration through the historical ID generator; current published inventory accepted",
+      "file": "inventory_work/build_versiones_rows.py",
+      "lines": [
+        90,
+        118
+      ],
+      "symbol": "module-level canonical row generation",
+      "invariant": "An existing source-file/group-to-record-ID association survives title-only metadata changes",
+      "observed": "Rows are sorted by mutable filename, then IDs assigned from list position; the published assembler applies ID-addressed evidence updates",
+      "counterexample": "Actual generator, writes intercepted in memory: prefix VV-057 canonical source title with AAA_. Drive IDs and content remain unchanged; 57 of 75 record IDs change, VV-057 becomes VV-001. Count/uniqueness checks alone do not identify semantic reassignment.",
+      "repair": "Use the accepted inventory's source-file/group-to-ID registry for known records and allocate unused IDs only for new groups, or explicitly retire/guard this historical generator against regenerating the accepted inventory.",
+      "verification": "observe_id_stability.py should preserve all before/after source-to-record mappings after the repair",
+      "current_data_impact": "None observed; published 93 record IDs and assignments reconcile",
+      "receipt": "id_stability_observations.json"
+    },
+    {
+      "id": "R04-02",
+      "severity": "P3",
+      "blocking": false,
+      "file": "version_comparisons.json",
+      "entries": [
+        {
+          "unique_id": "VV-008",
+          "lines": [
+            31,
+            40
+          ]
+        },
+        {
+          "unique_id": "VV-010",
+          "lines": [
+            57,
+            66
+          ]
+        },
+        {
+          "unique_id": "VV-027",
+          "lines": [
+            96,
+            105
+          ]
+        }
+      ],
+      "symbol": "stored words/shared_fivegrams measurements",
+      "invariant": "Exact numeric evidence reproduces from a named extraction and normalization rule",
+      "observed": "Three entries differ by 1–2 words or shared spans; nine reproduce exactly and all 12 rounded containment values agree.",
+      "counterexample": "NFD/NFKD accent-stripped lowercase Unicode word-token replay gives VV-008: 34,102 shared vs 34,104; VV-010: 38,245 alternate words / 15,050 shared vs 38,244 / 15,051; VV-027: 42,354 alternate words vs 42,353.",
+      "repair": "Recompute the three metrics and corresponding numeric evidence strings, recording normalizer and extraction hashes; or identify and label the historical extraction used.",
+      "verification": "Pair measurements in observe_identity.py should reproduce the accepted comparison register",
+      "current_data_impact": "No observed effect on consolidation decisions or counts",
+      "receipt": "observations.json"
+    }
+  ],
+  "mechanical_evidence": {
+    "data_checks": 39,
+    "passed": 36,
+    "identity_ownership_link_checks_passed": 27,
+    "pair_metrics_exactly_reproduced": 9,
+    "pairs_with_small_metric_drift": 3,
+    "ordered_alternate_pair_checks": 11,
+    "alternate_pairs_with_anchors_in_all_ten_deciles": 11,
+    "condensed_notes_ordered_blocks": 22,
+    "source_texts_screened": 105,
+    "cross_record_overlap_candidates": 39,
+    "all_overlap_candidates_involve_short_procedural_records": true,
+    "undisclosed_exact_duplicates": 0,
+    "forward_reverse_edges": 84,
+    "distinct_linked_uploads": 83
+  },
+  "exclusions": [
+    "fresh public discovery and territorial scope admission",
+    "audio listening and exact every-word boundaries",
+    "line-by-line review of all testimony",
+    "changes to baseline, original Drive files or shared caches"
+  ],
+  "artifacts": [
+    "review.md",
+    "observations.json",
+    "ordered_pair_observations.json",
+    "id_stability_observations.json",
+    "observe_identity.py",
+    "observe_id_stability.py"
+  ]
+}

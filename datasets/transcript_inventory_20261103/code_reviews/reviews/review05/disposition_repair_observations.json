@@ -1,0 +1,60 @@
+{
+  "review_id": "review05",
+  "kind": "R05-F2 repair follow-up, not an additional independent review",
+  "builder_sha256": "c268c8fad85bb5c7a8b3fc9d20529aae786f471ce94f5eaaf6d11bb834ba1776",
+  "ledger_sha256": "2381d6747c2f2171d8ccb050fd5dc1a604b789eefc8ea8dbc2829e84d5ee7e2b",
+  "source_session_index_sha256": "84ea4abd30c448bce30be72bcc75a81b65bf2e1c88082b7987a002ecc0ae2f27",
+  "all_passed": true,
+  "checks": [
+    {
+      "check": "All 45 accepted baseline dispositions survive both admission and final validation",
+      "passed": true,
+      "detail": {
+        "accepted": 45,
+        "produced": 45
+      }
+    },
+    {
+      "check": "A new unreviewed upload remains unresolved",
+      "passed": true,
+      "detail": {
+        "status": "Coverage unconfirmed; no accepted source-session comparison"
+      }
+    },
+    {
+      "check": "An exact principal/date collision remains unresolved even with a metadata ledger entry",
+      "passed": true,
+      "detail": {
+        "status": "Coverage unconfirmed; no accepted source-session comparison",
+        "existing_source": "VV-057"
+      }
+    },
+    {
+      "check": "A changed source-session index fails closed",
+      "passed": true,
+      "detail": {
+        "error": "Accepted reverse dispositions refer to a changed source-session index; re-review required"
+      }
+    },
+    {
+      "check": "Ordering, video URLs and coverage-note changes do not redefine the source-session index",
+      "passed": true,
+      "detail": {
+        "source_session_index_sha256": "84ea4abd30c448bce30be72bcc75a81b65bf2e1c88082b7987a002ecc0ae2f27"
+      }
+    },
+    {
+      "check": "Duplicate accepted video IDs cannot overwrite a disposition",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "check": "A later override cannot bypass accepted-disposition admission",
+      "passed": true,
+      "detail": {
+        "error": "No-source disposition lacks an accepted source-session comparison: UNREVIEWED1"
+      }
+    }
+  ],
+  "execution_boundary": "Pure definitions and isolated candidate/final-validation loops only. The top-level builder was neither imported nor executed; canonical outputs were not written."
+}

@@ -29,17 +29,30 @@ def main():
         check(name+' original link targets preserved',links_equal,True)
     before=old['Transcripts'];after=book['Transcripts']
     changed=[]
+    allowed_changes=True
     for i in range(1,before.max_row+1):
         for j in range(1,before.max_column+1):
             if before.cell(i,j).value!=after.cell(i,j).value:
-                changed.append([before.cell(i,1).value,openpyxl.utils.get_column_letter(j)])
-    check('Only intended VV-057 transcript fields changed',all(r=='VV-057' and c in ['H','J','K','M','N'] for r,c in changed),True)
+                uid=before.cell(i,1).value;col=openpyxl.utils.get_column_letter(j)
+                changed.append([uid,col])
+                permitted=uid=='VV-057' and col in ['H','J','K','M','N']
+                corrections={'VV-008':('34,104','34,102'),'VV-010':('15,051','15,050')}
+                if uid in corrections and col=='H':
+                    old_count,new_count=corrections[uid]
+                    permitted=after.cell(i,j).value==str(before.cell(i,j).value).replace(old_count,new_count)
+                allowed_changes=allowed_changes and permitted
+    check('Only intended VV-057 link fields and exact reviewed duplicate-metric corrections changed',allowed_changes,True)
     check('Transcript records preserved',after.max_row-1,93)
     inv=json.loads((OUT/'inventory.json').read_text())
     video=json.loads((OUT/'video_inventory.json').read_text())
     stats=json.loads((OUT/'summary.json').read_text())
     check('All transcript IDs unique',len({r['unique_id'] for r in inv}),93)
     check('All video IDs unique',len({r['video_id'] for r in video}),len(video))
+    transcript_rows={after.cell(i,1).value:i for i in range(2,after.max_row+1)}
+    video_sheet=book['Videos']
+    video_rows={video_sheet.cell(i,1).value:i for i in range(2,video_sheet.max_row+1)}
+    check('Workbook transcript IDs equal inventory order',[after.cell(i,1).value for i in range(2,after.max_row+1)],[r['unique_id'] for r in inv])
+    check('Workbook video IDs equal inventory order',[video_sheet.cell(i,1).value for i in range(2,video_sheet.max_row+1)],[r['video_id'] for r in video])
     included=[r for r in video if r['scope_label']=='Included']
     check('Included video decisions',len(included),stats['reverse_audit']['included_video_ids'])
     known={r['unique_id'] for r in inv}
@@ -48,6 +61,20 @@ def main():
     check('Each source row retains an original Drive hyperlink',all(after.cell(i,7).hyperlink and after.cell(i,7).hyperlink.target==inv[i-2]['direct_file_link'] for i in range(2,95)),True)
     check('All116 originals remain linked',sum(bool(book['Files'].cell(i,6).hyperlink) for i in range(2,118)),116)
     check('All video rows have exact YouTube hyperlinks',all(book['Videos'].cell(i,1).hyperlink and book['Videos'].cell(i,1).hyperlink.target==r['url'] for i,r in enumerate(video,2)),True)
+    def native_targets(sheet,row,columns):
+        return [sheet.cell(row,col).hyperlink.target for col in columns
+                if sheet.cell(row,col).hyperlink and sheet.cell(row,col).hyperlink.target]
+    for r in inv:
+        row=transcript_rows.get(r['unique_id'])
+        expected=re.findall(r'https://[^\s;]+',str(r.get('youtube_url') or ''))
+        actual=native_targets(after,row,[10,14,*range(15,after.max_column+1)]) if row is not None else None
+        check('Exact transcript video edges '+r['unique_id'],actual,expected)
+    originals={r['unique_id']:r['direct_file_link'] for r in inv}
+    for r in video:
+        row=video_rows.get(r['video_id'])
+        actual=native_targets(video_sheet,row,[9,16,*range(17,video_sheet.max_column+1)]) if row is not None else None
+        check('Exact video source edges '+r['video_id'],actual,r['source_links'])
+        check('Video source URLs correspond to transcript IDs '+r['video_id'],r['source_links'],[originals.get(i) for i in r['transcript_ids']])
     formula_errors=[]
     for sheet in values:
         for row in sheet:
@@ -60,7 +87,12 @@ def main():
     check('Known partial-source summary recalculation',values['Summary']['B43'].value,stats['reverse_audit']['known_partial_supplied_coverage_video_ids'])
     check('Unmatched content-checked upload summary',values['Summary']['B44'].value,stats['reverse_audit']['no_supplied_transcript_content_checked'])
     check('Unmatched metadata-based upload summary',values['Summary']['B45'].value,stats['reverse_audit']['no_supplied_transcript_metadata_basis'])
-    check('Every new table has filters and frozen headings',all(book[n].freeze_panes is not None and len(book[n].tables)>0 for n in ['Videos','Crawl sources']),True)
+    for name,freeze in {'Transcripts':'C2','English summaries':'C2','Recording gaps':'C2','Videos':'D2','Crawl sources':'B2','Files':'C2'}.items():
+        sheet=book[name]
+        expected_range=f'A1:{openpyxl.utils.get_column_letter(sheet.max_column)}{sheet.max_row}'
+        check('Frozen headings '+name,sheet.freeze_panes,freeze)
+        check('One full table '+name,[table.ref for table in sheet.tables.values()],[expected_range])
+        check('Explicit table filter '+name,[table.autoFilter.ref if table.autoFilter is not None else None for table in sheet.tables.values()],[expected_range])
     # Independent manifest membership accounting, including unavailable positions.
     crawl=json.loads((OUT/'crawl_manifest.json').read_text())
     import gzip

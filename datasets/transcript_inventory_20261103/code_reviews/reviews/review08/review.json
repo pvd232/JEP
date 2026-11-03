@@ -1,0 +1,128 @@
+{
+  "review_id": "review08",
+  "mode": "independent_completed_review",
+  "scope": [
+    "workbook_build/build_workbook.mjs",
+    "workbook_build/add_native_links.py",
+    "workbook_build/validate_outputs.py",
+    "JEP_transcript_inventory.xlsx"
+  ],
+  "reviewed_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "hashes": {
+    "workbook_build/build_workbook.mjs": "b12a5d8b38b1e541aa8ed7321f2029b3d4db31f3e0a5987810be554eaf19cae1",
+    "workbook_build/add_native_links.py": "3bc91c3e7cd0afdc3d2a34c90cf5dc5d2f011bdde4360d786c1802fb7062a5ce",
+    "workbook_build/validate_outputs.py": "b7225b038883384433ea0b56e6a5e241d966f4f5b3dd6b136bd855240252de2f",
+    "JEP_transcript_inventory.xlsx": "b1715e2102adabf278ea36d406f06f2147555a5906d1368015e57a570d241cee"
+  },
+  "verdict": "request_changes",
+  "current_count_or_link_data_correction_found": false,
+  "findings": [
+    {
+      "id": "R08-01",
+      "priority": "P2",
+      "title": "Third and later native links are silently lost",
+      "locations": [
+        {
+          "path": "workbook_build/build_workbook.mjs",
+          "lines": [
+            59,
+            68
+          ],
+          "symbol": "records.forEach URL branches"
+        },
+        {
+          "path": "workbook_build/build_workbook.mjs",
+          "lines": [
+            166,
+            168
+          ],
+          "symbol": "videoRecords.forEach source links"
+        }
+      ],
+      "current_artifact_affected": false,
+      "counterexample": "Exact builder body with a third VV-057 URL registers zero transcript video links; third reverse source ID is text-only.",
+      "smallest_repair": "Preserve primary and second links and create dynamic third-and-later hyperlink columns; preserve current dimensions when max cardinality is two.",
+      "observer": "observe_link_cardinality.mjs",
+      "result": "link_cardinality_observations.json"
+    },
+    {
+      "id": "R08-02",
+      "priority": "P2",
+      "title": "Gate accepts deleted transcript video hyperlink",
+      "locations": [
+        {
+          "path": "workbook_build/validate_outputs.py",
+          "lines": [
+            30,
+            50
+          ],
+          "symbol": "main transcript and hyperlink checks"
+        }
+      ],
+      "current_artifact_affected": false,
+      "counterexample": "Remove only native Transcripts!J2 link from an isolated XLSX copy: frozen validator exits zero with all_passed true.",
+      "smallest_repair": "Compare every expected forward video edge and reverse source edge with native hyperlink targets.",
+      "observer": "observe_missing_link_gate.py",
+      "result": "missing_link_gate_observations.json"
+    },
+    {
+      "id": "R08-03",
+      "priority": "P2",
+      "title": "No serialized table AutoFilter definitions despite passing filter claim",
+      "locations": [
+        {
+          "path": "workbook_build/build_workbook.mjs",
+          "lines": [
+            49,
+            49
+          ],
+          "symbol": "TranscriptInventory table creation; equivalent sites at95/120/159/185/205"
+        },
+        {
+          "path": "workbook_build/validate_outputs.py",
+          "lines": [
+            63,
+            63
+          ],
+          "symbol": "Every new table has filters and frozen headings"
+        }
+      ],
+      "current_artifact_affected": true,
+      "counterexample": "All six table autoFilter nodes and worksheet auto_filter refs are absent; gate checks only table existence and freeze panes.",
+      "smallest_repair": "Serialize autoFilter ref equal to each table ref; validate actual filter ranges.",
+      "observer": "inspect_workbook.py",
+      "result": "workbook_observations.json",
+      "application_ui_verified": false
+    }
+  ],
+  "positive_observations": {
+    "source_records": 93,
+    "source_files": 116,
+    "summaries": 93,
+    "forward_edges": 84,
+    "reverse_edges": 84,
+    "external_hyperlinks": 725,
+    "internal_hyperlinks": 395,
+    "cached_formulas": 22,
+    "field_projections": 5497,
+    "category_color_checks": 816,
+    "source_modified_time_tolerance_ms": 1,
+    "all_current_content_links_counts_checks_passed": true
+  },
+  "limitations": [
+    "No independent source/audio matching or summary factual review in this bounded workbook review.",
+    "No desktop Excel UI verification; filter finding is explicit OOXML absence and inaccurate gate assurance.",
+    "Synthetic counterexample workbook is review-only and must not be published as inventory data."
+  ],
+  "canonical_or_frozen_files_modified": false,
+  "evidence": [
+    "review.md",
+    "workbook_observations.json",
+    "link_cardinality_observations.json",
+    "missing_link_gate_observations.json"
+  ],
+  "primary_reference_urls": [
+    "https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.autofilter?view=openxml-3.0.1",
+    "https://learn.microsoft.com/en-us/office/open-xml/spreadsheet/working-with-tables"
+  ]
+}

@@ -1,6 +1,12 @@
 # Pagination correction and Casanare reverse audit
 
-Reviewed **3 November 2026**. Scope remains **JEP Case 03, Subcase Casanare**, including directly connected Casanare proceedings in the supplied Datos collection. Other cases and territorial subcases are discovery metadata only and are excluded from the confirmed corpus.
+Reviewed **3 November 2026**. Scope remains **JEP Case 03, Subcase Casanare**, including directly connected Casanare proceedings in the supplied Datos collection. Other cases and territorial subcases are excluded from the confirmed corpus. Outside-scope procedural openings were checked only where needed to resolve a territorial boundary; no substantive testimony analysis was added.
+
+## Ten independent code reviews and tieout
+
+Ten independent subagent reviews covered pagination, completeness, scope, duplicate/source identity, reverse joins, timestamps, forward gaps, workbook integrity, reproducibility and fresh-channel integrity. The [review register](code_reviews/ten_review_summary.md) preserves the findings and after-repair evidence. Repairs reject malformed or misdirected continuation controls, missing intermediate pages, contradictory scope decisions, lost source/video links, unsupported absence defaults and failed validation reports. Stable source IDs now depend on Drive-file identities rather than filename sorting. The workbook has explicit native table filters and validated clickable links in both directions.
+
+No supplied record was added or merged in this pass: **93 records, 116 source files and 93 English summaries remain**. Four tiny measurement corrections across three duplicate-comparison rows were synchronized; consolidation decisions are unchanged. All **74 challenged exclusion rationales** were replaced with specific official case/territorial evidence. Three previously uncertain contextual items were resolved as outside the hearing/statement corpus: two memorial events and one short victim-message clip. The [tieout decisions](tieout_data_decisions.json) preserve concise evidence and explicit limits.
 
 ## Pagination failure reproduced and corrected
 
@@ -16,8 +22,8 @@ The [reproduction report](pagination_reproduction.json) passed 15/15 checks agai
 
 | Source | Normal-title appearances | Unavailable positions | Distinct IDs | Declared total | Pagination/accounting |
 |---|---:|---:|---:|---:|---|
-| JEP Colombia / videos | 2663 | — | 2663 | — | reused terminal snapshot |
-| JEP Colombia / streams | 847 | — | 847 | — | reused terminal snapshot |
+| JEP Colombia / videos | 2663 | — | 2663 | — | exhausted count unknown |
+| JEP Colombia / streams | 846 | — | 846 | — | exhausted count unknown |
 | JEP Colombia / Shorts | 64 | — | 64 | — | exhausted count unknown |
 | Caso 03 de la JEP / Falsos positivos | 895 | 3 | 898 | 898 | exhausted with unavailable |
 | Subcaso Casanare | 19 | 1 | 20 | 20 | exhausted with unavailable |
@@ -31,11 +37,13 @@ The [reproduction report](pagination_reproduction.json) passed 15/15 checks agai
 | Caso 03 / Subcaso Meta | 169 | 1 | 170 | 170 | exhausted with unavailable |
 | Official JEP Case 03 page — Casanare-labelled hearing cards | 7 | — | 5 | — | observed cards extracted |
 
-The [crawl manifest](crawl_manifest.json) records each source, response-page evidence, terminal state and count reconciliation. The [full discovery catalog](public_catalog.json.gz) contains 3,606 distinct IDs; the [membership table](public_memberships.json.gz) retains 5,203 appearances across collections. These are discovery quantities, **not Casanare hearing counts**, and collection totals must not be added to estimate unique videos.
+The [crawl manifest](crawl_manifest.json) records each source, response-page evidence, terminal state and count reconciliation. The [full discovery catalog](public_catalog.json.gz) retains 3,606 distinct IDs; the [membership table](public_memberships.json.gz) retains 5,203 appearances across collections, including 1 explicitly historical appearance(s) absent from the latest listing. These are discovery quantities, **not Casanare hearing counts**, and collection totals must not be added to estimate unique videos.
 
-The retained channel Videos and Live catalogs contain 2,663 and 847 IDs respectively. Their terminal response structures were rechecked, but the earlier collector did not record original fetch times; they were not refetched in this pass. The Shorts surface was enumerated in this pass. A surface without a declared total can reach a verified terminal page but cannot be numerically reconciled to an undisclosed count. The official JEP page extraction is restricted to active Casanare-labelled cards; mismatched thumbnail/text-link destinations remain visible in provenance.
+The freshly traversed channel Videos and Live catalogs contain **2,663 and 846 IDs**, across **89 and 29 pages** respectively. Retrieval receipts cover 3 November 2026, 20:19–20:29 UTC; both primary lists reached terminal pages. The earlier Live listing contained one additional ID, `Pg8DvszQMME`. It remains playable, and its opening at 00:11:13–00:12:25 identifies Neiva and the Huila subcase on 21 October 2026. Its historical listing evidence is retained, and it is excluded from Casanare. Absence from a refreshed listing does not imply deletion or privacy status.
 
-Five regional playlists were read only to identify other-subcase membership. Official descriptions were checked for the remaining generic titles; no outside-case captions or testimony were analyzed. The [broad Case 03 register](broad_metadata_scope.json) assigns all 898 IDs: **96 included, 789 excluded and 13 scope unconfirmed**. Unresolved geography remains outside the confirmed Casanare corpus. Main-workbook scope decisions are in [scope_decisions.json](scope_decisions.json).
+The fresh snapshot's 118 pages were independently replayed; the repaired traversal rejects a mismatched first-page cache or selected channel surface. The older 120-response chain also replays, including one verified non-video About response per channel. Its original unknown retrieval times remain a historical limitation, but no longer describe the selected current channel catalogs. Shorts and ten playlists were also enumerated in this investigation. A surface without a declared total can reach a verified terminal page but cannot be numerically reconciled to an undisclosed count. The official JEP page extraction is restricted to active Casanare-labelled cards; mismatched thumbnail/text-link destinations remain visible in provenance.
+
+Five regional playlists were read to identify other-subcase membership. Official descriptions and a small number of procedural openings resolved the challenged territorial exclusions; substantive review remains in Casanare. The [broad Case 03 register](broad_metadata_scope.json) assigns all 898 IDs: **96 included, 789 excluded and 13 scope unconfirmed**. This register overlaps the main workbook and its counts must not be added to the main-register counts. Unresolved geography remains outside the confirmed Casanare corpus. Main-workbook scope decisions are in [scope_decisions.json](scope_decisions.json).
 
 ## Reverse map and supplied-source counts
 
@@ -47,8 +55,8 @@ Five regional playlists were read only to identify other-subcase membership. Off
 | Included public video IDs |128|Uploads, not a certified number of unique hearings.|
 | Video IDs linked to supplied transcript records |83|Includes alternate uploads and partial supplied coverage.|
 | Known partial supplied-source coverage |6|Subset of linked uploads; includes omitted openings and one missing morning portion.|
-| No supplied-source mapping, content checked |4|A distinct session/recording or recorded response was checked against supplied candidates.|
-| No supplied-source mapping, metadata basis |41|Identity/date metadata supports the candidate; further content checks could reveal errors or alternate uploads.|
+| No supplied-source mapping, content checked |17|Public identity/format checked against the supplied index; date conflicts remain explicit.|
+| No supplied-source mapping, metadata basis |28|Identity/date metadata supports the candidate; further content checks could reveal errors or alternate uploads.|
 | Source records with a high-confidence recording identity |82|80 public-caption checked, 2 metadata-only.|
 | Source records without a located recording |11|Unresolved forward-map gaps.|
 
@@ -61,6 +69,9 @@ The **45 video IDs without a supplied-source mapping are not a certified count o
 - `cSKgOHGfLQw` is the **20 September 2023 afternoon** recognition session, ending at 17:45. Its dated afternoon resumption and participant sequence differ from the supplied morning segment.
 - `uTjViv5Vtpc` is a short recorded questionnaire response attributed to Edwin Leonardo Toro Ramírez. Ordered comparison distinguishes it from supplied `VV-017`, `VV-018` and same-date Montaño `VV-025`. The title supplies 21 October 2019; no spoken date was observed, and the upload ends during the account. The description’s hearing-format wording is not adopted as a verified fact.
 - The previously checked Faiber Amaya continuation `s6x7MjB24E8` belongs to 28 August 2020, distinct from the supplied 29 April 2019 source.
+- `w49HGaeBNRk` is a Toro procedural installation and adjournment because defense counsel was absent. Its opening/title give 15 May 2019 while the closing automatic captions give 14 May; the discrepancy remains visible. Neither supplied Toro transcript covers this proceeding.
+- `xuxtUERYNxk` records preparations on 2 December 2019 after Wilson Rodríguez was not transported to the hearing. It is not a completed voluntary statement. `eKrYlu79rGo` is a dated Solano questionnaire supplement, distinct from supplied `VV-041`.
+- Further bounded opening checks identify Rivera, Soto, Romero, Cuevas, Torres and Saavedra recordings against the supplied-session index. Soto's continuation date remains title-based. For Rodríguez upload `U2k8Iaa-bd4`, the title gives 3 February 2020 while the opening captions render 2019; the year is explicitly unverified. These observations strengthen identity/format decisions without turning uploads into certified unique hearings.
 
 New bounded caption checks are recorded in [new_content_checks.json](new_content_checks.json). Cue timestamps are approximate; these checks establish identity or session distinction, not full audio equivalence. The original 93 summaries have not been replaced with summaries of newly discovered videos.
 
@@ -70,7 +81,7 @@ The source-tree inventory is complete for the supplied folders. The defined publ
 
 The source-side gap register remains 11 unlocated recordings, 2 missing public continuations and 2 metadata-only content checks. Those counts must not be added to the reverse video/source gap count: the direction differs and some records overlap. In particular `VV-015` lacks a later public recording portion while its supplied text also summarizes an opening; `VV-038` extends beyond its located upload without proving a reverse transcript gap.
 
-There are 5 distinct unavailable IDs exposed across the audited playlists: `6S-j34I6qYs`, `KnwzIgiijTA`, `UoQwxCMYJGQ`, `n1HYbvijKKI`, `o6q9K9GMm4E`. The Casanare playlist’s unavailable member is retained with an access/scope-unconfirmed status. A blank title and unavailable content cannot establish its hearing identity, even when its video ID is known. The main Videos table contains 7 scope-unconfirmed candidates; the broad metadata register separately retains unresolved territorial membership. These are explicit unresolved decisions, not silently excluded material.
+There are 5 distinct unavailable IDs exposed across the audited playlists: `6S-j34I6qYs`, `KnwzIgiijTA`, `UoQwxCMYJGQ`, `n1HYbvijKKI`, `o6q9K9GMm4E`. The Casanare playlist’s unavailable member is retained with an access/scope-unconfirmed status. A blank title and unavailable content cannot establish its hearing identity, even when its video ID is known. The main Videos table contains 4 scope-unconfirmed candidates; the broad metadata register separately retains unresolved territorial membership. These are explicit unresolved decisions, not silently excluded material.
 
 The public-source evidence cannot prove the absence of private, deleted, unlisted or never-published recordings. JEP or an authorized custodian can clarify the unavailable IDs, unresolved source-recording locators and recording access. The already-public videos without supplied transcripts are a separate source-expansion question; their availability does not require locating new public recordings through JEP.
 

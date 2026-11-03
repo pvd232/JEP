@@ -1,0 +1,142 @@
+{
+  "review_id": "R01",
+  "reviewer": "/root/review01_pagination",
+  "review_mode": "independent completed code review",
+  "candidate_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "base_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "reviewed_state": "Frozen published snapshot; no production mutation",
+  "scope": {
+    "file": "pagination_fix/crawl_public_catalog.py",
+    "symbols": [
+      "item_token",
+      "initial_list",
+      "continued_list",
+      "parse_entry",
+      "parse_list",
+      "crawl_one",
+      "reproduce"
+    ],
+    "supporting_code": "text/walk, playlist_metadata/completion, load_initial/load_next, reduced fixture construction; six fixture/manifest JSON files; crawl_manifest.json"
+  },
+  "reviewed_sha256": {
+    "pagination_fix/crawl_public_catalog.py": "8e7ba646de4edc9ee86045201eb7405077a8d670598f245969778b2e5d8936f6",
+    "pagination_fix/fixtures/audiencias_first_page.json": "c28324fd88a9f18ce40f04c6eccdffa004c9f7ccc7c9109f231b210cf5d2d82d",
+    "pagination_fix/fixtures/casanare_first_page.json": "85593f02cc0e108b7be29efdd5f4f41cae45492b7257bda25f03f94dec7a382e",
+    "pagination_fix/fixtures/case03_first_page.json": "247216a601e681ed15e180c80dc83ae381ccca249ff32e06c8a2ca645e352f51",
+    "pagination_fix/fixtures/deep_channel_streams_terminal.json": "333753b2ce0df66bae79b522f02b98a5cbe993d5bbccd3f0d562a3e2213cce80",
+    "pagination_fix/fixtures/deep_channel_videos_terminal.json": "f2430389e83a1d35e320e2c80cfe12ef481feaf46ac170866f9462b16fc9089b",
+    "pagination_fix/fixtures/fixture_manifest.json": "27422fe5c5a05c1461f87c81cf91a61973f2d5086aa22eac0ccfa0851e551624",
+    "crawl_manifest.json": "7eb203576902747ea2116c0138e5993e963a708d2cc73c37b25b7edd0993a8aa"
+  },
+  "invariants": [
+    "Only the actual primary-list continuation is admitted; outer and unrelated action targets are excluded.",
+    "Every admitted list entry preserves its video ID, order, source position and appearance multiplicity.",
+    "A failed, malformed, cyclic or capped traversal cannot silently claim successful exhaustion.",
+    "Supported Renderer and ViewModel controls retain compatibility."
+  ],
+  "findings": [
+    {
+      "id": "R01-F01",
+      "severity": "P2",
+      "blocks_review_approval": true,
+      "blocks_current_dataset_counts": false,
+      "title": "Missing primary-list target can match an unaddressed response action",
+      "file": "pagination_fix/crawl_public_catalog.py",
+      "lines": [
+        178,
+        182,
+        185,
+        194
+      ],
+      "symbols": [
+        "initial_list",
+        "continued_list",
+        "crawl_one"
+      ],
+      "invariant": "A continuation response must be bound to the positively identified primary-list target; missing identity must not be treated as an equal identity.",
+      "observed_code": "initial_list returns container.get(targetId) without validating it. continued_list accepts item.get(targetId) == target, so two missing values compare equal.",
+      "counterexample": "A selected modern itemSectionRenderer contains one video and a valid continuation control but omits targetId. The next response contains one appendContinuationItemsAction without targetId and another video. With a declared total of two, crawl_one admits the action and reports exhausted_reconciled, pagination_exhausted=true, count_reconciled=true, target_id=null.",
+      "observed_result": {
+        "status": "exhausted_reconciled",
+        "target_id": null,
+        "pagination_exhausted": true,
+        "count_reconciled": true,
+        "returned_memberships": 2,
+        "pending_token_sha256": [],
+        "errors": []
+      },
+      "smallest_repair": "Require a nonempty string target before following any pending continuation, and reject a missing/invalid target at the continued_list boundary. Preserve a valid terminal single-page list if no target is needed.",
+      "focused_verification": "Run the missing_primary_target synthetic case. It must return an explicit error/incomplete result with the existing pending continuation retained, never exhausted_reconciled. Retained playlist replay must remain unchanged.",
+      "data_impact": "Synthetic malformed/unsupported input only. All ten selected real playlists have nonempty targets, and all 22 retained pages replay exactly; no published count discrepancy is demonstrated."
+    },
+    {
+      "id": "R01-F02",
+      "severity": "P2",
+      "blocks_review_approval": true,
+      "blocks_current_dataset_counts": false,
+      "title": "Malformed legacy continuation controls are silently treated as terminal",
+      "file": "pagination_fix/crawl_public_catalog.py",
+      "lines": [
+        251,
+        254
+      ],
+      "symbols": [
+        "parse_list",
+        "crawl_one"
+      ],
+      "invariant": "A recognized list-continuation container that cannot supply a usable token must remain an explicit parse gap instead of disappearing from the queue.",
+      "observed_code": "parse_list appends legacy nextContinuationData.continuation only when truthy and silently ignores every other supplied legacy control.",
+      "counterexample": "parse_list receives one valid video and legacy_continuations=[{nextContinuationData:{}}]. It returns the video and an empty pending list without error. completion with declared=1 reports exhausted_reconciled and pagination_exhausted=true, although a malformed continuation control was present.",
+      "observed_result": {
+        "status": "exhausted_reconciled",
+        "pagination_exhausted": true,
+        "count_reconciled": true,
+        "unaccounted_declared_items": 0,
+        "returned_memberships": 1,
+        "visible_memberships": 1,
+        "normal_title_memberships": 1,
+        "unavailable_placeholder_memberships": 0,
+        "unique_video_ids": 1,
+        "duplicate_memberships": 0
+      },
+      "smallest_repair": "Validate every supplied legacy continuation object. Accept the supported nextContinuationData shape only with a nonempty string continuation; reject missing tokens and unsupported legacy control shapes with a concise ValueError. Do not guess how a reload control should paginate.",
+      "focused_verification": "The malformed_legacy_continuation case must raise a parsing error; a supported nonempty nextContinuationData token must still be returned and followed. Re-run the retained-page and existing reduced-fixture checks.",
+      "data_impact": "Synthetic malformed input only. This shape was not encountered in the retained selected playlist pages; no present inventory row or count is shown to be wrong."
+    }
+  ],
+  "mechanical_evidence": {
+    "command": "\"$CODEX_PRIMARY_RUNTIME_PYTHON\" inventory_work/tieout_review_20261103/reviews/review01/observe_pagination.py",
+    "python": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "standalone_replay": {
+      "exit_code": 0,
+      "all_passed": true,
+      "checks": 14
+    },
+    "retained_playlists": 10,
+    "retained_response_pages": 22,
+    "retained_memberships": 1622,
+    "retained_replay_exact": true,
+    "negative_controls": [
+      "mismatched_primary_target -> error, pending retained",
+      "request_failure -> error, pending retained",
+      "repeated_token -> cycle_detected",
+      "page_limit -> limit_reached"
+    ],
+    "network_requests": 0,
+    "baseline_files_unchanged": true,
+    "baseline_file_count": 45
+  },
+  "verdict": "Request changes",
+  "verdict_scope": "Two fail-closed parser repairs before unrestricted reuse. The observed pagination correction and the published selected-playlist counts are supported by retained-response replay.",
+  "exclusions": [
+    "No live network refetch or new public-video content review.",
+    "No verification of private/unlisted/deleted availability or channel snapshot freshness.",
+    "No complete review of scope classification, transcript matching, workbook construction or publication code.",
+    "The two counterexamples are malformed-input risks, not observed production-data failures."
+  ],
+  "evidence_files": [
+    "observe_pagination.py",
+    "observations.json",
+    "standalone/pagination_reproduction.json"
+  ]
+}

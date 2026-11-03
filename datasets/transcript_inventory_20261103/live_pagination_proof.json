@@ -26,5 +26,26 @@
     }
   ],
   "passed": true,
-  "errors": []
+  "errors": [],
+  "original_proof_sha256": "16f910238296ad579282dfc6ee3ee04dbc8a5e13f8135b5cb0867245adaf77d4",
+  "proof_type": "historical_live_request_with_retained_receipt",
+  "provenance_added_during_tieout": "Original 17:24 UTC proof retained. These original request receipts were appended during the code-review tieout; no new playlist next-page request is claimed.",
+  "page_request_provenance": [
+    {
+      "page_index": 0,
+      "fetched_at": "2026-11-03T17:24:32.524219+00:00",
+      "method": "GET",
+      "http_status": 200,
+      "response_sha256": "d5363984c2486b40f875c2b5389616af6bb99326ae430dc01967d9c42157ecb0",
+      "cache_reused_at_original_invocation": "not_recorded"
+    },
+    {
+      "page_index": 1,
+      "fetched_at": "2026-11-03T17:24:36.835663+00:00",
+      "method": "POST",
+      "http_status": 200,
+      "response_sha256": "d0b358b5bcfb1a24c4a0ad3907b593208a8be729ffd7c80e7176e58cf3a91828",
+      "cache_reused_at_original_invocation": "not_recorded"
+    }
+  ]
 }

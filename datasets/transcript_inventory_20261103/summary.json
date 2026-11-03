@@ -31,7 +31,7 @@
     "Protective measures": 1
   },
   "public_video_listings_reviewed": 2663,
-  "public_livestream_listings_reviewed": 847,
+  "public_livestream_listings_reviewed": 846,
   "access_note": "All 105 transcript files were readable. 80 matches have public-caption checks, including 2 partial uploads; 2 rely on metadata. 11 recordings remain unlocated. Two sources explicitly describe private/reserved hearings; one protects the declarant’s identity.",
   "date_note": "Solano: recorded date 27 Jul 2020 conflicts with filename/footer and a court citation. VV-071 combines 12/20 Aug 2021. VV-022: 22 Jul 2021 is submission date; recording day unknown. VV-056: source says 22 Jul 2020; one citation says 29 Jul.",
   "english_summaries": {
@@ -90,15 +90,15 @@
     "next_dependency": "Original/public recording pointers, missing continuations, or usable captions/media from the source owner or authorized recording custodian."
   },
   "reverse_audit": {
-    "candidate_rows": 207,
+    "candidate_rows": 208,
     "included_video_ids": 128,
     "video_ids_with_supplied_transcript": 83,
     "known_partial_supplied_coverage_video_ids": 6,
-    "no_supplied_transcript_content_checked": 4,
-    "no_supplied_transcript_metadata_basis": 41,
+    "no_supplied_transcript_content_checked": 17,
+    "no_supplied_transcript_metadata_basis": 28,
     "coverage_unconfirmed_video_ids": 0,
-    "scope_unconfirmed_candidates": 7,
-    "excluded_candidates": 72,
+    "scope_unconfirmed_candidates": 4,
+    "excluded_candidates": 76,
     "review_date": "2026-11-03",
     "broad_metadata_scope_counts": {
       "excluded": 789,
@@ -106,7 +106,7 @@
       "scope_unconfirmed": 13
     },
     "pagination_note": "Failure reproduced at 100/898. The live fix returned 100 new IDs at positions 101–200. Nine pages plus the normal unavailable-item view reconcile all 898 positions: 895 normal-title entries and 3 unavailable placeholders.",
-    "completeness_note": "The declared public-source pass is executed; all admitted videos have coverage decisions. Unavailable items and unresolved territorial metadata remain explicit. Channel Videos/Live reuse terminal snapshots with unrecorded original fetch times; Shorts and playlists were checked in this pass.",
+    "completeness_note": "The declared public-source pass is executed and all admitted videos have coverage decisions. Videos and Live were freshly traversed on 3 November 2026 across 118 pages, with retrieval receipts. All ten playlists reconcile. Unavailable items and four unresolved main-register scope decisions remain explicit.",
     "broad_scope_note": "Broad Case 03: 96 included, 789 excluded and 13 scope unconfirmed across 898 IDs. Generic or unavailable items without established Casanare membership stay outside the confirmed corpus. See the complete scope register.",
     "new_verified_alternate_upload": "FoAy5Qfphcs → VV-057; existing transcript count unchanged.",
     "transcript_video_edges": 84,
@@ -114,7 +114,21 @@
     "source_count": 14,
     "discovery_video_id_union": 3606,
     "discovery_memberships": 5203,
+    "current_discovery_memberships": 5202,
+    "historical_discovery_memberships": 1,
+    "independent_code_reviews": 10,
     "session_count_certified": false,
     "session_count_note": "Distinct uploads are counted separately from source documents. Different upload IDs are grouped only where content establishes equivalence; a definitive number of additional unique hearings is not claimed."
+  },
+  "historical_public_livestream_listings_reviewed": 847,
+  "fresh_channel_review": {
+    "review_date": "2026-11-03",
+    "videos": 2663,
+    "live": 846,
+    "pages": 118,
+    "historical_only_listing_ids": [
+      "Pg8DvszQMME"
+    ],
+    "source": "crawl_manifest.json"
   }
 }

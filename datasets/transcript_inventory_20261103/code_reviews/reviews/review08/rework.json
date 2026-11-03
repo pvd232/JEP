@@ -1,0 +1,90 @@
+{
+  "review_id": "review08",
+  "phase": "post_review_rework",
+  "baseline_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "review_receipts_frozen": [
+    "review.md",
+    "review.json"
+  ],
+  "findings_addressed": [
+    "R08-01",
+    "R08-02",
+    "R08-03"
+  ],
+  "changed_files": [
+    {
+      "path": "/tmp/jep-transcripts-8a7e64850a04/build_workbook.mjs",
+      "baseline_relative_path": "workbook_build/build_workbook.mjs",
+      "before_sha256": "b12a5d8b38b1e541aa8ed7321f2029b3d4db31f3e0a5987810be554eaf19cae1",
+      "after_sha256": "235faab6bec95e71c94d4d00f12855d14db1abebb6ef7e36cdf8c42632a633fd",
+      "added_lines": 39,
+      "removed_lines": 20
+    },
+    {
+      "path": "/tmp/jep-transcripts-8a7e64850a04/add_native_links.py",
+      "baseline_relative_path": "workbook_build/add_native_links.py",
+      "before_sha256": "3bc91c3e7cd0afdc3d2a34c90cf5dc5d2f011bdde4360d786c1802fb7062a5ce",
+      "after_sha256": "e556f6080cd0b422fa7386aa842a2cf3b7ca386323f2a28bf0e53668d4221d26",
+      "added_lines": 21,
+      "removed_lines": 2
+    },
+    {
+      "path": "/workspace/scratch/8a7e64850a04/inventory_work/reverse_audit/validate_outputs.py",
+      "baseline_relative_path": "workbook_build/validate_outputs.py",
+      "before_sha256": "b7225b038883384433ea0b56e6a5e241d966f4f5b3dd6b136bd855240252de2f",
+      "after_sha256": "66ff07a2c805428b2f42f556d2aa985b5457d7cd68a7ca6be756e0c5cd4cc728",
+      "added_lines": 25,
+      "removed_lines": 1
+    }
+  ],
+  "repairs": [
+    "Transcript primary and second video links retained for any cardinality; overflow uses dynamically added columns only when needed.",
+    "Reverse source-document links retain every source URL with dynamically added overflow columns.",
+    "Native XML helper adds explicit AutoFilter ref for all six tables.",
+    "Acceptance compares each forward/reverse native edge and verifies exact table/filter ranges, row IDs and source-ID/link correspondence."
+  ],
+  "focused_validation": {
+    "syntax_checks_passed": true,
+    "current_native_link_manifest_unchanged": true,
+    "current_table_ranges_unchanged": true,
+    "current_cell_assignments_unchanged": true,
+    "cardinalities_passed": [
+      0,
+      1,
+      2,
+      3,
+      15
+    ],
+    "valid_filtered_baseline_passes": true,
+    "missing_forward_link_rejected": true,
+    "missing_reverse_link_rejected": true,
+    "missing_filter_rejected": true,
+    "postprocessor_only_changed_six_table_parts": true
+  },
+  "all_focused_observers_passed": true,
+  "full_artifact_build_performed": false,
+  "publication_performed": false,
+  "final_baseline_integrity": {
+    "all_manifest_files_match": true,
+    "failure_paths": []
+  },
+  "isolation_incident": {
+    "description": "Initial rework observer symlinked all baseline JSON files, including generated workbook_validation.json; validator replaced that baseline report through the symlink.",
+    "affected_path": "/workspace/scratch/8a7e64850a04/inventory_work/tieout_review_20261103/base/workbook_validation.json",
+    "reviewed_code_and_workbook_changed": false,
+    "repair": "Removed report symlinks, restored report from unchanged outputs bytes after matching baseline_hashes.json, narrowed fixture inputs to five named files and reran all focused gate observations.",
+    "restored_sha256": "37ec612b0d89fb2a6240f88c4bfc1a0baafe5a2c612ab21b56bb722c9098825b",
+    "all_baseline_files_verified_after_rerun": true
+  },
+  "evidence": [
+    "rework_link_observations.json",
+    "rework_gate_observations.json",
+    "observe_rework_links.mjs",
+    "observe_rework_gate.py"
+  ],
+  "parent_handoff_notes": [
+    "Parent must rebuild final workbook from updated data, apply native postprocessor and run acceptance before publication.",
+    "The inherited source-field change whitelist still allows only VV-057 changes against the old upload; update it separately if new source-row corrections are introduced.",
+    "Review-only deliberately corrupted workbook copies must not be published as inventory data."
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "as_of": "2026-11-03",
+  "status": "Additional bounded content observations made after the frozen review baseline; canonical rows unchanged by reviewer",
+  "method": "Read public automatic-caption exports and source opening anchors; local exact 12-word comparison is supporting evidence, not an independent proof or audio validation.",
+  "checks": [
+    {
+      "video_id": "w49HGaeBNRk",
+      "public_url": "https://www.youtube.com/watch?v=w49HGaeBNRk",
+      "caption_sha256": "da3e63081a853c3de6cd290660c2d3adf6b894fa92a0e216e9aab8b58f982d84",
+      "caption_cues": 274,
+      "first_cue": "0:00",
+      "last_cue": "11:09",
+      "truncation_marker_present": false,
+      "compared_source_records": [
+        "VV-017",
+        "VV-018"
+      ],
+      "source_snapshot_sha256": {
+        "VV-017": "9fa0c7e5739f16cc98207216f28e94d1fdd7dfddf0b477ea48708f3606524dca",
+        "VV-018": "f456c16b7f77926256f46b54836304bcaea1592d90de41c603d6c81ec7638c47"
+      },
+      "finding": "Distinct procedural installation and adjournment of a proposed Toro continuation; no corresponding supplied transcript located.",
+      "recording_type": "Procedural installation/adjournment; substantive continuation did not proceed because defense counsel was absent.",
+      "date_basis": "Title and opening caption identify 15 May 2019. Closing automatic caption instead says 14 May 2019; exact day conflict remains explicit pending audio review.",
+      "anchors": [
+        {
+          "video_range": "00:50–01:06",
+          "evidence": "Opening gives 08:40 on 15 May 2019 and identifies continuation of Edwin Leonardo Toro Ramírez."
+        },
+        {
+          "video_range": "06:33–07:05",
+          "evidence": "Presence of defense counsel is described as indispensable; proceeding is declared unable to proceed due to counsel absence, with possible rescheduling discussed."
+        },
+        {
+          "video_range": "10:52–11:09",
+          "evidence": "Closing time is captioned approximately 09:05; closing date is captioned 14 May 2019, conflicting with the opening/title."
+        }
+      ],
+      "source_comparison": [
+        {
+          "transcript_id": "VV-017",
+          "pointer": "P0008",
+          "evidence": "Supplied installation identifies 20 February 2019,09:06, presided by Catalina Díaz Gómez."
+        },
+        {
+          "transcript_id": "VV-018",
+          "pointer": "P0005 and P0015",
+          "evidence": "Supplied installation identifies 27 June 2019,10:20; shared long wording concerns procedural introduction and the same prosecutor, not the adjournment sequence."
+        }
+      ],
+      "exact 12word_comparison": {
+        "VV-017": {
+          "matching_windows": 17,
+          "interpretation": "Procedural boilerplate in supplied opening P0008."
+        },
+        "VV-018": {
+          "matching_windows": 56,
+          "interpretation": "Procedural boilerplate inP0005 and prosecutor introduction P0015."
+        }
+      },
+      "recommended_resolution": "No supplied transcript · content checked, with procedural-format and ASR date-conflict notes; no new source record or source link."
+    },
+    {
+      "video_id": "eKrYlu79rGo",
+      "public_url": "https://www.youtube.com/watch?v=eKrYlu79rGo",
+      "caption_sha256": "e595fe76b7b6cebf0c8784d2ad9d66a0c774d3dcd5ed21169abfc9a8e910d691",
+      "caption_cues": 999,
+      "first_cue": "0:00",
+      "last_cue": "44:32",
+      "truncation_marker_present": false,
+      "compared_source_records": [
+        "VV-041"
+      ],
+      "source_snapshot_sha256": {
+        "VV-041": "b4f9c32ccf86bd0bf61bdf24975c10aae5f3a4dabdf8775dc5abb849ee1b08ad"
+      },
+      "finding": "Distinct recorded questionnaire supplement dated 15 October 2019; no supported link to the supplied July 2020 Solano hearing.",
+      "recording_type": "Counsel-led recorded supplement to written questionnaire answers, covering question 14.",
+      "date_basis": "Opening and closing captions agree on 15 October 2019; opening 15:00 and closing 15:45.",
+      "anchors": [
+        {
+          "video_range": "00:08–01:02",
+          "evidence": "Counsel dates recording15 October 2019, identifies Jorge Antonio Solano Galvis, and explains that the written questionnaire will be supplemented on video only for question 14."
+        },
+        {
+          "video_range": "44:13–44:25",
+          "evidence": "Closing identifies 15:45 on 15 October 2019."
+        }
+      ],
+      "source_comparison": [
+        {
+          "transcript_id": "VV-041",
+          "pointer": "P0001",
+          "evidence": "Supplied source opens the virtual magistrate-led hearing at 08:55 on 27 July 2020; the retained filename/footer date conflict is separate."
+        }
+      ],
+      "exact 12word_comparison": {
+        "VV-041": {
+          "matching_windows": 0,
+          "interpretation": "Corroborates, but does not alone prove, the distinction supported by dated opening/closing and different recording format."
+        }
+      },
+      "recommended_resolution": "No supplied transcript · content checked, recording format recorded as questionnaire supplement; no new source record or source link."
+    }
+  ]
+}

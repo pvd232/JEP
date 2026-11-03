@@ -61,7 +61,7 @@
       "expected": true
     },
     {
-      "check": "Only intended VV-057 transcript fields changed",
+      "check": "Only intended VV-057 link fields and exact reviewed duplicate-metric corrections changed",
       "passed": true,
       "actual": true,
       "expected": true
@@ -81,8 +81,626 @@
     {
       "check": "All video IDs unique",
       "passed": true,
-      "actual": 207,
-      "expected": 207
+      "actual": 208,
+      "expected": 208
+    },
+    {
+      "check": "Workbook transcript IDs equal inventory order",
+      "passed": true,
+      "actual": [
+        "VV-028",
+        "VV-017",
+        "VV-031",
+        "VV-020",
+        "VV-003",
+        "VV-021",
+        "VV-061",
+        "VV-018",
+        "VV-057",
+        "VV-027",
+        "VV-059",
+        "VV-042",
+        "VV-001",
+        "VV-074",
+        "VV-075",
+        "VV-037",
+        "VV-044",
+        "VV-015",
+        "VV-050",
+        "VV-058",
+        "VV-026",
+        "VV-053",
+        "VV-060",
+        "VV-066",
+        "VV-002",
+        "VV-008",
+        "VV-004",
+        "VV-009",
+        "VV-036",
+        "VV-048",
+        "VV-054",
+        "VV-070",
+        "VV-010",
+        "VV-025",
+        "VV-069",
+        "VV-040",
+        "VV-062",
+        "VV-029",
+        "VV-056",
+        "VV-041",
+        "VV-019",
+        "VV-068",
+        "VV-051",
+        "VV-038",
+        "VV-049",
+        "VV-034",
+        "VV-012",
+        "VV-045",
+        "VV-046",
+        "VV-016",
+        "VV-023",
+        "VV-072",
+        "VV-047",
+        "VV-005",
+        "VV-033",
+        "VV-013",
+        "VV-043",
+        "VV-006",
+        "VV-024",
+        "VV-073",
+        "VV-052",
+        "VV-035",
+        "VV-055",
+        "VV-014",
+        "VV-007",
+        "VV-032",
+        "VV-011",
+        "VV-022",
+        "VV-063",
+        "VV-071",
+        "VV-065",
+        "VV-039",
+        "CAS03-20230918-AM",
+        "CAS03-20230918-PM",
+        "CAS03-20230919-AM",
+        "CAS03-20230920-AM",
+        "OBS-VV-20210716",
+        "OBS-VV-20210717",
+        "OBS-RC05-20260423",
+        "OBS-RC05-20260424",
+        "SDSJ-20180830",
+        "VV-064",
+        "VV-067",
+        "SDSJ-20240524",
+        "SDSJ-20241203",
+        "SDSJ-20241204",
+        "SDSJ-20241205",
+        "SDSJ-20250813",
+        "SDSJ-20250814",
+        "SDSJ-20250815",
+        "TARDIO-20260318",
+        "TARDIO-20260319",
+        "VV-030"
+      ],
+      "expected": [
+        "VV-028",
+        "VV-017",
+        "VV-031",
+        "VV-020",
+        "VV-003",
+        "VV-021",
+        "VV-061",
+        "VV-018",
+        "VV-057",
+        "VV-027",
+        "VV-059",
+        "VV-042",
+        "VV-001",
+        "VV-074",
+        "VV-075",
+        "VV-037",
+        "VV-044",
+        "VV-015",
+        "VV-050",
+        "VV-058",
+        "VV-026",
+        "VV-053",
+        "VV-060",
+        "VV-066",
+        "VV-002",
+        "VV-008",
+        "VV-004",
+        "VV-009",
+        "VV-036",
+        "VV-048",
+        "VV-054",
+        "VV-070",
+        "VV-010",
+        "VV-025",
+        "VV-069",
+        "VV-040",
+        "VV-062",
+        "VV-029",
+        "VV-056",
+        "VV-041",
+        "VV-019",
+        "VV-068",
+        "VV-051",
+        "VV-038",
+        "VV-049",
+        "VV-034",
+        "VV-012",
+        "VV-045",
+        "VV-046",
+        "VV-016",
+        "VV-023",
+        "VV-072",
+        "VV-047",
+        "VV-005",
+        "VV-033",
+        "VV-013",
+        "VV-043",
+        "VV-006",
+        "VV-024",
+        "VV-073",
+        "VV-052",
+        "VV-035",
+        "VV-055",
+        "VV-014",
+        "VV-007",
+        "VV-032",
+        "VV-011",
+        "VV-022",
+        "VV-063",
+        "VV-071",
+        "VV-065",
+        "VV-039",
+        "CAS03-20230918-AM",
+        "CAS03-20230918-PM",
+        "CAS03-20230919-AM",
+        "CAS03-20230920-AM",
+        "OBS-VV-20210716",
+        "OBS-VV-20210717",
+        "OBS-RC05-20260423",
+        "OBS-RC05-20260424",
+        "SDSJ-20180830",
+        "VV-064",
+        "VV-067",
+        "SDSJ-20240524",
+        "SDSJ-20241203",
+        "SDSJ-20241204",
+        "SDSJ-20241205",
+        "SDSJ-20250813",
+        "SDSJ-20250814",
+        "SDSJ-20250815",
+        "TARDIO-20260318",
+        "TARDIO-20260319",
+        "VV-030"
+      ]
+    },
+    {
+      "check": "Workbook video IDs equal inventory order",
+      "passed": true,
+      "actual": [
+        "ZKeyTjuj05k",
+        "o_BvyjJigOE",
+        "KpZNfys5EgQ",
+        "1M2x7H2vH74",
+        "Dlfn1RekIeA",
+        "4-L2pa3TLSQ",
+        "xHM6s1lT4M0",
+        "zH62fXoKMX8",
+        "FfP2VXvDEVA",
+        "w49HGaeBNRk",
+        "natlD9Yr6Oo",
+        "JIEzFbO15mw",
+        "Z7O6PZdr4qw",
+        "VB-J8_VU7dk",
+        "FoAy5Qfphcs",
+        "ztGtBj4AbQA",
+        "YVr6Kg_bLWI",
+        "uzg0kvYZudo",
+        "6lKwWBmni4U",
+        "UCOA3ateyf0",
+        "GAs_0KxedWg",
+        "QenmEm4OdvI",
+        "5GR24Fuq30c",
+        "LSK1q61_au0",
+        "PCdtAVmlnf4",
+        "O25PKSrxRuA",
+        "5yp1pWDi6Z0",
+        "-ZfNT5R72fI",
+        "UzDjEgD4TEI",
+        "p2CITFhwOz4",
+        "Tr3kzy06EHo",
+        "vcqGiw2h9Kc",
+        "eeswpgpC0IU",
+        "VTULHi6Llfo",
+        "wIwEjEk4tlY",
+        "WZPeoIG6i7E",
+        "nWPgiw7qyZo",
+        "1NEbc6b6r8Q",
+        "OwRzkECLUwE",
+        "eKrYlu79rGo",
+        "QQ1Pm-HC7aI",
+        "j1vq2SJCxB4",
+        "uTjViv5Vtpc",
+        "kzsidY3b75k",
+        "JX9ugSHX8Vg",
+        "nrA5cWvKrwE",
+        "IoiLLB7fwWE",
+        "VSpKiFEOBSg",
+        "xuxtUERYNxk",
+        "eM8ZrqhZbgQ",
+        "uIHoKm5tM-o",
+        "YbtWpt_e_FA",
+        "U2k8Iaa-bd4",
+        "6WD3FoCBsTc",
+        "9hucRGwQpic",
+        "6-WiBJDqsQg",
+        "47aMQasQwdY",
+        "11BEjLTLHIc",
+        "2Pvhz6p_7-c",
+        "s6x7MjB24E8",
+        "QIkGxbpDOpM",
+        "6IEmoeSuTRQ",
+        "_tSgEMxHuww",
+        "Jvm2G-eg7Yc",
+        "EsvWraKhors",
+        "rIQrbJY5QbE",
+        "duGHxSWV1Hw",
+        "6g1y-3znGvc",
+        "3ycn0O2KA3U",
+        "gjHsSqbqsUc",
+        "IuVZecpjmEM",
+        "ATktSr_bK5Y",
+        "RfpTACkMwZg",
+        "drOGcjWegJw",
+        "VOFlxqzJqLw",
+        "bEhPkdaC4bc",
+        "NmU4Q32oLMM",
+        "JVNvwbSppc4",
+        "qMhiPp-BlQk",
+        "xWK_rJ5HkkY",
+        "m5dObnmugKc",
+        "9JaR2TuOuS4",
+        "pZBWhBb7npU",
+        "vjzz91wkNHo",
+        "CchilZicRmY",
+        "HS3oQWBvje8",
+        "jTTlR59r2Cs",
+        "9-0IQlIlCbI",
+        "91oN2bgF_Jc",
+        "BM2YpSKnP3o",
+        "LQ8c1zQmqxM",
+        "5iBLj_sZ5Pc",
+        "oyI98B24QAc",
+        "6bUGYG3G-UY",
+        "mJX7VBllEQw",
+        "t8DrOoFjCQA",
+        "dpppoKK5iEo",
+        "dCImovUQqmQ",
+        "EeU1kJj70FU",
+        "K_Ghpj6ic1g",
+        "YbMhvuOXO2Y",
+        "j-P6L41InvE",
+        "VoGD_6QGZq8",
+        "jw31qQpCQH0",
+        "QefPfduOZ2Y",
+        "wg4UGYvV_gs",
+        "AtoPYmmZymQ",
+        "qTkUcVlA098",
+        "zTUcmpzH124",
+        "Pq0tmcvNp9g",
+        "efeJV8Q4CwE",
+        "cGyu3lTjqso",
+        "fHVMPnXbj88",
+        "cSKgOHGfLQw",
+        "i1WWWhIL7_Y",
+        "m7S30QN1S5g",
+        "khiy_mt5oR4",
+        "fo6Bq6SAlso",
+        "scqh3qqvLwk",
+        "sMqVu1GYh3o",
+        "DFh9EZ9zMws",
+        "xGXxXaQ6YSc",
+        "Z-JYGwgAHaY",
+        "GJ8DgTuRFws",
+        "f6dkdTyATco",
+        "jEZEo-w2B9w",
+        "QZ-X0MHRzIk",
+        "rulBPVUPTQE",
+        "BJYdAbMd9nY",
+        "uASigfVN3tQ",
+        "UN7yvo0no14",
+        "o6q9K9GMm4E",
+        "3HFiGZGLgvQ",
+        "ne8eA7EmzTo",
+        "wKdrTpcBTXg",
+        "XqzOE_54pDE",
+        "8n-5cv4E32w",
+        "tTx34-snYDE",
+        "ChoCtaKlQyw",
+        "ZCO6jhmW-tA",
+        "_sm4aZvbeGA",
+        "88oZwMJCq0U",
+        "JFcV6rI4jDE",
+        "gqPo3k9PaZw",
+        "8eLzbVAnM8E",
+        "XXsg70ZuTyE",
+        "oIpviR-g6dY",
+        "g78kUeu20aI",
+        "1OQmwK0KSqg",
+        "yMUTmamyVO0",
+        "7o9-kG-JySc",
+        "ayWL60IJ6R4",
+        "Psa0P7IaEBo",
+        "Pg8DvszQMME",
+        "r9hzq8LNovM",
+        "XiBJkEgJTO0",
+        "-BxgvAIAZuE",
+        "9sSsb23kRxQ",
+        "mMC84FBU0v8",
+        "foWMWrcHh3M",
+        "AK7KiXCE9ys",
+        "UXVqF52u1no",
+        "Ts54fShcU6Y",
+        "xXydIH4M9qs",
+        "zEDgTDlZLmo",
+        "Nc__DNPvSjE",
+        "qvCAJwd9b7c",
+        "0TXYYOdG-cQ",
+        "PKzFoTAekfo",
+        "WIRAAZcpxQY",
+        "8DpaG9TJ8pY",
+        "C69xRBIa-fc",
+        "5xZYIlHa0Ys",
+        "cwlH65dBnjI",
+        "q8ZZ6eg2aOE",
+        "UsomYZzWX6E",
+        "MgXit2nQHvM",
+        "jjLfjGGrY94",
+        "6Yy5h_W4N_A",
+        "lTw313xy7PI",
+        "KDbqQxjrLYs",
+        "s5gXSqyqGAM",
+        "KO9p-cy5b_w",
+        "muvz5iDpj44",
+        "zAxFe4RI_XI",
+        "hPWvujYFMP0",
+        "MwBdAYzs70A",
+        "g0tq3EHhSHo",
+        "NblnFgMGBVk",
+        "T8E-_UwMtbQ",
+        "Jc_XkOLNAQg",
+        "jPNVNaJRMC8",
+        "FOu9Jr2pE8U",
+        "j88fZy6gRXg",
+        "9V54l4lzOos",
+        "pMLnGaPq258",
+        "HhUwDLhIlbs",
+        "sUZy2pQUtyQ",
+        "SFPbQ956ELE",
+        "E64ysnrWejE",
+        "kPsV9SpPUms",
+        "dXlaLWY8qkg",
+        "Z5NxrCuU-Tg",
+        "2WEfRQs3jRE",
+        "CCP0tAWjlEA",
+        "OZxGzpJemqM",
+        "BsOF4G_K97Q",
+        "hrWNqC6byG4"
+      ],
+      "expected": [
+        "ZKeyTjuj05k",
+        "o_BvyjJigOE",
+        "KpZNfys5EgQ",
+        "1M2x7H2vH74",
+        "Dlfn1RekIeA",
+        "4-L2pa3TLSQ",
+        "xHM6s1lT4M0",
+        "zH62fXoKMX8",
+        "FfP2VXvDEVA",
+        "w49HGaeBNRk",
+        "natlD9Yr6Oo",
+        "JIEzFbO15mw",
+        "Z7O6PZdr4qw",
+        "VB-J8_VU7dk",
+        "FoAy5Qfphcs",
+        "ztGtBj4AbQA",
+        "YVr6Kg_bLWI",
+        "uzg0kvYZudo",
+        "6lKwWBmni4U",
+        "UCOA3ateyf0",
+        "GAs_0KxedWg",
+        "QenmEm4OdvI",
+        "5GR24Fuq30c",
+        "LSK1q61_au0",
+        "PCdtAVmlnf4",
+        "O25PKSrxRuA",
+        "5yp1pWDi6Z0",
+        "-ZfNT5R72fI",
+        "UzDjEgD4TEI",
+        "p2CITFhwOz4",
+        "Tr3kzy06EHo",
+        "vcqGiw2h9Kc",
+        "eeswpgpC0IU",
+        "VTULHi6Llfo",
+        "wIwEjEk4tlY",
+        "WZPeoIG6i7E",
+        "nWPgiw7qyZo",
+        "1NEbc6b6r8Q",
+        "OwRzkECLUwE",
+        "eKrYlu79rGo",
+        "QQ1Pm-HC7aI",
+        "j1vq2SJCxB4",
+        "uTjViv5Vtpc",
+        "kzsidY3b75k",
+        "JX9ugSHX8Vg",
+        "nrA5cWvKrwE",
+        "IoiLLB7fwWE",
+        "VSpKiFEOBSg",
+        "xuxtUERYNxk",
+        "eM8ZrqhZbgQ",
+        "uIHoKm5tM-o",
+        "YbtWpt_e_FA",
+        "U2k8Iaa-bd4",
+        "6WD3FoCBsTc",
+        "9hucRGwQpic",
+        "6-WiBJDqsQg",
+        "47aMQasQwdY",
+        "11BEjLTLHIc",
+        "2Pvhz6p_7-c",
+        "s6x7MjB24E8",
+        "QIkGxbpDOpM",
+        "6IEmoeSuTRQ",
+        "_tSgEMxHuww",
+        "Jvm2G-eg7Yc",
+        "EsvWraKhors",
+        "rIQrbJY5QbE",
+        "duGHxSWV1Hw",
+        "6g1y-3znGvc",
+        "3ycn0O2KA3U",
+        "gjHsSqbqsUc",
+        "IuVZecpjmEM",
+        "ATktSr_bK5Y",
+        "RfpTACkMwZg",
+        "drOGcjWegJw",
+        "VOFlxqzJqLw",
+        "bEhPkdaC4bc",
+        "NmU4Q32oLMM",
+        "JVNvwbSppc4",
+        "qMhiPp-BlQk",
+        "xWK_rJ5HkkY",
+        "m5dObnmugKc",
+        "9JaR2TuOuS4",
+        "pZBWhBb7npU",
+        "vjzz91wkNHo",
+        "CchilZicRmY",
+        "HS3oQWBvje8",
+        "jTTlR59r2Cs",
+        "9-0IQlIlCbI",
+        "91oN2bgF_Jc",
+        "BM2YpSKnP3o",
+        "LQ8c1zQmqxM",
+        "5iBLj_sZ5Pc",
+        "oyI98B24QAc",
+        "6bUGYG3G-UY",
+        "mJX7VBllEQw",
+        "t8DrOoFjCQA",
+        "dpppoKK5iEo",
+        "dCImovUQqmQ",
+        "EeU1kJj70FU",
+        "K_Ghpj6ic1g",
+        "YbMhvuOXO2Y",
+        "j-P6L41InvE",
+        "VoGD_6QGZq8",
+        "jw31qQpCQH0",
+        "QefPfduOZ2Y",
+        "wg4UGYvV_gs",
+        "AtoPYmmZymQ",
+        "qTkUcVlA098",
+        "zTUcmpzH124",
+        "Pq0tmcvNp9g",
+        "efeJV8Q4CwE",
+        "cGyu3lTjqso",
+        "fHVMPnXbj88",
+        "cSKgOHGfLQw",
+        "i1WWWhIL7_Y",
+        "m7S30QN1S5g",
+        "khiy_mt5oR4",
+        "fo6Bq6SAlso",
+        "scqh3qqvLwk",
+        "sMqVu1GYh3o",
+        "DFh9EZ9zMws",
+        "xGXxXaQ6YSc",
+        "Z-JYGwgAHaY",
+        "GJ8DgTuRFws",
+        "f6dkdTyATco",
+        "jEZEo-w2B9w",
+        "QZ-X0MHRzIk",
+        "rulBPVUPTQE",
+        "BJYdAbMd9nY",
+        "uASigfVN3tQ",
+        "UN7yvo0no14",
+        "o6q9K9GMm4E",
+        "3HFiGZGLgvQ",
+        "ne8eA7EmzTo",
+        "wKdrTpcBTXg",
+        "XqzOE_54pDE",
+        "8n-5cv4E32w",
+        "tTx34-snYDE",
+        "ChoCtaKlQyw",
+        "ZCO6jhmW-tA",
+        "_sm4aZvbeGA",
+        "88oZwMJCq0U",
+        "JFcV6rI4jDE",
+        "gqPo3k9PaZw",
+        "8eLzbVAnM8E",
+        "XXsg70ZuTyE",
+        "oIpviR-g6dY",
+        "g78kUeu20aI",
+        "1OQmwK0KSqg",
+        "yMUTmamyVO0",
+        "7o9-kG-JySc",
+        "ayWL60IJ6R4",
+        "Psa0P7IaEBo",
+        "Pg8DvszQMME",
+        "r9hzq8LNovM",
+        "XiBJkEgJTO0",
+        "-BxgvAIAZuE",
+        "9sSsb23kRxQ",
+        "mMC84FBU0v8",
+        "foWMWrcHh3M",
+        "AK7KiXCE9ys",
+        "UXVqF52u1no",
+        "Ts54fShcU6Y",
+        "xXydIH4M9qs",
+        "zEDgTDlZLmo",
+        "Nc__DNPvSjE",
+        "qvCAJwd9b7c",
+        "0TXYYOdG-cQ",
+        "PKzFoTAekfo",
+        "WIRAAZcpxQY",
+        "8DpaG9TJ8pY",
+        "C69xRBIa-fc",
+        "5xZYIlHa0Ys",
+        "cwlH65dBnjI",
+        "q8ZZ6eg2aOE",
+        "UsomYZzWX6E",
+        "MgXit2nQHvM",
+        "jjLfjGGrY94",
+        "6Yy5h_W4N_A",
+        "lTw313xy7PI",
+        "KDbqQxjrLYs",
+        "s5gXSqyqGAM",
+        "KO9p-cy5b_w",
+        "muvz5iDpj44",
+        "zAxFe4RI_XI",
+        "hPWvujYFMP0",
+        "MwBdAYzs70A",
+        "g0tq3EHhSHo",
+        "NblnFgMGBVk",
+        "T8E-_UwMtbQ",
+        "Jc_XkOLNAQg",
+        "jPNVNaJRMC8",
+        "FOu9Jr2pE8U",
+        "j88fZy6gRXg",
+        "9V54l4lzOos",
+        "pMLnGaPq258",
+        "HhUwDLhIlbs",
+        "sUZy2pQUtyQ",
+        "SFPbQ956ELE",
+        "E64ysnrWejE",
+        "kPsV9SpPUms",
+        "dXlaLWY8qkg",
+        "Z5NxrCuU-Tg",
+        "2WEfRQs3jRE",
+        "CCP0tAWjlEA",
+        "OZxGzpJemqM",
+        "BsOF4G_K97Q",
+        "hrWNqC6byG4"
+      ]
     },
     {
       "check": "Included video decisions",
@@ -121,6 +739,4060 @@
       "expected": true
     },
     {
+      "check": "Exact transcript video edges VV-028",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=o_BvyjJigOE"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=o_BvyjJigOE"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-017",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=Dlfn1RekIeA"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=Dlfn1RekIeA"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-031",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=zH62fXoKMX8"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=zH62fXoKMX8"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-020",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact transcript video edges VV-003",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=FfP2VXvDEVA"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=FfP2VXvDEVA"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-021",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=natlD9Yr6Oo"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=natlD9Yr6Oo"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-061",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=JIEzFbO15mw"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=JIEzFbO15mw"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-018",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=VB-J8_VU7dk"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=VB-J8_VU7dk"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-057",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=ztGtBj4AbQA",
+        "https://www.youtube.com/watch?v=FoAy5Qfphcs"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=ztGtBj4AbQA",
+        "https://www.youtube.com/watch?v=FoAy5Qfphcs"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-027",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=YVr6Kg_bLWI"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=YVr6Kg_bLWI"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-059",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=uzg0kvYZudo"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=uzg0kvYZudo"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-042",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=6lKwWBmni4U"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=6lKwWBmni4U"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-001",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=UCOA3ateyf0"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=UCOA3ateyf0"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-074",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=GAs_0KxedWg"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=GAs_0KxedWg"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-075",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=QenmEm4OdvI"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=QenmEm4OdvI"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-037",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=LSK1q61_au0"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=LSK1q61_au0"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-044",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=PCdtAVmlnf4"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=PCdtAVmlnf4"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-015",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=O25PKSrxRuA"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=O25PKSrxRuA"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-050",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=5yp1pWDi6Z0"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=5yp1pWDi6Z0"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-058",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=-ZfNT5R72fI"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=-ZfNT5R72fI"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-026",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=UzDjEgD4TEI"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=UzDjEgD4TEI"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-053",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=p2CITFhwOz4"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=p2CITFhwOz4"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-060",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=Tr3kzy06EHo"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=Tr3kzy06EHo"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-066",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=vcqGiw2h9Kc"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=vcqGiw2h9Kc"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-002",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=eeswpgpC0IU"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=eeswpgpC0IU"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-008",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=VTULHi6Llfo"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=VTULHi6Llfo"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-004",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=wIwEjEk4tlY"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=wIwEjEk4tlY"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-009",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=WZPeoIG6i7E"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=WZPeoIG6i7E"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-036",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=nWPgiw7qyZo"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=nWPgiw7qyZo"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-048",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=OwRzkECLUwE"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=OwRzkECLUwE"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-054",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=1NEbc6b6r8Q"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=1NEbc6b6r8Q"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-070",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=QQ1Pm-HC7aI"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=QQ1Pm-HC7aI"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-010",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=j1vq2SJCxB4"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=j1vq2SJCxB4"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-025",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=kzsidY3b75k"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=kzsidY3b75k"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-069",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=JX9ugSHX8Vg"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=JX9ugSHX8Vg"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-040",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=nrA5cWvKrwE"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=nrA5cWvKrwE"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-062",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=IoiLLB7fwWE"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=IoiLLB7fwWE"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-029",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=eM8ZrqhZbgQ"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=eM8ZrqhZbgQ"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-056",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact transcript video edges VV-041",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=6-WiBJDqsQg"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=6-WiBJDqsQg"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-019",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact transcript video edges VV-068",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=2Pvhz6p_7-c"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=2Pvhz6p_7-c"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-051",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=QIkGxbpDOpM"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=QIkGxbpDOpM"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-038",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=6IEmoeSuTRQ"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=6IEmoeSuTRQ"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-049",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=_tSgEMxHuww"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=_tSgEMxHuww"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-034",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=Jvm2G-eg7Yc"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=Jvm2G-eg7Yc"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-012",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=rIQrbJY5QbE"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=rIQrbJY5QbE"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-045",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=duGHxSWV1Hw"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=duGHxSWV1Hw"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-046",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=gjHsSqbqsUc"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=gjHsSqbqsUc"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-016",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=ATktSr_bK5Y"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=ATktSr_bK5Y"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-023",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=JVNvwbSppc4"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=JVNvwbSppc4"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-072",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=xWK_rJ5HkkY"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=xWK_rJ5HkkY"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-047",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=m5dObnmugKc"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=m5dObnmugKc"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-005",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=pZBWhBb7npU"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=pZBWhBb7npU"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-033",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=vjzz91wkNHo"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=vjzz91wkNHo"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-013",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=jTTlR59r2Cs"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=jTTlR59r2Cs"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-043",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=91oN2bgF_Jc"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=91oN2bgF_Jc"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-006",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=BM2YpSKnP3o"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=BM2YpSKnP3o"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-024",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=LQ8c1zQmqxM"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=LQ8c1zQmqxM"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-073",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=6bUGYG3G-UY"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=6bUGYG3G-UY"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-052",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=mJX7VBllEQw"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=mJX7VBllEQw"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-035",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=t8DrOoFjCQA"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=t8DrOoFjCQA"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-055",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=dpppoKK5iEo"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=dpppoKK5iEo"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-014",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=dCImovUQqmQ"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=dCImovUQqmQ"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-007",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=K_Ghpj6ic1g"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=K_Ghpj6ic1g"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-032",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=YbMhvuOXO2Y"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=YbMhvuOXO2Y"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-011",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact transcript video edges VV-022",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact transcript video edges VV-063",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact transcript video edges VV-071",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact transcript video edges VV-065",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact transcript video edges VV-039",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact transcript video edges CAS03-20230918-AM",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=efeJV8Q4CwE"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=efeJV8Q4CwE"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges CAS03-20230918-PM",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=Pq0tmcvNp9g"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=Pq0tmcvNp9g"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges CAS03-20230919-AM",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=fHVMPnXbj88"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=fHVMPnXbj88"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges CAS03-20230920-AM",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=i1WWWhIL7_Y"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=i1WWWhIL7_Y"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges OBS-VV-20210716",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=VoGD_6QGZq8"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=VoGD_6QGZq8"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges OBS-VV-20210717",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=jw31qQpCQH0"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=jw31qQpCQH0"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges OBS-RC05-20260423",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=jEZEo-w2B9w"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=jEZEo-w2B9w"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges OBS-RC05-20260424",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=QZ-X0MHRzIk"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=QZ-X0MHRzIk"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges SDSJ-20180830",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=ZKeyTjuj05k"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=ZKeyTjuj05k"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-064",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact transcript video edges VV-067",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact transcript video edges SDSJ-20240524",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=m7S30QN1S5g"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=m7S30QN1S5g"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges SDSJ-20241203",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=khiy_mt5oR4"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=khiy_mt5oR4"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges SDSJ-20241204",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=fo6Bq6SAlso"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=fo6Bq6SAlso"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges SDSJ-20241205",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=scqh3qqvLwk"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=scqh3qqvLwk"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges SDSJ-20250813",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=sMqVu1GYh3o"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=sMqVu1GYh3o"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges SDSJ-20250814",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=DFh9EZ9zMws"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=DFh9EZ9zMws"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges SDSJ-20250815",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=xGXxXaQ6YSc"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=xGXxXaQ6YSc"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges TARDIO-20260318",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=Z-JYGwgAHaY"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=Z-JYGwgAHaY"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges TARDIO-20260319",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=f6dkdTyATco",
+        "https://www.youtube.com/watch?v=GJ8DgTuRFws"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=f6dkdTyATco",
+        "https://www.youtube.com/watch?v=GJ8DgTuRFws"
+      ]
+    },
+    {
+      "check": "Exact transcript video edges VV-030",
+      "passed": true,
+      "actual": [
+        "https://www.youtube.com/watch?v=eM8ZrqhZbgQ"
+      ],
+      "expected": [
+        "https://www.youtube.com/watch?v=eM8ZrqhZbgQ"
+      ]
+    },
+    {
+      "check": "Exact video source edges ZKeyTjuj05k",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/13usdMQ-xu05Z0p5Y0SMNxYgr2q-LJhCg/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/13usdMQ-xu05Z0p5Y0SMNxYgr2q-LJhCg/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs ZKeyTjuj05k",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/13usdMQ-xu05Z0p5Y0SMNxYgr2q-LJhCg/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/13usdMQ-xu05Z0p5Y0SMNxYgr2q-LJhCg/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges o_BvyjJigOE",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/15j_EE9zVj-tNdJqdGHrapM5UnzJCXbvL/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/15j_EE9zVj-tNdJqdGHrapM5UnzJCXbvL/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs o_BvyjJigOE",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/15j_EE9zVj-tNdJqdGHrapM5UnzJCXbvL/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/15j_EE9zVj-tNdJqdGHrapM5UnzJCXbvL/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges KpZNfys5EgQ",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs KpZNfys5EgQ",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges 1M2x7H2vH74",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 1M2x7H2vH74",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges Dlfn1RekIeA",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1W38Xwqr5ySlfh4hFoMGtp7l5a_jYKG2C/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1W38Xwqr5ySlfh4hFoMGtp7l5a_jYKG2C/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs Dlfn1RekIeA",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1W38Xwqr5ySlfh4hFoMGtp7l5a_jYKG2C/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1W38Xwqr5ySlfh4hFoMGtp7l5a_jYKG2C/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges 4-L2pa3TLSQ",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 4-L2pa3TLSQ",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges xHM6s1lT4M0",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs xHM6s1lT4M0",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges zH62fXoKMX8",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1kKD2dUYz-USwnur2KTonUq3LFygfJZ4b/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1kKD2dUYz-USwnur2KTonUq3LFygfJZ4b/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs zH62fXoKMX8",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1kKD2dUYz-USwnur2KTonUq3LFygfJZ4b/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1kKD2dUYz-USwnur2KTonUq3LFygfJZ4b/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges FfP2VXvDEVA",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1VTbDJfuZ3eW1ZqXVma19-dzqOgulb_Yn/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1VTbDJfuZ3eW1ZqXVma19-dzqOgulb_Yn/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs FfP2VXvDEVA",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1VTbDJfuZ3eW1ZqXVma19-dzqOgulb_Yn/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1VTbDJfuZ3eW1ZqXVma19-dzqOgulb_Yn/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges w49HGaeBNRk",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs w49HGaeBNRk",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges natlD9Yr6Oo",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1kec9P5SdbfJy4XxximR5_L6awtJMDCBO/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1kec9P5SdbfJy4XxximR5_L6awtJMDCBO/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs natlD9Yr6Oo",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1kec9P5SdbfJy4XxximR5_L6awtJMDCBO/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1kec9P5SdbfJy4XxximR5_L6awtJMDCBO/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges JIEzFbO15mw",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1IDfQ5w0x9ixuYNU8Sgd2wrFEVR_LWqVB/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1IDfQ5w0x9ixuYNU8Sgd2wrFEVR_LWqVB/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs JIEzFbO15mw",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1IDfQ5w0x9ixuYNU8Sgd2wrFEVR_LWqVB/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1IDfQ5w0x9ixuYNU8Sgd2wrFEVR_LWqVB/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges Z7O6PZdr4qw",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs Z7O6PZdr4qw",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges VB-J8_VU7dk",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1M3ZDIAUsXP39UUCMNWstam3midHpGOoo/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1M3ZDIAUsXP39UUCMNWstam3midHpGOoo/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs VB-J8_VU7dk",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1M3ZDIAUsXP39UUCMNWstam3midHpGOoo/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1M3ZDIAUsXP39UUCMNWstam3midHpGOoo/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges FoAy5Qfphcs",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1PN1Snb8AnIUiJtuykAqEc3KMGBbhvcrc/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1PN1Snb8AnIUiJtuykAqEc3KMGBbhvcrc/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs FoAy5Qfphcs",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1PN1Snb8AnIUiJtuykAqEc3KMGBbhvcrc/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1PN1Snb8AnIUiJtuykAqEc3KMGBbhvcrc/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges ztGtBj4AbQA",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1PN1Snb8AnIUiJtuykAqEc3KMGBbhvcrc/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1PN1Snb8AnIUiJtuykAqEc3KMGBbhvcrc/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs ztGtBj4AbQA",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1PN1Snb8AnIUiJtuykAqEc3KMGBbhvcrc/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1PN1Snb8AnIUiJtuykAqEc3KMGBbhvcrc/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges YVr6Kg_bLWI",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/17sB2S1nRbSX7GDan43p1-ZraYiYl2ui0/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/17sB2S1nRbSX7GDan43p1-ZraYiYl2ui0/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs YVr6Kg_bLWI",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/17sB2S1nRbSX7GDan43p1-ZraYiYl2ui0/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/17sB2S1nRbSX7GDan43p1-ZraYiYl2ui0/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges uzg0kvYZudo",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1mF3O1EHcoEMMcvfWNe5hpSJNcxcAHXEd/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1mF3O1EHcoEMMcvfWNe5hpSJNcxcAHXEd/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs uzg0kvYZudo",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1mF3O1EHcoEMMcvfWNe5hpSJNcxcAHXEd/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1mF3O1EHcoEMMcvfWNe5hpSJNcxcAHXEd/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges 6lKwWBmni4U",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1YaBgJ-MWeIEZP_ncF9q3JSF1zBerzvmk/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1YaBgJ-MWeIEZP_ncF9q3JSF1zBerzvmk/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 6lKwWBmni4U",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1YaBgJ-MWeIEZP_ncF9q3JSF1zBerzvmk/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1YaBgJ-MWeIEZP_ncF9q3JSF1zBerzvmk/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges UCOA3ateyf0",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1GJOQON-g4YpSyIo4pHeuizjd6fAQhXpI/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1GJOQON-g4YpSyIo4pHeuizjd6fAQhXpI/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs UCOA3ateyf0",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1GJOQON-g4YpSyIo4pHeuizjd6fAQhXpI/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1GJOQON-g4YpSyIo4pHeuizjd6fAQhXpI/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges GAs_0KxedWg",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1NviirtyULTCpTaiu3uKRCkv2LYkjLVtq/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1NviirtyULTCpTaiu3uKRCkv2LYkjLVtq/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs GAs_0KxedWg",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1NviirtyULTCpTaiu3uKRCkv2LYkjLVtq/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1NviirtyULTCpTaiu3uKRCkv2LYkjLVtq/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges QenmEm4OdvI",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1Rdc7ibmcQTQe1YviFkpQjo7SNyIOAGSw/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1Rdc7ibmcQTQe1YviFkpQjo7SNyIOAGSw/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs QenmEm4OdvI",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1Rdc7ibmcQTQe1YviFkpQjo7SNyIOAGSw/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1Rdc7ibmcQTQe1YviFkpQjo7SNyIOAGSw/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges 5GR24Fuq30c",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 5GR24Fuq30c",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges LSK1q61_au0",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1vBhsy4fx5pCa8cN3lgkl1J7sduZA4Kw3/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1vBhsy4fx5pCa8cN3lgkl1J7sduZA4Kw3/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs LSK1q61_au0",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1vBhsy4fx5pCa8cN3lgkl1J7sduZA4Kw3/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1vBhsy4fx5pCa8cN3lgkl1J7sduZA4Kw3/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges PCdtAVmlnf4",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/13X7s3QFrsXU8in1xIbAIVz6oE9M0VvMQ/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/13X7s3QFrsXU8in1xIbAIVz6oE9M0VvMQ/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs PCdtAVmlnf4",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/13X7s3QFrsXU8in1xIbAIVz6oE9M0VvMQ/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/13X7s3QFrsXU8in1xIbAIVz6oE9M0VvMQ/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges O25PKSrxRuA",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1u0aWiyaj7DFDhGoq-yIeZhgfgW62RX-o/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1u0aWiyaj7DFDhGoq-yIeZhgfgW62RX-o/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs O25PKSrxRuA",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1u0aWiyaj7DFDhGoq-yIeZhgfgW62RX-o/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1u0aWiyaj7DFDhGoq-yIeZhgfgW62RX-o/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges 5yp1pWDi6Z0",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/17RioyFzv96Vf2osgl9BajE3Pwl9MgpUx/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/17RioyFzv96Vf2osgl9BajE3Pwl9MgpUx/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 5yp1pWDi6Z0",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/17RioyFzv96Vf2osgl9BajE3Pwl9MgpUx/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/17RioyFzv96Vf2osgl9BajE3Pwl9MgpUx/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges -ZfNT5R72fI",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1oVJANsQw20rg4kj1ornOHgvS7A2se3KX/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1oVJANsQw20rg4kj1ornOHgvS7A2se3KX/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs -ZfNT5R72fI",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1oVJANsQw20rg4kj1ornOHgvS7A2se3KX/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1oVJANsQw20rg4kj1ornOHgvS7A2se3KX/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges UzDjEgD4TEI",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1f1Qt70iSbwOs57NcBken15lNg9td5SWV/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1f1Qt70iSbwOs57NcBken15lNg9td5SWV/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs UzDjEgD4TEI",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1f1Qt70iSbwOs57NcBken15lNg9td5SWV/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1f1Qt70iSbwOs57NcBken15lNg9td5SWV/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges p2CITFhwOz4",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1_usjFoRvI8pSkTvBzKvpXKAF2tCPEmkW/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1_usjFoRvI8pSkTvBzKvpXKAF2tCPEmkW/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs p2CITFhwOz4",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1_usjFoRvI8pSkTvBzKvpXKAF2tCPEmkW/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1_usjFoRvI8pSkTvBzKvpXKAF2tCPEmkW/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges Tr3kzy06EHo",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1paUf8FlvlqDJmdIkLilzJwGvi9yTq4tX/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1paUf8FlvlqDJmdIkLilzJwGvi9yTq4tX/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs Tr3kzy06EHo",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1paUf8FlvlqDJmdIkLilzJwGvi9yTq4tX/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1paUf8FlvlqDJmdIkLilzJwGvi9yTq4tX/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges vcqGiw2h9Kc",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/11wKM7-Kulom2iuf8N2C-gFg8NWK8BnYb/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/11wKM7-Kulom2iuf8N2C-gFg8NWK8BnYb/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs vcqGiw2h9Kc",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/11wKM7-Kulom2iuf8N2C-gFg8NWK8BnYb/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/11wKM7-Kulom2iuf8N2C-gFg8NWK8BnYb/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges eeswpgpC0IU",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1Qo2pzCDR60a4QruYxPpZFjYhvXzdBlEt/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1Qo2pzCDR60a4QruYxPpZFjYhvXzdBlEt/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs eeswpgpC0IU",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1Qo2pzCDR60a4QruYxPpZFjYhvXzdBlEt/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1Qo2pzCDR60a4QruYxPpZFjYhvXzdBlEt/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges VTULHi6Llfo",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1tRVbwGNQTacBvxF_dUPmHV8nifZpCZAi/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1tRVbwGNQTacBvxF_dUPmHV8nifZpCZAi/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs VTULHi6Llfo",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1tRVbwGNQTacBvxF_dUPmHV8nifZpCZAi/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1tRVbwGNQTacBvxF_dUPmHV8nifZpCZAi/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges wIwEjEk4tlY",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1w_141oY2AwUeVRpPbDeCi42PQMHYastO/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1w_141oY2AwUeVRpPbDeCi42PQMHYastO/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs wIwEjEk4tlY",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1w_141oY2AwUeVRpPbDeCi42PQMHYastO/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1w_141oY2AwUeVRpPbDeCi42PQMHYastO/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges WZPeoIG6i7E",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1kKRYVXFwif0UpeJ8RhfyE69c2i4B6kgX/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1kKRYVXFwif0UpeJ8RhfyE69c2i4B6kgX/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs WZPeoIG6i7E",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1kKRYVXFwif0UpeJ8RhfyE69c2i4B6kgX/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1kKRYVXFwif0UpeJ8RhfyE69c2i4B6kgX/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges nWPgiw7qyZo",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1Q4Dv_g3c8mu457JeZ26uTStsGCGeicIs/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1Q4Dv_g3c8mu457JeZ26uTStsGCGeicIs/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs nWPgiw7qyZo",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1Q4Dv_g3c8mu457JeZ26uTStsGCGeicIs/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1Q4Dv_g3c8mu457JeZ26uTStsGCGeicIs/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges 1NEbc6b6r8Q",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/192sObMDruek43627gv9VnEa7jwUbkHlj/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/192sObMDruek43627gv9VnEa7jwUbkHlj/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 1NEbc6b6r8Q",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/192sObMDruek43627gv9VnEa7jwUbkHlj/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/192sObMDruek43627gv9VnEa7jwUbkHlj/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges OwRzkECLUwE",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1LJWWz_20fL0kQEq4eod0-_q6WoPGgSOf/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1LJWWz_20fL0kQEq4eod0-_q6WoPGgSOf/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs OwRzkECLUwE",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1LJWWz_20fL0kQEq4eod0-_q6WoPGgSOf/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1LJWWz_20fL0kQEq4eod0-_q6WoPGgSOf/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges eKrYlu79rGo",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs eKrYlu79rGo",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges QQ1Pm-HC7aI",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1lJOicsRUG0voiUDbaSTYanRXhHg26MXx/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1lJOicsRUG0voiUDbaSTYanRXhHg26MXx/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs QQ1Pm-HC7aI",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1lJOicsRUG0voiUDbaSTYanRXhHg26MXx/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1lJOicsRUG0voiUDbaSTYanRXhHg26MXx/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges j1vq2SJCxB4",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/13DBfSrX8l_ebf5ApZQAMphm-FysuAlUK/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/13DBfSrX8l_ebf5ApZQAMphm-FysuAlUK/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs j1vq2SJCxB4",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/13DBfSrX8l_ebf5ApZQAMphm-FysuAlUK/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/13DBfSrX8l_ebf5ApZQAMphm-FysuAlUK/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges uTjViv5Vtpc",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs uTjViv5Vtpc",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges kzsidY3b75k",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1WI8-yPop41PSkWD0o2CmY_gBhVXJP75X/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1WI8-yPop41PSkWD0o2CmY_gBhVXJP75X/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs kzsidY3b75k",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1WI8-yPop41PSkWD0o2CmY_gBhVXJP75X/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1WI8-yPop41PSkWD0o2CmY_gBhVXJP75X/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges JX9ugSHX8Vg",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1kl5eA4gXyLDKLaB2WF85lnlf5TKxH2kn/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1kl5eA4gXyLDKLaB2WF85lnlf5TKxH2kn/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs JX9ugSHX8Vg",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1kl5eA4gXyLDKLaB2WF85lnlf5TKxH2kn/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1kl5eA4gXyLDKLaB2WF85lnlf5TKxH2kn/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges nrA5cWvKrwE",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/13QwTkZBXHbMmvtzqAKjcV-8nbpMZtZJn/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/13QwTkZBXHbMmvtzqAKjcV-8nbpMZtZJn/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs nrA5cWvKrwE",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/13QwTkZBXHbMmvtzqAKjcV-8nbpMZtZJn/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/13QwTkZBXHbMmvtzqAKjcV-8nbpMZtZJn/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges IoiLLB7fwWE",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/13EK-a2CpGibQ5FjmPFxYIGE8D2RXowJT/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/13EK-a2CpGibQ5FjmPFxYIGE8D2RXowJT/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs IoiLLB7fwWE",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/13EK-a2CpGibQ5FjmPFxYIGE8D2RXowJT/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/13EK-a2CpGibQ5FjmPFxYIGE8D2RXowJT/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges VSpKiFEOBSg",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs VSpKiFEOBSg",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges xuxtUERYNxk",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs xuxtUERYNxk",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges eM8ZrqhZbgQ",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1b1X0zzlTEZYzUx4hEdzPmBY4C7HE5FS1/view",
+        "https://drive.google.com/file/d/1GdPPPTf1vjCvmvdz8VjFUaH-uePylhEX/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1b1X0zzlTEZYzUx4hEdzPmBY4C7HE5FS1/view",
+        "https://drive.google.com/file/d/1GdPPPTf1vjCvmvdz8VjFUaH-uePylhEX/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs eM8ZrqhZbgQ",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1b1X0zzlTEZYzUx4hEdzPmBY4C7HE5FS1/view",
+        "https://drive.google.com/file/d/1GdPPPTf1vjCvmvdz8VjFUaH-uePylhEX/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1b1X0zzlTEZYzUx4hEdzPmBY4C7HE5FS1/view",
+        "https://drive.google.com/file/d/1GdPPPTf1vjCvmvdz8VjFUaH-uePylhEX/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges uIHoKm5tM-o",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs uIHoKm5tM-o",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges YbtWpt_e_FA",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs YbtWpt_e_FA",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges U2k8Iaa-bd4",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs U2k8Iaa-bd4",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges 6WD3FoCBsTc",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 6WD3FoCBsTc",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges 9hucRGwQpic",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 9hucRGwQpic",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges 6-WiBJDqsQg",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1JTQYDtd_rZ-SMuFVPUwXZMjXL1rS5tZm/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1JTQYDtd_rZ-SMuFVPUwXZMjXL1rS5tZm/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 6-WiBJDqsQg",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1JTQYDtd_rZ-SMuFVPUwXZMjXL1rS5tZm/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1JTQYDtd_rZ-SMuFVPUwXZMjXL1rS5tZm/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges 47aMQasQwdY",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 47aMQasQwdY",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges 11BEjLTLHIc",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 11BEjLTLHIc",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges 2Pvhz6p_7-c",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/18eeJBkBcT0LiJMbKIxyKvgPK7cNCY-gM/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/18eeJBkBcT0LiJMbKIxyKvgPK7cNCY-gM/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 2Pvhz6p_7-c",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/18eeJBkBcT0LiJMbKIxyKvgPK7cNCY-gM/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/18eeJBkBcT0LiJMbKIxyKvgPK7cNCY-gM/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges s6x7MjB24E8",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs s6x7MjB24E8",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges QIkGxbpDOpM",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1ZCaNDr-ZXYdlBYBg5c3spFCwDIuByoDH/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1ZCaNDr-ZXYdlBYBg5c3spFCwDIuByoDH/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs QIkGxbpDOpM",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1ZCaNDr-ZXYdlBYBg5c3spFCwDIuByoDH/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1ZCaNDr-ZXYdlBYBg5c3spFCwDIuByoDH/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges 6IEmoeSuTRQ",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/13Cgs7sTybxpdw2dN0p5o_HDuhfjcqj3G/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/13Cgs7sTybxpdw2dN0p5o_HDuhfjcqj3G/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 6IEmoeSuTRQ",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/13Cgs7sTybxpdw2dN0p5o_HDuhfjcqj3G/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/13Cgs7sTybxpdw2dN0p5o_HDuhfjcqj3G/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges _tSgEMxHuww",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1BUBQmqEG1q_um41zDOa6DKvODV49tcYW/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1BUBQmqEG1q_um41zDOa6DKvODV49tcYW/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs _tSgEMxHuww",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1BUBQmqEG1q_um41zDOa6DKvODV49tcYW/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1BUBQmqEG1q_um41zDOa6DKvODV49tcYW/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges Jvm2G-eg7Yc",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1JyaJ4uLz_62Nb_AxNef2m8PJ7qUgRc4h/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1JyaJ4uLz_62Nb_AxNef2m8PJ7qUgRc4h/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs Jvm2G-eg7Yc",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1JyaJ4uLz_62Nb_AxNef2m8PJ7qUgRc4h/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1JyaJ4uLz_62Nb_AxNef2m8PJ7qUgRc4h/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges EsvWraKhors",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs EsvWraKhors",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges rIQrbJY5QbE",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1wXJeoXNE0lboCSGRlpCDbtLiHfU1cP3M/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1wXJeoXNE0lboCSGRlpCDbtLiHfU1cP3M/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs rIQrbJY5QbE",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1wXJeoXNE0lboCSGRlpCDbtLiHfU1cP3M/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1wXJeoXNE0lboCSGRlpCDbtLiHfU1cP3M/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges duGHxSWV1Hw",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/11kwQSFs4ko0BnKAaU7M4wJNlc8xDVZ38/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/11kwQSFs4ko0BnKAaU7M4wJNlc8xDVZ38/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs duGHxSWV1Hw",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/11kwQSFs4ko0BnKAaU7M4wJNlc8xDVZ38/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/11kwQSFs4ko0BnKAaU7M4wJNlc8xDVZ38/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges 6g1y-3znGvc",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 6g1y-3znGvc",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges 3ycn0O2KA3U",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 3ycn0O2KA3U",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges gjHsSqbqsUc",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/17OGDruRfg7KHMD2F83JEvZNTNxMxPPAY/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/17OGDruRfg7KHMD2F83JEvZNTNxMxPPAY/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs gjHsSqbqsUc",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/17OGDruRfg7KHMD2F83JEvZNTNxMxPPAY/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/17OGDruRfg7KHMD2F83JEvZNTNxMxPPAY/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges IuVZecpjmEM",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs IuVZecpjmEM",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges ATktSr_bK5Y",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1Y5qnU1nMOdAwXnyo1L2o1wFgVNjO2Mnb/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1Y5qnU1nMOdAwXnyo1L2o1wFgVNjO2Mnb/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs ATktSr_bK5Y",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1Y5qnU1nMOdAwXnyo1L2o1wFgVNjO2Mnb/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1Y5qnU1nMOdAwXnyo1L2o1wFgVNjO2Mnb/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges RfpTACkMwZg",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs RfpTACkMwZg",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges drOGcjWegJw",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs drOGcjWegJw",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges VOFlxqzJqLw",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs VOFlxqzJqLw",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges bEhPkdaC4bc",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs bEhPkdaC4bc",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges NmU4Q32oLMM",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs NmU4Q32oLMM",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges JVNvwbSppc4",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/19NJHWWuqmP3xjicLsKD2KRfGQSYaUcQO/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/19NJHWWuqmP3xjicLsKD2KRfGQSYaUcQO/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs JVNvwbSppc4",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/19NJHWWuqmP3xjicLsKD2KRfGQSYaUcQO/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/19NJHWWuqmP3xjicLsKD2KRfGQSYaUcQO/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges qMhiPp-BlQk",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs qMhiPp-BlQk",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges xWK_rJ5HkkY",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1RxW4z3uK3N7rwa-yNZIQnrUo9DTe4F74/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1RxW4z3uK3N7rwa-yNZIQnrUo9DTe4F74/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs xWK_rJ5HkkY",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1RxW4z3uK3N7rwa-yNZIQnrUo9DTe4F74/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1RxW4z3uK3N7rwa-yNZIQnrUo9DTe4F74/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges m5dObnmugKc",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1tqF3vwbOVtv8_Um2pa50W15tniiYs60x/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1tqF3vwbOVtv8_Um2pa50W15tniiYs60x/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs m5dObnmugKc",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1tqF3vwbOVtv8_Um2pa50W15tniiYs60x/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1tqF3vwbOVtv8_Um2pa50W15tniiYs60x/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges 9JaR2TuOuS4",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 9JaR2TuOuS4",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges pZBWhBb7npU",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/18rzshw-ncns3VACI_xkkEAQHEtfLudbM/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/18rzshw-ncns3VACI_xkkEAQHEtfLudbM/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs pZBWhBb7npU",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/18rzshw-ncns3VACI_xkkEAQHEtfLudbM/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/18rzshw-ncns3VACI_xkkEAQHEtfLudbM/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges vjzz91wkNHo",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1OO0zqc3PwP52PUt-33A7mk6q1aMFES7H/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1OO0zqc3PwP52PUt-33A7mk6q1aMFES7H/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs vjzz91wkNHo",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1OO0zqc3PwP52PUt-33A7mk6q1aMFES7H/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1OO0zqc3PwP52PUt-33A7mk6q1aMFES7H/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges CchilZicRmY",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs CchilZicRmY",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges HS3oQWBvje8",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs HS3oQWBvje8",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges jTTlR59r2Cs",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1ZdUzQ0ChWEVjcWEQ5ew09xX4H744kgSG/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1ZdUzQ0ChWEVjcWEQ5ew09xX4H744kgSG/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs jTTlR59r2Cs",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1ZdUzQ0ChWEVjcWEQ5ew09xX4H744kgSG/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1ZdUzQ0ChWEVjcWEQ5ew09xX4H744kgSG/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges 9-0IQlIlCbI",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 9-0IQlIlCbI",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges 91oN2bgF_Jc",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1ZdyGSMzviRGaXGWKIukV0IId4E0o3KQU/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1ZdyGSMzviRGaXGWKIukV0IId4E0o3KQU/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 91oN2bgF_Jc",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1ZdyGSMzviRGaXGWKIukV0IId4E0o3KQU/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1ZdyGSMzviRGaXGWKIukV0IId4E0o3KQU/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges BM2YpSKnP3o",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1Lj_G5aFBrdZ8x1MV2xWKrK_R-JBO3dnT/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1Lj_G5aFBrdZ8x1MV2xWKrK_R-JBO3dnT/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs BM2YpSKnP3o",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1Lj_G5aFBrdZ8x1MV2xWKrK_R-JBO3dnT/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1Lj_G5aFBrdZ8x1MV2xWKrK_R-JBO3dnT/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges LQ8c1zQmqxM",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1Hr_Y4WPaac12YJ0Ob9Z9e2KavAaZCfI1/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1Hr_Y4WPaac12YJ0Ob9Z9e2KavAaZCfI1/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs LQ8c1zQmqxM",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1Hr_Y4WPaac12YJ0Ob9Z9e2KavAaZCfI1/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1Hr_Y4WPaac12YJ0Ob9Z9e2KavAaZCfI1/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges 5iBLj_sZ5Pc",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 5iBLj_sZ5Pc",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges oyI98B24QAc",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs oyI98B24QAc",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges 6bUGYG3G-UY",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1DVSSFSwWRxlxxevpA9dxvOAM3IQbGft3/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1DVSSFSwWRxlxxevpA9dxvOAM3IQbGft3/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 6bUGYG3G-UY",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1DVSSFSwWRxlxxevpA9dxvOAM3IQbGft3/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1DVSSFSwWRxlxxevpA9dxvOAM3IQbGft3/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges mJX7VBllEQw",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1ySIFbficSs-_ElQ-xLwtgqEiyWzGbu4V/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1ySIFbficSs-_ElQ-xLwtgqEiyWzGbu4V/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs mJX7VBllEQw",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1ySIFbficSs-_ElQ-xLwtgqEiyWzGbu4V/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1ySIFbficSs-_ElQ-xLwtgqEiyWzGbu4V/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges t8DrOoFjCQA",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1e3YE6nvcvaqIpLSM6f-HszEei1HIbX0Q/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1e3YE6nvcvaqIpLSM6f-HszEei1HIbX0Q/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs t8DrOoFjCQA",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1e3YE6nvcvaqIpLSM6f-HszEei1HIbX0Q/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1e3YE6nvcvaqIpLSM6f-HszEei1HIbX0Q/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges dpppoKK5iEo",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/18VpXWO0SxUYfTBeqQ5rY7P9U_gd6_caT/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/18VpXWO0SxUYfTBeqQ5rY7P9U_gd6_caT/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs dpppoKK5iEo",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/18VpXWO0SxUYfTBeqQ5rY7P9U_gd6_caT/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/18VpXWO0SxUYfTBeqQ5rY7P9U_gd6_caT/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges dCImovUQqmQ",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1gMAQZBiaHbV0qr4be-z0dIqg1bQs0Xnh/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1gMAQZBiaHbV0qr4be-z0dIqg1bQs0Xnh/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs dCImovUQqmQ",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1gMAQZBiaHbV0qr4be-z0dIqg1bQs0Xnh/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1gMAQZBiaHbV0qr4be-z0dIqg1bQs0Xnh/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges EeU1kJj70FU",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs EeU1kJj70FU",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges K_Ghpj6ic1g",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1YjHMStyZJxm0sCGTT7TSrFiHITT4umVR/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1YjHMStyZJxm0sCGTT7TSrFiHITT4umVR/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs K_Ghpj6ic1g",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1YjHMStyZJxm0sCGTT7TSrFiHITT4umVR/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1YjHMStyZJxm0sCGTT7TSrFiHITT4umVR/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges YbMhvuOXO2Y",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1pKKEW5B4QK8vn8s3q5YFpALswBd-y1j1/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1pKKEW5B4QK8vn8s3q5YFpALswBd-y1j1/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs YbMhvuOXO2Y",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1pKKEW5B4QK8vn8s3q5YFpALswBd-y1j1/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1pKKEW5B4QK8vn8s3q5YFpALswBd-y1j1/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges j-P6L41InvE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs j-P6L41InvE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges VoGD_6QGZq8",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1SU6b3whgTkjywUbZ0Cod-fKtP2OMD48S/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1SU6b3whgTkjywUbZ0Cod-fKtP2OMD48S/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs VoGD_6QGZq8",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1SU6b3whgTkjywUbZ0Cod-fKtP2OMD48S/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1SU6b3whgTkjywUbZ0Cod-fKtP2OMD48S/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges jw31qQpCQH0",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1xDvPk2mMBo4TSXp0bzsfyzIqLc87NEpn/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1xDvPk2mMBo4TSXp0bzsfyzIqLc87NEpn/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs jw31qQpCQH0",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1xDvPk2mMBo4TSXp0bzsfyzIqLc87NEpn/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1xDvPk2mMBo4TSXp0bzsfyzIqLc87NEpn/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges QefPfduOZ2Y",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs QefPfduOZ2Y",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges wg4UGYvV_gs",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs wg4UGYvV_gs",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges AtoPYmmZymQ",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs AtoPYmmZymQ",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges qTkUcVlA098",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs qTkUcVlA098",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges zTUcmpzH124",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs zTUcmpzH124",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges Pq0tmcvNp9g",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1fYM_KVfrLUEkDYMDz1zqcouS5v-ABzT9/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1fYM_KVfrLUEkDYMDz1zqcouS5v-ABzT9/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs Pq0tmcvNp9g",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1fYM_KVfrLUEkDYMDz1zqcouS5v-ABzT9/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1fYM_KVfrLUEkDYMDz1zqcouS5v-ABzT9/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges efeJV8Q4CwE",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1Fq8ikD2k8EnX5YF4KenJZ-bVb3sarszu/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1Fq8ikD2k8EnX5YF4KenJZ-bVb3sarszu/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs efeJV8Q4CwE",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1Fq8ikD2k8EnX5YF4KenJZ-bVb3sarszu/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1Fq8ikD2k8EnX5YF4KenJZ-bVb3sarszu/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges cGyu3lTjqso",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs cGyu3lTjqso",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges fHVMPnXbj88",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/12QcNhhx9p3ijZihhZ7UFDusiTrtEIcFk/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/12QcNhhx9p3ijZihhZ7UFDusiTrtEIcFk/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs fHVMPnXbj88",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/12QcNhhx9p3ijZihhZ7UFDusiTrtEIcFk/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/12QcNhhx9p3ijZihhZ7UFDusiTrtEIcFk/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges cSKgOHGfLQw",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs cSKgOHGfLQw",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges i1WWWhIL7_Y",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1zsGcBwQDckiKxncWFa27rbZ0e3DQTMNs/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1zsGcBwQDckiKxncWFa27rbZ0e3DQTMNs/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs i1WWWhIL7_Y",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1zsGcBwQDckiKxncWFa27rbZ0e3DQTMNs/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1zsGcBwQDckiKxncWFa27rbZ0e3DQTMNs/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges m7S30QN1S5g",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1MSkrJo8sSm9KzppEG59-jslUbG4g99k2/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1MSkrJo8sSm9KzppEG59-jslUbG4g99k2/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs m7S30QN1S5g",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1MSkrJo8sSm9KzppEG59-jslUbG4g99k2/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1MSkrJo8sSm9KzppEG59-jslUbG4g99k2/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges khiy_mt5oR4",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1RaMyQkVELSe6SLsr8VvIbXqPfhnt9eyz/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1RaMyQkVELSe6SLsr8VvIbXqPfhnt9eyz/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs khiy_mt5oR4",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1RaMyQkVELSe6SLsr8VvIbXqPfhnt9eyz/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1RaMyQkVELSe6SLsr8VvIbXqPfhnt9eyz/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges fo6Bq6SAlso",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1hyQ1by7FppE2spMREiEMiiNavLhnvEg-/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1hyQ1by7FppE2spMREiEMiiNavLhnvEg-/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs fo6Bq6SAlso",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1hyQ1by7FppE2spMREiEMiiNavLhnvEg-/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1hyQ1by7FppE2spMREiEMiiNavLhnvEg-/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges scqh3qqvLwk",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1GC43c__3FJMUi2WRSnspBIxb5y1OJLBc/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1GC43c__3FJMUi2WRSnspBIxb5y1OJLBc/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs scqh3qqvLwk",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1GC43c__3FJMUi2WRSnspBIxb5y1OJLBc/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1GC43c__3FJMUi2WRSnspBIxb5y1OJLBc/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges sMqVu1GYh3o",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1IkJugpqb2nmLD5ozK5gt33W2ygfHBp8W/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1IkJugpqb2nmLD5ozK5gt33W2ygfHBp8W/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs sMqVu1GYh3o",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1IkJugpqb2nmLD5ozK5gt33W2ygfHBp8W/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1IkJugpqb2nmLD5ozK5gt33W2ygfHBp8W/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges DFh9EZ9zMws",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1Nw7s8KPglaHJCbhZo6yIkMMyDWufoYes/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1Nw7s8KPglaHJCbhZo6yIkMMyDWufoYes/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs DFh9EZ9zMws",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1Nw7s8KPglaHJCbhZo6yIkMMyDWufoYes/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1Nw7s8KPglaHJCbhZo6yIkMMyDWufoYes/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges xGXxXaQ6YSc",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1MRbZ_KbmZs1mYFzaJdGXNPXWIjI8VKA7/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1MRbZ_KbmZs1mYFzaJdGXNPXWIjI8VKA7/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs xGXxXaQ6YSc",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1MRbZ_KbmZs1mYFzaJdGXNPXWIjI8VKA7/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1MRbZ_KbmZs1mYFzaJdGXNPXWIjI8VKA7/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges Z-JYGwgAHaY",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1W9eUkEhLht6pLrijAXdFwqKf-OI7tFT-/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1W9eUkEhLht6pLrijAXdFwqKf-OI7tFT-/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs Z-JYGwgAHaY",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1W9eUkEhLht6pLrijAXdFwqKf-OI7tFT-/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1W9eUkEhLht6pLrijAXdFwqKf-OI7tFT-/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges GJ8DgTuRFws",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1YVyOvLmChrFRcNXsNjdGlHH3IWRF73fb/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1YVyOvLmChrFRcNXsNjdGlHH3IWRF73fb/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs GJ8DgTuRFws",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1YVyOvLmChrFRcNXsNjdGlHH3IWRF73fb/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1YVyOvLmChrFRcNXsNjdGlHH3IWRF73fb/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges f6dkdTyATco",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1YVyOvLmChrFRcNXsNjdGlHH3IWRF73fb/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1YVyOvLmChrFRcNXsNjdGlHH3IWRF73fb/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs f6dkdTyATco",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1YVyOvLmChrFRcNXsNjdGlHH3IWRF73fb/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1YVyOvLmChrFRcNXsNjdGlHH3IWRF73fb/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges jEZEo-w2B9w",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1ELc8vQkh9syRZC8RlB9oUlArT3fhGpZi/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1ELc8vQkh9syRZC8RlB9oUlArT3fhGpZi/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs jEZEo-w2B9w",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1ELc8vQkh9syRZC8RlB9oUlArT3fhGpZi/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1ELc8vQkh9syRZC8RlB9oUlArT3fhGpZi/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges QZ-X0MHRzIk",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1qq_r3ssLlGhTWSZvasR0OzanSQcLqTUc/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1qq_r3ssLlGhTWSZvasR0OzanSQcLqTUc/view"
+      ]
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs QZ-X0MHRzIk",
+      "passed": true,
+      "actual": [
+        "https://drive.google.com/file/d/1qq_r3ssLlGhTWSZvasR0OzanSQcLqTUc/view"
+      ],
+      "expected": [
+        "https://drive.google.com/file/d/1qq_r3ssLlGhTWSZvasR0OzanSQcLqTUc/view"
+      ]
+    },
+    {
+      "check": "Exact video source edges rulBPVUPTQE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs rulBPVUPTQE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges BJYdAbMd9nY",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs BJYdAbMd9nY",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges uASigfVN3tQ",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs uASigfVN3tQ",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges UN7yvo0no14",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs UN7yvo0no14",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges o6q9K9GMm4E",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs o6q9K9GMm4E",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges 3HFiGZGLgvQ",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 3HFiGZGLgvQ",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges ne8eA7EmzTo",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs ne8eA7EmzTo",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges wKdrTpcBTXg",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs wKdrTpcBTXg",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges XqzOE_54pDE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs XqzOE_54pDE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges 8n-5cv4E32w",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 8n-5cv4E32w",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges tTx34-snYDE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs tTx34-snYDE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges ChoCtaKlQyw",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs ChoCtaKlQyw",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges ZCO6jhmW-tA",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs ZCO6jhmW-tA",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges _sm4aZvbeGA",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs _sm4aZvbeGA",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges 88oZwMJCq0U",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 88oZwMJCq0U",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges JFcV6rI4jDE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs JFcV6rI4jDE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges gqPo3k9PaZw",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs gqPo3k9PaZw",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges 8eLzbVAnM8E",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 8eLzbVAnM8E",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges XXsg70ZuTyE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs XXsg70ZuTyE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges oIpviR-g6dY",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs oIpviR-g6dY",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges g78kUeu20aI",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs g78kUeu20aI",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges 1OQmwK0KSqg",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 1OQmwK0KSqg",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges yMUTmamyVO0",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs yMUTmamyVO0",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges 7o9-kG-JySc",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 7o9-kG-JySc",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges ayWL60IJ6R4",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs ayWL60IJ6R4",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges Psa0P7IaEBo",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs Psa0P7IaEBo",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges Pg8DvszQMME",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs Pg8DvszQMME",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges r9hzq8LNovM",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs r9hzq8LNovM",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges XiBJkEgJTO0",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs XiBJkEgJTO0",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges -BxgvAIAZuE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs -BxgvAIAZuE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges 9sSsb23kRxQ",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 9sSsb23kRxQ",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges mMC84FBU0v8",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs mMC84FBU0v8",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges foWMWrcHh3M",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs foWMWrcHh3M",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges AK7KiXCE9ys",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs AK7KiXCE9ys",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges UXVqF52u1no",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs UXVqF52u1no",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges Ts54fShcU6Y",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs Ts54fShcU6Y",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges xXydIH4M9qs",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs xXydIH4M9qs",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges zEDgTDlZLmo",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs zEDgTDlZLmo",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges Nc__DNPvSjE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs Nc__DNPvSjE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges qvCAJwd9b7c",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs qvCAJwd9b7c",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges 0TXYYOdG-cQ",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 0TXYYOdG-cQ",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges PKzFoTAekfo",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs PKzFoTAekfo",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges WIRAAZcpxQY",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs WIRAAZcpxQY",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges 8DpaG9TJ8pY",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 8DpaG9TJ8pY",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges C69xRBIa-fc",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs C69xRBIa-fc",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges 5xZYIlHa0Ys",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 5xZYIlHa0Ys",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges cwlH65dBnjI",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs cwlH65dBnjI",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges q8ZZ6eg2aOE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs q8ZZ6eg2aOE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges UsomYZzWX6E",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs UsomYZzWX6E",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges MgXit2nQHvM",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs MgXit2nQHvM",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges jjLfjGGrY94",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs jjLfjGGrY94",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges 6Yy5h_W4N_A",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 6Yy5h_W4N_A",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges lTw313xy7PI",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs lTw313xy7PI",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges KDbqQxjrLYs",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs KDbqQxjrLYs",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges s5gXSqyqGAM",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs s5gXSqyqGAM",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges KO9p-cy5b_w",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs KO9p-cy5b_w",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges muvz5iDpj44",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs muvz5iDpj44",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges zAxFe4RI_XI",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs zAxFe4RI_XI",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges hPWvujYFMP0",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs hPWvujYFMP0",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges MwBdAYzs70A",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs MwBdAYzs70A",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges g0tq3EHhSHo",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs g0tq3EHhSHo",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges NblnFgMGBVk",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs NblnFgMGBVk",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges T8E-_UwMtbQ",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs T8E-_UwMtbQ",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges Jc_XkOLNAQg",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs Jc_XkOLNAQg",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges jPNVNaJRMC8",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs jPNVNaJRMC8",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges FOu9Jr2pE8U",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs FOu9Jr2pE8U",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges j88fZy6gRXg",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs j88fZy6gRXg",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges 9V54l4lzOos",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 9V54l4lzOos",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges pMLnGaPq258",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs pMLnGaPq258",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges HhUwDLhIlbs",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs HhUwDLhIlbs",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges sUZy2pQUtyQ",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs sUZy2pQUtyQ",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges SFPbQ956ELE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs SFPbQ956ELE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges E64ysnrWejE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs E64ysnrWejE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges kPsV9SpPUms",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs kPsV9SpPUms",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges dXlaLWY8qkg",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs dXlaLWY8qkg",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges Z5NxrCuU-Tg",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs Z5NxrCuU-Tg",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges 2WEfRQs3jRE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs 2WEfRQs3jRE",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges CCP0tAWjlEA",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs CCP0tAWjlEA",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges OZxGzpJemqM",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs OZxGzpJemqM",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges BsOF4G_K97Q",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs BsOF4G_K97Q",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Exact video source edges hrWNqC6byG4",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "check": "Video source URLs correspond to transcript IDs hrWNqC6byG4",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
       "check": "Cached formula errors",
       "passed": true,
       "actual": [],
@@ -153,20 +4825,170 @@
     {
       "check": "Unmatched content-checked upload summary",
       "passed": true,
-      "actual": 4,
-      "expected": 4
+      "actual": 17,
+      "expected": 17
     },
     {
       "check": "Unmatched metadata-based upload summary",
       "passed": true,
-      "actual": 41,
-      "expected": 41
+      "actual": 28,
+      "expected": 28
     },
     {
-      "check": "Every new table has filters and frozen headings",
+      "check": "Frozen headings Transcripts",
       "passed": true,
-      "actual": true,
-      "expected": true
+      "actual": "C2",
+      "expected": "C2"
+    },
+    {
+      "check": "One full table Transcripts",
+      "passed": true,
+      "actual": [
+        "A1:N94"
+      ],
+      "expected": [
+        "A1:N94"
+      ]
+    },
+    {
+      "check": "Explicit table filter Transcripts",
+      "passed": true,
+      "actual": [
+        "A1:N94"
+      ],
+      "expected": [
+        "A1:N94"
+      ]
+    },
+    {
+      "check": "Frozen headings English summaries",
+      "passed": true,
+      "actual": "C2",
+      "expected": "C2"
+    },
+    {
+      "check": "One full table English summaries",
+      "passed": true,
+      "actual": [
+        "A1:K94"
+      ],
+      "expected": [
+        "A1:K94"
+      ]
+    },
+    {
+      "check": "Explicit table filter English summaries",
+      "passed": true,
+      "actual": [
+        "A1:K94"
+      ],
+      "expected": [
+        "A1:K94"
+      ]
+    },
+    {
+      "check": "Frozen headings Recording gaps",
+      "passed": true,
+      "actual": "C2",
+      "expected": "C2"
+    },
+    {
+      "check": "One full table Recording gaps",
+      "passed": true,
+      "actual": [
+        "A1:I16"
+      ],
+      "expected": [
+        "A1:I16"
+      ]
+    },
+    {
+      "check": "Explicit table filter Recording gaps",
+      "passed": true,
+      "actual": [
+        "A1:I16"
+      ],
+      "expected": [
+        "A1:I16"
+      ]
+    },
+    {
+      "check": "Frozen headings Videos",
+      "passed": true,
+      "actual": "D2",
+      "expected": "D2"
+    },
+    {
+      "check": "One full table Videos",
+      "passed": true,
+      "actual": [
+        "A1:P209"
+      ],
+      "expected": [
+        "A1:P209"
+      ]
+    },
+    {
+      "check": "Explicit table filter Videos",
+      "passed": true,
+      "actual": [
+        "A1:P209"
+      ],
+      "expected": [
+        "A1:P209"
+      ]
+    },
+    {
+      "check": "Frozen headings Crawl sources",
+      "passed": true,
+      "actual": "B2",
+      "expected": "B2"
+    },
+    {
+      "check": "One full table Crawl sources",
+      "passed": true,
+      "actual": [
+        "A1:J15"
+      ],
+      "expected": [
+        "A1:J15"
+      ]
+    },
+    {
+      "check": "Explicit table filter Crawl sources",
+      "passed": true,
+      "actual": [
+        "A1:J15"
+      ],
+      "expected": [
+        "A1:J15"
+      ]
+    },
+    {
+      "check": "Frozen headings Files",
+      "passed": true,
+      "actual": "C2",
+      "expected": "C2"
+    },
+    {
+      "check": "One full table Files",
+      "passed": true,
+      "actual": [
+        "A1:G117"
+      ],
+      "expected": [
+        "A1:G117"
+      ]
+    },
+    {
+      "check": "Explicit table filter Files",
+      "passed": true,
+      "actual": [
+        "A1:G117"
+      ],
+      "expected": [
+        "A1:G117"
+      ]
     },
     {
       "check": "case03 returned-position count",
@@ -429,11 +5251,19 @@
     [
       "VV-057",
       "N"
+    ],
+    [
+      "VV-008",
+      "H"
+    ],
+    [
+      "VV-010",
+      "H"
     ]
   ],
-  "workbook_sha256": "b1715e2102adabf278ea36d406f06f2147555a5906d1368015e57a570d241cee",
-  "workbook_bytes": 248388,
+  "workbook_sha256": "8b0788daf33414a99982e89d18548c913d937558b670f405e7fff1d36960f998",
+  "workbook_bytes": 250039,
   "formula_cells": 22,
-  "external_hyperlinks": 725,
+  "external_hyperlinks": 726,
   "internal_hyperlinks": 395
 }

@@ -179,10 +179,15 @@ def initial_list(data):
             candidates.append((entries, container.get("targetId"), root_path + ("sectionListRenderer", "contents", index, "itemSectionRenderer", "contents"), []))
     if len(candidates) != 1:
         raise ValueError("Expected one primary playlist video list; found " + str(len(candidates)))
+    if not isinstance(candidates[0][1], str) or not candidates[0][1].strip():
+        raise ValueError("Primary video list has no usable continuation target")
     return candidates[0]
 
 
 def continued_list(data, target):
+    """Select a continuation only when its primary-list identity is explicit."""
+    if not isinstance(target, str) or not target.strip():
+        raise ValueError("A usable primary-list target is required")
     candidates, ignored = [], []
     for root in ["onResponseReceivedActions", "onResponseReceivedCommands", "onResponseReceivedEndpoints"]:
         for index, action in enumerate(data.get(root, [])):
@@ -249,9 +254,12 @@ def parse_list(items, legacy_continuations=()):
         else:
             unknown.append({"index": index, "keys": list(item)})
     for obj in legacy_continuations:
-        token = obj.get("nextContinuationData", {}).get("continuation")
-        if token:
-            tokens.append(token)
+        if not isinstance(obj, dict) or not isinstance(obj.get("nextContinuationData"), dict):
+            raise ValueError("Unsupported legacy continuation control")
+        token = obj["nextContinuationData"].get("continuation")
+        if not isinstance(token, str) or not token.strip():
+            raise ValueError("Malformed legacy continuation token")
+        tokens.append(token)
     tokens = list(dict.fromkeys(tokens))
     if unknown:
         raise ValueError("Unrecognized primary-list items: " + json.dumps(unknown))
@@ -331,6 +339,7 @@ def load_initial(label, show_unavailable=False):
         if not show_unavailable and meta["requested_url"] != url:
             raise ValueError("Cache URL mismatch")
         context = read(directory / "context.json") if show_unavailable else context_from((directory / "initial.html").read_text())
+        meta["cache_reused"] = True
         return read(raw_path), context, meta
     if show_unavailable:
         action, observation = observed_unavailable_action(label)
@@ -345,6 +354,7 @@ def load_initial(label, show_unavailable=False):
         data, context = assigned(html, "ytInitialData"), context_from(html)
         (directory / "initial.html").write_text(html)
     initial_list(data)
+    meta["cache_reused"] = False
     write(raw_path, data)
     write(meta_path, meta)
     return data, context, meta
@@ -358,11 +368,13 @@ def load_next(label, page, token, context):
         meta = read(meta_path)
         if meta.get("request_token_sha256") != fingerprint:
             raise ValueError("Continuation cache identity mismatch; preserve both snapshots")
+        meta["cache_reused"] = True
         return read(raw_path), meta
     url = "https://www.youtube.com/youtubei/v1/browse?prettyPrint=false"
     payload, meta = request(url, json.dumps({"context": context, "continuation": token}).encode())
     data = json.loads(payload)
     meta["request_token_sha256"] = fingerprint
+    meta["cache_reused"] = False
     write(raw_path, data)
     write(meta_path, meta)
     return data, meta
@@ -451,7 +463,73 @@ def crawl_one(label, max_pages=30, show_unavailable=False):
     return result
 
 
+def validate_retained_channel(snapshot, label):
+    """Replay every retained page, including the historical About branch.
+
+    The earlier collector queued all public continuation controls. Its request
+    times were not stored, so this checks content and queue closure, not freshness.
+    """
+    errors, receipts, pending, seen_tokens = [], [], [], set()
+    target = None
+    pages = snapshot.get("pages", [])
+    if not pages or [p.get("page") for p in pages] != list(range(len(pages))):
+        return [{"type": "NonconsecutiveChannelPages", "message": "Retained channel pages must start at zero and contain every page index"}], []
+    for index, page in enumerate(pages):
+        raw_path = ORIGINAL / (label + ("_" + str(index) if index else "") + ".json")
+        if not raw_path.exists():
+            errors.append({"type": "MissingChannelResponse", "page": index, "path": str(raw_path)})
+            break
+        raw = read(raw_path)
+        role = "primary_video_grid"
+        try:
+            if not index:
+                tabs = raw.get("contents", {}).get("twoColumnBrowseResultsRenderer", {}).get("tabs", [])
+                selected = [t["tabRenderer"] for t in tabs if t.get("tabRenderer", {}).get("selected")]
+                if len(selected) != 1:
+                    raise ValueError("Expected one selected channel surface")
+                grid = selected[0].get("content", {}).get("richGridRenderer", {})
+                target = grid.get("targetId")
+                if not isinstance(target, str) or not target.strip():
+                    raise ValueError("Selected channel grid has no usable target")
+                items = grid.get("contents", [])
+            else:
+                actions = [a.get(k) for root in ["onResponseReceivedActions", "onResponseReceivedCommands", "onResponseReceivedEndpoints"] for a in raw.get(root, []) for k in ["appendContinuationItemsAction", "reloadContinuationItemsCommand"] if a.get(k)]
+                matching = [a for a in actions if a.get("targetId") == target]
+                if not matching and not page.get("items"):
+                    # Only the positively identified historical About branch
+                    # may be skipped. An empty derived projection cannot prove
+                    # that a wrong-target raw response contains no videos.
+                    about_items = actions[0].get("continuationItems", []) if len(actions) == 1 else []
+                    about_branch = bool(about_items) and all(isinstance(i, dict) and set(i) == {"aboutChannelRenderer"} for i in about_items)
+                    if not about_branch or all_tokens(raw):
+                        raise ValueError("Unrecognized non-primary channel response")
+                    receipts.append({"page_index": index, "response_path": str(raw_path), "sha256": sha(raw_path.read_bytes()), "items": 0, "role": "verified_about_branch"})
+                    continue
+                if not pending:
+                    raise ValueError("No preceding primary continuation supports this page")
+                token = pending[0]
+                if token in seen_tokens:
+                    raise ValueError("Primary continuation cycle")
+                seen_tokens.add(token)
+                items, _, legacy, _ = continued_list(raw, target)
+                if legacy:
+                    raise ValueError("Unexpected legacy playlist controls in channel grid")
+            unwrapped = [item["richItemRenderer"]["content"] if "richItemRenderer" in item else item for item in items]
+            entries, pending = parse_list(unwrapped)
+            raw_ids = list(dict.fromkeys(entry["video_id"] for entry in entries))
+        except (KeyError, ValueError, TypeError) as exc:
+            errors.append({"type": "ChannelPageReplayFailure", "page": index, "message": str(exc)})
+            break
+        if raw_ids != [item["id"] for item in page.get("items", [])]:
+            errors.append({"type": "ChannelPageProjectionMismatch", "page": index})
+        receipts.append({"page_index": index, "response_path": str(raw_path), "sha256": sha(raw_path.read_bytes()), "items": len(raw_ids), "role": role})
+    if pending:
+        errors.append({"type": "UnconsumedChannelContinuation", "count": len(pending)})
+    return errors, receipts
+
+
 def reused_channel(label, surface):
+    """Retain historical metadata only with a replay of the complete page chain."""
     path = WORK / (label + "_full_public_catalog.json")
     if not path.exists():
         return {"collection_key": label, "collection_id": JEP_CHANNEL + ":" + surface, "collection_type": "channel_surface", "source_role": "reused_channel_discovery", "source_url": "https://www.youtube.com/@jepcolombia/" + surface, "title": "JEP Colombia / " + surface, "status": "required_snapshot_missing", "pagination_exhausted": False, "count_reconciled": None, "declared_items": None, "visible_memberships": 0, "unique_video_ids": 0, "errors": [{"type": "MissingSourceSnapshot", "message": "Named full channel snapshot is absent; no channel completeness claim", "path": str(path)}], "pending_token_sha256": [], "memberships": []}
@@ -462,16 +540,17 @@ def reused_channel(label, surface):
             if item.get("type") == "LOCKUP_CONTENT_TYPE_PLAYLIST":
                 raise ValueError("Unexpected playlist in channel video surface")
             entries.append({"video_id": item["id"], "url": "https://www.youtube.com/watch?v=" + item["id"], "title": item["title"], "channel_id": JEP_CHANNEL, "channel_name": "JEP Colombia", "duration_text": item.get("length") or None, "visibility": "listed", "renderer": item.get("kind"), "collection_id": JEP_CHANNEL + ":" + surface, "collection_key": label, "source_url": "https://www.youtube.com/@jepcolombia/" + surface, "page_index": page["page"], "position": len(entries) + 1})
-    last = snapshot["pages"][-1]["page"]
+    chain_errors, page_receipts = validate_retained_channel(snapshot, label)
+    last = snapshot["pages"][-1]["page"] if snapshot.get("pages") else 0
     terminal = ORIGINAL / (label + ("_" + str(last) if last else "") + ".json")
     if not terminal.exists():
         return {"collection_key": label, "collection_id": JEP_CHANNEL + ":" + surface, "collection_type": "channel_surface", "source_role": "reused_channel_discovery", "source_url": "https://www.youtube.com/@jepcolombia/" + surface, "title": "JEP Colombia / " + surface, "status": "terminal_snapshot_missing", "pagination_exhausted": False, "count_reconciled": None, "declared_items": None, "visible_memberships": len(entries), "unique_video_ids": len({x["video_id"] for x in entries}), "errors": [{"type": "MissingTerminalSnapshot", "message": "Channel records retained but terminal pagination cannot be verified", "path": str(terminal)}], "pending_token_sha256": [], "provenance": {"catalog_path": str(path), "catalog_sha256": sha(path.read_bytes())}, "memberships": entries}
     raw = read(terminal)
     tokens = all_tokens(raw)
     shapes = [list(p) for p, obj in walk(raw) if any(k in obj for k in ["continuationItemViewModel", "continuationItemRenderer", "nextContinuationData", "reloadContinuationData"])]
-    errors = [p for p in snapshot["pages"] if "error" in p]
+    errors = [p for p in snapshot["pages"] if "error" in p] + chain_errors
     valid = not tokens and not shapes and not errors and snapshot.get("continuation_remaining") is False
-    return {"collection_key": label, "collection_id": JEP_CHANNEL + ":" + surface, "collection_type": "channel_surface", "source_role": "reused_channel_discovery", "source_url": "https://www.youtube.com/@jepcolombia/" + surface, "title": "JEP Colombia / " + surface, "scope": "All-channel discovery metadata only; no Casanare admission implied", "status": "reused_terminal_snapshot" if valid else "reused_snapshot_incomplete", "pagination_exhausted": valid, "count_reconciled": None, "declared_items": None, "visible_memberships": len(entries), "unique_video_ids": len({x["video_id"] for x in entries}), "hidden_unavailable_count": None, "notices": [], "errors": errors, "pending_token_sha256": [sha(t) for _, t in tokens], "provenance": {"catalog_path": str(path), "catalog_sha256": sha(path.read_bytes()), "terminal_cache_path": str(terminal), "terminal_cache_sha256": sha(terminal.read_bytes()), "terminal_continuation_shapes": shapes, "original_fetch_time": "Not stored by original crawler; reused snapshot, not refetched"}, "memberships": entries}
+    return {"collection_key": label, "collection_id": JEP_CHANNEL + ":" + surface, "collection_type": "channel_surface", "source_role": "reused_channel_discovery", "source_url": "https://www.youtube.com/@jepcolombia/" + surface, "title": "JEP Colombia / " + surface, "scope": "All-channel discovery metadata only; no Casanare admission implied", "status": "reused_terminal_snapshot" if valid else "reused_snapshot_incomplete", "pagination_exhausted": valid, "count_reconciled": None, "declared_items": None, "visible_memberships": len(entries), "unique_video_ids": len({x["video_id"] for x in entries}), "hidden_unavailable_count": None, "notices": [], "errors": errors, "pending_token_sha256": [sha(t) for _, t in tokens], "pages": page_receipts, "provenance": {"catalog_path": str(path), "catalog_sha256": sha(path.read_bytes()), "terminal_cache_path": str(terminal), "terminal_cache_sha256": sha(terminal.read_bytes()), "terminal_continuation_shapes": shapes, "original_fetch_time": "Not stored by original crawler; reused snapshot, not refetched"}, "memberships": entries}
 
 
 def parse_shorts_list(items):
@@ -595,6 +674,9 @@ def export_all():
                 else:
                     alternate_views.append({k: v for k, v in expanded.items() if k != "memberships"})
             collections.append(chosen)
+        else:
+            playlist_id, _, scope = SEEDS[label]
+            collections.append({"collection_key": label, "collection_id": playlist_id, "collection_type": "playlist", "source_role": "core_declared_source" if label in CORE_SEED_KEYS else "supplemental_regional_membership", "source_url": "https://www.youtube.com/playlist?list=" + playlist_id, "scope": scope, "status": "required_snapshot_missing", "pagination_exhausted": False, "count_reconciled": None, "declared_items": None, "visible_memberships": 0, "unique_video_ids": 0, "errors": [{"type": "MissingSourceSnapshot", "message": "Declared playlist has not been crawled"}], "pending_token_sha256": [], "memberships": []})
     memberships = []
     for collection in collections:
         items = collection.pop("memberships")
@@ -920,6 +1002,7 @@ def metadata(ids, workers=2):
             write(path, results)
             print(json.dumps({"video_id": vid, "title": detail.get("title"), "channel_id": detail.get("channel_id"), "error": detail.get("error")}, ensure_ascii=False), flush=True)
     export_all()
+    return results
 
 
 def main():
@@ -949,7 +1032,9 @@ def main():
     elif args.command == "web-seed":
         web_seed()
     elif args.command == "shorts":
-        crawl_shorts(args.max_pages)
+        result = crawl_shorts(args.max_pages)
+        if not result.get("pagination_exhausted"):
+            raise SystemExit(1)
     elif args.command == "probe-next":
         reproduction = read(BASE / "pagination_reproduction.json")
         if not reproduction.get("all_passed"):
@@ -958,6 +1043,9 @@ def main():
         first = {x["video_id"] for x in result["memberships"] if x["page_index"] == 0}
         beyond = [x for x in result["memberships"] if x["page_index"] == 1]
         proof = {"command": "python inventory_work/reverse_audit/crawl_public_catalog.py probe-next --collection " + args.collection, "at": now(), "collection": args.collection, "first_page_appearances": len([x for x in result["memberships"] if x["page_index"] == 0]), "next_page_appearances": len(beyond), "new_video_ids_beyond_first_page": len({x["video_id"] for x in beyond} - first), "examples": [{k: x[k] for k in ["position", "video_id", "title", "url"]} for x in beyond[:3]], "passed": bool(beyond) and bool({x["video_id"] for x in beyond} - first), "errors": result["errors"]}
+        proof["passed"] = proof["passed"] and not bool(result["errors"])
+        proof["page_request_provenance"] = [{"page_index": p["page_index"], "fetched_at": p["request"].get("fetched_at"), "cache_reused": p["request"].get("cache_reused"), "response_sha256": p["request"].get("sha256")} for p in result["pages"]]
+        proof["proof_type"] = "live_continuation_request" if len(result["pages"])>1 and result["pages"][1]["request"].get("cache_reused") is False else "cached_response_replay"
         write(BASE / "live_pagination_proof.json", proof)
         export_all()
         print(json.dumps(proof, ensure_ascii=False), flush=True)
@@ -966,12 +1054,16 @@ def main():
     elif args.command == "crawl":
         if not read(BASE / "live_pagination_proof.json").get("passed"):
             raise SystemExit("Live next-page proof must pass before full crawl")
+        successful = []
         for label in args.collections:
             result = crawl_one(label, args.max_pages, args.show_unavailable)
             export_all()
             print(json.dumps({k: result.get(k) for k in ["collection_key", "status", "declared_items", "visible_memberships", "unique_video_ids", "hidden_unavailable_count", "count_reconciled", "pending_token_sha256", "errors"]}, ensure_ascii=False), flush=True)
+            successful.append(result.get("pagination_exhausted") is True and result.get("count_reconciled") is not False)
             if STOP_NETWORK.is_set():
                 break
+        if len(successful)!=len(args.collections) or not all(successful):
+            raise SystemExit(1)
     elif args.command == "metadata":
         ids = args.ids
         if args.ids_file:
@@ -979,7 +1071,10 @@ def main():
             if isinstance(values, dict):
                 values = values.get("video_ids", values.get("candidates", values.get("records", [])))
             ids += [x if isinstance(x, str) else x.get("video_id", x.get("id")) for x in values]
-        metadata([x for x in ids if x], args.workers)
+        requested = [x for x in ids if x]
+        results = metadata(requested, args.workers)
+        if any(results.get(vid,{}).get("error") or vid not in results for vid in requested):
+            raise SystemExit(1)
     else:
         print(json.dumps(export_all(), ensure_ascii=False))
 

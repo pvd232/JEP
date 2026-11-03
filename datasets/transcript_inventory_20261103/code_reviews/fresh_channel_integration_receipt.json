@@ -1,0 +1,131 @@
+{
+  "integration_script": "inventory_work/reverse_audit/integrate_fresh_channels.py",
+  "script_sha256": "cbba2c89da22fa864e8d339e7d29b9c34e5cb192f09a43e1aaff5f366ed912aa",
+  "baseline_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "checks": {
+    "same_collection_ids_and_keys": true,
+    "ten_playlist_snapshots_unchanged": true,
+    "alternate_snapshot_views_unchanged": true,
+    "shorts_web_and_other_nonchannel_collections_unchanged": true,
+    "all_nonchannel_membership_rows_unchanged": true,
+    "unavailable_placeholder_records_unchanged": true,
+    "unaffected_catalog_nodes_unchanged": true,
+    "baseline_watch_metadata_and_provenance_preserved": true,
+    "fresh_memberships_have_verified_owner": true,
+    "fresh_catalog_nodes_have_verified_owner": true,
+    "historical_rows_preserve_original_fields": true,
+    "current_plus_historical_equals_retained": true,
+    "current_plus_historical_only_ids_equals_catalog": true,
+    "collection_selected_counts_reconcile": true
+  },
+  "counts": {
+    "membership_count": 5203,
+    "current_membership_count": 5202,
+    "historical_membership_count": 1,
+    "unique_video_ids": 3606,
+    "current_unique_video_ids": 3605,
+    "historical_only_unique_video_ids": 1,
+    "historical_only_video_ids": [
+      "Pg8DvszQMME"
+    ],
+    "channel_refresh_pages": 118
+  },
+  "channel_sources": [
+    {
+      "collection_key": "deep_channel_videos",
+      "current_returned_memberships": 2663,
+      "historical_memberships_retained": 0,
+      "pages_checked": 89,
+      "fresh_first_fetched_at": "2026-11-03T20:19:11.924638+00:00",
+      "fresh_finished_at": "2026-11-03T20:26:51.601385+00:00",
+      "added_video_ids": [],
+      "not_in_latest_listing_video_ids": []
+    },
+    {
+      "collection_key": "deep_channel_streams",
+      "current_returned_memberships": 846,
+      "historical_memberships_retained": 1,
+      "pages_checked": 29,
+      "fresh_first_fetched_at": "2026-11-03T20:26:51.644307+00:00",
+      "fresh_finished_at": "2026-11-03T20:28:54.535610+00:00",
+      "added_video_ids": [],
+      "not_in_latest_listing_video_ids": [
+        "Pg8DvszQMME"
+      ]
+    }
+  ],
+  "channel_identity_normalization": {
+    "rule": "Use the verified owner of each selected channel surface. lockupViewModel metadata text may contain view counts and recency; it is not an owner name.",
+    "basis": [
+      {
+        "collection_id": "UCay5mclHBbWQTQ8fhoNCWow:videos",
+        "collection_key": "deep_channel_videos",
+        "channel_id": "UCay5mclHBbWQTQ8fhoNCWow",
+        "channel_name": "JEP Colombia",
+        "selected_tab_title": "Videos",
+        "source_url": "https://www.youtube.com/@jepcolombia/videos",
+        "json_pointer": "metadata.channelMetadataRenderer",
+        "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_000.json",
+        "response_json_file_sha256": "32d9949a7493f72041059fad3e6641720bda88f43dbca0531db1c6935deed771",
+        "request_response_sha256": "9488bbddde378c855716d4f3b6ac85359b269a43fb1ac1404590471ccb461305",
+        "fetched_at": "2026-11-03T20:19:11.924638+00:00",
+        "normalization": {
+          "rows": 2663,
+          "channel_ids_replaced": 2663,
+          "channel_names_replaced": 2663
+        }
+      },
+      {
+        "collection_id": "UCay5mclHBbWQTQ8fhoNCWow:streams",
+        "collection_key": "deep_channel_streams",
+        "channel_id": "UCay5mclHBbWQTQ8fhoNCWow",
+        "channel_name": "JEP Colombia",
+        "selected_tab_title": "Live",
+        "source_url": "https://www.youtube.com/@jepcolombia/streams",
+        "json_pointer": "metadata.channelMetadataRenderer",
+        "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_000.json",
+        "response_json_file_sha256": "9ec3fa304f0d6b1677ef5d8f57b87b87f6057c30d3539f1817d92a2b8b912b64",
+        "request_response_sha256": "f94333a930cc291f22ff0bbad5fe0801c46c6b45c0fc0020a3621123e965c9c2",
+        "fetched_at": "2026-11-03T20:26:51.644307+00:00",
+        "normalization": {
+          "rows": 846,
+          "channel_ids_replaced": 846,
+          "channel_names_replaced": 846
+        }
+      }
+    ]
+  },
+  "preserved_alternate_snapshots": 4,
+  "preserved_nonchannel_memberships": 1693,
+  "input_sha256": {
+    "crawl_manifest.json": "7eb203576902747ea2116c0138e5993e963a708d2cc73c37b25b7edd0993a8aa",
+    "public_memberships.json.gz": "74a5683824c461fdd6302af357790f68a35271bd711e22a3e13f33070951d079",
+    "public_catalog.json.gz": "64fb33a5c43c1ad2644e18506cd482d5fa7472dfd298e9b06162525fab0f0cc8"
+  },
+  "output_sha256": {
+    "crawl_manifest.json": "c60a8e98a0a286e79720703e42c17eff3778fa03ffdf7ee769be2a3247bd3e65",
+    "memberships.json": "9da3c5c15bbf8345285fb0bc30490dafed806ca3b643cb21d94d7ee99883e995",
+    "catalog.json": "58c6fce319cc86dc06c0654323d60a32a865c2c07a0e3eb9fd18a30fff64992e"
+  },
+  "no_network_fetch_performed": true,
+  "scope_or_transcript_decisions_modified": false,
+  "mode": "check_existing_outputs",
+  "fresh_cache_integrity": {
+    "before": {
+      "files": 240,
+      "sha256_of_file_hashes": "d102c7c1be7c6aa6deb47b980c56946f49df9c043c03d5aab70672fb19821489"
+    },
+    "after": {
+      "files": 240,
+      "sha256_of_file_hashes": "d102c7c1be7c6aa6deb47b980c56946f49df9c043c03d5aab70672fb19821489"
+    },
+    "unchanged": true
+  },
+  "all_frozen_hashes_match_manifest": true,
+  "all_passed": true,
+  "output_files": [
+    "inventory_work/reverse_audit/crawl_manifest.json",
+    "inventory_work/reverse_audit/memberships.json",
+    "inventory_work/reverse_audit/catalog.json"
+  ]
+}

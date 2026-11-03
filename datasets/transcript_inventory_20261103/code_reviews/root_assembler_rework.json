@@ -1,0 +1,177 @@
+{
+  "validation_type": "Focused post-review root assembler repair validation; not an additional review",
+  "source": "/workspace/scratch/8a7e64850a04/inventory_work/reverse_audit/assemble_outputs.py",
+  "source_sha256": "70f62fe303b18050f3d95433444820289c4644b7c4a847de8237ab0333f45f27",
+  "source_sha256_after": "70f62fe303b18050f3d95433444820289c4644b7c4a847de8237ab0333f45f27",
+  "baseline_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "findings_validated": [
+    "R03-F2",
+    "R05-F1",
+    "R06-01"
+  ],
+  "scope": "Duplicate row identifiers; main/broad conflict and promotion; exact bilateral source-video edges; included scope; malformed duration components",
+  "not_reassessed": [
+    "R03-F1 territorial/format research dispositions",
+    "R05-F2 unlinked-upload classification in build_mapping_review.py"
+  ],
+  "method": "Execute the exact current assembler main with deep-copied frozen JSON, in-memory JSON writes, and automatically deleted temporary CSV/gzip output; no source, canonical, frozen, or prior-review mutation",
+  "assembly_cases": [
+    {
+      "case": "baseline_valid",
+      "expected": "accept valid frozen input",
+      "accepted": true,
+      "error": null,
+      "checks": {
+        "source_count_93": true,
+        "source_ids_unchanged": true,
+        "video_count_207": true,
+        "included_count_128": true,
+        "all_84_forward_reverse_edges_equal": true,
+        "video_projection_unchanged": true,
+        "all_duration_values_unchanged": true,
+        "source_inventory_unchanged": true
+      },
+      "forward_edges": 84,
+      "reverse_edges": 84,
+      "passed": true
+    },
+    {
+      "case": "R03_broad_only_promotion",
+      "expected_error_prefix": "Broad inclusion absent from main included map: j7YryvmCbBw",
+      "accepted": false,
+      "error": {
+        "type": "ValueError",
+        "message": "Broad inclusion absent from main included map: j7YryvmCbBw"
+      },
+      "rejected_before_any_output": true,
+      "passed": true
+    },
+    {
+      "case": "R03_conflicting_shared_scope",
+      "expected_error_prefix": "Conflicting main/broad scope decisions: O25PKSrxRuA",
+      "accepted": false,
+      "error": {
+        "type": "ValueError",
+        "message": "Conflicting main/broad scope decisions: O25PKSrxRuA"
+      },
+      "rejected_before_any_output": true,
+      "passed": true
+    },
+    {
+      "case": "R05_missing_reverse_edge_VV029",
+      "expected_error_prefix": "Forward/reverse edge mismatch:",
+      "accepted": false,
+      "error": {
+        "type": "ValueError",
+        "message": "Forward/reverse edge mismatch: missing=[('VV-029', 'eM8ZrqhZbgQ')] extra=[]"
+      },
+      "rejected_before_any_output": true,
+      "passed": true
+    },
+    {
+      "case": "R05_duplicate_reverse_video_id",
+      "expected_error_prefix": "Missing or duplicate reverse identifiers",
+      "accepted": false,
+      "error": {
+        "type": "ValueError",
+        "message": "Missing or duplicate reverse identifiers"
+      },
+      "rejected_before_any_output": true,
+      "passed": true
+    },
+    {
+      "case": "duplicate_source_id",
+      "expected_error_prefix": "Missing or duplicate source identifiers",
+      "accepted": false,
+      "error": {
+        "type": "ValueError",
+        "message": "Missing or duplicate source identifiers"
+      },
+      "rejected_before_any_output": true,
+      "passed": true
+    },
+    {
+      "case": "duplicate_main_scope_id",
+      "expected_error_prefix": "Missing or duplicate main scope identifiers",
+      "accepted": false,
+      "error": {
+        "type": "ValueError",
+        "message": "Missing or duplicate main scope identifiers"
+      },
+      "rejected_before_any_output": true,
+      "passed": true
+    },
+    {
+      "case": "duplicate_broad_scope_id",
+      "expected_error_prefix": "Missing or duplicate broad scope identifiers",
+      "accepted": false,
+      "error": {
+        "type": "ValueError",
+        "message": "Missing or duplicate broad scope identifiers"
+      },
+      "rejected_before_any_output": true,
+      "passed": true
+    },
+    {
+      "case": "unexplained_extra_reverse_edge",
+      "expected_error_prefix": "Forward/reverse edge mismatch:",
+      "accepted": false,
+      "error": {
+        "type": "ValueError",
+        "message": "Forward/reverse edge mismatch: missing=[] extra=[('VV-028', 'eM8ZrqhZbgQ')]"
+      },
+      "rejected_before_any_output": true,
+      "passed": true
+    },
+    {
+      "case": "linked_video_outside_included_scope",
+      "expected_error_prefix": "A supplied transcript video link is outside the included scope map",
+      "accepted": false,
+      "error": {
+        "type": "ValueError",
+        "message": "A supplied transcript video link is outside the included scope map"
+      },
+      "rejected_before_any_output": true,
+      "passed": true
+    }
+  ],
+  "duration_cases": {
+    "finding": "R06-01",
+    "malformed_actual": {
+      "1:99": null,
+      "04:60:00": null,
+      "01:00:60": null
+    },
+    "malformed_expected": {
+      "1:99": null,
+      "04:60:00": null,
+      "01:00:60": null
+    },
+    "valid_actual": {
+      "0:00": 0,
+      "02:03": 123,
+      "4:59:59": 17999,
+      "25740": 25740,
+      "60:00": 3600,
+      "120:59:59": 435599
+    },
+    "valid_expected": {
+      "0:00": 0,
+      "02:03": 123,
+      "4:59:59": 17999,
+      "25740": 25740,
+      "60:00": 3600,
+      "120:59:59": 435599
+    },
+    "passed": true
+  },
+  "integrity": {
+    "source_hash_unchanged_during_observation": true,
+    "frozen_input_hashes_unchanged": true,
+    "all_frozen_hashes_match_manifest": true,
+    "canonical_output_directory_used": false,
+    "prior_review_files_written": false
+  },
+  "all_passed": true,
+  "observer": "/workspace/scratch/8a7e64850a04/inventory_work/tieout_review_20261103/observe_root_assembler_rework.py"
+}

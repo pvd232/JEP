@@ -38,7 +38,7 @@ python crawl_public_catalog.py export
 
 Fresh responses and checkpoints are written only beside this script, under `caches/`. Existing responses are reused after URL/token-fingerprint checks. Preserve an old snapshot when collecting a later one; use a separate task directory for a new snapshot.
 
-Channel Videos and Live reuse the sibling `deep_channel_videos_full_public_catalog.json` and `deep_channel_streams_full_public_catalog.json`, plus their terminal responses under sibling `public_catalog_cache/`. Missing catalogs or terminal responses produce explicit manifest gaps. Shorts requires the observed Shorts tab in the original channel Videos first page or an existing crawler-owned Shorts first page. The fixture replay requires neither full channel catalog.
+Channel Videos and Live reuse the sibling `deep_channel_videos_full_public_catalog.json` and `deep_channel_streams_full_public_catalog.json`, plus every retained response under sibling `public_catalog_cache/`. The repaired validator requires consecutive pages, raw/derived membership agreement, primary-list queue closure, and a positively identified About branch where present. Missing intermediate responses or contradictory projections produce explicit manifest gaps. Shorts requires the observed Shorts tab in the original channel Videos first page or an existing crawler-owned Shorts first page. The fixture replay requires neither full channel catalog.
 
 - `catalog.json`: one public node per video ID; Casanare scope requires separate evidence review.
 - `memberships.json`: one row per source appearance, preserving playlist positions, overlaps, repeated IDs, and web-card context.
@@ -53,3 +53,9 @@ Channel Videos and Live reuse the sibling `deep_channel_videos_full_public_catal
 `exhausted_reconciled` means pagination ended and the declared count reconciles. `exhausted_with_unavailable` also preserves unavailable positions. `exhausted_count_unknown` means pagination ended and the platform omitted a declared total, as on Shorts. Count mismatch, error, cycle, pending, and page-limit statuses remain explicit. Historical availability, full hearing coverage, and final Casanare classification each require further evidence beyond exhausted pagination.
 
 Publish only the reduced fixtures and metadata outputs. Keep raw response caches, player payloads, continuation tokens, signed media URLs, and source transcript text outside the publication package.
+
+## Ten-review repairs and fresh channel refresh
+
+`refresh_channel_catalogs.py --output-dir PATH` freshly traverses the official Videos and Live tabs, checks the requested selected surface, binds parsed first-page JSON to retained HTML, and records every response. Use a new output directory for a new observation. `integrate_fresh_channels.py` installs reviewed fresh states and preserves prior appearances missing from the latest listing as historical evidence. It does not admit videos to Casanare. The final snapshot has 89 Videos pages / 2,663 IDs and 29 Live pages / 846 IDs.
+
+The original `probe-next` proof retains its original retrieval times. New probe calls distinguish live requests from cached replays. An incomplete/error/page-capped crawl exits unsuccessfully. R01, R02, R09 and R10 repair receipts are in [code_reviews](../code_reviews/ten_review_summary.md). No public source traversal establishes availability of private, deleted, unlisted or unpublished recordings.

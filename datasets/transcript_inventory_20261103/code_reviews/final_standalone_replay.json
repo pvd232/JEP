@@ -1,0 +1,259 @@
+{
+  "script_sha256": "9ef7355d1aeb63d1dacc272b60c8299927ce0f87e595de0135601d7841603c6f",
+  "exit_code": 0,
+  "report": {
+    "command": "python crawl_public_catalog.py reproduce",
+    "at": "2026-11-03T21:10:47.536827+00:00",
+    "old_parser_source": "/tmp/jep-transcripts-8a7e64850a04/extend_public_catalog.py",
+    "old_parser_source_sha256": "daf73c1960432f09d9c95a954e5c3f35f782275155d2838c312b0a2492262f0b",
+    "fixtures": [
+      {
+        "label": "case03",
+        "source_path": "/tmp/jep-transcripts-8a7e64850a04/tieout_replay/fixtures/case03_first_page.json",
+        "sha256": "247216a601e681ed15e180c80dc83ae381ccca249ff32e06c8a2ca645e352f51",
+        "replay_source": "sanitized_standalone_fixture",
+        "historical_full_response_sha256": "caf9fedd11ca281bd195071e5a3a6e055a64976881e610fafcb7714e20261f4c",
+        "primary_list_path": [
+          "contents",
+          "twoColumnBrowseResultsRenderer",
+          "tabs",
+          0,
+          "tabRenderer",
+          "content",
+          "sectionListRenderer",
+          "contents",
+          0,
+          "itemSectionRenderer",
+          "contents"
+        ],
+        "primary_target": "PLbtegW3d3L4Id_lrAgBRDGf-k_bwEYH6_",
+        "old_parser_tokens": 0,
+        "new_primary_list_tokens": 1,
+        "ignored_other_tokens": 1,
+        "appearances": 100,
+        "unique_video_ids": 100,
+        "title": "Caso 03 de la JEP | Falsos positivos",
+        "declared_items": 898,
+        "hidden_unavailable_count": 0,
+        "hidden_unavailable_notice": false,
+        "notices": []
+      },
+      {
+        "label": "casanare",
+        "source_path": "/tmp/jep-transcripts-8a7e64850a04/tieout_replay/fixtures/casanare_first_page.json",
+        "sha256": "85593f02cc0e108b7be29efdd5f4f41cae45492b7257bda25f03f94dec7a382e",
+        "replay_source": "sanitized_standalone_fixture",
+        "historical_full_response_sha256": "76ee6686da3226277bb378a2aa9f2821129ad94de8f75c415e369c420aa1a389",
+        "primary_list_path": [
+          "contents",
+          "twoColumnBrowseResultsRenderer",
+          "tabs",
+          0,
+          "tabRenderer",
+          "content",
+          "sectionListRenderer",
+          "contents",
+          0,
+          "itemSectionRenderer",
+          "contents"
+        ],
+        "primary_target": "PLbtegW3d3L4JR1Y_bfCDS_C8sdKE6195K",
+        "old_parser_tokens": 0,
+        "new_primary_list_tokens": 0,
+        "ignored_other_tokens": 1,
+        "appearances": 19,
+        "unique_video_ids": 19,
+        "title": "Subcaso Casanare",
+        "declared_items": 20,
+        "hidden_unavailable_count": 1,
+        "hidden_unavailable_notice": true,
+        "notices": [
+          "1 unavailable video is hidden"
+        ]
+      },
+      {
+        "label": "audiencias",
+        "source_path": "/tmp/jep-transcripts-8a7e64850a04/tieout_replay/fixtures/audiencias_first_page.json",
+        "sha256": "c28324fd88a9f18ce40f04c6eccdffa004c9f7ccc7c9109f231b210cf5d2d82d",
+        "replay_source": "sanitized_standalone_fixture",
+        "historical_full_response_sha256": "11faeea9ffe3414ba39784bc9c0da1d0cc11a81e4e46b668b4fde1c43e06df22",
+        "primary_list_path": [
+          "contents",
+          "twoColumnBrowseResultsRenderer",
+          "tabs",
+          0,
+          "tabRenderer",
+          "content",
+          "sectionListRenderer",
+          "contents",
+          0,
+          "itemSectionRenderer",
+          "contents"
+        ],
+        "primary_target": "PLbtegW3d3L4JAstPux8ji9-h9balFGI6M",
+        "old_parser_tokens": 0,
+        "new_primary_list_tokens": 0,
+        "ignored_other_tokens": 1,
+        "appearances": 42,
+        "unique_video_ids": 41,
+        "title": "Audiencias & Diligencias | JEP | HD",
+        "declared_items": 44,
+        "hidden_unavailable_count": 2,
+        "hidden_unavailable_notice": true,
+        "notices": [
+          "2 unavailable videos are hidden"
+        ]
+      }
+    ],
+    "channel_terminal_fixture_provenance": {
+      "deep_channel_videos": {
+        "original_path": "/workspace/scratch/8a7e64850a04/inventory_work/public_catalog_cache/deep_channel_videos_89.json",
+        "original_sha256": "9febfda7cce8a88341e5553fae8e6a3e356e0d01137e09afbde7071f3158894a",
+        "sanitized_fixture": "deep_channel_videos_terminal.json",
+        "sanitized_sha256": "f2430389e83a1d35e320e2c80cfe12ef481feaf46ac170866f9462b16fc9089b",
+        "terminal_page": 89,
+        "terminal_items": 23,
+        "original_continuation_shapes": [],
+        "original_continuation_remaining": false,
+        "full_catalog_items": 2663,
+        "full_catalog_sha256": "da05d1788e7470154e14c3240fe6119590f47e42d08bd8bb6dd63f13abe97a41",
+        "limitation": "Reduced terminal structure proves this observed parser case; it does not recreate or independently re-enumerate the full channel catalog."
+      },
+      "deep_channel_streams": {
+        "original_path": "/workspace/scratch/8a7e64850a04/inventory_work/public_catalog_cache/deep_channel_streams_29.json",
+        "original_sha256": "087bf43ecc45a9151ad116d642aed5be2caf483ff0b87ea1cb626e3c90a3716f",
+        "sanitized_fixture": "deep_channel_streams_terminal.json",
+        "sanitized_sha256": "333753b2ce0df66bae79b522f02b98a5cbe993d5bbccd3f0d562a3e2213cce80",
+        "terminal_page": 29,
+        "terminal_items": 7,
+        "original_continuation_shapes": [],
+        "original_continuation_remaining": false,
+        "full_catalog_items": 847,
+        "full_catalog_sha256": "7f0e9bdabcf81c3deb46e25f56994af5bf400f80e6012a0626c4cf43731316e4",
+        "limitation": "Reduced terminal structure proves this observed parser case; it does not recreate or independently re-enumerate the full channel catalog."
+      }
+    },
+    "checks": [
+      {
+        "check": "Original parser misses actual Case03 continuation",
+        "observed": 0,
+        "expected": 0,
+        "passed": true
+      },
+      {
+        "check": "New parser selects one Case03 list token",
+        "observed": 1,
+        "expected": 1,
+        "passed": true
+      },
+      {
+        "check": "New parser excludes outer Case03 continuation",
+        "observed": 1,
+        "expected": 1,
+        "passed": true
+      },
+      {
+        "check": "Case03 first page and declared count",
+        "observed": [
+          100,
+          898
+        ],
+        "expected": [
+          100,
+          898
+        ],
+        "passed": true
+      },
+      {
+        "check": "Casanare hidden entry preserved",
+        "observed": [
+          19,
+          1,
+          20,
+          0
+        ],
+        "expected": [
+          19,
+          1,
+          20,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "check": "Audiencias repeated membership preserved",
+        "observed": [
+          42,
+          41,
+          2,
+          44
+        ],
+        "expected": [
+          42,
+          41,
+          2,
+          44
+        ],
+        "passed": true
+      },
+      {
+        "check": "Legacy Renderer shape supported",
+        "observed": "fixture-old-token",
+        "expected": "fixture-old-token",
+        "passed": true
+      },
+      {
+        "check": "Failed pending request cannot claim exhaustion",
+        "observed": false,
+        "expected": false,
+        "passed": true
+      },
+      {
+        "check": "Cycle cannot claim exhaustion",
+        "observed": "cycle_detected",
+        "expected": "cycle_detected",
+        "passed": true
+      },
+      {
+        "check": "Page limit remains explicit",
+        "observed": "limit_reached",
+        "expected": "limit_reached",
+        "passed": true
+      },
+      {
+        "check": "Returned placeholder is counted without implying playability",
+        "observed": [
+          2,
+          1,
+          "exhausted_with_unavailable"
+        ],
+        "expected": [
+          2,
+          1,
+          "exhausted_with_unavailable"
+        ],
+        "passed": true
+      },
+      {
+        "check": "Invalid placeholder channel sentinel is not an owner ID",
+        "observed": null,
+        "expected": null,
+        "passed": true
+      },
+      {
+        "check": "deep_channel_videos terminal snapshot has no missed continuation",
+        "observed": true,
+        "expected": true,
+        "passed": true
+      },
+      {
+        "check": "deep_channel_streams terminal snapshot has no missed continuation",
+        "observed": true,
+        "expected": true,
+        "passed": true
+      }
+    ],
+    "all_passed": true
+  },
+  "network_used": false
+}

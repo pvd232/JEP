@@ -1,0 +1,178 @@
+{
+  "review_id": "review07_forward_gaps",
+  "reviewed_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "review_mode": "independent",
+  "status": "complete",
+  "verdict": "Request changes",
+  "reviewed_files": [
+    {
+      "path": "base/inventory.json",
+      "sha256": "e261e1b82e9fe41b62aba96277ab54b5f377839a0fc428797dae8d005756b404",
+      "binding": "published frozen base"
+    },
+    {
+      "path": "base/recording_gaps.json",
+      "sha256": "71ac1bf29a3202812b03df5d058fdebdfc4cbb0bd981dff5df9718cab6bb8401",
+      "binding": "published frozen base"
+    },
+    {
+      "path": "base/completion_review.json",
+      "sha256": "2f74d67e9403c91c0dfccc98bec4165be3a171074b170bdb6448a17a07c9d106",
+      "binding": "published frozen base"
+    },
+    {
+      "path": "base/matching_audit.json",
+      "sha256": "05ab27936613d39ef1c1e6f937b75f01804e6f832d01c4579dcd389b45d27307",
+      "binding": "published frozen base"
+    },
+    {
+      "path": "base/summary.json",
+      "sha256": "eff0ec882313b47fcb26ce48a494af4f1c6aacb832f7151528c8e25fa974a35b",
+      "binding": "published frozen base"
+    },
+    {
+      "path": "base/workbook_build/assemble_outputs.py",
+      "sha256": "ec06e9fbe1a5afc2aee19020b70e173351013e7b0495719b4449f8b2d7dbcaed",
+      "binding": "published frozen base"
+    },
+    {
+      "path": "local historical/merge_completion_review.py",
+      "sha256": "58e292ba901ce5302f4b2069327832b5d908b011a62ce03d75c937a88c38830a",
+      "binding": "separately frozen local historical source"
+    },
+    {
+      "path": "local historical/apply_completion_summaries.py",
+      "sha256": "d7bde7ac17aa8472bda22d0bed93587d22a2779ee96a32fcf713812b46f6cdde",
+      "binding": "separately frozen local historical source"
+    },
+    {
+      "path": "local historical/merge_deep_results.py",
+      "sha256": "722420947c7d7826f20ffdbd0c3400acc3ec62e5371d63b681d02553d865d82f",
+      "binding": "separately frozen local historical source"
+    }
+  ],
+  "scope": [
+    "forward matching verification semantics",
+    "recording gap ownership and counts",
+    "protected labels and access classifications",
+    "date and recording-format conflicts",
+    "fresh channel disappearance relevance"
+  ],
+  "findings": [
+    {
+      "id": "R07-01",
+      "severity": "P2",
+      "blocking": true,
+      "title": "Forward merger infers content verification from confidence and hardcoded IDs",
+      "file": "inventory_work/merge_deep_results.py",
+      "lines": [
+        7,
+        8,
+        52,
+        61,
+        74,
+        83
+      ],
+      "symbol": "FIELDS, METADATA_ONLY, apply_deep_results",
+      "invariant": "High identity confidence does not establish a content check; explicit verification must govern and remain tied to the accepted recording.",
+      "observed": "content_verified is absent from allowed update fields; every High row is set True except two hardcoded IDs; a non-High downgrade does not clear prior True. Playability text is generated from this flag.",
+      "counterexamples": [
+        {
+          "case": "High identity confidence with explicit metadata-only evidence",
+          "expected_content_verified": false,
+          "actual": {
+            "unique_id": "SYNTHETIC-METADATA",
+            "confidence": "High",
+            "content_verified": true,
+            "verification_level": "Public captions checked",
+            "playability": "Public caption panel accessible without sign-in"
+          },
+          "invariant_passed": false
+        },
+        {
+          "case": "Rejected earlier candidate clears content verification",
+          "expected_content_verified": false,
+          "actual": {
+            "unique_id": "SYNTHETIC-DOWNGRADE",
+            "confidence": "Unmatched",
+            "content_verified": true,
+            "verification_level": "Public recording not located",
+            "playability": "Public caption panel accessible without sign-in"
+          },
+          "invariant_passed": false
+        },
+        {
+          "case": "A formerly metadata-only record can acquire affirmative evidence",
+          "expected_content_verified": true,
+          "actual": {
+            "unique_id": "SDSJ-20241203",
+            "confidence": "High",
+            "content_verified": false,
+            "verification_level": "Metadata only",
+            "playability": null
+          },
+          "invariant_passed": false
+        }
+      ],
+      "minimal_repair": "Honor explicit review verification, require an anchor for affirmative new checks, clear verification on rejection/replacement without new evidence, remove fixed record-ID exceptions and retain access observations independently.",
+      "observer": "observe_forward_verification.py --module PATH; all three invariant_passed fields must be true after repair.",
+      "current_data_impact": "No incorrect frozen row or count change established; actual eleven unmatched rows have no located recording and content_verified=False."
+    }
+  ],
+  "positive_evidence": {
+    "gap_count": 15,
+    "gap_counts_by_type": {
+      "Unmatched recording": 11,
+      "Missing continuation": 2,
+      "Content / coverage verification": 2
+    },
+    "exact_expected_gap_set_and_types": true,
+    "source_links_agree": true,
+    "recording_links_agree": true,
+    "source_dates_agree": true,
+    "unmatched_records_have_no_claimed_link_or_verification": true,
+    "no_candidate_records_silently_omitted": true,
+    "private_source_ids": [
+      "VV-064",
+      "VV-067"
+    ],
+    "protected_alias_retained": true,
+    "completion_audit_ids_equal_gap_ids": true,
+    "completion_audit_statuses_match": true,
+    "VV-064_private_reserved_opening_terms_present": true,
+    "VV-067_private_reserved_opening_terms_present": true,
+    "high_records": 82,
+    "new_verified_source_video_matches": 0
+  },
+  "additional_observations": [
+    {
+      "id": "R07-OBS-LIVE",
+      "video_id": "Pg8DvszQMME",
+      "source": "removed_live_watch_metadata.json",
+      "observation": "Absent from refreshed Live listing but exact public watch page remains accessible with official JEP identity and playability OK.",
+      "scope": "No Casanare connection established by title or boilerplate description; no substantive content reviewed.",
+      "effect_on_forward_gaps": "None established. The ID is not in supplied mapping or either frozen scope register; preserve historical discovery rather than marking deleted/unavailable.",
+      "public_url": "https://www.youtube.com/watch?v=Pg8DvszQMME",
+      "retrieved_at": "2026-11-03T20:33:48.939199+00:00"
+    }
+  ],
+  "artifacts": [
+    "review.md",
+    "review.json",
+    "scope_hashes.json",
+    "observe_forward_verification.py",
+    "observer_results.json",
+    "removed_live_watch_metadata.json"
+  ],
+  "publication_exclusions": [
+    "synthetic_fixtures/ are synthetic counterexamples, not corpus data",
+    "source_snapshot/ records locally reviewed historical code and is not the published base commit"
+  ],
+  "limits": [
+    "No independent audio listening",
+    "No full new search of the eleven unlocated recordings",
+    "No protected identity expansion",
+    "No source files or shared caches modified",
+    "One exact public watch-metadata GET; no outreach"
+  ]
+}

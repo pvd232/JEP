@@ -36,18 +36,22 @@ const colors = {
 const cellText = x => typeof x === 'string' && /^[=+@]/.test(x) ? "'" + x : x ?? '';
 const nativeLinks=[];
 const linkCell=(ws,cell,url,label)=>{ws.getRange(cell).values=[[label]];nativeLinks.push({sheet:ws.name,cell,url,label});};
+const columnName = number => { let name=''; for(let n=number;n>0;n=Math.floor((n-1)/26)) name=String.fromCharCode(65+(n-1)%26)+name; return name; };
+const transcriptVideoUrls = records.map(r=>[...String(r.youtube_url??'').matchAll(/https:\/\/[^\s;]+/g)].map(m=>m[0]));
+const extraVideoColumns = Math.max(0,...transcriptVideoUrls.map(urls=>urls.length-2));
 const fields = ['unique_id','category','transcript_title','date','participants','source_folder','direct_file_link','duplicate_notes','video_title','youtube_url','timestamps','confidence','evidence','notes'];
 const confidenceLabel=r=>r.confidence!=='High'?r.confidence:String(r.coverage_status??'').startsWith('Partial')?'High · partial recording':r.content_verified?'High · content checked':'High · metadata only';
-const headers = ['Unique ID','Category','Transcript title','Hearing / submission date','Participants','Source folder','Original transcript','Duplicate / version notes','Video title','YouTube link(s)','Timestamps','Match confidence','Evidence','Notes'];
+const headers = ['Unique ID','Category','Transcript title','Hearing / submission date','Participants','Source folder','Original transcript','Duplicate / version notes','Video title','YouTube link(s)','Timestamps','Match confidence','Evidence','Notes',...Array.from({length:extraVideoColumns},(_,i)=>`YouTube link ${i+3}`)];
+const transcriptLastColumn=columnName(headers.length);
 const end = records.length + 1;
-const matrix = records.map(r=>fields.map(k=> k === 'date' && /^\d{4}-\d{2}-\d{2}$/.test(r[k]??'') ? new Date(r[k]+'T00:00:00Z') : k==='confidence'?confidenceLabel(r):cellText(r[k])));
-sheet.getRange(`A1:N${end}`).values = [headers, ...matrix];
+const matrix = records.map(r=>[...fields.map(k=> k === 'date' && /^\d{4}-\d{2}-\d{2}$/.test(r[k]??'') ? new Date(r[k]+'T00:00:00Z') : k==='confidence'?confidenceLabel(r):cellText(r[k])),...Array(extraVideoColumns).fill('')]);
+sheet.getRange(`A1:${transcriptLastColumn}${end}`).values = [headers, ...matrix];
 sheet.getRange(`D2:D${end}`).setNumberFormat('yyyy-mm-dd');
-sheet.getRange(`A1:N${end}`).format = { font:{name:'Arial',size:10,color:ink},verticalAlignment:'top',wrapText:true };
-const widths = [24,30,48,18,38,40,22,45,48,36,46,22,66,62];
+sheet.getRange(`A1:${transcriptLastColumn}${end}`).format = { font:{name:'Arial',size:10,color:ink},verticalAlignment:'top',wrapText:true };
+const widths = [24,30,48,18,38,40,22,45,48,36,46,22,66,62,...Array(extraVideoColumns).fill(36)];
 widths.forEach((w,i)=>sheet.getRangeByIndexes(0,i,end,1).format.columnWidth=w);
-sheet.tables.add(`A1:N${end}`,true,'TranscriptInventory').style='TableStyleLight9';
-sheet.getRange('A1:N1').format = { fill:navy,font:{name:'Arial',size:10,bold:true,color:'#FFFFFF'},horizontalAlignment:'center',verticalAlignment:'center',rowHeight:34,wrapText:true };
+sheet.tables.add(`A1:${transcriptLastColumn}${end}`,true,'TranscriptInventory').style='TableStyleLight9';
+sheet.getRange(`A1:${transcriptLastColumn}1`).format = { fill:navy,font:{name:'Arial',size:10,bold:true,color:'#FFFFFF'},horizontalAlignment:'center',verticalAlignment:'center',rowHeight:34,wrapText:true };
 const lookup = new Map();
 records.forEach((r,i)=>{
   const row=i+2;
@@ -56,18 +60,24 @@ records.forEach((r,i)=>{
   sheet.getRange(`A${row}:B${row}`).format.fill=colors[r.category]??'#EEF0F3';
   sheet.getRange(`A${row}:B${row}`).format.font.bold=true;
   if(r.direct_file_link) linkCell(sheet,`G${row}`,r.direct_file_link,'Open original transcript');
-  const urls = [...String(r.youtube_url??'').matchAll(/https:\/\/[^\s;]+/g)].map(m=>m[0]);
+  const urls = transcriptVideoUrls[i];
   if(urls.length===1) linkCell(sheet,`J${row}`,urls[0],urls[0]);
-  if(urls.length===2){
-    const label=`Primary (click here): ${urls[0]}\nJEP reupload (click Notes): ${urls[1]}`;
+  if(urls.length>=2){
+    const label=`Primary (click here): ${urls[0]}\n${urls.length===2?'JEP reupload':'Second video'} (click Notes): ${urls[1]}`;
     matrix[i][9]=label;
-    matrix[i][13]=`Open JEP reupload (click here). ${r.notes}`;
+    matrix[i][13]=`Open ${urls.length===2?'JEP reupload':'second video'} (click here). ${r.notes}`;
     linkCell(sheet,`J${row}`,urls[0],label);
     linkCell(sheet,`N${row}`,urls[1],matrix[i][13]);
     sheet.getRange(`N${row}`).format.font.color='#1E5A9B';
   }
+  urls.slice(2).forEach((url,j)=>{
+    const cell=`${columnName(15+j)}${row}`;
+    matrix[i][14+j]=url;
+    linkCell(sheet,cell,url,url);
+    sheet.getRange(cell).format.font.color='#1E5A9B';
+  });
   const lines = Math.max(...matrix[i].map((v,c)=>c===6?1:String(v??'').split('\n').reduce((n,line)=>n+Math.max(1,Math.ceil(line.length/(widths[c]*1.02))),0)));
-  sheet.getRange(`A${row}:N${row}`).format.rowHeight=Math.max(64,14*lines+10);
+  sheet.getRange(`A${row}:${transcriptLastColumn}${row}`).format.rowHeight=Math.max(64,14*lines+10);
 });
 sheet.getRange(`G2:G${end}`).format.font.color='#1E5A9B';
 sheet.getRange(`J2:J${end}`).format.font.color='#1E5A9B';
@@ -140,24 +150,26 @@ gapSheet.freezePanes.freezeColumns(2);
 gapSheet.showGridLines=false;
 gapSheet.tabColor='#C48B38';
 
-const vheaders=['Video ID / YouTube link','Category','Scope decision','Public video title','Hearing / submission date','Participants / session','Supplied transcript coverage','Transcript ID(s)','Original transcript','Video timestamps / boundaries','Concise coverage evidence','Video duration','Publisher','Discovery sources','Scope evidence','Notes / review limits'];
+const extraSourceColumns=Math.max(0,...videoRecords.map(r=>r.source_links.length-2));
+const vheaders=['Video ID / YouTube link','Category','Scope decision','Public video title','Hearing / submission date','Participants / session','Supplied transcript coverage','Transcript ID(s)','Original transcript','Video timestamps / boundaries','Concise coverage evidence','Video duration','Publisher','Discovery sources','Scope evidence','Notes / review limits',...Array.from({length:extraSourceColumns},(_,i)=>`Original transcript ${i+3}`)];
+const videoLastColumn=columnName(vheaders.length);
 const videoCategoryColors={
  'Voluntary statement or submitted segment':colors['Statements / submissions'],
  'Submitted response segment — self-read questionnaire':colors['Statements / submissions'],
  'Recognition hearing':colors['Recognition hearings'],
 };
-const vwidths=[25,30,23,56,22,42,49,27,26,65,85,18,25,45,66,82];
+const vwidths=[25,30,23,56,22,42,49,27,26,65,85,18,25,45,66,82,...Array(extraSourceColumns).fill(26)];
 const vend=videoRecords.length+1;
 const vrows=videoRecords.map(r=>[
- r.video_id,r.category,r.scope_label,r.title,/^\d{4}-\d{2}-\d{2}$/.test(r.date??'')?new Date(r.date+'T00:00:00Z'):r.date??'',r.participants,r.coverage_label,r.transcript_ids.join('\n'),r.source_links.length?'Open original '+r.transcript_ids[0]:'No supplied transcript link',r.timestamps,r.evidence,r.duration_seconds==null?'':r.duration_seconds/86400,r.publisher,r.collections.join('\n'),r.scope_evidence,r.notes
+ r.video_id,r.category,r.scope_label,r.title,/^\d{4}-\d{2}-\d{2}$/.test(r.date??'')?new Date(r.date+'T00:00:00Z'):r.date??'',r.participants,r.coverage_label,r.transcript_ids.join('\n'),r.source_links.length?'Open original '+r.transcript_ids[0]:'No supplied transcript link',r.timestamps,r.evidence,r.duration_seconds==null?'':r.duration_seconds/86400,r.publisher,r.collections.join('\n'),r.scope_evidence,r.notes,...Array(extraSourceColumns).fill('')
 ].map(cellText));
-videos.getRange(`A1:P${vend}`).values=[vheaders,...vrows];
-videos.getRange(`A1:P${vend}`).format={font:{name:'Arial',size:10,color:ink},verticalAlignment:'top',wrapText:true};
+videos.getRange(`A1:${videoLastColumn}${vend}`).values=[vheaders,...vrows];
+videos.getRange(`A1:${videoLastColumn}${vend}`).format={font:{name:'Arial',size:10,color:ink},verticalAlignment:'top',wrapText:true};
 vwidths.forEach((w,i)=>videos.getRangeByIndexes(0,i,vend,1).format.columnWidth=w);
 videos.getRange(`E2:E${vend}`).setNumberFormat('yyyy-mm-dd');
 videos.getRange(`L2:L${vend}`).setNumberFormat('[h]:mm:ss');
-videos.tables.add(`A1:P${vend}`,true,'VideoCoverage').style='TableStyleLight9';
-videos.getRange('A1:P1').format={fill:navy,font:{name:'Arial',size:10,bold:true,color:'#FFFFFF'},horizontalAlignment:'center',verticalAlignment:'center',rowHeight:42,wrapText:true};
+videos.tables.add(`A1:${videoLastColumn}${vend}`,true,'VideoCoverage').style='TableStyleLight9';
+videos.getRange(`A1:${videoLastColumn}1`).format={fill:navy,font:{name:'Arial',size:10,bold:true,color:'#FFFFFF'},horizontalAlignment:'center',verticalAlignment:'center',rowHeight:42,wrapText:true};
 videoRecords.forEach((r,i)=>{
  const row=i+2;
  linkCell(videos,`A${row}`,r.url,r.video_id);
@@ -166,11 +178,18 @@ videoRecords.forEach((r,i)=>{
  if(r.transcript_ids.length&&lookup.has(r.transcript_ids[0])) linkCell(videos,`H${row}`,`#'Transcripts'!A${lookup.get(r.transcript_ids[0])}`,r.transcript_ids.join('\n'));
  if(r.source_links.length) linkCell(videos,`I${row}`,r.source_links[0],'Open original '+r.transcript_ids[0]);
  if(r.source_links.length>1) linkCell(videos,`P${row}`,r.source_links[1],'Second original '+r.transcript_ids[1]+' (click here). '+r.notes);
+ r.source_links.slice(2).forEach((url,j)=>{
+   const cell=`${columnName(17+j)}${row}`;
+   const label='Open original '+r.transcript_ids[j+2];
+   vrows[i][16+j]=label;
+   linkCell(videos,cell,url,label);
+   videos.getRange(cell).format.font.color='#1E5A9B';
+ });
  videos.getRange(`C${row}`).format.fill=r.scope_label==='Included'?'#E4F0E2':r.scope_label==='Scope unconfirmed'?'#FFF2CC':'#EEF0F3';
  if(r.coverage_label.startsWith('No supplied transcript')) videos.getRange(`G${row}`).format.fill='#FCE5E5';
  if(/Partial|unconfirmed|metadata only/i.test(r.coverage_label)) videos.getRange(`G${row}`).format.fill='#FFF2CC';
  const lines=Math.max(...vrows[i].map((v,c)=>String(v??'').split('\n').reduce((n,line)=>n+Math.max(1,Math.ceil(line.length/(vwidths[c]*0.98))),0)));
- videos.getRange(`A${row}:P${row}`).format.rowHeight=Math.min(409,Math.max(78,14*lines+12));
+ videos.getRange(`A${row}:${videoLastColumn}${row}`).format.rowHeight=Math.min(409,Math.max(78,14*lines+12));
 });
 for(const col of ['A','H','I']) videos.getRange(`${col}2:${col}${vend}`).format.font.color='#1E5A9B';
 videos.freezePanes.freezeRows(1); videos.freezePanes.freezeColumns(3); videos.showGridLines=false; videos.tabColor='#526E91';
@@ -300,7 +319,7 @@ const vm=[
  ['Included public uploads',`=COUNTIFS('Videos'!$C$2:$C$${vend},"Included")`,'Distinct video IDs; repeats in playlists count once.'],
  ['Linked to supplied transcript(s)','=B41-B44-B45-B46','Included uploads less those with no source or unresolved coverage. Includes known partial supplied coverage.'],
  ['Known partial source coverage',`=COUNTIFS('Videos'!$C$2:$C$${vend},"Included",'Videos'!$G$2:$G$${vend},"Partial supplied transcript")`,'An existing supplied transcript omits an identified part of the video.'],
- ['No source · content checked',`=COUNTIFS('Videos'!$C$2:$C$${vend},"Included",'Videos'!$G$2:$G$${vend},"No supplied transcript · content checked")`,'A distinct session has a public-content check; no supplied transcript was located.'],
+ ['No source · content checked',`=COUNTIFS('Videos'!$C$2:$C$${vend},"Included",'Videos'!$G$2:$G$${vend},"No supplied transcript · content checked")`,'Public identity or format checked against the supplied index; date conflicts remain explicit.'],
  ['No source · metadata basis',`=COUNTIFS('Videos'!$C$2:$C$${vend},"Included",'Videos'!$G$2:$G$${vend},"No supplied transcript · metadata basis")`,'Metadata identifies a session absent from the inventory; content remains unchecked.'],
  ['Coverage unresolved',`=COUNTIFS('Videos'!$C$2:$C$${vend},"Included",'Videos'!$G$2:$G$${vend},"Coverage unconfirmed")`,'Do not treat a possible alternate or continuation as a confirmed missing transcript.'],
  ['Scope unconfirmed in Videos',`=COUNTIFS('Videos'!$C$2:$C$${vend},"Scope unconfirmed")`,'Outside the confirmed Casanare corpus until the connection/proceeding type is established.'],

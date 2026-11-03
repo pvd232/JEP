@@ -1,0 +1,309 @@
+{
+  "review_id": "R09",
+  "reviewer": "/root/review09_reproducibility",
+  "review_mode": "independent completed code review",
+  "candidate_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "base_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "reviewed_at_utc": "2026-11-03T20:44:13.854139+00:00",
+  "scope": {
+    "code": [
+      "crawler CLI dispatch, load_initial/load_next, sanitize_fixtures, reproduce",
+      "workbook assembly, report generation and acceptance validator"
+    ],
+    "publication": [
+      "fixture manifest and reduced payloads",
+      "script/workbook/check receipts",
+      "published structured data payloads"
+    ]
+  },
+  "reviewed_sha256": {
+    "pagination_fix/crawl_public_catalog.py": "8e7ba646de4edc9ee86045201eb7405077a8d670598f245969778b2e5d8936f6",
+    "pagination_fix/README.md": "13ff9d5a450ff58a9843d1ea95b112c51b41566cad630f8dc490923d1e31582b",
+    "pagination_fix/fixtures/fixture_manifest.json": "27422fe5c5a05c1461f87c81cf91a61973f2d5086aa22eac0ccfa0851e551624",
+    "workbook_build/assemble_outputs.py": "ec06e9fbe1a5afc2aee19020b70e173351013e7b0495719b4449f8b2d7dbcaed",
+    "workbook_build/finish_report.py": "ea4e3149ada39fd968a78f283e64df882d1ba186883019fa435625446040a4d2",
+    "workbook_build/validate_outputs.py": "b7225b038883384433ea0b56e6a5e241d966f4f5b3dd6b136bd855240252de2f",
+    "workbook_build/README.md": "1d2c4dadc14bb0396d074b109a19f9031e8526187471f7b3aaec63120038d492",
+    "standalone_replay_result.json": "a1ba543e1c8a645b49e7474418fffaaa30bbd1c33d102581953ca3a4d77daa2c",
+    "pagination_reproduction.json": "466582054fc78d5d37f3bd8a4b2bfb4e0e7b253167eaf948bc0828b7fc86fae4",
+    "live_pagination_proof.json": "16f910238296ad579282dfc6ee3ee04dbc8a5e13f8135b5cb0867245adaf77d4",
+    "catalog_validation.json": "21af7fd536296402861c6720169689e8a65904e0380377d5d30ab01de701ae6f",
+    "workbook_validation.json": "37ec612b0d89fb2a6240f88c4bfc1a0baafe5a2c612ab21b56bb722c9098825b"
+  },
+  "verified_publication_sha256": {
+    "source_manifest.json": "f149b5a672485751ba3033f14cc006b6ae668ef8bc5322c3f4c609615d336cf9",
+    "standalone_replay_result.json": "a1ba543e1c8a645b49e7474418fffaaa30bbd1c33d102581953ca3a4d77daa2c",
+    "live_pagination_proof.json": "16f910238296ad579282dfc6ee3ee04dbc8a5e13f8135b5cb0867245adaf77d4",
+    "recording_gaps.json": "71ac1bf29a3202812b03df5d058fdebdfc4cbb0bd981dff5df9718cab6bb8401",
+    "video_details.json": "d79ff8c93f2dbacfd38bd9e8241e220907061b0538192580e077cec2f32643be",
+    "scope_decisions.json": "b49bb97967d26c9421b51dc2d3aac6363da7ea4ae5b8c98fa18b98f37f5e5766",
+    "inventory.csv": "7b27ec902ec8ff3a2ef828bc9e130c30b8adb090396ed8083cef232bb1b888b4",
+    "workbook_validation.json": "37ec612b0d89fb2a6240f88c4bfc1a0baafe5a2c612ab21b56bb722c9098825b",
+    "crawl_sources.json": "0ed123635cec2b3c526bf9cb0b97b8ce620001b4c3efd7f6cbaff974c881dd5c",
+    "new_content_checks.json": "de557498893bf7e2fb1905f6d136ba60eb8aeb1aa41003619a3cac010d439592",
+    "matching_audit.json": "05ab27936613d39ef1c1e6f937b75f01804e6f832d01c4579dcd389b45d27307",
+    "crawl_readiness_review.json": "72c8c6870f6eadd8b7ee9eafc82a756979b39e783cc54bfff07c7d5804ca079d",
+    "english_summaries.json": "6dcd91ad427e7afd2135c3fdb494842e83eb878b8df8133fd8f62ec72c66a64a",
+    "reverse_mapping_review.json": "6c8db273082b2c641f799e98996e92650472c9bb451d0ffaab61200ea631af55",
+    "public_catalog.json.gz": "64fb33a5c43c1ad2644e18506cd482d5fa7472dfd298e9b06162525fab0f0cc8",
+    "video_inventory.json": "878f42bf80d3cd0bd6ac70d6767e27b4b7f839aa4eba35350307d21a3ca38675",
+    "public_memberships.json.gz": "74a5683824c461fdd6302af357790f68a35271bd711e22a3e13f33070951d079",
+    "catalog_validation.json": "21af7fd536296402861c6720169689e8a65904e0380377d5d30ab01de701ae6f",
+    "completion_review.json": "2f74d67e9403c91c0dfccc98bec4165be3a171074b170bdb6448a17a07c9d106",
+    "crawl_manifest.json": "7eb203576902747ea2116c0138e5993e963a708d2cc73c37b25b7edd0993a8aa",
+    "broad_metadata_scope.json": "e0529d204f0512919fde6aded76daaf98d698dd61b439732670e9e5fc58aa9af",
+    "version_comparisons.json": "9573cd1460473c5cc007104cf209675fc6c6b8a08efa2970f5872fd471a29f57",
+    "reverse_audit_report.md": "796e730ba91262dd52d75df285e58770eb45dff373460f67c16e88fa636102e5",
+    "inventory.json": "e261e1b82e9fe41b62aba96277ab54b5f377839a0fc428797dae8d005756b404",
+    "recording_request.md": "0337dd02e36dea6758622149042d4e60d60ffda82ecb3e535324284d65934f78",
+    "video_coverage_method.md": "e1ac5bc92e5b15101cb9dd7bc7321ee2080e7583e1e29fd8e7e30950ec31516a",
+    "README.md": "a9d84b9a8948dfc81eb29b68174be34eadcd5d2b6733f041dad435575bcd9e5d",
+    "pagination_reproduction.json": "466582054fc78d5d37f3bd8a4b2bfb4e0e7b253167eaf948bc0828b7fc86fae4",
+    "standalone_replay.json": "759e7154f6a0c397b4fc98d935b52646d6e30f2f345788e3af6bf89f908646bb",
+    "JEP_transcript_inventory.xlsx": "b1715e2102adabf278ea36d406f06f2147555a5906d1368015e57a570d241cee",
+    "summary.json": "eff0ec882313b47fcb26ce48a494af4f1c6aacb832f7151528c8e25fa974a35b",
+    "pagination_fix/crawl_public_catalog.py": "8e7ba646de4edc9ee86045201eb7405077a8d670598f245969778b2e5d8936f6",
+    "pagination_fix/README.md": "13ff9d5a450ff58a9843d1ea95b112c51b41566cad630f8dc490923d1e31582b",
+    "workbook_build/validate_outputs.py": "b7225b038883384433ea0b56e6a5e241d966f4f5b3dd6b136bd855240252de2f",
+    "workbook_build/build_workbook.mjs": "b12a5d8b38b1e541aa8ed7321f2029b3d4db31f3e0a5987810be554eaf19cae1",
+    "workbook_build/assemble_outputs.py": "ec06e9fbe1a5afc2aee19020b70e173351013e7b0495719b4449f8b2d7dbcaed",
+    "workbook_build/add_native_links.py": "3bc91c3e7cd0afdc3d2a34c90cf5dc5d2f011bdde4360d786c1802fb7062a5ce",
+    "workbook_build/finish_report.py": "ea4e3149ada39fd968a78f283e64df882d1ba186883019fa435625446040a4d2",
+    "workbook_build/README.md": "1d2c4dadc14bb0396d074b109a19f9031e8526187471f7b3aaec63120038d492",
+    "pagination_fix/fixtures/audiencias_first_page.json": "c28324fd88a9f18ce40f04c6eccdffa004c9f7ccc7c9109f231b210cf5d2d82d",
+    "pagination_fix/fixtures/fixture_manifest.json": "27422fe5c5a05c1461f87c81cf91a61973f2d5086aa22eac0ccfa0851e551624",
+    "pagination_fix/fixtures/case03_first_page.json": "247216a601e681ed15e180c80dc83ae381ccca249ff32e06c8a2ca645e352f51",
+    "pagination_fix/fixtures/deep_channel_streams_terminal.json": "333753b2ce0df66bae79b522f02b98a5cbe993d5bbccd3f0d562a3e2213cce80",
+    "pagination_fix/fixtures/casanare_first_page.json": "85593f02cc0e108b7be29efdd5f4f41cae45492b7257bda25f03f94dec7a382e",
+    "pagination_fix/fixtures/deep_channel_videos_terminal.json": "f2430389e83a1d35e320e2c80cfe12ef481feaf46ac170866f9462b16fc9089b"
+  },
+  "invariants": [
+    "Reduced fixtures retain the actually observed parser failure and independent original-response provenance.",
+    "Pass claims and process status follow actual validation outcomes.",
+    "Evidence execution timestamps do not substitute for source retrieval timestamps.",
+    "No raw source transcript/player/caption payload, opaque token or signed media URL enters the reviewed public data package."
+  ],
+  "findings": [
+    {
+      "id": "R09-F01",
+      "severity": "P2",
+      "blocking": true,
+      "blocks_review_approval": true,
+      "blocks_current_dataset_counts": false,
+      "file": "workbook_build/finish_report.py",
+      "lines": [
+        17,
+        18,
+        48
+      ],
+      "symbol": "main",
+      "title": "Failed proof receipts still produce an all-passed report",
+      "invariant": "Narrative pass counts and command success must reflect actual proof/replay outcomes.",
+      "observed": "The report substitutes the total check count as both numerator and denominator, without checking all_passed, individual outcomes or replay exit_code.",
+      "counterexample": {
+        "exit_code": 0,
+        "error": null,
+        "input_reproduction_all_passed": false,
+        "input_replay_all_passed": false,
+        "input_replay_exit_code": 1,
+        "generated_report": true,
+        "claims_reproduction_passed_all": true,
+        "claims_replay_passed_all": true
+      },
+      "smallest_repair": "Validate receipt structure and outcomes before mutating summary/report; derive passed counts from outcomes; exit nonzero or explicitly publish failure when any required proof fails.",
+      "focused_observer": "failed_report in observe_publication.py. Failed inputs must not yield all-passed claims; real successful inputs must still succeed. Missing-input exceptions alone do not verify the repair.",
+      "current_data_impact": "Actual frozen reproduction and replay receipts pass. This demonstrates a future failure-reporting boundary, not an incorrect current published result.",
+      "status": "Open"
+    },
+    {
+      "id": "R09-F02",
+      "severity": "P2",
+      "blocking": true,
+      "blocks_review_approval": true,
+      "blocks_current_dataset_counts": false,
+      "file": "pagination_fix/crawl_public_catalog.py",
+      "lines": [
+        966,
+        974
+      ],
+      "symbol": "main crawl branch",
+      "title": "Failed or incomplete full crawl returns process success",
+      "invariant": "A required full-crawl command must return nonzero when requested traversal fails or remains incomplete.",
+      "observed": "main prints and exports the error state but returns normally even when crawl_one reports error.",
+      "counterexample": {
+        "exit_code": 0,
+        "error": null,
+        "transport_stub_calls": 1,
+        "status": "error",
+        "pagination_exhausted": false,
+        "error_count": 1
+      },
+      "smallest_repair": "After preserving receipts, aggregate requested collection results and exit nonzero for unsuccessful/incomplete traversal; preserve separate limited-probe success semantics.",
+      "focused_observer": "failed_crawl in observe_publication.py must observe nonzero exit plus preserved error state; also check completed success and required page-limit/stop cases.",
+      "current_data_impact": "Actual retained playlists are complete and reconciled; the first-request timeout is synthetic.",
+      "status": "Open"
+    },
+    {
+      "id": "R09-F03",
+      "severity": "P3",
+      "blocking": false,
+      "blocks_review_approval": false,
+      "blocks_current_dataset_counts": false,
+      "file": "pagination_fix/crawl_public_catalog.py",
+      "lines": [
+        323,
+        370,
+        953,
+        965
+      ],
+      "symbol": "load_initial/load_next/main probe-next",
+      "title": "Cache replay can emit a newly dated live proof without retrieval provenance",
+      "invariant": "Proof execution time and source retrieval time should be distinguishable.",
+      "observed": "Cached pages generate a new proof at timestamp, but the proof lacks fetch time, response hash, cache/fresh flags or request count.",
+      "counterexample": {
+        "exit_code": 0,
+        "error": null,
+        "network_calls": 0,
+        "proof_passed": true,
+        "proof_at": "2026-11-03T20:40:51.800466+00:00",
+        "actual_page_fetch_times": [
+          "2026-11-03T17:24:32.524219+00:00",
+          "2026-11-03T17:24:36.835663+00:00"
+        ],
+        "proof_field_names": [
+          "at",
+          "collection",
+          "command",
+          "errors",
+          "examples",
+          "first_page_appearances",
+          "new_video_ids_beyond_first_page",
+          "next_page_appearances",
+          "passed"
+        ],
+        "freshness_or_cache_evidence": {}
+      },
+      "smallest_repair": "Include original per-page fetch timestamps, response hashes and cache/fresh status; label replay accurately instead of forcing unnecessary network requests.",
+      "focused_observer": "cached_live_probe in observe_publication.py should remain a valid zero-network replay while exposing its cached provenance.",
+      "current_data_impact": "README documents cache reuse; actual published proof was generated after fresh GET and POST requests at 17:24:32.524219 and 17:24:36.835663 UTC, preceding proof time 17:24:40.388279 on 2026-11-03.",
+      "status": "Advisory"
+    }
+  ],
+  "mechanical_evidence": {
+    "command": "\"$CODEX_PRIMARY_RUNTIME_PYTHON\" inventory_work/tieout_review_20261103/reviews/review09/observe_publication.py",
+    "observer_sha256": "faffc1d77d0c987e087f6a3ffb69f0a32ce142d257cf0df383ec6f49d9ef7652",
+    "receipt_sha256": "34732fee702ef5982a2405dc666b3714946e0804f1ac3d84c670d1a11f23376c",
+    "tested_code_sha256": {
+      "crawler": "8e7ba646de4edc9ee86045201eb7405077a8d670598f245969778b2e5d8936f6",
+      "reporter": "ea4e3149ada39fd968a78f283e64df882d1ba186883019fa435625446040a4d2"
+    },
+    "counterexamples_reproduced": 3,
+    "network_requests": 0,
+    "publication_integrity": {
+      "frozen_file_count": 45,
+      "changed_frozen_files": [],
+      "fixture_hash_checks": [
+        {
+          "label": "case03",
+          "reduced_sha_matches": true,
+          "original_sha_matches": true
+        },
+        {
+          "label": "casanare",
+          "reduced_sha_matches": true,
+          "original_sha_matches": true
+        },
+        {
+          "label": "audiencias",
+          "reduced_sha_matches": true,
+          "original_sha_matches": true
+        },
+        {
+          "label": "deep_channel_videos",
+          "reduced_sha_matches": true,
+          "original_sha_matches": true
+        },
+        {
+          "label": "deep_channel_streams",
+          "reduced_sha_matches": true,
+          "original_sha_matches": true
+        }
+      ],
+      "script_sha256": "8e7ba646de4edc9ee86045201eb7405077a8d670598f245969778b2e5d8936f6",
+      "replay_script_sha_matches": true,
+      "catalog_validation_script_sha_matches": true,
+      "workbook_sha_matches_receipt": true,
+      "workbook_bytes_match_receipt": true,
+      "data_files_scanned": [
+        "source_manifest.json",
+        "standalone_replay_result.json",
+        "live_pagination_proof.json",
+        "recording_gaps.json",
+        "video_details.json",
+        "scope_decisions.json",
+        "workbook_validation.json",
+        "crawl_sources.json",
+        "new_content_checks.json",
+        "matching_audit.json",
+        "crawl_readiness_review.json",
+        "english_summaries.json",
+        "reverse_mapping_review.json",
+        "public_catalog.json.gz",
+        "video_inventory.json",
+        "public_memberships.json.gz",
+        "catalog_validation.json",
+        "completion_review.json",
+        "crawl_manifest.json",
+        "broad_metadata_scope.json",
+        "version_comparisons.json",
+        "inventory.json",
+        "pagination_reproduction.json",
+        "standalone_replay.json",
+        "summary.json",
+        "pagination_fix/fixtures/audiencias_first_page.json",
+        "pagination_fix/fixtures/fixture_manifest.json",
+        "pagination_fix/fixtures/case03_first_page.json",
+        "pagination_fix/fixtures/deep_channel_streams_terminal.json",
+        "pagination_fix/fixtures/casanare_first_page.json",
+        "pagination_fix/fixtures/deep_channel_videos_terminal.json"
+      ],
+      "excluded_payload_findings": [],
+      "fixture_tokens_are_synthetic": true,
+      "fixture_token_count": 4,
+      "embedded_workbook_executable_parts": []
+    },
+    "reused_same_hash_reviews": [
+      {
+        "review": "R01",
+        "evidence": "../review01/review.json",
+        "standalone_checks": 14,
+        "standalone_all_passed": true,
+        "retained_playlist_pages": 22,
+        "retained_memberships": 1622,
+        "retained_playlists": 10,
+        "replay_exact": true
+      },
+      {
+        "review": "review02_completeness",
+        "evidence": "../review02/review.json",
+        "retained_channel_response_pages": 120,
+        "retained_channel_replay_passed": true
+      }
+    ]
+  },
+  "verdict": "Request changes",
+  "verdict_scope": "Two failure-propagation/reporting defects before unrestricted reuse. Actual publication hashes, fixture provenance and successful frozen receipts are supported. Cached-proof freshness is advisory.",
+  "exclusions": [
+    "No network requests or fresh channel retrieval.",
+    "No substantive review of hearing identity, deduplication decisions or English summary accuracy.",
+    "The structured publication scan is bounded and is not a blanket sensitive-data certification.",
+    "Research-layout portability is disclosed and is not treated as a blocker.",
+    "Raw response caches remain local-only and are not review deliverables."
+  ],
+  "mutations": "Only review09 artifacts and transient inputs; frozen baseline/shared sources untouched.",
+  "evidence_files": [
+    "review.md",
+    "observe_publication.py",
+    "observations.json"
+  ]
+}

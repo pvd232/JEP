@@ -1,0 +1,152 @@
+{
+  "review_id": "review05",
+  "finding_id": "R05-F2",
+  "kind": "Repair follow-up to independent Review 05; not an eleventh review",
+  "recorded_at_utc": "2026-11-03T21:02:41.491568+00:00",
+  "accepted_base_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "verdict": "R05-F2 closed for the isolated absence-admission boundary; root integration remains separate",
+  "production_change_scope": [
+    "inventory_work/reverse_audit/build_mapping_review.py",
+    "inventory_work/reverse_audit/accepted_reverse_dispositions.json"
+  ],
+  "source_session_index_sha256": "84ea4abd30c448bce30be72bcc75a81b65bf2e1c88082b7987a002ecc0ae2f27",
+  "source_record_count": 93,
+  "accepted_disposition_count": 45,
+  "accepted_disposition_basis": {
+    "metadata_session_index": 41,
+    "content_checked": 4
+  },
+  "new_behavior": [
+    "An unlinked upload defaults to Coverage unconfirmed.",
+    "Absence requires an explicit reviewed ledger entry bound to exact video ID, public title SHA, parsed principal/date and the stable supplied source-session index.",
+    "An exact normalized principal/date collision with a supplied source prevents absence admission, including when a metadata ledger entry is present.",
+    "A source-session identity or membership change fails closed before output creation; source ordering, file ordering and public-link/notes changes do not redefine the index.",
+    "Duplicate accepted video IDs are rejected; final validation prevents a later override from bypassing the ledger."
+  ],
+  "source_index_fields": [
+    "unique_id",
+    "source_file_ids",
+    "transcript_title",
+    "date",
+    "participants",
+    "document_type"
+  ],
+  "file_hashes": {
+    "builder_before": {
+      "path": "inventory_work/tieout_review_20261103/reviews/review05/working_build_mapping_review.py",
+      "sha256": "f409e2bc23f999f55e4363f083c116cb56af2c3f556f47aeaba827837921a0e1"
+    },
+    "builder_after": {
+      "path": "inventory_work/reverse_audit/build_mapping_review.py",
+      "sha256": "c268c8fad85bb5c7a8b3fc9d20529aae786f471ce94f5eaaf6d11bb834ba1776"
+    },
+    "accepted_disposition_ledger": {
+      "path": "inventory_work/reverse_audit/accepted_reverse_dispositions.json",
+      "sha256": "2381d6747c2f2171d8ccb050fd5dc1a604b789eefc8ea8dbc2829e84d5ee7e2b"
+    },
+    "observer": {
+      "path": "inventory_work/tieout_review_20261103/reviews/review05/observe_disposition_repair.py",
+      "sha256": "d033c3cee54b026a0276414629d622d1e5ac2ce8c1883593133344707f24f743"
+    },
+    "observer_results": {
+      "path": "inventory_work/tieout_review_20261103/reviews/review05/disposition_repair_observations.json",
+      "sha256": "70939569cb45123490892cf470415cb365f903fc95af70af31ddd5ec4833a835"
+    },
+    "accepted_inventory": {
+      "path": "inventory_work/tieout_review_20261103/base/inventory.json",
+      "sha256": "e261e1b82e9fe41b62aba96277ab54b5f377839a0fc428797dae8d005756b404"
+    },
+    "accepted_reverse_mapping_review": {
+      "path": "inventory_work/tieout_review_20261103/base/reverse_mapping_review.json",
+      "sha256": "6c8db273082b2c641f799e98996e92650472c9bb451d0ffaab61200ea631af55"
+    },
+    "accepted_scope_decisions": {
+      "path": "inventory_work/tieout_review_20261103/base/scope_decisions.json",
+      "sha256": "b49bb97967d26c9421b51dc2d3aac6363da7ea4ae5b8c98fa18b98f37f5e5766"
+    },
+    "original_review": {
+      "path": "inventory_work/tieout_review_20261103/reviews/review05/review.json",
+      "sha256": "8b0cd0eb9edfafdc44acd0014f7dc1a16460f5de235efa8566784f89a6af4cab"
+    },
+    "all_41_metadata_comparisons": {
+      "path": "inventory_work/tieout_review_20261103/reviews/review05/metadata_gap_audit.json",
+      "sha256": "2f81da80dd477c313abb682241ee7b6224842e1ab8ec627bc852ab34f2545d1e"
+    }
+  },
+  "definition_locations": {
+    "source_session_index_fingerprint": {
+      "line": 71,
+      "end_line": 89
+    },
+    "validate_absence_ledger": {
+      "line": 92,
+      "end_line": 112
+    },
+    "accepted_absence": {
+      "line": 115,
+      "end_line": 137
+    }
+  },
+  "observer_command": "\"$CODEX_PRIMARY_RUNTIME_PYTHON\" inventory_work/tieout_review_20261103/reviews/review05/observe_disposition_repair.py",
+  "observer_exit_code": 0,
+  "checks": [
+    {
+      "check": "All 45 accepted baseline dispositions survive both admission and final validation",
+      "passed": true,
+      "detail": {
+        "accepted": 45,
+        "produced": 45
+      }
+    },
+    {
+      "check": "A new unreviewed upload remains unresolved",
+      "passed": true,
+      "detail": {
+        "status": "Coverage unconfirmed; no accepted source-session comparison"
+      }
+    },
+    {
+      "check": "An exact principal/date collision remains unresolved even with a metadata ledger entry",
+      "passed": true,
+      "detail": {
+        "status": "Coverage unconfirmed; no accepted source-session comparison",
+        "existing_source": "VV-057"
+      }
+    },
+    {
+      "check": "A changed source-session index fails closed",
+      "passed": true,
+      "detail": {
+        "error": "Accepted reverse dispositions refer to a changed source-session index; re-review required"
+      }
+    },
+    {
+      "check": "Ordering, video URLs and coverage-note changes do not redefine the source-session index",
+      "passed": true,
+      "detail": {
+        "source_session_index_sha256": "84ea4abd30c448bce30be72bcc75a81b65bf2e1c88082b7987a002ecc0ae2f27"
+      }
+    },
+    {
+      "check": "Duplicate accepted video IDs cannot overwrite a disposition",
+      "passed": true,
+      "detail": {}
+    },
+    {
+      "check": "A later override cannot bypass accepted-disposition admission",
+      "passed": true,
+      "detail": {
+        "error": "No-source disposition lacks an accepted source-session comparison: UNREVIEWED1"
+      }
+    }
+  ],
+  "execution_boundary": "Pure definitions and isolated candidate/final-validation loops only. The top-level builder was neither imported nor executed; canonical outputs were not written.",
+  "inspection": "Compared the exact patch against the frozen pre-repair builder and reread the surrounding candidate loop, content overrides and final writer. Existing content refinements and source-to-video links are unchanged.",
+  "limitations": [
+    "The accepted 45 are public upload dispositions, not a certified count of additional unique hearings.",
+    "The frozen ledger preserves four content-based and 41 metadata-based decisions. Fresh caption refinements belong to the parent integration and are not claimed in this ledger.",
+    "This receipt closes R05-F2 only; R05-F1 edge-preservation repair and canonical data/workbook integration belong to root.",
+    "The canonical top-level builder was neither imported nor executed. No canonical research outputs, assembler or source transcripts were modified by this repair.",
+    "No raw captions or private source text are included in these repair artifacts."
+  ]
+}

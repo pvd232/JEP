@@ -1,0 +1,90 @@
+{
+  "review_number": 10,
+  "mode": "independent",
+  "reviewed_at": "2026-11-03T20:48:57.123437+00:00",
+  "base_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "scope": [
+    "New fresh-channel traversal implementation",
+    "Current parser dependency at frozen hash",
+    "All 118 retained fresh pages and receipts",
+    "Historical/fresh channel ID reconciliation",
+    "Final-assembly guard requirements already identified by Reviews 03 and 05"
+  ],
+  "reviewed_sha256": {
+    "inventory_work/reverse_audit/refresh_channel_catalogs.py": "0cabb13c3c085059d30ce2e0656154737b717f26938ba2cea095066f089c8999",
+    "inventory_work/reverse_audit/crawl_public_catalog.py": "12e5a7b9daa3067ddd714a8b56c15ee753e4025a659a285051bc263c6845acaa",
+    "inventory_work/reverse_audit/assemble_outputs.py": "ec06e9fbe1a5afc2aee19020b70e173351013e7b0495719b4449f8b2d7dbcaed"
+  },
+  "observer_sha256": "af3525d25628a1b7120346800412843842085e2b1b9c3cb26db51185ea694a8f",
+  "observations_sha256": "55964f3caf6073c54872f089e861c628e5d3e38ff17f52f62017bdb8603fa403",
+  "actual_network_requests": 0,
+  "shared_source_edits_before_review_freeze": 0,
+  "verdict": "Request changes to the candidate code; retained fresh data passes the scoped offline audit",
+  "findings": [
+    {
+      "id": "R10-01",
+      "priority": "P2",
+      "file": "inventory_work/reverse_audit/refresh_channel_catalogs.py",
+      "function": "refresh",
+      "lines": "54–59",
+      "title": "Parsed initial cache is not bound to the retained HTML",
+      "impact": "A stale or changed page_000.json can suppress the first continuation while the genuine HTML receipt still validates, yielding false exhaustion. No such mismatch exists in the two actual fresh snapshots.",
+      "counterexample": "Original HTML has one video and a continuation; cached page_000.json omits the continuation. The unchanged raw HTML checksum and requested URL pass, and baseline reports exhausted_count_unknown with one video.",
+      "repair": "Re-extract ytInitialData from the retained checksum-verified HTML and reject any unequal parsed cache before selecting a grid.",
+      "observer": "R10-01 in observe_fresh_integrity.py must change from false exhaustion to an explicit initial-cache mismatch error. All 118 retained pages must still pass."
+    },
+    {
+      "id": "R10-02",
+      "priority": "P2",
+      "file": "inventory_work/reverse_audit/refresh_channel_catalogs.py",
+      "function": "refresh",
+      "lines": "70–79",
+      "title": "Requested surface is not checked against the selected tab endpoint",
+      "impact": "A self-consistent official-channel Videos response can be labelled and completed as the Live surface. The two retained snapshots have correct selected endpoints.",
+      "counterexample": "Request streams but provide a selected Videos tab at /@jepcolombia/videos, with the correct official channel ID and valid primary grid. Baseline emits channel_streams with selected_tab_title Videos and pagination_exhausted true.",
+      "repair": "Before consuming the grid, validate the observed selected-tab endpoint against the requested surface and official handle or canonical channel path. Preserve the observed endpoint and title as provenance.",
+      "observer": "R10-02 must become an explicit surface mismatch error; valid Videos and Live snapshots continue to parse."
+    }
+  ],
+  "verified_counts": {
+    "videos": {
+      "pages": 89,
+      "memberships": 2663,
+      "unique_video_ids": 2663,
+      "added_ids": [],
+      "absent_from_fresh_listing_ids": []
+    },
+    "streams": {
+      "pages": 29,
+      "memberships": 846,
+      "unique_video_ids": 846,
+      "added_ids": [],
+      "absent_from_fresh_listing_ids": [
+        "Pg8DvszQMME"
+      ]
+    }
+  },
+  "failure_controls": {
+    "passed": 7,
+    "total": 7
+  },
+  "integration_observations": [
+    "R03-F2: reject contradictory broad/main scope decisions and omitted broad inclusions before output writes.",
+    "R05-F1: reject duplicate reverse IDs and preserve the full forward/reverse edge set before output writes.",
+    "R05-F2: new unlinked uploads begin coverage-unconfirmed until explicit reviewed session comparison.",
+    "Use fresh traversal for current source accounting while preserving prior discovery memberships and unavailable placeholders. Pg8DvszQMME must not disappear from historical provenance solely because it is absent from the refreshed Live listing."
+  ],
+  "removed_listing_item": {
+    "video_id": "Pg8DvszQMME",
+    "disposition": "Absent from fresh Live listing; Review07 public watch check remains playable. Listing absence does not establish deletion or a privacy flag.",
+    "receipt": "../review07/removed_live_watch_metadata.json",
+    "sha256": "f69cf25dfd2b72550f3e11613ee2098b4eae767ac20750720002a240531d6012"
+  },
+  "limitations": [
+    "Raw first-page HTML bytes and normalized continuation JSON are retained and checked; original continuation HTTP bytes are not retained verbatim.",
+    "Request bodies are inferred from the reviewed caller and recorded token fingerprints; this is not a packet capture.",
+    "Absence from a channel listing does not establish deletion, unlisted privacy or video unavailability.",
+    "No new territory or hearing-content determinations; no full match certification; no packet capture or transcript changes."
+  ],
+  "repair_authorization": "Parent authorized repair only to refresh_channel_catalogs.py after this review receipt is frozen; repair receipt will be separate in rework.json."
+}

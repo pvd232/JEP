@@ -1,0 +1,388 @@
+{
+  "validation_type": "Follow-up verification of existing Reviews 01, 02 and 09; not an additional independent review",
+  "base_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "reviewed_source": "/workspace/scratch/8a7e64850a04/inventory_work/tieout_review_20261103/root_crawler_rework_snapshot/crawl_public_catalog.py",
+  "reviewed_source_sha256": "903447bf358adff4467b5207441e33770c8c319c0917a481a6fde6cb377764d6",
+  "working_source_sha256_at_finish": "903447bf358adff4467b5207441e33770c8c319c0917a481a6fde6cb377764d6",
+  "observer_sha256": "3e9b42b5982f57cc1abc7e29b135a233d82f09c65904fc639fadd7c32b3c292c",
+  "runtime": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+  "prior_evidence_sha256": {
+    "reviews/review01/review.json": "b1efd0a34942101f4cf3db66b76aed746c8507bedb9b50f495d8e155ae00718b",
+    "reviews/review01/observations.json": "b33f5162024dd4eeb88f2d607e404a2e06e967c1ffa88a42e8fc4974d3914082",
+    "reviews/review01/observe_pagination.py": "c500429262969ce3985c3355d3259358e3851112f7b84f4f437d9c3360f5d7ef",
+    "reviews/review02/review.json": "36a0fc83e41e22397e5b78581b6dd11b9f60d41e80feda016f6b8db1cf443cd4",
+    "reviews/review02/observer_results.json": "5e00a752d97e969e463027dc6d31180a0d92da177af1cfb07ee302aea0e384de",
+    "reviews/review09/review.json": "03c1fbd4bcf6d1a9ff74291ea981a591fc5efadce1ca285bb5ef3ba50c563601",
+    "reviews/review09/observations.json": "34732fee702ef5982a2405dc666b3714946e0804f1ac3d84c670d1a11f23376c",
+    "reviews/review09/observe_publication.py": "faffc1d77d0c987e087f6a3ffb69f0a32ce142d257cf0df383ec6f49d9ef7652"
+  },
+  "prior_evidence_unchanged": true,
+  "actual_network_requests": 0,
+  "cases": [
+    {
+      "id": "R01-F01",
+      "scenario": "Missing target on both first and continued page",
+      "observed": {
+        "status": "error",
+        "pagination_exhausted": false,
+        "count_reconciled": false,
+        "visible_memberships": 0,
+        "unique_video_ids": 0,
+        "pending_token_sha256": [],
+        "errors": [
+          {
+            "type": "ValueError",
+            "message": "Primary video list has no usable continuation target",
+            "at": "2026-11-03T20:55:49.622773+00:00"
+          }
+        ]
+      },
+      "passed": true
+    },
+    {
+      "id": "R01-F02",
+      "observed_error": "Malformed legacy continuation token",
+      "entry_count": 0,
+      "pending_count": 0,
+      "passed": true
+    },
+    {
+      "id": "R01-F02-valid-control",
+      "observed_error": null,
+      "entry_count": 1,
+      "pending_count": 1,
+      "passed": true
+    },
+    {
+      "id": "R02-01",
+      "scenario": "Missing middle index",
+      "observed": {
+        "status": "reused_snapshot_incomplete",
+        "pagination_exhausted": false,
+        "count_reconciled": null,
+        "visible_memberships": 2,
+        "unique_video_ids": 2,
+        "pending_token_sha256": [],
+        "errors": [
+          {
+            "type": "NonconsecutiveChannelPages",
+            "message": "Retained channel pages must start at zero and contain every page index"
+          }
+        ]
+      },
+      "page_roles": [],
+      "passed": true
+    },
+    {
+      "id": "R02-01-branch-guard",
+      "scenario": "A wrong-target video page is mislabelled an empty non-video branch in the derived catalog",
+      "observed": {
+        "status": "reused_terminal_snapshot",
+        "pagination_exhausted": true,
+        "count_reconciled": null,
+        "visible_memberships": 2,
+        "unique_video_ids": 2,
+        "pending_token_sha256": [],
+        "errors": []
+      },
+      "page_roles": [
+        "primary_video_grid",
+        "non_video_branch",
+        "primary_video_grid"
+      ],
+      "passed": false
+    },
+    {
+      "id": "R02-02",
+      "retained_required_core_keys": [
+        "audiencias",
+        "casanare",
+        "case03",
+        "memoria_casanare",
+        "regimen"
+      ],
+      "missing_core_keys_with_explicit_status": [
+        "audiencias",
+        "case03",
+        "memoria_casanare",
+        "regimen"
+      ],
+      "missing_regional_keys_with_explicit_status": [
+        "region_antioquia",
+        "region_costa_caribe",
+        "region_huila",
+        "region_meta",
+        "region_norte_santander"
+      ],
+      "channel_controls_exhausted": true,
+      "passed": true
+    },
+    {
+      "id": "R09-F02-transport-failure",
+      "observed": {
+        "exit_code": 1,
+        "error": "1",
+        "transport_stub_calls": 1,
+        "status": "error",
+        "pagination_exhausted": false,
+        "error_count": 1
+      },
+      "passed": true
+    },
+    {
+      "id": "R09-F02-page-cap",
+      "observed": {
+        "exit_code": 1,
+        "error": "1",
+        "status": "limit_reached",
+        "pagination_exhausted": false,
+        "count_reconciled": false,
+        "visible_memberships": 1,
+        "unique_video_ids": 1,
+        "pending_token_sha256": [
+          "cb3aa06db7d4174f063b9f0e40ede1c72ff73e64a7842a8a24768ce6ee4e0918"
+        ],
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "id": "R09-F02-successful-completion",
+      "observed": {
+        "exit_code": 0,
+        "error": null,
+        "status": "exhausted_reconciled",
+        "pagination_exhausted": true,
+        "count_reconciled": true,
+        "visible_memberships": 1,
+        "unique_video_ids": 1,
+        "pending_token_sha256": [],
+        "errors": []
+      },
+      "passed": true
+    },
+    {
+      "id": "R09-F02-stop-on-429",
+      "observed": {
+        "exit_code": 1,
+        "error": "1",
+        "intercepted_transport_calls": 1,
+        "stop_network_set": true,
+        "first_state": {
+          "status": "error",
+          "pagination_exhausted": false,
+          "count_reconciled": null,
+          "visible_memberships": 0,
+          "unique_video_ids": 0,
+          "pending_token_sha256": [],
+          "errors": [
+            {
+              "type": "HTTPError",
+              "message": "HTTP Error 429: Synthetic offline rate limit",
+              "at": "2026-11-03T20:55:51.249846+00:00"
+            }
+          ]
+        },
+        "uncrawled_second_source_status": "required_snapshot_missing"
+      },
+      "passed": true
+    },
+    {
+      "id": "R09-F03",
+      "observed": {
+        "exit_code": 0,
+        "network_calls": 0,
+        "passed": true,
+        "proof_execution_time": "2026-11-03T20:55:51.381406+00:00",
+        "proof_type": "cached_response_replay",
+        "page_request_provenance": [
+          {
+            "page_index": 0,
+            "fetched_at": "2026-11-03T17:24:32.524219+00:00",
+            "cache_reused": true,
+            "response_sha256": "d5363984c2486b40f875c2b5389616af6bb99326ae430dc01967d9c42157ecb0"
+          },
+          {
+            "page_index": 1,
+            "fetched_at": "2026-11-03T17:24:36.835663+00:00",
+            "cache_reused": true,
+            "response_sha256": "d0b358b5bcfb1a24c4a0ad3907b593208a8be729ffd7c80e7176e58cf3a91828"
+          }
+        ]
+      },
+      "passed": true
+    }
+  ],
+  "retained_channel_replays": [
+    {
+      "label": "deep_channel_videos",
+      "pages": 90,
+      "unique_video_ids": 2663,
+      "roles": {
+        "primary_video_grid": 89,
+        "non_video_branch": 1
+      },
+      "checks": {
+        "complete_with_no_errors": true,
+        "all_pages_receipted": true,
+        "same_complete_ordered_ids": true,
+        "same_unique_id_count": true,
+        "one_recognized_nonvideo_branch": true,
+        "every_raw_hash_matches_original_review": true,
+        "same_derived_catalog_as_original_review": true,
+        "unknown_retrieval_time_remains_explicit": true
+      },
+      "all_passed": true,
+      "response_sha256": {
+        "0": "4b8d2e50f078a544794447f5cd9c2070b452c2529cdc542926cd0dd229d0e697",
+        "1": "6817ebb6fb5641aa10115cc9326e449371d7c8238192d6f42867c24361709164",
+        "2": "841805a8124cf62b43869be21c5e2e3690ca83306b6b4dd70e239e938b18161b",
+        "3": "46027ed17649c316ee913c99355fd68360524a066ec7a7266f39ab4c9545d283",
+        "4": "fd496fa20accadb5088157f977f0c0a9353c473077209fd6e19a271bedeb512f",
+        "5": "5d89dd2726b58ee43e22656b142cfee314860b4ce6d4be83ba5a98faf89bff1a",
+        "6": "72e3df55b5c6c63f3fe301f1c2d5d502f4b2b1af5703710eb569934413920fff",
+        "7": "dc2387211612dd8f69659c5068f8358931812c1e9d1c224819af40d9b26dfabf",
+        "8": "4170bb8a0c44c43f5f4f6cacebb1e762ad6ffa63fd5870c9b341d67fab3c220a",
+        "9": "874e6e55192a9c962ddfedaea0a1338fc28082fe31a896d20a4014b3c58bbfd1",
+        "10": "6e187c1707ff76c4550dd38128040be44846d8ccce1a46d45542f38fae758b09",
+        "11": "bd318082d68abba1ad80fa5dbe4fc5e0a8ae25fc480c9b7a429bf9f273487ed7",
+        "12": "1ee9e1427a3b7300c6547b21ea46f79272af721429e40f15e701c962a5a6c464",
+        "13": "49c80b75c5ce1a5fad7cbed33c7e9ad8a5a0875f7199446b180fc7e4bf7feca3",
+        "14": "1bb2140a93daa7319f3b7b2b346b268353d0a809e7a32bc7f989b4d22f1804a7",
+        "15": "5f8dda4765e13aa58d0ffd7a4a20bd8ab2459f73906cc4a4df556739e1abe848",
+        "16": "3361951ed6432b299970f9d7ce1d4ec5311591c02f541881437cbb698e238282",
+        "17": "afc0cbf80993a4303111cd17133219149da6b210424bd3f0bc943e074eafc88f",
+        "18": "e9c41389fe72a4a371763cb6fe5d51e172c6346193ef90d598e09e84dc005c7c",
+        "19": "53ef44580cce4c3102758071a661be7987998e772e693b3756621903ab73f9e8",
+        "20": "bb90b98c1ffe3153b8185629b8e9ba02ad032d6bb249b666bd559fb7ef786f2d",
+        "21": "00397093b9e70f4fc76ad3d2bbef88114c68aa5690f6865c906fc4cb724f418f",
+        "22": "d9a5f3de74105ea8683c341b8bb37278c3db47d46000595e0a85785d839bca5d",
+        "23": "43b4a6b897b911145d75ab87297c4732d5fdad1c142d891041445e27f532e05f",
+        "24": "b0a0f57192ef55bd62e75a65c432d5d886efaf8484aa664ea41e32ad0db12ba3",
+        "25": "daedefba3731b0c5be47e2e1488399abb9b3782e54dc7af916962bf25c402307",
+        "26": "c1ba2b6941fc3cc8172ae614065e00c441384d53846f9eca776bba3d4b42a76b",
+        "27": "4655969e53245d8465560406e0f34e7d94f7dfaf6b7c2bdb43ce4db7905ea9a9",
+        "28": "9c13ff0ffd3d3d8ee7fa26a398e1bddb84f5d454095cf39ba9da04a8bd11c076",
+        "29": "743823d2410813b1a326cd16caaa6755e8207b2db265bcbff67b64eed2470c5d",
+        "30": "1cdd5c412686ea17b4dd8ab4a69cf2bccda9c7fb5b49b55aa9490d5a21de45e2",
+        "31": "b8a8d61153064c2777997ccb7d4f48c6d2dddcecd4ee693866dcaf7d4681eb39",
+        "32": "c74f02c64916488ac5bc017c6bd6baf48a49ef443764e02c8ae19cb59a9411e5",
+        "33": "797b851716ca10d7ab10c350d4e80359d0df0bcd1e49b7c21bba4dd170047b9d",
+        "34": "9155eefc31f81e97e5b0d22426ed108b39880315aa866eba65506ac5deba0694",
+        "35": "f6ec192ab6762167dc53ac7c15c09c618310412ef050430994bdc1bbf47c8f8f",
+        "36": "c7a8d347fd63bc9d2c797044149643e73606ee202e1efd7f95fb437b282e58f2",
+        "37": "a9c2a9e4c13d8c24e99bf95a63a423e4dd6bc7ea31f1078eacf3737d1e317aa4",
+        "38": "b9b81de4fcd84fff4fc0c91c2e08ed83d69c17c78d52752d3e4611a42dbe2146",
+        "39": "a18f1392ad19709486e73165b0175421d3eee28e7f1a0a29b04003b8fb8eebbf",
+        "40": "823607d0c5c2e2178e6b0a69645677eec4f4c28c922c9184d8198820a7a5b34c",
+        "41": "e1e32a300e841c2aa31ffbbac250fde56cb285d93be5e073ba9de53ce626eaf1",
+        "42": "475fe15a574da9b51b9b8f82c9c9526ec79d1e5dbc820ce74aab420036947e0a",
+        "43": "365cd9d1935928bdb5c961ea15f15c81732b4955ea27ad07d5ad53b07c9c305e",
+        "44": "406f7efc6a0fc8615671c36ca02caf497f214d7060edc1010cc01d5a928453e9",
+        "45": "f8cf143e5d0c461747f731df0ae4d8364f068f600273e50e30dfb90260045830",
+        "46": "6ce6c7714e3ce1ea2023b8624662c1805b6b16e297c4b8a54994d0c80bf5eb56",
+        "47": "1072a4e95029107516418c396199c2d9dfcdc723781bf3cb1ade002aee9e227f",
+        "48": "c5fefa1b86031f811e7dc3912678660a74789b6598b9463c8f5c3d91644989d3",
+        "49": "27e0baad8ddb3489944b5e229e9cdf876b84bf630193ecdb88b6d5198296a482",
+        "50": "3407a296373e8bf375d757ff29535023c67e650bd9b574ddc72db2f1009d3cd1",
+        "51": "725a226ec576c9dafa2af6019a2b16e3ed047ee4b14ca641dffe88da701caed8",
+        "52": "aa4750d6b71eaa308cfa1202dcccfd05d7ac543e016e6b0b4f13cea1a452ba2a",
+        "53": "0d3a02df0715102de759a9ff3ced465dcc7969664b48393dbe6ed547f01d00ed",
+        "54": "d44a80766579c58e3bcd3d50e2e1f24dca0175d92dd7034beb0649941708787b",
+        "55": "5a78df7a13f231ba51fb8a173c84d1dadec25d088e6dc08bad27e32fa8152543",
+        "56": "ad03a55c3a9d9c4dc506c4b716ab6c4363610c9f4b57c75234de595486144cbd",
+        "57": "c292e9196a6e5a880aa749217bb184c2654dd41dda3d2bdffd4b6a29909411df",
+        "58": "4c1652394b07f14de1695f04d236fd89d14ef592386e2be59a4794a7f2598901",
+        "59": "fd2e0f6fb9a30bfc67794250bf4038c604d951b7d5d8f545c62c317600c1830e",
+        "60": "81a93a73e1776663b75069105a4e6d4af8b86ac519af5abdd2fc59ece137188d",
+        "61": "5da7f2570ac99f0e87b309fefa24f120336712b53e976c1583137329e4998039",
+        "62": "a80094f844b5d99bc6df4320e7dbd5015ffbec5af5154efbf8f406a32f4ca7d6",
+        "63": "7db4afb8e0613c306a09bb65b1af7ddd28004d2e829db19e831e542feb06c3e7",
+        "64": "4834db9f8ed70c55d291c59ec639471f2aec6157ebe909f9e106cf8619ec276a",
+        "65": "ad0e26e6797c6c516e2900d023b9649dee7a84ce48db809c3f6d04b394eddd55",
+        "66": "3148380e3fbfe4f2fa37832f39d38efacebc5f3bea448462fd69b3100937e03e",
+        "67": "b7f58c3695710b440993813bbf728936b387b3c5f447a700cd96a2b798c6951b",
+        "68": "c3de1276e1649655c543ee910e7f21e3bf987951b3065f3311c0d05ccf7a81ba",
+        "69": "e05bd47ac3b6b996b3cf40b021558ad3aa6f45d1bdc3931f94beafc4251ba44b",
+        "70": "5864543687a5d29993f0dcd68d444d812c9b620407bf5e7c9fd88450db5b8476",
+        "71": "a2181d26d9046736c78c707df2770e71ec73b357321d0aefc43bab1c30895e28",
+        "72": "8cee6dce139724b2404dd5ea19342a6e479552ef4903bd3bd7e17959db46f4e6",
+        "73": "b67fb19f2116539249714732d692e63d0faf8ac6fa66a7e4213adb79a61a602c",
+        "74": "aa3aaff93c14fa502d4c235d06ac7043f2ec1483260ac0b97853d8491eacfd24",
+        "75": "6f74e815bc7b6d321355cc82078b92be0488609ad713798e9105d8a2b8f26630",
+        "76": "19f4b218e1d5f795acb9d0266a5d0144d86606cbbf0399406c2377eaba42b542",
+        "77": "00ac69f8bda408f6345d9436574ad7b464d865962f5f914eeded47b8875c2d87",
+        "78": "19b17636032d5846e473bc71bba49b2a1746524dfdca2c5fca02e26d1a9e2ee5",
+        "79": "9305cecd9fee114f9f6377b9d2d7b98b298be097a12c7f25e2ea0e93c864eb3c",
+        "80": "13692cb1708250265bd85e48d720eb7dbc2a7d2c5166b260357f1f3e9b9a2c9c",
+        "81": "80e0fe8c4cad24693cddce8a2d734ca39003846e18369c9f23a9270082a8d35b",
+        "82": "9af17b5fff4b5f09f538777db9a9d0ccc53b140b7ab8f719c0ab1b44be33644f",
+        "83": "619ba854b0724930f9086b0487402b4d6f66bdf816b88ec4ad66f97e4739f48d",
+        "84": "c10fb842bf80bd6489ce000b6d89738db5396948f3f7c58a981d337a40869f8c",
+        "85": "d77b289b6e7eda7ffb591a7405b474c87b17b28a96717f3cc380bbfe92b5f814",
+        "86": "290aab60f2ba49485b969f8f9b109da81cb3a304df60c8064b13a07457467492",
+        "87": "e29c1093d962df73da8c446396389e86368746a336771462644913897f148ea1",
+        "88": "aec2ca9919a41ebaf3afede9b4ce00ab83304119a57f777a5c3ca99edba77a35",
+        "89": "9febfda7cce8a88341e5553fae8e6a3e356e0d01137e09afbde7071f3158894a"
+      }
+    },
+    {
+      "label": "deep_channel_streams",
+      "pages": 30,
+      "unique_video_ids": 847,
+      "roles": {
+        "primary_video_grid": 29,
+        "non_video_branch": 1
+      },
+      "checks": {
+        "complete_with_no_errors": true,
+        "all_pages_receipted": true,
+        "same_complete_ordered_ids": true,
+        "same_unique_id_count": true,
+        "one_recognized_nonvideo_branch": true,
+        "every_raw_hash_matches_original_review": true,
+        "same_derived_catalog_as_original_review": true,
+        "unknown_retrieval_time_remains_explicit": true
+      },
+      "all_passed": true,
+      "response_sha256": {
+        "0": "415dd845caf0f78e199db6bea2d0fe59774640a355063e4745029620dd0278c5",
+        "1": "d88c7f26fd0fe91e2a526717c59db26bdd9b01bf805ca388f48ea869e732d25e",
+        "2": "003683b49b669dddb659a219d4d48fd9c7b36d88a8f4e461d88af7eb5955bd29",
+        "3": "88179899a2e152fd1ea3dc596fd3c24627062f9c06a08e7299af455b562f2d9e",
+        "4": "083ebc1428150d9636f7e7fcc8fbb830e05850901bf2516529cff93b36c55c1b",
+        "5": "3846d6fae4fea511fe17a5ba5e249788a8770b9dd8e04a441ba33284e5e713f7",
+        "6": "095374425a012ba821ae6de8fa4e6fb6a2e764ba747252602f5e7336108a0f06",
+        "7": "ffd6320b6919bf4342997f0c2357fd2a2d0f7c083ab0c46f0a77ef043f70b40d",
+        "8": "bb6035c29c698c7d9b456fdc3a4593ce3937409b8f1ea097ddb0ad86ce8897c8",
+        "9": "bb368d83dee11ff8b64ba928881271a442980e5f9c95029b6d29b4529c59eea7",
+        "10": "89c3b74376d8aa7755dbfbbd74d0b7a2897bc6506439ee3ec7d6bc0f8d956571",
+        "11": "8552c069af91641a420f34849be3039eea781c2ce3eac1474727ff9de9f023d8",
+        "12": "3d96fa2e1514c48848ec2b6f81e69ceae318a648fc0896dfa7d588da212a8f17",
+        "13": "917bb4878d8616ab4c33f4150b7ac63207bc90f77c6b9030e937ed3e90ac7bad",
+        "14": "f2aa2eef7298f3a7603eb44da50bdc6bac46874ffa4b9901b535c65632a923a2",
+        "15": "db7599633e63fc314dd6e3d57eb1bc42a830a20b123dfadd58967091cf1b96e4",
+        "16": "582428383614fde09781f0b9cf155210872016e6ec9cced87b22af8560619628",
+        "17": "1bc6cd279149b8b0be724d0d4effdf7b4bf402b8a6aac173c8f127585b7be08b",
+        "18": "9a23a4b653389409216291594fce2142fa90e8b87b7b42218bc0c5a16d723d0c",
+        "19": "04ec7c1e74ae2bb564ee122a4104d3cb4f638e3e378006df0fdfa41b66789374",
+        "20": "783f5fa641aa6a3327c2e70950b5a8e69e66fdf6225eff7e2e98f1227dc6fd8d",
+        "21": "847e341dee26b20eef4dd47414df141c8ccdf705d07db40b0f47171872e462e7",
+        "22": "9cff61645f505c2be185d956bcf3a305843734960b8ded1c30fdbfbe0afb26ce",
+        "23": "78bd2ded12d13800bb846137129ce1e87d761611c87a26a9d6fc3fd340ace3c6",
+        "24": "fe693b820ca6a2afd32c318b095866683ad9b0d8c5787fa08ea354e9f5a97bfe",
+        "25": "cfe9b4892e627b7160a5d35ac8f1b1918b383a330f5c5b48d6d8b8e849d40fee",
+        "26": "059a7c3c5d70fd71bf67de6783e2ca06ccaf07bf1a8d8e1ecdf9fb5ff1fd6b6b",
+        "27": "dc083fdd97d9b182e0f55ecc4b67ce5a87fb97d69c344efccf8729704555ed63",
+        "28": "509d42c4b5cec812f95bf935831f5b1b7bb977f0e93b34f0a27029e7bec2191a",
+        "29": "087bf43ecc45a9151ad116d642aed5be2caf483ff0b87ea1cb626e3c90a3716f"
+      }
+    }
+  ],
+  "passed": false,
+  "limitations": [
+    "The original channel request times and submitted-token provenance were not retained; content/queue closure is checked without inventing retrieval times.",
+    "The separately reviewed fresh 118-page discovery is not substituted for this 120-page historical replay.",
+    "No scope, transcript-matching, workbook or publication repair is certified here."
+  ]
+}

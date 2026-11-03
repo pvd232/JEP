@@ -1,0 +1,963 @@
+{
+  "title": "Ten independent reviews: findings, repairs and remaining research gaps",
+  "aggregation_kind": "Follow-up aggregation; not an additional independent review",
+  "generated_at_utc": "2026-11-03T21:08:06.649812+00:00",
+  "frozen_published_base_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "review_boundary_note": "Reviews preserve their original verdicts and source hashes. Repairs and root integration are separate later evidence. Review 10 additionally covers the new fresh-channel candidate at its recorded hash.",
+  "independent_review_count": 10,
+  "finding_count": 20,
+  "priority_counts": {
+    "P1": 2,
+    "P2": 16,
+    "P3": 2
+  },
+  "current_output_findings": [
+    "R03-F1",
+    "R04-02",
+    "R08-03"
+  ],
+  "guard_only_findings": [
+    "R01-F01",
+    "R01-F02",
+    "R02-01",
+    "R02-02",
+    "R03-F2",
+    "R04-01",
+    "R05-F1",
+    "R05-F2",
+    "R06-01",
+    "R07-01",
+    "R08-01",
+    "R08-02",
+    "R09-F01",
+    "R09-F02",
+    "R09-F03",
+    "R10-01",
+    "R10-02"
+  ],
+  "resolution_summary": "All 20 finding remedies are recorded and verified at their stated code/data review boundary. Final release workbook rebuild and acceptance remain pending; this aggregate does not certify a rebuilt or published artifact.",
+  "research_uncertainty_is_a_code_defect": false,
+  "reviews": [
+    {
+      "review_number": 1,
+      "scope": "Primary-list pagination parsing and traversal",
+      "independent_review": true,
+      "original_verdict": "Request changes",
+      "original_receipts": [
+        {
+          "path": "reviews/review01/review.md",
+          "sha256": "7069780dd3d646d085def4a9b7d667ad4cb58f4bacc3faae8735896cdf592be0"
+        },
+        {
+          "path": "reviews/review01/review.json",
+          "sha256": "b1efd0a34942101f4cf3db66b76aed746c8507bedb9b50f495d8e155ae00718b"
+        }
+      ],
+      "reviewed_source_hashes": {
+        "pagination_fix/crawl_public_catalog.py": "8e7ba646de4edc9ee86045201eb7405077a8d670598f245969778b2e5d8936f6",
+        "pagination_fix/fixtures/audiencias_first_page.json": "c28324fd88a9f18ce40f04c6eccdffa004c9f7ccc7c9109f231b210cf5d2d82d",
+        "pagination_fix/fixtures/casanare_first_page.json": "85593f02cc0e108b7be29efdd5f4f41cae45492b7257bda25f03f94dec7a382e",
+        "pagination_fix/fixtures/case03_first_page.json": "247216a601e681ed15e180c80dc83ae381ccca249ff32e06c8a2ca645e352f51",
+        "pagination_fix/fixtures/deep_channel_streams_terminal.json": "333753b2ce0df66bae79b522f02b98a5cbe993d5bbccd3f0d562a3e2213cce80",
+        "pagination_fix/fixtures/deep_channel_videos_terminal.json": "f2430389e83a1d35e320e2c80cfe12ef481feaf46ac170866f9462b16fc9089b",
+        "pagination_fix/fixtures/fixture_manifest.json": "27422fe5c5a05c1461f87c81cf91a61973f2d5086aa22eac0ccfa0851e551624",
+        "crawl_manifest.json": "7eb203576902747ea2116c0138e5993e963a708d2cc73c37b25b7edd0993a8aa"
+      },
+      "findings": [
+        {
+          "id": "R01-F01",
+          "priority": "P2",
+          "impact_class": "guard_only",
+          "problem": "Missing continuation target accepted as equal to another missing target",
+          "fix": "Require a usable primary target; malformed missing-target input now reports an explicit incomplete/error state.",
+          "status": "repair_verified_at_review_boundary",
+          "release_artifact_gate_pending": false
+        },
+        {
+          "id": "R01-F02",
+          "priority": "P2",
+          "impact_class": "guard_only",
+          "problem": "Malformed legacy continuation treated as terminal",
+          "fix": "Reject missing/unsupported legacy continuation tokens; valid legacy tokens remain supported.",
+          "status": "repair_verified_at_review_boundary",
+          "release_artifact_gate_pending": false
+        }
+      ],
+      "repair_and_verification": "Both counterexamples reject; valid legacy control passes. Original review replayed all 22 retained playlist pages across ten playlists without membership changes.",
+      "repair_receipts": [
+        {
+          "path": "root_crawler_rework.json",
+          "sha256": "5dcea20e9fa3d84c78a94f028d9427fd8065c684f5c73e7814e1f8b51ddbe217"
+        }
+      ]
+    },
+    {
+      "review_number": 2,
+      "scope": "Crawl completeness and retained-cache accounting",
+      "independent_review": true,
+      "original_verdict": "Request changes",
+      "original_receipts": [
+        {
+          "path": "reviews/review02/review.md",
+          "sha256": "f4fb5906d0015936a7004737f82240e8635ab001689bb5c283f23eb95ffeec99"
+        },
+        {
+          "path": "reviews/review02/review.json",
+          "sha256": "36a0fc83e41e22397e5b78581b6dd11b9f60d41e80feda016f6b8db1cf443cd4"
+        }
+      ],
+      "reviewed_source_hashes": {
+        "pagination_fix/crawl_public_catalog.py": "8e7ba646de4edc9ee86045201eb7405077a8d670598f245969778b2e5d8936f6",
+        "crawl_manifest.json": "7eb203576902747ea2116c0138e5993e963a708d2cc73c37b25b7edd0993a8aa",
+        "catalog_validation.json": "21af7fd536296402861c6720169689e8a65904e0380377d5d30ab01de701ae6f",
+        "live_pagination_proof.json": "16f910238296ad579282dfc6ee3ee04dbc8a5e13f8135b5cb0867245adaf77d4",
+        "pagination_fix/README.md": "13ff9d5a450ff58a9843d1ea95b112c51b41566cad630f8dc490923d1e31582b"
+      },
+      "findings": [
+        {
+          "id": "R02-01",
+          "priority": "P1",
+          "impact_class": "guard_only",
+          "problem": "Terminal page could certify a channel catalog missing a middle page",
+          "fix": "Require consecutive indexes, per-page raw-response agreement, primary-list closure, and positively recognized non-video branches.",
+          "status": "repair_verified_at_review_boundary",
+          "release_artifact_gate_pending": false
+        },
+        {
+          "id": "R02-02",
+          "priority": "P2",
+          "impact_class": "guard_only",
+          "problem": "Unstarted required playlists disappeared from the manifest",
+          "fix": "Keep every declared source in the manifest with an explicit missing/incomplete status when its state is absent.",
+          "status": "repair_verified_at_review_boundary",
+          "release_artifact_gate_pending": false
+        }
+      ],
+      "repair_and_verification": "Missing-middle-page and disguised wrong-target branch controls reject; missing source states stay visible. All 120 historical channel responses replay with their original 2,663 Videos / 847 Live IDs; these are explicitly historical counts.",
+      "repair_receipts": [
+        {
+          "path": "root_crawler_rework.json",
+          "sha256": "5dcea20e9fa3d84c78a94f028d9427fd8065c684f5c73e7814e1f8b51ddbe217"
+        }
+      ]
+    },
+    {
+      "review_number": 3,
+      "scope": "Casanare scope decisions and register projection",
+      "independent_review": true,
+      "original_verdict": "Request changes",
+      "original_receipts": [
+        {
+          "path": "reviews/review03/review.md",
+          "sha256": "948fe0565384ea5cb23c45d0ab439e70b7556e9eab6f174b445b3dc8c5e6b1e9"
+        },
+        {
+          "path": "reviews/review03/review.json",
+          "sha256": "b1d289329056056ac9ddb65813fe5f87c8c42b57bbfb6804d38c5b4b68d1f629"
+        }
+      ],
+      "reviewed_source_hashes": {
+        "workbook_build/assemble_outputs.py": "ec06e9fbe1a5afc2aee19020b70e173351013e7b0495719b4449f8b2d7dbcaed",
+        "pagination_fix/crawl_public_catalog.py": "8e7ba646de4edc9ee86045201eb7405077a8d670598f245969778b2e5d8936f6",
+        "scope_decisions.json": "b49bb97967d26c9421b51dc2d3aac6363da7ea4ae5b8c98fa18b98f37f5e5766",
+        "broad_metadata_scope.json": "e0529d204f0512919fde6aded76daaf98d698dd61b439732670e9e5fc58aa9af",
+        "video_inventory.json": "878f42bf80d3cd0bd6ac70d6767e27b4b7f839aa4eba35350307d21a3ca38675",
+        "public_catalog.json.gz": "64fb33a5c43c1ad2644e18506cd482d5fa7472dfd298e9b06162525fab0f0cc8",
+        "public_memberships.json.gz": "74a5683824c461fdd6302af357790f68a35271bd711e22a3e13f33070951d079",
+        "crawl_manifest.json": "7eb203576902747ea2116c0138e5993e963a708d2cc73c37b25b7edd0993a8aa",
+        "inventory.json": "e261e1b82e9fe41b62aba96277ab54b5f377839a0fc428797dae8d005756b404",
+        "reverse_mapping_review.json": "6c8db273082b2c641f799e98996e92650472c9bb451d0ffaab61200ea631af55",
+        "new_content_checks.json": "de557498893bf7e2fb1905f6d136ba60eb8aeb1aa41003619a3cac010d439592",
+        "summary.json": "eff0ec882313b47fcb26ce48a494af4f1c6aacb832f7151528c8e25fa974a35b"
+      },
+      "findings": [
+        {
+          "id": "R03-F1",
+          "priority": "P1",
+          "impact_class": "actual_output",
+          "problem": "74 broad exclusions used unsupported non-hearing rationales",
+          "fix": "Root replaced all 74 rationales with bounded official metadata/opening and territorial evidence; each remains excluded with its corrected reason.",
+          "status": "data_correction_recorded_with_evidence",
+          "release_artifact_gate_pending": false
+        },
+        {
+          "id": "R03-F2",
+          "priority": "P2",
+          "impact_class": "guard_only",
+          "problem": "Broad and main scope decisions could conflict or omit an admitted broad candidate",
+          "fix": "Reject shared decision conflicts and broad inclusions absent from the main admitted map before output writes.",
+          "status": "repair_verified_at_review_boundary",
+          "release_artifact_gate_pending": false
+        }
+      ],
+      "repair_and_verification": "The exact 74-ID review queue is represented by corrected evidence pointers. Both inconsistent scope fixtures reject; valid frozen inputs preserve all accepted rows and links.",
+      "repair_receipts": [
+        {
+          "path": "tieout_data_decisions.json",
+          "sha256": "be5b6369f490dc8cb4d8b4decf420bb96ff37a4c1e950eb4d72f04dd3be1d89e"
+        },
+        {
+          "path": "root_assembler_rework.json",
+          "sha256": "6e7fdb4f1cfb9de45855f2716edc0b4ab3764c302fd1549341b7cb8e0a336b02"
+        }
+      ]
+    },
+    {
+      "review_number": 4,
+      "scope": "Transcript identity, duplicates, versions and many-to-many links",
+      "independent_review": true,
+      "original_verdict": "Request changes",
+      "original_receipts": [
+        {
+          "path": "reviews/review04/review.md",
+          "sha256": "faf6da99e02404ab054f6af5ffc79620cb1f9e0735efe8ced0e45644cf44b86e"
+        },
+        {
+          "path": "reviews/review04/review.json",
+          "sha256": "c4d450fb2c65ddf96b41fb9d3006077ec70033a30aee56584ac23ab469f18fa9"
+        }
+      ],
+      "reviewed_source_hashes": {
+        "inventory_work/tieout_review_20261103/base/inventory.json": "e261e1b82e9fe41b62aba96277ab54b5f377839a0fc428797dae8d005756b404",
+        "inventory_work/tieout_review_20261103/base/source_manifest.json": "f149b5a672485751ba3033f14cc006b6ae668ef8bc5322c3f4c609615d336cf9",
+        "inventory_work/tieout_review_20261103/base/version_comparisons.json": "9573cd1460473c5cc007104cf209675fc6c6b8a08efa2970f5872fd471a29f57",
+        "inventory_work/tieout_review_20261103/base/reverse_mapping_review.json": "6c8db273082b2c641f799e98996e92650472c9bb451d0ffaab61200ea631af55",
+        "inventory_work/tieout_review_20261103/base/video_inventory.json": "878f42bf80d3cd0bd6ac70d6767e27b4b7f839aa4eba35350307d21a3ca38675",
+        "inventory_work/tieout_review_20261103/base/new_content_checks.json": "de557498893bf7e2fb1905f6d136ba60eb8aeb1aa41003619a3cac010d439592",
+        "inventory_work/tieout_review_20261103/base/workbook_build/assemble_outputs.py": "ec06e9fbe1a5afc2aee19020b70e173351013e7b0495719b4449f8b2d7dbcaed",
+        "inventory_work/build_versiones_rows.py": "d54568ba8380e3697ce818d5f50033642e065ff097e8c9c175219a89d4f27fd2",
+        "inventory_work/finalize_versiones_rows.py": "8c36a5ff51e1dd432032e19a8482a9b3a08fe51ee803103375cbbc4c669db31c",
+        "inventory_work/assemble_inventory.py": "a22a464333023607d34b83805fa0e699efa0987ba656084b784c69c82818317d",
+        "inventory_work/build_root_rows.py": "d96d0ffd71ae3b8a2d012af902c4bcec0daebcb05adbc6263bb5443b9d1bc5b0",
+        "inventory_work/build_casanare_rows.py": "389b675af21182fad1ed579abf1c8a9b29e4d008bbc9fd8427700e9b10a045a9",
+        "inventory_work/merge_deep_results.py": "722420947c7d7826f20ffdbd0c3400acc3ec62e5371d63b681d02553d865d82f",
+        "inventory_work/compare_identity_captions.py": "b432fb90071163ad1fac3950aec900b0461fbb4822f1b8880faa9bf64e27ac42",
+        "inventory_work/merge_completion_review.py": "58e292ba901ce5302f4b2069327832b5d908b011a62ce03d75c937a88c38830a"
+      },
+      "findings": [
+        {
+          "id": "R04-01",
+          "priority": "P2",
+          "impact_class": "guard_only",
+          "problem": "Mutable filenames could renumber established transcript IDs",
+          "fix": "Resolve accepted record identity through immutable Drive-file IDs; reject conflicting established groups; allocate unused draft IDs only for genuinely new groups.",
+          "status": "repair_verified_at_review_boundary",
+          "release_artifact_gate_pending": false
+        },
+        {
+          "id": "R04-02",
+          "priority": "P3",
+          "impact_class": "actual_output",
+          "problem": "Three comparison rows had small nonreproducible metric differences",
+          "fix": "Recompute four numeric fields across VV-008, VV-010 and VV-027 from retained extracted text; record normalizer and extraction hashes.",
+          "status": "repair_verified_at_review_boundary",
+          "release_artifact_gate_pending": false
+        }
+      ],
+      "repair_and_verification": "26 checks pass. The original title-only counterexample changed 57 IDs; after repair it changes zero. All 93 accepted IDs / 105 assignments stay fixed, all twelve metric rows reproduce, and shared/composite relations remain intact.",
+      "repair_receipts": [
+        {
+          "path": "reviews/review04/rework.json",
+          "sha256": "2adc6f9768d8a65b6524dc7c503fe2242f65dd52f7e632b72db53feaf84aa5f6"
+        },
+        {
+          "path": "reviews/review04/rework_observations.json",
+          "sha256": "67baddd67fc04ae71e5a242910ebaefe4371f6654d8b03d4e902fc89b448eb49"
+        }
+      ]
+    },
+    {
+      "review_number": 5,
+      "scope": "Reverse mapping and no-source coverage decisions",
+      "independent_review": true,
+      "original_verdict": "Request changes",
+      "original_receipts": [
+        {
+          "path": "reviews/review05/review.md",
+          "sha256": "85605742c12c0ea61b2c26ea1f5190776b771970bbfc1ffd2b4ba70cbf089520"
+        },
+        {
+          "path": "reviews/review05/review.json",
+          "sha256": "8b0cd0eb9edfafdc44acd0014f7dc1a16460f5de235efa8566784f89a6af4cab"
+        }
+      ],
+      "reviewed_source_hashes": {
+        "inventory_work/tieout_review_20261103/base/workbook_build/assemble_outputs.py": "ec06e9fbe1a5afc2aee19020b70e173351013e7b0495719b4449f8b2d7dbcaed",
+        "inventory_work/reverse_audit/build_mapping_review.py": "f409e2bc23f999f55e4363f083c116cb56af2c3f556f47aeaba827837921a0e1",
+        "inventory_work/tieout_review_20261103/base/reverse_mapping_review.json": "6c8db273082b2c641f799e98996e92650472c9bb451d0ffaab61200ea631af55",
+        "inventory_work/tieout_review_20261103/base/inventory.json": "e261e1b82e9fe41b62aba96277ab54b5f377839a0fc428797dae8d005756b404",
+        "inventory_work/tieout_review_20261103/base/video_inventory.json": "878f42bf80d3cd0bd6ac70d6767e27b4b7f839aa4eba35350307d21a3ca38675",
+        "inventory_work/tieout_review_20261103/base/scope_decisions.json": "b49bb97967d26c9421b51dc2d3aac6363da7ea4ae5b8c98fa18b98f37f5e5766",
+        "inventory_work/tieout_review_20261103/base/summary.json": "eff0ec882313b47fcb26ce48a494af4f1c6aacb832f7151528c8e25fa974a35b"
+      },
+      "findings": [
+        {
+          "id": "R05-F1",
+          "priority": "P2",
+          "impact_class": "guard_only",
+          "problem": "Duplicate reverse IDs or a missing shared-upload relation could silently lose an edge",
+          "fix": "Reject duplicate reverse IDs and require exact equality of all corrected forward/reverse transcript-video edges.",
+          "status": "repair_verified_at_review_boundary",
+          "release_artifact_gate_pending": false
+        },
+        {
+          "id": "R05-F2",
+          "priority": "P2",
+          "impact_class": "guard_only",
+          "problem": "An unlinked upload automatically became a no-transcript decision",
+          "fix": "Default new unlinked uploads to Coverage unconfirmed; absence requires an accepted session-comparison ledger bound to source identity and exact upload metadata.",
+          "status": "repair_verified_at_review_boundary",
+          "release_artifact_gate_pending": false
+        }
+      ],
+      "repair_and_verification": "Missing/duplicate-edge controls reject. Seven absence-admission checks pass, preserving all 45 accepted baseline dispositions while rejecting unreviewed or same-principal/date ambiguity. Later root content refinements are separate from that frozen ledger replay.",
+      "repair_receipts": [
+        {
+          "path": "root_assembler_rework.json",
+          "sha256": "6e7fdb4f1cfb9de45855f2716edc0b4ab3764c302fd1549341b7cb8e0a336b02"
+        },
+        {
+          "path": "reviews/review05/rework_R05_F2.json",
+          "sha256": "35da497caf7420751b31ecd3382a3059476cd851264ffa3ae069cf7ed7cc7cb4"
+        }
+      ]
+    },
+    {
+      "review_number": 6,
+      "scope": "Timestamps, dates, durations and directional coverage",
+      "independent_review": true,
+      "original_verdict": "Approve",
+      "original_receipts": [
+        {
+          "path": "reviews/review06/review.md",
+          "sha256": "2ea8010b8bcce04635be08e53df9978e67301187a4abfc6b2c8bae50d7c4b79c"
+        },
+        {
+          "path": "reviews/review06/review.json",
+          "sha256": "84264abcb99d33e4054a80f5a57c59b3cf38702eae2d55e7f3aedb1e738e74da"
+        }
+      ],
+      "reviewed_source_hashes": {
+        "workbook_build/assemble_outputs.py": "ec06e9fbe1a5afc2aee19020b70e173351013e7b0495719b4449f8b2d7dbcaed",
+        "workbook_build/build_workbook.mjs": "b12a5d8b38b1e541aa8ed7321f2029b3d4db31f3e0a5987810be554eaf19cae1",
+        "reverse_mapping_review.json": "6c8db273082b2c641f799e98996e92650472c9bb451d0ffaab61200ea631af55",
+        "new_content_checks.json": "de557498893bf7e2fb1905f6d136ba60eb8aeb1aa41003619a3cac010d439592",
+        "recording_gaps.json": "71ac1bf29a3202812b03df5d058fdebdfc4cbb0bd981dff5df9718cab6bb8401",
+        "video_inventory.json": "878f42bf80d3cd0bd6ac70d6767e27b4b7f839aa4eba35350307d21a3ca38675",
+        "inventory.json": "e261e1b82e9fe41b62aba96277ab54b5f377839a0fc428797dae8d005756b404",
+        "summary.json": "eff0ec882313b47fcb26ce48a494af4f1c6aacb832f7151528c8e25fa974a35b",
+        "JEP_transcript_inventory.xlsx": "b1715e2102adabf278ea36d406f06f2147555a5906d1368015e57a570d241cee",
+        "README.md": "a9d84b9a8948dfc81eb29b68174be34eadcd5d2b6733f041dad435575bcd9e5d",
+        "reverse_audit_report.md": "796e730ba91262dd52d75df285e58770eb45dff373460f67c16e88fa636102e5"
+      },
+      "findings": [
+        {
+          "id": "R06-01",
+          "priority": "P2",
+          "impact_class": "guard_only",
+          "problem": "Invalid minute/second components normalized into plausible durations",
+          "fix": "Return unknown for invalid seconds and three-component minutes while preserving valid elapsed durations and unbounded hours.",
+          "status": "repair_verified_at_review_boundary",
+          "release_artifact_gate_pending": false
+        }
+      ],
+      "repair_and_verification": "All three malformed-duration cases reject and six valid controls preserve expected seconds. The frozen review found no current timestamp/date/duration error and retained the distinction between six supplied-source omissions and two public-recording continuations.",
+      "repair_receipts": [
+        {
+          "path": "root_assembler_rework.json",
+          "sha256": "6e7fdb4f1cfb9de45855f2716edc0b4ab3764c302fd1549341b7cb8e0a336b02"
+        }
+      ]
+    },
+    {
+      "review_number": 7,
+      "scope": "Forward-match verification, recording gaps and protected labels",
+      "independent_review": true,
+      "original_verdict": "Request changes",
+      "original_receipts": [
+        {
+          "path": "reviews/review07/review.md",
+          "sha256": "181d2e45907d8203d73a44294d8c2f83d2e45aeebf2d66ec6b1d11d9e9c49c0e"
+        },
+        {
+          "path": "reviews/review07/review.json",
+          "sha256": "18d9bb3f639f1ade63ab9a5b9a2fc4785956cfab5dcacd611553bfd7cb61e872"
+        }
+      ],
+      "reviewed_source_hashes": {
+        "base/inventory.json": "e261e1b82e9fe41b62aba96277ab54b5f377839a0fc428797dae8d005756b404",
+        "base/recording_gaps.json": "71ac1bf29a3202812b03df5d058fdebdfc4cbb0bd981dff5df9718cab6bb8401",
+        "base/completion_review.json": "2f74d67e9403c91c0dfccc98bec4165be3a171074b170bdb6448a17a07c9d106",
+        "base/matching_audit.json": "05ab27936613d39ef1c1e6f937b75f01804e6f832d01c4579dcd389b45d27307",
+        "base/summary.json": "eff0ec882313b47fcb26ce48a494af4f1c6aacb832f7151528c8e25fa974a35b",
+        "base/workbook_build/assemble_outputs.py": "ec06e9fbe1a5afc2aee19020b70e173351013e7b0495719b4449f8b2d7dbcaed",
+        "local historical/merge_completion_review.py": "58e292ba901ce5302f4b2069327832b5d908b011a62ce03d75c937a88c38830a",
+        "local historical/apply_completion_summaries.py": "d7bde7ac17aa8472bda22d0bed93587d22a2779ee96a32fcf713812b46f6cdde",
+        "local historical/merge_deep_results.py": "722420947c7d7826f20ffdbd0c3400acc3ec62e5371d63b681d02553d865d82f"
+      },
+      "findings": [
+        {
+          "id": "R07-01",
+          "priority": "P2",
+          "impact_class": "guard_only",
+          "problem": "High identity confidence and hardcoded IDs implied content verification",
+          "fix": "Use explicit verification evidence, clear rejected verification, allow later evidence for formerly metadata-only records, and keep playability separate.",
+          "status": "repair_verified_at_review_boundary",
+          "release_artifact_gate_pending": false
+        }
+      ],
+      "repair_and_verification": "All three original merger counterexamples pass after repair; the fifteen recording-gap rows retain correct ownership and links. No incorrect frozen match or protected-label expansion was established.",
+      "repair_receipts": [
+        {
+          "path": "reviews/review07/rework_observer.json",
+          "sha256": "0246de58063c363d812bc1766d43194f7436d01a6d602dd8e79b6270293970ea"
+        }
+      ]
+    },
+    {
+      "review_number": 8,
+      "scope": "Workbook projection, hyperlinks, filters and acceptance",
+      "independent_review": true,
+      "original_verdict": "request_changes",
+      "original_receipts": [
+        {
+          "path": "reviews/review08/review.md",
+          "sha256": "d72caf57d8dcff248e25902eca8fe851a93d37e369db766685cda9fdafc9dc89"
+        },
+        {
+          "path": "reviews/review08/review.json",
+          "sha256": "ca93f0d326b7180615e3a3f8db8fb116e81e0c7627dd235a63534c7891f3985e"
+        }
+      ],
+      "reviewed_source_hashes": {
+        "workbook_build/build_workbook.mjs": "b12a5d8b38b1e541aa8ed7321f2029b3d4db31f3e0a5987810be554eaf19cae1",
+        "workbook_build/add_native_links.py": "3bc91c3e7cd0afdc3d2a34c90cf5dc5d2f011bdde4360d786c1802fb7062a5ce",
+        "workbook_build/validate_outputs.py": "b7225b038883384433ea0b56e6a5e241d966f4f5b3dd6b136bd855240252de2f",
+        "JEP_transcript_inventory.xlsx": "b1715e2102adabf278ea36d406f06f2147555a5906d1368015e57a570d241cee"
+      },
+      "findings": [
+        {
+          "id": "R08-01",
+          "priority": "P2",
+          "impact_class": "guard_only",
+          "problem": "Third and later native links could be lost",
+          "fix": "Add native-link columns only when cardinality requires them; preserve every forward and reverse URL.",
+          "status": "repair_verified_at_review_boundary",
+          "release_artifact_gate_pending": true
+        },
+        {
+          "id": "R08-02",
+          "priority": "P2",
+          "impact_class": "guard_only",
+          "problem": "Acceptance could pass after deleting a native transcript-video hyperlink",
+          "fix": "Compare native hyperlink targets against every expected forward and reverse edge by record ID.",
+          "status": "repair_verified_at_review_boundary",
+          "release_artifact_gate_pending": true
+        },
+        {
+          "id": "R08-03",
+          "priority": "P2",
+          "impact_class": "actual_output",
+          "problem": "All six data tables lacked serialized filter definitions",
+          "fix": "Write an AutoFilter matching each table range and validate the actual serialized filters.",
+          "status": "repair_verified_at_review_boundary",
+          "release_artifact_gate_pending": true
+        }
+      ],
+      "repair_and_verification": "Focused cardinalities 0/1/2/3/15 pass; deleted forward/reverse links and filters reject. The repaired postprocessor changes only the six table parts. Final release workbook rebuild and acceptance remain a separate gate.",
+      "repair_receipts": [
+        {
+          "path": "reviews/review08/rework.json",
+          "sha256": "c828c3219f441f4bbc237ec38f7263a7b302bb120e6e84880f225d50498da287"
+        }
+      ]
+    },
+    {
+      "review_number": 9,
+      "scope": "Reproducibility, failure reporting and publication provenance",
+      "independent_review": true,
+      "original_verdict": "Request changes",
+      "original_receipts": [
+        {
+          "path": "reviews/review09/review.md",
+          "sha256": "86d8edbe8afc980cb1309b8befab61c223cb63090206e7583ad143160199a932"
+        },
+        {
+          "path": "reviews/review09/review.json",
+          "sha256": "03c1fbd4bcf6d1a9ff74291ea981a591fc5efadce1ca285bb5ef3ba50c563601"
+        }
+      ],
+      "reviewed_source_hashes": {
+        "pagination_fix/crawl_public_catalog.py": "8e7ba646de4edc9ee86045201eb7405077a8d670598f245969778b2e5d8936f6",
+        "pagination_fix/README.md": "13ff9d5a450ff58a9843d1ea95b112c51b41566cad630f8dc490923d1e31582b",
+        "pagination_fix/fixtures/fixture_manifest.json": "27422fe5c5a05c1461f87c81cf91a61973f2d5086aa22eac0ccfa0851e551624",
+        "workbook_build/assemble_outputs.py": "ec06e9fbe1a5afc2aee19020b70e173351013e7b0495719b4449f8b2d7dbcaed",
+        "workbook_build/finish_report.py": "ea4e3149ada39fd968a78f283e64df882d1ba186883019fa435625446040a4d2",
+        "workbook_build/validate_outputs.py": "b7225b038883384433ea0b56e6a5e241d966f4f5b3dd6b136bd855240252de2f",
+        "workbook_build/README.md": "1d2c4dadc14bb0396d074b109a19f9031e8526187471f7b3aaec63120038d492",
+        "standalone_replay_result.json": "a1ba543e1c8a645b49e7474418fffaaa30bbd1c33d102581953ca3a4d77daa2c",
+        "pagination_reproduction.json": "466582054fc78d5d37f3bd8a4b2bfb4e0e7b253167eaf948bc0828b7fc86fae4",
+        "live_pagination_proof.json": "16f910238296ad579282dfc6ee3ee04dbc8a5e13f8135b5cb0867245adaf77d4",
+        "catalog_validation.json": "21af7fd536296402861c6720169689e8a65904e0380377d5d30ab01de701ae6f",
+        "workbook_validation.json": "37ec612b0d89fb2a6240f88c4bfc1a0baafe5a2c612ab21b56bb722c9098825b"
+      },
+      "findings": [
+        {
+          "id": "R09-F01",
+          "priority": "P2",
+          "impact_class": "guard_only",
+          "problem": "Failed proof receipts could produce an all-passed report",
+          "fix": "Validate individual and aggregate outcomes and replay exit status before writing a success report.",
+          "status": "repair_verified_at_review_boundary",
+          "release_artifact_gate_pending": false
+        },
+        {
+          "id": "R09-F02",
+          "priority": "P2",
+          "impact_class": "guard_only",
+          "problem": "Failed requested full crawl returned process success",
+          "fix": "Return a nonzero process status for transport failure, page caps or rate-limited incomplete requested crawls while retaining their receipts.",
+          "status": "repair_verified_at_review_boundary",
+          "release_artifact_gate_pending": false
+        },
+        {
+          "id": "R09-F03",
+          "priority": "P3",
+          "impact_class": "guard_only",
+          "problem": "Cached proof execution time omitted response-retrieval provenance",
+          "fix": "Record proof execution separately from original fetch times, response hashes and cache-reuse state.",
+          "status": "repair_verified_at_review_boundary",
+          "release_artifact_gate_pending": false
+        }
+      ],
+      "repair_and_verification": "All nine report controls pass without output changes on failed inputs. Crawler failure, cap, successful-completion and 429 controls pass; a zero-network cached proof now exposes original retrieval provenance. Actual frozen receipts and publication hashes were valid.",
+      "repair_receipts": [
+        {
+          "path": "reviews/review09/rework.json",
+          "sha256": "37e167cc609143f9418c306987aa1bb3d2941061b1d28df1b7f002e94d297aef"
+        },
+        {
+          "path": "root_crawler_rework.json",
+          "sha256": "5dcea20e9fa3d84c78a94f028d9427fd8065c684f5c73e7814e1f8b51ddbe217"
+        }
+      ]
+    },
+    {
+      "review_number": 10,
+      "scope": "Fresh channel traversal, cache binding and surface provenance",
+      "independent_review": true,
+      "original_verdict": "Request changes to the candidate code; retained fresh data passes the scoped offline audit",
+      "original_receipts": [
+        {
+          "path": "reviews/review10/review.md",
+          "sha256": "146cb1ec8ff05247cc2b94104f9c97b7a7131df70135b2100b902487ddddc00d"
+        },
+        {
+          "path": "reviews/review10/review.json",
+          "sha256": "91b9d1ccaebcb335fafb5e975984aa8fcbb2521eddecae0a0b3e6a17facd6aa2"
+        }
+      ],
+      "reviewed_source_hashes": {
+        "inventory_work/reverse_audit/refresh_channel_catalogs.py": "0cabb13c3c085059d30ce2e0656154737b717f26938ba2cea095066f089c8999",
+        "inventory_work/reverse_audit/crawl_public_catalog.py": "12e5a7b9daa3067ddd714a8b56c15ee753e4025a659a285051bc263c6845acaa",
+        "inventory_work/reverse_audit/assemble_outputs.py": "ec06e9fbe1a5afc2aee19020b70e173351013e7b0495719b4449f8b2d7dbcaed"
+      },
+      "findings": [
+        {
+          "id": "R10-01",
+          "priority": "P2",
+          "impact_class": "guard_only",
+          "problem": "Parsed first-page cache was not bound to its retained HTML",
+          "fix": "Re-extract the initial data from checksum-verified HTML and reject a different parsed cache before consuming entries.",
+          "status": "repair_verified_at_review_boundary",
+          "release_artifact_gate_pending": false
+        },
+        {
+          "id": "R10-02",
+          "priority": "P2",
+          "impact_class": "guard_only",
+          "problem": "A selected Videos tab could satisfy a requested Live surface",
+          "fix": "Validate the selected official endpoint against the requested surface and preserve the observed endpoint.",
+          "status": "repair_verified_at_review_boundary",
+          "release_artifact_gate_pending": false
+        }
+      ],
+      "repair_and_verification": "Both mismatches reject before recording membership; seven failure controls and full replay of all 118 fresh pages pass. The retained fresh source files remain unchanged: 2,663 Videos IDs and 846 Live IDs.",
+      "repair_receipts": [
+        {
+          "path": "reviews/review10/rework.json",
+          "sha256": "569f39b6565b08ca5f8317d9fb24e4893e4317e7fbefb3c2f39b16cb9f6ea088"
+        },
+        {
+          "path": "reviews/review10/rework_replay.json",
+          "sha256": "666ba0aad89fb3c3bd89c9ad0392f9f20743a8c676682fbb901dc5ce241ab49e"
+        }
+      ]
+    }
+  ],
+  "current_data_snapshot": {
+    "consolidated_source_records": 93,
+    "original_files": 116,
+    "transcript_or_notes_files": 105,
+    "consolidated_versions": 12,
+    "source_folders": 10,
+    "source_ids_and_assignments_preserved": true,
+    "high_confidence_source_matches": 82,
+    "content_checked_source_matches": 80,
+    "unmatched_source_records": 11,
+    "included_uploads": 128,
+    "uploads_linked_to_supplied_records": 83,
+    "transcript_video_edges": 84,
+    "uploads_without_located_supplied_transcript": 45,
+    "no_source_uploads_with_bounded_content_identity_check": 17,
+    "no_source_uploads_with_metadata_basis": 28,
+    "additional_root_bounded_identity_checks": 13,
+    "main_scope_rows": 208,
+    "main_scope_counts": {
+      "excluded": 76,
+      "included": 128,
+      "scope_unconfirmed": 4
+    },
+    "broad_scope_rows": 898,
+    "broad_scope_counts": {
+      "excluded": 789,
+      "included": 96,
+      "scope_unconfirmed": 13
+    },
+    "corrected_exclusion_rationales": 74
+  },
+  "version_metric_corrections": {
+    "fields": [
+      {
+        "record_id": "VV-008",
+        "field": "shared_fivegrams",
+        "before": 34104,
+        "after": 34102
+      },
+      {
+        "record_id": "VV-010",
+        "field": "words",
+        "before": [
+          34761,
+          38244
+        ],
+        "after": [
+          34761,
+          38245
+        ]
+      },
+      {
+        "record_id": "VV-010",
+        "field": "shared_fivegrams",
+        "before": 15051,
+        "after": 15050
+      },
+      {
+        "record_id": "VV-027",
+        "field": "words",
+        "before": [
+          46111,
+          42353
+        ],
+        "after": [
+          46111,
+          42354
+        ]
+      }
+    ],
+    "historical_generator_input_synchronized": true,
+    "downstream_numeric_evidence_synchronized": true,
+    "containment_and_consolidation_decisions_changed": false
+  },
+  "fresh_discovery": {
+    "fresh_pages": 118,
+    "videos": {
+      "pages": 89,
+      "ids": 2663
+    },
+    "live": {
+      "pages": 29,
+      "ids": 846
+    },
+    "status": "exhausted_count_unknown for both surfaces; no independent declared channel total was supplied",
+    "fresh_fetch_date_utc": "2026-11-03",
+    "historical_live_ids": 847,
+    "historical_only_upload": {
+      "video_id": "Pg8DvszQMME",
+      "change": "Historical catalog difference resolved",
+      "decision": "excluded",
+      "evidence": "Public opening 00:11:13–00:12:25 identifies Neiva, the Huila subcase and 21 October 2026. The upload remains playable but is absent from the refreshed Live listing; it is an outside-scope Huila hearing, not a deleted-video inference.",
+      "public_url": "https://www.youtube.com/watch?v=Pg8DvszQMME"
+    },
+    "history_note": "Retain Pg8DvszQMME as historical discovery. Its bounded opening establishes a Huila hearing, excluded from Casanare; current listing absence is not deletion.",
+    "integration": {
+      "status": "verified; check mode reproduced existing outputs",
+      "receipt": {
+        "path": "fresh_channel_integration_receipt.json",
+        "sha256": "68d189ab946706a5aa029ec46e77e56c135fcb971b9c6cd0278f5e97b8c89f08"
+      },
+      "recorded_result": {
+        "integration_script": "inventory_work/reverse_audit/integrate_fresh_channels.py",
+        "script_sha256": "cbba2c89da22fa864e8d339e7d29b9c34e5cb192f09a43e1aaff5f366ed912aa",
+        "baseline_commit": "620cc5eb85860ff77a837058903321876de82b15",
+        "checks": {
+          "same_collection_ids_and_keys": true,
+          "ten_playlist_snapshots_unchanged": true,
+          "alternate_snapshot_views_unchanged": true,
+          "shorts_web_and_other_nonchannel_collections_unchanged": true,
+          "all_nonchannel_membership_rows_unchanged": true,
+          "unavailable_placeholder_records_unchanged": true,
+          "unaffected_catalog_nodes_unchanged": true,
+          "baseline_watch_metadata_and_provenance_preserved": true,
+          "fresh_memberships_have_verified_owner": true,
+          "fresh_catalog_nodes_have_verified_owner": true,
+          "historical_rows_preserve_original_fields": true,
+          "current_plus_historical_equals_retained": true,
+          "current_plus_historical_only_ids_equals_catalog": true,
+          "collection_selected_counts_reconcile": true
+        },
+        "counts": {
+          "membership_count": 5203,
+          "current_membership_count": 5202,
+          "historical_membership_count": 1,
+          "unique_video_ids": 3606,
+          "current_unique_video_ids": 3605,
+          "historical_only_unique_video_ids": 1,
+          "historical_only_video_ids": [
+            "Pg8DvszQMME"
+          ],
+          "channel_refresh_pages": 118
+        },
+        "channel_sources": [
+          {
+            "collection_key": "deep_channel_videos",
+            "current_returned_memberships": 2663,
+            "historical_memberships_retained": 0,
+            "pages_checked": 89,
+            "fresh_first_fetched_at": "2026-11-03T20:19:11.924638+00:00",
+            "fresh_finished_at": "2026-11-03T20:26:51.601385+00:00",
+            "added_video_ids": [],
+            "not_in_latest_listing_video_ids": []
+          },
+          {
+            "collection_key": "deep_channel_streams",
+            "current_returned_memberships": 846,
+            "historical_memberships_retained": 1,
+            "pages_checked": 29,
+            "fresh_first_fetched_at": "2026-11-03T20:26:51.644307+00:00",
+            "fresh_finished_at": "2026-11-03T20:28:54.535610+00:00",
+            "added_video_ids": [],
+            "not_in_latest_listing_video_ids": [
+              "Pg8DvszQMME"
+            ]
+          }
+        ],
+        "channel_identity_normalization": {
+          "rule": "Use the verified owner of each selected channel surface. lockupViewModel metadata text may contain view counts and recency; it is not an owner name.",
+          "basis": [
+            {
+              "collection_id": "UCay5mclHBbWQTQ8fhoNCWow:videos",
+              "collection_key": "deep_channel_videos",
+              "channel_id": "UCay5mclHBbWQTQ8fhoNCWow",
+              "channel_name": "JEP Colombia",
+              "selected_tab_title": "Videos",
+              "source_url": "https://www.youtube.com/@jepcolombia/videos",
+              "json_pointer": "metadata.channelMetadataRenderer",
+              "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/videos/page_000.json",
+              "response_json_file_sha256": "32d9949a7493f72041059fad3e6641720bda88f43dbca0531db1c6935deed771",
+              "request_response_sha256": "9488bbddde378c855716d4f3b6ac85359b269a43fb1ac1404590471ccb461305",
+              "fetched_at": "2026-11-03T20:19:11.924638+00:00",
+              "normalization": {
+                "rows": 2663,
+                "channel_ids_replaced": 2663,
+                "channel_names_replaced": 2663
+              }
+            },
+            {
+              "collection_id": "UCay5mclHBbWQTQ8fhoNCWow:streams",
+              "collection_key": "deep_channel_streams",
+              "channel_id": "UCay5mclHBbWQTQ8fhoNCWow",
+              "channel_name": "JEP Colombia",
+              "selected_tab_title": "Live",
+              "source_url": "https://www.youtube.com/@jepcolombia/streams",
+              "json_pointer": "metadata.channelMetadataRenderer",
+              "response_path": "inventory_work/tieout_review_20261103/fresh_discovery/streams/page_000.json",
+              "response_json_file_sha256": "9ec3fa304f0d6b1677ef5d8f57b87b87f6057c30d3539f1817d92a2b8b912b64",
+              "request_response_sha256": "f94333a930cc291f22ff0bbad5fe0801c46c6b45c0fc0020a3621123e965c9c2",
+              "fetched_at": "2026-11-03T20:26:51.644307+00:00",
+              "normalization": {
+                "rows": 846,
+                "channel_ids_replaced": 846,
+                "channel_names_replaced": 846
+              }
+            }
+          ]
+        },
+        "preserved_alternate_snapshots": 4,
+        "preserved_nonchannel_memberships": 1693,
+        "input_sha256": {
+          "crawl_manifest.json": "7eb203576902747ea2116c0138e5993e963a708d2cc73c37b25b7edd0993a8aa",
+          "public_memberships.json.gz": "74a5683824c461fdd6302af357790f68a35271bd711e22a3e13f33070951d079",
+          "public_catalog.json.gz": "64fb33a5c43c1ad2644e18506cd482d5fa7472dfd298e9b06162525fab0f0cc8"
+        },
+        "output_sha256": {
+          "crawl_manifest.json": "c60a8e98a0a286e79720703e42c17eff3778fa03ffdf7ee769be2a3247bd3e65",
+          "memberships.json": "9da3c5c15bbf8345285fb0bc30490dafed806ca3b643cb21d94d7ee99883e995",
+          "catalog.json": "58c6fce319cc86dc06c0654323d60a32a865c2c07a0e3eb9fd18a30fff64992e"
+        },
+        "no_network_fetch_performed": true,
+        "scope_or_transcript_decisions_modified": false,
+        "mode": "check_existing_outputs",
+        "fresh_cache_integrity": {
+          "before": {
+            "files": 240,
+            "sha256_of_file_hashes": "d102c7c1be7c6aa6deb47b980c56946f49df9c043c03d5aab70672fb19821489"
+          },
+          "after": {
+            "files": 240,
+            "sha256_of_file_hashes": "d102c7c1be7c6aa6deb47b980c56946f49df9c043c03d5aab70672fb19821489"
+          },
+          "unchanged": true
+        },
+        "all_frozen_hashes_match_manifest": true,
+        "all_passed": true,
+        "output_files": [
+          "inventory_work/reverse_audit/crawl_manifest.json",
+          "inventory_work/reverse_audit/memberships.json",
+          "inventory_work/reverse_audit/catalog.json"
+        ]
+      }
+    }
+  },
+  "root_after_fix_checks": {
+    "crawler": {
+      "receipt": {
+        "path": "root_crawler_rework.json",
+        "sha256": "5dcea20e9fa3d84c78a94f028d9427fd8065c684f5c73e7814e1f8b51ddbe217"
+      },
+      "source_sha256": "9ef7355d1aeb63d1dacc272b60c8299927ce0f87e595de0135601d7841603c6f",
+      "focused_cases": 11,
+      "all_passed": true,
+      "historical_pages_replayed": 120,
+      "historical_counts": {
+        "deep_channel_videos": 2663,
+        "deep_channel_streams": 847
+      }
+    },
+    "assembler": {
+      "receipt": {
+        "path": "root_assembler_rework.json",
+        "sha256": "6e7fdb4f1cfb9de45855f2716edc0b4ab3764c302fd1549341b7cb8e0a336b02"
+      },
+      "source_sha256": "70f62fe303b18050f3d95433444820289c4644b7c4a847de8237ab0333f45f27",
+      "assembly_cases": 10,
+      "malformed_duration_cases": 3,
+      "valid_duration_cases": 6,
+      "all_passed": true,
+      "baseline_edges": 84
+    }
+  },
+  "remaining_research_gaps": [
+    {
+      "kind": "Public recording not located for supplied source",
+      "count": 11,
+      "unit": "consolidated source records",
+      "note": "Unsuccessful searches do not establish nonpublication or reservation."
+    },
+    {
+      "kind": "Located upload ends before supplied source continuation",
+      "count": 2,
+      "record_ids": [
+        "VV-015",
+        "VV-038"
+      ]
+    },
+    {
+      "kind": "Source-to-video match remains metadata-only",
+      "count": 2,
+      "note": "Usable public captions were unavailable; content/coverage and offsets remain unverified."
+    },
+    {
+      "kind": "Known omitted supplied transcript portions",
+      "count": 6,
+      "note": "Separate direction from missing public continuations; these counts overlap and must not be added."
+    },
+    {
+      "kind": "No supplied transcript located for admitted upload",
+      "count": 45,
+      "bounded_identity_content_checked": 17,
+      "metadata_based": 28,
+      "note": "Upload counts do not establish additional unique hearings; bounded identity checks do not certify full-audio equivalence."
+    },
+    {
+      "kind": "Scope unconfirmed",
+      "main_count": 4,
+      "broad_count": 13,
+      "overlap_count": 1,
+      "distinct_ids": 16,
+      "main_ids": [
+        "BJYdAbMd9nY",
+        "UN7yvo0no14",
+        "o6q9K9GMm4E",
+        "uASigfVN3tQ"
+      ],
+      "broad_ids": [
+        "0-CbJelWHts",
+        "6S-j34I6qYs",
+        "D2SNLxwt92U",
+        "FAmaTx4lNbU",
+        "KnwzIgiijTA",
+        "UN7yvo0no14",
+        "WImCcSZSWHY",
+        "a4s1-NLEuHg",
+        "j7YryvmCbBw",
+        "lCG07wZujJQ",
+        "n1HYbvijKKI",
+        "r0EQ4-J3j4I",
+        "yoKhg7c3YGQ"
+      ],
+      "note": "These candidates remain outside the admitted corpus. Four unavailable IDs across the two registers have no usable recording identity, including the Casanare playlist placeholder."
+    }
+  ],
+  "release_gate": {
+    "final_workbook_rebuilt_and_accepted": true,
+    "status": "Final workbook build, native links, six table filters, visual review and acceptance passed; repository publication is recorded by its commit.",
+    "publication_claimed_by_this_aggregate": false,
+    "workbook_sha256": "8b0788daf33414a99982e89d18548c913d937558b670f405e7fff1d36960f998",
+    "acceptance_receipt": "../workbook_validation.json",
+    "catalog_acceptance_receipt": "../catalog_validation.json"
+  },
+  "interpretation_limits": [
+    "93 means consolidated source records; VV-071 contains two dated sessions, and a shared upload retains two source segments. It is not a certified unique-hearing count.",
+    "17 guard/reuse/provenance findings demonstrated failure paths without establishing an incorrect frozen matching or consolidation count.",
+    "The source-text and caption checks establish identity and selected boundaries, not a word-for-word audit of every proceeding. Caption date conflicts remain explicit.",
+    "The workbook review verified projection of the 93 English summaries; it did not independently fact-check every summary claim.",
+    "Ten independently scoped reviews are preserved; repair observers, this aggregation and final integration are follow-up work, not additional reviews."
+  ],
+  "data_evidence_sha256": {
+    "inventory_work/tieout_review_20261103/tieout_data_decisions.json": "be5b6369f490dc8cb4d8b4decf420bb96ff37a4c1e950eb4d72f04dd3be1d89e",
+    "inventory_work/tieout_review_20261103/fresh_channel_comparison.json": "f74b885cc0c6d5a4a68a481cde3cfda2428323d59674de43f29de08615abf9fa",
+    "inventory_work/reverse_audit/scope_decisions_initial.json": "40e56e93f800590816beb457211b811626b68e7e4485f72c2ab224ad9ca92298",
+    "inventory_work/reverse_audit/broad_metadata_scope.json": "054bba658501a64cdb616f0a41ef1ae7f1790b9d1a6688a99ddc7d7910b75e1a",
+    "inventory_work/reverse_audit/reverse_mapping_review.json": "bb0d95c15a1cdcb1972d95b36d9c5d8ea4d8f4b4c1ae56aaa9de3f63aca034e1",
+    "inventory_work/reverse_audit/root_content_checks.json": "af79e21281e8023a4fe1cb6a1a4589e2bc2549316b702db2ddc1e5363e065ad8",
+    "outputs/jep_transcripts_20261103/inventory.json": "ab7e5a6e2ecf24fcc28eed6f49c56022710220bfd6c24081c33fc2907b62d267",
+    "outputs/jep_transcripts_20261103/source_manifest.json": "f149b5a672485751ba3033f14cc006b6ae668ef8bc5322c3f4c609615d336cf9",
+    "outputs/jep_transcripts_20261103/version_comparisons.json": "d07b46404a2b0dddb2b1fced637609ac7c3c66d3c8351fb9ef4289e44bf23979",
+    "inventory_work/versiones_version_pairs.json": "d07b46404a2b0dddb2b1fced637609ac7c3c66d3c8351fb9ef4289e44bf23979"
+  },
+  "repair_receipt_sha256": {
+    "fresh_channel_integration_receipt.json": "68d189ab946706a5aa029ec46e77e56c135fcb971b9c6cd0278f5e97b8c89f08",
+    "reviews/review04/rework.json": "2adc6f9768d8a65b6524dc7c503fe2242f65dd52f7e632b72db53feaf84aa5f6",
+    "reviews/review04/rework_observations.json": "67baddd67fc04ae71e5a242910ebaefe4371f6654d8b03d4e902fc89b448eb49",
+    "reviews/review05/rework_R05_F2.json": "35da497caf7420751b31ecd3382a3059476cd851264ffa3ae069cf7ed7cc7cb4",
+    "reviews/review07/rework_observer.json": "0246de58063c363d812bc1766d43194f7436d01a6d602dd8e79b6270293970ea",
+    "reviews/review08/rework.json": "c828c3219f441f4bbc237ec38f7263a7b302bb120e6e84880f225d50498da287",
+    "reviews/review09/rework.json": "37e167cc609143f9418c306987aa1bb3d2941061b1d28df1b7f002e94d297aef",
+    "reviews/review10/rework.json": "569f39b6565b08ca5f8317d9fb24e4893e4317e7fbefb3c2f39b16cb9f6ea088",
+    "reviews/review10/rework_replay.json": "666ba0aad89fb3c3bd89c9ad0392f9f20743a8c676682fbb901dc5ce241ab49e",
+    "root_assembler_rework.json": "6e7fdb4f1cfb9de45855f2716edc0b4ab3764c302fd1549341b7cb8e0a336b02",
+    "root_crawler_rework.json": "5dcea20e9fa3d84c78a94f028d9427fd8065c684f5c73e7814e1f8b51ddbe217",
+    "tieout_data_decisions.json": "be5b6369f490dc8cb4d8b4decf420bb96ff37a4c1e950eb4d72f04dd3be1d89e"
+  }
+}

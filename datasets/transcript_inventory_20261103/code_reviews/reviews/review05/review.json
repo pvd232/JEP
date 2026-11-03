@@ -1,0 +1,121 @@
+{
+  "review_id": "review05",
+  "review_type": "Independent code review",
+  "reviewed_commit": "620cc5eb85860ff77a837058903321876de82b15",
+  "as_of": "2026-11-03",
+  "verdict": "Request changes",
+  "scope": [
+    "workbook_build/assemble_outputs.py coverage_label, main reverse join/projection and collections_module_count",
+    "inventory_work/reverse_audit/build_mapping_review.py, exact working snapshot frozen for review",
+    "reverse_mapping_review.json, inventory.json, video_inventory.json and all 41 metadata-basis gap records"
+  ],
+  "reviewed_hashes": {
+    "inventory_work/tieout_review_20261103/base/workbook_build/assemble_outputs.py": "ec06e9fbe1a5afc2aee19020b70e173351013e7b0495719b4449f8b2d7dbcaed",
+    "inventory_work/reverse_audit/build_mapping_review.py": "f409e2bc23f999f55e4363f083c116cb56af2c3f556f47aeaba827837921a0e1",
+    "inventory_work/tieout_review_20261103/base/reverse_mapping_review.json": "6c8db273082b2c641f799e98996e92650472c9bb451d0ffaab61200ea631af55",
+    "inventory_work/tieout_review_20261103/base/inventory.json": "e261e1b82e9fe41b62aba96277ab54b5f377839a0fc428797dae8d005756b404",
+    "inventory_work/tieout_review_20261103/base/video_inventory.json": "878f42bf80d3cd0bd6ac70d6767e27b4b7f839aa4eba35350307d21a3ca38675",
+    "inventory_work/tieout_review_20261103/base/scope_decisions.json": "b49bb97967d26c9421b51dc2d3aac6363da7ea4ae5b8c98fa18b98f37f5e5766",
+    "inventory_work/tieout_review_20261103/base/summary.json": "eff0ec882313b47fcb26ce48a494af4f1c6aacb832f7151528c8e25fa974a35b"
+  },
+  "findings": [
+    {
+      "id": "R05-F1",
+      "severity": "P2",
+      "blocking": true,
+      "blocking_scope": "Approval of the reusable reverse-map assembler; no current published edge loss observed.",
+      "title": "The assembler can silently lose an established transcript-video edge",
+      "locations": [
+        {
+          "file": "workbook_build/assemble_outputs.py",
+          "line": 79,
+          "symbol": "main.review_by_id"
+        },
+        {
+          "file": "workbook_build/assemble_outputs.py",
+          "line": 101,
+          "symbol": "main ids lookup and projection"
+        }
+      ],
+      "invariant": "Every established source-to-video edge must be present in the reverse map, and reverse video IDs must be unique before constructing a dictionary.",
+      "observation": "The assembler checks that returned source IDs exist but never checks that every forward edge was retained. Its dictionary construction silently overwrites duplicate review IDs.",
+      "counterexample": "For eM8ZrqhZbgQ, delete VV-029 from the reverse row while retaining VV-030. The actual assembler accepts the input and writes 83 reverse edges against 84 forward edges. Appending a duplicate review row containing only VV-030 produces the same loss.",
+      "current_data_impact": "None observed: the frozen snapshot has 84 equal forward/reverse edges; VV-029 and VV-030 are both preserved.",
+      "smallest_repair": "Reject duplicate reverse video IDs before indexing. After applying reviewed forward corrections, compare the full set of (transcript_id, video_id) pairs in both directions and reject missing or unexplained extra edges before writing outputs.",
+      "observer": "observe_reverse_join.py baseline, missing_reverse_edge, and duplicate_reverse_id cases; baseline must pass, both mutations must be rejected."
+    },
+    {
+      "id": "R05-F2",
+      "severity": "P2",
+      "blocking": true,
+      "blocking_scope": "Approval of automatic disposition for new unlinked candidates; current 41 decisions remain explicitly metadata-based.",
+      "title": "An unlinked upload is automatically assigned a no-transcript disposition before session ambiguity is resolved",
+      "locations": [
+        {
+          "file": "inventory_work/reverse_audit/build_mapping_review.py",
+          "line": 126,
+          "symbol": "absent candidate selection"
+        },
+        {
+          "file": "inventory_work/reverse_audit/build_mapping_review.py",
+          "line": 135,
+          "symbol": "unlinked-candidate coverage_status"
+        },
+        {
+          "file": "inventory_work/reverse_audit/build_mapping_review.py",
+          "line": 145,
+          "symbol": "near-source metadata comparison"
+        }
+      ],
+      "invariant": "Absence of an exact upload-ID link does not establish absence of a supplied transcript; a same-principal/date candidate must stay unresolved until its recording relationship is reviewed.",
+      "observation": "Every admitted upload without an exact link receives No supplied transcript. Same-person source candidates are only appended as notes; they do not change the status. Current FoAy5Qfphcs handling works through an explicit hardcoded exception.",
+      "counterexample": "A synthetic new upload titled for Marco Fabián García Céspedes on 5 July 2019 is assigned No supplied transcript located for public-metadata session despite discovering VV-057 with that exact principal and date. No content evidence or source anchor supports absence.",
+      "current_data_impact": "No exact principal/date collision found among the 41 frozen metadata-only gap rows. This counterexample demonstrates a regeneration risk when admitting further uploads, not a proven false count among those 41.",
+      "smallest_repair": "Default an unlinked upload to Coverage unconfirmed. Promote it to an absence disposition only from an explicit reviewed session comparison. At minimum, generically retain same-principal/date ambiguities as unresolved instead of relying on hardcoded IDs.",
+      "observer": "observe_reverse_join.py unlinked_candidate case executes the actual builder loop in isolation. The synthetic candidate must not receive a no-supplied-source disposition without reviewed evidence."
+    }
+  ],
+  "invariants_checked": [
+    "Bilateral preservation of transcript-video links",
+    "Distinct upload IDs and source IDs retain their many-to-many relation",
+    "Source transcript omissions and public recording omissions remain separate",
+    "Metadata-only and content-checked identity decisions remain visibly distinct",
+    "No-transcript claims require more than absence of an exact upload-ID link"
+  ],
+  "current_snapshot_results": {
+    "included_video_ids": 128,
+    "linked_uploads": 83,
+    "unlinked_uploads": 45,
+    "content_checked_unlinked": 4,
+    "metadata_based_unlinked": 41,
+    "known_partial_supplied_coverage_uploads": 6,
+    "forward_edges": 84,
+    "reverse_edges": 84,
+    "edge_sets_equal": true,
+    "metadata_gap_records_reviewed_against_source_index": 41,
+    "same_principal_same_date_collisions": 0
+  },
+  "mechanical_evidence": {
+    "observer": "observe_reverse_join.py",
+    "observations": "observations.json",
+    "exit_code": 1,
+    "interpretation": "The baseline passes; exit1 reports the deliberately reproduced invariant violations, not an operational failure.",
+    "synthetic_outputs": "observer_outputs contains isolated mutated projections and must not be presented as research data."
+  },
+  "additional_content_observations": {
+    "artifact": "priority_content_checks.json",
+    "video_ids": [
+      "w49HGaeBNRk",
+      "eKrYlu79rGo"
+    ],
+    "finding": "Both support distinct recording/session identity relative to the supplied candidates. The Toro short recording is a procedural adjournment; its opening/title and closing automatic captions disagree by one day. The Solano recording is a questionnaire supplement, dated consistently 15 October 2019.",
+    "canonical_rows_changed": false
+  },
+  "exclusions_and_limits": [
+    "No new source-to-video link is asserted by the reviewer.",
+    "No independent audio listening; public automatic-caption anchors remain approximate.",
+    "The review does not certify 45 additional unique hearings or complete coverage of all supplied text.",
+    "Scope admission, channel freshness and spreadsheet rendering are reviewed separately.",
+    "No network requests or mutations of baseline, canonical files, shared caches or external resources were performed."
+  ]
+}
