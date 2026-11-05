@@ -14,6 +14,7 @@ from pathlib import Path
 from csts_pilot.convergence_run import artifact_path, artifact_source
 from pydantic import Field
 from scripts import color_clustering
+from scripts.color_artifact_loaders import load_json, load_path
 from viper import api, execution, stages
 from viper.authoring import experiment, input, plan, replicate, stage, variant
 from viper.config import BuildConfig, EmbedConfig
@@ -63,16 +64,6 @@ COMMON = {
 }
 
 
-def load_json(path: Path):
-    """Load a tracked JSON output through VIPER's artifact loader interface."""
-    return color_clustering.read(path)
-
-
-def load_path(path: Path) -> Path:
-    """Expose an immutable binary artifact without eagerly loading its bytes."""
-    return path
-
-
 def verify_inputs(context) -> None:
     """Compare every materialized native input with its frozen stage configuration."""
     if set(context.inputs) != set(context.config.input_sha256):
@@ -90,6 +81,10 @@ def working_directory(context, stage_name: str):
         implementation=color_clustering.sha(Path(color_clustering.__file__)),
         driver=color_clustering.sha(Path(__file__)),
     )
+    if stage_name == "report":
+        identity["diagnostics"] = color_clustering.sha(
+            Path(__file__).with_name("color_diagnostics.py")
+        )
     digest = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()
     root = context.config.work_root / stage_name / digest[:20]
     root.mkdir(parents=True, exist_ok=True)
@@ -138,7 +133,7 @@ def cluster(context: StageContext[BuildPins]) -> None:
     verify_inputs(context)
     with working_directory(context, "cluster") as root:
         assemble(context, root)
-        (root / "embeddings").mkdir()
+        (root / "embeddings").mkdir(exist_ok=True)
         for arm in color_clustering.ARMS:
             shutil.copyfile(context.inputs[arm], root / "embeddings" / (arm + ".npz"))
             shutil.copyfile(
@@ -160,7 +155,7 @@ def report(context: StageContext[BuildPins]) -> None:
     with working_directory(context, "report") as root:
         assemble(context, root)
         shutil.copyfile(context.inputs["metrics"], root / "metrics.json")
-        (root / "embeddings").mkdir()
+        (root / "embeddings").mkdir(exist_ok=True)
         for arm in color_clustering.ARMS:
             shutil.copyfile(context.inputs[arm], root / "embeddings" / (arm + ".npz"))
         color_clustering.write_report(root)
@@ -210,11 +205,21 @@ def run(root: Path) -> None:
     def execute(name: str, configured, gpu: bool) -> dict:
         """Run and verify one plan, retaining its immutable VIPER reference."""
         expected_hashes = configured.spec.config.input_sha256
+        implementation = {
+            filename: color_clustering.sha(root / "scripts" / filename)
+            for filename in (
+                "color_clustering.py",
+                "run_color_clustering.py",
+                "color_artifact_loaders.py",
+                *(("color_diagnostics.py",) if name == "report" else ()),
+            )
+        }
         for old in previous.get("runs", []):
             if (
                 old["name"] == name
                 and old["status"] == "succeeded"
                 and old.get("input_sha256") == expected_hashes
+                and old.get("implementation_sha256") == implementation
             ):
                 api.verify_run(
                     api.VerifyRunRequest(
@@ -264,6 +269,7 @@ def run(root: Path) -> None:
             "seconds": time.monotonic() - started,
             "source_commit": source.commit,
             "input_sha256": expected_hashes,
+            "implementation_sha256": implementation,
         }
         status["runs"].append(record)
         color_clustering.write(directory / "status.json", status)

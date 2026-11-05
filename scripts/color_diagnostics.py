@@ -286,7 +286,9 @@ def build_review_pack(root: Path, cluster_archive: Path) -> None:
                         ranked = members[
                             np.argsort(-(x[members] @ unit_centroids[cluster_id]))
                         ]
-                        for rank, j in enumerate(list(ranked[:5]) + list(ranked[-3:])):
+                        central = list(ranked[:5])
+                        peripheral = [j for j in ranked[-3:] if j not in central]
+                        for rank, j in enumerate(central + peripheral):
                             point = points[indices[j]]
                             exemplars.append(
                                 {
@@ -452,7 +454,19 @@ def build_review_pack(root: Path, cluster_archive: Path) -> None:
                 interval = metrics["paired_intervals"][control][measure]["interval_95"]
                 if interval is not None:
                     ax.plot(interval, [j, j], lw=4)
-                    ax.scatter([sum(interval) / 2], [j], s=30)
+                    if measure == "delta_ari":
+                        arms = metrics["cohorts"]["validation_single"]["arms"]
+                        estimate = (
+                            arms[color_clustering.ARMS[0]]["median_ari_at_C"]
+                            - arms[control]["median_ari_at_C"]
+                        )
+                    else:
+                        scores = metrics["pair_similarity"]
+                        estimate = (
+                            scores[color_clustering.ARMS[0]]["validation"]["spearman"]
+                            - scores[control]["validation"]["spearman"]
+                        )
+                    ax.scatter([estimate], [j], s=30)
             ax.axvline(0, color="#777", ls="--")
             ax.set(
                 yticks=range(len(controls)),
