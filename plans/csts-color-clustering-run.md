@@ -23,3 +23,5 @@ The review pack includes every cohort's K curves, seed IQR, convergence iteratio
 Validation is bounded to the sixteen success/rejection fixtures named by the accepted contract, source-format/documentation checks and native VIPER run verification. The new analysis has no retained CodeQL impact selection; this limitation remains explicit rather than widening the repository test suite.
 
 Local VIPER persistence is the completion path. A separate durable background uploader exports the terminal run into a local outbox, then publishes that immutable bundle to the configured VIPER cloud repository. Queue state, failures and cloud references are retained independently; cloud transfer never gates scientific completion or review delivery.
+
+When the GPU identity lacks object permissions, `scripts/async_color_upload_mac.py` mirrors the portable outbox and publishes the same immutable bytes through the existing authorized Mac account. OAuth tokens remain in the Mac publisher process and refresh through gcloud. This fallback runs as a separate durable job; scientific completion and user review remain independent.

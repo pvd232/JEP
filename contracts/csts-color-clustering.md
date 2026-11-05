@@ -17,6 +17,8 @@
 
 The [typed contract](csts-color-clustering.toml) owns these requirements and their verifiers. The [checklist workspace](../checklists/csts-color-clustering.toml) places them in three phases. The [experiment settings](../experiments/color-clustering.toml) hold the accepted scientific parameters. Implementation is in `scripts/color_clustering.py`, `scripts/run_color_clustering.py`, `scripts/color_diagnostics.py` and the focused contract fixture module. Source-review lifecycle state remains separate from native experiment run evidence.
 
+The [measured results](../training_outputs/color_clustering_20261104/report.md) and native run references retain experiment evidence for review.
+
 ## 2. Claim
 
 The analysis will produce a reproducible comparison of conditional color structure in the selected fine-tuned Qwen encoder and two controls, using reviewed target-color labels and a fixed clustering and evaluation policy.

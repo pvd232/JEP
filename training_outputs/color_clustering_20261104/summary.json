@@ -1,0 +1,656 @@
+{
+  "execution_source": "072289a86276349914f9484c6ada269fa199450e",
+  "report_source": "c09d6a4c7cae5a54a559df88bb37c03b04c95227",
+  "fit_count": 13440,
+  "point_count": 1017,
+  "pair_count": 531,
+  "cohorts": {
+    "validation_single": {
+      "split": "validation",
+      "kind": "single",
+      "points": 65,
+      "labeled": 65,
+      "colors": 13,
+      "color_counts": {
+        "yellow": 3,
+        "red": 12,
+        "pink": 3,
+        "black": 10,
+        "orange": 6,
+        "blue": 7,
+        "gray": 2,
+        "white": 8,
+        "brown": 8,
+        "green": 3,
+        "navy": 1,
+        "blond": 1,
+        "tan": 1
+      },
+      "arms": {
+        "finetuned_conditioned": {
+          "k_star": 12,
+          "k_near_color_count": true,
+          "median_ari_at_C": 0.918418988334725,
+          "ari_at_C_iqr": [
+            0.9012587172477298,
+            0.9525310437338188
+          ],
+          "median_seed_stability": 0.9306848084205122
+        },
+        "pretrained_conditioned": {
+          "k_star": 26,
+          "k_near_color_count": false,
+          "median_ari_at_C": 0.3427127438042121,
+          "ari_at_C_iqr": [
+            0.3204549569742251,
+            0.3750731798164792
+          ],
+          "median_seed_stability": 0.5893091340789591
+        },
+        "finetuned_unconditioned": {
+          "k_star": 26,
+          "k_near_color_count": false,
+          "median_ari_at_C": 0.0981698839688631,
+          "ari_at_C_iqr": [
+            0.07577950768656894,
+            0.11854760174112668
+          ],
+          "median_seed_stability": 0.6000116103564379
+        }
+      }
+    },
+    "validation_all": {
+      "split": "validation",
+      "kind": "all",
+      "points": 137,
+      "labeled": 65,
+      "colors": 13,
+      "color_counts": {
+        "yellow": 3,
+        "red": 12,
+        "pink": 3,
+        "black": 10,
+        "orange": 6,
+        "blue": 7,
+        "gray": 2,
+        "white": 8,
+        "brown": 8,
+        "green": 3,
+        "navy": 1,
+        "blond": 1,
+        "tan": 1
+      },
+      "arms": {
+        "finetuned_conditioned": {
+          "k_star": 25,
+          "k_near_color_count": false,
+          "median_ari_at_C": 0.9411949809227864,
+          "ari_at_C_iqr": [
+            0.8875054380450856,
+            0.9546244518939201
+          ],
+          "median_seed_stability": 0.8357174910239131
+        },
+        "pretrained_conditioned": {
+          "k_star": 26,
+          "k_near_color_count": false,
+          "median_ari_at_C": 0.243023518326681,
+          "ari_at_C_iqr": [
+            0.21684259406110523,
+            0.25556843233247034
+          ],
+          "median_seed_stability": 0.5324401372895575
+        },
+        "finetuned_unconditioned": {
+          "k_star": 26,
+          "k_near_color_count": false,
+          "median_ari_at_C": 0.09537485955593761,
+          "ari_at_C_iqr": [
+            0.0672593688863328,
+            0.11528417027395083
+          ],
+          "median_seed_stability": 0.5856083318441545
+        }
+      }
+    },
+    "train_single": {
+      "split": "train",
+      "kind": "single",
+      "points": 313,
+      "labeled": 313,
+      "colors": 17,
+      "color_counts": {
+        "brown": 48,
+        "gray": 10,
+        "black": 71,
+        "red": 28,
+        "white": 55,
+        "blue": 38,
+        "pink": 6,
+        "yellow": 14,
+        "tan": 5,
+        "orange": 8,
+        "gold": 9,
+        "green": 10,
+        "purple": 4,
+        "maroon": 1,
+        "beige": 3,
+        "blond": 2,
+        "navy": 1
+      },
+      "arms": {
+        "finetuned_conditioned": {
+          "k_star": 12,
+          "k_near_color_count": true,
+          "median_ari_at_C": 0.8516907677412733,
+          "ari_at_C_iqr": [
+            0.8324123424651506,
+            0.8640738797640517
+          ],
+          "median_seed_stability": 0.9264087123542986
+        },
+        "pretrained_conditioned": {
+          "k_star": 2,
+          "k_near_color_count": false,
+          "median_ari_at_C": 0.37735940983828475,
+          "ari_at_C_iqr": [
+            0.3612993578696569,
+            0.42447064332582435
+          ],
+          "median_seed_stability": 1.0
+        },
+        "finetuned_unconditioned": {
+          "k_star": 31,
+          "k_near_color_count": false,
+          "median_ari_at_C": 0.03724445578250543,
+          "ari_at_C_iqr": [
+            0.032917057083052634,
+            0.0424290066260886
+          ],
+          "median_seed_stability": 0.49813762683048346
+        }
+      }
+    },
+    "train_all": {
+      "split": "train",
+      "kind": "all",
+      "points": 641,
+      "labeled": 313,
+      "colors": 17,
+      "color_counts": {
+        "brown": 48,
+        "gray": 10,
+        "black": 71,
+        "red": 28,
+        "white": 55,
+        "blue": 38,
+        "pink": 6,
+        "yellow": 14,
+        "tan": 5,
+        "orange": 8,
+        "gold": 9,
+        "green": 10,
+        "purple": 4,
+        "maroon": 1,
+        "beige": 3,
+        "blond": 2,
+        "navy": 1
+      },
+      "arms": {
+        "finetuned_conditioned": {
+          "k_star": 16,
+          "k_near_color_count": true,
+          "median_ari_at_C": 0.8729714734790304,
+          "ari_at_C_iqr": [
+            0.8704791662132998,
+            0.8992411831360407
+          ],
+          "median_seed_stability": 0.8974680293158255
+        },
+        "pretrained_conditioned": {
+          "k_star": 3,
+          "k_near_color_count": false,
+          "median_ari_at_C": 0.37157403768442454,
+          "ari_at_C_iqr": [
+            0.346125363207502,
+            0.39321477880041955
+          ],
+          "median_seed_stability": 0.7630311722226694
+        },
+        "finetuned_unconditioned": {
+          "k_star": 34,
+          "k_near_color_count": false,
+          "median_ari_at_C": 0.051306132934652124,
+          "ari_at_C_iqr": [
+            0.043052650296893626,
+            0.05754625886919137
+          ],
+          "median_seed_stability": 0.530370621257719
+        }
+      }
+    },
+    "test_single": {
+      "split": "test",
+      "kind": "single",
+      "points": 119,
+      "labeled": 119,
+      "colors": 11,
+      "color_counts": {
+        "yellow": 6,
+        "red": 13,
+        "brown": 29,
+        "green": 7,
+        "black": 21,
+        "white": 21,
+        "blue": 8,
+        "tan": 3,
+        "orange": 8,
+        "pink": 2,
+        "beige": 1
+      },
+      "arms": {
+        "finetuned_conditioned": {
+          "k_star": 11,
+          "k_near_color_count": true,
+          "median_ari_at_C": 0.9430517768003226,
+          "ari_at_C_iqr": [
+            0.9200834797986307,
+            0.960019695886139
+          ],
+          "median_seed_stability": 0.9453460118508085
+        },
+        "pretrained_conditioned": {
+          "k_star": 2,
+          "k_near_color_count": false,
+          "median_ari_at_C": 0.5117347500692042,
+          "ari_at_C_iqr": [
+            0.4553729556488001,
+            0.5483704562764403
+          ],
+          "median_seed_stability": 0.9333092698310173
+        },
+        "finetuned_unconditioned": {
+          "k_star": 22,
+          "k_near_color_count": false,
+          "median_ari_at_C": 0.0640478712476187,
+          "ari_at_C_iqr": [
+            0.056101088702564014,
+            0.0774970868622453
+          ],
+          "median_seed_stability": 0.6074898170075218
+        }
+      }
+    },
+    "test_all": {
+      "split": "test",
+      "kind": "all",
+      "points": 239,
+      "labeled": 119,
+      "colors": 11,
+      "color_counts": {
+        "yellow": 6,
+        "red": 13,
+        "brown": 29,
+        "green": 7,
+        "black": 21,
+        "white": 21,
+        "blue": 8,
+        "tan": 3,
+        "orange": 8,
+        "pink": 2,
+        "beige": 1
+      },
+      "arms": {
+        "finetuned_conditioned": {
+          "k_star": 21,
+          "k_near_color_count": false,
+          "median_ari_at_C": 0.8828865806277082,
+          "ari_at_C_iqr": [
+            0.8817704506268186,
+            0.8834878678535061
+          ],
+          "median_seed_stability": 0.8819027229270779
+        },
+        "pretrained_conditioned": {
+          "k_star": 2,
+          "k_near_color_count": false,
+          "median_ari_at_C": 0.5353901186031311,
+          "ari_at_C_iqr": [
+            0.4388855608679397,
+            0.5587769075149271
+          ],
+          "median_seed_stability": 1.0
+        },
+        "finetuned_unconditioned": {
+          "k_star": 22,
+          "k_near_color_count": false,
+          "median_ari_at_C": 0.07413023730025634,
+          "ari_at_C_iqr": [
+            0.0681071893285719,
+            0.07802641022522838
+          ],
+          "median_seed_stability": 0.5164045107164484
+        }
+      }
+    },
+    "pooled_single": {
+      "split": "pooled",
+      "kind": "single",
+      "points": 497,
+      "labeled": 497,
+      "colors": 17,
+      "color_counts": {
+        "yellow": 23,
+        "brown": 85,
+        "gray": 12,
+        "black": 102,
+        "red": 53,
+        "white": 84,
+        "blue": 53,
+        "pink": 11,
+        "green": 20,
+        "orange": 22,
+        "tan": 9,
+        "gold": 9,
+        "purple": 4,
+        "maroon": 1,
+        "navy": 2,
+        "beige": 4,
+        "blond": 3
+      },
+      "arms": {
+        "finetuned_conditioned": {
+          "k_star": 12,
+          "k_near_color_count": true,
+          "median_ari_at_C": 0.8675335768826993,
+          "ari_at_C_iqr": [
+            0.8544968010323366,
+            0.885920550211353
+          ],
+          "median_seed_stability": 0.9471087364862486
+        },
+        "pretrained_conditioned": {
+          "k_star": 2,
+          "k_near_color_count": false,
+          "median_ari_at_C": 0.421935697870449,
+          "ari_at_C_iqr": [
+            0.3717388905982209,
+            0.45165386484755243
+          ],
+          "median_seed_stability": 0.9959758548595423
+        },
+        "finetuned_unconditioned": {
+          "k_star": 34,
+          "k_near_color_count": false,
+          "median_ari_at_C": 0.03765960594804847,
+          "ari_at_C_iqr": [
+            0.034706199700887674,
+            0.04814536393295609
+          ],
+          "median_seed_stability": 0.5099785967901151
+        }
+      }
+    },
+    "pooled_all": {
+      "split": "pooled",
+      "kind": "all",
+      "points": 1017,
+      "labeled": 497,
+      "colors": 17,
+      "color_counts": {
+        "yellow": 23,
+        "brown": 85,
+        "gray": 12,
+        "black": 102,
+        "red": 53,
+        "white": 84,
+        "blue": 53,
+        "pink": 11,
+        "green": 20,
+        "orange": 22,
+        "tan": 9,
+        "gold": 9,
+        "purple": 4,
+        "maroon": 1,
+        "navy": 2,
+        "beige": 4,
+        "blond": 3
+      },
+      "arms": {
+        "finetuned_conditioned": {
+          "k_star": 20,
+          "k_near_color_count": true,
+          "median_ari_at_C": 0.8922879554461843,
+          "ari_at_C_iqr": [
+            0.8848562874111874,
+            0.9138661115163782
+          ],
+          "median_seed_stability": 0.8856720541663909
+        },
+        "pretrained_conditioned": {
+          "k_star": 3,
+          "k_near_color_count": false,
+          "median_ari_at_C": 0.3897449383197906,
+          "ari_at_C_iqr": [
+            0.37018852452658935,
+            0.423448973754412
+          ],
+          "median_seed_stability": 0.6228867709341098
+        },
+        "finetuned_unconditioned": {
+          "k_star": 34,
+          "k_near_color_count": false,
+          "median_ari_at_C": 0.041892157184648615,
+          "ari_at_C_iqr": [
+            0.03965251245451637,
+            0.04397097701873462
+          ],
+          "median_seed_stability": 0.5698868855396141
+        }
+      }
+    }
+  },
+  "pair_similarity": {
+    "finetuned_conditioned": {
+      "train": {
+        "pairs": 336,
+        "spearman": 0.9266494000410875,
+        "undefined_reason": null
+      },
+      "validation": {
+        "pairs": 74,
+        "spearman": 0.8579742385199931,
+        "undefined_reason": null
+      },
+      "test": {
+        "pairs": 121,
+        "spearman": 0.8689652302428461,
+        "undefined_reason": null
+      },
+      "pooled": {
+        "pairs": 531,
+        "spearman": 0.9090401411879165,
+        "undefined_reason": null
+      }
+    },
+    "pretrained_conditioned": {
+      "train": {
+        "pairs": 336,
+        "spearman": 0.48832409637709306,
+        "undefined_reason": null
+      },
+      "validation": {
+        "pairs": 74,
+        "spearman": 0.21963092222072308,
+        "undefined_reason": null
+      },
+      "test": {
+        "pairs": 121,
+        "spearman": 0.5910970543409969,
+        "undefined_reason": null
+      },
+      "pooled": {
+        "pairs": 531,
+        "spearman": 0.4768008068861114,
+        "undefined_reason": null
+      }
+    },
+    "finetuned_unconditioned": {
+      "train": {
+        "pairs": 336,
+        "spearman": -0.12236169241358125,
+        "undefined_reason": null
+      },
+      "validation": {
+        "pairs": 74,
+        "spearman": -0.34360592583545285,
+        "undefined_reason": null
+      },
+      "test": {
+        "pairs": 121,
+        "spearman": -0.06598816557044822,
+        "undefined_reason": null
+      },
+      "pooled": {
+        "pairs": 531,
+        "spearman": -0.14741566871712533,
+        "undefined_reason": null
+      }
+    }
+  },
+  "condition_switch": {
+    "finetuned_conditioned": {
+      "arm": "finetuned_conditioned",
+      "selected": 50,
+      "scored": 47,
+      "mean_bidirectional_margin": 0.8137835720752148,
+      "both_directions_positive_rate": 1.0
+    },
+    "pretrained_conditioned": {
+      "arm": "pretrained_conditioned",
+      "selected": 50,
+      "scored": 47,
+      "mean_bidirectional_margin": 0.05668605515297423,
+      "both_directions_positive_rate": 0.2978723404255319
+    },
+    "finetuned_unconditioned": {
+      "arm": "finetuned_unconditioned",
+      "selected": 50,
+      "scored": 47,
+      "mean_bidirectional_margin": -4.84110193049654e-05,
+      "both_directions_positive_rate": 0.0
+    }
+  },
+  "paired_intervals": {
+    "pretrained_conditioned": {
+      "delta_ari": {
+        "valid_draws": 1000,
+        "interval_95": [
+          0.35217334244659426,
+          0.6225822728856868
+        ],
+        "conditional_on_fixed_fits": true
+      },
+      "delta_spearman": {
+        "valid_draws": 1000,
+        "interval_95": [
+          0.41497851317719425,
+          0.8551764295605904
+        ],
+        "conditional_on_fixed_fits": true
+      }
+    },
+    "finetuned_unconditioned": {
+      "delta_ari": {
+        "valid_draws": 1000,
+        "interval_95": [
+          0.591769803136988,
+          0.8065327008711376
+        ],
+        "conditional_on_fixed_fits": true
+      },
+      "delta_spearman": {
+        "valid_draws": 1000,
+        "interval_95": [
+          0.9240606396254076,
+          1.4457229162505407
+        ],
+        "conditional_on_fixed_fits": true
+      }
+    }
+  },
+  "runtime_versions": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "torch": "2.14.0+cu130",
+    "transformers": "5.20.2",
+    "peft": "0.21.2"
+  },
+  "native_stage_results": [
+    {
+      "name": "embed",
+      "status": "succeeded",
+      "source_commit": "072289a86276349914f9484c6ada269fa199450e",
+      "seconds": 307.5564484430006,
+      "reference": {
+        "sha256": "2a324a0aedc6dae1e76567e949106b41596a3211cccb28a8192fd1120c360568",
+        "bytes": 1030,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-color-clustering-20261104/repo",
+          "store": ".viper/store",
+          "store_id": "3cd83615021d90a0524af9da37d81523",
+          "commit": "e3b7421a75a40025d76d13a2b3244baec221d67526c9baecfbd8afa46e429983",
+          "path": "experiments/csts_color_072289a8_embed/runs/embed/01M6N1H0E1M97QJE2335HPRMF5/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      }
+    },
+    {
+      "name": "cluster",
+      "status": "succeeded",
+      "source_commit": "072289a86276349914f9484c6ada269fa199450e",
+      "seconds": 1221.303465737,
+      "reference": {
+        "sha256": "cb77096f9967a3e4dc52e80e85433bf1434527d916524a3a1ed554bb8eac0c2c",
+        "bytes": 1038,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-color-clustering-20261104/repo",
+          "store": ".viper/store",
+          "store_id": "3cd83615021d90a0524af9da37d81523",
+          "commit": "6da3a300f3deb3f24c605861bceacfc96e90127dd2729098e53c9209664698d5",
+          "path": "experiments/csts_color_072289a8_cluster/runs/cluster/01M6N1TDDZMCVY7C67MFMDJAN9/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      }
+    },
+    {
+      "name": "report",
+      "status": "succeeded",
+      "source_commit": "c09d6a4c7cae5a54a559df88bb37c03b04c95227",
+      "seconds": 228.9973735220001,
+      "reference": {
+        "sha256": "176177ee929cfdf99f61d498f68046e9618cc1a18683f9f0ab9951f567cba148",
+        "bytes": 1034,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-color-clustering-20261104/repo",
+          "store": ".viper/store",
+          "store_id": "3cd83615021d90a0524af9da37d81523",
+          "commit": "70ed1eaa0b30662acd84f8fc0610fd4e86638877ef719cbb841b834ddfd59266",
+          "path": "experiments/csts_color_c09d6a4c_report/runs/report/01M6N36Z5H7BR46X7RW01FZ5S9/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      }
+    }
+  ],
+  "review_inventory": {
+    "pdf_pages": 86,
+    "seeded_fits": 13440,
+    "assignment_tables": 24,
+    "focused_tests": "16 passed in 0.17s"
+  },
+  "asynchronous_upload_job": "475202922408485aa4303ad54df83646"
+}
