@@ -1,0 +1,8 @@
+# Runtime observed on the requested Colab A100 for this screen.
+# Checkpoint and tokenizer revisions are pinned in extraction_native.py.
+# GoLLIE uses stock Llama SDPA with verified legacy architecture and RoPE
+# base 10000; its original FlashAttention package is unnecessary here.
+torch==2.14.0
+transformers==5.20.2
+accelerate==1.15.0
+sentencepiece

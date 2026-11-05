@@ -1,0 +1,416 @@
+{
+  "all_reviewers_accepted": {
+    "arms": {
+      "gollie": {
+        "all_criteria_accepted": 22,
+        "criteria": {
+          "abstention_correct": 24,
+          "binding_correct": 144,
+          "complete": 22,
+          "faithful": 144,
+          "inference_correct": 144,
+          "multiplicity_correct": 79,
+          "scope_correct": 143
+        },
+        "n": 239
+      },
+      "gpt_propositions": {
+        "all_criteria_accepted": 219,
+        "criteria": {
+          "abstention_correct": 230,
+          "binding_correct": 237,
+          "complete": 219,
+          "faithful": 234,
+          "inference_correct": 234,
+          "multiplicity_correct": 233,
+          "scope_correct": 235
+        },
+        "n": 239
+      },
+      "knowcoder": {
+        "all_criteria_accepted": 21,
+        "criteria": {
+          "abstention_correct": 21,
+          "binding_correct": 139,
+          "complete": 21,
+          "faithful": 139,
+          "inference_correct": 139,
+          "multiplicity_correct": 82,
+          "scope_correct": 139
+        },
+        "n": 239
+      }
+    },
+    "paired_vs_propositions": {
+      "gollie": {
+        "components": 110,
+        "mean_difference": -0.8242677824267782,
+        "paired_component_95_ci": [
+          -0.8828451882845189,
+          -0.7551020408163265
+        ]
+      },
+      "knowcoder": {
+        "components": 110,
+        "mean_difference": -0.8284518828451883,
+        "paired_component_95_ci": [
+          -0.890295358649789,
+          -0.7644628099173554
+        ]
+      }
+    }
+  },
+  "disagreement_candidates": [
+    "candidate_00004",
+    "candidate_00006",
+    "candidate_00007",
+    "candidate_00008",
+    "candidate_00010",
+    "candidate_00011",
+    "candidate_00012",
+    "candidate_00015",
+    "candidate_00016",
+    "candidate_00021",
+    "candidate_00022",
+    "candidate_00030",
+    "candidate_00041",
+    "candidate_00049",
+    "candidate_00053",
+    "candidate_00066",
+    "candidate_00070",
+    "candidate_00074",
+    "candidate_00075",
+    "candidate_00077",
+    "candidate_00079",
+    "candidate_00082",
+    "candidate_00087",
+    "candidate_00089",
+    "candidate_00090",
+    "candidate_00091",
+    "candidate_00092",
+    "candidate_00096",
+    "candidate_00097",
+    "candidate_00099",
+    "candidate_00106",
+    "candidate_00112",
+    "candidate_00116",
+    "candidate_00120",
+    "candidate_00125",
+    "candidate_00129",
+    "candidate_00132",
+    "candidate_00141",
+    "candidate_00142",
+    "candidate_00149",
+    "candidate_00155",
+    "candidate_00162",
+    "candidate_00163",
+    "candidate_00171",
+    "candidate_00174",
+    "candidate_00182",
+    "candidate_00183",
+    "candidate_00184",
+    "candidate_00188",
+    "candidate_00189",
+    "candidate_00195",
+    "candidate_00197",
+    "candidate_00199",
+    "candidate_00205",
+    "candidate_00209",
+    "candidate_00210",
+    "candidate_00215",
+    "candidate_00217",
+    "candidate_00221",
+    "candidate_00222",
+    "candidate_00226",
+    "candidate_00228",
+    "candidate_00229",
+    "candidate_00231",
+    "candidate_00233",
+    "candidate_00237",
+    "candidate_00238",
+    "candidate_00241",
+    "candidate_00252",
+    "candidate_00255",
+    "candidate_00259",
+    "candidate_00260",
+    "candidate_00265",
+    "candidate_00267",
+    "candidate_00268",
+    "candidate_00271",
+    "candidate_00276",
+    "candidate_00278",
+    "candidate_00279",
+    "candidate_00284",
+    "candidate_00285",
+    "candidate_00288",
+    "candidate_00290",
+    "candidate_00307",
+    "candidate_00312",
+    "candidate_00320",
+    "candidate_00321",
+    "candidate_00323",
+    "candidate_00327",
+    "candidate_00331",
+    "candidate_00337",
+    "candidate_00353",
+    "candidate_00357",
+    "candidate_00360",
+    "candidate_00361",
+    "candidate_00364",
+    "candidate_00368",
+    "candidate_00369",
+    "candidate_00378",
+    "candidate_00380",
+    "candidate_00386",
+    "candidate_00387",
+    "candidate_00393",
+    "candidate_00401",
+    "candidate_00402",
+    "candidate_00403",
+    "candidate_00405",
+    "candidate_00408",
+    "candidate_00414",
+    "candidate_00415",
+    "candidate_00417",
+    "candidate_00418",
+    "candidate_00419",
+    "candidate_00425",
+    "candidate_00426",
+    "candidate_00428",
+    "candidate_00431",
+    "candidate_00432",
+    "candidate_00433",
+    "candidate_00438",
+    "candidate_00443",
+    "candidate_00456",
+    "candidate_00457",
+    "candidate_00458",
+    "candidate_00463",
+    "candidate_00466",
+    "candidate_00467",
+    "candidate_00475",
+    "candidate_00476",
+    "candidate_00477",
+    "candidate_00479",
+    "candidate_00481",
+    "candidate_00489",
+    "candidate_00497",
+    "candidate_00500",
+    "candidate_00504",
+    "candidate_00506",
+    "candidate_00507",
+    "candidate_00509",
+    "candidate_00511",
+    "candidate_00512",
+    "candidate_00517",
+    "candidate_00522",
+    "candidate_00523",
+    "candidate_00525",
+    "candidate_00531",
+    "candidate_00533",
+    "candidate_00534",
+    "candidate_00535",
+    "candidate_00536",
+    "candidate_00540",
+    "candidate_00541",
+    "candidate_00546",
+    "candidate_00549",
+    "candidate_00551",
+    "candidate_00552",
+    "candidate_00556",
+    "candidate_00557",
+    "candidate_00558",
+    "candidate_00563",
+    "candidate_00569",
+    "candidate_00570",
+    "candidate_00571",
+    "candidate_00574",
+    "candidate_00576",
+    "candidate_00577",
+    "candidate_00578",
+    "candidate_00579",
+    "candidate_00580",
+    "candidate_00581",
+    "candidate_00585",
+    "candidate_00590",
+    "candidate_00592",
+    "candidate_00605",
+    "candidate_00607",
+    "candidate_00610",
+    "candidate_00613",
+    "candidate_00615",
+    "candidate_00618",
+    "candidate_00619",
+    "candidate_00626",
+    "candidate_00627",
+    "candidate_00628",
+    "candidate_00630",
+    "candidate_00632",
+    "candidate_00636",
+    "candidate_00638",
+    "candidate_00640",
+    "candidate_00644",
+    "candidate_00645",
+    "candidate_00648",
+    "candidate_00652",
+    "candidate_00654",
+    "candidate_00656",
+    "candidate_00658",
+    "candidate_00659",
+    "candidate_00660",
+    "candidate_00663",
+    "candidate_00665",
+    "candidate_00667",
+    "candidate_00676",
+    "candidate_00681",
+    "candidate_00685",
+    "candidate_00688",
+    "candidate_00689",
+    "candidate_00690",
+    "candidate_00691",
+    "candidate_00694",
+    "candidate_00699",
+    "candidate_00703",
+    "candidate_00704",
+    "candidate_00706",
+    "candidate_00710",
+    "candidate_00712"
+  ],
+  "disagreements_require_adjudication": true,
+  "individual_reviews": [
+    {
+      "arms": {
+        "gollie": {
+          "all_criteria_accepted": 23,
+          "criteria": {
+            "abstention_correct": 25,
+            "binding_correct": 183,
+            "complete": 23,
+            "faithful": 183,
+            "inference_correct": 184,
+            "multiplicity_correct": 107,
+            "scope_correct": 182
+          },
+          "n": 239
+        },
+        "gpt_propositions": {
+          "all_criteria_accepted": 222,
+          "criteria": {
+            "abstention_correct": 232,
+            "binding_correct": 238,
+            "complete": 222,
+            "faithful": 235,
+            "inference_correct": 235,
+            "multiplicity_correct": 234,
+            "scope_correct": 237
+          },
+          "n": 239
+        },
+        "knowcoder": {
+          "all_criteria_accepted": 22,
+          "criteria": {
+            "abstention_correct": 22,
+            "binding_correct": 194,
+            "complete": 22,
+            "faithful": 194,
+            "inference_correct": 194,
+            "multiplicity_correct": 119,
+            "scope_correct": 194
+          },
+          "n": 239
+        }
+      },
+      "paired_vs_propositions": {
+        "gollie": {
+          "components": 110,
+          "mean_difference": -0.8326359832635983,
+          "paired_component_95_ci": [
+            -0.8927038626609443,
+            -0.7659574468085106
+          ]
+        },
+        "knowcoder": {
+          "components": 110,
+          "mean_difference": -0.8368200836820083,
+          "paired_component_95_ci": [
+            -0.8987854251012146,
+            -0.7725321888412017
+          ]
+        }
+      },
+      "review_kind": "model_assisted",
+      "review_sha256": "a0a7f030db8017af67e18a1b6b92dba951b9850b0f9de1cb1d10f3f0ab67c491",
+      "reviewer_ids": [
+        "model:gpt-6.1-sol:max:review-a"
+      ]
+    },
+    {
+      "arms": {
+        "gollie": {
+          "all_criteria_accepted": 22,
+          "criteria": {
+            "abstention_correct": 24,
+            "binding_correct": 183,
+            "complete": 22,
+            "faithful": 183,
+            "inference_correct": 183,
+            "multiplicity_correct": 112,
+            "scope_correct": 182
+          },
+          "n": 239
+        },
+        "gpt_propositions": {
+          "all_criteria_accepted": 224,
+          "criteria": {
+            "abstention_correct": 231,
+            "binding_correct": 237,
+            "complete": 224,
+            "faithful": 234,
+            "inference_correct": 234,
+            "multiplicity_correct": 234,
+            "scope_correct": 236
+          },
+          "n": 239
+        },
+        "knowcoder": {
+          "all_criteria_accepted": 21,
+          "criteria": {
+            "abstention_correct": 21,
+            "binding_correct": 175,
+            "complete": 21,
+            "faithful": 175,
+            "inference_correct": 175,
+            "multiplicity_correct": 108,
+            "scope_correct": 175
+          },
+          "n": 239
+        }
+      },
+      "paired_vs_propositions": {
+        "gollie": {
+          "components": 110,
+          "mean_difference": -0.8451882845188284,
+          "paired_component_95_ci": [
+            -0.9,
+            -0.7815126050420168
+          ]
+        },
+        "knowcoder": {
+          "components": 110,
+          "mean_difference": -0.8493723849372385,
+          "paired_component_95_ci": [
+            -0.9079497907949791,
+            -0.7876106194690266
+          ]
+        }
+      },
+      "review_kind": "model_assisted",
+      "review_sha256": "8ca0bba4457c321432d7e9b15e130d9e087ff64c3d083f41588981e1e612e453",
+      "reviewer_ids": [
+        "model:gpt-6.1-sol:max:review-b"
+      ]
+    }
+  ],
+  "review_kind": "model_assisted",
+  "review_seal_sha256": "868c37dc5135b3eefa072f1d0d662d70c0a3dc031f65f77637c1e89f1cf0c261"
+}

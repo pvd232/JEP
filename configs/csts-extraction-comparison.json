@@ -1,0 +1,45 @@
+{
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "max",
+  "sample_rows": 120,
+  "sample_seed": "csts-extraction-comparison-20261027-v1",
+  "review_seed": 20261027,
+  "timeout_seconds": 1200,
+  "max_output_tokens": 1024,
+  "max_payload_bytes": 65536,
+  "arms": [
+    "gpt_direct",
+    "gpt_propositions",
+    "gpt_json",
+    "gpt_python",
+    "knowcoder",
+    "gollie"
+  ],
+  "native_models": {
+    "knowcoder": {
+      "model_id": "golaxy/KnowCoder-7B-base",
+      "revision": "4a7a076f573fe87fe0a97670c63c64214484742f",
+      "context_limit": 2048,
+      "language": "English",
+      "prompt_source": "https://github.com/ICT-GoKnow/KnowCoder/blob/master/Cases.md"
+    },
+    "gollie": {
+      "model_id": "HiTZ/GoLLIE-7B",
+      "revision": "d3e41fef45f6a7d438c46ba7d9fce5d0d486c7a9",
+      "context_limit": 16384,
+      "language": "English",
+      "prompt_source": "https://huggingface.co/HiTZ/GoLLIE-7B"
+    }
+  },
+  "dataset": {
+    "revision": "jep-csts-v1.1",
+    "validation": {
+      "rows": 1576,
+      "sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+    },
+    "test": {
+      "rows": 2431,
+      "sha256": "d6b40b7b891ed147befb30801c2f85a8787775adebdd98d134157cbb2a6e9f76"
+    }
+  }
+}

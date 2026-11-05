@@ -1,0 +1,829 @@
+{
+  "status": "not_executed_pending_independent_scope_and_reference_review",
+  "model_calls": 0,
+  "count_family_enabled": false,
+  "stages": [
+    "mentions",
+    "quantity_bindings",
+    "identity"
+  ],
+  "warning": "Separate source-only native tasks. Gold is not model input. Schema-valid union cannot establish source support, identity or completeness; no exact scene totals are asserted.",
+  "cases": [
+    {
+      "case_id": "three_plus_one",
+      "source_id": "0a7d36e084bd22ea9dc3c763c84b3c2bbbc7e37f7876d3971665079e307a0a9e",
+      "condition": "number of people",
+      "passage": "Three people look up at a man on a ladder against a brick wall .",
+      "plan": {
+        "version": "task-aware-native-v2",
+        "condition": "number of people",
+        "normalized_condition": "number of people",
+        "family": "aggregate_counts_quantities",
+        "native_task": "NER+RE",
+        "supported": true,
+        "gate_status": "separate_count_stage_gates_required",
+        "unsupported_reason": null,
+        "scope": "All and only annotations directly answering: number of people",
+        "schemas": [
+          {
+            "name": "PersonGroup",
+            "kind": "entity",
+            "description": "A person/object or referential group requested by number of people. Copy its full noun phrase including any determiner or quantity. Repeated mentions are not automatically new referents.",
+            "predicate": null,
+            "target_type": "Person",
+            "value_type": null,
+            "polarity": "positive"
+          },
+          {
+            "name": "NegatedPersonGroup",
+            "kind": "entity",
+            "description": "Explicitly denied: A person/object or referential group requested by number of people. Copy its full noun phrase including any determiner or quantity. Repeated mentions are not automatically new referents.",
+            "predicate": null,
+            "target_type": "Person",
+            "value_type": null,
+            "polarity": "negative"
+          },
+          {
+            "name": "UncertainPersonGroup",
+            "kind": "entity",
+            "description": "Explicitly uncertain: A person/object or referential group requested by number of people. Copy its full noun phrase including any determiner or quantity. Repeated mentions are not automatically new referents.",
+            "predicate": null,
+            "target_type": "Person",
+            "value_type": null,
+            "polarity": "uncertain"
+          },
+          {
+            "name": "Quantity",
+            "kind": "entity",
+            "description": "An explicit quantity word, numeral or quantity-bearing noun phrase modifying a requested target group. When a short determiner repeats, copy the whole quantity-bearing noun phrase to preserve its binding. Exclude identifiers such as jersey numbers.",
+            "predicate": null,
+            "target_type": "Quantity",
+            "value_type": null,
+            "polarity": "positive"
+          },
+          {
+            "name": "HasQuantity",
+            "kind": "relation",
+            "description": "Target group and its explicitly stated quantity; preserve each group separately.",
+            "predicate": "has_quantity",
+            "target_type": "Person",
+            "value_type": "Quantity",
+            "polarity": "positive"
+          },
+          {
+            "name": "SameReferent",
+            "kind": "relation",
+            "description": "Two mentions explicitly referring to the same target entity/group, including unambiguous pronouns.",
+            "predicate": "same_referent",
+            "target_type": "Person",
+            "value_type": "Person",
+            "polarity": "positive"
+          },
+          {
+            "name": "DistinctFrom",
+            "kind": "relation",
+            "description": "Two target groups explicitly disjoint, such as three people looking at a separate man. Do not assume disjointness merely from two surface mentions.",
+            "predicate": "distinct_from",
+            "target_type": "Person",
+            "value_type": "Person",
+            "polarity": "positive"
+          },
+          {
+            "name": "PartOf",
+            "kind": "relation",
+            "description": "The first target mention is included in the second target group, not an additional entity.",
+            "predicate": "part_of",
+            "target_type": "Person",
+            "value_type": "Person",
+            "polarity": "positive"
+          }
+        ],
+        "projection": "task-aware-native-v2",
+        "author_sources": {
+          "gollie_ner": "https://github.com/hitz-zentroa/GoLLIE/blob/164c611743fdc1befe71bbdf03e08c5eb4e35957/notebooks/Named%20Entity%20Recognition.ipynb",
+          "gollie_event": "https://github.com/hitz-zentroa/GoLLIE/blob/164c611743fdc1befe71bbdf03e08c5eb4e35957/notebooks/Event%20Extraction.ipynb",
+          "gollie_relation": "https://github.com/hitz-zentroa/GoLLIE/blob/164c611743fdc1befe71bbdf03e08c5eb4e35957/notebooks/Relation%20Extraction.ipynb",
+          "knowcoder": "https://github.com/ICT-GoKnow/KnowCoder/blob/b7859789fc7641e03916074088859aa592332ad3/Cases.md"
+        },
+        "aggregation": {
+          "stages": [
+            "mentions",
+            "quantity_bindings",
+            "identity"
+          ],
+          "closure": "unverified_by_default",
+          "exact_requires": [
+            "source completeness validated",
+            "resolved coreference",
+            "known disjoint maximal groups",
+            "explicit exact quantities"
+          ],
+          "unknown_is_not_zero": true
+        }
+      },
+      "plan_sha256": "f3f6272b10e2637896b70efcbd8c0755524d19bfb27c3539219592dd9ba41f07",
+      "profile": "positive_anchor",
+      "coverage_complete": false,
+      "provenance": "already_exposed_development_source",
+      "expected_native_stages": {
+        "gollie": {
+          "mentions": "[PersonGroup(span='Three people'), PersonGroup(span='a man'), Quantity(span='Three')]",
+          "quantity_bindings": "[HasQuantity(arg1='Three people', arg2='Three')]",
+          "identity": "[DistinctFrom(arg1='Three people', arg2='a man')]"
+        },
+        "knowcoder": {
+          "mentions": "[PersonGroup('Three people'), PersonGroup('a man'), Quantity('Three')]",
+          "quantity_bindings": "[HasQuantity(Entity('Three people'), Entity('Three'))]",
+          "identity": "[DistinctFrom(Entity('Three people'), Entity('a man'))]"
+        }
+      },
+      "minimal_conditional_quantity": {
+        "kind": "lower_bound",
+        "lower": 4,
+        "upper": null
+      },
+      "completeness_established": false,
+      "review_status": "proposed_reference_requires_independent_source_review"
+    },
+    {
+      "case_id": "repeated_dog_is_subset",
+      "source_id": "11c0d8914453aec9c3b5364f1acb3f28293bdf2f727791568aa72df1f1a2d84e",
+      "condition": "number of animals",
+      "passage": "Two black dogs run through the snow with a red toy in one dog 's mouth .",
+      "plan": {
+        "version": "task-aware-native-v2",
+        "condition": "number of animals",
+        "normalized_condition": "number of animals",
+        "family": "aggregate_counts_quantities",
+        "native_task": "NER+RE",
+        "supported": true,
+        "gate_status": "separate_count_stage_gates_required",
+        "unsupported_reason": null,
+        "scope": "All and only annotations directly answering: number of animals",
+        "schemas": [
+          {
+            "name": "AnimalGroup",
+            "kind": "entity",
+            "description": "A person/object or referential group requested by number of animals. Copy its full noun phrase including any determiner or quantity. Repeated mentions are not automatically new referents.",
+            "predicate": null,
+            "target_type": "Animal",
+            "value_type": null,
+            "polarity": "positive"
+          },
+          {
+            "name": "NegatedAnimalGroup",
+            "kind": "entity",
+            "description": "Explicitly denied: A person/object or referential group requested by number of animals. Copy its full noun phrase including any determiner or quantity. Repeated mentions are not automatically new referents.",
+            "predicate": null,
+            "target_type": "Animal",
+            "value_type": null,
+            "polarity": "negative"
+          },
+          {
+            "name": "UncertainAnimalGroup",
+            "kind": "entity",
+            "description": "Explicitly uncertain: A person/object or referential group requested by number of animals. Copy its full noun phrase including any determiner or quantity. Repeated mentions are not automatically new referents.",
+            "predicate": null,
+            "target_type": "Animal",
+            "value_type": null,
+            "polarity": "uncertain"
+          },
+          {
+            "name": "Quantity",
+            "kind": "entity",
+            "description": "An explicit quantity word, numeral or quantity-bearing noun phrase modifying a requested target group. When a short determiner repeats, copy the whole quantity-bearing noun phrase to preserve its binding. Exclude identifiers such as jersey numbers.",
+            "predicate": null,
+            "target_type": "Quantity",
+            "value_type": null,
+            "polarity": "positive"
+          },
+          {
+            "name": "HasQuantity",
+            "kind": "relation",
+            "description": "Target group and its explicitly stated quantity; preserve each group separately.",
+            "predicate": "has_quantity",
+            "target_type": "Animal",
+            "value_type": "Quantity",
+            "polarity": "positive"
+          },
+          {
+            "name": "SameReferent",
+            "kind": "relation",
+            "description": "Two mentions explicitly referring to the same target entity/group, including unambiguous pronouns.",
+            "predicate": "same_referent",
+            "target_type": "Animal",
+            "value_type": "Animal",
+            "polarity": "positive"
+          },
+          {
+            "name": "DistinctFrom",
+            "kind": "relation",
+            "description": "Two target groups explicitly disjoint, such as three people looking at a separate man. Do not assume disjointness merely from two surface mentions.",
+            "predicate": "distinct_from",
+            "target_type": "Animal",
+            "value_type": "Animal",
+            "polarity": "positive"
+          },
+          {
+            "name": "PartOf",
+            "kind": "relation",
+            "description": "The first target mention is included in the second target group, not an additional entity.",
+            "predicate": "part_of",
+            "target_type": "Animal",
+            "value_type": "Animal",
+            "polarity": "positive"
+          }
+        ],
+        "projection": "task-aware-native-v2",
+        "author_sources": {
+          "gollie_ner": "https://github.com/hitz-zentroa/GoLLIE/blob/164c611743fdc1befe71bbdf03e08c5eb4e35957/notebooks/Named%20Entity%20Recognition.ipynb",
+          "gollie_event": "https://github.com/hitz-zentroa/GoLLIE/blob/164c611743fdc1befe71bbdf03e08c5eb4e35957/notebooks/Event%20Extraction.ipynb",
+          "gollie_relation": "https://github.com/hitz-zentroa/GoLLIE/blob/164c611743fdc1befe71bbdf03e08c5eb4e35957/notebooks/Relation%20Extraction.ipynb",
+          "knowcoder": "https://github.com/ICT-GoKnow/KnowCoder/blob/b7859789fc7641e03916074088859aa592332ad3/Cases.md"
+        },
+        "aggregation": {
+          "stages": [
+            "mentions",
+            "quantity_bindings",
+            "identity"
+          ],
+          "closure": "unverified_by_default",
+          "exact_requires": [
+            "source completeness validated",
+            "resolved coreference",
+            "known disjoint maximal groups",
+            "explicit exact quantities"
+          ],
+          "unknown_is_not_zero": true
+        }
+      },
+      "plan_sha256": "ec25d7b2ea7c1bf4a51f27ad150b0bb54a9eb50f3901adaf2fcdcc7dad28be2e",
+      "profile": "positive_anchor",
+      "coverage_complete": false,
+      "provenance": "already_exposed_development_source",
+      "expected_native_stages": {
+        "gollie": {
+          "mentions": "[AnimalGroup(span='Two black dogs'), AnimalGroup(span='one dog'), Quantity(span='Two'), Quantity(span='one')]",
+          "quantity_bindings": "[HasQuantity(arg1='Two black dogs', arg2='Two'), HasQuantity(arg1='one dog', arg2='one')]",
+          "identity": "[PartOf(arg1='one dog', arg2='Two black dogs')]"
+        },
+        "knowcoder": {
+          "mentions": "[AnimalGroup('Two black dogs'), AnimalGroup('one dog'), Quantity('Two'), Quantity('one')]",
+          "quantity_bindings": "[HasQuantity(Entity('Two black dogs'), Entity('Two')), HasQuantity(Entity('one dog'), Entity('one'))]",
+          "identity": "[PartOf(Entity('one dog'), Entity('Two black dogs'))]"
+        }
+      },
+      "minimal_conditional_quantity": {
+        "kind": "lower_bound",
+        "lower": 2,
+        "upper": null
+      },
+      "completeness_established": false,
+      "review_status": "proposed_reference_requires_independent_source_review"
+    },
+    {
+      "case_id": "unspecified_plural",
+      "source_id": "7507127642c646106a0ede6e36b0c349ae5c7ae184fbcc3ceb7fe8cda9a355be",
+      "condition": "number of people",
+      "passage": "A number of children enjoy themselves on the coast of a city .",
+      "plan": {
+        "version": "task-aware-native-v2",
+        "condition": "number of people",
+        "normalized_condition": "number of people",
+        "family": "aggregate_counts_quantities",
+        "native_task": "NER+RE",
+        "supported": true,
+        "gate_status": "separate_count_stage_gates_required",
+        "unsupported_reason": null,
+        "scope": "All and only annotations directly answering: number of people",
+        "schemas": [
+          {
+            "name": "PersonGroup",
+            "kind": "entity",
+            "description": "A person/object or referential group requested by number of people. Copy its full noun phrase including any determiner or quantity. Repeated mentions are not automatically new referents.",
+            "predicate": null,
+            "target_type": "Person",
+            "value_type": null,
+            "polarity": "positive"
+          },
+          {
+            "name": "NegatedPersonGroup",
+            "kind": "entity",
+            "description": "Explicitly denied: A person/object or referential group requested by number of people. Copy its full noun phrase including any determiner or quantity. Repeated mentions are not automatically new referents.",
+            "predicate": null,
+            "target_type": "Person",
+            "value_type": null,
+            "polarity": "negative"
+          },
+          {
+            "name": "UncertainPersonGroup",
+            "kind": "entity",
+            "description": "Explicitly uncertain: A person/object or referential group requested by number of people. Copy its full noun phrase including any determiner or quantity. Repeated mentions are not automatically new referents.",
+            "predicate": null,
+            "target_type": "Person",
+            "value_type": null,
+            "polarity": "uncertain"
+          },
+          {
+            "name": "Quantity",
+            "kind": "entity",
+            "description": "An explicit quantity word, numeral or quantity-bearing noun phrase modifying a requested target group. When a short determiner repeats, copy the whole quantity-bearing noun phrase to preserve its binding. Exclude identifiers such as jersey numbers.",
+            "predicate": null,
+            "target_type": "Quantity",
+            "value_type": null,
+            "polarity": "positive"
+          },
+          {
+            "name": "HasQuantity",
+            "kind": "relation",
+            "description": "Target group and its explicitly stated quantity; preserve each group separately.",
+            "predicate": "has_quantity",
+            "target_type": "Person",
+            "value_type": "Quantity",
+            "polarity": "positive"
+          },
+          {
+            "name": "SameReferent",
+            "kind": "relation",
+            "description": "Two mentions explicitly referring to the same target entity/group, including unambiguous pronouns.",
+            "predicate": "same_referent",
+            "target_type": "Person",
+            "value_type": "Person",
+            "polarity": "positive"
+          },
+          {
+            "name": "DistinctFrom",
+            "kind": "relation",
+            "description": "Two target groups explicitly disjoint, such as three people looking at a separate man. Do not assume disjointness merely from two surface mentions.",
+            "predicate": "distinct_from",
+            "target_type": "Person",
+            "value_type": "Person",
+            "polarity": "positive"
+          },
+          {
+            "name": "PartOf",
+            "kind": "relation",
+            "description": "The first target mention is included in the second target group, not an additional entity.",
+            "predicate": "part_of",
+            "target_type": "Person",
+            "value_type": "Person",
+            "polarity": "positive"
+          }
+        ],
+        "projection": "task-aware-native-v2",
+        "author_sources": {
+          "gollie_ner": "https://github.com/hitz-zentroa/GoLLIE/blob/164c611743fdc1befe71bbdf03e08c5eb4e35957/notebooks/Named%20Entity%20Recognition.ipynb",
+          "gollie_event": "https://github.com/hitz-zentroa/GoLLIE/blob/164c611743fdc1befe71bbdf03e08c5eb4e35957/notebooks/Event%20Extraction.ipynb",
+          "gollie_relation": "https://github.com/hitz-zentroa/GoLLIE/blob/164c611743fdc1befe71bbdf03e08c5eb4e35957/notebooks/Relation%20Extraction.ipynb",
+          "knowcoder": "https://github.com/ICT-GoKnow/KnowCoder/blob/b7859789fc7641e03916074088859aa592332ad3/Cases.md"
+        },
+        "aggregation": {
+          "stages": [
+            "mentions",
+            "quantity_bindings",
+            "identity"
+          ],
+          "closure": "unverified_by_default",
+          "exact_requires": [
+            "source completeness validated",
+            "resolved coreference",
+            "known disjoint maximal groups",
+            "explicit exact quantities"
+          ],
+          "unknown_is_not_zero": true
+        }
+      },
+      "plan_sha256": "f3f6272b10e2637896b70efcbd8c0755524d19bfb27c3539219592dd9ba41f07",
+      "profile": "positive_anchor",
+      "coverage_complete": false,
+      "provenance": "already_exposed_development_source",
+      "expected_native_stages": {
+        "gollie": {
+          "mentions": "[PersonGroup(span='A number of children')]",
+          "quantity_bindings": "[]",
+          "identity": "[]"
+        },
+        "knowcoder": {
+          "mentions": "[PersonGroup('A number of children')]",
+          "quantity_bindings": "[]",
+          "identity": "[]"
+        }
+      },
+      "minimal_conditional_quantity": {
+        "kind": "lower_bound",
+        "lower": 2,
+        "upper": null
+      },
+      "completeness_established": false,
+      "review_status": "proposed_reference_requires_independent_source_review"
+    },
+    {
+      "case_id": "jersey_not_population",
+      "source_id": "b2a6650564ccf6aa6ff9bca716fdbc30fab8a17c2848eb3446547d29ac22eb29",
+      "condition": "number of animals",
+      "passage": "A brown and white greyhound wearing a red number five is caught in midair racing .",
+      "plan": {
+        "version": "task-aware-native-v2",
+        "condition": "number of animals",
+        "normalized_condition": "number of animals",
+        "family": "aggregate_counts_quantities",
+        "native_task": "NER+RE",
+        "supported": true,
+        "gate_status": "separate_count_stage_gates_required",
+        "unsupported_reason": null,
+        "scope": "All and only annotations directly answering: number of animals",
+        "schemas": [
+          {
+            "name": "AnimalGroup",
+            "kind": "entity",
+            "description": "A person/object or referential group requested by number of animals. Copy its full noun phrase including any determiner or quantity. Repeated mentions are not automatically new referents.",
+            "predicate": null,
+            "target_type": "Animal",
+            "value_type": null,
+            "polarity": "positive"
+          },
+          {
+            "name": "NegatedAnimalGroup",
+            "kind": "entity",
+            "description": "Explicitly denied: A person/object or referential group requested by number of animals. Copy its full noun phrase including any determiner or quantity. Repeated mentions are not automatically new referents.",
+            "predicate": null,
+            "target_type": "Animal",
+            "value_type": null,
+            "polarity": "negative"
+          },
+          {
+            "name": "UncertainAnimalGroup",
+            "kind": "entity",
+            "description": "Explicitly uncertain: A person/object or referential group requested by number of animals. Copy its full noun phrase including any determiner or quantity. Repeated mentions are not automatically new referents.",
+            "predicate": null,
+            "target_type": "Animal",
+            "value_type": null,
+            "polarity": "uncertain"
+          },
+          {
+            "name": "Quantity",
+            "kind": "entity",
+            "description": "An explicit quantity word, numeral or quantity-bearing noun phrase modifying a requested target group. When a short determiner repeats, copy the whole quantity-bearing noun phrase to preserve its binding. Exclude identifiers such as jersey numbers.",
+            "predicate": null,
+            "target_type": "Quantity",
+            "value_type": null,
+            "polarity": "positive"
+          },
+          {
+            "name": "HasQuantity",
+            "kind": "relation",
+            "description": "Target group and its explicitly stated quantity; preserve each group separately.",
+            "predicate": "has_quantity",
+            "target_type": "Animal",
+            "value_type": "Quantity",
+            "polarity": "positive"
+          },
+          {
+            "name": "SameReferent",
+            "kind": "relation",
+            "description": "Two mentions explicitly referring to the same target entity/group, including unambiguous pronouns.",
+            "predicate": "same_referent",
+            "target_type": "Animal",
+            "value_type": "Animal",
+            "polarity": "positive"
+          },
+          {
+            "name": "DistinctFrom",
+            "kind": "relation",
+            "description": "Two target groups explicitly disjoint, such as three people looking at a separate man. Do not assume disjointness merely from two surface mentions.",
+            "predicate": "distinct_from",
+            "target_type": "Animal",
+            "value_type": "Animal",
+            "polarity": "positive"
+          },
+          {
+            "name": "PartOf",
+            "kind": "relation",
+            "description": "The first target mention is included in the second target group, not an additional entity.",
+            "predicate": "part_of",
+            "target_type": "Animal",
+            "value_type": "Animal",
+            "polarity": "positive"
+          }
+        ],
+        "projection": "task-aware-native-v2",
+        "author_sources": {
+          "gollie_ner": "https://github.com/hitz-zentroa/GoLLIE/blob/164c611743fdc1befe71bbdf03e08c5eb4e35957/notebooks/Named%20Entity%20Recognition.ipynb",
+          "gollie_event": "https://github.com/hitz-zentroa/GoLLIE/blob/164c611743fdc1befe71bbdf03e08c5eb4e35957/notebooks/Event%20Extraction.ipynb",
+          "gollie_relation": "https://github.com/hitz-zentroa/GoLLIE/blob/164c611743fdc1befe71bbdf03e08c5eb4e35957/notebooks/Relation%20Extraction.ipynb",
+          "knowcoder": "https://github.com/ICT-GoKnow/KnowCoder/blob/b7859789fc7641e03916074088859aa592332ad3/Cases.md"
+        },
+        "aggregation": {
+          "stages": [
+            "mentions",
+            "quantity_bindings",
+            "identity"
+          ],
+          "closure": "unverified_by_default",
+          "exact_requires": [
+            "source completeness validated",
+            "resolved coreference",
+            "known disjoint maximal groups",
+            "explicit exact quantities"
+          ],
+          "unknown_is_not_zero": true
+        }
+      },
+      "plan_sha256": "ec25d7b2ea7c1bf4a51f27ad150b0bb54a9eb50f3901adaf2fcdcc7dad28be2e",
+      "profile": "positive_anchor",
+      "coverage_complete": false,
+      "provenance": "already_exposed_development_source",
+      "expected_native_stages": {
+        "gollie": {
+          "mentions": "[AnimalGroup(span='A brown and white greyhound')]",
+          "quantity_bindings": "[]",
+          "identity": "[]"
+        },
+        "knowcoder": {
+          "mentions": "[AnimalGroup('A brown and white greyhound')]",
+          "quantity_bindings": "[]",
+          "identity": "[]"
+        }
+      },
+      "minimal_conditional_quantity": {
+        "kind": "lower_bound",
+        "lower": 1,
+        "upper": null
+      },
+      "completeness_established": false,
+      "review_status": "proposed_reference_requires_independent_source_review"
+    },
+    {
+      "case_id": "unmentioned_wheels",
+      "source_id": "3165c2eace681157890fd25ee5c9a441c2dbea2abc7fd49492a56f16f6803670",
+      "condition": "number of wheels",
+      "passage": "a boy in green jacket is riding a small motocross bike through the mud .",
+      "plan": {
+        "version": "task-aware-native-v2",
+        "condition": "number of wheels",
+        "normalized_condition": "number of wheels",
+        "family": "aggregate_counts_quantities",
+        "native_task": "NER+RE",
+        "supported": true,
+        "gate_status": "separate_count_stage_gates_required",
+        "unsupported_reason": null,
+        "scope": "All and only annotations directly answering: number of wheels",
+        "schemas": [
+          {
+            "name": "WheelGroup",
+            "kind": "entity",
+            "description": "A person/object or referential group requested by number of wheels. Copy its full noun phrase including any determiner or quantity. Repeated mentions are not automatically new referents.",
+            "predicate": null,
+            "target_type": "Wheel",
+            "value_type": null,
+            "polarity": "positive"
+          },
+          {
+            "name": "NegatedWheelGroup",
+            "kind": "entity",
+            "description": "Explicitly denied: A person/object or referential group requested by number of wheels. Copy its full noun phrase including any determiner or quantity. Repeated mentions are not automatically new referents.",
+            "predicate": null,
+            "target_type": "Wheel",
+            "value_type": null,
+            "polarity": "negative"
+          },
+          {
+            "name": "UncertainWheelGroup",
+            "kind": "entity",
+            "description": "Explicitly uncertain: A person/object or referential group requested by number of wheels. Copy its full noun phrase including any determiner or quantity. Repeated mentions are not automatically new referents.",
+            "predicate": null,
+            "target_type": "Wheel",
+            "value_type": null,
+            "polarity": "uncertain"
+          },
+          {
+            "name": "Quantity",
+            "kind": "entity",
+            "description": "An explicit quantity word, numeral or quantity-bearing noun phrase modifying a requested target group. When a short determiner repeats, copy the whole quantity-bearing noun phrase to preserve its binding. Exclude identifiers such as jersey numbers.",
+            "predicate": null,
+            "target_type": "Quantity",
+            "value_type": null,
+            "polarity": "positive"
+          },
+          {
+            "name": "HasQuantity",
+            "kind": "relation",
+            "description": "Target group and its explicitly stated quantity; preserve each group separately.",
+            "predicate": "has_quantity",
+            "target_type": "Wheel",
+            "value_type": "Quantity",
+            "polarity": "positive"
+          },
+          {
+            "name": "SameReferent",
+            "kind": "relation",
+            "description": "Two mentions explicitly referring to the same target entity/group, including unambiguous pronouns.",
+            "predicate": "same_referent",
+            "target_type": "Wheel",
+            "value_type": "Wheel",
+            "polarity": "positive"
+          },
+          {
+            "name": "DistinctFrom",
+            "kind": "relation",
+            "description": "Two target groups explicitly disjoint, such as three people looking at a separate man. Do not assume disjointness merely from two surface mentions.",
+            "predicate": "distinct_from",
+            "target_type": "Wheel",
+            "value_type": "Wheel",
+            "polarity": "positive"
+          },
+          {
+            "name": "PartOf",
+            "kind": "relation",
+            "description": "The first target mention is included in the second target group, not an additional entity.",
+            "predicate": "part_of",
+            "target_type": "Wheel",
+            "value_type": "Wheel",
+            "polarity": "positive"
+          }
+        ],
+        "projection": "task-aware-native-v2",
+        "author_sources": {
+          "gollie_ner": "https://github.com/hitz-zentroa/GoLLIE/blob/164c611743fdc1befe71bbdf03e08c5eb4e35957/notebooks/Named%20Entity%20Recognition.ipynb",
+          "gollie_event": "https://github.com/hitz-zentroa/GoLLIE/blob/164c611743fdc1befe71bbdf03e08c5eb4e35957/notebooks/Event%20Extraction.ipynb",
+          "gollie_relation": "https://github.com/hitz-zentroa/GoLLIE/blob/164c611743fdc1befe71bbdf03e08c5eb4e35957/notebooks/Relation%20Extraction.ipynb",
+          "knowcoder": "https://github.com/ICT-GoKnow/KnowCoder/blob/b7859789fc7641e03916074088859aa592332ad3/Cases.md"
+        },
+        "aggregation": {
+          "stages": [
+            "mentions",
+            "quantity_bindings",
+            "identity"
+          ],
+          "closure": "unverified_by_default",
+          "exact_requires": [
+            "source completeness validated",
+            "resolved coreference",
+            "known disjoint maximal groups",
+            "explicit exact quantities"
+          ],
+          "unknown_is_not_zero": true
+        }
+      },
+      "plan_sha256": "ffb8c844193e8e77a897e9f009d8fda278c51596e5c51865b9b241ace29d04d9",
+      "profile": "positive_anchor",
+      "coverage_complete": false,
+      "provenance": "already_exposed_development_source",
+      "expected_native_stages": {
+        "gollie": {
+          "mentions": "[]",
+          "quantity_bindings": "[]",
+          "identity": "[]"
+        },
+        "knowcoder": {
+          "mentions": "[]",
+          "quantity_bindings": "[]",
+          "identity": "[]"
+        }
+      },
+      "minimal_conditional_quantity": {
+        "kind": "unknown",
+        "lower": null,
+        "upper": null
+      },
+      "completeness_established": false,
+      "review_status": "proposed_reference_requires_independent_source_review"
+    },
+    {
+      "case_id": "women_excludes_untyped_baby",
+      "source_id": "929a87372d3bad3712d71e2e02cb9751f1f39e266c26222d1f0838ab9a140cd8",
+      "condition": "number of women",
+      "passage": "Two older women with a baby that has a pacifier in its mouth , the baby wears an orange and brown dress .",
+      "plan": {
+        "version": "task-aware-native-v2",
+        "condition": "number of women",
+        "normalized_condition": "number of women",
+        "family": "aggregate_counts_quantities",
+        "native_task": "NER+RE",
+        "supported": true,
+        "gate_status": "separate_count_stage_gates_required",
+        "unsupported_reason": null,
+        "scope": "All and only annotations directly answering: number of women",
+        "schemas": [
+          {
+            "name": "WomanGroup",
+            "kind": "entity",
+            "description": "A person/object or referential group requested by number of women. Copy its full noun phrase including any determiner or quantity. Repeated mentions are not automatically new referents.",
+            "predicate": null,
+            "target_type": "Person",
+            "value_type": null,
+            "polarity": "positive"
+          },
+          {
+            "name": "NegatedWomanGroup",
+            "kind": "entity",
+            "description": "Explicitly denied: A person/object or referential group requested by number of women. Copy its full noun phrase including any determiner or quantity. Repeated mentions are not automatically new referents.",
+            "predicate": null,
+            "target_type": "Person",
+            "value_type": null,
+            "polarity": "negative"
+          },
+          {
+            "name": "UncertainWomanGroup",
+            "kind": "entity",
+            "description": "Explicitly uncertain: A person/object or referential group requested by number of women. Copy its full noun phrase including any determiner or quantity. Repeated mentions are not automatically new referents.",
+            "predicate": null,
+            "target_type": "Person",
+            "value_type": null,
+            "polarity": "uncertain"
+          },
+          {
+            "name": "Quantity",
+            "kind": "entity",
+            "description": "An explicit quantity word, numeral or quantity-bearing noun phrase modifying a requested target group. When a short determiner repeats, copy the whole quantity-bearing noun phrase to preserve its binding. Exclude identifiers such as jersey numbers.",
+            "predicate": null,
+            "target_type": "Quantity",
+            "value_type": null,
+            "polarity": "positive"
+          },
+          {
+            "name": "HasQuantity",
+            "kind": "relation",
+            "description": "Target group and its explicitly stated quantity; preserve each group separately.",
+            "predicate": "has_quantity",
+            "target_type": "Person",
+            "value_type": "Quantity",
+            "polarity": "positive"
+          },
+          {
+            "name": "SameReferent",
+            "kind": "relation",
+            "description": "Two mentions explicitly referring to the same target entity/group, including unambiguous pronouns.",
+            "predicate": "same_referent",
+            "target_type": "Person",
+            "value_type": "Person",
+            "polarity": "positive"
+          },
+          {
+            "name": "DistinctFrom",
+            "kind": "relation",
+            "description": "Two target groups explicitly disjoint, such as three people looking at a separate man. Do not assume disjointness merely from two surface mentions.",
+            "predicate": "distinct_from",
+            "target_type": "Person",
+            "value_type": "Person",
+            "polarity": "positive"
+          },
+          {
+            "name": "PartOf",
+            "kind": "relation",
+            "description": "The first target mention is included in the second target group, not an additional entity.",
+            "predicate": "part_of",
+            "target_type": "Person",
+            "value_type": "Person",
+            "polarity": "positive"
+          }
+        ],
+        "projection": "task-aware-native-v2",
+        "author_sources": {
+          "gollie_ner": "https://github.com/hitz-zentroa/GoLLIE/blob/164c611743fdc1befe71bbdf03e08c5eb4e35957/notebooks/Named%20Entity%20Recognition.ipynb",
+          "gollie_event": "https://github.com/hitz-zentroa/GoLLIE/blob/164c611743fdc1befe71bbdf03e08c5eb4e35957/notebooks/Event%20Extraction.ipynb",
+          "gollie_relation": "https://github.com/hitz-zentroa/GoLLIE/blob/164c611743fdc1befe71bbdf03e08c5eb4e35957/notebooks/Relation%20Extraction.ipynb",
+          "knowcoder": "https://github.com/ICT-GoKnow/KnowCoder/blob/b7859789fc7641e03916074088859aa592332ad3/Cases.md"
+        },
+        "aggregation": {
+          "stages": [
+            "mentions",
+            "quantity_bindings",
+            "identity"
+          ],
+          "closure": "unverified_by_default",
+          "exact_requires": [
+            "source completeness validated",
+            "resolved coreference",
+            "known disjoint maximal groups",
+            "explicit exact quantities"
+          ],
+          "unknown_is_not_zero": true
+        }
+      },
+      "plan_sha256": "c3a04f5cb96ef83f4f55582965e3ce50c6bbde2ca513d3781f2db2f50b3d903c",
+      "profile": "positive_anchor",
+      "coverage_complete": false,
+      "provenance": "already_exposed_development_source",
+      "expected_native_stages": {
+        "gollie": {
+          "mentions": "[WomanGroup(span='Two older women'), Quantity(span='Two')]",
+          "quantity_bindings": "[HasQuantity(arg1='Two older women', arg2='Two')]",
+          "identity": "[]"
+        },
+        "knowcoder": {
+          "mentions": "[WomanGroup('Two older women'), Quantity('Two')]",
+          "quantity_bindings": "[HasQuantity(Entity('Two older women'), Entity('Two'))]",
+          "identity": "[]"
+        }
+      },
+      "minimal_conditional_quantity": {
+        "kind": "lower_bound",
+        "lower": 2,
+        "upper": null
+      },
+      "completeness_established": false,
+      "review_status": "proposed_reference_requires_independent_source_review"
+    }
+  ]
+}

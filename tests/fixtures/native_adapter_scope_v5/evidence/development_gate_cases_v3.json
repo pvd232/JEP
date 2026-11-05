@@ -1,0 +1,193 @@
+{
+  "status": "gold_fixture_proposal_requires_independent_semantic_review",
+  "cases": [
+    {
+      "case_id": "animal",
+      "source_id": "0e0f8e525cb9cab9cd247b885b55b18c701e71f9424a2bf7c585c8b4290ffdc5",
+      "provenance": "exposed_development_source",
+      "condition": "type of animal",
+      "passage": "An elephant with a red bench on its back and a red and yellow blanket over it's body.",
+      "family": "unary_typed_mentions",
+      "profile": "positive_anchor",
+      "plan_sha256": "a2c1866bc49af09f803362e281f44e8929f2abb06abce306c79172d65f143b48",
+      "gate_kind": "minimal_native_anchor_smoke",
+      "completeness_established": false,
+      "independent_expected_entity_types": [
+        "Animal"
+      ],
+      "expected_native_annotations": {
+        "gollie": "[Animal(span='elephant')]",
+        "knowcoder": "[Animal('elephant')]"
+      },
+      "model_accuracy_verified": false
+    },
+    {
+      "case_id": "food",
+      "source_id": "038c7bfbf57a1553e093ee710a45dfa397f4214cae400afc4a69fc07dda9819f",
+      "provenance": "exposed_development_source",
+      "condition": "type of food",
+      "passage": "a close up of a plate of food with a sandwich and a pickle",
+      "family": "unary_typed_mentions",
+      "profile": "positive_anchor",
+      "plan_sha256": "c69248203639aba92fb6cc84772a8ff23c657b1a03f82e2feeecda3f05fa16df",
+      "gate_kind": "minimal_native_anchor_smoke",
+      "completeness_established": false,
+      "independent_expected_entity_types": [
+        "Food"
+      ],
+      "expected_native_annotations": {
+        "gollie": "[Food(span='sandwich'), Food(span='pickle')]",
+        "knowcoder": "[Food('sandwich'), Food('pickle')]"
+      },
+      "model_accuracy_verified": false
+    },
+    {
+      "case_id": "vehicle",
+      "source_id": "09a106cd7adabcbd963da9cb273d410ce07e34b12323ccfa9d3dc3b0f0b47358",
+      "provenance": "exposed_development_source",
+      "condition": "type of vehicle",
+      "passage": "A train pumps out steam while going down a track on a cloudy day.",
+      "family": "unary_typed_mentions",
+      "profile": "positive_anchor",
+      "plan_sha256": "9e6b5613149758602104f37bd53da75017b9f5e1548374ece1c67165dacec5ba",
+      "gate_kind": "minimal_native_anchor_smoke",
+      "completeness_established": false,
+      "independent_expected_entity_types": [
+        "Vehicle"
+      ],
+      "expected_native_annotations": {
+        "gollie": "[Vehicle(span='train')]",
+        "knowcoder": "[Vehicle('train')]"
+      },
+      "model_accuracy_verified": false
+    },
+    {
+      "case_id": "helmet",
+      "source_id": "5e85e75e8c5a68fc1892b938c6bb0a5d0b19c0663377423fa4b589d0fab170f0",
+      "provenance": "exposed_development_source",
+      "condition": "presence of helmets",
+      "passage": "Five workers in orange outfits and blue helmets work on scaffolding .",
+      "family": "unary_typed_mentions",
+      "profile": "positive_anchor",
+      "plan_sha256": "a9c0735beff5f64182bfdcc9e7da7ea337dbe3b584b2ee2ce7515d35fbc5f41d",
+      "gate_kind": "minimal_native_anchor_smoke",
+      "completeness_established": false,
+      "independent_expected_entity_types": [
+        "Clothing"
+      ],
+      "expected_native_annotations": {
+        "gollie": "[Helmet(span='blue helmets')]",
+        "knowcoder": "[Helmet('blue helmets')]"
+      },
+      "model_accuracy_verified": false
+    },
+    {
+      "case_id": "animal_color",
+      "source_id": "4268cdb2b8327804ae548041f12f7d7b7a5ed4fffb40ff31c2a8a8d70b60a268",
+      "provenance": "exposed_development_source",
+      "condition": "color of animal",
+      "passage": "a close up of a brown dog, his eyes are glowing because of the flash ",
+      "family": "binary_properties_locations",
+      "profile": "positive_anchor",
+      "plan_sha256": "7ab22a9ca536d906017e13fb7f91841445336cd73fad78232d7ad06417497f31",
+      "gate_kind": "minimal_native_anchor_smoke",
+      "completeness_established": false,
+      "independent_expected_entity_types": [
+        "Animal",
+        "Color"
+      ],
+      "expected_native_annotations": {
+        "gollie": "[HasColor(object='brown dog', color='brown')]",
+        "knowcoder": "[Color(Entity('brown dog'), Entity('brown'))]"
+      },
+      "model_accuracy_verified": false
+    },
+    {
+      "case_id": "board_color",
+      "source_id": "0895cb7b5b9c6063ccadbb60d35423140dc64d0a848cda1af164f3b08e623829",
+      "provenance": "exposed_development_source",
+      "condition": "color of surfboard",
+      "passage": "A male surfer on a white surfboard jumps a wave .",
+      "family": "binary_properties_locations",
+      "profile": "positive_anchor",
+      "plan_sha256": "27b1d221aa16522f01d46191e8d1e8924f2a803024ffc2e2af5cfe582b1e3812",
+      "gate_kind": "minimal_native_anchor_smoke",
+      "completeness_established": false,
+      "independent_expected_entity_types": [
+        "Object",
+        "Color"
+      ],
+      "expected_native_annotations": {
+        "gollie": "[HasColor(object='white surfboard', color='white')]",
+        "knowcoder": "[Color(Entity('white surfboard'), Entity('white'))]"
+      },
+      "model_accuracy_verified": false
+    },
+    {
+      "case_id": "spatial_qualifier",
+      "source_id": "6bddbf603e3180f308879b8364c46495b83b479616febc1bc6aa126277167831",
+      "provenance": "exposed_development_source",
+      "condition": "location of person",
+      "passage": "A boy in a black swimsuit playing near the water .",
+      "family": "binary_properties_locations",
+      "profile": "positive_anchor",
+      "plan_sha256": "ee18a8ab6c48bcc1e8fc4c2b22aedb598e45bf44c106e27f1c7e15d2acec9ced",
+      "gate_kind": "minimal_native_anchor_smoke",
+      "completeness_established": false,
+      "independent_expected_entity_types": [
+        "Person",
+        "Location"
+      ],
+      "expected_native_annotations": {
+        "gollie": "[Location(arg1='A boy', arg2='near the water')]",
+        "knowcoder": "[Location(Entity('A boy'), Entity('near the water'))]"
+      },
+      "model_accuracy_verified": false
+    },
+    {
+      "case_id": "dog_event",
+      "source_id": "24b010d7477d6d2e8e19f5cf4f35519aad527f4b720692a915517314f25fc398",
+      "provenance": "exposed_development_source",
+      "condition": "action of dog",
+      "passage": "A dog in a green collar fetches a stick from the dead leaves .",
+      "family": "actions_events",
+      "profile": "positive_anchor",
+      "plan_sha256": "baedf189a322cff7b64577ae512341bc7e59556c306881df9e9637f9b30616a5",
+      "gate_kind": "minimal_native_anchor_smoke",
+      "completeness_established": false,
+      "independent_expected_entity_types": [
+        "Animal",
+        "Entity",
+        "Location"
+      ],
+      "expected_native_annotations": {
+        "gollie": "[ActivityEvent(mention='fetches', actor=['A dog'], theme=['a stick'], place=['the dead leaves'])]",
+        "knowcoder": "[ActivityEvent(trigger='fetches', actor=[Entity('A dog')], theme=[Entity('a stick')], place=[Entity('the dead leaves')])]"
+      },
+      "model_accuracy_verified": false
+    },
+    {
+      "case_id": "person_event",
+      "source_id": "735dffb9c8117d53c584d5efdd59df2dff1ca364dc0f13a4fd24f1116e1c4584",
+      "provenance": "exposed_development_source",
+      "condition": "motion of person",
+      "passage": "A little girl in a pink jacket throws leaves over her head in front of a fence .",
+      "family": "actions_events",
+      "profile": "positive_anchor",
+      "plan_sha256": "6d0132adfa3b833d2704335b4b3ee03990eb134276269b634ba3e40433ca15a5",
+      "gate_kind": "minimal_native_anchor_smoke",
+      "completeness_established": false,
+      "independent_expected_entity_types": [
+        "Person",
+        "Entity",
+        "Location"
+      ],
+      "expected_native_annotations": {
+        "gollie": "[MovementEvent(mention='throws', actor=['A little girl'], theme=['leaves'], place=['in front of a fence'])]",
+        "knowcoder": "[MovementEvent(trigger='throws', actor=[Entity('A little girl')], theme=[Entity('leaves')], place=[Entity('in front of a fence')])]"
+      },
+      "model_accuracy_verified": false
+    }
+  ],
+  "warning": "These supplied annotations test schema/projection. No model has emitted them; passing unit tests does not establish model fidelity."
+}

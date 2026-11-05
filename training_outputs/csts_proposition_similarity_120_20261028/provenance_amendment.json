@@ -1,0 +1,106 @@
+{
+  "created_utc": "2026-10-28T12:44:49.025635+00:00",
+  "current_metadata_sha256": {
+    "origin.json": "a1faf2360bd08a8ee45b56679a775b1f61b9d14c0118b649cb721026c26858e1",
+    "preparation.json": "0d7265ea3f151b929cf17729be02d5597d83fb5b1a511c4d6c9d214a12a29db9",
+    "preparation_original.py": "d4efcb6f5c056d96fbed79c08e9a940c997bc88cebfdd920d94d7bd959670c99",
+    "scripts/prepare_proposition_similarity.py": "b482c18632b8aea503964d74be2df1192ee83578a18c646b70167332c2bf2b9a"
+  },
+  "executed_identity": {
+    "cohort_sha256": {
+      "labels.json": "0b13d1ecf0a9620fa16e6a2144cf900b6a8be8dfc8ae8e5752a0a33de14b09b9",
+      "pairs.json": "582032adeed74b06fab6ceb9fc3705b266fbc1dc4ec9be3c614a2b747d8206c4",
+      "sources.json": "3fceb04fb86d726874a48a26a8335d0b0616fda4a0380bc57e886efe80013462"
+    },
+    "manifest_sha256": "30bf13a1fec09e634123a67882675315baacd9ddec68df1982094b9189708106",
+    "protocol_sha256": "1adf50ef5f89b8397a25d095cda53a3dd6fefc2c189aa06b663ddb54dad2a7d1"
+  },
+  "immutable_artifacts_sha256": {
+    "direct.json": "e9beb89b03bf58667b41e8738b0f7a9fbd9266d9f92b71df81ab23a3f2b0c70d",
+    "execution_seal.json": "ee2c4e06223b7e5fdf87edb30ccee01e2d716832f6ce738bf5aa5c512341c4e9",
+    "gpu_inputs.tar.gz": "093b0d784395b460d0f5d7a5e8e371a43d6658a9ae3912228af96b20c0a23bfc",
+    "inputs.json": "4c0a4d691b9ae1f7659927ed776ed31ddf6bc418c3968a8fd5de5ebfd901ce17",
+    "labels.json": "0b13d1ecf0a9620fa16e6a2144cf900b6a8be8dfc8ae8e5752a0a33de14b09b9"
+  },
+  "prior_metadata": {
+    "origin_original_manifest": {
+      "artifacts": {
+        "labels.json": "0b13d1ecf0a9620fa16e6a2144cf900b6a8be8dfc8ae8e5752a0a33de14b09b9",
+        "pairs.json": "582032adeed74b06fab6ceb9fc3705b266fbc1dc4ec9be3c614a2b747d8206c4",
+        "protocol.json": "ad0af03a65b4f7c834ddc25f275f1f23c3ec3cf09e5bbd4ff2c20aba8debc118",
+        "sources.json": "3fceb04fb86d726874a48a26a8335d0b0616fda4a0380bc57e886efe80013462"
+      },
+      "dataset_revision": "jep-csts-v1.1",
+      "dataset_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "historical_test_exposure": true,
+      "inference_completed": false,
+      "rows": 120,
+      "sources": 239,
+      "split": "validation"
+    },
+    "origin_sha256": "66b901f49f412ebb7fb03811319936b9fbab58ba4df03f31b99fd685b6c93c1a",
+    "preparation_receipt": {
+      "groups": 110,
+      "pairs": 120,
+      "sha256": {
+        "direct.json": "e9beb89b03bf58667b41e8738b0f7a9fbd9266d9f92b71df81ab23a3f2b0c70d",
+        "inputs.json": "4c0a4d691b9ae1f7659927ed776ed31ddf6bc418c3968a8fd5de5ebfd901ce17",
+        "labels.json": "0b13d1ecf0a9620fa16e6a2144cf900b6a8be8dfc8ae8e5752a0a33de14b09b9",
+        "origin.json": "66b901f49f412ebb7fb03811319936b9fbab58ba4df03f31b99fd685b6c93c1a"
+      },
+      "source_status": {
+        "answered": 221,
+        "not_specified": 18
+      },
+      "sources": 239,
+      "status": "prepared_before_embedding_inference"
+    },
+    "preparation_sha256": "36f86484bb799fbf600df3f99c82269dc824cf13514e2614193a2b1abd2b0f27"
+  },
+  "published_origin_archive": {
+    "audit_member": "parser-amendment/audit.json",
+    "audit_sha256": "18bcec7d0eac96bc2f9e868605341289d808d8359362b760d97bed52df9d6b5d",
+    "origin_prefix": "origins/gpt-v2/run",
+    "repository_path": "training_outputs/csts_extraction_screen_artifacts_20261028.tar.gz",
+    "sha256": "02ac804d78e54549fe057c2c7086c43fa16555a9a6ea7c5f483b72c9fd91b472"
+  },
+  "reason": "The original origin field embedded the preflight cohort manifest. This amendment names it separately and binds the actual executed GPT manifest and protocol.",
+  "scientific_inputs_unchanged": true,
+  "status": "metadata_only_provenance_correction",
+  "verification": {
+    "audit_identical_to_published_member": true,
+    "indexed_archive_members": 6095,
+    "inputs_labels_direct_execution_seal_gpu_bundle_unchanged": true,
+    "negative_guard_checks": [
+      {
+        "case": "manifest_binding",
+        "reason": "The parser audit does not bind this executed GPT origin.",
+        "rejected": true
+      },
+      {
+        "case": "protocol_binding",
+        "reason": "The parser audit does not bind this executed GPT origin.",
+        "rejected": true
+      },
+      {
+        "case": "request_protocol",
+        "reason": "Source/request mismatch",
+        "rejected": true
+      },
+      {
+        "case": "audit_ids",
+        "reason": "Incomplete or duplicated retained audit",
+        "rejected": true
+      }
+    ],
+    "no_model_calls_or_score_changes": true,
+    "original_result_hashes": 359,
+    "pairs_sources_labels_byte_identical": true,
+    "preparer_fresh_replay_passed": true,
+    "preparer_sources_pairs_labels_direct_unchanged": true,
+    "prior_origin_reconstructable_from_retained_metadata": true,
+    "raw_artifact_hashes": 2513,
+    "request_protocol_hashes": 359,
+    "response_payload_hashes": 359
+  }
+}

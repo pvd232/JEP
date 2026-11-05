@@ -1,0 +1,41 @@
+{
+  "scope": "Original fixed48 primary capture, preserved before empty-input recovery",
+  "cases_per_model": 48,
+  "models": [
+    "knowcoder",
+    "gollie"
+  ],
+  "representative_accuracy_claimed": false,
+  "archives": [
+    {
+      "kind": "knowcoder_primary_capture",
+      "file": "jep-final-native-48-v1-knowcoder-execution-20261028.tar.gz",
+      "bytes": 2106683,
+      "sha256": "f01cc8aba5da050e0902afd2bed9028100dfcf4aa7675b30ad7cdb42df6c7189"
+    },
+    {
+      "kind": "gollie_primary_capture",
+      "file": "jep-final-native-48-v1-gollie-execution-20261028.tar.gz",
+      "bytes": 1685780,
+      "sha256": "92efafb0154ec7271325801cceb2113f125c756b6b10a311ab6ae3a85904d7d5"
+    },
+    {
+      "kind": "frozen_provider",
+      "file": "jep-native-positive-diagnostic-provider-v3-20261028.tar.gz",
+      "bytes": 1552285,
+      "sha256": "ea06d13eadaaa7127d7a0555de689a107c05018eaaa9b942d8c9e2ce2faea6bd"
+    },
+    {
+      "kind": "frozen_protocol",
+      "file": "jep-native-positive-diagnostic-protocol-v3-20261028.tar.gz",
+      "bytes": 8552,
+      "sha256": "1671a8d3c7f7e2cfa74c8dca8b2c38844ae6d0feb162030f112191e041cd568e"
+    },
+    {
+      "kind": "inference_only_job",
+      "file": "jep-native-positive-diagnostic-job-v1-20261028.tar.gz",
+      "bytes": 6737,
+      "sha256": "010c7e88035d4041051e046c0d044a5bca5832f8f66e5e3f04ecb560efb12109"
+    }
+  ]
+}

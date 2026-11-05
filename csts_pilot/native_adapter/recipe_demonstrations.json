@@ -1,0 +1,62 @@
+{
+  "ActionDescription": {
+    "fixed_across_targets": true,
+    "go_output": "[ActionDescription(actor=\"A gardener\", verbal_clause=\"plants lavender in a pot\")]",
+    "go_query": "# The following lines describe the task definition\n\n@dataclass\nclass ActionDescription(Relation):\n    \"\"\"\n    Description: The source-mentioned actor and its contiguous verbal description. Copy the full verb phrase including its stated objects, prepositions, negation and modal qualifiers. Keep the correct actor; do not assign another actor's separate action to this actor. This records a verbatim clause description, not resolved event actor/theme/place roles or an inferred goal, state or persistent hobby.\n    \"\"\"\n    actor: str  # Subject mention, copied exactly.\n    verbal_clause: str  # Value or related mention, copied exactly.\n\n\n# Extract the requested positive source-supported annotations. Copy argument spans exactly; return [] when none are supported.\n# This is the text to analyze\ntext = \"A gardener plants lavender in a pot.\"\n\n# The annotation instances that take place in the text above\nresult =",
+    "know_output": "results = [ActionDescription(Entity(\"A gardener\"), Entity(\"plants lavender in a pot\"))]",
+    "know_query": "class Entity:\n\tdef __init__(self, name: str):\n\t\tself.name = name\n\nclass Relation:\n\tdef __init__(self, head_entity: Entity, tail_entity: Entity):\n\t\tself.head_entity = head_entity\n\t\tself.tail_entity = tail_entity\n\nclass ActionDescription(Relation):\n\t\"\"\"\n\tDescription: The source-mentioned actor and its contiguous verbal description. Copy the full verb phrase including its stated objects, prepositions, negation and modal qualifiers. Keep the correct actor; do not assign another actor's separate action to this actor. This records a verbatim clause description, not resolved event actor/theme/place roles or an inferred goal, state or persistent hobby.\n\t\"\"\"\n\tdef __init__(self, head_entity: Entity, tail_entity: Entity):\n\t\tsuper().__init__(head_entity=head_entity, tail_entity=tail_entity)\n\n\n\"\"\"\nThis is an object-oriented programming task: Some Relation Classes and related Entity Classes are defined above. Please instantiate all the corresponding Relation Objects in the following sentence.\n\"\"\"\nsentence = \"A gardener plants lavender in a pot.\"",
+    "schemas": [
+      {
+        "description": "The source-mentioned actor and its contiguous verbal description. Copy the full verb phrase including its stated objects, prepositions, negation and modal qualifiers. Keep the correct actor; do not assign another actor's separate action to this actor. This records a verbatim clause description, not resolved event actor/theme/place roles or an inferred goal, state or persistent hobby.",
+        "kind": "relation",
+        "name": "ActionDescription",
+        "polarity": "positive",
+        "predicate": "has_action_description",
+        "representation": "verbatim_action_description",
+        "target_type": "Person",
+        "value_type": "VerbalClause"
+      }
+    ],
+    "sentence": "A gardener plants lavender in a pot."
+  },
+  "Food": {
+    "authorship": "Independent synthetic development example; no locked/fresh source or answer was read.",
+    "description": "An explicitly mentioned food, dish, edible ingredient, fruit or vegetable. Include prepared foods and individual ingredients named in the sentence. Copy the noun phrase naming the food; exclude containers, utensils and unstated foods.",
+    "go_output": "[Food(span=\"lentils\"), Food(span=\"pear\")]",
+    "go_query": "# The following lines describe the task definition\n@dataclass\nclass Food(Entity):\n    \"\"\"An explicitly mentioned food, dish, edible ingredient, fruit or vegetable. Include prepared foods and individual ingredients named in the sentence. Copy the noun phrase naming the food; exclude containers, utensils and unstated foods.\"\"\"\n    span: str\n\n# This is the text to analyze\ntext = \"A bowl contains lentils beside a pear.\"\n\n# The annotation instances that take place in the text above are listed here\nresult =",
+    "go_schema": "@dataclass\nclass Food(Entity):\n    \"\"\"An explicitly mentioned food, dish, edible ingredient, fruit or vegetable. Include prepared foods and individual ingredients named in the sentence. Copy the noun phrase naming the food; exclude containers, utensils and unstated foods.\"\"\"\n    span: str",
+    "interpretation": "This is a prepared development recipe alternative. Successful familiar-case recovery alone would not establish negative specificity, completeness or transfer. No target-case answers or forced nonempty instruction are provided.",
+    "name": "Food",
+    "native_task": "NER",
+    "schema_profile": "positive_anchor",
+    "scope": "GoLLIE Food NER only; fixed across all Food conditions and sources. KnowCoder ordinary NER remains the previously frozen zero-shot recipe.",
+    "sentence": "A bowl contains lentils beside a pear.",
+    "status": "PREPARED_FIXED_SYNTHETIC_FOOD_DEMONSTRATION"
+  },
+  "Spatial": {
+    "fixed_across_targets": true,
+    "go_output": "[Beside(subject=\"crate\", reference=\"lantern\")]",
+    "go_query": "# The following lines describe the task definition\n\n\"Physical location only; the relation class carries the qualifier and arguments are entity mentions.\"\n\n@dataclass\nclass Beside(Relation):\n    \"\"\"\n    Description: Beside/next to/alongside the reference.\n    \"\"\"\n    subject: str  # Subject mention, copied exactly.\n    reference: str  # Value or related mention, copied exactly.\n\n\n# Extract the requested positive source-supported annotations. Copy argument spans exactly; return [] when none are supported.\n# This is the text to analyze\ntext = \"An unpainted crate stands beside a violet lantern.\"\n\n# The annotation instances that take place in the text above\nresult =",
+    "know_output": "results = [Beside(Entity(\"crate\"), Entity(\"lantern\"))]",
+    "know_query": "class Entity:\n\tdef __init__(self, name: str):\n\t\tself.name = name\n\nclass Relation:\n\tdef __init__(self, head_entity: Entity, tail_entity: Entity):\n\t\tself.head_entity = head_entity\n\t\tself.tail_entity = tail_entity\n\n\"Physical location only; the relation class carries the qualifier and arguments are entity mentions.\"\n\nclass Beside(Relation):\n\t\"\"\"\n\tDescription: Beside/next to/alongside the reference.\n\t\"\"\"\n\tpass\n\n\n\"\"\"\nThis is an object-oriented programming task: Some Relation Classes and related Entity Classes are defined above. Please instantiate all the corresponding Relation Objects in the following sentence.\n\"\"\"\nsentence = \"An unpainted crate stands beside a violet lantern.\"",
+    "schemas": [
+      {
+        "constructor_style": "inherited_relation",
+        "description": "Beside/next to/alongside the reference.",
+        "kind": "relation",
+        "lexical_cues": [
+          "beside",
+          "next to",
+          "alongside"
+        ],
+        "name": "Beside",
+        "polarity": "positive",
+        "predicate": "beside",
+        "representation": "spatial_predicate_edge",
+        "target_type": "Entity",
+        "value_type": "SpatialReference"
+      }
+    ],
+    "sentence": "An unpainted crate stands beside a violet lantern."
+  }
+}

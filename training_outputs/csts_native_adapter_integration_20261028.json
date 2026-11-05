@@ -1,0 +1,62 @@
+{
+  "source_archive_sha256": "ce822907f2f268e8b5ffcc2ce80b49b2e33cd34ad4575b3fcd72212e7498a4aa",
+  "test_relocation_only": {
+    "test_adapter.py": "tests/test_task_native_adapter.py",
+    "test_counts.py": "tests/test_task_native_counts.py",
+    "test_export_cli.py": "tests/test_task_native_export_cli.py",
+    "test_scope_extensions.py": "tests/test_task_native_scope_extensions.py",
+    "test_stage_merge.py": "tests/test_task_native_stage_merge.py"
+  },
+  "legacy_adapter_changed": false,
+  "model_generations": 0,
+  "scope": "Reviewed condition-only development implementation; empirical model quality is separate",
+  "targeted_tests": {
+    "new_adapter": 80,
+    "legacy_extraction_and_transport": 69,
+    "combined_passed": 149
+  },
+  "independent_relocation_audit_sha256": "7ab5b5453ba120f95b298ac3e3b0765658607afa1c17cf7ae7862f0fb3747fb2",
+  "initial_relocation_implementation_sha256": {
+    "__init__.py": "b0572fcc34f6a05cbd37dbe1b6ffb14e7b6500c5bb8c93379ee1b2ea27801f1f",
+    "cli.py": "f579eef7cdf17cb7a973cb13c6117a8467a4474f62ddd7208f0c3481dc43a33d",
+    "counts.py": "c3db49bc283c7cc30c5881418fddd2506e2d283d2dc6a3c36cada7f4422fce76",
+    "export.py": "9591874d15fc0637a030c806036ca75ff4dc0dc566e2903b4eea623f367560f6",
+    "gates.py": "74fb62e780d160805d7e7d6222672b8515c8a261dd395ae90e2e0250bc1c5150",
+    "inventory.py": "3caefd6f3492b8244fb7c2c860db6e437b99215c0011196ed891a9096cff765c",
+    "normalize.py": "0b4d2b747dd99c3a30cbfcf084ede902c040c6691aa18ed83c82d5d8bce860a5",
+    "runtime.py": "0ede1154a1625d16e03994b3bb546289c23cf8f979ebea829c6d09be0eb7cbea",
+    "schema.py": "49782e03ed91519dafff535f02a904489735103e08f6f9f4129ed3c041d7b98d",
+    "scope_extensions.py": "c5fffd5a03bca8adbc81e7477530f4fa1e6481c341d1db89a0151ca49669f8e3"
+  },
+  "current_implementation_sha256": {
+    "__init__.py": "b0572fcc34f6a05cbd37dbe1b6ffb14e7b6500c5bb8c93379ee1b2ea27801f1f",
+    "cli.py": "f579eef7cdf17cb7a973cb13c6117a8467a4474f62ddd7208f0c3481dc43a33d",
+    "counts.py": "c3db49bc283c7cc30c5881418fddd2506e2d283d2dc6a3c36cada7f4422fce76",
+    "export.py": "9591874d15fc0637a030c806036ca75ff4dc0dc566e2903b4eea623f367560f6",
+    "gates.py": "74fb62e780d160805d7e7d6222672b8515c8a261dd395ae90e2e0250bc1c5150",
+    "inventory.py": "3caefd6f3492b8244fb7c2c860db6e437b99215c0011196ed891a9096cff765c",
+    "normalize.py": "91ba2e447c35aee60b275c5cac5870d14dc1afcd1748da74c5bdda92947a2442",
+    "runtime.py": "0ede1154a1625d16e03994b3bb546289c23cf8f979ebea829c6d09be0eb7cbea",
+    "schema.py": "49782e03ed91519dafff535f02a904489735103e08f6f9f4129ed3c041d7b98d",
+    "scope_extensions.py": "c5fffd5a03bca8adbc81e7477530f4fa1e6481c341d1db89a0151ca49669f8e3"
+  },
+  "subsequent_amendments": [
+    {
+      "file": "normalize.py",
+      "change": "Strip only external payload whitespace before strict AST parsing",
+      "before_sha256": "0b4d2b747dd99c3a30cbfcf084ede902c040c6691aa18ed83c82d5d8bce860a5",
+      "after_sha256": "3971bdc56f932a99e81c1bc3e970908370c8af5a8ebb874f15f8d015d32a2193",
+      "reason": "Observed Know vLLM API emits a leading space; original nine result records falsely report malformed syntax",
+      "raw_generation_retries": 0,
+      "semantic_repairs": false
+    },
+    {
+      "file": "normalize.py",
+      "change": "Apply same whitespace envelope normalization in the per-stage AST reparse",
+      "before_sha256": "3971bdc56f932a99e81c1bc3e970908370c8af5a8ebb874f15f8d015d32a2193",
+      "after_sha256": "91ba2e447c35aee60b275c5cac5870d14dc1afcd1748da74c5bdda92947a2442",
+      "raw_generation_retries": 0,
+      "semantic_repairs": false
+    }
+  ]
+}

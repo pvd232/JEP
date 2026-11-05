@@ -1,0 +1,38 @@
+{
+  "EE": {
+    "authorship": "Synthetic development example authored without viewing locked/fresh sources or their answers.",
+    "description": "A person puts a plant into soil or a container. Record its trigger, actor, plant and stated location.",
+    "go_output": "[Planting(mention=\"plants\", actor=[\"gardener\"], theme=[\"lavender\"], place=[\"in a pot\"])]",
+    "go_query": "# The following lines describe the task definition\n@dataclass\nclass Planting(Event):\n    \"\"\"A person puts a plant into soil or a container. Record its trigger, actor, plant and stated location.\"\"\"\n    mention: str\n    actor: List[str]\n    theme: List[str]\n    place: List[str]\n\n# This is the text to analyze\ntext = \"A gardener plants lavender in a pot.\"\n\n# The annotation instances that take place in the text above are listed here\nresult =",
+    "go_schema": "@dataclass\nclass Planting(Event):\n    \"\"\"A person puts a plant into soil or a container. Record its trigger, actor, plant and stated location.\"\"\"\n    mention: str\n    actor: List[str]\n    theme: List[str]\n    place: List[str]",
+    "know_output": "results = [Planting(trigger=\"plants\", actor=[Entity(\"gardener\")], theme=[Entity(\"lavender\")], place=[Entity(\"in a pot\")])]",
+    "know_query": "class Entity:\n\tdef __init__(self, name: str):\n\t\tself.name = name\n\nclass Event:\n\tpass\n\nclass Planting(Event):\n\t\"\"\"Description: A person puts a plant into soil or a container. Record its trigger, actor, plant and stated location.\"\"\"\n\tdef __init__(self, trigger: str, actor: List[Entity], theme: List[Entity], place: List[Entity]):\n\t\tself.trigger = trigger\n\t\tself.actor = actor\n\t\tself.theme = theme\n\t\tself.place = place\n\n\"\"\"\nThis is an object-oriented programming task: Some Event Classes and related Entity Classes are defined above. Please instantiate all the corresponding Event Objects in the following sentence.\n\"\"\"\nsentence = \"A gardener plants lavender in a pot.\"",
+    "know_schema": "class Entity:\n\tdef __init__(self, name: str):\n\t\tself.name = name\n\nclass Event:\n\tpass\n\nclass Planting(Event):\n\t\"\"\"Description: A person puts a plant into soil or a container. Record its trigger, actor, plant and stated location.\"\"\"\n\tdef __init__(self, trigger: str, actor: List[Entity], theme: List[Entity], place: List[Entity]):\n\t\tself.trigger = trigger\n\t\tself.actor = actor\n\t\tself.theme = theme\n\t\tself.place = place",
+    "name": "Planting",
+    "sentence": "A gardener plants lavender in a pot."
+  },
+  "NER": {
+    "authorship": "Synthetic development example authored without viewing locked/fresh sources or their answers.",
+    "description": "A mineral explicitly named in the sentence.",
+    "go_output": "[Mineral(span=\"mica\"), Mineral(span=\"quartz\")]",
+    "go_query": "# The following lines describe the task definition\n@dataclass\nclass Mineral(Entity):\n    \"\"\"A mineral explicitly named in the sentence.\"\"\"\n    span: str\n\n# This is the text to analyze\ntext = \"The drawer contains mica and quartz.\"\n\n# The annotation instances that take place in the text above are listed here\nresult =",
+    "go_schema": "@dataclass\nclass Mineral(Entity):\n    \"\"\"A mineral explicitly named in the sentence.\"\"\"\n    span: str",
+    "know_output": "results = [Mineral(\"mica\"), Mineral(\"quartz\")]",
+    "know_query": "class Entity:\n\tdef __init__(self, name: str):\n\t\tself.name = name\n\nclass Mineral(Entity):\n\t\"\"\"Description: A mineral explicitly named in the sentence.\"\"\"\n\tpass\n\n\"\"\"\nThis is an object-oriented programming task: Some Entity Classes are defined above. Please instantiate all the corresponding Entity Objects in the following sentence.\n\"\"\"\nsentence = \"The drawer contains mica and quartz.\"",
+    "know_schema": "class Entity:\n\tdef __init__(self, name: str):\n\t\tself.name = name\n\nclass Mineral(Entity):\n\t\"\"\"Description: A mineral explicitly named in the sentence.\"\"\"\n\tpass",
+    "name": "Mineral",
+    "sentence": "The drawer contains mica and quartz."
+  },
+  "RE": {
+    "authorship": "Synthetic development example authored without viewing locked/fresh sources or their answers.",
+    "description": "Color explicitly stated for the subject; do not fill unstated colors.",
+    "go_output": "[HasColor(object=\"lantern\", color=\"violet\")]",
+    "go_query": "# The following lines describe the task definition\n@dataclass\nclass HasColor(Relation):\n    \"\"\"Color explicitly stated for the subject; do not fill unstated colors.\"\"\"\n    object: str\n    color: str\n\n# This is the text to analyze\ntext = \"An unpainted crate stands beside a violet lantern.\"\n\n# The annotation instances that take place in the text above are listed here\nresult =",
+    "go_schema": "@dataclass\nclass HasColor(Relation):\n    \"\"\"Color explicitly stated for the subject; do not fill unstated colors.\"\"\"\n    object: str\n    color: str",
+    "know_output": "results = [Color(Entity(\"lantern\"), Entity(\"violet\"))]",
+    "know_query": "class Entity:\n\tdef __init__(self, name: str):\n\t\tself.name = name\n\nclass Relation:\n\tdef __init__(self, head_entity: Entity, tail_entity: Entity):\n\t\tself.head_entity = head_entity\n\t\tself.tail_entity = tail_entity\n\nclass Color(Relation):\n\t\"\"\"Description: Color explicitly stated for the subject; do not fill unstated colors.\"\"\"\n\tdef __init__(self, head_entity: Entity, tail_entity: Entity):\n\t\tsuper().__init__(head_entity=head_entity, tail_entity=tail_entity)\n\n\"\"\"\nThis is an object-oriented programming task: Some Relation Classes and related Entity Classes are defined above. Please instantiate all the corresponding Relation Objects in the following sentence.\n\"\"\"\nsentence = \"An unpainted crate stands beside a violet lantern.\"",
+    "know_schema": "class Entity:\n\tdef __init__(self, name: str):\n\t\tself.name = name\n\nclass Relation:\n\tdef __init__(self, head_entity: Entity, tail_entity: Entity):\n\t\tself.head_entity = head_entity\n\t\tself.tail_entity = tail_entity\n\nclass Color(Relation):\n\t\"\"\"Description: Color explicitly stated for the subject; do not fill unstated colors.\"\"\"\n\tdef __init__(self, head_entity: Entity, tail_entity: Entity):\n\t\tsuper().__init__(head_entity=head_entity, tail_entity=tail_entity)",
+    "name": "Color",
+    "sentence": "An unpainted crate stands beside a violet lantern."
+  }
+}
