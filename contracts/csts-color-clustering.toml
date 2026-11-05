@@ -144,7 +144,7 @@ symbol = "test_switch_rejects_overlapping_prototypes"
 [[verifiers]]
 id = "COL-VR-08"
 requirement_ids = ["COL-REQ-08"]
-acceptance_conditions = ["The report contains every arm, cohort, K and seed, including failures and undefined metrics with reasons.", "Artifact hashes and runtime versions permit metrics to be recomputed from retained vectors and annotations.", "Missing evidence or a requirement that clustering favor the hypothesis raises ValueError containing 'report: incomplete evidence'."]
+acceptance_conditions = ["The report contains every arm, cohort, K and seed, including failures and undefined metrics with reasons.", "Artifact hashes and runtime versions permit metrics to be recomputed from retained vectors and annotations.", "Verified local evidence satisfies completion; cloud replication uses an independent durable outbox and upload receipt and never gates review delivery.", "Missing evidence or a requirement that clustering favor the hypothesis raises ValueError containing 'report: incomplete evidence'."]
 [verifiers.success_case]
 repository_id = "jep"
 path = "tests/test_color_clustering.py"

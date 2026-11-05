@@ -2,7 +2,7 @@
 
 ## 1. Status
 
-**Contract status:** Methods accepted by the user; execution uses native VIPER stages. Requirements and three dependent implementation blocks are declared. Scientific results are unobserved; model artifact paths and hashes remain to be resolved in the first block. Implementation plans will bind the accepted methods to complete source changes and an inspected execution baseline.
+**Contract status:** Methods accepted by the user; execution uses native VIPER stages. Requirements and three dependent implementation blocks are declared. The cohort, labels and exact encoder checkpoint are frozen. The implementation and sixteen focused fixtures are verified. Native run references, measured results and the diagnostic review pack retain experiment evidence separately from source-review lifecycle records.
 
 | ID | Implementation obligation |
 |---|---|
@@ -15,7 +15,7 @@
 | <nobr><code>COL-REQ-07</code></nobr> | Evaluate a fixed source-derived condition-switch probe with independent target labels and prototypes that exclude the probe's connected-caption family. |
 | <nobr><code>COL-REQ-08</code></nobr> | Publish a complete reproducible diagnostic report with source, label, model and configuration identities, all runs, split-specific results and explicit undefined outcomes. |
 
-The [typed contract](csts-color-clustering.toml) owns these requirements and their verifiers. The [checklist workspace](../checklists/csts-color-clustering.toml) places them in three phases. The [experiment settings](../experiments/color-clustering.toml) hold the proposed scientific parameters. Implementation is in `scripts/color_clustering.py`, `scripts/run_color_clustering.py`, `scripts/color_diagnostics.py` and the focused contract fixture module. Source-review lifecycle state remains separate from native experiment run evidence.
+The [typed contract](csts-color-clustering.toml) owns these requirements and their verifiers. The [checklist workspace](../checklists/csts-color-clustering.toml) places them in three phases. The [experiment settings](../experiments/color-clustering.toml) hold the accepted scientific parameters. Implementation is in `scripts/color_clustering.py`, `scripts/run_color_clustering.py`, `scripts/color_diagnostics.py` and the focused contract fixture module. Source-review lifecycle state remains separate from native experiment run evidence.
 
 ## 2. Claim
 
@@ -23,15 +23,15 @@ The analysis will produce a reproducible comparison of conditional color structu
 
 Three research questions remain open until measurement: whether the fine-tuned conditioned vectors align with target colors more strongly than the controls; whether the silhouette-selected K lies near the represented color count; and whether their raw cosine similarities preserve the audited color-pair ratings.
 
-Here, C is the number of distinct reviewed single target-color labels in an analysis cohort; N is the number of unique points in that cohort. K-star is the K with the greatest median cosine silhouette across the twenty seeds. The proposed definition of “near” is an absolute difference from C of at most the larger of one cluster and 25% of C, rounded up. This tolerance is a project choice for review.
+Here, C is the number of distinct reviewed single target-color labels in an analysis cohort; N is the number of unique points in that cohort. K-star is the K with the greatest median cosine silhouette across the twenty seeds. The accepted definition of “near” is an absolute difference from C of at most the larger of one cluster and 25% of C, rounded up. This tolerance is a project choice for review.
 
 Implementation acceptance requires complete, correctly identified evidence. Scientific outcomes may support, weaken or leave these hypotheses unresolved.
 
 ## 3. Models
 
-The preparer reads original comparisons, creates unique points and preserves the link from each original sentence side to its vector. A reviewer assigns target colors from the text before model output is available. The encoder and scorer then write the remaining records.
+The preparer reads original comparisons, creates unique points and preserves the link from each original sentence side to its vector. Explicit target-binding rules and assistant review of the rules and exception cases assign provisional reference colors before model output is available. The annotation file retains supporting spans for expert review. The encoder and scorer then write the remaining records.
 
-| Proposed record | Exact fields and producer | Consumer |
+| Record | Exact fields and producer | Consumer |
 |---|---|---|
 | `pairs.json` | Preparer: `row_id: str`, `split: str`, `group_id: str`, `pair_id: str`, `condition: str`, `sentence1: str`, `sentence2: str`, `rating: float`, `point1_id: str`, `point2_id: str`. | Pair scoring and source accounting. |
 | `points.json` | Preparer: `point_id: str`, `condition: str`, `sentence: str`, `group_id: str`, `occurrences: list[{row_id: str, side: str, split: str}]`. | Label review, inference and clustering. |
@@ -41,7 +41,7 @@ The preparer reads original comparisons, creates unique points and preserves the
 | `clusters/<cohort>/<arm>/<K>/<seed>.npz` | Clusterer: `point_ids`, `assignments: int[N]`, `centroids: float32[K,4096]`; sidecar records `inertia: float`, `iterations: int`, `converged: bool` and configuration hashes. | Metrics and reproducibility checks. |
 | `metrics.json` | Evaluator: per-run scores, denominators, undefined reasons, paired comparisons, resampling seed, selected K and switch coverage. | Report generation and independent recomputation. |
 
-The main arm is the encoder after conditional summarization pretraining and similarity training that supplied vectors to the recorded approximately 0.865 comparison system. Its learned pairwise comparator is a separate artifact. The resolver must connect the actual encoder checkpoint to that run before inference; an approximate score alone cannot identify a checkpoint.
+The main arm is the encoder after conditional summarization pretraining and similarity training that supplied vectors to the recorded approximately 0.865 comparison system. Its learned pairwise comparator is a separate artifact. The resolved checkpoint is `proposition_final.pt`, SHA-256 `d30c00fc76e70ec639493b7121a8b8c9d7520745733857c1c49f0902fff00f4f`. The 0.865230 result averages three learned-comparator fits on this single frozen encoder; its archived raw-cosine test Spearman is 0.863398.
 
 ## 4. Execution
 
@@ -71,6 +71,8 @@ Native VIPER stores the stage artifacts under its managed experiment directories
 | `experiment.toml`, `model-manifest.json`, `environment.json` | Accepted settings, actual checkpoint and tokenizer identities, pooling and token policy, dependency versions, hardware, device/dtype and thread settings. |
 | `embeddings/`, `clusters/`, `metrics.json`, `switch-probe.json` | Reusable vectors, every clustering, full score tables, paired intervals and condition-switch definitions and coverage. |
 | `report.md`, `figures/`, `run-receipt.json` | Interpretations linked to measured values; command, job ID, exit state and complete artifact hashes. |
+
+Local artifact persistence and verified local runs satisfy experiment completion. Cloud replication runs as a separate durable asynchronous job with a retained queue and upload receipt; upload progress and retries do not gate completion or user review.
 
 The report generator consumes these records directly. A report repair reuses successful embeddings and cluster fits.
 
@@ -122,7 +124,7 @@ A cache produced from another LoRA checkpoint has the right dimensions but a dif
 2. Complete `COL-PB-01`: prepare the data/label review and resolve the archived encoder artifacts. Review the frozen input inventories before inference.
 3. Create the current source-backed `PairBlockPlan` over the inspected implementation baseline; reuse the owning project's environment and focused checks.
 4. Complete `COL-PB-02`: implement and verify the analysis on small fixtures and validated cache slices.
-5. Complete `COL-PB-03`: run inference on the existing suitable JEP worker and CPU analysis on the existing development host, using durable job records. Verify live worker state and preserve existing jobs.
+5. Complete `COL-PB-03`: run GPU inference and CPU analysis on the existing suitable JEP worker, using durable job records. Verify live worker state and preserve existing jobs.
 6. Review the full result and its condition-specific failure examples before choosing a follow-up experiment.
 
 ## 10. Master checklist
@@ -213,7 +215,7 @@ The generated region owns the current block states and requirement links. The op
 | <nobr><code>COL-VR-05</code></nobr> | <nobr><code>COL-REQ-05</code></nobr> | Each supported K and seed is retained with assignments, centroids, inertia, iterations and convergence status.<br>K-means uses Lloyd updates, n_init=1, max_iter=500, tol=1e-4 and seeds 0 through 19.<br>A missing supported run or changed setting raises ValueError containing 'kmeans sweep: incomplete grid'. | [test_sweep_covers_each_supported_k_and_seed](../tests/test_color_clustering.py) | [test_sweep_rejects_missing_or_changed_settings](../tests/test_color_clustering.py) |
 | <nobr><code>COL-VR-06</code></nobr> | <nobr><code>COL-REQ-06</code></nobr> | Primary ARI is evaluated at K=C; K-star maximizes median cosine silhouette across seeds, with ties within 1e-6 resolved toward smaller K.<br>Original color-pair Spearman uses all retained selected pairs, including multiple-color and unspecified cases.<br>Ground-truth ARI used to select K-star or a missing original pair raises ValueError containing 'metric policy: unsupported selection'. | [test_scores_follow_fixed_selection_and_pair_links](../tests/test_color_clustering.py) | [test_scores_reject_label_selected_k_or_broken_pairs](../tests/test_color_clustering.py) |
 | <nobr><code>COL-VR-07</code></nobr> | <nobr><code>COL-REQ-07</code></nobr> | At most fifty hash-ordered sentences with two explicitly named, differently colored objects enter the frozen probe.<br>Both condition directions use the same text and prototypes estimated from at least five other caption families per color.<br>A prototype containing the probe family raises ValueError containing 'condition switch: prototype overlap'; insufficient coverage yields an explicit undefined result. | [test_switch_scores_follow_target_changes](../tests/test_color_clustering.py) | [test_switch_rejects_overlapping_prototypes](../tests/test_color_clustering.py) |
-| <nobr><code>COL-VR-08</code></nobr> | <nobr><code>COL-REQ-08</code></nobr> | The report contains every arm, cohort, K and seed, including failures and undefined metrics with reasons.<br>Artifact hashes and runtime versions permit metrics to be recomputed from retained vectors and annotations.<br>Missing evidence or a requirement that clustering favor the hypothesis raises ValueError containing 'report: incomplete evidence'. | [test_report_accounts_for_all_inputs_and_results](../tests/test_color_clustering.py) | [test_report_rejects_omissions_or_outcome_gates](../tests/test_color_clustering.py) |
+| <nobr><code>COL-VR-08</code></nobr> | <nobr><code>COL-REQ-08</code></nobr> | The report contains every arm, cohort, K and seed, including failures and undefined metrics with reasons.<br>Artifact hashes and runtime versions permit metrics to be recomputed from retained vectors and annotations.<br>Verified local evidence satisfies completion; cloud replication uses an independent durable outbox and upload receipt and never gates review delivery.<br>Missing evidence or a requirement that clustering favor the hypothesis raises ValueError containing 'report: incomplete evidence'. | [test_report_accounts_for_all_inputs_and_results](../tests/test_color_clustering.py) | [test_report_rejects_omissions_or_outcome_gates](../tests/test_color_clustering.py) |
 <!-- contract-protocol:generated:end -->
 
 ## 12. ContractTarget
