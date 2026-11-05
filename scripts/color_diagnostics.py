@@ -88,7 +88,7 @@ def build_review_pack(root: Path, cluster_archive: Path) -> None:
                 color = label["color_labels"][0]
                 colors[color] = colors.get(color, 0) + 1
         fig, axes = plt.subplots(1, 2, figsize=(11, 4))
-        axes[0].bar(counts, counts.values())
+        axes[0].bar(list(counts), list(counts.values()))
         axes[0].set(
             ylabel="Unique condition–sentence inputs", title="Annotation coverage"
         )
