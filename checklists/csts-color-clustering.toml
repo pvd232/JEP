@@ -1,0 +1,33 @@
+schema_version = 1
+checklist_id = "csts-color-clustering"
+title = "C-STS Color Clustering"
+coordination_repository_id = "jep"
+checklist_path = "checklists/csts-color-clustering.md"
+contract_paths = ["contracts/csts-color-clustering.toml"]
+
+[[phases]]
+number = 1
+title = "Freeze cohort, labels and encoder identity"
+requirement_ids = ["COL-REQ-01", "COL-REQ-02", "COL-REQ-03"]
+
+[[phases]]
+number = 2
+title = "Implement embedding, clustering and scoring"
+requirement_ids = ["COL-REQ-04", "COL-REQ-05", "COL-REQ-06", "COL-REQ-07"]
+
+[[phases]]
+number = 3
+title = "Execute and report"
+requirement_ids = ["COL-REQ-08"]
+
+[[repository_bindings]]
+repository_id = "jep"
+checkout = "/home/machina/jep-color-clustering-20261104/repo"
+
+[[repository_bindings.executables]]
+command = "git"
+path = "/usr/bin/git"
+
+[[repository_bindings.executables]]
+command = "python3"
+path = "/home/machina/jep-format-env/bin/python"

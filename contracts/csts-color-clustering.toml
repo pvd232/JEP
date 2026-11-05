@@ -1,0 +1,179 @@
+schema_version = 1
+contract_id = "csts-color-clustering"
+title = "C-STS Conditional Color Clustering"
+
+[[requirements]]
+id = "COL-REQ-01"
+claim = "Select every retained color-related comparison from pinned JEP C-STS revision 1.1; preserve original text, splits, connected-caption groups and pair-to-point links."
+depends_on = []
+verifier_ids = ["COL-VR-01"]
+
+[[requirements]]
+id = "COL-REQ-02"
+claim = "Freeze reviewed target-color annotations and spelling aliases before inference; preserve single-color, multiple-color, unspecified and unresolved cases."
+depends_on = ["COL-REQ-01"]
+verifier_ids = ["COL-VR-02"]
+
+[[requirements]]
+id = "COL-REQ-03"
+claim = "Identify the exact conditional-summary-plus-similarity encoder underlying the recorded approximately 0.865 scorer result and pin every model, tokenizer, adapter and extraction setting."
+depends_on = []
+verifier_ids = ["COL-VR-03"]
+
+[[requirements]]
+id = "COL-REQ-04"
+claim = "Encode the identical point cohort for all three arms using validated caches, final non-padding EOD pooling and finite float32 unit vectors."
+depends_on = ["COL-REQ-01", "COL-REQ-03"]
+verifier_ids = ["COL-VR-04"]
+
+[[requirements]]
+id = "COL-REQ-05"
+claim = "Fit the predeclared K grid and all twenty k-means++ seeds in the original normalized vector space for each arm and analysis cohort."
+depends_on = ["COL-REQ-02", "COL-REQ-04"]
+verifier_ids = ["COL-VR-05"]
+
+[[requirements]]
+id = "COL-REQ-06"
+claim = "Report color agreement, geometric separation, seed stability and original-pair cosine/rating Spearman using fixed selection rules and family-aware paired uncertainty."
+depends_on = ["COL-REQ-05"]
+verifier_ids = ["COL-VR-06"]
+
+[[requirements]]
+id = "COL-REQ-07"
+claim = "Evaluate a fixed source-derived condition-switch probe with independent target labels and prototypes that exclude the probe's connected-caption family."
+depends_on = ["COL-REQ-02", "COL-REQ-04"]
+verifier_ids = ["COL-VR-07"]
+
+[[requirements]]
+id = "COL-REQ-08"
+claim = "Execute embedding, clustering and reporting as native VIPER stages and publish a complete reproducible visual diagnostic report with source, label, model and configuration identities, all runs, split-specific results and explicit undefined outcomes."
+depends_on = ["COL-REQ-06", "COL-REQ-07"]
+verifier_ids = ["COL-VR-08"]
+
+[[verifiers]]
+id = "COL-VR-01"
+requirement_ids = ["COL-REQ-01"]
+acceptance_conditions = ["All unique conditions receive an inclusion decision before embeddings are inspected.", "Exact duplicate condition/sentence inputs share one point and retain every source occurrence.", "Changed source hashes or a selected excluded row raise ValueError containing 'color cohort: source mismatch'."]
+[verifiers.success_case]
+repository_id = "jep"
+path = "tests/test_color_clustering.py"
+symbol = "test_cohort_preserves_rows_points_and_splits"
+[[verifiers.rejection_cases]]
+repository_id = "jep"
+path = "tests/test_color_clustering.py"
+symbol = "test_cohort_rejects_source_or_membership_mismatch"
+
+[[verifiers]]
+id = "COL-VR-02"
+requirement_ids = ["COL-REQ-02"]
+acceptance_conditions = ["Each reviewed label records the condition target, supporting text, evidence kind, color set and reviewer.", "Primary color-label agreement uses resolved points with exactly one target color; other points remain in the full-cohort diagnostic.", "A resolved label lacking supporting text or containing an unresolved target raises ValueError containing 'color label: missing target evidence'."]
+[verifiers.success_case]
+repository_id = "jep"
+path = "tests/test_color_clustering.py"
+symbol = "test_labels_resolve_the_named_target"
+[[verifiers.rejection_cases]]
+repository_id = "jep"
+path = "tests/test_color_clustering.py"
+symbol = "test_labels_reject_missing_or_conflicting_evidence"
+
+[[verifiers]]
+id = "COL-VR-03"
+requirement_ids = ["COL-REQ-03"]
+acceptance_conditions = ["The checkpoint digest and extraction configuration resolve to the archived main-encoder run; the pairwise comparator is identified separately.", "The two controls use the same base revision and tokenizer as the main encoder.", "A different adapter or unpinned representation raises ValueError containing 'encoder identity: checkpoint mismatch'."]
+[verifiers.success_case]
+repository_id = "jep"
+path = "tests/test_color_clustering.py"
+symbol = "test_encoder_matches_the_archived_run"
+[[verifiers.rejection_cases]]
+repository_id = "jep"
+path = "tests/test_color_clustering.py"
+symbol = "test_encoder_rejects_checkpoint_substitution"
+
+[[verifiers]]
+id = "COL-VR-04"
+requirement_ids = ["COL-REQ-04"]
+acceptance_conditions = ["Cache identity includes exact input bytes, arm, base and adapter digests, tokenizer, prompt, pooling and token policy.", "Each arm produces a 4096-dimensional vector per point; norms differ from one by at most 2e-5.", "Stale cache identity, invalid vectors or an omitted point raise ValueError containing 'embedding cache: identity mismatch'."]
+[verifiers.success_case]
+repository_id = "jep"
+path = "tests/test_color_clustering.py"
+symbol = "test_embeddings_preserve_arm_and_input_identity"
+[[verifiers.rejection_cases]]
+repository_id = "jep"
+path = "tests/test_color_clustering.py"
+symbol = "test_embeddings_reject_stale_or_invalid_vectors"
+
+[[verifiers]]
+id = "COL-VR-05"
+requirement_ids = ["COL-REQ-05"]
+acceptance_conditions = ["Each supported K and seed is retained with assignments, centroids, inertia, iterations and convergence status.", "K-means uses Lloyd updates, n_init=1, max_iter=500, tol=1e-4 and seeds 0 through 19.", "A missing supported run or changed setting raises ValueError containing 'kmeans sweep: incomplete grid'."]
+[verifiers.success_case]
+repository_id = "jep"
+path = "tests/test_color_clustering.py"
+symbol = "test_sweep_covers_each_supported_k_and_seed"
+[[verifiers.rejection_cases]]
+repository_id = "jep"
+path = "tests/test_color_clustering.py"
+symbol = "test_sweep_rejects_missing_or_changed_settings"
+
+[[verifiers]]
+id = "COL-VR-06"
+requirement_ids = ["COL-REQ-06"]
+acceptance_conditions = ["Primary ARI is evaluated at K=C; K-star maximizes median cosine silhouette across seeds, with ties within 1e-6 resolved toward smaller K.", "Original color-pair Spearman uses all retained selected pairs, including multiple-color and unspecified cases.", "Ground-truth ARI used to select K-star or a missing original pair raises ValueError containing 'metric policy: unsupported selection'."]
+[verifiers.success_case]
+repository_id = "jep"
+path = "tests/test_color_clustering.py"
+symbol = "test_scores_follow_fixed_selection_and_pair_links"
+[[verifiers.rejection_cases]]
+repository_id = "jep"
+path = "tests/test_color_clustering.py"
+symbol = "test_scores_reject_label_selected_k_or_broken_pairs"
+
+[[verifiers]]
+id = "COL-VR-07"
+requirement_ids = ["COL-REQ-07"]
+acceptance_conditions = ["At most fifty hash-ordered sentences with two explicitly named, differently colored objects enter the frozen probe.", "Both condition directions use the same text and prototypes estimated from at least five other caption families per color.", "A prototype containing the probe family raises ValueError containing 'condition switch: prototype overlap'; insufficient coverage yields an explicit undefined result."]
+[verifiers.success_case]
+repository_id = "jep"
+path = "tests/test_color_clustering.py"
+symbol = "test_switch_scores_follow_target_changes"
+[[verifiers.rejection_cases]]
+repository_id = "jep"
+path = "tests/test_color_clustering.py"
+symbol = "test_switch_rejects_overlapping_prototypes"
+
+[[verifiers]]
+id = "COL-VR-08"
+requirement_ids = ["COL-REQ-08"]
+acceptance_conditions = ["The report contains every arm, cohort, K and seed, including failures and undefined metrics with reasons.", "Artifact hashes and runtime versions permit metrics to be recomputed from retained vectors and annotations.", "Missing evidence or a requirement that clustering favor the hypothesis raises ValueError containing 'report: incomplete evidence'."]
+[verifiers.success_case]
+repository_id = "jep"
+path = "tests/test_color_clustering.py"
+symbol = "test_report_accounts_for_all_inputs_and_results"
+[[verifiers.rejection_cases]]
+repository_id = "jep"
+path = "tests/test_color_clustering.py"
+symbol = "test_report_rejects_omissions_or_outcome_gates"
+
+[[pair_blocks]]
+id = "COL-PB-01"
+requirement_ids = ["COL-REQ-01", "COL-REQ-02", "COL-REQ-03"]
+depends_on = []
+repository_id = "jep"
+requirement_contribution = "Prepare the audited cohort, review target colors and resolve the archived encoder identity."
+completion_evidence = ["implementation_review"]
+
+[[pair_blocks]]
+id = "COL-PB-02"
+requirement_ids = ["COL-REQ-04", "COL-REQ-05", "COL-REQ-06", "COL-REQ-07"]
+depends_on = ["COL-PB-01"]
+repository_id = "jep"
+requirement_contribution = "Reuse the encoder extraction path and implement the cached clustering and scoring analysis."
+completion_evidence = ["implementation_review"]
+
+[[pair_blocks]]
+id = "COL-PB-03"
+requirement_ids = ["COL-REQ-08"]
+depends_on = ["COL-PB-02"]
+repository_id = "jep"
+requirement_contribution = "Run the frozen analysis and publish its complete evidence and interpretation."
+completion_evidence = ["implementation_review"]

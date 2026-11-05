@@ -1,0 +1,68 @@
+# Proposed scientific settings for review. Model artifact pins are resolved before inference.
+[experiment]
+id = "csts-color-clustering"
+dataset_repository = "pvd232/JEP"
+dataset_commit = "5dde4314e90f92eb4ac84b122e3b312402b18931"
+dataset_path = "datasets/csts-jep-revision-v1-1"
+primary_split = "validation"
+secondary_cohorts = ["training", "test", "pooled"]
+condition_filter = "review every unique condition; color/colour/hue/shade words identify initial candidates"
+point_identity = "SHA256 of UTF-8 compact JSON [original condition, original sentence]"
+primary_label_cohort = "reviewed single-target-color points"
+secondary_label_cohort = "all selected points"
+hypothesis = "K-star is within max(1, ceil(0.25*C)) of C"
+
+[labels]
+spelling_aliases = ["grey=gray", "blonde=blond"]
+shade_modifiers = "store separately; light blue and dark blue use base label blue"
+named_shades = "retain distinct labels such as navy, beige and tan"
+statuses = ["single", "multiple", "unspecified", "unresolved"]
+evidence_kinds = ["explicit", "implied", "unspecified"]
+freeze_before_inference = true
+
+[encoder]
+base_model_id = "Qwen/Qwen3-Embedding-8B"
+dimension = 4096
+pooling = "last_nonpadding_eod_float32_unit_norm"
+end_token = "<|endoftext|>"
+norm_atol = 0.00002
+arms = ["finetuned_conditioned", "pretrained_conditioned", "finetuned_unconditioned"]
+conditioned_prompt = "Instruct: Represent the passage for semantic similarity with respect to this condition: {condition}\nQuery: {passage}"
+unconditioned_prompt = "Instruct: Represent the passage for semantic similarity.\nQuery: {passage}"
+required_identity_fields = ["base_revision", "adapter_sha256", "tokenizer_revision", "extraction_commit", "max_length", "dtype", "checkpoint_source_run"]
+weights_frozen = true
+
+[clustering]
+algorithm = "lloyd"
+init = "k-means++"
+n_init = 1
+seeds = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+max_iter = 500
+tol = 0.0001
+k_min = 2
+k_max = "min(2*C, N-1)"
+spaces = ["original_normalized_4096_dimensions"]
+primary_fixed_k = "C"
+k_star_metric = "median_cosine_silhouette"
+tie_atol = 0.000001
+
+[evaluation]
+primary_metric = "adjusted_rand_index_at_C"
+supporting_metric = "original_pair_raw_cosine_rating_spearman"
+secondary_metrics = ["cosine_silhouette", "inertia", "pairwise_seed_assignment_ARI", "cluster_size_and_color_tables"]
+bootstrap_resamples = 1000
+bootstrap_seed = 20261104
+bootstrap_unit = "existing group_id: connected canonical-caption component"
+bootstrap_targets = ["paired_delta_ARI_at_C", "paired_delta_color_pair_Spearman"]
+bootstrap_scope = "rescore fixed fits; intervals conditional on the fitted clusterings"
+report_slices = ["split", "explicit_vs_implied", "condition_target", "color_frequency"]
+undefined_policy = "retain null with denominator and reason"
+
+[condition_switch]
+maximum_sentences = 50
+selection = "ascending SHA256(original sentence)"
+evidence = "two explicitly colored objects with different reviewed colors"
+alternative_condition = "color of <unambiguously named second object>"
+minimum_prototype_families_per_color = 5
+prototype_policy = "normalized mean of single-color vectors; exclude the whole probe group"
+metrics = ["mean_bidirectional_margin", "both_directions_positive_rate"]
