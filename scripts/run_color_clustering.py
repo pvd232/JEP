@@ -301,7 +301,13 @@ def run(root: Path) -> None:
                     },
                 ),
                 inputs=common_specs
-                + (input("checkpoint", path="color_inputs/checkpoint.pt"),),
+                + (
+                    input(
+                        "checkpoint",
+                        path="color_inputs/checkpoint.pt",
+                        data_role="training",
+                    ),
+                ),
                 outputs=StageOutputs(**embedding_outputs),
                 reuse="never",
             ),
@@ -335,8 +341,12 @@ def run(root: Path) -> None:
                 ),
                 inputs=common_specs + embedding_inputs,
                 outputs=EvalOutputs(
-                    predictions=output(path="metrics.json", loader=load_json),
-                    clusters=output(path="clusters.tar", loader=load_path),
+                    predictions=output(
+                        path="metrics.json", loader=load_json, data_role="evaluation"
+                    ),
+                    clusters=output(
+                        path="clusters.tar", loader=load_path, data_role="evaluation"
+                    ),
                 ),
                 reuse="never",
             ),
@@ -379,11 +389,23 @@ def run(root: Path) -> None:
                     ),
                 ),
                 outputs=StageOutputs(
-                    report=output(path="report.md", loader=load_path),
-                    dashboard=output(path="dashboard.html", loader=load_path),
-                    pdf=output(path="diagnostics.pdf", loader=load_path),
-                    bundle=output(path="review.zip", loader=load_path),
-                    receipt=output(path="run-receipt.json", loader=load_json),
+                    report=output(
+                        path="report.md", loader=load_path, data_role="evaluation"
+                    ),
+                    dashboard=output(
+                        path="dashboard.html", loader=load_path, data_role="evaluation"
+                    ),
+                    pdf=output(
+                        path="diagnostics.pdf", loader=load_path, data_role="evaluation"
+                    ),
+                    bundle=output(
+                        path="review.zip", loader=load_path, data_role="evaluation"
+                    ),
+                    receipt=output(
+                        path="run-receipt.json",
+                        loader=load_json,
+                        data_role="evaluation",
+                    ),
                 ),
                 reuse="never",
             ),
