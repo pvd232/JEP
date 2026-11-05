@@ -1,0 +1,35 @@
+{
+  "arm": "pretrained_conditioned",
+  "cohort": "validation_single",
+  "points": 65,
+  "reference_colors": 13,
+  "k": 12,
+  "k_policy": "Match fine-tuned validation silhouette-selected K=12",
+  "seed_policy": "Highest cosine silhouette among 20 saved starts at fixed K; lower-seed tie break",
+  "plotted_run": {
+    "k": 12,
+    "seed": 18,
+    "ari": 0.3478411738462301,
+    "silhouette": 0.19876934587955475,
+    "inertia": 16.75632667541504,
+    "iterations": 2,
+    "converged": true,
+    "undefined_reason": null
+  },
+  "color_palette": {
+    "blond": "#c6a74a",
+    "gold": "#cda400",
+    "gray": "#888888",
+    "unknown": "#bcbcbc",
+    "maroon": "#800000"
+  },
+  "pca": "Original per-encoder validation PC1/PC2 coordinates, reused exactly",
+  "clustering": "Saved assignments on normalized 4096-dimensional vectors",
+  "spokes": "Connect each point to the mean PCA coordinates of its assigned group",
+  "source_archive_sha256": "1592c0e1c75f14ac4af92cedb0b1ef32df6f78af713eb918f43937736e0df12c",
+  "median_ari_at_k": {
+    "finetuned_conditioned": 0.9375150247621368,
+    "pretrained_conditioned": 0.34747214786295316,
+    "finetuned_unconditioned": 0.10748711042988696
+  }
+}
