@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import gc
 import hashlib
 import importlib.metadata
 import json
@@ -556,6 +557,8 @@ def encode_inputs(output: Path, manifest_path: Path) -> None:
                 continue
             if model is not None:
                 del model
+                model = None
+                gc.collect()
                 torch.cuda.empty_cache()
             model = load_backbone(
                 cfg, adapters=None if arm == "pretrained_conditioned" else cfg
@@ -573,6 +576,7 @@ def encode_inputs(output: Path, manifest_path: Path) -> None:
                     for k, v in saved[state_key].items()
                 ):
                     raise ValueError("encoder identity: checkpoint mismatch")
+                del current
             model.eval()
             for parameter in model.parameters():
                 parameter.requires_grad_(False)
