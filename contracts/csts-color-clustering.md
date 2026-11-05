@@ -200,7 +200,7 @@ The generated region owns the current block states and requirement links. The op
 | <nobr><code>COL-REQ-05</code></nobr> | Fit the predeclared K grid and all twenty k-means++ seeds in the original normalized vector space for each arm and analysis cohort. | planned | <nobr><code>COL-VR-05</code></nobr> | <nobr><code>COL-PB-02</code></nobr> |
 | <nobr><code>COL-REQ-06</code></nobr> | Report color agreement, geometric separation, seed stability and original-pair cosine/rating Spearman using fixed selection rules and family-aware paired uncertainty. | planned | <nobr><code>COL-VR-06</code></nobr> | <nobr><code>COL-PB-02</code></nobr> |
 | <nobr><code>COL-REQ-07</code></nobr> | Evaluate a fixed source-derived condition-switch probe with independent target labels and prototypes that exclude the probe's connected-caption family. | planned | <nobr><code>COL-VR-07</code></nobr> | <nobr><code>COL-PB-02</code></nobr> |
-| <nobr><code>COL-REQ-08</code></nobr> | Publish a complete reproducible diagnostic report with source, label, model and configuration identities, all runs, split-specific results and explicit undefined outcomes. | planned | <nobr><code>COL-VR-08</code></nobr> | <nobr><code>COL-PB-03</code></nobr> |
+| <nobr><code>COL-REQ-08</code></nobr> | Execute embedding, clustering and reporting as native VIPER stages and publish a complete reproducible visual diagnostic report with source, label, model and configuration identities, all runs, split-specific results and explicit undefined outcomes. | planned | <nobr><code>COL-VR-08</code></nobr> | <nobr><code>COL-PB-03</code></nobr> |
 
 ### Verification rules
 
