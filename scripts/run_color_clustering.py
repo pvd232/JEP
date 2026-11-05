@@ -14,10 +14,10 @@ from pathlib import Path
 from csts_pilot.convergence_run import artifact_path, artifact_source
 from pydantic import Field
 from scripts import color_clustering
-from viper import api, execution
+from viper import api, execution, stages
 from viper.authoring import experiment, input, plan, replicate, stage, variant
-from viper.config import BuildConfig, EvalConfig
-from viper.outputs import EvalOutputs, StageOutputs, output
+from viper.config import BuildConfig, EmbedConfig
+from viper.outputs import StageOutputs, output
 from viper.references import GitFileRef
 from viper.repository import read_source
 from viper.runtime import (
@@ -26,7 +26,7 @@ from viper.runtime import (
     LocalEnvSpec,
     observe_python_env,
 )
-from viper.stages import StageContext, build, eval
+from viper.stages import StageContext
 
 
 class BuildPins(BuildConfig):
@@ -40,11 +40,11 @@ class BuildPins(BuildConfig):
     )
 
 
-class AnalysisPins(EvalConfig):
-    """Bind clustering diagnostics to the frozen cohort, settings and embeddings."""
+class EmbedPins(EmbedConfig):
+    """Bind embedding inference to the exact frozen source and model inputs."""
 
     input_sha256: dict[str, str] = Field(
-        description="SHA-256 of each named input supplied to the clustering stage."
+        description="SHA-256 of each named input supplied to the embedding stage."
     )
     work_root: Path = Field(
         description="Durable task-owned directory for resumable intermediate artifacts."
@@ -102,8 +102,8 @@ def assemble(context, root: Path) -> None:
         shutil.copyfile(context.inputs[name], root / filename)
 
 
-@build(config=BuildPins)
-def embed(context: StageContext[BuildPins]) -> None:
+@stages.embed(config=EmbedPins)
+def embed(context: StageContext[EmbedPins]) -> None:
     """Build all three conditional/control vector caches without parameter updates."""
     verify_inputs(context)
     with working_directory(context, "embed") as root:
@@ -132,8 +132,8 @@ def embed(context: StageContext[BuildPins]) -> None:
         )
 
 
-@eval(config=AnalysisPins)
-def cluster(context: StageContext[AnalysisPins]) -> None:
+@stages.build(config=BuildPins)
+def cluster(context: StageContext[BuildPins]) -> None:
     """Measure the complete fixed sweep and source-family paired comparisons."""
     verify_inputs(context)
     with working_directory(context, "cluster") as root:
@@ -151,7 +151,7 @@ def cluster(context: StageContext[AnalysisPins]) -> None:
             archive.add(root / "clusters", arcname="clusters")
 
 
-@build(config=BuildPins)
+@stages.build(config=BuildPins)
 def report(context: StageContext[BuildPins]) -> None:
     """Produce the full visual review pack from tracked vectors and clustering artifacts."""
     from scripts.color_diagnostics import build_review_pack
@@ -202,14 +202,14 @@ def run(root: Path) -> None:
         if name != "checkpoint"
     }
     common_specs = tuple(
-        input(name, path=str(path.relative_to(root)), data_role="evaluation")
+        input(name, path=str(path.relative_to(root)), data_role="eval")
         for name, path in source_inputs.items()
         if name != "checkpoint"
     )
 
     def execute(name: str, configured, gpu: bool) -> dict:
         """Run and verify one plan, retaining its immutable VIPER reference."""
-        expected_hashes = configured.config.input_sha256
+        expected_hashes = configured.spec.config.input_sha256
         for old in previous.get("runs", []):
             if (
                 old["name"] == name
@@ -280,20 +280,20 @@ def run(root: Path) -> None:
         embedding_outputs = {}
         for arm in color_clustering.ARMS:
             embedding_outputs[arm] = output(
-                path=arm + ".npz", loader=load_path, data_role="evaluation"
+                path=arm + ".npz", loader=load_path, data_role="eval"
             )
             embedding_outputs[arm + "_probes"] = output(
-                path=arm + "-probes.npz", loader=load_path, data_role="evaluation"
+                path=arm + "-probes.npz", loader=load_path, data_role="eval"
             )
         embedding_outputs["metadata"] = output(
-            path="metadata.json", loader=load_json, data_role="evaluation"
+            path="metadata.json", loader=load_json, data_role="eval"
         )
         embedded = execute(
             "embed",
             stage(
                 embed,
                 stage_id="embed",
-                config=BuildPins(
+                config=EmbedPins(
                     work_root=directory / "working",
                     input_sha256={
                         **common_hashes,
@@ -321,7 +321,7 @@ def run(root: Path) -> None:
             if name != "metadata"
         }
         embedding_inputs = tuple(
-            input(name, source=artifact_source(embedded, "embed", name))
+            input(name, source=artifact_source(embedded, "embed", name, role="eval"))
             for name in embeddings
         )
         clustered = execute(
@@ -329,7 +329,7 @@ def run(root: Path) -> None:
             stage(
                 cluster,
                 stage_id="cluster",
-                config=AnalysisPins(
+                config=BuildPins(
                     work_root=directory / "working",
                     input_sha256={
                         **common_hashes,
@@ -340,12 +340,12 @@ def run(root: Path) -> None:
                     },
                 ),
                 inputs=common_specs + embedding_inputs,
-                outputs=EvalOutputs(
+                outputs=StageOutputs(
                     predictions=output(
-                        path="metrics.json", loader=load_json, data_role="evaluation"
+                        path="metrics.json", loader=load_json, data_role="eval"
                     ),
                     clusters=output(
-                        path="clusters.tar", loader=load_path, data_role="evaluation"
+                        path="clusters.tar", loader=load_path, data_role="eval"
                     ),
                 ),
                 reuse="never",
@@ -381,30 +381,32 @@ def run(root: Path) -> None:
                 + (
                     input(
                         "metrics",
-                        source=artifact_source(clustered, "cluster", "predictions"),
+                        source=artifact_source(
+                            clustered, "cluster", "predictions", role="eval"
+                        ),
                     ),
                     input(
                         "clusters",
-                        source=artifact_source(clustered, "cluster", "clusters"),
+                        source=artifact_source(
+                            clustered, "cluster", "clusters", role="eval"
+                        ),
                     ),
                 ),
                 outputs=StageOutputs(
-                    report=output(
-                        path="report.md", loader=load_path, data_role="evaluation"
-                    ),
+                    report=output(path="report.md", loader=load_path, data_role="eval"),
                     dashboard=output(
-                        path="dashboard.html", loader=load_path, data_role="evaluation"
+                        path="dashboard.html", loader=load_path, data_role="eval"
                     ),
                     pdf=output(
-                        path="diagnostics.pdf", loader=load_path, data_role="evaluation"
+                        path="diagnostics.pdf", loader=load_path, data_role="eval"
                     ),
                     bundle=output(
-                        path="review.zip", loader=load_path, data_role="evaluation"
+                        path="review.zip", loader=load_path, data_role="eval"
                     ),
                     receipt=output(
                         path="run-receipt.json",
                         loader=load_json,
-                        data_role="evaluation",
+                        data_role="eval",
                     ),
                 ),
                 reuse="never",
