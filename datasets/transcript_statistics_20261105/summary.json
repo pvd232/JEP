@@ -94,27 +94,50 @@
     "sample_sd": 17715.128665945533
   },
   "all_records_page_equivalent_500_words_mean": 65.98369892473119,
-  "identified_victim_speakers_min": {
-    "n": 93,
-    "total": 146,
-    "mean": 1.5698924731182795,
-    "median": 0,
-    "min": 0,
-    "max": 38,
-    "sample_sd": 4.693654017052232
-  },
-  "identified_compareciente_speakers_min": {
-    "n": 93,
-    "total": 221,
-    "mean": 2.3763440860215055,
-    "median": 1,
-    "min": 0,
-    "max": 24,
-    "sample_sd": 4.4670629843785346
-  },
-  "records_with_identified_victim_speakers": 20,
-  "victim_speakers_mean_in_records_with_victim_speakers": 7.3,
-  "participant_count_scope": "Minimum distinct identifiable live victim and compareciente speakers, including personal introductions, per supplied consolidated transcript. Attorneys are separate. Remote observers and people mentioned only as victims of an underlying crime are outside this speaker count. Repeated turns by one person within a transcript count once.",
-  "participant_count_status": "Rapid source audit; conservative minimum counts. Generic role tags and diarization identifiers were corrected at named/announced floors; unresolved identities are merged or omitted. These are recorded speakers, not total audience attendance or underlying-crime victim totals.",
-  "soffice_version": "LibreOfficeDev 26.8.0.0.alpha0 2c87e51eeaa2b413ff4ae097b2705eea1995d8e5"
+  "soffice_version": "LibreOfficeDev 26.8.0.0.alpha0 2c87e51eeaa2b413ff4ae097b2705eea1995d8e5",
+  "participant_audit": {
+    "review_status": "ten_reviews_completed; headline_attendance_means_withdrawn",
+    "reviewer_count": 10,
+    "source_records_reviewed": 93,
+    "mean_victim_attendance": null,
+    "mean_compareciente_attendance": null,
+    "attendance_mean_reason": "Incomplete attendee rosters; document records include submitted videos, split sessions and multi-day material. Separate attendance observations retain their original scope.",
+    "confirmed_recorded_speaker_incidences_min": {
+      "victim": 148,
+      "compareciente": 225,
+      "sworn_witness": 5
+    },
+    "disputed_compareciente_role_records": [
+      "VV-023"
+    ],
+    "witnesses_reporting_own_harm_separately": 1,
+    "recorded_submission_records": [
+      "VV-001",
+      "VV-002",
+      "VV-022",
+      "VV-026",
+      "VV-036",
+      "VV-044",
+      "VV-048",
+      "VV-052",
+      "VV-053",
+      "VV-054",
+      "VV-066"
+    ],
+    "count_scope": "Distinct source-supported person occurrences within supplied records. Introductions count; established aliases merge repeated turns. Primary recorded submissions and live hearing contributions retain their mode. Prerecorded inserts within hearings and unresolved identities are excluded.",
+    "confirmed_correction_records": [
+      "SDSJ-20240524",
+      "SDSJ-20241203",
+      "CAS03-20230919-AM",
+      "OBS-RC05-20260423",
+      "OBS-RC05-20260424",
+      "SDSJ-20250813"
+    ],
+    "superseded_values": {
+      "victim_speaker_mean": 1.5698924731182795,
+      "compareciente_speaker_mean": 2.3763440860215055,
+      "positive_record_victim_mean": 7.3,
+      "status": "superseded; not attendance statistics"
+    }
+  }
 }

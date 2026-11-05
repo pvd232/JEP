@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-05",
+  "status": "passed",
+  "checked_records": 93,
+  "checked_person_occurrences": 379,
+  "checks": {
+    "all_source_hashes_match": true,
+    "calculation_reproduces_summary": true,
+    "retained_length_measures_unchanged": true,
+    "negative_count_rejected": true,
+    "duplicate_person_key_rejected": true,
+    "missing_review_rejected": true,
+    "compensating_count_errors_rejected": true,
+    "disputed_role_zero_substitution_rejected": true,
+    "unknown_record_mode_rejected": true,
+    "unresolved_person_role_rejected": true,
+    "source_version_mismatch_rejected": true,
+    "unknown_attendance_zero_substitution_rejected": true,
+    "recording_mode_conflict_rejected": true,
+    "secondary_harm_count_mismatch_rejected": true,
+    "changed_source_bytes_rejected": true,
+    "cli_regeneration_byte_identical": true,
+    "changed_reviewed_input_rejected": true,
+    "all_correction_rows_match_review": true,
+    "later_name_anchor_preserved": true
+  },
+  "calculator_sha256": "d057aebf4e43b5ca34d4a0ae8ae73477f45200f88cb92f8bd39d0cc0be12e25f",
+  "verification_script_sha256": "a77074061969c10a869dec3a61a5055cb8c2552383b647e4110a0bb63e3713cd",
+  "input_sha256": {
+    "records.csv": "cacee970358d4cadc0a1d5e32098fa8b5e5205bd489d8b7bd66e5d99ebb5d5dc",
+    "participant_evidence.json": "93e5f0ec4136626920dd80fd1c67ef9c7aac8036fcbef4a328095e122ac39ee0",
+    "attendance_observations.json": "e912a6839cf4b24dd1d8a1200b1e23285b7d99126bb25d305a6e27984e05f3e9"
+  },
+  "independent_rework_reviewers": [
+    "08",
+    "10"
+  ],
+  "remaining_scope": "Human identity annotation and source interpretation remain review judgments. Complete audiovisual validation and event attendance reconciliation remain outstanding."
+}
