@@ -1,0 +1,114 @@
+#!/usr/bin/env python3
+"""Reach the user's Mac through a private reverse SSH port on the existing VM."""
+import argparse
+import json
+import os
+from pathlib import Path
+import re
+import shlex
+import subprocess
+import time
+
+
+def key_pair(path):
+    public = Path(str(path) + '.pub')
+    if not path.exists():
+        if public.exists():
+            raise RuntimeError('Existing public key has no private counterpart; preserve it and inspect')
+        path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+        subprocess.run(['ssh-keygen', '-q', '-t', 'ed25519', '-N', '', '-C', 'chatgpt-mac-relay', '-f', str(path)], check=True)
+    path.chmod(0o600)
+    return public.read_text().strip()
+
+
+def configure(state, user, port, host_key, gcloud_bin=None):
+    if not re.fullmatch(r'[A-Za-z_][A-Za-z0-9_.-]{0,63}', user):
+        raise ValueError('Invalid Mac short username')
+    if not 1024 <= port <= 65535:
+        raise ValueError('Use an unprivileged relay port')
+    if not re.fullmatch(r'ssh-ed25519 [A-Za-z0-9+/]+={0,2}', host_key):
+        raise ValueError('Supply the Mac SSH server Ed25519 public host key')
+    state.mkdir(parents=True, exist_ok=True, mode=0o700)
+    state.chmod(0o700)
+    known_hosts = state / 'known_hosts'
+    known_hosts.write_text('[127.0.0.1]:' + str(port) + ' ' + host_key + '\n')
+    known_hosts.chmod(0o600)
+    config = state / 'config.json'
+    if gcloud_bin and (not Path(gcloud_bin).is_absolute() or '\n' in gcloud_bin):
+        raise ValueError('The Mac Google Cloud CLI path must be absolute')
+    config.write_text(json.dumps({'mac_user': user, 'port': port, 'gcloud_bin': gcloud_bin}, indent=2) + '\n')
+    config.chmod(0o600)
+
+
+def ssh_argv(state, key, arguments):
+    config = json.loads((state / 'config.json').read_text())
+    user, port = config['mac_user'], int(config['port'])
+    if not re.fullmatch(r'[A-Za-z_][A-Za-z0-9_.-]{0,63}', user) or not 1024 <= port <= 65535:
+        raise ValueError('Invalid saved relay configuration')
+    if not arguments:
+        raise ValueError('A Mac command is required after --')
+    code = shlex.join(arguments)
+    if config.get('gcloud_bin'):
+        code = 'export PATH=' + shlex.quote(str(Path(config['gcloud_bin']).parent)) + ':"$PATH"\n' + code
+    remote = '/bin/zsh -lc ' + shlex.quote(code)
+    return ['ssh', '-p', str(port), '-i', str(key), '-o', 'BatchMode=yes', '-o', 'IdentitiesOnly=yes', '-o', 'ConnectTimeout=10', '-o', 'StrictHostKeyChecking=yes', '-o', 'UserKnownHostsFile=' + str(state / 'known_hosts'), '--', user + '@127.0.0.1', remote]
+
+
+def check_server():
+    result = subprocess.run(['sudo', '-n', '/usr/sbin/sshd', '-T'], check=True, capture_output=True, text=True)
+    settings = dict(line.split(None, 1) for line in result.stdout.splitlines() if ' ' in line)
+    if settings.get('gatewayports') not in ['no', 'clientspecified']:
+        raise RuntimeError('Relay requires GatewayPorts no or clientspecified to preserve the loopback binding')
+    if settings.get('allowtcpforwarding') not in ['yes', 'remote']:
+        raise RuntimeError('SSH remote forwarding is disabled on the relay host')
+
+
+def verify(state, key):
+    port = int(json.loads((state / 'config.json').read_text())['port'])
+    for attempt in range(20):
+        result = subprocess.run(['ss', '-ltnH', 'sport = :' + str(port)], check=True, capture_output=True, text=True)
+        addresses = [line.split()[3] for line in result.stdout.splitlines() if line.strip()]
+        if addresses:
+            if any(address not in ['127.0.0.1:' + str(port), '[::1]:' + str(port)] for address in addresses):
+                raise RuntimeError('Relay listener has an unexpected non-loopback address')
+            hostname = subprocess.check_output(ssh_argv(state, key, ['hostname']), text=True, timeout=15).strip()
+            user = subprocess.check_output(ssh_argv(state, key, ['id', '-un']), text=True, timeout=15).strip()
+            print(json.dumps({'loopback_listener': True, 'mac_hostname': hostname, 'mac_user': user}))
+            return
+        time.sleep(1)
+    raise RuntimeError('Mac reverse tunnel is not listening yet; inspect the Mac relay LaunchAgent log')
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--state-root', type=Path, default=Path('/var/lib/cloud-dev/aether/mac-relay'))
+    parser.add_argument('--key-file', type=Path, default=Path.home() / '.ssh/chatgpt_mac_relay_ed25519')
+    subcommands = parser.add_subparsers(dest='operation', required=True)
+    subcommands.add_parser('public-key')
+    subcommands.add_parser('check-server')
+    subcommands.add_parser('verify')
+    setup = subcommands.add_parser('configure')
+    setup.add_argument('--mac-user', required=True)
+    setup.add_argument('--port', type=int, default=22022)
+    setup.add_argument('--host-key', required=True)
+    setup.add_argument('--gcloud-bin')
+    subcommands.add_parser('run').add_argument('arguments', nargs=argparse.REMAINDER)
+    args = parser.parse_args()
+    if args.operation == 'public-key':
+        print(key_pair(args.key_file))
+    elif args.operation == 'check-server':
+        check_server()
+        print('SSH relay policy supports private loopback forwarding')
+    elif args.operation == 'verify':
+        verify(args.state_root, args.key_file)
+    elif args.operation == 'configure':
+        configure(args.state_root, args.mac_user, args.port, args.host_key, args.gcloud_bin)
+        print('Mac relay identity configured; awaiting the outbound Mac tunnel')
+    else:
+        arguments = args.arguments[1:] if args.arguments[:1] == ['--'] else args.arguments
+        command = ssh_argv(args.state_root, args.key_file, arguments)
+        os.execvp(command[0], command)
+
+
+if __name__ == '__main__':
+    main()

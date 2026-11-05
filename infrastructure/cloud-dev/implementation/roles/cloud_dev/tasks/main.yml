@@ -1,0 +1,125 @@
+---
+- name: Load the VM profile from the controller
+  ansible.builtin.set_fact:
+    cloud_dev_profile: "{{ lookup('ansible.builtin.file', cloud_dev_profile_file) | from_json }}"
+
+- name: Require an explicit profile and Linux user
+  ansible.builtin.assert:
+    that:
+      - cloud_dev_profile.schema_version == 1
+      - cloud_dev_profile.target.linux_user == ansible_user
+      - cloud_dev_profile.target.vm_name | length > 0
+
+- name: Read GCP identity before filesystem changes
+  ansible.builtin.uri:
+    url: "http://metadata.google.internal/computeMetadata/v1/{{ item }}"
+    headers:
+      Metadata-Flavor: Google
+    return_content: true
+    use_proxy: false
+  loop:
+    - project/project-id
+    - instance/name
+    - instance/zone
+  register: cloud_dev_identity
+  changed_when: false
+
+- name: Verify the GCP target matches the profile
+  ansible.builtin.assert:
+    that:
+      - cloud_dev_identity.results[0].content == cloud_dev_profile.target.gcp_project
+      - cloud_dev_identity.results[1].content == cloud_dev_profile.target.vm_name
+      - cloud_dev_identity.results[2].content.split('/')[-1] == cloud_dev_profile.target.zone
+
+- name: Prepare a private source directory
+  ansible.builtin.file:
+    path: "/home/{{ cloud_dev_profile.target.linux_user }}/cloud-dev-setup/cloud-dev-plan/{{ item }}"
+    state: directory
+    mode: '0700'
+  loop:
+    - implementation
+    - tools
+    - profiles
+    - projects
+
+- name: Copy the parameterized installer and service sources
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/{{ item }}"
+    dest: "/home/{{ cloud_dev_profile.target.linux_user }}/cloud-dev-setup/cloud-dev-plan/implementation/{{ item }}"
+    mode: '0700'
+  loop:
+    - install.py
+    - activate.py
+    - mcp_stdio.py
+    - cloud_job.py
+    - probe_mcp.py
+    - project.py
+    - probe_identity.py
+
+- name: Copy profile validation and Mac relay tooling
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/../tools/{{ item }}"
+    dest: "/home/{{ cloud_dev_profile.target.linux_user }}/cloud-dev-setup/cloud-dev-plan/tools/{{ item }}"
+    mode: '0700'
+  loop:
+    - preflight.py
+    - mac_relay.py
+
+- name: Copy the VM profile
+  ansible.builtin.copy:
+    src: "{{ cloud_dev_profile_file }}"
+    dest: "/home/{{ cloud_dev_profile.target.linux_user }}/cloud-dev-setup/cloud-dev-plan/profiles/{{ cloud_dev_profile.profile }}.json"
+    mode: '0600'
+
+- name: Copy the shared tested toolchain lock
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/../toolchain.lock.json"
+    dest: "/home/{{ cloud_dev_profile.target.linux_user }}/cloud-dev-setup/cloud-dev-plan/toolchain.lock.json"
+    mode: '0600'
+
+- name: Copy the complete npm dependency lock
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/../desktop-commander.package-lock.json"
+    dest: "/home/{{ cloud_dev_profile.target.linux_user }}/cloud-dev-setup/cloud-dev-plan/desktop-commander.package-lock.json"
+    mode: '0600'
+
+- name: Verify actual instance identity before setup
+  ansible.builtin.command:
+    argv:
+      - /usr/bin/python3
+      - "/home/{{ cloud_dev_profile.target.linux_user }}/cloud-dev-setup/cloud-dev-plan/tools/preflight.py"
+      - --profile
+      - "/home/{{ cloud_dev_profile.target.linux_user }}/cloud-dev-setup/cloud-dev-plan/profiles/{{ cloud_dev_profile.profile }}.json"
+      - --local
+  changed_when: false
+
+- name: Converge isolated tooling and service configuration
+  ansible.builtin.command:
+    argv:
+      - /usr/bin/python3
+      - "/home/{{ cloud_dev_profile.target.linux_user }}/cloud-dev-setup/cloud-dev-plan/implementation/install.py"
+      - --profile
+      - "/home/{{ cloud_dev_profile.target.linux_user }}/cloud-dev-setup/cloud-dev-plan/profiles/{{ cloud_dev_profile.profile }}.json"
+  register: cloud_dev_install
+  changed_when: "'CLOUD_DEV_CHANGED=1' in cloud_dev_install.stdout"
+
+- name: Copy optional project definitions
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/home/{{ cloud_dev_profile.target.linux_user }}/cloud-dev-setup/cloud-dev-plan/projects/{{ item | basename }}"
+    mode: '0600'
+  loop: "{{ cloud_dev_project_files | default([]) }}"
+
+- name: Create project environments using the shared host runtime
+  ansible.builtin.command:
+    argv:
+      - /usr/bin/python3
+      - "{{ cloud_dev_profile.paths.install_root }}/bin/project.py"
+      - --host-profile
+      - "{{ cloud_dev_profile.paths.config_root }}/profile.json"
+      - setup
+      - --definition
+      - "/home/{{ cloud_dev_profile.target.linux_user }}/cloud-dev-setup/cloud-dev-plan/projects/{{ item | basename }}"
+  loop: "{{ cloud_dev_project_files | default([]) }}"
+  register: cloud_dev_project_setup
+  changed_when: "'\"changed\": true' in cloud_dev_project_setup.stdout"
