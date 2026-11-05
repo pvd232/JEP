@@ -1,19 +1,25 @@
-# Off-the-shelf Qwen at K = 12
+# Qwen color structure at K = 12
 
-![Off-the-shelf Qwen on PC1 and PC2](off-the-shelf-qwen-k12-pca.png)
+![Off-the-shelf and fine-tuned Qwen with identical formatting](qwen-k12-pca-comparison.png)
 
-K = 12 matches the [fine-tuned validation plot](../figures/02-validation-single-12-clusters.png), selected by the highest median silhouette over 20 starts. Both figures use the same 65 single-color validation inputs and target-color palette.
+Both panels use the same 65 single-color validation inputs, K = 12, target-color palette, dot sizes, axis limits and equal axis scaling. K = 12 was selected by the fine-tuned encoder's highest median silhouette over 20 starts.
 
-Dots show reference target colors. Gray spokes connect each group's members to their mean PCA position; numbers identify the 12 fitted groups. The off-the-shelf Qwen3-Embedding-8B encoder receives the original condition. The illustration reuses its original PCA coordinates and saved K=12 assignments, choosing the highest-silhouette start (seed 18) under the fine-tuned chart's plotting policy.
+**Gray lines show cluster membership.** Each line connects a sentence to the mean PCA position of its assigned cluster. Numbers identify clusters within each panel. Dot colors show the reference target colors.
 
-Clustering uses normalized 4,096-dimensional embeddings. PCA is fitted separately for each encoder. Across 20 starts at K=12, median ARI is 0.3475 off-the-shelf and 0.9375 fine-tuned. The illustrated off-the-shelf fit has ARI 0.3478. Reference labels are provisional; see the [measured report](../../report.md).
+Both encoders receive the original condition. The plots reuse the saved PC1/PC2 coordinates and K=12 assignments. Each panel follows the same selection rule: the highest-silhouette saved start at K=12. The off-the-shelf fit uses seed 18 (ARI 0.3478); the fine-tuned fit uses seed 2 (ARI 0.9486).
 
-[SVG](off-the-shelf-qwen-k12-pca.svg) · [Point coordinates and groups](off-the-shelf-qwen-k12-points.csv) · [Fit metadata](off-the-shelf-qwen-k12-metadata.json)
+PCA is fitted separately for each encoder; positions show each encoder's own first two principal components. Clustering and ARI use the original normalized 4,096-dimensional vectors. Across all 20 starts at K=12, median ARI is 0.3475 off-the-shelf and 0.9375 fine-tuned. Reference labels are provisional; see the [measured report](../../report.md).
 
-Reproduce from the original native review archive:
+| Chart | PNG | SVG | Coordinates and groups | Fit metadata |
+|---|---|---|---|---|
+| Paired comparison | [PNG](qwen-k12-pca-comparison.png) | [SVG](qwen-k12-pca-comparison.svg) | See both encoders below | See both encoders below |
+| Off-the-shelf Qwen | [PNG](off-the-shelf-qwen-k12-pca.png) | [SVG](off-the-shelf-qwen-k12-pca.svg) | [CSV](off-the-shelf-qwen-k12-points.csv) | [JSON](off-the-shelf-qwen-k12-metadata.json) |
+| Fine-tuned Qwen | [PNG](fine-tuned-qwen-k12-pca.png) | [SVG](fine-tuned-qwen-k12-pca.svg) | [CSV](fine-tuned-qwen-k12-points.csv) | [JSON](fine-tuned-qwen-k12-metadata.json) |
+
+Reproduce all three illustrations from the original native review archive:
 
 ```sh
 python3 build_pretrained_pca.py /path/to/native-review.zip --out .
 ```
 
-The generator requires Python, NumPy and Matplotlib. It checks all 65 point IDs, 13 reference colors, 12 occupied clusters, normalized vectors, finite coordinates and the saved cosine silhouette. The metadata records the archive SHA-256.
+The generator requires Python, NumPy and Matplotlib. It checks matching point IDs and colors, 12 occupied clusters per encoder, normalized vectors, finite coordinates, saved cosine silhouettes and identical axis limits. Metadata records the archive SHA-256.

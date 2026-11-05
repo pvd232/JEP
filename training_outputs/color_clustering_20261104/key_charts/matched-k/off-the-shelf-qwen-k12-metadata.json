@@ -26,6 +26,12 @@
   "pca": "Original per-encoder validation PC1/PC2 coordinates, reused exactly",
   "clustering": "Saved assignments on normalized 4096-dimensional vectors",
   "spokes": "Connect each point to the mean PCA coordinates of its assigned group",
+  "axis_limits": [
+    -0.7,
+    0.7
+  ],
+  "equal_axis_aspect": true,
+  "group_numbers": "Local to each encoder",
   "source_archive_sha256": "1592c0e1c75f14ac4af92cedb0b1ef32df6f78af713eb918f43937736e0df12c",
   "median_ari_at_k": {
     "finetuned_conditioned": 0.9375150247621368,

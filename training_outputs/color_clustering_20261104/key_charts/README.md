@@ -33,17 +33,13 @@ The chosen cluster count has the highest median silhouette across 20 random star
 
 ![All selected inputs](figures/05-pooled-all-20-clusters.png)
 
-## Off-the-shelf Qwen at the same K
+## Matched comparison at K = 12
 
-**K = 12** matches the fine-tuned validation plot above: it maximizes that encoder's median silhouette over 20 starts. Both plots use the same 65 single-color validation inputs and target-color palette. The ARI bar comparison below uses K = 13, the number of reference colors.
+![Off-the-shelf and fine-tuned Qwen with identical formatting](matched-k/qwen-k12-pca-comparison.png)
 
-![Off-the-shelf Qwen at K=12 on PC1 and PC2](matched-k/off-the-shelf-qwen-k12-pca.png)
+Both panels use K = 12 and the same 65 validation inputs, target-color palette, point sizes and axis limits. Gray spokes connect each sentence to its assigned group's mean PCA position. Each encoder uses its own PC1/PC2 projection; cluster numbers identify groups within each panel.
 
-Dots show reference target colors. Gray spokes connect members of each of the 12 fitted groups to their mean PCA position; numbers identify groups. The off-the-shelf encoder receives the original condition. The figure reuses its saved PC1/PC2 coordinates and the highest-silhouette saved start at K=12 (seed 18), following the fine-tuned chart's plotting policy. PCA is fitted separately for each encoder; clustering uses the original normalized 4,096-dimensional vectors.
-
-Across all 20 starts at K=12, median ARI is **0.3475 off-the-shelf** and **0.9375 fine-tuned**. The illustrated off-the-shelf fit has ARI **0.3478**. Reference labels retain the provisional status described below.
-
-[SVG](matched-k/off-the-shelf-qwen-k12-pca.svg) · [Point coordinates and groups](matched-k/off-the-shelf-qwen-k12-points.csv) · [Fit metadata](matched-k/off-the-shelf-qwen-k12-metadata.json) · [Reproduction script](matched-k/build_pretrained_pca.py)
+[Comparison, standalone charts and plotted data](matched-k/). The plotted-fit ARIs are 0.3478 off-the-shelf and 0.9486 fine-tuned. Across 20 starts at K=12, median ARIs are 0.3475 and 0.9375. The ARI bars below use K=13, the number of reference colors.
 
 ## Comparison with the controls
 
