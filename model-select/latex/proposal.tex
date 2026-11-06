@@ -30,7 +30,7 @@ Reliance on consistent human annotations limits the scale at which researchers c
 However, studies do not consistently compare candidate models or validate model outputs against independent human annotations~\cite{Desai2026}. These gaps motivate our benchmarking study, which will compare open and closed-source LLMs with language and domain-adapted encoders to guide model selection for codebook development, passage retrieval, and passage classification of the Casanare subcase of JEP Case 03~\cite{JEPCaso03}. Experts from JEP will validate the resulting codebook, retrieved passages, and classifications.
 
 \subsection{Preliminary evidence for conditional representations}
-We compared control Qwen3-Embedding-8B with Qwen fine-tuned on the conditional similarity objective. On the same 65 C-STS validation inputs, the fine-tuned model grouped sentences more consistently by target color (Figure~\ref{fig:csts-color-clustering}). This supports testing the approach on JEP narratives~\cite{CSTSColorClustering}.
+We compared control Qwen3-Embedding-8B with Qwen3-Embedding-8B fine-tuned on the conditional similarity objective. On the same 65 C-STS validation inputs, the fine-tuned model grouped sentences much more consistently by target color (Figure~\ref{fig:csts-color-clustering}). For example, the validation data pair ``shorts color'' with a man in red shorts entering water, and ``color of clothing'' with a boy in a blue shirt jumping into water. They fall into red and blue groups in the fine-tuned model, suggesting it is picking up the color asked for even when the scenes are similar. This supports testing the approach on JEP narratives~\cite{CSTSColorClustering}.
 
 \begin{figure}[H]
 \centering
