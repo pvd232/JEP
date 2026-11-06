@@ -34,8 +34,8 @@ We compared control Qwen3-Embedding-8B with Qwen fine-tuned on the conditional s
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\linewidth]{figures/qwen-k12-pca-comparison.png}
-\caption{Control Qwen (left) and fine-tuned Qwen (right), using the same inputs and \(K=12\). Point colors show provisional reference labels; gray lines connect sentences to their clusters. Each panel uses a separate PCA projection.}
+\includegraphics[width=\linewidth]{figures/qwen-k12-pca-comparison.pdf}
+\caption{Fine-tuned Qwen (right) groups sentences by color more consistently than control Qwen (left), improving agreement with color labels (adjusted Rand index, ARI) from 0.348 to 0.949. Both panels show the same 65 C-STS sentences. Each dot uses the color of the item named in its condition, such as clothing; gray lines connect dots to cluster centers (\(K=12\)). Each panel uses its own PCA projection.}
 \label{fig:csts-color-clustering}
 \end{figure}
 
@@ -104,7 +104,7 @@ We will replicate ConfliBERT-Spanish-style continued pretraining using mDeBERTa-
 Further adaptation of selected open models will use broad Colombian Spanish restorative-justice narratives and legal material, followed by narrower JEP testimony from other cases and adjacent Case 03 subcases. Comparisons before and after each stage will use the same subsequent task-training procedure~\cite{DomainAdaptivePretraining}. Casanare material will remain held out from training.
 
 \subsubsection{Conditional contrastive}
-\noindent\textbf{[WIP: This section still needs to be fleshed out.]} Spanish task training will compare seed-guided weak passage labels~\cite{XClass} with open-LLM-generated relevance labels. Conditional-comparison examples will pair passages under specified conditions. Specifically, contrastive learning evaluates passage pairs under a shared narrative condition: it clusters passages expressing similar accounts of that narrative and separates passages that diverge, penalizing superficial lexical overlap. Original passages with surrounding context and condition-focused summaries will be compared as alternative training inputs. Expert annotations of the held-out transcript will evaluate passage retrieval, and thresholds will be selected on separate validation material.
+\noindent\textbf{[WIP: This section still needs to be fleshed out.]} Spanish task training will compare seed-guided weak passage labels~\cite{XClass} with open-LLM-generated relevance labels. Conditional-comparison examples will pair passages under specified conditions. Specifically, contrastive learning evaluates passage pairs under a shared narrative condition: it clusters passages expressing similar accounts of that narrative and separates passages that diverge, penalizing superficial lexical overlap. Original passages with surrounding context and condition-focused summaries will be compared as alternative training inputs.
 
 \section{Evaluation protocol}
 Each candidate will be evaluated on the same fixed sample of 250 test items per applicable benchmark, or all items if fewer. JEP retrieval will use all passages in the randomly selected held-out transcript.
