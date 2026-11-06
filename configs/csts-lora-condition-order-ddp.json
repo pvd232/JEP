@@ -1,0 +1,14 @@
+{
+  "execution": "external_pytorch_ddp",
+  "native_train_receipt": false,
+  "base_protocol": "configs/csts-lora-condition-order-replay.json",
+  "world_size": 2,
+  "global_batch_size": 32,
+  "microbatch_size_per_rank": 2,
+  "initialization_seed": 7,
+  "global_shuffle_seed": 107,
+  "rank_rng_policy": "Identical seed-7 adapter initialization; rank 0 keeps its post-initialization RNG stream, rank 1 starts its training RNG stream at seed 8; each rank restores its own saved stream.",
+  "batch_assignment": "Alternate consecutive original two-comparison microbatches between ranks; no padding, dropping or duplication.",
+  "checkpoint_policy": "Immutable completed-epoch files on each persistent local disk; common manifest only after both durable receipts agree; resume only from the latest manifest present identically on both ranks.",
+  "readiness": "retained_not_gpu_validated_or_executed"
+}
