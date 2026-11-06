@@ -277,6 +277,7 @@ def restore_training(
     allowed = {
         "start_epoch",
         "max_epochs",
+        "stop_after_epoch",
         "max_seconds",
         "learning_rate",
         "schedule",
@@ -366,8 +367,13 @@ def fit_neural(
     started = time.monotonic()
     if config.device == "cuda":
         torch.cuda.reset_peak_memory_stats()
-    reason, epoch = "epoch_budget", config.start_epoch
-    for epoch in range(config.start_epoch + 1, config.max_epochs + 1):
+    epoch_limit = config.stop_after_epoch or config.max_epochs
+    reason = (
+        "replay_epoch_limit"
+        if config.stop_after_epoch is not None
+        else "epoch_budget"
+    )
+    for epoch in range(config.start_epoch + 1, epoch_limit + 1):
         if len(history) > config.start_epoch:
             expected_epoch_seconds = 1.25 * history[-1]["observed_epoch_seconds"]
             if (
@@ -410,6 +416,18 @@ def fit_neural(
             optimizer.step()
             scheduler.step()
             step += 1
+            if step == config.start_epoch * updates_per_epoch + 1 or step % 25 == 0:
+                print(
+                    {
+                        "event": "optimizer_step",
+                        "kind": config.kind,
+                        "epoch": epoch,
+                        "step": step,
+                        "updates_per_epoch": updates_per_epoch,
+                        "learning_rates": scheduler.get_last_lr(),
+                    },
+                    flush=True,
+                )
         synchronize(config.device)
         fit_seconds = time.monotonic() - fit_started
         validation_started = time.monotonic()

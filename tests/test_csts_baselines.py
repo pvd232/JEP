@@ -359,6 +359,72 @@ def test_patience_and_continuation_restore_optimizer_and_next_pair_order(
     )
 
 
+def test_replay_limit_preserves_scheduler_horizon_and_continuation_state(
+    prepared, tmp_path
+):
+    """A one-epoch replay retains the 24-epoch warmup and resumes terminal AdamW state."""
+    parent = context_for(
+        prepared,
+        tmp_path / "replay-initial",
+        max_epochs=24,
+        stop_after_epoch=1,
+        schedule="linear",
+        warmup_fraction=0.1,
+    )
+    stages.fit_projection(parent)
+    trace = load_json(parent.outputs["trace"])
+    assert len(trace["epochs"]) == 1
+    assert trace["actual_updates"] == 3
+    assert trace["stop_reason"] == "replay_epoch_limit"
+    # Three updates per epoch; ceil(24 * 3 * 0.1) = eight warmup updates.
+    assert trace["epochs"][0]["learning_rates"] == pytest.approx([1e-3 * 3 / 8])
+    original = {key: path.read_bytes() for key, path in parent.outputs.items()}
+    continued = context_for(
+        prepared,
+        tmp_path / "replay-continued",
+        start_epoch=1,
+        max_epochs=24,
+        stop_after_epoch=3,
+        learning_rate=1e-4,
+        schedule="constant",
+        warmup_fraction=0.0,
+    )
+    continued.inputs.update(
+        {
+            "parent_last_model": parent.outputs["last_model"],
+            "parent_resume": parent.outputs["resume_state"],
+            "parent_trace": parent.outputs["trace"],
+            "parent_model": parent.outputs["model"],
+            "parent_validation_predictions": parent.outputs["validation_predictions"],
+        }
+    )
+    stages.fit_projection(continued)
+    trace = load_json(continued.outputs["trace"])
+    assert len(trace["epochs"]) == 3
+    assert trace["actual_updates"] == 9
+    assert trace["stop_reason"] == "replay_epoch_limit"
+    assert trace["config"]["max_epochs"] == 24
+    assert all(
+        record["learning_rates"] == [1e-4] for record in trace["epochs"][1:]
+    )
+    state = load_state(continued.outputs["resume_state"])
+    assert all(
+        float(item["step"]) == 9
+        for item in state.optimizer_state["optimizer"]["state"].values()
+    )
+    generator = torch.Generator().set_state(
+        load_state(parent.outputs["resume_state"]).dataloader.state_dict[
+            "generator_state"
+        ]
+    )
+    assert trace["epochs"][1]["batch_order_sha256"] == models.state_digest(
+        {"order": torch.randperm(9, generator=generator)}
+    )
+    assert all(
+        path.read_bytes() == original[name] for name, path in parent.outputs.items()
+    )
+
+
 def test_parameter_restore_rejects_broadcastable_wrong_shape():
     """Reject a malformed one-value tensor in place of a full projection matrix."""
     with pytest.raises(ValueError, match="shapes differ"):

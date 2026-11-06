@@ -1,0 +1,37 @@
+{
+  "name": "qwen_condition_last_vanilla_lora",
+  "baseline": {
+    "kind": "original standalone Qwen LoRA cosine",
+    "tree_commit": "5bb506d33f55942ea72b04e86b926abfc53dc819",
+    "initial_measurement_commit": "cd6d14accb1213d797305cd7c581224d4422164d",
+    "continuation_measurement_commit": "5f842c8f7915685f7d020ee6f045734151363ff4",
+    "selected_checkpoint_sha256": "1be3cedbeacb494f46010d447564144a7f499d2dc8b174029107ff81651bbea3",
+    "selected_epoch": 5,
+    "completed_epochs": 7,
+    "validation_spearman": 0.776790887947513,
+    "test_spearman": 0.7788823829272487,
+    "test_mse_0_1": 0.072817277752418,
+    "rows": "all 6980 original training comparisons; no proposition-dependent subset",
+    "checkpoint_selection": "highest validation Spearman, retaining the earlier checkpoint on ties",
+    "history": "initial 1 completed epoch under the original 24-epoch linear schedule, then constant-rate continuation; user stopped after total epoch 7",
+    "auxiliary_pretraining": false,
+    "learned_comparison_head": false
+  },
+  "prompt_before": "Instruct: Represent the passage for semantic similarity with respect to this condition: {condition}\nQuery: {passage}",
+  "prompt_after": "Query: {passage}\nInstruct: Represent the passage for semantic similarity with respect to this condition: {condition}",
+  "phases": [
+    {
+      "name": "initial",
+      "settings": "configs/csts-tranche-2.json",
+      "settings_sha256": "fc6cbc6e171ec380f5edfc2e3e5f1000b83d6e94cad727b6ad1847b55f4e2714",
+      "stop_after_epoch": 1
+    },
+    {
+      "name": "continuation",
+      "settings": "configs/csts-tranche-2-lora-continuation.json",
+      "settings_sha256": "b885c1a86d2b5443b43e2009cea73b0eb13831fc1d07a25c7468baae40675b9f",
+      "stop_after_epoch": 7
+    }
+  ],
+  "environment_lockfile": "condition_order_requirements.txt"
+}

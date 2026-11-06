@@ -15,7 +15,7 @@ from torch.nn import functional as F
 from transformers import AutoModel, AutoTokenizer
 from viper.config import BuildConfig, EvalConfig, TrainConfig
 
-PROMPT = "Instruct: Represent the passage for semantic similarity with respect to this condition: {condition}\nQuery: {passage}"
+PROMPT = "Query: {passage}\nInstruct: Represent the passage for semantic similarity with respect to this condition: {condition}"
 EOD = "<|endoftext|>"
 
 
@@ -90,6 +90,11 @@ class FitConfig(EncoderConfig, TrainConfig):
         ge=1,
         description="Total epoch ceiling including a declared parent phase.",
     )
+    stop_after_epoch: int | None = Field(
+        default=None,
+        ge=1,
+        description="Optional completed-epoch limit for replay; max_epochs still defines the learning-rate schedule horizon.",
+    )
     start_epoch: int = Field(
         default=0,
         ge=0,
@@ -144,6 +149,12 @@ class FitConfig(EncoderConfig, TrainConfig):
             raise ValueError("Ridge penalties must be finite and positive.")
         if self.start_epoch >= self.max_epochs:
             raise ValueError("The epoch ceiling must exceed the restored epoch.")
+        if self.stop_after_epoch is not None and not (
+            self.start_epoch < self.stop_after_epoch <= self.max_epochs
+        ):
+            raise ValueError(
+                "The replay epoch limit must exceed the restored epoch and not exceed max_epochs."
+            )
         if self.start_epoch and (
             self.kind not in {"projection", "lora"}
             or self.schedule != "constant"

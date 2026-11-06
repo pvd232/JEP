@@ -414,8 +414,11 @@ def run_study(
     parent_path: Path | None = None,
     frozen_summary: Path | None = None,
     recovery: bool = False,
+    standalone_lora: bool = False,
 ) -> None:
-    """Execute one declared phase while preserving every successful native stage."""
+    """Execute a baseline phase or an explicitly requested standalone LoRA replay."""
+    if standalone_lora and phase != "lora":
+        raise ValueError("Standalone LoRA execution requires the lora phase.")
     storage = load_storage_settings(root)
     if not isinstance(storage.destination, LocalStorageDestination):
         raise ValueError(
@@ -426,7 +429,7 @@ def run_study(
             frozen_summary or root / "baseline_results/frozen/initial/summary.json",
             settings,
         )
-        if phase == "lora"
+        if phase == "lora" and not standalone_lora
         else None
     )
     source = read_source(root)
@@ -471,6 +474,7 @@ def run_study(
             or summary["parent_summary_sha256"] != parent_sha
             or summary["frozen_prerequisite_sha256"] != prerequisite_sha
             or summary["recovery"] != recovery
+            or summary.get("standalone_lora", False) != standalone_lora
         ):
             raise ValueError(
                 "Pipeline resume requires identical source, settings and parent."
@@ -490,6 +494,7 @@ def run_study(
             "parent_summary_sha256": parent_sha,
             "frozen_prerequisite_sha256": prerequisite_sha,
             "recovery": recovery,
+            "standalone_lora": standalone_lora,
             "failed_parent_records": [
                 record for record in parent["runs"] if record["status"] != "succeeded"
             ]
@@ -576,13 +581,17 @@ def run_study(
             )
             write_json(summary_path, summary)
             env = LocalEnvSpec(
-                compute=CUDAComputeSpec(model="NVIDIA L4", count=1)
+                compute=CUDAComputeSpec(
+                    model=settings.get("gpu_model", "NVIDIA L4"), count=1
+                )
                 if gpu
                 else CPUComputeSpec(),
                 lockfile=GitFileRef(
                     repository=source.repository,
                     commit=source.commit,
-                    path="tranche2_requirements.txt",
+                    path=settings.get(
+                        "environment_lockfile", "tranche2_requirements.txt"
+                    ),
                 ),
                 python_env=environment,
             )
