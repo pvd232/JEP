@@ -30,12 +30,12 @@ Reliance on consistent human annotations limits the scale at which researchers c
 However, studies do not consistently compare candidate models or validate model outputs against independent human annotations~\cite{Desai2026}. These gaps motivate our benchmarking study, which will compare open and closed-source LLMs with language and domain-adapted encoders to guide model selection for codebook development, passage retrieval, and passage classification of the Casanare subcase of JEP Case 03~\cite{JEPCaso03}. Experts from JEP will validate the resulting codebook, retrieved passages, and classifications.
 
 \subsection{Preliminary evidence for conditional representations}
-We conducted an exploratory color-clustering experiment comparing pretrained and previously fine-tuned Qwen3-Embedding-8B encoders on the same 65 single-color inputs from the C-STS validation split, supplying each input's original condition (Figure~\ref{fig:csts-color-clustering}). The fine-tuned checkpoint used condition-focused proposition supervision followed by similarity-rating training. At a matched \(K=12\), median adjusted Rand index (ARI) across 20 clustering starts was 0.3475 for the pretrained encoder and 0.9375 for the fine-tuned encoder against provisional target-color labels~\cite{CSTSColorClustering}. This result motivates evaluating conditional representations for narratives of harm and reparation in JEP testimony.
+We compared control Qwen3-Embedding-8B with Qwen fine-tuned on the conditional similarity objective. On the same 65 C-STS validation inputs, the fine-tuned model grouped sentences more consistently by target color (Figure~\ref{fig:csts-color-clustering}). This supports testing the approach on JEP narratives~\cite{CSTSColorClustering}.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{figures/qwen-k12-pca-comparison.png}
-\caption{Conditional color clustering on 65 validation inputs. Point colors indicate provisional target-color labels; gray lines show cluster membership. Clustering uses normalized 4,096-dimensional embeddings with \(K=12\), selected by the fine-tuned encoder's median silhouette over 20 starts. Each panel shows its highest-silhouette start: ARI 0.348 (pretrained) and 0.949 (fine-tuned). These are individual-fit scores; the text reports medians. PCA is fitted separately for each encoder and used only for visualization.}
+\caption{Control Qwen (left) and fine-tuned Qwen (right), using the same inputs and \(K=12\). Point colors show provisional reference labels; gray lines connect sentences to their clusters. Each panel uses a separate PCA projection.}
 \label{fig:csts-color-clustering}
 \end{figure}
 
