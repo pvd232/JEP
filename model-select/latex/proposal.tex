@@ -17,32 +17,47 @@
 
 \setcitestyle{numbers,square}
 \title{JEP LLM Benchmarking Proposal}
-\author{Peter Driscoll}
+\author{%
+  Peter Dixon, Ph.D. \\
+  Director, Negotiation and Conflict Resolution \\
+  Columbia University \\
+  \texttt{peter.dixon@columbia.edu}
+  \And
+  Peter Driscoll \\
+  Department of Computer Science \\
+  Columbia University \\
+  \texttt{pvd2112@columbia.edu}
+  \And
+  Valentina Velasquez \\
+  Negotiation and Conflict Resolution \\
+  Columbia University \\
+  \texttt{v.velasquez@columbia.edu}
+}
 \begin{document}
 \raggedbottom
 \maketitle
 
 \section{Introduction}
-Transitional justice research uses qualitative coding to compare testimony~\cite{Schirmer2025}. We focus on the Casanare case of Colombia's Special Jurisdiction for Peace (JEP)~\cite{JEPCaso03}. For example, testimony may express similar narratives of harm, yet diverge into very different narratives of reparation. Conditional semantic textual similarity (C-STS) scores how similar two passages are on a 1--5 scale under a condition relevant to both. We can use these scores to train models to compare passages on the aspect named in the condition~\cite{C-STS}.
+Researchers studying transitional justice label passages of testimony by theme so they can compare accounts~\cite{Schirmer2025}. We focus on the Casanare case of Colombia's Special Jurisdiction for Peace (JEP)~\cite{JEPCaso03}. Accounts may be similar in one respect and different in another. For example, testimony may express similar narratives of harm, yet diverge into very different narratives of reparation. Conditional semantic textual similarity (C-STS) scores how similar two passages are on a 1--5 scale under a condition relevant to both. We can use these scores to train models to compare passages on the aspect named in the condition~\cite{C-STS}.
 
-The need for consistent human labels limits how much testimony researchers can analyze. LLMs may reduce that workload; they have been used to label political relevance and framing~\cite{Gilardi2023}.
+Labeling testimony consistently by hand takes time and limits how much researchers can analyze. LLMs may reduce that workload; they have been used to label political relevance and framing~\cite{Gilardi2023}.
 
-Studies vary in whether they compare models and check model outputs against independent human annotations~\cite{Desai2026}. We will compare open and closed-source LLMs with encoders adapted to the language and subject matter. The results will help us choose models for developing a codebook, retrieving passages, and classifying passages from the Casanare subcase of JEP Case 03~\cite{JEPCaso03}. Experts from JEP will validate the resulting codebook, retrieved passages, and classifications.
+Studies using LLMs vary in whether they compare models and check model outputs against independent human annotations~\cite{Desai2026}. We will compare open and closed-source LLMs with encoders adapted to the language and subject matter. The results will help us choose models for developing a codebook, retrieving passages, and classifying passages from the Casanare subcase of JEP Case 03~\cite{JEPCaso03}. Experts from JEP will validate the resulting codebook, retrieved passages, and classifications.
 
 \subsection{Preliminary evidence for conditional representations}
-We compared control Qwen3-Embedding-8B with Qwen3-Embedding-8B fine-tuned on the conditional similarity objective. On the same 65 C-STS validation inputs, the fine-tuned model grouped sentences much more consistently by target color (Figure~\ref{fig:csts-color-clustering}). For example, the validation data pair ``shorts color'' with a man in red shorts entering water, and ``color of clothing'' with a boy in a blue shirt jumping into water. The fine-tuned model places these sentences in red and blue groups, suggesting it is picking up the color asked for even when the scenes are similar. This supports testing the approach on JEP narratives~\cite{CSTSColorClustering}.
+We compared control Qwen3-Embedding-8B with Qwen3-Embedding-8B fine-tuned on the conditional similarity objective. On the same 65 C-STS validation inputs, the fine-tuned model grouped sentences much more consistently by target color, as shown in Figure~\ref{fig:csts-color-clustering}. For example, one input pairs ``shorts color'' with a sentence about a man in red shorts entering water; another pairs ``color of clothing'' with a sentence about a boy in a blue shirt jumping into water. The fine-tuned model places these sentences in red and blue groups, suggesting it is picking up the color asked for even when the scenes are similar. This supports testing the approach on JEP narratives~\cite{CSTSColorClustering}.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{figures/qwen-k12-pca-comparison.pdf}
-\caption{Fine-tuned Qwen (right) groups sentences by color more consistently than control Qwen (left), improving agreement with color labels (Adjusted Rand Index, ARI, Section~\ref{app:ari}) from 0.348 to 0.949. Both panels show the same 65 C-STS sentences. Each dot uses the color of the item named in its condition, such as clothing; gray lines connect dots to cluster centers (\(K=12\)). Each panel uses its own PCA projection.}
+\caption{Fine-tuned Qwen on the right groups sentences by color more consistently than control Qwen on the left, improving agreement with color labels from 0.348 to 0.949 by Adjusted Rand Index, detailed in Section~\ref{app:ari}. Both panels show the same 65 C-STS sentences. Each dot uses the color of the item named in its condition, such as clothing; gray lines connect dots to cluster centers with \(K=12\). Each panel uses its own PCA projection.}
 \label{fig:csts-color-clustering}
 \end{figure}
 
 \section{Evaluation datasets}
 \noindent\textbf{[WIP: Need to add the MET-D benchmark. Its task description, evaluation protocol, and scoring metrics remain to be specified.]}\par\smallskip
 
-We will evaluate the models on nine benchmark datasets plus a JEP passage-retrieval evaluation: three general Spanish benchmarks, one Colombian Spanish benchmark, four Spanish crime and politics datasets used to evaluate ConfliBERT-Spanish~\cite{ConfliBERT-Spanish}, and one conditional semantic similarity dataset. For benchmarks with more than 250 test items, we evaluate a fixed sample of 250 randomly selected items; benchmarks with fewer items (specifically XCol, with 183 items) use all available items. JEP retrieval evaluates all passages in the selected held-out transcript.
+We will evaluate the models on nine benchmark datasets plus a JEP passage-retrieval evaluation: three general Spanish benchmarks, four Spanish crime and politics datasets used to evaluate ConfliBERT-Spanish~\cite{ConfliBERT-Spanish}, one Colombian Spanish benchmark, and one conditional semantic similarity dataset. For benchmarks with more than 250 test items, we evaluate a fixed sample of 250 randomly selected items. Benchmarks with fewer items use all available items, including all 183 items for XCol. JEP retrieval evaluates all passages in the selected held-out transcript.
 
 \subsection{General Spanish tasks}
 \begin{itemize}
@@ -65,7 +80,7 @@ We will evaluate the models on nine benchmark datasets plus a JEP passage-retrie
 C-STS tests similarity between sentence pairs under a specified condition, using our LLM-cleaned and validated revision 1.1~\cite{C-STSCleaned}.
 
 \subsection{JEP passage retrieval}
-Our team will read one randomly selected transcript from the held-out trial split for the Casanare subcase of JEP Case 03~\cite{JEPCaso03}. We will identify every passage concerning narratives of harm, reparation, restoration, or sanctions. Passages may belong to more than one narrative. LLMs and encoders will rank the same fixed passage pool (Section~\ref{app:retrieval}) for each narrative, with the aim of retrieving all relevant examples. Retrieval thresholds (Section~\ref{app:retrieval}) will be selected on separate validation material.
+Our team will read one randomly selected transcript from the held-out trial split for the Casanare subcase of JEP Case 03~\cite{JEPCaso03}. We will identify every passage concerning narratives of harm, reparation, restoration, or sanctions. Passages may belong to more than one narrative. LLMs and encoders will rank all passages in that transcript (Section~\ref{app:retrieval}) for each narrative, with the aim of retrieving all relevant examples. Retrieval thresholds (Section~\ref{app:retrieval}) will be selected on separate validation material.
 
 \section{Model candidates}
 \subsection{Generative LLMs}
@@ -90,7 +105,7 @@ Qwen3-Embedding-8B & Unmasked bidirectional bi-encoder & Does using the full tex
 Qwen3-8B & Unmasked bidirectional cross-encoder & Does Qwen compare passages better when it reads them together? \\
 mDeBERTa-v3-base & Bidirectional bi-encoder & Does mDeBERTa compare passages better than Qwen? \\
 mDeBERTa-v3-base & Bidirectional cross-encoder & Does mDeBERTa improve when it reads both passages together? \\
-ConfliDeBERTaV3-Spanish (planned) & mDeBERTa with further conflict pretraining & Does training mDeBERTa on Spanish conflict text improve its results? \\
+ConfliDeBERTaV3-Spanish, planned & mDeBERTa with further conflict pretraining & Does training mDeBERTa on Spanish conflict text improve its results? \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -109,9 +124,9 @@ We will further adapt selected open models, first on Colombian Spanish restorati
 \noindent\textbf{[WIP: This section still needs to be fleshed out.]} For training on Spanish passages, we will compare weak labels from seed terms~\cite{XClass} with relevance labels from open LLMs. Each training pair will contain two passages and a narrative condition. Contrastive training will bring representations of similar accounts closer together and separate those of different accounts, even when they share words. We will compare two training inputs: original passages with surrounding context and condition-focused summaries. Section~\ref{app:examples} shows training pairs built from seed terms.
 
 \section{Evaluation protocol}
-Each candidate will be evaluated on the same fixed sample of 250 test items per applicable benchmark, or all items if fewer (specifically, 183 items for XCol). JEP retrieval will use all passages in the randomly selected held-out transcript.
+Each candidate will be evaluated on the same fixed sample of 250 test items per applicable benchmark, or all items if fewer, including the 183 items for XCol. JEP retrieval will use all passages in the randomly selected held-out transcript.
 
-\noindent\textbf{[WIP: The encoder evaluation protocol for general Spanish benchmarks (specifying task-head adaptation vs.\ embedding scoring for multiple-choice and extractive QA, and excluding generative tasks like XL-Sum) remains to be formally specified.]}\par\smallskip
+\noindent\textbf{[WIP: The encoder evaluation protocol for general Spanish benchmarks remains to be specified.]}\par\smallskip
 
 Scores are reported as follows:
 \begin{itemize}
@@ -190,7 +205,7 @@ XQuAD uses normalized answer tokens, ignoring their order and counting repeated 
 
 ROUGE compares generated summaries with reference summaries~\cite{ROUGE}. An \(n\)-gram is a sequence of \(n\) consecutive words. ROUGE-1 matches individual words; ROUGE-2 matches consecutive word pairs. ROUGE-L uses the length of the longest common subsequence: words appearing in the same order in both texts, with gaps allowed. We report the F1 form of each measure. XQuAD and XL-Sum scores are averaged over test items.
 \subsubsection{XQuAD text normalization}
-We will use the official SQuAD v1.1 scorer specified by XQuAD~\cite{XQuad}. It lowercases answers, removes ASCII punctuation and the English articles \emph{a}, \emph{an}, and \emph{the}, and normalizes whitespace. Token F1 then splits the normalized answers on whitespace. These rules also apply to the Spanish evaluation.
+We will use the official SQuAD v1.1 scorer specified by XQuAD~\cite{XQuad}. It lowercases answers, removes ASCII punctuation and the English articles \emph{a}, \emph{an}, and \emph{the}, and normalizes whitespace. For token F1, the scorer splits the normalized answers on whitespace. These rules also apply to the Spanish evaluation.
 
 \subsubsection{NER and entity spans}
 \label{app:ner}
@@ -223,7 +238,7 @@ We report \(k\in\{1,5,10\}\). For \(Q\) narrative queries, let \(r_q\) be the ra
 \end{cases}
 \]
 
-For unranked retrieval, we choose a score cutoff \(\tau\) (\textbf{retrieval threshold}) on separate validation material to maximize F1. Passages with scores at or above \(\tau\) form the returned set. True positives are relevant passages retrieved, false positives are irrelevant passages retrieved, and false negatives are relevant passages missed; full-set precision, recall, and F1 use the same formulas (Section~\ref{app:prf}). Retrieval scores are reported per narrative and averaged equally across narratives. Recall is zero when a narrative's reference set is empty.
+For unranked retrieval, score cutoff \(\tau\) acts as the retrieval threshold, chosen on separate validation material to maximize F1. Passages with scores at or above \(\tau\) form the returned set. True positives are relevant passages retrieved, false positives are irrelevant passages retrieved, and false negatives are relevant passages missed; full-set precision, recall, and F1 use the same formulas (Section~\ref{app:prf}). Retrieval scores are reported per narrative and averaged equally across narratives. Recall is zero when a narrative's reference set is empty.
 
 \subsubsection{Conditional similarity}
 \label{app:similarity}
@@ -246,7 +261,7 @@ Spearman correlation measures agreement between the predicted and reference rank
 \]
 Spearman correlation is undefined if either ranking is constant.
 
-Condition-ordering accuracy measures whether the model correctly ranks pairs of conditions with distinct reference ratings for the same passage pair. For all \(M\) condition pairs on an identical passage pair with reference ratings \(y_a \neq y_b\), let \(\hat{s}_a\) and \(\hat{s}_b\) be the predicted scores. Pairs where \((\hat{s}_a - \hat{s}_b)(y_a - y_b) > 0\) receive full credit, while tied predictions receive half credit:
+Condition-ordering accuracy measures whether the model correctly ranks pairs of conditions with distinct reference ratings for the same passage pair. For each of the \(M\) comparisons indexed by \(j\), conditions \(a\) and \(b\) apply to the same passage pair, with reference ratings \(y_a \neq y_b\) and predicted scores \(\hat{s}_a\) and \(\hat{s}_b\). Pairs where \((\hat{s}_a - \hat{s}_b)(y_a - y_b) > 0\) receive full credit, while tied predictions receive half credit:
 \[
 \mathrm{Acc}_{\mathrm{cond}} = \frac{1}{M}\sum_{j=1}^{M} \left[ \mathbb{I}\left((\hat{s}_a - \hat{s}_b)(y_a - y_b) > 0\right) + 0.5 \cdot \mathbb{I}\left(\hat{s}_a = \hat{s}_b\right) \right].
 \]
@@ -261,7 +276,7 @@ Token cost is the billed amount per token. Input and output token costs are repo
 
 \subsection{Task examples}
 \label{app:examples}
-The examples, expected outputs, and training pairs are illustrative. Bold text marks answer or entity spans.
+The examples, expected outputs, and training pairs are illustrative. Within passages, bold text marks answer spans, entity spans, or matched seed terms.
 
 \begingroup
 \small
@@ -390,22 +405,21 @@ Sanctions \(\rightarrow\) P4.\par
 \midrule
 
 \textbf{Seed-guided conditional contrastive training}~\cite{XClass}\par
-\textit{Seed terms (Case 03 vernacular and euphemisms)}\par
-Harm (executions): \emph{legalización, poner el muerto, hacer la vuelta, baja en combate}.\newline
-Harm (extortion): \emph{vacunas, boletas, cuotas}.\par\smallskip
+\textit{Case 03 seed terms and euphemisms}\par
+Execution harm: \emph{legalización, poner el muerto, hacer la vuelta, baja en combate}.\newline
+Extortion harm: \emph{vacunas, boletas, cuotas}.\par\smallskip
 \textit{Unannotated testimony passages}\par
-P1 (anchor): Dijeron que iban a \textbf{hacer la vuelta} y al día siguiente reportaron la \textbf{legalización} del muchacho como supuesta baja.\par
-P2 (candidate): Se llevaron a mi hermano de la finca para \textbf{poner el muerto} y presentarlo en el informe operacional.\par
-P3 (candidate): Los comandantes nos exigían el pago puntual de las \textbf{vacunas} y enviaban \textbf{boletas} a los finqueros de la vereda.
+P1, anchor: Dijeron que iban a \textbf{hacer la vuelta} y al día siguiente reportaron la \textbf{legalización} del muchacho como supuesta baja.\par
+P2, candidate: Se llevaron a mi hermano de la finca para \textbf{poner el muerto} y presentarlo en el informe operacional.\par
+P3, candidate: Los comandantes nos exigían el pago puntual de las \textbf{vacunas} y enviaban \textbf{boletas} a los finqueros de la vereda.
 &
 \textit{Condition and labels from seed terms}\par
-Condition: \textbf{Narrative: Harm (extrajudicial execution)}.\par\smallskip
-P1, P2: Match execution/harm seeds.\newline
+Condition: \textbf{Harm narrative, extrajudicial execution}.\par\smallskip
+P1, P2: Match execution harm seeds.\newline
 P3: Matches extortion seeds.\par\smallskip
 \textit{Contrastive training objective}\par
-Positive pair (P1, P2): Both describe execution; pull their representations together despite different wording.\par\smallskip
-Negative pair (P1, P3): P1 describes an execution and P3 describes extortion; push their representations apart under this condition.
-
+Positive pair of P1 and P2: Both describe execution; pull representations together despite different wording.\par\smallskip
+Negative pair of P1 and P3: P1 describes an execution and P3 describes extortion; push representations apart under this condition.
 \\
 \end{longtable}
 \endgroup
