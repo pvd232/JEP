@@ -12,21 +12,36 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{array,booktabs,longtable}
+\usepackage{graphicx}
+\usepackage{float}
 
 \setcitestyle{numbers,square}
 \title{JEP LLM Benchmarking Proposal}
 \author{Peter Driscoll}
 \begin{document}
+\raggedbottom
 \maketitle
 
 \section{Introduction}
-Transitional justice research uses qualitative coding to compare testimony~\cite{Schirmer2025}. In the Casanare case of Colombia's Special Jurisdiction for Peace (JEP)~\cite{JEPCaso03}, the focus of this study, accounts may be similar under one aspect and different under another. For example, trials may have similar descriptions of harm, yet through divergent narratives, produce very different demands for reparation. Conditional semantic textual similarity (C-STS) formalizes this type of comparison by scoring the similarity of two passages on a 1--5 scale based on a condition relevant to both of them. This provides a quantitative target for learning representations that preserve these distinctions~\cite{C-STS}.
+Transitional justice research uses qualitative coding to compare testimony~\cite{Schirmer2025}. In the Casanare case of Colombia's Special Jurisdiction for Peace (JEP)~\cite{JEPCaso03}, the focus of this study, accounts may be similar under one aspect and different under another. For example, testimony may express similar narratives of harm, yet diverge into very different narratives of reparation. Conditional semantic textual similarity (C-STS) formalizes this type of comparison by scoring the similarity of two passages on a 1--5 scale based on a condition relevant to both of them. This provides a quantitative target for learning representations that preserve these distinctions~\cite{C-STS}.
 
 Reliance on consistent human annotations limits the scale at which researchers can analyze these corpora. LLMs have shown potential to reduce this reliance by automating text annotation, with demonstrated applications to political relevance and framing~\cite{Gilardi2023}.
 
 However, studies do not consistently compare candidate models or validate model outputs against independent human annotations~\cite{Desai2026}. These gaps motivate our benchmarking study, which will compare open and closed-source LLMs with language and domain-adapted encoders to guide model selection for codebook development, passage retrieval, and passage classification of the Casanare subcase of JEP Case 03~\cite{JEPCaso03}. Experts from JEP will validate the resulting codebook, retrieved passages, and classifications.
 
+\subsection{Preliminary evidence for conditional representations}
+We conducted an exploratory color-clustering experiment comparing pretrained and previously fine-tuned Qwen3-Embedding-8B encoders on the same 65 single-color inputs from the C-STS validation split, supplying each input's original condition (Figure~\ref{fig:csts-color-clustering}). The fine-tuned checkpoint used condition-focused proposition supervision followed by similarity-rating training. At a matched \(K=12\), median adjusted Rand index (ARI) across 20 clustering starts was 0.3475 for the pretrained encoder and 0.9375 for the fine-tuned encoder against provisional target-color labels~\cite{CSTSColorClustering}. This result motivates evaluating conditional representations for narratives of harm and reparation in JEP testimony.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\linewidth]{figures/qwen-k12-pca-comparison.png}
+\caption{Conditional color clustering on 65 validation inputs. Point colors indicate provisional target-color labels; gray lines show cluster membership. Clustering uses normalized 4,096-dimensional embeddings with \(K=12\), selected by the fine-tuned encoder's median silhouette over 20 starts. Each panel shows its highest-silhouette start: ARI 0.348 (pretrained) and 0.949 (fine-tuned). These are individual-fit scores; the text reports medians. PCA is fitted separately for each encoder and used only for visualization.}
+\label{fig:csts-color-clustering}
+\end{figure}
+
 \section{Evaluation datasets}
+\noindent\textbf{[WIP: Need to add the MET-D benchmark. Its task description, evaluation protocol, and scoring metrics remain to be specified.]}\par\smallskip
+
 We will evaluate the models on nine benchmark datasets plus a JEP passage-retrieval evaluation: three general Spanish benchmarks, one Colombian Spanish benchmark, four Spanish crime and politics datasets used to evaluate ConfliBERT-Spanish~\cite{ConfliBERT-Spanish}, and one conditional semantic similarity dataset.
 
 \subsection{General Spanish tasks}
@@ -50,50 +65,48 @@ We will evaluate the models on nine benchmark datasets plus a JEP passage-retrie
 C-STS tests similarity between sentence pairs under a specified condition, using our LLM-cleaned and validated revision 1.1~\cite{C-STSCleaned}.
 
 \subsection{JEP passage retrieval}
-Our team will read one randomly selected transcript from the held-out trial split for the Casanare subcase of JEP Case 03~\cite{JEPCaso03}. We will identify every passage concerning harm, reparation, restoration, or sanctions. Passages may belong to more than one category. LLMs and encoders will rank the same fixed passage pool (Section~\ref{app:retrieval}) for each category, with the aim of retrieving all relevant examples. Retrieval thresholds (Section~\ref{app:retrieval}) will be selected on separate validation material.
+Our team will read one randomly selected transcript from the held-out trial split for the Casanare subcase of JEP Case 03~\cite{JEPCaso03}. We will identify every passage concerning narratives of harm, reparation, restoration, or sanctions. Passages may belong to more than one narrative. LLMs and encoders will rank the same fixed passage pool (Section~\ref{app:retrieval}) for each narrative, with the aim of retrieving all relevant examples. Retrieval thresholds (Section~\ref{app:retrieval}) will be selected on separate validation material.
 
-\section{Tasks}
-LLMs and encoders will be evaluated on all tasks, with the exception of XL-Sum, which encoders will not be evaluated on because they lack an autoregressive decoder\cite{}.
 \section{Model candidates}
 \subsection{Generative LLMs}
 \subsubsection{Open source}
-Fine-tuned Gemma 4 and fine-tuned Qwen3.8-27B~\cite{ModelDocs}.
+Fine-tuned Gemma-4 and fine-tuned Qwen3.8-27B~\cite{ModelDocs}.
 
 \subsubsection{Closed source}
 GPT-6.1 Sol at \texttt{max} reasoning effort, Claude Opus 5.5, and Gemini 4 Argon~\cite{ModelDocs}.
 
-\subsection{Encoders}
-
-\subsubsection{Passage retrieval}
-We will compare direct passage selection by Qwen3.8-27B and GPT-6.1 Sol at \texttt{max} reasoning effort, encoder-only retrieval, and encoder retrieval followed by Qwen assessment~\cite{ModelDocs}. All approaches will use the same category definitions and transcript passages, retaining surrounding exchanges and source locations. The fully annotated held-out transcript will provide the common evaluation for harm, reparation, restoration, and sanctions. Retrieval quality and processing time will be compared, separating training and indexing costs from inference.
-
-\subsubsection{Architectures and model candidates}
-The architecture comparison will use five configurations:
+\subsection{Text encoder}
+\subsubsection{Architectures}
+We compare backbone families, attention masks, and independent versus joint passage encoding for condition steering in C-STS.
 \begin{center}
 \small
-\begin{tabular}{@{}p{0.29\linewidth}p{0.30\linewidth}p{0.34\linewidth}@{}}
+\begin{tabular}{@{}p{0.26\linewidth}p{0.36\linewidth}p{0.32\linewidth}@{}}
 \toprule
-\textbf{Candidate} & \textbf{Configuration} & \textbf{What it tests} \\
+\textbf{Model} & \textbf{Architecture} & \textbf{What it tests} \\
 \midrule
-Qwen3-Embedding-8B & Causal bi-encoder & Existing embedding baseline \\
-Qwen3-Embedding-8B & Unmasked bidirectional bi-encoder & Effect of removing causal masking \\
-Qwen3-8B & Unmasked cross-encoder & Joint conditional comparison with a decoder-derived model \\
-mDeBERTa-v3-base & Native bidirectional bi-encoder & Smaller native encoder versus Qwen \\
-mDeBERTa-v3-base & Native bidirectional cross-encoder & Independent versus joint encoding on the same backbone \\
+Qwen3-Embedding-8B & Causal bi-encoder & Baseline embedding performance \\
+Qwen3-Embedding-8B & Unmasked bidirectional bi-encoder & Effect of bidirectional attention \\
+Qwen3-8B & Unmasked bidirectional cross-encoder & Joint condition--passage encoding \\
+mDeBERTa-v3-base & Bidirectional bi-encoder & Dedicated encoder representation \\
+mDeBERTa-v3-base & Bidirectional cross-encoder & Dedicated encoder joint scoring \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-Qwen3-Embedding-8B supplies the causal embedding baseline~\cite{Qwen3-Embedding}. Its unmasked variant will allow bidirectional attention, following the decoder-to-encoder adaptation direction established by LLM2Vec~\cite{LLM2Vec}. The attention comparison will hold pooling and scoring fixed. mDeBERTa-v3-base will serve as the shared native bidirectional backbone for independent passage encoding and joint scoring~\cite{DeBERTaV3}. English C-STS development data will guide architecture selection and condition-sensitivity analysis. A separate comparison of cosine similarity and a learned scoring function will use the same passage representations.
+Qwen3-Embedding-8B establishes the causal embedding baseline~\cite{Qwen3-Embedding}. Its unmasked bi-encoder variant enables bidirectional attention over the condition and passage, following the decoder adaptation method of LLM2Vec~\cite{LLM2Vec}, holding pooling and scoring fixed. The unmasked Qwen3-8B cross-encoder jointly encodes the condition and both candidate passages, allowing each input token to attend to all other input tokens. \texttt{microsoft/mdeberta-v3-base}~\cite{DeBERTaV3} provides the dedicated encoder-only baseline, isolating independent passage encoding against joint scoring on a shared bidirectional backbone.
 
-\subsubsection{Training data and domain adaptation}
+\subsection{Fine-tuning}
+\subsubsection{Domain adaptation}
+\noindent\textbf{[WIP: The MET-D adaptation, training targets, and evaluation criteria remain to be specified.]} We plan to fine-tune Qwen3.8-27B and Gemma-4 on other JEP subcases, adopting the MET-D framework for the JEP's definition of restorative justice.\par\smallskip
+
 We will replicate ConfliBERT-Spanish-style continued pretraining using mDeBERTa-v3-base and the Spanish political-conflict corpus used by ConfliBERT-Spanish~\cite{ConfliBERT-Spanish}. We will compare the original and adapted checkpoints on the applicable benchmarks defined in this proposal. \emph{ConfliDeBERTaV3-Spanish} will denote our conflict-adapted mDeBERTa model.
 
 Further adaptation of selected open models will use broad Colombian Spanish restorative-justice narratives and legal material, followed by narrower JEP testimony from other cases and adjacent Case 03 subcases. Comparisons before and after each stage will use the same subsequent task-training procedure~\cite{DomainAdaptivePretraining}. Casanare material will remain held out from training.
 
-Spanish task training will compare seed-guided weak passage labels~\cite{XClass} with open-LLM-generated relevance labels. Conditional-comparison examples will pair passages under specified conditions. Original passages with surrounding context and condition-focused summaries will be compared as alternative training inputs. Expert annotations of the held-out transcript will evaluate passage retrieval, and thresholds will be selected on separate validation material.
+\subsubsection{Conditional contrastive}
+\noindent\textbf{[WIP: This section still needs to be fleshed out.]} Spanish task training will compare seed-guided weak passage labels~\cite{XClass} with open-LLM-generated relevance labels. Conditional-comparison examples will pair passages under specified conditions. Specifically, contrastive learning evaluates passage pairs under a shared narrative condition: it clusters passages expressing similar accounts of that narrative and separates passages that diverge, penalizing superficial lexical overlap. Original passages with surrounding context and condition-focused summaries will be compared as alternative training inputs. Expert annotations of the held-out transcript will evaluate passage retrieval, and thresholds will be selected on separate validation material.
 
-\section{Evaluation}
+\section{Evaluation protocol}
 Each candidate will be evaluated on the same fixed sample of 250 test items per applicable benchmark, or all items if fewer. JEP retrieval will use all passages in the randomly selected held-out transcript.
 
 Scores are reported as follows:
@@ -106,7 +119,7 @@ Scores are reported as follows:
     \item Protest: positive-class F1; macro and per-label F1 (Section~\ref{app:prf})~\cite{ConfliBERT-Spanish}
     \item InsightCrime: macro and per-label F1 (Section~\ref{app:prf})~\cite{ConfliBERT-Spanish,Parolin2021}
     \item Mx-News: entity micro F1 (Section~\ref{app:ner})~\cite{MxNews,CoNLL2003}
-    \item C-STS: Spearman correlation, mean absolute error (Section~\ref{app:similarity})~\cite{C-STSCleaned}
+    \item C-STS: Spearman correlation, mean squared error, condition-ordering accuracy (Section~\ref{app:similarity})~\cite{C-STSCleaned}
     \item JEP retrieval: Recall@1/5/10, MRR@10, precision, recall, F1 (Section~\ref{app:retrieval})~\cite{IRMeasures}
 \end{itemize}
 
@@ -191,12 +204,12 @@ Mx-News reports entity micro F1, which applies the precision, recall, and F1 for
 
 \subsubsection{Passage retrieval}
 \label{app:retrieval}
-For each category query \(q\), models rank the \textbf{fixed passage pool} \(\mathcal{P}\), containing all passages in the held-out Casanare subcase. Human annotators identify the reference set of relevant passages \(\mathcal{R}_q \subseteq \mathcal{P}\). Let \(\mathcal{D}_{q,k} \subseteq \mathcal{P}\) contain the first \(k\) retrieved passages. Recall@\(k\) measures the fraction of relevant passages recovered within those results~\cite{IRMeasures}:
+For each narrative query \(q\), models rank the \textbf{fixed passage pool} \(\mathcal{P}\), containing all passages in the selected held-out Casanare transcript. Human annotators identify the reference set of relevant passages \(\mathcal{R}_q \subseteq \mathcal{P}\). Let \(\mathcal{D}_{q,k} \subseteq \mathcal{P}\) contain the first \(k\) retrieved passages. Recall@\(k\) measures the fraction of relevant passages recovered within those results~\cite{IRMeasures}:
 \[
 \mathrm{Recall}@k(q) =
 \frac{|\mathcal{D}_{q,k}\cap\mathcal{R}_q|}{|\mathcal{R}_q|}.
 \]
-We report \(k\in\{1,5,10\}\). For \(Q\) category queries, let \(r_q\) be the rank of the first relevant passage, or infinity if none is retrieved. Mean reciprocal rank at 10 is~\cite{IRMeasures}:
+We report \(k\in\{1,5,10\}\). For \(Q\) narrative queries, let \(r_q\) be the rank of the first relevant passage, or infinity if none is retrieved. Mean reciprocal rank at 10 is~\cite{IRMeasures}:
 \[
 \mathrm{MRR}@10 =
 \frac{1}{Q}\sum_{q=1}^{Q}
@@ -206,15 +219,15 @@ We report \(k\in\{1,5,10\}\). For \(Q\) category queries, let \(r_q\) be the ran
 \end{cases}
 \]
 
-For unranked retrieval, a score cutoff \(\tau\) acts as the \textbf{retrieval threshold}, selected on separate validation material to maximize F1. Passages with scores at or above \(\tau\) form the returned set. True positives are relevant passages retrieved, false positives are irrelevant passages retrieved, and false negatives are relevant passages missed; full-set precision, recall, and F1 use the same formulas (Section~\ref{app:prf}). Retrieval scores are reported per category and averaged equally across categories. Recall is assigned zero when a category has no reference passages.
+For unranked retrieval, a score cutoff \(\tau\) acts as the \textbf{retrieval threshold}, selected on separate validation material to maximize F1. Passages with scores at or above \(\tau\) form the returned set. True positives are relevant passages retrieved, false positives are irrelevant passages retrieved, and false negatives are relevant passages missed; full-set precision, recall, and F1 use the same formulas (Section~\ref{app:prf}). Retrieval scores are reported per narrative and averaged equally across narratives. Recall is assigned zero when a narrative has no reference passages.
 
 \subsubsection{Conditional similarity}
 \label{app:similarity}
-For \(n\) sentence pairs, let \(\hat{s}_i\) and \(s_i\) be the predicted and reference similarity scores for pair \(i\), each on the 1--5 scale. Mean absolute error (MAE) is:
+For \(n\) sentence pairs, let \(\hat{s}_i\) and \(s_i\) be the predicted and reference similarity scores for pair \(i\), each on the 1--5 scale. Mean squared error (MSE) is:
 \[
-\mathrm{MAE} = \frac{1}{n}\sum_{i=1}^{n}|\hat{s}_i-s_i|.
+\mathrm{MSE} = \frac{1}{n}\sum_{i=1}^{n}(\hat{s}_i-s_i)^2.
 \]
-For encoder MAE, we will fit an affine map \(az+b\) from raw similarity \(z\) to reference scores on the validation split by least squares, with slope \(a\geq 0\) and intercept \(b\in\mathbb{R}\)~\cite{LinearCalibration}. We will freeze both parameters before testing and clip predictions to the 1--5 range:
+For encoder MSE, we will fit an affine map \(az+b\) from raw similarity \(z\) to reference scores on the validation split by least squares, with slope \(a\geq 0\) and intercept \(b\in\mathbb{R}\)~\cite{LinearCalibration}. We will freeze both parameters before testing and clip predictions to the 1--5 range:
 \[
 \hat{s} = \min\{5,\max\{1,az+b\}\}.
 \]
@@ -229,6 +242,11 @@ Spearman correlation measures agreement between the rankings induced by predicte
 \]
 Spearman correlation is undefined if either ranking has no variation.
 
+Condition-ordering accuracy measures whether the model correctly ranks pairs of conditions with distinct reference ratings for the same passage pair. For all \(M\) condition pairs on an identical passage pair with reference ratings \(y_a \neq y_b\), let \(\hat{s}_a\) and \(\hat{s}_b\) be the predicted scores. Pairs where \((\hat{s}_a - \hat{s}_b)(y_a - y_b) > 0\) receive full credit, while tied predictions receive half credit:
+\[
+\mathrm{Acc}_{\mathrm{cond}} = \frac{1}{M}\sum_{j=1}^{M} \left[ \mathbb{I}\left((\hat{s}_a - \hat{s}_b)(y_a - y_b) > 0\right) + 0.5 \cdot \mathbb{I}\left(\hat{s}_a = \hat{s}_b\right) \right].
+\]
+
 \subsubsection{Token cost}
 \label{app:cost}
 Token cost is the billed amount per token. Input and output token costs are reported separately using each provider's pricing~\cite{ModelDocs}.
@@ -239,6 +257,7 @@ These examples and target outputs are constructed illustrations. Bold text marks
 
 \begingroup
 \small
+\hbadness=10000
 \setlength{\LTleft}{0pt}
 \setlength{\LTright}{0pt}
 \setlength{\parskip}{8pt}
@@ -354,7 +373,7 @@ P3: Proponemos recuperar el lugar de encuentro de la comunidad.\par
 P4: Pedimos una sanción para los responsables.\par
 P5: Todavía no puedo trabajar por el dolor.
 &
-\textit{Category query \(\rightarrow\) relevant passages}\par
+\textit{Narrative query \(\rightarrow\) relevant passages}\par
 Harm \(\rightarrow\) P1, P5.\par
 Reparation \(\rightarrow\) P2.\par
 Restoration \(\rightarrow\) P3.\par
@@ -367,11 +386,13 @@ Sanctions \(\rightarrow\) P4.\par
 \clearpage
 \begin{thebibliography}{99}
 \small
+\setlength{\itemsep}{1pt}
 \bibitem{Schirmer2025} M.~Schirmer, J.~Pfeffer, and S.~Hilbert. \href{https://doi.org/10.1177/15586898231218463}{\emph{Talking About Torture: A Novel Approach to the Mixed Methods Analysis of Genocide-Related Witness Statements in the Khmer Rouge Tribunal}}. Journal of Mixed Methods Research, 19(1):83--102, 2025.
 \bibitem{JEPCaso03} Jurisdicci\'on Especial para la Paz. \href{https://www.jep.gov.co/macrocasos/caso03.html}{\emph{Caso 03: Asesinatos y desapariciones forzadas presentados como bajas en combate por agentes del Estado}}. Official case overview and Casanare hearing recordings. Consulted November 3, 2026.
 \bibitem{C-STS} A.~Deshpande et al. \href{https://aclanthology.org/2023.emnlp-main.345/}{\emph{C-STS: Conditional Semantic Textual Similarity}}. Proceedings of EMNLP, pp.~5669--5690, 2023.
 \bibitem{Gilardi2023} F.~Gilardi, M.~Alizadeh, and M.~Kubli. \href{https://doi.org/10.1073/pnas.2305016120}{\emph{ChatGPT Outperforms Crowd Workers for Text-Annotation Tasks}}. Proceedings of the National Academy of Sciences, 120(30):e2305016120, 2023.
 \bibitem{Desai2026} M.~Desai, D.~Card, and A.~Z.~Jacobs. \href{https://arxiv.org/abs/2607.07915}{\emph{Validating LLMs in Social Science: Epistemic Threats and Emerging Norms}}. arXiv:2607.07915, 2026.
+\bibitem{CSTSColorClustering} P.~Driscoll. \href{https://github.com/pvd232/JEP/blob/9efa1d385fcc67f4daabc7f606f83263e8cdba0a/training_outputs/color_clustering_20261104/report.md}{\emph{C-STS Color Clustering Results}}. 2026. \href{https://github.com/pvd232/JEP/blob/9efa1d385fcc67f4daabc7f606f83263e8cdba0a/training_outputs/color_clustering_20261104/key_charts/matched-k/README.md}{Matched-\(K\) comparison and figure notes}; \href{https://github.com/pvd232/JEP/blob/9efa1d385fcc67f4daabc7f606f83263e8cdba0a/training_outputs/proposition_full_20261026/comparison_report.md}{encoder training protocol}.
 \bibitem{ConfliBERT-Spanish} W.~Yang et al. \href{https://doi.org/10.1109/CiSt56084.2023.10409883}{\emph{ConfliBERT-Spanish: A Pre-trained Spanish Language Model for Political Conflict and Violence}}. 2023 7th IEEE Congress on Information Science and Technology (CiSt), pp.~287--292, 2023, especially Section III.
 \bibitem{XL-SUM} T.~Hasan et al. \emph{XL-Sum: Large-Scale Multilingual Abstractive Summarization for 44 Languages}. 2021. \href{https://huggingface.co/datasets/csebuetnlp/xlsum}{Dataset card}, Spanish configuration.
 \bibitem{MMLU-ProX-Lite} W.~Xuan et al. \href{https://arxiv.org/abs/2503.10497}{\emph{MMLU-ProX: A Multilingual Benchmark for Advanced Large Language Model Evaluation}}. 2025. \href{https://huggingface.co/datasets/li-lab/MMLU-ProX-Lite}{MMLU-ProX-Lite dataset card}, Spanish configuration.
@@ -385,7 +406,6 @@ Sanctions \(\rightarrow\) P4.\par
 \bibitem{DeBERTaV3} P.~He, J.~Gao, and W.~Chen. \href{https://arxiv.org/abs/2111.09543}{\emph{DeBERTaV3: Improving DeBERTa Using ELECTRA-Style Pre-Training with Gradient-Disentangled Embedding Sharing}}. ICLR, 2023.
 \bibitem{ROUGE} C.-Y.~Lin. \href{https://aclanthology.org/W04-1013/}{\emph{ROUGE: A Package for Automatic Evaluation of Summaries}}. Text Summarization Branches Out, pp.~74--81, 2004.
 \bibitem{CoNLL2003} E.~F.~Tjong Kim Sang and F.~De Meulder. \href{https://aclanthology.org/W03-0419/}{\emph{Introduction to the CoNLL-2003 Shared Task: Language-Independent Named Entity Recognition}}. Proceedings of CoNLL, pp.~142--147, 2003.
-\bibitem{BERT} J.~Devlin, M.-W.~Chang, K.~Lee, and K.~Toutanova. \href{https://aclanthology.org/N19-1423/}{\emph{BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding}}. Proceedings of NAACL-HLT, pp.~4171--4186, 2019, Sections 4.2 and 4.4.
 \bibitem{IRMeasures} ir\_measures contributors. \href{https://ir-measur.es/en/latest/measures.html}{\emph{Measure definitions: Recall@k, reciprocal rank, and set precision, recall, and F1}}. Project documentation. Consulted November 4, 2026.
 \bibitem{LinearCalibration} scikit-learn developers. \href{https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html}{\emph{LinearRegression}}. Official documentation: least-squares regression with an intercept and non-negative coefficients. Consulted November 4, 2026.
 \bibitem{LLM2Vec} P.~BehnamGhader et al. \href{https://arxiv.org/abs/2404.05961}{\emph{LLM2Vec: Large Language Models Are Secretly Powerful Text Encoders}}. arXiv:2404.05961, 2024.
