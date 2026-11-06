@@ -23,7 +23,7 @@
 \maketitle
 
 \section{Introduction}
-Transitional justice research uses qualitative coding to compare testimony~\cite{Schirmer2025}. We focus on the Casanare case of Colombia's Special Jurisdiction for Peace (JEP)~\cite{JEPCaso03}. Two accounts may describe similar harm and differ on reparation. Conditional semantic textual similarity (C-STS) scores how similar two passages are on a 1--5 scale under a condition relevant to both. We can use these scores to train models to compare passages on the aspect named in the condition~\cite{C-STS}.
+Transitional justice research uses qualitative coding to compare testimony~\cite{Schirmer2025}. In the Casanare case of Colombia's Special Jurisdiction for Peace (JEP)~\cite{JEPCaso03}, the focus of this study, accounts may be similar under one aspect and different under another. For example, testimony may express similar narratives of harm, yet diverge into very different narratives of reparation. Conditional semantic textual similarity (C-STS) formalizes this type of comparison by scoring the similarity of two passages on a 1--5 scale based on a condition relevant to both of them. This provides a quantitative target for learning representations that preserve these distinctions~\cite{C-STS}.
 
 The need for consistent human labels limits how much testimony researchers can analyze. LLMs may reduce that workload; they have been used to label political relevance and framing~\cite{Gilardi2023}.
 
@@ -35,7 +35,7 @@ We compared control Qwen3-Embedding-8B with Qwen3-Embedding-8B fine-tuned on the
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{figures/qwen-k12-pca-comparison.pdf}
-\caption{Fine-tuned Qwen (right) groups sentences by color more consistently than control Qwen (left), improving agreement with color labels (Adjusted Rand Index, ARI) from 0.348 to 0.949. Both panels show the same 65 C-STS sentences. Each dot uses the color of the item named in its condition, such as clothing; gray lines connect dots to cluster centers (\(K=12\)). Each panel uses its own PCA projection.}
+\caption{Fine-tuned Qwen (right) groups sentences by color more consistently than control Qwen (left), improving agreement with color labels (Adjusted Rand Index, ARI, Section~\ref{app:ari}) from 0.348 to 0.949. Both panels show the same 65 C-STS sentences. Each dot uses the color of the item named in its condition, such as clothing; gray lines connect dots to cluster centers (\(K=12\)). Each panel uses its own PCA projection.}
 \label{fig:csts-color-clustering}
 \end{figure}
 
@@ -248,6 +248,10 @@ Condition-ordering accuracy measures whether the model correctly ranks pairs of 
 \[
 \mathrm{Acc}_{\mathrm{cond}} = \frac{1}{M}\sum_{j=1}^{M} \left[ \mathbb{I}\left((\hat{s}_a - \hat{s}_b)(y_a - y_b) > 0\right) + 0.5 \cdot \mathbb{I}\left(\hat{s}_a = \hat{s}_b\right) \right].
 \]
+
+\subsubsection{Adjusted Rand Index}
+\label{app:ari}
+\noindent\textbf{[WIP: Need to add the ARI definition and formula.]}\par\smallskip
 
 \subsubsection{Token cost}
 \label{app:cost}
