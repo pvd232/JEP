@@ -23,7 +23,7 @@
 \maketitle
 
 \section{Introduction}
-Transitional justice research uses qualitative coding to compare testimony~\cite{Schirmer2025}. In the Casanare case of Colombia's Special Jurisdiction for Peace (JEP)~\cite{JEPCaso03}, the focus of this study, accounts may be similar under one aspect and different under another. For example, testimony may express similar narratives of harm, yet diverge into very different narratives of reparation. Conditional semantic textual similarity (C-STS) formalizes this type of comparison by scoring the similarity of two passages on a 1--5 scale based on a condition relevant to both of them. This provides a quantitative target for learning representations that preserve these distinctions~\cite{C-STS}.
+Transitional justice research uses qualitative coding to compare testimony~\cite{Schirmer2025}. We focus on the Casanare case of Colombia's Special Jurisdiction for Peace (JEP)~\cite{JEPCaso03}. For example, testimony may express similar narratives of harm, yet diverge into very different narratives of reparation. Conditional semantic textual similarity (C-STS) scores how similar two passages are on a 1--5 scale under a condition relevant to both. We can use these scores to train models to compare passages on the aspect named in the condition~\cite{C-STS}.
 
 The need for consistent human labels limits how much testimony researchers can analyze. LLMs may reduce that workload; they have been used to label political relevance and framing~\cite{Gilardi2023}.
 
@@ -42,7 +42,7 @@ We compared control Qwen3-Embedding-8B with Qwen3-Embedding-8B fine-tuned on the
 \section{Evaluation datasets}
 \noindent\textbf{[WIP: Need to add the MET-D benchmark. Its task description, evaluation protocol, and scoring metrics remain to be specified.]}\par\smallskip
 
-We will evaluate the models on nine benchmark datasets plus a JEP passage-retrieval evaluation: three general Spanish benchmarks, one Colombian Spanish benchmark, four Spanish crime and politics datasets used to evaluate ConfliBERT-Spanish~\cite{ConfliBERT-Spanish}, and one conditional semantic similarity dataset.
+We will evaluate the models on nine benchmark datasets plus a JEP passage-retrieval evaluation: three general Spanish benchmarks, one Colombian Spanish benchmark, four Spanish crime and politics datasets used to evaluate ConfliBERT-Spanish~\cite{ConfliBERT-Spanish}, and one conditional semantic similarity dataset. For benchmarks with more than 250 test items, we evaluate a fixed sample of 250 randomly selected items; benchmarks with fewer items (specifically XCol, with 183 items) use all available items. JEP retrieval evaluates all passages in the selected held-out transcript.
 
 \subsection{General Spanish tasks}
 \begin{itemize}
@@ -109,7 +109,9 @@ We will further adapt selected open models, first on Colombian Spanish restorati
 \noindent\textbf{[WIP: This section still needs to be fleshed out.]} For training on Spanish passages, we will compare weak labels from seed terms~\cite{XClass} with relevance labels from open LLMs. Each training pair will contain two passages and a narrative condition. Contrastive training will bring representations of similar accounts closer together and separate those of different accounts, even when they share words. We will compare two training inputs: original passages with surrounding context and condition-focused summaries. Section~\ref{app:examples} shows training pairs built from seed terms.
 
 \section{Evaluation protocol}
-Each candidate will be evaluated on the same fixed sample of 250 test items per applicable benchmark, or all items if fewer. JEP retrieval will use all passages in the randomly selected held-out transcript.
+Each candidate will be evaluated on the same fixed sample of 250 test items per applicable benchmark, or all items if fewer (specifically, 183 items for XCol). JEP retrieval will use all passages in the randomly selected held-out transcript.
+
+\noindent\textbf{[WIP: The encoder evaluation protocol for general Spanish benchmarks (specifying task-head adaptation vs.\ embedding scoring for multiple-choice and extractive QA, and excluding generative tasks like XL-Sum) remains to be formally specified.]}\par\smallskip
 
 Scores are reported as follows:
 \begin{itemize}
