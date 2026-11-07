@@ -173,7 +173,14 @@ class FullDataPromptTests(unittest.TestCase):
             require_launch_approval(self.p,'abc',approval,[])
 
     def selections(self):
-        return [{'trial_id':r['trial_id'],'selection_metric':'validation_spearman','test_used':False,
+        return [{'trial_id':r['trial_id'], 'arm':r['arm'], 'seed':r['seed'],
+                 'native_run_id':f"SYNTHETIC_TEST_ONLY_{r['trial_id']}",
+                 'prompt_sha256':digest_object(PROMPTS[r['arm']]),
+                 'training_sha256':self.p['splits']['training']['sha256'],
+                 'validation_sha256':self.p['splits']['validation']['sha256'],
+                 'trace_sha256':'c'*64, 'validation_predictions_sha256':'d'*64,
+                 'selected_epoch':1, 'completed_epochs':2, 'actual_updates':380,
+                 'selection_metric':'validation_spearman','test_used':False,
                  'stop_reason':'validation_patience','model_sha256':'a'*64,
                  'training_source_commit':'b'*40,'protocol_sha256':digest_object(self.p)} for r in trial_matrix(self.p)]
 
@@ -220,6 +227,38 @@ class FullDataPromptTests(unittest.TestCase):
         s = self.selections(); s[0]['protocol_sha256'] = 'd'*64
         with self.assertRaises(ValueError):
             require_complete_selections(self.p, s)
+
+    def test_relabelled_seed_rejected(self):
+        s=self.selections();s[0]['seed']=8
+        with self.assertRaises(ValueError): require_complete_selections(self.p,s)
+
+    def test_one_native_run_cannot_stand_for_fifteen_trials(self):
+        s=self.selections()
+        for r in s:r['native_run_id']='SYNTHETIC_TEST_ONLY_SAME_RUN'
+        with self.assertRaises(ValueError):require_complete_selections(self.p,s)
+
+    def test_split_path_is_pinned(self):
+        p=copy.deepcopy(self.p);p['splits']['training']['path']='wrong.json'
+        with self.assertRaises(ValueError):validate_protocol(p)
+
+    def test_all_analysis_fields_are_pinned(self):
+        for key in self.p['analysis']:
+            p=copy.deepcopy(self.p);p['analysis'][key]='unapproved alteration'
+            with self.assertRaises(ValueError):validate_protocol(p)
+
+    def test_approval_rejects_noncommit_even_with_receipts(self):
+        for source in ('', 'main', 'abc', 'Z'*40):
+            approval={'user_execution_approved':True,'source_commit':source,'protocol_sha256':digest_object(self.p)}
+            receipts=[{'role':r,'provider_run_id':f'SYNTHETIC_TEST_ONLY_{r}', 'status':'approved',
+                       'source_commit':source,'protocol_sha256':digest_object(self.p)} for r in REVIEW_ROLES]
+            with self.assertRaises(PermissionError):require_launch_approval(self.p,source,approval,receipts)
+
+    def test_full_commit_approval_shape_accepts(self):
+        source='b'*40
+        approval={'user_execution_approved':True,'source_commit':source,'protocol_sha256':digest_object(self.p)}
+        receipts=[{'role':r,'provider_run_id':f'SYNTHETIC_TEST_ONLY_{r}', 'status':'approved',
+                   'source_commit':source,'protocol_sha256':digest_object(self.p)} for r in REVIEW_ROLES]
+        require_launch_approval(self.p,source,approval,receipts)
 
     def test_builder_cannot_execute_or_provision(self):
         text=(ROOT/'csts_pilot/full_data_prompt_native.py').read_text()

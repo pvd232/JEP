@@ -263,6 +263,18 @@ def restore_training(
     resume = load_resume_state(context.inputs["parent_resume"])
     state = resume.dataloader.state_dict
     expected_step = config.start_epoch * updates_per_epoch
+    if config.data_contract is not None:
+        if parent.get("stop_reason") != "epoch_budget":
+            raise ValueError("Cannot resume a scientifically stopped or failed native parent.")
+        expected_prediction_sha = parent.get("selected", {}).get("validation_predictions_sha256")
+        if expected_prediction_sha != file_sha256(context.inputs["parent_validation_predictions"]):
+            raise ValueError("Selected validation predictions do not belong to the parent generation.")
+        check = ValidationPatience(config.patience, 0.0)
+        for item in parent.get("epochs", []):
+            val = item["validation"]["spearman"]
+            check.observe(val if val is not None else -1.0)
+        if check.stale_epochs >= config.patience:
+            raise ValueError("Parent history has already exhausted validation patience.")
     if (
         parent["status"] != "complete"
         or len(parent["epochs"]) != config.start_epoch
@@ -356,7 +368,7 @@ def fit_neural(
             if selected["validation"]["spearman"] is not None
             else -1.0
         )
-        if config.train_until_patience:
+        if config.train_until_patience or config.data_contract is not None:
             stopping = ValidationPatience(config.patience, 0.0)
             for record in history:
                 score = record["validation"]["spearman"]
@@ -372,6 +384,11 @@ def fit_neural(
             optimizer, math.ceil(config.warmup_fraction * total_updates), total_updates
         )
     )
+    if config.start_epoch and config.data_contract is not None:
+        resumed = load_resume_state(context.inputs["parent_resume"])
+        scheduler.load_state_dict(resumed.optimizer_state["scheduler"])
+        if scheduler.last_epoch != step:
+            raise ValueError("Restored scheduler counter differs from completed optimizer updates.")
     synchronize(config.device)
     started = time.monotonic()
     if config.device == "cuda":
@@ -460,6 +477,7 @@ def fit_neural(
                 "epoch": epoch,
                 "step": step,
                 "sha256": file_sha256(context.outputs["model"]),
+                "validation_predictions_sha256": file_sha256(context.outputs["validation_predictions"]),
                 "validation": diagnostics,
             }
         record = {
@@ -572,8 +590,11 @@ def fit_lora(context: StageContext[FitConfig]) -> None:
     """Train attention adapters against rating MSE while freezing the Qwen base."""
     if context.config.kind != "lora":
         raise ValueError("Adapter fitting requires the LoRA scorer.")
-    reset_rng(context.config.seed)
     config = context.config
+    if config.data_contract is not None:
+        from csts_pilot.full_data_prompt_integrity import verify_staged_fit_inputs
+        verify_staged_fit_inputs(context.inputs, config.data_contract)
+    reset_rng(context.config.seed)
     tokenizer, model = load_tokenizer(config), load_backbone(config, adapters=config)
     training = TokenPairs(load_json(context.inputs["training"]), config, tokenizer)
     validation = TokenPairs(load_json(context.inputs["validation"]), config, tokenizer)
@@ -597,6 +618,22 @@ def verify_test_inputs(context: Any) -> dict[str, Any]:
     ):
         raise ValueError("The frozen model or test cohort bytes differ.")
     saved = load_model(context.inputs["model"])
+    if config.expected_seed is not None and saved["config"].get("seed") != config.expected_seed:
+        raise ValueError("Selected checkpoint was trained under a different seed.")
+    if config.expected_trial_id is not None:
+        if saved["config"].get("trial_id") != config.expected_trial_id:
+            raise ValueError("Selected checkpoint belongs to a different arm/seed trial.")
+        from csts_pilot.full_data_prompt_protocol import digest_object, require_complete_selections
+        if file_sha256(context.inputs["matrix"]) != config.matrix_sha256:
+            raise ValueError("Global selected-model matrix bytes changed.")
+        matrix = load_json(context.inputs["matrix"])
+        protocol = load_json(context.inputs["protocol"])
+        if digest_object(protocol) != config.protocol_sha256:
+            raise ValueError("Evaluation protocol changed.")
+        require_complete_selections(protocol, matrix)
+        chosen = [r for r in matrix if r["trial_id"] == config.expected_trial_id]
+        if len(chosen) != 1 or chosen[0]["model_sha256"] != config.model_sha256:
+            raise ValueError("Checkpoint differs from its independently sealed matrix entry.")
     if saved["kind"] != config.kind or encoder_settings(
         FitConfig.model_validate(saved["config"])
     ) != encoder_settings(config):

@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Any
 
 from csts_pilot.full_data_prompt_protocol import (
-    PROMPTS, require_complete_selections, validate_protocol,
+    PROMPTS, digest_object, require_complete_selections, validate_protocol,
 )
 
 
@@ -29,6 +29,8 @@ def fit_arguments(protocol: dict[str, Any], arm: str, seed: int,
         "max_length": spec["max_length"], "embedding_dimension": spec["width"],
         "encode_batch_size": 4, "device": "cuda", "kind": "lora", "seed": seed,
         "prompt_template": PROMPTS[arm],
+        "trial_id": f"{arm}_seed{seed}",
+        "data_contract": {name: protocol["splits"][name] for name in ("training", "validation")},
         "learning_rate": train["learning_rate"], "weight_decay": train["weight_decay"],
         "batch_size": train["batch_size"], "microbatch_size": train["microbatch_size"],
         "schedule": "constant", "warmup_fraction": 0,
@@ -115,7 +117,8 @@ def epoch_plan(root: Path, protocol: dict[str, Any], arm: str, seed: int,
 def prediction_stage(protocol: dict[str, Any], arm: str, seed: int,
                      selections: list[dict[str, Any]], selected_run: dict[str, Any],
                      model_sha256: str, selection_path: str, selection_sha256: str,
-                     holdout_path: str) -> Any:
+                     holdout_path: str, matrix_path: str, matrix_sha256: str,
+                     protocol_path: str) -> Any:
     """Construct test capture only after the entire 15-fit selection is frozen.
 
     The controller must verify the source-bound selected_run/model digest before
@@ -138,6 +141,8 @@ def prediction_stage(protocol: dict[str, Any], arm: str, seed: int,
         "kind": "lora", "model_id": model["id"], "revision": model["revision"],
         "max_length": model["max_length"], "embedding_dimension": model["width"],
         "encode_batch_size": 4, "device": "cuda", "prompt_template": PROMPTS[arm],
+        "expected_seed": seed, "expected_trial_id": trial_id,
+        "matrix_sha256": matrix_sha256, "protocol_sha256": digest_object(protocol),
         "model_sha256": model_sha256, "selection_sha256": selection_sha256,
         "test_sha256": protocol["splits"]["test"]["sha256"],
     })
@@ -145,6 +150,8 @@ def prediction_stage(protocol: dict[str, Any], arm: str, seed: int,
         input("test", path=protocol["splits"]["test"]["path"], data_role="eval"),
         input("holdout", path=holdout_path, data_role="eval"),
         input("selection", path=selection_path, data_role="training"),
+        input("matrix", path=matrix_path, data_role="training"),
+        input("protocol", path=protocol_path, data_role="training"),
         input("model", source=artifact_source(selected_run, "train", "model")),
     ), outputs=StageOutputs(
         predictions=output(path="predictions.json", loader=load_json, data_role="eval"),

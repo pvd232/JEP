@@ -61,6 +61,10 @@ class FitConfig(EncoderConfig, TrainConfig):
     kind: Literal["mean", "cosine", "ridge", "projection", "lora"] = Field(
         description="Scorer fitted by this native training stage."
     )
+    data_contract: dict[str, Any] | None = Field(
+        default=None, description="Optional exact staged train/validation identities for new full-data fits."
+    )
+    trial_id: str | None = Field(default=None, description="Arm and seed identity bound into the trained checkpoint.")
     seed: int = Field(
         default=7, ge=0, description="Initialization and training permutation seed."
     )
@@ -179,6 +183,10 @@ class ScoreConfig(EncoderConfig, EvalConfig):
     kind: Literal["mean", "cosine", "ridge", "projection", "lora"] = Field(
         description="Frozen scorer evaluated by this stage."
     )
+    expected_seed: int | None = Field(default=None, ge=0, description="Verify the checkpoint's actual training seed.")
+    expected_trial_id: str | None = Field(default=None, description="Verify the checkpoint's actual arm/seed identity.")
+    matrix_sha256: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$", description="Hash of all independently sealed selections.")
+    protocol_sha256: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$", description="Hash of the approved protocol object.")
     model_sha256: str = Field(
         pattern=r"^[0-9a-f]{64}$", description="Exact selected model artifact digest."
     )
@@ -225,6 +233,8 @@ def validate_rows(rows: list[dict[str, Any]]) -> None:
         target, rating = float(row["target"]), float(row["rating"])
         if (
             not math.isfinite(target)
+            or not math.isfinite(rating)
+            or not 1 <= rating <= 5
             or not 0 <= target <= 1
             or abs(target - (rating - 1) / 4) > 1e-12
         ):
@@ -448,7 +458,7 @@ class TokenPairs:
         batch = pad_sequences(
             self.tokenizer, [self.sequences[key] for key in keys], self.config
         )
-        self.nonpadding_tokens += int(batch["attention_mask"].sum())
+        self.nonpadding_tokens += sum(len(self.sequences[key]) for key in keys)
         embeddings = encode(model, batch)
         left, right = embeddings.chunk(2)
         with torch.autocast(embeddings.device.type, enabled=False):

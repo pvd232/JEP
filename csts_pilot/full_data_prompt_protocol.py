@@ -72,14 +72,23 @@ def validate_protocol(p: dict[str, Any]) -> None:
         raise ValueError("Full-data ratings-only training configuration changed.")
     for split, (rows, groups, digest) in PINNED_SPLITS.items():
         item = p["splits"][split]
+        filename = "train" if split == "training" else split
+        if item["path"] != f"csts_data/jep-csts-v1/{filename}.json":
+            raise ValueError(f"Pinned {split} input path changed.")
         if (item["rows"], item["groups"], item["sha256"]) != (rows, groups, digest):
             raise ValueError(f"Pinned {split} cohort changed.")
     if p["execution"]["gcp_project"] != "mantra-477901":
         raise ValueError("Training belongs to Mantra, not the CPU development project.")
     if p["execution"]["max_gcp_gpus"] != 2:
         raise ValueError("Do not exceed the authorized two-Mantra-GPU concurrency.")
-    if p["analysis"]["test_release"] != "all_15_validation_selections_frozen":
-        raise ValueError("Test labels must stay sealed until all selections freeze.")
+    expected_analysis = {
+        "primary": ["B-A", "C-A"], "secondary": ["C-B"], "metric": "spearman",
+        "secondary_metric": "mse_0_1", "test_release": "all_15_validation_selections_frozen",
+        "bootstrap_groups": 1222, "bootstrap_draws": 10000, "bootstrap_seed": 610707,
+        "test_status": "previously_examined_exploratory",
+    }
+    if p["analysis"] != expected_analysis:
+        raise ValueError("Predeclared statistical analysis changed.")
     for text in PROMPTS.values():
         fields = [f for _, f, _, _ in Formatter().parse(text) if f is not None]
         if sorted(fields) != ["condition", "passage"]:
@@ -133,6 +142,9 @@ def require_launch_approval(p: dict[str, Any], source: str,
     in a JSON object are not cryptographic proof of independent review.
     """
     validate_protocol(p)
+    if (not isinstance(source, str) or len(source) != 40
+            or any(c not in "0123456789abcdef" for c in source)):
+        raise PermissionError("Approval must name an immutable 40-character source commit.")
     if approval.get("user_execution_approved") is not True:
         raise PermissionError("User requested presentation before execution.")
     if approval.get("source_commit") != source or approval.get("protocol_sha256") != digest_object(p):
@@ -160,7 +172,28 @@ def require_complete_selections(p: dict[str, Any], selections: list[dict[str, An
     if (not isinstance(source_commit, str) or len(source_commit) != 40
             or any(c not in "0123456789abcdef" for c in source_commit)):
         raise ValueError("Training source revision is not bound.")
+    native_ids = [s.get("native_run_id") for s in selections]
+    if any(not isinstance(i, str) or not i for i in native_ids) or len(set(native_ids)) != 15:
+        raise ValueError("Each trial requires its own independently verified native execution.")
     for s in selections:
+        if s.get("trial_id") != f"{s.get('arm')}_seed{s.get('seed')}":
+            raise ValueError("Selection label does not match its checkpoint arm and seed.")
+        if s.get("arm") not in PROMPTS or s.get("seed") not in p["seeds"]:
+            raise ValueError("Selection has an unregistered arm or seed.")
+        if s.get("prompt_sha256") != digest_object(PROMPTS[s["arm"]]):
+            raise ValueError("Selection has a different prompt.")
+        if s.get("training_sha256") != p["splits"]["training"]["sha256"] or s.get("validation_sha256") != p["splits"]["validation"]["sha256"]:
+            raise ValueError("Selection has different staged training/validation bytes.")
+        if type(s.get("selected_epoch")) is not int or s["selected_epoch"] < 1:
+            raise ValueError("Selection lacks its validation-selected epoch.")
+        if type(s.get("completed_epochs")) is not int or s["completed_epochs"] < s["selected_epoch"]:
+            raise ValueError("Invalid completed-epoch counter.")
+        if s.get("actual_updates") != 190 * s["completed_epochs"]:
+            raise ValueError("Training exposure differs from the full-data protocol.")
+        for key in ("trace_sha256", "validation_predictions_sha256"):
+            value = s.get(key, "")
+            if len(value) != 64 or any(c not in "0123456789abcdef" for c in value):
+                raise ValueError("Native trace/prediction artifact hash missing.")
         if s.get("protocol_sha256") != digest_object(p):
             raise ValueError("Selections belong to a different protocol.")
         if s.get("selection_metric") != "validation_spearman" or s.get("test_used") is not False:
