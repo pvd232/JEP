@@ -1,0 +1,69 @@
+{
+  "recorded_utc": "2026-11-07T23:09:59Z",
+  "user_instruction": "ok, launch it",
+  "user_execution_approved": true,
+  "requested_branch": "experiment/qwen-full-data-prompt-20261107",
+  "approved_repository_head": "7b8e301baa676b594cd9c6007df8a10b8cb92ec5",
+  "implementation_candidate_commit": "f8c6932141dec874b801fa6975d3ec8f27bfa5da",
+  "protocol_sha256": "0aee2f8aece3e89ff12223fe40a54fb632305339f240475362212c432fd68a11",
+  "experiment": {
+    "arms": ["A_condition_first", "B_order_only", "C_case_inspired"],
+    "seeds": [7, 8, 9, 10, 11],
+    "new_lora_fits": 15,
+    "full_training_rows_from_first_update": 6051,
+    "subset_phase_epochs": 0,
+    "evidence_or_proposition_training": false,
+    "gpu_project": "mantra-477901",
+    "maximum_mantra_gpus": 2,
+    "preferred_gpu_provisioning": "Spot in eligible East Asian zones",
+    "optional_gpu_route": "Colab A100 only when legitimately allocated and verified"
+  },
+  "attempt_status": "BLOCKED_BEFORE_GPU_ALLOCATION",
+  "training_started": false,
+  "gpu_allocations_by_this_attempt": 0,
+  "recurring_automation_created": false,
+  "current_gpu_inventory": "unknown: current live inventory request was rejected during user credential refresh",
+  "observations": [
+    {
+      "route": "existing cloud bridge using pvd2112@columbia.edu",
+      "operation": "gcloud compute instances list --project=mantra-477901 --account=pvd2112@columbia.edu",
+      "result": "Reauthentication failed. cannot prompt during non-interactive execution"
+    },
+    {
+      "route": "Columbia dev attached service account",
+      "principal": "dev-vm@pvd-dev-232.iam.gserviceaccount.com",
+      "operation": "describe existing jep-csts-format-20261021 in mantra-477901 / asia-northeast3-a",
+      "result": "missing compute.instances.get permission"
+    },
+    {
+      "route": "Columbia Mac relay",
+      "result": "127.0.0.1 port 22022: Connection refused"
+    },
+    {
+      "route": "direct Local Mac terminal",
+      "result": "connection failed"
+    },
+    {
+      "route": "existing reviewer CLI",
+      "result": "loggedIn false"
+    }
+  ],
+  "cpu_protocol_tests": {"executed_again": true, "passed": 39, "failed": 0},
+  "independent_reviews": {"requested": 10, "completed": 0, "completion_not_inferred_from_launch_approval": true},
+  "remaining_preflight": [
+    "restore existing legitimate Google user login",
+    "verify current inventory, Spot quotas and permitted allocation routes",
+    "complete independent review requirement without fabricated receipts",
+    "validate the actual native VIPER runtime, tokenizer ceiling and resume equivalence",
+    "verify cloud artifact transport and task-owned shutdown safeguards"
+  ],
+  "authentication_recovery": {
+    "flow_started": true,
+    "identity": "pvd2112@columbia.edu",
+    "host": "existing cloud bridge",
+    "process_pid": 517945,
+    "status": "waiting for Google's browser verification code",
+    "active_default_account_change_requested": false,
+    "credential_values_or_authorization_url_recorded_here": false
+  }
+}
