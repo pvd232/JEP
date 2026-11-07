@@ -111,7 +111,15 @@ def main() -> None:
     out.mkdir(parents=True, exist_ok=True)
     protocol_path = out / "protocol.json"
     if protocol_path.exists():
-        if load_json(protocol_path) != protocol:
+        prior_protocol = load_json(protocol_path)
+        if args.resume and all(
+            prior_protocol.get(k) == v
+            for k, v in protocol.items() if k != "source_commit"
+        ):
+            # Training stages remain pinned to their original source commit.
+            # A later evaluation-only source repair must not rebind training.
+            protocol = prior_protocol
+        elif prior_protocol != protocol:
             raise ValueError("Existing run differs from frozen protocol.")
     else:
         write_json(protocol_path, protocol)
@@ -249,7 +257,7 @@ def run(root: Path, settings: dict, protocol: dict, out: Path, args) -> None:
         "selected_epoch": selected_epoch,
         "validation_spearman": selected_val,
         "original_baseline_validation_spearman": 0.871875,
-        "source_commit": source.commit,
+        "source_commit": protocol["source_commit"],
         "prefix_updates": PREFIX_UPDATES,
     }
     selection_rel = "ratings_only_order_results/condition_last/selection.json"
@@ -277,7 +285,7 @@ def run(root: Path, settings: dict, protocol: dict, out: Path, args) -> None:
         inputs=(
             input("test",path=settings["splits"]["test"]["path"],data_role="eval"),
             input("holdout",path=holdout_rel,data_role="eval"),
-            input("model",source=artifact_source(final,"train","model"),data_role="training"),
+            input("model",source=artifact_source(final,"train","model")),
             input("selection",path=selection_rel,data_role="training"),
         ),
         outputs=StageOutputs(
