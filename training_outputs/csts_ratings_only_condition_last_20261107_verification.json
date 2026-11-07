@@ -1,0 +1,38 @@
+{
+  "validation": {
+    "baseline_spearman": 0.871875,
+    "replay_spearman": 0.8693524185595121
+  },
+  "test": {
+    "rows": 2430,
+    "source_groups": 1222,
+    "baseline_spearman": 0.8553747813377186,
+    "replay_spearman": 0.860893780560459,
+    "delta_spearman": 0.005518999222740351,
+    "baseline_mse": 0.038359250025926606,
+    "replay_mse": 0.03637347478192739,
+    "delta_mse": -0.001985775243999219
+  },
+  "bootstrap": {
+    "method": "paired cluster bootstrap over 1222 source groups with replacement",
+    "draws": 2000,
+    "seed": 61024,
+    "spearman_delta_ci95": [
+      -0.0036964934167959314,
+      0.015722572633288728
+    ],
+    "mse_delta_ci95": [
+      -0.005429724254276841,
+      0.0011676668689089263
+    ]
+  },
+  "training_commit": "609e2d3bd6521af1372aee067c1db1ef84d85d52",
+  "evaluation_recovery_commit": "e60e718cb8feb569a451fc07639a93d5724455f4",
+  "selected_epoch": 2,
+  "selected_model_sha256": "b8fde4f1f0b9c62edfec6fce53d0efe12602227eec400b31f4fd2ee1adfd184b",
+  "original_predictions_sha256": "031ce3e9f694dbd6a23abd863114f5eff526d93a643c238ac909c2cff5ae5bad",
+  "new_predictions_sha256": "f82228f42eac932a469575e8614d9d1aa63a7f9772931a7c098ed94b24874016",
+  "row_identities_match": true,
+  "scope": "Ratings-only Qwen3-Embedding-8B LoRA, same 2430 test comparisons, condition-first vs condition-last; single training seed.",
+  "limitation": "Test cohort previously examined, conditional fixed-checkpoint group-bootstrap interval; no backbone-seed uncertainty."
+}
