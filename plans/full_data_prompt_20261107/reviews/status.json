@@ -2,14 +2,28 @@
   "status": "INCOMPLETE_NO_INDEPENDENT_REVIEW",
   "requested": 10,
   "completed": 0,
-  "provider_probe": {
-    "provider": "Claude Code on existing authorized CPU host",
-    "session_id": "48f70164-dd7e-4331-8ef0-33c48d1cfc3b",
-    "result": "Not logged in",
-    "input_tokens": 0,
-    "output_tokens": 0
-  },
+  "review_candidate_source_commit": "f8c6932141dec874b801fa6975d3ec8f27bfa5da",
+  "provider_probes": [
+    {
+      "provider": "Claude Code on existing authorized CPU host",
+      "session_id": "48f70164-dd7e-4331-8ef0-33c48d1cfc3b",
+      "result": "Not logged in",
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "independent_review_completed": false
+    },
+    {
+      "provider": "GitHub Copilot CLI via existing authenticated GitHub CLI account",
+      "result": "Access denied by policy settings",
+      "request_id": "0401:7C40D:1B3BDC0:1E25739:6AEF8814",
+      "independent_review_completed": false,
+      "policy_bypass_attempted": false
+    }
+  ],
   "other_route": "Local Mac direct relay unavailable; device offline",
+  "cpu_test_count": 39,
+  "cpu_tests_repeated_on_second_host": true,
+  "cpu_checks_are_not_subagent_reviews": true,
   "training_launched": false,
   "reviews": []
 }
