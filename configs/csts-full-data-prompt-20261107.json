@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "experiment": "qwen_ratings_full_data_three_prompts_20261107",
+  "status": "DRAFT_REVIEW_REQUIRED",
+  "user_execution_approved": false,
+  "model": {"id": "Qwen/Qwen3-Embedding-8B", "revision": "c90816d848505624c2434128dfc61132162a0ee9", "width": 4096, "max_length": 160},
+  "arms": ["A_condition_first", "B_order_only", "C_case_inspired"],
+  "seeds": [7, 8, 9, 10, 11],
+  "training": {"seed_policy": "paired", "kind": "lora", "learning_rate": 0.00002, "weight_decay": 0.01, "batch_size": 32, "microbatch_size": 32, "schedule": "constant", "warmup_fraction": 0, "lora_rank": 32, "lora_alpha": 32, "lora_dropout": 0.05, "patience": 1, "max_epochs": 24, "train_until_patience": false, "initialization": "fresh_base_and_lora", "subset_phase_epochs": 0, "optimizer_resets": 0},
+  "splits": {
+    "training": {"path": "csts_data/jep-csts-v1/train.json", "rows": 6051, "groups": 2635, "sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4"},
+    "validation": {"path": "csts_data/jep-csts-v1/validation.json", "rows": 1576, "groups": 680, "sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"},
+    "test": {"path": "csts_data/jep-csts-v1/test.json", "rows": 2430, "groups": 1222, "sha256": "52a9c0d6b8d9f3fc81e698bae1e2564051cf7ec29e8dc1cb4d68167910bb968d"}
+  },
+  "analysis": {"primary": ["B-A", "C-A"], "secondary": ["C-B"], "metric": "spearman", "secondary_metric": "mse_0_1", "test_release": "all_15_validation_selections_frozen", "bootstrap_groups": 1222, "bootstrap_draws": 10000, "bootstrap_seed": 610707, "test_status": "previously_examined_exploratory"},
+  "execution": {"gcp_project": "mantra-477901", "max_gcp_gpus": 2, "preferred_provisioning": "SPOT", "preferred_regions": ["asia-northeast3", "asia-northeast1", "asia-east1"], "optional_colab_gpu": "A100", "parallelism": "independent_seed_blocks_not_DDP", "hardware_rule": "all_three_arms_of_seed_on_same_gpu_type_and_runtime", "checkpoint": "sealed_native_epoch_plus_verified_cloud_publication", "shutdown": "task_owned_only_after_verified_collection_or_failure", "approval_required": true},
+  "review": {"required_independent_reviewers": 10, "completed_independent_reviewers": 0}
+}

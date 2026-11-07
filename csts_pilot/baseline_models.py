@@ -45,6 +45,10 @@ class EncoderConfig(BuildConfig):
         ge=1,
         description="Conditioned passages encoded in one inference call.",
     )
+    prompt_template: str | None = Field(
+        default=None,
+        description="Explicit per-run prompt; None preserves the legacy prompt for old artifacts.",
+    )
     device: Literal["cpu", "cuda"] = Field(
         default="cuda",
         description="Device used for backbone inference or adapter training.",
@@ -194,7 +198,7 @@ def encoder_settings(config: EncoderConfig) -> dict[str, Any]:
         "revision": config.revision,
         "max_length": config.max_length,
         "embedding_dimension": config.embedding_dimension,
-        "prompt": PROMPT,
+        "prompt": config.prompt_template if config.prompt_template is not None else PROMPT,
         "pooling": "last_nonpadding_eod_float32_unit_norm",
     }
 
@@ -245,7 +249,9 @@ def token_sequences(
 ) -> list[list[int]]:
     """Tokenize unique passages once, append EOD and check every token ceiling."""
     texts = [
-        PROMPT.format(condition=condition, passage=passage)
+        (config.prompt_template if config.prompt_template is not None else PROMPT).format(
+            condition=condition, passage=passage
+        )
         for condition, passage in keys
     ]
     encoded = tokenizer(
