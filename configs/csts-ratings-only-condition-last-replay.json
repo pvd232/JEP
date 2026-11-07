@@ -1,0 +1,64 @@
+{
+  "name": "jep_csts_v1_ratings_only_condition_last_retrain",
+  "original_source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
+  "original_settings": "configs/csts-qwen-jep-v1-full-propositions-converged.json",
+  "original_settings_sha256": "4c52be688d8fb52a8a1a7ce18275c5e1aa775a623b4acb74a35a46fd29bf45dc",
+  "original_prompt": "Instruct: Represent the passage for semantic similarity with respect to this condition: {condition}\nQuery: {passage}",
+  "ablation_prompt": "Query: {passage}\nInstruct: Represent the passage for semantic similarity with respect to this condition: {condition}",
+  "base_model": "Qwen/Qwen3-Embedding-8B",
+  "revision": "c90816d848505624c2434128dfc61132162a0ee9",
+  "training_semantics": "ratings-only throughout; first-phase 5885 matched subset rows, then full 6051 ratings rows; zero evidence/proposition generation gradients",
+  "pretrained_initialization": true,
+  "checkpoint_first_phase": false,
+  "seed": 7,
+  "logical_batch": 32,
+  "original_microbatch": 32,
+  "phase_A": {
+    "epochs": 5,
+    "updates": 920,
+    "prepared_sha256": "0b63e159ecb8eb211636b9b509baf6035dc1e22b81f5404c1caaecc78203f67f"
+  },
+  "phase_B": {
+    "full_train_rows": 6051,
+    "max_epochs": 24,
+    "patience": 1,
+    "checkpoint_selection": "highest validation Spearman"
+  },
+  "training": {
+    "learning_rate": 0.00002,
+    "weight_decay": 0.01,
+    "schedule": "constant",
+    "warmup_fraction": 0,
+    "lora_rank": 32,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "adapter_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ],
+    "loss": "squared error of cosines against normalized ratings"
+  },
+  "splits": {
+    "training": {
+      "n": 6051,
+      "sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4"
+    },
+    "validation": {
+      "n": 1576,
+      "sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+    },
+    "test": {
+      "n": 2430,
+      "sha256": "52a9c0d6b8d9f3fc81e698bae1e2564051cf7ec29e8dc1cb4d68167910bb968d"
+    }
+  },
+  "original_ratings_only_results": {
+    "validation_spearman": 0.871875,
+    "test_spearman": 0.855375,
+    "test_mse": 0.038359
+  },
+  "evaluation": "validation-only checkpoint selection; test held out until native training stages complete",
+  "rationale": "Decoder causal attention means moving the condition behind the passage changes what earlier token states can attend to; final attended EOD remains after both."
+}
