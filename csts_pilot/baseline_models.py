@@ -15,7 +15,7 @@ from torch.nn import functional as F
 from transformers import AutoModel, AutoTokenizer
 from viper.config import BuildConfig, EvalConfig, TrainConfig
 
-PROMPT = "Instruct: Represent the passage for semantic similarity with respect to this condition: {condition}\nQuery: {passage}"
+PROMPT = "Query: {passage}\nInstruct: Represent the passage for semantic similarity with respect to this condition: {condition}"
 EOD = "<|endoftext|>"
 
 
