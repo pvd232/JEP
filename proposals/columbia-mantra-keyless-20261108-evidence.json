@@ -1,0 +1,39 @@
+{
+  "status": "proposal_only_not_deployed",
+  "inspected_host": "dev.c.pvd-dev-232.internal",
+  "tool": "columbia-vm.start_process",
+  "aether_used": false,
+  "iam_or_gpu_changes": false,
+  "source_baseline": "a6dea0c952b5f0948e49f8dd4aa06c769e00689c",
+  "collector_source_baseline": "9b163a100362580f99722eecc63895420ecec3b1",
+  "installed_host_probe": {
+    "keyless_identity_verified": true,
+    "service_account": "dev-vm@pvd-dev-232.iam.gserviceaccount.com",
+    "gcp_project": "pvd-dev-232",
+    "vm": "dev",
+    "observed_token_expires_in_seconds": 2680,
+    "compute_api_http_status": 200,
+    "bearer_token_recorded": false,
+    "scope_of_check": "Only the configured Columbia host instance, not Mantra."
+  },
+  "mantra_read_only_request": {
+    "checked_utc": "2026-11-08T06:49:16.593031+00:00",
+    "argv": ["gcloud", "compute", "instances", "describe", "jep-full-prompt-spot-2-20261107", "--project=mantra-477901", "--zone=asia-northeast1-b", "--account=dev-vm@pvd-dev-232.iam.gserviceaccount.com", "--format=json(id,name,status)"],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "ERROR: (gcloud.compute.instances.describe) Could not fetch resource:\n - Required 'compute.instances.get' permission for 'projects/mantra-477901/zones/asia-northeast1-b/instances/jep-full-prompt-spot-2-20261107'\n\n",
+    "source_receipt": "/home/pvd2112_columbia_edu/columbia-projects/jep/data/columbia-mantra-identity-spec-20261108/current-access.json"
+  },
+  "installed_source_sha256": {
+    "project.py": "94ce889e983707bf617a37bfb99173a6a3d3a88ad9eb7a8c71a8ce75015d30e1",
+    "probe_identity.py": "06a91b72f5d0e95f57dced4831acd3207270919243277c4696f5aeac2206d262"
+  },
+  "independent_review": {
+    "requested": 3,
+    "completed": 0,
+    "provider_probe": "Codex CLI login status on Columbia: Not logged in",
+    "credential_copied_from_other_host": false,
+    "review_briefs": ["security_and_iam", "reliability_and_recovery", "minimality_and_contract_traceability"],
+    "no_self_review_counted_as_independent": true
+  }
+}
