@@ -1,6 +1,6 @@
 {
-  "generated_epoch": 1794174051.74743,
-  "generated_utc": "2026-11-08T21:40:51.747430+00:00",
+  "generated_epoch": 1794174363.0229394,
+  "generated_utc": "2026-11-08T21:46:03.022939+00:00",
   "cadence_seconds": 300,
   "training_mode": "independent_seed_workers",
   "target_fits": 15,
@@ -9,7 +9,7 @@
       "worker": "worker1",
       "zone": "asia-northeast3-a",
       "state": {
-        "status": "running",
+        "status": "assigned_training_complete_test_not_opened",
         "worker": "worker1",
         "source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
         "seeds": [
@@ -105,32 +105,58 @@
             "finished": true
           },
           "C_case_inspired_seed11": {
-            "epochs": 2,
+            "epochs": 7,
             "seconds": [
               975.8126256789983,
-              992.5110686650005
+              992.5110686650005,
+              991.2207239769996,
+              988.5005712439997,
+              992.6475259180006,
+              994.4339928789996,
+              986.8957136809986
             ],
-            "selected_epoch": null,
-            "finished": false
+            "selected_epoch": 6,
+            "finished": true
+          },
+          "A_condition_first_seed11": {
+            "epochs": 5,
+            "seconds": [
+              961.5305299980027,
+              983.0292581320027,
+              987.8607386500007,
+              982.3852486670003,
+              980.0147243930041
+            ],
+            "selected_epoch": 4,
+            "finished": true
           }
         }
       },
-      "fresh": false,
-      "source": "collector_snapshot_after_controller_failure",
-      "observed_utc": "2026-11-08T15:33:38.422232+00:00",
+      "fresh": true,
+      "source": "guest_observation",
+      "observed_utc": "2026-11-08T21:46:02.357896+00:00",
       "controller_final": {
         "worker": "worker1",
         "status": "failed_preserved",
         "reason": "ERROR: (gcloud.compute.instances.describe) There was a problem refreshing your current auth tokens: Reauthentication failed. cannot prompt during non-interactive execution.\nPlease run:\n\n  $ gcloud auth login\n\nto obtain new credentials.\n\nIf you have already logged in with a different account, run:\n\n  $ gcloud config set account ACCOUNT\n\nto select an already authenticated account to use.\n"
       },
-      "probe_error": "CalledProcessError",
-      "access_status": "authentication_required"
+      "instance_id": "3087252568751843062",
+      "epoch_start": null,
+      "gpu": "GPU-b2e57239-579e-e259-9761-832579cdf079, 0 %",
+      "services": {
+        "train": "inactive",
+        "upload": "inactive"
+      },
+      "verified_epoch_checkpoints": 47,
+      "native_viper_checkpoints": 42,
+      "pending_generations": 0,
+      "last_verified_utc": "2026-11-08T18:10:43.380163+00:00"
     },
     {
       "worker": "worker2",
       "zone": "asia-east1-b",
       "state": {
-        "status": "running",
+        "status": "assigned_training_complete_test_not_opened",
         "worker": "worker2",
         "source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
         "seeds": [
@@ -185,21 +211,68 @@
             ],
             "selected_epoch": 3,
             "finished": true
+          },
+          "B_order_only_seed10": {
+            "epochs": 5,
+            "seconds": [
+              961.9468022120004,
+              952.9409096700001,
+              968.968496167,
+              976.6343319899997,
+              963.9618228039999
+            ],
+            "selected_epoch": 4,
+            "finished": true
+          },
+          "C_case_inspired_seed10": {
+            "epochs": 3,
+            "seconds": [
+              983.4532164369994,
+              995.712814638,
+              999.4987461470009
+            ],
+            "selected_epoch": 2,
+            "finished": true
           }
         }
       },
-      "fresh": false,
-      "source": "collector_snapshot_after_controller_failure",
-      "observed_utc": "2026-11-08T15:33:40.868618+00:00",
+      "fresh": true,
+      "source": "guest_observation",
+      "observed_utc": "2026-11-08T21:46:02.059802+00:00",
       "controller_final": {
         "worker": "worker2",
         "status": "failed_preserved",
         "reason": "ERROR: (gcloud.compute.instances.describe) There was a problem refreshing your current auth tokens: Reauthentication failed. cannot prompt during non-interactive execution.\nPlease run:\n\n  $ gcloud auth login\n\nto obtain new credentials.\n\nIf you have already logged in with a different account, run:\n\n  $ gcloud config set account ACCOUNT\n\nto select an already authenticated account to use.\n"
       },
-      "probe_error": "CalledProcessError",
-      "access_status": "authentication_required"
+      "instance_id": "6739260318488017241",
+      "epoch_start": {
+        "utc": "2026-11-08T10:58:40.573695+00:00",
+        "trial": "A_condition_first_seed10",
+        "epoch": 2
+      },
+      "gpu": "GPU-9882621e-b66d-5494-d4db-3707cfb4631f, 0 %",
+      "services": {
+        "train": "inactive",
+        "upload": "inactive"
+      },
+      "verified_epoch_checkpoints": 26,
+      "native_viper_checkpoints": 26,
+      "pending_generations": 0,
+      "last_verified_utc": "2026-11-08T17:37:49.257007+00:00"
     }
   ],
-  "forecast": null,
-  "monitor_status": "controller_unavailable"
+  "forecast": {
+    "epoch_minutes": 16.38382096886671,
+    "finished_fit_samples": 15,
+    "assumed_epochs_per_fit": [
+      3,
+      5,
+      7
+    ],
+    "earliest_epoch": 1794174363.0229394,
+    "central_epoch": 1794174363.0229394,
+    "latest_epoch": 1794174363.0229394,
+    "basis": "Conditional on remaining fits following observed stopping lengths; unfinished epochs counted conservatively. Spot interruptions and continued validation improvement can extend the estimate."
+  },
+  "monitor_status": "active"
 }
