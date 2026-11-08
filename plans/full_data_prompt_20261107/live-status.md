@@ -1,6 +1,6 @@
 # Live training status
 
-Updated: Sun 9:00 AM EST. Refresh this page for the latest snapshot.
+Updated: Sun 9:05 AM EST. Refresh this page for the latest snapshot.
 A background CPU reporter updates this branch every five minutes. Treat snapshots older than ten minutes as stale.
 
 **Training fits finished: 9 / 15.**
@@ -10,7 +10,7 @@ ETA is unconfirmed while a worker observation is unavailable.
 
 | Placement | Current work | Fits finished | GPU use | Cloud-verified epochs | Uploads pending |
 | --- | --- | ---: | ---: | ---: | ---: |
-| Seoul (asia-northeast3-a) | B_order_only_seed11, epoch 1 | 6 / 9 | 100 % | 31 | 0 |
+| Seoul (asia-northeast3-a) | B_order_only_seed11, epoch 2 | 6 / 9 | 100 % | 32 | 0 |
 | Taiwan (asia-east1-b) | Stopped; recovery work preserved | 3 / 6 | — | — | — |
 
 Cloud-verified epochs include the five preserved Seoul epochs. New publications use native VIPER Cloud.
@@ -30,7 +30,7 @@ The existing controllers delete owned compute and disks after verified publicati
 | A_condition_first_seed10 | 1 | Checkpointed | — |
 | B_order_only_seed10 | 0 | Queued | — |
 | C_case_inspired_seed10 | 0 | Queued | — |
-| B_order_only_seed11 | 0 | Running | — |
+| B_order_only_seed11 | 1 | Running | — |
 | C_case_inspired_seed11 | 0 | Queued | — |
 | A_condition_first_seed11 | 0 | Queued | — |
 
