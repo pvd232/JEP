@@ -1,6 +1,6 @@
 {
-  "generated_epoch": 1794147355.3381765,
-  "generated_utc": "2026-11-08T14:15:55.338176+00:00",
+  "generated_epoch": 1794147663.384479,
+  "generated_utc": "2026-11-08T14:21:03.384479+00:00",
   "cadence_seconds": 300,
   "training_mode": "independent_seed_workers",
   "target_fits": 15,
@@ -94,9 +94,10 @@
             "finished": true
           },
           "B_order_only_seed11": {
-            "epochs": 1,
+            "epochs": 2,
             "seconds": [
-              947.6894504769989
+              947.6894504769989,
+              969.5170007050001
             ],
             "selected_epoch": null,
             "finished": false
@@ -105,22 +106,22 @@
       },
       "fresh": true,
       "source": "guest_observation",
-      "observed_utc": "2026-11-08T14:15:54.801123+00:00",
+      "observed_utc": "2026-11-08T14:21:02.826060+00:00",
       "instance_id": "3087252568751843062",
       "epoch_start": {
-        "utc": "2026-11-08T14:02:53.253665+00:00",
+        "utc": "2026-11-08T14:19:10.956929+00:00",
         "trial": "B_order_only_seed11",
-        "epoch": 2
+        "epoch": 3
       },
       "gpu": "GPU-b2e57239-579e-e259-9761-832579cdf079, 100 %",
       "services": {
         "train": "active",
         "upload": "active"
       },
-      "verified_epoch_checkpoints": 32,
-      "native_viper_checkpoints": 27,
+      "verified_epoch_checkpoints": 33,
+      "native_viper_checkpoints": 28,
       "pending_generations": 0,
-      "last_verified_utc": "2026-11-08T14:03:54.376101+00:00"
+      "last_verified_utc": "2026-11-08T14:20:13.163228+00:00"
     },
     {
       "worker": "worker2",
