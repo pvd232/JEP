@@ -1,6 +1,6 @@
 {
-  "generated_epoch": 1794135617.0744338,
-  "generated_utc": "2026-11-08T11:00:17.074434+00:00",
+  "generated_epoch": 1794135926.2822382,
+  "generated_utc": "2026-11-08T11:05:26.282238+00:00",
   "cadence_seconds": 300,
   "training_mode": "independent_seed_workers",
   "target_fits": 15,
@@ -57,36 +57,37 @@
             "finished": true
           },
           "C_case_inspired_seed9": {
-            "epochs": 5,
+            "epochs": 6,
             "seconds": [
               971.1071048379999,
               990.563182494001,
               990.3797136140001,
               985.0852939629985,
-              986.0564454930009
+              986.0564454930009,
+              983.9765954769991
             ],
-            "selected_epoch": null,
-            "finished": false
+            "selected_epoch": 5,
+            "finished": true
           }
         }
       },
       "fresh": true,
       "source": "guest_observation",
-      "observed_utc": "2026-11-08T11:00:16.018649+00:00",
+      "observed_utc": "2026-11-08T11:05:25.673881+00:00",
       "instance_id": "3087252568751843062",
       "epoch_start": {
-        "utc": "2026-11-08T10:48:07.276064+00:00",
-        "trial": "C_case_inspired_seed9",
-        "epoch": 6
+        "utc": "2026-11-08T11:04:38.445074+00:00",
+        "trial": "A_condition_first_seed9",
+        "epoch": 1
       },
-      "gpu": "GPU-b2e57239-579e-e259-9761-832579cdf079, 100 %",
+      "gpu": "GPU-b2e57239-579e-e259-9761-832579cdf079, 2 %",
       "services": {
         "train": "active",
         "upload": "active"
       },
       "verified_epoch_checkpoints": 20,
       "native_viper_checkpoints": 15,
-      "pending_generations": 0,
+      "pending_generations": 1,
       "last_verified_utc": "2026-11-08T10:49:12.054424+00:00"
     },
     {
@@ -149,37 +150,15 @@
         }
       },
       "fresh": true,
-      "source": "guest_observation",
-      "observed_utc": "2026-11-08T11:00:16.506760+00:00",
-      "instance_id": "4722509685362370145",
-      "epoch_start": {
-        "utc": "2026-11-08T10:58:40.573695+00:00",
-        "trial": "A_condition_first_seed10",
-        "epoch": 2
-      },
-      "gpu": "GPU-3e179d63-e2a8-9999-a742-b42c6f48bb32, 100 %",
-      "services": {
-        "train": "active",
-        "upload": "active"
-      },
-      "verified_epoch_checkpoints": 15,
-      "native_viper_checkpoints": 15,
-      "pending_generations": 0,
-      "last_verified_utc": "2026-11-08T10:59:42.357023+00:00"
+      "source": "final_controller_receipt",
+      "observed_utc": "2026-11-08T11:02:22.167841+00:00",
+      "final": {
+        "worker": "worker2",
+        "status": "failed_preserved",
+        "reason": "ogle.com/iap/docs/using-tcp-forwarding#increasing_the_tcp_upload_bandwidth\n\nERROR: [0] Error during local connection to [stdin]: Error while connecting [4003: 'failed to connect to backend']. (Failed to connect to port 22)\nTraceback (most recent call last):\n  File \"/snap/google-cloud-cli/519/lib/googlecloudsdk/command_lib/compute/iap_tunnel.py\", line 805, in RunReceiveLocalData\n    websocket_conn = self._InitiateConnection(\n        conn,\n    ...<4 lines>...\n        conn_id=conn_id,\n    )\n  File \"/snap/google-cloud-cli/519/lib/googlecloudsdk/command_lib/compute/iap_tunnel.py\", line 771, in _InitiateConnection\n    new_websocket.InitiateConnection()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/snap/google-cloud-cli/519/lib/googlecloudsdk/api_lib/compute/iap_tunnel_websocket.py\", line 213, in InitiateConnection\n    self._WaitForOpenOrRaiseError()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/snap/google-cloud-cli/519/lib/googlecloudsdk/api_lib/compute/iap_tunnel_websocket.py\", line 582, in _WaitForOpenOrRaiseError\n    raise ConnectionCreationError(error_msg)\ngooglecloudsdk.api_lib.compute.iap_tunnel_websocket.ConnectionCreationError: Error while connecting [4003: 'failed to connect to backend']. (Failed to connect to port 22)\nConnection closed by UNKNOWN port 65535\n\nRecommendation: To check for possible causes of SSH connectivity issues and get\nrecommendations, rerun the ssh command with the --troubleshoot option.\n\ngcloud compute ssh jep-full-prompt-worker2-20261108 --project=mantra-477901 --zone=asia-east1-b --troubleshoot\n\nOr, to investigate an IAP tunneling issue:\n\ngcloud compute ssh jep-full-prompt-worker2-20261108 --project=mantra-477901 --zone=asia-east1-b --troubleshoot --tunnel-through-iap\n\nERROR: (gcloud.compute.ssh) [/usr/bin/ssh] exited with return code [255].\n"
+      }
     }
   ],
-  "forecast": {
-    "epoch_minutes": 16.440738572199976,
-    "finished_fit_samples": 6,
-    "assumed_epochs_per_fit": [
-      3,
-      5.0,
-      6
-    ],
-    "earliest_epoch": 1794151400.183463,
-    "central_epoch": 1794161264.6266065,
-    "latest_epoch": 1794166196.8481781,
-    "basis": "Conditional on remaining fits following observed stopping lengths; unfinished epochs counted conservatively. Spot interruptions and continued validation improvement can extend the estimate."
-  },
+  "forecast": null,
   "monitor_status": "active"
 }
