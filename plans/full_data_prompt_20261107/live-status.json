@@ -1,6 +1,6 @@
 {
-  "generated_epoch": 1794152287.5258243,
-  "generated_utc": "2026-11-08T15:38:07.525824+00:00",
+  "generated_epoch": 1794172807.3740978,
+  "generated_utc": "2026-11-08T21:20:07.374098+00:00",
   "cadence_seconds": 300,
   "training_mode": "independent_seed_workers",
   "target_fits": 15,
@@ -115,14 +115,16 @@
           }
         }
       },
-      "fresh": true,
-      "source": "final_controller_receipt",
+      "fresh": false,
+      "source": "collector_snapshot_after_controller_failure",
       "observed_utc": "2026-11-08T15:33:38.422232+00:00",
-      "final": {
+      "controller_final": {
         "worker": "worker1",
         "status": "failed_preserved",
         "reason": "ERROR: (gcloud.compute.instances.describe) There was a problem refreshing your current auth tokens: Reauthentication failed. cannot prompt during non-interactive execution.\nPlease run:\n\n  $ gcloud auth login\n\nto obtain new credentials.\n\nIf you have already logged in with a different account, run:\n\n  $ gcloud config set account ACCOUNT\n\nto select an already authenticated account to use.\n"
-      }
+      },
+      "probe_error": "CalledProcessError",
+      "access_status": "authentication_required"
     },
     {
       "worker": "worker2",
@@ -186,16 +188,18 @@
           }
         }
       },
-      "fresh": true,
-      "source": "final_controller_receipt",
+      "fresh": false,
+      "source": "collector_snapshot_after_controller_failure",
       "observed_utc": "2026-11-08T15:33:40.868618+00:00",
-      "final": {
+      "controller_final": {
         "worker": "worker2",
         "status": "failed_preserved",
         "reason": "ERROR: (gcloud.compute.instances.describe) There was a problem refreshing your current auth tokens: Reauthentication failed. cannot prompt during non-interactive execution.\nPlease run:\n\n  $ gcloud auth login\n\nto obtain new credentials.\n\nIf you have already logged in with a different account, run:\n\n  $ gcloud config set account ACCOUNT\n\nto select an already authenticated account to use.\n"
-      }
+      },
+      "probe_error": "CalledProcessError",
+      "access_status": "authentication_required"
     }
   ],
   "forecast": null,
-  "monitor_status": "final"
+  "monitor_status": "controller_unavailable"
 }

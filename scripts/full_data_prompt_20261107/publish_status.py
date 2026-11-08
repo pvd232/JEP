@@ -86,7 +86,7 @@ print(json.dumps({"observed_utc":datetime.datetime.now(datetime.timezone.utc).is
 
 
 def observe(worker, data):
-    """Prefer current guest observations and retain an explicitly marked collector fallback."""
+    """Report controller failure separately from independent GPU activity."""
     approval = json.loads((data / ("approval-" + worker + ".json")).read_text())
     assignment = approval["assignments"][worker]
     state_file = data / ("collection-" + worker) / (worker + "-latest-state.json")
@@ -100,13 +100,18 @@ def observe(worker, data):
     final = data / ("collection-" + worker) / "collection-final.json"
     if final.exists():
         try:
-            result["final"] = json.loads(final.read_text())[0]
-            result["source"] = "final_controller_receipt"
-            result["fresh"] = True
-            if result["final"]["status"] == "training_collected_test_still_locked":
+            receipt = json.loads(final.read_text())[0]
+            cleanup_file = data / ("collection-" + worker) / (worker + "-cleanup.json")
+            cleanup = json.loads(cleanup_file.read_text()) if cleanup_file.exists() else {}
+            if (receipt["status"] == "training_collected_test_still_locked"
+                    and cleanup.get("instance_deleted") is True):
+                result.update(final=receipt, source="verified_controller_completion", fresh=True)
+                result["cleanup"] = cleanup
                 result["verified_epoch_checkpoints"] = sum(t["epochs"] for t in state["trials"].values())
                 result["pending_generations"] = 0
-            return result
+                return result
+            result["controller_final"] = receipt
+            result["source"] = "collector_snapshot_after_controller_failure"
         except (OSError, ValueError, IndexError, KeyError):
             pass
     script = inspect.getsource(project_state) + REMOTE.replace("__WORKER__", repr(worker))
@@ -123,8 +128,9 @@ def observe(worker, data):
         result.update(live, fresh=True, source="guest_observation")
     except (subprocess.SubprocessError, ValueError, AssertionError, OSError) as error:
         result["probe_error"] = type(error).__name__
+        detail = str(getattr(error, "stderr", "") or error).lower()
+        result["access_status"] = "authentication_required" if "reauthentication" in detail or "no valid credentials" in detail else "observation_unavailable"
     return result
-
 
 def forecast(workers, cases, now):
     """Estimate the longest worker queue from observed epoch times and stopping lengths."""
@@ -163,15 +169,24 @@ def eastern(timestamp):
 
 
 def render(report, cases):
-    """Render completed work, freshness and publication observations as a compact page."""
-    count = sum(t["finished"] for w in report["workers"] for t in w["state"]["trials"].values())
+    """Keep last confirmed work distinct from current GPU and cleanup observations."""
+    workers = report["workers"]
+    count = sum(t["finished"] for w in workers for t in w["state"]["trials"].values())
+    all_fresh = all(w["fresh"] for w in workers)
+    count_label = "Training fits finished" if all_fresh else "Fits confirmed finished at the last successful observations"
+    test_line = ("The held-out test remains sealed for evaluation." if all_fresh else
+                 "The held-out test was sealed at the last successful observations.") if all(w["state"].get("test_opened") is False for w in workers) else "The held-out test flag needs confirmation."
     lines = ["# Live training status", "",
-             "Updated: " + eastern(report["generated_epoch"]) + ". Refresh this page for the latest snapshot.",
-             "A background CPU reporter updates this branch every five minutes. Treat snapshots older than ten minutes as stale.",
-             "", "**Training fits finished: " + str(count) + " / " + str(len(cases)) + ".**",
-             "The held-out test remains sealed for evaluation." if all(w["state"].get("test_opened") is False for w in report["workers"]) else "The held-out test flag needs confirmation.", ""]
+             "Page checked: " + eastern(report["generated_epoch"]) + ". Worker observation times appear below.",
+             "The background reporter checks every five minutes. A page update does not establish a fresh GPU observation.",
+             "", "**" + count_label + ": " + str(count) + " / " + str(len(cases)) + ".**",
+             test_line, ""]
     if report.get("monitor_status") == "final":
-        lines += ["**Final snapshot. Both cleanup controllers have returned terminal receipts.**", ""]
+        lines += ["**Both workers have verified publication and successful compute cleanup receipts.**", ""]
+    elif report.get("monitor_status") == "controller_unavailable":
+        auth = any(w.get("access_status") == "authentication_required" for w in workers)
+        lines += ["**" + ("Google reauthentication is required for monitoring." if auth else "The monitoring controllers failed.") +
+                  " Current GPU activity, training completion and cleanup are unconfirmed.**", ""]
     elif report.get("monitor_status") == "runtime_limit":
         lines += ["**The reporter reached its runtime limit; this page has stopped refreshing.**", ""]
     eta = report["forecast"]
@@ -180,12 +195,12 @@ def render(report, cases):
                   "Planning range: " + eastern(eta["earliest_epoch"]) + " to " + eastern(eta["latest_epoch"]) + ".",
                   "Basis: %.1f minutes per completed epoch; %s–%s total epochs per remaining fit, based on %s stopped fits." %
                   (eta["epoch_minutes"], eta["assumed_epochs_per_fit"][0], eta["assumed_epochs_per_fit"][2], eta["finished_fit_samples"]),
-                  "Validation-based stopping or Spot interruptions can extend this estimate.", ""]
+                  "Validation stopping or Spot interruptions can extend this estimate.", ""]
     elif count < len(cases):
-        lines += ["ETA is unconfirmed while a worker observation is unavailable.", ""]
-    lines += ["| Placement | Current work | Fits finished | GPU use | Cloud-verified epochs | Uploads pending |",
+        lines += ["There is no current ETA while worker observations are unavailable.", ""]
+    lines += ["| Placement | Current work | Fits confirmed finished | GPU use | Cloud-verified epochs | Uploads pending |",
               "| --- | --- | ---: | ---: | ---: | ---: |"]
-    for worker in report["workers"]:
+    for worker in workers:
         trials = worker["state"]["trials"]
         assigned = [c for c in cases if c["seed"] in worker["state"]["seeds"]]
         done = sum(t["finished"] for t in trials.values())
@@ -196,29 +211,31 @@ def render(report, cases):
         if worker["state"].get("status") == "assigned_training_complete_test_not_opened":
             phase = "Training finished; verifying cloud publication"
         elif worker["state"].get("status") == "failed_preserved":
-            phase = "Stopped; recovery work preserved"
+            phase = "Worker reported failure; recovery state retained"
         if worker.get("final"):
-            phase = "Collected and cleaned up" if worker["final"]["status"] == "training_collected_test_still_locked" else "Stopped; recovery work preserved"
+            phase = "Publication verified; compute cleanup confirmed"
         if not worker["fresh"]:
-            phase = "Observation unavailable; last collector state retained"
+            phase = "Current state unknown; last confirmed progress shown"
         location = "Seoul" if worker["zone"].startswith("asia-northeast3") else "Taiwan"
-        gpu = worker.get("gpu", "").split(",", 1)[-1].strip() or "—"
+        gpu = (worker.get("gpu", "").split(",", 1)[-1].strip() or "—") if worker["fresh"] else "—"
         lines.append("| %s (%s) | %s | %s / %s | %s | %s | %s |" %
                      (location, worker["zone"], phase, done, len(assigned), gpu,
                       worker.get("verified_epoch_checkpoints", "—"), worker.get("pending_generations", "—")))
-    lines += ["", "Cloud-verified epochs include the five preserved Seoul epochs. New publications use native VIPER Cloud.",
-              "The existing controllers delete owned compute and disks after verified publication; unverified recovery disks are retained.",
-              "", "| Fit | Epochs completed | Status | Selected epoch |", "| --- | ---: | --- | ---: |"]
-    running_ids = {w["epoch_start"]["trial"] for w in report["workers"] if w.get("epoch_start") and w["state"].get("status") == "running"}
+    lines += ["", "New checkpoint publications use native VIPER Cloud.",
+              "Cleanup is unconfirmed while the controllers cannot access Google Cloud." if report.get("monitor_status") == "controller_unavailable" else
+              "Controllers delete exact owned resources after verified publication and retain unverified recovery disks.", ""]
+    for worker in workers:
+        lines += [worker["worker"] + " last successful worker observation: " + str(worker.get("observed_utc")) + "."]
+    lines += ["", "| Fit | Epochs completed at last observation | Status | Selected epoch |", "| --- | ---: | --- | ---: |"]
+    running_ids = {w["epoch_start"]["trial"] for w in workers if w["fresh"] and w.get("epoch_start") and w["state"].get("status") == "running"}
     for case in cases:
-        trial = next((w["state"]["trials"][case["trial_id"]] for w in report["workers"] if case["trial_id"] in w["state"]["trials"]), None)
+        trial = next((w["state"]["trials"][case["trial_id"]] for w in workers if case["trial_id"] in w["state"]["trials"]), None)
+        phase = "Finished" if trial and trial["finished"] else ("Running" if case["trial_id"] in running_ids else ("Checkpointed" if trial else "No completed epoch observed"))
         lines.append("| %s | %s | %s | %s |" % (case["trial_id"], trial["epochs"] if trial else 0,
-                     "Finished" if trial and trial["finished"] else ("Running" if case["trial_id"] in running_ids else ("Checkpointed" if trial else "Queued")),
-                     trial["selected_epoch"] if trial and trial["finished"] else "—"))
+                     phase, trial["selected_epoch"] if trial and trial["finished"] else "—"))
     lines += ["", "[Structured status](live-status.json) · [Deployment records](https://github.com/pvd232/JEP/blob/experiment/qwen-full-data-prompt-20261107/plans/full_data_prompt_20261107/lifecycle-launch-20261108/README.md)", "",
-              "Monitoring reads progress metadata and publication receipts. Models and dataset contents remain in their existing stores.", ""]
+              "Monitoring reads progress metadata and publication receipts.", ""]
     return "\n".join(lines)
-
 
 def publish(root):
     """Push only generated status files to the dedicated monitoring branch."""
@@ -259,7 +276,8 @@ def main():
                       "cadence_seconds": args.interval, "training_mode": "independent_seed_workers",
                       "target_fits": len(cases), "workers": workers, "forecast": forecast(workers, cases, now)}
             terminal = all("final" in w for w in workers)
-            report["monitor_status"] = "final" if terminal else ("runtime_limit" if time.monotonic() >= deadline else "active")
+            blocked = any(w.get("controller_final") and not w["fresh"] for w in workers)
+            report["monitor_status"] = "final" if terminal else ("runtime_limit" if time.monotonic() >= deadline else ("controller_unavailable" if blocked else "active"))
             (root / (STATUS + ".json")).write_text(json.dumps(report, indent=2) + "\n")
             (root / (STATUS + ".md")).write_text(render(report, cases))
             if args.publish:
