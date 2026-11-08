@@ -48,7 +48,7 @@ def emit(event: str, **data: Any) -> None:
 
 def publish_generation(root: Path, output: Path, generation: str,
                        record: dict[str, Any], state: dict[str, Any],
-                       files: list[Path]) -> None:
+                       files: list[Path], *, wait_for_cloud: bool = True) -> None:
     """Seal native state locally, then wait for a matching verified cloud ACK.
 
     Never use unverified uploads or a pointer from another generation. If transfer
@@ -96,6 +96,21 @@ def publish_generation(root: Path, output: Path, generation: str,
         raise ValueError('Existing sealed transfer archive changed.')
     emit('checkpoint_export_ready', generation=generation,
          sha256=manifest['archive_sha256'], bytes=manifest['archive_size'])
+    if not wait_for_cloud:
+        pending = [p for p in (output / 'transfer').glob('*/ready.json')
+                   if not (p.parent / 'ack.json').exists()]
+        if len(pending) <= 2:
+            return
+        # Bound recoverable work and disk usage when publication falls behind.
+        oldest = min(pending, key=lambda p: p.stat().st_mtime)
+        old = json.loads(oldest.read_text())
+        wait_for_generation(oldest.parent, old, output)
+        return
+    wait_for_generation(queue, manifest, output)
+
+
+def wait_for_generation(queue: Path, manifest: dict[str, Any], output: Path) -> None:
+    """Wait for an ACK bound to immutable generation bytes, including an older lease."""
     deadline = time.monotonic() + 1200
     while time.monotonic() < deadline:
         ackpath = queue / 'ack.json'
@@ -103,11 +118,11 @@ def publish_generation(root: Path, output: Path, generation: str,
             ack = json.loads(ackpath.read_text())
             if (ack.get('generation'), ack.get('source_commit'), ack.get('archive_sha256'),
                 ack.get('cloud_roundtrip_verified'), ack.get('execution_id'), ack.get('instance_id')) != (
-                    generation, state['source_commit'], manifest['archive_sha256'], True,
-                    state['lease']['execution_id'], state['lease']['instance_id']):
+                    manifest['generation'], manifest['source_commit'], manifest['archive_sha256'], True,
+                    manifest['execution_id'], manifest['instance_id']):
                 raise ValueError('Collector acknowledgment is not bound to this exact generation.')
             atomic_json(output / 'verified-cloud-generation.json', ack)
-            emit('checkpoint_cloud_verified', generation=generation)
+            emit('checkpoint_cloud_verified', generation=manifest['generation'])
             return
         time.sleep(5)
     raise TimeoutError('Checkpoint export was not verified; local state preserved, no advancement.')
@@ -139,7 +154,7 @@ def run_training(root: Path, output: Path, protocol: dict[str, Any], state: dict
                 # A crash after local-state commit but before export must finish
                 # that exact publication before selecting or continuing.
                 publish_generation(root, output, generation, parent, state,
-                                   [Path(parent['path']).parent])
+                                   [Path(parent['path']).parent], wait_for_cloud=False)
                 stale_pending = output / 'pending-native.json'
                 if stale_pending.exists():
                     pending_info = json.loads(stale_pending.read_text())
@@ -148,7 +163,8 @@ def run_training(root: Path, output: Path, protocol: dict[str, Any], state: dict
                     else:
                         raise RuntimeError('Unreconciled native attempt differs from sealed parent.')
                 if trace['stop_reason'] == 'validation_patience':
-                    selected = seal_native_selection(root, protocol, source.commit, arm, seed, parent)
+                    selected = seal_native_selection(root, protocol, parent['source_commit'], arm, seed, parent,
+                                                     state['training_source_commit'])
                     prior['selection'] = selected
                     atomic_json(output / 'state.json', state)
                     emit('trial_validation_selected', trial=key, epoch=selected['selected_epoch'],
@@ -185,13 +201,14 @@ def run_training(root: Path, output: Path, protocol: dict[str, Any], state: dict
             generation = f'{key}_epoch{epoch:02}'
             # Preserve all native bytes for that execution, including model/optimizer/RNG.
             native_run = Path(record['path']).parent
-            publish_generation(root, output, generation, record, state, [native_run])
+            publish_generation(root, output, generation, record, state, [native_run], wait_for_cloud=False)
             emit('native_epoch_sealed', trial=key, epoch=epoch,
                  stop_reason=actual_trace['stop_reason'])
         if not prior.get('selection'):
             # The final permitted iteration might have just sealed a patience stop.
             last = prior['records'][-1]
-            prior['selection'] = seal_native_selection(root, protocol, source.commit, arm, seed, last)
+            prior['selection'] = seal_native_selection(root, protocol, last['source_commit'], arm, seed, last,
+                                                       state['training_source_commit'])
             atomic_json(output / 'state.json', state)
     selected = [state['trials'][r['trial_id']]['selection'] for r in rows]
     initial = {}
@@ -204,7 +221,52 @@ def run_training(root: Path, output: Path, protocol: dict[str, Any], state: dict
     atomic_json(output / 'state.json', state)
     publish_generation(root, output, 'training-final', {}, state,
                        [output / 'selections.json', output / 'state.json'])
+    for manifest_path in sorted((output / 'transfer').glob('*/ready.json')):
+        wait_for_generation(manifest_path.parent, json.loads(manifest_path.read_text()), output)
     emit('assigned_training_complete', trials=len(selected), test_opened=False)
+
+
+def require_training_compatibility(root: Path, source: str, training_source: str) -> None:
+    """Allow controller repairs while requiring unchanged model, loss, data and protocol code."""
+    import re
+    import subprocess
+    if re.fullmatch(r"[0-9a-f]{40}", training_source) is None:
+        raise ValueError("Training compatibility must name an immutable source commit.")
+    scoped = ["csts_pilot", "jep_pilot", "configs", "pilot_requirements.txt", "tranche2_requirements.txt"]
+    changed = subprocess.check_output(
+        ["git", "diff", "--name-only", training_source, source, "--", *scoped],
+        cwd=root, text=True, timeout=30,
+    ).splitlines()
+    controllers = {
+        "csts_pilot/full_data_prompt_integrity.py", "csts_pilot/full_data_prompt_lease.py",
+        "csts_pilot/full_data_prompt_worker.py", "csts_pilot/full_data_prompt_uploads.py",
+    }
+    if set(changed) - controllers:
+        raise ValueError("Training revision changes scientific code or inputs: " + ", ".join(changed))
+
+
+def rebind_resume_state(state: dict[str, Any], approval: dict[str, Any], worker: str,
+                        source: str, protocol_sha: str, lease: dict[str, Any],
+                        state_sha: str) -> dict[str, Any]:
+    """Rebind preserved completed work only under an explicit hash-bound resume record."""
+    if (state['protocol_sha256'], state['worker']) != (protocol_sha, worker):
+        raise ValueError('Existing worker state has different protocol or ownership.')
+    if state['source_commit'] == source and state.get('lease') == lease:
+        state['status'] = 'running'
+        state.pop('failure', None)
+        return state
+    resume = approval.get('resumes', {}).get(worker, {})
+    if (resume.get('state_sha256'), resume.get('previous_source_commit'),
+            resume.get('previous_execution_id')) != (
+                state_sha, state['source_commit'], state.get('lease', {}).get('execution_id')):
+        raise ValueError('Explicit resume is not bound to the preserved state and prior lease.')
+    history = state.setdefault('resume_history', [])
+    history.append({'previous_source_commit': state['source_commit'],
+                    'previous_lease': state['lease'], 'state_sha256': state_sha, 'resumed_utc': utc()})
+    state.update(source_commit=source, lease=lease, status='running',
+                 training_source_commit=approval['training_source_commit'])
+    state.pop('failure', None)
+    return state
 
 
 def main() -> None:
@@ -222,6 +284,8 @@ def main() -> None:
     protocol = json.loads((root / 'configs/csts-full-data-prompt-20261107.json').read_text())
     approval = json.loads(args.approval.read_text())
     require_launch_approval(protocol, source.commit, approval, json.loads(args.reviews.read_text()))
+    training_source = approval.get('training_source_commit', source.commit)
+    require_training_compatibility(root, source.commit, training_source)
     load_fit_cohorts(root, protocol)
     seeds = [7, 9, 11] if args.worker == 'worker1' else [8, 10]
     output = root / 'baseline_results/full_data_prompt_20261107' / args.worker
@@ -235,15 +299,19 @@ def main() -> None:
             if not args.resume:
                 raise ValueError('Existing work requires explicit --resume.')
             state = json.loads(state_path.read_text())
-            if (state['source_commit'], state['protocol_sha256'], state['worker']) != (
-                    source.commit, digest_object(protocol), args.worker):
-                raise ValueError('Existing worker state has different provenance.')
-            if state.get('lease') != lease:
-                raise ValueError('Existing state belongs to a different execution lease.')
+            previous_bytes = state_path.read_bytes()
+            previous_sha = digest_file(state_path)
+            archive = state_path.with_name('state.' + state['lease']['execution_id'] + '.before-resume.json')
+            if not archive.exists():
+                archive.write_bytes(previous_bytes)
+            state = rebind_resume_state(state, approval, args.worker, source.commit,
+                                        digest_object(protocol), lease, previous_sha)
+            atomic_json(state_path, state)
         else:
             state = {'source_commit': source.commit, 'protocol_sha256': digest_object(protocol),
                      'worker': args.worker, 'seeds': seeds, 'status': 'running', 'trials': {},
-                     'started_utc': utc(), 'test_opened': False, 'lease': lease}
+                     'started_utc': utc(), 'test_opened': False, 'lease': lease,
+                     'training_source_commit': training_source}
             atomic_json(state_path, state)
         try:
             run_training(root, output, protocol, state, seeds, args.gpu_model)
@@ -251,6 +319,7 @@ def main() -> None:
             state['status'] = 'failed_preserved'
             state['failure'] = {'type': type(exc).__name__, 'message': str(exc), 'utc': utc()}
             atomic_json(state_path, state)
+            publish_generation(root, output, 'worker-failed', {}, state, [state_path], wait_for_cloud=False)
             raise
 
 

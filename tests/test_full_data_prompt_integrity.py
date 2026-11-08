@@ -45,4 +45,20 @@ class StagedCohortTests(unittest.TestCase):
         self.contract['test']={}
         with self.assertRaises(ValueError):verify_staged_fit_inputs(self.inputs,self.contract)
 
+class PersistedConfigurationTests(unittest.TestCase):
+    def test_json_roundtrip_preserves_tuple_parameters(self):
+        from csts_pilot.full_data_prompt_integrity import verify_fit_configuration
+        expected = {"ridge_alphas": (1e-5, 1e-4, .001), "learning_rate": 2e-5}
+        verify_fit_configuration(json.loads(json.dumps(expected)), expected, "A_condition_first", 7)
+        verify_fit_configuration(expected, expected, "A_condition_first", 7)
+
+    def test_real_parameter_changes_remain_rejected(self):
+        from csts_pilot.full_data_prompt_integrity import verify_fit_configuration
+        expected = {"ridge_alphas": (1e-5, 1e-4, .001), "learning_rate": 2e-5}
+        for actual in [{"ridge_alphas": [1e-5], "learning_rate": 2e-5},
+                       {"ridge_alphas": list(expected["ridge_alphas"]), "learning_rate": 1e-4},
+                       {"learning_rate": 2e-5}]:
+            with self.subTest(actual=actual), self.assertRaises(ValueError):
+                verify_fit_configuration(actual, expected, "A_condition_first", 7)
+
 if __name__=='__main__':unittest.main()

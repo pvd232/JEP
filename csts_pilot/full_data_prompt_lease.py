@@ -6,10 +6,23 @@ import time
 import urllib.request
 from typing import Any
 
-ASSIGNMENTS={
-    'worker1':('jep-full-prompt-spot-1-20261107','asia-northeast3-a'),
-    'worker2':('jep-full-prompt-spot-2-20261107','asia-northeast1-b'),
-}
+WORKERS = {"worker1", "worker2"}
+EAST_ASIA_REGIONS = {"asia-east1", "asia-east2", "asia-northeast1", "asia-northeast2", "asia-northeast3"}
+
+
+def validate_placement(worker: str, assignment: dict[str, Any]) -> tuple[str, str]:
+    """Resolve one manifest placement within the authorized Mantra East Asia fleet."""
+    import re
+    if worker not in WORKERS:
+        raise PermissionError("Unknown task worker.")
+    name, zone = assignment.get("instance_name", ""), assignment.get("zone", "")
+    if not isinstance(name, str) or re.fullmatch(r"jep-[a-z0-9-]{1,58}[a-z0-9]", name) is None:
+        raise PermissionError("Assignment must identify a task-owned JEP instance.")
+    if not isinstance(zone, str) or zone.rsplit("-", 1)[0] not in EAST_ASIA_REGIONS:
+        raise PermissionError("Assignment is outside authorized East Asia regions.")
+    if assignment.get("project", "mantra-477901") != "mantra-477901":
+        raise PermissionError("Assignment is outside the authorized project.")
+    return name, zone
 
 
 def validate_assignment(worker: str, assignment: dict[str, Any], actual: dict[str, str],
@@ -20,11 +33,7 @@ def validate_assignment(worker: str, assignment: dict[str, Any], actual: dict[st
     a different host cannot use it, and two worker labels cannot share one GPU.
     The external collector binds this same execution identity in immutable objects.
     """
-    if worker not in ASSIGNMENTS:
-        raise PermissionError('Unknown task worker.')
-    name,zone=ASSIGNMENTS[worker]
-    if assignment.get('instance_name')!=name or assignment.get('zone')!=zone:
-        raise PermissionError('Assignment does not identify the fixed task worker.')
+    name, zone = validate_placement(worker, assignment)
     expected={'project':'mantra-477901','name':name,'zone':zone,'id':assignment.get('instance_id')}
     if actual!=expected or not isinstance(actual['id'],str) or not actual['id'].isdigit():
         raise PermissionError('Actual GCP identity differs from the assigned immutable instance.')

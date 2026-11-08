@@ -1,212 +1,189 @@
 #!/usr/bin/env python3
-"""One-shot authenticated IAP/cloud exporter for exactly two task-owned GPU workers.
+"""Monitor manifest-selected Spot workers and clean up only their owned resources.
 
-This is not a recurring automation. Interrupted/failed workers are preserved and
-stopped rather than relaunched blindly. Auth failure never causes credential
-export, IAM alteration, permission bypass, or an unbounded idle GPU allocation.
+VIPER publication runs asynchronously on each worker under its attached identity.
+This controller uses the existing administrator connection for lifecycle actions.
+Unverified checkpoints keep their recovery disk; a successful final export permits
+deletion of the exact task-owned boot disk recorded in the allocation manifest.
 """
 from __future__ import annotations
+
 import argparse
 import concurrent.futures
 import datetime as dt
-import hashlib
 import json
 from pathlib import Path
 import shlex
 import subprocess
 import time
 
-PROJECT='mantra-477901'
-ACCOUNT='pvd2112@columbia.edu'
-REMOTE_ROOT='/home/machina/jep-full-data-task-20261107/repo'
-PREFIX='gs://mantra-mlfg-prod-uscentral1-8e7a/viper/pvd232/jep_full_data_prompt_20261107'
-WORKERS={
- 'worker1':('jep-full-prompt-spot-1-20261107','asia-northeast3-a'),
- 'worker2':('jep-full-prompt-spot-2-20261107','asia-northeast1-b'),
-}
+from csts_pilot.full_data_prompt_lease import validate_placement
 
-def run(args: list[str], timeout: int=120) -> subprocess.CompletedProcess:
-    """Invoke one bounded provider CLI command, preserving stderr on failure."""
-    return subprocess.run(args,capture_output=True,text=True,timeout=timeout)
+REMOTE_ROOT = "/home/machina/jep-full-data-task-20261107/repo"
+TASK = "jep-full-data-20261107"
+
+
+def run(args: list[str], timeout: int = 120) -> subprocess.CompletedProcess:
+    """Run a bounded cloud command without shell interpolation."""
+    return subprocess.run(args, capture_output=True, text=True, timeout=timeout)
+
 
 def require_ok(result: subprocess.CompletedProcess) -> str:
-    """Return stdout only after confirmed command success."""
+    """Expose provider failures without presenting a partial action as successful."""
     if result.returncode:
         raise RuntimeError(result.stderr[-1800:] or result.stdout[-1800:])
     return result.stdout
 
-def sha(path: Path) -> str:
-    """Hash streamed file bytes independently of provider metadata checksums."""
-    h=hashlib.sha256()
-    with path.open('rb') as f:
-        for block in iter(lambda:f.read(4*1024*1024),b''):h.update(block)
-    return h.hexdigest()
 
-def ssh(worker: str, command: str, timeout: int=120) -> subprocess.CompletedProcess:
-    """Use private IAP; no external IPs or transferred credentials."""
-    instance,zone=WORKERS[worker]
-    return run(['gcloud','compute','ssh',f'machina@{instance}',f'--project={PROJECT}',
-                f'--zone={zone}',f'--account={ACCOUNT}','--tunnel-through-iap','--quiet',
-                '--command='+command],timeout)
+def flags(assignment: dict, account: str) -> list[str]:
+    """Bind every lifecycle call to its declared account, project and zone."""
+    return [f"--project={assignment['project']}", f"--zone={assignment['zone']}",
+            f"--account={account}", "--quiet"]
 
-def scp(worker: str, source: str, target: str, upload: bool=False) -> None:
-    """Copy one task artifact over the established IAP channel."""
-    instance,zone=WORKERS[worker]
-    src=source if upload else f'machina@{instance}:{source}'
-    dst=f'machina@{instance}:{target}' if upload else target
-    require_ok(run(['gcloud','compute','scp',src,dst,f'--project={PROJECT}',f'--zone={zone}',
-                    f'--account={ACCOUNT}','--tunnel-through-iap','--quiet'],900))
 
-def describe(worker: str) -> dict:
-    """Confirm task labels before any stop operation; never act on historical VMs."""
-    instance,zone=WORKERS[worker]
-    text=require_ok(run(['gcloud','compute','instances','describe',instance,
-                         f'--project={PROJECT}',f'--zone={zone}',f'--account={ACCOUNT}',
-                         '--format=json(id,name,status,labels,scheduling.provisioningModel)'],60))
-    d=json.loads(text)
-    if d['name']!=instance or d.get('labels',{}).get('task')!='jep-full-data-20261107':
-        raise ValueError('Instance ownership does not match this task.')
-    return d
+def describe(assignment: dict, account: str) -> dict | None:
+    """Require immutable instance identity and task ownership before cleanup."""
+    result = run(["gcloud", "compute", "instances", "describe", assignment["instance_name"],
+                  *flags(assignment, account), "--format=json"], 60)
+    if result.returncode and ("was not found" in result.stderr or "Not Found" in result.stderr):
+        return None
+    instance = json.loads(require_ok(result))
+    if (instance["id"] != assignment["instance_id"]
+            or instance.get("labels", {}).get("task") != TASK):
+        raise PermissionError("Instance identity or task label differs from the allocation.")
+    return instance
 
-def stop(worker: str, expected_instance_id: str) -> dict:
-    """Stop only the two named, label-confirmed task clones; disks remain preserved."""
-    d=describe(worker)
-    if d.get('id') != expected_instance_id:
-        raise PermissionError('Refusing to stop a replacement instance outside this execution lease.')
-    instance,zone=WORKERS[worker]
-    if d['status']!='TERMINATED':
-        require_ok(run(['gcloud','compute','instances','stop',instance,f'--project={PROJECT}',
-                        f'--zone={zone}',f'--account={ACCOUNT}','--quiet'],180))
-    final=describe(worker)
-    return {'worker':worker,'instance':instance,'status':final['status']}
 
-def read_worker(worker: str) -> dict:
-    """Fetch only task state and complete export manifests, never credential paths."""
-    base=f'{REMOTE_ROOT}/baseline_results/full_data_prompt_20261107/{worker}'
-    program=f'''import json,pathlib
-p=pathlib.Path({base!r})
-s=json.loads((p/'state.json').read_text()) if (p/'state.json').exists() else None
-ready=[]
-for m in sorted((p/'transfer').glob('*/ready.json')):
- if not (m.parent/'ack.json').exists():ready.append(json.loads(m.read_text()))
-print(json.dumps({{'state':s,'ready':ready}}))
-'''
-    return json.loads(require_ok(ssh(worker,'python3 -c '+shlex.quote(program),90)))
+def cleanup(assignment: dict, account: str, verified: bool, delete_disk: bool) -> dict:
+    """Delete the exact task VM, retaining recovery bytes until verified export."""
+    instance = describe(assignment, account)
+    if instance is not None:
+        require_ok(run(["gcloud", "compute", "instances", "delete", assignment["instance_name"],
+                        "--keep-disks=all", *flags(assignment, account)], 180))
+    disk_deleted = False
+    disk = assignment.get("boot_disk")
+    if verified and delete_disk and disk:
+        result = run(["gcloud", "compute", "disks", "describe", disk["name"],
+                      *flags(assignment, account), "--format=json"], 60)
+        info = json.loads(require_ok(result))
+        if (info["id"] != disk["id"] or info.get("users")
+                or info.get("labels", {}).get("task") != TASK):
+            raise PermissionError("Recovery disk identity, ownership or attachment changed.")
+        require_ok(run(["gcloud", "compute", "disks", "delete", disk["name"],
+                        *flags(assignment, account)], 180))
+        disk_deleted = True
+    return {"instance": assignment["instance_name"], "instance_deleted": True,
+            "disk_deleted": disk_deleted, "recovery_disk_preserved": not disk_deleted}
 
-def collect(worker: str, manifest: dict, local: Path, expected_source: str, assignment: dict) -> dict:
-    """Require archive SHA and cloud-download SHA before publishing generation ACK."""
-    generation=manifest['generation']
-    if (manifest.get('execution_id'),manifest.get('instance_id')) != (assignment['execution_id'],assignment['instance_id']):
-        raise ValueError('Generation belongs to a different assigned execution lease.')
-    if (manifest['worker']!=worker or manifest['source_commit']!=expected_source
-            or not generation or any(c not in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-' for c in generation)):
-        raise ValueError('Export identity or generation name differs from assigned work.')
-    remote_base=f'{REMOTE_ROOT}/baseline_results/full_data_prompt_20261107/{worker}/transfer/{generation}'
-    if manifest['archive']!=remote_base+'/native.tar':
-        raise ValueError('Unexpected remote artifact path.')
-    folder=local/worker/generation;folder.mkdir(parents=True,exist_ok=True)
-    (folder/'ready.json').write_text(json.dumps(manifest,indent=2)+'\n')
-    archive=folder/'native.tar'
-    if not archive.exists() or sha(archive)!=manifest['archive_sha256']:
-        partial=folder/'native.tar.partial'
-        scp(worker,manifest['archive'],str(partial))
-        if partial.stat().st_size!=manifest['archive_size'] or sha(partial)!=manifest['archive_sha256']:
-            raise ValueError('IAP-delivered native artifact bytes differ from sealed generation.')
-        partial.replace(archive)
-    destination=f'{PREFIX}/{expected_source}/{worker}/{assignment["execution_id"]}/{generation}'
-    flags=[f'--project={PROJECT}',f'--account={ACCOUNT}','--quiet']
-    created=run(['gcloud','storage','cp',str(archive),destination+'/native.tar','--if-generation-match=0',*flags],900)
-    # A retry may find an existing immutable object; never overwrite it.
-    # The mandatory download below must verify exactly the expected bytes.
-    roundtrip=folder/'roundtrip.native.tar'
-    require_ok(run(['gcloud','storage','cp',destination+'/native.tar',str(roundtrip),*flags],900))
-    if sha(roundtrip)!=manifest['archive_sha256']:
-        raise ValueError('Cloud native artifact failed independent SHA round trip.')
-    roundtrip.unlink()
-    # Authoritative manifest is published after all its referenced bytes verify.
-    manifest_copy=run(['gcloud','storage','cp',str(folder/'ready.json'),destination+'/manifest.json','--if-generation-match=0',*flags],120)
-    manifest_roundtrip=folder/'manifest.roundtrip.json'
-    require_ok(run(['gcloud','storage','cp',destination+'/manifest.json',str(manifest_roundtrip),*flags],120))
-    if sha(manifest_roundtrip)!=sha(folder/'ready.json'):
-        raise ValueError('Immutable cloud manifest conflicts with this sealed generation.')
-    ack={'generation':generation,'source_commit':expected_source,
-         'execution_id':assignment['execution_id'],'instance_id':assignment['instance_id'],
-         'archive_sha256':manifest['archive_sha256'],'cloud_roundtrip_verified':True,
-         'cloud_prefix':destination,'verified_utc':dt.datetime.now(dt.timezone.utc).isoformat()}
-    path=folder/'ack.json';path.write_text(json.dumps(ack,indent=2)+'\n')
-    scp(worker,str(path),remote_base+'/ack.json.partial',upload=True)
-    require_ok(ssh(worker,'mv '+shlex.quote(remote_base+'/ack.json.partial')+' '+shlex.quote(remote_base+'/ack.json'),60))
-    return ack
+
+def read_worker(assignment: dict, account: str, worker: str) -> dict:
+    """Read only study state and generation receipts through the established IAP route."""
+    base = f"{REMOTE_ROOT}/baseline_results/full_data_prompt_20261107/{worker}"
+    program = (
+        "import json,pathlib;"
+        f"p=pathlib.Path({base!r});"
+        "s=json.loads((p/'state.json').read_text()) if (p/'state.json').exists() else None;"
+        "m=[(q,json.loads(q.read_text())) for q in (p/'transfer').glob('*/ready.json')];"
+        "ready=[v for q,v in m if not (q.parent/'ack.json').exists()];"
+        "acks=[json.loads((q.parent/'ack.json').read_text()) for q,v in m if (q.parent/'ack.json').exists()];"
+        "print(json.dumps({'state':s,'ready':ready,'acks':acks}))"
+    )
+    return json.loads(require_ok(run(
+        ["gcloud", "compute", "ssh", f"machina@{assignment['instance_name']}",
+         *flags(assignment, account), "--tunnel-through-iap",
+         "--command=python3 -c " + shlex.quote(program)], 90)))
+
 
 def monitor(worker: str, args: argparse.Namespace) -> dict:
-    """Export sequential generations and stop this GPU after completion/failure."""
-    deadline=time.monotonic()+args.max_hours*3600
-    local=args.local;last=None;observed_start=False
-    assignment=args.assignments[worker]
-    independently_verified_deadline=None
+    """Observe one independent worker and finalize its resources after export or failure."""
+    assignment = args.approval["assignments"][worker]
+    account = args.approval["controller_account"]
+    deadline = time.monotonic() + args.max_hours * 3600
+    last = None
+    started = time.monotonic()
+    failure_at = None
+    verified = False
     try:
-        while time.monotonic()<deadline:
-            d=describe(worker)
-            if d.get('id') != assignment['instance_id']:
-                raise ValueError('Cloud instance ID no longer matches the execution lease.')
-            if d['status']=='TERMINATED':
-                raise RuntimeError('Task worker stopped or was preempted; persistent checkpoint disk preserved for explicit resume.')
-            if d['status']!='RUNNING':
-                time.sleep(15);continue
-            obj=read_worker(worker)
-            if obj['state']:
-                observed_start=True;last=obj['state']
-                (local/f'{worker}-latest-state.json').write_text(json.dumps(last,indent=2)+'\n')
-                if last.get('lease',{}).get('execution_id')!=assignment['execution_id'] or not last.get('lease',{}).get('deadline_verified') or last.get('lease',{}).get('shutdown_mode')!='poweroff':
-                    raise ValueError('Worker has no verified execution lease/shutdown deadline.')
-                independently_verified_deadline=last['lease']['deadline_utc']
-                if last['source_commit']!=args.source:
-                    raise ValueError('Running source differs from approved collector source.')
-            for manifest in obj['ready']:
-                ack=collect(worker,manifest,local,args.source,assignment)
-                print(json.dumps({'event':'native_generation_cloud_verified','worker':worker,**ack}),flush=True)
-            if last and last['status']=='assigned_training_complete_test_not_opened':
-                if not (local/worker/'training-final'/'ack.json').exists():
-                    time.sleep(5);continue
-                return {'status':'training_collected_test_still_locked','worker':worker,
-                        'trials':len(last['trials']),'gpu':stop(worker,assignment['instance_id'])}
-            if last and last['status']=='failed_preserved':
-                raise RuntimeError(json.dumps(last.get('failure',{})))
-            if not observed_start and time.monotonic()>deadline-(args.max_hours*3600-300):
-                raise RuntimeError('Training never started within the bounded launch window.')
+        while time.monotonic() < deadline:
+            instance = describe(assignment, account)
+            if instance is None or instance["status"] == "TERMINATED":
+                raise RuntimeError("Spot worker stopped or disappeared; recovery disk retained.")
+            if instance["status"] != "RUNNING":
+                time.sleep(15)
+                continue
+            obj = read_worker(assignment, account, worker)
+            if not obj["state"] and time.monotonic() - started > 300:
+                raise RuntimeError("Training did not start within the five-minute allocation window.")
+            if obj["state"]:
+                last = obj["state"]
+                (args.local / f"{worker}-latest-state.json").write_text(json.dumps(last, indent=2) + "\n")
+                if (last["source_commit"] != args.source
+                        or last.get("lease", {}).get("execution_id") != assignment["execution_id"]
+                        or not last.get("lease", {}).get("deadline_verified")):
+                    raise ValueError("Worker source or execution lease differs from this launch.")
+            finals = [a for a in obj["acks"] if a.get("generation") == "training-final"
+                      and a.get("execution_id") == assignment["execution_id"]
+                      and a.get("transport") == "viper_cloud"
+                      and a.get("cloud_roundtrip_verified") is True
+                      and a.get("cloud_references")]
+            if (last and last["status"] == "assigned_training_complete_test_not_opened"
+                    and finals and not obj["ready"]):
+                verified = True
+                (args.local / f"{worker}-final-viper-receipt.json").write_text(json.dumps(finals[0], indent=2) + "\n")
+                return {"worker": worker, "status": "training_collected_test_still_locked",
+                        "trials": len(last["trials"]), "viper_receipt": finals[0]}
+            if last and last["status"] == "failed_preserved":
+                failure_at = failure_at or time.monotonic()
+                if not obj["ready"] or time.monotonic() - failure_at > 120:
+                    raise RuntimeError(json.dumps(last.get("failure", {})))
             time.sleep(20)
-        raise TimeoutError('Bounded training collection window ended; preserve and stop.')
+        raise TimeoutError("Allocation collection deadline ended; recovery disk retained.")
     finally:
-        try:
-            result=stop(worker,assignment['instance_id']);print(json.dumps({'event':'gpu_shutdown_verified',**result}),flush=True)
-        except Exception as exc:
-            print(json.dumps({'event':'cloud_stop_unverified','worker':worker,'verified_guest_deadline_utc':independently_verified_deadline,'error':str(exc)}),flush=True)
+        receipt = cleanup(assignment, account, verified, args.delete_verified_disks)
+        (args.local / f"{worker}-cleanup.json").write_text(json.dumps(receipt, indent=2) + "\n")
+        print(json.dumps({"event": "resource_cleanup", "worker": worker, **receipt}), flush=True)
+
 
 def main() -> None:
-    """Run one bounded collector per task GPU; no schedules or future triggers."""
-    p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--source',required=True)
-    p.add_argument('--local',type=Path,required=True)
-    p.add_argument('--approval',type=Path,required=True)
-    p.add_argument('--max-hours',type=float,default=23)
-    args=p.parse_args()
-    if len(args.source)!=40 or any(c not in '0123456789abcdef' for c in args.source):raise ValueError('Exact source commit required.')
-    if not 0<args.max_hours<=23:raise ValueError('Collector time must fit task shutdown envelope.')
-    approval=json.loads(args.approval.read_text())
-    if approval.get('source_commit')!=args.source or approval.get('user_execution_approved') is not True:
-        raise PermissionError('Collector source is not the approved source.')
-    args.assignments=approval['assignments']
-    if set(args.assignments)!=set(WORKERS):raise PermissionError('Both fixed worker assignments required.')
-    args.local.mkdir(parents=True,exist_ok=True)
-    records=[]
-    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
-        pending={pool.submit(monitor,w,args):w for w in WORKERS}
+    """Run bounded lifecycle monitors for the worker set in one approved manifest."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--source", required=True)
+    parser.add_argument("--local", type=Path, required=True)
+    parser.add_argument("--approval", type=Path, required=True)
+    parser.add_argument("--max-hours", type=float, default=22)
+    parser.add_argument("--delete-verified-disks", action="store_true")
+    args = parser.parse_args()
+    if not 0 < args.max_hours <= 23:
+        raise ValueError("Controller duration must fit the allocation deadline.")
+    args.approval = json.loads(args.approval.read_text())
+    if args.approval.get("source_commit") != args.source or args.approval.get("user_execution_approved") is not True:
+        raise PermissionError("Controller manifest is not the approved source.")
+    assignments = args.approval["assignments"]
+    if not assignments or len(assignments) > 2:
+        raise ValueError("The approved study uses at most two independent workers.")
+    identities = set()
+    for worker, assignment in assignments.items():
+        validate_placement(worker, assignment)
+        key = assignment["project"], assignment["instance_id"]
+        if key in identities:
+            raise ValueError("Two worker labels cannot share one instance.")
+        identities.add(key)
+    args.local.mkdir(parents=True, exist_ok=True)
+    records = []
+    with concurrent.futures.ThreadPoolExecutor(max_workers=len(assignments)) as pool:
+        pending = {pool.submit(monitor, worker, args): worker for worker in assignments}
         for future in concurrent.futures.as_completed(pending):
-            w=pending[future]
-            try:record=future.result()
-            except Exception as exc:record={'worker':w,'status':'failed_preserved','reason':str(exc)}
-            records.append(record);print(json.dumps(record),flush=True)
-    (args.local/'collection-final.json').write_text(json.dumps(records,indent=2)+'\n')
-    if any(r['status']!='training_collected_test_still_locked' for r in records):raise SystemExit(2)
+            worker = pending[future]
+            try:
+                record = future.result()
+            except Exception as exc:
+                record = {"worker": worker, "status": "failed_preserved", "reason": str(exc)}
+            records.append(record)
+            print(json.dumps(record), flush=True)
+    (args.local / "collection-final.json").write_text(json.dumps(records, indent=2) + "\n")
+    if any(r["status"] != "training_collected_test_still_locked" for r in records):
+        raise SystemExit(2)
 
-if __name__=='__main__':main()
+
+if __name__ == "__main__":
+    main()

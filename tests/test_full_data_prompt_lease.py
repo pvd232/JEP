@@ -44,6 +44,15 @@ class LeaseTests(unittest.TestCase):
         with self.assertRaises(PermissionError):self.check(mode=None)
     def test_unknown_shutdown_action_blocks(self):
         with self.assertRaises(PermissionError):self.check(mode='unknown')
+    def test_manifest_can_place_worker_in_taiwan(self):
+        a=dict(self.assignment,instance_name='jep-full-prompt-worker2-20261108',zone='asia-east1-b')
+        m=dict(self.actual,name=a['instance_name'],zone=a['zone'])
+        from csts_pilot.full_data_prompt_lease import validate_assignment
+        self.assertTrue(validate_assignment('worker2',a,m,'GPU-test',int((self.now+3600)*1e6),'poweroff',self.now)['deadline_verified'])
+    def test_manifest_cannot_escape_east_asia(self):
+        a=dict(self.assignment,zone='us-central1-a')
+        m=dict(self.actual,zone=a['zone'])
+        with self.assertRaises(PermissionError):self.check(a=a,m=m)
     def test_hostwide_lock_excludes_second_worker_name(self):
         with tempfile.TemporaryDirectory() as d:
             p=Path(d)/'gpu-exclusive.lock'

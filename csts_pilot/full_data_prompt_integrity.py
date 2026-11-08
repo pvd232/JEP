@@ -35,8 +35,21 @@ def verify_staged_fit_inputs(inputs: Any, contract: dict[str, Any]) -> None:
             raise ValueError(f"Staged training and validation overlap by {field}.")
 
 
+def verify_fit_configuration(actual: dict[str, Any], expected: dict[str, Any],
+                             arm: str, seed: int) -> None:
+    """Compare persisted JSON values while preserving every scientific parameter."""
+    actual_json = json.loads(json.dumps(actual, allow_nan=False))
+    expected_json = json.loads(json.dumps(expected, allow_nan=False))
+    for key, value in expected_json.items():
+        if key in {"max_epochs", "start_epoch"}:
+            continue
+        if key not in actual_json or actual_json[key] != value:
+            raise ValueError(f"Checkpoint/trace differs in {key} for requested {arm}/seed{seed}.")
+
+
 def seal_native_selection(root: Path, protocol: dict[str, Any], source_commit: str,
-                          arm: str, seed: int, record: dict[str, Any]) -> dict[str, Any]:
+                          arm: str, seed: int, record: dict[str, Any],
+                          training_source_commit: str | None = None) -> dict[str, Any]:
     """Derive a final selection only from verified native trace, model and predictions.
 
     This reads training/validation artifacts only. It never reads test examples.
@@ -70,9 +83,7 @@ def seal_native_selection(root: Path, protocol: dict[str, Any], source_commit: s
         raise ValueError("Native training input hashes do not match the protocol.")
     expected = FitConfig.model_validate(fit_arguments(protocol, arm, seed, len(history)-1)).model_dump()
     for actual in (trace["config"], saved["config"]):
-        for key, value in expected.items():
-            if key not in {"max_epochs", "start_epoch"} and actual.get(key) != value:
-                raise ValueError(f"Checkpoint/trace differs in {key} for requested {arm}/seed{seed}.")
+        verify_fit_configuration(actual, expected, arm, seed)
     best = trace["selected"]
     rank = lambda r: r["validation"]["spearman"] if r["validation"]["spearman"] is not None else -math.inf
     first_best = max(history, key=rank)
@@ -97,7 +108,8 @@ def seal_native_selection(root: Path, protocol: dict[str, Any], source_commit: s
             raise ValueError("Validation-selected metrics failed independent recomputation.")
     return {
         "trial_id": f"{arm}_seed{seed}", "arm": arm, "seed": seed,
-        "training_source_commit": source_commit, "protocol_sha256": digest_object(protocol),
+        "training_source_commit": training_source_commit or source_commit,
+        "execution_source_commit": source_commit, "protocol_sha256": digest_object(protocol),
         "prompt_sha256": digest_object(PROMPTS[arm]),
         "native_run_id": digest_object(record["reference"]), "native_run_reference": record["reference"],
         "trace_sha256": digest_file(trace_path), "model_sha256": model_sha,
