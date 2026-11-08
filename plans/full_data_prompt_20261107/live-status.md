@@ -1,21 +1,23 @@
 # Live training status
 
-Page checked: Sun 4:46 PM EST. Worker observation times appear below.
+Page checked: Sun 4:51 PM EST. Worker observation times appear below.
 The background reporter checks every five minutes. A page update does not establish a fresh GPU observation.
 
-**Training fits finished: 15 / 15.**
-The held-out test remains sealed for evaluation.
+**Fits confirmed finished at the last successful observations: 15 / 15.**
+The held-out test was sealed at the last successful observations.
+
+**The monitoring controllers failed. Current GPU activity, training completion and cleanup are unconfirmed.**
 
 | Placement | Current work | Fits confirmed finished | GPU use | Cloud-verified epochs | Uploads pending |
 | --- | --- | ---: | ---: | ---: | ---: |
-| Seoul (asia-northeast3-a) | Training finished; verifying cloud publication | 9 / 9 | 0 % | 47 | 0 |
-| Taiwan (asia-east1-b) | Training finished; verifying cloud publication | 6 / 6 | 0 % | 26 | 0 |
+| Seoul (asia-northeast3-a) | Current state unknown; last confirmed progress shown | 9 / 9 | — | — | — |
+| Taiwan (asia-east1-b) | Current state unknown; last confirmed progress shown | 6 / 6 | — | — | — |
 
 New checkpoint publications use native VIPER Cloud.
-Controllers delete exact owned resources after verified publication and retain unverified recovery disks.
+Cleanup is unconfirmed while the controllers cannot access Google Cloud.
 
-worker1 last successful worker observation: 2026-11-08T21:46:02.357896+00:00.
-worker2 last successful worker observation: 2026-11-08T21:46:02.059802+00:00.
+worker1 last successful worker observation: 2026-11-08T21:45:34.398386+00:00.
+worker2 last successful worker observation: 2026-11-08T21:45:33.703780+00:00.
 
 | Fit | Epochs completed at last observation | Status | Selected epoch |
 | --- | ---: | --- | ---: |
