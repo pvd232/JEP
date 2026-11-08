@@ -1,19 +1,19 @@
 # Live training status
 
-Updated: Sun 5:44 AM EST. Refresh this page for the latest snapshot.
+Updated: Sun 5:50 AM EST. Refresh this page for the latest snapshot.
 A background CPU reporter updates this branch every five minutes. Treat snapshots older than ten minutes as stale.
 
 **Training fits finished: 6 / 15.**
 The held-out test remains sealed for evaluation.
 
-**Estimated training finish: Sun 12:53 PM EST**
-Planning range: Sun 10:08 AM EST to Sun 2:32 PM EST.
+**Estimated training finish: Sun 12:57 PM EST**
+Planning range: Sun 10:13 AM EST to Sun 2:20 PM EST.
 Basis: 16.5 minutes per completed epoch; 3–6 total epochs per remaining fit, based on 6 stopped fits.
 Validation-based stopping or Spot interruptions can extend this estimate.
 
 | Placement | Current work | Fits finished | GPU use | Cloud-verified epochs | Uploads pending |
 | --- | --- | ---: | ---: | ---: | ---: |
-| Seoul (asia-northeast3-a) | C_case_inspired_seed9, epoch 5 | 3 / 9 | 100 % | 19 | 0 |
+| Seoul (asia-northeast3-a) | C_case_inspired_seed9, epoch 6 | 3 / 9 | 100 % | 20 | 0 |
 | Taiwan (asia-east1-b) | A_condition_first_seed10, epoch 1 | 3 / 6 | 100 % | 14 | 0 |
 
 Cloud-verified epochs include the five preserved Seoul epochs. New publications use native VIPER Cloud.
@@ -27,7 +27,7 @@ The existing controllers delete owned compute and disks after verified publicati
 | B_order_only_seed8 | 3 | Finished | 2 |
 | C_case_inspired_seed8 | 5 | Finished | 4 |
 | A_condition_first_seed8 | 6 | Finished | 5 |
-| C_case_inspired_seed9 | 4 | Running | — |
+| C_case_inspired_seed9 | 5 | Running | — |
 | A_condition_first_seed9 | 0 | Queued | — |
 | B_order_only_seed9 | 0 | Queued | — |
 | A_condition_first_seed10 | 0 | Running | — |
