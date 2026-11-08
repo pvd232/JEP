@@ -2,7 +2,7 @@
 """Monitor manifest-selected Spot workers and clean up only their owned resources.
 
 VIPER publication runs asynchronously on each worker under its attached identity.
-This controller uses the existing administrator connection for lifecycle actions.
+This controller uses the CPU host attached service account for lifecycle actions.
 Unverified checkpoints keep their recovery disk; a successful final export permits
 deletion of the exact task-owned boot disk recorded in the allocation manifest.
 """
@@ -20,6 +20,9 @@ from pathlib import Path
 import shlex
 import subprocess
 import time
+import os
+import sys
+import urllib.request
 
 from csts_pilot.full_data_prompt_lease import validate_placement
 from csts_pilot.full_data_prompt_worker import acknowledgment_matches
@@ -28,15 +31,91 @@ REMOTE_ROOT = "/home/machina/jep-full-data-task-20261107/repo"
 TASK = "jep-full-data-20261107"
 
 
+
+class CloudCommandError(RuntimeError):
+    """Retain the API failure category without declaring a training failure."""
+    def __init__(self, detail: str):
+        super().__init__(detail)
+        lower = detail.lower()
+        self.kind = ("authentication_required" if any(value in lower for value in
+                     ("reauthentication", "no valid credentials", "no active account"))
+                     else "authorization_denied" if any(value in lower for value in
+                     ("permission_denied", "permission denied", "required '", "does not have permission"))
+                     else "transport_unavailable")
+
+
+class ObservationUnavailable(RuntimeError):
+    """Stop observation without claiming GPU failure or authorizing deletion."""
+
+
+class AllocationLost(RuntimeError):
+    """Represent a provider-confirmed stopped or absent allocation."""
+
+
+class WorkerReportedFailure(RuntimeError):
+    """Represent a failure reported by the exact worker execution."""
+
+
+class AllocationDeadline(RuntimeError):
+    """Represent expiration of the original approved resource deadline."""
+
+
+class CleanupIncomplete(RuntimeError):
+    """Keep verified publication distinct from unconfirmed resource deletion."""
+
+
+def controller_environment() -> dict[str, str]:
+    """Isolate the CLI from personal credentials and use metadata refresh."""
+    env = os.environ.copy()
+    for name in ("GOOGLE_APPLICATION_CREDENTIALS", "CLOUDSDK_AUTH_ACCESS_TOKEN",
+                 "CLOUDSDK_AUTH_ACCESS_TOKEN_FILE", "CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE",
+                 "CLOUDSDK_AUTH_IMPERSONATE_SERVICE_ACCOUNT"):
+        env.pop(name, None)
+    config = Path.home() / ".config/jep-spot-controller/gcloud"
+    config.mkdir(parents=True, exist_ok=True, mode=0o700)
+    env["CLOUDSDK_CONFIG"] = str(config)
+    return env
+
+
+def require_controller_identity(account: str) -> dict:
+    """Require the declared attached identity before unattended lifecycle work."""
+    if not account.endswith(".gserviceaccount.com"):
+        raise PermissionError("Unattended controllers require an attached service account; personal login is rejected.")
+    request = urllib.request.Request(
+        "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/email",
+        headers={"Metadata-Flavor": "Google"})
+    with urllib.request.urlopen(request, timeout=5) as response:
+        attached = response.read().decode().strip()
+    if attached != account:
+        raise PermissionError("Controller account differs from the CPU host attached identity.")
+    return {"account": account, "credential_source": "gce_metadata", "automatic_refresh": True}
+
+
+def retry_observation(worker: str, local: Path, stage: str, error: Exception, failures: int) -> int:
+    """Bound transport retries and retain access failures without deleting GPU work."""
+    failures += 1
+    kind = getattr(error, "kind", "transport_unavailable")
+    blocked = kind in {"authentication_required", "authorization_denied"} or failures >= 5
+    record = {"worker": worker, "stage": stage, "kind": kind,
+              "reason": str(error)[-1800:], "consecutive_failures": failures,
+              "utc": dt.datetime.now(dt.timezone.utc).isoformat(),
+              "gpu_state": "unknown", "cleanup_authorized_by_this_error": False,
+              "retry_pending": not blocked}
+    (local / (worker + "-controller-error.json")).write_text(json.dumps(record, indent=2) + "\n")
+    if blocked:
+        raise ObservationUnavailable(kind + " while " + stage + ": " + str(error)) from error
+    time.sleep(min(15 * 2 ** (failures - 1), 60))
+    return failures
+
 def run(args: list[str], timeout: int = 120) -> subprocess.CompletedProcess:
     """Run a bounded cloud command without shell interpolation."""
-    return subprocess.run(args, capture_output=True, text=True, timeout=timeout)
+    return subprocess.run(args, capture_output=True, text=True, timeout=timeout, env=controller_environment())
 
 
 def require_ok(result: subprocess.CompletedProcess) -> str:
     """Expose provider failures without presenting a partial action as successful."""
     if result.returncode:
-        raise RuntimeError(result.stderr[-1800:] or result.stdout[-1800:])
+        raise CloudCommandError(result.stderr[-1800:] or result.stdout[-1800:])
     return result.stdout
 
 
@@ -174,7 +253,7 @@ def verify_cloud_archive(uri: str, manifest: dict, assignment: dict, account: st
     with tempfile.TemporaryFile() as errors:
         process = subprocess.Popen(['gcloud','storage','cat',uri,
                                     '--project=' + assignment['project'], '--account=' + account,
-                                    '--quiet'], stdout=subprocess.PIPE, stderr=errors)
+                                    '--quiet'], stdout=subprocess.PIPE, stderr=errors, env=controller_environment())
         timer = threading.Timer(900, process.kill)
         timer.start()
         try:
@@ -191,53 +270,89 @@ def verify_cloud_archive(uri: str, manifest: dict, assignment: dict, account: st
 
 
 def monitor(worker: str, args: argparse.Namespace) -> dict:
-    """Observe one independent worker and finalize its resources after export or failure."""
+    """Observe independently; clean up only on confirmed completion, failure or deadline."""
     assignment = args.approval["assignments"][worker]
     account = args.approval["controller_account"]
-    deadline = time.monotonic() + args.max_hours * 3600
+    remaining = min(args.max_hours * 3600,
+                    assignment.get("deadline_epoch", time.time() + args.max_hours * 3600) - time.time())
+    deadline = time.monotonic() + max(0, remaining)
     last = None
     started = time.monotonic()
     failure_at = None
     verified = False
+    cleanup_permitted = False
+    failures = 0
     try:
         while time.monotonic() < deadline:
-            instance = describe(assignment, account)
+            try:
+                instance = describe(assignment, account)
+            except PermissionError:
+                raise
+            except (CloudCommandError, subprocess.TimeoutExpired, OSError) as error:
+                failures = retry_observation(worker, args.local, "provider observation", error, failures)
+                continue
             if instance is None or instance["status"] == "TERMINATED":
-                raise RuntimeError("Spot worker stopped or disappeared; recovery disk retained.")
+                cleanup_permitted = True
+                raise AllocationLost("Provider confirmed a stopped or absent allocation; recovery disk retained.")
             if instance["status"] != "RUNNING":
                 time.sleep(15)
                 continue
-            obj = read_worker(assignment, account, worker)
+            try:
+                obj = read_worker(assignment, account, worker)
+            except PermissionError:
+                raise
+            except (CloudCommandError, subprocess.TimeoutExpired, OSError) as error:
+                failures = retry_observation(worker, args.local, "worker observation", error, failures)
+                continue
+            failures = 0
             if not obj["state"] and time.monotonic() - started > 300:
-                raise RuntimeError("Training did not start within the five-minute allocation window.")
+                cleanup_permitted = True
+                raise RuntimeError("Connected worker has no training state after five minutes; bootstrap failed.")
             if obj["state"]:
                 last = obj["state"]
-                (args.local / f"{worker}-latest-state.json").write_text(json.dumps(last, indent=2) + "\n")
                 if (last["source_commit"] != args.source
                         or last.get("lease", {}).get("execution_id") != assignment["execution_id"]
                         or not last.get("lease", {}).get("deadline_verified")):
                     raise ValueError("Worker source or execution lease differs from this launch.")
+                (args.local / f"{worker}-latest-state.json").write_text(json.dumps(last, indent=2) + "\n")
             if last and last["status"] == "assigned_training_complete_test_not_opened":
                 validate_completion(worker, assignment, obj)
                 proofs = []
-                for entry in obj['generations']:
-                    uri = cloud_archive_uri(worker, entry['manifest'], entry['ack'], args.approval['cloud'])
-                    proofs.append(verify_cloud_archive(uri, entry['manifest'], assignment, account))
+                for entry in obj["generations"]:
+                    uri = cloud_archive_uri(worker, entry["manifest"], entry["ack"], args.approval["cloud"])
+                    proofs.append(verify_cloud_archive(uri, entry["manifest"], assignment, account))
                 verified = True
+                cleanup_permitted = True
                 (args.local / f"{worker}-final-viper-receipt.json").write_text(json.dumps(proofs, indent=2) + "\n")
                 return {"worker": worker, "status": "training_collected_test_still_locked",
                         "trials": len(last["trials"]), "controller_cloud_proofs": proofs}
             if last and last["status"] == "failed_preserved":
                 failure_at = failure_at or time.monotonic()
                 if not obj["ready"] or time.monotonic() - failure_at > 120:
-                    raise RuntimeError(json.dumps(last.get("failure", {})))
+                    cleanup_permitted = True
+                    raise WorkerReportedFailure(json.dumps(last.get("failure", {})))
             time.sleep(20)
-        raise TimeoutError("Allocation collection deadline ended; recovery disk retained.")
+        cleanup_permitted = True
+        raise AllocationDeadline("Original allocation collection deadline ended; recovery disk retained.")
     finally:
-        receipt = cleanup(assignment, account, verified, args.delete_verified_disks)
+        active_error = sys.exc_info()[1]
+        cleanup_error = None
+        if cleanup_permitted:
+            try:
+                receipt = {"cleanup_status": "completed",
+                           **cleanup(assignment, account, verified, args.delete_verified_disks)}
+            except Exception as error:
+                cleanup_error = error
+                receipt = {"cleanup_status": "failed", "reason": str(error),
+                           "instance_deleted": None, "disk_deleted": None,
+                           "publication_verified": verified}
+        else:
+            receipt = {"cleanup_status": "not_attempted", "reason": "Current worker state or publication is unconfirmed.",
+                       "instance_deleted": None, "disk_deleted": None, "publication_verified": verified}
         (args.local / f"{worker}-cleanup.json").write_text(json.dumps(receipt, indent=2) + "\n")
         print(json.dumps({"event": "resource_cleanup", "worker": worker, **receipt}), flush=True)
-
+        if cleanup_error is not None and active_error is None:
+            raise CleanupIncomplete("Publication verified, but cleanup failed: " + str(cleanup_error)) from cleanup_error
 
 def main() -> None:
     """Run bounded lifecycle monitors for the worker set in one approved manifest."""
@@ -264,6 +379,8 @@ def main() -> None:
             raise ValueError("Two worker labels cannot share one instance.")
         identities.add(key)
     args.local.mkdir(parents=True, exist_ok=True)
+    identity = require_controller_identity(args.approval["controller_account"])
+    (args.local / "controller-identity.json").write_text(json.dumps(identity, indent=2) + "\n")
     records = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=len(assignments)) as pool:
         pending = {pool.submit(monitor, worker, args): worker for worker in assignments}
@@ -272,7 +389,13 @@ def main() -> None:
             try:
                 record = future.result()
             except Exception as exc:
-                record = {"worker": worker, "status": "failed_preserved", "reason": str(exc)}
+                status = ("allocation_lost_preserved" if isinstance(exc, AllocationLost)
+                          else "worker_failed_preserved" if isinstance(exc, WorkerReportedFailure)
+                          else "allocation_deadline_preserved" if isinstance(exc, AllocationDeadline)
+                          else "cleanup_failed" if isinstance(exc, CleanupIncomplete)
+                          else "controller_unavailable")
+                record = {"worker": worker, "status": status, "reason": str(exc),
+                          "exception": type(exc).__name__}
             records.append(record)
             print(json.dumps(record), flush=True)
     (args.local / "collection-final.json").write_text(json.dumps(records, indent=2) + "\n")

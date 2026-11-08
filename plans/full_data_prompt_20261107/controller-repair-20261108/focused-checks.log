@@ -1,0 +1,52 @@
+test_changed_identity_cannot_trigger_cleanup (test_spot_controller_failures.ControllerFailureTests.test_changed_identity_cannot_trigger_cleanup) ... {"event": "resource_cleanup", "worker": "worker1", "cleanup_status": "not_attempted", "reason": "Current worker state or publication is unconfirmed.", "instance_deleted": null, "disk_deleted": null, "publication_verified": false}
+ok
+test_cleanup_error_does_not_replace_original_worker_failure (test_spot_controller_failures.ControllerFailureTests.test_cleanup_error_does_not_replace_original_worker_failure) ... {"event": "resource_cleanup", "worker": "worker1", "cleanup_status": "failed", "reason": "Reauthentication failed", "instance_deleted": null, "disk_deleted": null, "publication_verified": false}
+ok
+test_cli_environment_excludes_personal_credential_overrides (test_spot_controller_failures.ControllerFailureTests.test_cli_environment_excludes_personal_credential_overrides) ... ok
+test_expired_auth_never_deletes_or_relabels_running_work (test_spot_controller_failures.ControllerFailureTests.test_expired_auth_never_deletes_or_relabels_running_work) ... {"event": "resource_cleanup", "worker": "worker1", "cleanup_status": "not_attempted", "reason": "Current worker state or publication is unconfirmed.", "instance_deleted": null, "disk_deleted": null, "publication_verified": false}
+ok
+test_personal_login_is_rejected_before_metadata_or_cloud_access (test_spot_controller_failures.ControllerFailureTests.test_personal_login_is_rejected_before_metadata_or_cloud_access) ... ok
+test_repeated_transport_failures_are_bounded_without_cleanup (test_spot_controller_failures.ControllerFailureTests.test_repeated_transport_failures_are_bounded_without_cleanup) ... {"event": "resource_cleanup", "worker": "worker1", "cleanup_status": "not_attempted", "reason": "Current worker state or publication is unconfirmed.", "instance_deleted": null, "disk_deleted": null, "publication_verified": false}
+ok
+test_transient_ssh_failure_is_retried_without_deleting_worker (test_spot_controller_failures.ControllerFailureTests.test_transient_ssh_failure_is_retried_without_deleting_worker) ... {"event": "resource_cleanup", "worker": "worker1", "cleanup_status": "not_attempted", "reason": "Current worker state or publication is unconfirmed.", "instance_deleted": null, "disk_deleted": null, "publication_verified": false}
+ok
+test_worker_reported_failure_allows_owned_compute_cleanup_but_keeps_disk (test_spot_controller_failures.ControllerFailureTests.test_worker_reported_failure_allows_owned_compute_cleanup_but_keeps_disk) ... {"event": "resource_cleanup", "worker": "worker1", "cleanup_status": "completed", "instance_deleted": true, "disk_deleted": false}
+ok
+test_auth_failure_is_unknown_and_does_not_become_a_terminal_worker_result (test_spot_controller_failures.ReporterFailureTests.test_auth_failure_is_unknown_and_does_not_become_a_terminal_worker_result) ... ok
+test_nonzero_wait_terminal_stockout_is_observed_before_fallback (test_spot_lifecycle.AllocationObservationTests.test_nonzero_wait_terminal_stockout_is_observed_before_fallback) ... ok
+test_operation_observation_timeout_never_cleans_resources (test_spot_lifecycle.AllocationObservationTests.test_operation_observation_timeout_never_cleans_resources) ... ok
+test_pending_operation_never_authorizes_fallback (test_spot_lifecycle.AllocationObservationTests.test_pending_operation_never_authorizes_fallback) ... ok
+test_running_wait_is_polled_to_done_without_another_create (test_spot_lifecycle.AllocationObservationTests.test_running_wait_is_polled_to_done_without_another_create) ... ok
+test_changed_recovery_disk_cannot_be_deleted (test_spot_lifecycle.CleanupTests.test_changed_recovery_disk_cannot_be_deleted) ... ok
+test_replacement_instance_cannot_be_deleted (test_spot_lifecycle.CleanupTests.test_replacement_instance_cannot_be_deleted) ... ok
+test_unverified_failure_keeps_recovery_disk (test_spot_lifecycle.CleanupTests.test_unverified_failure_keeps_recovery_disk) ... ok
+test_invalid_inherited_ack_never_permits_disk_cleanup (test_spot_lifecycle.CompletionAndStorageRegressionTests.test_invalid_inherited_ack_never_permits_disk_cleanup) ... {"event": "resource_cleanup", "worker": "worker1", "cleanup_status": "not_attempted", "reason": "Current worker state or publication is unconfirmed.", "instance_deleted": null, "disk_deleted": null, "publication_verified": false}
+ok
+test_low_disk_reserve_blocks_another_epoch (test_spot_lifecycle.CompletionAndStorageRegressionTests.test_low_disk_reserve_blocks_another_epoch) ... ok
+test_verified_tar_is_reclaimed_without_losing_native_artifacts (test_spot_lifecycle.CompletionAndStorageRegressionTests.test_verified_tar_is_reclaimed_without_losing_native_artifacts) ... {"utc": "2026-11-08T21:30:05.472017+00:00", "event": "checkpoint_export_ready", "generation": "epoch1", "sha256": "98fc167e221941b5a7c2e8e6ba6337feeb29334a34b7cae4854302e0257accbe", "bytes": 10240}
+{"utc": "2026-11-08T21:30:05.479230+00:00", "event": "checkpoint_cloud_verified", "generation": "epoch1"}
+{"utc": "2026-11-08T21:30:05.479740+00:00", "event": "checkpoint_export_ready", "generation": "epoch1", "sha256": "98fc167e221941b5a7c2e8e6ba6337feeb29334a34b7cae4854302e0257accbe", "bytes": 10240}
+{"utc": "2026-11-08T21:30:05.486204+00:00", "event": "checkpoint_cloud_verified", "generation": "epoch1"}
+ok
+test_outside_region_cannot_enter_candidate_search (test_spot_lifecycle.PlacementTests.test_outside_region_cannot_enter_candidate_search) ... ok
+test_taiwan_capacity_can_be_selected_without_tokyo (test_spot_lifecycle.PlacementTests.test_taiwan_capacity_can_be_selected_without_tokyo) ... ok
+test_cloud_verification_failure_preserves_local_without_ack (test_spot_lifecycle.PublicationTests.test_cloud_verification_failure_preserves_local_without_ack) ... ok
+test_verified_publication_writes_bound_viper_ack (test_spot_lifecycle.PublicationTests.test_verified_publication_writes_bound_viper_ack) ... ok
+test_changed_preserved_state_cannot_rebind (test_spot_lifecycle.ResumeTests.test_changed_preserved_state_cannot_rebind) ... ok
+test_hash_bound_rebind_preserves_completed_records (test_spot_lifecycle.ResumeTests.test_hash_bound_rebind_preserves_completed_records) ... ok
+test_scientific_code_change_cannot_reuse_training_revision (test_spot_lifecycle.ResumeTests.test_scientific_code_change_cannot_reuse_training_revision) ... ok
+test_completed_resume_publishes_current_lease_without_training (test_spot_lifecycle.ReviewRegressionTests.test_completed_resume_publishes_current_lease_without_training) ... {"utc": "2026-11-08T21:30:45.919390+00:00", "event": "assigned_training_complete", "trials": 1, "test_opened": false}
+ok
+test_distinct_journals_share_project_admission_lock (test_spot_lifecycle.ReviewRegressionTests.test_distinct_journals_share_project_admission_lock) ... ok
+test_pending_old_generation_is_published_with_original_identity (test_spot_lifecycle.ReviewRegressionTests.test_pending_old_generation_is_published_with_original_identity) ... ok
+test_preserved_native_runtime_cannot_change_gpu_or_packages (test_spot_lifecycle.ReviewRegressionTests.test_preserved_native_runtime_cannot_change_gpu_or_packages) ... ok
+test_resume_cannot_relabel_scientific_source (test_spot_lifecycle.ReviewRegressionTests.test_resume_cannot_relabel_scientific_source) ... ok
+test_final_ack_does_not_bypass_a_transient_pending_upload (test_spot_lifecycle.TerminalUploadRegressionTests.test_final_ack_does_not_bypass_a_transient_pending_upload) ... {"event": "viper_generation_verified", "worker": "worker1", "generation": "publication-complete-cccccccccccccccccccccccccccccccc", "instance_id": "999", "execution_id": "cccccccccccccccccccccccccccccccc", "source_commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "archive": "/tmp/tmprquabdzi/baseline_results/full_data_prompt_20261107/worker1/transfer/publication-complete-cccccccccccccccccccccccccccccccc/native.tar", "archive_sha256": "d82906937e82695b5e3f2a7dfa869fa44977986a5c394527402c1a843d91fe22", "archive_size": 53, "cloud_roundtrip_verified": true, "transport": "viper_cloud"}
+{"event": "viper_generation_verified", "worker": "worker1", "generation": "worker-failed-old", "instance_id": "123", "execution_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "source_commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "archive": "/tmp/tmprquabdzi/baseline_results/full_data_prompt_20261107/worker1/transfer/worker-failed-old/native.tar", "archive_sha256": "a8d9f95d1918a1d91b5d18852186b3444036981d5122d8f595dbcfcbc59b83d9", "archive_size": 17, "cloud_roundtrip_verified": true, "transport": "viper_cloud"}
+ok
+test_same_lease_resume_requires_new_attempt_identity (test_spot_lifecycle.TerminalUploadRegressionTests.test_same_lease_resume_requires_new_attempt_identity) ... ok
+
+----------------------------------------------------------------------
+Ran 33 tests in 40.737s
+
+OK

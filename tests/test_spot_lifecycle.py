@@ -338,7 +338,7 @@ class CompletionAndStorageRegressionTests(unittest.TestCase):
                  patch.object(collector,'cleanup',return_value={'recovery_disk_preserved':True}) as cleanup:
                 with self.assertRaisesRegex(ValueError,'mismatched generation'):
                     collector.monitor('worker1',args)
-            self.assertFalse(cleanup.call_args.args[2])
+            cleanup.assert_not_called()
 
 
 if __name__ == "__main__":

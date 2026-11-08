@@ -1,0 +1,1237 @@
+{
+  "protocol_sha256": "0aee2f8aece3e89ff12223fe40a54fb632305339f240475362212c432fd68a11",
+  "execution_source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+  "training_source_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+  "test_opened": false,
+  "frozen_utc": "2026-11-08T21:56:50.310523+00:00",
+  "selections": [
+    {
+      "trial_id": "A_condition_first_seed10",
+      "arm": "A_condition_first",
+      "seed": 10,
+      "training_source_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+      "execution_source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+      "protocol_sha256": "0aee2f8aece3e89ff12223fe40a54fb632305339f240475362212c432fd68a11",
+      "prompt_sha256": "2bee95ef599718c32b01fe55ca47a5b12f426290fd59731eab0cd939b68e88e2",
+      "native_run_id": "139218f3a3131c257bef0f69c6e56d68e7df4458f13c999b313b06182dc3ab73",
+      "native_run_reference": {
+        "sha256": "231e59140bfd99be6082c98017b87233ada3c92d557fa9ea52fe06178f2af7d8",
+        "bytes": 1090,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-full-data-task-20261107/repo",
+          "store": ".viper/store",
+          "store_id": "7c2d8e82b327dcd5e65a7958bf5c910d",
+          "commit": "97e753dd3d84964a6b1af7a0697a4f36e985c7739ad7dfd5d9641e32f3c25999",
+          "path": "experiments/full_prompt_83467f75_a_condition_first_s10_e4/runs/a_condition_first/01M6XV9CMKAH75CQVT0XHW3KAW/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "trace_sha256": "db79ed856ae65429571425cf7272cb3b8967a59940421755b0149326a2a1851c",
+      "model_sha256": "84458c9ae1bea5f86a37fc77dd949bccd6f5982c31d5e462aec2ee81f37134cc",
+      "validation_predictions_sha256": "e9ffb354f415b1e510c7eb0c9f8cf806b6533d2aa28ed8f41b46fa7ff4995840",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "selected_epoch": 3,
+      "completed_epochs": 4,
+      "actual_updates": 760,
+      "stop_reason": "validation_patience",
+      "selection_metric": "validation_spearman",
+      "test_used": false,
+      "validation_metrics": {
+        "n": 1576,
+        "mse_0_1": 0.03192856229310998,
+        "mse_1_5": 0.5108569966897597,
+        "spearman": 0.8724975979532501,
+        "prediction_mean": 0.5972109626702962,
+        "target_mean": 0.6134200507614214,
+        "prediction_std": 0.3367859041556897,
+        "target_std": 0.3852562483034509,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 266,
+            "mean": 0.11957057444921422
+          },
+          "2.0": {
+            "n": 213,
+            "mean": 0.3263610906794038
+          },
+          "3.0": {
+            "n": 302,
+            "mean": 0.5061700987500071
+          },
+          "4.0": {
+            "n": 130,
+            "mean": 0.6798239113046572
+          },
+          "5.0": {
+            "n": 665,
+            "mean": 0.9002155094106394
+          }
+        },
+        "condition_changes": {
+          "n": 551,
+          "correct": 531,
+          "ties": 0,
+          "accuracy_ties_half": 0.9637023593466425,
+          "difference_mse": 0.06731482257908468,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "initial_trainable_sha256": "d66f485ada57e135e7f1bad0d43c7a76c832fd6833c4be3f81b9ba4ebaf53ba1",
+      "batch_order_sha256": [
+        "9c621dc9d9acb39b750748d3d3d3fc61c4754266c20b33a63e78d8fe44b1e280",
+        "adc8a5007d9752ab59917d4acc774e5cdc2a400108efbba6fb37a48ac03fb9ac",
+        "c901c5804ecdbe60453be6c716828a2bdcc1e8d0a6777f1376d332a6c7f2c9b1",
+        "146995c09f147da7cf8dcd71dcc56d553d431d819cdd6e4e425e9f402448ed3f"
+      ]
+    },
+    {
+      "trial_id": "A_condition_first_seed11",
+      "arm": "A_condition_first",
+      "seed": 11,
+      "training_source_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+      "execution_source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+      "protocol_sha256": "0aee2f8aece3e89ff12223fe40a54fb632305339f240475362212c432fd68a11",
+      "prompt_sha256": "2bee95ef599718c32b01fe55ca47a5b12f426290fd59731eab0cd939b68e88e2",
+      "native_run_id": "6443787e1615f247e8d6687faa0dc1e798c6d6b96d5671c18b49e7369bb55c1a",
+      "native_run_reference": {
+        "sha256": "d1753346277b802dad4fca796b2bd5ac412bef14caea6cce3d2d6a9efea60087",
+        "bytes": 1090,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-full-data-task-20261107/repo",
+          "store": ".viper/store",
+          "store_id": "747740edc48a233d08deca7cbdca5ffb",
+          "commit": "8dd4414c8d25bc3bbcfa73ce05bd1061f78950002c6ee20d2ff80103d9a04920",
+          "path": "experiments/full_prompt_83467f75_a_condition_first_s11_e5/runs/a_condition_first/01M6Y4P58V9ZMT9RQHTYZC95W5/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "trace_sha256": "bcb270031bcbe41ac90ff9a9525284b00a15d5453ffd1d9c1b7731f638ada7bb",
+      "model_sha256": "01a1c09ce18b8a7518ef616d307de3663ac1b91058c06b00f9dd8282ecdbe7cd",
+      "validation_predictions_sha256": "8d227d8b7cc9c6df5c22d085c7155b44c634dc9780fdcef73f4e7b64686b3960",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "selected_epoch": 4,
+      "completed_epochs": 5,
+      "actual_updates": 950,
+      "stop_reason": "validation_patience",
+      "selection_metric": "validation_spearman",
+      "test_used": false,
+      "validation_metrics": {
+        "n": 1576,
+        "mse_0_1": 0.03203045570227281,
+        "mse_1_5": 0.5124872912363649,
+        "spearman": 0.8750488300591874,
+        "prediction_mean": 0.5820368998944003,
+        "target_mean": 0.6134200507614214,
+        "prediction_std": 0.3449797002908681,
+        "target_std": 0.3852562483034509,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 266,
+            "mean": 0.09786942653021866
+          },
+          "2.0": {
+            "n": 213,
+            "mean": 0.3021437984676988
+          },
+          "3.0": {
+            "n": 302,
+            "mean": 0.4818067481025856
+          },
+          "4.0": {
+            "n": 130,
+            "mean": 0.6547330245375633
+          },
+          "5.0": {
+            "n": 665,
+            "mean": 0.8966606414827861
+          }
+        },
+        "condition_changes": {
+          "n": 551,
+          "correct": 533,
+          "ties": 0,
+          "accuracy_ties_half": 0.9673321234119783,
+          "difference_mse": 0.06544629034254666,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "initial_trainable_sha256": "b39679d280e5fd8eb9582facfeb70457c73fa1c1395decd5977762c250718e0e",
+      "batch_order_sha256": [
+        "01e82c38677c14ec428802ea58249d381218e37fbe1fa812efe2ed05a59807e5",
+        "e92a0a78fac7da1d505352687adeb10f5958247eb710ce43632ecf0965363e0e",
+        "092b3fbb69c50404909adf67ae508505b225239332985b74f3544611c49f2910",
+        "85d6e9b4914414ea516cdc135a80c67ab09b064c3a046b108b7fa5a09422de7a",
+        "aa6da1922bcd1c8dbb05c0b1f1a9f4faec2ecded6a34729800eb9a9363cd276c"
+      ]
+    },
+    {
+      "trial_id": "A_condition_first_seed7",
+      "arm": "A_condition_first",
+      "seed": 7,
+      "training_source_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+      "execution_source_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+      "protocol_sha256": "0aee2f8aece3e89ff12223fe40a54fb632305339f240475362212c432fd68a11",
+      "prompt_sha256": "2bee95ef599718c32b01fe55ca47a5b12f426290fd59731eab0cd939b68e88e2",
+      "native_run_id": "5b19cb7bc97c2335398e7ad3078cb5f5e40442277d65f38b632e9a37ae11b309",
+      "native_run_reference": {
+        "sha256": "b6310a0ac1457af8c780913ffb7845da532acba8967136e2d32f20a8d873f604",
+        "bytes": 1088,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-full-data-task-20261107/repo",
+          "store": ".viper/store",
+          "store_id": "747740edc48a233d08deca7cbdca5ffb",
+          "commit": "f66fa1b47b607fe39dd5d6b5d2ac77533f4ee61cce0bc8720a7a84aa87f58085",
+          "path": "experiments/full_prompt_9b163a10_a_condition_first_s7_e5/runs/a_condition_first/01M6WPQG6CD5381WGFSS0GZEXG/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "trace_sha256": "dd0b20019a8e523cfcb0db74385aedb88b06dafd06f8f229e4f53722263980a0",
+      "model_sha256": "92321cd418d74bba7643af223d34c6ba0a7e59bfaf6c11160c4c44176f2b1854",
+      "validation_predictions_sha256": "42270ab823ff0dc13d72f0bbcb6f4547f4bd12725e138895f5d071815b0feec9",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "selected_epoch": 4,
+      "completed_epochs": 5,
+      "actual_updates": 950,
+      "stop_reason": "validation_patience",
+      "selection_metric": "validation_spearman",
+      "test_used": false,
+      "validation_metrics": {
+        "n": 1576,
+        "mse_0_1": 0.030871644386266796,
+        "mse_1_5": 0.49394631018026874,
+        "spearman": 0.8764748186828899,
+        "prediction_mean": 0.5910617615634618,
+        "target_mean": 0.6134200507614214,
+        "prediction_std": 0.34266823805419916,
+        "target_std": 0.3852562483034509,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 266,
+            "mean": 0.10997979056188151
+          },
+          "2.0": {
+            "n": 213,
+            "mean": 0.30732340607005104
+          },
+          "3.0": {
+            "n": 302,
+            "mean": 0.4926689190941166
+          },
+          "4.0": {
+            "n": 130,
+            "mean": 0.6710701924103957
+          },
+          "5.0": {
+            "n": 665,
+            "mean": 0.9034190794915185
+          }
+        },
+        "condition_changes": {
+          "n": 551,
+          "correct": 532,
+          "ties": 0,
+          "accuracy_ties_half": 0.9655172413793104,
+          "difference_mse": 0.06323306104594047,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "initial_trainable_sha256": "4b73103d990fd3441c8b8ea0cbad43ed04049a46ca5846e718c14101c67c57aa",
+      "batch_order_sha256": [
+        "4d48d6c08f0848e080bb0e6b73db5edc7395c7bb4a5434c23f6444e9b1163ebf",
+        "11b247eadc2fe1cbb3f1192d29107e425210f01b440a93490932d162686ced12",
+        "ff8bb078df8984c6191f7f0b609437632ac9c489b01db4d7c91fc5d559503b69",
+        "bf18651d40c5b4e25636c230ffeae7da217ad1f18ef409ae60e70e5df45c8368",
+        "63149a61b9b4246eb303dea457fa20bcebefddf81bc09c7b9dd12090059a86c7"
+      ]
+    },
+    {
+      "trial_id": "A_condition_first_seed8",
+      "arm": "A_condition_first",
+      "seed": 8,
+      "training_source_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+      "execution_source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+      "protocol_sha256": "0aee2f8aece3e89ff12223fe40a54fb632305339f240475362212c432fd68a11",
+      "prompt_sha256": "2bee95ef599718c32b01fe55ca47a5b12f426290fd59731eab0cd939b68e88e2",
+      "native_run_id": "1f07fc212c20a5cd64435dd63e9d10f8085c7c4e4e65ee67b5c4f356b9844362",
+      "native_run_reference": {
+        "sha256": "83bc222f18c0c85d60f8ccc08e882ea228a3acc3212be1fc8e303bb53f5796d3",
+        "bytes": 1088,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-full-data-task-20261107/repo",
+          "store": ".viper/store",
+          "store_id": "7c2d8e82b327dcd5e65a7958bf5c910d",
+          "commit": "c7d86297354b1c83a16d3994dc8448f6755c92315755ac12506fe6e503515d95",
+          "path": "experiments/full_prompt_83467f75_a_condition_first_s8_e6/runs/a_condition_first/01M6XB23HV9G57SEVC7BW38BSB/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "trace_sha256": "4a0d81877b489e99183d9801c34911305bef136dad6db3308ab9c83ca57322a8",
+      "model_sha256": "2f4654fe9a6e8f102c8ab47039a1da48e89b6b43237d62788f8868fe46c9cec8",
+      "validation_predictions_sha256": "94b8cae9c0bbf3c43a39947bc70f94a0f3d8468915d596e72b185397617d3495",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "selected_epoch": 5,
+      "completed_epochs": 6,
+      "actual_updates": 1140,
+      "stop_reason": "validation_patience",
+      "selection_metric": "validation_spearman",
+      "test_used": false,
+      "validation_metrics": {
+        "n": 1576,
+        "mse_0_1": 0.032286918342664554,
+        "mse_1_5": 0.5165906934826329,
+        "spearman": 0.8731076316027357,
+        "prediction_mean": 0.587229239642691,
+        "target_mean": 0.6134200507614214,
+        "prediction_std": 0.3491226027042153,
+        "target_std": 0.3852562483034509,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 266,
+            "mean": 0.09265974062123805
+          },
+          "2.0": {
+            "n": 213,
+            "mean": 0.30622853650033754
+          },
+          "3.0": {
+            "n": 302,
+            "mean": 0.49017904705016424
+          },
+          "4.0": {
+            "n": 130,
+            "mean": 0.6794759226533083
+          },
+          "5.0": {
+            "n": 665,
+            "mean": 0.9011025116435791
+          }
+        },
+        "condition_changes": {
+          "n": 551,
+          "correct": 534,
+          "ties": 0,
+          "accuracy_ties_half": 0.969147005444646,
+          "difference_mse": 0.06359969356391108,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "initial_trainable_sha256": "5f8d17a0bd6d7c23a2ed8e943402ef59309192a5d447023908babdfee55bced0",
+      "batch_order_sha256": [
+        "2c06068ad3b048c8a485c04347cf8694efce847976df736b64b88b2f598ff8e8",
+        "30970018e4ba9b81496590db7a19a311fb8d06123936473303a337970fbfe867",
+        "0a65359b1258797ed1bff967c4c0058e05f33aff7e558169334e5a819c7e2126",
+        "9ca78e215849846581a824dc68eea7cd0f7a71c0b6fcf7228ed0ece3434d918a",
+        "ded7256f9b4037f6425c12a6f82ce8c49f3c2d69ed76b1021db74828a1745775",
+        "6b53fb1ccda54c6107c7958041b76ab9fe5295e62c94ceec425429c0d7af0d39"
+      ]
+    },
+    {
+      "trial_id": "A_condition_first_seed9",
+      "arm": "A_condition_first",
+      "seed": 9,
+      "training_source_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+      "execution_source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+      "protocol_sha256": "0aee2f8aece3e89ff12223fe40a54fb632305339f240475362212c432fd68a11",
+      "prompt_sha256": "2bee95ef599718c32b01fe55ca47a5b12f426290fd59731eab0cd939b68e88e2",
+      "native_run_id": "679a91f30d4796e69451401778268576e9b42f788c38969c2c17991a44e6c424",
+      "native_run_reference": {
+        "sha256": "d94338223c42ac3a89a2da0b4f7c55ddbb02a3abbd8ef79623250b1f80d54275",
+        "bytes": 1088,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-full-data-task-20261107/repo",
+          "store": ".viper/store",
+          "store_id": "747740edc48a233d08deca7cbdca5ffb",
+          "commit": "226b896d4e77ce3634c544f9c0b716c3ced8775a6344d51f5f5fa9ee075aefee",
+          "path": "experiments/full_prompt_83467f75_a_condition_first_s9_e5/runs/a_condition_first/01M6XH1A24JYKSMN0R0AR3KZHM/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "trace_sha256": "eaccc5b240a1ddb9fd8fa93ccfaa43f8013e88176235449de9b1d69bbce68b9b",
+      "model_sha256": "6de86f5d0330467ef80035b59d5578b1b3c8bfd8bd439ed19fa60cb25c96caca",
+      "validation_predictions_sha256": "ba61a7a7ae517f0374adc73425beeb2c714113e0d448abecb6ec8feb5ab8411a",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "selected_epoch": 4,
+      "completed_epochs": 5,
+      "actual_updates": 950,
+      "stop_reason": "validation_patience",
+      "selection_metric": "validation_spearman",
+      "test_used": false,
+      "validation_metrics": {
+        "n": 1576,
+        "mse_0_1": 0.031795584498621965,
+        "mse_1_5": 0.5087293519779514,
+        "spearman": 0.8751942681407967,
+        "prediction_mean": 0.5866731512592219,
+        "target_mean": 0.6134200507614214,
+        "prediction_std": 0.34371734500926326,
+        "target_std": 0.3852562483034509,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 266,
+            "mean": 0.09729490143901676
+          },
+          "2.0": {
+            "n": 213,
+            "mean": 0.3141146645369664
+          },
+          "3.0": {
+            "n": 302,
+            "mean": 0.4912550951237019
+          },
+          "4.0": {
+            "n": 130,
+            "mean": 0.6655261669021386
+          },
+          "5.0": {
+            "n": 665,
+            "mean": 0.8976429753845796
+          }
+        },
+        "condition_changes": {
+          "n": 551,
+          "correct": 534,
+          "ties": 0,
+          "accuracy_ties_half": 0.969147005444646,
+          "difference_mse": 0.06564379528006646,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "initial_trainable_sha256": "9db138e7f84496be28eb45696676f21cd17385f67af65f2f7f797d366bce4e29",
+      "batch_order_sha256": [
+        "c897a4f85f66c3d9e79593fc70124c84bcd8452c4da417eaf623db92bef93d19",
+        "4ca5d2d9d624c10c11b2c47358a36c5ec3913b7861c0afdbdf0d5bfd8f0be060",
+        "7162e15ca35d82d89dca58d382259197937a8cc624b84405a6f4d623e4e7bcb7",
+        "c1ea36e1ab8a96854876c853c6d58116e77cc40f060afac2675dd10019acb77c",
+        "88dbeddce485993bd39b3800668cd771cb22d8f2312e25b83f52a6c597b03a74"
+      ]
+    },
+    {
+      "trial_id": "B_order_only_seed10",
+      "arm": "B_order_only",
+      "seed": 10,
+      "training_source_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+      "execution_source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+      "protocol_sha256": "0aee2f8aece3e89ff12223fe40a54fb632305339f240475362212c432fd68a11",
+      "prompt_sha256": "ea4f456aa5478bc87172f9f98beb47c9857ffaf7698dc8a170d3291745ab4d6f",
+      "native_run_id": "54d5961151672b37f5351d6869e959817f90258d02b3fe19e61788d1fb7abe6b",
+      "native_run_reference": {
+        "sha256": "f8f64da2516ca6e1e74b8bdff95ef52146b93246d49efbbf89423c5ec7185517",
+        "bytes": 1070,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-full-data-task-20261107/repo",
+          "store": ".viper/store",
+          "store_id": "7c2d8e82b327dcd5e65a7958bf5c910d",
+          "commit": "37e4a283d44d9a820e015d05b16703dfe48d198c4a5a68b4302e7d17e49e736f",
+          "path": "experiments/full_prompt_83467f75_b_order_only_s10_e5/runs/b_order_only/01M6XZYN1P0VS8ES1Y58HB1SNC/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "trace_sha256": "8123e664ad463dc5a39cc60449f17e1ece3c3c30071c0bcb5981998001a4b45d",
+      "model_sha256": "dc1fb8248411b80be69dff66cd008f332281275381e37755cbd838bf9af1428b",
+      "validation_predictions_sha256": "6ab142032a98118e2712806d59008ea10db046d29d728a00f051d9b5a8e7329d",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "selected_epoch": 4,
+      "completed_epochs": 5,
+      "actual_updates": 950,
+      "stop_reason": "validation_patience",
+      "selection_metric": "validation_spearman",
+      "test_used": false,
+      "validation_metrics": {
+        "n": 1576,
+        "mse_0_1": 0.03179393200655904,
+        "mse_1_5": 0.5087029121049447,
+        "spearman": 0.8761867833457124,
+        "prediction_mean": 0.5855373050453174,
+        "target_mean": 0.6134200507614214,
+        "prediction_std": 0.344927469063274,
+        "target_std": 0.3852562483034509,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 266,
+            "mean": 0.10679011360770162
+          },
+          "2.0": {
+            "n": 213,
+            "mean": 0.3044594271117253
+          },
+          "3.0": {
+            "n": 302,
+            "mean": 0.47622052915641017
+          },
+          "4.0": {
+            "n": 130,
+            "mean": 0.6620808828335542
+          },
+          "5.0": {
+            "n": 665,
+            "mean": 0.901746842080265
+          }
+        },
+        "condition_changes": {
+          "n": 551,
+          "correct": 527,
+          "ties": 0,
+          "accuracy_ties_half": 0.956442831215971,
+          "difference_mse": 0.06798578931571675,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "initial_trainable_sha256": "d66f485ada57e135e7f1bad0d43c7a76c832fd6833c4be3f81b9ba4ebaf53ba1",
+      "batch_order_sha256": [
+        "9c621dc9d9acb39b750748d3d3d3fc61c4754266c20b33a63e78d8fe44b1e280",
+        "adc8a5007d9752ab59917d4acc774e5cdc2a400108efbba6fb37a48ac03fb9ac",
+        "c901c5804ecdbe60453be6c716828a2bdcc1e8d0a6777f1376d332a6c7f2c9b1",
+        "146995c09f147da7cf8dcd71dcc56d553d431d819cdd6e4e425e9f402448ed3f",
+        "2cdde015a0f0353c67a351895bf265e74b4009353347a28c9ba6d63194cebc79"
+      ]
+    },
+    {
+      "trial_id": "B_order_only_seed11",
+      "arm": "B_order_only",
+      "seed": 11,
+      "training_source_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+      "execution_source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+      "protocol_sha256": "0aee2f8aece3e89ff12223fe40a54fb632305339f240475362212c432fd68a11",
+      "prompt_sha256": "ea4f456aa5478bc87172f9f98beb47c9857ffaf7698dc8a170d3291745ab4d6f",
+      "native_run_id": "6eab1b3574384e014e33fd876f3b28636808559b3ada7f00dba8cffecbb1b5f2",
+      "native_run_reference": {
+        "sha256": "ed379e1cebdc634ea49418143caef3ad7b46cb857076dfa4f31a7a990907a059",
+        "bytes": 1070,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-full-data-task-20261107/repo",
+          "store": ".viper/store",
+          "store_id": "747740edc48a233d08deca7cbdca5ffb",
+          "commit": "0b192b0e9c2f91aa7ae91bb839855a406a8addc5468c3dd2c1ebd80545529ce7",
+          "path": "experiments/full_prompt_83467f75_b_order_only_s11_e4/runs/b_order_only/01M6XSBMH2PVY6P6P3E1WDXMYZ/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "trace_sha256": "7ca4052ccdff733cd0f31b5e8fc38bbf2c0776c9240b12a9b7a4bf476e9f9071",
+      "model_sha256": "c2a1cf98364adc70f3df0fd09adda0cacaf59765859f4a2b8172143d134b5c0c",
+      "validation_predictions_sha256": "cc2db398ee02c77df43063a3ee6d3b0926bac1f71ce021863e7b2b93b6e084eb",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "selected_epoch": 3,
+      "completed_epochs": 4,
+      "actual_updates": 760,
+      "stop_reason": "validation_patience",
+      "selection_metric": "validation_spearman",
+      "test_used": false,
+      "validation_metrics": {
+        "n": 1576,
+        "mse_0_1": 0.03146007639394167,
+        "mse_1_5": 0.5033612223030667,
+        "spearman": 0.8755966595805454,
+        "prediction_mean": 0.5935102807159056,
+        "target_mean": 0.6134200507614214,
+        "prediction_std": 0.3374213468661384,
+        "target_std": 0.3852562483034509,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 266,
+            "mean": 0.11970816389044844
+          },
+          "2.0": {
+            "n": 213,
+            "mean": 0.325989085778664
+          },
+          "3.0": {
+            "n": 302,
+            "mean": 0.48839907856374387
+          },
+          "4.0": {
+            "n": 130,
+            "mean": 0.6687323141556519
+          },
+          "5.0": {
+            "n": 665,
+            "mean": 0.9017480195128829
+          }
+        },
+        "condition_changes": {
+          "n": 551,
+          "correct": 529,
+          "ties": 0,
+          "accuracy_ties_half": 0.9600725952813067,
+          "difference_mse": 0.0693262338146008,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "initial_trainable_sha256": "b39679d280e5fd8eb9582facfeb70457c73fa1c1395decd5977762c250718e0e",
+      "batch_order_sha256": [
+        "01e82c38677c14ec428802ea58249d381218e37fbe1fa812efe2ed05a59807e5",
+        "e92a0a78fac7da1d505352687adeb10f5958247eb710ce43632ecf0965363e0e",
+        "092b3fbb69c50404909adf67ae508505b225239332985b74f3544611c49f2910",
+        "85d6e9b4914414ea516cdc135a80c67ab09b064c3a046b108b7fa5a09422de7a"
+      ]
+    },
+    {
+      "trial_id": "B_order_only_seed7",
+      "arm": "B_order_only",
+      "seed": 7,
+      "training_source_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+      "execution_source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+      "protocol_sha256": "0aee2f8aece3e89ff12223fe40a54fb632305339f240475362212c432fd68a11",
+      "prompt_sha256": "ea4f456aa5478bc87172f9f98beb47c9857ffaf7698dc8a170d3291745ab4d6f",
+      "native_run_id": "2456a73cba5c639bc6a507f417b1f7d8ffec205303a7ada73613562075dfc532",
+      "native_run_reference": {
+        "sha256": "6956de1fcb176a38f3aedfb4a47a392445541264e7e42c9a1848aa90317a696b",
+        "bytes": 1068,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-full-data-task-20261107/repo",
+          "store": ".viper/store",
+          "store_id": "747740edc48a233d08deca7cbdca5ffb",
+          "commit": "455300836bbd82c69f1137e3b32e4a6b718ecdd7012cec9795bd3fc13e4be7be",
+          "path": "experiments/full_prompt_83467f75_b_order_only_s7_e5/runs/b_order_only/01M6X1ZBM4CT27SAXGTR0TK8A8/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "trace_sha256": "c146890b7a64d054f156ba3c300b0aa320802bf1543a4286aaf55e37153dad59",
+      "model_sha256": "ecd90a2b530e90726f2e1d5a9c4963aea1c24c912072f2f99fb3997def727e87",
+      "validation_predictions_sha256": "180eb300ef3f7c263f8d3447b52217040a4544c3cd9979633800c74269fa7524",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "selected_epoch": 4,
+      "completed_epochs": 5,
+      "actual_updates": 950,
+      "stop_reason": "validation_patience",
+      "selection_metric": "validation_spearman",
+      "test_used": false,
+      "validation_metrics": {
+        "n": 1576,
+        "mse_0_1": 0.03209158848938696,
+        "mse_1_5": 0.5134654158301913,
+        "spearman": 0.8746972021838658,
+        "prediction_mean": 0.5920147554074925,
+        "target_mean": 0.6134200507614214,
+        "prediction_std": 0.3394575269030135,
+        "target_std": 0.3852562483034509,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 266,
+            "mean": 0.11484340309599568
+          },
+          "2.0": {
+            "n": 213,
+            "mean": 0.3207053493515986
+          },
+          "3.0": {
+            "n": 302,
+            "mean": 0.490890267471604
+          },
+          "4.0": {
+            "n": 130,
+            "mean": 0.6753067423517888
+          },
+          "5.0": {
+            "n": 665,
+            "mean": 0.8994254625633471
+          }
+        },
+        "condition_changes": {
+          "n": 551,
+          "correct": 529,
+          "ties": 0,
+          "accuracy_ties_half": 0.9600725952813067,
+          "difference_mse": 0.07135933585701255,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "initial_trainable_sha256": "4b73103d990fd3441c8b8ea0cbad43ed04049a46ca5846e718c14101c67c57aa",
+      "batch_order_sha256": [
+        "4d48d6c08f0848e080bb0e6b73db5edc7395c7bb4a5434c23f6444e9b1163ebf",
+        "11b247eadc2fe1cbb3f1192d29107e425210f01b440a93490932d162686ced12",
+        "ff8bb078df8984c6191f7f0b609437632ac9c489b01db4d7c91fc5d559503b69",
+        "bf18651d40c5b4e25636c230ffeae7da217ad1f18ef409ae60e70e5df45c8368",
+        "63149a61b9b4246eb303dea457fa20bcebefddf81bc09c7b9dd12090059a86c7"
+      ]
+    },
+    {
+      "trial_id": "B_order_only_seed8",
+      "arm": "B_order_only",
+      "seed": 8,
+      "training_source_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+      "execution_source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+      "protocol_sha256": "0aee2f8aece3e89ff12223fe40a54fb632305339f240475362212c432fd68a11",
+      "prompt_sha256": "ea4f456aa5478bc87172f9f98beb47c9857ffaf7698dc8a170d3291745ab4d6f",
+      "native_run_id": "88bcc90f112528544e347947317cf788b691f1bf48869d5e232c1cfdc5ca7054",
+      "native_run_reference": {
+        "sha256": "33c12c23be264849a3d22fffae90978f9c94d29f4faaa5371d8379f23b7b18b9",
+        "bytes": 1068,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-full-data-task-20261107/repo",
+          "store": ".viper/store",
+          "store_id": "7c2d8e82b327dcd5e65a7958bf5c910d",
+          "commit": "aed0ca22673176077c7321d2fa128d30009af80c43dd996cc02784c64fa2127f",
+          "path": "experiments/full_prompt_83467f75_b_order_only_s8_e3/runs/b_order_only/01M6X0GZ54A641TXBB0MVJ64JB/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "trace_sha256": "1f2a823ab999ffdad9591741cca184118485691a0b8d395d2c19b2187be27b4d",
+      "model_sha256": "1a8c5385f0727a83b66250e0082f8b120d685e365c6aa64fd5dc69bad12946a9",
+      "validation_predictions_sha256": "1c0836e9087ef3f21ec52e450f121bf7722080abdb20f7821958c1b0441d7e41",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "selected_epoch": 2,
+      "completed_epochs": 3,
+      "actual_updates": 570,
+      "stop_reason": "validation_patience",
+      "selection_metric": "validation_spearman",
+      "test_used": false,
+      "validation_metrics": {
+        "n": 1576,
+        "mse_0_1": 0.03390473876336232,
+        "mse_1_5": 0.5424758202137971,
+        "spearman": 0.8697257695993728,
+        "prediction_mean": 0.5906149452886967,
+        "target_mean": 0.6134200507614214,
+        "prediction_std": 0.32350057132599025,
+        "target_std": 0.3852562483034509,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 266,
+            "mean": 0.14561447802374378
+          },
+          "2.0": {
+            "n": 213,
+            "mean": 0.334920884997632
+          },
+          "3.0": {
+            "n": 302,
+            "mean": 0.48691503505611067
+          },
+          "4.0": {
+            "n": 130,
+            "mean": 0.6447674491084538
+          },
+          "5.0": {
+            "n": 665,
+            "mean": 0.8870217220227521
+          }
+        },
+        "condition_changes": {
+          "n": 551,
+          "correct": 530,
+          "ties": 0,
+          "accuracy_ties_half": 0.9618874773139746,
+          "difference_mse": 0.07688517804675889,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "initial_trainable_sha256": "5f8d17a0bd6d7c23a2ed8e943402ef59309192a5d447023908babdfee55bced0",
+      "batch_order_sha256": [
+        "2c06068ad3b048c8a485c04347cf8694efce847976df736b64b88b2f598ff8e8",
+        "30970018e4ba9b81496590db7a19a311fb8d06123936473303a337970fbfe867",
+        "0a65359b1258797ed1bff967c4c0058e05f33aff7e558169334e5a819c7e2126"
+      ]
+    },
+    {
+      "trial_id": "B_order_only_seed9",
+      "arm": "B_order_only",
+      "seed": 9,
+      "training_source_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+      "execution_source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+      "protocol_sha256": "0aee2f8aece3e89ff12223fe40a54fb632305339f240475362212c432fd68a11",
+      "prompt_sha256": "ea4f456aa5478bc87172f9f98beb47c9857ffaf7698dc8a170d3291745ab4d6f",
+      "native_run_id": "de64b98354294dc00e33f296f0eebd60e78f79eff017ec46b206dc2c7e9db94b",
+      "native_run_reference": {
+        "sha256": "b6d4dd32a3739e6dec23ccede92dfc02fa5c3c841fb52abae97a8e0d404e9a08",
+        "bytes": 1068,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-full-data-task-20261107/repo",
+          "store": ".viper/store",
+          "store_id": "747740edc48a233d08deca7cbdca5ffb",
+          "commit": "99d09a4e610ca7996e3f1d26855c9fae6046e3b2188edc82e4c7de8ee3987ab6",
+          "path": "experiments/full_prompt_83467f75_b_order_only_s9_e5/runs/b_order_only/01M6XNNFMGF89EF5GQN2PA5X41/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "trace_sha256": "7c29bb62b679758e56c4593cd5112a602eaeaf161bae0b3753476836e10677f1",
+      "model_sha256": "85f127420b63875c551f4375883eca2dc2b6b5c90405c69b532ce92e6bce57a6",
+      "validation_predictions_sha256": "5cd31c807e51fb7f9582e447a5f9a32e6017954bee9b6f42d2e81139180b4385",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "selected_epoch": 4,
+      "completed_epochs": 5,
+      "actual_updates": 950,
+      "stop_reason": "validation_patience",
+      "selection_metric": "validation_spearman",
+      "test_used": false,
+      "validation_metrics": {
+        "n": 1576,
+        "mse_0_1": 0.03226891266661764,
+        "mse_1_5": 0.5163026026658822,
+        "spearman": 0.872477699316546,
+        "prediction_mean": 0.5958504136787671,
+        "target_mean": 0.6134200507614214,
+        "prediction_std": 0.3358198871730072,
+        "target_std": 0.3852562483034509,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 266,
+            "mean": 0.11922113040700219
+          },
+          "2.0": {
+            "n": 213,
+            "mean": 0.3351889426859332
+          },
+          "3.0": {
+            "n": 302,
+            "mean": 0.49616834355074146
+          },
+          "4.0": {
+            "n": 130,
+            "mean": 0.6831481182804474
+          },
+          "5.0": {
+            "n": 665,
+            "mean": 0.898195626088103
+          }
+        },
+        "condition_changes": {
+          "n": 551,
+          "correct": 526,
+          "ties": 0,
+          "accuracy_ties_half": 0.9546279491833031,
+          "difference_mse": 0.07084830092802072,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "initial_trainable_sha256": "9db138e7f84496be28eb45696676f21cd17385f67af65f2f7f797d366bce4e29",
+      "batch_order_sha256": [
+        "c897a4f85f66c3d9e79593fc70124c84bcd8452c4da417eaf623db92bef93d19",
+        "4ca5d2d9d624c10c11b2c47358a36c5ec3913b7861c0afdbdf0d5bfd8f0be060",
+        "7162e15ca35d82d89dca58d382259197937a8cc624b84405a6f4d623e4e7bcb7",
+        "c1ea36e1ab8a96854876c853c6d58116e77cc40f060afac2675dd10019acb77c",
+        "88dbeddce485993bd39b3800668cd771cb22d8f2312e25b83f52a6c597b03a74"
+      ]
+    },
+    {
+      "trial_id": "C_case_inspired_seed10",
+      "arm": "C_case_inspired",
+      "seed": 10,
+      "training_source_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+      "execution_source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+      "protocol_sha256": "0aee2f8aece3e89ff12223fe40a54fb632305339f240475362212c432fd68a11",
+      "prompt_sha256": "28c015a505cf015fbfd7dd8dec79598963395fc0b0aee2094b11492a2c91e9e5",
+      "native_run_id": "81dea20cc6ccdb6e85f370e3b1651c477a7e373ce1b49e06c5a92853e89e8ea9",
+      "native_run_reference": {
+        "sha256": "49727ba43ad2fc2d8c6d642c40a3cdbc9023168d7398baffcf2e5952bb633a1a",
+        "bytes": 1082,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-full-data-task-20261107/repo",
+          "store": ".viper/store",
+          "store_id": "7c2d8e82b327dcd5e65a7958bf5c910d",
+          "commit": "514460b86ace547eb0e99932f7528c199e38f5387d55aef5c45c4eddadb90456",
+          "path": "experiments/full_prompt_83467f75_c_case_inspired_s10_e3/runs/c_case_inspired/01M6Y2S4S13T7YDC4JMS0VH0X9/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "trace_sha256": "fb30e2ceba5273e655dba0d7882e87acd76748f2a6fdb53d92e7f52e3702eb1a",
+      "model_sha256": "d9e9ca71392a487c8a601f11ed7bb2c1fa6fe93d02917afb7ddd6654c391d173",
+      "validation_predictions_sha256": "e2a8dd5d0b800230df83e5369cc06c80d41668853ac8e1c983154605fbcf23dd",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "selected_epoch": 2,
+      "completed_epochs": 3,
+      "actual_updates": 570,
+      "stop_reason": "validation_patience",
+      "selection_metric": "validation_spearman",
+      "test_used": false,
+      "validation_metrics": {
+        "n": 1576,
+        "mse_0_1": 0.0329704267773899,
+        "mse_1_5": 0.5275268284382384,
+        "spearman": 0.8723635199622012,
+        "prediction_mean": 0.59316946757614,
+        "target_mean": 0.6134200507614214,
+        "prediction_std": 0.32463848288452374,
+        "target_std": 0.3852562483034509,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 266,
+            "mean": 0.13290169321375206
+          },
+          "2.0": {
+            "n": 213,
+            "mean": 0.3429594448474651
+          },
+          "3.0": {
+            "n": 302,
+            "mean": 0.5005568103827783
+          },
+          "4.0": {
+            "n": 130,
+            "mean": 0.6559409107153232
+          },
+          "5.0": {
+            "n": 665,
+            "mean": 0.8872066069534399
+          }
+        },
+        "condition_changes": {
+          "n": 551,
+          "correct": 532,
+          "ties": 0,
+          "accuracy_ties_half": 0.9655172413793104,
+          "difference_mse": 0.07600437116742116,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "initial_trainable_sha256": "d66f485ada57e135e7f1bad0d43c7a76c832fd6833c4be3f81b9ba4ebaf53ba1",
+      "batch_order_sha256": [
+        "9c621dc9d9acb39b750748d3d3d3fc61c4754266c20b33a63e78d8fe44b1e280",
+        "adc8a5007d9752ab59917d4acc774e5cdc2a400108efbba6fb37a48ac03fb9ac",
+        "c901c5804ecdbe60453be6c716828a2bdcc1e8d0a6777f1376d332a6c7f2c9b1"
+      ]
+    },
+    {
+      "trial_id": "C_case_inspired_seed11",
+      "arm": "C_case_inspired",
+      "seed": 11,
+      "training_source_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+      "execution_source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+      "protocol_sha256": "0aee2f8aece3e89ff12223fe40a54fb632305339f240475362212c432fd68a11",
+      "prompt_sha256": "28c015a505cf015fbfd7dd8dec79598963395fc0b0aee2094b11492a2c91e9e5",
+      "native_run_id": "43a437fa6b5a05417ffb54a2862b4916a82f9ed9c766a0cc22c7aaaaa69c0bd2",
+      "native_run_reference": {
+        "sha256": "eab1bb082ef84a60b75d481146fc505faae15779dd5cb0fe66859cc6209c8851",
+        "bytes": 1082,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-full-data-task-20261107/repo",
+          "store": ".viper/store",
+          "store_id": "747740edc48a233d08deca7cbdca5ffb",
+          "commit": "d420365bbe9856d8e4377b1e7b5a08822c93cb4bc955a8f44909f356238a4a14",
+          "path": "experiments/full_prompt_83467f75_c_case_inspired_s11_e7/runs/c_case_inspired/01M6XZZFP2NE64MRWHC5X55S7E/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "trace_sha256": "237af46110f8bc80681fb628ac25433d0b30b6f47607a9b018044fb69a11b7ae",
+      "model_sha256": "fd62b5982cb2067b523828862ceb0f31f9d3735531c844cc2710def5963252c4",
+      "validation_predictions_sha256": "8678f477fa560522c1c60838276d9fe7c843adbb590a15d5ccb3fdf3c191d4bb",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "selected_epoch": 6,
+      "completed_epochs": 7,
+      "actual_updates": 1330,
+      "stop_reason": "validation_patience",
+      "selection_metric": "validation_spearman",
+      "test_used": false,
+      "validation_metrics": {
+        "n": 1576,
+        "mse_0_1": 0.03178868611597139,
+        "mse_1_5": 0.5086189778555422,
+        "spearman": 0.8756951918964353,
+        "prediction_mean": 0.5889240351897371,
+        "target_mean": 0.6134200507614214,
+        "prediction_std": 0.34216195005220645,
+        "target_std": 0.3852562483034509,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 266,
+            "mean": 0.10975690448439603
+          },
+          "2.0": {
+            "n": 213,
+            "mean": 0.31020855889633786
+          },
+          "3.0": {
+            "n": 302,
+            "mean": 0.48704970356644384
+          },
+          "4.0": {
+            "n": 130,
+            "mean": 0.6729592432196324
+          },
+          "5.0": {
+            "n": 665,
+            "mean": 0.8997004627453206
+          }
+        },
+        "condition_changes": {
+          "n": 551,
+          "correct": 526,
+          "ties": 0,
+          "accuracy_ties_half": 0.9546279491833031,
+          "difference_mse": 0.06928123226335836,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "initial_trainable_sha256": "b39679d280e5fd8eb9582facfeb70457c73fa1c1395decd5977762c250718e0e",
+      "batch_order_sha256": [
+        "01e82c38677c14ec428802ea58249d381218e37fbe1fa812efe2ed05a59807e5",
+        "e92a0a78fac7da1d505352687adeb10f5958247eb710ce43632ecf0965363e0e",
+        "092b3fbb69c50404909adf67ae508505b225239332985b74f3544611c49f2910",
+        "85d6e9b4914414ea516cdc135a80c67ab09b064c3a046b108b7fa5a09422de7a",
+        "aa6da1922bcd1c8dbb05c0b1f1a9f4faec2ecded6a34729800eb9a9363cd276c",
+        "8b07525387322d43e73a0171fe5021098a404d67eadd993210b71c3c22db220a",
+        "29f42831cf75af8c4766f920dcf9c6fbd5b9bb133cae455c9c6f182bf04463c6"
+      ]
+    },
+    {
+      "trial_id": "C_case_inspired_seed7",
+      "arm": "C_case_inspired",
+      "seed": 7,
+      "training_source_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+      "execution_source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+      "protocol_sha256": "0aee2f8aece3e89ff12223fe40a54fb632305339f240475362212c432fd68a11",
+      "prompt_sha256": "28c015a505cf015fbfd7dd8dec79598963395fc0b0aee2094b11492a2c91e9e5",
+      "native_run_id": "fa5c2e6a2c55164d5d9104034fa1d6d6a7b1df49b47e867d518429a92b5ad21f",
+      "native_run_reference": {
+        "sha256": "8933f56577c9dbc1d681cf9aafd3f1f9e396331f13a80e2fab22f015c3cba1e5",
+        "bytes": 1080,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-full-data-task-20261107/repo",
+          "store": ".viper/store",
+          "store_id": "747740edc48a233d08deca7cbdca5ffb",
+          "commit": "c532a9f26ed2f9971d87fa9e7c0f863f2526106ee31f06898ab3f4e458d1b56b",
+          "path": "experiments/full_prompt_83467f75_c_case_inspired_s7_e5/runs/c_case_inspired/01M6X6P24PXTY9015CV235RZW2/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "trace_sha256": "7e5fca83db3c9bbae5290fd12fad27157e38bf70b77dcd119839b1a164f9e4ed",
+      "model_sha256": "3b30f1bc21f560f0345fc389b4bcdc7842defce1924f8c182896343f2a5bd559",
+      "validation_predictions_sha256": "58106c23fafe889354f9c6e28c5cac64f1f3645a66d24f48cf40ddc4c48a29d7",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "selected_epoch": 4,
+      "completed_epochs": 5,
+      "actual_updates": 950,
+      "stop_reason": "validation_patience",
+      "selection_metric": "validation_spearman",
+      "test_used": false,
+      "validation_metrics": {
+        "n": 1576,
+        "mse_0_1": 0.031504825473573216,
+        "mse_1_5": 0.5040772075771714,
+        "spearman": 0.8756955293248677,
+        "prediction_mean": 0.5958763735248,
+        "target_mean": 0.6134200507614214,
+        "prediction_std": 0.3383987251587608,
+        "target_std": 0.3852562483034509,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 266,
+            "mean": 0.11960201903291859
+          },
+          "2.0": {
+            "n": 213,
+            "mean": 0.3216727913965082
+          },
+          "3.0": {
+            "n": 302,
+            "mean": 0.49751581018482216
+          },
+          "4.0": {
+            "n": 130,
+            "mean": 0.6800330076080102
+          },
+          "5.0": {
+            "n": 665,
+            "mean": 0.9024310637293453
+          }
+        },
+        "condition_changes": {
+          "n": 551,
+          "correct": 530,
+          "ties": 0,
+          "accuracy_ties_half": 0.9618874773139746,
+          "difference_mse": 0.070774508377303,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "initial_trainable_sha256": "4b73103d990fd3441c8b8ea0cbad43ed04049a46ca5846e718c14101c67c57aa",
+      "batch_order_sha256": [
+        "4d48d6c08f0848e080bb0e6b73db5edc7395c7bb4a5434c23f6444e9b1163ebf",
+        "11b247eadc2fe1cbb3f1192d29107e425210f01b440a93490932d162686ced12",
+        "ff8bb078df8984c6191f7f0b609437632ac9c489b01db4d7c91fc5d559503b69",
+        "bf18651d40c5b4e25636c230ffeae7da217ad1f18ef409ae60e70e5df45c8368",
+        "63149a61b9b4246eb303dea457fa20bcebefddf81bc09c7b9dd12090059a86c7"
+      ]
+    },
+    {
+      "trial_id": "C_case_inspired_seed8",
+      "arm": "C_case_inspired",
+      "seed": 8,
+      "training_source_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+      "execution_source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+      "protocol_sha256": "0aee2f8aece3e89ff12223fe40a54fb632305339f240475362212c432fd68a11",
+      "prompt_sha256": "28c015a505cf015fbfd7dd8dec79598963395fc0b0aee2094b11492a2c91e9e5",
+      "native_run_id": "a17eb3849dd56afa4e3c0d7a328e7c5a5507b22ac65a2d039e2e21762b381ad5",
+      "native_run_reference": {
+        "sha256": "93631fd55dac634086dd8b8393e6fc109dc24e684403d47a6129e984c143bb12",
+        "bytes": 1080,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-full-data-task-20261107/repo",
+          "store": ".viper/store",
+          "store_id": "7c2d8e82b327dcd5e65a7958bf5c910d",
+          "commit": "59cd6d471d8f60e0e75dfab3c77c6f88a4bfd312b7672b49f736eda7fa937a2c",
+          "path": "experiments/full_prompt_83467f75_c_case_inspired_s8_e5/runs/c_case_inspired/01M6X5B1ZD9J5P1P36P7CSQX5Y/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "trace_sha256": "a2a683618b25dd5c266e5e0f0f316dc833225637d43b6116bf245278c5892501",
+      "model_sha256": "d80d064da0f869b1db528c3679ececf7b14a6a32795e1a3aba560f55a5831f39",
+      "validation_predictions_sha256": "e72a70c61239f871b0ca53d0580a131cf819639cdfde6eab3d1c5d151349d080",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "selected_epoch": 4,
+      "completed_epochs": 5,
+      "actual_updates": 950,
+      "stop_reason": "validation_patience",
+      "selection_metric": "validation_spearman",
+      "test_used": false,
+      "validation_metrics": {
+        "n": 1576,
+        "mse_0_1": 0.032335835959914676,
+        "mse_1_5": 0.5173733753586348,
+        "spearman": 0.8757501268520459,
+        "prediction_mean": 0.5805910749435969,
+        "target_mean": 0.6134200507614214,
+        "prediction_std": 0.34469831129757206,
+        "target_std": 0.3852562483034509,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 266,
+            "mean": 0.10639359777324126
+          },
+          "2.0": {
+            "n": 213,
+            "mean": 0.29400595113145356
+          },
+          "3.0": {
+            "n": 302,
+            "mean": 0.47159399916202027
+          },
+          "4.0": {
+            "n": 130,
+            "mean": 0.6551716506481171
+          },
+          "5.0": {
+            "n": 665,
+            "mean": 0.8969832589191602
+          }
+        },
+        "condition_changes": {
+          "n": 551,
+          "correct": 531,
+          "ties": 0,
+          "accuracy_ties_half": 0.9637023593466425,
+          "difference_mse": 0.07133491448572671,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "initial_trainable_sha256": "5f8d17a0bd6d7c23a2ed8e943402ef59309192a5d447023908babdfee55bced0",
+      "batch_order_sha256": [
+        "2c06068ad3b048c8a485c04347cf8694efce847976df736b64b88b2f598ff8e8",
+        "30970018e4ba9b81496590db7a19a311fb8d06123936473303a337970fbfe867",
+        "0a65359b1258797ed1bff967c4c0058e05f33aff7e558169334e5a819c7e2126",
+        "9ca78e215849846581a824dc68eea7cd0f7a71c0b6fcf7228ed0ece3434d918a",
+        "ded7256f9b4037f6425c12a6f82ce8c49f3c2d69ed76b1021db74828a1745775"
+      ]
+    },
+    {
+      "trial_id": "C_case_inspired_seed9",
+      "arm": "C_case_inspired",
+      "seed": 9,
+      "training_source_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+      "execution_source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+      "protocol_sha256": "0aee2f8aece3e89ff12223fe40a54fb632305339f240475362212c432fd68a11",
+      "prompt_sha256": "28c015a505cf015fbfd7dd8dec79598963395fc0b0aee2094b11492a2c91e9e5",
+      "native_run_id": "206692b83ed306b86eeb3edde19f774691ca234be6a7e7e4738f2e3457e0c1e4",
+      "native_run_reference": {
+        "sha256": "4f8e3d858cfa6e31f20510b775928e8c911067a58e79071f1c31e9c0252e16ae",
+        "bytes": 1080,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-full-data-task-20261107/repo",
+          "store": ".viper/store",
+          "store_id": "747740edc48a233d08deca7cbdca5ffb",
+          "commit": "91fd118f298acaa57318f7152ba60528c4236d6e3953202739e7e7a933f6a77d",
+          "path": "experiments/full_prompt_83467f75_c_case_inspired_s9_e6/runs/c_case_inspired/01M6XCBJV7FKZ7ZVZ4YZKPJA78/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "trace_sha256": "d4e87f12c7105ced8c0e284a3e36625d14fc7d68455a55499b7ea199b85e91c7",
+      "model_sha256": "56aa924bb06d624c8eb863248976941719f4dd8852154ea5f01956bfff455e74",
+      "validation_predictions_sha256": "4228ac981732a9e6659e2c31e72b8ca1958bac1b14016e2fc1b802e92cf6755c",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "selected_epoch": 5,
+      "completed_epochs": 6,
+      "actual_updates": 1140,
+      "stop_reason": "validation_patience",
+      "selection_metric": "validation_spearman",
+      "test_used": false,
+      "validation_metrics": {
+        "n": 1576,
+        "mse_0_1": 0.03123627924917795,
+        "mse_1_5": 0.4997804679868472,
+        "spearman": 0.8759786012504835,
+        "prediction_mean": 0.5965858691649424,
+        "target_mean": 0.6134200507614214,
+        "prediction_std": 0.34549051618760934,
+        "target_std": 0.3852562483034509,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 266,
+            "mean": 0.10527558589644759
+          },
+          "2.0": {
+            "n": 213,
+            "mean": 0.3115662009818173
+          },
+          "3.0": {
+            "n": 302,
+            "mean": 0.5088545249170617
+          },
+          "4.0": {
+            "n": 130,
+            "mean": 0.6840723703687007
+          },
+          "5.0": {
+            "n": 665,
+            "mean": 0.907141275899975
+          }
+        },
+        "condition_changes": {
+          "n": 551,
+          "correct": 531,
+          "ties": 0,
+          "accuracy_ties_half": 0.9637023593466425,
+          "difference_mse": 0.06835693418308107,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "initial_trainable_sha256": "9db138e7f84496be28eb45696676f21cd17385f67af65f2f7f797d366bce4e29",
+      "batch_order_sha256": [
+        "c897a4f85f66c3d9e79593fc70124c84bcd8452c4da417eaf623db92bef93d19",
+        "4ca5d2d9d624c10c11b2c47358a36c5ec3913b7861c0afdbdf0d5bfd8f0be060",
+        "7162e15ca35d82d89dca58d382259197937a8cc624b84405a6f4d623e4e7bcb7",
+        "c1ea36e1ab8a96854876c853c6d58116e77cc40f060afac2675dd10019acb77c",
+        "88dbeddce485993bd39b3800668cd771cb22d8f2312e25b83f52a6c597b03a74",
+        "0ec1d5a841681d64d413b9e2abbe25d51137377ffb5b686b9c9f08c157652ec2"
+      ]
+    }
+  ]
+}

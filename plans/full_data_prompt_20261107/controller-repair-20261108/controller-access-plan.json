@@ -1,0 +1,33 @@
+{
+  "principal": "767812446290-compute@developer.gserviceaccount.com",
+  "project": "mantra-477901",
+  "scope": "persistent_project_wide",
+  "conditional": false,
+  "receipts": [
+    {
+      "action": "project_owner",
+      "applied_utc": "2026-11-08T21:53:22.025428+00:00"
+    },
+    {
+      "action": "iap_access",
+      "applied_utc": "2026-11-08T21:53:25.239581+00:00"
+    },
+    {
+      "action": "viper_bucket_admin",
+      "applied_utc": "2026-11-08T21:53:28.700359+00:00"
+    }
+  ],
+  "roles": {
+    "mantra-477901": [
+      "roles/owner",
+      "roles/iap.tunnelResourceAccessor"
+    ],
+    "gs://mantra-mlfg-prod-uscentral1-8e7a": [
+      "roles/storage.admin"
+    ]
+  },
+  "credential_source": "attached_service_account_metadata",
+  "automatic_refresh": true,
+  "no_per_run_access_expiry": true,
+  "user_requested_project_wide_access": true
+}

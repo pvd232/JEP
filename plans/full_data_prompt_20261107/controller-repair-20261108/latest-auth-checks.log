@@ -1,0 +1,20 @@
+test_changed_identity_cannot_trigger_cleanup (test_spot_controller_failures.ControllerFailureTests.test_changed_identity_cannot_trigger_cleanup) ... {"event": "resource_cleanup", "worker": "worker1", "cleanup_status": "not_attempted", "reason": "Current worker state or publication is unconfirmed.", "instance_deleted": null, "disk_deleted": null, "publication_verified": false}
+ok
+test_cleanup_error_does_not_replace_original_worker_failure (test_spot_controller_failures.ControllerFailureTests.test_cleanup_error_does_not_replace_original_worker_failure) ... {"event": "resource_cleanup", "worker": "worker1", "cleanup_status": "failed", "reason": "Reauthentication failed", "instance_deleted": null, "disk_deleted": null, "publication_verified": false}
+ok
+test_cli_environment_excludes_personal_credential_overrides (test_spot_controller_failures.ControllerFailureTests.test_cli_environment_excludes_personal_credential_overrides) ... ok
+test_expired_auth_never_deletes_or_relabels_running_work (test_spot_controller_failures.ControllerFailureTests.test_expired_auth_never_deletes_or_relabels_running_work) ... {"event": "resource_cleanup", "worker": "worker1", "cleanup_status": "not_attempted", "reason": "Current worker state or publication is unconfirmed.", "instance_deleted": null, "disk_deleted": null, "publication_verified": false}
+ok
+test_personal_login_is_rejected_before_metadata_or_cloud_access (test_spot_controller_failures.ControllerFailureTests.test_personal_login_is_rejected_before_metadata_or_cloud_access) ... ok
+test_repeated_transport_failures_are_bounded_without_cleanup (test_spot_controller_failures.ControllerFailureTests.test_repeated_transport_failures_are_bounded_without_cleanup) ... {"event": "resource_cleanup", "worker": "worker1", "cleanup_status": "not_attempted", "reason": "Current worker state or publication is unconfirmed.", "instance_deleted": null, "disk_deleted": null, "publication_verified": false}
+ok
+test_transient_ssh_failure_is_retried_without_deleting_worker (test_spot_controller_failures.ControllerFailureTests.test_transient_ssh_failure_is_retried_without_deleting_worker) ... {"event": "resource_cleanup", "worker": "worker1", "cleanup_status": "not_attempted", "reason": "Current worker state or publication is unconfirmed.", "instance_deleted": null, "disk_deleted": null, "publication_verified": false}
+ok
+test_worker_reported_failure_allows_owned_compute_cleanup_but_keeps_disk (test_spot_controller_failures.ControllerFailureTests.test_worker_reported_failure_allows_owned_compute_cleanup_but_keeps_disk) ... {"event": "resource_cleanup", "worker": "worker1", "cleanup_status": "completed", "instance_deleted": true, "disk_deleted": false}
+ok
+test_auth_failure_is_unknown_and_does_not_become_a_terminal_worker_result (test_spot_controller_failures.ReporterFailureTests.test_auth_failure_is_unknown_and_does_not_become_a_terminal_worker_result) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.075s
+
+OK

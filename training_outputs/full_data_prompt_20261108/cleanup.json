@@ -1,0 +1,35 @@
+{
+  "status": "training_verified_and_resources_deleted",
+  "fits": 15,
+  "archives": 77,
+  "archive_bytes": 35921745920,
+  "inputs": 3,
+  "controller_account": "767812446290-compute@developer.gserviceaccount.com",
+  "test_opened": false,
+  "no_training_restarted": true,
+  "cleanup": [
+    {
+      "instance": "jep-full-prompt-spot-1-20261107",
+      "instance_deleted": true,
+      "disk_deleted": true,
+      "recovery_disk_preserved": false,
+      "cleanup_status": "completed",
+      "verified_utc": "2026-11-08T21:57:06.039654+00:00",
+      "controller_account": "767812446290-compute@developer.gserviceaccount.com",
+      "instance_id": "3087252568751843062",
+      "disk_id": "3314044794942129831"
+    },
+    {
+      "instance": "jep-full-prompt-worker2-20261108",
+      "instance_deleted": true,
+      "disk_deleted": true,
+      "recovery_disk_preserved": false,
+      "cleanup_status": "completed",
+      "verified_utc": "2026-11-08T21:57:06.528959+00:00",
+      "controller_account": "767812446290-compute@developer.gserviceaccount.com",
+      "instance_id": "6739260318488017241",
+      "disk_id": "255424787610707553"
+    }
+  ],
+  "completed_utc": "2026-11-08T21:57:06.531793+00:00"
+}

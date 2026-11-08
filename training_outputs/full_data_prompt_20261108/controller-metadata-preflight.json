@@ -1,0 +1,29 @@
+{
+  "verified_utc": "2026-11-08T21:54:52.367677+00:00",
+  "identity": {
+    "account": "767812446290-compute@developer.gserviceaccount.com",
+    "credential_source": "gce_metadata",
+    "automatic_refresh": true
+  },
+  "compute_checks": [
+    {
+      "worker": "worker1",
+      "instance_id": "3087252568751843062",
+      "status": "TERMINATED",
+      "metadata_authenticated_get": true
+    },
+    {
+      "worker": "worker2",
+      "instance_id": "6739260318488017241",
+      "status": "TERMINATED",
+      "metadata_authenticated_get": true
+    }
+  ],
+  "storage_byte_verified": {
+    "uri": "gs://mantra-mlfg-prod-uscentral1-8e7a/viper/pvd232/jep_full_data_prompt_20261107/6b2dc4f0fd6ce87f495f11ea64f310fbe8174787182a8acf10ec57517d9126ac/csts_data/jep-csts-v1/validation.json",
+    "bytes": 734101,
+    "sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+    "controller_verified": true
+  },
+  "isolated_sdk_config": "/home/peter_aetherlabs_live/.config/jep-spot-controller/gcloud"
+}
