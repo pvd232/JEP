@@ -1,0 +1,3331 @@
+{
+  "completed_utc": "2026-11-08T23:41:06.705216+00:00",
+  "workers": [
+    {
+      "worker": 1,
+      "metrics": [
+        {
+          "trial_id": "A_condition_first_seed10",
+          "arm": "A_condition_first",
+          "seed": 10,
+          "validation": {
+            "n": 1576,
+            "mse_0_1": 0.03192856229310998,
+            "mse_1_5": 0.5108569966897597,
+            "spearman": 0.8724975979532501,
+            "prediction_mean": 0.5972109626702962,
+            "target_mean": 0.6134200507614214,
+            "prediction_std": 0.3367859041556897,
+            "target_std": 0.3852562483034509,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 266,
+                "mean": 0.11957057444921422
+              },
+              "2.0": {
+                "n": 213,
+                "mean": 0.3263610906794038
+              },
+              "3.0": {
+                "n": 302,
+                "mean": 0.5061700987500071
+              },
+              "4.0": {
+                "n": 130,
+                "mean": 0.6798239113046572
+              },
+              "5.0": {
+                "n": 665,
+                "mean": 0.9002155094106394
+              }
+            },
+            "condition_changes": {
+              "n": 551,
+              "correct": 531,
+              "ties": 0,
+              "accuracy_ties_half": 0.9637023593466425,
+              "difference_mse": 0.06731482257908468,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "test": {
+            "n": 2430,
+            "mse_0_1": 0.040388457527831094,
+            "mse_1_5": 0.6462153204452975,
+            "spearman": 0.8496647259140063,
+            "prediction_mean": 0.6091607002890189,
+            "target_mean": 0.6217078189300411,
+            "prediction_std": 0.33884324202352817,
+            "target_std": 0.4012287775249589,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 482,
+                "mean": 0.16560722156563054
+              },
+              "2.0": {
+                "n": 269,
+                "mean": 0.3621463623576448
+              },
+              "3.0": {
+                "n": 374,
+                "mean": 0.4727509184815189
+              },
+              "4.0": {
+                "n": 194,
+                "mean": 0.6693901482623877
+              },
+              "5.0": {
+                "n": 1111,
+                "mean": 0.8968046059032263
+              }
+            },
+            "condition_changes": {
+              "n": 877,
+              "correct": 834,
+              "ties": 0,
+              "accuracy_ties_half": 0.95096921322691,
+              "difference_mse": 0.08651487532395517,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "selected_epoch": 3,
+          "completed_epochs": 4,
+          "scoring_seconds": 153.98686841400013
+        },
+        {
+          "trial_id": "A_condition_first_seed7",
+          "arm": "A_condition_first",
+          "seed": 7,
+          "validation": {
+            "n": 1576,
+            "mse_0_1": 0.030871644386266796,
+            "mse_1_5": 0.49394631018026874,
+            "spearman": 0.8764748186828899,
+            "prediction_mean": 0.5910617615634618,
+            "target_mean": 0.6134200507614214,
+            "prediction_std": 0.34266823805419916,
+            "target_std": 0.3852562483034509,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 266,
+                "mean": 0.10997979056188151
+              },
+              "2.0": {
+                "n": 213,
+                "mean": 0.30732340607005104
+              },
+              "3.0": {
+                "n": 302,
+                "mean": 0.4926689190941166
+              },
+              "4.0": {
+                "n": 130,
+                "mean": 0.6710701924103957
+              },
+              "5.0": {
+                "n": 665,
+                "mean": 0.9034190794915185
+              }
+            },
+            "condition_changes": {
+              "n": 551,
+              "correct": 532,
+              "ties": 0,
+              "accuracy_ties_half": 0.9655172413793104,
+              "difference_mse": 0.06323306104594047,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "test": {
+            "n": 2430,
+            "mse_0_1": 0.038399520374845376,
+            "mse_1_5": 0.614392325997526,
+            "spearman": 0.8558758678149301,
+            "prediction_mean": 0.603431096037662,
+            "target_mean": 0.6217078189300411,
+            "prediction_std": 0.3452185342553075,
+            "target_std": 0.4012287775249589,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 482,
+                "mean": 0.15296084468428786
+              },
+              "2.0": {
+                "n": 269,
+                "mean": 0.3386852239919861
+              },
+              "3.0": {
+                "n": 374,
+                "mean": 0.46126496386191346
+              },
+              "4.0": {
+                "n": 194,
+                "mean": 0.6648521355746948
+              },
+              "5.0": {
+                "n": 1111,
+                "mean": 0.9000987400486059
+              }
+            },
+            "condition_changes": {
+              "n": 877,
+              "correct": 841,
+              "ties": 0,
+              "accuracy_ties_half": 0.9589509692132269,
+              "difference_mse": 0.0806510300062812,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "selected_epoch": 4,
+          "completed_epochs": 5,
+          "scoring_seconds": 153.82201082999995
+        },
+        {
+          "trial_id": "A_condition_first_seed9",
+          "arm": "A_condition_first",
+          "seed": 9,
+          "validation": {
+            "n": 1576,
+            "mse_0_1": 0.031795584498621965,
+            "mse_1_5": 0.5087293519779514,
+            "spearman": 0.8751942681407967,
+            "prediction_mean": 0.5866731512592219,
+            "target_mean": 0.6134200507614214,
+            "prediction_std": 0.34371734500926326,
+            "target_std": 0.3852562483034509,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 266,
+                "mean": 0.09729490143901676
+              },
+              "2.0": {
+                "n": 213,
+                "mean": 0.3141146645369664
+              },
+              "3.0": {
+                "n": 302,
+                "mean": 0.4912550951237019
+              },
+              "4.0": {
+                "n": 130,
+                "mean": 0.6655261669021386
+              },
+              "5.0": {
+                "n": 665,
+                "mean": 0.8976429753845796
+              }
+            },
+            "condition_changes": {
+              "n": 551,
+              "correct": 534,
+              "ties": 0,
+              "accuracy_ties_half": 0.969147005444646,
+              "difference_mse": 0.06564379528006646,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "test": {
+            "n": 2430,
+            "mse_0_1": 0.04000095754068195,
+            "mse_1_5": 0.6400153206509112,
+            "spearman": 0.8523155665490445,
+            "prediction_mean": 0.6009387620892414,
+            "target_mean": 0.6217078189300411,
+            "prediction_std": 0.3457947707148165,
+            "target_std": 0.4012287775249589,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 482,
+                "mean": 0.14730509052862686
+              },
+              "2.0": {
+                "n": 269,
+                "mean": 0.34542417110785234
+              },
+              "3.0": {
+                "n": 374,
+                "mean": 0.4655532163298903
+              },
+              "4.0": {
+                "n": 194,
+                "mean": 0.656959779560566
+              },
+              "5.0": {
+                "n": 1111,
+                "mean": 0.895404082873013
+              }
+            },
+            "condition_changes": {
+              "n": 877,
+              "correct": 839,
+              "ties": 0,
+              "accuracy_ties_half": 0.9566704675028507,
+              "difference_mse": 0.08551362477277802,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "selected_epoch": 4,
+          "completed_epochs": 5,
+          "scoring_seconds": 153.81191037600001
+        },
+        {
+          "trial_id": "B_order_only_seed11",
+          "arm": "B_order_only",
+          "seed": 11,
+          "validation": {
+            "n": 1576,
+            "mse_0_1": 0.03146007639394167,
+            "mse_1_5": 0.5033612223030667,
+            "spearman": 0.8755966595805454,
+            "prediction_mean": 0.5935102807159056,
+            "target_mean": 0.6134200507614214,
+            "prediction_std": 0.3374213468661384,
+            "target_std": 0.3852562483034509,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 266,
+                "mean": 0.11970816389044844
+              },
+              "2.0": {
+                "n": 213,
+                "mean": 0.325989085778664
+              },
+              "3.0": {
+                "n": 302,
+                "mean": 0.48839907856374387
+              },
+              "4.0": {
+                "n": 130,
+                "mean": 0.6687323141556519
+              },
+              "5.0": {
+                "n": 665,
+                "mean": 0.9017480195128829
+              }
+            },
+            "condition_changes": {
+              "n": 551,
+              "correct": 529,
+              "ties": 0,
+              "accuracy_ties_half": 0.9600725952813067,
+              "difference_mse": 0.0693262338146008,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "test": {
+            "n": 2430,
+            "mse_0_1": 0.03955135830794416,
+            "mse_1_5": 0.6328217329271065,
+            "spearman": 0.8530366180302271,
+            "prediction_mean": 0.6093467663122732,
+            "target_mean": 0.6217078189300411,
+            "prediction_std": 0.33830362472264947,
+            "target_std": 0.4012287775249589,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 482,
+                "mean": 0.1735479559834382
+              },
+              "2.0": {
+                "n": 269,
+                "mean": 0.3499629801090765
+              },
+              "3.0": {
+                "n": 374,
+                "mean": 0.46714276293501816
+              },
+              "4.0": {
+                "n": 194,
+                "mean": 0.6546034740725744
+              },
+              "5.0": {
+                "n": 1111,
+                "mean": 0.9011863351914391
+              }
+            },
+            "condition_changes": {
+              "n": 877,
+              "correct": 835,
+              "ties": 0,
+              "accuracy_ties_half": 0.9521094640820981,
+              "difference_mse": 0.08645023154308452,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "selected_epoch": 3,
+          "completed_epochs": 4,
+          "scoring_seconds": 151.77979627500008
+        },
+        {
+          "trial_id": "B_order_only_seed8",
+          "arm": "B_order_only",
+          "seed": 8,
+          "validation": {
+            "n": 1576,
+            "mse_0_1": 0.03390473876336232,
+            "mse_1_5": 0.5424758202137971,
+            "spearman": 0.8697257695993728,
+            "prediction_mean": 0.5906149452886967,
+            "target_mean": 0.6134200507614214,
+            "prediction_std": 0.32350057132599025,
+            "target_std": 0.3852562483034509,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 266,
+                "mean": 0.14561447802374378
+              },
+              "2.0": {
+                "n": 213,
+                "mean": 0.334920884997632
+              },
+              "3.0": {
+                "n": 302,
+                "mean": 0.48691503505611067
+              },
+              "4.0": {
+                "n": 130,
+                "mean": 0.6447674491084538
+              },
+              "5.0": {
+                "n": 665,
+                "mean": 0.8870217220227521
+              }
+            },
+            "condition_changes": {
+              "n": 551,
+              "correct": 530,
+              "ties": 0,
+              "accuracy_ties_half": 0.9618874773139746,
+              "difference_mse": 0.07688517804675889,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "test": {
+            "n": 2430,
+            "mse_0_1": 0.04165392973209711,
+            "mse_1_5": 0.6664628757135538,
+            "spearman": 0.8493783828985157,
+            "prediction_mean": 0.6044272586728212,
+            "target_mean": 0.6217078189300411,
+            "prediction_std": 0.3259647680072421,
+            "target_std": 0.4012287775249589,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 482,
+                "mean": 0.1913288511979274
+              },
+              "2.0": {
+                "n": 269,
+                "mean": 0.35645373049278684
+              },
+              "3.0": {
+                "n": 374,
+                "mean": 0.46138187281209675
+              },
+              "4.0": {
+                "n": 194,
+                "mean": 0.634213757806832
+              },
+              "5.0": {
+                "n": 1111,
+                "mean": 0.8866403144453153
+              }
+            },
+            "condition_changes": {
+              "n": 877,
+              "correct": 837,
+              "ties": 0,
+              "accuracy_ties_half": 0.9543899657924744,
+              "difference_mse": 0.09301226740170777,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "selected_epoch": 2,
+          "completed_epochs": 3,
+          "scoring_seconds": 151.4254202750003
+        },
+        {
+          "trial_id": "C_case_inspired_seed10",
+          "arm": "C_case_inspired",
+          "seed": 10,
+          "validation": {
+            "n": 1576,
+            "mse_0_1": 0.0329704267773899,
+            "mse_1_5": 0.5275268284382384,
+            "spearman": 0.8723635199622012,
+            "prediction_mean": 0.59316946757614,
+            "target_mean": 0.6134200507614214,
+            "prediction_std": 0.32463848288452374,
+            "target_std": 0.3852562483034509,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 266,
+                "mean": 0.13290169321375206
+              },
+              "2.0": {
+                "n": 213,
+                "mean": 0.3429594448474651
+              },
+              "3.0": {
+                "n": 302,
+                "mean": 0.5005568103827783
+              },
+              "4.0": {
+                "n": 130,
+                "mean": 0.6559409107153232
+              },
+              "5.0": {
+                "n": 665,
+                "mean": 0.8872066069534399
+              }
+            },
+            "condition_changes": {
+              "n": 551,
+              "correct": 532,
+              "ties": 0,
+              "accuracy_ties_half": 0.9655172413793104,
+              "difference_mse": 0.07600437116742116,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "test": {
+            "n": 2430,
+            "mse_0_1": 0.04096703287441373,
+            "mse_1_5": 0.6554725259906197,
+            "spearman": 0.8497481009715326,
+            "prediction_mean": 0.6038830450155347,
+            "target_mean": 0.6217078189300411,
+            "prediction_std": 0.32843618482133236,
+            "target_std": 0.4012287775249589,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 482,
+                "mean": 0.17528873070189535
+              },
+              "2.0": {
+                "n": 269,
+                "mean": 0.36836332307096753
+              },
+              "3.0": {
+                "n": 374,
+                "mean": 0.46815368654654627
+              },
+              "4.0": {
+                "n": 194,
+                "mean": 0.6494544114648682
+              },
+              "5.0": {
+                "n": 1111,
+                "mean": 0.8845843948611636
+              }
+            },
+            "condition_changes": {
+              "n": 877,
+              "correct": 836,
+              "ties": 0,
+              "accuracy_ties_half": 0.9532497149372862,
+              "difference_mse": 0.08959023031457528,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "selected_epoch": 2,
+          "completed_epochs": 3,
+          "scoring_seconds": 154.390831446
+        },
+        {
+          "trial_id": "C_case_inspired_seed7",
+          "arm": "C_case_inspired",
+          "seed": 7,
+          "validation": {
+            "n": 1576,
+            "mse_0_1": 0.031504825473573216,
+            "mse_1_5": 0.5040772075771714,
+            "spearman": 0.8756955293248677,
+            "prediction_mean": 0.5958763735248,
+            "target_mean": 0.6134200507614214,
+            "prediction_std": 0.3383987251587608,
+            "target_std": 0.3852562483034509,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 266,
+                "mean": 0.11960201903291859
+              },
+              "2.0": {
+                "n": 213,
+                "mean": 0.3216727913965082
+              },
+              "3.0": {
+                "n": 302,
+                "mean": 0.49751581018482216
+              },
+              "4.0": {
+                "n": 130,
+                "mean": 0.6800330076080102
+              },
+              "5.0": {
+                "n": 665,
+                "mean": 0.9024310637293453
+              }
+            },
+            "condition_changes": {
+              "n": 551,
+              "correct": 530,
+              "ties": 0,
+              "accuracy_ties_half": 0.9618874773139746,
+              "difference_mse": 0.070774508377303,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "test": {
+            "n": 2430,
+            "mse_0_1": 0.03967226434920177,
+            "mse_1_5": 0.6347562295872283,
+            "spearman": 0.8510339081479499,
+            "prediction_mean": 0.6046746002814882,
+            "target_mean": 0.6217078189300411,
+            "prediction_std": 0.34199831191717783,
+            "target_std": 0.4012287775249589,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 482,
+                "mean": 0.15952672409685908
+              },
+              "2.0": {
+                "n": 269,
+                "mean": 0.34373917718691455
+              },
+              "3.0": {
+                "n": 374,
+                "mean": 0.4681049252307431
+              },
+              "4.0": {
+                "n": 194,
+                "mean": 0.664195350073662
+              },
+              "5.0": {
+                "n": 1111,
+                "mean": 0.896558432993215
+              }
+            },
+            "condition_changes": {
+              "n": 877,
+              "correct": 836,
+              "ties": 0,
+              "accuracy_ties_half": 0.9532497149372862,
+              "difference_mse": 0.08459199831932737,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "selected_epoch": 4,
+          "completed_epochs": 5,
+          "scoring_seconds": 115.68762913699993
+        },
+        {
+          "trial_id": "C_case_inspired_seed9",
+          "arm": "C_case_inspired",
+          "seed": 9,
+          "validation": {
+            "n": 1576,
+            "mse_0_1": 0.03123627924917795,
+            "mse_1_5": 0.4997804679868472,
+            "spearman": 0.8759786012504835,
+            "prediction_mean": 0.5965858691649424,
+            "target_mean": 0.6134200507614214,
+            "prediction_std": 0.34549051618760934,
+            "target_std": 0.3852562483034509,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 266,
+                "mean": 0.10527558589644759
+              },
+              "2.0": {
+                "n": 213,
+                "mean": 0.3115662009818173
+              },
+              "3.0": {
+                "n": 302,
+                "mean": 0.5088545249170617
+              },
+              "4.0": {
+                "n": 130,
+                "mean": 0.6840723703687007
+              },
+              "5.0": {
+                "n": 665,
+                "mean": 0.907141275899975
+              }
+            },
+            "condition_changes": {
+              "n": 551,
+              "correct": 531,
+              "ties": 0,
+              "accuracy_ties_half": 0.9637023593466425,
+              "difference_mse": 0.06835693418308107,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "test": {
+            "n": 2430,
+            "mse_0_1": 0.039029520102321066,
+            "mse_1_5": 0.6244723216371371,
+            "spearman": 0.8520023736138661,
+            "prediction_mean": 0.6079147947484573,
+            "target_mean": 0.6217078189300411,
+            "prediction_std": 0.34749622673726493,
+            "target_std": 0.4012287775249589,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 482,
+                "mean": 0.15086476582573935
+              },
+              "2.0": {
+                "n": 269,
+                "mean": 0.3379422421238236
+              },
+              "3.0": {
+                "n": 374,
+                "mean": 0.4832261962265792
+              },
+              "4.0": {
+                "n": 194,
+                "mean": 0.6689394698622301
+              },
+              "5.0": {
+                "n": 1111,
+                "mean": 0.9028882236160425
+              }
+            },
+            "condition_changes": {
+              "n": 877,
+              "correct": 834,
+              "ties": 0,
+              "accuracy_ties_half": 0.95096921322691,
+              "difference_mse": 0.0835368307798107,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "selected_epoch": 5,
+          "completed_epochs": 6,
+          "scoring_seconds": 132.9646981640003
+        }
+      ],
+      "cloud_proofs": [
+        {
+          "trial": "A_condition_first_seed10",
+          "file": "predictions.json",
+          "reference": {
+            "sha256": "9282d351a2b8a09d22140f1d1bf7637b9b4fa511bd46f71450b22a2fed90a600",
+            "bytes": 1229767,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "7adea0434450c90dc69d3cb4baa081f1fcf4f2a601176a1a1f59765a40c739d7",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed10/test/predictions.json"
+            }
+          },
+          "sha256": "9282d351a2b8a09d22140f1d1bf7637b9b4fa511bd46f71450b22a2fed90a600",
+          "verified": true
+        },
+        {
+          "trial": "A_condition_first_seed10",
+          "file": "timing.json",
+          "reference": {
+            "sha256": "f781c43b69442fdb8a04775e2e63b0eb66a80174536122b17959bcd94d336ceb",
+            "bytes": 443,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "7adea0434450c90dc69d3cb4baa081f1fcf4f2a601176a1a1f59765a40c739d7",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed10/test/timing.json"
+            }
+          },
+          "sha256": "f781c43b69442fdb8a04775e2e63b0eb66a80174536122b17959bcd94d336ceb",
+          "verified": true
+        },
+        {
+          "trial": "A_condition_first_seed10",
+          "file": "resolved.yaml",
+          "reference": {
+            "sha256": "c2244c0cc662f50dac3fd7e46015b2b82777154c48c5617e66f35a28211bc681",
+            "bytes": 1092,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "7adea0434450c90dc69d3cb4baa081f1fcf4f2a601176a1a1f59765a40c739d7",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed10/test/resolved.yaml"
+            }
+          },
+          "sha256": "c2244c0cc662f50dac3fd7e46015b2b82777154c48c5617e66f35a28211bc681",
+          "verified": true
+        },
+        {
+          "trial": "A_condition_first_seed7",
+          "file": "predictions.json",
+          "reference": {
+            "sha256": "a1070d46a5eb41fd40bd724f9f106697943258aaac221b5e6eb524876df02bb1",
+            "bytes": 1229778,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "85f96db61f7be6e6fa493dc5b7d073a26c66fb1cae6c659722e51e64b661bb89",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed7/test/predictions.json"
+            }
+          },
+          "sha256": "a1070d46a5eb41fd40bd724f9f106697943258aaac221b5e6eb524876df02bb1",
+          "verified": true
+        },
+        {
+          "trial": "A_condition_first_seed7",
+          "file": "timing.json",
+          "reference": {
+            "sha256": "ed4c3bbb93ed3931e0c9e60e6d6c6a24be17292bbd22db58bec9311e51351cec",
+            "bytes": 443,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "85f96db61f7be6e6fa493dc5b7d073a26c66fb1cae6c659722e51e64b661bb89",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed7/test/timing.json"
+            }
+          },
+          "sha256": "ed4c3bbb93ed3931e0c9e60e6d6c6a24be17292bbd22db58bec9311e51351cec",
+          "verified": true
+        },
+        {
+          "trial": "A_condition_first_seed7",
+          "file": "resolved.yaml",
+          "reference": {
+            "sha256": "7cfd7121f694818dff8d695fccdbbe9eb8846854b3c0aa719f586ab72aef6d99",
+            "bytes": 1090,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "85f96db61f7be6e6fa493dc5b7d073a26c66fb1cae6c659722e51e64b661bb89",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed7/test/resolved.yaml"
+            }
+          },
+          "sha256": "7cfd7121f694818dff8d695fccdbbe9eb8846854b3c0aa719f586ab72aef6d99",
+          "verified": true
+        },
+        {
+          "trial": "A_condition_first_seed9",
+          "file": "predictions.json",
+          "reference": {
+            "sha256": "1bf7b24a673689ae6dbd04668f30a68ad7958baeade08d80e91d6a9ecd747912",
+            "bytes": 1229864,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "681379e52e95e533e0835fa6135dc268cac0852f4a7e40c4431086efe4466254",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed9/test/predictions.json"
+            }
+          },
+          "sha256": "1bf7b24a673689ae6dbd04668f30a68ad7958baeade08d80e91d6a9ecd747912",
+          "verified": true
+        },
+        {
+          "trial": "A_condition_first_seed9",
+          "file": "timing.json",
+          "reference": {
+            "sha256": "e31df24138d21254f50ce7af5f987a3ec6b768274739d51e195d02394559803c",
+            "bytes": 443,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "681379e52e95e533e0835fa6135dc268cac0852f4a7e40c4431086efe4466254",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed9/test/timing.json"
+            }
+          },
+          "sha256": "e31df24138d21254f50ce7af5f987a3ec6b768274739d51e195d02394559803c",
+          "verified": true
+        },
+        {
+          "trial": "A_condition_first_seed9",
+          "file": "resolved.yaml",
+          "reference": {
+            "sha256": "da1c71c061599d6f739e5571f5e04b6e28aae2ec55453193df3402d66cc71ff0",
+            "bytes": 1090,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "681379e52e95e533e0835fa6135dc268cac0852f4a7e40c4431086efe4466254",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed9/test/resolved.yaml"
+            }
+          },
+          "sha256": "da1c71c061599d6f739e5571f5e04b6e28aae2ec55453193df3402d66cc71ff0",
+          "verified": true
+        },
+        {
+          "trial": "B_order_only_seed11",
+          "file": "predictions.json",
+          "reference": {
+            "sha256": "3fc567d633cea7c8f4378b6863aa88caf7109d1974ed6b178fc42df4f42450b9",
+            "bytes": 1229778,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "ab3965df14eddbb0e650c241b7916e6159db91686a51ae461a1a0ab834178d9b",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/B_order_only_seed11/test/predictions.json"
+            }
+          },
+          "sha256": "3fc567d633cea7c8f4378b6863aa88caf7109d1974ed6b178fc42df4f42450b9",
+          "verified": true
+        },
+        {
+          "trial": "B_order_only_seed11",
+          "file": "timing.json",
+          "reference": {
+            "sha256": "05932d57f42852f054732eca456c13c4d029757d5a0405fa162c67d777efc31a",
+            "bytes": 443,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "ab3965df14eddbb0e650c241b7916e6159db91686a51ae461a1a0ab834178d9b",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/B_order_only_seed11/test/timing.json"
+            }
+          },
+          "sha256": "05932d57f42852f054732eca456c13c4d029757d5a0405fa162c67d777efc31a",
+          "verified": true
+        },
+        {
+          "trial": "B_order_only_seed11",
+          "file": "resolved.yaml",
+          "reference": {
+            "sha256": "5fdff1f0c7e3252ff4da0afdeb85b354228e471dc6b7c0169d9ebe70c190cac5",
+            "bytes": 1082,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "ab3965df14eddbb0e650c241b7916e6159db91686a51ae461a1a0ab834178d9b",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/B_order_only_seed11/test/resolved.yaml"
+            }
+          },
+          "sha256": "5fdff1f0c7e3252ff4da0afdeb85b354228e471dc6b7c0169d9ebe70c190cac5",
+          "verified": true
+        },
+        {
+          "trial": "B_order_only_seed8",
+          "file": "predictions.json",
+          "reference": {
+            "sha256": "7dd7a188aff78864880aed999206d24a98af1d12ee41c2bf01f0f30358fca106",
+            "bytes": 1229675,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "c850e915e5687be58a679153144a4f44e9e1449a4577e6a16b6fda46ce29aba4",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/B_order_only_seed8/test/predictions.json"
+            }
+          },
+          "sha256": "7dd7a188aff78864880aed999206d24a98af1d12ee41c2bf01f0f30358fca106",
+          "verified": true
+        },
+        {
+          "trial": "B_order_only_seed8",
+          "file": "timing.json",
+          "reference": {
+            "sha256": "e1d747762b3df498c18d0cf25a04d736ee63efd7f1b397052ab422bc5b53d9e0",
+            "bytes": 442,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "c850e915e5687be58a679153144a4f44e9e1449a4577e6a16b6fda46ce29aba4",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/B_order_only_seed8/test/timing.json"
+            }
+          },
+          "sha256": "e1d747762b3df498c18d0cf25a04d736ee63efd7f1b397052ab422bc5b53d9e0",
+          "verified": true
+        },
+        {
+          "trial": "B_order_only_seed8",
+          "file": "resolved.yaml",
+          "reference": {
+            "sha256": "53b002e8e60bb77a91d16233129aca25f43d5644381fbce8181cd4a3f2777047",
+            "bytes": 1080,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "c850e915e5687be58a679153144a4f44e9e1449a4577e6a16b6fda46ce29aba4",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/B_order_only_seed8/test/resolved.yaml"
+            }
+          },
+          "sha256": "53b002e8e60bb77a91d16233129aca25f43d5644381fbce8181cd4a3f2777047",
+          "verified": true
+        },
+        {
+          "trial": "C_case_inspired_seed10",
+          "file": "predictions.json",
+          "reference": {
+            "sha256": "4097f4dbe7cfd04f9e960f36af64ecadc12497be0155682a1a5f467bc091502e",
+            "bytes": 1229748,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "324d13a74bc19b670500693081c02f98e006ab414fe1ea4091efe1a6615e9972",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed10/test/predictions.json"
+            }
+          },
+          "sha256": "4097f4dbe7cfd04f9e960f36af64ecadc12497be0155682a1a5f467bc091502e",
+          "verified": true
+        },
+        {
+          "trial": "C_case_inspired_seed10",
+          "file": "timing.json",
+          "reference": {
+            "sha256": "0073180ef934517b348930075b8350cc28b5e6f1b8761e43c933bc6b2ac9e9bf",
+            "bytes": 438,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "324d13a74bc19b670500693081c02f98e006ab414fe1ea4091efe1a6615e9972",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed10/test/timing.json"
+            }
+          },
+          "sha256": "0073180ef934517b348930075b8350cc28b5e6f1b8761e43c933bc6b2ac9e9bf",
+          "verified": true
+        },
+        {
+          "trial": "C_case_inspired_seed10",
+          "file": "resolved.yaml",
+          "reference": {
+            "sha256": "0bc4c61d01765c408fe171aa528c8be35e83aeb6db85a5e9ddab8e5855eff23a",
+            "bytes": 1088,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "324d13a74bc19b670500693081c02f98e006ab414fe1ea4091efe1a6615e9972",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed10/test/resolved.yaml"
+            }
+          },
+          "sha256": "0bc4c61d01765c408fe171aa528c8be35e83aeb6db85a5e9ddab8e5855eff23a",
+          "verified": true
+        },
+        {
+          "trial": "C_case_inspired_seed7",
+          "file": "predictions.json",
+          "reference": {
+            "sha256": "f79966a2b49709bbdea9301745983b27c44f63dd363cac0c12fbe11f85d0c900",
+            "bytes": 1229770,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "f6017270f20216543639544645beb4fcbd3b3436387356892697735820375499",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed7/test/predictions.json"
+            }
+          },
+          "sha256": "f79966a2b49709bbdea9301745983b27c44f63dd363cac0c12fbe11f85d0c900",
+          "verified": true
+        },
+        {
+          "trial": "C_case_inspired_seed7",
+          "file": "timing.json",
+          "reference": {
+            "sha256": "9e4bcbc02910860bdb27d814ea9f5b3bf0ff534876d0d539226f2e6068f9a998",
+            "bytes": 443,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "f6017270f20216543639544645beb4fcbd3b3436387356892697735820375499",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed7/test/timing.json"
+            }
+          },
+          "sha256": "9e4bcbc02910860bdb27d814ea9f5b3bf0ff534876d0d539226f2e6068f9a998",
+          "verified": true
+        },
+        {
+          "trial": "C_case_inspired_seed7",
+          "file": "resolved.yaml",
+          "reference": {
+            "sha256": "0f6d4825a39c1a0cb83ee3e91cbfdaf697ca4e7bfe02660da616dcacd5320964",
+            "bytes": 1086,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "f6017270f20216543639544645beb4fcbd3b3436387356892697735820375499",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed7/test/resolved.yaml"
+            }
+          },
+          "sha256": "0f6d4825a39c1a0cb83ee3e91cbfdaf697ca4e7bfe02660da616dcacd5320964",
+          "verified": true
+        },
+        {
+          "trial": "C_case_inspired_seed9",
+          "file": "predictions.json",
+          "reference": {
+            "sha256": "ad91d23917b2e4c1b29be98b56a0ce51f481a326ec1dd9b886fda223c8a43c22",
+            "bytes": 1229802,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "dee4d0890fae62eae7c3d1899be73074842599056a397769570efae379c12dfa",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed9/test/predictions.json"
+            }
+          },
+          "sha256": "ad91d23917b2e4c1b29be98b56a0ce51f481a326ec1dd9b886fda223c8a43c22",
+          "verified": true
+        },
+        {
+          "trial": "C_case_inspired_seed9",
+          "file": "timing.json",
+          "reference": {
+            "sha256": "40fad91af61c9f2a461a271caac91eb3feafebe859b608b410250e75d98dcecb",
+            "bytes": 442,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "dee4d0890fae62eae7c3d1899be73074842599056a397769570efae379c12dfa",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed9/test/timing.json"
+            }
+          },
+          "sha256": "40fad91af61c9f2a461a271caac91eb3feafebe859b608b410250e75d98dcecb",
+          "verified": true
+        },
+        {
+          "trial": "C_case_inspired_seed9",
+          "file": "resolved.yaml",
+          "reference": {
+            "sha256": "79332853ae3b67c033b3351fe2cb30eeae1b72261af8bb39eadf45a6963bcc19",
+            "bytes": 1086,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "dee4d0890fae62eae7c3d1899be73074842599056a397769570efae379c12dfa",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed9/test/resolved.yaml"
+            }
+          },
+          "sha256": "79332853ae3b67c033b3351fe2cb30eeae1b72261af8bb39eadf45a6963bcc19",
+          "verified": true
+        }
+      ],
+      "native_completion": {
+        "worker": 1,
+        "source_commit": "9fb983cc71a3745c1684a67f74d60a7c19855917",
+        "started_utc": "2026-11-08T23:08:34.299675+00:00",
+        "phase": "complete",
+        "assigned": [
+          "A_condition_first_seed10",
+          "A_condition_first_seed7",
+          "A_condition_first_seed9",
+          "B_order_only_seed11",
+          "B_order_only_seed8",
+          "C_case_inspired_seed10",
+          "C_case_inspired_seed7",
+          "C_case_inspired_seed9"
+        ],
+        "records": [
+          {
+            "path": "/home/machina/jep-full-data-test-20261108/repo/experiments/full_prompt_test_9fb983cc_a_condition_first_seed10_test/runs/selected/01M6YPX4QKDBV4ZYFFKWBZSAHQ/resolved.yaml",
+            "reference": {
+              "sha256": "c2244c0cc662f50dac3fd7e46015b2b82777154c48c5617e66f35a28211bc681",
+              "bytes": 1092,
+              "stored_at": {
+                "kind": "local",
+                "workspace": "/home/machina/jep-full-data-test-20261108/repo",
+                "store": ".viper/store",
+                "store_id": "c50fd9374e76b7ce3520515a81822824",
+                "commit": "569ec5353ec827b6c62efc14313a0a77e003245d1db4a48f51f019dcd218e6f4",
+                "path": "experiments/full_prompt_test_9fb983cc_a_condition_first_seed10_test/runs/selected/01M6YPX4QKDBV4ZYFFKWBZSAHQ/resolved.yaml"
+              },
+              "kind": "resolved_run"
+            },
+            "trial_id": "A_condition_first_seed10",
+            "split": "test",
+            "source_commit": "9fb983cc71a3745c1684a67f74d60a7c19855917",
+            "seconds": 217.40824410200003,
+            "predictions_sha256": "9282d351a2b8a09d22140f1d1bf7637b9b4fa511bd46f71450b22a2fed90a600"
+          },
+          {
+            "path": "/home/machina/jep-full-data-test-20261108/repo/experiments/full_prompt_test_9fb983cc_a_condition_first_seed7_test/runs/selected/01M6YQ3S2ATD61DYMFCN1XA89S/resolved.yaml",
+            "reference": {
+              "sha256": "7cfd7121f694818dff8d695fccdbbe9eb8846854b3c0aa719f586ab72aef6d99",
+              "bytes": 1090,
+              "stored_at": {
+                "kind": "local",
+                "workspace": "/home/machina/jep-full-data-test-20261108/repo",
+                "store": ".viper/store",
+                "store_id": "c50fd9374e76b7ce3520515a81822824",
+                "commit": "d6ac4c419e5b5f7fa178802a9ad7ce43fcdc2159a4554bee902a6aca93e9ba73",
+                "path": "experiments/full_prompt_test_9fb983cc_a_condition_first_seed7_test/runs/selected/01M6YQ3S2ATD61DYMFCN1XA89S/resolved.yaml"
+              },
+              "kind": "resolved_run"
+            },
+            "trial_id": "A_condition_first_seed7",
+            "split": "test",
+            "source_commit": "9fb983cc71a3745c1684a67f74d60a7c19855917",
+            "seconds": 216.51954603500008,
+            "predictions_sha256": "a1070d46a5eb41fd40bd724f9f106697943258aaac221b5e6eb524876df02bb1"
+          },
+          {
+            "path": "/home/machina/jep-full-data-test-20261108/repo/experiments/full_prompt_test_9fb983cc_a_condition_first_seed9_test/runs/selected/01M6YQACH61WJ8DTTTE4FP813S/resolved.yaml",
+            "reference": {
+              "sha256": "da1c71c061599d6f739e5571f5e04b6e28aae2ec55453193df3402d66cc71ff0",
+              "bytes": 1090,
+              "stored_at": {
+                "kind": "local",
+                "workspace": "/home/machina/jep-full-data-test-20261108/repo",
+                "store": ".viper/store",
+                "store_id": "c50fd9374e76b7ce3520515a81822824",
+                "commit": "84fa3ce69fcb613404c294b05ada831b5f3d3655631eff6a6995fb964f6f784d",
+                "path": "experiments/full_prompt_test_9fb983cc_a_condition_first_seed9_test/runs/selected/01M6YQACH61WJ8DTTTE4FP813S/resolved.yaml"
+              },
+              "kind": "resolved_run"
+            },
+            "trial_id": "A_condition_first_seed9",
+            "split": "test",
+            "source_commit": "9fb983cc71a3745c1684a67f74d60a7c19855917",
+            "seconds": 218.0397601030004,
+            "predictions_sha256": "1bf7b24a673689ae6dbd04668f30a68ad7958baeade08d80e91d6a9ecd747912"
+          },
+          {
+            "path": "/home/machina/jep-full-data-test-20261108/repo/experiments/full_prompt_test_9fb983cc_b_order_only_seed11_test/runs/selected/01M6YQH1FKDR58FN0JEM4S9XVJ/resolved.yaml",
+            "reference": {
+              "sha256": "5fdff1f0c7e3252ff4da0afdeb85b354228e471dc6b7c0169d9ebe70c190cac5",
+              "bytes": 1082,
+              "stored_at": {
+                "kind": "local",
+                "workspace": "/home/machina/jep-full-data-test-20261108/repo",
+                "store": ".viper/store",
+                "store_id": "c50fd9374e76b7ce3520515a81822824",
+                "commit": "07bb94b767b976a93d562b7a36a456c02ecbe0f83c44a96a47afee49c6142b74",
+                "path": "experiments/full_prompt_test_9fb983cc_b_order_only_seed11_test/runs/selected/01M6YQH1FKDR58FN0JEM4S9XVJ/resolved.yaml"
+              },
+              "kind": "resolved_run"
+            },
+            "trial_id": "B_order_only_seed11",
+            "split": "test",
+            "source_commit": "9fb983cc71a3745c1684a67f74d60a7c19855917",
+            "seconds": 214.52261380699974,
+            "predictions_sha256": "3fc567d633cea7c8f4378b6863aa88caf7109d1974ed6b178fc42df4f42450b9"
+          },
+          {
+            "path": "/home/machina/jep-full-data-test-20261108/repo/experiments/full_prompt_test_9fb983cc_b_order_only_seed8_test/runs/selected/01M6YQQK04HXG8MX3Q52ERP3JF/resolved.yaml",
+            "reference": {
+              "sha256": "53b002e8e60bb77a91d16233129aca25f43d5644381fbce8181cd4a3f2777047",
+              "bytes": 1080,
+              "stored_at": {
+                "kind": "local",
+                "workspace": "/home/machina/jep-full-data-test-20261108/repo",
+                "store": ".viper/store",
+                "store_id": "c50fd9374e76b7ce3520515a81822824",
+                "commit": "4d442261c570eb6a7f200afe7cf97e57d23a8c5d5eebf794f71d7da194e08ecb",
+                "path": "experiments/full_prompt_test_9fb983cc_b_order_only_seed8_test/runs/selected/01M6YQQK04HXG8MX3Q52ERP3JF/resolved.yaml"
+              },
+              "kind": "resolved_run"
+            },
+            "trial_id": "B_order_only_seed8",
+            "split": "test",
+            "source_commit": "9fb983cc71a3745c1684a67f74d60a7c19855917",
+            "seconds": 217.56274674900033,
+            "predictions_sha256": "7dd7a188aff78864880aed999206d24a98af1d12ee41c2bf01f0f30358fca106"
+          },
+          {
+            "path": "/home/machina/jep-full-data-test-20261108/repo/experiments/full_prompt_test_9fb983cc_c_case_inspired_seed10_test/runs/selected/01M6YQY7FMWE9065MDC9AGEAAG/resolved.yaml",
+            "reference": {
+              "sha256": "0bc4c61d01765c408fe171aa528c8be35e83aeb6db85a5e9ddab8e5855eff23a",
+              "bytes": 1088,
+              "stored_at": {
+                "kind": "local",
+                "workspace": "/home/machina/jep-full-data-test-20261108/repo",
+                "store": ".viper/store",
+                "store_id": "c50fd9374e76b7ce3520515a81822824",
+                "commit": "1f8026d5fe4f6f90600f5f0762d42735be646147ad537001bfd0f722101fac3b",
+                "path": "experiments/full_prompt_test_9fb983cc_c_case_inspired_seed10_test/runs/selected/01M6YQY7FMWE9065MDC9AGEAAG/resolved.yaml"
+              },
+              "kind": "resolved_run"
+            },
+            "trial_id": "C_case_inspired_seed10",
+            "split": "test",
+            "source_commit": "9fb983cc71a3745c1684a67f74d60a7c19855917",
+            "seconds": 223.3669259369999,
+            "predictions_sha256": "4097f4dbe7cfd04f9e960f36af64ecadc12497be0155682a1a5f467bc091502e"
+          },
+          {
+            "path": "/home/machina/jep-full-data-test-20261108/repo/experiments/full_prompt_test_9fb983cc_c_case_inspired_seed7_test/runs/selected/01M6YR51MGP4SZ6MCB3FS4VMFG/resolved.yaml",
+            "reference": {
+              "sha256": "0f6d4825a39c1a0cb83ee3e91cbfdaf697ca4e7bfe02660da616dcacd5320964",
+              "bytes": 1086,
+              "stored_at": {
+                "kind": "local",
+                "workspace": "/home/machina/jep-full-data-test-20261108/repo",
+                "store": ".viper/store",
+                "store_id": "c50fd9374e76b7ce3520515a81822824",
+                "commit": "b5ac8eaa2aad433a53eacbd8c626ced7404f04fcb77af90e6864adce15311cc6",
+                "path": "experiments/full_prompt_test_9fb983cc_c_case_inspired_seed7_test/runs/selected/01M6YR51MGP4SZ6MCB3FS4VMFG/resolved.yaml"
+              },
+              "kind": "resolved_run"
+            },
+            "trial_id": "C_case_inspired_seed7",
+            "split": "test",
+            "source_commit": "9fb983cc71a3745c1684a67f74d60a7c19855917",
+            "seconds": 181.12703141899965,
+            "predictions_sha256": "f79966a2b49709bbdea9301745983b27c44f63dd363cac0c12fbe11f85d0c900"
+          },
+          {
+            "path": "/home/machina/jep-full-data-test-20261108/repo/experiments/full_prompt_test_9fb983cc_c_case_inspired_seed9_test/runs/selected/01M6YRAJHCHJV127BVHQRB1SEG/resolved.yaml",
+            "reference": {
+              "sha256": "79332853ae3b67c033b3351fe2cb30eeae1b72261af8bb39eadf45a6963bcc19",
+              "bytes": 1086,
+              "stored_at": {
+                "kind": "local",
+                "workspace": "/home/machina/jep-full-data-test-20261108/repo",
+                "store": ".viper/store",
+                "store_id": "c50fd9374e76b7ce3520515a81822824",
+                "commit": "79e99f83d92fb5714962a867bdfc5d347b3b670545187e5955eb373c0004f70b",
+                "path": "experiments/full_prompt_test_9fb983cc_c_case_inspired_seed9_test/runs/selected/01M6YRAJHCHJV127BVHQRB1SEG/resolved.yaml"
+              },
+              "kind": "resolved_run"
+            },
+            "trial_id": "C_case_inspired_seed9",
+            "split": "test",
+            "source_commit": "9fb983cc71a3745c1684a67f74d60a7c19855917",
+            "seconds": 195.5395085670002,
+            "predictions_sha256": "ad91d23917b2e4c1b29be98b56a0ce51f481a326ec1dd9b886fda223c8a43c22"
+          }
+        ],
+        "cloud": [
+          {
+            "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed10/validation/predictions.json": {
+              "sha256": "e9ffb354f415b1e510c7eb0c9f8cf806b6533d2aa28ed8f41b46fa7ff4995840",
+              "bytes": 794396,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "9b59b6f1cd9da665f83301253036d551a52e4efddd05a17eea0e193e2a96e6e7",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed10/validation/predictions.json"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed10/validation/resolved.yaml": {
+              "sha256": "0c3d216c179e3ac3002aa1d06bd6a7b9bc5770044514103a6239e0e2de49bd1e",
+              "bytes": 1104,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "9b59b6f1cd9da665f83301253036d551a52e4efddd05a17eea0e193e2a96e6e7",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed10/validation/resolved.yaml"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed10/validation/timing.json": {
+              "sha256": "91c1ea17e88bfcb2214cd42de3ce10690f5a7980af5af5432bdb4935291148a0",
+              "bytes": 443,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "9b59b6f1cd9da665f83301253036d551a52e4efddd05a17eea0e193e2a96e6e7",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed10/validation/timing.json"
+              }
+            }
+          },
+          {
+            "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed10/test/predictions.json": {
+              "sha256": "9282d351a2b8a09d22140f1d1bf7637b9b4fa511bd46f71450b22a2fed90a600",
+              "bytes": 1229767,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "7adea0434450c90dc69d3cb4baa081f1fcf4f2a601176a1a1f59765a40c739d7",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed10/test/predictions.json"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed10/test/resolved.yaml": {
+              "sha256": "c2244c0cc662f50dac3fd7e46015b2b82777154c48c5617e66f35a28211bc681",
+              "bytes": 1092,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "7adea0434450c90dc69d3cb4baa081f1fcf4f2a601176a1a1f59765a40c739d7",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed10/test/resolved.yaml"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed10/test/timing.json": {
+              "sha256": "f781c43b69442fdb8a04775e2e63b0eb66a80174536122b17959bcd94d336ceb",
+              "bytes": 443,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "7adea0434450c90dc69d3cb4baa081f1fcf4f2a601176a1a1f59765a40c739d7",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed10/test/timing.json"
+              }
+            }
+          },
+          {
+            "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed7/test/predictions.json": {
+              "sha256": "a1070d46a5eb41fd40bd724f9f106697943258aaac221b5e6eb524876df02bb1",
+              "bytes": 1229778,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "85f96db61f7be6e6fa493dc5b7d073a26c66fb1cae6c659722e51e64b661bb89",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed7/test/predictions.json"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed7/test/resolved.yaml": {
+              "sha256": "7cfd7121f694818dff8d695fccdbbe9eb8846854b3c0aa719f586ab72aef6d99",
+              "bytes": 1090,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "85f96db61f7be6e6fa493dc5b7d073a26c66fb1cae6c659722e51e64b661bb89",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed7/test/resolved.yaml"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed7/test/timing.json": {
+              "sha256": "ed4c3bbb93ed3931e0c9e60e6d6c6a24be17292bbd22db58bec9311e51351cec",
+              "bytes": 443,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "85f96db61f7be6e6fa493dc5b7d073a26c66fb1cae6c659722e51e64b661bb89",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed7/test/timing.json"
+              }
+            }
+          },
+          {
+            "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed9/test/predictions.json": {
+              "sha256": "1bf7b24a673689ae6dbd04668f30a68ad7958baeade08d80e91d6a9ecd747912",
+              "bytes": 1229864,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "681379e52e95e533e0835fa6135dc268cac0852f4a7e40c4431086efe4466254",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed9/test/predictions.json"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed9/test/resolved.yaml": {
+              "sha256": "da1c71c061599d6f739e5571f5e04b6e28aae2ec55453193df3402d66cc71ff0",
+              "bytes": 1090,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "681379e52e95e533e0835fa6135dc268cac0852f4a7e40c4431086efe4466254",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed9/test/resolved.yaml"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed9/test/timing.json": {
+              "sha256": "e31df24138d21254f50ce7af5f987a3ec6b768274739d51e195d02394559803c",
+              "bytes": 443,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "681379e52e95e533e0835fa6135dc268cac0852f4a7e40c4431086efe4466254",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/A_condition_first_seed9/test/timing.json"
+              }
+            }
+          },
+          {
+            "baseline_results/full_data_prompt_test_20261108/worker1/B_order_only_seed11/test/predictions.json": {
+              "sha256": "3fc567d633cea7c8f4378b6863aa88caf7109d1974ed6b178fc42df4f42450b9",
+              "bytes": 1229778,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "ab3965df14eddbb0e650c241b7916e6159db91686a51ae461a1a0ab834178d9b",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/B_order_only_seed11/test/predictions.json"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker1/B_order_only_seed11/test/resolved.yaml": {
+              "sha256": "5fdff1f0c7e3252ff4da0afdeb85b354228e471dc6b7c0169d9ebe70c190cac5",
+              "bytes": 1082,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "ab3965df14eddbb0e650c241b7916e6159db91686a51ae461a1a0ab834178d9b",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/B_order_only_seed11/test/resolved.yaml"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker1/B_order_only_seed11/test/timing.json": {
+              "sha256": "05932d57f42852f054732eca456c13c4d029757d5a0405fa162c67d777efc31a",
+              "bytes": 443,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "ab3965df14eddbb0e650c241b7916e6159db91686a51ae461a1a0ab834178d9b",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/B_order_only_seed11/test/timing.json"
+              }
+            }
+          },
+          {
+            "baseline_results/full_data_prompt_test_20261108/worker1/B_order_only_seed8/test/predictions.json": {
+              "sha256": "7dd7a188aff78864880aed999206d24a98af1d12ee41c2bf01f0f30358fca106",
+              "bytes": 1229675,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "c850e915e5687be58a679153144a4f44e9e1449a4577e6a16b6fda46ce29aba4",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/B_order_only_seed8/test/predictions.json"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker1/B_order_only_seed8/test/resolved.yaml": {
+              "sha256": "53b002e8e60bb77a91d16233129aca25f43d5644381fbce8181cd4a3f2777047",
+              "bytes": 1080,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "c850e915e5687be58a679153144a4f44e9e1449a4577e6a16b6fda46ce29aba4",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/B_order_only_seed8/test/resolved.yaml"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker1/B_order_only_seed8/test/timing.json": {
+              "sha256": "e1d747762b3df498c18d0cf25a04d736ee63efd7f1b397052ab422bc5b53d9e0",
+              "bytes": 442,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "c850e915e5687be58a679153144a4f44e9e1449a4577e6a16b6fda46ce29aba4",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/B_order_only_seed8/test/timing.json"
+              }
+            }
+          },
+          {
+            "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed10/test/predictions.json": {
+              "sha256": "4097f4dbe7cfd04f9e960f36af64ecadc12497be0155682a1a5f467bc091502e",
+              "bytes": 1229748,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "324d13a74bc19b670500693081c02f98e006ab414fe1ea4091efe1a6615e9972",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed10/test/predictions.json"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed10/test/resolved.yaml": {
+              "sha256": "0bc4c61d01765c408fe171aa528c8be35e83aeb6db85a5e9ddab8e5855eff23a",
+              "bytes": 1088,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "324d13a74bc19b670500693081c02f98e006ab414fe1ea4091efe1a6615e9972",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed10/test/resolved.yaml"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed10/test/timing.json": {
+              "sha256": "0073180ef934517b348930075b8350cc28b5e6f1b8761e43c933bc6b2ac9e9bf",
+              "bytes": 438,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "324d13a74bc19b670500693081c02f98e006ab414fe1ea4091efe1a6615e9972",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed10/test/timing.json"
+              }
+            }
+          },
+          {
+            "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed7/test/predictions.json": {
+              "sha256": "f79966a2b49709bbdea9301745983b27c44f63dd363cac0c12fbe11f85d0c900",
+              "bytes": 1229770,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "f6017270f20216543639544645beb4fcbd3b3436387356892697735820375499",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed7/test/predictions.json"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed7/test/resolved.yaml": {
+              "sha256": "0f6d4825a39c1a0cb83ee3e91cbfdaf697ca4e7bfe02660da616dcacd5320964",
+              "bytes": 1086,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "f6017270f20216543639544645beb4fcbd3b3436387356892697735820375499",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed7/test/resolved.yaml"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed7/test/timing.json": {
+              "sha256": "9e4bcbc02910860bdb27d814ea9f5b3bf0ff534876d0d539226f2e6068f9a998",
+              "bytes": 443,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "f6017270f20216543639544645beb4fcbd3b3436387356892697735820375499",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed7/test/timing.json"
+              }
+            }
+          },
+          {
+            "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed9/test/predictions.json": {
+              "sha256": "ad91d23917b2e4c1b29be98b56a0ce51f481a326ec1dd9b886fda223c8a43c22",
+              "bytes": 1229802,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "dee4d0890fae62eae7c3d1899be73074842599056a397769570efae379c12dfa",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed9/test/predictions.json"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed9/test/resolved.yaml": {
+              "sha256": "79332853ae3b67c033b3351fe2cb30eeae1b72261af8bb39eadf45a6963bcc19",
+              "bytes": 1086,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "dee4d0890fae62eae7c3d1899be73074842599056a397769570efae379c12dfa",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed9/test/resolved.yaml"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed9/test/timing.json": {
+              "sha256": "40fad91af61c9f2a461a271caac91eb3feafebe859b608b410250e75d98dcecb",
+              "bytes": 442,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "dee4d0890fae62eae7c3d1899be73074842599056a397769570efae379c12dfa",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker1/C_case_inspired_seed9/test/timing.json"
+              }
+            }
+          }
+        ],
+        "validation_replay": {
+          "trial": "A_condition_first_seed10",
+          "expected": 0.8724975979532501,
+          "observed": 0.8724975979532501,
+          "record": {
+            "path": "/home/machina/jep-full-data-test-20261108/repo/experiments/full_prompt_test_9fb983cc_a_condition_first_seed10_validation/runs/selected/01M6YPQCQE0XEZTRF34K20A35B/resolved.yaml",
+            "reference": {
+              "sha256": "0c3d216c179e3ac3002aa1d06bd6a7b9bc5770044514103a6239e0e2de49bd1e",
+              "bytes": 1104,
+              "stored_at": {
+                "kind": "local",
+                "workspace": "/home/machina/jep-full-data-test-20261108/repo",
+                "store": ".viper/store",
+                "store_id": "c50fd9374e76b7ce3520515a81822824",
+                "commit": "960f366976291e96f1c71da853c9e15a0aefb280a969118429bdab64d99a470a",
+                "path": "experiments/full_prompt_test_9fb983cc_a_condition_first_seed10_validation/runs/selected/01M6YPQCQE0XEZTRF34K20A35B/resolved.yaml"
+              },
+              "kind": "resolved_run"
+            },
+            "trial_id": "A_condition_first_seed10",
+            "split": "validation",
+            "source_commit": "9fb983cc71a3745c1684a67f74d60a7c19855917",
+            "seconds": 188.38537922399996,
+            "predictions_sha256": "e9ffb354f415b1e510c7eb0c9f8cf806b6533d2aa28ed8f41b46fa7ff4995840"
+          }
+        },
+        "current_trial": "C_case_inspired_seed9",
+        "completed_utc": "2026-11-08T23:39:55.461952+00:00",
+        "status_cloud": {
+          "baseline_results/full_data_prompt_test_20261108/worker1/status.json": {
+            "sha256": "5cc4b38cd7f3794b584ba63bea24d847248212c3581182f0194befbd048a71a2",
+            "bytes": 28577,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "1a3a012e60cdce2ddd3302259d4840aee6b792a28865b199298ec73ed282f49b",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker1/status.json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "worker": 2,
+      "metrics": [
+        {
+          "trial_id": "A_condition_first_seed11",
+          "arm": "A_condition_first",
+          "seed": 11,
+          "validation": {
+            "n": 1576,
+            "mse_0_1": 0.03203045570227281,
+            "mse_1_5": 0.5124872912363649,
+            "spearman": 0.8750488300591874,
+            "prediction_mean": 0.5820368998944003,
+            "target_mean": 0.6134200507614214,
+            "prediction_std": 0.3449797002908681,
+            "target_std": 0.3852562483034509,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 266,
+                "mean": 0.09786942653021866
+              },
+              "2.0": {
+                "n": 213,
+                "mean": 0.3021437984676988
+              },
+              "3.0": {
+                "n": 302,
+                "mean": 0.4818067481025856
+              },
+              "4.0": {
+                "n": 130,
+                "mean": 0.6547330245375633
+              },
+              "5.0": {
+                "n": 665,
+                "mean": 0.8966606414827861
+              }
+            },
+            "condition_changes": {
+              "n": 551,
+              "correct": 533,
+              "ties": 0,
+              "accuracy_ties_half": 0.9673321234119783,
+              "difference_mse": 0.06544629034254666,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "test": {
+            "n": 2430,
+            "mse_0_1": 0.04091307317738659,
+            "mse_1_5": 0.6546091708381855,
+            "spearman": 0.8499897496371102,
+            "prediction_mean": 0.5943614323324535,
+            "target_mean": 0.6217078189300411,
+            "prediction_std": 0.34780875252422827,
+            "target_std": 0.4012287775249589,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 482,
+                "mean": 0.14439714378947818
+              },
+              "2.0": {
+                "n": 269,
+                "mean": 0.33073575545420875
+              },
+              "3.0": {
+                "n": 374,
+                "mean": 0.4530064154797318
+              },
+              "4.0": {
+                "n": 194,
+                "mean": 0.6505995363611536
+              },
+              "5.0": {
+                "n": 1111,
+                "mean": 0.8911703236729684
+              }
+            },
+            "condition_changes": {
+              "n": 877,
+              "correct": 837,
+              "ties": 0,
+              "accuracy_ties_half": 0.9543899657924744,
+              "difference_mse": 0.08269338336902675,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "selected_epoch": 4,
+          "completed_epochs": 5,
+          "scoring_seconds": 151.92905315999997
+        },
+        {
+          "trial_id": "A_condition_first_seed8",
+          "arm": "A_condition_first",
+          "seed": 8,
+          "validation": {
+            "n": 1576,
+            "mse_0_1": 0.032286918342664554,
+            "mse_1_5": 0.5165906934826329,
+            "spearman": 0.8731076316027357,
+            "prediction_mean": 0.587229239642691,
+            "target_mean": 0.6134200507614214,
+            "prediction_std": 0.3491226027042153,
+            "target_std": 0.3852562483034509,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 266,
+                "mean": 0.09265974062123805
+              },
+              "2.0": {
+                "n": 213,
+                "mean": 0.30622853650033754
+              },
+              "3.0": {
+                "n": 302,
+                "mean": 0.49017904705016424
+              },
+              "4.0": {
+                "n": 130,
+                "mean": 0.6794759226533083
+              },
+              "5.0": {
+                "n": 665,
+                "mean": 0.9011025116435791
+              }
+            },
+            "condition_changes": {
+              "n": 551,
+              "correct": 534,
+              "ties": 0,
+              "accuracy_ties_half": 0.969147005444646,
+              "difference_mse": 0.06359969356391108,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "test": {
+            "n": 2430,
+            "mse_0_1": 0.03949385668959667,
+            "mse_1_5": 0.6319017070335468,
+            "spearman": 0.853193273328336,
+            "prediction_mean": 0.6008823680652137,
+            "target_mean": 0.6217078189300411,
+            "prediction_std": 0.3510545361761377,
+            "target_std": 0.4012287775249589,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 482,
+                "mean": 0.14365636506427032
+              },
+              "2.0": {
+                "n": 269,
+                "mean": 0.33341109047758094
+              },
+              "3.0": {
+                "n": 374,
+                "mean": 0.4580539082765908
+              },
+              "4.0": {
+                "n": 194,
+                "mean": 0.666456313477349
+              },
+              "5.0": {
+                "n": 1111,
+                "mean": 0.9006386287929532
+              }
+            },
+            "condition_changes": {
+              "n": 877,
+              "correct": 837,
+              "ties": 0,
+              "accuracy_ties_half": 0.9543899657924744,
+              "difference_mse": 0.08287685614563006,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "selected_epoch": 5,
+          "completed_epochs": 6,
+          "scoring_seconds": 151.79456771500008
+        },
+        {
+          "trial_id": "B_order_only_seed10",
+          "arm": "B_order_only",
+          "seed": 10,
+          "validation": {
+            "n": 1576,
+            "mse_0_1": 0.03179393200655904,
+            "mse_1_5": 0.5087029121049447,
+            "spearman": 0.8761867833457124,
+            "prediction_mean": 0.5855373050453174,
+            "target_mean": 0.6134200507614214,
+            "prediction_std": 0.344927469063274,
+            "target_std": 0.3852562483034509,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 266,
+                "mean": 0.10679011360770162
+              },
+              "2.0": {
+                "n": 213,
+                "mean": 0.3044594271117253
+              },
+              "3.0": {
+                "n": 302,
+                "mean": 0.47622052915641017
+              },
+              "4.0": {
+                "n": 130,
+                "mean": 0.6620808828335542
+              },
+              "5.0": {
+                "n": 665,
+                "mean": 0.901746842080265
+              }
+            },
+            "condition_changes": {
+              "n": 551,
+              "correct": 527,
+              "ties": 0,
+              "accuracy_ties_half": 0.956442831215971,
+              "difference_mse": 0.06798578931571675,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "test": {
+            "n": 2430,
+            "mse_0_1": 0.03735228282961104,
+            "mse_1_5": 0.5976365252737766,
+            "spearman": 0.859654288086307,
+            "prediction_mean": 0.6007720994217889,
+            "target_mean": 0.6217078189300411,
+            "prediction_std": 0.34637468505343644,
+            "target_std": 0.4012287775249589,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 482,
+                "mean": 0.15195790109566618
+              },
+              "2.0": {
+                "n": 269,
+                "mean": 0.3273929195222358
+              },
+              "3.0": {
+                "n": 374,
+                "mean": 0.45634275566746685
+              },
+              "4.0": {
+                "n": 194,
+                "mean": 0.6414962174351683
+              },
+              "5.0": {
+                "n": 1111,
+                "mean": 0.9031875257545446
+              }
+            },
+            "condition_changes": {
+              "n": 877,
+              "correct": 837,
+              "ties": 0,
+              "accuracy_ties_half": 0.9543899657924744,
+              "difference_mse": 0.08150494122897858,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "selected_epoch": 4,
+          "completed_epochs": 5,
+          "scoring_seconds": 149.36843088699993
+        },
+        {
+          "trial_id": "B_order_only_seed7",
+          "arm": "B_order_only",
+          "seed": 7,
+          "validation": {
+            "n": 1576,
+            "mse_0_1": 0.03209158848938696,
+            "mse_1_5": 0.5134654158301913,
+            "spearman": 0.8746972021838658,
+            "prediction_mean": 0.5920147554074925,
+            "target_mean": 0.6134200507614214,
+            "prediction_std": 0.3394575269030135,
+            "target_std": 0.3852562483034509,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 266,
+                "mean": 0.11484340309599568
+              },
+              "2.0": {
+                "n": 213,
+                "mean": 0.3207053493515986
+              },
+              "3.0": {
+                "n": 302,
+                "mean": 0.490890267471604
+              },
+              "4.0": {
+                "n": 130,
+                "mean": 0.6753067423517888
+              },
+              "5.0": {
+                "n": 665,
+                "mean": 0.8994254625633471
+              }
+            },
+            "condition_changes": {
+              "n": 551,
+              "correct": 529,
+              "ties": 0,
+              "accuracy_ties_half": 0.9600725952813067,
+              "difference_mse": 0.07135933585701255,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "test": {
+            "n": 2430,
+            "mse_0_1": 0.03856420763838817,
+            "mse_1_5": 0.6170273222142107,
+            "spearman": 0.8562386398121584,
+            "prediction_mean": 0.6049600359686715,
+            "target_mean": 0.6217078189300411,
+            "prediction_std": 0.3420059285522885,
+            "target_std": 0.4012287775249589,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 482,
+                "mean": 0.15660290364311288
+              },
+              "2.0": {
+                "n": 269,
+                "mean": 0.34534902668464584
+              },
+              "3.0": {
+                "n": 374,
+                "mean": 0.4707565733585208
+              },
+              "4.0": {
+                "n": 194,
+                "mean": 0.6540947202401063
+              },
+              "5.0": {
+                "n": 1111,
+                "mean": 0.8989325522115701
+              }
+            },
+            "condition_changes": {
+              "n": 877,
+              "correct": 842,
+              "ties": 0,
+              "accuracy_ties_half": 0.9600912200684151,
+              "difference_mse": 0.0849065866333931,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "selected_epoch": 4,
+          "completed_epochs": 5,
+          "scoring_seconds": 149.40673897700003
+        },
+        {
+          "trial_id": "B_order_only_seed9",
+          "arm": "B_order_only",
+          "seed": 9,
+          "validation": {
+            "n": 1576,
+            "mse_0_1": 0.03226891266661764,
+            "mse_1_5": 0.5163026026658822,
+            "spearman": 0.872477699316546,
+            "prediction_mean": 0.5958504136787671,
+            "target_mean": 0.6134200507614214,
+            "prediction_std": 0.3358198871730072,
+            "target_std": 0.3852562483034509,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 266,
+                "mean": 0.11922113040700219
+              },
+              "2.0": {
+                "n": 213,
+                "mean": 0.3351889426859332
+              },
+              "3.0": {
+                "n": 302,
+                "mean": 0.49616834355074146
+              },
+              "4.0": {
+                "n": 130,
+                "mean": 0.6831481182804474
+              },
+              "5.0": {
+                "n": 665,
+                "mean": 0.898195626088103
+              }
+            },
+            "condition_changes": {
+              "n": 551,
+              "correct": 526,
+              "ties": 0,
+              "accuracy_ties_half": 0.9546279491833031,
+              "difference_mse": 0.07084830092802072,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "test": {
+            "n": 2430,
+            "mse_0_1": 0.03773173899292424,
+            "mse_1_5": 0.6037078238867878,
+            "spearman": 0.8586185517777474,
+            "prediction_mean": 0.6102289577302189,
+            "target_mean": 0.6217078189300411,
+            "prediction_std": 0.33821266081090623,
+            "target_std": 0.4012287775249589,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 482,
+                "mean": 0.16320939589276354
+              },
+              "2.0": {
+                "n": 269,
+                "mean": 0.3594210141487281
+              },
+              "3.0": {
+                "n": 374,
+                "mean": 0.4746939019663608
+              },
+              "4.0": {
+                "n": 194,
+                "mean": 0.6620963413229922
+              },
+              "5.0": {
+                "n": 1111,
+                "mean": 0.9014608245778872
+              }
+            },
+            "condition_changes": {
+              "n": 877,
+              "correct": 839,
+              "ties": 0,
+              "accuracy_ties_half": 0.9566704675028507,
+              "difference_mse": 0.08731908706395274,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "selected_epoch": 4,
+          "completed_epochs": 5,
+          "scoring_seconds": 149.38975642800006
+        },
+        {
+          "trial_id": "C_case_inspired_seed11",
+          "arm": "C_case_inspired",
+          "seed": 11,
+          "validation": {
+            "n": 1576,
+            "mse_0_1": 0.03178868611597139,
+            "mse_1_5": 0.5086189778555422,
+            "spearman": 0.8756951918964353,
+            "prediction_mean": 0.5889240351897371,
+            "target_mean": 0.6134200507614214,
+            "prediction_std": 0.34216195005220645,
+            "target_std": 0.3852562483034509,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 266,
+                "mean": 0.10975690448439603
+              },
+              "2.0": {
+                "n": 213,
+                "mean": 0.31020855889633786
+              },
+              "3.0": {
+                "n": 302,
+                "mean": 0.48704970356644384
+              },
+              "4.0": {
+                "n": 130,
+                "mean": 0.6729592432196324
+              },
+              "5.0": {
+                "n": 665,
+                "mean": 0.8997004627453206
+              }
+            },
+            "condition_changes": {
+              "n": 551,
+              "correct": 526,
+              "ties": 0,
+              "accuracy_ties_half": 0.9546279491833031,
+              "difference_mse": 0.06928123226335836,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "test": {
+            "n": 2430,
+            "mse_0_1": 0.03700543185316755,
+            "mse_1_5": 0.5920869096506808,
+            "spearman": 0.85960115798183,
+            "prediction_mean": 0.5996923090782738,
+            "target_mean": 0.6217078189300411,
+            "prediction_std": 0.3447055710722492,
+            "target_std": 0.4012287775249589,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 482,
+                "mean": 0.14763532194243242
+              },
+              "2.0": {
+                "n": 269,
+                "mean": 0.3296590557107252
+              },
+              "3.0": {
+                "n": 374,
+                "mean": 0.46218488864690305
+              },
+              "4.0": {
+                "n": 194,
+                "mean": 0.6510824622567167
+              },
+              "5.0": {
+                "n": 1111,
+                "mean": 0.8985118396633869
+              }
+            },
+            "condition_changes": {
+              "n": 877,
+              "correct": 837,
+              "ties": 0,
+              "accuracy_ties_half": 0.9543899657924744,
+              "difference_mse": 0.07910368161746271,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "selected_epoch": 6,
+          "completed_epochs": 7,
+          "scoring_seconds": 137.40002570900015
+        },
+        {
+          "trial_id": "C_case_inspired_seed8",
+          "arm": "C_case_inspired",
+          "seed": 8,
+          "validation": {
+            "n": 1576,
+            "mse_0_1": 0.032335835959914676,
+            "mse_1_5": 0.5173733753586348,
+            "spearman": 0.8757501268520459,
+            "prediction_mean": 0.5805910749435969,
+            "target_mean": 0.6134200507614214,
+            "prediction_std": 0.34469831129757206,
+            "target_std": 0.3852562483034509,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 266,
+                "mean": 0.10639359777324126
+              },
+              "2.0": {
+                "n": 213,
+                "mean": 0.29400595113145356
+              },
+              "3.0": {
+                "n": 302,
+                "mean": 0.47159399916202027
+              },
+              "4.0": {
+                "n": 130,
+                "mean": 0.6551716506481171
+              },
+              "5.0": {
+                "n": 665,
+                "mean": 0.8969832589191602
+              }
+            },
+            "condition_changes": {
+              "n": 551,
+              "correct": 531,
+              "ties": 0,
+              "accuracy_ties_half": 0.9637023593466425,
+              "difference_mse": 0.07133491448572671,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "test": {
+            "n": 2430,
+            "mse_0_1": 0.03891701543313517,
+            "mse_1_5": 0.6226722469301628,
+            "spearman": 0.8554473565563594,
+            "prediction_mean": 0.592361769748568,
+            "target_mean": 0.6217078189300411,
+            "prediction_std": 0.3485061447920854,
+            "target_std": 0.4012287775249589,
+            "mean_prediction_by_rating": {
+              "1.0": {
+                "n": 482,
+                "mean": 0.1438853225257263
+              },
+              "2.0": {
+                "n": 269,
+                "mean": 0.31394675234159575
+              },
+              "3.0": {
+                "n": 374,
+                "mean": 0.44954995512165485
+              },
+              "4.0": {
+                "n": 194,
+                "mean": 0.6359415637310019
+              },
+              "5.0": {
+                "n": 1111,
+                "mean": 0.8948067975449304
+              }
+            },
+            "condition_changes": {
+              "n": 877,
+              "correct": 835,
+              "ties": 0,
+              "accuracy_ties_half": 0.9521094640820981,
+              "difference_mse": 0.08297223775118276,
+              "unit": "Within-pair comparisons. These reuse captions and are dependent."
+            }
+          },
+          "selected_epoch": 4,
+          "completed_epochs": 5,
+          "scoring_seconds": 145.50883600899988
+        }
+      ],
+      "cloud_proofs": [
+        {
+          "trial": "A_condition_first_seed11",
+          "file": "predictions.json",
+          "reference": {
+            "sha256": "17eefc403bad75ca5af9cfa02176f394086a02dca3fe48e4c64740fd6cd4d5a1",
+            "bytes": 1229855,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "67528acabc2edad813e2ee91e031a22511a65dfa927851c4cf37e6a533e35005",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed11/test/predictions.json"
+            }
+          },
+          "sha256": "17eefc403bad75ca5af9cfa02176f394086a02dca3fe48e4c64740fd6cd4d5a1",
+          "verified": true
+        },
+        {
+          "trial": "A_condition_first_seed11",
+          "file": "timing.json",
+          "reference": {
+            "sha256": "de2cf9bbd31851e55128cba85d678454d1346b299e5f10de17bdff889ccc5021",
+            "bytes": 443,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "67528acabc2edad813e2ee91e031a22511a65dfa927851c4cf37e6a533e35005",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed11/test/timing.json"
+            }
+          },
+          "sha256": "de2cf9bbd31851e55128cba85d678454d1346b299e5f10de17bdff889ccc5021",
+          "verified": true
+        },
+        {
+          "trial": "A_condition_first_seed11",
+          "file": "resolved.yaml",
+          "reference": {
+            "sha256": "1d0fb5c1de8000f3b265267be44f82e5ec91be5fbfb21603980c49f68ed1490e",
+            "bytes": 1092,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "67528acabc2edad813e2ee91e031a22511a65dfa927851c4cf37e6a533e35005",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed11/test/resolved.yaml"
+            }
+          },
+          "sha256": "1d0fb5c1de8000f3b265267be44f82e5ec91be5fbfb21603980c49f68ed1490e",
+          "verified": true
+        },
+        {
+          "trial": "A_condition_first_seed8",
+          "file": "predictions.json",
+          "reference": {
+            "sha256": "edceeb8f315c4949d647daa3aa86568782fb7625fb78cabda740bc75dedb4a4b",
+            "bytes": 1229864,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "84a334f880e392100edd672e53f270993cb7fedb31e970c4176d39a6929d5366",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed8/test/predictions.json"
+            }
+          },
+          "sha256": "edceeb8f315c4949d647daa3aa86568782fb7625fb78cabda740bc75dedb4a4b",
+          "verified": true
+        },
+        {
+          "trial": "A_condition_first_seed8",
+          "file": "timing.json",
+          "reference": {
+            "sha256": "24f5ea39a57ec9ac10ce8d14bcc116d629e3e5f67e568a775ee8bc810dc80c76",
+            "bytes": 443,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "84a334f880e392100edd672e53f270993cb7fedb31e970c4176d39a6929d5366",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed8/test/timing.json"
+            }
+          },
+          "sha256": "24f5ea39a57ec9ac10ce8d14bcc116d629e3e5f67e568a775ee8bc810dc80c76",
+          "verified": true
+        },
+        {
+          "trial": "A_condition_first_seed8",
+          "file": "resolved.yaml",
+          "reference": {
+            "sha256": "b77130179d0270d83adaffa5991e99fab050183edeb9a2c11cb81f467722c82f",
+            "bytes": 1090,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "84a334f880e392100edd672e53f270993cb7fedb31e970c4176d39a6929d5366",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed8/test/resolved.yaml"
+            }
+          },
+          "sha256": "b77130179d0270d83adaffa5991e99fab050183edeb9a2c11cb81f467722c82f",
+          "verified": true
+        },
+        {
+          "trial": "B_order_only_seed10",
+          "file": "predictions.json",
+          "reference": {
+            "sha256": "a7df8738aed8ac63afb7188ebaf29c1c74c64e3a86993954468efc6cb0779bf8",
+            "bytes": 1229789,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "63192d00c61e3571b646ff47c9ed8fbf258cbb4ea0633a6ab47dd013b33e3878",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed10/test/predictions.json"
+            }
+          },
+          "sha256": "a7df8738aed8ac63afb7188ebaf29c1c74c64e3a86993954468efc6cb0779bf8",
+          "verified": true
+        },
+        {
+          "trial": "B_order_only_seed10",
+          "file": "timing.json",
+          "reference": {
+            "sha256": "2db9ede00d7a17707f861a5b462c9743e492b264dd0f7c35d884a4f87ee65ae4",
+            "bytes": 443,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "63192d00c61e3571b646ff47c9ed8fbf258cbb4ea0633a6ab47dd013b33e3878",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed10/test/timing.json"
+            }
+          },
+          "sha256": "2db9ede00d7a17707f861a5b462c9743e492b264dd0f7c35d884a4f87ee65ae4",
+          "verified": true
+        },
+        {
+          "trial": "B_order_only_seed10",
+          "file": "resolved.yaml",
+          "reference": {
+            "sha256": "f35e71a9072bd077ec695a5bf578337c25e12d698f467bfcbb263929f00d8c1c",
+            "bytes": 1082,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "63192d00c61e3571b646ff47c9ed8fbf258cbb4ea0633a6ab47dd013b33e3878",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed10/test/resolved.yaml"
+            }
+          },
+          "sha256": "f35e71a9072bd077ec695a5bf578337c25e12d698f467bfcbb263929f00d8c1c",
+          "verified": true
+        },
+        {
+          "trial": "B_order_only_seed7",
+          "file": "predictions.json",
+          "reference": {
+            "sha256": "e4363a916696a2a18462edc1123d03d57508917126fb34fae6f55fa56e162abd",
+            "bytes": 1229859,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "d9605e431bcb2e0bbddb384b746e7ea36922a78983d3498297d77a623f532aaf",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed7/test/predictions.json"
+            }
+          },
+          "sha256": "e4363a916696a2a18462edc1123d03d57508917126fb34fae6f55fa56e162abd",
+          "verified": true
+        },
+        {
+          "trial": "B_order_only_seed7",
+          "file": "timing.json",
+          "reference": {
+            "sha256": "d832555881c765a21e5701f7fe0ac35165d0338262136f075c6d2cf4b58f8753",
+            "bytes": 443,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "d9605e431bcb2e0bbddb384b746e7ea36922a78983d3498297d77a623f532aaf",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed7/test/timing.json"
+            }
+          },
+          "sha256": "d832555881c765a21e5701f7fe0ac35165d0338262136f075c6d2cf4b58f8753",
+          "verified": true
+        },
+        {
+          "trial": "B_order_only_seed7",
+          "file": "resolved.yaml",
+          "reference": {
+            "sha256": "a881caf2b32307d77798308974ec90109409d0bd645ef9d452730389d3df5d11",
+            "bytes": 1080,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "d9605e431bcb2e0bbddb384b746e7ea36922a78983d3498297d77a623f532aaf",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed7/test/resolved.yaml"
+            }
+          },
+          "sha256": "a881caf2b32307d77798308974ec90109409d0bd645ef9d452730389d3df5d11",
+          "verified": true
+        },
+        {
+          "trial": "B_order_only_seed9",
+          "file": "predictions.json",
+          "reference": {
+            "sha256": "d38d30fa5c0219000f0d2b10883f4522e161557604cb53d1feb2fbaf9d426103",
+            "bytes": 1229768,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "a374b3a96ed96736084bcb3a6bbe077ccd4035fcb172285706f027142601827a",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed9/test/predictions.json"
+            }
+          },
+          "sha256": "d38d30fa5c0219000f0d2b10883f4522e161557604cb53d1feb2fbaf9d426103",
+          "verified": true
+        },
+        {
+          "trial": "B_order_only_seed9",
+          "file": "timing.json",
+          "reference": {
+            "sha256": "04b0e6a5878662de67c43e043e66b5315c81e8ecc568f95ffc80aa2fe3e21b8c",
+            "bytes": 443,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "a374b3a96ed96736084bcb3a6bbe077ccd4035fcb172285706f027142601827a",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed9/test/timing.json"
+            }
+          },
+          "sha256": "04b0e6a5878662de67c43e043e66b5315c81e8ecc568f95ffc80aa2fe3e21b8c",
+          "verified": true
+        },
+        {
+          "trial": "B_order_only_seed9",
+          "file": "resolved.yaml",
+          "reference": {
+            "sha256": "73b25d96c17b7d6b29762f59070735971d3e1c6944ff19c67a5b72dcb2babc56",
+            "bytes": 1080,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "a374b3a96ed96736084bcb3a6bbe077ccd4035fcb172285706f027142601827a",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed9/test/resolved.yaml"
+            }
+          },
+          "sha256": "73b25d96c17b7d6b29762f59070735971d3e1c6944ff19c67a5b72dcb2babc56",
+          "verified": true
+        },
+        {
+          "trial": "C_case_inspired_seed11",
+          "file": "predictions.json",
+          "reference": {
+            "sha256": "08f6d52534df022d4dd1134e81816aaa5b320fd505bae9ac4269bcc1431abba8",
+            "bytes": 1229800,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "f83b6d77426067d8fd584439ef97990c13ae7daeade09bb908f43f10375d3f6f",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker2/C_case_inspired_seed11/test/predictions.json"
+            }
+          },
+          "sha256": "08f6d52534df022d4dd1134e81816aaa5b320fd505bae9ac4269bcc1431abba8",
+          "verified": true
+        },
+        {
+          "trial": "C_case_inspired_seed11",
+          "file": "timing.json",
+          "reference": {
+            "sha256": "8981db3c46ad5ccb8b334b9943c2d3ba125de8dfe230cd83f17bc73edd4d1f3a",
+            "bytes": 443,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "f83b6d77426067d8fd584439ef97990c13ae7daeade09bb908f43f10375d3f6f",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker2/C_case_inspired_seed11/test/timing.json"
+            }
+          },
+          "sha256": "8981db3c46ad5ccb8b334b9943c2d3ba125de8dfe230cd83f17bc73edd4d1f3a",
+          "verified": true
+        },
+        {
+          "trial": "C_case_inspired_seed11",
+          "file": "resolved.yaml",
+          "reference": {
+            "sha256": "db77916d858afd90ba286e2623acff7202e56a2316d99db546ddeb6b9add487b",
+            "bytes": 1088,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "f83b6d77426067d8fd584439ef97990c13ae7daeade09bb908f43f10375d3f6f",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker2/C_case_inspired_seed11/test/resolved.yaml"
+            }
+          },
+          "sha256": "db77916d858afd90ba286e2623acff7202e56a2316d99db546ddeb6b9add487b",
+          "verified": true
+        },
+        {
+          "trial": "C_case_inspired_seed8",
+          "file": "predictions.json",
+          "reference": {
+            "sha256": "7b9aafdfdf60f942fe801e86113d68e585380031de724c6b9dca2b88fc2964f2",
+            "bytes": 1229826,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "d7c97ddebe5f7b92c1b9cf0f849d28c6eddb829f4bb94d171c19df44ca5721d1",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker2/C_case_inspired_seed8/test/predictions.json"
+            }
+          },
+          "sha256": "7b9aafdfdf60f942fe801e86113d68e585380031de724c6b9dca2b88fc2964f2",
+          "verified": true
+        },
+        {
+          "trial": "C_case_inspired_seed8",
+          "file": "timing.json",
+          "reference": {
+            "sha256": "0c54667405f96ffa4e8c15b6a4f219608ef5170dbe2c53fc0d42880e6bc95ce7",
+            "bytes": 443,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "d7c97ddebe5f7b92c1b9cf0f849d28c6eddb829f4bb94d171c19df44ca5721d1",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker2/C_case_inspired_seed8/test/timing.json"
+            }
+          },
+          "sha256": "0c54667405f96ffa4e8c15b6a4f219608ef5170dbe2c53fc0d42880e6bc95ce7",
+          "verified": true
+        },
+        {
+          "trial": "C_case_inspired_seed8",
+          "file": "resolved.yaml",
+          "reference": {
+            "sha256": "7ab78dd2f67f9d3c41dff08fc9c03162be56e067aa1750b5a368877ea2cca1c5",
+            "bytes": 1086,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "d7c97ddebe5f7b92c1b9cf0f849d28c6eddb829f4bb94d171c19df44ca5721d1",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker2/C_case_inspired_seed8/test/resolved.yaml"
+            }
+          },
+          "sha256": "7ab78dd2f67f9d3c41dff08fc9c03162be56e067aa1750b5a368877ea2cca1c5",
+          "verified": true
+        }
+      ],
+      "native_completion": {
+        "worker": 2,
+        "source_commit": "9fb983cc71a3745c1684a67f74d60a7c19855917",
+        "started_utc": "2026-11-08T23:08:34.338078+00:00",
+        "phase": "complete",
+        "assigned": [
+          "A_condition_first_seed11",
+          "A_condition_first_seed8",
+          "B_order_only_seed10",
+          "B_order_only_seed7",
+          "B_order_only_seed9",
+          "C_case_inspired_seed11",
+          "C_case_inspired_seed8"
+        ],
+        "records": [
+          {
+            "path": "/home/machina/jep-full-data-test-20261108/repo/experiments/full_prompt_test_9fb983cc_a_condition_first_seed11_test/runs/selected/01M6YPX39FV03GPR69AAHDCK9M/resolved.yaml",
+            "reference": {
+              "sha256": "1d0fb5c1de8000f3b265267be44f82e5ec91be5fbfb21603980c49f68ed1490e",
+              "bytes": 1092,
+              "stored_at": {
+                "kind": "local",
+                "workspace": "/home/machina/jep-full-data-test-20261108/repo",
+                "store": ".viper/store",
+                "store_id": "bb8f15e32cbb45ea4c5425909e1d8436",
+                "commit": "e51d2fc55e27cdf8c4ab07fdf1563d0d67d4a0c0c03080889fa485ffa13d8491",
+                "path": "experiments/full_prompt_test_9fb983cc_a_condition_first_seed11_test/runs/selected/01M6YPX39FV03GPR69AAHDCK9M/resolved.yaml"
+              },
+              "kind": "resolved_run"
+            },
+            "trial_id": "A_condition_first_seed11",
+            "split": "test",
+            "source_commit": "9fb983cc71a3745c1684a67f74d60a7c19855917",
+            "seconds": 219.72049511199998,
+            "predictions_sha256": "17eefc403bad75ca5af9cfa02176f394086a02dca3fe48e4c64740fd6cd4d5a1"
+          },
+          {
+            "path": "/home/machina/jep-full-data-test-20261108/repo/experiments/full_prompt_test_9fb983cc_a_condition_first_seed8_test/runs/selected/01M6YQ3SWE795YPG36457HTZSG/resolved.yaml",
+            "reference": {
+              "sha256": "b77130179d0270d83adaffa5991e99fab050183edeb9a2c11cb81f467722c82f",
+              "bytes": 1090,
+              "stored_at": {
+                "kind": "local",
+                "workspace": "/home/machina/jep-full-data-test-20261108/repo",
+                "store": ".viper/store",
+                "store_id": "bb8f15e32cbb45ea4c5425909e1d8436",
+                "commit": "418eef510748638182ea38ea74888e14ed8cfc89720bc45f66d73aa75e1bf5c7",
+                "path": "experiments/full_prompt_test_9fb983cc_a_condition_first_seed8_test/runs/selected/01M6YQ3SWE795YPG36457HTZSG/resolved.yaml"
+              },
+              "kind": "resolved_run"
+            },
+            "trial_id": "A_condition_first_seed8",
+            "split": "test",
+            "source_commit": "9fb983cc71a3745c1684a67f74d60a7c19855917",
+            "seconds": 218.00869476000003,
+            "predictions_sha256": "edceeb8f315c4949d647daa3aa86568782fb7625fb78cabda740bc75dedb4a4b"
+          },
+          {
+            "path": "/home/machina/jep-full-data-test-20261108/repo/experiments/full_prompt_test_9fb983cc_b_order_only_seed10_test/runs/selected/01M6YQAESXWS1BVPFHJR9EP0Z1/resolved.yaml",
+            "reference": {
+              "sha256": "f35e71a9072bd077ec695a5bf578337c25e12d698f467bfcbb263929f00d8c1c",
+              "bytes": 1082,
+              "stored_at": {
+                "kind": "local",
+                "workspace": "/home/machina/jep-full-data-test-20261108/repo",
+                "store": ".viper/store",
+                "store_id": "bb8f15e32cbb45ea4c5425909e1d8436",
+                "commit": "78fee166e73357ef063c285b4b9d937f7faf92ffe773e540a41dc9809d528611",
+                "path": "experiments/full_prompt_test_9fb983cc_b_order_only_seed10_test/runs/selected/01M6YQAESXWS1BVPFHJR9EP0Z1/resolved.yaml"
+              },
+              "kind": "resolved_run"
+            },
+            "trial_id": "B_order_only_seed10",
+            "split": "test",
+            "source_commit": "9fb983cc71a3745c1684a67f74d60a7c19855917",
+            "seconds": 217.62006687500002,
+            "predictions_sha256": "a7df8738aed8ac63afb7188ebaf29c1c74c64e3a86993954468efc6cb0779bf8"
+          },
+          {
+            "path": "/home/machina/jep-full-data-test-20261108/repo/experiments/full_prompt_test_9fb983cc_b_order_only_seed7_test/runs/selected/01M6YQH3B86D8SWYHPSMCPT5HE/resolved.yaml",
+            "reference": {
+              "sha256": "a881caf2b32307d77798308974ec90109409d0bd645ef9d452730389d3df5d11",
+              "bytes": 1080,
+              "stored_at": {
+                "kind": "local",
+                "workspace": "/home/machina/jep-full-data-test-20261108/repo",
+                "store": ".viper/store",
+                "store_id": "bb8f15e32cbb45ea4c5425909e1d8436",
+                "commit": "a16025c765890a84c2768e26c1420faca169acf9bd871d46d8a7ff4a623a8b0c",
+                "path": "experiments/full_prompt_test_9fb983cc_b_order_only_seed7_test/runs/selected/01M6YQH3B86D8SWYHPSMCPT5HE/resolved.yaml"
+              },
+              "kind": "resolved_run"
+            },
+            "trial_id": "B_order_only_seed7",
+            "split": "test",
+            "source_commit": "9fb983cc71a3745c1684a67f74d60a7c19855917",
+            "seconds": 214.17951432200016,
+            "predictions_sha256": "e4363a916696a2a18462edc1123d03d57508917126fb34fae6f55fa56e162abd"
+          },
+          {
+            "path": "/home/machina/jep-full-data-test-20261108/repo/experiments/full_prompt_test_9fb983cc_b_order_only_seed9_test/runs/selected/01M6YQQMH1BTVQFFTGW7CQAN6D/resolved.yaml",
+            "reference": {
+              "sha256": "73b25d96c17b7d6b29762f59070735971d3e1c6944ff19c67a5b72dcb2babc56",
+              "bytes": 1080,
+              "stored_at": {
+                "kind": "local",
+                "workspace": "/home/machina/jep-full-data-test-20261108/repo",
+                "store": ".viper/store",
+                "store_id": "bb8f15e32cbb45ea4c5425909e1d8436",
+                "commit": "6ed6e709243fd5ed21520a7221f691b16c2dd6aebb3f45b6cfa21a98b2dfdfa8",
+                "path": "experiments/full_prompt_test_9fb983cc_b_order_only_seed9_test/runs/selected/01M6YQQMH1BTVQFFTGW7CQAN6D/resolved.yaml"
+              },
+              "kind": "resolved_run"
+            },
+            "trial_id": "B_order_only_seed9",
+            "split": "test",
+            "source_commit": "9fb983cc71a3745c1684a67f74d60a7c19855917",
+            "seconds": 219.68651378999994,
+            "predictions_sha256": "d38d30fa5c0219000f0d2b10883f4522e161557604cb53d1feb2fbaf9d426103"
+          },
+          {
+            "path": "/home/machina/jep-full-data-test-20261108/repo/experiments/full_prompt_test_9fb983cc_c_case_inspired_seed11_test/runs/selected/01M6YQYB2YDRSZ7AZWA6XT3F5A/resolved.yaml",
+            "reference": {
+              "sha256": "db77916d858afd90ba286e2623acff7202e56a2316d99db546ddeb6b9add487b",
+              "bytes": 1088,
+              "stored_at": {
+                "kind": "local",
+                "workspace": "/home/machina/jep-full-data-test-20261108/repo",
+                "store": ".viper/store",
+                "store_id": "bb8f15e32cbb45ea4c5425909e1d8436",
+                "commit": "e2ea0e1abd73e67242e73e83ddf0b977297cd5f1f7f2ca0c168d9424c89d6f99",
+                "path": "experiments/full_prompt_test_9fb983cc_c_case_inspired_seed11_test/runs/selected/01M6YQYB2YDRSZ7AZWA6XT3F5A/resolved.yaml"
+              },
+              "kind": "resolved_run"
+            },
+            "trial_id": "C_case_inspired_seed11",
+            "split": "test",
+            "source_commit": "9fb983cc71a3745c1684a67f74d60a7c19855917",
+            "seconds": 203.5128784389999,
+            "predictions_sha256": "08f6d52534df022d4dd1134e81816aaa5b320fd505bae9ac4269bcc1431abba8"
+          },
+          {
+            "path": "/home/machina/jep-full-data-test-20261108/repo/experiments/full_prompt_test_9fb983cc_c_case_inspired_seed8_test/runs/selected/01M6YR4HVCBP9R0KGNRMW6XVJP/resolved.yaml",
+            "reference": {
+              "sha256": "7ab78dd2f67f9d3c41dff08fc9c03162be56e067aa1750b5a368877ea2cca1c5",
+              "bytes": 1086,
+              "stored_at": {
+                "kind": "local",
+                "workspace": "/home/machina/jep-full-data-test-20261108/repo",
+                "store": ".viper/store",
+                "store_id": "bb8f15e32cbb45ea4c5425909e1d8436",
+                "commit": "87ba74bd6fe44f896a1e3fbd97723cf0b1e49f58c2022f52e28692fffedb73a8",
+                "path": "experiments/full_prompt_test_9fb983cc_c_case_inspired_seed8_test/runs/selected/01M6YR4HVCBP9R0KGNRMW6XVJP/resolved.yaml"
+              },
+              "kind": "resolved_run"
+            },
+            "trial_id": "C_case_inspired_seed8",
+            "split": "test",
+            "source_commit": "9fb983cc71a3745c1684a67f74d60a7c19855917",
+            "seconds": 210.55957094899986,
+            "predictions_sha256": "7b9aafdfdf60f942fe801e86113d68e585380031de724c6b9dca2b88fc2964f2"
+          }
+        ],
+        "cloud": [
+          {
+            "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed11/validation/predictions.json": {
+              "sha256": "8d227d8b7cc9c6df5c22d085c7155b44c634dc9780fdcef73f4e7b64686b3960",
+              "bytes": 794408,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "1d9f18780a7f4e90ebd5c51f3b7cec40c55d762e4d02f798e7513640cd82bdf8",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed11/validation/predictions.json"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed11/validation/resolved.yaml": {
+              "sha256": "3dcb0a75d446513c593ff81dab8520991db6289fae6a8c18798a32734642b255",
+              "bytes": 1104,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "1d9f18780a7f4e90ebd5c51f3b7cec40c55d762e4d02f798e7513640cd82bdf8",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed11/validation/resolved.yaml"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed11/validation/timing.json": {
+              "sha256": "9f6aab2850662b671673521da26b5bc555cbbbfb998c183bec03a1a7b3a0c44c",
+              "bytes": 443,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "1d9f18780a7f4e90ebd5c51f3b7cec40c55d762e4d02f798e7513640cd82bdf8",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed11/validation/timing.json"
+              }
+            }
+          },
+          {
+            "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed11/test/predictions.json": {
+              "sha256": "17eefc403bad75ca5af9cfa02176f394086a02dca3fe48e4c64740fd6cd4d5a1",
+              "bytes": 1229855,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "67528acabc2edad813e2ee91e031a22511a65dfa927851c4cf37e6a533e35005",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed11/test/predictions.json"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed11/test/resolved.yaml": {
+              "sha256": "1d0fb5c1de8000f3b265267be44f82e5ec91be5fbfb21603980c49f68ed1490e",
+              "bytes": 1092,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "67528acabc2edad813e2ee91e031a22511a65dfa927851c4cf37e6a533e35005",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed11/test/resolved.yaml"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed11/test/timing.json": {
+              "sha256": "de2cf9bbd31851e55128cba85d678454d1346b299e5f10de17bdff889ccc5021",
+              "bytes": 443,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "67528acabc2edad813e2ee91e031a22511a65dfa927851c4cf37e6a533e35005",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed11/test/timing.json"
+              }
+            }
+          },
+          {
+            "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed8/test/predictions.json": {
+              "sha256": "edceeb8f315c4949d647daa3aa86568782fb7625fb78cabda740bc75dedb4a4b",
+              "bytes": 1229864,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "84a334f880e392100edd672e53f270993cb7fedb31e970c4176d39a6929d5366",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed8/test/predictions.json"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed8/test/resolved.yaml": {
+              "sha256": "b77130179d0270d83adaffa5991e99fab050183edeb9a2c11cb81f467722c82f",
+              "bytes": 1090,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "84a334f880e392100edd672e53f270993cb7fedb31e970c4176d39a6929d5366",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed8/test/resolved.yaml"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed8/test/timing.json": {
+              "sha256": "24f5ea39a57ec9ac10ce8d14bcc116d629e3e5f67e568a775ee8bc810dc80c76",
+              "bytes": 443,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "84a334f880e392100edd672e53f270993cb7fedb31e970c4176d39a6929d5366",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/A_condition_first_seed8/test/timing.json"
+              }
+            }
+          },
+          {
+            "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed10/test/predictions.json": {
+              "sha256": "a7df8738aed8ac63afb7188ebaf29c1c74c64e3a86993954468efc6cb0779bf8",
+              "bytes": 1229789,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "63192d00c61e3571b646ff47c9ed8fbf258cbb4ea0633a6ab47dd013b33e3878",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed10/test/predictions.json"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed10/test/resolved.yaml": {
+              "sha256": "f35e71a9072bd077ec695a5bf578337c25e12d698f467bfcbb263929f00d8c1c",
+              "bytes": 1082,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "63192d00c61e3571b646ff47c9ed8fbf258cbb4ea0633a6ab47dd013b33e3878",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed10/test/resolved.yaml"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed10/test/timing.json": {
+              "sha256": "2db9ede00d7a17707f861a5b462c9743e492b264dd0f7c35d884a4f87ee65ae4",
+              "bytes": 443,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "63192d00c61e3571b646ff47c9ed8fbf258cbb4ea0633a6ab47dd013b33e3878",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed10/test/timing.json"
+              }
+            }
+          },
+          {
+            "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed7/test/predictions.json": {
+              "sha256": "e4363a916696a2a18462edc1123d03d57508917126fb34fae6f55fa56e162abd",
+              "bytes": 1229859,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "d9605e431bcb2e0bbddb384b746e7ea36922a78983d3498297d77a623f532aaf",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed7/test/predictions.json"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed7/test/resolved.yaml": {
+              "sha256": "a881caf2b32307d77798308974ec90109409d0bd645ef9d452730389d3df5d11",
+              "bytes": 1080,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "d9605e431bcb2e0bbddb384b746e7ea36922a78983d3498297d77a623f532aaf",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed7/test/resolved.yaml"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed7/test/timing.json": {
+              "sha256": "d832555881c765a21e5701f7fe0ac35165d0338262136f075c6d2cf4b58f8753",
+              "bytes": 443,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "d9605e431bcb2e0bbddb384b746e7ea36922a78983d3498297d77a623f532aaf",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed7/test/timing.json"
+              }
+            }
+          },
+          {
+            "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed9/test/predictions.json": {
+              "sha256": "d38d30fa5c0219000f0d2b10883f4522e161557604cb53d1feb2fbaf9d426103",
+              "bytes": 1229768,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "a374b3a96ed96736084bcb3a6bbe077ccd4035fcb172285706f027142601827a",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed9/test/predictions.json"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed9/test/resolved.yaml": {
+              "sha256": "73b25d96c17b7d6b29762f59070735971d3e1c6944ff19c67a5b72dcb2babc56",
+              "bytes": 1080,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "a374b3a96ed96736084bcb3a6bbe077ccd4035fcb172285706f027142601827a",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed9/test/resolved.yaml"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed9/test/timing.json": {
+              "sha256": "04b0e6a5878662de67c43e043e66b5315c81e8ecc568f95ffc80aa2fe3e21b8c",
+              "bytes": 443,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "a374b3a96ed96736084bcb3a6bbe077ccd4035fcb172285706f027142601827a",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/B_order_only_seed9/test/timing.json"
+              }
+            }
+          },
+          {
+            "baseline_results/full_data_prompt_test_20261108/worker2/C_case_inspired_seed11/test/predictions.json": {
+              "sha256": "08f6d52534df022d4dd1134e81816aaa5b320fd505bae9ac4269bcc1431abba8",
+              "bytes": 1229800,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "f83b6d77426067d8fd584439ef97990c13ae7daeade09bb908f43f10375d3f6f",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/C_case_inspired_seed11/test/predictions.json"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker2/C_case_inspired_seed11/test/resolved.yaml": {
+              "sha256": "db77916d858afd90ba286e2623acff7202e56a2316d99db546ddeb6b9add487b",
+              "bytes": 1088,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "f83b6d77426067d8fd584439ef97990c13ae7daeade09bb908f43f10375d3f6f",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/C_case_inspired_seed11/test/resolved.yaml"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker2/C_case_inspired_seed11/test/timing.json": {
+              "sha256": "8981db3c46ad5ccb8b334b9943c2d3ba125de8dfe230cd83f17bc73edd4d1f3a",
+              "bytes": 443,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "f83b6d77426067d8fd584439ef97990c13ae7daeade09bb908f43f10375d3f6f",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/C_case_inspired_seed11/test/timing.json"
+              }
+            }
+          },
+          {
+            "baseline_results/full_data_prompt_test_20261108/worker2/C_case_inspired_seed8/test/predictions.json": {
+              "sha256": "7b9aafdfdf60f942fe801e86113d68e585380031de724c6b9dca2b88fc2964f2",
+              "bytes": 1229826,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "d7c97ddebe5f7b92c1b9cf0f849d28c6eddb829f4bb94d171c19df44ca5721d1",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/C_case_inspired_seed8/test/predictions.json"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker2/C_case_inspired_seed8/test/resolved.yaml": {
+              "sha256": "7ab78dd2f67f9d3c41dff08fc9c03162be56e067aa1750b5a368877ea2cca1c5",
+              "bytes": 1086,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "d7c97ddebe5f7b92c1b9cf0f849d28c6eddb829f4bb94d171c19df44ca5721d1",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/C_case_inspired_seed8/test/resolved.yaml"
+              }
+            },
+            "baseline_results/full_data_prompt_test_20261108/worker2/C_case_inspired_seed8/test/timing.json": {
+              "sha256": "0c54667405f96ffa4e8c15b6a4f219608ef5170dbe2c53fc0d42880e6bc95ce7",
+              "bytes": 443,
+              "stored_at": {
+                "kind": "gcs",
+                "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+                "prefix": "viper",
+                "owner": "pvd232",
+                "workspace": "jep_full_data_prompt_20261107",
+                "revision": "d7c97ddebe5f7b92c1b9cf0f849d28c6eddb829f4bb94d171c19df44ca5721d1",
+                "path": "baseline_results/full_data_prompt_test_20261108/worker2/C_case_inspired_seed8/test/timing.json"
+              }
+            }
+          }
+        ],
+        "validation_replay": {
+          "trial": "A_condition_first_seed11",
+          "expected": 0.8750488300591874,
+          "observed": 0.8750488300591874,
+          "record": {
+            "path": "/home/machina/jep-full-data-test-20261108/repo/experiments/full_prompt_test_9fb983cc_a_condition_first_seed11_validation/runs/selected/01M6YPQCRMY8RE2THPCB3DBZD3/resolved.yaml",
+            "reference": {
+              "sha256": "3dcb0a75d446513c593ff81dab8520991db6289fae6a8c18798a32734642b255",
+              "bytes": 1104,
+              "stored_at": {
+                "kind": "local",
+                "workspace": "/home/machina/jep-full-data-test-20261108/repo",
+                "store": ".viper/store",
+                "store_id": "bb8f15e32cbb45ea4c5425909e1d8436",
+                "commit": "2ff16a3e1fa31d014fc542f7931ac393a77f9f7ad8dbb157913b497b89e819de",
+                "path": "experiments/full_prompt_test_9fb983cc_a_condition_first_seed11_validation/runs/selected/01M6YPQCRMY8RE2THPCB3DBZD3/resolved.yaml"
+              },
+              "kind": "resolved_run"
+            },
+            "trial_id": "A_condition_first_seed11",
+            "split": "validation",
+            "source_commit": "9fb983cc71a3745c1684a67f74d60a7c19855917",
+            "seconds": 186.86963446699997,
+            "predictions_sha256": "8d227d8b7cc9c6df5c22d085c7155b44c634dc9780fdcef73f4e7b64686b3960"
+          }
+        },
+        "current_trial": "C_case_inspired_seed8",
+        "completed_utc": "2026-11-08T23:36:52.832454+00:00",
+        "status_cloud": {
+          "baseline_results/full_data_prompt_test_20261108/worker2/status.json": {
+            "sha256": "10a4d037fa95bb9e47b1904027a248674840f307e2e2d73b28e3d1b9f166711e",
+            "bytes": 25414,
+            "stored_at": {
+              "kind": "gcs",
+              "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+              "prefix": "viper",
+              "owner": "pvd232",
+              "workspace": "jep_full_data_prompt_20261107",
+              "revision": "3371373f682c3fdbe8f8cf60d7727902932494778eb80b51cce129b5fe4687d5",
+              "path": "baseline_results/full_data_prompt_test_20261108/worker2/status.json"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

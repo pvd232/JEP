@@ -3,7 +3,7 @@ from pathlib import Path
 import csv,datetime as dt,json,statistics,time
 import numpy as np
 from scipy.stats import rankdata,spearmanr
-ROOT=Path("/home/peter_aetherlabs_live/jep-worktrees/full-data-test-20261108")
+ROOT=Path(__file__).resolve().parents[2]
 OUT=Path("/home/peter_aetherlabs_live/jep-full-data-test-launch-20261108")
 DEST=ROOT/"training_outputs/full_data_prompt_20261108"
 deadline=time.monotonic()+7000

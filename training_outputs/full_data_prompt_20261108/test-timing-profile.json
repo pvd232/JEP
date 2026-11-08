@@ -1,0 +1,11 @@
+{
+  "test_captures": 15,
+  "test_comparisons_per_checkpoint": 2430,
+  "native_total_seconds": 3187.3741109660004,
+  "scoring_including_model_load_seconds": 2202.666573802001,
+  "mean_native_seconds_per_checkpoint": 212.49160739773336,
+  "mean_scoring_including_model_load_seconds_per_checkpoint": 146.84443825346673,
+  "interpretation": "Difference includes native run preparation, immutable artifact handling and stage orchestration; scoring includes model loading, input verification and tokenization. This measurement does not isolate pure GPU forward time.",
+  "outside_scoring_seconds": 984.7075371639994,
+  "outside_scoring_fraction": 0.3089400562601555
+}

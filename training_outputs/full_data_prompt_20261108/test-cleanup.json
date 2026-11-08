@@ -1,0 +1,87 @@
+{
+  "workers": {
+    "1": {
+      "instance": "jep-full-prompt-eval1-20261108",
+      "instance_deleted": true,
+      "disk_deleted": true,
+      "recovery_disk_preserved": false
+    },
+    "2": {
+      "instance": "jep-full-prompt-eval2-20261108",
+      "instance_deleted": true,
+      "disk_deleted": true,
+      "recovery_disk_preserved": false
+    }
+  },
+  "template_snapshot": {
+    "deleted_utc": "2026-11-08T23:41:29.964791+00:00",
+    "name": "jep-full-prompt-test-template-20261108",
+    "immutable_id": "7605866160543581782",
+    "verified_deleted": true,
+    "pre_delete_resource": {
+      "architecture": "X86_64",
+      "creationSizeBytes": "49770044416",
+      "creationTimestamp": "2026-11-08T14:33:32.326-08:00",
+      "diskSizeGb": "200",
+      "downloadBytes": "163838287433",
+      "enableConfidentialCompute": false,
+      "guestOsFeatures": [
+        {
+          "type": "VIRTIO_SCSI_MULTIQUEUE"
+        },
+        {
+          "type": "SEV_CAPABLE"
+        },
+        {
+          "type": "SEV_SNP_CAPABLE"
+        },
+        {
+          "type": "SEV_LIVE_MIGRATABLE"
+        },
+        {
+          "type": "SEV_LIVE_MIGRATABLE_V2"
+        },
+        {
+          "type": "SNP_SVSM_CAPABLE"
+        },
+        {
+          "type": "IDPF"
+        },
+        {
+          "type": "TDX_CAPABLE"
+        },
+        {
+          "type": "UEFI_COMPATIBLE"
+        },
+        {
+          "type": "GVNIC"
+        }
+      ],
+      "id": "7605866160543581782",
+      "kind": "compute#snapshot",
+      "labelFingerprint": "X7HcLDIOsuo=",
+      "labels": {
+        "purpose": "frozen-checkpoint-test",
+        "task": "jep-full-data-20261107"
+      },
+      "licenseCodes": [
+        "3242930272766215801"
+      ],
+      "licenses": [
+        "https://www.googleapis.com/compute/v1/projects/ubuntu-os-cloud/global/licenses/ubuntu-2404-lts"
+      ],
+      "name": "jep-full-prompt-test-template-20261108",
+      "selfLink": "https://www.googleapis.com/compute/v1/projects/mantra-477901/global/snapshots/jep-full-prompt-test-template-20261108",
+      "sourceDisk": "https://www.googleapis.com/compute/v1/projects/mantra-477901/zones/asia-northeast3-a/disks/jep-csts-format-20261021",
+      "sourceDiskId": "3713489084324549102",
+      "status": "READY",
+      "storageBytes": "49770044416",
+      "storageBytesStatus": "UP_TO_DATE",
+      "storageLocations": [
+        "asia"
+      ]
+    },
+    "test_predictions_verified": 15,
+    "cloud_artifacts_verified": 45
+  }
+}

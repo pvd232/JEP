@@ -128,7 +128,7 @@ def main():
         signature_data["workers"]={w:{k:v for k,v in state.items() if k!="last_cpu_observation_utc"} for w,state in states.items()}
         signature=digest(json.dumps(signature_data,sort_keys=True).encode())
         previous=out/"test-progress-published-signature.txt"
-        if not previous.exists() or previous.read_text()!=signature:
+        if a.once or not previous.exists() or previous.read_text()!=signature:
             atomic(destination/"live-status.md","\n".join(lines))
             atomic(destination/"test-progress.csv",buf.getvalue())
             atomic(destination/"test-progress.json",json.dumps(payload,indent=2)+"\n")

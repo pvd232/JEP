@@ -6,8 +6,11 @@ VIPER stages. It performs no fitting. The evaluator checks one saved validation
 score per worker before opening test inference and uploads artifacts through
 VIPER while the next checkpoint runs.
 
-Start the CPU results reporter alongside inference, rather than after the last
-worker finishes. Reuse the existing monitor checkout and branch:
+Start the durable CPU collector (`collect_test_predictions.py`) alongside
+inference. It independently verifies published prediction bytes and deletes each
+finished worker after export. Start the CPU results reporter at the same time,
+rather than after the last worker finishes. Reuse the existing monitor checkout
+and branch:
 
 ```bash
 cloud-job submit --cwd "$JEP_CHECKOUT" -- "$JEP_PYTHON" -u \
@@ -33,7 +36,9 @@ local files and retries; it does not block inference or artifact export.
 Run `analyze_test.py` after the complete collector receipt is available. It
 independently recomputes all 15 scores and runs the predeclared 10,000 shared
 source-group bootstrap draws. Publish its CSV, JSON and report to the experiment
-branch. Preserve the original validation selection matrix. Delete owned GPUs,
+branch. Run `assemble_test_report.py` to gather publication, allocation, timing
+and cleanup receipts into the final report. Preserve the original validation
+selection matrix. Delete owned GPUs,
 disks and temporary snapshots only after verified export; the analysis uses CPU.
 
 Live tracker: https://github.com/pvd232/JEP/blob/monitor/full-data-prompt-20261107/plans/full_data_prompt_20261107/live-status.md

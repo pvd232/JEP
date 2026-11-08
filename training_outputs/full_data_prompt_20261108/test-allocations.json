@@ -1,0 +1,363 @@
+{
+  "1": {
+    "project": "mantra-477901",
+    "name": "jep-full-prompt-eval1-20261108",
+    "snapshot": "jep-full-prompt-test-template-20261108",
+    "regions": [
+      "asia-northeast3",
+      "asia-east1",
+      "asia-east2",
+      "asia-northeast1",
+      "asia-northeast2"
+    ],
+    "candidates": [
+      [
+        "asia-northeast3-b",
+        "g2-standard-4"
+      ],
+      [
+        "asia-east1-b",
+        "g2-standard-4"
+      ],
+      [
+        "asia-northeast1-c",
+        "g2-standard-4"
+      ],
+      [
+        "asia-northeast3-a",
+        "g2-standard-4"
+      ],
+      [
+        "asia-east1-a",
+        "g2-standard-4"
+      ],
+      [
+        "asia-east1-c",
+        "g2-standard-4"
+      ],
+      [
+        "asia-northeast1-a",
+        "g2-standard-4"
+      ],
+      [
+        "asia-northeast1-b",
+        "g2-standard-4"
+      ]
+    ],
+    "capacity_advice": [
+      {
+        "recommendations": [
+          {
+            "scores": {
+              "estimatedUptime": "3600s",
+              "obtainability": 0.9
+            },
+            "shards": [
+              {
+                "instanceCount": 1,
+                "machineType": "g2-standard-4",
+                "provisioningModel": "SPOT",
+                "zone": "https://www.googleapis.com/compute/beta/projects/mantra-477901/zones/asia-northeast3-b"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "recommendations": [
+          {
+            "scores": {
+              "estimatedUptime": "3600s",
+              "obtainability": 0.9
+            },
+            "shards": [
+              {
+                "instanceCount": 1,
+                "machineType": "g2-standard-4",
+                "provisioningModel": "SPOT",
+                "zone": "https://www.googleapis.com/compute/beta/projects/mantra-477901/zones/asia-east1-b"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "advice_error": "ERROR: (gcloud.beta.compute.advice.capacity) HTTPError 400: Machine specification is not supported in locations: [asia-east2-a asia-east2-b asia-east2-c].\n"
+      },
+      {
+        "recommendations": [
+          {
+            "scores": {
+              "estimatedUptime": "3600s",
+              "obtainability": 0.9
+            },
+            "shards": [
+              {
+                "instanceCount": 1,
+                "machineType": "g2-standard-4",
+                "provisioningModel": "SPOT",
+                "zone": "https://www.googleapis.com/compute/beta/projects/mantra-477901/zones/asia-northeast1-c"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "advice_error": "ERROR: (gcloud.beta.compute.advice.capacity) HTTPError 400: Machine specification is not supported in locations: [asia-northeast2-a asia-northeast2-b asia-northeast2-c].\n"
+      }
+    ],
+    "attempts": [
+      {
+        "zone": "asia-northeast3-b",
+        "machine": "g2-standard-4",
+        "status": "allocated",
+        "boot_disk_absent_before_create": true,
+        "operation": "operation-1794177592705-65fcb8613c333-21dd0ef8-2bc21c19",
+        "terminal_operation": {
+          "endTime": "2026-11-08T14:43:31.986-08:00",
+          "id": "8767699876908451028",
+          "insertTime": "2026-11-08T14:39:55.468-08:00",
+          "kind": "compute#operation",
+          "name": "operation-1794177592705-65fcb8613c333-21dd0ef8-2bc21c19",
+          "operationType": "insert",
+          "progress": 100,
+          "selfLink": "https://www.googleapis.com/compute/v1/projects/mantra-477901/zones/asia-northeast3-b/operations/operation-1794177592705-65fcb8613c333-21dd0ef8-2bc21c19",
+          "startTime": "2026-11-08T14:39:55.490-08:00",
+          "status": "DONE",
+          "targetId": "686231220242957526",
+          "targetLink": "https://www.googleapis.com/compute/v1/projects/mantra-477901/zones/asia-northeast3-b/instances/jep-full-prompt-eval1-20261108",
+          "user": "767812446290-compute@developer.gserviceaccount.com",
+          "warnings": [
+            {
+              "message": "You are creating a global DNS VM. VM instances using global DNS are vulnerable to cross-regional outages. To reduce the risk of widespread service disruption, use zonal DNS instead. Learn more at https://cloud.google.com/compute/docs/networking/zonal-dns?utm_id=vm-insert"
+            }
+          ],
+          "zone": "https://www.googleapis.com/compute/v1/projects/mantra-477901/zones/asia-northeast3-b"
+        },
+        "returncode": 0,
+        "error": ""
+      }
+    ],
+    "bootstrap_minutes": 10,
+    "approved_run_hours": 3,
+    "started_utc": "2026-11-08T22:39:46.143023+00:00",
+    "allocation": {
+      "instance_name": "jep-full-prompt-eval1-20261108",
+      "instance_id": "686231220242957526",
+      "project": "mantra-477901",
+      "zone": "asia-northeast3-b",
+      "service_account": "jep-gpu-jobs@mantra-477901.iam.gserviceaccount.com",
+      "boot_disk": {
+        "name": "jep-full-prompt-eval1-20261108",
+        "id": "1163284005292688598"
+      }
+    }
+  },
+  "2": {
+    "project": "mantra-477901",
+    "name": "jep-full-prompt-eval2-20261108",
+    "snapshot": "jep-full-prompt-test-template-20261108",
+    "regions": [
+      "asia-northeast3",
+      "asia-east1",
+      "asia-east2",
+      "asia-northeast1",
+      "asia-northeast2"
+    ],
+    "candidates": [
+      [
+        "asia-northeast3-b",
+        "g2-standard-4"
+      ],
+      [
+        "asia-east1-b",
+        "g2-standard-4"
+      ],
+      [
+        "asia-northeast1-c",
+        "g2-standard-4"
+      ],
+      [
+        "asia-northeast3-a",
+        "g2-standard-4"
+      ],
+      [
+        "asia-east1-a",
+        "g2-standard-4"
+      ],
+      [
+        "asia-east1-c",
+        "g2-standard-4"
+      ],
+      [
+        "asia-northeast1-a",
+        "g2-standard-4"
+      ],
+      [
+        "asia-northeast1-b",
+        "g2-standard-4"
+      ]
+    ],
+    "capacity_advice": [
+      {
+        "recommendations": [
+          {
+            "scores": {
+              "estimatedUptime": "3600s",
+              "obtainability": 0.9
+            },
+            "shards": [
+              {
+                "instanceCount": 1,
+                "machineType": "g2-standard-4",
+                "provisioningModel": "SPOT",
+                "zone": "https://www.googleapis.com/compute/beta/projects/mantra-477901/zones/asia-northeast3-b"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "recommendations": [
+          {
+            "scores": {
+              "estimatedUptime": "3600s",
+              "obtainability": 0.9
+            },
+            "shards": [
+              {
+                "instanceCount": 1,
+                "machineType": "g2-standard-4",
+                "provisioningModel": "SPOT",
+                "zone": "https://www.googleapis.com/compute/beta/projects/mantra-477901/zones/asia-east1-b"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "advice_error": "ERROR: (gcloud.beta.compute.advice.capacity) HTTPError 400: Machine specification is not supported in locations: [asia-east2-a asia-east2-b asia-east2-c].\n"
+      },
+      {
+        "recommendations": [
+          {
+            "scores": {
+              "estimatedUptime": "3600s",
+              "obtainability": 0.9
+            },
+            "shards": [
+              {
+                "instanceCount": 1,
+                "machineType": "g2-standard-4",
+                "provisioningModel": "SPOT",
+                "zone": "https://www.googleapis.com/compute/beta/projects/mantra-477901/zones/asia-northeast1-c"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "advice_error": "ERROR: (gcloud.beta.compute.advice.capacity) HTTPError 400: Machine specification is not supported in locations: [asia-northeast2-a asia-northeast2-b asia-northeast2-c].\n"
+      }
+    ],
+    "attempts": [
+      {
+        "zone": "asia-northeast3-b",
+        "machine": "g2-standard-4",
+        "status": "failed",
+        "boot_disk_absent_before_create": true,
+        "operation": "operation-1794177996901-65fcb9e2b4b34-8b17678d-20aa1283",
+        "terminal_operation": {
+          "endTime": "2026-11-08T14:46:43.638-08:00",
+          "error": {
+            "errors": [
+              {
+                "code": "QUOTA_EXCEEDED",
+                "errorDetails": [
+                  {
+                    "quotaInfo": {
+                      "dimensions": {
+                        "region": "asia-northeast3"
+                      },
+                      "limit": 1.0,
+                      "limitName": "PREEMPTIBLE-NVIDIA-L4-GPUS-per-project-region",
+                      "metricName": "compute.googleapis.com/preemptible_nvidia_l4_gpus"
+                    }
+                  }
+                ],
+                "message": "Quota 'PREEMPTIBLE_NVIDIA_L4_GPUS' exceeded.  Limit: 1.0 in region asia-northeast3."
+              }
+            ]
+          },
+          "httpErrorMessage": "FORBIDDEN",
+          "httpErrorStatusCode": 403,
+          "id": "3329490266139477281",
+          "insertTime": "2026-11-08T14:46:38.520-08:00",
+          "kind": "compute#operation",
+          "name": "operation-1794177996901-65fcb9e2b4b34-8b17678d-20aa1283",
+          "operationType": "insert",
+          "progress": 100,
+          "selfLink": "https://www.googleapis.com/compute/v1/projects/mantra-477901/zones/asia-northeast3-b/operations/operation-1794177996901-65fcb9e2b4b34-8b17678d-20aa1283",
+          "startTime": "2026-11-08T14:46:38.542-08:00",
+          "status": "DONE",
+          "targetId": "1819758160074589473",
+          "targetLink": "https://www.googleapis.com/compute/v1/projects/mantra-477901/zones/asia-northeast3-b/instances/jep-full-prompt-eval2-20261108",
+          "user": "767812446290-compute@developer.gserviceaccount.com",
+          "warnings": [
+            {
+              "message": "You are creating a global DNS VM. VM instances using global DNS are vulnerable to cross-regional outages. To reduce the risk of widespread service disruption, use zonal DNS instead. Learn more at https://cloud.google.com/compute/docs/networking/zonal-dns?utm_id=vm-insert"
+            }
+          ],
+          "zone": "https://www.googleapis.com/compute/v1/projects/mantra-477901/zones/asia-northeast3-b"
+        },
+        "returncode": 1,
+        "error": "{\"errors\": [{\"code\": \"QUOTA_EXCEEDED\", \"errorDetails\": [{\"quotaInfo\": {\"dimensions\": {\"region\": \"asia-northeast3\"}, \"limit\": 1.0, \"limitName\": \"PREEMPTIBLE-NVIDIA-L4-GPUS-per-project-region\", \"metricName\": \"compute.googleapis.com/preemptible_nvidia_l4_gpus\"}}], \"message\": \"Quota 'PREEMPTIBLE_NVIDIA_L4_GPUS' exceeded.  Limit: 1.0 in region asia-northeast3.\"}]}",
+        "partial_resources_reconciled": true
+      },
+      {
+        "zone": "asia-east1-b",
+        "machine": "g2-standard-4",
+        "status": "allocated",
+        "boot_disk_absent_before_create": true,
+        "operation": "operation-1794178017656-65fcb9f67fda1-a0f7161f-6b224cf1",
+        "terminal_operation": {
+          "endTime": "2026-11-08T14:53:50.384-08:00",
+          "id": "8594514224164455691",
+          "insertTime": "2026-11-08T14:47:00.611-08:00",
+          "kind": "compute#operation",
+          "name": "operation-1794178017656-65fcb9f67fda1-a0f7161f-6b224cf1",
+          "operationType": "insert",
+          "progress": 100,
+          "selfLink": "https://www.googleapis.com/compute/v1/projects/mantra-477901/zones/asia-east1-b/operations/operation-1794178017656-65fcb9f67fda1-a0f7161f-6b224cf1",
+          "startTime": "2026-11-08T14:47:00.650-08:00",
+          "status": "DONE",
+          "targetId": "2891677028155475212",
+          "targetLink": "https://www.googleapis.com/compute/v1/projects/mantra-477901/zones/asia-east1-b/instances/jep-full-prompt-eval2-20261108",
+          "user": "767812446290-compute@developer.gserviceaccount.com",
+          "warnings": [
+            {
+              "message": "You are creating a global DNS VM. VM instances using global DNS are vulnerable to cross-regional outages. To reduce the risk of widespread service disruption, use zonal DNS instead. Learn more at https://cloud.google.com/compute/docs/networking/zonal-dns?utm_id=vm-insert"
+            }
+          ],
+          "zone": "https://www.googleapis.com/compute/v1/projects/mantra-477901/zones/asia-east1-b"
+        },
+        "returncode": 0,
+        "error": ""
+      }
+    ],
+    "bootstrap_minutes": 10,
+    "approved_run_hours": 3,
+    "started_utc": "2026-11-08T22:46:31.359038+00:00",
+    "allocation": {
+      "instance_name": "jep-full-prompt-eval2-20261108",
+      "instance_id": "2891677028155475212",
+      "project": "mantra-477901",
+      "zone": "asia-east1-b",
+      "service_account": "jep-gpu-jobs@mantra-477901.iam.gserviceaccount.com",
+      "boot_disk": {
+        "name": "jep-full-prompt-eval2-20261108",
+        "id": "3044674277318935820"
+      }
+    }
+  }
+}
