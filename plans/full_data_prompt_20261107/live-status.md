@@ -1,20 +1,20 @@
 # Live training status
 
-Updated: Sun 10:22 AM EST. Refresh this page for the latest snapshot.
+Updated: Sun 10:27 AM EST. Refresh this page for the latest snapshot.
 A background CPU reporter updates this branch every five minutes. Treat snapshots older than ten minutes as stale.
 
-**Training fits finished: 10 / 15.**
+**Training fits finished: 11 / 15.**
 The held-out test remains sealed for evaluation.
 
-**Estimated training finish: Sun 1:39 PM EST**
-Planning range: Sun 12:17 PM EST to Sun 2:28 PM EST.
-Basis: 16.4 minutes per completed epoch; 3–6 total epochs per remaining fit, based on 10 stopped fits.
+**Estimated training finish: Sun 1:11 PM EST**
+Planning range: Sun 12:06 PM EST to Sun 1:44 PM EST.
+Basis: 16.4 minutes per completed epoch; 3–6 total epochs per remaining fit, based on 11 stopped fits.
 Validation-based stopping or Spot interruptions can extend this estimate.
 
 | Placement | Current work | Fits finished | GPU use | Cloud-verified epochs | Uploads pending |
 | --- | --- | ---: | ---: | ---: | ---: |
-| Seoul (asia-northeast3-a) | C_case_inspired_seed11, epoch 2 | 7 / 9 | 100 % | 36 | 0 |
-| Taiwan (asia-east1-b) | A_condition_first_seed10, epoch 2 | 3 / 6 | 100 % | 17 | 0 |
+| Seoul (asia-northeast3-a) | C_case_inspired_seed11, epoch 3 | 7 / 9 | 100 % | 37 | 0 |
+| Taiwan (asia-east1-b) | Preparing next fit | 4 / 6 | 100 % | 18 | 0 |
 
 Cloud-verified epochs include the five preserved Seoul epochs. New publications use native VIPER Cloud.
 The existing controllers delete owned compute and disks after verified publication; unverified recovery disks are retained.
@@ -30,11 +30,11 @@ The existing controllers delete owned compute and disks after verified publicati
 | C_case_inspired_seed9 | 6 | Finished | 5 |
 | A_condition_first_seed9 | 5 | Finished | 4 |
 | B_order_only_seed9 | 5 | Finished | 4 |
-| A_condition_first_seed10 | 3 | Running | — |
+| A_condition_first_seed10 | 4 | Finished | 3 |
 | B_order_only_seed10 | 0 | Queued | — |
 | C_case_inspired_seed10 | 0 | Queued | — |
 | B_order_only_seed11 | 4 | Finished | 3 |
-| C_case_inspired_seed11 | 1 | Running | — |
+| C_case_inspired_seed11 | 2 | Running | — |
 | A_condition_first_seed11 | 0 | Queued | — |
 
 [Structured status](live-status.json) · [Deployment records](https://github.com/pvd232/JEP/blob/experiment/qwen-full-data-prompt-20261107/plans/full_data_prompt_20261107/lifecycle-launch-20261108/README.md)
