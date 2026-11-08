@@ -82,6 +82,23 @@ def candidates(regions: list[str], zones: list[str], advice: list[dict]) -> list
     return result
 
 
+def terminal_operation(name: str, zone: str, common: list[str]) -> dict:
+    """Distinguish a terminal provider failure from an unavailable observation."""
+    waited = command(["gcloud", "compute", "operations", "wait", name,
+                      f"--zone={zone}", *common, "--format=json"], 900)
+    # gcloud reports a DONE stockout with a nonzero exit status. Describe the
+    # recorded operation independently before deciding whether fallback is safe.
+    observed = waited if waited.returncode == 0 else command([
+        "gcloud", "compute", "operations", "describe", name,
+        f"--zone={zone}", *common, "--format=json"], 60)
+    if observed.returncode:
+        raise RuntimeError("Provider operation completion is unknown; admission intent retained: " + name)
+    completed = json.loads(observed.stdout)
+    if completed.get("status") != "DONE":
+        raise RuntimeError("Provider operation is not terminal; admission intent retained: " + name)
+    return completed
+
+
 def cleanup_failed_create(name: str, zone: str, snapshot_id: str, common: list[str]) -> None:
     """Reconcile only resources absent before this exact snapshot-backed create intent."""
     result = command(["gcloud", "compute", "instances", "describe", name,
@@ -204,28 +221,20 @@ def main() -> None:
                     save(args.journal, journal)
                     save(admission_path, {'pending_intent': {'name': args.name, 'zone': zone,
                          'journal': str(args.journal), 'operation': operation['name']}})
-                    waited = command(['gcloud','compute','operations','wait',operation['name'],
-                                      f'--zone={zone}',*common,'--format=json'],900)
-                    if waited.returncode:
-                        attempt.update(status='operation_observation_failed', error=waited.stderr[-2000:])
-                        save(args.journal, journal)
-                        raise RuntimeError('Provider operation completion is unknown; admission intent retained: ' + operation['name'])
+                    completed = terminal_operation(operation["name"], zone, common)
+                    attempt["terminal_operation"] = completed
+                    save(args.journal, journal)
+                    if completed.get("error"):
+                        result = subprocess.CompletedProcess([], 1, "", json.dumps(completed["error"]))
                     else:
-                        completed = json.loads(waited.stdout)
-                        if completed.get('status') != 'DONE':
-                            attempt.update(status='provider_operation_still_pending')
-                            save(args.journal, journal)
-                            raise RuntimeError('Provider operation is not terminal; admission intent retained: ' + operation['name'])
-                        if completed.get('error'):
-                            result = subprocess.CompletedProcess([],1,'',json.dumps(completed['error']))
-                        else:
-                            result = command(['gcloud','compute','instances','describe',args.name,
-                                              f'--zone={zone}',*common,'--format=json'],60)
+                        result = command(["gcloud", "compute", "instances", "describe", args.name,
+                                          f"--zone={zone}", *common, "--format=json"], 60)
             except subprocess.TimeoutExpired:
                 attempt.update(status="provider_timeout_requires_reconciliation")
                 save(args.journal, journal)
-                cleanup_failed_create(args.name, zone, snapshot["id"], common)
-                raise RuntimeError("Allocation timed out; reconcile its journal before another request.")
+                # A client observation timeout says nothing about provider completion.
+                # Preserve the admission record and all resources for reconciliation.
+                raise RuntimeError("Allocation observation timed out; admission intent and resources retained.")
             attempt.update(returncode=result.returncode, error=result.stderr[-2000:])
             if result.returncode == 0:
                 created = json.loads(result.stdout)

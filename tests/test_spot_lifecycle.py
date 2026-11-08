@@ -66,6 +66,35 @@ class PlacementTests(unittest.TestCase):
             load_script("deploy_spot").candidates(["us-east1"], ["us-east1-a"], [])
 
 
+class AllocationObservationTests(unittest.TestCase):
+    """Permit fallback only after a recorded operation is authoritatively terminal."""
+    def test_nonzero_wait_terminal_stockout_is_observed_before_fallback(self):
+        deploy = load_script("deploy_spot")
+        done = {"name": "op-1", "status": "DONE",
+                "error": {"errors": [{"code": "ZONE_RESOURCE_POOL_EXHAUSTED"}]}}
+        responses = [subprocess.CompletedProcess([], 1, "", "capacity failed"),
+                     subprocess.CompletedProcess([], 0, json.dumps(done), "")]
+        with patch.object(deploy, "command", side_effect=responses) as run:
+            self.assertEqual(deploy.terminal_operation("op-1", "asia-east1-b", []), done)
+        self.assertEqual(run.call_args_list[1].args[0][3], "describe")
+
+    def test_pending_operation_never_authorizes_fallback(self):
+        deploy = load_script("deploy_spot")
+        responses = [subprocess.CompletedProcess([], 1, "", "observation failed"),
+                     subprocess.CompletedProcess([], 0, '{"status":"RUNNING"}', "")]
+        with patch.object(deploy, "command", side_effect=responses):
+            with self.assertRaisesRegex(RuntimeError, "intent retained"):
+                deploy.terminal_operation("op-1", "asia-east1-b", [])
+
+    def test_operation_observation_timeout_never_cleans_resources(self):
+        deploy = load_script("deploy_spot")
+        with patch.object(deploy, "command", side_effect=subprocess.TimeoutExpired("wait", 900)), \
+             patch.object(deploy, "cleanup_failed_create") as cleanup:
+            with self.assertRaises(subprocess.TimeoutExpired):
+                deploy.terminal_operation("op-1", "asia-east1-b", [])
+        cleanup.assert_not_called()
+
+
 class PublicationTests(unittest.TestCase):
     """Require VIPER's streamed cloud verification before a durable generation ACK."""
     def setUp(self):
