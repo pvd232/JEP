@@ -1,0 +1,53 @@
+{
+  "kind": "proposal_evidence_not_deployment_receipt",
+  "source_branch": "proposal/columbia-mantra-keyless-20261108",
+  "source_evidence_commit": "0659e24e866969ea1fb57743b399d154ea01ef29",
+  "host": "dev.c.pvd-dev-232.internal",
+  "tool": "columbia-vm.start_process",
+  "host_code_commit": "a6dea0c952b5f0948e49f8dd4aa06c769e00689c",
+  "collector_code_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+  "proposal_pr_base_commit": "9ae8379b2ad134561c1d52e61c34f74bc3304dc1",
+  "host_probe": {
+    "observed_principal": "dev-vm@pvd-dev-232.iam.gserviceaccount.com",
+    "host_project": "pvd-dev-232",
+    "instance": "dev",
+    "http_status": 200,
+    "observed_token_remaining_seconds": 2680,
+    "token_value_retained": false,
+    "proves": "Attached identity and host-instance read only",
+    "does_not_prove": "Mantra authorization, IAP, SSH, storage, renewal or current GPU status"
+  },
+  "mantra_request": {
+    "checked_utc": "2026-11-08T06:49:16.593031+00:00",
+    "operation": "compute.instances.describe",
+    "project": "mantra-477901",
+    "zone": "asia-northeast1-b",
+    "instance": "jep-full-prompt-spot-2-20261107",
+    "account": "dev-vm@pvd-dev-232.iam.gserviceaccount.com",
+    "exit_code": 1,
+    "reported_required_permission": "compute.instances.get",
+    "effective_iam_policy_inspected": false,
+    "mutation_attempted": false
+  },
+  "source_findings": {
+    "collector_explicit_human_account": "pvd2112@columbia.edu",
+    "collector_shutdown_in_finally": true,
+    "new_handover_semantics_implemented": false
+  },
+  "review_access_rechecked": {
+    "checked_utc": "2026-11-08T07:22:59Z",
+    "codex_login_status": "Not logged in",
+    "github_cli_status": "Not logged into any GitHub hosts",
+    "columbia_mac_relay": "Connection refused on existing local relay",
+    "credentials_copied": false,
+    "github_connector_remains_available_for_pr_publication": true
+  },
+  "preparation_scope": {
+    "aether_tools_used": false,
+    "cloud_permission_changes": false,
+    "gpu_operations": false,
+    "collector_migration": false,
+    "production_code_changes": false,
+    "independent_review_results": "See REVIEW.md and attributable PR review responses; an auth check is not a review."
+  }
+}
