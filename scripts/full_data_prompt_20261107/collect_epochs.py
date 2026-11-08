@@ -12,12 +12,17 @@ import argparse
 import concurrent.futures
 import datetime as dt
 import json
+import hashlib
+import re
+import tempfile
+import threading
 from pathlib import Path
 import shlex
 import subprocess
 import time
 
 from csts_pilot.full_data_prompt_lease import validate_placement
+from csts_pilot.full_data_prompt_worker import acknowledgment_matches
 
 REMOTE_ROOT = "/home/machina/jep-full-data-task-20261107/repo"
 TASK = "jep-full-data-20261107"
@@ -79,19 +84,110 @@ def cleanup(assignment: dict, account: str, verified: bool, delete_disk: bool) -
 def read_worker(assignment: dict, account: str, worker: str) -> dict:
     """Read only study state and generation receipts through the established IAP route."""
     base = f"{REMOTE_ROOT}/baseline_results/full_data_prompt_20261107/{worker}"
-    program = (
-        "import json,pathlib;"
-        f"p=pathlib.Path({base!r});"
-        "s=json.loads((p/'state.json').read_text()) if (p/'state.json').exists() else None;"
-        "m=[(q,json.loads(q.read_text())) for q in (p/'transfer').glob('*/ready.json')];"
-        "ready=[v for q,v in m if not (q.parent/'ack.json').exists()];"
-        "acks=[json.loads((q.parent/'ack.json').read_text()) for q,v in m if (q.parent/'ack.json').exists()];"
-        "print(json.dumps({'state':s,'ready':ready,'acks':acks}))"
-    )
-    return json.loads(require_ok(run(
+    program = f"""import json,pathlib,hashlib
+p=pathlib.Path({base!r})
+s=json.loads((p/'state.json').read_text()) if (p/'state.json').exists() else None
+generations=[]
+for path in sorted((p/'transfer').glob('*/ready.json')):
+ if path.is_symlink() or not path.resolve().is_relative_to(p.resolve()):raise ValueError('Invalid generation path')
+ manifest=json.loads(path.read_text());a=path.parent/'ack.json'
+ if a.is_symlink():raise ValueError('Invalid acknowledgment path')
+ generations.append({{'manifest':manifest,'manifest_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),
+                     'ack':json.loads(a.read_text()) if a.exists() else None,
+                     'ack_sha256':hashlib.sha256(a.read_bytes()).hexdigest() if a.exists() else None}})
+c=p/'completion.json'
+if c.is_symlink():raise ValueError('Invalid completion path')
+print(json.dumps({{'state':s,'generations':generations,'completion':json.loads(c.read_text()) if c.exists() else None}}))
+"""
+    obj = json.loads(require_ok(run(
         ["gcloud", "compute", "ssh", f"machina@{assignment['instance_name']}",
          *flags(assignment, account), "--tunnel-through-iap",
          "--command=python3 -c " + shlex.quote(program)], 90)))
+    obj["ready"] = [entry["manifest"] for entry in obj["generations"]
+                    if not entry["ack"] or not acknowledgment_matches(entry["manifest"], entry["ack"])]
+    return obj
+
+
+def validate_completion(worker: str, assignment: dict, obj: dict) -> None:
+    """Require terminal publication and valid receipts for the complete sealed inventory."""
+    state = obj['state']
+    terminal = 'publication-complete-' + assignment['execution_id']
+    if state.get('completion_generation') != terminal:
+        raise ValueError('Worker has no terminal publication for this execution.')
+    inventory = []
+    found_terminal = False
+    seen = set()
+    for entry in obj['generations']:
+        manifest, ack = entry['manifest'], entry['ack']
+        generation = manifest['generation']
+        if (generation in seen or manifest['worker'] != worker
+                or re.fullmatch(r'[A-Za-z0-9_-]+', generation) is None
+                or not ack or not acknowledgment_matches(manifest, ack)):
+            raise ValueError('Completion contains a missing, duplicated or mismatched generation receipt.')
+        seen.add(generation)
+        if generation == terminal:
+            found_terminal = (ack.get('transport') == 'viper_cloud'
+                              and bool(ack.get('cloud_references'))
+                              and manifest['instance_id'] == assignment['instance_id']
+                              and manifest['execution_id'] == assignment['execution_id'])
+        else:
+            inventory.append({'generation': generation, 'manifest_sha256': entry['manifest_sha256'],
+                              'ack_sha256': entry['ack_sha256']})
+    completion = obj.get('completion') or {}
+    if (not found_terminal or inventory != state.get('publication_inventory')
+            or completion.get('generations') != inventory
+            or completion.get('source_commit') != state['source_commit']
+            or completion.get('lease') != state['lease'] or completion.get('worker') != worker):
+        raise ValueError('Terminal receipt does not bind the complete generation inventory.')
+
+
+def cloud_archive_uri(worker: str, manifest: dict, ack: dict, cloud: dict) -> str:
+    """Resolve an exact current VIPER archive or the study's preserved legacy archive."""
+    archive = f"{REMOTE_ROOT}/baseline_results/full_data_prompt_20261107/{worker}/transfer/{manifest['generation']}/native.tar"
+    if manifest['archive'] != archive:
+        raise ValueError('Archive reference leaves the worker generation namespace.')
+    references = ack.get('cloud_references')
+    if references:
+        path = archive.removeprefix(REMOTE_ROOT + '/')
+        reference = references.get(path, {})
+        location = reference.get('stored_at', {})
+        if (reference.get('sha256') != manifest['archive_sha256']
+                or reference.get('bytes') != manifest['archive_size']
+                or location.get('kind') != 'gcs' or location.get('path') != path
+                or any(location.get(key) != cloud[key] for key in ('bucket','prefix','owner','workspace'))
+                or re.fullmatch(r'[0-9a-f]{64}', location.get('revision', '')) is None):
+            raise ValueError('VIPER reference differs from the declared immutable archive.')
+        return ('gs://' + cloud['bucket'] + '/' + cloud['prefix'] + '/' + cloud['owner'] + '/'
+                + cloud['workspace'] + '/' + location['revision'] + '/' + path)
+    prefix = ('gs://' + cloud['bucket'] + '/viper/pvd232/jep_full_data_prompt_20261107/'
+              + manifest['source_commit'] + '/' + worker + '/' + manifest['execution_id']
+              + '/' + manifest['generation'])
+    if ack.get('cloud_prefix') != prefix:
+        raise ValueError('Legacy archive is outside its original verified study namespace.')
+    return prefix + '/native.tar'
+
+
+def verify_cloud_archive(uri: str, manifest: dict, assignment: dict, account: str) -> dict:
+    """Stream independent cloud bytes on the controller before deleting a recovery disk."""
+    digest = hashlib.sha256()
+    size = 0
+    with tempfile.TemporaryFile() as errors:
+        process = subprocess.Popen(['gcloud','storage','cat',uri,
+                                    '--project=' + assignment['project'], '--account=' + account,
+                                    '--quiet'], stdout=subprocess.PIPE, stderr=errors)
+        timer = threading.Timer(900, process.kill)
+        timer.start()
+        try:
+            for block in iter(lambda: process.stdout.read(4 * 1024 * 1024), b''):
+                digest.update(block); size += len(block)
+            result = process.wait(timeout=10)
+        finally:
+            timer.cancel()
+            if process.poll() is None: process.kill(); process.wait()
+        if result or size != manifest['archive_size'] or digest.hexdigest() != manifest['archive_sha256']:
+            errors.seek(0)
+            raise ValueError('Controller cloud verification failed: ' + errors.read(1200).decode(errors='replace'))
+    return {'uri': uri, 'bytes': size, 'sha256': digest.hexdigest(), 'controller_verified': True}
 
 
 def monitor(worker: str, args: argparse.Namespace) -> dict:
@@ -121,17 +217,16 @@ def monitor(worker: str, args: argparse.Namespace) -> dict:
                         or last.get("lease", {}).get("execution_id") != assignment["execution_id"]
                         or not last.get("lease", {}).get("deadline_verified")):
                     raise ValueError("Worker source or execution lease differs from this launch.")
-            finals = [a for a in obj["acks"] if a.get("generation") == "training-final-" + assignment["execution_id"]
-                      and a.get("execution_id") == assignment["execution_id"]
-                      and a.get("transport") == "viper_cloud"
-                      and a.get("cloud_roundtrip_verified") is True
-                      and a.get("cloud_references")]
-            if (last and last["status"] == "assigned_training_complete_test_not_opened"
-                    and finals and not obj["ready"]):
+            if last and last["status"] == "assigned_training_complete_test_not_opened":
+                validate_completion(worker, assignment, obj)
+                proofs = []
+                for entry in obj['generations']:
+                    uri = cloud_archive_uri(worker, entry['manifest'], entry['ack'], args.approval['cloud'])
+                    proofs.append(verify_cloud_archive(uri, entry['manifest'], assignment, account))
                 verified = True
-                (args.local / f"{worker}-final-viper-receipt.json").write_text(json.dumps(finals[0], indent=2) + "\n")
+                (args.local / f"{worker}-final-viper-receipt.json").write_text(json.dumps(proofs, indent=2) + "\n")
                 return {"worker": worker, "status": "training_collected_test_still_locked",
-                        "trials": len(last["trials"]), "viper_receipt": finals[0]}
+                        "trials": len(last["trials"]), "controller_cloud_proofs": proofs}
             if last and last["status"] == "failed_preserved":
                 failure_at = failure_at or time.monotonic()
                 if not obj["ready"] or time.monotonic() - failure_at > 120:

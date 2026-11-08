@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import Any
 
 from csts_pilot.full_data_prompt_protocol import digest_file
-from csts_pilot.full_data_prompt_worker import atomic_json
+from csts_pilot.full_data_prompt_worker import acknowledgment_matches, atomic_json
 
 
 def require_workload_identity(expected: str) -> None:
@@ -117,9 +117,12 @@ def run(root: Path, worker: str, assignment: dict[str, Any], cloud_config: dict[
         deadline = time.monotonic() + max_hours * 3600
         while time.monotonic() < deadline:
             for path in sorted((output / "transfer").glob("*/ready.json")):
-                if (path.parent / "ack.json").exists():
-                    continue
                 manifest = json.loads(path.read_text())
+                ack_path = path.parent / "ack.json"
+                if ack_path.exists():
+                    if not acknowledgment_matches(manifest, json.loads(ack_path.read_text())):
+                        raise ValueError("Existing acknowledgment differs from its sealed generation.")
+                    continue
                 if manifest["worker"] != worker:
                     raise ValueError("Queued generation names another worker.")
                 require_generation_authorization(path, manifest, assignment, resume or {})
@@ -138,7 +141,7 @@ def run(root: Path, worker: str, assignment: dict[str, Any], cloud_config: dict[
             if pending:
                 time.sleep(2)
                 continue
-            final = output / "transfer" / ("training-final-" + assignment["execution_id"]) / "ack.json"
+            final = output / "transfer" / ("publication-complete-" + assignment["execution_id"]) / "ack.json"
             if final.exists():
                 final_ack = json.loads(final.read_text())
                 if final_ack.get("execution_id") == assignment["execution_id"]:

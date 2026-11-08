@@ -46,6 +46,35 @@ def emit(event: str, **data: Any) -> None:
     print(json.dumps({'utc': utc(), 'event': event, **data}, allow_nan=False), flush=True)
 
 
+def acknowledgment_matches(manifest: dict[str, Any], ack: dict[str, Any]) -> bool:
+    """Require an acknowledgment for the exact immutable generation and execution."""
+    keys = ('generation', 'source_commit', 'archive_sha256', 'execution_id', 'instance_id')
+    return (all(isinstance(manifest.get(key), str) and bool(manifest[key]) for key in keys)
+            and all(ack.get(key) == manifest.get(key) for key in keys)
+            and ack.get('cloud_roundtrip_verified') is True)
+
+
+def generation_inventory(output: Path) -> list[dict[str, Any]]:
+    """Bind every sealed generation to its validated manifest and ACK bytes."""
+    inventory = []
+    for path in sorted((output / 'transfer').glob('*/ready.json')):
+        manifest = json.loads(path.read_text())
+        ack_path = path.parent / 'ack.json'
+        ack = json.loads(ack_path.read_text())
+        if not acknowledgment_matches(manifest, ack):
+            raise ValueError('Generation inventory contains an invalid acknowledgment.')
+        inventory.append({'generation': manifest['generation'],
+                          'manifest_sha256': digest_file(path), 'ack_sha256': digest_file(ack_path)})
+    return inventory
+
+
+def require_epoch_space(root: Path) -> None:
+    """Stop before another optimizer epoch when checkpoint workspace reserve is exhausted."""
+    import shutil
+    if shutil.disk_usage(root).free < 3 * 1024 ** 3:
+        raise OSError('Less than 3 GiB remains for the next native epoch and recovery bundle.')
+
+
 def publish_generation(root: Path, output: Path, generation: str,
                        record: dict[str, Any], state: dict[str, Any],
                        files: list[Path], *, wait_for_cloud: bool = True) -> None:
@@ -92,11 +121,18 @@ def publish_generation(root: Path, output: Path, generation: str,
                     'native_record': record, 'status': 'ready_for_verified_export'}
         atomic_json(manifest_path, manifest)
     manifest = json.loads(manifest_path.read_text())
-    if digest_file(archive) != manifest['archive_sha256']:
+    ack_path = queue / 'ack.json'
+    if not archive.exists():
+        if not ack_path.exists() or not acknowledgment_matches(manifest, json.loads(ack_path.read_text())):
+            raise ValueError('Sealed archive is missing without a matching verified cloud receipt.')
+    elif digest_file(archive) != manifest['archive_sha256']:
         raise ValueError('Existing sealed transfer archive changed.')
     emit('checkpoint_export_ready', generation=generation,
          sha256=manifest['archive_sha256'], bytes=manifest['archive_size'])
     if not wait_for_cloud:
+        if ack_path.exists():
+            wait_for_generation(queue, manifest, output)
+            return
         pending = [p for p in (output / 'transfer').glob('*/ready.json')
                    if not (p.parent / 'ack.json').exists()]
         if len(pending) <= 2:
@@ -116,12 +152,11 @@ def wait_for_generation(queue: Path, manifest: dict[str, Any], output: Path) -> 
         ackpath = queue / 'ack.json'
         if ackpath.exists():
             ack = json.loads(ackpath.read_text())
-            if (ack.get('generation'), ack.get('source_commit'), ack.get('archive_sha256'),
-                ack.get('cloud_roundtrip_verified'), ack.get('execution_id'), ack.get('instance_id')) != (
-                    manifest['generation'], manifest['source_commit'], manifest['archive_sha256'], True,
-                    manifest['execution_id'], manifest['instance_id']):
+            if not acknowledgment_matches(manifest, ack):
                 raise ValueError('Collector acknowledgment is not bound to this exact generation.')
             atomic_json(output / 'verified-cloud-generation.json', ack)
+            # Native outputs and receipts stay local; the verified tar is redundant.
+            (queue / 'native.tar').unlink(missing_ok=True)
             emit('checkpoint_cloud_verified', generation=manifest['generation'])
             return
         time.sleep(5)
@@ -176,6 +211,7 @@ def run_training(root: Path, output: Path, protocol: dict[str, Any], state: dict
             pending = output / 'pending-native.json'
             if pending.exists():
                 raise RuntimeError('An interrupted native attempt requires explicit reconciliation; no duplicate launch.')
+            require_epoch_space(root)
             planned = epoch_plan(root, protocol, arm, seed, gpu_model, parent, trace)
             atomic_json(pending, {'trial': key, 'epoch': epoch, 'source_commit': source.commit,
                                  'started_utc': utc(), 'attempt': uuid.uuid4().hex})
@@ -217,13 +253,23 @@ def run_training(root: Path, output: Path, protocol: dict[str, Any], state: dict
     if any(len(v) != 1 for v in initial.values()):
         raise ValueError('Within-seed initial adapter weights differed across prompt arms.')
     atomic_json(output / 'selections.json', selected)
-    state['status'] = 'assigned_training_complete_test_not_opened'
+    state['status'] = 'training_complete_awaiting_cloud'
     state['final_generation'] = 'training-final-' + state['lease']['execution_id']
     atomic_json(output / 'state.json', state)
     publish_generation(root, output, state['final_generation'], {}, state,
                        [output / 'selections.json', output / 'state.json'])
     for manifest_path in sorted((output / 'transfer').glob('*/ready.json')):
         wait_for_generation(manifest_path.parent, json.loads(manifest_path.read_text()), output)
+    inventory = generation_inventory(output)
+    completion = {'source_commit': state['source_commit'], 'worker': state['worker'],
+                  'lease': state['lease'], 'generations': inventory, 'test_opened': False}
+    atomic_json(output / 'completion.json', completion)
+    state['completion_generation'] = 'publication-complete-' + state['lease']['execution_id']
+    publish_generation(root, output, state['completion_generation'], {}, state,
+                       [output / 'completion.json'])
+    state['publication_inventory'] = inventory
+    state['status'] = 'assigned_training_complete_test_not_opened'
+    atomic_json(output / 'state.json', state)
     emit('assigned_training_complete', trials=len(selected), test_opened=False)
 
 

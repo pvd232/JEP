@@ -32,9 +32,11 @@ Spot and stays within the requested concurrency, attempts and 23-hour envelope.
 Use the returned placement rather than changing code for another zone. Bind its
 actual GPU UUID and guest deadline before launch. Record the task-owned boot disk
 ID and keep boot auto-delete disabled until publication verifies recovery bytes.
-A ten-minute provider bootstrap deadline deletes an idle new VM if launch does
-not complete. Extend that deadline to the approved run envelope only after
-observing the training service and actual GPU work.
+Set the provider runtime limit to the approved envelope at creation; GCP does
+not permit extending it while the VM runs. A guest startup poweroff timer limits
+bootstrap to ten minutes. Replace that guest timer with the approved deadline
+only after preflight succeeds and the trainer is ready to start. Record and poll
+the asynchronous provider operation instead of inferring failure from a CLI timeout.
 
 ## Launch and recovery
 

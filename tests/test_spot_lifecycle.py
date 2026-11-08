@@ -204,14 +204,15 @@ class ReviewRegressionTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             root=Path(folder);output=root/'out';output.mkdir()
             selected={'seed':7,'initial_trainable_sha256':'a'*64}
-            state={'trials':{'A_seed7':{'selection':selected}},'lease':{'execution_id':'c'*32}}
+            state={'source_commit':'b'*40,'worker':'worker1','trials':{'A_seed7':{'selection':selected}},'lease':{'execution_id':'c'*32}}
             with patch.object(worker,'trial_matrix',return_value=[{'trial_id':'A_seed7','arm':'A','seed':7}]), \
                  patch('viper.repository.read_source',return_value=SimpleNamespace(commit='b'*40)), \
                  patch.object(worker,'publish_generation') as publish, \
                  patch('viper.execution.run') as execute:
                 worker.run_training(root,output,{},state,[7],'NVIDIA L4')
             execute.assert_not_called()
-            self.assertEqual(publish.call_args.args[2],'training-final-'+'c'*32)
+            self.assertEqual(publish.call_args_list[0].args[2],'training-final-'+'c'*32)
+            self.assertEqual(publish.call_args_list[1].args[2],'publication-complete-'+'c'*32)
             self.assertEqual(state['final_generation'],'training-final-'+'c'*32)
 
 
@@ -230,7 +231,7 @@ class TerminalUploadRegressionTests(unittest.TestCase):
             current={'project':'mantra-477901','service_account':'job@example.test',
                      'instance_id':'999','execution_id':'c'*32}
             inherited={};failures=[]
-            for generation,instance,execution in [('training-final-'+'c'*32,'999','c'*32),
+            for generation,instance,execution in [('publication-complete-'+'c'*32,'999','c'*32),
                                                    ('worker-failed-old','123','b'*32)]:
                 q=output/'transfer'/generation;q.mkdir(parents=True)
                 (q/'native.tar').write_bytes(generation.encode())
@@ -256,6 +257,46 @@ class TerminalUploadRegressionTests(unittest.TestCase):
                             {'preserved_generations':inherited})
             self.assertEqual(publish_mock.call_count,3)
             self.assertTrue((output/'upload-complete.json').exists())
+
+
+class CompletionAndStorageRegressionTests(unittest.TestCase):
+    """Keep recovery bytes until every generation validates and reserve space before work."""
+    def test_verified_tar_is_reclaimed_without_losing_native_artifacts(self):
+        from test_full_data_worker_persistence import WorkerPersistenceTests
+        case=WorkerPersistenceTests();case.setUp();self.addCleanup(case.doCleanups)
+        case.execute()
+        self.assertFalse((case.out/'transfer/epoch1/native.tar').exists())
+        self.assertTrue((case.out/'transfer/epoch1/ready.json').exists())
+        self.assertTrue((case.out/'transfer/epoch1/ack.json').exists())
+        self.assertTrue(case.file.exists())
+        import csts_pilot.full_data_prompt_worker as worker
+        worker.publish_generation(case.root,case.out,'epoch1',{},case.state,[])
+
+    def test_low_disk_reserve_blocks_another_epoch(self):
+        from csts_pilot.full_data_prompt_worker import require_epoch_space
+        with patch('shutil.disk_usage',return_value=SimpleNamespace(free=1024**3)):
+            with self.assertRaises(OSError):require_epoch_space(ROOT)
+
+    def test_invalid_inherited_ack_never_permits_disk_cleanup(self):
+        collector=load_script('collect_epochs')
+        assignment={'instance_name':'jep-test','project':'mantra-477901','zone':'asia-east1-b',
+                    'instance_id':'999','execution_id':'c'*32}
+        manifest={'worker':'worker1','generation':'epoch1','source_commit':'a'*40,
+                  'instance_id':'999','execution_id':'c'*32,'archive_sha256':'d'*64}
+        ack={**manifest,'archive_sha256':'e'*64,'cloud_roundtrip_verified':True}
+        state={'source_commit':'a'*40,'status':'assigned_training_complete_test_not_opened',
+               'lease':{'execution_id':'c'*32,'deadline_verified':True},
+               'completion_generation':'publication-complete-'+'c'*32,'trials':{}}
+        obj={'state':state,'generations':[{'manifest':manifest,'ack':ack}], 'ready':[], 'completion':{}}
+        with tempfile.TemporaryDirectory() as folder:
+            args=SimpleNamespace(source='a'*40,max_hours=1,local=Path(folder),delete_verified_disks=True,
+                approval={'assignments':{'worker1':assignment},'controller_account':'admin@example.test'})
+            with patch.object(collector,'describe',return_value={'status':'RUNNING'}), \
+                 patch.object(collector,'read_worker',return_value=obj), \
+                 patch.object(collector,'cleanup',return_value={'recovery_disk_preserved':True}) as cleanup:
+                with self.assertRaisesRegex(ValueError,'mismatched generation'):
+                    collector.monitor('worker1',args)
+            self.assertFalse(cleanup.call_args.args[2])
 
 
 if __name__ == "__main__":

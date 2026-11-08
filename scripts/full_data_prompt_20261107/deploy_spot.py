@@ -189,13 +189,32 @@ def main() -> None:
                     "gcloud", "compute", "instances", "create", args.name, f"--zone={zone}",
                     f"--machine-type={machine}", "--provisioning-model=SPOT",
                     "--no-restart-on-failure", "--maintenance-policy=TERMINATE",
-                    "--instance-termination-action=DELETE", "--max-run-duration=10m",
+                    "--instance-termination-action=DELETE", f"--max-run-duration={args.max_hours}h",
+                    "--metadata=startup-script=#!/bin/sh\n/sbin/shutdown -P +10\n",
                     "--preemption-notice-duration=120s", f"--source-snapshot={args.snapshot}",
                     "--boot-disk-size=350", "--boot-disk-type=pd-balanced", "--no-boot-disk-auto-delete",
                     "--network=default", "--subnet=default", "--no-address",
                     f"--service-account={args.service_account}", "--scopes=cloud-platform",
-                    f"--labels=task={TASK},purpose=spot-training", *common, "--format=json",
-                ], 300)
+                    f"--labels=task={TASK},purpose=spot-training", *common, "--async", "--format=json",
+                ], 120)
+                if result.returncode == 0:
+                    operation = json.loads(result.stdout)
+                    if isinstance(operation, list): operation = operation[0]
+                    attempt['operation'] = operation['name']
+                    save(args.journal, journal)
+                    save(admission_path, {'pending_intent': {'name': args.name, 'zone': zone,
+                         'journal': str(args.journal), 'operation': operation['name']}})
+                    waited = command(['gcloud','compute','operations','wait',operation['name'],
+                                      f'--zone={zone}',*common,'--format=json'],900)
+                    if waited.returncode:
+                        result = waited
+                    else:
+                        completed = json.loads(waited.stdout)
+                        if completed.get('error'):
+                            result = subprocess.CompletedProcess([],1,'',json.dumps(completed['error']))
+                        else:
+                            result = command(['gcloud','compute','instances','describe',args.name,
+                                              f'--zone={zone}',*common,'--format=json'],60)
             except subprocess.TimeoutExpired:
                 attempt.update(status="provider_timeout_requires_reconciliation")
                 save(args.journal, journal)
