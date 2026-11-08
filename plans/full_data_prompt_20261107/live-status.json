@@ -1,6 +1,6 @@
 {
-  "generated_epoch": 1794128504.7276232,
-  "generated_utc": "2026-11-08T09:01:44.727623+00:00",
+  "generated_epoch": 1794128819.950962,
+  "generated_utc": "2026-11-08T09:06:59.950962+00:00",
   "cadence_seconds": 300,
   "training_mode": "independent_seed_workers",
   "target_fits": 15,
@@ -58,14 +58,14 @@
       },
       "fresh": true,
       "source": "guest_observation",
-      "observed_utc": "2026-11-08T09:01:43.996477+00:00",
+      "observed_utc": "2026-11-08T09:06:58.295861+00:00",
       "instance_id": "3087252568751843062",
       "epoch_start": {
         "utc": "2026-11-08T08:52:31.863796+00:00",
         "trial": "C_case_inspired_seed7",
         "epoch": 4
       },
-      "gpu": "GPU-b2e57239-579e-e259-9761-832579cdf079, 92 %",
+      "gpu": "GPU-b2e57239-579e-e259-9761-832579cdf079, 100 %",
       "services": {
         "train": "active",
         "upload": "active"
@@ -100,49 +100,50 @@
             "finished": true
           },
           "C_case_inspired_seed8": {
-            "epochs": 4,
+            "epochs": 5,
             "seconds": [
               1000.5347694399998,
               1012.1218852799998,
               1006.5972454069997,
-              1017.310294586
+              1017.310294586,
+              1013.0214503059997
             ],
-            "selected_epoch": null,
-            "finished": false
+            "selected_epoch": 4,
+            "finished": true
           }
         }
       },
       "fresh": true,
       "source": "guest_observation",
-      "observed_utc": "2026-11-08T09:01:44.216682+00:00",
+      "observed_utc": "2026-11-08T09:06:58.768697+00:00",
       "instance_id": "4722509685362370145",
       "epoch_start": {
-        "utc": "2026-11-08T08:45:29.969777+00:00",
-        "trial": "C_case_inspired_seed8",
-        "epoch": 5
+        "utc": "2026-11-08T09:02:30.221445+00:00",
+        "trial": "A_condition_first_seed8",
+        "epoch": 1
       },
-      "gpu": "GPU-3e179d63-e2a8-9999-a742-b42c6f48bb32, 0 %",
+      "gpu": "GPU-3e179d63-e2a8-9999-a742-b42c6f48bb32, 100 %",
       "services": {
         "train": "active",
         "upload": "active"
       },
-      "verified_epoch_checkpoints": 7,
-      "native_viper_checkpoints": 7,
+      "verified_epoch_checkpoints": 8,
+      "native_viper_checkpoints": 8,
       "pending_generations": 0,
-      "last_verified_utc": "2026-11-08T08:46:29.214425+00:00"
+      "last_verified_utc": "2026-11-08T09:03:32.334278+00:00"
     }
   ],
   "forecast": {
-    "epoch_minutes": 16.480421423375,
-    "finished_fit_samples": 3,
+    "epoch_minutes": 16.541214862816666,
+    "finished_fit_samples": 4,
     "assumed_epochs_per_fit": [
       3,
-      5,
+      5.0,
       5
     ],
-    "earliest_epoch": 1794147292.4080458,
-    "central_epoch": 1794160147.1367562,
-    "latest_epoch": 1794160147.1367562,
+    "earliest_epoch": 1794147676.9359057,
+    "central_epoch": 1794160579.0834987,
+    "latest_epoch": 1794160579.0834987,
     "basis": "Conditional on remaining fits following observed stopping lengths; unfinished epochs counted conservatively. Spot interruptions and continued validation improvement can extend the estimate."
   },
   "monitor_status": "active"
