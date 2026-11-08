@@ -86,6 +86,10 @@ class Tests(unittest.TestCase):
                 if args[:3]==['iam','roles','list']:return []
                 self.fail('Unexpected write during plan '+str(args))
             def api(url,method='GET',body=None):
+                if url.endswith(':testIamPermissions') or url.endswith('/testIamPermissions'):
+                    self.assertEqual(method,'POST'); return {'permissions': body['permissions']}
+                if '/iam/testPermissions?' in url:
+                    self.assertEqual(method,'GET'); return {'permissions':m.urllib.parse.parse_qs(m.urllib.parse.urlsplit(url).query)['permissions']}
                 self.assertEqual(method,'GET')
                 return {'iamConfiguration':{'uniformBucketLevelAccess':{'enabled':True}}}
             result=type('R',(),{'returncode':0,'stdout':m.ADMIN+'\n'})()
@@ -103,7 +107,11 @@ class Tests(unittest.TestCase):
                 if args[:3]==['iam','roles','list']:return [{'name':'projects/x/roles/'+r,'includedPermissions':p,'stage':'GA'} for r,p in m.ROLES.items()]
                 self.assertIn('add-iam-policy-binding',args);return {}
             result=type('R',(),{'returncode':0,'stdout':m.ADMIN+'\n'})()
-            with patch.object(s,'cli',side_effect=cli),patch.object(s,'api',return_value={'iamConfiguration':{'uniformBucketLevelAccess':{'enabled':True}}}),patch.object(s,'worker',return_value=w),patch.object(s,'iap_binding'),patch.object(s,'storage_binding'),patch.object(m.subprocess,'run',return_value=result):s.run()
+            def api(url,method='GET',body=None):
+                if url.endswith(':testIamPermissions') or url.endswith('/testIamPermissions'):return {'permissions':body['permissions']}
+                if '/iam/testPermissions?' in url:return {'permissions':m.urllib.parse.parse_qs(m.urllib.parse.urlsplit(url).query)['permissions']}
+                return {'iamConfiguration':{'uniformBucketLevelAccess':{'enabled':True}}}
+            with patch.object(s,'cli',side_effect=cli),patch.object(s,'api',side_effect=api),patch.object(s,'worker',return_value=w),patch.object(s,'iap_binding'),patch.object(s,'storage_binding'),patch.object(m.subprocess,'run',return_value=result):s.run()
             self.assertEqual(s.records[-1]['operation'],'ACCESS_SETUP_APPLIED')
             self.assertFalse(any(x in ['stop','start','reset','delete','set-service-account','ssh'] for c in calls for x in c))
             self.assertFalse(s.records[-1]['runtime_ready'])
@@ -114,5 +122,50 @@ class Tests(unittest.TestCase):
             with patch.object(m.subprocess,'run',return_value=result),patch.object(s,'cli') as cli:
                 with self.assertRaises(ValueError):s.run()
                 cli.assert_not_called()
+
+    def test_missing_admin_permission_is_not_assumed_from_account(self):
+        with tempfile.TemporaryDirectory() as td:
+            s=m.Setup(True,Path(td)/'r.json')
+            with patch.object(s,'api',return_value={'permissions':[]}):
+                with self.assertRaisesRegex(PermissionError,'resourcemanager.projects.setIamPolicy'):
+                    s.require_permissions('projects/test','https://cloudresourcemanager.googleapis.com/v1/projects/test:testIamPermissions', ['resourcemanager.projects.setIamPolicy'])
+            self.assertFalse(s.records[-1]['passed'])
+    def test_malformed_permission_response_rejected(self):
+        with tempfile.TemporaryDirectory() as td:
+            s=m.Setup(True,Path(td)/'r.json')
+            with patch.object(s,'api',return_value={'permissions':'*'}):
+                with self.assertRaises(ValueError):s.require_permissions('x','https://iam.googleapis.com/x:testIamPermissions',['iam.roles.create'])
+    def test_preflight_checks_five_resource_boundaries(self):
+        with tempfile.TemporaryDirectory() as td:
+            s=m.Setup(False,Path(td)/'r.json')
+            with patch.object(s,'require_permissions') as check:s.permission_preflight([worker()],'123',{})
+            self.assertEqual(check.call_count,5)
+            self.assertIn('iam.roles.create',check.call_args_list[0].args[2])
+            self.assertEqual(check.call_args_list[2].kwargs,{'query':True})
+    def test_existing_roles_do_not_require_create_permission(self):
+        with tempfile.TemporaryDirectory() as td:
+            s=m.Setup(False,Path(td)/'r.json')
+            with patch.object(s,'require_permissions') as check:s.permission_preflight([worker()],'123',{name:{} for name in m.ROLES})
+            self.assertNotIn('iam.roles.create',check.call_args_list[0].args[2])
+    def test_existing_public_key_needs_no_metadata_permission(self):
+        with tempfile.TemporaryDirectory() as td:
+            s=m.Setup(False,Path(td)/'r.json');w=worker();w['metadata'],_=m.append_public_key(w['metadata'])
+            with patch.object(s,'require_permissions') as check:s.permission_preflight([w],'123',{})
+            self.assertNotIn('compute.instances.setMetadata',check.call_args_list[3].args[2])
+    def test_denied_preflight_prevents_all_setup_mutations(self):
+        with tempfile.TemporaryDirectory() as td:
+            s=m.Setup(True,Path(td)/'r.json');calls=[]
+            def cli(args):
+                calls.append(args)
+                if args[:3]==['compute','instances','list']:return [worker()]
+                if args[:3]==['compute','project-info','describe']:return {'commonInstanceMetadata':{}}
+                if args[:2]==['projects','describe']:return {'projectNumber':'123'}
+                if args[:3]==['iam','roles','list']:return []
+                self.fail('Mutation happened before preflight: '+str(args))
+            result=type('R',(),{'returncode':0,'stdout':m.ADMIN+'\n'})()
+            with patch.object(s,'cli',side_effect=cli),patch.object(s,'api',return_value={'iamConfiguration':{'uniformBucketLevelAccess':{'enabled':True}}}),patch.object(s,'permission_preflight',side_effect=PermissionError('missing')),patch.object(s,'ensure_role') as roles,patch.object(m.subprocess,'run',return_value=result):
+                with self.assertRaises(PermissionError):s.run()
+                roles.assert_not_called()
+            self.assertFalse(any('add-iam-policy-binding' in a for a in calls))
 
 if __name__=='__main__': unittest.main()
