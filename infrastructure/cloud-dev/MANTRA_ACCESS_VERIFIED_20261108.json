@@ -1,0 +1,79 @@
+{
+  "verified_utc": "2026-11-08T23:50:37.813593+00:00",
+  "status": "columbia_mantra_access_verified",
+  "host": "dev.c.pvd-dev-232.internal",
+  "principal": "dev-vm@pvd-dev-232.iam.gserviceaccount.com",
+  "resource_project": "mantra-477901",
+  "role": "roles/admin",
+  "binding_condition": null,
+  "binding_observation": "Google project IAM read returned the unconditional roles/admin binding for this principal.",
+  "identity_source": "attached_service_account_metadata",
+  "verification": {
+    "compute_inventory": "passed",
+    "project_iam_read": "passed",
+    "storage_write_read_sha256": "passed",
+    "cpu_vm_create": "passed",
+    "iap_ssh_guest_execution": "passed",
+    "cpu_vm_and_disk_removal": "passed",
+    "durable_runner": "succeeded"
+  },
+  "storage_canary": {
+    "uri": "gs://mantra-mlfg-prod-uscentral1-8e7a/viper/pvd232/jep_full_data_prompt_20261107/access-canary/578c220b34414b7c8853a9ab099d9fd0.json",
+    "sha256": "df10637a331218f55107d5966a142fba06a7027ed7ae1430a1220738c81fe46e"
+  },
+  "ssh": {
+    "registered_project_keys_before": 9,
+    "registered_project_keys_after": 10,
+    "existing_keys_preserved": true,
+    "other_project_metadata_preserved": true,
+    "private_key_location": "Columbia host",
+    "cpu_canary_name": "jep-columbia-auth-check-c6656618ff",
+    "cpu_canary_id": "352224021793519374",
+    "cpu_canary_zone": "us-central1-a",
+    "cpu_canary_machine_type": "e2-micro",
+    "guest_user": "machina",
+    "canary_cleanup_verified": true,
+    "initial_attempts": "The first allocation request used an incompatible E2 maintenance setting; the request was reconciled as absent, then corrected. The successful VM accepted SSH on the third readiness attempt."
+  },
+  "durable_job": {
+    "id": "0bfa7937bdae41e5951e72d2f2eb00a8",
+    "status": "succeeded",
+    "exit_code": 0,
+    "started_at": "2026-11-08T23:49:02.055431+00:00",
+    "finished_at": "2026-11-08T23:49:05.477879+00:00",
+    "credential_selection": "inherited attached service account",
+    "explicit_account_argument_required_in_child": false,
+    "resource_project_explicit_in_child": "mantra-477901"
+  },
+  "checkpoint_checks": {
+    "inventory_source": "afe47d5",
+    "objects": 77,
+    "archive_bytes": 35921745920,
+    "inventory_verification": "All cloud objects present with exact recorded lengths",
+    "terminal_publication_verification": "Independent streaming SHA-256 from Columbia",
+    "terminal_archives": [
+      {
+        "worker": "worker1",
+        "generation": "publication-complete-58179d4388b7461b9e436f557d9e6a47",
+        "bytes": 112640,
+        "sha256": "a929f7f1a6db40ea153744fbc16e017fa8d70988be5db596507e3a0ab41c1044",
+        "hash_verified_on_columbia": true
+      },
+      {
+        "worker": "worker2",
+        "generation": "publication-complete-13816a6161e54ea9a6e46a858ca6d459",
+        "bytes": 81920,
+        "sha256": "fa45843861e7e06b0c202fcc8c283313145299cb07aff27e3b39aa26f6c1455e",
+        "hash_verified_on_columbia": true
+      }
+    ]
+  },
+  "credential_refresh": "Google attached-account credential mechanism; observed fresh acquisition and separate CLI/durable-process access",
+  "post_expiry_test": "pending separate observation",
+  "experiment_training_or_evaluation_changed": false,
+  "experiment_gpu_lifecycle_calls": 0,
+  "disposable_cpu_canary_lifecycle_calls": true,
+  "aether_execution_used": false,
+  "local_evidence_directory": "/home/pvd2112_columbia_edu/columbia-projects/jep/data/columbia-mantra-identity-spec-20261108/access-accepted-20261108T234107Z",
+  "operational_scope": "Live access acceptance for Columbia; per-run collector assignment remains part of each workload launch."
+}

@@ -205,7 +205,7 @@ class CloudDevelopmentTests(unittest.TestCase):
         response.__enter__.return_value = response
         response.status = 200
         response.read.return_value = b'{"name":"dev"}'
-        with mock.patch.object(probe_identity, 'metadata', side_effect=metadata), mock.patch.object(probe_identity.urllib.request, 'urlopen', return_value=response):
+        with mock.patch.object(probe_identity, 'metadata', side_effect=metadata), mock.patch.object(probe_identity.urllib.request, 'build_opener', return_value=mock.Mock(open=mock.Mock(return_value=response))):
             result = probe_identity.probe(self.host)
         self.assertTrue(result['keyless_identity_verified'])
         self.assertEqual(result['compute_api_http_status'], 200)
@@ -216,7 +216,7 @@ class CloudDevelopmentTests(unittest.TestCase):
         directory = Path(profile['resolved']['project_environment']['CLOUDSDK_CONFIG'])
         directory.mkdir()
         (directory / 'application_default_credentials.json').write_text('{}')
-        identifier, job = self.queued_job(profile)
+        identifier, job = self.queued_job(profile, argv=[sys.executable, '-c', 'print("completed")'])
         cloud_job.run_job(profile, identifier)
         record = json.loads((job / 'job.json').read_text())
         self.assertEqual(record['status'], 'failed')
@@ -239,7 +239,7 @@ class CloudDevelopmentTests(unittest.TestCase):
         with mock.patch.object(project, 'collect', return_value={'target_verified': False, 'identity_mismatches': {'vm_name': 'wrong'}}):
             with self.assertRaisesRegex(RuntimeError, 'identity mismatch'):
                 project.setup(self.host, self.definition)
-        self.assertFalse(Path(self.host['paths']['project_root']).exists())
+        self.assertFalse(Path(self.host['paths']['workspace_root']).exists())
 
     def test_wrong_metadata_stops_installer_before_sudo(self):
         config = self.root / 'host.json'
