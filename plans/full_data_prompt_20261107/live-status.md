@@ -1,20 +1,20 @@
 # Live training status
 
-Updated: Sun 2:54 AM EST. Refresh this page for the latest snapshot.
+Updated: Sun 2:59 AM EST. Refresh this page for the latest snapshot.
 A background CPU reporter updates this branch every five minutes. Treat snapshots older than ten minutes as stale.
 
 **Training fits finished: 2 / 15.**
 The held-out test remains sealed for evaluation.
 
-**Estimated training finish: Sun 10:47 AM EST**
-Planning range: Sun 8:53 AM EST to Sun 12:41 PM EST.
+**Estimated training finish: Sun 10:52 AM EST**
+Planning range: Sun 8:58 AM EST to Sun 12:46 PM EST.
 Basis: 16.3 minutes per completed epoch; 3–5 total epochs per remaining fit, based on 2 stopped fits.
 Validation-based stopping or Spot interruptions can extend this estimate.
 
 | Placement | Current work | Fits finished | GPU use | Cloud-verified epochs | Uploads pending |
 | --- | --- | ---: | ---: | ---: | ---: |
-| Seoul (asia-northeast3-a) | B_order_only_seed7, epoch 5 | 1 / 9 | 95 % | 9 | 0 |
-| Taiwan (asia-east1-b) | C_case_inspired_seed8, epoch 2 | 1 / 6 | 0 % | 3 | 1 |
+| Seoul (asia-northeast3-a) | B_order_only_seed7, epoch 5 | 1 / 9 | 100 % | 9 | 0 |
+| Taiwan (asia-east1-b) | C_case_inspired_seed8, epoch 2 | 1 / 6 | 100 % | 4 | 0 |
 
 Cloud-verified epochs include the five preserved Seoul epochs. New publications use native VIPER Cloud.
 The existing controllers delete owned compute and disks after verified publication; unverified recovery disks are retained.
