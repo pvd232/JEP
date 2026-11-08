@@ -144,5 +144,76 @@ class CleanupTests(unittest.TestCase):
         self.assertEqual(run.call_count, 2)
 
 
+class ReviewRegressionTests(unittest.TestCase):
+    """Observe the preserved-lease, terminal-resume and shared-admission review findings."""
+    def test_pending_old_generation_is_published_with_original_identity(self):
+        from csts_pilot.full_data_prompt_uploads import require_generation_authorization
+        case = PublicationTests();case.setUp()
+        self.addCleanup(case.doCleanups)
+        manifest = json.loads(case.manifest.read_text())
+        preserved = {"manifest_sha256": digest_file(case.manifest),
+                     **{k:manifest[k] for k in ['archive_sha256','instance_id','execution_id','source_commit']}}
+        resume = {"preserved_generations": {"epoch1":preserved}}
+        assignment = {"instance_id":"999", "execution_id":"c"*32}
+        require_generation_authorization(case.manifest, manifest, assignment, resume)
+        ack = publish_one(case.root, case.manifest, case.cloud(), 'owner', 'study')
+        self.assertEqual(ack['execution_id'],manifest['execution_id'])
+        self.assertEqual(ack['archive_sha256'],manifest['archive_sha256'])
+        with self.assertRaises(PermissionError):
+            require_generation_authorization(case.manifest, manifest, assignment, {})
+
+    def test_resume_cannot_relabel_scientific_source(self):
+        case=ResumeTests();case.setUp();original=copy.deepcopy(case.state)
+        case.state['training_source_commit']='a'*40
+        case.approval['training_source_commit']='e'*40
+        with self.assertRaisesRegex(ValueError,'scientific source'):
+            rebind_resume_state(case.state,case.approval,'worker1','e'*40,'b'*64,
+                                {'execution_id':'f'*32},'d'*64)
+        self.assertEqual(case.state['trials'],original['trials'])
+        self.assertEqual(case.state['training_source_commit'],'a'*40)
+
+    def test_distinct_journals_share_project_admission_lock(self):
+        import fcntl
+        deploy=load_script('deploy_spot')
+        with tempfile.TemporaryDirectory() as folder, patch.object(Path,'home',return_value=Path(folder)):
+            first,_=deploy.admission_paths('mantra-477901')
+            second,_=deploy.admission_paths('mantra-477901')
+            with first.open('a+') as a,second.open('a+') as b:
+                fcntl.flock(a,fcntl.LOCK_EX|fcntl.LOCK_NB)
+                with self.assertRaises(BlockingIOError):
+                    fcntl.flock(b,fcntl.LOCK_EX|fcntl.LOCK_NB)
+
+    def test_preserved_native_runtime_cannot_change_gpu_or_packages(self):
+        from csts_pilot.full_data_prompt_worker import require_preserved_runtime
+        import yaml
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder)
+            runtime={'gpu_model':'NVIDIA L4','python_env':{'python_version':'3.13.15','distributions':[]}}
+            spec=root/'spec.yaml'
+            spec.write_text(yaml.safe_dump({'env':{'compute':{'model':'NVIDIA L4','count':1},
+                                                  'python_env':runtime['python_env']}}))
+            record=root/'resolved.yaml';record.write_text(yaml.safe_dump({'spec':{'sha256':digest_file(spec)}}))
+            state={'trials':{'trial':{'records':[{'path':str(record)}]}}}
+            require_preserved_runtime(state,runtime)
+            for changed in [dict(runtime,gpu_model='NVIDIA T4'),
+                            dict(runtime,python_env={'python_version':'3.12','distributions':[]})]:
+                with self.assertRaises(ValueError):require_preserved_runtime(state,changed)
+
+    def test_completed_resume_publishes_current_lease_without_training(self):
+        import csts_pilot.full_data_prompt_worker as worker
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);output=root/'out';output.mkdir()
+            selected={'seed':7,'initial_trainable_sha256':'a'*64}
+            state={'trials':{'A_seed7':{'selection':selected}},'lease':{'execution_id':'c'*32}}
+            with patch.object(worker,'trial_matrix',return_value=[{'trial_id':'A_seed7','arm':'A','seed':7}]), \
+                 patch('viper.repository.read_source',return_value=SimpleNamespace(commit='b'*40)), \
+                 patch.object(worker,'publish_generation') as publish, \
+                 patch('viper.execution.run') as execute:
+                worker.run_training(root,output,{},state,[7],'NVIDIA L4')
+            execute.assert_not_called()
+            self.assertEqual(publish.call_args.args[2],'training-final-'+'c'*32)
+            self.assertEqual(state['final_generation'],'training-final-'+'c'*32)
+
+
 if __name__ == "__main__":
     unittest.main()

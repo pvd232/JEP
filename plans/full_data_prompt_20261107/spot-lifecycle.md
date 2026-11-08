@@ -21,7 +21,9 @@ actual execution source separately. Completed native epochs remain reusable.
 
 ## Allocation
 
-Use the existing administrator connection with explicit project and account.
+Use the sole durable CPU controller with explicit project and account. Its
+project-wide admission lock serializes inventory and creation across journals;
+unresolved create intents block admission until reconciled.
 Provide `deploy_spot.py` with `--snapshot`, `--name`, `--service-account`,
 `--project`, `--account`, `--journal`, and preferred `--regions`. `--plan-only`
 records discovered candidates without creating a VM. Actual allocation remains

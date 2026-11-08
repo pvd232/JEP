@@ -12,6 +12,7 @@ import concurrent.futures
 import datetime as dt
 import fcntl
 import json
+import os
 from pathlib import Path
 import subprocess
 from typing import Any
@@ -37,8 +38,24 @@ def save(path: Path, value: Any) -> None:
     """Commit the current allocation journal through one atomic JSON replacement."""
     path.parent.mkdir(parents=True, exist_ok=True)
     temp = path.with_suffix(".partial")
-    temp.write_text(json.dumps(value, indent=2) + "\n")
+    with temp.open("w") as stream:
+        json.dump(value, stream, indent=2)
+        stream.write("\n")
+        stream.flush()
+        os.fsync(stream.fileno())
     temp.replace(path)
+    directory = os.open(path.parent, os.O_RDONLY)
+    try:
+        os.fsync(directory)
+    finally:
+        os.close(directory)
+
+
+def admission_paths(project: str) -> tuple[Path, Path]:
+    """Share one admission lock and unresolved-intent record on the sole controller."""
+    root = Path.home() / ".local/state/jep-spot-allocations"
+    root.mkdir(parents=True, exist_ok=True)
+    return root / (project + ".lock"), root / (project + ".json")
 
 
 def candidates(regions: list[str], zones: list[str], advice: list[dict]) -> list[tuple[str, str]]:
@@ -109,8 +126,12 @@ def main() -> None:
         raise ValueError("Allocation attempts, duration and GPU count must fit the approved bounds.")
     common = [f"--project={args.project}", f"--account={args.account}", "--quiet"]
     args.journal.parent.mkdir(parents=True, exist_ok=True)
-    with args.journal.with_suffix(".lock").open("a+") as lock:
+    lock_path, admission_path = admission_paths(args.project)
+    with lock_path.open("a+") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        admission = json.loads(admission_path.read_text()) if admission_path.exists() else {}
+        if admission.get("pending_intent"):
+            raise RuntimeError("Reconcile the controller's unresolved allocation intent before admission.")
         if args.journal.exists():
             prior = json.loads(args.journal.read_text())
             if prior.get("allocation"):
@@ -161,6 +182,8 @@ def main() -> None:
                        "boot_disk_absent_before_create": True}
             journal["attempts"].append(attempt)
             save(args.journal, journal)
+            save(admission_path, {"pending_intent": {"name": args.name, "zone": zone,
+                  "journal": str(args.journal), "utc": dt.datetime.now(dt.timezone.utc).isoformat()}})
             try:
                 result = command([
                     "gcloud", "compute", "instances", "create", args.name, f"--zone={zone}",
@@ -195,6 +218,7 @@ def main() -> None:
                 attempt["status"] = "allocated"
                 journal["allocation"] = allocation
                 save(args.journal, journal)
+                save(admission_path, {"last_allocation": allocation, "pending_intent": None})
                 print(json.dumps(allocation))
                 return
             attempt["status"] = "failed"
@@ -202,6 +226,7 @@ def main() -> None:
             cleanup_failed_create(args.name, zone, snapshot["id"], common)
             attempt["partial_resources_reconciled"] = True
             save(args.journal, journal)
+            save(admission_path, {"pending_intent": None})
             # Capacity and quota failures can use another approved placement.
             if any(code in result.stderr for code in ("QUOTA_EXCEEDED", "quota exceeded", "Quota exceeded")):
                 continue

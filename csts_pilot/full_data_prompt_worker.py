@@ -218,8 +218,9 @@ def run_training(root: Path, output: Path, protocol: dict[str, Any], state: dict
         raise ValueError('Within-seed initial adapter weights differed across prompt arms.')
     atomic_json(output / 'selections.json', selected)
     state['status'] = 'assigned_training_complete_test_not_opened'
+    state['final_generation'] = 'training-final-' + state['lease']['execution_id']
     atomic_json(output / 'state.json', state)
-    publish_generation(root, output, 'training-final', {}, state,
+    publish_generation(root, output, state['final_generation'], {}, state,
                        [output / 'selections.json', output / 'state.json'])
     for manifest_path in sorted((output / 'transfer').glob('*/ready.json')):
         wait_for_generation(manifest_path.parent, json.loads(manifest_path.read_text()), output)
@@ -230,7 +231,7 @@ def require_training_compatibility(root: Path, source: str, training_source: str
     """Allow controller repairs while requiring unchanged model, loss, data and protocol code."""
     import re
     import subprocess
-    if re.fullmatch(r"[0-9a-f]{40}", training_source) is None:
+    if any(re.fullmatch(r"[0-9a-f]{40}", value) is None for value in (training_source, source)):
         raise ValueError("Training compatibility must name an immutable source commit.")
     scoped = ["csts_pilot", "jep_pilot", "configs", "pilot_requirements.txt", "tranche2_requirements.txt"]
     changed = subprocess.check_output(
@@ -245,12 +246,50 @@ def require_training_compatibility(root: Path, source: str, training_source: str
         raise ValueError("Training revision changes scientific code or inputs: " + ", ".join(changed))
 
 
+def observed_runtime(gpu_model: str) -> dict[str, Any]:
+    """Capture actual GPU type and the pinned Python distribution fingerprint."""
+    import subprocess
+    from viper.runtime import observe_python_env
+    actual = subprocess.check_output(
+        ['nvidia-smi', '--query-gpu=name', '--format=csv,noheader'], text=True, timeout=10,
+    ).strip().splitlines()
+    if actual != [gpu_model]:
+        raise ValueError('Actual GPU type differs from the approved training block.')
+    return {'gpu_model': gpu_model, 'python_env': observe_python_env().model_dump(mode='json')}
+
+
+def require_preserved_runtime(state: dict[str, Any], runtime: dict[str, Any]) -> None:
+    """Require resumed seed blocks to retain their recorded GPU type and Python environment."""
+    import yaml
+    if state.get('runtime_block') is not None and state['runtime_block'] != runtime:
+        raise ValueError('Resume changes the seed block GPU type or runtime.')
+    for trial in state['trials'].values():
+        for record in trial['records']:
+            folder = Path(record['path']).parent
+            resolved = yaml.safe_load((folder / 'resolved.yaml').read_text())
+            spec = folder / 'spec.yaml'
+            if digest_file(spec) != resolved['spec']['sha256']:
+                raise ValueError('Preserved native runtime specification changed.')
+            environment = yaml.safe_load(spec.read_text())['env']
+            expected = {'gpu_model': environment['compute']['model'],
+                        'python_env': environment['python_env']}
+            if expected != runtime or environment['compute']['count'] != 1:
+                raise ValueError('Preserved native fit used a different GPU type or runtime.')
+
+
 def rebind_resume_state(state: dict[str, Any], approval: dict[str, Any], worker: str,
                         source: str, protocol_sha: str, lease: dict[str, Any],
                         state_sha: str) -> dict[str, Any]:
     """Rebind preserved completed work only under an explicit hash-bound resume record."""
     if (state['protocol_sha256'], state['worker']) != (protocol_sha, worker):
         raise ValueError('Existing worker state has different protocol or ownership.')
+    preserved_source = state.get('training_source_commit', state['source_commit'])
+    if approval.get('training_source_commit') != preserved_source:
+        raise ValueError('Resume cannot replace the original scientific source.')
+    for trial in state['trials'].values():
+        selected = trial.get('selection')
+        if selected and selected.get('training_source_commit') != preserved_source:
+            raise ValueError('Preserved selections have conflicting scientific provenance.')
     if state['source_commit'] == source and state.get('lease') == lease:
         state['status'] = 'running'
         state.pop('failure', None)
@@ -264,7 +303,7 @@ def rebind_resume_state(state: dict[str, Any], approval: dict[str, Any], worker:
     history.append({'previous_source_commit': state['source_commit'],
                     'previous_lease': state['lease'], 'state_sha256': state_sha, 'resumed_utc': utc()})
     state.update(source_commit=source, lease=lease, status='running',
-                 training_source_commit=approval['training_source_commit'])
+                 training_source_commit=preserved_source)
     state.pop('failure', None)
     return state
 
@@ -294,11 +333,18 @@ def main() -> None:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         from csts_pilot.full_data_prompt_lease import inspect_local_assignment
         lease = inspect_local_assignment(args.worker, approval['assignments'][args.worker])
+        runtime = observed_runtime(args.gpu_model)
         state_path = output / 'state.json'
         if state_path.exists():
             if not args.resume:
                 raise ValueError('Existing work requires explicit --resume.')
             state = json.loads(state_path.read_text())
+            require_preserved_runtime(state, runtime)
+            preserved_training_source = state.get('training_source_commit', state['source_commit'])
+            require_training_compatibility(root, state['source_commit'], preserved_training_source)
+            for trial in state['trials'].values():
+                for record in trial['records']:
+                    require_training_compatibility(root, record['source_commit'], preserved_training_source)
             previous_bytes = state_path.read_bytes()
             previous_sha = digest_file(state_path)
             archive = state_path.with_name('state.' + state['lease']['execution_id'] + '.before-resume.json')
@@ -306,12 +352,13 @@ def main() -> None:
                 archive.write_bytes(previous_bytes)
             state = rebind_resume_state(state, approval, args.worker, source.commit,
                                         digest_object(protocol), lease, previous_sha)
+            state['runtime_block'] = runtime
             atomic_json(state_path, state)
         else:
             state = {'source_commit': source.commit, 'protocol_sha256': digest_object(protocol),
                      'worker': args.worker, 'seeds': seeds, 'status': 'running', 'trials': {},
                      'started_utc': utc(), 'test_opened': False, 'lease': lease,
-                     'training_source_commit': training_source}
+                     'training_source_commit': training_source, 'runtime_block': runtime}
             atomic_json(state_path, state)
         try:
             run_training(root, output, protocol, state, seeds, args.gpu_model)
@@ -319,7 +366,8 @@ def main() -> None:
             state['status'] = 'failed_preserved'
             state['failure'] = {'type': type(exc).__name__, 'message': str(exc), 'utc': utc()}
             atomic_json(state_path, state)
-            publish_generation(root, output, 'worker-failed', {}, state, [state_path], wait_for_cloud=False)
+            publish_generation(root, output, 'worker-failed-' + state['lease']['execution_id'], {}, state,
+                               [state_path], wait_for_cloud=False)
             raise
 
 

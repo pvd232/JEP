@@ -87,8 +87,24 @@ def publish_one(root: Path, manifest_path: Path, cloud: Any, owner: str,
     return ack
 
 
+def require_generation_authorization(path: Path, manifest: dict[str, Any],
+                                     assignment: dict[str, Any], resume: dict[str, Any]) -> None:
+    """Admit current generations or exact preserved manifests from an approved resume."""
+    identity = (manifest["instance_id"], manifest["execution_id"])
+    if identity == (assignment["instance_id"], assignment["execution_id"]):
+        return
+    preserved = resume.get("preserved_generations", {}).get(manifest["generation"], {})
+    expected = (preserved.get("manifest_sha256"), preserved.get("archive_sha256"),
+                preserved.get("instance_id"), preserved.get("execution_id"),
+                preserved.get("source_commit"))
+    actual = (digest_file(path), manifest["archive_sha256"], manifest["instance_id"],
+              manifest["execution_id"], manifest["source_commit"])
+    if expected != actual:
+        raise PermissionError("Preserved generation is not bound to this explicit resume.")
+
+
 def run(root: Path, worker: str, assignment: dict[str, Any], cloud_config: dict[str, str],
-        max_hours: float) -> None:
+        max_hours: float, resume: dict[str, Any] | None = None) -> None:
     """Drain durable generation files with bounded retries and an exclusive uploader."""
     import fcntl
 
@@ -106,11 +122,7 @@ def run(root: Path, worker: str, assignment: dict[str, Any], cloud_config: dict[
                 manifest = json.loads(path.read_text())
                 if manifest["worker"] != worker:
                     raise ValueError("Queued generation names another worker.")
-                # Already acknowledged generations from a previous lease stay immutable.
-                if (manifest["instance_id"], manifest["execution_id"]) != (
-                    assignment["instance_id"], assignment["execution_id"]
-                ):
-                    raise PermissionError("Unacknowledged generation belongs to another lease.")
+                require_generation_authorization(path, manifest, assignment, resume or {})
                 try:
                     ack = publish_one(root, path, cloud, cloud_config["owner"], cloud_config["workspace"])
                     print(json.dumps({"event": "viper_generation_verified", **ack}), flush=True)
@@ -121,13 +133,13 @@ def run(root: Path, worker: str, assignment: dict[str, Any], cloud_config: dict[
                     })
                     time.sleep(15)
                     break
-            final = output / "transfer/training-final/ack.json"
+            final = output / "transfer" / ("training-final-" + assignment["execution_id"]) / "ack.json"
             if final.exists():
                 final_ack = json.loads(final.read_text())
                 if final_ack.get("execution_id") == assignment["execution_id"]:
                     atomic_json(output / "upload-complete.json", final_ack)
                     return
-            failed = output / "transfer/worker-failed/ack.json"
+            failed = output / "transfer" / ("worker-failed-" + assignment["execution_id"]) / "ack.json"
             if failed.exists() and json.loads(failed.read_text()).get("execution_id") == assignment["execution_id"]:
                 return
             time.sleep(2)
@@ -146,7 +158,7 @@ def main() -> None:
     from viper.repository import resolve_root
     approval = json.loads(args.approval.read_text())
     run(resolve_root(), args.worker, approval["assignments"][args.worker],
-        approval["cloud"], args.max_hours)
+        approval["cloud"], args.max_hours, approval.get("resumes", {}).get(args.worker, {}))
 
 
 if __name__ == "__main__":

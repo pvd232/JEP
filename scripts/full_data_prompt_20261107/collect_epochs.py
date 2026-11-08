@@ -121,7 +121,7 @@ def monitor(worker: str, args: argparse.Namespace) -> dict:
                         or last.get("lease", {}).get("execution_id") != assignment["execution_id"]
                         or not last.get("lease", {}).get("deadline_verified")):
                     raise ValueError("Worker source or execution lease differs from this launch.")
-            finals = [a for a in obj["acks"] if a.get("generation") == "training-final"
+            finals = [a for a in obj["acks"] if a.get("generation") == "training-final-" + assignment["execution_id"]
                       and a.get("execution_id") == assignment["execution_id"]
                       and a.get("transport") == "viper_cloud"
                       and a.get("cloud_roundtrip_verified") is True
