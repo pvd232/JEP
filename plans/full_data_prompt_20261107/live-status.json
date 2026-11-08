@@ -1,6 +1,6 @@
 {
-  "generated_epoch": 1794140560.7685368,
-  "generated_utc": "2026-11-08T12:22:40.768537+00:00",
+  "generated_epoch": 1794140871.3582456,
+  "generated_utc": "2026-11-08T12:27:51.358246+00:00",
   "cadence_seconds": 300,
   "training_mode": "independent_seed_workers",
   "target_fits": 15,
@@ -70,36 +70,37 @@
             "finished": true
           },
           "A_condition_first_seed9": {
-            "epochs": 4,
+            "epochs": 5,
             "seconds": [
               962.0461886609992,
               974.1084742679996,
               976.7813439700003,
-              974.5652695770004
+              974.5652695770004,
+              979.6967745610018
             ],
-            "selected_epoch": null,
-            "finished": false
+            "selected_epoch": 4,
+            "finished": true
           }
         }
       },
       "fresh": true,
       "source": "guest_observation",
-      "observed_utc": "2026-11-08T12:22:40.197535+00:00",
+      "observed_utc": "2026-11-08T12:27:50.584106+00:00",
       "instance_id": "3087252568751843062",
       "epoch_start": {
-        "utc": "2026-11-08T12:09:53.480671+00:00",
-        "trial": "A_condition_first_seed9",
-        "epoch": 5
+        "utc": "2026-11-08T12:26:20.694047+00:00",
+        "trial": "B_order_only_seed9",
+        "epoch": 1
       },
       "gpu": "GPU-b2e57239-579e-e259-9761-832579cdf079, 100 %",
       "services": {
         "train": "active",
         "upload": "active"
       },
-      "verified_epoch_checkpoints": 25,
-      "native_viper_checkpoints": 20,
+      "verified_epoch_checkpoints": 26,
+      "native_viper_checkpoints": 21,
       "pending_generations": 0,
-      "last_verified_utc": "2026-11-08T12:10:55.939209+00:00"
+      "last_verified_utc": "2026-11-08T12:27:21.582021+00:00"
     },
     {
       "worker": "worker2",
