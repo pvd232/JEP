@@ -74,7 +74,7 @@ preserved during this review; this report proposes a change.
 
 ## Method and retained inputs
 
-Collected at **2026-11-08T08:15:50.078649+00:00**. The audit contains 38 source histories
+Collected at **2026-11-08T08:19:26.504466+00:00**. The audit contains 38 source histories
 and 34 maximal trajectories after folding identical or exact-prefix
 copies with matching model, phase, seed and split identities. They are related
 records rather than independent experimental replications.

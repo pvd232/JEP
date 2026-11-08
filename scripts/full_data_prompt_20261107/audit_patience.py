@@ -23,6 +23,8 @@ def replay(epochs, patience):
 
 def analyze(data):
     """Compare strict first-non-improvement stopping with each curve's observed peak."""
+    if len({c["label"] for c in data["curves"]}) != len(data["curves"]):
+        raise ValueError("Curve labels must be unique; use source-qualified names.")
     results=[]
     for curve in data["curves"]:
         epochs=curve["epochs"]
