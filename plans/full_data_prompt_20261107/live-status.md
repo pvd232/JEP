@@ -1,6 +1,6 @@
 # Live training status
 
-Updated: Sun 6:20 AM EST. Refresh this page for the latest snapshot.
+Updated: Sun 6:25 AM EST. Refresh this page for the latest snapshot.
 A background CPU reporter updates this branch every five minutes. Treat snapshots older than ten minutes as stale.
 
 **Training fits finished: 7 / 15.**
@@ -10,7 +10,7 @@ ETA is unconfirmed while a worker observation is unavailable.
 
 | Placement | Current work | Fits finished | GPU use | Cloud-verified epochs | Uploads pending |
 | --- | --- | ---: | ---: | ---: | ---: |
-| Seoul (asia-northeast3-a) | A_condition_first_seed9, epoch 2 | 4 / 9 | 0 % | 21 | 1 |
+| Seoul (asia-northeast3-a) | A_condition_first_seed9, epoch 2 | 4 / 9 | 100 % | 22 | 0 |
 | Taiwan (asia-east1-b) | Stopped; recovery work preserved | 3 / 6 | — | — | — |
 
 Cloud-verified epochs include the five preserved Seoul epochs. New publications use native VIPER Cloud.
