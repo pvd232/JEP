@@ -1,13 +1,13 @@
 # Live training status
 
-Updated: Sun 10:27 AM EST. Refresh this page for the latest snapshot.
+Updated: Sun 10:33 AM EST. Refresh this page for the latest snapshot.
 A background CPU reporter updates this branch every five minutes. Treat snapshots older than ten minutes as stale.
 
 **Training fits finished: 11 / 15.**
 The held-out test remains sealed for evaluation.
 
-**Estimated training finish: Sun 1:11 PM EST**
-Planning range: Sun 12:06 PM EST to Sun 1:44 PM EST.
+**Estimated training finish: Sun 1:16 PM EST**
+Planning range: Sun 12:11 PM EST to Sun 1:49 PM EST.
 Basis: 16.4 minutes per completed epoch; 3–6 total epochs per remaining fit, based on 11 stopped fits.
 Validation-based stopping or Spot interruptions can extend this estimate.
 
