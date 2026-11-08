@@ -70,3 +70,6 @@ Independent seed workers remain the current study's execution mode. A synchroniz
 multi-GPU fit of one adapter requires its own verified distributed entrypoint and
 unchanged scientific configuration; the reusable Spot training skill covers that
 separate topology.
+
+
+[Observed Seoul/Taiwan deployment](lifecycle-launch-20261108/README.md) retains immutable placements, genuine source reviews, VIPER preflight references and cleanup receipts.

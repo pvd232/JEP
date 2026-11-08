@@ -1,0 +1,35 @@
+{
+  "role": "10_lifecycle_security",
+  "reviewed_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+  "verdict": "approve",
+  "files_inspected": [
+    "csts_pilot/baseline_models.py:1-552",
+    "csts_pilot/baseline_stages.py:1-732",
+    "csts_pilot/convergence.py:1-591",
+    "csts_pilot/full_data_prompt_protocol.py:1-219",
+    "csts_pilot/full_data_prompt_integrity.py:1-124",
+    "csts_pilot/full_data_prompt_lease.py:1-72",
+    "csts_pilot/full_data_prompt_worker.py:1-419",
+    "csts_pilot/full_data_prompt_uploads.py:1-173",
+    "csts_pilot/full_data_prompt_native.py:1-159",
+    "scripts/full_data_prompt_20261107/deploy_spot.py:1-273",
+    "scripts/full_data_prompt_20261107/collect_epochs.py:1-284",
+    "tests/test_spot_lifecycle.py:1-332",
+    "tests/test_full_data_prompt_lease.py:1-64",
+    "tests/test_full_data_prompt_integrity.py:1-64",
+    "plans/full_data_prompt_20261107/spot-lifecycle.md:1-72",
+    "configs/csts-full-data-prompt-20261107.json:1-18",
+    "Supplied scientific/controller diff from prior training source"
+  ],
+  "findings": [],
+  "runtime_checks_still_needed": [
+    "Verify authentic provenance of all ten independent review executions and the exact source/protocol-bound fit approval; receipt strings alone do not establish independence.",
+    "Observe actual Spot allocation, project-wide GPU inventory, attached service account permissions, immutable instance and disk IDs, GPU UUIDs, and installed poweroff deadlines within the authorized 23-hour envelope.",
+    "Verify the prepared snapshot and service configuration do not automatically start training before the fit approval gate.",
+    "Validate preserved state hashes, historical native specification hashes, GPU type and Python environment against the actual resumed artifacts.",
+    "Exercise native VIPER publication and independent controller cloud-byte verification using the installed pinned VIPER version and actual repository configuration.",
+    "Observe successful cleanup of exact assigned resources and recovery-disk retention on publication failure or preemption.",
+    "PLAN.md, provider/run ID and a computed protocol digest were not supplied; no tools or tests were executed."
+  ],
+  "rationale": "No concrete blocking static defect remains within the supplied lifecycle scope and explicit authorization context. VM allocation is already authorized; subsequent fit approval correctly binds identities available only after allocation and read-only preflight. Imports and plan construction do not allocate GPUs or train. Allocation is bounded, Spot-only and serialized on the stipulated sole controller, with unresolved intents retained when completion is unknown. Training checks exact-source approval, ten distinct review receipts, host/GPU identity and an independent shutdown timer. The supplied compatibility diff preserves model, trainer and input behavior while recording scientific and execution revisions separately; resume authorization binds the prior state and lease. Publication uses attached workload credentials without exporting credentials. Recovery-disk deletion requires complete generation receipts, independent cloud-byte verification, and matching detached disk identity and ownership. Runtime correctness remains unverified."
+}

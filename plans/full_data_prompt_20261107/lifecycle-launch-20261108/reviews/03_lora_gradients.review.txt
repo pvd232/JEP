@@ -1,0 +1,29 @@
+{
+  "role": "03_lora_gradients",
+  "reviewed_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+  "verdict": "approve",
+  "files_inspected": [
+    "csts_pilot/baseline_models.py:18-211,257-380,434-465,522-552",
+    "csts_pilot/baseline_stages.py:223-601,604-664",
+    "csts_pilot/convergence.py:92-132",
+    "csts_pilot/full_data_prompt_protocol.py:14-95,163-205",
+    "csts_pilot/full_data_prompt_integrity.py:11-124",
+    "csts_pilot/full_data_prompt_native.py:17-114,117-159",
+    "csts_pilot/full_data_prompt_worker.py:166-415",
+    "tests/test_spot_lifecycle.py:27-52,194-244",
+    "tests/test_full_data_prompt_integrity.py:7-62",
+    "configs/csts-full-data-prompt-20261107.json:1-18",
+    "plans/full_data_prompt_20261107/spot-lifecycle.md:1-72",
+    "Supplied scientific/controller diff from prior training source"
+  ],
+  "findings": [],
+  "runtime_checks_still_needed": [
+    "Verify the pinned PEFT runtime exposes only the intended q/k/v/o LoRA parameters as trainable; confirm frozen backbone weights remain unchanged after an update.",
+    "On the intended GPU and pinned environment, confirm finite loss and adapter gradients, a nonzero adapter update, and successful backward through nonreentrant checkpointing, BF16 SDPA, and float32 pooling.",
+    "Compare uninterrupted training with an epoch-boundary continuation, including adapter weights, AdamW moments, scheduler counters, permutation RNG, CUDA dropout RNG, and validation selection.",
+    "Confirm the pinned backbone applies its expected causal and padding masks and produces consistent final-EOD embeddings for padded inputs.",
+    "Verify actual preserved artifacts, runtime fingerprints, compatibility diffs, staged input hashes, and resume authorization against deployment records.",
+    "Observe real asynchronous VIPER publication and independent cloud checksum verification before claiming publication or cleanup succeeded."
+  ],
+  "rationale": "No blocking static defect was identified in this specialization. The fit_lora -> fit_neural -> TokenPairs.scores path attaches attention-only PEFT adapters, optimizes parameters marked trainable, and computes rating MSE over independently conditioned passage embeddings. Sum-reduced microbatch losses divided by the effective batch size preserve comparison weighting, including the final partial batch. Float32 final-attended-EOD normalization and cosine scoring retain autograd. No teacher, evidence loss, learned scoring head, or subset curriculum enters this path. Prompt identity is shared by training and inference and checked against saved encoder settings. The supplied diff leaves model, trainer, native plan, protocol, and input code unchanged. The compatibility guard rejects changes to those scoped scientific files; resume metadata retains the original training source separately from execution source, binds the prior state and lease, and checks preserved GPU/runtime identity. The JSON-normalized configuration comparison fixes tuple/list persistence without relaxing scientific parameter equality. Assessment used only the supplied packet; no tools or tests were executed. A protocol digest, provider run ID, and PLAN.md contents were not supplied, so none is claimed verified."
+}

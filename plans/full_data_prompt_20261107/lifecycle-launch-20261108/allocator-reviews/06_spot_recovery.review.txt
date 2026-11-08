@@ -1,0 +1,34 @@
+{
+  "role": "06_spot_recovery",
+  "reviewed_commit": "b03f744bf4aa53d767fa318341ad41863526a71f",
+  "verdict": "approve",
+  "files_inspected": [
+    "csts_pilot/baseline_models.py",
+    "csts_pilot/baseline_stages.py",
+    "csts_pilot/convergence.py",
+    "csts_pilot/full_data_prompt_protocol.py",
+    "csts_pilot/full_data_prompt_integrity.py",
+    "csts_pilot/full_data_prompt_lease.py",
+    "csts_pilot/full_data_prompt_worker.py",
+    "csts_pilot/full_data_prompt_uploads.py",
+    "csts_pilot/full_data_prompt_native.py",
+    "scripts/full_data_prompt_20261107/deploy_spot.py",
+    "scripts/full_data_prompt_20261107/collect_epochs.py",
+    "tests/test_spot_lifecycle.py",
+    "tests/test_full_data_prompt_lease.py",
+    "tests/test_full_data_prompt_integrity.py",
+    "plans/full_data_prompt_20261107/spot-lifecycle.md",
+    "configs/csts-full-data-prompt-20261107.json",
+    "Supplied scientific/controller diff"
+  ],
+  "findings": [],
+  "runtime_checks_still_needed": [
+    "Execute the supplied allocation observation regressions; no tests were executed in this review.",
+    "Observe a real RUNNING-to-DONE create operation and confirm that admission remains locked without another create request.",
+    "Verify that observation timeout or provider uncertainty retains the durable pending intent and resources, blocking subsequent admission until reconciliation.",
+    "Verify actual GPU inventory, immutable allocation identities, Spot settings, retained boot disk and independent shutdown deadline before scientific fit launch.",
+    "Confirm both actual training workers remain pinned to approved commit 83467f7; this allocator review does not authorize replacing their source.",
+    "Before claiming recovery or cleanup success, verify preserved native artifacts, optimizer/RNG restoration, asynchronous VIPER cloud roundtrip receipts and controller verification of every generation."
+  ],
+  "rationale": "No concrete blocking static defect remains in the allocator-only follow-up. deploy_spot.py:86-104 polls PENDING/RUNNING observations with bounded provider calls and an observation deadline. Its caller retains the project admission lock throughout observation; only terminal completion permits allocation processing or failed-create reconciliation. Timeout, malformed output and uncertain completion leave the durable pending intent intact. Failed terminal creates undergo reconciliation before fallback admission. The polling deadline can be exceeded by an in-flight bounded call, but observation remains bounded. Explicit region sets govern initial placement, while the reusable five-region East Asia scope and two-GPU cap match the supplied authorization; Tokyo is not hardcoded. The supplied compatibility boundary rejects scientific-code changes outside its controller allowlist, and resume metadata preserves original training provenance separately from execution provenance while binding prior state and a fresh lease. The supplied diff leaves model, trainer and native fit configuration unchanged. Assessment used only the supplied packet; no tools, runtime checks, external reviews or provisioning were performed. No provider/run ID or computed protocol hash is available."
+}

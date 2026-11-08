@@ -1,0 +1,34 @@
+{
+  "role": "10_lifecycle_security",
+  "reviewed_commit": "b03f744bf4aa53d767fa318341ad41863526a71f",
+  "verdict": "approve",
+  "files_inspected": [
+    "csts_pilot/baseline_models.py",
+    "csts_pilot/baseline_stages.py",
+    "csts_pilot/convergence.py",
+    "csts_pilot/full_data_prompt_protocol.py",
+    "csts_pilot/full_data_prompt_integrity.py",
+    "csts_pilot/full_data_prompt_lease.py",
+    "csts_pilot/full_data_prompt_worker.py",
+    "csts_pilot/full_data_prompt_uploads.py",
+    "csts_pilot/full_data_prompt_native.py",
+    "scripts/full_data_prompt_20261107/deploy_spot.py",
+    "scripts/full_data_prompt_20261107/collect_epochs.py",
+    "tests/test_spot_lifecycle.py",
+    "tests/test_full_data_prompt_lease.py",
+    "tests/test_full_data_prompt_integrity.py",
+    "plans/full_data_prompt_20261107/spot-lifecycle.md",
+    "configs/csts-full-data-prompt-20261107.json",
+    "Supplied scientific/controller diff"
+  ],
+  "findings": [],
+  "runtime_checks_still_needed": [
+    "Run the supplied regression tests; none were executed in this review.",
+    "Observe real RUNNING-to-DONE operation polling, terminal stockout fallback, and observation failure retaining the admission intent without cleanup or another create.",
+    "Verify the sole controller's shared admission lock, current project GPU inventory, quota, and actual Spot placement before allocation.",
+    "Authenticate independent review provider receipts externally; JSON receipt fields alone do not prove independence.",
+    "Before scientific execution, verify exact worker approvals, workers remaining pinned to approved commit 83467f7, immutable instance and GPU identities, attached workload identity, preserved runtime, and installed poweroff deadlines.",
+    "Observe real asynchronous VIPER publication and independent controller archive verification before permitting recovery-disk deletion."
+  ],
+  "rationale": "No concrete blocking static defect remains in the allocator-only follow-up. deploy_spot.py:86-104 polls nonterminal operations with bounded provider calls and an observation budget. The project admission lock remains held throughout observation; unknown completion, malformed responses, and timeouts exit with the durable intent retained. Fallback and partial-resource cleanup follow terminal observation of an accepted asynchronous create. The observation budget can be exceeded by the final bounded provider call, but execution remains bounded. Allocation is explicitly invoked, restricted to Mantra, Spot, and at most two GPUs. All five East Asia regions are authorized reusable scope; explicit Seoul/Taiwan initial preferences do not narrow that scope. Preflight allocation may precede scientific fit approval. The supplied compatibility boundary rejects scientific-module, protocol, configuration, and dependency changes while permitting designated controller repairs. Resume authorization binds prior state bytes and lease, preserves scientific provenance, and records execution provenance separately. The supplied diff leaves model/trainer/input behavior unchanged. This approval does not authorize moving the two workers from 83467f7 or establish any GPU/cloud checks as passed. Review used only the supplied packet; no tools or external checks were used."
+}

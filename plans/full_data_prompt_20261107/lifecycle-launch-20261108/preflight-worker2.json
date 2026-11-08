@@ -1,0 +1,73 @@
+{
+  "worker": "worker2",
+  "source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+  "assignment": {
+    "instance_name": "jep-full-prompt-worker2-20261108",
+    "instance_id": "4722509685362370145",
+    "project": "mantra-477901",
+    "zone": "asia-east1-b",
+    "service_account": "jep-gpu-jobs@mantra-477901.iam.gserviceaccount.com",
+    "gpu_uuid": "GPU-3e179d63-e2a8-9999-a742-b42c6f48bb32",
+    "shutdown_mode": "poweroff",
+    "execution_id": "c04a5812c47942568552acbc7420b6f3",
+    "deadline_epoch": 1794203267.329475,
+    "input_references": {
+      "csts_data/jep-csts-v1/test.json": {
+        "sha256": "52a9c0d6b8d9f3fc81e698bae1e2564051cf7ec29e8dc1cb4d68167910bb968d",
+        "bytes": 1136833,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_full_data_prompt_20261107",
+          "revision": "6b2dc4f0fd6ce87f495f11ea64f310fbe8174787182a8acf10ec57517d9126ac",
+          "path": "csts_data/jep-csts-v1/test.json"
+        }
+      },
+      "csts_data/jep-csts-v1/train.json": {
+        "sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+        "bytes": 2810091,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_full_data_prompt_20261107",
+          "revision": "6b2dc4f0fd6ce87f495f11ea64f310fbe8174787182a8acf10ec57517d9126ac",
+          "path": "csts_data/jep-csts-v1/train.json"
+        }
+      },
+      "csts_data/jep-csts-v1/validation.json": {
+        "sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+        "bytes": 734101,
+        "stored_at": {
+          "kind": "gcs",
+          "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+          "prefix": "viper",
+          "owner": "pvd232",
+          "workspace": "jep_full_data_prompt_20261107",
+          "revision": "6b2dc4f0fd6ce87f495f11ea64f310fbe8174787182a8acf10ec57517d9126ac",
+          "path": "csts_data/jep-csts-v1/validation.json"
+        }
+      }
+    }
+  },
+  "resume": null,
+  "preserved_selection": null,
+  "viper_canary": {
+    "baseline_results/full_data_prompt_20261107/deployment-canary/worker2-c04a5812c47942568552acbc7420b6f3.json": {
+      "sha256": "69b1583881ce67f5644bbccdef777f4e6119ab3f06cc00e73d56766cb77ae27f",
+      "bytes": 556,
+      "stored_at": {
+        "kind": "gcs",
+        "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+        "prefix": "viper",
+        "owner": "pvd232",
+        "workspace": "jep_full_data_prompt_20261107",
+        "revision": "603c0b61fd4cb057e679b7fb06618999b5b801c77d22a555843a9406be4f922a",
+        "path": "baseline_results/full_data_prompt_20261107/deployment-canary/worker2-c04a5812c47942568552acbc7420b6f3.json"
+      }
+    }
+  }
+}

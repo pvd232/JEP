@@ -1,0 +1,33 @@
+{
+  "role": "01_design",
+  "reviewed_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+  "verdict": "approve",
+  "files_inspected": [
+    "csts_pilot/baseline_models.py",
+    "csts_pilot/baseline_stages.py",
+    "csts_pilot/convergence.py",
+    "csts_pilot/full_data_prompt_protocol.py",
+    "csts_pilot/full_data_prompt_integrity.py",
+    "csts_pilot/full_data_prompt_lease.py",
+    "csts_pilot/full_data_prompt_worker.py",
+    "csts_pilot/full_data_prompt_uploads.py",
+    "csts_pilot/full_data_prompt_native.py",
+    "scripts/full_data_prompt_20261107/deploy_spot.py",
+    "scripts/full_data_prompt_20261107/collect_epochs.py",
+    "tests/test_spot_lifecycle.py",
+    "tests/test_full_data_prompt_lease.py",
+    "tests/test_full_data_prompt_integrity.py",
+    "plans/full_data_prompt_20261107/spot-lifecycle.md",
+    "configs/csts-full-data-prompt-20261107.json",
+    "Supplied scientific/controller diff"
+  ],
+  "findings": [],
+  "runtime_checks_still_needed": [
+    "Verify actual preserved artifacts, source commits, state digest, native references and runtime fingerprints against the approved resume manifest.",
+    "Confirm restored optimizer moments, scheduler counters, permutation RNG, CUDA RNG and incumbent artifacts on the installed runtime.",
+    "Observe full-cohort optimizer activity and matched initialization across all three arms within each seed.",
+    "Verify installed VIPER publication APIs, real cloud roundtrip hashes, asynchronous backpressure and complete terminal inventory.",
+    "Verify actual Spot placement, independent shutdown deadline and immutable resource identities before exercising cleanup."
+  ],
+  "rationale": "No blocking static design finding remains in the supplied packet. The protocol fixes three prompts and five paired seeds; every fresh fit uses the full training cohort from its first update, with the same objective, optimizer settings and strict validation stopping rule. Budget-censored fits cannot enter final evaluation. Preserved completed epochs remain part of their original trials rather than becoming new controls. The supplied diff leaves model, trainer and input code unchanged. Compatibility checks protect those scientific modules, while resume metadata retains the original training source separately from execution source and binds the prior state and lease. JSON normalization repairs persisted configuration comparison without relaxing scientific parameter checks. B–A tests prompt ordering; C–A and C–B compare complete prompt formulations because C changes wording and target roles together, so they do not establish a pure role effect. No tools or tests were executed. A protocol hash and provider/run ID were not supplied and are not invented; PLAN.md was not supplied, so the included lifecycle plan was reviewed instead."
+}

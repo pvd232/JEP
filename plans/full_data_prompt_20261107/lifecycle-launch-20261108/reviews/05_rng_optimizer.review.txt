@@ -1,0 +1,33 @@
+{
+  "role": "05_rng_optimizer",
+  "reviewed_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+  "verdict": "approve",
+  "files_inspected": [
+    "csts_pilot/baseline_models.py",
+    "csts_pilot/baseline_stages.py",
+    "csts_pilot/convergence.py",
+    "csts_pilot/full_data_prompt_protocol.py",
+    "csts_pilot/full_data_prompt_integrity.py",
+    "csts_pilot/full_data_prompt_native.py",
+    "csts_pilot/full_data_prompt_worker.py",
+    "csts_pilot/full_data_prompt_lease.py",
+    "csts_pilot/full_data_prompt_uploads.py",
+    "scripts/full_data_prompt_20261107/deploy_spot.py",
+    "scripts/full_data_prompt_20261107/collect_epochs.py",
+    "tests/test_spot_lifecycle.py",
+    "tests/test_full_data_prompt_lease.py",
+    "tests/test_full_data_prompt_integrity.py",
+    "plans/full_data_prompt_20261107/spot-lifecycle.md",
+    "configs/csts-full-data-prompt-20261107.json",
+    "Supplied scientific/controller diff"
+  ],
+  "findings": [],
+  "runtime_checks_still_needed": [
+    "Compare uninterrupted and epoch-segmented LoRA execution in the pinned GPU environment: next permutation, CPU/CUDA RNG, dropout behavior, optimizer moments, scheduler counter, parameter updates and selected incumbent.",
+    "Confirm installed VIPER RNG capture/restoration covers CUDA and registered NumPy generators and supports the equality verification used by restore_training.",
+    "Exercise restoration of actual preserved native artifacts, including optimizer tensor placement and runtime specification validation.",
+    "Verify interrupted attempts require reconciliation and completed epochs resume without duplicate optimizer updates.",
+    "Observe actual asynchronous VIPER publication, cloud checksum verification and recovery before permitting disk cleanup."
+  ],
+  "rationale": "No concrete blocking static defect was identified within this specialization. baseline_stages.py:252-328 restores terminal trainable weights, AdamW state and step counts, the permutation generator, main-process RNG and historical best outputs. Lines 371-391 reconstruct historical patience and restore the constant scheduler counter for full-data continuation. The supplied diff leaves model, trainer and input code unchanged; worker compatibility checks reject changes outside the declared controller boundary, while resume metadata retains original training provenance separately from execution provenance. JSON normalization in the selection verifier preserves scientific values across tuple/list serialization. Paired initialization does not establish identical dropout masks across different prompt lengths. This was source-only review: no tools or tests were run, no GPU/cloud checks passed, and no provider/run ID was supplied. A protocol digest was not supplied or independently computed; PLAN.md and the implementations of VIPER RNG/resume helpers were not included."
+}

@@ -1,0 +1,139 @@
+{
+  "utc": "2026-11-08T06:52:22.319554+00:00",
+  "verified_replacements": {
+    "worker1": {
+      "instance_id": "3087252568751843062",
+      "boot_disk_id": "3314044794942129831",
+      "input_references": {
+        "csts_data/jep-csts-v1/test.json": {
+          "sha256": "52a9c0d6b8d9f3fc81e698bae1e2564051cf7ec29e8dc1cb4d68167910bb968d",
+          "bytes": 1136833,
+          "stored_at": {
+            "kind": "gcs",
+            "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+            "prefix": "viper",
+            "owner": "pvd232",
+            "workspace": "jep_full_data_prompt_20261107",
+            "revision": "6b2dc4f0fd6ce87f495f11ea64f310fbe8174787182a8acf10ec57517d9126ac",
+            "path": "csts_data/jep-csts-v1/test.json"
+          }
+        },
+        "csts_data/jep-csts-v1/train.json": {
+          "sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+          "bytes": 2810091,
+          "stored_at": {
+            "kind": "gcs",
+            "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+            "prefix": "viper",
+            "owner": "pvd232",
+            "workspace": "jep_full_data_prompt_20261107",
+            "revision": "6b2dc4f0fd6ce87f495f11ea64f310fbe8174787182a8acf10ec57517d9126ac",
+            "path": "csts_data/jep-csts-v1/train.json"
+          }
+        },
+        "csts_data/jep-csts-v1/validation.json": {
+          "sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+          "bytes": 734101,
+          "stored_at": {
+            "kind": "gcs",
+            "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+            "prefix": "viper",
+            "owner": "pvd232",
+            "workspace": "jep_full_data_prompt_20261107",
+            "revision": "6b2dc4f0fd6ce87f495f11ea64f310fbe8174787182a8acf10ec57517d9126ac",
+            "path": "csts_data/jep-csts-v1/validation.json"
+          }
+        }
+      },
+      "viper_canary": {
+        "baseline_results/full_data_prompt_20261107/deployment-canary/worker1-58179d4388b7461b9e436f557d9e6a47.json": {
+          "sha256": "24d8c4e8c05e06dce0d419c1290e9f5510ba5f82104958c74fee29d7ae2f87c8",
+          "bytes": 560,
+          "stored_at": {
+            "kind": "gcs",
+            "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+            "prefix": "viper",
+            "owner": "pvd232",
+            "workspace": "jep_full_data_prompt_20261107",
+            "revision": "b3244c7d43be5d7abd3d72fa0074403501e6101990670ef97a2c96d214ade42e",
+            "path": "baseline_results/full_data_prompt_20261107/deployment-canary/worker1-58179d4388b7461b9e436f557d9e6a47.json"
+          }
+        }
+      }
+    },
+    "worker2": {
+      "instance_id": "4722509685362370145",
+      "boot_disk_id": "255424787610707553",
+      "input_references": {
+        "csts_data/jep-csts-v1/test.json": {
+          "sha256": "52a9c0d6b8d9f3fc81e698bae1e2564051cf7ec29e8dc1cb4d68167910bb968d",
+          "bytes": 1136833,
+          "stored_at": {
+            "kind": "gcs",
+            "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+            "prefix": "viper",
+            "owner": "pvd232",
+            "workspace": "jep_full_data_prompt_20261107",
+            "revision": "6b2dc4f0fd6ce87f495f11ea64f310fbe8174787182a8acf10ec57517d9126ac",
+            "path": "csts_data/jep-csts-v1/test.json"
+          }
+        },
+        "csts_data/jep-csts-v1/train.json": {
+          "sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+          "bytes": 2810091,
+          "stored_at": {
+            "kind": "gcs",
+            "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+            "prefix": "viper",
+            "owner": "pvd232",
+            "workspace": "jep_full_data_prompt_20261107",
+            "revision": "6b2dc4f0fd6ce87f495f11ea64f310fbe8174787182a8acf10ec57517d9126ac",
+            "path": "csts_data/jep-csts-v1/train.json"
+          }
+        },
+        "csts_data/jep-csts-v1/validation.json": {
+          "sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+          "bytes": 734101,
+          "stored_at": {
+            "kind": "gcs",
+            "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+            "prefix": "viper",
+            "owner": "pvd232",
+            "workspace": "jep_full_data_prompt_20261107",
+            "revision": "6b2dc4f0fd6ce87f495f11ea64f310fbe8174787182a8acf10ec57517d9126ac",
+            "path": "csts_data/jep-csts-v1/validation.json"
+          }
+        }
+      },
+      "viper_canary": {
+        "baseline_results/full_data_prompt_20261107/deployment-canary/worker2-c04a5812c47942568552acbc7420b6f3.json": {
+          "sha256": "69b1583881ce67f5644bbccdef777f4e6119ab3f06cc00e73d56766cb77ae27f",
+          "bytes": 556,
+          "stored_at": {
+            "kind": "gcs",
+            "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+            "prefix": "viper",
+            "owner": "pvd232",
+            "workspace": "jep_full_data_prompt_20261107",
+            "revision": "603c0b61fd4cb057e679b7fb06618999b5b801c77d22a555843a9406be4f922a",
+            "path": "baseline_results/full_data_prompt_20261107/deployment-canary/worker2-c04a5812c47942568552acbc7420b6f3.json"
+          }
+        }
+      }
+    }
+  },
+  "old_vm_id": "7922926118120851111",
+  "old_disk_id": "2969144253760013991",
+  "snapshot_id": "4601854222837594413",
+  "old_worker_cleanup": {
+    "instance": "jep-full-prompt-spot-2-20261107",
+    "instance_deleted": true,
+    "disk_deleted": true,
+    "recovery_disk_preserved": false
+  },
+  "temporary_snapshot_deleted": true,
+  "unused_workspace_grants_removed": [
+    "jep-viper-create",
+    "jep-viper-read"
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "user_execution_approved": true,
+  "source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+  "training_source_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+  "protocol_sha256": "0aee2f8aece3e89ff12223fe40a54fb632305339f240475362212c432fd68a11",
+  "authorization": "User explicitly instructed restart Seoul and deploy Taiwan using at most two East Asia Spot GPUs.",
+  "recorded_utc": "2026-11-08T06:41:19.096818+00:00",
+  "controller_account": "pvd2112@columbia.edu",
+  "cloud": {
+    "owner": "pvd232",
+    "workspace": "jep_full_data_prompt_20261107",
+    "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+    "prefix": "viper"
+  },
+  "assignments": {
+    "worker1": {
+      "instance_name": "jep-full-prompt-spot-1-20261107",
+      "instance_id": "3087252568751843062",
+      "project": "mantra-477901",
+      "zone": "asia-northeast3-a",
+      "service_account": "jep-gpu-jobs@mantra-477901.iam.gserviceaccount.com",
+      "gpu_uuid": "GPU-b2e57239-579e-e259-9761-832579cdf079",
+      "shutdown_mode": "poweroff",
+      "execution_id": "58179d4388b7461b9e436f557d9e6a47",
+      "deadline_epoch": 1794202777.148045,
+      "input_references": {
+        "csts_data/jep-csts-v1/test.json": {
+          "sha256": "52a9c0d6b8d9f3fc81e698bae1e2564051cf7ec29e8dc1cb4d68167910bb968d",
+          "bytes": 1136833,
+          "stored_at": {
+            "kind": "gcs",
+            "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+            "prefix": "viper",
+            "owner": "pvd232",
+            "workspace": "jep_full_data_prompt_20261107",
+            "revision": "6b2dc4f0fd6ce87f495f11ea64f310fbe8174787182a8acf10ec57517d9126ac",
+            "path": "csts_data/jep-csts-v1/test.json"
+          }
+        },
+        "csts_data/jep-csts-v1/train.json": {
+          "sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+          "bytes": 2810091,
+          "stored_at": {
+            "kind": "gcs",
+            "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+            "prefix": "viper",
+            "owner": "pvd232",
+            "workspace": "jep_full_data_prompt_20261107",
+            "revision": "6b2dc4f0fd6ce87f495f11ea64f310fbe8174787182a8acf10ec57517d9126ac",
+            "path": "csts_data/jep-csts-v1/train.json"
+          }
+        },
+        "csts_data/jep-csts-v1/validation.json": {
+          "sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+          "bytes": 734101,
+          "stored_at": {
+            "kind": "gcs",
+            "bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+            "prefix": "viper",
+            "owner": "pvd232",
+            "workspace": "jep_full_data_prompt_20261107",
+            "revision": "6b2dc4f0fd6ce87f495f11ea64f310fbe8174787182a8acf10ec57517d9126ac",
+            "path": "csts_data/jep-csts-v1/validation.json"
+          }
+        }
+      },
+      "boot_disk": {
+        "name": "jep-full-prompt-spot-1-20261107",
+        "id": "3314044794942129831"
+      }
+    }
+  },
+  "resumes": {
+    "worker1": {
+      "state_sha256": "2541bdc4105a197822ef5679fd504dbd72b4a66a2e907588c94b58d3fea5f44b",
+      "previous_source_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+      "previous_execution_id": "9a0a09eacfaa4145ad32f82f21bd88f2",
+      "preserved_generations": {
+        "A_condition_first_seed7_epoch01": {
+          "manifest_sha256": "8273428801870b90c228c736f7a9367d4b4f39f65224f9e1d7b8539d4ad40ef1",
+          "archive_sha256": "a085e0811c5da977093265733c16c127d75d04b2028e47a8effb5f0cb1f1ef61",
+          "instance_id": "1031896102393218727",
+          "execution_id": "9a0a09eacfaa4145ad32f82f21bd88f2",
+          "source_commit": "9b163a100362580f99722eecc63895420ecec3b1"
+        },
+        "A_condition_first_seed7_epoch02": {
+          "manifest_sha256": "b3934820eee663d506555b9411093e5b581da42b45074166d614a0ff84401a14",
+          "archive_sha256": "23bf79cfe20041de5cf3557873af9a30c169e79b2bb345fe797a24dfe612af3d",
+          "instance_id": "1031896102393218727",
+          "execution_id": "9a0a09eacfaa4145ad32f82f21bd88f2",
+          "source_commit": "9b163a100362580f99722eecc63895420ecec3b1"
+        },
+        "A_condition_first_seed7_epoch03": {
+          "manifest_sha256": "41606aa0163e63f97c893cc43c065226dd486a92b6a50f7d4f59048b31f571a8",
+          "archive_sha256": "6b13cbeeba21a17ad499db20865c2ca6eba79ff75369042a8848fe514301caed",
+          "instance_id": "1031896102393218727",
+          "execution_id": "9a0a09eacfaa4145ad32f82f21bd88f2",
+          "source_commit": "9b163a100362580f99722eecc63895420ecec3b1"
+        },
+        "A_condition_first_seed7_epoch04": {
+          "manifest_sha256": "6b6724f42e849d50461c02c9cbee848150d171e055e5d0401c37b813ce1c9bd5",
+          "archive_sha256": "6c475735383c4e7b329d570fb4d5411a984438fde0d930e25ce508dcf711be34",
+          "instance_id": "1031896102393218727",
+          "execution_id": "9a0a09eacfaa4145ad32f82f21bd88f2",
+          "source_commit": "9b163a100362580f99722eecc63895420ecec3b1"
+        },
+        "A_condition_first_seed7_epoch05": {
+          "manifest_sha256": "fc895ebc023760540e192d170d1b68b20b43400bc73219fe2d520838a18fb97b",
+          "archive_sha256": "45b494ac2637a0296b774624c06260a9a5130538a84f32881cc80cf2edbbe79e",
+          "instance_id": "1031896102393218727",
+          "execution_id": "9a0a09eacfaa4145ad32f82f21bd88f2",
+          "source_commit": "9b163a100362580f99722eecc63895420ecec3b1"
+        }
+      }
+    }
+  }
+}

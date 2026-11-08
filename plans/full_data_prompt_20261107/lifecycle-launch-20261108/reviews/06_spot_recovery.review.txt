@@ -1,0 +1,35 @@
+{
+  "role": "06_spot_recovery",
+  "reviewed_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+  "verdict": "approve",
+  "files_inspected": [
+    "csts_pilot/baseline_models.py",
+    "csts_pilot/baseline_stages.py",
+    "csts_pilot/convergence.py",
+    "csts_pilot/full_data_prompt_protocol.py",
+    "csts_pilot/full_data_prompt_integrity.py",
+    "csts_pilot/full_data_prompt_lease.py",
+    "csts_pilot/full_data_prompt_worker.py",
+    "csts_pilot/full_data_prompt_uploads.py",
+    "csts_pilot/full_data_prompt_native.py",
+    "scripts/full_data_prompt_20261107/deploy_spot.py",
+    "scripts/full_data_prompt_20261107/collect_epochs.py",
+    "tests/test_spot_lifecycle.py",
+    "tests/test_full_data_prompt_lease.py",
+    "tests/test_full_data_prompt_integrity.py",
+    "plans/full_data_prompt_20261107/spot-lifecycle.md",
+    "configs/csts-full-data-prompt-20261107.json",
+    "Supplied scientific/controller diff"
+  ],
+  "findings": [],
+  "runtime_checks_still_needed": [
+    "Exercise interruption before the first completed epoch and reconcile pending-native.json explicitly before retrying.",
+    "Restore published generations on a replacement host, retaining the expected repository path, and verify native artifact references resolve with matching terminal model, optimizer, scheduler, RNG and incumbent predictions.",
+    "Exercise kills between native success, state commit, pending-marker removal, archive replacement, ready-manifest publication and ACK publication.",
+    "Verify the installed VIPER API publishes immutable references and actually streams cloud bytes through checksum verification; exercise transient failures and asynchronous backpressure.",
+    "Observe actual East Asia Spot allocation, provider operation reconciliation, immutable instance/disk identities, workload identity and independent poweroff deadlines.",
+    "Exercise final publication and controller-side cloud verification before exact-ID disk deletion; confirm interrupted or failed collection preserves recovery disks.",
+    "Run the supplied regression tests. No tests, GPU checks or cloud checks were executed during this review."
+  ],
+  "rationale": "No concrete blocking static defect was identified in the supplied recovery paths. Ready manifests follow sealed archive replacement; ACKs bind generation, source, archive digest and execution identity. Unresolved native attempts block duplicate launches, and uncertain allocation operations retain admission intent. Cleanup independently verifies cloud archive bytes before permitting recovery-disk deletion. Resume authorization binds the prior state digest and lease while requiring a fresh execution identity. The supplied diff preserves the scientific trainer and input configuration; compatibility checks reject changes outside the controller allowlist within the scientific scope, staged data hashes remain enforced, and selections distinguish original training source from execution source. Approval is static only. No tools or external reviews were accessed. A provider/run ID was not supplied, the protocol hash was not computed, and PLAN.md was not included; the supplied lifecycle plan was inspected."
+}

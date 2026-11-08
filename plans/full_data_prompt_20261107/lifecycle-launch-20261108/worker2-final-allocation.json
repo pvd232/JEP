@@ -1,0 +1,86 @@
+{
+  "project": "mantra-477901",
+  "name": "jep-full-prompt-worker2-20261108",
+  "snapshot": "jep-full-data-template-20261108",
+  "regions": [
+    "asia-east1"
+  ],
+  "candidates": [
+    [
+      "asia-east1-b",
+      "g2-standard-4"
+    ],
+    [
+      "asia-east1-a",
+      "g2-standard-4"
+    ],
+    [
+      "asia-east1-c",
+      "g2-standard-4"
+    ]
+  ],
+  "capacity_advice": [
+    {
+      "recommendations": [
+        {
+          "scores": {
+            "estimatedUptime": "3600s",
+            "obtainability": 0.9
+          },
+          "shards": [
+            {
+              "instanceCount": 1,
+              "machineType": "g2-standard-4",
+              "provisioningModel": "SPOT",
+              "zone": "https://www.googleapis.com/compute/beta/projects/mantra-477901/zones/asia-east1-b"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "attempts": [
+    {
+      "zone": "asia-east1-b",
+      "machine": "g2-standard-4",
+      "status": "allocated",
+      "boot_disk_absent_before_create": true,
+      "operation": "operation-1794119819671-65fbe1289365a-156d4ded-e0ef0457",
+      "terminal_operation": {
+        "endTime": "2026-11-07T22:46:45.256-08:00",
+        "id": "7727465399182009983",
+        "insertTime": "2026-11-07T22:37:04.909-08:00",
+        "kind": "compute#operation",
+        "name": "operation-1794119819671-65fbe1289365a-156d4ded-e0ef0457",
+        "operationType": "insert",
+        "progress": 100,
+        "selfLink": "https://www.googleapis.com/compute/v1/projects/mantra-477901/zones/asia-east1-b/operations/operation-1794119819671-65fbe1289365a-156d4ded-e0ef0457",
+        "startTime": "2026-11-07T22:37:04.942-08:00",
+        "status": "DONE",
+        "targetId": "4722509685362370145",
+        "targetLink": "https://www.googleapis.com/compute/v1/projects/mantra-477901/zones/asia-east1-b/instances/jep-full-prompt-worker2-20261108",
+        "user": "pvd2112@columbia.edu",
+        "warnings": [
+          {
+            "message": "You are creating a global DNS VM. VM instances using global DNS are vulnerable to cross-regional outages. To reduce the risk of widespread service disruption, use zonal DNS instead. Learn more at https://cloud.google.com/compute/docs/networking/zonal-dns?utm_id=vm-insert"
+          }
+        ],
+        "zone": "https://www.googleapis.com/compute/v1/projects/mantra-477901/zones/asia-east1-b"
+      }
+    }
+  ],
+  "bootstrap_minutes": 10,
+  "approved_run_hours": 23,
+  "started_utc": "2026-11-08T06:36:52.975143+00:00",
+  "allocation": {
+    "project": "mantra-477901",
+    "zone": "asia-east1-b",
+    "instance_name": "jep-full-prompt-worker2-20261108",
+    "instance_id": "4722509685362370145",
+    "service_account": "jep-gpu-jobs@mantra-477901.iam.gserviceaccount.com",
+    "boot_disk": {
+      "name": "jep-full-prompt-worker2-20261108",
+      "id": "255424787610707553"
+    }
+  }
+}

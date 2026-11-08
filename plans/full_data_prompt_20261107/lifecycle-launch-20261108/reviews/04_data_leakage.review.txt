@@ -1,0 +1,33 @@
+{
+  "role": "04_data_leakage",
+  "reviewed_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+  "verdict": "approve",
+  "files_inspected": [
+    "csts_pilot/baseline_models.py",
+    "csts_pilot/baseline_stages.py",
+    "csts_pilot/convergence.py",
+    "csts_pilot/full_data_prompt_protocol.py",
+    "csts_pilot/full_data_prompt_integrity.py",
+    "csts_pilot/full_data_prompt_lease.py",
+    "csts_pilot/full_data_prompt_worker.py",
+    "csts_pilot/full_data_prompt_uploads.py",
+    "csts_pilot/full_data_prompt_native.py",
+    "scripts/full_data_prompt_20261107/deploy_spot.py",
+    "scripts/full_data_prompt_20261107/collect_epochs.py",
+    "tests/test_spot_lifecycle.py",
+    "tests/test_full_data_prompt_lease.py",
+    "tests/test_full_data_prompt_integrity.py",
+    "plans/full_data_prompt_20261107/spot-lifecycle.md",
+    "configs/csts-full-data-prompt-20261107.json",
+    "Supplied scientific/controller diff from prior training source"
+  ],
+  "findings": [],
+  "runtime_checks_still_needed": [
+    "Verify actual staged files match the pinned training, validation and test SHA-256 values and declared cohort sizes; inspect source identities for train/test and validation/test overlap without exposing test labels to model selection.",
+    "Confirm native execution uses all 6051 training comparisons from the first epoch, including the final partial batch, with 190 optimizer updates per completed epoch.",
+    "Verify preserved native artifacts, runtime fingerprints, exact-state resume authorization and source compatibility against the actual immutable commits.",
+    "Confirm all 15 independently sealed validation selections exist before test prediction execution.",
+    "Observe actual GPU continuation, asynchronous VIPER publication, cloud byte verification and cleanup behavior. No execution or cloud checks were performed."
+  ],
+  "rationale": "No concrete blocking static data-leakage defect was found in the supplied packet. The fit graph binds only training and validation inputs (full_data_prompt_native.py:76-84). Staged verification checks their exact hashes, counts, unique row IDs, disjoint groups and rating normalization before backbone loading (full_data_prompt_integrity.py:11-35; baseline_stages.py:594-600). Training permutes every row and retains the final partial batch without truncation (baseline_stages.py:412-436); token overflow fails explicitly. Before selection, the worker hashes test bytes without deserializing examples (full_data_prompt_protocol.py:114-134). Test capture requires the complete 15-selection matrix and rechecks its bindings. The supplied diff preserves model, trainer, prompt and input code; JSON normalization in configuration verification preserves parameter values. Resume metadata retains the original scientific source separately from execution source and binds prior state and lease. The compatibility allowlist includes integrity code, so approval relies on inspecting its supplied diff, which introduces no changed cohort or label semantics. Actual dataset contents, PLAN.md, provider/run ID and a computed protocol hash were not supplied; none were accessed or invented. Tests were inspected statically, not executed. The protocol correctly identifies the previously examined test set as exploratory."
+}

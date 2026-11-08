@@ -1,0 +1,54 @@
+{
+  "status": "two_workers_observed_running",
+  "source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+  "mode": "independent_seed_workers",
+  "workers": [
+    {
+      "observed_utc": "2026-11-08T06:55:02.839737+00:00",
+      "worker": "worker1",
+      "instance_id": "3087252568751843062",
+      "gpu": "NVIDIA L4, GPU-b2e57239-579e-e259-9761-832579cdf079, 100 %, 18528 MiB",
+      "services": {
+        "train": "active",
+        "upload": "active"
+      },
+      "state_status": "running",
+      "source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+      "training_source_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+      "execution_id": "58179d4388b7461b9e436f557d9e6a47",
+      "test_opened": false,
+      "trials": {
+        "A_condition_first_seed7": {
+          "completed_epochs": 5,
+          "selected_epoch": 4,
+          "actual_updates": 950
+        }
+      }
+    },
+    {
+      "observed_utc": "2026-11-08T06:55:11.563415+00:00",
+      "worker": "worker2",
+      "instance_id": "4722509685362370145",
+      "gpu": "NVIDIA L4, GPU-3e179d63-e2a8-9999-a742-b42c6f48bb32, 92 %, 20236 MiB",
+      "services": {
+        "train": "active",
+        "upload": "active"
+      },
+      "state_status": "running",
+      "source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+      "training_source_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+      "execution_id": "c04a5812c47942568552acbc7420b6f3",
+      "test_opened": false,
+      "trials": {}
+    }
+  ],
+  "focused_lifecycle_checks": {
+    "passed": 23,
+    "source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4"
+  },
+  "cleanup_controllers": {
+    "worker1": "ae17b5bc325941999e96901b7af894fb",
+    "worker2": "f834824fca38469182794dbd2b0dce51"
+  },
+  "skill_installation": "pending release validation"
+}
