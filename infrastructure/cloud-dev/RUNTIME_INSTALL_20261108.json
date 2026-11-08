@@ -1,0 +1,78 @@
+{
+  "status": "runtime_installed_mantra_access_and_collector_cutover_not_completed",
+  "installed_utc": "2026-11-08T21:48:55.412925+00:00",
+  "host": "dev.c.pvd-dev-232.internal",
+  "runtime_source_commit": "ac9a4c6de08ab7fbd7d9ba48b760da4b08c5bfd9",
+  "changed_installed_files": {
+    "project.py": {
+      "before_sha256": "94ce889e983707bf617a37bfb99173a6a3d3a88ad9eb7a8c71a8ce75015d30e1",
+      "after_sha256": "d1b93f5ed7701c573a6b02abe2e13a1dc0a3d04731813195e2e36b8341cbcdbf"
+    },
+    "probe_identity.py": {
+      "before_sha256": "06a91b72f5d0e95f57dced4831acd3207270919243277c4696f5aeac2206d262",
+      "after_sha256": "6fb0c8576463c4738c76c9cf73822b81a9b3bff66ef8a7495bbb9368a13d29ad"
+    }
+  },
+  "source_backup": "/home/pvd2112_columbia_edu/columbia-projects/jep/data/columbia-mantra-identity-spec-20261108/runtime-source-backup-20261108T214854Z",
+  "host_probe": {
+    "observed_principal": "dev-vm@pvd-dev-232.iam.gserviceaccount.com",
+    "http_status": 200,
+    "scope": "host_only",
+    "workload_access_verified": false,
+    "token_values_retained": false
+  },
+  "runner_smoke": {
+    "command": "cloud-project --project jep run -- harmless Python environment inspection",
+    "passed": true,
+    "observed_project": "jep",
+    "observed_principal": "dev-vm@pvd-dev-232.iam.gserviceaccount.com",
+    "existing_resource_default": "pvd-dev-232"
+  },
+  "unchanged": {
+    "project_profile": true,
+    "cloud_job_py": true,
+    "connector_process_pid": true,
+    "gpu_resources": true,
+    "trainer_and_publisher_processes": true,
+    "existing_collectors": true,
+    "checkpoint_and_approval_files": true,
+    "shutdown_deadlines": true
+  },
+  "control_actions": {
+    "gpu_operations": 0,
+    "service_restarts": 0,
+    "iam_mutations": 0,
+    "human_credentials_copied": false,
+    "aether_used": false,
+    "subagents_started": 0
+  },
+  "admin_route_observations": {
+    "columbia_human_login": "absent; only attached service-account credentials are available",
+    "browser": "Originating browser context unavailable to the connected tool",
+    "columbia_mac_relay": "Connection refused",
+    "direct_mac_connector": "Connection failed",
+    "mantra_instance_permission_test": "Denied: compute.instances.list required",
+    "human_account_admin_permissions": "not verified from an authenticated human session",
+    "cloud_resource_manager_disabled_consumer": "263437697547 was verified as Columbia project pvd-dev-232, not evidence of human-account Mantra privileges"
+  },
+  "setup_hardening": {
+    "source_commit": "746c41475cb99131fa1c1a52bb2e0118da318b71",
+    "script_sha256": "268f2e99ea3d76bc8b434166ad3beb3ca21e35d7916b6b4e515b21ee8498710d",
+    "published_bytes_match_tested": true,
+    "offline_tests_passed": 81,
+    "permission_preflight_before_writes": true,
+    "live_admin_setup_executed": false
+  },
+  "training_observation": {
+    "source": "GitHub monitor/full-data-prompt-20261107 saved collector snapshots, not a live GPU inspection by this task",
+    "snapshot_generated_utc": "2026-11-08T21:51:43.972064+00:00",
+    "worker1_observed_utc": "2026-11-08T21:45:34.398386+00:00",
+    "worker2_observed_utc": "2026-11-08T21:45:33.703780+00:00",
+    "fits_reported_finished": 15,
+    "total_fits": 15,
+    "test_opened": false,
+    "controller_status": "failed_preserved; human credential reauthentication failure",
+    "live_artifact_verification_or_cleanup_established": false
+  },
+  "remaining": "Owner-session scoped Mantra grants, actual SSH/storage checks and safe collector cutover. No completed or preserved fit is to be retrained merely to repair authentication."
+}
