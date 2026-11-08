@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "profile": "jep-gpu-format",
+  "connection_name": "GPU worker jep-csts-format-20261021",
+  "project_instructions": "Use the existing project runtime and checkpoints. Preserve active GPU jobs. Keep this worker stopped when it was stopped before identity provisioning.",
+  "target": {
+    "gcp_project": "mantra-477901",
+    "zone": "asia-northeast3-a",
+    "vm_name": "jep-csts-format-20261021",
+    "gcp_account": "pvd2112@columbia.edu",
+    "linux_user": "machina",
+    "ssh_via_iap": true
+  },
+  "paths": {
+    "workspace_root": "/home/machina/worktrees",
+    "project_root": "/home/machina/cloud-projects",
+    "install_root": "/opt/cloud-dev/jep-gpu-format",
+    "state_root": "/var/lib/cloud-dev/jep-gpu-format",
+    "config_root": "/etc/cloud-dev/jep-gpu-format"
+  },
+  "transport": {
+    "preferred": "secure_tunnel",
+    "fallback": "https_oauth",
+    "selected": null,
+    "tunnel_id": null,
+    "platform_organization_id": null,
+    "chatgpt_workspace_id": null,
+    "https_hostname": null,
+    "oauth_issuer": null
+  },
+  "job_identity": {
+    "mode": "attached_service_account",
+    "service_account_id": "jep-gpu-jobs",
+    "service_account_email": "jep-gpu-jobs@mantra-477901.iam.gserviceaccount.com",
+    "oauth_scopes": [
+      "https://www.googleapis.com/auth/cloud-platform"
+    ],
+    "iam_bindings": [
+      {
+        "scope": "project",
+        "resource": "mantra-477901",
+        "role": "roles/compute.viewer"
+      }
+    ]
+  },
+  "project": {
+    "repository_urls": [
+      "https://github.com/pvd232/JEP.git"
+    ],
+    "bootstrap_commands": [],
+    "verify_commands": [],
+    "secret_references": [],
+    "backup_uri": null,
+    "backup_retention_days": 14,
+    "runtime_service_account": "jep-gpu-jobs@mantra-477901.iam.gserviceaccount.com"
+  },
+  "role": "gpu-worker"
+}
