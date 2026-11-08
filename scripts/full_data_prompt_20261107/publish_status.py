@@ -9,6 +9,8 @@ import inspect
 import json
 import math
 from pathlib import Path
+
+from scripts.full_data_prompt_20261107.collect_epochs import controller_environment
 import shlex
 import statistics
 import subprocess
@@ -21,8 +23,8 @@ EASTERN = ZoneInfo("America/New_York")
 
 
 def command(args, cwd=None, timeout=120):
-    """Capture a bounded command while retaining existing authentication."""
-    return subprocess.run(args, cwd=cwd, text=True, capture_output=True, timeout=timeout, check=True)
+    """Capture a bounded command using the isolated controller environment."""
+    return subprocess.run(args, cwd=cwd, text=True, capture_output=True, timeout=timeout, check=True, env=controller_environment())
 
 
 def project_state(state):
