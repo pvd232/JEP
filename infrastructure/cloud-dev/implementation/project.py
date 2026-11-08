@@ -2,6 +2,8 @@
 """Create project environments and run jobs through the shared VM toolchain."""
 import argparse
 import copy
+import configparser
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -19,6 +21,101 @@ def write(path, content, mode=0o600):
     if not path.exists() or path.read_text() != content:
         path.write_text(content)
     path.chmod(mode)
+
+
+CREDENTIAL_OVERRIDES = (
+    'GOOGLE_APPLICATION_CREDENTIALS', 'GOOGLE_OAUTH_ACCESS_TOKEN',
+    'CLOUDSDK_AUTH_ACCESS_TOKEN', 'CLOUDSDK_AUTH_ACCESS_TOKEN_FILE',
+    'CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE', 'CLOUDSDK_AUTH_IMPERSONATE_SERVICE_ACCOUNT',
+    'CLOUDSDK_AUTH_DISABLE_CREDENTIALS', 'CLOUDSDK_ACTIVE_CONFIG_NAME',
+    'GCE_METADATA_HOST', 'GCE_METADATA_IP', 'GCE_METADATA_ROOT',
+)
+
+
+def workload_definition(profile):
+    """Validate the optional cross-project destination; never redefine the host."""
+    value = profile.get('project_definition', {}).get('workload')
+    if value is None:
+        return None
+    if not isinstance(value, dict) or set(value) != {
+            'resource_project', 'instance_manifest', 'artifact_prefix'}:
+        raise ValueError('workload requires only resource_project, instance_manifest and artifact_prefix')
+    project_id, manifest, prefix = (value[k] for k in
+                                  ('resource_project', 'instance_manifest', 'artifact_prefix'))
+    if not isinstance(project_id, str) or not re.fullmatch(r'[a-z][a-z0-9-]{4,28}[a-z0-9]', project_id):
+        raise ValueError('Invalid workload resource_project')
+    if (not isinstance(manifest, str) or not Path(manifest).is_absolute()
+            or '..' in Path(manifest).parts or any(c in manifest for c in '\r\n\x00')):
+        raise ValueError('instance_manifest must be an absolute non-traversing path')
+    if (not isinstance(prefix, str) or not re.fullmatch(r'gs://[a-z0-9][a-z0-9._-]+/[A-Za-z0-9_./-]+/', prefix)
+            or any(x in ('..', '.') for x in prefix.removeprefix('gs://').split('/'))):
+        raise ValueError('artifact_prefix must be a concrete gs:// object prefix ending in /')
+    identity = profile.get('job_identity', {})
+    account = identity.get('service_account_email', '')
+    if (identity.get('mode') != 'attached_service_account' or not isinstance(account, str)
+            or not re.fullmatch(r'[a-z0-9-]+@[a-z0-9-]+\.iam\.gserviceaccount\.com', account)):
+        raise ValueError('Cross-project jobs require the declared attached service account')
+    return dict(value)
+
+
+def workload_context(profile):
+    """Read one approved assignment once and return its nonsecret, hash-bound context."""
+    workload = workload_definition(profile)
+    if workload is None:
+        raise ValueError('This project has no configured workload destination')
+    path = Path(workload['instance_manifest'])
+    if path.is_symlink() or not path.is_file():
+        raise ValueError('Assignment manifest must be a regular nonsymlink file')
+    if path.stat().st_size > 4 * 1024 * 1024:
+        raise ValueError('Assignment manifest exceeds 4 MiB')
+    raw = path.read_bytes()
+    manifest = json.loads(raw)
+    if not isinstance(manifest, dict):
+        raise ValueError('Assignment manifest must be a JSON object')
+    account = profile['job_identity']['service_account_email']
+    if (manifest.get('user_execution_approved') is not True
+            or manifest.get('controller_account') != account
+            or not isinstance(manifest.get('source_commit'), str)
+            or not re.fullmatch(r'[a-f0-9]{40}', manifest['source_commit'])):
+        raise PermissionError('Assignment source, approval or controller account does not match workload identity')
+    assignments = manifest.get('assignments')
+    if not isinstance(assignments, dict) or not 1 <= len(assignments) <= 2:
+        raise ValueError('JEP requires one or two explicit worker assignments')
+    seen = set()
+    for worker, item in assignments.items():
+        if not isinstance(worker, str) or not re.fullmatch(r'[a-z][a-z0-9_-]{0,63}', worker) or not isinstance(item, dict):
+            raise ValueError('Invalid worker assignment')
+        if (item.get('project') != workload['resource_project']
+                or not isinstance(item.get('instance_id'), str) or not item['instance_id'].isdigit()
+                or not isinstance(item.get('instance_name'), str)
+                or not re.fullmatch(r'[a-z][a-z0-9-]{0,61}[a-z0-9]', item['instance_name'])
+                or not isinstance(item.get('zone'), str)
+                or not re.fullmatch(r'[a-z]+-[a-z0-9]+[0-9]-[a-z]', item['zone'])):
+            raise ValueError('Assignment project, name, zone or immutable instance ID is invalid')
+        key = item['project'], item['instance_id']
+        if key in seen:
+            raise ValueError('Worker assignments cannot share an immutable instance')
+        seen.add(key)
+    return {'account': account, **workload, 'manifest_sha256': hashlib.sha256(raw).hexdigest(),
+            'approval': manifest}
+
+
+def check_keyless_configuration(directory):
+    """Reject saved credential overrides without reading credential databases or tokens."""
+    directory = Path(directory)
+    if directory.is_symlink():
+        raise RuntimeError('Keyless configuration directory cannot be a symlink')
+    if (directory / 'application_default_credentials.json').exists():
+        raise RuntimeError('Keyless jobs require a cloud configuration directory without a local ADC credential file')
+    for path in (directory / 'configurations').glob('config_*'):
+        if path.is_symlink():
+            raise RuntimeError('Keyless SDK configuration cannot be a symlink')
+        config = configparser.ConfigParser(interpolation=None)
+        config.read(path)
+        prohibited = ('credential_file_override', 'access_token_file', 'impersonate_service_account',
+                      'disable_credentials', 'access_token')
+        if any(config.has_option('auth', name) for name in prohibited):
+            raise RuntimeError('Keyless SDK configuration contains an authentication override')
 
 
 def project_profile(host, definition):
@@ -46,6 +143,7 @@ def project_profile(host, definition):
     profile['project_id'] = name
     profile['paths'].update(workspace_root=str(workspace), state_root=str(state), config_root=str(config))
     profile['project_definition'] = copy.deepcopy(definition)
+    workload = workload_definition(profile)
     profile.setdefault('resolved', {})['project_environment'] = {
         'VIRTUAL_ENV': str(runtime / 'venv'),
         'CLOUDSDK_CONFIG': str(config / 'gcloud'),
@@ -61,9 +159,11 @@ def project_profile(host, definition):
     if identity.get('mode') == 'attached_service_account':
         profile['resolved']['project_environment'].update({
             'CLOUDSDK_CORE_ACCOUNT': identity['service_account_email'],
-            'CLOUDSDK_CORE_PROJECT': host['target']['gcp_project'],
+            'CLOUDSDK_CORE_PROJECT': workload['resource_project'] if workload else host['target']['gcp_project'],
             'CLOUDSDK_COMPUTE_ZONE': host['target']['zone'],
         })
+    if workload:
+        profile['resolved']['project_environment'].pop('CLOUDSDK_COMPUTE_ZONE', None)
     profile['resolved']['project_runtime'] = str(runtime)
     return profile
 
@@ -71,19 +171,28 @@ def project_profile(host, definition):
 def project_environment(profile):
     environment = os.environ.copy()
     # Do not inherit common account-level credentials into a project process.
-    for key in ['GOOGLE_APPLICATION_CREDENTIALS', 'GOOGLE_OAUTH_ACCESS_TOKEN', 'CLOUDSDK_AUTH_ACCESS_TOKEN', 'CLOUDSDK_AUTH_ACCESS_TOKEN_FILE', 'CLOUDSDK_AUTH_CREDENTIAL_FILE_OVERRIDE', 'CLOUDSDK_AUTH_IMPERSONATE_SERVICE_ACCOUNT']:
-        environment.pop(key, None)
+    for key in list(environment):
+        if key in CREDENTIAL_OVERRIDES or key.startswith(('CLOUDSDK_AUTH_', 'CLOUDSDK_API_ENDPOINT_OVERRIDES_')):
+            environment.pop(key, None)
     settings = profile['resolved'].get('project_environment', {})
+    if any(key in CREDENTIAL_OVERRIDES or key.startswith(('CLOUDSDK_AUTH_', 'CLOUDSDK_API_ENDPOINT_OVERRIDES_')) for key in settings):
+        raise RuntimeError('Job configuration cannot declare an authentication or API endpoint override')
     environment.update(settings)
+    workload = workload_definition(profile)
     identity = profile.get('job_identity', {})
     if identity.get('mode') == 'attached_service_account':
+        if settings.get('CLOUDSDK_CORE_ACCOUNT', identity['service_account_email']) != identity['service_account_email']:
+            raise RuntimeError('Saved job account differs from the attached identity')
         environment['CLOUDSDK_CONFIG'] = settings.get('CLOUDSDK_CONFIG', str(Path(profile['paths']['config_root']) / 'gcloud-jobs'))
         environment['CLOUDSDK_CORE_ACCOUNT'] = identity['service_account_email']
-        environment['CLOUDSDK_CORE_PROJECT'] = profile['target']['gcp_project']
-        environment['CLOUDSDK_COMPUTE_ZONE'] = profile['target']['zone']
-        adc = Path(environment['CLOUDSDK_CONFIG']) / 'application_default_credentials.json'
-        if adc.exists():
-            raise RuntimeError('Keyless jobs require a cloud configuration directory without a local ADC credential file: ' + str(adc))
+        environment['CLOUDSDK_CORE_PROJECT'] = workload['resource_project'] if workload else profile['target']['gcp_project']
+        environment['CLOUDSDK_CORE_DISABLE_PROMPTS'] = 'true'
+        if workload:
+            environment.pop('CLOUDSDK_COMPUTE_ZONE', None)
+            environment.pop('CLOUDSDK_COMPUTE_REGION', None)
+        else:
+            environment['CLOUDSDK_COMPUTE_ZONE'] = profile['target']['zone']
+        check_keyless_configuration(environment['CLOUDSDK_CONFIG'])
     prefixes = [str(Path(settings['VIRTUAL_ENV']) / 'bin')] if settings.get('VIRTUAL_ENV') else []
     environment['PATH'] = ':'.join(prefixes + [
         profile['resolved']['node_bin_dir'], profile['resolved']['bin_dir'],

@@ -7,6 +7,8 @@ import shlex
 import subprocess
 import sys
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'implementation'))
+from project import workload_context
 from preflight import load_profile, ssh_arguments
 from deploy import cloud, run, snapshots
 
@@ -29,6 +31,39 @@ def plan(profile):
             argv += ['--service-account=' + account, '--scopes=cloud-platform']
         commands.append(argv)
     return {'service_account': account, 'oauth_scopes': identity['oauth_scopes'], 'iam_bindings': identity['iam_bindings'], 'private_key_files': False, 'restart_policy': 'running idle VM only when attachment/scopes differ; snapshot and check durable/GPU jobs first; preserve an already stopped VM', 'commands': [shlex.join(argv) for argv in commands]}
+
+
+def workload_plan(profile):
+    """Describe exact-resource grants for an administrator; never issue a mutation.
+
+    This intentionally has no apply counterpart. Effective IAM, current guest SSH
+    mode and CLI auxiliary permissions must be inspected before granting access.
+    """
+    context = workload_context(profile)
+    member = 'serviceAccount:' + context['account']
+    targets = []
+    for worker, item in context['approval']['assignments'].items():
+        resource = ('projects/' + item['project'] + '/zones/' + item['zone']
+                    + '/instances/' + item['instance_name'])
+        targets.append({'worker': worker, 'resource': resource, 'instance_id': item['instance_id'],
+                        'permissions': ['compute.instances.get', 'compute.instances.start', 'compute.instances.stop'],
+                        'iap_role': 'roles/iap.tunnelResourceAccessor', 'iap_destination_port': 22})
+    bucket, prefix = context['artifact_prefix'].removeprefix('gs://').split('/', 1)
+    return {'mode': 'ADMINISTRATOR_PLAN_ONLY', 'member': member,
+            'resource_project': context['resource_project'], 'manifest_sha256': context['manifest_sha256'],
+            'instances': targets,
+            'storage': {'bucket': bucket, 'object_prefix': prefix,
+                        'permissions': ['storage.objects.create', 'storage.objects.get'],
+                        'object_condition': "resource.name.startsWith('projects/_/buckets/" + bucket + "/objects/" + prefix + "')",
+                        'object_listing_granted': False},
+            'verify_before_granting': ['effective IAM/organization policy', 'IAP and guest SSH mode',
+                'required compute.projects.get / compute.zoneOperations.get CLI lookups',
+                'whether exact-name SSH invocation needs instance listing or public-key registration',
+                'storage metadata prerequisites', 'negative non-task permission checks'],
+            'excluded': ['VM deletion', 'disk deletion', 'IAM administration by runtime',
+                         'private key creation/export', 'service-account attachment changes',
+                         'GPU restart', 'credential copying', 'collector migration'],
+            'mutations_performed': False}
 
 
 def matches(instance, identity):
@@ -126,14 +161,16 @@ def apply(profile, allow_restart, receipt_path):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--profile', required=True, type=Path)
-    parser.add_argument('operation', choices=['plan', 'apply'])
+    parser.add_argument('operation', choices=['plan', 'apply', 'workload-plan'])
     parser.add_argument('--allow-restart', action='store_true')
     parser.add_argument('--receipt', type=Path, default=Path('receipts/columbia-identity.json'))
     args = parser.parse_args()
     profile = load_profile(args.profile)
     if not profile.get('job_identity'):
         parser.error('The host profile requires job_identity')
-    if args.operation == 'plan':
+    if args.operation == 'workload-plan':
+        print(json.dumps(workload_plan(profile), indent=2))
+    elif args.operation == 'plan':
         print(json.dumps(plan(profile), indent=2))
     else:
         apply(profile, args.allow_restart, args.receipt)
