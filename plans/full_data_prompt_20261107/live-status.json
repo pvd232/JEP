@@ -1,6 +1,6 @@
 {
-  "generated_epoch": 1794136542.5968504,
-  "generated_utc": "2026-11-08T11:15:42.596850+00:00",
+  "generated_epoch": 1794136851.2487438,
+  "generated_utc": "2026-11-08T11:20:51.248744+00:00",
   "cadence_seconds": 300,
   "training_mode": "independent_seed_workers",
   "target_fits": 15,
@@ -68,26 +68,34 @@
             ],
             "selected_epoch": 5,
             "finished": true
+          },
+          "A_condition_first_seed9": {
+            "epochs": 1,
+            "seconds": [
+              962.0461886609992
+            ],
+            "selected_epoch": null,
+            "finished": false
           }
         }
       },
       "fresh": true,
       "source": "guest_observation",
-      "observed_utc": "2026-11-08T11:15:42.063673+00:00",
+      "observed_utc": "2026-11-08T11:20:50.710860+00:00",
       "instance_id": "3087252568751843062",
       "epoch_start": {
-        "utc": "2026-11-08T11:04:38.445074+00:00",
+        "utc": "2026-11-08T11:20:47.457138+00:00",
         "trial": "A_condition_first_seed9",
-        "epoch": 1
+        "epoch": 2
       },
-      "gpu": "GPU-b2e57239-579e-e259-9761-832579cdf079, 100 %",
+      "gpu": "GPU-b2e57239-579e-e259-9761-832579cdf079, 0 %",
       "services": {
         "train": "active",
         "upload": "active"
       },
       "verified_epoch_checkpoints": 21,
       "native_viper_checkpoints": 16,
-      "pending_generations": 0,
+      "pending_generations": 1,
       "last_verified_utc": "2026-11-08T11:05:40.185756+00:00"
     },
     {
