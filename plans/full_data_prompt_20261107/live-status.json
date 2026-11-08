@@ -1,6 +1,6 @@
 {
-  "generated_epoch": 1794125722.6320455,
-  "generated_utc": "2026-11-08T08:15:22.632046+00:00",
+  "generated_epoch": 1794126031.434844,
+  "generated_utc": "2026-11-08T08:20:31.434844+00:00",
   "cadence_seconds": 300,
   "training_mode": "independent_seed_workers",
   "target_fits": 15,
@@ -43,27 +43,35 @@
             ],
             "selected_epoch": 4,
             "finished": true
+          },
+          "C_case_inspired_seed7": {
+            "epochs": 1,
+            "seconds": [
+              984.0802540760005
+            ],
+            "selected_epoch": null,
+            "finished": false
           }
         }
       },
       "fresh": true,
       "source": "guest_observation",
-      "observed_utc": "2026-11-08T08:15:22.020984+00:00",
+      "observed_utc": "2026-11-08T08:20:30.860498+00:00",
       "instance_id": "3087252568751843062",
       "epoch_start": {
-        "utc": "2026-11-08T08:02:33.575738+00:00",
+        "utc": "2026-11-08T08:19:04.301671+00:00",
         "trial": "C_case_inspired_seed7",
-        "epoch": 1
+        "epoch": 2
       },
       "gpu": "GPU-b2e57239-579e-e259-9761-832579cdf079, 100 %",
       "services": {
         "train": "active",
         "upload": "active"
       },
-      "verified_epoch_checkpoints": 10,
-      "native_viper_checkpoints": 5,
+      "verified_epoch_checkpoints": 11,
+      "native_viper_checkpoints": 6,
       "pending_generations": 0,
-      "last_verified_utc": "2026-11-08T08:03:37.748960+00:00"
+      "last_verified_utc": "2026-11-08T08:20:07.128581+00:00"
     },
     {
       "worker": "worker2",
@@ -102,7 +110,7 @@
       },
       "fresh": true,
       "source": "guest_observation",
-      "observed_utc": "2026-11-08T08:15:21.958359+00:00",
+      "observed_utc": "2026-11-08T08:20:30.224905+00:00",
       "instance_id": "4722509685362370145",
       "epoch_start": {
         "utc": "2026-11-08T08:11:32.286532+00:00",
@@ -121,16 +129,16 @@
     }
   ],
   "forecast": {
-    "epoch_minutes": 16.296127612666663,
+    "epoch_minutes": 16.348732590300003,
     "finished_fit_samples": 3,
     "assumed_epochs_per_fit": [
       3,
       5,
       5
     ],
-    "earliest_epoch": 1794146255.7528374,
-    "central_epoch": 1794159944.5000322,
-    "latest_epoch": 1794159944.5000322,
+    "earliest_epoch": 1794145649.9139524,
+    "central_epoch": 1794159382.8493283,
+    "latest_epoch": 1794159382.8493283,
     "basis": "Conditional on remaining fits following observed stopping lengths; unfinished epochs counted conservatively. Spot interruptions and continued validation improvement can extend the estimate."
   },
   "monitor_status": "active"
