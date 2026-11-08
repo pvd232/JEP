@@ -157,7 +157,7 @@ def monitor(worker: str, args: argparse.Namespace) -> dict:
             if obj['state']:
                 observed_start=True;last=obj['state']
                 (local/f'{worker}-latest-state.json').write_text(json.dumps(last,indent=2)+'\n')
-                if last.get('lease',{}).get('execution_id')!=assignment['execution_id'] or not last.get('lease',{}).get('deadline_verified'):
+                if last.get('lease',{}).get('execution_id')!=assignment['execution_id'] or not last.get('lease',{}).get('deadline_verified') or last.get('lease',{}).get('shutdown_mode')!='poweroff':
                     raise ValueError('Worker has no verified execution lease/shutdown deadline.')
                 independently_verified_deadline=last['lease']['deadline_utc']
                 if last['source_commit']!=args.source:

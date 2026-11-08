@@ -8,9 +8,9 @@ class LeaseTests(unittest.TestCase):
         self.now=1000000.
         self.assignment={'instance_name':'jep-full-prompt-spot-1-20261107','zone':'asia-northeast3-a','instance_id':'123','gpu_uuid':'GPU-test','execution_id':'a'*32,'deadline_epoch':self.now+3600}
         self.actual={'project':'mantra-477901','name':self.assignment['instance_name'],'zone':self.assignment['zone'],'id':'123'}
-    def check(self,a=None,m=None,gpu='GPU-test',timer='default'):
+    def check(self,a=None,m=None,gpu='GPU-test',timer='default',mode='poweroff'):
         if timer=='default':timer=int((self.now+3600)*1e6)
-        return validate_assignment('worker1',a or self.assignment,m or self.actual,gpu,timer,self.now)
+        return validate_assignment('worker1',a or self.assignment,m or self.actual,gpu,timer,mode,self.now)
     def test_valid_lease(self):self.assertTrue(self.check()['deadline_verified'])
     def test_different_host_cannot_reuse_worker(self):
         m=dict(self.actual,id='999')
@@ -36,6 +36,14 @@ class LeaseTests(unittest.TestCase):
     def test_missing_execution_identity_blocks(self):
         a=dict(self.assignment,execution_id='')
         with self.assertRaises(PermissionError):self.check(a=a)
+    def test_reboot_is_not_a_gpu_shutdown(self):
+        with self.assertRaises(PermissionError):self.check(mode='reboot')
+    def test_halt_is_not_an_accepted_shutdown(self):
+        with self.assertRaises(PermissionError):self.check(mode='halt')
+    def test_missing_shutdown_action_blocks(self):
+        with self.assertRaises(PermissionError):self.check(mode=None)
+    def test_unknown_shutdown_action_blocks(self):
+        with self.assertRaises(PermissionError):self.check(mode='unknown')
     def test_hostwide_lock_excludes_second_worker_name(self):
         with tempfile.TemporaryDirectory() as d:
             p=Path(d)/'gpu-exclusive.lock'

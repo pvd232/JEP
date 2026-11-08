@@ -13,7 +13,7 @@ ASSIGNMENTS={
 
 
 def validate_assignment(worker: str, assignment: dict[str, Any], actual: dict[str, str],
-                        gpu_uuid: str, scheduled_usec: int | None, now: float) -> dict[str, Any]:
+                        gpu_uuid: str, scheduled_usec: int | None, scheduled_mode: str | None, now: float) -> dict[str, Any]:
     """Reject wrong hosts, unbound GPUs and missing/expired independent shutdown timers.
 
     An immutable GCP instance ID plus a host-wide flock is the exclusive lease:
@@ -36,12 +36,14 @@ def validate_assignment(worker: str, assignment: dict[str, Any], actual: dict[st
     deadline=assignment.get('deadline_epoch')
     if not isinstance(deadline,(int,float)) or not now+60<deadline<=now+86400:
         raise PermissionError('Task allocation deadline is absent, expired or exceeds 24 hours.')
+    if scheduled_mode != 'poweroff':
+        raise PermissionError('Independent shutdown must power off the VM, not reboot or halt.')
     if scheduled_usec is None or abs(scheduled_usec/1e6-deadline)>60:
         raise PermissionError('Independent guest shutdown deadline is not installed as assigned.')
     return {'worker':worker,'execution_id':execution,'instance_id':actual['id'],
             'gpu_uuid':gpu_uuid,'deadline_epoch':deadline,
             'deadline_utc':dt.datetime.fromtimestamp(deadline,dt.timezone.utc).isoformat(),
-            'deadline_verified':True}
+            'deadline_verified':True,'shutdown_mode':'poweroff'}
 
 
 def inspect_local_assignment(worker: str, assignment: dict[str, Any]) -> dict[str, Any]:
@@ -58,4 +60,4 @@ def inspect_local_assignment(worker: str, assignment: dict[str, Any]) -> dict[st
     result=subprocess.run(['sudo','-n','cat','/run/systemd/shutdown/scheduled'],capture_output=True,text=True,timeout=5)
     fields=dict(line.split('=',1) for line in result.stdout.splitlines() if '=' in line)
     scheduled=int(fields['USEC']) if result.returncode==0 and fields.get('USEC','').isdigit() else None
-    return validate_assignment(worker,assignment,actual,gpu[0],scheduled,time.time())
+    return validate_assignment(worker,assignment,actual,gpu[0],scheduled,fields.get('MODE'),time.time())
