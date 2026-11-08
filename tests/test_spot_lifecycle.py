@@ -168,22 +168,23 @@ class CleanupTests(unittest.TestCase):
             with self.assertRaises(PermissionError):
                 self.collector.describe(self.assignment, "admin@example.test")
 
-    def test_unverified_failure_keeps_recovery_disk(self):
-        with patch.object(self.collector, "describe", return_value={"id":"123"}), patch.object(
+    def test_terminal_stop_keeps_instance_and_recovery_disk(self):
+        observations = [{"id":"123", "status":"RUNNING"}, {"id":"123", "status":"TERMINATED"}]
+        with patch.object(self.collector, "describe", side_effect=observations), patch.object(
                 self.collector, "run", return_value=subprocess.CompletedProcess([],0,"","")) as run:
-            receipt = self.collector.cleanup(self.assignment, "admin@example.test", False, True)
+            receipt = self.collector.cleanup(self.assignment, "runtime@example.test", True, False)
         self.assertTrue(receipt["recovery_disk_preserved"])
+        self.assertFalse(receipt["instance_deleted"])
         self.assertEqual(run.call_count, 1)
-        self.assertIn("--keep-disks=all", run.call_args.args[0])
+        self.assertIn("stop", run.call_args.args[0])
+        self.assertNotIn("delete", run.call_args.args[0])
 
-    def test_changed_recovery_disk_cannot_be_deleted(self):
-        responses = [subprocess.CompletedProcess([],0,"",""), subprocess.CompletedProcess([],0,
-            json.dumps({"id":"999","labels":{"task":"jep-full-data-20261107"}}),"")]
-        with patch.object(self.collector, "describe", return_value={"id":"123"}), patch.object(
-                self.collector, "run", side_effect=responses) as run:
+    def test_disk_deletion_rejected_before_any_cloud_call(self):
+        with patch.object(self.collector, "run") as run, patch.object(self.collector, "describe") as describe:
             with self.assertRaises(PermissionError):
-                self.collector.cleanup(self.assignment, "admin@example.test", True, True)
-        self.assertEqual(run.call_count, 2)
+                self.collector.cleanup(self.assignment, "runtime@example.test", True, True)
+        run.assert_not_called()
+        describe.assert_not_called()
 
 
 class ReviewRegressionTests(unittest.TestCase):
@@ -338,7 +339,7 @@ class CompletionAndStorageRegressionTests(unittest.TestCase):
                  patch.object(collector,'cleanup',return_value={'recovery_disk_preserved':True}) as cleanup:
                 with self.assertRaisesRegex(ValueError,'mismatched generation'):
                     collector.monitor('worker1',args)
-            self.assertFalse(cleanup.call_args.args[2])
+            cleanup.assert_not_called()
 
 
 if __name__ == "__main__":
