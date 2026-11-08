@@ -1,6 +1,6 @@
 {
-  "generated_epoch": 1794149511.7154384,
-  "generated_utc": "2026-11-08T14:51:51.715438+00:00",
+  "generated_epoch": 1794149821.5963755,
+  "generated_utc": "2026-11-08T14:57:01.596375+00:00",
   "cadence_seconds": 300,
   "training_mode": "independent_seed_workers",
   "target_fits": 15,
@@ -108,22 +108,22 @@
       },
       "fresh": true,
       "source": "guest_observation",
-      "observed_utc": "2026-11-08T14:51:50.576457+00:00",
+      "observed_utc": "2026-11-08T14:57:00.512310+00:00",
       "instance_id": "3087252568751843062",
       "epoch_start": {
         "utc": "2026-11-08T14:51:23.075549+00:00",
         "trial": "C_case_inspired_seed11",
         "epoch": 1
       },
-      "gpu": "GPU-b2e57239-579e-e259-9761-832579cdf079, 0 %",
+      "gpu": "GPU-b2e57239-579e-e259-9761-832579cdf079, 100 %",
       "services": {
         "train": "active",
         "upload": "active"
       },
-      "verified_epoch_checkpoints": 34,
-      "native_viper_checkpoints": 29,
-      "pending_generations": 1,
-      "last_verified_utc": "2026-11-08T14:36:21.385577+00:00"
+      "verified_epoch_checkpoints": 35,
+      "native_viper_checkpoints": 30,
+      "pending_generations": 0,
+      "last_verified_utc": "2026-11-08T14:52:24.403555+00:00"
     },
     {
       "worker": "worker2",
@@ -175,9 +175,10 @@
             "finished": true
           },
           "A_condition_first_seed10": {
-            "epochs": 1,
+            "epochs": 2,
             "seconds": [
-              982.887349558001
+              982.887349558001,
+              991.556195827
             ],
             "selected_epoch": null,
             "finished": false
@@ -186,35 +187,35 @@
       },
       "fresh": true,
       "source": "guest_observation",
-      "observed_utc": "2026-11-08T14:51:51.195739+00:00",
+      "observed_utc": "2026-11-08T14:57:00.778323+00:00",
       "instance_id": "6739260318488017241",
       "epoch_start": {
         "utc": "2026-11-08T10:58:40.573695+00:00",
         "trial": "A_condition_first_seed10",
         "epoch": 2
       },
-      "gpu": "GPU-9882621e-b66d-5494-d4db-3707cfb4631f, 0 %",
+      "gpu": "GPU-9882621e-b66d-5494-d4db-3707cfb4631f, 100 %",
       "services": {
         "train": "inactive",
         "upload": "inactive"
       },
-      "verified_epoch_checkpoints": 15,
-      "native_viper_checkpoints": 15,
+      "verified_epoch_checkpoints": 16,
+      "native_viper_checkpoints": 16,
       "pending_generations": 0,
-      "last_verified_utc": "2026-11-08T10:59:42.357023+00:00"
+      "last_verified_utc": "2026-11-08T14:53:25.011697+00:00"
     }
   ],
   "forecast": {
-    "epoch_minutes": 16.354854768699987,
+    "epoch_minutes": 16.372754282466666,
     "finished_fit_samples": 10,
     "assumed_epochs_per_fit": [
       3,
       5.0,
       6
     ],
-    "earliest_epoch": 1794157362.0457273,
-    "central_epoch": 1794163249.7934442,
-    "latest_epoch": 1794166193.6673024,
+    "earliest_epoch": 1794156698.1531742,
+    "central_epoch": 1794162592.3447158,
+    "latest_epoch": 1794165539.4404867,
     "basis": "Conditional on remaining fits following observed stopping lengths; unfinished epochs counted conservatively. Spot interruptions and continued validation improvement can extend the estimate."
   },
   "monitor_status": "active"
