@@ -1,8 +1,8 @@
 # Live validation and test results
 
-Updated: 2026-11-08T23:34:21.073186+00:00. This durable reporter checks every 30 seconds and pushes each newly observed score to this branch.
+Updated: 2026-11-08T23:36:59.347006+00:00. This durable reporter checks every 30 seconds and pushes each newly observed score to this branch.
 
-**Training: 15/15 finished. Test scores: 12/15. VIPER cloud bytes independently verified: 0/15.**
+**Training: 15/15 finished. Test scores: 13/15. VIPER cloud bytes independently verified: 0/15.**
 
 Scores are Spearman correlation. Checkpoints were selected using validation only; no retraining occurs here. The test partition was previously examined and these comparisons are exploratory.
 
@@ -18,7 +18,7 @@ Scores are Spearman correlation. Checkpoints were selected using validation only
 | B_order_only | 9 | 4 | 0.872478 | 0.858619 | sealed; cloud verification pending |
 | B_order_only | 10 | 4 | 0.876187 | 0.859654 | sealed; cloud verification pending |
 | B_order_only | 11 | 3 | 0.875597 | 0.853037 | sealed; cloud verification pending |
-| C_case_inspired | 7 | 4 | 0.875696 | pending | pending |
+| C_case_inspired | 7 | 4 | 0.875696 | 0.851034 | sealed; cloud verification pending |
 | C_case_inspired | 8 | 4 | 0.875750 | pending | pending |
 | C_case_inspired | 9 | 5 | 0.875979 | pending | pending |
 | C_case_inspired | 10 | 2 | 0.872364 | 0.849748 | sealed; cloud verification pending |
@@ -28,11 +28,11 @@ Scores are Spearman correlation. Checkpoints were selected using validation only
 | --- | ---: | ---: | ---: |
 | A_condition_first | 0.874465 ± 0.001630 | 0.852208 ± 0.002541 | 5/5 |
 | B_order_only | 0.873737 ± 0.002648 | 0.855385 ± 0.004213 | 5/5 |
-| C_case_inspired | 0.875097 ± 0.001532 | pending full arm | 2/5 |
+| C_case_inspired | 0.875097 ± 0.001532 | pending full arm | 3/5 |
 
 | Worker | Observed phase | Test captures | Current trial |
 | --- | --- | ---: | --- |
-| 1 | test_inference | 6/8 | C_case_inspired_seed7 |
+| 1 | test_inference | 7/8 | C_case_inspired_seed9 |
 | 2 | test_inference | 6/7 | C_case_inspired_seed8 |
 
 Inference and native VIPER uploads run concurrently. 'Sealed' means the CPU independently checked prediction bytes, row identities, labels and frozen model/test hashes. 'Cloud verified' additionally requires verified publication and download receipts. Compute cleanup follows verified export.
