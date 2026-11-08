@@ -1,6 +1,6 @@
 # Live validation and test results
 
-Updated: 2026-11-08T23:40:03.857485+00:00. This durable reporter checks every 30 seconds and pushes each newly observed score to this branch.
+Updated: 2026-11-08T23:41:35.359654+00:00. This durable reporter checks every 30 seconds and pushes each newly observed score to this branch.
 
 **Training: 15/15 finished. Test scores: 15/15. VIPER cloud bytes independently verified: 15/15.**
 
@@ -39,4 +39,4 @@ Inference and native VIPER uploads run concurrently. 'Sealed' means the CPU inde
 
 [Score CSV](test-progress.csv) · [Structured status](test-progress.json) · [Final analysis](https://github.com/pvd232/JEP/blob/experiment/qwen-full-data-prompt-20261107/training_outputs/full_data_prompt_20261108/test-results.md)
 
-Cleanup receipts received for worker(s): 2.
+Cleanup receipts received for worker(s): 1, 2.
