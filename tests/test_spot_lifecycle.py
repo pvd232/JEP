@@ -215,5 +215,48 @@ class ReviewRegressionTests(unittest.TestCase):
             self.assertEqual(state['final_generation'],'training-final-'+'c'*32)
 
 
+class TerminalUploadRegressionTests(unittest.TestCase):
+    """Keep a resumed publisher alive until inherited and current generations finish."""
+    def test_same_lease_resume_requires_new_attempt_identity(self):
+        case=ResumeTests();case.setUp()
+        with self.assertRaisesRegex(ValueError,'fresh execution lease'):
+            rebind_resume_state(case.state,case.approval,'worker1','a'*40,'b'*64,
+                                {'execution_id':'c'*32},'d'*64)
+
+    def test_final_ack_does_not_bypass_a_transient_pending_upload(self):
+        import csts_pilot.full_data_prompt_uploads as uploads
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder);output=root/'baseline_results/full_data_prompt_20261107/worker1'
+            current={'project':'mantra-477901','service_account':'job@example.test',
+                     'instance_id':'999','execution_id':'c'*32}
+            inherited={};failures=[]
+            for generation,instance,execution in [('training-final-'+'c'*32,'999','c'*32),
+                                                   ('worker-failed-old','123','b'*32)]:
+                q=output/'transfer'/generation;q.mkdir(parents=True)
+                (q/'native.tar').write_bytes(generation.encode())
+                m={'worker':'worker1','generation':generation,'instance_id':instance,
+                   'execution_id':execution,'source_commit':'a'*40,'archive':str(q/'native.tar'),
+                   'archive_sha256':digest_file(q/'native.tar'),'archive_size':(q/'native.tar').stat().st_size}
+                (q/'ready.json').write_text(json.dumps(m))
+                if instance=='123':inherited[generation]={'manifest_sha256':digest_file(q/'ready.json'),
+                    **{k:m[k] for k in ['archive_sha256','instance_id','execution_id','source_commit']}}
+            def publish(root,path,cloud,owner,workspace):
+                m=json.loads(path.read_text())
+                if m['generation']=='worker-failed-old' and not failures:
+                    failures.append(True)
+                    self.assertFalse((output/'upload-complete.json').exists())
+                    raise RuntimeError('temporary transport failure')
+                ack={**m,'cloud_roundtrip_verified':True,'transport':'viper_cloud'}
+                (path.parent/'ack.json').write_text(json.dumps(ack))
+                return ack
+            with patch.object(uploads,'require_workload_identity'),patch.object(uploads,'cloud_service'), \
+                 patch.object(uploads,'publish_one',side_effect=publish) as publish_mock, \
+                 patch.object(uploads.time,'sleep'):
+                uploads.run(root,'worker1',current,{'owner':'owner','workspace':'study'},.01,
+                            {'preserved_generations':inherited})
+            self.assertEqual(publish_mock.call_count,3)
+            self.assertTrue((output/'upload-complete.json').exists())
+
+
 if __name__ == "__main__":
     unittest.main()

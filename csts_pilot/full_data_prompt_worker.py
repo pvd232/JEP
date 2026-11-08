@@ -290,10 +290,8 @@ def rebind_resume_state(state: dict[str, Any], approval: dict[str, Any], worker:
         selected = trial.get('selection')
         if selected and selected.get('training_source_commit') != preserved_source:
             raise ValueError('Preserved selections have conflicting scientific provenance.')
-    if state['source_commit'] == source and state.get('lease') == lease:
-        state['status'] = 'running'
-        state.pop('failure', None)
-        return state
+    if state.get('lease', {}).get('execution_id') == lease.get('execution_id'):
+        raise ValueError('Every resume requires a fresh execution lease and exact-state authorization.')
     resume = approval.get('resumes', {}).get(worker, {})
     if (resume.get('state_sha256'), resume.get('previous_source_commit'),
             resume.get('previous_execution_id')) != (

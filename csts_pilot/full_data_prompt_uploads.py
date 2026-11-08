@@ -133,6 +133,11 @@ def run(root: Path, worker: str, assignment: dict[str, Any], cloud_config: dict[
                     })
                     time.sleep(15)
                     break
+            pending = [path for path in (output / "transfer").glob("*/ready.json")
+                       if not (path.parent / "ack.json").exists()]
+            if pending:
+                time.sleep(2)
+                continue
             final = output / "transfer" / ("training-final-" + assignment["execution_id"]) / "ack.json"
             if final.exists():
                 final_ack = json.loads(final.read_text())
