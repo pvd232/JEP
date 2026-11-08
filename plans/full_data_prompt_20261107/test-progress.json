@@ -1,8 +1,8 @@
 {
-  "checked_utc": "2026-11-08T23:33:04.461147+00:00",
+  "checked_utc": "2026-11-08T23:33:42.602853+00:00",
   "source_commit": "9fb983cc71a3745c1684a67f74d60a7c19855917",
   "training_fits": 15,
-  "test_scores": 10,
+  "test_scores": 11,
   "cloud_verified_test_scores": 0,
   "workers": {
     "1": {
@@ -10,7 +10,7 @@
       "completed": 5,
       "assigned": 8,
       "current_trial": "C_case_inspired_seed10",
-      "last_cpu_observation_utc": "2026-11-08T23:33:02.119069+00:00",
+      "last_cpu_observation_utc": "2026-11-08T23:33:30.108741+00:00",
       "validation_replay": {
         "trial": "A_condition_first_seed10",
         "expected": 0.8724975979532501,
@@ -40,10 +40,10 @@
     },
     "2": {
       "phase": "test_inference",
-      "completed": 5,
+      "completed": 6,
       "assigned": 7,
-      "current_trial": "C_case_inspired_seed11",
-      "last_cpu_observation_utc": "2026-11-08T23:32:53.024087+00:00",
+      "current_trial": "C_case_inspired_seed8",
+      "last_cpu_observation_utc": "2026-11-08T23:33:20.768403+00:00",
       "validation_replay": {
         "trial": "A_condition_first_seed11",
         "expected": 0.8750488300591874,
@@ -981,6 +981,97 @@
       "scoring_seconds": 149.38975642800006,
       "native_seconds": 219.68651378999994,
       "predictions_sha256": "d38d30fa5c0219000f0d2b10883f4522e161557604cb53d1feb2fbaf9d426103",
+      "cloud_verified": false
+    },
+    "C_case_inspired_seed11": {
+      "trial_id": "C_case_inspired_seed11",
+      "arm": "C_case_inspired",
+      "seed": 11,
+      "validation": {
+        "n": 1576,
+        "mse_0_1": 0.03178868611597139,
+        "mse_1_5": 0.5086189778555422,
+        "spearman": 0.8756951918964353,
+        "prediction_mean": 0.5889240351897371,
+        "target_mean": 0.6134200507614214,
+        "prediction_std": 0.34216195005220645,
+        "target_std": 0.3852562483034509,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 266,
+            "mean": 0.10975690448439603
+          },
+          "2.0": {
+            "n": 213,
+            "mean": 0.31020855889633786
+          },
+          "3.0": {
+            "n": 302,
+            "mean": 0.48704970356644384
+          },
+          "4.0": {
+            "n": 130,
+            "mean": 0.6729592432196324
+          },
+          "5.0": {
+            "n": 665,
+            "mean": 0.8997004627453206
+          }
+        },
+        "condition_changes": {
+          "n": 551,
+          "correct": 526,
+          "ties": 0,
+          "accuracy_ties_half": 0.9546279491833031,
+          "difference_mse": 0.06928123226335836,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "test": {
+        "n": 2430,
+        "mse_0_1": 0.03700543185316755,
+        "mse_1_5": 0.5920869096506808,
+        "spearman": 0.85960115798183,
+        "prediction_mean": 0.5996923090782738,
+        "target_mean": 0.6217078189300411,
+        "prediction_std": 0.3447055710722492,
+        "target_std": 0.4012287775249589,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 482,
+            "mean": 0.14763532194243242
+          },
+          "2.0": {
+            "n": 269,
+            "mean": 0.3296590557107252
+          },
+          "3.0": {
+            "n": 374,
+            "mean": 0.46218488864690305
+          },
+          "4.0": {
+            "n": 194,
+            "mean": 0.6510824622567167
+          },
+          "5.0": {
+            "n": 1111,
+            "mean": 0.8985118396633869
+          }
+        },
+        "condition_changes": {
+          "n": 877,
+          "correct": 837,
+          "ties": 0,
+          "accuracy_ties_half": 0.9543899657924744,
+          "difference_mse": 0.07910368161746271,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "selected_epoch": 6,
+      "completed_epochs": 7,
+      "scoring_seconds": 137.40002570900015,
+      "native_seconds": 203.5128784389999,
+      "predictions_sha256": "08f6d52534df022d4dd1134e81816aaa5b320fd505bae9ac4269bcc1431abba8",
       "cloud_verified": false
     }
   },
