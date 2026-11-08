@@ -1,3 +1,7 @@
+Completed November 8: all 15 fits finished; 77 archives and all input files were byte-verified. Both Spot VMs and disks are deleted. [Final results](../../../training_outputs/full_data_prompt_20261108/README.md).
+
+The controller now uses its attached service account with persistent Mantra Owner, IAP and VIPER Storage Admin grants. [Access and repair records](../controller-repair-20261108/README.md). The remaining sections retain the launch-time record.
+
 # East Asia Spot deployment — 8 November 2026
 
 [Live training status](https://github.com/pvd232/JEP/blob/monitor/full-data-prompt-20261107/plans/full_data_prompt_20261107/live-status.md) updates every five minutes. The observations below are historical launch evidence.
