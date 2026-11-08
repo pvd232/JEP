@@ -160,7 +160,7 @@ def main() -> None:
             advice = list(pool.map(advise, args.regions))
         plan = candidates(args.regions, zones, advice)[:args.max_attempts]
         journal = {"project": args.project, "name": args.name, "snapshot": args.snapshot,
-                   "regions": args.regions, "candidates": plan, "attempts": [],
+                   "regions": args.regions, "candidates": plan, "capacity_advice": advice, "attempts": [],
                    "bootstrap_minutes": 10, "approved_run_hours": args.max_hours,
                    "started_utc": dt.datetime.now(dt.timezone.utc).isoformat()}
         save(args.journal, journal)
@@ -207,9 +207,15 @@ def main() -> None:
                     waited = command(['gcloud','compute','operations','wait',operation['name'],
                                       f'--zone={zone}',*common,'--format=json'],900)
                     if waited.returncode:
-                        result = waited
+                        attempt.update(status='operation_observation_failed', error=waited.stderr[-2000:])
+                        save(args.journal, journal)
+                        raise RuntimeError('Provider operation completion is unknown; admission intent retained: ' + operation['name'])
                     else:
                         completed = json.loads(waited.stdout)
+                        if completed.get('status') != 'DONE':
+                            attempt.update(status='provider_operation_still_pending')
+                            save(args.journal, journal)
+                            raise RuntimeError('Provider operation is not terminal; admission intent retained: ' + operation['name'])
                         if completed.get('error'):
                             result = subprocess.CompletedProcess([],1,'',json.dumps(completed['error']))
                         else:
