@@ -1,8 +1,8 @@
 # Live validation and test results
 
-Updated: 2026-11-08T23:33:42.602853+00:00. This durable reporter checks every 30 seconds and pushes each newly observed score to this branch.
+Updated: 2026-11-08T23:34:21.073186+00:00. This durable reporter checks every 30 seconds and pushes each newly observed score to this branch.
 
-**Training: 15/15 finished. Test scores: 11/15. VIPER cloud bytes independently verified: 0/15.**
+**Training: 15/15 finished. Test scores: 12/15. VIPER cloud bytes independently verified: 0/15.**
 
 Scores are Spearman correlation. Checkpoints were selected using validation only; no retraining occurs here. The test partition was previously examined and these comparisons are exploratory.
 
@@ -21,18 +21,18 @@ Scores are Spearman correlation. Checkpoints were selected using validation only
 | C_case_inspired | 7 | 4 | 0.875696 | pending | pending |
 | C_case_inspired | 8 | 4 | 0.875750 | pending | pending |
 | C_case_inspired | 9 | 5 | 0.875979 | pending | pending |
-| C_case_inspired | 10 | 2 | 0.872364 | pending | pending |
+| C_case_inspired | 10 | 2 | 0.872364 | 0.849748 | sealed; cloud verification pending |
 | C_case_inspired | 11 | 6 | 0.875695 | 0.859601 | sealed; cloud verification pending |
 
 | Arm | Validation mean ± SD (5 seeds) | Test mean ± SD | Completed test seeds |
 | --- | ---: | ---: | ---: |
 | A_condition_first | 0.874465 ± 0.001630 | 0.852208 ± 0.002541 | 5/5 |
 | B_order_only | 0.873737 ± 0.002648 | 0.855385 ± 0.004213 | 5/5 |
-| C_case_inspired | 0.875097 ± 0.001532 | pending full arm | 1/5 |
+| C_case_inspired | 0.875097 ± 0.001532 | pending full arm | 2/5 |
 
 | Worker | Observed phase | Test captures | Current trial |
 | --- | --- | ---: | --- |
-| 1 | test_inference | 5/8 | C_case_inspired_seed10 |
+| 1 | test_inference | 6/8 | C_case_inspired_seed7 |
 | 2 | test_inference | 6/7 | C_case_inspired_seed8 |
 
 Inference and native VIPER uploads run concurrently. 'Sealed' means the CPU independently checked prediction bytes, row identities, labels and frozen model/test hashes. 'Cloud verified' additionally requires verified publication and download receipts. Compute cleanup follows verified export.
