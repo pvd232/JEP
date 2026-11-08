@@ -101,8 +101,8 @@ def epoch_plan(root: Path, protocol: dict[str, Any], arm: str, seed: int,
     configured = epoch_stage(protocol, arm, seed, parent, parent_trace)
     epoch = 1 if parent_trace is None else len(parent_trace["epochs"]) + 1
     trial = experiment(
-        experiment_id=f"full_prompt_{source.commit[:8]}_{arm}_s{seed}_e{epoch}",
-        variants=(variant(arm, stages=(configured,), estimator=configured.outputs["model"]),),
+        experiment_id=f"full_prompt_{source.commit[:8]}_{arm.lower()}_s{seed}_e{epoch}",
+        variants=(variant(arm.lower(), stages=(configured,), estimator=configured.outputs["model"]),),
         replicates=(replicate(seed=seed),),
     )
     environment = LocalEnvSpec(
