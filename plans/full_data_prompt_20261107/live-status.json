@@ -1,6 +1,6 @@
 {
-  "generated_epoch": 1794149203.2797537,
-  "generated_utc": "2026-11-08T14:46:43.279754+00:00",
+  "generated_epoch": 1794149511.7154384,
+  "generated_utc": "2026-11-08T14:51:51.715438+00:00",
   "cadence_seconds": 300,
   "training_mode": "independent_seed_workers",
   "target_fits": 15,
@@ -94,34 +94,35 @@
             "finished": true
           },
           "B_order_only_seed11": {
-            "epochs": 3,
+            "epochs": 4,
             "seconds": [
               947.6894504769989,
               969.5170007050001,
-              962.532083823
+              962.532083823,
+              955.3008283480012
             ],
-            "selected_epoch": null,
-            "finished": false
+            "selected_epoch": 3,
+            "finished": true
           }
         }
       },
       "fresh": true,
       "source": "guest_observation",
-      "observed_utc": "2026-11-08T14:46:42.733247+00:00",
+      "observed_utc": "2026-11-08T14:51:50.576457+00:00",
       "instance_id": "3087252568751843062",
       "epoch_start": {
-        "utc": "2026-11-08T14:35:20.487488+00:00",
-        "trial": "B_order_only_seed11",
-        "epoch": 4
+        "utc": "2026-11-08T14:51:23.075549+00:00",
+        "trial": "C_case_inspired_seed11",
+        "epoch": 1
       },
-      "gpu": "GPU-b2e57239-579e-e259-9761-832579cdf079, 94 %",
+      "gpu": "GPU-b2e57239-579e-e259-9761-832579cdf079, 0 %",
       "services": {
         "train": "active",
         "upload": "active"
       },
       "verified_epoch_checkpoints": 34,
       "native_viper_checkpoints": 29,
-      "pending_generations": 0,
+      "pending_generations": 1,
       "last_verified_utc": "2026-11-08T14:36:21.385577+00:00"
     },
     {
@@ -185,14 +186,14 @@
       },
       "fresh": true,
       "source": "guest_observation",
-      "observed_utc": "2026-11-08T14:46:42.491334+00:00",
+      "observed_utc": "2026-11-08T14:51:51.195739+00:00",
       "instance_id": "6739260318488017241",
       "epoch_start": {
         "utc": "2026-11-08T10:58:40.573695+00:00",
         "trial": "A_condition_first_seed10",
         "epoch": 2
       },
-      "gpu": "GPU-9882621e-b66d-5494-d4db-3707cfb4631f, 100 %",
+      "gpu": "GPU-9882621e-b66d-5494-d4db-3707cfb4631f, 0 %",
       "services": {
         "train": "inactive",
         "upload": "inactive"
@@ -204,16 +205,16 @@
     }
   ],
   "forecast": {
-    "epoch_minutes": 16.372754282466666,
-    "finished_fit_samples": 9,
+    "epoch_minutes": 16.354854768699987,
+    "finished_fit_samples": 10,
     "assumed_epochs_per_fit": [
       3,
-      5,
+      5.0,
       6
     ],
-    "earliest_epoch": 1794157062.2018092,
-    "central_epoch": 1794162956.3933508,
-    "latest_epoch": 1794165903.489122,
+    "earliest_epoch": 1794157362.0457273,
+    "central_epoch": 1794163249.7934442,
+    "latest_epoch": 1794166193.6673024,
     "basis": "Conditional on remaining fits following observed stopping lengths; unfinished epochs counted conservatively. Spot interruptions and continued validation improvement can extend the estimate."
   },
   "monitor_status": "active"
