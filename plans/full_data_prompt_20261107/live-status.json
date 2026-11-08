@@ -1,0 +1,127 @@
+{
+  "generated_epoch": 1794124093.8312967,
+  "generated_utc": "2026-11-08T07:48:13.831297+00:00",
+  "cadence_seconds": 300,
+  "training_mode": "independent_seed_workers",
+  "target_fits": 15,
+  "workers": [
+    {
+      "worker": "worker1",
+      "zone": "asia-northeast3-a",
+      "state": {
+        "status": "running",
+        "worker": "worker1",
+        "source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+        "seeds": [
+          7,
+          9,
+          11
+        ],
+        "execution_id": "58179d4388b7461b9e436f557d9e6a47",
+        "test_opened": false,
+        "trials": {
+          "A_condition_first_seed7": {
+            "epochs": 5,
+            "seconds": [
+              977.649752495,
+              993.811932353,
+              994.8571078489999,
+              995.6785628400003,
+              998.7385661039998
+            ],
+            "selected_epoch": 4,
+            "finished": true
+          },
+          "B_order_only_seed7": {
+            "epochs": 4,
+            "seconds": [
+              951.2839243189999,
+              972.2528957549998,
+              971.69857379,
+              971.9256093560002
+            ],
+            "selected_epoch": null,
+            "finished": false
+          }
+        }
+      },
+      "fresh": true,
+      "source": "guest_observation",
+      "observed_utc": "2026-11-08T07:48:12.867153+00:00",
+      "instance_id": "3087252568751843062",
+      "epoch_start": {
+        "utc": "2026-11-08T07:46:40.904673+00:00",
+        "trial": "B_order_only_seed7",
+        "epoch": 5
+      },
+      "gpu": "GPU-b2e57239-579e-e259-9761-832579cdf079, 100 %",
+      "services": {
+        "train": "active",
+        "upload": "active"
+      },
+      "verified_epoch_checkpoints": 9,
+      "native_viper_checkpoints": 4,
+      "pending_generations": 0,
+      "last_verified_utc": "2026-11-08T07:47:41.898033+00:00"
+    },
+    {
+      "worker": "worker2",
+      "zone": "asia-east1-b",
+      "state": {
+        "status": "running",
+        "worker": "worker2",
+        "source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+        "seeds": [
+          8,
+          10
+        ],
+        "execution_id": "c04a5812c47942568552acbc7420b6f3",
+        "test_opened": false,
+        "trials": {
+          "B_order_only_seed8": {
+            "epochs": 3,
+            "seconds": [
+              972.8247916439999,
+              985.177679036,
+              977.7676567599997
+            ],
+            "selected_epoch": 2,
+            "finished": true
+          }
+        }
+      },
+      "fresh": true,
+      "source": "guest_observation",
+      "observed_utc": "2026-11-08T07:48:13.259248+00:00",
+      "instance_id": "4722509685362370145",
+      "epoch_start": {
+        "utc": "2026-11-08T07:37:45.854729+00:00",
+        "trial": "C_case_inspired_seed8",
+        "epoch": 1
+      },
+      "gpu": "GPU-3e179d63-e2a8-9999-a742-b42c6f48bb32, 100 %",
+      "services": {
+        "train": "active",
+        "upload": "active"
+      },
+      "verified_epoch_checkpoints": 3,
+      "native_viper_checkpoints": 3,
+      "pending_generations": 0,
+      "last_verified_utc": "2026-11-08T07:38:49.817622+00:00"
+    }
+  ],
+  "forecast": {
+    "epoch_minutes": 16.295145077124996,
+    "finished_fit_samples": 2,
+    "assumed_epochs_per_fit": [
+      3,
+      4.0,
+      5
+    ],
+    "earliest_epoch": 1794145603.4227984,
+    "central_epoch": 1794152447.383731,
+    "latest_epoch": 1794159291.3446634,
+    "basis": "Conditional on remaining fits following observed stopping lengths; unfinished epochs counted conservatively. Spot interruptions and continued validation improvement can extend the estimate."
+  },
+  "monitor_status": "active"
+}
