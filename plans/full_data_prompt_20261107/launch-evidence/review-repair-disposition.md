@@ -23,3 +23,9 @@ Spot transport adaptation: the private task VMs comply with the project's no-ext
 Execution scope: the new worker executes assigned full-data fits. It does not unlock test labels or choose a winning arm. The collector stops each task GPU after verified training collection, or failure; the original historical stopped VM/disk and Columbia CPU connector are excluded. The global fifteen-selection gate remains mandatory for subsequent held-out evaluation.
 
 A final independent static pass must review the patched exact source, worker and exporter before scientific training. Runtime preflight must remain separately evidenced; static approval is not a GPU validation certificate.
+
+Final-pass operational findings and repairs:
+- Each worker now binds to an immutable GCP project/name/zone/instance ID and actual GPU UUID, plus a unique execution ID. A host-wide GPU lock excludes both worker labels from sharing one device. A different instance cannot reuse the assignment.
+- Generation manifests and ACKs include instance and execution IDs. Cloud objects use create-only generation preconditions; existing objects are downloaded and must have identical SHA bytes before any ACK. Conflicting generations are rejected, never overwritten.
+- The GPU worker reads the actual independently installed systemd shutdown timestamp and rejects missing, expired or mismatched deadline evidence before model execution. The collector reports stop failures truthfully with only the deadline it actually observed. Replacement instances are excluded from stop actions by immutable ID.
+- The current 72 dependency-free checks include wrong host/project/GPU/lease, missing/expired deadlines, host-wide lock exclusion and corrupted publication ACK counterexamples. Native CPU/CUDA dropout resume tests remain separate.

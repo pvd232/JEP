@@ -62,15 +62,17 @@ def describe(worker: str) -> dict:
     instance,zone=WORKERS[worker]
     text=require_ok(run(['gcloud','compute','instances','describe',instance,
                          f'--project={PROJECT}',f'--zone={zone}',f'--account={ACCOUNT}',
-                         '--format=json(name,status,labels,scheduling.provisioningModel)'],60))
+                         '--format=json(id,name,status,labels,scheduling.provisioningModel)'],60))
     d=json.loads(text)
     if d['name']!=instance or d.get('labels',{}).get('task')!='jep-full-data-20261107':
         raise ValueError('Instance ownership does not match this task.')
     return d
 
-def stop(worker: str) -> dict:
+def stop(worker: str, expected_instance_id: str) -> dict:
     """Stop only the two named, label-confirmed task clones; disks remain preserved."""
     d=describe(worker)
+    if d.get('id') != expected_instance_id:
+        raise PermissionError('Refusing to stop a replacement instance outside this execution lease.')
     instance,zone=WORKERS[worker]
     if d['status']!='TERMINATED':
         require_ok(run(['gcloud','compute','instances','stop',instance,f'--project={PROJECT}',
@@ -91,9 +93,11 @@ print(json.dumps({{'state':s,'ready':ready}}))
 '''
     return json.loads(require_ok(ssh(worker,'python3 -c '+shlex.quote(program),90)))
 
-def collect(worker: str, manifest: dict, local: Path, expected_source: str) -> dict:
+def collect(worker: str, manifest: dict, local: Path, expected_source: str, assignment: dict) -> dict:
     """Require archive SHA and cloud-download SHA before publishing generation ACK."""
     generation=manifest['generation']
+    if (manifest.get('execution_id'),manifest.get('instance_id')) != (assignment['execution_id'],assignment['instance_id']):
+        raise ValueError('Generation belongs to a different assigned execution lease.')
     if (manifest['worker']!=worker or manifest['source_commit']!=expected_source
             or not generation or any(c not in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-' for c in generation)):
         raise ValueError('Export identity or generation name differs from assigned work.')
@@ -109,17 +113,24 @@ def collect(worker: str, manifest: dict, local: Path, expected_source: str) -> d
         if partial.stat().st_size!=manifest['archive_size'] or sha(partial)!=manifest['archive_sha256']:
             raise ValueError('IAP-delivered native artifact bytes differ from sealed generation.')
         partial.replace(archive)
-    destination=f'{PREFIX}/{expected_source}/{worker}/{generation}'
+    destination=f'{PREFIX}/{expected_source}/{worker}/{assignment["execution_id"]}/{generation}'
     flags=[f'--project={PROJECT}',f'--account={ACCOUNT}','--quiet']
-    require_ok(run(['gcloud','storage','cp',str(archive),destination+'/native.tar',*flags],900))
+    created=run(['gcloud','storage','cp',str(archive),destination+'/native.tar','--if-generation-match=0',*flags],900)
+    # A retry may find an existing immutable object; never overwrite it.
+    # The mandatory download below must verify exactly the expected bytes.
     roundtrip=folder/'roundtrip.native.tar'
     require_ok(run(['gcloud','storage','cp',destination+'/native.tar',str(roundtrip),*flags],900))
     if sha(roundtrip)!=manifest['archive_sha256']:
         raise ValueError('Cloud native artifact failed independent SHA round trip.')
     roundtrip.unlink()
     # Authoritative manifest is published after all its referenced bytes verify.
-    require_ok(run(['gcloud','storage','cp',str(folder/'ready.json'),destination+'/manifest.json',*flags],120))
+    manifest_copy=run(['gcloud','storage','cp',str(folder/'ready.json'),destination+'/manifest.json','--if-generation-match=0',*flags],120)
+    manifest_roundtrip=folder/'manifest.roundtrip.json'
+    require_ok(run(['gcloud','storage','cp',destination+'/manifest.json',str(manifest_roundtrip),*flags],120))
+    if sha(manifest_roundtrip)!=sha(folder/'ready.json'):
+        raise ValueError('Immutable cloud manifest conflicts with this sealed generation.')
     ack={'generation':generation,'source_commit':expected_source,
+         'execution_id':assignment['execution_id'],'instance_id':assignment['instance_id'],
          'archive_sha256':manifest['archive_sha256'],'cloud_roundtrip_verified':True,
          'cloud_prefix':destination,'verified_utc':dt.datetime.now(dt.timezone.utc).isoformat()}
     path=folder/'ack.json';path.write_text(json.dumps(ack,indent=2)+'\n')
@@ -131,9 +142,13 @@ def monitor(worker: str, args: argparse.Namespace) -> dict:
     """Export sequential generations and stop this GPU after completion/failure."""
     deadline=time.monotonic()+args.max_hours*3600
     local=args.local;last=None;observed_start=False
+    assignment=args.assignments[worker]
+    independently_verified_deadline=None
     try:
         while time.monotonic()<deadline:
             d=describe(worker)
+            if d.get('id') != assignment['instance_id']:
+                raise ValueError('Cloud instance ID no longer matches the execution lease.')
             if d['status']=='TERMINATED':
                 raise RuntimeError('Task worker stopped or was preempted; persistent checkpoint disk preserved for explicit resume.')
             if d['status']!='RUNNING':
@@ -142,16 +157,19 @@ def monitor(worker: str, args: argparse.Namespace) -> dict:
             if obj['state']:
                 observed_start=True;last=obj['state']
                 (local/f'{worker}-latest-state.json').write_text(json.dumps(last,indent=2)+'\n')
+                if last.get('lease',{}).get('execution_id')!=assignment['execution_id'] or not last.get('lease',{}).get('deadline_verified'):
+                    raise ValueError('Worker has no verified execution lease/shutdown deadline.')
+                independently_verified_deadline=last['lease']['deadline_utc']
                 if last['source_commit']!=args.source:
                     raise ValueError('Running source differs from approved collector source.')
             for manifest in obj['ready']:
-                ack=collect(worker,manifest,local,args.source)
+                ack=collect(worker,manifest,local,args.source,assignment)
                 print(json.dumps({'event':'native_generation_cloud_verified','worker':worker,**ack}),flush=True)
             if last and last['status']=='assigned_training_complete_test_not_opened':
                 if not (local/worker/'training-final'/'ack.json').exists():
                     time.sleep(5);continue
                 return {'status':'training_collected_test_still_locked','worker':worker,
-                        'trials':len(last['trials']),'gpu':stop(worker)}
+                        'trials':len(last['trials']),'gpu':stop(worker,assignment['instance_id'])}
             if last and last['status']=='failed_preserved':
                 raise RuntimeError(json.dumps(last.get('failure',{})))
             if not observed_start and time.monotonic()>deadline-(args.max_hours*3600-300):
@@ -160,19 +178,25 @@ def monitor(worker: str, args: argparse.Namespace) -> dict:
         raise TimeoutError('Bounded training collection window ended; preserve and stop.')
     finally:
         try:
-            result=stop(worker);print(json.dumps({'event':'gpu_shutdown_verified',**result}),flush=True)
+            result=stop(worker,assignment['instance_id']);print(json.dumps({'event':'gpu_shutdown_verified',**result}),flush=True)
         except Exception as exc:
-            print(json.dumps({'event':'cloud_stop_unverified_guest_deadline_remains','worker':worker,'error':str(exc)}),flush=True)
+            print(json.dumps({'event':'cloud_stop_unverified','worker':worker,'verified_guest_deadline_utc':independently_verified_deadline,'error':str(exc)}),flush=True)
 
 def main() -> None:
     """Run one bounded collector per task GPU; no schedules or future triggers."""
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--source',required=True)
     p.add_argument('--local',type=Path,required=True)
+    p.add_argument('--approval',type=Path,required=True)
     p.add_argument('--max-hours',type=float,default=23)
     args=p.parse_args()
     if len(args.source)!=40 or any(c not in '0123456789abcdef' for c in args.source):raise ValueError('Exact source commit required.')
     if not 0<args.max_hours<=23:raise ValueError('Collector time must fit task shutdown envelope.')
+    approval=json.loads(args.approval.read_text())
+    if approval.get('source_commit')!=args.source or approval.get('user_execution_approved') is not True:
+        raise PermissionError('Collector source is not the approved source.')
+    args.assignments=approval['assignments']
+    if set(args.assignments)!=set(WORKERS):raise PermissionError('Both fixed worker assignments required.')
     args.local.mkdir(parents=True,exist_ok=True)
     records=[]
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:

@@ -85,6 +85,8 @@ def publish_generation(root: Path, output: Path, generation: str,
         manifest = {'generation': generation, 'worker': state['worker'],
                     'source_commit': state['source_commit'],
                     'protocol_sha256': state['protocol_sha256'],
+                    'execution_id': state['lease']['execution_id'],
+                    'instance_id': state['lease']['instance_id'],
                     'archive': str(archive), 'archive_sha256': digest_file(archive),
                     'archive_size': archive.stat().st_size,
                     'native_record': record, 'status': 'ready_for_verified_export'}
@@ -100,8 +102,9 @@ def publish_generation(root: Path, output: Path, generation: str,
         if ackpath.exists():
             ack = json.loads(ackpath.read_text())
             if (ack.get('generation'), ack.get('source_commit'), ack.get('archive_sha256'),
-                ack.get('cloud_roundtrip_verified')) != (
-                    generation, state['source_commit'], manifest['archive_sha256'], True):
+                ack.get('cloud_roundtrip_verified'), ack.get('execution_id'), ack.get('instance_id')) != (
+                    generation, state['source_commit'], manifest['archive_sha256'], True,
+                    state['lease']['execution_id'], state['lease']['instance_id']):
                 raise ValueError('Collector acknowledgment is not bound to this exact generation.')
             atomic_json(output / 'verified-cloud-generation.json', ack)
             emit('checkpoint_cloud_verified', generation=generation)
@@ -217,14 +220,16 @@ def main() -> None:
     root = resolve_root()
     source = read_source(root)
     protocol = json.loads((root / 'configs/csts-full-data-prompt-20261107.json').read_text())
-    require_launch_approval(protocol, source.commit, json.loads(args.approval.read_text()),
-                            json.loads(args.reviews.read_text()))
+    approval = json.loads(args.approval.read_text())
+    require_launch_approval(protocol, source.commit, approval, json.loads(args.reviews.read_text()))
     load_fit_cohorts(root, protocol)
     seeds = [7, 9, 11] if args.worker == 'worker1' else [8, 10]
     output = root / 'baseline_results/full_data_prompt_20261107' / args.worker
     output.mkdir(parents=True, exist_ok=True)
-    with (output / 'worker.lock').open('a+') as lock:
+    with (root.parent / 'gpu-exclusive.lock').open('a+') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        from csts_pilot.full_data_prompt_lease import inspect_local_assignment
+        lease = inspect_local_assignment(args.worker, approval['assignments'][args.worker])
         state_path = output / 'state.json'
         if state_path.exists():
             if not args.resume:
@@ -233,10 +238,12 @@ def main() -> None:
             if (state['source_commit'], state['protocol_sha256'], state['worker']) != (
                     source.commit, digest_object(protocol), args.worker):
                 raise ValueError('Existing worker state has different provenance.')
+            if state.get('lease') != lease:
+                raise ValueError('Existing state belongs to a different execution lease.')
         else:
             state = {'source_commit': source.commit, 'protocol_sha256': digest_object(protocol),
                      'worker': args.worker, 'seeds': seeds, 'status': 'running', 'trials': {},
-                     'started_utc': utc(), 'test_opened': False}
+                     'started_utc': utc(), 'test_opened': False, 'lease': lease}
             atomic_json(state_path, state)
         try:
             run_training(root, output, protocol, state, seeds, args.gpu_model)

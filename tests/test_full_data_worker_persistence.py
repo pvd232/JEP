@@ -9,7 +9,7 @@ class WorkerPersistenceTests(unittest.TestCase):
         self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
         self.root=Path(self.tmp.name);self.out=self.root/'baseline_results/w1';self.out.mkdir(parents=True)
         self.file=self.root/'artifact.pt';self.file.write_bytes(b'valid checkpoint bytes')
-        self.state={'worker':'worker1','source_commit':'a'*40,'protocol_sha256':'b'*64}
+        self.state={'worker':'worker1','source_commit':'a'*40,'protocol_sha256':'b'*64,'lease':{'execution_id':'d'*32,'instance_id':'123'}}
     def test_atomic_reject_nan_preserves_last_record(self):
         p=self.out/'state.json';worker.atomic_json(p,{'status':'valid'})
         with self.assertRaises(ValueError):worker.atomic_json(p,{'broken':float('nan')})
@@ -20,7 +20,8 @@ class WorkerPersistenceTests(unittest.TestCase):
             original(path,obj)
             if path.name=='ready.json':
                 original(path.parent/'ack.json',{'generation':obj['generation'],'source_commit':obj['source_commit'],
-                    'archive_sha256':'c'*64 if wrong else obj['archive_sha256'],'cloud_roundtrip_verified':True})
+                    'archive_sha256':'c'*64 if wrong else obj['archive_sha256'],'cloud_roundtrip_verified':True,
+                    'execution_id':obj['execution_id'],'instance_id':obj['instance_id']})
         with patch.object(worker,'atomic_json',hook):
             worker.publish_generation(self.root,self.out,'epoch1',{},self.state,[self.file])
     def test_verified_exact_generation_advances(self):
