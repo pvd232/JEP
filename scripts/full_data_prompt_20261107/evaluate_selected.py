@@ -76,7 +76,7 @@ def main():
             outputs=StageOutputs(predictions=output(path="predictions.json",loader=load_json,data_role="eval"),
                                  timing=output(path="timing.json",loader=load_json,data_role="eval")),reuse="never")
         trial_plan=plan(experiment=experiment(experiment_id="full_prompt_test_"+source.commit[:8]+"_"+trial.lower()+"_"+split,
-            variants=(variant("selected",stages=(configured,)),),replicates=(replicate(seed=selected["seed"]),)),
+            variants=(variant("selected",stages=(configured,),estimator=None),),replicates=(replicate(seed=selected["seed"]),)),
             source=source,env=environment)
         started=time.monotonic()
         result=execution.run(trial_plan,timeout_seconds=1200,
