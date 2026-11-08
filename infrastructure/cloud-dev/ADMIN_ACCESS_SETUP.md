@@ -1,55 +1,69 @@
-# One-time owner action: authorize Columbia's machine identity
+# One-time owner authorization for Columbia → Mantra
 
-Open [Mantra in Google Cloud Shell](https://console.cloud.google.com/?project=mantra-477901&cloudshell=true), signed in as **pvd2112@columbia.edu**. Authorize Cloud Shell inside Google's interface when prompted. Do not send a verification code, token, credential file or private key to chat.
+**Current state, November 8:** the tested runner/probe update is installed on Columbia. Host authentication and the existing job-runner smoke test pass. Mantra authorization and collector cutover are still incomplete. No GPU worker, trainer, publisher, collector, checkpoint, shutdown timer, attached service account or firewall was changed during that installation.
 
-The remaining Google grant must be made by your administrator account. The Columbia VM currently authenticates as `dev-vm@pvd-dev-232.iam.gserviceaccount.com`; that principal still lacks the observed Mantra `compute.instances.get` permission. Your human account's permissions are not automatically inherited by the VM identity.
+The human account's administrator permissions have **not** been verified from this chat. The available Columbia credential is `dev-vm@pvd-dev-232.iam.gserviceaccount.com`; it lacks the observed Mantra access. The connected browser session and the Mac admin relay are unavailable. A new permission preflight in the setup script tests the **actual authenticated administrator caller** before any IAM or SSH-metadata change. It does not assume that an email address or an account-owner claim proves those rights.
 
-## Run this exact setup
+## Owner-session entrypoint
 
-[Inspect the pinned source](https://github.com/pvd232/JEP/blob/d6d8ee86f63e64f0b10c5a183020d8fa33e824c8/infrastructure/cloud-dev/tools/admin_columbia_mantra_access.py).
+Open [Mantra in Google Cloud Shell](https://console.cloud.google.com/?project=mantra-477901&cloudshell=true), signed in as **pvd2112@columbia.edu**. Authorize Cloud Shell inside Google's interface when prompted. No authorization code, token, credential file or private key needs to enter chat.
+
+[Inspect the pinned script](https://github.com/pvd232/JEP/blob/746c41475cb99131fa1c1a52bb2e0118da318b71/infrastructure/cloud-dev/tools/admin_columbia_mantra_access.py). This source supersedes the earlier setup command, which did not explicitly preflight administrator permissions.
 
 ```bash
 curl --fail --location --proto '=https' --proto-redir '=https' \
-  'https://raw.githubusercontent.com/pvd232/JEP/d6d8ee86f63e64f0b10c5a183020d8fa33e824c8/infrastructure/cloud-dev/tools/admin_columbia_mantra_access.py' \
+  'https://raw.githubusercontent.com/pvd232/JEP/746c41475cb99131fa1c1a52bb2e0118da318b71/infrastructure/cloud-dev/tools/admin_columbia_mantra_access.py' \
   -o columbia_mantra_access.py &&
 printf '%s  %s\n' \
-  '6e92d3cbd0fe8567336bb46764037b9f3f232c74e64d8d30774b798ab82eaea6' \
+  '268f2e99ea3d76bc8b434166ad3beb3ca21e35d7916b6b4e515b21ee8498710d' \
   'columbia_mantra_access.py' | sha256sum --check - &&
 python3 columbia_mantra_access.py --apply
 ```
 
-The `--apply` explicitly authorizes the additive permissions and public-key setup described below. Omit it to run only inspection and print the plan. A standalone shell is also available at [shell.cloud.google.com](https://shell.cloud.google.com/).
+Omit `--apply` for read-only inspection and permission checks. With `--apply`, mutation begins only after all observed preflight checks pass. Actual write APIs still enforce current IAM and organization policy; a preflight is not a guarantee that a later write cannot fail.
 
-## Exactly what it changes
+## Permission checks before mutation
 
-- Creates three narrowly defined custom roles if absent, without overwriting an existing role with different permissions.
-- Grants the Columbia service account required read-only project discovery.
-- Grants get/start/stop/SSH-metadata permissions only on the currently running, task-labelled JEP workers in approved East Asia regions; the script itself never starts or stops them.
-- Grants instance-specific IAP access restricted to port 22.
-- Grants Service Account User on the already-attached JEP worker service account, not on all project service accounts.
-- Grants bucket-metadata read and object create/get only at the declared JEP artifact namespace. No object delete or bucket-wide object-list permission is included.
-- Appends the Columbia host's **public** SSH key while preserving every existing metadata item and SSH key. The private key was generated locally on Columbia and was not exported. Its public fingerprint is `SHA256:fS9IqRqbaG8cqCCaL289rbH76apAQXO4ofPp8sqGBhY`.
+The script calls Google's permission-test APIs for the logged-in caller on the project, worker service account, artifact bucket, selected Compute instances and their IAP resources. Missing permissions are reported by exact resource and permission name. Permission-test requests do not grant rights.
 
-The script identifies actual current instance names/IDs rather than assuming the obsolete Tokyo allocation. It refuses unexpected service accounts, OS Login mode, missing/extra live workers, replacement instance IDs, conflicting role definitions or incompatible storage policy. It does not change OS Login, firewall rules, startup scripts, service-account attachments, GPU state, trainer/collector processes, checkpoint data, approval manifests or shutdown deadlines. It preserves IAM etags and metadata fingerprints, and never broadens access automatically after a denial.
+Custom-role creation is checked only if a role is absent. SSH-metadata write permission is checked only if Columbia's public key needs to be added. Disabled-service errors retain the API service and consumer-project identifier without exposing credentials. The script does not enable APIs automatically, assign Owner, weaken policies, or retry through a different identity after a denial.
 
-## Interpret the result correctly
+The previous `SERVICE_DISABLED` diagnostic seen from the Columbia VM named consumer project **263437697547**, which was independently verified to be **pvd-dev-232**. It was not evidence that the human account lacked Mantra administrator privileges, nor proof that Cloud Resource Manager was disabled in Mantra. The owner-session checks must establish their own outcome.
 
-On successful setup the output contains `ACCESS_SETUP_APPLIED` and `RECEIPT=<local JSON file>`. That means the additive setup calls completed, **not** that runtime SSH, Storage, expiry refresh or collector cutover has been verified. IAM propagation can delay observation of new grants.
+## Exactly what authorized application changes
 
-If the script prints `SETUP_STOPPED`, retain the exact error and receipt. Do not stop a GPU, change its login mode, grant Owner, or repeatedly rerun a still-pending metadata operation. Some earlier additive grants may already have been applied; the receipt records them. The script does not attempt a destructive rollback.
+The script creates three scoped custom roles if absent, without overwriting a conflicting role. It grants the Columbia account project discovery reads; get/start/stop/SSH-metadata rights on the selected task workers; instance-specific IAP access for port 22; Service Account User on the existing JEP worker account; and bucket-metadata read plus object create/get within the approved JEP namespace. It does not grant object-delete or object-list permission.
 
-Return the final status and receipt filename, or the exact error text. Do not return Google login codes, tokens or private keys.
+It appends Columbia's public SSH key while preserving existing keys and all other instance metadata. The private key remains on Columbia. Public fingerprint: `SHA256:fS9IqRqbaG8cqCCaL289rbH76apAQXO4ofPp8sqGBhY`.
 
-## Remaining execution, without disturbing existing training
+Selection uses current running task-labelled workers, not obsolete fixed Tokyo names. Unexpected identities, guest-login mode, region, role definitions, extra/missing workers or storage policy stop the procedure. The setup does **not** start, stop, reset, delete or recreate VMs; change service-account attachments, OS Login or startup scripts; restart collectors; rewrite approvals; or open training/test data.
 
-After permissions propagate, verify from Columbia using its attached identity: real destination read, IAP/SSH read-only status, and an artifact write/read/hash canary outside training files. Reconcile the actual training/checkpoint state before changing any controller. The old collector's cleanup path may stop/delete its worker, so do not terminate it for migration. Keep its deadlines and current training code intact. Use the replacement collector only at an explicitly safe assignment boundary.
+IAM etags and metadata fingerprints prevent blindly overwriting concurrent changes. If a later call fails, earlier additive grants can remain and are retained in the receipt. There is no destructive automatic rollback.
 
-PR #19 and PR #20 remain unmerged/uninstalled at this preparation. This setup script does not merge or install either PR. It resolves the administrator setup portion; operational acceptance and safe deployment remain explicit steps. Future newly provisioned workers require the same per-resource authorization setup; this script does not grant blanket provisioning rights.
+## Result interpretation
 
-## Evidence
+- `ADMIN_PERMISSION_PREFLIGHT_PASSED`: read-only checks observed the necessary caller permissions. No grant is implied by this message alone.
+- `ACCESS_SETUP_APPLIED`: the setup calls completed. Runtime SSH/storage/renewal and safe controller migration still require acceptance checks from Columbia.
+- `SETUP_STOPPED`: retain the exact error and receipt. Do not stop a GPU, disable OS Login, broaden to Owner or rerun a still-pending metadata operation to force progress.
 
-At **2026-11-08 21:27 UTC**, the published source SHA matched the tested bytes on Columbia, the attached account's `cloud-platform` scope was observed, and **75 offline tests passed**: the prior 58 plus 17 bootstrap tests. The new checks cover policy/key preservation, idempotency, target scope, wrong-account/OS-Login rejection, plan-only behavior and no VM lifecycle commands. Those tests are not live administrator execution or independent subagent review.
+The final line names a local `RECEIPT=...json`. Share status/error text and that filename, never login codes, tokens or private keys.
 
-No administrator grant has been applied by this preparation, no GPU operation or collector restart was performed, no Aether tool was used, and installed runner files were not replaced. Only Columbia's missing local SSH key was generated; its private bytes stayed on that host.
+## What is already installed
 
-References: [attached workload identities](https://docs.cloud.google.com/docs/authentication/set-up-adc-attached-service-account), [IAP's separate permission requirements](https://docs.cloud.google.com/iap/docs/using-tcp-forwarding), [Storage IAM condition limits](https://docs.cloud.google.com/storage/docs/access-control/iam), [IAM propagation](https://docs.cloud.google.com/iam/docs/access-change-propagation).
+At **2026-11-08 21:48:55 UTC**, `project.py` and `probe_identity.py` from tested source `ac9a4c6de08ab7fbd7d9ba48b760da4b08c5bfd9` were installed atomically on Columbia after verifying no active/queued CPU durable jobs. Original source files were backed up. The host probe passed and explicitly reported `scope: host_only` and `workload_access_verified: false`; a real `cloud-project --project jep run` smoke test passed. The connector PID, project profile and `cloud_job.py` bytes stayed unchanged. No service restart was performed.
+
+No active workload manifest was rewritten. The companion collector in PR #20 is **not** installed over a running controller. Existing collectors can execute destructive cleanup when terminated, so completing the IAM setup must be followed by read-only state reconciliation and a safe assignment boundary, not a blind service stop.
+
+## Verification still required
+
+After authorization propagates: actual destination reads from Columbia's attached identity, IAP/SSH status reads, an artifact canary write/read/hash check outside training files, denied unrelated operations using nonmutating checks, and calls across token expiry. Verify recovered checkpoints before changing ownership. Preserve the independent shutdown deadlines.
+
+Future replacement workers need their own scoped authorization; this is not blanket VM-provisioning authority. This setup removes routine human Google logins from job execution, not platform action-safety checks, resource capacity constraints or network dependencies.
+
+## Tests and provenance
+
+**81 offline tests passed** against source `746c41475cb99131fa1c1a52bb2e0118da318b71`, whose script and test bytes were compared with the published GitHub objects. The six additional preflight tests check caller permissions, malformed/empty results, all resource boundaries, conditional role/key requirements and rejection before writes. These are offline tests, not actual administrator execution or independent subagent review.
+
+No Aether tools or copied Google credentials were used. No native subagent execution capability is exposed in the current chat; no hosted Codex review is represented as one.
+
+Official API references: [project permission tests](https://docs.cloud.google.com/resource-manager/reference/rest/v1/projects/testIamPermissions), [service-account permission tests](https://docs.cloud.google.com/iam/docs/reference/rest/v1/projects.serviceAccounts/testIamPermissions), [Compute permission tests](https://docs.cloud.google.com/compute/docs/reference/rest/v1/instances/testIamPermissions), [Storage permission tests](https://docs.cloud.google.com/storage/docs/json_api/v1/buckets/testIamPermissions), [IAP API](https://docs.cloud.google.com/iap/docs/reference/rest).
