@@ -5,7 +5,7 @@ The independent CPU controllers are running with verified-publication cleanup.
 
 | Worker | Observed placement | Current fit |
 | --- | --- | --- |
-| worker1 | Seoul, asia-northeast3-a | B_order_only, seed 7, epoch 1 |
+| worker1 | Seoul, asia-northeast3-a | B_order_only, seed 7, epoch 2 |
 | worker2 | Taiwan, asia-east1-b | B_order_only, seed 8, epoch 1 |
 
 See [runtime evidence](runtime-evidence.json) for observation times, immutable VM
@@ -40,3 +40,8 @@ The reusable skill is a draft at
 It covers independent fits and one synchronized LoRA adapter across GPUs.
 Structure, prose and native offline forward checks passed. Installation remains
 pending because the full automated release check fails during sandbox bootstrap.
+
+The first new native checkpoint, B_order_only seed 7 epoch 1, was asynchronously
+published and streamed hash-verified through VIPER at 06:58:46 UTC. Epoch 2 had
+already started at 06:57:44 UTC. The [native receipt](first-native-viper-ack.json)
+and [training events](worker1-first-epoch-events.json) retain that observed overlap.
