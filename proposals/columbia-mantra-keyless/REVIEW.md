@@ -1,29 +1,48 @@
-# Independent proposal review
+# Proposal review results
 
-**Review state: not yet completed.** Three independent reviews were requested by the user. Local Codex on Columbia returned `Not logged in`; the Columbia GitHub CLI is unauthenticated and its existing Mac relay is unavailable. Those are access observations, not review results. Aether and cross-host credential copying are excluded.
+**Status: three distinct hosted Codex review passes completed; each reported no major issues.** All three completion comments identify the same proposal revision, `2f8270bd7428336491970ce93bacfd85f23cfe93`. The reviewed design, README, gap analysis and evidence file are unchanged; this update records the results after review.
 
-A hosted GitHub review request, if supported by the repository's existing Codex connection, is the next permitted route. Three requests must be treated as requests until attributable reviewer outputs exist. Do not infer completion from comment submission, an eyes reaction, or a passing mechanical check.
+## Retained provider results
 
-## Shared review contract
+| Pass | Provider completion, UTC November 8, 2026 | Retained result |
+|---|---|---|
+| 1 | 07:36:31 | [Receipt 6718813510](https://github.com/pvd232/JEP/pull/18#issuecomment-6718813510): no major issues reported |
+| 2 | 07:47:31 | [Receipt 6718909189](https://github.com/pvd232/JEP/pull/18#issuecomment-6718909189): no major issues reported |
+| 3 | 07:50:36 | [Receipt 6718935234](https://github.com/pvd232/JEP/pull/18#issuecomment-6718935234): no major issues reported |
 
-Review only this proposal packet and its pinned implementation sources. This is a specification review, not authorization to change IAM, start/stop a VM, read credentials, modify source, or migrate a live collector. Start each assessment independently; do not adopt another reviewer's conclusions as your own. Inspect the same pinned proposal commit and identify it in the result.
+The author of all three receipts is the repository's `chatgpt-codex-connector[bot]`. Each is a separate provider-authored completion comment, not an author-generated review or an acknowledgement reaction. The initial concurrent requests yielded only one completion and were not counted three times. Fresh subsequent review requests produced the other two receipts against the unchanged revision.
 
-Each result must state: reviewer/task identifier when exposed; exact reviewed commit; inspected files; concrete findings with severity and file/section; counterexample; proposed smallest repair and acceptance test; verdict; and unverified runtime assumptions. A no-finding result must explicitly state its inspected scope. Missing provider task identity must be reported as unavailable, not invented. The author records finding dispositions and obtains re-review of material changes.
+**Evidence limit:** the integration returned summary-only results. It did not expose internal task/session IDs, per-file inspection lists, or separate substantive writeups proving every requested specialist check was performed. The table establishes three hosted review completions, not three certified exhaustive security/recovery audits, distinct hidden contexts, or live cloud verification. The detailed review scopes below are retained as requested instructions, not falsely reported as inspected coverage. No provider identity or missing finding was invented.
 
-## Reviewer 1 — security and IAM
+Local Codex on Columbia was unauthenticated, so the existing authorized GitHub Codex integration performed these reviews. No Aether host, copied credential or new model-provider login was used.
 
-Determine whether the proposal really limits Columbia's authority to the intended Mantra operations. Inspect metadata-identity trust, administrator versus runtime authority, IAP versus SSH, public/private SSH key handling, object-prefix versus bucket-list permissions, credential backup/reconstruction and explicit tool-refusal boundaries. Challenge self-granting permissions, blanket admin roles, copied refresh tokens, application allowlists misrepresented as IAM, and host-wide credential exposure. No cloud mutation is permitted.
+## Requested review scopes
 
-## Reviewer 2 — reliability and recovery
+### Security and IAM
 
-Trace host authentication, target authorization, CLI/account precedence, IAP network and guest login, artifact round trips, renewal and rebuild evidence. Examine the existing collector's `finally: stop(...)` behavior and ensure the proposed cutover cannot stop a live trainer or advance a checkpoint twice. Distinguish read-only observations from missing real integration tests. Challenge rollback, stale acknowledgements, revoked access and unavailable metadata/network. No running service may be touched.
+Inspect the attached-identity trust boundary, administrator versus runtime authority, scoped Mantra access, IAP versus guest SSH, public/private key handling, storage-prefix versus bucket-list permissions, credential reconstruction and tool-refusal boundaries. Challenge broad grants, self-escalation, copied refresh tokens and application checks misrepresented as IAM enforcement.
 
-## Reviewer 3 — minimality and contract traceability
+### Reliability and recovery
 
-Check that the plan repairs the two diagnosed gaps with existing owners, not a new credential platform. Trace every requirement to a planned code owner and positive/rejection evidence. Check the clean PR baseline and unmerged installed-code dependency. Reject invented skill use, unimplemented typed-contract claims, duplicate configuration authority, vague acceptance gates, speculative scope expansion and unsupported claims of completion.
+Trace host-versus-target probing, account precedence, network/SSH prerequisites, artifact round trips, after-expiry renewal, clean-host reconstruction and rollback. Inspect the current collector's `finally: stop(...)` behavior and ensure cutover cannot stop active training, duplicate acknowledgements or lose shutdown protection.
 
-## Acceptance and evidence
+### Minimality and contract traceability
 
-The proposal is independently reviewed only after all three actual results are retained with matching source identity and blocking findings have dispositions. The author may perform syntax, link, scope or counterexample checks, but these do not count as subagent reviews. Static reviewer approval does not establish cloud access, token refresh, guest login or safe live migration.
+Check that the plan repairs the two evidenced gaps using existing owners. Trace R1–R8 to planned code changes and positive/rejection evidence; check the clean PR baseline and unmerged installed-code dependency. Reject unnecessary services/stores, duplicate configuration authority, vague acceptance conditions, and claims that unimplemented code or typed contracts already exist.
 
-Review requests and any provider responses will be linked in the PR conversation. Until those responses exist, this file must remain explicit that the review is pending or blocked. The PR remains draft while the required reviews are incomplete.
+## Author checks, separately identified
+
+Nine documentation-check groups passed on Columbia for the reviewed revision: exact five-file proposal scope, relative links, balanced fences, JSON parsing, R1–R8 coverage, pinned source paths, human-account/finally-stop source facts, credential-pattern scan and diff whitespace. Seven relative links resolved. The installed `project.py` and `probe_identity.py` matched their pinned source bytes. These checks do not count as independent reviews or runtime acceptance tests.
+
+Two author findings were incorporated **before** the reviewed revision:
+
+- The earlier proposal branch contained the unmerged host installation. This PR uses a clean `main` baseline and adds only this five-file packet.
+- Stopping the existing collector invokes task shutdown in its `finally` path. The plan prefers assignment-completion cutover and requires an explicitly tested relinquish-ownership path for any live migration.
+
+No actionable finding was exposed by the three provider completion summaries, so there is no fabricated reviewer-finding disposition or unreported code repair.
+
+## Decision boundary
+
+The packet is available for the owner's proposal review. It remains **not implemented and not deployed**. Static review does not establish IAM permissions, credential renewal, IAP/SSH access, effective privilege boundaries, safe live migration or success after host reconstruction. Those require the implementation and retained integration evidence specified in [TECHNICAL_PLAN.md](TECHNICAL_PLAN.md).
+
+Any material change to the design or implementation requires review of that changed revision. The final review-ledger update does not claim that the provider reviewed its own completion records. Merging this documentation is not permission to change IAM or migrate a running workload automatically.
