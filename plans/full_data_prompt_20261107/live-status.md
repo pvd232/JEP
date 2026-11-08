@@ -1,20 +1,19 @@
 # Live training status
 
-Updated: Sun 10:33 AM EST. Refresh this page for the latest snapshot.
+Updated: Sun 10:38 AM EST. Refresh this page for the latest snapshot.
 A background CPU reporter updates this branch every five minutes. Treat snapshots older than ten minutes as stale.
 
 **Training fits finished: 11 / 15.**
 The held-out test remains sealed for evaluation.
 
-**Estimated training finish: Sun 1:16 PM EST**
-Planning range: Sun 12:11 PM EST to Sun 1:49 PM EST.
-Basis: 16.4 minutes per completed epoch; 3–6 total epochs per remaining fit, based on 11 stopped fits.
-Validation-based stopping or Spot interruptions can extend this estimate.
+**Final snapshot. Both cleanup controllers have returned terminal receipts.**
+
+ETA is unconfirmed while a worker observation is unavailable.
 
 | Placement | Current work | Fits finished | GPU use | Cloud-verified epochs | Uploads pending |
 | --- | --- | ---: | ---: | ---: | ---: |
-| Seoul (asia-northeast3-a) | C_case_inspired_seed11, epoch 3 | 7 / 9 | 100 % | 37 | 0 |
-| Taiwan (asia-east1-b) | Preparing next fit | 4 / 6 | 100 % | 18 | 0 |
+| Seoul (asia-northeast3-a) | Stopped; recovery work preserved | 7 / 9 | — | — | — |
+| Taiwan (asia-east1-b) | Stopped; recovery work preserved | 4 / 6 | — | — | — |
 
 Cloud-verified epochs include the five preserved Seoul epochs. New publications use native VIPER Cloud.
 The existing controllers delete owned compute and disks after verified publication; unverified recovery disks are retained.
@@ -34,7 +33,7 @@ The existing controllers delete owned compute and disks after verified publicati
 | B_order_only_seed10 | 0 | Queued | — |
 | C_case_inspired_seed10 | 0 | Queued | — |
 | B_order_only_seed11 | 4 | Finished | 3 |
-| C_case_inspired_seed11 | 2 | Running | — |
+| C_case_inspired_seed11 | 2 | Checkpointed | — |
 | A_condition_first_seed11 | 0 | Queued | — |
 
 [Structured status](live-status.json) · [Deployment records](https://github.com/pvd232/JEP/blob/experiment/qwen-full-data-prompt-20261107/plans/full_data_prompt_20261107/lifecycle-launch-20261108/README.md)
