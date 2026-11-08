@@ -128,7 +128,9 @@ def main():
         signature_data["workers"]={w:{k:v for k,v in state.items() if k!="last_cpu_observation_utc"} for w,state in states.items()}
         signature=digest(json.dumps(signature_data,sort_keys=True).encode())
         previous=out/"test-progress-published-signature.txt"
-        if a.once or not previous.exists() or previous.read_text()!=signature:
+        publication_ok=previous.exists() and previous.read_text()==signature
+        if a.once or not publication_ok:
+            publication_ok=False
             atomic(destination/"live-status.md","\n".join(lines))
             atomic(destination/"test-progress.csv",buf.getvalue())
             atomic(destination/"test-progress.json",json.dumps(payload,indent=2)+"\n")
@@ -140,9 +142,13 @@ def main():
                         "commit","-m",f"Publish live test scores {len(cache)}/15 [skip ci]")
                 git("push","origin","HEAD:refs/heads/"+branch)
                 atomic(previous,signature)
+                publication_ok=True
                 print(json.dumps({"published_test_scores":len(cache),"cloud_verified":payload["cloud_verified_test_scores"],"commit":git("rev-parse","HEAD"),"utc":now}),flush=True)
             except Exception as error:print(json.dumps({"publication_error":str(error)}),flush=True)
-        if a.once or (len(cache)==15 and payload["cloud_verified_test_scores"]==15 and len(cleanups)==2):return
+        if a.once:
+            if not publication_ok:raise RuntimeError("GitHub result publication failed; local results retained")
+            return
+        if publication_ok and len(cache)==15 and payload["cloud_verified_test_scores"]==15 and len(cleanups)==2:return
         time.sleep(30)
     raise TimeoutError("GitHub test reporter deadline reached")
 
