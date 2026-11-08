@@ -1,6 +1,6 @@
 {
-  "generated_epoch": 1794150438.2407107,
-  "generated_utc": "2026-11-08T15:07:18.240711+00:00",
+  "generated_epoch": 1794150747.103293,
+  "generated_utc": "2026-11-08T15:12:27.103293+00:00",
   "cadence_seconds": 300,
   "training_mode": "independent_seed_workers",
   "target_fits": 15,
@@ -103,27 +103,35 @@
             ],
             "selected_epoch": 3,
             "finished": true
+          },
+          "C_case_inspired_seed11": {
+            "epochs": 1,
+            "seconds": [
+              975.8126256789983
+            ],
+            "selected_epoch": null,
+            "finished": false
           }
         }
       },
       "fresh": true,
       "source": "guest_observation",
-      "observed_utc": "2026-11-08T15:07:17.686384+00:00",
+      "observed_utc": "2026-11-08T15:12:26.097535+00:00",
       "instance_id": "3087252568751843062",
       "epoch_start": {
-        "utc": "2026-11-08T14:51:23.075549+00:00",
+        "utc": "2026-11-08T15:07:45.636989+00:00",
         "trial": "C_case_inspired_seed11",
-        "epoch": 1
+        "epoch": 2
       },
-      "gpu": "GPU-b2e57239-579e-e259-9761-832579cdf079, 0 %",
+      "gpu": "GPU-b2e57239-579e-e259-9761-832579cdf079, 100 %",
       "services": {
         "train": "active",
         "upload": "active"
       },
-      "verified_epoch_checkpoints": 35,
-      "native_viper_checkpoints": 30,
+      "verified_epoch_checkpoints": 36,
+      "native_viper_checkpoints": 31,
       "pending_generations": 0,
-      "last_verified_utc": "2026-11-08T14:52:24.403555+00:00"
+      "last_verified_utc": "2026-11-08T15:08:48.308164+00:00"
     },
     {
       "worker": "worker2",
@@ -175,10 +183,11 @@
             "finished": true
           },
           "A_condition_first_seed10": {
-            "epochs": 2,
+            "epochs": 3,
             "seconds": [
               982.887349558001,
-              991.556195827
+              991.556195827,
+              994.187467555
             ],
             "selected_epoch": null,
             "finished": false
@@ -187,7 +196,7 @@
       },
       "fresh": true,
       "source": "guest_observation",
-      "observed_utc": "2026-11-08T15:07:17.390451+00:00",
+      "observed_utc": "2026-11-08T15:12:26.463550+00:00",
       "instance_id": "6739260318488017241",
       "epoch_start": {
         "utc": "2026-11-08T10:58:40.573695+00:00",
@@ -199,10 +208,10 @@
         "train": "inactive",
         "upload": "inactive"
       },
-      "verified_epoch_checkpoints": 16,
-      "native_viper_checkpoints": 16,
+      "verified_epoch_checkpoints": 17,
+      "native_viper_checkpoints": 17,
       "pending_generations": 0,
-      "last_verified_utc": "2026-11-08T14:53:25.011697+00:00"
+      "last_verified_utc": "2026-11-08T15:10:07.643437+00:00"
     }
   ],
   "forecast": {
@@ -213,9 +222,9 @@
       5.0,
       6
     ],
-    "earliest_epoch": 1794157314.7975094,
-    "central_epoch": 1794163208.989051,
-    "latest_epoch": 1794166156.084822,
+    "earliest_epoch": 1794157623.6600916,
+    "central_epoch": 1794162535.4863763,
+    "latest_epoch": 1794165482.5821471,
     "basis": "Conditional on remaining fits following observed stopping lengths; unfinished epochs counted conservatively. Spot interruptions and continued validation improvement can extend the estimate."
   },
   "monitor_status": "active"
