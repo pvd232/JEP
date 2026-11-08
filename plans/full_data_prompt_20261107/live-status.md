@@ -1,6 +1,6 @@
 # Live validation and test results
 
-Updated: 2026-11-08T23:37:30.954487+00:00. This durable reporter checks every 30 seconds and pushes each newly observed score to this branch.
+Updated: 2026-11-08T23:38:32.375775+00:00. This durable reporter checks every 30 seconds and pushes each newly observed score to this branch.
 
 **Training: 15/15 finished. Test scores: 14/15. VIPER cloud bytes independently verified: 7/15.**
 
@@ -38,3 +38,5 @@ Scores are Spearman correlation. Checkpoints were selected using validation only
 Inference and native VIPER uploads run concurrently. 'Sealed' means the CPU independently checked prediction bytes, row identities, labels and frozen model/test hashes. 'Cloud verified' additionally requires verified publication and download receipts. Compute cleanup follows verified export.
 
 [Score CSV](test-progress.csv) · [Structured status](test-progress.json) · [Final analysis](https://github.com/pvd232/JEP/blob/experiment/qwen-full-data-prompt-20261107/training_outputs/full_data_prompt_20261108/test-results.md)
+
+Cleanup receipts received for worker(s): 2.

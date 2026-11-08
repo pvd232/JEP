@@ -1,5 +1,5 @@
 {
-  "checked_utc": "2026-11-08T23:37:30.954487+00:00",
+  "checked_utc": "2026-11-08T23:38:32.375775+00:00",
   "source_commit": "9fb983cc71a3745c1684a67f74d60a7c19855917",
   "training_fits": 15,
   "test_scores": 14,
@@ -10,7 +10,7 @@
       "completed": 7,
       "assigned": 8,
       "current_trial": "C_case_inspired_seed9",
-      "last_cpu_observation_utc": "2026-11-08T23:37:13.304038+00:00",
+      "last_cpu_observation_utc": "2026-11-08T23:38:09.427333+00:00",
       "validation_replay": {
         "trial": "A_condition_first_seed10",
         "expected": 0.8724975979532501,
@@ -1335,7 +1335,14 @@
     }
   },
   "observation_errors": {},
-  "cleanup": {},
+  "cleanup": {
+    "2": {
+      "instance": "jep-full-prompt-eval2-20261108",
+      "instance_deleted": true,
+      "disk_deleted": true,
+      "recovery_disk_preserved": false
+    }
+  },
   "test_status": "previously_examined_exploratory",
   "selection_rule": "validation only; frozen before test"
 }
