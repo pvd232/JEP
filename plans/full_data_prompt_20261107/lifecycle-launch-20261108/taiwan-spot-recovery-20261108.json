@@ -1,0 +1,62 @@
+{
+  "observed_utc": "2026-11-08T14:38:47Z",
+  "status": "resumed_training",
+  "cause": {
+    "provider_event": "compute.instances.preempted",
+    "at_utc": "2026-11-08T11:03:20Z",
+    "old_instance_id": "4722509685362370145",
+    "provider_operation": "systemevent-1794135794322-65fc1cab30d5f-73898457-22edf495",
+    "controller_delete_started_utc": "2026-11-08T11:03:22Z"
+  },
+  "recovery": {
+    "project": "mantra-477901",
+    "zone": "asia-east1-b",
+    "instance_name": "jep-full-prompt-worker2-20261108",
+    "instance_id": "6739260318488017241",
+    "boot_disk_id": "255424787610707553",
+    "gpu_uuid": "GPU-9882621e-b66d-5494-d4db-3707cfb4631f",
+    "execution_id": "13816a6161e54ea9a6e46a858ca6d459",
+    "started_utc": "2026-11-08T14:35:31.892869Z",
+    "source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+    "training_source_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+    "protocol_sha256": "0aee2f8aece3e89ff12223fe40a54fb632305339f240475362212c432fd68a11",
+    "provider_termination_utc": "2026-11-09T05:47:00Z",
+    "guest_shutdown_epoch": 1794203179.770316,
+    "source_and_scientific_protocol_unchanged": true
+  },
+  "reconciliation": {
+    "trial": "A_condition_first_seed10",
+    "sealed_parent_epoch": 1,
+    "sealed_parent_updates": 190,
+    "interrupted_attempt_updates": 225,
+    "replay_epoch": 2,
+    "completed_fits_preserved": 3,
+    "state_before_resume_sha256": "07df8fd0773afee078c4edb3c7cc1951cdafeff99e210d84743219e8e2e674ab",
+    "old_pending_sha256": "6fabebc48b936265f13d69a3896435f15fff16f44cc1c8577a53b13e00111643",
+    "partial_trace_sha256": "e876eea549da860cb6f58225c8513b30b4bdfb97b4cffa8659e0b5da68f83c32",
+    "partial_attempt_retained": true
+  },
+  "observations": {
+    "gpu_utilization_percent": 100,
+    "gpu_memory_mib": 19058,
+    "train_service_active": true,
+    "uploader_service_active": true,
+    "viper_canary_byte_verified": true,
+    "preserved_epoch1_cloud_ack_verified_utc": "2026-11-08T14:35:44.656311Z",
+    "collector_job_id": "e1833f8dda8041358f7ee4e1223d2ac2",
+    "collector_observed_utc": "2026-11-08T14:38:29.850547Z",
+    "collector_state_status": "running",
+    "collector_bound_to_new_instance": true,
+    "test_opened": false,
+    "patience": 1,
+    "total_fits_finished": 9,
+    "total_fits": 15
+  },
+  "automation": {
+    "recovery_initiated_by": "agent under existing user authorization",
+    "automatic_preemption_replacement_was_present": false,
+    "cleanup": "Controller deletes exact owned VM and disk only after complete cloud archive verification; unverified disks are retained.",
+    "max_concurrent_gpus": 2,
+    "monitor_url": "https://github.com/pvd232/JEP/blob/monitor/full-data-prompt-20261107/plans/full_data_prompt_20261107/live-status.md"
+  }
+}
