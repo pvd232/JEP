@@ -1,0 +1,2988 @@
+{
+  "collected_utc": "2026-11-08T08:15:50.078649+00:00",
+  "current_training": {
+    "seed_policy": "paired",
+    "kind": "lora",
+    "learning_rate": 2e-05,
+    "weight_decay": 0.01,
+    "batch_size": 32,
+    "microbatch_size": 32,
+    "schedule": "constant",
+    "warmup_fraction": 0,
+    "lora_rank": 32,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "patience": 1,
+    "max_epochs": 24,
+    "train_until_patience": false,
+    "initialization": "fresh_base_and_lora",
+    "subset_phase_epochs": 0,
+    "optimizer_resets": 0
+  },
+  "current_validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+  "raw_histories": 38,
+  "maximal_histories": 34,
+  "curves": [
+    {
+      "label": "csts_continuation_mse_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "phase": "csts_continuation_mse_trace",
+      "seed": 7,
+      "validation_sha256": null,
+      "training_sha256": null,
+      "config": {
+        "schema_version": 2,
+        "model_id": "google/flan-t5-small",
+        "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+        "condition": true,
+        "projection_dimension": 128,
+        "encoder_learning_rate": 3e-06,
+        "projection_learning_rate": 0.0001,
+        "batch_size": 32,
+        "max_epochs": 48,
+        "patience": 5,
+        "warmup_fraction": 0.0,
+        "weight_decay": 0.01,
+        "max_length": 160,
+        "seed": 7,
+        "device": "cuda",
+        "fit_check": false,
+        "rating_objective": "mse",
+        "prefix_epochs": 8,
+        "min_delta": 0.0,
+        "start_epoch": 24,
+        "schedule": "constant",
+        "max_seconds": 1800.0
+      },
+      "original_stop_reason": "validation_patience",
+      "source": {
+        "path": "training_outputs/csts_continuation_mse_trace.json",
+        "sha256": "22e6a61ee31cee8ed31ecdc3a9d72061173e44509c67299fec4b72421b08a13a",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.24334787142946948
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.3643912405383318
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.38511096192155975
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.434780650616664
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.48032347157730254
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.5075876142839637
+        },
+        {
+          "epoch": 7,
+          "validation_spearman": 0.4932014296778695
+        },
+        {
+          "epoch": 8,
+          "validation_spearman": 0.5055411792666247
+        },
+        {
+          "epoch": 9,
+          "validation_spearman": 0.519600472316808
+        },
+        {
+          "epoch": 10,
+          "validation_spearman": 0.5086597516648933
+        },
+        {
+          "epoch": 11,
+          "validation_spearman": 0.5267070362255716
+        },
+        {
+          "epoch": 12,
+          "validation_spearman": 0.5264814972370441
+        },
+        {
+          "epoch": 13,
+          "validation_spearman": 0.5385848733499599
+        },
+        {
+          "epoch": 14,
+          "validation_spearman": 0.5460608251816421
+        },
+        {
+          "epoch": 15,
+          "validation_spearman": 0.5391282889624436
+        },
+        {
+          "epoch": 16,
+          "validation_spearman": 0.5490912415878039
+        },
+        {
+          "epoch": 17,
+          "validation_spearman": 0.5398122124379328
+        },
+        {
+          "epoch": 18,
+          "validation_spearman": 0.5437219418517185
+        },
+        {
+          "epoch": 19,
+          "validation_spearman": 0.556390474283241
+        },
+        {
+          "epoch": 20,
+          "validation_spearman": 0.5543550000410645
+        },
+        {
+          "epoch": 21,
+          "validation_spearman": 0.5557773083752042
+        },
+        {
+          "epoch": 22,
+          "validation_spearman": 0.5595286293808345
+        },
+        {
+          "epoch": 23,
+          "validation_spearman": 0.5601479884450835
+        },
+        {
+          "epoch": 24,
+          "validation_spearman": 0.5591461168878507
+        },
+        {
+          "epoch": 25,
+          "validation_spearman": 0.5561702275724346
+        },
+        {
+          "epoch": 26,
+          "validation_spearman": 0.5556288403363755
+        },
+        {
+          "epoch": 27,
+          "validation_spearman": 0.5607856824846899
+        },
+        {
+          "epoch": 28,
+          "validation_spearman": 0.5627884825237565
+        },
+        {
+          "epoch": 29,
+          "validation_spearman": 0.5607342166493537
+        },
+        {
+          "epoch": 30,
+          "validation_spearman": 0.5625176466088377
+        },
+        {
+          "epoch": 31,
+          "validation_spearman": 0.561446456156477
+        },
+        {
+          "epoch": 32,
+          "validation_spearman": 0.5646971516399106
+        },
+        {
+          "epoch": 33,
+          "validation_spearman": 0.5633941944176767
+        },
+        {
+          "epoch": 34,
+          "validation_spearman": 0.5685004729310623
+        },
+        {
+          "epoch": 35,
+          "validation_spearman": 0.5695759038991457
+        },
+        {
+          "epoch": 36,
+          "validation_spearman": 0.5666218340555697
+        },
+        {
+          "epoch": 37,
+          "validation_spearman": 0.5676305668528825
+        },
+        {
+          "epoch": 38,
+          "validation_spearman": 0.5672569932454309
+        },
+        {
+          "epoch": 39,
+          "validation_spearman": 0.5656949489196312
+        },
+        {
+          "epoch": 40,
+          "validation_spearman": 0.5657139234166659
+        }
+      ]
+    },
+    {
+      "label": "ratings_ratings_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "phase": "ratings",
+      "seed": 7,
+      "validation_sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+      "training_sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01",
+      "config": {
+        "schema_version": 2,
+        "model_id": "google/flan-t5-small",
+        "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+        "condition": true,
+        "projection_dimension": 128,
+        "encoder_learning_rate": 3e-05,
+        "projection_learning_rate": 0.001,
+        "batch_size": 32,
+        "max_epochs": 40,
+        "patience": 5,
+        "warmup_fraction": 0.1,
+        "weight_decay": 0.01,
+        "max_length": 160,
+        "seed": 7,
+        "device": "cuda",
+        "fit_check": false,
+        "arm": "ratings",
+        "phase": "ratings",
+        "training_sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01",
+        "validation_sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+        "prepared_sha256": "5a09c04931cc159ce643925ffe41a15d8cd6ab5fd3578b1b7bbc81d175aa0cc0",
+        "initial_sha256": "207bc5214e9534ac9e20d77582d34f74be2b312c88de32225cfa2ea6b6d63357",
+        "linear_epochs": 24,
+        "continuation_encoder_rate": 3e-06,
+        "continuation_projection_rate": 0.0001,
+        "max_seconds": 2400.0
+      },
+      "original_stop_reason": "epoch_ceiling",
+      "source": {
+        "path": "training_outputs/csts_tranche3_evidence/ratings_ratings_trace.json",
+        "sha256": "a62880eef567e475a082823a5d09b371045b1fd7ab17b28b59862467bb0bbd18",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.432875383190064
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.4372881526889797
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.46199593204862777
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.47234361124535623
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.4982749683184632
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.5184261943323047
+        },
+        {
+          "epoch": 7,
+          "validation_spearman": 0.5128726628482947
+        },
+        {
+          "epoch": 8,
+          "validation_spearman": 0.5232462328438601
+        },
+        {
+          "epoch": 9,
+          "validation_spearman": 0.5292075238104883
+        },
+        {
+          "epoch": 10,
+          "validation_spearman": 0.5184733764837354
+        },
+        {
+          "epoch": 11,
+          "validation_spearman": 0.5371364517191451
+        },
+        {
+          "epoch": 12,
+          "validation_spearman": 0.5320144134922595
+        },
+        {
+          "epoch": 13,
+          "validation_spearman": 0.5371635702671141
+        },
+        {
+          "epoch": 14,
+          "validation_spearman": 0.5498023937342681
+        },
+        {
+          "epoch": 15,
+          "validation_spearman": 0.5424300676512869
+        },
+        {
+          "epoch": 16,
+          "validation_spearman": 0.5534812793304209
+        },
+        {
+          "epoch": 17,
+          "validation_spearman": 0.5475557338755558
+        },
+        {
+          "epoch": 18,
+          "validation_spearman": 0.5504418032680423
+        },
+        {
+          "epoch": 19,
+          "validation_spearman": 0.5616449399712746
+        },
+        {
+          "epoch": 20,
+          "validation_spearman": 0.5606719506770015
+        },
+        {
+          "epoch": 21,
+          "validation_spearman": 0.559746484280211
+        },
+        {
+          "epoch": 22,
+          "validation_spearman": 0.5638972544948027
+        },
+        {
+          "epoch": 23,
+          "validation_spearman": 0.5656882728386767
+        },
+        {
+          "epoch": 24,
+          "validation_spearman": 0.5640201750065285
+        },
+        {
+          "epoch": 25,
+          "validation_spearman": 0.5610565244614254
+        },
+        {
+          "epoch": 26,
+          "validation_spearman": 0.5618442040146776
+        },
+        {
+          "epoch": 27,
+          "validation_spearman": 0.564949121160195
+        },
+        {
+          "epoch": 28,
+          "validation_spearman": 0.5673278498225586
+        },
+        {
+          "epoch": 29,
+          "validation_spearman": 0.5656224637343773
+        },
+        {
+          "epoch": 30,
+          "validation_spearman": 0.5668477589797697
+        },
+        {
+          "epoch": 31,
+          "validation_spearman": 0.5651715857972782
+        },
+        {
+          "epoch": 32,
+          "validation_spearman": 0.5692970067781231
+        },
+        {
+          "epoch": 33,
+          "validation_spearman": 0.5689147354737984
+        },
+        {
+          "epoch": 34,
+          "validation_spearman": 0.5721566547315778
+        },
+        {
+          "epoch": 35,
+          "validation_spearman": 0.5736627020139483
+        },
+        {
+          "epoch": 36,
+          "validation_spearman": 0.5707249455298109
+        },
+        {
+          "epoch": 37,
+          "validation_spearman": 0.5709443307639357
+        },
+        {
+          "epoch": 38,
+          "validation_spearman": 0.571951425860397
+        },
+        {
+          "epoch": 39,
+          "validation_spearman": 0.5698308416890797
+        },
+        {
+          "epoch": 40,
+          "validation_spearman": 0.5716744755928852
+        }
+      ]
+    },
+    {
+      "label": "shuffled_ratings_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "phase": "ratings",
+      "seed": 7,
+      "validation_sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+      "training_sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01",
+      "config": {
+        "schema_version": 2,
+        "model_id": "google/flan-t5-small",
+        "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+        "condition": true,
+        "projection_dimension": 128,
+        "encoder_learning_rate": 3e-05,
+        "projection_learning_rate": 0.001,
+        "batch_size": 32,
+        "max_epochs": 40,
+        "patience": 5,
+        "warmup_fraction": 0.1,
+        "weight_decay": 0.01,
+        "max_length": 160,
+        "seed": 7,
+        "device": "cuda",
+        "fit_check": false,
+        "arm": "shuffled",
+        "phase": "ratings",
+        "training_sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01",
+        "validation_sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+        "prepared_sha256": "5a09c04931cc159ce643925ffe41a15d8cd6ab5fd3578b1b7bbc81d175aa0cc0",
+        "initial_sha256": "ad4caf822ae825738a60d1952592aca25f88c7ff9c97394a08f3b7adad50049b",
+        "linear_epochs": 24,
+        "continuation_encoder_rate": 3e-06,
+        "continuation_projection_rate": 0.0001,
+        "max_seconds": 2400.0
+      },
+      "original_stop_reason": "validation_patience",
+      "source": {
+        "path": "training_outputs/csts_tranche3_evidence/shuffled_ratings_trace.json",
+        "sha256": "8fd44b9ec09f5c7f0e1ff19efabcf07cd06b620d865645414a41019e5067bc6a",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.39221572850162817
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.4257268533232668
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.4453085635618859
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.4561682660110313
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.5033670136858915
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.5349254446980753
+        },
+        {
+          "epoch": 7,
+          "validation_spearman": 0.5333200240307363
+        },
+        {
+          "epoch": 8,
+          "validation_spearman": 0.5388541180379562
+        },
+        {
+          "epoch": 9,
+          "validation_spearman": 0.5529740376097249
+        },
+        {
+          "epoch": 10,
+          "validation_spearman": 0.5389885539810862
+        },
+        {
+          "epoch": 11,
+          "validation_spearman": 0.5607778900191327
+        },
+        {
+          "epoch": 12,
+          "validation_spearman": 0.5615435975069194
+        },
+        {
+          "epoch": 13,
+          "validation_spearman": 0.5586544274951155
+        },
+        {
+          "epoch": 14,
+          "validation_spearman": 0.5747918992768613
+        },
+        {
+          "epoch": 15,
+          "validation_spearman": 0.5715230635316743
+        },
+        {
+          "epoch": 16,
+          "validation_spearman": 0.5783719951729154
+        },
+        {
+          "epoch": 17,
+          "validation_spearman": 0.5766722304095572
+        },
+        {
+          "epoch": 18,
+          "validation_spearman": 0.5798164089324914
+        },
+        {
+          "epoch": 19,
+          "validation_spearman": 0.5855450289240149
+        },
+        {
+          "epoch": 20,
+          "validation_spearman": 0.5845472659945898
+        },
+        {
+          "epoch": 21,
+          "validation_spearman": 0.5837913584440396
+        },
+        {
+          "epoch": 22,
+          "validation_spearman": 0.5883484040213738
+        },
+        {
+          "epoch": 23,
+          "validation_spearman": 0.5896945203692574
+        },
+        {
+          "epoch": 24,
+          "validation_spearman": 0.5895675922748964
+        },
+        {
+          "epoch": 25,
+          "validation_spearman": 0.5839973500938404
+        },
+        {
+          "epoch": 26,
+          "validation_spearman": 0.5881542197804888
+        },
+        {
+          "epoch": 27,
+          "validation_spearman": 0.5914754841795875
+        },
+        {
+          "epoch": 28,
+          "validation_spearman": 0.5942927539714632
+        },
+        {
+          "epoch": 29,
+          "validation_spearman": 0.5930865372842946
+        },
+        {
+          "epoch": 30,
+          "validation_spearman": 0.5928566529833904
+        },
+        {
+          "epoch": 31,
+          "validation_spearman": 0.5930366434801276
+        },
+        {
+          "epoch": 32,
+          "validation_spearman": 0.5951255920396221
+        },
+        {
+          "epoch": 33,
+          "validation_spearman": 0.5946160188313687
+        },
+        {
+          "epoch": 34,
+          "validation_spearman": 0.5991450938843921
+        },
+        {
+          "epoch": 35,
+          "validation_spearman": 0.5986329057213969
+        },
+        {
+          "epoch": 36,
+          "validation_spearman": 0.5977729379919381
+        },
+        {
+          "epoch": 37,
+          "validation_spearman": 0.5971380849238276
+        },
+        {
+          "epoch": 38,
+          "validation_spearman": 0.5987207028439399
+        },
+        {
+          "epoch": 39,
+          "validation_spearman": 0.5958514198446735
+        }
+      ]
+    },
+    {
+      "label": "csts_continuation_pearson_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "phase": "csts_continuation_pearson_trace",
+      "seed": 7,
+      "validation_sha256": null,
+      "training_sha256": null,
+      "config": {
+        "schema_version": 2,
+        "model_id": "google/flan-t5-small",
+        "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+        "condition": true,
+        "projection_dimension": 128,
+        "encoder_learning_rate": 3e-06,
+        "projection_learning_rate": 0.0001,
+        "batch_size": 32,
+        "max_epochs": 48,
+        "patience": 5,
+        "warmup_fraction": 0.0,
+        "weight_decay": 0.01,
+        "max_length": 160,
+        "seed": 7,
+        "device": "cuda",
+        "fit_check": false,
+        "rating_objective": "pearson",
+        "prefix_epochs": 8,
+        "min_delta": 0.0,
+        "start_epoch": 24,
+        "schedule": "constant",
+        "max_seconds": 1442.753014711
+      },
+      "original_stop_reason": "validation_patience",
+      "source": {
+        "path": "training_outputs/csts_continuation_pearson_trace.json",
+        "sha256": "64e2f16d23372b3923ba2e3c0ad0b510c807456d5948fad3bc89457056185aca",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.26269440199361044
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.35397760193340594
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.42447385355427675
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.44221116097644225
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.4645836357849837
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.494015507433189
+        },
+        {
+          "epoch": 7,
+          "validation_spearman": 0.4952827797499459
+        },
+        {
+          "epoch": 8,
+          "validation_spearman": 0.5080635032773745
+        },
+        {
+          "epoch": 9,
+          "validation_spearman": 0.5221168941385541
+        },
+        {
+          "epoch": 10,
+          "validation_spearman": 0.517019605552643
+        },
+        {
+          "epoch": 11,
+          "validation_spearman": 0.5208374183741808
+        },
+        {
+          "epoch": 12,
+          "validation_spearman": 0.5254285404549219
+        },
+        {
+          "epoch": 13,
+          "validation_spearman": 0.5263763812917014
+        },
+        {
+          "epoch": 14,
+          "validation_spearman": 0.5392243422504082
+        },
+        {
+          "epoch": 15,
+          "validation_spearman": 0.5312135083249874
+        },
+        {
+          "epoch": 16,
+          "validation_spearman": 0.5382667188927316
+        },
+        {
+          "epoch": 17,
+          "validation_spearman": 0.5350124860643297
+        },
+        {
+          "epoch": 18,
+          "validation_spearman": 0.5402224577760016
+        },
+        {
+          "epoch": 19,
+          "validation_spearman": 0.5505254381550838
+        },
+        {
+          "epoch": 20,
+          "validation_spearman": 0.5481057386829525
+        },
+        {
+          "epoch": 21,
+          "validation_spearman": 0.5521803437234687
+        },
+        {
+          "epoch": 22,
+          "validation_spearman": 0.5546282323942435
+        },
+        {
+          "epoch": 23,
+          "validation_spearman": 0.5531947682964994
+        },
+        {
+          "epoch": 24,
+          "validation_spearman": 0.5504620840866076
+        },
+        {
+          "epoch": 25,
+          "validation_spearman": 0.544689738189559
+        },
+        {
+          "epoch": 26,
+          "validation_spearman": 0.5464591037236548
+        },
+        {
+          "epoch": 27,
+          "validation_spearman": 0.5561973579324238
+        },
+        {
+          "epoch": 28,
+          "validation_spearman": 0.5565668074838135
+        },
+        {
+          "epoch": 29,
+          "validation_spearman": 0.5529282120242748
+        },
+        {
+          "epoch": 30,
+          "validation_spearman": 0.5534862861201979
+        },
+        {
+          "epoch": 31,
+          "validation_spearman": 0.5551982899635503
+        },
+        {
+          "epoch": 32,
+          "validation_spearman": 0.5523278547352364
+        },
+        {
+          "epoch": 33,
+          "validation_spearman": 0.5512977307965722
+        }
+      ]
+    },
+    {
+      "label": "evidence_ratings_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "phase": "ratings",
+      "seed": 7,
+      "validation_sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+      "training_sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01",
+      "config": {
+        "schema_version": 2,
+        "model_id": "google/flan-t5-small",
+        "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+        "condition": true,
+        "projection_dimension": 128,
+        "encoder_learning_rate": 3e-05,
+        "projection_learning_rate": 0.001,
+        "batch_size": 32,
+        "max_epochs": 40,
+        "patience": 5,
+        "warmup_fraction": 0.1,
+        "weight_decay": 0.01,
+        "max_length": 160,
+        "seed": 7,
+        "device": "cuda",
+        "fit_check": false,
+        "arm": "evidence",
+        "phase": "ratings",
+        "training_sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01",
+        "validation_sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+        "prepared_sha256": "5a09c04931cc159ce643925ffe41a15d8cd6ab5fd3578b1b7bbc81d175aa0cc0",
+        "initial_sha256": "b5db6c3179cfd2bc8f91d0d734a83bcacee3917612b94d133c7761bd1bebfa38",
+        "linear_epochs": 24,
+        "continuation_encoder_rate": 3e-06,
+        "continuation_projection_rate": 0.0001,
+        "max_seconds": 2400.0
+      },
+      "original_stop_reason": "validation_patience",
+      "source": {
+        "path": "training_outputs/csts_tranche3_evidence/evidence_ratings_trace.json",
+        "sha256": "20e1529a36cd323848de667a31179c925736a6b4b49d0a1f6d94512331479114",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.39312959790649277
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.44266566294192444
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.4912256249298293
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.4979701347037567
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.528069884456756
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.546919514878049
+        },
+        {
+          "epoch": 7,
+          "validation_spearman": 0.547315236343655
+        },
+        {
+          "epoch": 8,
+          "validation_spearman": 0.5514623586288129
+        },
+        {
+          "epoch": 9,
+          "validation_spearman": 0.5757606877320591
+        },
+        {
+          "epoch": 10,
+          "validation_spearman": 0.5680413852733465
+        },
+        {
+          "epoch": 11,
+          "validation_spearman": 0.5979041157085128
+        },
+        {
+          "epoch": 12,
+          "validation_spearman": 0.6019447884486218
+        },
+        {
+          "epoch": 13,
+          "validation_spearman": 0.6070423197602969
+        },
+        {
+          "epoch": 14,
+          "validation_spearman": 0.6187442510422004
+        },
+        {
+          "epoch": 15,
+          "validation_spearman": 0.6236438458483619
+        },
+        {
+          "epoch": 16,
+          "validation_spearman": 0.6292926529283659
+        },
+        {
+          "epoch": 17,
+          "validation_spearman": 0.6322196456463881
+        },
+        {
+          "epoch": 18,
+          "validation_spearman": 0.6367970670107516
+        },
+        {
+          "epoch": 19,
+          "validation_spearman": 0.6393403679387015
+        },
+        {
+          "epoch": 20,
+          "validation_spearman": 0.6407135836388006
+        },
+        {
+          "epoch": 21,
+          "validation_spearman": 0.6430680832192257
+        },
+        {
+          "epoch": 22,
+          "validation_spearman": 0.6462944791743621
+        },
+        {
+          "epoch": 23,
+          "validation_spearman": 0.6459839171427351
+        },
+        {
+          "epoch": 24,
+          "validation_spearman": 0.6456475590495143
+        },
+        {
+          "epoch": 25,
+          "validation_spearman": 0.6441148451398355
+        },
+        {
+          "epoch": 26,
+          "validation_spearman": 0.6451891526517223
+        },
+        {
+          "epoch": 27,
+          "validation_spearman": 0.64837626872816
+        },
+        {
+          "epoch": 28,
+          "validation_spearman": 0.6500694062233188
+        },
+        {
+          "epoch": 29,
+          "validation_spearman": 0.6493740346884934
+        },
+        {
+          "epoch": 30,
+          "validation_spearman": 0.6471228971677366
+        },
+        {
+          "epoch": 31,
+          "validation_spearman": 0.6486693888921119
+        },
+        {
+          "epoch": 32,
+          "validation_spearman": 0.6496259961263553
+        },
+        {
+          "epoch": 33,
+          "validation_spearman": 0.6492799118480032
+        }
+      ]
+    },
+    {
+      "label": "csts_tranche1_mse_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "phase": "csts_tranche1_mse_trace",
+      "seed": 7,
+      "validation_sha256": null,
+      "training_sha256": null,
+      "config": {
+        "schema_version": 2,
+        "model_id": "google/flan-t5-small",
+        "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+        "condition": true,
+        "projection_dimension": 128,
+        "encoder_learning_rate": 3e-05,
+        "projection_learning_rate": 0.001,
+        "batch_size": 32,
+        "max_epochs": 24,
+        "patience": 3,
+        "warmup_fraction": 0.1,
+        "weight_decay": 0.01,
+        "max_length": 160,
+        "seed": 7,
+        "device": "cuda",
+        "fit_check": false,
+        "rating_objective": "mse",
+        "prefix_epochs": 8,
+        "max_seconds": 1800.0
+      },
+      "original_stop_reason": null,
+      "source": {
+        "path": "training_outputs/csts_tranche1_mse_trace.json",
+        "sha256": "8d3d6a3daafadaa3c34c667b189d843dca71fcc8cc8d904a306853bbd4b608f1",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.24334787142946948
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.3643912405383318
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.38511096192155975
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.434780650616664
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.48032347157730254
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.5075876142839637
+        },
+        {
+          "epoch": 7,
+          "validation_spearman": 0.4932014296778695
+        },
+        {
+          "epoch": 8,
+          "validation_spearman": 0.5055411792666247
+        },
+        {
+          "epoch": 9,
+          "validation_spearman": 0.519600472316808
+        },
+        {
+          "epoch": 10,
+          "validation_spearman": 0.5086597516648933
+        },
+        {
+          "epoch": 11,
+          "validation_spearman": 0.5267070362255716
+        },
+        {
+          "epoch": 12,
+          "validation_spearman": 0.5264814972370441
+        },
+        {
+          "epoch": 13,
+          "validation_spearman": 0.5385848733499599
+        },
+        {
+          "epoch": 14,
+          "validation_spearman": 0.5460608251816421
+        },
+        {
+          "epoch": 15,
+          "validation_spearman": 0.5391282889624436
+        },
+        {
+          "epoch": 16,
+          "validation_spearman": 0.5490912415878039
+        },
+        {
+          "epoch": 17,
+          "validation_spearman": 0.5398122124379328
+        },
+        {
+          "epoch": 18,
+          "validation_spearman": 0.5437219418517185
+        },
+        {
+          "epoch": 19,
+          "validation_spearman": 0.556390474283241
+        },
+        {
+          "epoch": 20,
+          "validation_spearman": 0.5543550000410645
+        },
+        {
+          "epoch": 21,
+          "validation_spearman": 0.5557773083752042
+        },
+        {
+          "epoch": 22,
+          "validation_spearman": 0.5595286293808345
+        },
+        {
+          "epoch": 23,
+          "validation_spearman": 0.5601479884450835
+        },
+        {
+          "epoch": 24,
+          "validation_spearman": 0.5591461168878507
+        }
+      ]
+    },
+    {
+      "label": "csts_tranche1_pearson_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "phase": "csts_tranche1_pearson_trace",
+      "seed": 7,
+      "validation_sha256": null,
+      "training_sha256": null,
+      "config": {
+        "schema_version": 2,
+        "model_id": "google/flan-t5-small",
+        "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+        "condition": true,
+        "projection_dimension": 128,
+        "encoder_learning_rate": 3e-05,
+        "projection_learning_rate": 0.001,
+        "batch_size": 32,
+        "max_epochs": 24,
+        "patience": 3,
+        "warmup_fraction": 0.1,
+        "weight_decay": 0.01,
+        "max_length": 160,
+        "seed": 7,
+        "device": "cuda",
+        "fit_check": false,
+        "rating_objective": "pearson",
+        "prefix_epochs": 8,
+        "max_seconds": 1252.169637947
+      },
+      "original_stop_reason": null,
+      "source": {
+        "path": "training_outputs/csts_tranche1_pearson_trace.json",
+        "sha256": "5fee43681182bc61e3ed047db8bece73a73b64ee6f2e2491c095e4dd29b28a90",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.26269440199361044
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.35397760193340594
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.42447385355427675
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.44221116097644225
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.4645836357849837
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.494015507433189
+        },
+        {
+          "epoch": 7,
+          "validation_spearman": 0.4952827797499459
+        },
+        {
+          "epoch": 8,
+          "validation_spearman": 0.5080635032773745
+        },
+        {
+          "epoch": 9,
+          "validation_spearman": 0.5221168941385541
+        },
+        {
+          "epoch": 10,
+          "validation_spearman": 0.517019605552643
+        },
+        {
+          "epoch": 11,
+          "validation_spearman": 0.5208374183741808
+        },
+        {
+          "epoch": 12,
+          "validation_spearman": 0.5254285404549219
+        },
+        {
+          "epoch": 13,
+          "validation_spearman": 0.5263763812917014
+        },
+        {
+          "epoch": 14,
+          "validation_spearman": 0.5392243422504082
+        },
+        {
+          "epoch": 15,
+          "validation_spearman": 0.5312135083249874
+        },
+        {
+          "epoch": 16,
+          "validation_spearman": 0.5382667188927316
+        },
+        {
+          "epoch": 17,
+          "validation_spearman": 0.5350124860643297
+        },
+        {
+          "epoch": 18,
+          "validation_spearman": 0.5402224577760016
+        },
+        {
+          "epoch": 19,
+          "validation_spearman": 0.5505254381550838
+        },
+        {
+          "epoch": 20,
+          "validation_spearman": 0.5481057386829525
+        },
+        {
+          "epoch": 21,
+          "validation_spearman": 0.5521803437234687
+        },
+        {
+          "epoch": 22,
+          "validation_spearman": 0.5546282323942435
+        },
+        {
+          "epoch": 23,
+          "validation_spearman": 0.5531947682964994
+        },
+        {
+          "epoch": 24,
+          "validation_spearman": 0.5504620840866076
+        }
+      ]
+    },
+    {
+      "label": "csts_tranche2_projection_trace",
+      "scope": "older_qwen_projection",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "phase": "csts_tranche2_projection_trace",
+      "seed": 7,
+      "validation_sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+      "training_sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01",
+      "config": {
+        "schema_version": 2,
+        "model_id": "Qwen/Qwen3-Embedding-8B",
+        "revision": "c90816d848505624c2434128dfc61132162a0ee9",
+        "max_length": 160,
+        "embedding_dimension": 4096,
+        "encode_batch_size": 4,
+        "device": "cpu",
+        "kind": "projection",
+        "seed": 7,
+        "projection_dimension": 128,
+        "ridge_alphas": [
+          1e-05,
+          0.0001,
+          0.001,
+          0.01,
+          0.1,
+          1.0
+        ],
+        "learning_rate": 0.001,
+        "batch_size": 32,
+        "microbatch_size": 32,
+        "max_epochs": 48,
+        "start_epoch": 0,
+        "patience": 5,
+        "weight_decay": 0.01,
+        "schedule": "constant",
+        "warmup_fraction": 0.0,
+        "max_seconds": 1800.0,
+        "lora_rank": 32,
+        "lora_alpha": 32,
+        "lora_dropout": 0.05
+      },
+      "original_stop_reason": "validation_patience",
+      "source": {
+        "path": "training_outputs/csts_tranche2_projection_trace.json",
+        "sha256": "650caf6c166bb0e31e2edfd2988578ded488ce8322983837046f0d1fd7c70262",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.4706486987351638
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.5254413581666455
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.571112657314756
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.5819226124536415
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.5976973117752546
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.6114308134892846
+        },
+        {
+          "epoch": 7,
+          "validation_spearman": 0.6151476760970467
+        },
+        {
+          "epoch": 8,
+          "validation_spearman": 0.613488696548053
+        },
+        {
+          "epoch": 9,
+          "validation_spearman": 0.617400504864704
+        },
+        {
+          "epoch": 10,
+          "validation_spearman": 0.6161383325565212
+        },
+        {
+          "epoch": 11,
+          "validation_spearman": 0.6210932963018018
+        },
+        {
+          "epoch": 12,
+          "validation_spearman": 0.6184961075386494
+        },
+        {
+          "epoch": 13,
+          "validation_spearman": 0.6186811566215457
+        },
+        {
+          "epoch": 14,
+          "validation_spearman": 0.6187719717306428
+        },
+        {
+          "epoch": 15,
+          "validation_spearman": 0.6243103961567669
+        },
+        {
+          "epoch": 16,
+          "validation_spearman": 0.640348613770061
+        },
+        {
+          "epoch": 17,
+          "validation_spearman": 0.6334847549048335
+        },
+        {
+          "epoch": 18,
+          "validation_spearman": 0.6275105707128276
+        },
+        {
+          "epoch": 19,
+          "validation_spearman": 0.6424206754325978
+        },
+        {
+          "epoch": 20,
+          "validation_spearman": 0.6261400131194158
+        },
+        {
+          "epoch": 21,
+          "validation_spearman": 0.6384839827429993
+        },
+        {
+          "epoch": 22,
+          "validation_spearman": 0.633113410025376
+        },
+        {
+          "epoch": 23,
+          "validation_spearman": 0.6282985038520847
+        },
+        {
+          "epoch": 24,
+          "validation_spearman": 0.630497898012873
+        }
+      ]
+    },
+    {
+      "label": "recent_frozen_comparator_seed_9",
+      "scope": "recent_frozen_comparator",
+      "model": "Qwen/Qwen3-Embedding-8B (frozen)",
+      "phase": "symmetric_comparator",
+      "seed": 9,
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "config": {},
+      "original_stop_reason": null,
+      "source": {
+        "archive": "/home/peter_aetherlabs_live/jep-sota-condition-order-20261107/collected/results-evidence.tar.gz",
+        "member": "./comparison-seed-9-epochs.json",
+        "sha256": "48f72b6a63112bce54bcd3c49f8e6f22c76a23367beaa8ceb3226eea450fb576",
+        "source_commit": "fdbcb3461f63cf44d7cb3cde4de27332594e452d",
+        "recorded_selected": {
+          "epoch": 9,
+          "validation_spearman": 0.8465351181029664,
+          "checkpoint_sha256": "0af82b773b9c9da246bafeac49a216b06242072cdfc5d5ce0a3f4b767cd01f77"
+        }
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.8423632092113851
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.8438225454016741
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.8448174884822142
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.8455302819421692
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.8458233610303373
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.8459570019709188
+        },
+        {
+          "epoch": 7,
+          "validation_spearman": 0.84617644774808
+        },
+        {
+          "epoch": 8,
+          "validation_spearman": 0.8464601929231063
+        },
+        {
+          "epoch": 9,
+          "validation_spearman": 0.8465351181029664
+        },
+        {
+          "epoch": 10,
+          "validation_spearman": 0.8463228113473391
+        },
+        {
+          "epoch": 11,
+          "validation_spearman": 0.84652917293536
+        },
+        {
+          "epoch": 12,
+          "validation_spearman": 0.846008763492343
+        },
+        {
+          "epoch": 13,
+          "validation_spearman": 0.8461236964365895
+        },
+        {
+          "epoch": 14,
+          "validation_spearman": 0.8453828289311163
+        },
+        {
+          "epoch": 15,
+          "validation_spearman": 0.8451995956518858
+        },
+        {
+          "epoch": 16,
+          "validation_spearman": 0.8447653259077
+        },
+        {
+          "epoch": 17,
+          "validation_spearman": 0.8440627398137812
+        },
+        {
+          "epoch": 18,
+          "validation_spearman": 0.8442031759202565
+        },
+        {
+          "epoch": 19,
+          "validation_spearman": 0.843628948249184
+        }
+      ]
+    },
+    {
+      "label": "recent_frozen_comparator_seed_7",
+      "scope": "recent_frozen_comparator",
+      "model": "Qwen/Qwen3-Embedding-8B (frozen)",
+      "phase": "symmetric_comparator",
+      "seed": 7,
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "config": {},
+      "original_stop_reason": null,
+      "source": {
+        "archive": "/home/peter_aetherlabs_live/jep-sota-condition-order-20261107/collected/results-evidence.tar.gz",
+        "member": "./comparison-seed-7-epochs.json",
+        "sha256": "9843b748d1a89e69958404cf0a3782187990022666d0adb87a8a1c7e12edcca7",
+        "source_commit": "fdbcb3461f63cf44d7cb3cde4de27332594e452d",
+        "recorded_selected": {
+          "epoch": 8,
+          "validation_spearman": 0.846447046068686,
+          "checkpoint_sha256": "4e5b215641752a21fb8bc4cc0414cb88aa90d8761a16109dc56e42dd71c8f812"
+        }
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.8428829225942727
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.8439149799035357
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.8450367912539923
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.8457379771758963
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.845891473369481
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.8460805618354025
+        },
+        {
+          "epoch": 7,
+          "validation_spearman": 0.8463934833221575
+        },
+        {
+          "epoch": 8,
+          "validation_spearman": 0.846447046068686
+        },
+        {
+          "epoch": 9,
+          "validation_spearman": 0.8462639461540262
+        },
+        {
+          "epoch": 10,
+          "validation_spearman": 0.8461295275212498
+        },
+        {
+          "epoch": 11,
+          "validation_spearman": 0.8459014966007048
+        },
+        {
+          "epoch": 12,
+          "validation_spearman": 0.8458125536797103
+        },
+        {
+          "epoch": 13,
+          "validation_spearman": 0.8455975973074931
+        },
+        {
+          "epoch": 14,
+          "validation_spearman": 0.84485834785169
+        },
+        {
+          "epoch": 15,
+          "validation_spearman": 0.8449410226378649
+        },
+        {
+          "epoch": 16,
+          "validation_spearman": 0.8447027274657878
+        },
+        {
+          "epoch": 17,
+          "validation_spearman": 0.8441008724401684
+        },
+        {
+          "epoch": 18,
+          "validation_spearman": 0.8439075147011846
+        }
+      ]
+    },
+    {
+      "label": "recent_frozen_comparator_seed_8",
+      "scope": "recent_frozen_comparator",
+      "model": "Qwen/Qwen3-Embedding-8B (frozen)",
+      "phase": "symmetric_comparator",
+      "seed": 8,
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "config": {},
+      "original_stop_reason": null,
+      "source": {
+        "archive": "/home/peter_aetherlabs_live/jep-sota-condition-order-20261107/collected/results-evidence.tar.gz",
+        "member": "./comparison-seed-8-epochs.json",
+        "sha256": "ae0b17e0850e490a2cd2ff65c214d0e78e24f9613febddba304bba7afeb0fcb0",
+        "source_commit": "fdbcb3461f63cf44d7cb3cde4de27332594e452d",
+        "recorded_selected": {
+          "epoch": 8,
+          "validation_spearman": 0.846376785435194,
+          "checkpoint_sha256": "8c5f138c743ff8186fbd54b24499f545c74690f27d45bbd0e4f7541d972cdf31"
+        }
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.84252547533059
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.8440358435541699
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.8446584648895578
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.8456883205651653
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.8459262027891141
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.8463004767987639
+        },
+        {
+          "epoch": 7,
+          "validation_spearman": 0.8463648677843464
+        },
+        {
+          "epoch": 8,
+          "validation_spearman": 0.846376785435194
+        },
+        {
+          "epoch": 9,
+          "validation_spearman": 0.8463174398080666
+        },
+        {
+          "epoch": 10,
+          "validation_spearman": 0.8460948430920741
+        },
+        {
+          "epoch": 11,
+          "validation_spearman": 0.8459303836880633
+        },
+        {
+          "epoch": 12,
+          "validation_spearman": 0.8458470934967008
+        },
+        {
+          "epoch": 13,
+          "validation_spearman": 0.8456868856909294
+        },
+        {
+          "epoch": 14,
+          "validation_spearman": 0.8449524453936793
+        },
+        {
+          "epoch": 15,
+          "validation_spearman": 0.8449403509946056
+        },
+        {
+          "epoch": 16,
+          "validation_spearman": 0.8442412715901965
+        },
+        {
+          "epoch": 17,
+          "validation_spearman": 0.8437835274273541
+        },
+        {
+          "epoch": 18,
+          "validation_spearman": 0.8439785465996636
+        }
+      ]
+    },
+    {
+      "label": "ratings_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "phase": "ratings_trace",
+      "seed": 7,
+      "validation_sha256": null,
+      "training_sha256": null,
+      "config": {
+        "schema_version": 2,
+        "model_id": "google/flan-t5-small",
+        "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+        "condition": true,
+        "projection_dimension": 128,
+        "encoder_learning_rate": 3e-05,
+        "projection_learning_rate": 0.001,
+        "batch_size": 32,
+        "max_epochs": 8,
+        "patience": 3,
+        "warmup_fraction": 0.1,
+        "weight_decay": 0.01,
+        "max_length": 160,
+        "seed": 7,
+        "device": "cuda",
+        "fit_check": false,
+        "objective": "ratings",
+        "annotation_weight": 0.2,
+        "shuffle_answers": false,
+        "checkpoint_metric": "spearman",
+        "fixed_epoch_budget": true
+      },
+      "original_stop_reason": null,
+      "source": {
+        "path": "training_outputs/csts_annotation_format_evidence/evidence/ratings_trace.json",
+        "sha256": "b1738cbca13ce2c0a5fc74eb68b6f02158515d87fb6bf48cdfd19c34649f9be9",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.40549213285447394
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.45741470285298136
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.5105976427794624
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.523195997557344
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.5349244250406867
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.5426046712134526
+        },
+        {
+          "epoch": 7,
+          "validation_spearman": 0.5448673160831911
+        },
+        {
+          "epoch": 8,
+          "validation_spearman": 0.5437521933486947
+        }
+      ]
+    },
+    {
+      "label": "ratings_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "phase": "ratings_trace",
+      "seed": 7,
+      "validation_sha256": null,
+      "training_sha256": null,
+      "config": {
+        "schema_version": 2,
+        "model_id": "google/flan-t5-small",
+        "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+        "condition": true,
+        "projection_dimension": 128,
+        "encoder_learning_rate": 3e-05,
+        "projection_learning_rate": 0.001,
+        "batch_size": 32,
+        "max_epochs": 8,
+        "patience": 3,
+        "warmup_fraction": 0.1,
+        "weight_decay": 0.01,
+        "max_length": 160,
+        "seed": 7,
+        "device": "cuda",
+        "fit_check": false,
+        "objective": "ratings",
+        "annotation_weight": 0.2,
+        "shuffle_answers": false,
+        "checkpoint_metric": "spearman",
+        "fixed_epoch_budget": true
+      },
+      "original_stop_reason": null,
+      "source": {
+        "path": "training_outputs/csts_annotation_format_evidence/prose/ratings_trace.json",
+        "sha256": "06038ecb706a5fc4427d81846b8a3ec3719283616c67b7bc7c2e47df24053995",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.4159798650467238
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.4541632382542732
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.5133147013922528
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.5198156274130761
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.5261083317919268
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.532510049864353
+        },
+        {
+          "epoch": 7,
+          "validation_spearman": 0.5381009403255929
+        },
+        {
+          "epoch": 8,
+          "validation_spearman": 0.5381335559311394
+        }
+      ]
+    },
+    {
+      "label": "ratings_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "phase": "ratings_trace",
+      "seed": 7,
+      "validation_sha256": null,
+      "training_sha256": null,
+      "config": {
+        "schema_version": 2,
+        "model_id": "google/flan-t5-small",
+        "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+        "condition": true,
+        "projection_dimension": 128,
+        "encoder_learning_rate": 3e-05,
+        "projection_learning_rate": 0.001,
+        "batch_size": 32,
+        "max_epochs": 8,
+        "patience": 3,
+        "warmup_fraction": 0.1,
+        "weight_decay": 0.01,
+        "max_length": 160,
+        "seed": 7,
+        "device": "cuda",
+        "fit_check": false,
+        "objective": "ratings",
+        "annotation_weight": 0.2,
+        "shuffle_answers": false,
+        "checkpoint_metric": "spearman",
+        "fixed_epoch_budget": true
+      },
+      "original_stop_reason": null,
+      "source": {
+        "path": "training_outputs/csts_annotation_format_evidence/record/ratings_trace.json",
+        "sha256": "33263487d527e1462e82763f01d5aea686ddbd0de5735b91517ba0cc467f25ee",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.4086557081810166
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.4548783439382955
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.5065518215362446
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.5156582232762422
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.519245768134899
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.5264025329798832
+        },
+        {
+          "epoch": 7,
+          "validation_spearman": 0.5331753352736424
+        },
+        {
+          "epoch": 8,
+          "validation_spearman": 0.5327613515744813
+        }
+      ]
+    },
+    {
+      "label": "older_qwen_lora_condition_last",
+      "scope": "older_qwen_lora",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "phase": "ratings",
+      "seed": 7,
+      "validation_sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+      "training_sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01",
+      "config": {
+        "schema_version": 2,
+        "model_id": "Qwen/Qwen3-Embedding-8B",
+        "revision": "c90816d848505624c2434128dfc61132162a0ee9",
+        "max_length": 160,
+        "embedding_dimension": 4096,
+        "encode_batch_size": 4,
+        "device": "cuda",
+        "kind": "lora",
+        "seed": 7,
+        "projection_dimension": 128,
+        "ridge_alphas": [
+          1e-05,
+          0.0001,
+          0.001,
+          0.01,
+          0.1,
+          1.0
+        ],
+        "learning_rate": 2e-05,
+        "batch_size": 32,
+        "microbatch_size": 2,
+        "max_epochs": 24,
+        "stop_after_epoch": 7,
+        "start_epoch": 1,
+        "patience": 5,
+        "weight_decay": 0.01,
+        "schedule": "constant",
+        "warmup_fraction": 0.0,
+        "max_seconds": 57600.0,
+        "lora_rank": 32,
+        "lora_alpha": 32,
+        "lora_dropout": 0.05
+      },
+      "original_stop_reason": "replay_epoch_limit",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-condition-replay-20261106/verified-evidence/baseline_results/lora/condition_last_20261106_continuation/lora_trace.json",
+        "sha256": "f4ec68558570b565b6d36a24767d475ae3a6b0ff37dd5dbf773f8160dd1d6070"
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.6798655189937189
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.7736972346680008
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.7729789235158399
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.7835560523520446
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.7829723307090407
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.7800282689250795
+        },
+        {
+          "epoch": 7,
+          "validation_spearman": 0.7751772464470121
+        }
+      ]
+    },
+    {
+      "label": "epoch_scores/ratings_pretrain",
+      "scope": "recent_qwen_fixed_or_proposition_pretraining",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "phase": "ratings_pretrain",
+      "seed": null,
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "config": {},
+      "original_stop_reason": "fixed_update_budget",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/epoch_scores.json",
+        "json_pointer": "/stages/ratings_pretrain",
+        "sha256": "007fd92e9bd26ddde1e94973c43335b96f5fe61ec201f71eda7b2ee2ca89dde0",
+        "identity": {
+          "run_name": "jep_csts_v1_full_propositions_converged_patience1_20261027",
+          "source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
+          "attempt": "9bfd9512",
+          "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+        }
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.8511942971477676
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.8656840454078584
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.8699310626644988
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.8699165860446431
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.8678713175657048
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.8683749760984485
+        },
+        {
+          "epoch": 7,
+          "validation_spearman": 0.8683670680842244
+        }
+      ]
+    },
+    {
+      "label": "answers_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "phase": "answers_trace",
+      "seed": 7,
+      "validation_sha256": null,
+      "training_sha256": null,
+      "config": {
+        "schema_version": 2,
+        "model_id": "google/flan-t5-small",
+        "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+        "condition": true,
+        "projection_dimension": 128,
+        "encoder_learning_rate": 3e-05,
+        "projection_learning_rate": 0.001,
+        "batch_size": 32,
+        "max_epochs": 6,
+        "patience": 3,
+        "warmup_fraction": 0.1,
+        "weight_decay": 0.01,
+        "max_length": 160,
+        "seed": 7,
+        "device": "cuda",
+        "fit_check": false,
+        "objective": "answers",
+        "annotation_weight": 0.2,
+        "shuffle_answers": false,
+        "checkpoint_metric": "mse",
+        "fixed_epoch_budget": true
+      },
+      "original_stop_reason": null,
+      "source": {
+        "path": "training_outputs/csts_annotation_format_evidence/evidence/answers_trace.json",
+        "sha256": "c09aef36e96bb3a6bb798fc381a32403d06c57f244e43ceb2ac1b22a5eef9300",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.02798936281457357
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.03018409209865823
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.028942264286453138
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.027579958818040626
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.028338099151668336
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.029729318463038015
+        }
+      ]
+    },
+    {
+      "label": "answers_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "phase": "answers_trace",
+      "seed": 7,
+      "validation_sha256": null,
+      "training_sha256": null,
+      "config": {
+        "schema_version": 2,
+        "model_id": "google/flan-t5-small",
+        "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+        "condition": true,
+        "projection_dimension": 128,
+        "encoder_learning_rate": 3e-05,
+        "projection_learning_rate": 0.001,
+        "batch_size": 32,
+        "max_epochs": 6,
+        "patience": 3,
+        "warmup_fraction": 0.1,
+        "weight_decay": 0.01,
+        "max_length": 160,
+        "seed": 7,
+        "device": "cuda",
+        "fit_check": false,
+        "objective": "answers",
+        "annotation_weight": 0.2,
+        "shuffle_answers": false,
+        "checkpoint_metric": "mse",
+        "fixed_epoch_budget": true
+      },
+      "original_stop_reason": null,
+      "source": {
+        "path": "training_outputs/csts_annotation_format_evidence/prose/answers_trace.json",
+        "sha256": "7338fc9bc7b665f459b595d643336cd66e2d67cca8da974b264bd4ef6a2aa5ec",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.02436647759948075
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.0217232334407812
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.021712450500169983
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.020031757231076416
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.02187297245124938
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.022401793218663296
+        }
+      ]
+    },
+    {
+      "label": "answers_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "phase": "answers_trace",
+      "seed": 7,
+      "validation_sha256": null,
+      "training_sha256": null,
+      "config": {
+        "schema_version": 2,
+        "model_id": "google/flan-t5-small",
+        "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+        "condition": true,
+        "projection_dimension": 128,
+        "encoder_learning_rate": 3e-05,
+        "projection_learning_rate": 0.001,
+        "batch_size": 32,
+        "max_epochs": 6,
+        "patience": 3,
+        "warmup_fraction": 0.1,
+        "weight_decay": 0.01,
+        "max_length": 160,
+        "seed": 7,
+        "device": "cuda",
+        "fit_check": false,
+        "objective": "answers",
+        "annotation_weight": 0.2,
+        "shuffle_answers": false,
+        "checkpoint_metric": "mse",
+        "fixed_epoch_budget": true
+      },
+      "original_stop_reason": null,
+      "source": {
+        "path": "training_outputs/csts_annotation_format_evidence/record/answers_trace.json",
+        "sha256": "63a586620b702b99885c555c6ff67776c3b260a951b4dc343992ab31da7b225b",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.02864740233212489
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.01842584148672971
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.013859809265919412
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.01451790132632351
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.015272379306246095
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.01541778967131636
+        }
+      ]
+    },
+    {
+      "label": "evidence_pretrain_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "phase": "pretrain",
+      "seed": 7,
+      "validation_sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+      "training_sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01",
+      "config": {
+        "schema_version": 2,
+        "model_id": "google/flan-t5-small",
+        "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+        "condition": true,
+        "projection_dimension": 128,
+        "encoder_learning_rate": 3e-05,
+        "projection_learning_rate": 0.001,
+        "batch_size": 32,
+        "max_epochs": 6,
+        "patience": 5,
+        "warmup_fraction": 0.1,
+        "weight_decay": 0.01,
+        "max_length": 160,
+        "seed": 7,
+        "device": "cuda",
+        "fit_check": false,
+        "arm": "evidence",
+        "phase": "pretrain",
+        "training_sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01",
+        "validation_sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+        "prepared_sha256": "5a09c04931cc159ce643925ffe41a15d8cd6ab5fd3578b1b7bbc81d175aa0cc0",
+        "initial_sha256": "4bb47cbde23c898577448f73038616e07567b1e279e8f685ae865008e97591f1",
+        "linear_epochs": 24,
+        "continuation_encoder_rate": 3e-06,
+        "continuation_projection_rate": 0.0001,
+        "max_seconds": 2400.0
+      },
+      "original_stop_reason": "fixed_pretraining_budget",
+      "source": {
+        "path": "training_outputs/csts_tranche3_evidence/evidence_pretrain_trace.json",
+        "sha256": "9b95f786d5c6b661cc1e324fde023a6e1624fd64ee711bbf738c47d827816868",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.02745844416955466
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.024941212070282943
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.02392057839883545
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.022421379959199596
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.02284066976870761
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.023492080218884392
+        }
+      ]
+    },
+    {
+      "label": "ratings_pretrain_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "phase": "pretrain",
+      "seed": 7,
+      "validation_sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+      "training_sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01",
+      "config": {
+        "schema_version": 2,
+        "model_id": "google/flan-t5-small",
+        "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+        "condition": true,
+        "projection_dimension": 128,
+        "encoder_learning_rate": 3e-05,
+        "projection_learning_rate": 0.001,
+        "batch_size": 32,
+        "max_epochs": 6,
+        "patience": 5,
+        "warmup_fraction": 0.1,
+        "weight_decay": 0.01,
+        "max_length": 160,
+        "seed": 7,
+        "device": "cuda",
+        "fit_check": false,
+        "arm": "ratings",
+        "phase": "pretrain",
+        "training_sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01",
+        "validation_sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+        "prepared_sha256": "5a09c04931cc159ce643925ffe41a15d8cd6ab5fd3578b1b7bbc81d175aa0cc0",
+        "initial_sha256": "4bb47cbde23c898577448f73038616e07567b1e279e8f685ae865008e97591f1",
+        "linear_epochs": 24,
+        "continuation_encoder_rate": 3e-06,
+        "continuation_projection_rate": 0.0001,
+        "max_seconds": 2400.0
+      },
+      "original_stop_reason": "fixed_pretraining_budget",
+      "source": {
+        "path": "training_outputs/csts_tranche3_evidence/ratings_pretrain_trace.json",
+        "sha256": "a7b38cdd85ca316558b2a02630af60baac370430e4d01ea73791fe52e18bbfe8",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.34195172715918504
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.37814047670829176
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.38264673638407964
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.40375647809416865
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.3992149130770308
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.4053164129077056
+        }
+      ]
+    },
+    {
+      "label": "shuffled_pretrain_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "phase": "pretrain",
+      "seed": 7,
+      "validation_sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+      "training_sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01",
+      "config": {
+        "schema_version": 2,
+        "model_id": "google/flan-t5-small",
+        "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+        "condition": true,
+        "projection_dimension": 128,
+        "encoder_learning_rate": 3e-05,
+        "projection_learning_rate": 0.001,
+        "batch_size": 32,
+        "max_epochs": 6,
+        "patience": 5,
+        "warmup_fraction": 0.1,
+        "weight_decay": 0.01,
+        "max_length": 160,
+        "seed": 7,
+        "device": "cuda",
+        "fit_check": false,
+        "arm": "shuffled",
+        "phase": "pretrain",
+        "training_sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01",
+        "validation_sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+        "prepared_sha256": "5a09c04931cc159ce643925ffe41a15d8cd6ab5fd3578b1b7bbc81d175aa0cc0",
+        "initial_sha256": "4bb47cbde23c898577448f73038616e07567b1e279e8f685ae865008e97591f1",
+        "linear_epochs": 24,
+        "continuation_encoder_rate": 3e-06,
+        "continuation_projection_rate": 0.0001,
+        "max_seconds": 2400.0
+      },
+      "original_stop_reason": "fixed_pretraining_budget",
+      "source": {
+        "path": "training_outputs/csts_tranche3_evidence/shuffled_pretrain_trace.json",
+        "sha256": "2fd230294a46d48bef1bfb42c1e551952760ea471e24ed8f0a952ec32028568a",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.08439227834578138
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.0840627159716136
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.08073616267520889
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.08152524903598579
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.0796891620542471
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.07908144272735944
+        }
+      ]
+    },
+    {
+      "label": "epoch_scores/evidence_pretrain",
+      "scope": "recent_qwen_fixed_or_proposition_pretraining",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "phase": "evidence_pretrain",
+      "seed": null,
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "config": {},
+      "original_stop_reason": "proposition_validation_patience",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/epoch_scores.json",
+        "json_pointer": "/stages/evidence_pretrain",
+        "sha256": "007fd92e9bd26ddde1e94973c43335b96f5fe61ec201f71eda7b2ee2ca89dde0",
+        "identity": {
+          "run_name": "jep_csts_v1_full_propositions_converged_patience1_20261027",
+          "source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
+          "attempt": "9bfd9512",
+          "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+        }
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.4738370115511225
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.4562223547833581
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.48044195496520814
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.49722078185523333
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.5003242834624434
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.5111559305848661
+        }
+      ]
+    },
+    {
+      "label": "two_epoch_phase1_scores/ratings_ratings",
+      "scope": "recent_qwen_ratings",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "phase": "ratings_ratings",
+      "seed": null,
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "config": {},
+      "original_stop_reason": "validation_patience",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/two_epoch_phase1_scores.json",
+        "json_pointer": "/stages/ratings_ratings",
+        "sha256": "6b2e9e118cdda33c1f1b3e53c53356dfbae0787827f030e63872687250b32ed4",
+        "identity": {
+          "run_name": "jep_csts_v1_proposition_patience1_completion_20261027",
+          "source_commit": "636cb33048f41eb8c0e839250df66d36cf46a101",
+          "attempt": "191bbce7",
+          "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+        }
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.8651653516458706
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.8736060017481213
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.875774373088357
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.8759148798941229
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.8748754733870959
+        },
+        {
+          "epoch": 6,
+          "validation_spearman": 0.872286908848061
+        }
+      ],
+      "aliases": [
+        {
+          "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/four_epoch_pilot_scores.json",
+          "json_pointer": "/stages/ratings_ratings",
+          "sha256": "86a07cbdce109e11b8fc4574c97295eeb839d43170f63d76987d21c364175030",
+          "identity": {
+            "run_name": "jep_csts_v1_existing_propositions_patience2_20261027",
+            "source_commit": "8df0a1039bb5be8ddfd8407bdd32aa64a102018a",
+            "attempt": "6048f746",
+            "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+          }
+        }
+      ]
+    },
+    {
+      "label": "epoch_scores/evidence_ratings",
+      "scope": "recent_qwen_ratings",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "phase": "evidence_ratings",
+      "seed": null,
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "config": {},
+      "original_stop_reason": "validation_patience",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/epoch_scores.json",
+        "json_pointer": "/stages/evidence_ratings",
+        "sha256": "007fd92e9bd26ddde1e94973c43335b96f5fe61ec201f71eda7b2ee2ca89dde0",
+        "identity": {
+          "run_name": "jep_csts_v1_full_propositions_converged_patience1_20261027",
+          "source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
+          "attempt": "9bfd9512",
+          "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+        }
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.8541123454435061
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.8711297241464339
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.8740149364876366
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.8770609109816897
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.8728643810525594
+        }
+      ]
+    },
+    {
+      "label": "two_epoch_phase1_scores/evidence_ratings",
+      "scope": "recent_qwen_ratings",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "phase": "evidence_ratings",
+      "seed": null,
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "config": {},
+      "original_stop_reason": "validation_patience",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/two_epoch_phase1_scores.json",
+        "json_pointer": "/stages/evidence_ratings",
+        "sha256": "6b2e9e118cdda33c1f1b3e53c53356dfbae0787827f030e63872687250b32ed4",
+        "identity": {
+          "run_name": "jep_csts_v1_proposition_patience1_completion_20261027",
+          "source_commit": "636cb33048f41eb8c0e839250df66d36cf46a101",
+          "attempt": "191bbce7",
+          "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+        }
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.8476409498069783
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.8679663650043191
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.8732305949430224
+        },
+        {
+          "epoch": 4,
+          "validation_spearman": 0.8750486487560906
+        },
+        {
+          "epoch": 5,
+          "validation_spearman": 0.8735786587975386
+        }
+      ],
+      "aliases": [
+        {
+          "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/four_epoch_pilot_scores.json",
+          "json_pointer": "/stages/evidence_ratings",
+          "sha256": "86a07cbdce109e11b8fc4574c97295eeb839d43170f63d76987d21c364175030",
+          "identity": {
+            "run_name": "jep_csts_v1_existing_propositions_patience2_20261027",
+            "source_commit": "8df0a1039bb5be8ddfd8407bdd32aa64a102018a",
+            "attempt": "6048f746",
+            "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+          }
+        }
+      ]
+    },
+    {
+      "label": "epoch_scores/ratings_ratings",
+      "scope": "recent_qwen_ratings",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "phase": "ratings_ratings",
+      "seed": null,
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "config": {},
+      "original_stop_reason": "validation_patience",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/epoch_scores.json",
+        "json_pointer": "/stages/ratings_ratings",
+        "sha256": "007fd92e9bd26ddde1e94973c43335b96f5fe61ec201f71eda7b2ee2ca89dde0",
+        "identity": {
+          "run_name": "jep_csts_v1_full_propositions_converged_patience1_20261027",
+          "source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
+          "attempt": "9bfd9512",
+          "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+        }
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.8702511842320014
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.8718754731182672
+        },
+        {
+          "epoch": 3,
+          "validation_spearman": 0.8669079481433456
+        }
+      ]
+    },
+    {
+      "label": "four_epoch_pilot_scores/ratings_pretrain",
+      "scope": "recent_qwen_fixed_or_proposition_pretraining",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "phase": "ratings_pretrain",
+      "seed": null,
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "config": {},
+      "original_stop_reason": "fixed_update_budget",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/four_epoch_pilot_scores.json",
+        "json_pointer": "/stages/ratings_pretrain",
+        "sha256": "86a07cbdce109e11b8fc4574c97295eeb839d43170f63d76987d21c364175030",
+        "identity": {
+          "run_name": "jep_csts_v1_existing_propositions_patience2_20261027",
+          "source_commit": "8df0a1039bb5be8ddfd8407bdd32aa64a102018a",
+          "attempt": "6048f746",
+          "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+        }
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.8106559608996193
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.8453686505097764
+        }
+      ],
+      "aliases": [
+        {
+          "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/two_epoch_phase1_scores.json",
+          "json_pointer": "/stages/ratings_pretrain",
+          "sha256": "6b2e9e118cdda33c1f1b3e53c53356dfbae0787827f030e63872687250b32ed4",
+          "identity": {
+            "run_name": "jep_csts_v1_proposition_patience1_completion_20261027",
+            "source_commit": "636cb33048f41eb8c0e839250df66d36cf46a101",
+            "attempt": "191bbce7",
+            "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+          }
+        }
+      ]
+    },
+    {
+      "label": "four_epoch_pilot_scores/evidence_pretrain",
+      "scope": "recent_qwen_fixed_or_proposition_pretraining",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "phase": "evidence_pretrain",
+      "seed": null,
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "config": {},
+      "original_stop_reason": "fixed_update_budget",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/four_epoch_pilot_scores.json",
+        "json_pointer": "/stages/evidence_pretrain",
+        "sha256": "86a07cbdce109e11b8fc4574c97295eeb839d43170f63d76987d21c364175030",
+        "identity": {
+          "run_name": "jep_csts_v1_existing_propositions_patience2_20261027",
+          "source_commit": "8df0a1039bb5be8ddfd8407bdd32aa64a102018a",
+          "attempt": "6048f746",
+          "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+        }
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.45820365475363267
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.48441696004268336
+        }
+      ],
+      "aliases": [
+        {
+          "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/two_epoch_phase1_scores.json",
+          "json_pointer": "/stages/evidence_pretrain",
+          "sha256": "6b2e9e118cdda33c1f1b3e53c53356dfbae0787827f030e63872687250b32ed4",
+          "identity": {
+            "run_name": "jep_csts_v1_proposition_patience1_completion_20261027",
+            "source_commit": "636cb33048f41eb8c0e839250df66d36cf46a101",
+            "attempt": "191bbce7",
+            "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+          }
+        }
+      ]
+    },
+    {
+      "label": "v41_final_epoch_scores/ratings_pretrain",
+      "scope": "recent_qwen_fixed_or_proposition_pretraining",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "phase": "ratings_pretrain",
+      "seed": null,
+      "validation_sha256": "f186e86877e731c96ee9b1c819863b981074bc500dc9aa11c6951ba9fd56e2c9",
+      "training_sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01",
+      "config": {},
+      "original_stop_reason": "fixed_update_budget",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/v41_final_epoch_scores.json",
+        "json_pointer": "/stages/ratings_pretrain",
+        "sha256": "2e98b3b3c134a5e29f8679ea0891eefccf9c695ca24167d0fc8d0caf05462383",
+        "identity": {
+          "run_name": "propositions_v41_full_after_indicative",
+          "source_commit": "a6daf0eeea544716d7340f0f24de687e4ba93490",
+          "attempt": "d73dcec7",
+          "validation_sha256": "f186e86877e731c96ee9b1c819863b981074bc500dc9aa11c6951ba9fd56e2c9"
+        }
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.767296901710081
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.8143611040105944
+        }
+      ]
+    },
+    {
+      "label": "v41_final_epoch_scores/evidence_pretrain",
+      "scope": "recent_qwen_fixed_or_proposition_pretraining",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "phase": "evidence_pretrain",
+      "seed": null,
+      "validation_sha256": "f186e86877e731c96ee9b1c819863b981074bc500dc9aa11c6951ba9fd56e2c9",
+      "training_sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01",
+      "config": {},
+      "original_stop_reason": "fixed_update_budget",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/v41_final_epoch_scores.json",
+        "json_pointer": "/stages/evidence_pretrain",
+        "sha256": "2e98b3b3c134a5e29f8679ea0891eefccf9c695ca24167d0fc8d0caf05462383",
+        "identity": {
+          "run_name": "propositions_v41_full_after_indicative",
+          "source_commit": "a6daf0eeea544716d7340f0f24de687e4ba93490",
+          "attempt": "d73dcec7",
+          "validation_sha256": "f186e86877e731c96ee9b1c819863b981074bc500dc9aa11c6951ba9fd56e2c9"
+        }
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.45327923555463523
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.45918352861890127
+        }
+      ]
+    },
+    {
+      "label": "v41_final_epoch_scores/ratings_ratings",
+      "scope": "recent_qwen_ratings",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "phase": "ratings_ratings",
+      "seed": null,
+      "validation_sha256": "f186e86877e731c96ee9b1c819863b981074bc500dc9aa11c6951ba9fd56e2c9",
+      "training_sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01",
+      "config": {},
+      "original_stop_reason": null,
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/v41_final_epoch_scores.json",
+        "json_pointer": "/stages/ratings_ratings",
+        "sha256": "2e98b3b3c134a5e29f8679ea0891eefccf9c695ca24167d0fc8d0caf05462383",
+        "identity": {
+          "run_name": "propositions_v41_full_after_indicative",
+          "source_commit": "a6daf0eeea544716d7340f0f24de687e4ba93490",
+          "attempt": "d73dcec7",
+          "validation_sha256": "f186e86877e731c96ee9b1c819863b981074bc500dc9aa11c6951ba9fd56e2c9"
+        }
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.8167491896631709
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.821362455875043
+        }
+      ]
+    },
+    {
+      "label": "v41_final_epoch_scores/evidence_ratings",
+      "scope": "recent_qwen_ratings",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "phase": "evidence_ratings",
+      "seed": null,
+      "validation_sha256": "f186e86877e731c96ee9b1c819863b981074bc500dc9aa11c6951ba9fd56e2c9",
+      "training_sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01",
+      "config": {},
+      "original_stop_reason": "epoch_budget",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/v41_final_epoch_scores.json",
+        "json_pointer": "/stages/evidence_ratings",
+        "sha256": "2e98b3b3c134a5e29f8679ea0891eefccf9c695ca24167d0fc8d0caf05462383",
+        "identity": {
+          "run_name": "propositions_v41_full_after_indicative",
+          "source_commit": "a6daf0eeea544716d7340f0f24de687e4ba93490",
+          "attempt": "d73dcec7",
+          "validation_sha256": "f186e86877e731c96ee9b1c819863b981074bc500dc9aa11c6951ba9fd56e2c9"
+        }
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.8126011324816838
+        },
+        {
+          "epoch": 2,
+          "validation_spearman": 0.8216492088016224
+        }
+      ]
+    },
+    {
+      "label": "csts_tranche2_lora_trace",
+      "scope": "older_qwen_lora",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "phase": "csts_tranche2_lora_trace",
+      "seed": 7,
+      "validation_sha256": "f01ec22320c590e381ede0b378895cdd241cd8079e06b18715bc13d2921a4273",
+      "training_sha256": "4058b7f63a5285ebdb5061f24f7f2907e76e2ddc7c99480bfd39fc69062a7d01",
+      "config": {
+        "schema_version": 2,
+        "model_id": "Qwen/Qwen3-Embedding-8B",
+        "revision": "c90816d848505624c2434128dfc61132162a0ee9",
+        "max_length": 160,
+        "embedding_dimension": 4096,
+        "encode_batch_size": 4,
+        "device": "cuda",
+        "kind": "lora",
+        "seed": 7,
+        "projection_dimension": 128,
+        "ridge_alphas": [
+          1e-05,
+          0.0001,
+          0.001,
+          0.01,
+          0.1,
+          1.0
+        ],
+        "learning_rate": 2e-05,
+        "batch_size": 32,
+        "microbatch_size": 2,
+        "max_epochs": 24,
+        "start_epoch": 0,
+        "patience": 5,
+        "weight_decay": 0.01,
+        "schedule": "linear",
+        "warmup_fraction": 0.1,
+        "max_seconds": 2400.0,
+        "lora_rank": 32,
+        "lora_alpha": 32,
+        "lora_dropout": 0.05
+      },
+      "original_stop_reason": "resource_budget",
+      "source": {
+        "path": "training_outputs/csts_tranche2_lora_trace.json",
+        "sha256": "1563cb70034c6cc9c8a8b0d1191f69775e145e0462eddd89a3dfbdb27bcddc55",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      },
+      "epochs": [
+        {
+          "epoch": 1,
+          "validation_spearman": 0.6667722886017582
+        }
+      ]
+    }
+  ],
+  "live_fits": [
+    {
+      "worker": "worker1",
+      "trial": "A_condition_first_seed7",
+      "completed_epochs": 5,
+      "selected_epoch": 4,
+      "validation_spearman": 0.8764748186828899,
+      "stopping_limit": "The live patience-1 fit provides no epochs after its first non-improvement."
+    },
+    {
+      "worker": "worker1",
+      "trial": "B_order_only_seed7",
+      "completed_epochs": 5,
+      "selected_epoch": 4,
+      "validation_spearman": 0.8746972021838658,
+      "stopping_limit": "The live patience-1 fit provides no epochs after its first non-improvement."
+    },
+    {
+      "worker": "worker2",
+      "trial": "B_order_only_seed8",
+      "completed_epochs": 3,
+      "selected_epoch": 2,
+      "validation_spearman": 0.8697257695993728,
+      "stopping_limit": "The live patience-1 fit provides no epochs after its first non-improvement."
+    },
+    {
+      "worker": "worker2",
+      "trial": "C_case_inspired_seed8",
+      "completed_epochs": 2,
+      "selected_epoch": null,
+      "validation_spearman": null,
+      "stopping_limit": "The live patience-1 fit provides no epochs after its first non-improvement."
+    }
+  ],
+  "scope": "Replay validation Spearman only. No current held-out test data or new model training. Continued schedules, auxiliary objectives and other architectures are context only."
+}

@@ -1,0 +1,2272 @@
+{
+  "current_patience": 1,
+  "counterfactual_rule": "Strict validation Spearman improvement; min_delta=0; replay starts at epoch one. This matches the current stopper, not every historical objective or minimum-epoch rule.",
+  "interpretation": "An observed recovery proves patience 1 would miss that recorded peak. A retained peak does not rule out unobserved later recovery. Architecture, data and schedule differences limit transfer.",
+  "histories": [
+    {
+      "label": "csts_continuation_mse_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "epochs_observed": 40,
+      "best_observed": {
+        "epoch": 35,
+        "validation_spearman": 0.5695759038991457
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 7,
+          "selected_epoch": 6,
+          "validation_spearman": 0.5075876142839637,
+          "epochs_consumed": 7,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 8,
+          "selected_epoch": 6,
+          "validation_spearman": 0.5075876142839637,
+          "epochs_consumed": 8,
+          "stop_observed": true
+        },
+        "3": {
+          "stop_epoch": 26,
+          "selected_epoch": 23,
+          "validation_spearman": 0.5601479884450835,
+          "epochs_consumed": 26,
+          "stop_observed": true
+        },
+        "4": {
+          "stop_epoch": 39,
+          "selected_epoch": 35,
+          "validation_spearman": 0.5695759038991457,
+          "epochs_consumed": 39,
+          "stop_observed": true
+        },
+        "5": {
+          "stop_epoch": 40,
+          "selected_epoch": 35,
+          "validation_spearman": 0.5695759038991457,
+          "epochs_consumed": 40,
+          "stop_observed": true
+        },
+        "10": {
+          "stop_epoch": 40,
+          "selected_epoch": 35,
+          "validation_spearman": 0.5695759038991457,
+          "epochs_consumed": 40,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": true,
+      "gain_over_patience1": 0.06198828961518199,
+      "minimum_patience_to_reach_observed_peak": 4,
+      "original_stop_reason": "validation_patience",
+      "source": {
+        "path": "training_outputs/csts_continuation_mse_trace.json",
+        "sha256": "22e6a61ee31cee8ed31ecdc3a9d72061173e44509c67299fec4b72421b08a13a",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      }
+    },
+    {
+      "label": "ratings_ratings_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "epochs_observed": 40,
+      "best_observed": {
+        "epoch": 35,
+        "validation_spearman": 0.5736627020139483
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 7,
+          "selected_epoch": 6,
+          "validation_spearman": 0.5184261943323047,
+          "epochs_consumed": 7,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 18,
+          "selected_epoch": 16,
+          "validation_spearman": 0.5534812793304209,
+          "epochs_consumed": 18,
+          "stop_observed": true
+        },
+        "3": {
+          "stop_epoch": 26,
+          "selected_epoch": 23,
+          "validation_spearman": 0.5656882728386767,
+          "epochs_consumed": 26,
+          "stop_observed": true
+        },
+        "4": {
+          "stop_epoch": 27,
+          "selected_epoch": 23,
+          "validation_spearman": 0.5656882728386767,
+          "epochs_consumed": 27,
+          "stop_observed": true
+        },
+        "5": {
+          "stop_epoch": 40,
+          "selected_epoch": 35,
+          "validation_spearman": 0.5736627020139483,
+          "epochs_consumed": 40,
+          "stop_observed": true
+        },
+        "10": {
+          "stop_epoch": 40,
+          "selected_epoch": 35,
+          "validation_spearman": 0.5736627020139483,
+          "epochs_consumed": 40,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": true,
+      "gain_over_patience1": 0.055236507681643565,
+      "minimum_patience_to_reach_observed_peak": 5,
+      "original_stop_reason": "epoch_ceiling",
+      "source": {
+        "path": "training_outputs/csts_tranche3_evidence/ratings_ratings_trace.json",
+        "sha256": "a62880eef567e475a082823a5d09b371045b1fd7ab17b28b59862467bb0bbd18",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      }
+    },
+    {
+      "label": "shuffled_ratings_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "epochs_observed": 39,
+      "best_observed": {
+        "epoch": 34,
+        "validation_spearman": 0.5991450938843921
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 7,
+          "selected_epoch": 6,
+          "validation_spearman": 0.5349254446980753,
+          "epochs_consumed": 7,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 21,
+          "selected_epoch": 19,
+          "validation_spearman": 0.5855450289240149,
+          "epochs_consumed": 21,
+          "stop_observed": true
+        },
+        "3": {
+          "stop_epoch": 26,
+          "selected_epoch": 23,
+          "validation_spearman": 0.5896945203692574,
+          "epochs_consumed": 26,
+          "stop_observed": true
+        },
+        "4": {
+          "stop_epoch": 38,
+          "selected_epoch": 34,
+          "validation_spearman": 0.5991450938843921,
+          "epochs_consumed": 38,
+          "stop_observed": true
+        },
+        "5": {
+          "stop_epoch": 39,
+          "selected_epoch": 34,
+          "validation_spearman": 0.5991450938843921,
+          "epochs_consumed": 39,
+          "stop_observed": true
+        },
+        "10": {
+          "stop_epoch": 39,
+          "selected_epoch": 34,
+          "validation_spearman": 0.5991450938843921,
+          "epochs_consumed": 39,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": true,
+      "gain_over_patience1": 0.06421964918631673,
+      "minimum_patience_to_reach_observed_peak": 4,
+      "original_stop_reason": "validation_patience",
+      "source": {
+        "path": "training_outputs/csts_tranche3_evidence/shuffled_ratings_trace.json",
+        "sha256": "8fd44b9ec09f5c7f0e1ff19efabcf07cd06b620d865645414a41019e5067bc6a",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      }
+    },
+    {
+      "label": "csts_continuation_pearson_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "epochs_observed": 33,
+      "best_observed": {
+        "epoch": 28,
+        "validation_spearman": 0.5565668074838135
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 10,
+          "selected_epoch": 9,
+          "validation_spearman": 0.5221168941385541,
+          "epochs_consumed": 10,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 11,
+          "selected_epoch": 9,
+          "validation_spearman": 0.5221168941385541,
+          "epochs_consumed": 11,
+          "stop_observed": true
+        },
+        "3": {
+          "stop_epoch": 17,
+          "selected_epoch": 14,
+          "validation_spearman": 0.5392243422504082,
+          "epochs_consumed": 17,
+          "stop_observed": true
+        },
+        "4": {
+          "stop_epoch": 26,
+          "selected_epoch": 22,
+          "validation_spearman": 0.5546282323942435,
+          "epochs_consumed": 26,
+          "stop_observed": true
+        },
+        "5": {
+          "stop_epoch": 33,
+          "selected_epoch": 28,
+          "validation_spearman": 0.5565668074838135,
+          "epochs_consumed": 33,
+          "stop_observed": true
+        },
+        "10": {
+          "stop_epoch": 33,
+          "selected_epoch": 28,
+          "validation_spearman": 0.5565668074838135,
+          "epochs_consumed": 33,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": true,
+      "gain_over_patience1": 0.034449913345259375,
+      "minimum_patience_to_reach_observed_peak": 5,
+      "original_stop_reason": "validation_patience",
+      "source": {
+        "path": "training_outputs/csts_continuation_pearson_trace.json",
+        "sha256": "64e2f16d23372b3923ba2e3c0ad0b510c807456d5948fad3bc89457056185aca",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      }
+    },
+    {
+      "label": "evidence_ratings_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "epochs_observed": 33,
+      "best_observed": {
+        "epoch": 28,
+        "validation_spearman": 0.6500694062233188
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 10,
+          "selected_epoch": 9,
+          "validation_spearman": 0.5757606877320591,
+          "epochs_consumed": 10,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 24,
+          "selected_epoch": 22,
+          "validation_spearman": 0.6462944791743621,
+          "epochs_consumed": 24,
+          "stop_observed": true
+        },
+        "3": {
+          "stop_epoch": 25,
+          "selected_epoch": 22,
+          "validation_spearman": 0.6462944791743621,
+          "epochs_consumed": 25,
+          "stop_observed": true
+        },
+        "4": {
+          "stop_epoch": 26,
+          "selected_epoch": 22,
+          "validation_spearman": 0.6462944791743621,
+          "epochs_consumed": 26,
+          "stop_observed": true
+        },
+        "5": {
+          "stop_epoch": 33,
+          "selected_epoch": 28,
+          "validation_spearman": 0.6500694062233188,
+          "epochs_consumed": 33,
+          "stop_observed": true
+        },
+        "10": {
+          "stop_epoch": 33,
+          "selected_epoch": 28,
+          "validation_spearman": 0.6500694062233188,
+          "epochs_consumed": 33,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": true,
+      "gain_over_patience1": 0.07430871849125964,
+      "minimum_patience_to_reach_observed_peak": 5,
+      "original_stop_reason": "validation_patience",
+      "source": {
+        "path": "training_outputs/csts_tranche3_evidence/evidence_ratings_trace.json",
+        "sha256": "20e1529a36cd323848de667a31179c925736a6b4b49d0a1f6d94512331479114",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      }
+    },
+    {
+      "label": "csts_tranche1_mse_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "epochs_observed": 24,
+      "best_observed": {
+        "epoch": 23,
+        "validation_spearman": 0.5601479884450835
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 7,
+          "selected_epoch": 6,
+          "validation_spearman": 0.5075876142839637,
+          "epochs_consumed": 7,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 8,
+          "selected_epoch": 6,
+          "validation_spearman": 0.5075876142839637,
+          "epochs_consumed": 8,
+          "stop_observed": true
+        },
+        "3": {
+          "stop_epoch": 24,
+          "selected_epoch": 23,
+          "validation_spearman": 0.5601479884450835,
+          "epochs_consumed": 24,
+          "stop_observed": false
+        },
+        "4": {
+          "stop_epoch": 24,
+          "selected_epoch": 23,
+          "validation_spearman": 0.5601479884450835,
+          "epochs_consumed": 24,
+          "stop_observed": false
+        },
+        "5": {
+          "stop_epoch": 24,
+          "selected_epoch": 23,
+          "validation_spearman": 0.5601479884450835,
+          "epochs_consumed": 24,
+          "stop_observed": false
+        },
+        "10": {
+          "stop_epoch": 24,
+          "selected_epoch": 23,
+          "validation_spearman": 0.5601479884450835,
+          "epochs_consumed": 24,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": true,
+      "gain_over_patience1": 0.052560374161119805,
+      "minimum_patience_to_reach_observed_peak": 3,
+      "original_stop_reason": null,
+      "source": {
+        "path": "training_outputs/csts_tranche1_mse_trace.json",
+        "sha256": "8d3d6a3daafadaa3c34c667b189d843dca71fcc8cc8d904a306853bbd4b608f1",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      }
+    },
+    {
+      "label": "csts_tranche1_pearson_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "epochs_observed": 24,
+      "best_observed": {
+        "epoch": 22,
+        "validation_spearman": 0.5546282323942435
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 10,
+          "selected_epoch": 9,
+          "validation_spearman": 0.5221168941385541,
+          "epochs_consumed": 10,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 11,
+          "selected_epoch": 9,
+          "validation_spearman": 0.5221168941385541,
+          "epochs_consumed": 11,
+          "stop_observed": true
+        },
+        "3": {
+          "stop_epoch": 17,
+          "selected_epoch": 14,
+          "validation_spearman": 0.5392243422504082,
+          "epochs_consumed": 17,
+          "stop_observed": true
+        },
+        "4": {
+          "stop_epoch": 24,
+          "selected_epoch": 22,
+          "validation_spearman": 0.5546282323942435,
+          "epochs_consumed": 24,
+          "stop_observed": false
+        },
+        "5": {
+          "stop_epoch": 24,
+          "selected_epoch": 22,
+          "validation_spearman": 0.5546282323942435,
+          "epochs_consumed": 24,
+          "stop_observed": false
+        },
+        "10": {
+          "stop_epoch": 24,
+          "selected_epoch": 22,
+          "validation_spearman": 0.5546282323942435,
+          "epochs_consumed": 24,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": true,
+      "gain_over_patience1": 0.032511338255689415,
+      "minimum_patience_to_reach_observed_peak": 4,
+      "original_stop_reason": null,
+      "source": {
+        "path": "training_outputs/csts_tranche1_pearson_trace.json",
+        "sha256": "5fee43681182bc61e3ed047db8bece73a73b64ee6f2e2491c095e4dd29b28a90",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      }
+    },
+    {
+      "label": "csts_tranche2_projection_trace",
+      "scope": "older_qwen_projection",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "epochs_observed": 24,
+      "best_observed": {
+        "epoch": 19,
+        "validation_spearman": 0.6424206754325978
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 8,
+          "selected_epoch": 7,
+          "validation_spearman": 0.6151476760970467,
+          "epochs_consumed": 8,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 13,
+          "selected_epoch": 11,
+          "validation_spearman": 0.6210932963018018,
+          "epochs_consumed": 13,
+          "stop_observed": true
+        },
+        "3": {
+          "stop_epoch": 14,
+          "selected_epoch": 11,
+          "validation_spearman": 0.6210932963018018,
+          "epochs_consumed": 14,
+          "stop_observed": true
+        },
+        "4": {
+          "stop_epoch": 23,
+          "selected_epoch": 19,
+          "validation_spearman": 0.6424206754325978,
+          "epochs_consumed": 23,
+          "stop_observed": true
+        },
+        "5": {
+          "stop_epoch": 24,
+          "selected_epoch": 19,
+          "validation_spearman": 0.6424206754325978,
+          "epochs_consumed": 24,
+          "stop_observed": true
+        },
+        "10": {
+          "stop_epoch": 24,
+          "selected_epoch": 19,
+          "validation_spearman": 0.6424206754325978,
+          "epochs_consumed": 24,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": true,
+      "gain_over_patience1": 0.027272999335551162,
+      "minimum_patience_to_reach_observed_peak": 4,
+      "original_stop_reason": "validation_patience",
+      "source": {
+        "path": "training_outputs/csts_tranche2_projection_trace.json",
+        "sha256": "650caf6c166bb0e31e2edfd2988578ded488ce8322983837046f0d1fd7c70262",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      }
+    },
+    {
+      "label": "recent_frozen_comparator_seed_9",
+      "scope": "recent_frozen_comparator",
+      "model": "Qwen/Qwen3-Embedding-8B (frozen)",
+      "epochs_observed": 19,
+      "best_observed": {
+        "epoch": 9,
+        "validation_spearman": 0.8465351181029664
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 10,
+          "selected_epoch": 9,
+          "validation_spearman": 0.8465351181029664,
+          "epochs_consumed": 10,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 11,
+          "selected_epoch": 9,
+          "validation_spearman": 0.8465351181029664,
+          "epochs_consumed": 11,
+          "stop_observed": true
+        },
+        "3": {
+          "stop_epoch": 12,
+          "selected_epoch": 9,
+          "validation_spearman": 0.8465351181029664,
+          "epochs_consumed": 12,
+          "stop_observed": true
+        },
+        "4": {
+          "stop_epoch": 13,
+          "selected_epoch": 9,
+          "validation_spearman": 0.8465351181029664,
+          "epochs_consumed": 13,
+          "stop_observed": true
+        },
+        "5": {
+          "stop_epoch": 14,
+          "selected_epoch": 9,
+          "validation_spearman": 0.8465351181029664,
+          "epochs_consumed": 14,
+          "stop_observed": true
+        },
+        "10": {
+          "stop_epoch": 19,
+          "selected_epoch": 9,
+          "validation_spearman": 0.8465351181029664,
+          "epochs_consumed": 19,
+          "stop_observed": true
+        }
+      },
+      "patience1_missed_observed_peak": false,
+      "gain_over_patience1": 0.0,
+      "minimum_patience_to_reach_observed_peak": 1,
+      "original_stop_reason": null,
+      "source": {
+        "archive": "/home/peter_aetherlabs_live/jep-sota-condition-order-20261107/collected/results-evidence.tar.gz",
+        "member": "./comparison-seed-9-epochs.json",
+        "sha256": "48f72b6a63112bce54bcd3c49f8e6f22c76a23367beaa8ceb3226eea450fb576",
+        "source_commit": "fdbcb3461f63cf44d7cb3cde4de27332594e452d",
+        "recorded_selected": {
+          "epoch": 9,
+          "validation_spearman": 0.8465351181029664,
+          "checkpoint_sha256": "0af82b773b9c9da246bafeac49a216b06242072cdfc5d5ce0a3f4b767cd01f77"
+        }
+      }
+    },
+    {
+      "label": "recent_frozen_comparator_seed_7",
+      "scope": "recent_frozen_comparator",
+      "model": "Qwen/Qwen3-Embedding-8B (frozen)",
+      "epochs_observed": 18,
+      "best_observed": {
+        "epoch": 8,
+        "validation_spearman": 0.846447046068686
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 9,
+          "selected_epoch": 8,
+          "validation_spearman": 0.846447046068686,
+          "epochs_consumed": 9,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 10,
+          "selected_epoch": 8,
+          "validation_spearman": 0.846447046068686,
+          "epochs_consumed": 10,
+          "stop_observed": true
+        },
+        "3": {
+          "stop_epoch": 11,
+          "selected_epoch": 8,
+          "validation_spearman": 0.846447046068686,
+          "epochs_consumed": 11,
+          "stop_observed": true
+        },
+        "4": {
+          "stop_epoch": 12,
+          "selected_epoch": 8,
+          "validation_spearman": 0.846447046068686,
+          "epochs_consumed": 12,
+          "stop_observed": true
+        },
+        "5": {
+          "stop_epoch": 13,
+          "selected_epoch": 8,
+          "validation_spearman": 0.846447046068686,
+          "epochs_consumed": 13,
+          "stop_observed": true
+        },
+        "10": {
+          "stop_epoch": 18,
+          "selected_epoch": 8,
+          "validation_spearman": 0.846447046068686,
+          "epochs_consumed": 18,
+          "stop_observed": true
+        }
+      },
+      "patience1_missed_observed_peak": false,
+      "gain_over_patience1": 0.0,
+      "minimum_patience_to_reach_observed_peak": 1,
+      "original_stop_reason": null,
+      "source": {
+        "archive": "/home/peter_aetherlabs_live/jep-sota-condition-order-20261107/collected/results-evidence.tar.gz",
+        "member": "./comparison-seed-7-epochs.json",
+        "sha256": "9843b748d1a89e69958404cf0a3782187990022666d0adb87a8a1c7e12edcca7",
+        "source_commit": "fdbcb3461f63cf44d7cb3cde4de27332594e452d",
+        "recorded_selected": {
+          "epoch": 8,
+          "validation_spearman": 0.846447046068686,
+          "checkpoint_sha256": "4e5b215641752a21fb8bc4cc0414cb88aa90d8761a16109dc56e42dd71c8f812"
+        }
+      }
+    },
+    {
+      "label": "recent_frozen_comparator_seed_8",
+      "scope": "recent_frozen_comparator",
+      "model": "Qwen/Qwen3-Embedding-8B (frozen)",
+      "epochs_observed": 18,
+      "best_observed": {
+        "epoch": 8,
+        "validation_spearman": 0.846376785435194
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 9,
+          "selected_epoch": 8,
+          "validation_spearman": 0.846376785435194,
+          "epochs_consumed": 9,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 10,
+          "selected_epoch": 8,
+          "validation_spearman": 0.846376785435194,
+          "epochs_consumed": 10,
+          "stop_observed": true
+        },
+        "3": {
+          "stop_epoch": 11,
+          "selected_epoch": 8,
+          "validation_spearman": 0.846376785435194,
+          "epochs_consumed": 11,
+          "stop_observed": true
+        },
+        "4": {
+          "stop_epoch": 12,
+          "selected_epoch": 8,
+          "validation_spearman": 0.846376785435194,
+          "epochs_consumed": 12,
+          "stop_observed": true
+        },
+        "5": {
+          "stop_epoch": 13,
+          "selected_epoch": 8,
+          "validation_spearman": 0.846376785435194,
+          "epochs_consumed": 13,
+          "stop_observed": true
+        },
+        "10": {
+          "stop_epoch": 18,
+          "selected_epoch": 8,
+          "validation_spearman": 0.846376785435194,
+          "epochs_consumed": 18,
+          "stop_observed": true
+        }
+      },
+      "patience1_missed_observed_peak": false,
+      "gain_over_patience1": 0.0,
+      "minimum_patience_to_reach_observed_peak": 1,
+      "original_stop_reason": null,
+      "source": {
+        "archive": "/home/peter_aetherlabs_live/jep-sota-condition-order-20261107/collected/results-evidence.tar.gz",
+        "member": "./comparison-seed-8-epochs.json",
+        "sha256": "ae0b17e0850e490a2cd2ff65c214d0e78e24f9613febddba304bba7afeb0fcb0",
+        "source_commit": "fdbcb3461f63cf44d7cb3cde4de27332594e452d",
+        "recorded_selected": {
+          "epoch": 8,
+          "validation_spearman": 0.846376785435194,
+          "checkpoint_sha256": "8c5f138c743ff8186fbd54b24499f545c74690f27d45bbd0e4f7541d972cdf31"
+        }
+      }
+    },
+    {
+      "label": "ratings_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "epochs_observed": 8,
+      "best_observed": {
+        "epoch": 7,
+        "validation_spearman": 0.5448673160831911
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 8,
+          "selected_epoch": 7,
+          "validation_spearman": 0.5448673160831911,
+          "epochs_consumed": 8,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 8,
+          "selected_epoch": 7,
+          "validation_spearman": 0.5448673160831911,
+          "epochs_consumed": 8,
+          "stop_observed": false
+        },
+        "3": {
+          "stop_epoch": 8,
+          "selected_epoch": 7,
+          "validation_spearman": 0.5448673160831911,
+          "epochs_consumed": 8,
+          "stop_observed": false
+        },
+        "4": {
+          "stop_epoch": 8,
+          "selected_epoch": 7,
+          "validation_spearman": 0.5448673160831911,
+          "epochs_consumed": 8,
+          "stop_observed": false
+        },
+        "5": {
+          "stop_epoch": 8,
+          "selected_epoch": 7,
+          "validation_spearman": 0.5448673160831911,
+          "epochs_consumed": 8,
+          "stop_observed": false
+        },
+        "10": {
+          "stop_epoch": 8,
+          "selected_epoch": 7,
+          "validation_spearman": 0.5448673160831911,
+          "epochs_consumed": 8,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": false,
+      "gain_over_patience1": 0.0,
+      "minimum_patience_to_reach_observed_peak": 1,
+      "original_stop_reason": null,
+      "source": {
+        "path": "training_outputs/csts_annotation_format_evidence/evidence/ratings_trace.json",
+        "sha256": "b1738cbca13ce2c0a5fc74eb68b6f02158515d87fb6bf48cdfd19c34649f9be9",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      }
+    },
+    {
+      "label": "ratings_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "epochs_observed": 8,
+      "best_observed": {
+        "epoch": 8,
+        "validation_spearman": 0.5381335559311394
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 8,
+          "selected_epoch": 8,
+          "validation_spearman": 0.5381335559311394,
+          "epochs_consumed": 8,
+          "stop_observed": false
+        },
+        "2": {
+          "stop_epoch": 8,
+          "selected_epoch": 8,
+          "validation_spearman": 0.5381335559311394,
+          "epochs_consumed": 8,
+          "stop_observed": false
+        },
+        "3": {
+          "stop_epoch": 8,
+          "selected_epoch": 8,
+          "validation_spearman": 0.5381335559311394,
+          "epochs_consumed": 8,
+          "stop_observed": false
+        },
+        "4": {
+          "stop_epoch": 8,
+          "selected_epoch": 8,
+          "validation_spearman": 0.5381335559311394,
+          "epochs_consumed": 8,
+          "stop_observed": false
+        },
+        "5": {
+          "stop_epoch": 8,
+          "selected_epoch": 8,
+          "validation_spearman": 0.5381335559311394,
+          "epochs_consumed": 8,
+          "stop_observed": false
+        },
+        "10": {
+          "stop_epoch": 8,
+          "selected_epoch": 8,
+          "validation_spearman": 0.5381335559311394,
+          "epochs_consumed": 8,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": false,
+      "gain_over_patience1": 0.0,
+      "minimum_patience_to_reach_observed_peak": 1,
+      "original_stop_reason": null,
+      "source": {
+        "path": "training_outputs/csts_annotation_format_evidence/prose/ratings_trace.json",
+        "sha256": "06038ecb706a5fc4427d81846b8a3ec3719283616c67b7bc7c2e47df24053995",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      }
+    },
+    {
+      "label": "ratings_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "epochs_observed": 8,
+      "best_observed": {
+        "epoch": 7,
+        "validation_spearman": 0.5331753352736424
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 8,
+          "selected_epoch": 7,
+          "validation_spearman": 0.5331753352736424,
+          "epochs_consumed": 8,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 8,
+          "selected_epoch": 7,
+          "validation_spearman": 0.5331753352736424,
+          "epochs_consumed": 8,
+          "stop_observed": false
+        },
+        "3": {
+          "stop_epoch": 8,
+          "selected_epoch": 7,
+          "validation_spearman": 0.5331753352736424,
+          "epochs_consumed": 8,
+          "stop_observed": false
+        },
+        "4": {
+          "stop_epoch": 8,
+          "selected_epoch": 7,
+          "validation_spearman": 0.5331753352736424,
+          "epochs_consumed": 8,
+          "stop_observed": false
+        },
+        "5": {
+          "stop_epoch": 8,
+          "selected_epoch": 7,
+          "validation_spearman": 0.5331753352736424,
+          "epochs_consumed": 8,
+          "stop_observed": false
+        },
+        "10": {
+          "stop_epoch": 8,
+          "selected_epoch": 7,
+          "validation_spearman": 0.5331753352736424,
+          "epochs_consumed": 8,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": false,
+      "gain_over_patience1": 0.0,
+      "minimum_patience_to_reach_observed_peak": 1,
+      "original_stop_reason": null,
+      "source": {
+        "path": "training_outputs/csts_annotation_format_evidence/record/ratings_trace.json",
+        "sha256": "33263487d527e1462e82763f01d5aea686ddbd0de5735b91517ba0cc467f25ee",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      }
+    },
+    {
+      "label": "older_qwen_lora_condition_last",
+      "scope": "older_qwen_lora",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "epochs_observed": 7,
+      "best_observed": {
+        "epoch": 4,
+        "validation_spearman": 0.7835560523520446
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 3,
+          "selected_epoch": 2,
+          "validation_spearman": 0.7736972346680008,
+          "epochs_consumed": 3,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 6,
+          "selected_epoch": 4,
+          "validation_spearman": 0.7835560523520446,
+          "epochs_consumed": 6,
+          "stop_observed": true
+        },
+        "3": {
+          "stop_epoch": 7,
+          "selected_epoch": 4,
+          "validation_spearman": 0.7835560523520446,
+          "epochs_consumed": 7,
+          "stop_observed": true
+        },
+        "4": {
+          "stop_epoch": 7,
+          "selected_epoch": 4,
+          "validation_spearman": 0.7835560523520446,
+          "epochs_consumed": 7,
+          "stop_observed": false
+        },
+        "5": {
+          "stop_epoch": 7,
+          "selected_epoch": 4,
+          "validation_spearman": 0.7835560523520446,
+          "epochs_consumed": 7,
+          "stop_observed": false
+        },
+        "10": {
+          "stop_epoch": 7,
+          "selected_epoch": 4,
+          "validation_spearman": 0.7835560523520446,
+          "epochs_consumed": 7,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": true,
+      "gain_over_patience1": 0.009858817684043841,
+      "minimum_patience_to_reach_observed_peak": 2,
+      "original_stop_reason": "replay_epoch_limit",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-condition-replay-20261106/verified-evidence/baseline_results/lora/condition_last_20261106_continuation/lora_trace.json",
+        "sha256": "f4ec68558570b565b6d36a24767d475ae3a6b0ff37dd5dbf773f8160dd1d6070"
+      }
+    },
+    {
+      "label": "epoch_scores/ratings_pretrain",
+      "scope": "recent_qwen_fixed_or_proposition_pretraining",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "epochs_observed": 7,
+      "best_observed": {
+        "epoch": 3,
+        "validation_spearman": 0.8699310626644988
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 4,
+          "selected_epoch": 3,
+          "validation_spearman": 0.8699310626644988,
+          "epochs_consumed": 4,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 5,
+          "selected_epoch": 3,
+          "validation_spearman": 0.8699310626644988,
+          "epochs_consumed": 5,
+          "stop_observed": true
+        },
+        "3": {
+          "stop_epoch": 6,
+          "selected_epoch": 3,
+          "validation_spearman": 0.8699310626644988,
+          "epochs_consumed": 6,
+          "stop_observed": true
+        },
+        "4": {
+          "stop_epoch": 7,
+          "selected_epoch": 3,
+          "validation_spearman": 0.8699310626644988,
+          "epochs_consumed": 7,
+          "stop_observed": true
+        },
+        "5": {
+          "stop_epoch": 7,
+          "selected_epoch": 3,
+          "validation_spearman": 0.8699310626644988,
+          "epochs_consumed": 7,
+          "stop_observed": false
+        },
+        "10": {
+          "stop_epoch": 7,
+          "selected_epoch": 3,
+          "validation_spearman": 0.8699310626644988,
+          "epochs_consumed": 7,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": false,
+      "gain_over_patience1": 0.0,
+      "minimum_patience_to_reach_observed_peak": 1,
+      "original_stop_reason": "fixed_update_budget",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/epoch_scores.json",
+        "json_pointer": "/stages/ratings_pretrain",
+        "sha256": "007fd92e9bd26ddde1e94973c43335b96f5fe61ec201f71eda7b2ee2ca89dde0",
+        "identity": {
+          "run_name": "jep_csts_v1_full_propositions_converged_patience1_20261027",
+          "source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
+          "attempt": "9bfd9512",
+          "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+        }
+      }
+    },
+    {
+      "label": "answers_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "epochs_observed": 6,
+      "best_observed": {
+        "epoch": 2,
+        "validation_spearman": 0.03018409209865823
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 3,
+          "selected_epoch": 2,
+          "validation_spearman": 0.03018409209865823,
+          "epochs_consumed": 3,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 4,
+          "selected_epoch": 2,
+          "validation_spearman": 0.03018409209865823,
+          "epochs_consumed": 4,
+          "stop_observed": true
+        },
+        "3": {
+          "stop_epoch": 5,
+          "selected_epoch": 2,
+          "validation_spearman": 0.03018409209865823,
+          "epochs_consumed": 5,
+          "stop_observed": true
+        },
+        "4": {
+          "stop_epoch": 6,
+          "selected_epoch": 2,
+          "validation_spearman": 0.03018409209865823,
+          "epochs_consumed": 6,
+          "stop_observed": true
+        },
+        "5": {
+          "stop_epoch": 6,
+          "selected_epoch": 2,
+          "validation_spearman": 0.03018409209865823,
+          "epochs_consumed": 6,
+          "stop_observed": false
+        },
+        "10": {
+          "stop_epoch": 6,
+          "selected_epoch": 2,
+          "validation_spearman": 0.03018409209865823,
+          "epochs_consumed": 6,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": false,
+      "gain_over_patience1": 0.0,
+      "minimum_patience_to_reach_observed_peak": 1,
+      "original_stop_reason": null,
+      "source": {
+        "path": "training_outputs/csts_annotation_format_evidence/evidence/answers_trace.json",
+        "sha256": "c09aef36e96bb3a6bb798fc381a32403d06c57f244e43ceb2ac1b22a5eef9300",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      }
+    },
+    {
+      "label": "answers_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "epochs_observed": 6,
+      "best_observed": {
+        "epoch": 1,
+        "validation_spearman": 0.02436647759948075
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 2,
+          "selected_epoch": 1,
+          "validation_spearman": 0.02436647759948075,
+          "epochs_consumed": 2,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 3,
+          "selected_epoch": 1,
+          "validation_spearman": 0.02436647759948075,
+          "epochs_consumed": 3,
+          "stop_observed": true
+        },
+        "3": {
+          "stop_epoch": 4,
+          "selected_epoch": 1,
+          "validation_spearman": 0.02436647759948075,
+          "epochs_consumed": 4,
+          "stop_observed": true
+        },
+        "4": {
+          "stop_epoch": 5,
+          "selected_epoch": 1,
+          "validation_spearman": 0.02436647759948075,
+          "epochs_consumed": 5,
+          "stop_observed": true
+        },
+        "5": {
+          "stop_epoch": 6,
+          "selected_epoch": 1,
+          "validation_spearman": 0.02436647759948075,
+          "epochs_consumed": 6,
+          "stop_observed": true
+        },
+        "10": {
+          "stop_epoch": 6,
+          "selected_epoch": 1,
+          "validation_spearman": 0.02436647759948075,
+          "epochs_consumed": 6,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": false,
+      "gain_over_patience1": 0.0,
+      "minimum_patience_to_reach_observed_peak": 1,
+      "original_stop_reason": null,
+      "source": {
+        "path": "training_outputs/csts_annotation_format_evidence/prose/answers_trace.json",
+        "sha256": "7338fc9bc7b665f459b595d643336cd66e2d67cca8da974b264bd4ef6a2aa5ec",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      }
+    },
+    {
+      "label": "answers_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "epochs_observed": 6,
+      "best_observed": {
+        "epoch": 1,
+        "validation_spearman": 0.02864740233212489
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 2,
+          "selected_epoch": 1,
+          "validation_spearman": 0.02864740233212489,
+          "epochs_consumed": 2,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 3,
+          "selected_epoch": 1,
+          "validation_spearman": 0.02864740233212489,
+          "epochs_consumed": 3,
+          "stop_observed": true
+        },
+        "3": {
+          "stop_epoch": 4,
+          "selected_epoch": 1,
+          "validation_spearman": 0.02864740233212489,
+          "epochs_consumed": 4,
+          "stop_observed": true
+        },
+        "4": {
+          "stop_epoch": 5,
+          "selected_epoch": 1,
+          "validation_spearman": 0.02864740233212489,
+          "epochs_consumed": 5,
+          "stop_observed": true
+        },
+        "5": {
+          "stop_epoch": 6,
+          "selected_epoch": 1,
+          "validation_spearman": 0.02864740233212489,
+          "epochs_consumed": 6,
+          "stop_observed": true
+        },
+        "10": {
+          "stop_epoch": 6,
+          "selected_epoch": 1,
+          "validation_spearman": 0.02864740233212489,
+          "epochs_consumed": 6,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": false,
+      "gain_over_patience1": 0.0,
+      "minimum_patience_to_reach_observed_peak": 1,
+      "original_stop_reason": null,
+      "source": {
+        "path": "training_outputs/csts_annotation_format_evidence/record/answers_trace.json",
+        "sha256": "63a586620b702b99885c555c6ff67776c3b260a951b4dc343992ab31da7b225b",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      }
+    },
+    {
+      "label": "evidence_pretrain_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "epochs_observed": 6,
+      "best_observed": {
+        "epoch": 1,
+        "validation_spearman": 0.02745844416955466
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 2,
+          "selected_epoch": 1,
+          "validation_spearman": 0.02745844416955466,
+          "epochs_consumed": 2,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 3,
+          "selected_epoch": 1,
+          "validation_spearman": 0.02745844416955466,
+          "epochs_consumed": 3,
+          "stop_observed": true
+        },
+        "3": {
+          "stop_epoch": 4,
+          "selected_epoch": 1,
+          "validation_spearman": 0.02745844416955466,
+          "epochs_consumed": 4,
+          "stop_observed": true
+        },
+        "4": {
+          "stop_epoch": 5,
+          "selected_epoch": 1,
+          "validation_spearman": 0.02745844416955466,
+          "epochs_consumed": 5,
+          "stop_observed": true
+        },
+        "5": {
+          "stop_epoch": 6,
+          "selected_epoch": 1,
+          "validation_spearman": 0.02745844416955466,
+          "epochs_consumed": 6,
+          "stop_observed": true
+        },
+        "10": {
+          "stop_epoch": 6,
+          "selected_epoch": 1,
+          "validation_spearman": 0.02745844416955466,
+          "epochs_consumed": 6,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": false,
+      "gain_over_patience1": 0.0,
+      "minimum_patience_to_reach_observed_peak": 1,
+      "original_stop_reason": "fixed_pretraining_budget",
+      "source": {
+        "path": "training_outputs/csts_tranche3_evidence/evidence_pretrain_trace.json",
+        "sha256": "9b95f786d5c6b661cc1e324fde023a6e1624fd64ee711bbf738c47d827816868",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      }
+    },
+    {
+      "label": "ratings_pretrain_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "epochs_observed": 6,
+      "best_observed": {
+        "epoch": 6,
+        "validation_spearman": 0.4053164129077056
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 5,
+          "selected_epoch": 4,
+          "validation_spearman": 0.40375647809416865,
+          "epochs_consumed": 5,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 6,
+          "selected_epoch": 6,
+          "validation_spearman": 0.4053164129077056,
+          "epochs_consumed": 6,
+          "stop_observed": false
+        },
+        "3": {
+          "stop_epoch": 6,
+          "selected_epoch": 6,
+          "validation_spearman": 0.4053164129077056,
+          "epochs_consumed": 6,
+          "stop_observed": false
+        },
+        "4": {
+          "stop_epoch": 6,
+          "selected_epoch": 6,
+          "validation_spearman": 0.4053164129077056,
+          "epochs_consumed": 6,
+          "stop_observed": false
+        },
+        "5": {
+          "stop_epoch": 6,
+          "selected_epoch": 6,
+          "validation_spearman": 0.4053164129077056,
+          "epochs_consumed": 6,
+          "stop_observed": false
+        },
+        "10": {
+          "stop_epoch": 6,
+          "selected_epoch": 6,
+          "validation_spearman": 0.4053164129077056,
+          "epochs_consumed": 6,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": true,
+      "gain_over_patience1": 0.001559934813536945,
+      "minimum_patience_to_reach_observed_peak": 2,
+      "original_stop_reason": "fixed_pretraining_budget",
+      "source": {
+        "path": "training_outputs/csts_tranche3_evidence/ratings_pretrain_trace.json",
+        "sha256": "a7b38cdd85ca316558b2a02630af60baac370430e4d01ea73791fe52e18bbfe8",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      }
+    },
+    {
+      "label": "shuffled_pretrain_trace",
+      "scope": "older_other_architecture_or_auxiliary",
+      "model": "google/flan-t5-small",
+      "epochs_observed": 6,
+      "best_observed": {
+        "epoch": 1,
+        "validation_spearman": 0.08439227834578138
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 2,
+          "selected_epoch": 1,
+          "validation_spearman": 0.08439227834578138,
+          "epochs_consumed": 2,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 3,
+          "selected_epoch": 1,
+          "validation_spearman": 0.08439227834578138,
+          "epochs_consumed": 3,
+          "stop_observed": true
+        },
+        "3": {
+          "stop_epoch": 4,
+          "selected_epoch": 1,
+          "validation_spearman": 0.08439227834578138,
+          "epochs_consumed": 4,
+          "stop_observed": true
+        },
+        "4": {
+          "stop_epoch": 5,
+          "selected_epoch": 1,
+          "validation_spearman": 0.08439227834578138,
+          "epochs_consumed": 5,
+          "stop_observed": true
+        },
+        "5": {
+          "stop_epoch": 6,
+          "selected_epoch": 1,
+          "validation_spearman": 0.08439227834578138,
+          "epochs_consumed": 6,
+          "stop_observed": true
+        },
+        "10": {
+          "stop_epoch": 6,
+          "selected_epoch": 1,
+          "validation_spearman": 0.08439227834578138,
+          "epochs_consumed": 6,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": false,
+      "gain_over_patience1": 0.0,
+      "minimum_patience_to_reach_observed_peak": 1,
+      "original_stop_reason": "fixed_pretraining_budget",
+      "source": {
+        "path": "training_outputs/csts_tranche3_evidence/shuffled_pretrain_trace.json",
+        "sha256": "2fd230294a46d48bef1bfb42c1e551952760ea471e24ed8f0a952ec32028568a",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      }
+    },
+    {
+      "label": "epoch_scores/evidence_pretrain",
+      "scope": "recent_qwen_fixed_or_proposition_pretraining",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "epochs_observed": 6,
+      "best_observed": {
+        "epoch": 6,
+        "validation_spearman": 0.5111559305848661
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 2,
+          "selected_epoch": 1,
+          "validation_spearman": 0.4738370115511225,
+          "epochs_consumed": 2,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 6,
+          "selected_epoch": 6,
+          "validation_spearman": 0.5111559305848661,
+          "epochs_consumed": 6,
+          "stop_observed": false
+        },
+        "3": {
+          "stop_epoch": 6,
+          "selected_epoch": 6,
+          "validation_spearman": 0.5111559305848661,
+          "epochs_consumed": 6,
+          "stop_observed": false
+        },
+        "4": {
+          "stop_epoch": 6,
+          "selected_epoch": 6,
+          "validation_spearman": 0.5111559305848661,
+          "epochs_consumed": 6,
+          "stop_observed": false
+        },
+        "5": {
+          "stop_epoch": 6,
+          "selected_epoch": 6,
+          "validation_spearman": 0.5111559305848661,
+          "epochs_consumed": 6,
+          "stop_observed": false
+        },
+        "10": {
+          "stop_epoch": 6,
+          "selected_epoch": 6,
+          "validation_spearman": 0.5111559305848661,
+          "epochs_consumed": 6,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": true,
+      "gain_over_patience1": 0.03731891903374357,
+      "minimum_patience_to_reach_observed_peak": 2,
+      "original_stop_reason": "proposition_validation_patience",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/epoch_scores.json",
+        "json_pointer": "/stages/evidence_pretrain",
+        "sha256": "007fd92e9bd26ddde1e94973c43335b96f5fe61ec201f71eda7b2ee2ca89dde0",
+        "identity": {
+          "run_name": "jep_csts_v1_full_propositions_converged_patience1_20261027",
+          "source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
+          "attempt": "9bfd9512",
+          "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+        }
+      }
+    },
+    {
+      "label": "two_epoch_phase1_scores/ratings_ratings",
+      "scope": "recent_qwen_ratings",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "epochs_observed": 6,
+      "best_observed": {
+        "epoch": 4,
+        "validation_spearman": 0.8759148798941229
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 5,
+          "selected_epoch": 4,
+          "validation_spearman": 0.8759148798941229,
+          "epochs_consumed": 5,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 6,
+          "selected_epoch": 4,
+          "validation_spearman": 0.8759148798941229,
+          "epochs_consumed": 6,
+          "stop_observed": true
+        },
+        "3": {
+          "stop_epoch": 6,
+          "selected_epoch": 4,
+          "validation_spearman": 0.8759148798941229,
+          "epochs_consumed": 6,
+          "stop_observed": false
+        },
+        "4": {
+          "stop_epoch": 6,
+          "selected_epoch": 4,
+          "validation_spearman": 0.8759148798941229,
+          "epochs_consumed": 6,
+          "stop_observed": false
+        },
+        "5": {
+          "stop_epoch": 6,
+          "selected_epoch": 4,
+          "validation_spearman": 0.8759148798941229,
+          "epochs_consumed": 6,
+          "stop_observed": false
+        },
+        "10": {
+          "stop_epoch": 6,
+          "selected_epoch": 4,
+          "validation_spearman": 0.8759148798941229,
+          "epochs_consumed": 6,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": false,
+      "gain_over_patience1": 0.0,
+      "minimum_patience_to_reach_observed_peak": 1,
+      "original_stop_reason": "validation_patience",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/two_epoch_phase1_scores.json",
+        "json_pointer": "/stages/ratings_ratings",
+        "sha256": "6b2e9e118cdda33c1f1b3e53c53356dfbae0787827f030e63872687250b32ed4",
+        "identity": {
+          "run_name": "jep_csts_v1_proposition_patience1_completion_20261027",
+          "source_commit": "636cb33048f41eb8c0e839250df66d36cf46a101",
+          "attempt": "191bbce7",
+          "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+        }
+      }
+    },
+    {
+      "label": "epoch_scores/evidence_ratings",
+      "scope": "recent_qwen_ratings",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "epochs_observed": 5,
+      "best_observed": {
+        "epoch": 4,
+        "validation_spearman": 0.8770609109816897
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 5,
+          "selected_epoch": 4,
+          "validation_spearman": 0.8770609109816897,
+          "epochs_consumed": 5,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 5,
+          "selected_epoch": 4,
+          "validation_spearman": 0.8770609109816897,
+          "epochs_consumed": 5,
+          "stop_observed": false
+        },
+        "3": {
+          "stop_epoch": 5,
+          "selected_epoch": 4,
+          "validation_spearman": 0.8770609109816897,
+          "epochs_consumed": 5,
+          "stop_observed": false
+        },
+        "4": {
+          "stop_epoch": 5,
+          "selected_epoch": 4,
+          "validation_spearman": 0.8770609109816897,
+          "epochs_consumed": 5,
+          "stop_observed": false
+        },
+        "5": {
+          "stop_epoch": 5,
+          "selected_epoch": 4,
+          "validation_spearman": 0.8770609109816897,
+          "epochs_consumed": 5,
+          "stop_observed": false
+        },
+        "10": {
+          "stop_epoch": 5,
+          "selected_epoch": 4,
+          "validation_spearman": 0.8770609109816897,
+          "epochs_consumed": 5,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": false,
+      "gain_over_patience1": 0.0,
+      "minimum_patience_to_reach_observed_peak": 1,
+      "original_stop_reason": "validation_patience",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/epoch_scores.json",
+        "json_pointer": "/stages/evidence_ratings",
+        "sha256": "007fd92e9bd26ddde1e94973c43335b96f5fe61ec201f71eda7b2ee2ca89dde0",
+        "identity": {
+          "run_name": "jep_csts_v1_full_propositions_converged_patience1_20261027",
+          "source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
+          "attempt": "9bfd9512",
+          "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+        }
+      }
+    },
+    {
+      "label": "two_epoch_phase1_scores/evidence_ratings",
+      "scope": "recent_qwen_ratings",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "epochs_observed": 5,
+      "best_observed": {
+        "epoch": 4,
+        "validation_spearman": 0.8750486487560906
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 5,
+          "selected_epoch": 4,
+          "validation_spearman": 0.8750486487560906,
+          "epochs_consumed": 5,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 5,
+          "selected_epoch": 4,
+          "validation_spearman": 0.8750486487560906,
+          "epochs_consumed": 5,
+          "stop_observed": false
+        },
+        "3": {
+          "stop_epoch": 5,
+          "selected_epoch": 4,
+          "validation_spearman": 0.8750486487560906,
+          "epochs_consumed": 5,
+          "stop_observed": false
+        },
+        "4": {
+          "stop_epoch": 5,
+          "selected_epoch": 4,
+          "validation_spearman": 0.8750486487560906,
+          "epochs_consumed": 5,
+          "stop_observed": false
+        },
+        "5": {
+          "stop_epoch": 5,
+          "selected_epoch": 4,
+          "validation_spearman": 0.8750486487560906,
+          "epochs_consumed": 5,
+          "stop_observed": false
+        },
+        "10": {
+          "stop_epoch": 5,
+          "selected_epoch": 4,
+          "validation_spearman": 0.8750486487560906,
+          "epochs_consumed": 5,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": false,
+      "gain_over_patience1": 0.0,
+      "minimum_patience_to_reach_observed_peak": 1,
+      "original_stop_reason": "validation_patience",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/two_epoch_phase1_scores.json",
+        "json_pointer": "/stages/evidence_ratings",
+        "sha256": "6b2e9e118cdda33c1f1b3e53c53356dfbae0787827f030e63872687250b32ed4",
+        "identity": {
+          "run_name": "jep_csts_v1_proposition_patience1_completion_20261027",
+          "source_commit": "636cb33048f41eb8c0e839250df66d36cf46a101",
+          "attempt": "191bbce7",
+          "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+        }
+      }
+    },
+    {
+      "label": "epoch_scores/ratings_ratings",
+      "scope": "recent_qwen_ratings",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "epochs_observed": 3,
+      "best_observed": {
+        "epoch": 2,
+        "validation_spearman": 0.8718754731182672
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 3,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8718754731182672,
+          "epochs_consumed": 3,
+          "stop_observed": true
+        },
+        "2": {
+          "stop_epoch": 3,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8718754731182672,
+          "epochs_consumed": 3,
+          "stop_observed": false
+        },
+        "3": {
+          "stop_epoch": 3,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8718754731182672,
+          "epochs_consumed": 3,
+          "stop_observed": false
+        },
+        "4": {
+          "stop_epoch": 3,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8718754731182672,
+          "epochs_consumed": 3,
+          "stop_observed": false
+        },
+        "5": {
+          "stop_epoch": 3,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8718754731182672,
+          "epochs_consumed": 3,
+          "stop_observed": false
+        },
+        "10": {
+          "stop_epoch": 3,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8718754731182672,
+          "epochs_consumed": 3,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": false,
+      "gain_over_patience1": 0.0,
+      "minimum_patience_to_reach_observed_peak": 1,
+      "original_stop_reason": "validation_patience",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/epoch_scores.json",
+        "json_pointer": "/stages/ratings_ratings",
+        "sha256": "007fd92e9bd26ddde1e94973c43335b96f5fe61ec201f71eda7b2ee2ca89dde0",
+        "identity": {
+          "run_name": "jep_csts_v1_full_propositions_converged_patience1_20261027",
+          "source_commit": "3ef6ba0616614632abc5bc0b2f2e2c71886c2f0e",
+          "attempt": "9bfd9512",
+          "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+        }
+      }
+    },
+    {
+      "label": "four_epoch_pilot_scores/ratings_pretrain",
+      "scope": "recent_qwen_fixed_or_proposition_pretraining",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "epochs_observed": 2,
+      "best_observed": {
+        "epoch": 2,
+        "validation_spearman": 0.8453686505097764
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8453686505097764,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "2": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8453686505097764,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "3": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8453686505097764,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "4": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8453686505097764,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "5": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8453686505097764,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "10": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8453686505097764,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": false,
+      "gain_over_patience1": 0.0,
+      "minimum_patience_to_reach_observed_peak": 1,
+      "original_stop_reason": "fixed_update_budget",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/four_epoch_pilot_scores.json",
+        "json_pointer": "/stages/ratings_pretrain",
+        "sha256": "86a07cbdce109e11b8fc4574c97295eeb839d43170f63d76987d21c364175030",
+        "identity": {
+          "run_name": "jep_csts_v1_existing_propositions_patience2_20261027",
+          "source_commit": "8df0a1039bb5be8ddfd8407bdd32aa64a102018a",
+          "attempt": "6048f746",
+          "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+        }
+      }
+    },
+    {
+      "label": "four_epoch_pilot_scores/evidence_pretrain",
+      "scope": "recent_qwen_fixed_or_proposition_pretraining",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "epochs_observed": 2,
+      "best_observed": {
+        "epoch": 2,
+        "validation_spearman": 0.48441696004268336
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.48441696004268336,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "2": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.48441696004268336,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "3": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.48441696004268336,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "4": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.48441696004268336,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "5": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.48441696004268336,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "10": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.48441696004268336,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": false,
+      "gain_over_patience1": 0.0,
+      "minimum_patience_to_reach_observed_peak": 1,
+      "original_stop_reason": "fixed_update_budget",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/four_epoch_pilot_scores.json",
+        "json_pointer": "/stages/evidence_pretrain",
+        "sha256": "86a07cbdce109e11b8fc4574c97295eeb839d43170f63d76987d21c364175030",
+        "identity": {
+          "run_name": "jep_csts_v1_existing_propositions_patience2_20261027",
+          "source_commit": "8df0a1039bb5be8ddfd8407bdd32aa64a102018a",
+          "attempt": "6048f746",
+          "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff"
+        }
+      }
+    },
+    {
+      "label": "v41_final_epoch_scores/ratings_pretrain",
+      "scope": "recent_qwen_fixed_or_proposition_pretraining",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "epochs_observed": 2,
+      "best_observed": {
+        "epoch": 2,
+        "validation_spearman": 0.8143611040105944
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8143611040105944,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "2": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8143611040105944,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "3": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8143611040105944,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "4": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8143611040105944,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "5": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8143611040105944,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "10": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8143611040105944,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": false,
+      "gain_over_patience1": 0.0,
+      "minimum_patience_to_reach_observed_peak": 1,
+      "original_stop_reason": "fixed_update_budget",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/v41_final_epoch_scores.json",
+        "json_pointer": "/stages/ratings_pretrain",
+        "sha256": "2e98b3b3c134a5e29f8679ea0891eefccf9c695ca24167d0fc8d0caf05462383",
+        "identity": {
+          "run_name": "propositions_v41_full_after_indicative",
+          "source_commit": "a6daf0eeea544716d7340f0f24de687e4ba93490",
+          "attempt": "d73dcec7",
+          "validation_sha256": "f186e86877e731c96ee9b1c819863b981074bc500dc9aa11c6951ba9fd56e2c9"
+        }
+      }
+    },
+    {
+      "label": "v41_final_epoch_scores/evidence_pretrain",
+      "scope": "recent_qwen_fixed_or_proposition_pretraining",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "epochs_observed": 2,
+      "best_observed": {
+        "epoch": 2,
+        "validation_spearman": 0.45918352861890127
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.45918352861890127,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "2": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.45918352861890127,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "3": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.45918352861890127,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "4": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.45918352861890127,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "5": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.45918352861890127,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "10": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.45918352861890127,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": false,
+      "gain_over_patience1": 0.0,
+      "minimum_patience_to_reach_observed_peak": 1,
+      "original_stop_reason": "fixed_update_budget",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/v41_final_epoch_scores.json",
+        "json_pointer": "/stages/evidence_pretrain",
+        "sha256": "2e98b3b3c134a5e29f8679ea0891eefccf9c695ca24167d0fc8d0caf05462383",
+        "identity": {
+          "run_name": "propositions_v41_full_after_indicative",
+          "source_commit": "a6daf0eeea544716d7340f0f24de687e4ba93490",
+          "attempt": "d73dcec7",
+          "validation_sha256": "f186e86877e731c96ee9b1c819863b981074bc500dc9aa11c6951ba9fd56e2c9"
+        }
+      }
+    },
+    {
+      "label": "v41_final_epoch_scores/ratings_ratings",
+      "scope": "recent_qwen_ratings",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "epochs_observed": 2,
+      "best_observed": {
+        "epoch": 2,
+        "validation_spearman": 0.821362455875043
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.821362455875043,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "2": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.821362455875043,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "3": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.821362455875043,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "4": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.821362455875043,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "5": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.821362455875043,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "10": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.821362455875043,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": false,
+      "gain_over_patience1": 0.0,
+      "minimum_patience_to_reach_observed_peak": 1,
+      "original_stop_reason": null,
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/v41_final_epoch_scores.json",
+        "json_pointer": "/stages/ratings_ratings",
+        "sha256": "2e98b3b3c134a5e29f8679ea0891eefccf9c695ca24167d0fc8d0caf05462383",
+        "identity": {
+          "run_name": "propositions_v41_full_after_indicative",
+          "source_commit": "a6daf0eeea544716d7340f0f24de687e4ba93490",
+          "attempt": "d73dcec7",
+          "validation_sha256": "f186e86877e731c96ee9b1c819863b981074bc500dc9aa11c6951ba9fd56e2c9"
+        }
+      }
+    },
+    {
+      "label": "v41_final_epoch_scores/evidence_ratings",
+      "scope": "recent_qwen_ratings",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "epochs_observed": 2,
+      "best_observed": {
+        "epoch": 2,
+        "validation_spearman": 0.8216492088016224
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8216492088016224,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "2": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8216492088016224,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "3": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8216492088016224,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "4": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8216492088016224,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "5": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8216492088016224,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        },
+        "10": {
+          "stop_epoch": 2,
+          "selected_epoch": 2,
+          "validation_spearman": 0.8216492088016224,
+          "epochs_consumed": 2,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": false,
+      "gain_over_patience1": 0.0,
+      "minimum_patience_to_reach_observed_peak": 1,
+      "original_stop_reason": "epoch_budget",
+      "source": {
+        "retained_path": "/home/peter_aetherlabs_live/jep-ratings-only-flip-20261107/training_outputs/proposition_full_20261026/v41_final_epoch_scores.json",
+        "json_pointer": "/stages/evidence_ratings",
+        "sha256": "2e98b3b3c134a5e29f8679ea0891eefccf9c695ca24167d0fc8d0caf05462383",
+        "identity": {
+          "run_name": "propositions_v41_full_after_indicative",
+          "source_commit": "a6daf0eeea544716d7340f0f24de687e4ba93490",
+          "attempt": "d73dcec7",
+          "validation_sha256": "f186e86877e731c96ee9b1c819863b981074bc500dc9aa11c6951ba9fd56e2c9"
+        }
+      }
+    },
+    {
+      "label": "csts_tranche2_lora_trace",
+      "scope": "older_qwen_lora",
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "epochs_observed": 1,
+      "best_observed": {
+        "epoch": 1,
+        "validation_spearman": 0.6667722886017582
+      },
+      "policies": {
+        "1": {
+          "stop_epoch": 1,
+          "selected_epoch": 1,
+          "validation_spearman": 0.6667722886017582,
+          "epochs_consumed": 1,
+          "stop_observed": false
+        },
+        "2": {
+          "stop_epoch": 1,
+          "selected_epoch": 1,
+          "validation_spearman": 0.6667722886017582,
+          "epochs_consumed": 1,
+          "stop_observed": false
+        },
+        "3": {
+          "stop_epoch": 1,
+          "selected_epoch": 1,
+          "validation_spearman": 0.6667722886017582,
+          "epochs_consumed": 1,
+          "stop_observed": false
+        },
+        "4": {
+          "stop_epoch": 1,
+          "selected_epoch": 1,
+          "validation_spearman": 0.6667722886017582,
+          "epochs_consumed": 1,
+          "stop_observed": false
+        },
+        "5": {
+          "stop_epoch": 1,
+          "selected_epoch": 1,
+          "validation_spearman": 0.6667722886017582,
+          "epochs_consumed": 1,
+          "stop_observed": false
+        },
+        "10": {
+          "stop_epoch": 1,
+          "selected_epoch": 1,
+          "validation_spearman": 0.6667722886017582,
+          "epochs_consumed": 1,
+          "stop_observed": false
+        }
+      },
+      "patience1_missed_observed_peak": false,
+      "gain_over_patience1": 0.0,
+      "minimum_patience_to_reach_observed_peak": 1,
+      "original_stop_reason": "resource_budget",
+      "source": {
+        "path": "training_outputs/csts_tranche2_lora_trace.json",
+        "sha256": "1563cb70034c6cc9c8a8b0d1191f69775e145e0462eddd89a3dfbdb27bcddc55",
+        "repository_revision": "df2aac50e58337e992faf4393b076ec4ab93f2fa"
+      }
+    }
+  ],
+  "live_fits": [
+    {
+      "worker": "worker1",
+      "trial": "A_condition_first_seed7",
+      "completed_epochs": 5,
+      "selected_epoch": 4,
+      "validation_spearman": 0.8764748186828899,
+      "stopping_limit": "The live patience-1 fit provides no epochs after its first non-improvement."
+    },
+    {
+      "worker": "worker1",
+      "trial": "B_order_only_seed7",
+      "completed_epochs": 5,
+      "selected_epoch": 4,
+      "validation_spearman": 0.8746972021838658,
+      "stopping_limit": "The live patience-1 fit provides no epochs after its first non-improvement."
+    },
+    {
+      "worker": "worker2",
+      "trial": "B_order_only_seed8",
+      "completed_epochs": 3,
+      "selected_epoch": 2,
+      "validation_spearman": 0.8697257695993728,
+      "stopping_limit": "The live patience-1 fit provides no epochs after its first non-improvement."
+    },
+    {
+      "worker": "worker2",
+      "trial": "C_case_inspired_seed8",
+      "completed_epochs": 2,
+      "selected_epoch": null,
+      "validation_spearman": null,
+      "stopping_limit": "The live patience-1 fit provides no epochs after its first non-improvement."
+    }
+  ]
+}
