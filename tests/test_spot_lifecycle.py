@@ -82,9 +82,22 @@ class AllocationObservationTests(unittest.TestCase):
         deploy = load_script("deploy_spot")
         responses = [subprocess.CompletedProcess([], 1, "", "observation failed"),
                      subprocess.CompletedProcess([], 0, '{"status":"RUNNING"}', "")]
-        with patch.object(deploy, "command", side_effect=responses):
+        with patch.object(deploy, "command", side_effect=responses), \
+             patch.object(deploy.time, "monotonic", side_effect=[0, 901]):
             with self.assertRaisesRegex(RuntimeError, "intent retained"):
                 deploy.terminal_operation("op-1", "asia-east1-b", [])
+
+    def test_running_wait_is_polled_to_done_without_another_create(self):
+        deploy = load_script("deploy_spot")
+        done = {"status": "DONE", "name": "op-1"}
+        responses = [subprocess.CompletedProcess([], 0, '{"status":"RUNNING"}', ""),
+                     subprocess.CompletedProcess([], 0, json.dumps(done), "")]
+        with patch.object(deploy, "command", side_effect=responses) as run, \
+             patch.object(deploy.time, "sleep"), \
+             patch.object(deploy.time, "monotonic", side_effect=[0, 10]):
+            self.assertEqual(deploy.terminal_operation("op-1", "asia-east1-b", []), done)
+        self.assertEqual(run.call_count, 2)
+        self.assertTrue(all(call.args[0][3] == "wait" for call in run.call_args_list))
 
     def test_operation_observation_timeout_never_cleans_resources(self):
         deploy = load_script("deploy_spot")

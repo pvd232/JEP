@@ -15,6 +15,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import time
 from typing import Any
 
 EAST_ASIA = ("asia-east1", "asia-east2", "asia-northeast1", "asia-northeast2", "asia-northeast3")
@@ -83,20 +84,24 @@ def candidates(regions: list[str], zones: list[str], advice: list[dict]) -> list
 
 
 def terminal_operation(name: str, zone: str, common: list[str]) -> dict:
-    """Distinguish a terminal provider failure from an unavailable observation."""
-    waited = command(["gcloud", "compute", "operations", "wait", name,
-                      f"--zone={zone}", *common, "--format=json"], 900)
-    # gcloud reports a DONE stockout with a nonzero exit status. Describe the
-    # recorded operation independently before deciding whether fallback is safe.
-    observed = waited if waited.returncode == 0 else command([
-        "gcloud", "compute", "operations", "describe", name,
-        f"--zone={zone}", *common, "--format=json"], 60)
-    if observed.returncode:
-        raise RuntimeError("Provider operation completion is unknown; admission intent retained: " + name)
-    completed = json.loads(observed.stdout)
-    if completed.get("status") != "DONE":
-        raise RuntimeError("Provider operation is not terminal; admission intent retained: " + name)
-    return completed
+    """Poll the recorded operation until terminal or the observation budget expires."""
+    deadline = time.monotonic() + 900
+    while True:
+        waited = command(["gcloud", "compute", "operations", "wait", name,
+                          f"--zone={zone}", *common, "--format=json"], 240)
+        # gcloud can return RUNNING after its server-side wait, or a nonzero
+        # status for a DONE stockout. Neither alone authorizes a new allocation.
+        observed = waited if waited.returncode == 0 else command([
+            "gcloud", "compute", "operations", "describe", name,
+            f"--zone={zone}", *common, "--format=json"], 60)
+        if observed.returncode:
+            raise RuntimeError("Provider operation completion is unknown; admission intent retained: " + name)
+        completed = json.loads(observed.stdout)
+        if completed.get("status") == "DONE":
+            return completed
+        if completed.get("status") not in {"PENDING", "RUNNING"} or time.monotonic() >= deadline:
+            raise RuntimeError("Provider operation is not terminal; admission intent retained: " + name)
+        time.sleep(2)
 
 
 def cleanup_failed_create(name: str, zone: str, snapshot_id: str, common: list[str]) -> None:
