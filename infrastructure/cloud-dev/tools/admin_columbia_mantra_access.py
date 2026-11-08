@@ -134,7 +134,8 @@ class Setup:
         return json.loads(result.stdout) if result.stdout.strip() else None
 
     def api(self, url: str, method: str = 'GET', body: dict | None = None) -> dict:
-        allowed = {'compute.googleapis.com', 'iap.googleapis.com', 'storage.googleapis.com'}
+        allowed = {'compute.googleapis.com', 'iap.googleapis.com', 'storage.googleapis.com',
+                   'cloudresourcemanager.googleapis.com', 'iam.googleapis.com'}
         if urllib.parse.urlsplit(url).hostname not in allowed or not url.startswith('https://'):
             raise ValueError('Unexpected API destination.')
         if time.monotonic() - self.token_at > 2400 or not self.token:
@@ -157,7 +158,68 @@ class Setup:
                 return json.load(response)
         except urllib.error.HTTPError as error:
             # Do not dump HTTP headers or full resource bodies to the receipt.
-            raise RuntimeError(f'{method} {urllib.parse.urlsplit(url).path}: HTTP {error.code}; no automatic permission broadening.') from None
+            detail = ''
+            try:
+                parsed = json.loads(error.read(16384)).get('error', {})
+                for item in parsed.get('details', []):
+                    if item.get('@type', '').endswith('ErrorInfo'):
+                        meta = item.get('metadata', {})
+                        detail = '; reason=' + str(item.get('reason', 'unknown'))
+                        detail += '; service=' + str(meta.get('service', 'unknown'))
+                        detail += '; consumer=' + str(meta.get('consumer', 'unknown'))
+                        break
+            except (ValueError, OSError):
+                pass
+            raise RuntimeError(f'{method} {urllib.parse.urlsplit(url).path}: HTTP {error.code}{detail}; no automatic permission broadening.') from None
+
+    def require_permissions(self, resource: str, url: str,
+                            permissions: list[str], *, query: bool = False) -> None:
+        """Test the authenticated caller, not a role label or another identity."""
+        if query:
+            url += '?' + urllib.parse.urlencode([('permissions', p) for p in permissions])
+            observed = self.api(url)
+        else:
+            observed = self.api(url, 'POST', {'permissions': permissions})
+        granted = observed.get('permissions', [])
+        if not isinstance(granted, list) or not all(isinstance(p, str) for p in granted):
+            raise ValueError('Malformed permission-test response; setup is not authorized.')
+        missing = sorted(set(permissions) - set(granted))
+        self.event('admin_permission_check', account=ADMIN, resource=resource,
+                   required=permissions, missing=missing, passed=not missing,
+                   mutation=False)
+        if missing:
+            raise PermissionError('Administrator preflight failed for ' + resource
+                                  + '; missing: ' + ', '.join(missing))
+
+    def permission_preflight(self, selected: list[dict], number: str,
+                             existing: dict) -> None:
+        """Require every setup permission before the first additive mutation."""
+        required = ['resourcemanager.projects.get', 'resourcemanager.projects.getIamPolicy',
+                    'resourcemanager.projects.setIamPolicy', 'iam.roles.list',
+                    'compute.instances.list', 'compute.projects.get', 'compute.zoneOperations.get']
+        if any(role not in existing for role in ROLES):
+            required.append('iam.roles.create')
+        self.require_permissions('projects/' + PROJECT,
+            f'https://cloudresourcemanager.googleapis.com/v1/projects/{PROJECT}:testIamPermissions', required)
+        self.require_permissions('serviceAccounts/' + WORKER_SA,
+            f'https://iam.googleapis.com/v1/projects/{PROJECT}/serviceAccounts/{WORKER_SA}:testIamPermissions',
+            ['iam.serviceAccounts.getIamPolicy', 'iam.serviceAccounts.setIamPolicy', 'iam.serviceAccounts.actAs'])
+        self.require_permissions('buckets/' + BUCKET,
+            f'https://storage.googleapis.com/storage/v1/b/{BUCKET}/iam/testPermissions',
+            ['storage.buckets.get', 'storage.buckets.getIamPolicy', 'storage.buckets.setIamPolicy'], query=True)
+        for row in selected:
+            zone = row['zone'].rsplit('/', 1)[-1]
+            resource = f'projects/{PROJECT}/zones/{zone}/instances/{row["name"]}'
+            permissions = ['compute.instances.get', 'compute.instances.getIamPolicy', 'compute.instances.setIamPolicy']
+            if append_public_key(row.get('metadata', {}))[1]:
+                permissions.append('compute.instances.setMetadata')
+            self.require_permissions(resource,
+                'https://compute.googleapis.com/compute/v1/' + resource + '/testIamPermissions', permissions)
+            iap = f'projects/{number}/iap_tunnel/zones/{zone}/instances/{row["id"]}'
+            self.require_permissions(iap, 'https://iap.googleapis.com/v1/' + iap + ':testIamPermissions',
+                                     ['iap.tunnelInstances.getIamPolicy', 'iap.tunnelInstances.setIamPolicy'])
+        self.event('ADMIN_PERMISSION_PREFLIGHT_PASSED', account=ADMIN,
+                   note='Read-only checks passed; write operations still enforce current IAM and organization policy.')
 
     def ensure_role(self, role_id: str, permissions: list[str], existing: dict) -> None:
         role = existing.get(role_id)
@@ -221,6 +283,7 @@ class Setup:
             if role and (role.get('deleted') or role.get('stage') in ('DISABLED', 'DEPRECATED')
                          or set(role.get('includedPermissions', [])) != set(permissions)):
                 raise ValueError('Role name collision; no changes applied: ' + role_id)
+        self.permission_preflight(selected, str(project['projectNumber']), existing)
         self.event('plan', mode='APPLY' if self.apply else 'PLAN_ONLY', principal=PRINCIPAL,
                    workers=[{'name':r['name'],'id':str(r['id']),'zone':r['zone'].rsplit('/',1)[-1]} for r in selected],
                    roles=ROLES, public_key_fingerprint=KEY_FINGERPRINT,
