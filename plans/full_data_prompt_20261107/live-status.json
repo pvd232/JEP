@@ -1,6 +1,6 @@
 {
-  "generated_epoch": 1794148279.051564,
-  "generated_utc": "2026-11-08T14:31:19.051564+00:00",
+  "generated_epoch": 1794148587.7565298,
+  "generated_utc": "2026-11-08T14:36:27.756530+00:00",
   "cadence_seconds": 300,
   "training_mode": "independent_seed_workers",
   "target_fits": 15,
@@ -94,10 +94,11 @@
             "finished": true
           },
           "B_order_only_seed11": {
-            "epochs": 2,
+            "epochs": 3,
             "seconds": [
               947.6894504769989,
-              969.5170007050001
+              969.5170007050001,
+              962.532083823
             ],
             "selected_epoch": null,
             "finished": false
@@ -106,22 +107,22 @@
       },
       "fresh": true,
       "source": "guest_observation",
-      "observed_utc": "2026-11-08T14:31:18.536150+00:00",
+      "observed_utc": "2026-11-08T14:36:27.214927+00:00",
       "instance_id": "3087252568751843062",
       "epoch_start": {
-        "utc": "2026-11-08T14:19:10.956929+00:00",
+        "utc": "2026-11-08T14:35:20.487488+00:00",
         "trial": "B_order_only_seed11",
-        "epoch": 3
+        "epoch": 4
       },
-      "gpu": "GPU-b2e57239-579e-e259-9761-832579cdf079, 100 %",
+      "gpu": "GPU-b2e57239-579e-e259-9761-832579cdf079, 2 %",
       "services": {
         "train": "active",
         "upload": "active"
       },
-      "verified_epoch_checkpoints": 33,
-      "native_viper_checkpoints": 28,
+      "verified_epoch_checkpoints": 34,
+      "native_viper_checkpoints": 29,
       "pending_generations": 0,
-      "last_verified_utc": "2026-11-08T14:20:13.163228+00:00"
+      "last_verified_utc": "2026-11-08T14:36:21.385577+00:00"
     },
     {
       "worker": "worker2",
@@ -134,7 +135,7 @@
           8,
           10
         ],
-        "execution_id": "c04a5812c47942568552acbc7420b6f3",
+        "execution_id": "13816a6161e54ea9a6e46a858ca6d459",
         "test_opened": false,
         "trials": {
           "B_order_only_seed8": {
@@ -183,15 +184,37 @@
         }
       },
       "fresh": true,
-      "source": "final_controller_receipt",
-      "observed_utc": "2026-11-08T11:02:22.167841+00:00",
-      "final": {
-        "worker": "worker2",
-        "status": "failed_preserved",
-        "reason": "ogle.com/iap/docs/using-tcp-forwarding#increasing_the_tcp_upload_bandwidth\n\nERROR: [0] Error during local connection to [stdin]: Error while connecting [4003: 'failed to connect to backend']. (Failed to connect to port 22)\nTraceback (most recent call last):\n  File \"/snap/google-cloud-cli/519/lib/googlecloudsdk/command_lib/compute/iap_tunnel.py\", line 805, in RunReceiveLocalData\n    websocket_conn = self._InitiateConnection(\n        conn,\n    ...<4 lines>...\n        conn_id=conn_id,\n    )\n  File \"/snap/google-cloud-cli/519/lib/googlecloudsdk/command_lib/compute/iap_tunnel.py\", line 771, in _InitiateConnection\n    new_websocket.InitiateConnection()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/snap/google-cloud-cli/519/lib/googlecloudsdk/api_lib/compute/iap_tunnel_websocket.py\", line 213, in InitiateConnection\n    self._WaitForOpenOrRaiseError()\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/snap/google-cloud-cli/519/lib/googlecloudsdk/api_lib/compute/iap_tunnel_websocket.py\", line 582, in _WaitForOpenOrRaiseError\n    raise ConnectionCreationError(error_msg)\ngooglecloudsdk.api_lib.compute.iap_tunnel_websocket.ConnectionCreationError: Error while connecting [4003: 'failed to connect to backend']. (Failed to connect to port 22)\nConnection closed by UNKNOWN port 65535\n\nRecommendation: To check for possible causes of SSH connectivity issues and get\nrecommendations, rerun the ssh command with the --troubleshoot option.\n\ngcloud compute ssh jep-full-prompt-worker2-20261108 --project=mantra-477901 --zone=asia-east1-b --troubleshoot\n\nOr, to investigate an IAP tunneling issue:\n\ngcloud compute ssh jep-full-prompt-worker2-20261108 --project=mantra-477901 --zone=asia-east1-b --troubleshoot --tunnel-through-iap\n\nERROR: (gcloud.compute.ssh) [/usr/bin/ssh] exited with return code [255].\n"
-      }
+      "source": "guest_observation",
+      "observed_utc": "2026-11-08T14:36:26.933084+00:00",
+      "instance_id": "6739260318488017241",
+      "epoch_start": {
+        "utc": "2026-11-08T10:58:40.573695+00:00",
+        "trial": "A_condition_first_seed10",
+        "epoch": 2
+      },
+      "gpu": "GPU-9882621e-b66d-5494-d4db-3707cfb4631f, 2 %",
+      "services": {
+        "train": "inactive",
+        "upload": "inactive"
+      },
+      "verified_epoch_checkpoints": 15,
+      "native_viper_checkpoints": 15,
+      "pending_generations": 0,
+      "last_verified_utc": "2026-11-08T10:59:42.357023+00:00"
     }
   ],
-  "forecast": null,
+  "forecast": {
+    "epoch_minutes": 16.372754282466666,
+    "finished_fit_samples": 9,
+    "assumed_epochs_per_fit": [
+      3,
+      5,
+      6
+    ],
+    "earliest_epoch": 1794156446.6785853,
+    "central_epoch": 1794162340.870127,
+    "latest_epoch": 1794165287.965898,
+    "basis": "Conditional on remaining fits following observed stopping lengths; unfinished epochs counted conservatively. Spot interruptions and continued validation improvement can extend the estimate."
+  },
   "monitor_status": "active"
 }
