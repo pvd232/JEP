@@ -1,6 +1,6 @@
 """Capture test predictions from all validation-frozen models without fitting."""
 from pathlib import Path
-import argparse,concurrent.futures,datetime as dt,hashlib,json,subprocess,time
+import argparse,concurrent.futures,datetime as dt,hashlib,json,subprocess,time,shutil
 from viper import execution
 from viper.authoring import experiment,input,plan,replicate,stage,variant
 from viper.outputs import StageOutputs,output
@@ -8,18 +8,26 @@ from viper.references import GitFileRef
 from viper.repository import read_source,resolve_root
 from viper.runtime import CUDAComputeSpec,LocalEnvSpec,observe_python_env
 from viper.storage import ViperCloudDestination
+from viper.stages import build,StageContext
 from csts_pilot.baseline_models import ScoreConfig
 from csts_pilot.baseline_stages import capture_predictions
 from csts_pilot.convergence_run import artifact_path
 from csts_pilot.diagnostics import summarize
 from csts_pilot.full_data_prompt_protocol import PROMPTS,digest_file,digest_object,require_complete_selections
 from csts_pilot.full_data_prompt_uploads import cloud_service
-from jep_pilot.loaders import load_json
+from jep_pilot.loaders import load_json,load_model
 
 def atomic(path,value):
     """Keep one complete inference progress record at every update."""
     path.parent.mkdir(parents=True,exist_ok=True)
     tmp=path.with_suffix(".partial");tmp.write_text(json.dumps(value,indent=2)+"\n");tmp.replace(path)
+
+@build(config=ScoreConfig)
+def stage_frozen_model(context: StageContext[ScoreConfig]) -> None:
+    """Copy the already selected model byte-for-byte; perform no fitting."""
+    assert digest_file(context.inputs["model"])==context.config.model_sha256
+    shutil.copyfile(context.inputs["model"],context.outputs["model"])
+    assert digest_file(context.outputs["model"])==context.config.model_sha256
 
 def main():
     parser=argparse.ArgumentParser()
@@ -66,17 +74,20 @@ def main():
             "test_sha256":protocol["splits"][split]["sha256"]}})
         split_name="test.json" if split=="test" else "validation.json"
         holdout_name="holdout.json" if split=="test" else "validation-holdout.json"
+        frozen=stage(stage_frozen_model,stage_id="frozen_model",config=config,
+            inputs=(input("model",path="eval_inputs/models/"+trial+".pt",data_role="training"),),
+            outputs=StageOutputs(model=output(path="model.pt",loader=load_model,data_role="training")),reuse="never")
         configured=stage(capture_predictions,stage_id="capture",config=config,inputs=(
             input("test",path="eval_inputs/"+split_name,data_role="eval"),
             input("holdout",path="eval_inputs/"+holdout_name,data_role="eval"),
             input("selection",path="eval_inputs/"+trial+"-selection.json",data_role="training"),
             input("matrix",path="eval_inputs/matrix.json",data_role="training"),
             input("protocol",path="eval_inputs/protocol.json",data_role="training"),
-            input("model",path="eval_inputs/models/"+trial+".pt",data_role="training")),
+            input("model",source=frozen.outputs["model"])),
             outputs=StageOutputs(predictions=output(path="predictions.json",loader=load_json,data_role="eval"),
                                  timing=output(path="timing.json",loader=load_json,data_role="eval")),reuse="never")
         trial_plan=plan(experiment=experiment(experiment_id="full_prompt_test_"+source.commit[:8]+"_"+trial.lower()+"_"+split,
-            variants=(variant("selected",stages=(configured,),estimator=None),),replicates=(replicate(seed=selected["seed"]),)),
+            variants=(variant("selected",stages=(frozen,configured),estimator=frozen.outputs["model"]),),replicates=(replicate(seed=selected["seed"]),)),
             source=source,env=environment)
         started=time.monotonic()
         result=execution.run(trial_plan,timeout_seconds=1200,
