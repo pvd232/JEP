@@ -1,0 +1,1050 @@
+{
+  "reason": "Native API envelope whitespace caused IndentationError before AST validation",
+  "model_calls": 0,
+  "raw_outputs_modified": false,
+  "schema_or_semantic_repairs": false,
+  "normalizer_implementation_sha256": {
+    "__init__.py": "b0572fcc34f6a05cbd37dbe1b6ffb14e7b6500c5bb8c93379ee1b2ea27801f1f",
+    "cli.py": "f579eef7cdf17cb7a973cb13c6117a8467a4474f62ddd7208f0c3481dc43a33d",
+    "counts.py": "c3db49bc283c7cc30c5881418fddd2506e2d283d2dc6a3c36cada7f4422fce76",
+    "export.py": "9591874d15fc0637a030c806036ca75ff4dc0dc566e2903b4eea623f367560f6",
+    "gates.py": "74fb62e780d160805d7e7d6222672b8515c8a261dd395ae90e2e0250bc1c5150",
+    "inventory.py": "3caefd6f3492b8244fb7c2c860db6e437b99215c0011196ed891a9096cff765c",
+    "normalize.py": "91ba2e447c35aee60b275c5cac5870d14dc1afcd1748da74c5bdda92947a2442",
+    "runtime.py": "0ede1154a1625d16e03994b3bb546289c23cf8f979ebea829c6d09be0eb7cbea",
+    "schema.py": "49782e03ed91519dafff535f02a904489735103e08f6f9f4129ed3c041d7b98d",
+    "scope_extensions.py": "c5fffd5a03bca8adbc81e7477530f4fa1e6481c341d1db89a0151ca49669f8e3"
+  },
+  "cases": [
+    {
+      "model": "knowcoder_ie",
+      "case_id": "animal",
+      "raw_generation_sha256": "8b4639df22e1618fd05ce79c90d444376c30e651f002da93d4b87d1d6ed7d954",
+      "original_result_sha256": "c227e4a1b598e34e11ef0110a596d55da8f8d15dc0583f4cc4c31d69d8717d8e",
+      "original_native_status": "schema_or_grounding_failed",
+      "reparsed_status": "parsed_and_grounded",
+      "reparsed_evidence": {
+        "condition": "type of animal",
+        "family": "unary_typed_mentions",
+        "plan_sha256": "e45355ed53ece57e8424a0eaa209d15927b57b9f7642750dc479dbdbc3111cf2",
+        "status": "answered",
+        "entities": [
+          {
+            "id": "e0",
+            "type": "Animal",
+            "span": {
+              "text": "elephant",
+              "candidates": [
+                {
+                  "start": 3,
+                  "end": 11
+                }
+              ],
+              "grounding": "unique"
+            },
+            "polarity": "positive",
+            "quantity": {
+              "kind": "unknown",
+              "lower": null,
+              "upper": null,
+              "source_text": "elephant"
+            },
+            "annotation_origins": [
+              "annotation:0"
+            ],
+            "answer_roles": [
+              "direct"
+            ]
+          }
+        ],
+        "relations": [],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "requested_facet_status_kind": "candidate_prediction",
+        "ambiguity_origins": [],
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary",
+        "task_stage": null,
+        "requested_facet_status": "answered",
+        "context_annotations_present": false,
+        "candidate_grounding_status": "unique"
+      },
+      "semantic_support_validated": false,
+      "truncated": false,
+      "last_output_token_id": 2
+    },
+    {
+      "model": "knowcoder_ie",
+      "case_id": "food",
+      "raw_generation_sha256": "0046808003ba0f3e488da6f2ac86ab09de61f00760a700a3ba44f707753b9dd0",
+      "original_result_sha256": "45ff83f76bf0632bed7654d59416499f6a9fb805542a3b060c337a8ff1d7a72e",
+      "original_native_status": "schema_or_grounding_failed",
+      "reparsed_status": "parsed_and_grounded",
+      "reparsed_evidence": {
+        "condition": "type of food",
+        "family": "unary_typed_mentions",
+        "plan_sha256": "9dc5b122e40ffd022bb9a244486388f0f850ae5f4b722f22840af179ec75f580",
+        "status": "answered",
+        "entities": [
+          {
+            "id": "e0",
+            "type": "Food",
+            "span": {
+              "text": "sandwich",
+              "candidates": [
+                {
+                  "start": 37,
+                  "end": 45
+                }
+              ],
+              "grounding": "unique"
+            },
+            "polarity": "positive",
+            "quantity": {
+              "kind": "unknown",
+              "lower": null,
+              "upper": null,
+              "source_text": "sandwich"
+            },
+            "annotation_origins": [
+              "annotation:0"
+            ],
+            "answer_roles": [
+              "direct"
+            ]
+          },
+          {
+            "id": "e1",
+            "type": "Food",
+            "span": {
+              "text": "pickle",
+              "candidates": [
+                {
+                  "start": 52,
+                  "end": 58
+                }
+              ],
+              "grounding": "unique"
+            },
+            "polarity": "positive",
+            "quantity": {
+              "kind": "unknown",
+              "lower": null,
+              "upper": null,
+              "source_text": "pickle"
+            },
+            "annotation_origins": [
+              "annotation:1"
+            ],
+            "answer_roles": [
+              "direct"
+            ]
+          }
+        ],
+        "relations": [],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "requested_facet_status_kind": "candidate_prediction",
+        "ambiguity_origins": [],
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary",
+        "task_stage": null,
+        "requested_facet_status": "answered",
+        "context_annotations_present": false,
+        "candidate_grounding_status": "unique"
+      },
+      "semantic_support_validated": false,
+      "truncated": false,
+      "last_output_token_id": 2
+    },
+    {
+      "model": "knowcoder_ie",
+      "case_id": "vehicle",
+      "raw_generation_sha256": "0572c1e6b8c27c8ee1d585dfe64dc8dbceeb1e49a216fe09e936cfd8a230bbc7",
+      "original_result_sha256": "d6d62955e4cd2d2e07aeaf20fc88f5a2d87e1ebe4bd1f14529ee8fbde09ff3a0",
+      "original_native_status": "schema_or_grounding_failed",
+      "reparsed_status": "parsed_and_grounded",
+      "reparsed_evidence": {
+        "condition": "type of vehicle",
+        "family": "unary_typed_mentions",
+        "plan_sha256": "26131136bcc86193a04c75ec95e7d8b55293f6b852f714c830d097b72f44b763",
+        "status": "answered",
+        "entities": [
+          {
+            "id": "e0",
+            "type": "Vehicle",
+            "span": {
+              "text": "train",
+              "candidates": [
+                {
+                  "start": 2,
+                  "end": 7
+                }
+              ],
+              "grounding": "unique"
+            },
+            "polarity": "positive",
+            "quantity": {
+              "kind": "unknown",
+              "lower": null,
+              "upper": null,
+              "source_text": "train"
+            },
+            "annotation_origins": [
+              "annotation:0"
+            ],
+            "answer_roles": [
+              "direct"
+            ]
+          }
+        ],
+        "relations": [],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "requested_facet_status_kind": "candidate_prediction",
+        "ambiguity_origins": [],
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary",
+        "task_stage": null,
+        "requested_facet_status": "answered",
+        "context_annotations_present": false,
+        "candidate_grounding_status": "unique"
+      },
+      "semantic_support_validated": false,
+      "truncated": false,
+      "last_output_token_id": 2
+    },
+    {
+      "model": "knowcoder_ie",
+      "case_id": "helmet",
+      "raw_generation_sha256": "1852d5fac7dbbbdc40f96847587b09e46d26442b3e796b06fe9706d82377bb59",
+      "original_result_sha256": "a3806d093fc1928f7762df71c1f706cba83e0de8fa4c52569682744dc0c25973",
+      "original_native_status": "schema_or_grounding_failed",
+      "reparsed_status": "parsed_and_grounded",
+      "reparsed_evidence": {
+        "condition": "presence of helmets",
+        "family": "unary_typed_mentions",
+        "plan_sha256": "9c27fb890c3829ac80b75332072cfe1509ad9003d62171b6539ee626808e444f",
+        "status": "answered",
+        "entities": [
+          {
+            "id": "e0",
+            "type": "Clothing",
+            "span": {
+              "text": "blue helmets",
+              "candidates": [
+                {
+                  "start": 35,
+                  "end": 47
+                }
+              ],
+              "grounding": "unique"
+            },
+            "polarity": "positive",
+            "quantity": {
+              "kind": "unknown",
+              "lower": null,
+              "upper": null,
+              "source_text": "blue helmets"
+            },
+            "annotation_origins": [
+              "annotation:0"
+            ],
+            "answer_roles": [
+              "direct"
+            ]
+          }
+        ],
+        "relations": [],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "requested_facet_status_kind": "candidate_prediction",
+        "ambiguity_origins": [],
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary",
+        "task_stage": null,
+        "requested_facet_status": "answered",
+        "context_annotations_present": false,
+        "candidate_grounding_status": "unique"
+      },
+      "semantic_support_validated": false,
+      "truncated": false,
+      "last_output_token_id": 2
+    },
+    {
+      "model": "knowcoder_ie",
+      "case_id": "animal_color",
+      "raw_generation_sha256": "864c42d7dda83dba133bbf9a4b100c1919f4357b7d2ddbf7200d917f65d186df",
+      "original_result_sha256": "b6e35b6a8a137e5975a83872de81985f1d5b45fd14b9c94318439fe00b1f78ab",
+      "original_native_status": "schema_or_grounding_failed",
+      "reparsed_status": "parsed_and_grounded",
+      "reparsed_evidence": {
+        "condition": "color of animal",
+        "family": "binary_properties_locations",
+        "plan_sha256": "75d2d596dea58ff9c3078948dd09c8cf3be790a96a6319dde0bcb5f67f2885a6",
+        "status": "answered",
+        "entities": [
+          {
+            "id": "e0",
+            "type": "Animal",
+            "span": {
+              "text": "brown",
+              "candidates": [
+                {
+                  "start": 16,
+                  "end": 21
+                }
+              ],
+              "grounding": "unique"
+            },
+            "polarity": "positive",
+            "quantity": {
+              "kind": "unknown",
+              "lower": null,
+              "upper": null,
+              "source_text": "brown"
+            },
+            "annotation_origins": [
+              "annotation:0:subject"
+            ],
+            "answer_roles": [
+              "direct"
+            ]
+          },
+          {
+            "id": "e1",
+            "type": "Color",
+            "span": {
+              "text": "dog",
+              "candidates": [
+                {
+                  "start": 22,
+                  "end": 25
+                }
+              ],
+              "grounding": "unique"
+            },
+            "polarity": "positive",
+            "quantity": {
+              "kind": "unknown",
+              "lower": null,
+              "upper": null,
+              "source_text": "dog"
+            },
+            "annotation_origins": [
+              "annotation:0:object"
+            ],
+            "answer_roles": [
+              "direct"
+            ]
+          }
+        ],
+        "relations": [
+          {
+            "predicate": "color",
+            "subject": "e0",
+            "object": "e1",
+            "polarity": "positive",
+            "answer_role": "direct",
+            "support_span": {
+              "text": "brown dog",
+              "grounding": "unique",
+              "candidates": [
+                {
+                  "start": 16,
+                  "end": 25
+                }
+              ]
+            }
+          }
+        ],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "requested_facet_status_kind": "candidate_prediction",
+        "ambiguity_origins": [],
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary",
+        "task_stage": null,
+        "requested_facet_status": "answered",
+        "context_annotations_present": false,
+        "candidate_grounding_status": "unique"
+      },
+      "semantic_support_validated": false,
+      "truncated": false,
+      "last_output_token_id": 2
+    },
+    {
+      "model": "knowcoder_ie",
+      "case_id": "board_color",
+      "raw_generation_sha256": "e69359e2ab5811802c26a38416b85dd0df71c420de5db55df2eadbc021b46cd5",
+      "original_result_sha256": "ea28d3925d535682cbd6b81908f6a58c38b2d1941b1cde5b73bbcc0ce916d108",
+      "original_native_status": "schema_or_grounding_failed",
+      "reparsed_status": "parsed_and_grounded",
+      "reparsed_evidence": {
+        "condition": "color of surfboard",
+        "family": "binary_properties_locations",
+        "plan_sha256": "66b3617247230e3e7258de20295a2d957c6e723844e16f562051420ea9a2e6d3",
+        "status": "not_specified",
+        "entities": [],
+        "relations": [],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "requested_facet_status_kind": "candidate_prediction",
+        "ambiguity_origins": [],
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary",
+        "task_stage": null,
+        "requested_facet_status": "not_specified",
+        "context_annotations_present": false,
+        "candidate_grounding_status": "not_applicable"
+      },
+      "semantic_support_validated": false,
+      "truncated": false,
+      "last_output_token_id": 2
+    },
+    {
+      "model": "knowcoder_ie",
+      "case_id": "spatial_qualifier",
+      "raw_generation_sha256": "8362d2a9532cff04e1c83802af17f0c803223dd2d0887c9355b2bfa107a9e049",
+      "original_result_sha256": "6530f696514851c0dd5d2b587b7de1bba250dea5c46720bb6c354407c7902958",
+      "original_native_status": "schema_or_grounding_failed",
+      "reparsed_status": "parsed_and_grounded",
+      "reparsed_evidence": {
+        "condition": "location of person",
+        "family": "binary_properties_locations",
+        "plan_sha256": "dfc505d4407da90026c17dcd04115ab1da6e4cc513dcb3e829fa97d8abf43411",
+        "status": "not_specified",
+        "entities": [],
+        "relations": [],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "requested_facet_status_kind": "candidate_prediction",
+        "ambiguity_origins": [],
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary",
+        "task_stage": null,
+        "requested_facet_status": "not_specified",
+        "context_annotations_present": false,
+        "candidate_grounding_status": "not_applicable"
+      },
+      "semantic_support_validated": false,
+      "truncated": false,
+      "last_output_token_id": 2
+    },
+    {
+      "model": "knowcoder_ie",
+      "case_id": "dog_event",
+      "raw_generation_sha256": "e9a12a4135fefa7c165cc19bc194b3fe4cf1ec20ae1ab30752b7256e755d3541",
+      "original_result_sha256": "94093b38eb78abfbfca68aecb2db81cb8e92ce792a2eb709ac05495443b3af6b",
+      "original_native_status": "schema_or_grounding_failed",
+      "reparsed_status": "parsed_and_grounded",
+      "reparsed_evidence": {
+        "condition": "action of dog",
+        "family": "actions_events",
+        "plan_sha256": "249bc7b4c192ab4c48740afd8e39185a730591dd2f1daf2521455e89abc13b3f",
+        "status": "not_specified",
+        "entities": [],
+        "relations": [],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "requested_facet_status_kind": "candidate_prediction",
+        "ambiguity_origins": [],
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary",
+        "task_stage": null,
+        "requested_facet_status": "not_specified",
+        "context_annotations_present": false,
+        "candidate_grounding_status": "not_applicable"
+      },
+      "semantic_support_validated": false,
+      "truncated": false,
+      "last_output_token_id": 2
+    },
+    {
+      "model": "knowcoder_ie",
+      "case_id": "person_event",
+      "raw_generation_sha256": "3ecccc32161ddb55336447ab86ac94fc9b129e899e4bdf46398b46c40fa5a9a6",
+      "original_result_sha256": "fcc0095b49b8fe1316717d897b4fc6dc5fdd0e4a59bf14835ea2c16ccdb92891",
+      "original_native_status": "schema_or_grounding_failed",
+      "reparsed_status": "parsed_and_grounded",
+      "reparsed_evidence": {
+        "condition": "motion of person",
+        "family": "actions_events",
+        "plan_sha256": "c8a77fca3e4a800353c04e8a4a23a6c6e3ea86a1f12c51a57e31f9a9a34cd3c5",
+        "status": "not_specified",
+        "entities": [],
+        "relations": [],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "requested_facet_status_kind": "candidate_prediction",
+        "ambiguity_origins": [],
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary",
+        "task_stage": null,
+        "requested_facet_status": "not_specified",
+        "context_annotations_present": false,
+        "candidate_grounding_status": "not_applicable"
+      },
+      "semantic_support_validated": false,
+      "truncated": false,
+      "last_output_token_id": 2
+    },
+    {
+      "model": "gollie",
+      "case_id": "animal",
+      "raw_generation_sha256": "a77c225bce541d48437eb9e028e2325bfbfd516ad010c5fe1674dd3c9e1ea3c0",
+      "original_result_sha256": "ac123d733304c78c5490bd8c856d5fe52e76c54063069873893796a669fb1c93",
+      "original_native_status": "parsed_and_grounded",
+      "reparsed_status": "parsed_and_grounded",
+      "reparsed_evidence": {
+        "condition": "type of animal",
+        "family": "unary_typed_mentions",
+        "plan_sha256": "e45355ed53ece57e8424a0eaa209d15927b57b9f7642750dc479dbdbc3111cf2",
+        "status": "answered",
+        "entities": [
+          {
+            "id": "e0",
+            "type": "Animal",
+            "span": {
+              "text": "elephant",
+              "candidates": [
+                {
+                  "start": 3,
+                  "end": 11
+                }
+              ],
+              "grounding": "unique"
+            },
+            "polarity": "positive",
+            "quantity": {
+              "kind": "unknown",
+              "lower": null,
+              "upper": null,
+              "source_text": "elephant"
+            },
+            "annotation_origins": [
+              "annotation:0"
+            ],
+            "answer_roles": [
+              "direct"
+            ]
+          }
+        ],
+        "relations": [],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "requested_facet_status_kind": "candidate_prediction",
+        "ambiguity_origins": [],
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary",
+        "task_stage": null,
+        "requested_facet_status": "answered",
+        "context_annotations_present": false,
+        "candidate_grounding_status": "unique"
+      },
+      "semantic_support_validated": false,
+      "truncated": false,
+      "last_output_token_id": 2
+    },
+    {
+      "model": "gollie",
+      "case_id": "food",
+      "raw_generation_sha256": "c95fbb78160b77e0abc97c87fc3114696c34c3119c3ea612716b44b5ed4e28e5",
+      "original_result_sha256": "e5ab6a8e0c9c6076a56ccc4f0d4740af6bb06ccb37e58c97b8af4b2a3a44d415",
+      "original_native_status": "parsed_and_grounded",
+      "reparsed_status": "parsed_and_grounded",
+      "reparsed_evidence": {
+        "condition": "type of food",
+        "family": "unary_typed_mentions",
+        "plan_sha256": "9dc5b122e40ffd022bb9a244486388f0f850ae5f4b722f22840af179ec75f580",
+        "status": "not_specified",
+        "entities": [],
+        "relations": [],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "requested_facet_status_kind": "candidate_prediction",
+        "ambiguity_origins": [],
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary",
+        "task_stage": null,
+        "requested_facet_status": "not_specified",
+        "context_annotations_present": false,
+        "candidate_grounding_status": "not_applicable"
+      },
+      "semantic_support_validated": false,
+      "truncated": false,
+      "last_output_token_id": 2
+    },
+    {
+      "model": "gollie",
+      "case_id": "vehicle",
+      "raw_generation_sha256": "74f3d10ceb3be2500eaab79858e9c860a5fc9fa3e20ba5c3dd0b7d3f4d51db2f",
+      "original_result_sha256": "a6634bb12bcd86935fc57bbeb0e436ada0938997a1b4e55417fbfb1793a47f0a",
+      "original_native_status": "parsed_and_grounded",
+      "reparsed_status": "parsed_and_grounded",
+      "reparsed_evidence": {
+        "condition": "type of vehicle",
+        "family": "unary_typed_mentions",
+        "plan_sha256": "26131136bcc86193a04c75ec95e7d8b55293f6b852f714c830d097b72f44b763",
+        "status": "answered",
+        "entities": [
+          {
+            "id": "e0",
+            "type": "Vehicle",
+            "span": {
+              "text": "train",
+              "candidates": [
+                {
+                  "start": 2,
+                  "end": 7
+                }
+              ],
+              "grounding": "unique"
+            },
+            "polarity": "positive",
+            "quantity": {
+              "kind": "unknown",
+              "lower": null,
+              "upper": null,
+              "source_text": "train"
+            },
+            "annotation_origins": [
+              "annotation:0"
+            ],
+            "answer_roles": [
+              "direct"
+            ]
+          }
+        ],
+        "relations": [],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "requested_facet_status_kind": "candidate_prediction",
+        "ambiguity_origins": [],
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary",
+        "task_stage": null,
+        "requested_facet_status": "answered",
+        "context_annotations_present": false,
+        "candidate_grounding_status": "unique"
+      },
+      "semantic_support_validated": false,
+      "truncated": false,
+      "last_output_token_id": 2
+    },
+    {
+      "model": "gollie",
+      "case_id": "helmet",
+      "raw_generation_sha256": "1f2481aebf67c94588f285fd9f1981416bf6820e600ea64a3c6f5571c4af02f8",
+      "original_result_sha256": "04aa99f3cae24cb7a591e09c973b2bdf2a76cbaed206dd79446d0b0561d9204d",
+      "original_native_status": "parsed_and_grounded",
+      "reparsed_status": "parsed_and_grounded",
+      "reparsed_evidence": {
+        "condition": "presence of helmets",
+        "family": "unary_typed_mentions",
+        "plan_sha256": "9c27fb890c3829ac80b75332072cfe1509ad9003d62171b6539ee626808e444f",
+        "status": "answered",
+        "entities": [
+          {
+            "id": "e0",
+            "type": "Clothing",
+            "span": {
+              "text": "blue helmets",
+              "candidates": [
+                {
+                  "start": 35,
+                  "end": 47
+                }
+              ],
+              "grounding": "unique"
+            },
+            "polarity": "positive",
+            "quantity": {
+              "kind": "unknown",
+              "lower": null,
+              "upper": null,
+              "source_text": "blue helmets"
+            },
+            "annotation_origins": [
+              "annotation:0"
+            ],
+            "answer_roles": [
+              "direct"
+            ]
+          }
+        ],
+        "relations": [],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "requested_facet_status_kind": "candidate_prediction",
+        "ambiguity_origins": [],
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary",
+        "task_stage": null,
+        "requested_facet_status": "answered",
+        "context_annotations_present": false,
+        "candidate_grounding_status": "unique"
+      },
+      "semantic_support_validated": false,
+      "truncated": false,
+      "last_output_token_id": 2
+    },
+    {
+      "model": "gollie",
+      "case_id": "animal_color",
+      "raw_generation_sha256": "40fc64add62097959aaef62362c0b7af495e94bacdcde02dda0e0e8f8f90dde3",
+      "original_result_sha256": "b110ee6ecebfba34eb49d962c02be71d8e6f8d2c0e1055705c13597eaa82ce28",
+      "original_native_status": "parsed_and_grounded",
+      "reparsed_status": "parsed_and_grounded",
+      "reparsed_evidence": {
+        "condition": "color of animal",
+        "family": "binary_properties_locations",
+        "plan_sha256": "75d2d596dea58ff9c3078948dd09c8cf3be790a96a6319dde0bcb5f67f2885a6",
+        "status": "not_specified",
+        "entities": [],
+        "relations": [],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "requested_facet_status_kind": "candidate_prediction",
+        "ambiguity_origins": [],
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary",
+        "task_stage": null,
+        "requested_facet_status": "not_specified",
+        "context_annotations_present": false,
+        "candidate_grounding_status": "not_applicable"
+      },
+      "semantic_support_validated": false,
+      "truncated": false,
+      "last_output_token_id": 2
+    },
+    {
+      "model": "gollie",
+      "case_id": "board_color",
+      "raw_generation_sha256": "6aaed1eb3d9fe8058749b689b10241e039e6d97a2a5e3fca2a432a31fa434a6e",
+      "original_result_sha256": "f08d54ffb9e37d829e44317e54ca6442b15e5ac2d420f5bb6aa4e1b4c426213a",
+      "original_native_status": "parsed_and_grounded",
+      "reparsed_status": "parsed_and_grounded",
+      "reparsed_evidence": {
+        "condition": "color of surfboard",
+        "family": "binary_properties_locations",
+        "plan_sha256": "66b3617247230e3e7258de20295a2d957c6e723844e16f562051420ea9a2e6d3",
+        "status": "answered",
+        "entities": [
+          {
+            "id": "e0",
+            "type": "Object",
+            "span": {
+              "text": "surfboard",
+              "candidates": [
+                {
+                  "start": 25,
+                  "end": 34
+                }
+              ],
+              "grounding": "unique"
+            },
+            "polarity": "positive",
+            "quantity": {
+              "kind": "unknown",
+              "lower": null,
+              "upper": null,
+              "source_text": "surfboard"
+            },
+            "annotation_origins": [
+              "annotation:0:subject"
+            ],
+            "answer_roles": [
+              "direct"
+            ]
+          },
+          {
+            "id": "e1",
+            "type": "Color",
+            "span": {
+              "text": "white",
+              "candidates": [
+                {
+                  "start": 19,
+                  "end": 24
+                }
+              ],
+              "grounding": "unique"
+            },
+            "polarity": "positive",
+            "quantity": {
+              "kind": "unknown",
+              "lower": null,
+              "upper": null,
+              "source_text": "white"
+            },
+            "annotation_origins": [
+              "annotation:0:object"
+            ],
+            "answer_roles": [
+              "direct"
+            ]
+          }
+        ],
+        "relations": [
+          {
+            "predicate": "color",
+            "subject": "e0",
+            "object": "e1",
+            "polarity": "positive",
+            "answer_role": "direct",
+            "support_span": {
+              "text": "white surfboard",
+              "grounding": "unique",
+              "candidates": [
+                {
+                  "start": 19,
+                  "end": 34
+                }
+              ]
+            }
+          }
+        ],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "requested_facet_status_kind": "candidate_prediction",
+        "ambiguity_origins": [],
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary",
+        "task_stage": null,
+        "requested_facet_status": "answered",
+        "context_annotations_present": false,
+        "candidate_grounding_status": "unique"
+      },
+      "semantic_support_validated": false,
+      "truncated": false,
+      "last_output_token_id": 2
+    },
+    {
+      "model": "gollie",
+      "case_id": "spatial_qualifier",
+      "raw_generation_sha256": "e2d43361623cbe4ae6c8d976725bc80c56535e24b8da9e8721741c28fc1a93e8",
+      "original_result_sha256": "c4bb0c6956a03c61236c9dd579fa322cdce77ae0d5c14627076e8d06f723ce85",
+      "original_native_status": "parsed_and_grounded",
+      "reparsed_status": "parsed_and_grounded",
+      "reparsed_evidence": {
+        "condition": "location of person",
+        "family": "binary_properties_locations",
+        "plan_sha256": "dfc505d4407da90026c17dcd04115ab1da6e4cc513dcb3e829fa97d8abf43411",
+        "status": "answered",
+        "entities": [
+          {
+            "id": "e0",
+            "type": "Person",
+            "span": {
+              "text": "boy",
+              "candidates": [
+                {
+                  "start": 2,
+                  "end": 5
+                }
+              ],
+              "grounding": "unique"
+            },
+            "polarity": "positive",
+            "quantity": {
+              "kind": "unknown",
+              "lower": null,
+              "upper": null,
+              "source_text": "boy"
+            },
+            "annotation_origins": [
+              "annotation:0:subject"
+            ],
+            "answer_roles": [
+              "direct"
+            ]
+          },
+          {
+            "id": "e1",
+            "type": "Location",
+            "span": {
+              "text": "water",
+              "candidates": [
+                {
+                  "start": 43,
+                  "end": 48
+                }
+              ],
+              "grounding": "unique"
+            },
+            "polarity": "positive",
+            "quantity": {
+              "kind": "unknown",
+              "lower": null,
+              "upper": null,
+              "source_text": "water"
+            },
+            "annotation_origins": [
+              "annotation:0:object"
+            ],
+            "answer_roles": [
+              "direct"
+            ]
+          }
+        ],
+        "relations": [
+          {
+            "predicate": "located_at",
+            "subject": "e0",
+            "object": "e1",
+            "polarity": "positive",
+            "answer_role": "direct",
+            "support_span": {
+              "text": "boy in a black swimsuit playing near the water",
+              "grounding": "unique",
+              "candidates": [
+                {
+                  "start": 2,
+                  "end": 48
+                }
+              ]
+            }
+          }
+        ],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "requested_facet_status_kind": "candidate_prediction",
+        "ambiguity_origins": [],
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary",
+        "task_stage": null,
+        "requested_facet_status": "answered",
+        "context_annotations_present": false,
+        "candidate_grounding_status": "unique"
+      },
+      "semantic_support_validated": false,
+      "truncated": false,
+      "last_output_token_id": 2
+    },
+    {
+      "model": "gollie",
+      "case_id": "dog_event",
+      "raw_generation_sha256": "03b0726dcd0f31cd8e704ccabaa075eba4c0448f5edd0384865371aa60f95770",
+      "original_result_sha256": "fc0be050e688c1f7a7de1f063e0d87031e844d3621dc3132019fa421036e0ab4",
+      "original_native_status": "parsed_and_grounded",
+      "reparsed_status": "parsed_and_grounded",
+      "reparsed_evidence": {
+        "condition": "action of dog",
+        "family": "actions_events",
+        "plan_sha256": "249bc7b4c192ab4c48740afd8e39185a730591dd2f1daf2521455e89abc13b3f",
+        "status": "not_specified",
+        "entities": [],
+        "relations": [],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "requested_facet_status_kind": "candidate_prediction",
+        "ambiguity_origins": [],
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary",
+        "task_stage": null,
+        "requested_facet_status": "not_specified",
+        "context_annotations_present": false,
+        "candidate_grounding_status": "not_applicable"
+      },
+      "semantic_support_validated": false,
+      "truncated": false,
+      "last_output_token_id": 2
+    },
+    {
+      "model": "gollie",
+      "case_id": "person_event",
+      "raw_generation_sha256": "9befbd17977b84b6988898b89e341bf3091382b696e3b015ec0981090df71edc",
+      "original_result_sha256": "589483089af5195a07ce73c63b9c33c9a6a9fa5bfb7c9f976b4500f6175a9968",
+      "original_native_status": "parsed_and_grounded",
+      "reparsed_status": "parsed_and_grounded",
+      "reparsed_evidence": {
+        "condition": "motion of person",
+        "family": "actions_events",
+        "plan_sha256": "c8a77fca3e4a800353c04e8a4a23a6c6e3ea86a1f12c51a57e31f9a9a34cd3c5",
+        "status": "not_specified",
+        "entities": [],
+        "relations": [],
+        "events": [],
+        "issues": [],
+        "properties": [],
+        "coverage_validated": false,
+        "semantic_support_validated": false,
+        "requested_facet_status_kind": "candidate_prediction",
+        "ambiguity_origins": [],
+        "capability_profile": "positive_anchor",
+        "schema_stage": "ordinary",
+        "task_stage": null,
+        "requested_facet_status": "not_specified",
+        "context_annotations_present": false,
+        "candidate_grounding_status": "not_applicable"
+      },
+      "semantic_support_validated": false,
+      "truncated": false,
+      "last_output_token_id": 2
+    }
+  ],
+  "capture_indexes": {
+    "knowcoder_ie": {
+      "verified_entries": 27,
+      "all_hashes_and_sizes_match": true
+    },
+    "gollie": {
+      "verified_entries": 22,
+      "all_hashes_and_sizes_match": true
+    }
+  },
+  "direct_and_stage_envelopes_stripped": true,
+  "prior_direct_only_normalizer_sha256": "3971bdc56f932a99e81c1bc3e970908370c8af5a8ebb874f15f8d015d32a2193"
+}

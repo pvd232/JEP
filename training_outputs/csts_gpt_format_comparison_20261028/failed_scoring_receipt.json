@@ -1,0 +1,78 @@
+{
+  "batch_layout": "two comparisons: left1,left2,right1,right2",
+  "checkpoint_config": {
+    "batch_size": 32,
+    "device": "cuda",
+    "embedding_dimension": 4096,
+    "encode_batch_size": 4,
+    "kind": "lora",
+    "learning_rate": 2e-05,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "lora_rank": 32,
+    "max_epochs": 24,
+    "max_length": 160,
+    "max_seconds": 8100.0,
+    "microbatch_size": 32,
+    "model_id": "Qwen/Qwen3-Embedding-8B",
+    "patience": 1,
+    "projection_dimension": 128,
+    "revision": "c90816d848505624c2434128dfc61132162a0ee9",
+    "ridge_alphas": [
+      1e-05,
+      0.0001,
+      0.001,
+      0.01,
+      0.1,
+      1.0
+    ],
+    "schedule": "constant",
+    "schema_version": 2,
+    "seed": 7,
+    "start_epoch": 0,
+    "train_until_patience": true,
+    "warmup_fraction": 0.0,
+    "weight_decay": 0.01
+  },
+  "checkpoint_epoch": 4,
+  "checkpoint_sha256": "d30c00fc76e70ec639493b7121a8b8c9d7520745733857c1c49f0902fff00f4f",
+  "checkpoint_step": 760,
+  "code_sha256": "223e8f83c3081f9ff4e2aa70a9f193bd4cc1a4f248a3cf46a55e207525cbc8b1",
+  "completed_unix": 1793203341.162462,
+  "error": "Found an incompatible version of torchao. Found version 0.10.0, but only versions above 0.16.0 are supported",
+  "error_type": "ImportError",
+  "fallback": "original passage per unavailable side",
+  "gpu": "NVIDIA A100-SXM4-40GB, 40960 MiB, 6 MiB",
+  "incumbent_baseline_code": "/content/jep-gpt-format-comparison-20261028/runtime/incumbent/csts_pilot/baseline_models.py",
+  "incumbent_baseline_code_sha256": "1e2939bb6d5c42ff6df6590ab46db805371256b649e8b720abec3637492f14ea",
+  "inputs_sha256": "1e6ca27338e47b57a2b6784fad0d0b2f7399f2463e2ceb4d031be4141eaa65bb",
+  "label_policy": "No evaluation labels supplied; constant rating=1,target=0 placeholders satisfy legacy row validation only.",
+  "optimizer_updates": 0,
+  "source_fallbacks": {
+    "json": {
+      "ambiguous": 3,
+      "failure:unresolved_entity_reference": 1,
+      "not_specified": 21
+    },
+    "propositions": {
+      "ambiguous": 2,
+      "not_specified": 19
+    },
+    "python": {
+      "ambiguous": 4,
+      "failure:unresolved_entity_reference": 4,
+      "not_specified": 22
+    }
+  },
+  "started_unix": 1793203316.028851,
+  "status": "failed",
+  "tokenized_inputs_sha256": "9a9ade1ec73adba4f1d107cf82e8059c577640f6b41c3a1067f69e537dd11ee4",
+  "truncated_inputs": 0,
+  "versions": {
+    "numpy": "2.1.3",
+    "peft": "0.21.2",
+    "python": "3.13.16 (main, Oct  1 2026, 15:40:24) [GCC 13.3.0]",
+    "torch": "2.11.0+cu130",
+    "transformers": "5.20.2"
+  }
+}

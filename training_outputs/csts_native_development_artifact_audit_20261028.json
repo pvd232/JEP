@@ -1,0 +1,2248 @@
+{
+  "scope": "Independent read-only qualitative development-artifact audit; not human adjudication or a representative score.",
+  "model_calls": 0,
+  "original_captures_modified": false,
+  "source_scope": "Previously exposed development sources only; no locked/fresh case inspection.",
+  "numeric_count_success_claimed": false,
+  "model_ranking_claimed": false,
+  "archive_index_verification": {
+    "path": "/private/tmp/jep-extraction-comparison-20261027/training_outputs/csts_native_development_archives_20261028.json",
+    "sha256": "442e97dcf58141183d5424c4e641a560cec3d72bb2975fbf3b4728d4ef761dc8",
+    "archive_hashes_and_sizes_verified": 11
+  },
+  "termination_totals": {
+    "generations": 120,
+    "final_token_id_2": 119,
+    "truncated": 1,
+    "reported_output_length_matches": 120,
+    "reported_input_length_matches": 120,
+    "stop_reason_eos": 59,
+    "stop_reason_stop": 60,
+    "stop_reason_length": 1
+  },
+  "archives": [
+    {
+      "archive": "/private/tmp/jep-extraction-comparison-20261027/training_outputs/csts_native_task_contract_v2_gollie_execution_20261028.tar.gz",
+      "sha256": "6d8a132d324faeb23b5eb57d2d52efacbfc2ef0726aeb8cff5b3ed7a82963ce7",
+      "archive_bytes": 1671834,
+      "regular_files": 95,
+      "tar_member_sizes_verified": 95,
+      "indexes": [
+        {
+          "path": "results/native-task-contract-v2-gollie-execution-index.json",
+          "hashes_verified": 23,
+          "explicit_index_sizes_verified": 0
+        },
+        {
+          "path": "results/native-task-contract-v2-gollie/capture-index.json",
+          "hashes_verified": 22,
+          "explicit_index_sizes_verified": 22
+        }
+      ],
+      "termination": {
+        "generations": 9,
+        "final_token_id_2": 9,
+        "truncated": 0,
+        "reported_output_length_matches": 9,
+        "reported_input_length_matches": 9,
+        "stop_reason_eos": 9
+      },
+      "ordinary_nonempty": 9,
+      "ordinary_cases": [
+        {
+          "case_id": "animal",
+          "condition": "type of animal",
+          "passage": "An elephant with a red bench on its back and a red and yellow blanket over it's body.",
+          "raw_output": "[\n    Animal(span=\"elephant\"),\n]\n",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-task-contract-v2-gollie/animal-generation.json"
+        },
+        {
+          "case_id": "animal_color",
+          "condition": "color of animal",
+          "passage": "a close up of a brown dog, his eyes are glowing because of the flash ",
+          "raw_output": "[HasColor(object=\"dog\", color=\"brown\")]\n",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-task-contract-v2-gollie/animal_color-generation.json"
+        },
+        {
+          "case_id": "board_color",
+          "condition": "color of surfboard",
+          "passage": "A male surfer on a white surfboard jumps a wave .",
+          "raw_output": "[HasColor(object=\"surfboard\", color=\"white\")]\n",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-task-contract-v2-gollie/board_color-generation.json"
+        },
+        {
+          "case_id": "dog_event",
+          "condition": "action of dog",
+          "passage": "A dog in a green collar fetches a stick from the dead leaves .",
+          "raw_output": "[ActionDescription(actor=\"dog\", verbal_clause=\"fetches a stick from the dead leaves\")]\n",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-task-contract-v2-gollie/dog_event-generation.json"
+        },
+        {
+          "case_id": "food",
+          "condition": "type of food",
+          "passage": "a close up of a plate of food with a sandwich and a pickle",
+          "raw_output": "[Food(span=\"sandwich\"), Food(span=\"pickle\")]\n",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-task-contract-v2-gollie/food-generation.json"
+        },
+        {
+          "case_id": "helmet",
+          "condition": "presence of helmets",
+          "passage": "Five workers in orange outfits and blue helmets work on scaffolding .",
+          "raw_output": "[\n    Helmet(span=\"blue helmets\"),\n]\n",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-task-contract-v2-gollie/helmet-generation.json"
+        },
+        {
+          "case_id": "person_event",
+          "condition": "motion of person",
+          "passage": "A little girl in a pink jacket throws leaves over her head in front of a fence .",
+          "raw_output": "[ActionDescription(actor=\"girl\", verbal_clause=\"throws leaves over her head\")]\n",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-task-contract-v2-gollie/person_event-generation.json"
+        },
+        {
+          "case_id": "spatial_qualifier",
+          "condition": "location of person",
+          "passage": "A boy in a black swimsuit playing near the water .",
+          "raw_output": "[Near(subject=\"boy\", reference=\"water\")]\n",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-task-contract-v2-gollie/spatial_qualifier-generation.json"
+        },
+        {
+          "case_id": "vehicle",
+          "condition": "type of vehicle",
+          "passage": "A train pumps out steam while going down a track on a cloudy day.",
+          "raw_output": "[\n    Vehicle(span=\"train\"),\n]\n",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-task-contract-v2-gollie/vehicle-generation.json"
+        }
+      ],
+      "count_cases": []
+    },
+    {
+      "archive": "/private/tmp/jep-extraction-comparison-20261027/training_outputs/csts_native_task_contract_v2_knowcoder_ie_execution_20261028.tar.gz",
+      "sha256": "c796a45644f260350f6717c038348138d3bf4bef5d079c045529b525a92b9eca",
+      "archive_bytes": 1676904,
+      "regular_files": 96,
+      "tar_member_sizes_verified": 96,
+      "indexes": [
+        {
+          "path": "results/native-task-contract-v2-knowcoder_ie-execution-index.json",
+          "hashes_verified": 24,
+          "explicit_index_sizes_verified": 0
+        },
+        {
+          "path": "results/native-task-contract-v2-knowcoder_ie/capture-index.json",
+          "hashes_verified": 23,
+          "explicit_index_sizes_verified": 23
+        }
+      ],
+      "termination": {
+        "generations": 9,
+        "final_token_id_2": 9,
+        "truncated": 0,
+        "reported_output_length_matches": 9,
+        "reported_input_length_matches": 9,
+        "stop_reason_stop": 9
+      },
+      "ordinary_nonempty": 8,
+      "ordinary_cases": [
+        {
+          "case_id": "animal",
+          "condition": "type of animal",
+          "passage": "An elephant with a red bench on its back and a red and yellow blanket over it's body.",
+          "raw_output": " results = [\n\tAnimal(\"elephant\")\n]",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-task-contract-v2-knowcoder_ie/animal-generation.json"
+        },
+        {
+          "case_id": "animal_color",
+          "condition": "color of animal",
+          "passage": "a close up of a brown dog, his eyes are glowing because of the flash ",
+          "raw_output": " results = [\n\tColor(Entity(\"dog\"), Entity(\"brown\"))\n]",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-task-contract-v2-knowcoder_ie/animal_color-generation.json"
+        },
+        {
+          "case_id": "board_color",
+          "condition": "color of surfboard",
+          "passage": "A male surfer on a white surfboard jumps a wave .",
+          "raw_output": " results = [\n\tColor(Entity(\"surfboard\"), Entity(\"white\"))\n]",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-task-contract-v2-knowcoder_ie/board_color-generation.json"
+        },
+        {
+          "case_id": "dog_event",
+          "condition": "action of dog",
+          "passage": "A dog in a green collar fetches a stick from the dead leaves .",
+          "raw_output": " results = [\n\tActionDescription(Entity(\"dog\"), Entity(\"fetches\"))\n]",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-task-contract-v2-knowcoder_ie/dog_event-generation.json"
+        },
+        {
+          "case_id": "food",
+          "condition": "type of food",
+          "passage": "a close up of a plate of food with a sandwich and a pickle",
+          "raw_output": " results = [\n\tFood(\"sandwich\"),\n\tFood(\"pickle\")\n]",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-task-contract-v2-knowcoder_ie/food-generation.json"
+        },
+        {
+          "case_id": "helmet",
+          "condition": "presence of helmets",
+          "passage": "Five workers in orange outfits and blue helmets work on scaffolding .",
+          "raw_output": " results = [\n\tHelmet(\"blue helmets\")\n]",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-task-contract-v2-knowcoder_ie/helmet-generation.json"
+        },
+        {
+          "case_id": "person_event",
+          "condition": "motion of person",
+          "passage": "A little girl in a pink jacket throws leaves over her head in front of a fence .",
+          "raw_output": " results = [\n\tActionDescription(Entity(\"girl\"), Entity(\"throws leaves over her head\"))\n]",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-task-contract-v2-knowcoder_ie/person_event-generation.json"
+        },
+        {
+          "case_id": "spatial_qualifier",
+          "condition": "location of person",
+          "passage": "A boy in a black swimsuit playing near the water .",
+          "raw_output": " results = []",
+          "empty_literal_list": true,
+          "generation_artifact": "results/native-task-contract-v2-knowcoder_ie/spatial_qualifier-generation.json"
+        },
+        {
+          "case_id": "vehicle",
+          "condition": "type of vehicle",
+          "passage": "A train pumps out steam while going down a track on a cloudy day.",
+          "raw_output": " results = [\n\tVehicle(\"train\")\n]",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-task-contract-v2-knowcoder_ie/vehicle-generation.json"
+        }
+      ],
+      "count_cases": []
+    },
+    {
+      "archive": "/private/tmp/jep-extraction-comparison-20261027/training_outputs/csts_native_one_shot_v1_gollie_execution_20261028.tar.gz",
+      "sha256": "7e16998b272a6e41381f849a2d0337e40f222ee1fc861dc72a2c49e72e7e13b9",
+      "archive_bytes": 1164078,
+      "regular_files": 88,
+      "tar_member_sizes_verified": 88,
+      "indexes": [
+        {
+          "path": "results/native-one-shot-v1-gollie-execution-index.json",
+          "hashes_verified": 23,
+          "explicit_index_sizes_verified": 0
+        },
+        {
+          "path": "results/native-one-shot-v1-gollie/capture-index.json",
+          "hashes_verified": 22,
+          "explicit_index_sizes_verified": 22
+        }
+      ],
+      "termination": {
+        "generations": 9,
+        "final_token_id_2": 9,
+        "truncated": 0,
+        "reported_output_length_matches": 9,
+        "reported_input_length_matches": 9,
+        "stop_reason_eos": 9
+      },
+      "ordinary_nonempty": 6,
+      "ordinary_cases": [
+        {
+          "case_id": "animal",
+          "condition": "type of animal",
+          "passage": "An elephant with a red bench on its back and a red and yellow blanket over it's body.",
+          "raw_output": "[Animal(span=\"elephant\")]\n",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-one-shot-v1-gollie/animal-generation.json"
+        },
+        {
+          "case_id": "animal_color",
+          "condition": "color of animal",
+          "passage": "a close up of a brown dog, his eyes are glowing because of the flash ",
+          "raw_output": "[HasColor(object=\"dog\", color=\"brown\")]\n",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-one-shot-v1-gollie/animal_color-generation.json"
+        },
+        {
+          "case_id": "board_color",
+          "condition": "color of surfboard",
+          "passage": "A male surfer on a white surfboard jumps a wave .",
+          "raw_output": "[HasColor(object=\"surfboard\", color=\"white\")]\n",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-one-shot-v1-gollie/board_color-generation.json"
+        },
+        {
+          "case_id": "dog_event",
+          "condition": "action of dog",
+          "passage": "A dog in a green collar fetches a stick from the dead leaves .",
+          "raw_output": "[]\n",
+          "empty_literal_list": true,
+          "generation_artifact": "results/native-one-shot-v1-gollie/dog_event-generation.json"
+        },
+        {
+          "case_id": "food",
+          "condition": "type of food",
+          "passage": "a close up of a plate of food with a sandwich and a pickle",
+          "raw_output": "[]\n",
+          "empty_literal_list": true,
+          "generation_artifact": "results/native-one-shot-v1-gollie/food-generation.json"
+        },
+        {
+          "case_id": "helmet",
+          "condition": "presence of helmets",
+          "passage": "Five workers in orange outfits and blue helmets work on scaffolding .",
+          "raw_output": "[Helmet(span=\"blue helmets\")]\n",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-one-shot-v1-gollie/helmet-generation.json"
+        },
+        {
+          "case_id": "person_event",
+          "condition": "motion of person",
+          "passage": "A little girl in a pink jacket throws leaves over her head in front of a fence .",
+          "raw_output": "[]\n",
+          "empty_literal_list": true,
+          "generation_artifact": "results/native-one-shot-v1-gollie/person_event-generation.json"
+        },
+        {
+          "case_id": "spatial_qualifier",
+          "condition": "location of person",
+          "passage": "A boy in a black swimsuit playing near the water .",
+          "raw_output": "[\n    Location(arg1=\"boy\", arg2=\"water\"),\n]\n",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-one-shot-v1-gollie/spatial_qualifier-generation.json"
+        },
+        {
+          "case_id": "vehicle",
+          "condition": "type of vehicle",
+          "passage": "A train pumps out steam while going down a track on a cloudy day.",
+          "raw_output": "[\n    Vehicle(span=\"train\"),\n]\n",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-one-shot-v1-gollie/vehicle-generation.json"
+        }
+      ],
+      "count_cases": []
+    },
+    {
+      "archive": "/private/tmp/jep-extraction-comparison-20261027/training_outputs/csts_native_one_shot_v1_knowcoder_ie_execution_20261028.tar.gz",
+      "sha256": "76a20baf3bc9ad2ccd59e312da2fa6e37c332bdbd45b17f431128ec532f8845d",
+      "archive_bytes": 1171211,
+      "regular_files": 89,
+      "tar_member_sizes_verified": 89,
+      "indexes": [
+        {
+          "path": "results/native-one-shot-v1-knowcoder_ie-execution-index.json",
+          "hashes_verified": 24,
+          "explicit_index_sizes_verified": 0
+        },
+        {
+          "path": "results/native-one-shot-v1-knowcoder_ie/capture-index.json",
+          "hashes_verified": 23,
+          "explicit_index_sizes_verified": 23
+        }
+      ],
+      "termination": {
+        "generations": 9,
+        "final_token_id_2": 9,
+        "truncated": 0,
+        "reported_output_length_matches": 9,
+        "reported_input_length_matches": 9,
+        "stop_reason_stop": 9
+      },
+      "ordinary_nonempty": 5,
+      "ordinary_cases": [
+        {
+          "case_id": "animal",
+          "condition": "type of animal",
+          "passage": "An elephant with a red bench on its back and a red and yellow blanket over it's body.",
+          "raw_output": " results = []",
+          "empty_literal_list": true,
+          "generation_artifact": "results/native-one-shot-v1-knowcoder_ie/animal-generation.json"
+        },
+        {
+          "case_id": "animal_color",
+          "condition": "color of animal",
+          "passage": "a close up of a brown dog, his eyes are glowing because of the flash ",
+          "raw_output": " results = [\n\tColor(Entity(\"dog\"), Entity(\"brown\"))\n]",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-one-shot-v1-knowcoder_ie/animal_color-generation.json"
+        },
+        {
+          "case_id": "board_color",
+          "condition": "color of surfboard",
+          "passage": "A male surfer on a white surfboard jumps a wave .",
+          "raw_output": " results = [\n\tColor(Entity(\"surfboard\"), Entity(\"white\"))\n]",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-one-shot-v1-knowcoder_ie/board_color-generation.json"
+        },
+        {
+          "case_id": "dog_event",
+          "condition": "action of dog",
+          "passage": "A dog in a green collar fetches a stick from the dead leaves .",
+          "raw_output": " results = []",
+          "empty_literal_list": true,
+          "generation_artifact": "results/native-one-shot-v1-knowcoder_ie/dog_event-generation.json"
+        },
+        {
+          "case_id": "food",
+          "condition": "type of food",
+          "passage": "a close up of a plate of food with a sandwich and a pickle",
+          "raw_output": " results = [\n\tFood(\"sandwich\"),\n\tFood(\"pickle\")\n]",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-one-shot-v1-knowcoder_ie/food-generation.json"
+        },
+        {
+          "case_id": "helmet",
+          "condition": "presence of helmets",
+          "passage": "Five workers in orange outfits and blue helmets work on scaffolding .",
+          "raw_output": " results = [\n\tHelmet(\"helmets\")\n]",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-one-shot-v1-knowcoder_ie/helmet-generation.json"
+        },
+        {
+          "case_id": "person_event",
+          "condition": "motion of person",
+          "passage": "A little girl in a pink jacket throws leaves over her head in front of a fence .",
+          "raw_output": " results = []",
+          "empty_literal_list": true,
+          "generation_artifact": "results/native-one-shot-v1-knowcoder_ie/person_event-generation.json"
+        },
+        {
+          "case_id": "spatial_qualifier",
+          "condition": "location of person",
+          "passage": "A boy in a black swimsuit playing near the water .",
+          "raw_output": " results = []",
+          "empty_literal_list": true,
+          "generation_artifact": "results/native-one-shot-v1-knowcoder_ie/spatial_qualifier-generation.json"
+        },
+        {
+          "case_id": "vehicle",
+          "condition": "type of vehicle",
+          "passage": "A train pumps out steam while going down a track on a cloudy day.",
+          "raw_output": " results = [\n\tVehicle(\"train\")\n]",
+          "empty_literal_list": false,
+          "generation_artifact": "results/native-one-shot-v1-knowcoder_ie/vehicle-generation.json"
+        }
+      ],
+      "count_cases": []
+    },
+    {
+      "archive": "/private/tmp/jep-extraction-comparison-20261027/training_outputs/csts_finite_count_v2_gollie_execution_20261028.tar.gz",
+      "sha256": "f69c435cdb3845df87b108115b0f4cadebc56731b102b8159a59e685005dcd6e",
+      "archive_bytes": 1690880,
+      "regular_files": 102,
+      "tar_member_sizes_verified": 102,
+      "indexes": [
+        {
+          "path": "results/finite-count-v2-gollie-execution-index.json",
+          "hashes_verified": 15,
+          "explicit_index_sizes_verified": 0
+        }
+      ],
+      "termination": {
+        "generations": 18,
+        "final_token_id_2": 18,
+        "truncated": 0,
+        "reported_output_length_matches": 18,
+        "reported_input_length_matches": 18,
+        "stop_reason_eos": 18
+      },
+      "ordinary_nonempty": 0,
+      "ordinary_cases": [],
+      "count_cases": [
+        {
+          "source": {
+            "condition": "number of people",
+            "id": "0a7d36e084bd22ea9dc3c763c84b3c2bbbc7e37f7876d3971665079e307a0a9e",
+            "passage": "Three people look up at a man on a ladder against a brick wall ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": {
+            "assumptions": [
+              "source_support_and_target_scope_require_caller_validation",
+              "coreference_and_disjointness_use_declared_graph_only"
+            ],
+            "coverage_complete": false,
+            "issues": [
+              "coverage_unverified"
+            ],
+            "kind": "lower_bound",
+            "lower": 2,
+            "upper": null
+          },
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[\n    PersonGroup(span=\"people\"),\n]\n",
+              "empty_literal_list": false
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[]\n",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[]\n",
+              "empty_literal_list": true
+            }
+          ]
+        },
+        {
+          "source": {
+            "condition": "number of animals",
+            "id": "11c0d8914453aec9c3b5364f1acb3f28293bdf2f727791568aa72df1f1a2d84e",
+            "passage": "Two black dogs run through the snow with a red toy in one dog 's mouth ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": {
+            "assumptions": [
+              "source_support_and_target_scope_require_caller_validation",
+              "coreference_and_disjointness_use_declared_graph_only"
+            ],
+            "coverage_complete": false,
+            "issues": [
+              "ambiguous_repeated_source_span",
+              "coverage_unverified",
+              "group_overlap_unresolved"
+            ],
+            "kind": "unknown",
+            "lower": null,
+            "upper": null
+          },
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[\n    AnimalGroup(span=\"Two\"),\n    AnimalGroup(span=\"dog\"),\n]\n",
+              "empty_literal_list": false
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[]\n",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[]\n",
+              "empty_literal_list": true
+            }
+          ]
+        },
+        {
+          "source": {
+            "condition": "number of people",
+            "id": "7507127642c646106a0ede6e36b0c349ae5c7ae184fbcc3ceb7fe8cda9a355be",
+            "passage": "A number of children enjoy themselves on the coast of a city ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": {
+            "assumptions": [
+              "source_support_and_target_scope_require_caller_validation",
+              "coreference_and_disjointness_use_declared_graph_only"
+            ],
+            "coverage_complete": false,
+            "issues": [
+              "coverage_unverified"
+            ],
+            "kind": "unknown",
+            "lower": null,
+            "upper": null
+          },
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[\n    PersonGroup(span=\"number\"),\n]\n",
+              "empty_literal_list": false
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[]\n",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[]\n",
+              "empty_literal_list": true
+            }
+          ]
+        },
+        {
+          "source": {
+            "condition": "number of animals",
+            "id": "b2a6650564ccf6aa6ff9bca716fdbc30fab8a17c2848eb3446547d29ac22eb29",
+            "passage": "A brown and white greyhound wearing a red number five is caught in midair racing ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": {
+            "assumptions": [
+              "source_support_and_target_scope_require_caller_validation",
+              "coreference_and_disjointness_use_declared_graph_only"
+            ],
+            "coverage_complete": false,
+            "issues": [
+              "coverage_unverified",
+              "no_count_evidence"
+            ],
+            "kind": "unknown",
+            "lower": null,
+            "upper": null
+          },
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[\n    Quantity(span=\"five\"),\n]\n",
+              "empty_literal_list": false
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[]\n",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[]\n",
+              "empty_literal_list": true
+            }
+          ]
+        },
+        {
+          "source": {
+            "condition": "number of wheels",
+            "id": "3165c2eace681157890fd25ee5c9a441c2dbea2abc7fd49492a56f16f6803670",
+            "passage": "a boy in green jacket is riding a small motocross bike through the mud ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": {
+            "assumptions": [
+              "source_support_and_target_scope_require_caller_validation",
+              "coreference_and_disjointness_use_declared_graph_only"
+            ],
+            "coverage_complete": false,
+            "issues": [
+              "coverage_unverified",
+              "no_count_evidence"
+            ],
+            "kind": "unknown",
+            "lower": null,
+            "upper": null
+          },
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[]\n",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[]\n",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[]\n",
+              "empty_literal_list": true
+            }
+          ]
+        },
+        {
+          "source": {
+            "condition": "number of women",
+            "id": "929a87372d3bad3712d71e2e02cb9751f1f39e266c26222d1f0838ab9a140cd8",
+            "passage": "Two older women with a baby that has a pacifier in its mouth , the baby wears an orange and brown dress ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": {
+            "assumptions": [
+              "source_support_and_target_scope_require_caller_validation",
+              "coreference_and_disjointness_use_declared_graph_only"
+            ],
+            "coverage_complete": false,
+            "issues": [
+              "coverage_unverified"
+            ],
+            "kind": "lower_bound",
+            "lower": 2,
+            "upper": null
+          },
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[\n    WomanGroup(span=\"women\"),\n]\n",
+              "empty_literal_list": false
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[]\n",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[]\n",
+              "empty_literal_list": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "archive": "/private/tmp/jep-extraction-comparison-20261027/training_outputs/csts_finite_count_v2_knowcoder_execution_20261028.tar.gz",
+      "sha256": "f65371a59bcd34099e030aedef77d546029bd578fec6645c729de32396a59755",
+      "archive_bytes": 1717623,
+      "regular_files": 101,
+      "tar_member_sizes_verified": 101,
+      "indexes": [
+        {
+          "path": "results/finite-count-v2-knowcoder-execution-index.json",
+          "hashes_verified": 15,
+          "explicit_index_sizes_verified": 0
+        }
+      ],
+      "termination": {
+        "generations": 18,
+        "final_token_id_2": 18,
+        "truncated": 0,
+        "reported_output_length_matches": 18,
+        "reported_input_length_matches": 18,
+        "stop_reason_stop": 18
+      },
+      "ordinary_nonempty": 0,
+      "ordinary_cases": [],
+      "count_cases": [
+        {
+          "source": {
+            "condition": "number of people",
+            "id": "0a7d36e084bd22ea9dc3c763c84b3c2bbbc7e37f7876d3971665079e307a0a9e",
+            "passage": "Three people look up at a man on a ladder against a brick wall ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": {
+            "assumptions": [
+              "source_support_and_target_scope_require_caller_validation",
+              "coreference_and_disjointness_use_declared_graph_only"
+            ],
+            "coverage_complete": false,
+            "issues": [
+              "coverage_unverified",
+              "no_count_evidence"
+            ],
+            "kind": "unknown",
+            "lower": null,
+            "upper": null
+          },
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = [\n\tQuantity(\"Three\")\n]",
+              "empty_literal_list": false
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            }
+          ]
+        },
+        {
+          "source": {
+            "condition": "number of animals",
+            "id": "11c0d8914453aec9c3b5364f1acb3f28293bdf2f727791568aa72df1f1a2d84e",
+            "passage": "Two black dogs run through the snow with a red toy in one dog 's mouth ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": {
+            "assumptions": [
+              "source_support_and_target_scope_require_caller_validation",
+              "coreference_and_disjointness_use_declared_graph_only"
+            ],
+            "coverage_complete": false,
+            "issues": [
+              "coverage_unverified",
+              "no_count_evidence"
+            ],
+            "kind": "unknown",
+            "lower": null,
+            "upper": null
+          },
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = [\n\tQuantity(\"Two\")\n]",
+              "empty_literal_list": false
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            }
+          ]
+        },
+        {
+          "source": {
+            "condition": "number of people",
+            "id": "7507127642c646106a0ede6e36b0c349ae5c7ae184fbcc3ceb7fe8cda9a355be",
+            "passage": "A number of children enjoy themselves on the coast of a city ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": {
+            "assumptions": [
+              "source_support_and_target_scope_require_caller_validation",
+              "coreference_and_disjointness_use_declared_graph_only"
+            ],
+            "coverage_complete": false,
+            "issues": [
+              "coverage_unverified",
+              "no_count_evidence"
+            ],
+            "kind": "unknown",
+            "lower": null,
+            "upper": null
+          },
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            }
+          ]
+        },
+        {
+          "source": {
+            "condition": "number of animals",
+            "id": "b2a6650564ccf6aa6ff9bca716fdbc30fab8a17c2848eb3446547d29ac22eb29",
+            "passage": "A brown and white greyhound wearing a red number five is caught in midair racing ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": {
+            "assumptions": [
+              "source_support_and_target_scope_require_caller_validation",
+              "coreference_and_disjointness_use_declared_graph_only"
+            ],
+            "coverage_complete": false,
+            "issues": [
+              "coverage_unverified"
+            ],
+            "kind": "unknown",
+            "lower": null,
+            "upper": null
+          },
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = [\n\tAnimalGroup(\"greyhound\"),\n\tQuantity(\"number five\")\n]",
+              "empty_literal_list": false
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            }
+          ]
+        },
+        {
+          "source": {
+            "condition": "number of wheels",
+            "id": "3165c2eace681157890fd25ee5c9a441c2dbea2abc7fd49492a56f16f6803670",
+            "passage": "a boy in green jacket is riding a small motocross bike through the mud ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": {
+            "assumptions": [
+              "source_support_and_target_scope_require_caller_validation",
+              "coreference_and_disjointness_use_declared_graph_only"
+            ],
+            "coverage_complete": false,
+            "issues": [
+              "coverage_unverified",
+              "no_count_evidence"
+            ],
+            "kind": "unknown",
+            "lower": null,
+            "upper": null
+          },
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            }
+          ]
+        },
+        {
+          "source": {
+            "condition": "number of women",
+            "id": "929a87372d3bad3712d71e2e02cb9751f1f39e266c26222d1f0838ab9a140cd8",
+            "passage": "Two older women with a baby that has a pacifier in its mouth , the baby wears an orange and brown dress ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": {
+            "assumptions": [
+              "source_support_and_target_scope_require_caller_validation",
+              "coreference_and_disjointness_use_declared_graph_only"
+            ],
+            "coverage_complete": false,
+            "issues": [
+              "coverage_unverified",
+              "no_count_evidence"
+            ],
+            "kind": "unknown",
+            "lower": null,
+            "upper": null
+          },
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = [\n\tQuantity(\"Two\")\n]",
+              "empty_literal_list": false
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "archive": "/private/tmp/jep-extraction-comparison-20261027/training_outputs/csts_guided_count_v1_gollie_execution_20261028.tar.gz",
+      "sha256": "7ae743aaf38bd9297ffb20e413160975c80b9f5eda3c81c354f72fc52a833ada",
+      "archive_bytes": 1672853,
+      "regular_files": 94,
+      "tar_member_sizes_verified": 94,
+      "indexes": [
+        {
+          "path": "results/guided-count-v1-gollie-execution-index.json",
+          "hashes_verified": 15,
+          "explicit_index_sizes_verified": 0
+        }
+      ],
+      "termination": {
+        "generations": 18,
+        "final_token_id_2": 18,
+        "truncated": 0,
+        "reported_output_length_matches": 18,
+        "reported_input_length_matches": 18,
+        "stop_reason_eos": 18
+      },
+      "ordinary_nonempty": 0,
+      "ordinary_cases": [],
+      "count_cases": [
+        {
+          "source": {
+            "condition": "number of people",
+            "id": "0a7d36e084bd22ea9dc3c763c84b3c2bbbc7e37f7876d3971665079e307a0a9e",
+            "passage": "Three people look up at a man on a ladder against a brick wall ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": {
+            "assumptions": [
+              "source_support_and_target_scope_require_caller_validation",
+              "coreference_and_disjointness_use_declared_graph_only"
+            ],
+            "coverage_complete": false,
+            "issues": [
+              "coverage_unverified",
+              "group_overlap_unresolved"
+            ],
+            "kind": "lower_bound",
+            "lower": 3,
+            "upper": null
+          },
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[Person(span=\"Three people\"),Person(span=\"a man\")]\n",
+              "empty_literal_list": false
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[]\n",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[]\n",
+              "empty_literal_list": true
+            }
+          ]
+        },
+        {
+          "source": {
+            "condition": "number of animals",
+            "id": "11c0d8914453aec9c3b5364f1acb3f28293bdf2f727791568aa72df1f1a2d84e",
+            "passage": "Two black dogs run through the snow with a red toy in one dog 's mouth ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": {
+            "assumptions": [
+              "source_support_and_target_scope_require_caller_validation",
+              "coreference_and_disjointness_use_declared_graph_only"
+            ],
+            "coverage_complete": false,
+            "issues": [
+              "ambiguous_repeated_source_span",
+              "coverage_unverified",
+              "group_overlap_unresolved"
+            ],
+            "kind": "unknown",
+            "lower": null,
+            "upper": null
+          },
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[Quantity(span=\"Two\"),Animal(span=\"dogs\"),Animal(span=\"dog\")]\n",
+              "empty_literal_list": false
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[HasQuantity(arg1=\"dogs\",arg2=\"Two\")]\n",
+              "empty_literal_list": false
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[]\n",
+              "empty_literal_list": true
+            }
+          ]
+        },
+        {
+          "source": {
+            "condition": "number of people",
+            "id": "7507127642c646106a0ede6e36b0c349ae5c7ae184fbcc3ceb7fe8cda9a355be",
+            "passage": "A number of children enjoy themselves on the coast of a city ."
+          },
+          "runtime_status": "error",
+          "parse_valid": false,
+          "error": "One or more fixed guided stages failed or remained unrun",
+          "quantity": null,
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[Quantity(span=\"number\")]\n",
+              "empty_literal_list": false
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": false,
+              "runtime_status": "error",
+              "error": "ValueError: Downstream relation invents an endpoint absent from actual stage1 candidates",
+              "raw_output": "[HasQuantity(arg1=\"number\",arg2=\"number\")]\n",
+              "empty_literal_list": false
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[]\n",
+              "empty_literal_list": true
+            }
+          ]
+        },
+        {
+          "source": {
+            "condition": "number of animals",
+            "id": "b2a6650564ccf6aa6ff9bca716fdbc30fab8a17c2848eb3446547d29ac22eb29",
+            "passage": "A brown and white greyhound wearing a red number five is caught in midair racing ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": {
+            "assumptions": [
+              "source_support_and_target_scope_require_caller_validation",
+              "coreference_and_disjointness_use_declared_graph_only"
+            ],
+            "coverage_complete": false,
+            "issues": [
+              "coverage_unverified",
+              "quantity_binding_conflict"
+            ],
+            "kind": "unknown",
+            "lower": null,
+            "upper": null
+          },
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[Animal(span=\"A brown and white greyhound\"),Quantity(span=\"five\")]\n",
+              "empty_literal_list": false
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[HasQuantity(arg1=\"A brown and white greyhound\",arg2=\"five\")]\n",
+              "empty_literal_list": false
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[]\n",
+              "empty_literal_list": true
+            }
+          ]
+        },
+        {
+          "source": {
+            "condition": "number of wheels",
+            "id": "3165c2eace681157890fd25ee5c9a441c2dbea2abc7fd49492a56f16f6803670",
+            "passage": "a boy in green jacket is riding a small motocross bike through the mud ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": {
+            "assumptions": [
+              "source_support_and_target_scope_require_caller_validation",
+              "coreference_and_disjointness_use_declared_graph_only"
+            ],
+            "coverage_complete": false,
+            "issues": [
+              "coverage_unverified",
+              "no_count_evidence"
+            ],
+            "kind": "unknown",
+            "lower": null,
+            "upper": null
+          },
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[]\n",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[]\n",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[]\n",
+              "empty_literal_list": true
+            }
+          ]
+        },
+        {
+          "source": {
+            "condition": "number of women",
+            "id": "929a87372d3bad3712d71e2e02cb9751f1f39e266c26222d1f0838ab9a140cd8",
+            "passage": "Two older women with a baby that has a pacifier in its mouth , the baby wears an orange and brown dress ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": {
+            "assumptions": [
+              "source_support_and_target_scope_require_caller_validation",
+              "coreference_and_disjointness_use_declared_graph_only"
+            ],
+            "coverage_complete": false,
+            "issues": [
+              "ambiguous_repeated_source_span",
+              "coverage_unverified",
+              "group_overlap_unresolved"
+            ],
+            "kind": "unknown",
+            "lower": null,
+            "upper": null
+          },
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[Woman(span=\"Two older women\"),Woman(span=\"baby\"),Woman(span=\"that\"),Woman(span=\"baby\")]\n",
+              "empty_literal_list": false
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[]\n",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": "[]\n",
+              "empty_literal_list": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "archive": "/private/tmp/jep-extraction-comparison-20261027/training_outputs/csts_guided_count_v1_knowcoder_execution_20261028.tar.gz",
+      "sha256": "129ce4aca8ac553c614badd7a1c1934d034d3ffd28d2cf75c850ef894b16a32e",
+      "archive_bytes": 1695388,
+      "regular_files": 94,
+      "tar_member_sizes_verified": 94,
+      "indexes": [
+        {
+          "path": "results/guided-count-v1-knowcoder-execution-index.json",
+          "hashes_verified": 15,
+          "explicit_index_sizes_verified": 0
+        }
+      ],
+      "termination": {
+        "generations": 18,
+        "final_token_id_2": 18,
+        "truncated": 0,
+        "reported_output_length_matches": 18,
+        "reported_input_length_matches": 18,
+        "stop_reason_stop": 18
+      },
+      "ordinary_nonempty": 0,
+      "ordinary_cases": [],
+      "count_cases": [
+        {
+          "source": {
+            "condition": "number of people",
+            "id": "0a7d36e084bd22ea9dc3c763c84b3c2bbbc7e37f7876d3971665079e307a0a9e",
+            "passage": "Three people look up at a man on a ladder against a brick wall ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": {
+            "assumptions": [
+              "source_support_and_target_scope_require_caller_validation",
+              "coreference_and_disjointness_use_declared_graph_only"
+            ],
+            "coverage_complete": false,
+            "issues": [
+              "coverage_unverified",
+              "no_count_evidence"
+            ],
+            "kind": "unknown",
+            "lower": null,
+            "upper": null
+          },
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = [\n\tQuantity(\"Three\")\n]",
+              "empty_literal_list": false
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            }
+          ]
+        },
+        {
+          "source": {
+            "condition": "number of animals",
+            "id": "11c0d8914453aec9c3b5364f1acb3f28293bdf2f727791568aa72df1f1a2d84e",
+            "passage": "Two black dogs run through the snow with a red toy in one dog 's mouth ."
+          },
+          "runtime_status": "error",
+          "parse_valid": false,
+          "error": "One or more fixed guided stages failed or remained unrun",
+          "quantity": null,
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = [\n\tQuantity(\"Two\")\n]",
+              "empty_literal_list": false
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": false,
+              "runtime_status": "error",
+              "error": "ValueError: Downstream relation invents an endpoint absent from actual stage1 candidates",
+              "raw_output": " results = [\n\tHasQuantity(Entity(\"Two\"), Entity(\"One\"))\n]",
+              "empty_literal_list": false
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            }
+          ]
+        },
+        {
+          "source": {
+            "condition": "number of people",
+            "id": "7507127642c646106a0ede6e36b0c349ae5c7ae184fbcc3ceb7fe8cda9a355be",
+            "passage": "A number of children enjoy themselves on the coast of a city ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": {
+            "assumptions": [
+              "source_support_and_target_scope_require_caller_validation",
+              "coreference_and_disjointness_use_declared_graph_only"
+            ],
+            "coverage_complete": false,
+            "issues": [
+              "coverage_unverified",
+              "no_count_evidence"
+            ],
+            "kind": "unknown",
+            "lower": null,
+            "upper": null
+          },
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            }
+          ]
+        },
+        {
+          "source": {
+            "condition": "number of animals",
+            "id": "b2a6650564ccf6aa6ff9bca716fdbc30fab8a17c2848eb3446547d29ac22eb29",
+            "passage": "A brown and white greyhound wearing a red number five is caught in midair racing ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": {
+            "assumptions": [
+              "source_support_and_target_scope_require_caller_validation",
+              "coreference_and_disjointness_use_declared_graph_only"
+            ],
+            "coverage_complete": false,
+            "issues": [
+              "coverage_unverified"
+            ],
+            "kind": "lower_bound",
+            "lower": 5,
+            "upper": null
+          },
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = [\n\tAnimal(\"greyhound\"),\n\tQuantity(\"five\")\n]",
+              "empty_literal_list": false
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = [\n\tHasQuantity(Entity(\"greyhound\"), Entity(\"five\"))\n]",
+              "empty_literal_list": false
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            }
+          ]
+        },
+        {
+          "source": {
+            "condition": "number of wheels",
+            "id": "3165c2eace681157890fd25ee5c9a441c2dbea2abc7fd49492a56f16f6803670",
+            "passage": "a boy in green jacket is riding a small motocross bike through the mud ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": {
+            "assumptions": [
+              "source_support_and_target_scope_require_caller_validation",
+              "coreference_and_disjointness_use_declared_graph_only"
+            ],
+            "coverage_complete": false,
+            "issues": [
+              "coverage_unverified",
+              "no_count_evidence"
+            ],
+            "kind": "unknown",
+            "lower": null,
+            "upper": null
+          },
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            }
+          ]
+        },
+        {
+          "source": {
+            "condition": "number of women",
+            "id": "929a87372d3bad3712d71e2e02cb9751f1f39e266c26222d1f0838ab9a140cd8",
+            "passage": "Two older women with a baby that has a pacifier in its mouth , the baby wears an orange and brown dress ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": {
+            "assumptions": [
+              "source_support_and_target_scope_require_caller_validation",
+              "coreference_and_disjointness_use_declared_graph_only"
+            ],
+            "coverage_complete": false,
+            "issues": [
+              "coverage_unverified",
+              "group_overlap_unresolved"
+            ],
+            "kind": "lower_bound",
+            "lower": 2,
+            "upper": null
+          },
+          "stages": [
+            {
+              "stage": "mentions",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = [\n\tWoman(\"Two older women\"),\n\tWoman(\"a baby\")\n]",
+              "empty_literal_list": false
+            },
+            {
+              "stage": "quantity_bindings",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            },
+            {
+              "stage": "identity",
+              "parse_valid": true,
+              "runtime_status": "ok",
+              "error": "",
+              "raw_output": " results = []",
+              "empty_literal_list": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "archive": "/private/tmp/jep-extraction-comparison-20261027/training_outputs/csts_count_evidence_v1_gollie_execution_20261028.tar.gz",
+      "sha256": "119d59f9fe91b6855c1bce386c36c7cd281f4744cd2468df2d5112d5a5d2785e",
+      "archive_bytes": 1616434,
+      "regular_files": 98,
+      "tar_member_sizes_verified": 98,
+      "indexes": [
+        {
+          "path": "results/count-evidence-v1-gollie-execution-index.json",
+          "hashes_verified": 15,
+          "explicit_index_sizes_verified": 0
+        }
+      ],
+      "termination": {
+        "generations": 6,
+        "final_token_id_2": 5,
+        "truncated": 1,
+        "reported_output_length_matches": 6,
+        "reported_input_length_matches": 6,
+        "stop_reason_eos": 5,
+        "stop_reason_length": 1
+      },
+      "ordinary_nonempty": 0,
+      "ordinary_cases": [],
+      "count_cases": [
+        {
+          "source": {
+            "condition": "number of people",
+            "id": "0a7d36e084bd22ea9dc3c763c84b3c2bbbc7e37f7876d3971665079e307a0a9e",
+            "passage": "Three people look up at a man on a ladder against a brick wall ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": null,
+          "stages": [],
+          "raw_output": "[CountEvidence(span=\"Three people\"),CountEvidence(span=\"a man\")]\n",
+          "quote_evidence": {
+            "ambiguity_origins": [],
+            "candidate_grounding_status": "unique_exact_occurrences",
+            "condition": "number of people",
+            "model": "gollie",
+            "numeric_count_interpreted": false,
+            "parse_status": "accepted",
+            "quotes": [
+              {
+                "grounding_status": "unique",
+                "quote": "Three people",
+                "quote_id": "quote_0001",
+                "span_candidates": [
+                  {
+                    "end": 12,
+                    "start": 0
+                  }
+                ]
+              },
+              {
+                "grounding_status": "unique",
+                "quote": "a man",
+                "quote_id": "quote_0002",
+                "span_candidates": [
+                  {
+                    "end": 29,
+                    "start": 24
+                  }
+                ]
+              }
+            ],
+            "raw_payload": "[CountEvidence(span=\"Three people\"),CountEvidence(span=\"a man\")]\n",
+            "raw_payload_sha256": "a56d2c66958d26b11f1c22857988b41d41d018cc0294671b7295e7743443943a",
+            "rejection_reasons": [],
+            "representation": "uninterpreted_count_relevant_source_assertions",
+            "semantic_support_validated": false,
+            "status": "candidate_assertions"
+          }
+        },
+        {
+          "source": {
+            "condition": "number of animals",
+            "id": "11c0d8914453aec9c3b5364f1acb3f28293bdf2f727791568aa72df1f1a2d84e",
+            "passage": "Two black dogs run through the snow with a red toy in one dog 's mouth ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": null,
+          "stages": [],
+          "raw_output": "[CountEvidence(span=\"Two black dogs\"),CountEvidence(span=\"one dog\")]\n",
+          "quote_evidence": {
+            "ambiguity_origins": [],
+            "candidate_grounding_status": "unique_exact_occurrences",
+            "condition": "number of animals",
+            "model": "gollie",
+            "numeric_count_interpreted": false,
+            "parse_status": "accepted",
+            "quotes": [
+              {
+                "grounding_status": "unique",
+                "quote": "Two black dogs",
+                "quote_id": "quote_0001",
+                "span_candidates": [
+                  {
+                    "end": 14,
+                    "start": 0
+                  }
+                ]
+              },
+              {
+                "grounding_status": "unique",
+                "quote": "one dog",
+                "quote_id": "quote_0002",
+                "span_candidates": [
+                  {
+                    "end": 61,
+                    "start": 54
+                  }
+                ]
+              }
+            ],
+            "raw_payload": "[CountEvidence(span=\"Two black dogs\"),CountEvidence(span=\"one dog\")]\n",
+            "raw_payload_sha256": "b944282b50846ce05cc447b07cfec2d21ed9a79df293eae3e331031b666b81eb",
+            "rejection_reasons": [],
+            "representation": "uninterpreted_count_relevant_source_assertions",
+            "semantic_support_validated": false,
+            "status": "candidate_assertions"
+          }
+        },
+        {
+          "source": {
+            "condition": "number of people",
+            "id": "7507127642c646106a0ede6e36b0c349ae5c7ae184fbcc3ceb7fe8cda9a355be",
+            "passage": "A number of children enjoy themselves on the coast of a city ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": null,
+          "stages": [],
+          "raw_output": "[CountEvidence(span=\"number of children\")]\n",
+          "quote_evidence": {
+            "ambiguity_origins": [],
+            "candidate_grounding_status": "unique_exact_occurrences",
+            "condition": "number of people",
+            "model": "gollie",
+            "numeric_count_interpreted": false,
+            "parse_status": "accepted",
+            "quotes": [
+              {
+                "grounding_status": "unique",
+                "quote": "number of children",
+                "quote_id": "quote_0001",
+                "span_candidates": [
+                  {
+                    "end": 20,
+                    "start": 2
+                  }
+                ]
+              }
+            ],
+            "raw_payload": "[CountEvidence(span=\"number of children\")]\n",
+            "raw_payload_sha256": "49c8e0b267687b6de16854716504f9f8ca6926cba456ccd34776feaeb82019a2",
+            "rejection_reasons": [],
+            "representation": "uninterpreted_count_relevant_source_assertions",
+            "semantic_support_validated": false,
+            "status": "candidate_assertions"
+          }
+        },
+        {
+          "source": {
+            "condition": "number of animals",
+            "id": "b2a6650564ccf6aa6ff9bca716fdbc30fab8a17c2848eb3446547d29ac22eb29",
+            "passage": "A brown and white greyhound wearing a red number five is caught in midair racing ."
+          },
+          "runtime_status": "truncated",
+          "parse_valid": false,
+          "error": "Native output budget exhausted",
+          "quantity": null,
+          "stages": [],
+          "raw_output": "[CountEvidence(span=\"A brown and white greyhound\")]\n\n# The following lines describe the task definition\n@dataclass\nclass CountEvidence(Entity):\n    \"\"\"An exact quoted source assertion or noun phrase relevant to number of animals. Target: animals, including species terms. This object preserves source wording, including denial; it does not assert positive entity presence or a computed count.\"\"\"\n    span: str\n\n# Quote the smallest exact source noun phrase or clause needed as count evidence. Preserve every relevant cardinal or vague quantity, article, denial, uncertainty, subset, inclusion, distinctness and repeated-reference cue. Keep a longer clause when needed to preserve attachment, scope or how mentions relate; isolated noun phrases must not lose watching-versus-including meaning. Exclude irrelevant identifier numbers and background clauses. Do not infer unmentioned parts or people. Do not return totals, paraphrases, numeric interpretations, identity links or positive-presence facts. Return [] only when no evidence about the requested target is stated. Never copy the whole caption by default.\n# This is the text to analyze\ntext = \"A brown and white greyhound wearing a red number five is caught in midair racing .\"\n\n# The annotation instances that take place in the text above are listed here\nresult = [CountEvidence(span=\"A brown and white greyhound\")]\n\n# The following lines describe the task definition\n@dataclass\nclass CountEvidence(Entity):\n    \"\"\"An exact quoted source assertion or noun phrase relevant to number of animals. Target: animals, including species terms. This object preserves source wording, including denial; it does not assert positive entity presence or a computed count.\"\"\"\n    span: str\n\n# Quote the smallest exact source noun phrase or clause needed as count evidence. Preserve every relevant cardinal or vague quantity, article, denial, uncertainty, subset, inclusion, distinctness and repeated-reference cue. Keep a longer clause when needed to preserve attachment, scope or how mentions relate; isolated noun phrases must not lose watching-versus-including meaning. Exclude irrelevant identifier numbers and background clauses. Do not infer unmentioned parts or people. Do not return totals, paraphrases, numeric interpretations, identity links or positive-presence facts",
+          "quote_evidence": null
+        },
+        {
+          "source": {
+            "condition": "number of wheels",
+            "id": "3165c2eace681157890fd25ee5c9a441c2dbea2abc7fd49492a56f16f6803670",
+            "passage": "a boy in green jacket is riding a small motocross bike through the mud ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": null,
+          "stages": [],
+          "raw_output": "[]\n",
+          "quote_evidence": {
+            "ambiguity_origins": [],
+            "candidate_grounding_status": "no_candidate_assertions",
+            "condition": "number of wheels",
+            "model": "gollie",
+            "numeric_count_interpreted": false,
+            "parse_status": "accepted",
+            "quotes": [],
+            "raw_payload": "[]\n",
+            "raw_payload_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+            "rejection_reasons": [],
+            "representation": "uninterpreted_count_relevant_source_assertions",
+            "semantic_support_validated": false,
+            "status": "no_candidate_assertions"
+          }
+        },
+        {
+          "source": {
+            "condition": "number of women",
+            "id": "929a87372d3bad3712d71e2e02cb9751f1f39e266c26222d1f0838ab9a140cd8",
+            "passage": "Two older women with a baby that has a pacifier in its mouth , the baby wears an orange and brown dress ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": null,
+          "stages": [],
+          "raw_output": "[CountEvidence(span=\"Two older women\"),CountEvidence(span=\"baby\")]\n",
+          "quote_evidence": {
+            "ambiguity_origins": [
+              {
+                "origin": "multiple_exact_source_occurrences",
+                "quote_id": "quote_0002"
+              }
+            ],
+            "candidate_grounding_status": "multiple_exact_occurrences",
+            "condition": "number of women",
+            "model": "gollie",
+            "numeric_count_interpreted": false,
+            "parse_status": "accepted",
+            "quotes": [
+              {
+                "grounding_status": "unique",
+                "quote": "Two older women",
+                "quote_id": "quote_0001",
+                "span_candidates": [
+                  {
+                    "end": 15,
+                    "start": 0
+                  }
+                ]
+              },
+              {
+                "grounding_status": "ambiguous",
+                "quote": "baby",
+                "quote_id": "quote_0002",
+                "span_candidates": [
+                  {
+                    "end": 27,
+                    "start": 23
+                  },
+                  {
+                    "end": 71,
+                    "start": 67
+                  }
+                ]
+              }
+            ],
+            "raw_payload": "[CountEvidence(span=\"Two older women\"),CountEvidence(span=\"baby\")]\n",
+            "raw_payload_sha256": "f9f1eb127d0dfc00bec37901199768ffe9ee47980d4b4067906cbcfdd582a127",
+            "rejection_reasons": [],
+            "representation": "uninterpreted_count_relevant_source_assertions",
+            "semantic_support_validated": false,
+            "status": "ambiguous_candidate_grounding"
+          }
+        }
+      ]
+    },
+    {
+      "archive": "/private/tmp/jep-extraction-comparison-20261027/training_outputs/csts_count_evidence_v1_knowcoder_execution_20261028.tar.gz",
+      "sha256": "92ec727c2c1dc712032c01112689806c4367405271b9d4e36d30f8c6606ad30f",
+      "archive_bytes": 1638607,
+      "regular_files": 97,
+      "tar_member_sizes_verified": 97,
+      "indexes": [
+        {
+          "path": "results/count-evidence-v1-knowcoder-execution-index.json",
+          "hashes_verified": 15,
+          "explicit_index_sizes_verified": 0
+        }
+      ],
+      "termination": {
+        "generations": 6,
+        "final_token_id_2": 6,
+        "truncated": 0,
+        "reported_output_length_matches": 6,
+        "reported_input_length_matches": 6,
+        "stop_reason_stop": 6
+      },
+      "ordinary_nonempty": 0,
+      "ordinary_cases": [],
+      "count_cases": [
+        {
+          "source": {
+            "condition": "number of people",
+            "id": "0a7d36e084bd22ea9dc3c763c84b3c2bbbc7e37f7876d3971665079e307a0a9e",
+            "passage": "Three people look up at a man on a ladder against a brick wall ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": null,
+          "stages": [],
+          "raw_output": " results = [\n\tCountEvidence(\"Three people\"),\n\tCountEvidence(\"a man\")\n]",
+          "quote_evidence": {
+            "ambiguity_origins": [],
+            "candidate_grounding_status": "unique_exact_occurrences",
+            "condition": "number of people",
+            "model": "knowcoder",
+            "numeric_count_interpreted": false,
+            "parse_status": "accepted",
+            "quotes": [
+              {
+                "grounding_status": "unique",
+                "quote": "Three people",
+                "quote_id": "quote_0001",
+                "span_candidates": [
+                  {
+                    "end": 12,
+                    "start": 0
+                  }
+                ]
+              },
+              {
+                "grounding_status": "unique",
+                "quote": "a man",
+                "quote_id": "quote_0002",
+                "span_candidates": [
+                  {
+                    "end": 29,
+                    "start": 24
+                  }
+                ]
+              }
+            ],
+            "raw_payload": " results = [\n\tCountEvidence(\"Three people\"),\n\tCountEvidence(\"a man\")\n]",
+            "raw_payload_sha256": "71d7f0be89c622981d818d2f0c566db290ac0a0980021ccd5115d0a0f8cb0513",
+            "rejection_reasons": [],
+            "representation": "uninterpreted_count_relevant_source_assertions",
+            "semantic_support_validated": false,
+            "status": "candidate_assertions"
+          }
+        },
+        {
+          "source": {
+            "condition": "number of animals",
+            "id": "11c0d8914453aec9c3b5364f1acb3f28293bdf2f727791568aa72df1f1a2d84e",
+            "passage": "Two black dogs run through the snow with a red toy in one dog 's mouth ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": null,
+          "stages": [],
+          "raw_output": " results = [\n\tCountEvidence(\"Two black dogs\")\n]",
+          "quote_evidence": {
+            "ambiguity_origins": [],
+            "candidate_grounding_status": "unique_exact_occurrences",
+            "condition": "number of animals",
+            "model": "knowcoder",
+            "numeric_count_interpreted": false,
+            "parse_status": "accepted",
+            "quotes": [
+              {
+                "grounding_status": "unique",
+                "quote": "Two black dogs",
+                "quote_id": "quote_0001",
+                "span_candidates": [
+                  {
+                    "end": 14,
+                    "start": 0
+                  }
+                ]
+              }
+            ],
+            "raw_payload": " results = [\n\tCountEvidence(\"Two black dogs\")\n]",
+            "raw_payload_sha256": "974fbed799b3773bb3b42275098841281478b5fb0ba331fc5f31c551c1db12e6",
+            "rejection_reasons": [],
+            "representation": "uninterpreted_count_relevant_source_assertions",
+            "semantic_support_validated": false,
+            "status": "candidate_assertions"
+          }
+        },
+        {
+          "source": {
+            "condition": "number of people",
+            "id": "7507127642c646106a0ede6e36b0c349ae5c7ae184fbcc3ceb7fe8cda9a355be",
+            "passage": "A number of children enjoy themselves on the coast of a city ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": null,
+          "stages": [],
+          "raw_output": " results = []",
+          "quote_evidence": {
+            "ambiguity_origins": [],
+            "candidate_grounding_status": "no_candidate_assertions",
+            "condition": "number of people",
+            "model": "knowcoder",
+            "numeric_count_interpreted": false,
+            "parse_status": "accepted",
+            "quotes": [],
+            "raw_payload": " results = []",
+            "raw_payload_sha256": "fcf9aad201770a7bd5985e760a0e165e10b41866aaf50bfce382b13439be1be8",
+            "rejection_reasons": [],
+            "representation": "uninterpreted_count_relevant_source_assertions",
+            "semantic_support_validated": false,
+            "status": "no_candidate_assertions"
+          }
+        },
+        {
+          "source": {
+            "condition": "number of animals",
+            "id": "b2a6650564ccf6aa6ff9bca716fdbc30fab8a17c2848eb3446547d29ac22eb29",
+            "passage": "A brown and white greyhound wearing a red number five is caught in midair racing ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": null,
+          "stages": [],
+          "raw_output": " results = [\n\tCountEvidence(\"wearing a red number five\")\n]",
+          "quote_evidence": {
+            "ambiguity_origins": [],
+            "candidate_grounding_status": "unique_exact_occurrences",
+            "condition": "number of animals",
+            "model": "knowcoder",
+            "numeric_count_interpreted": false,
+            "parse_status": "accepted",
+            "quotes": [
+              {
+                "grounding_status": "unique",
+                "quote": "wearing a red number five",
+                "quote_id": "quote_0001",
+                "span_candidates": [
+                  {
+                    "end": 53,
+                    "start": 28
+                  }
+                ]
+              }
+            ],
+            "raw_payload": " results = [\n\tCountEvidence(\"wearing a red number five\")\n]",
+            "raw_payload_sha256": "3ab4d05d4b6b1ec851afb6d78c47140ad170ad614ae638ca36a1de4d0f3250c2",
+            "rejection_reasons": [],
+            "representation": "uninterpreted_count_relevant_source_assertions",
+            "semantic_support_validated": false,
+            "status": "candidate_assertions"
+          }
+        },
+        {
+          "source": {
+            "condition": "number of wheels",
+            "id": "3165c2eace681157890fd25ee5c9a441c2dbea2abc7fd49492a56f16f6803670",
+            "passage": "a boy in green jacket is riding a small motocross bike through the mud ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": null,
+          "stages": [],
+          "raw_output": " results = []",
+          "quote_evidence": {
+            "ambiguity_origins": [],
+            "candidate_grounding_status": "no_candidate_assertions",
+            "condition": "number of wheels",
+            "model": "knowcoder",
+            "numeric_count_interpreted": false,
+            "parse_status": "accepted",
+            "quotes": [],
+            "raw_payload": " results = []",
+            "raw_payload_sha256": "fcf9aad201770a7bd5985e760a0e165e10b41866aaf50bfce382b13439be1be8",
+            "rejection_reasons": [],
+            "representation": "uninterpreted_count_relevant_source_assertions",
+            "semantic_support_validated": false,
+            "status": "no_candidate_assertions"
+          }
+        },
+        {
+          "source": {
+            "condition": "number of women",
+            "id": "929a87372d3bad3712d71e2e02cb9751f1f39e266c26222d1f0838ab9a140cd8",
+            "passage": "Two older women with a baby that has a pacifier in its mouth , the baby wears an orange and brown dress ."
+          },
+          "runtime_status": "ok",
+          "parse_valid": true,
+          "error": "",
+          "quantity": null,
+          "stages": [],
+          "raw_output": " results = [\n\tCountEvidence(\"Two older women\"),\n\tCountEvidence(\"a baby\")\n]",
+          "quote_evidence": {
+            "ambiguity_origins": [],
+            "candidate_grounding_status": "unique_exact_occurrences",
+            "condition": "number of women",
+            "model": "knowcoder",
+            "numeric_count_interpreted": false,
+            "parse_status": "accepted",
+            "quotes": [
+              {
+                "grounding_status": "unique",
+                "quote": "Two older women",
+                "quote_id": "quote_0001",
+                "span_candidates": [
+                  {
+                    "end": 15,
+                    "start": 0
+                  }
+                ]
+              },
+              {
+                "grounding_status": "unique",
+                "quote": "a baby",
+                "quote_id": "quote_0002",
+                "span_candidates": [
+                  {
+                    "end": 27,
+                    "start": 21
+                  }
+                ]
+              }
+            ],
+            "raw_payload": " results = [\n\tCountEvidence(\"Two older women\"),\n\tCountEvidence(\"a baby\")\n]",
+            "raw_payload_sha256": "332d7e97073b0c27085b50b9a67031bc4cfed81b0bd4dd14fb734ac2affdeb37",
+            "rejection_reasons": [],
+            "representation": "uninterpreted_count_relevant_source_assertions",
+            "semantic_support_validated": false,
+            "status": "candidate_assertions"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,160 @@
+{
+  "validation": {
+    "manifest": {
+      "artifacts": {
+        "labels.json": "0b13d1ecf0a9620fa16e6a2144cf900b6a8be8dfc8ae8e5752a0a33de14b09b9",
+        "pairs.json": "582032adeed74b06fab6ceb9fc3705b266fbc1dc4ec9be3c614a2b747d8206c4",
+        "protocol.json": "ad0af03a65b4f7c834ddc25f275f1f23c3ec3cf09e5bbd4ff2c20aba8debc118",
+        "sources.json": "3fceb04fb86d726874a48a26a8335d0b0616fda4a0380bc57e886efe80013462"
+      },
+      "dataset_revision": "jep-csts-v1.1",
+      "dataset_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "historical_test_exposure": true,
+      "inference_completed": false,
+      "rows": 120,
+      "sources": 239,
+      "split": "validation"
+    },
+    "components": 110,
+    "dry_runs": [
+      {
+        "arm": "gpt_direct",
+        "requests": 120,
+        "execute": false,
+        "model": "gpt-6.1-sol"
+      },
+      {
+        "arm": "gpt_propositions",
+        "requests": 239,
+        "execute": false,
+        "model": "gpt-6.1-sol"
+      },
+      {
+        "arm": "gpt_json",
+        "requests": 239,
+        "execute": false,
+        "model": "gpt-6.1-sol"
+      },
+      {
+        "arm": "gpt_python",
+        "requests": 239,
+        "execute": false,
+        "model": "gpt-6.1-sol"
+      },
+      {
+        "arm": "knowcoder",
+        "requests": 239,
+        "execute": false,
+        "model": {
+          "context_limit": 2048,
+          "language": "English",
+          "model_id": "golaxy/KnowCoder-7B-base",
+          "prompt_source": "https://github.com/ICT-GoKnow/KnowCoder/blob/master/Cases.md",
+          "revision": "4a7a076f573fe87fe0a97670c63c64214484742f"
+        }
+      },
+      {
+        "arm": "gollie",
+        "requests": 239,
+        "execute": false,
+        "model": {
+          "context_limit": 16384,
+          "language": "English",
+          "model_id": "HiTZ/GoLLIE-7B",
+          "prompt_source": "https://huggingface.co/HiTZ/GoLLIE-7B",
+          "revision": "d3e41fef45f6a7d438c46ba7d9fce5d0d486c7a9"
+        }
+      }
+    ],
+    "inference_count": 0
+  },
+  "test": {
+    "manifest": {
+      "artifacts": {
+        "labels.json": "2176abb74e8173a4197c7cd8d1984d2ad6ecf2be7a3c4bb4fa18ef2c5bf79ba7",
+        "pairs.json": "53ea44ccd10c5947959d4c461abf08bdce2f81e28139a14561434c8360b73fb0",
+        "protocol.json": "ad0af03a65b4f7c834ddc25f275f1f23c3ec3cf09e5bbd4ff2c20aba8debc118",
+        "sources.json": "c07336095c903f809546927fd981111aad5f33ee5481ed08a9ccdbcd99e64901"
+      },
+      "dataset_revision": "jep-csts-v1.1",
+      "dataset_sha256": "d6b40b7b891ed147befb30801c2f85a8787775adebdd98d134157cbb2a6e9f76",
+      "historical_test_exposure": true,
+      "inference_completed": false,
+      "rows": 2431,
+      "sources": 4824,
+      "split": "test"
+    },
+    "components": 1222,
+    "dry_runs": [
+      {
+        "arm": "gpt_direct",
+        "requests": 2431,
+        "execute": false,
+        "model": "gpt-6.1-sol"
+      },
+      {
+        "arm": "gpt_propositions",
+        "requests": 4824,
+        "execute": false,
+        "model": "gpt-6.1-sol"
+      },
+      {
+        "arm": "gpt_json",
+        "requests": 4824,
+        "execute": false,
+        "model": "gpt-6.1-sol"
+      },
+      {
+        "arm": "gpt_python",
+        "requests": 4824,
+        "execute": false,
+        "model": "gpt-6.1-sol"
+      },
+      {
+        "arm": "knowcoder",
+        "requests": 4824,
+        "execute": false,
+        "model": {
+          "context_limit": 2048,
+          "language": "English",
+          "model_id": "golaxy/KnowCoder-7B-base",
+          "prompt_source": "https://github.com/ICT-GoKnow/KnowCoder/blob/master/Cases.md",
+          "revision": "4a7a076f573fe87fe0a97670c63c64214484742f"
+        }
+      },
+      {
+        "arm": "gollie",
+        "requests": 4824,
+        "execute": false,
+        "model": {
+          "context_limit": 16384,
+          "language": "English",
+          "model_id": "HiTZ/GoLLIE-7B",
+          "prompt_source": "https://huggingface.co/HiTZ/GoLLIE-7B",
+          "revision": "d3e41fef45f6a7d438c46ba7d9fce5d0d486c7a9"
+        }
+      }
+    ],
+    "inference_count": 0
+  },
+  "restored_evaluation_2450_present": true,
+  "base_commit": "61a48b2fa580c7457155535bcfafde10426dab83",
+  "inference_executed": false,
+  "native_checkpoints_loaded": false,
+  "offline_tests": {
+    "command": "python3 -m unittest discover -s tests -p 'test_extraction*.py' -q",
+    "passed": 50
+  },
+  "compileall_passed": true,
+  "source_sha256": {
+    "configs/csts-extraction-comparison.json": "a10239cc9e79b320fca07cd034285e5a75fbea9e51da212ae8bb73be5396b8fe",
+    "configs/csts-native-requirements.txt": "7bf26727898bc895dbc437de1faa9139886ca0276c0872048332f05a675d1add",
+    "csts_pilot/__init__.py": "2d9451135a6d5e923e376ff5c09abc3b3ad345c991e809b0039b524f3aba48d8",
+    "csts_pilot/extraction_comparison.py": "2f2d91afa04395e3a90430c439565261d2f5acfce64e1a117765234513c7dcf7",
+    "csts_pilot/extraction_formats.py": "676a1856ca0f6f3925098664e727483a7f0dcc5a13922340efd3b2229bcef0db",
+    "csts_pilot/extraction_native.py": "4f50273aca3c6a0fb1d2179b6a95bbeffb5247ceed466490eb67eefa53b56517",
+    "tests/test_extraction_comparison.py": "ed9783adaac1a43fdad7d16cd8ee37f15441979462eed627fd11d9d4921fef30",
+    "tests/test_extraction_formats.py": "41100598b452e8d1915badcc8f9bf516f2ff1ab7e77176af28162b501742a841",
+    "tests/test_extraction_native.py": "64eb705917e7cb3605015caf455b6700ee928f6c68ab922223f4608162a71224"
+  }
+}

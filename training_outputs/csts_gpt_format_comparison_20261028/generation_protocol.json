@@ -1,0 +1,31 @@
+{
+  "baseline_sha256": "4c0a4d691b9ae1f7659927ed776ed31ddf6bc418c3968a8fd5de5ebfd901ce17",
+  "batch_policy": "sha256_seed_source_order_greedy_least_loaded_unique_connected_group_and_canonical_condition",
+  "canonical_condition": "NFKC_casefold_whitespace_collapse",
+  "code_sha256": {
+    "extraction_formats.py": "676a1856ca0f6f3925098664e727483a7f0dcc5a13922340efd3b2229bcef0db",
+    "format_batches.py": "901ca1db047b06cd9f5397590f7adb45a0b57cff8882e6f4760b3b48308edd20"
+  },
+  "cohort": {
+    "groups": 110,
+    "pairs": 120,
+    "sources": 239
+  },
+  "created_utc": "2026-10-28T14:55:10.866002+00:00",
+  "experiment": "csts-gpt-format-batches-20261028-v1",
+  "job_order": "batch_order_rotating_first_arm_propositions_json_python",
+  "jobs_sha256": "b9083c6b6f77dc0c84e926d825ac190e70b627155fc47534f49aa8a0445a5a5f",
+  "max_batch_bytes": 1048576,
+  "max_batch_size": 16,
+  "max_payload_bytes": 65536,
+  "model": "gpt-6.1-sol",
+  "new_generation": "all_three_arms_including_fresh_matched_propositions",
+  "pairs_sha256": "fb37567dd7084a8b64d23e0673b73410243b01f73a8b170a8f98b216584b2862",
+  "reasoning_effort": "max",
+  "schedule_sha256": "afe616f7caa283a3f3109ed857dac2f3f4c3000cd7075ddac86af13ca3c1f50c",
+  "seed": 42,
+  "source_isolation": "no_same_connected_group_or_canonical_condition_within_a_batch; explicit_case_independence_instruction",
+  "sources_sha256": "678666e1cb42df54a7cc0f35180a4ad29d5042a642ef00e407225913fe9609bc",
+  "timeout_seconds": 1200,
+  "transport": "signed_in_codex_cli_default_shared_daemon_no_no_daemon_flag"
+}

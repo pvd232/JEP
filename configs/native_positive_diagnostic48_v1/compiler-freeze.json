@@ -1,0 +1,59 @@
+{
+  "capture_scope": "locked48_diagnostic_only",
+  "checks": {
+    "capability_profile_and_stages_bound": true,
+    "checkpoint_and_tokenizer_pinned": true,
+    "condition_only_schema": true,
+    "no_heldout_passage_or_gold_tuning": true,
+    "runtime_and_backend_pinned": true,
+    "token_budget_bound": true
+  },
+  "compiler_implementation_files": {
+    "__init__.py": "b0572fcc34f6a05cbd37dbe1b6ffb14e7b6500c5bb8c93379ee1b2ea27801f1f",
+    "cli.py": "508bbbd0c160c3bf763548a2a1f9092dbe1617f46cd07f161e557896639fef32",
+    "counts.py": "c3db49bc283c7cc30c5881418fddd2506e2d283d2dc6a3c36cada7f4422fce76",
+    "demonstrations.json": "23a4c1091997f9953990757561494966b8883fc2aa6ec263c0ca678de0ce9a84",
+    "export.py": "9591874d15fc0637a030c806036ca75ff4dc0dc566e2903b4eea623f367560f6",
+    "gates.py": "224e0584229dc034ac1873af06520f94944435d8adcc15a3d224897c9fb37731",
+    "inventory.py": "3caefd6f3492b8244fb7c2c860db6e437b99215c0011196ed891a9096cff765c",
+    "know_refinement.py": "17cb256ce0a6d139be09d3c02a3ba3d9c59c12f249b9222b3dc3ef712aa94f07",
+    "know_refinement_demonstrations.json": "8840993e4b080ac783adfda99ec304c881b65b2d9e0957257cc3126bd198a97a",
+    "normalize.py": "48508551042c27d80712201eaef720087c0abf0ebd73b7401803055d92599859",
+    "prompt_profiles.py": "9ef810de3e06edc9cd5840f9a2b9c3b0d37a677b48bf7022d0324a6217a5c0f7",
+    "recipe_demonstrations.json": "cfd6dd191d52a548ac7bc3c4e77bc3dd5ee77c24fd959cc54178c9fe4276e028",
+    "runtime.py": "0ede1154a1625d16e03994b3bb546289c23cf8f979ebea829c6d09be0eb7cbea",
+    "schema.py": "5488f890df70f153c2301d1cba28e4f6c8f9876cf8a38d8e3576629f12493bbf",
+    "scope_extensions.py": "c5fffd5a03bca8adbc81e7477530f4fa1e6481c341d1db89a0151ca49669f8e3",
+    "task_recipe.py": "39ca5e7c4066484f704e43d1d393e3d89f17e17cb13c5dd5eedba1590bc763f0"
+  },
+  "compiler_implementation_sha256": "c267a1ae4b90f5e981272f08b1a77e8d2397e8030937d1b464c620dceed98919",
+  "count_evidence_dispatch": false,
+  "cpu_replay_codec_sha256": "ccaab11b51195cc3da1f957100eadd2c6678cee4ecbd4b4b4d03ac47dacd017b",
+  "created_at_utc": "2026-10-28T07:01:01.653425+00:00",
+  "diagnostic_cohort": {
+    "source_sha256": "5cb5226b91b226b513e69478279f2bc2a051b58502828145f6f681ca6adf5511",
+    "source_support_seal_sha256": "9d1911bbb7e0eaa93163f752b9275103bd6e3a24ae6e36633c5c69f02ee200e8",
+    "sources": 48
+  },
+  "experimental_calls_only": true,
+  "final_core_seal_sha256": "4f1e23dfe170051699cf93efeae2c5ed9220289a2791400117249f308199cbac",
+  "fixed_diagnostic_cases": 48,
+  "fresh_evaluation_authorized": false,
+  "independently_reviewed": true,
+  "models": [
+    "gollie",
+    "knowcoder"
+  ],
+  "no_post_capture_tuning": true,
+  "protocol_sha256": "235a817398017a780cc354694dd9c48337200818983a1f52d0a33b00629b6946",
+  "provider_artifacts": {
+    "evaluate_native.py": "3f1d1e2e898f426bf4019ea2e476dd0315b3751bf1129380aba767297e25dd89",
+    "native_capture.py": "5b465a5799cf39cde9947bfec781a5e901183711a76dfa1e29743427e194eaff",
+    "support-seal.json": "50e73a46bb1b5da1f3262cdcaf0c65e8a7a1ecce2bcba34e0a339a845936d20a"
+  },
+  "reviewer_agent": "/root/code_review",
+  "root_authorized": true,
+  "semantic_qualification_passed": false,
+  "status": "FROZEN_NATIVE_PROTOCOL",
+  "symbolic_count_dispatch": false
+}

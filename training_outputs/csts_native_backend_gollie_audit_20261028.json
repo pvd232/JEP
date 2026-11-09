@@ -1,0 +1,73 @@
+{
+  "archive_sha256": "c3e3f901ff21adc1a75f3bf9ca34ef6d572ced022d6b5a4dfaf3abceae1682f9",
+  "capture_index_hashes_verified": 7,
+  "fixtures": [
+    {
+      "fixture_id": "author_relations",
+      "canonical_output": "[\n    PersonalSocialRelation(arg1=\"Ana\", arg2=\"Mary\"),\n    PhysicalRelation(arg1=\"Mary\", arg2=\"supermarket\"),\n    PhysicalRelation(arg1=\"Ana\", arg2=\"home\"),\n]\n",
+      "same_generated_ids_as_stock434_eager": true,
+      "prior520_input_ids_match": null,
+      "prior520_output_ids_match": null,
+      "original_ended_on_eos": true,
+      "original_truncated": false,
+      "stock_ended_on_eos": true,
+      "stock_truncated": false,
+      "all_cache_top1_checks_equal": true,
+      "prefill_logit_max_abs_difference": 0.1875
+    },
+    {
+      "fixture_id": "gollie-plate_food-C",
+      "canonical_output": "[]\n",
+      "same_generated_ids_as_stock434_eager": true,
+      "prior520_input_ids_match": true,
+      "prior520_output_ids_match": true,
+      "original_ended_on_eos": true,
+      "original_truncated": false,
+      "stock_ended_on_eos": true,
+      "stock_truncated": false,
+      "all_cache_top1_checks_equal": true,
+      "prefill_logit_max_abs_difference": 0.125
+    },
+    {
+      "fixture_id": "gollie-snow_color_absent-C",
+      "canonical_output": "[]\n",
+      "same_generated_ids_as_stock434_eager": true,
+      "prior520_input_ids_match": true,
+      "prior520_output_ids_match": true,
+      "original_ended_on_eos": true,
+      "original_truncated": false,
+      "stock_ended_on_eos": true,
+      "stock_truncated": false,
+      "all_cache_top1_checks_equal": true,
+      "prefill_logit_max_abs_difference": 0.125
+    },
+    {
+      "fixture_id": "gollie-surfboard_color-A",
+      "canonical_output": "[]\n",
+      "same_generated_ids_as_stock434_eager": true,
+      "prior520_input_ids_match": true,
+      "prior520_output_ids_match": true,
+      "original_ended_on_eos": true,
+      "original_truncated": false,
+      "stock_ended_on_eos": true,
+      "stock_truncated": false,
+      "all_cache_top1_checks_equal": true,
+      "prefill_logit_max_abs_difference": 0.1015625
+    },
+    {
+      "fixture_id": "gollie-surfboard_color-C",
+      "canonical_output": "[\n    HasColor(object=\"surfboard\", color=\"white\"),\n]\n",
+      "same_generated_ids_as_stock434_eager": true,
+      "prior520_input_ids_match": true,
+      "prior520_output_ids_match": true,
+      "original_ended_on_eos": true,
+      "original_truncated": false,
+      "stock_ended_on_eos": true,
+      "stock_truncated": false,
+      "all_cache_top1_checks_equal": true,
+      "prefill_logit_max_abs_difference": 0.09375
+    }
+  ],
+  "representative_quality_score": false,
+  "general_backend_parity_claimed": false
+}

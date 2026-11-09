@@ -1,0 +1,61 @@
+{
+  "review_status": "read_only_independent_qualitative_review_complete",
+  "model_calls": 0,
+  "original_captures_modified": false,
+  "human_adjudication": false,
+  "formal_seven_criterion_scores_produced": false,
+  "representative_quality_score": false,
+  "model_ranking_claimed": false,
+  "numeric_count_success_claimed": false,
+  "report_reviewed": "/tmp/jep-extraction-comparison-20261027/training_outputs/csts_native_development_progression_20261028.md",
+  "report_sha256": "98ea907a505df4e9a0e028765db601fc5b85abf3be1a0bc199ade0d35697f8c4",
+  "archive_index_verification": {
+    "path": "/private/tmp/jep-extraction-comparison-20261027/training_outputs/csts_native_development_archives_20261028.json",
+    "sha256": "442e97dcf58141183d5424c4e641a560cec3d72bb2975fbf3b4728d4ef761dc8",
+    "archive_hashes_and_sizes_verified": 11
+  },
+  "execution_archive_sha256": {
+    "csts_native_task_contract_v2_gollie_execution_20261028.tar.gz": "6d8a132d324faeb23b5eb57d2d52efacbfc2ef0726aeb8cff5b3ed7a82963ce7",
+    "csts_native_task_contract_v2_knowcoder_ie_execution_20261028.tar.gz": "c796a45644f260350f6717c038348138d3bf4bef5d079c045529b525a92b9eca",
+    "csts_native_one_shot_v1_gollie_execution_20261028.tar.gz": "7e16998b272a6e41381f849a2d0337e40f222ee1fc861dc72a2c49e72e7e13b9",
+    "csts_native_one_shot_v1_knowcoder_ie_execution_20261028.tar.gz": "76a20baf3bc9ad2ccd59e312da2fa6e37c332bdbd45b17f431128ec532f8845d",
+    "csts_finite_count_v2_gollie_execution_20261028.tar.gz": "f69c435cdb3845df87b108115b0f4cadebc56731b102b8159a59e685005dcd6e",
+    "csts_finite_count_v2_knowcoder_execution_20261028.tar.gz": "f65371a59bcd34099e030aedef77d546029bd578fec6645c729de32396a59755",
+    "csts_guided_count_v1_gollie_execution_20261028.tar.gz": "7ae743aaf38bd9297ffb20e413160975c80b9f5eda3c81c354f72fc52a833ada",
+    "csts_guided_count_v1_knowcoder_execution_20261028.tar.gz": "129ce4aca8ac553c614badd7a1c1934d034d3ffd28d2cf75c850ef894b16a32e",
+    "csts_count_evidence_v1_gollie_execution_20261028.tar.gz": "119d59f9fe91b6855c1bce386c36c7cd281f4744cd2468df2d5112d5a5d2785e",
+    "csts_count_evidence_v1_knowcoder_execution_20261028.tar.gz": "92ec727c2c1dc712032c01112689806c4367405271b9d4e36d30f8c6606ad30f"
+  },
+  "capture_integrity": {
+    "execution_archives_audited": 10,
+    "archive_index_entries_hash_and_size_verified": 11,
+    "capture_execution_index_hash_declarations_verified": 274,
+    "explicit_index_size_declarations_verified": 90,
+    "tar_member_lengths_verified": 954,
+    "generations": 120,
+    "final_token_id_2": 119,
+    "truncated": 1,
+    "reported_output_length_matches": 120,
+    "reported_input_length_matches": 120,
+    "stop_reason_eos": 59,
+    "stop_reason_stop": 60,
+    "stop_reason_length": 1
+  },
+  "findings": [
+    "GoLLIE dog output preserves fetches a stick from the dead leaves; KnowCoder dog output is only fetches and remains partial under the full-clause contract.",
+    "Both models preserve throws leaves over her head but omit in front of a fence. They are not full source clauses. The fence is a locative/context adjunct and may be outside the narrower original motion-of-person facet; do not automatically label a C-STS motion error solely for its omission.",
+    "GoLLIE Near(boy,water) preserves the location qualifier; KnowCoder spatial remains empty. Nine/eight nonempty task-contract outputs are not nine/eight complete semantic passes.",
+    "Both symbolic count variants omit every identity relation. Guided KnowCoder falsely treats jersey five as a greyhound count and emits lower bound5. Guided GoLLIE detects the article/cardinality conflict rather than becoming correct. Both include an untyped baby as Woman.",
+    "Quote-only CountEvidence remains a distinct task. Its familiar-case omissions/irrelevance and one GoLLIE truncation prevent an evidence-sufficiency claim; no numeric or identity reasoning is established.",
+    "The root progression draft accurately distinguishes adaptive task changes from parser amendments, preserves failed runs, and disclaims representative/family/training claims."
+  ],
+  "nonblocking_wording_suggestion": "Replace GoLLIE produced supported annotations on all nine sources with GoLLIE produced nonempty source-grounded annotations on all nine sources, then retain the concrete supported examples; this avoids reading the sentence as a formal all-criteria pass.",
+  "supporting_files": [
+    "findings.json",
+    "findings.md",
+    "count-evidence-addendum.json"
+  ],
+  "detailed_machine_audit": "/tmp/jep-post-baseline-published-with-quotes-20261028/artifact-audit.json",
+  "reproducible_script": "/tmp/audit_native_development_20261028.py",
+  "reproduce": "python tools/audit_native_development_20261028.py --archive-dir training_outputs --include-count-evidence --output /tmp/native-development-audit-new"
+}

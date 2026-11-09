@@ -1,0 +1,81 @@
+{
+  "status": "SEPARATE_FIRST_NEURAL_GENERATION_RECOVERY_COMPLETED",
+  "origin": "mechanical_empty_input_first_neural_generation_recovery_v1",
+  "original_primary_cases": 96,
+  "original_primary_scores_unchanged": {
+    "gollie": 12,
+    "knowcoder": 9
+  },
+  "selection": "Only the original seven zero-call empty_absent cases per model; no previously generated source repeated",
+  "models": {
+    "knowcoder": {
+      "sources": 7,
+      "actual_model_calls": 7,
+      "literal_empty_lists": 7,
+      "eos": 7,
+      "truncated": 0,
+      "operational_valid": 7,
+      "owner_replay_verified": 7
+    },
+    "gollie": {
+      "sources": 7,
+      "actual_model_calls": 7,
+      "literal_empty_lists": 7,
+      "eos": 7,
+      "truncated": 0,
+      "operational_valid": 7,
+      "owner_replay_verified": 7
+    }
+  },
+  "total_new_model_calls": 14,
+  "original_capture_files_rehashed_unchanged": 292,
+  "original_job_unchanged": true,
+  "nonempty_prompts_changed": false,
+  "semantic_prompt_examples_or_budgets_changed": false,
+  "mechanical_repairs": [
+    "Allow string-typed empty/whitespace source in renderer and normalizer; keep nonstring and invented-span rejection",
+    "Clear per-source cached error context; retain error response only after current-source call"
+  ],
+  "formal_seven_criterion_sensitivity_rescore_performed": false,
+  "production_or_fresh_qualification": false,
+  "count_or_quote_dispatch": false,
+  "human_adjudication": false,
+  "artifacts": [
+    {
+      "kind": "knowcoder_capture",
+      "file": "csts_native_empty_input_recovery_knowcoder_20261028.tar.gz",
+      "sha256": "c233ff2efbb5818e90cd70fc95c50d62df1194f12f96ec7e9e5a4fc34b4e2ebb",
+      "bytes": 1746621
+    },
+    {
+      "kind": "gollie_capture",
+      "file": "csts_native_empty_input_recovery_gollie_20261028.tar.gz",
+      "sha256": "8389d5a91581a7a657e5f87803945f1be14c7413345713aa0e336de35d30951c",
+      "bytes": 1681118
+    },
+    {
+      "kind": "executed_combined_capsule",
+      "file": "csts_native_empty_input_recovery_capsule_20261028.tar.gz",
+      "sha256": "1a4667f42db166e7cf535748f3b79511ea7df894b80872f50f422589ead1f3f3",
+      "bytes": 1569499
+    },
+    {
+      "kind": "original_capture_preservation_audit",
+      "file": "csts_native_empty_input_recovery_preservation_20261028.json",
+      "sha256": "d3b9e7ea195238e0e6a702f7faf77a0631cebd145f1ca5e7ffe917663d37bb10",
+      "bytes": 910
+    },
+    {
+      "kind": "zero_prior_call_selection",
+      "file": "csts_native_empty_input_recovery_selection_20261028.json",
+      "sha256": "826f5c7f58f700dd75a34bca8b56add4e0e7d1ea16552b1a481d2fa93326ff7d",
+      "bytes": 4606
+    },
+    {
+      "kind": "historical_stale_context_disclosure",
+      "file": "csts_native_empty_input_recovery_context_addendum_20261028.json",
+      "sha256": "4ae806430833209c3f3600bf25290e4a2d683dbac0ebca58b47a7196e237e37f",
+      "bytes": 3754
+    }
+  ]
+}

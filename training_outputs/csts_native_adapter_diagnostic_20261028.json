@@ -1,0 +1,93 @@
+{
+  "status": "post_screen_adapter_diagnostic_complete",
+  "representative_benchmark": false,
+  "original_main_captures_changed": false,
+  "fixtures": {
+    "literal_positive_sources": 6,
+    "unsupported_negative_sources": 2,
+    "all_drawn_from_original_239": true,
+    "selected_after_original_screen": true,
+    "fixed_before_target_diagnostic_outputs": true
+  },
+  "variants": {
+    "A": "exact original generic ConditionRelation prompts",
+    "B": "author-style multiline formatting, identical generic schema and guideline meaning",
+    "C": "descriptive native classes, typed arguments and task mapping; factors change jointly"
+  },
+  "controls": {
+    "models_and_revisions_unchanged": true,
+    "native_backend_sha256": "908292e1e1786cc9593bc6b3aa15c9580c7b41a4d2dca15f5657da74bd292fb6",
+    "max_new_tokens": 1024,
+    "do_sample": false,
+    "num_beams": 1,
+    "attempts_per_cell": 1,
+    "total_cells": 48
+  },
+  "summary": {
+    "knowcoder": {
+      "A": {
+        "positive_cases": 6,
+        "literal_positive_anchor_sets_recovered": 0,
+        "negative_cases": 2,
+        "correct_negative_abstentions": 2,
+        "schema_valid_cells": 8,
+        "raw_empty_lists": 8
+      },
+      "B": {
+        "positive_cases": 6,
+        "literal_positive_anchor_sets_recovered": 0,
+        "negative_cases": 2,
+        "correct_negative_abstentions": 2,
+        "schema_valid_cells": 8,
+        "raw_empty_lists": 8
+      },
+      "C": {
+        "positive_cases": 6,
+        "literal_positive_anchor_sets_recovered": 0,
+        "negative_cases": 2,
+        "correct_negative_abstentions": 2,
+        "schema_valid_cells": 8,
+        "raw_empty_lists": 8
+      }
+    },
+    "gollie": {
+      "A": {
+        "positive_cases": 6,
+        "literal_positive_anchor_sets_recovered": 0,
+        "negative_cases": 2,
+        "correct_negative_abstentions": 2,
+        "schema_valid_cells": 8,
+        "raw_empty_lists": 8
+      },
+      "B": {
+        "positive_cases": 6,
+        "literal_positive_anchor_sets_recovered": 0,
+        "negative_cases": 2,
+        "correct_negative_abstentions": 2,
+        "schema_valid_cells": 8,
+        "raw_empty_lists": 8
+      },
+      "C": {
+        "positive_cases": 6,
+        "literal_positive_anchor_sets_recovered": 4,
+        "negative_cases": 2,
+        "correct_negative_abstentions": 2,
+        "schema_valid_cells": 8,
+        "raw_empty_lists": 4
+      }
+    }
+  },
+  "artifact": {
+    "filename": "csts_native_adapter_diagnostic_20261028.tar.gz",
+    "sha256": "69beade5a5fe13b1d9ea0e6de6e26cf12daf2405d9404a080a35696855dac619",
+    "indexed_files": 118
+  },
+  "conclusion": {
+    "original_native_baseline_validated": false,
+    "native_model_comparative_conclusion": "suspended",
+    "gollie_adapter_effect_observed_on_selected_cases": true,
+    "single_root_cause_identified": false,
+    "knowcoder_target_failure_resolved": false,
+    "fresh_representative_evaluation_required_after_adapter_repair": true
+  }
+}

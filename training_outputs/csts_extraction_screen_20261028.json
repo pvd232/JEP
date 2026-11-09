@@ -1,0 +1,500 @@
+{
+  "status": "completed_capture_screen_native_comparison_uncalibrated",
+  "dataset": {
+    "revision": "jep-csts-v1.1",
+    "split": "validation",
+    "sample_rows": 120,
+    "unique_passage_condition_sources": 239,
+    "connected_source_groups": 110,
+    "population_validation_rows": 1576,
+    "population_validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+    "sample_seed": "csts-extraction-comparison-20261027-v1",
+    "labels_sha256": "0b13d1ecf0a9620fa16e6a2144cf900b6a8be8dfc8ae8e5752a0a33de14b09b9"
+  },
+  "gpt": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "max",
+    "immutable_model_snapshot": null,
+    "max_output_tokens": null,
+    "max_payload_bytes": 65536,
+    "direct": {
+      "mse_0_1": 0.029848958333333335,
+      "mse_1_5": 0.47758333333333336,
+      "n": 120,
+      "spearman": 0.8863650783239838
+    },
+    "direct_status": "parser_amendment",
+    "direct_original_first_pass_valid": 116,
+    "direct_revalidated_original_responses": 120,
+    "propositions_captured": 239,
+    "propositions_first_pass_valid": 238,
+    "propositions_parser_amendment_valid": 239,
+    "propositions_amendment_scope": "sensitivity_only",
+    "json_arm_executed": false,
+    "python_arm_executed": false,
+    "provider_output_token_cap": null,
+    "output_cap_limitation": "Signed-in Codex exposes no verified provider output-token cap; 1024 is native-only."
+  },
+  "native": {
+    "knowcoder_v4": {
+      "checkpoint": {
+        "context_limit": 2048,
+        "language": "English",
+        "model_id": "golaxy/KnowCoder-7B-base",
+        "prompt_source": "https://github.com/ICT-GoKnow/KnowCoder/blob/master/Cases.md",
+        "revision": "4a7a076f573fe87fe0a97670c63c64214484742f"
+      },
+      "outputs": 239,
+      "structurally_valid": 239,
+      "empty_relation_lists": 239,
+      "nonempty_relation_lists": 0,
+      "arm_wall_seconds": 49.81,
+      "protocol_sha256": "ddc81991dd23713c708e81390849da03e053e4f9685bd3c0767d0d56fef62113",
+      "role": "primary_native_screen"
+    },
+    "gollie_v3": {
+      "checkpoint": {
+        "context_limit": 16384,
+        "language": "English",
+        "model_id": "HiTZ/GoLLIE-7B",
+        "prompt_source": "https://huggingface.co/HiTZ/GoLLIE-7B",
+        "revision": "d3e41fef45f6a7d438c46ba7d9fce5d0d486c7a9"
+      },
+      "outputs": 239,
+      "structurally_valid": 239,
+      "empty_relation_lists": 236,
+      "nonempty_relation_lists": 3,
+      "arm_wall_seconds": 41.33,
+      "protocol_sha256": "e5fcace356bbc1310f90ce90e36811120472f4240b9a5317b4ebc52260fd584d",
+      "role": "primary_native_screen",
+      "backend": "stock_llama_sdpa_legacy_gollie",
+      "verified_parameter_tensors": 291,
+      "legacy_rope_base": 10000,
+      "config_rope_theta": 1000000,
+      "bit_parity_with_author_kernels_claimed": false
+    },
+    "knowcoder_v2": {
+      "outputs": 239,
+      "structurally_valid": 239,
+      "empty_relation_lists": 239,
+      "arm_wall_seconds": 31.38,
+      "role": "preserved_original_prompt_control",
+      "included_in_primary_review": false
+    },
+    "max_new_tokens": 1024
+  },
+  "hardware": {
+    "cuda_version": "13.0",
+    "gpu_devices": [
+      "NVIDIA A100-SXM4-80GB"
+    ],
+    "implementation": "stock_llama_sdpa_legacy_gollie",
+    "numerical_caveat": "Exact pinned checkpoint tensors and legacy architecture; SDPA/rotary kernel rounding may differ from the authors' custom FlashAttention. No bit-parity or published-score reproduction claim.",
+    "original_config_rope_theta": 1000000,
+    "packages": {
+      "accelerate": "1.15.0",
+      "flash-attn": null,
+      "sentencepiece": "0.2.2",
+      "torch": "2.14.0",
+      "transformers": "5.20.2"
+    },
+    "platform": "Linux-6.6.159+-x86_64-with-glibc2.39",
+    "python": "3.13.16 (main, Oct  1 2026, 15:40:24) [GCC 13.3.0]",
+    "resolved_model_revision": null,
+    "rope_base": 10000,
+    "verified_parameter_tensors": 291
+  },
+  "author_pipeline_checks": {
+    "status": "completed",
+    "selection_timing": "post_screen",
+    "purpose": "pipeline_health_checks",
+    "calibration_or_benchmark_f1": false,
+    "gollie": {
+      "expected_relations": 3,
+      "predicted_relations": 3,
+      "matched_reference_relations": 3,
+      "exact_expected_relations": true,
+      "fixture_id": "gollie_author_notebook_ana_mary",
+      "source_url": "https://github.com/hitz-zentroa/GoLLIE/blob/164c611743fdc1befe71bbdf03e08c5eb4e35957/notebooks/Relation%20Extraction.ipynb"
+    },
+    "knowcoder": {
+      "expected_relations": 3,
+      "predicted_relations": 4,
+      "matched_reference_relations": 2,
+      "additional_relations": 2,
+      "missed_relation": [
+        "Population",
+        "Kurush",
+        "813"
+      ],
+      "extra_relations_semantic_adjudication": "not_done",
+      "exact_expected_relations": false,
+      "fixture_id": "knowcoder_author_sft_re_kurush",
+      "source_url": "https://github.com/ICT-GoKnow/KnowCoder/blob/b7859789fc7641e03916074088859aa592332ad3/Cases.md"
+    }
+  },
+  "model_assisted_fidelity": {
+    "status": "completed_model_assisted",
+    "candidate_count": 717,
+    "sources_per_arm": 239,
+    "reviewers_required": 2,
+    "reviewer_a": {
+      "arms": {
+        "gollie": {
+          "all_criteria_accepted": 23,
+          "criteria": {
+            "abstention_correct": 25,
+            "binding_correct": 183,
+            "complete": 23,
+            "faithful": 183,
+            "inference_correct": 184,
+            "multiplicity_correct": 107,
+            "scope_correct": 182
+          },
+          "n": 239
+        },
+        "gpt_propositions": {
+          "all_criteria_accepted": 222,
+          "criteria": {
+            "abstention_correct": 232,
+            "binding_correct": 238,
+            "complete": 222,
+            "faithful": 235,
+            "inference_correct": 235,
+            "multiplicity_correct": 234,
+            "scope_correct": 237
+          },
+          "n": 239
+        },
+        "knowcoder": {
+          "all_criteria_accepted": 22,
+          "criteria": {
+            "abstention_correct": 22,
+            "binding_correct": 194,
+            "complete": 22,
+            "faithful": 194,
+            "inference_correct": 194,
+            "multiplicity_correct": 119,
+            "scope_correct": 194
+          },
+          "n": 239
+        }
+      },
+      "paired_vs_propositions": {
+        "gollie": {
+          "components": 110,
+          "mean_difference": -0.8326359832635983,
+          "paired_component_95_ci": [
+            -0.8927038626609443,
+            -0.7659574468085106
+          ]
+        },
+        "knowcoder": {
+          "components": 110,
+          "mean_difference": -0.8368200836820083,
+          "paired_component_95_ci": [
+            -0.8987854251012146,
+            -0.7725321888412017
+          ]
+        }
+      },
+      "review_kind": "model_assisted",
+      "review_sha256": "a0a7f030db8017af67e18a1b6b92dba951b9850b0f9de1cb1d10f3f0ab67c491",
+      "reviewer_ids": [
+        "model:gpt-6.1-sol:max:review-a"
+      ]
+    },
+    "reviewer_b": {
+      "arms": {
+        "gollie": {
+          "all_criteria_accepted": 22,
+          "criteria": {
+            "abstention_correct": 24,
+            "binding_correct": 183,
+            "complete": 22,
+            "faithful": 183,
+            "inference_correct": 183,
+            "multiplicity_correct": 112,
+            "scope_correct": 182
+          },
+          "n": 239
+        },
+        "gpt_propositions": {
+          "all_criteria_accepted": 224,
+          "criteria": {
+            "abstention_correct": 231,
+            "binding_correct": 237,
+            "complete": 224,
+            "faithful": 234,
+            "inference_correct": 234,
+            "multiplicity_correct": 234,
+            "scope_correct": 236
+          },
+          "n": 239
+        },
+        "knowcoder": {
+          "all_criteria_accepted": 21,
+          "criteria": {
+            "abstention_correct": 21,
+            "binding_correct": 175,
+            "complete": 21,
+            "faithful": 175,
+            "inference_correct": 175,
+            "multiplicity_correct": 108,
+            "scope_correct": 175
+          },
+          "n": 239
+        }
+      },
+      "paired_vs_propositions": {
+        "gollie": {
+          "components": 110,
+          "mean_difference": -0.8451882845188284,
+          "paired_component_95_ci": [
+            -0.9,
+            -0.7815126050420168
+          ]
+        },
+        "knowcoder": {
+          "components": 110,
+          "mean_difference": -0.8493723849372385,
+          "paired_component_95_ci": [
+            -0.9079497907949791,
+            -0.7876106194690266
+          ]
+        }
+      },
+      "review_kind": "model_assisted",
+      "review_sha256": "8ca0bba4457c321432d7e9b15e130d9e087ff64c3d083f41588981e1e612e453",
+      "reviewer_ids": [
+        "model:gpt-6.1-sol:max:review-b"
+      ]
+    },
+    "blinded_arm_identity": true,
+    "output_formats_visible": true,
+    "generator_and_reviewer_model_alias_same": true,
+    "source_only_references_sealed_before_extraction": true,
+    "human_adjudication_completed": false,
+    "criteria": [
+      "faithful",
+      "complete",
+      "scope_correct",
+      "binding_correct",
+      "multiplicity_correct",
+      "abstention_correct",
+      "inference_correct"
+    ],
+    "paired_bootstrap": {
+      "resamples": 2000,
+      "resampling_unit": "connected_source_group",
+      "reference_arm": "gpt_propositions",
+      "intervals": {
+        "gollie": {
+          "components": 110,
+          "mean_difference": -0.8242677824267782,
+          "paired_component_95_ci": [
+            -0.8828451882845189,
+            -0.7551020408163265
+          ]
+        },
+        "knowcoder": {
+          "components": 110,
+          "mean_difference": -0.8284518828451883,
+          "paired_component_95_ci": [
+            -0.890295358649789,
+            -0.7644628099173554
+          ]
+        }
+      }
+    },
+    "review_packet_sha256": "6283c270309bf60bacf3c6e66d4f1d7655447923d1c10556ab937cfeecfefda7",
+    "review_seal_sha256": "868c37dc5135b3eefa072f1d0d662d70c0a3dc031f65f77637c1e89f1cf0c261",
+    "panel_changed_by_parser_amendment": false,
+    "accepted_by_both": {
+      "arms": {
+        "gollie": {
+          "all_criteria_accepted": 22,
+          "criteria": {
+            "abstention_correct": 24,
+            "binding_correct": 144,
+            "complete": 22,
+            "faithful": 144,
+            "inference_correct": 144,
+            "multiplicity_correct": 79,
+            "scope_correct": 143
+          },
+          "n": 239
+        },
+        "gpt_propositions": {
+          "all_criteria_accepted": 219,
+          "criteria": {
+            "abstention_correct": 230,
+            "binding_correct": 237,
+            "complete": 219,
+            "faithful": 234,
+            "inference_correct": 234,
+            "multiplicity_correct": 233,
+            "scope_correct": 235
+          },
+          "n": 239
+        },
+        "knowcoder": {
+          "all_criteria_accepted": 21,
+          "criteria": {
+            "abstention_correct": 21,
+            "binding_correct": 139,
+            "complete": 21,
+            "faithful": 139,
+            "inference_correct": 139,
+            "multiplicity_correct": 82,
+            "scope_correct": 139
+          },
+          "n": 239
+        }
+      },
+      "paired_vs_propositions": {
+        "gollie": {
+          "components": 110,
+          "mean_difference": -0.8242677824267782,
+          "paired_component_95_ci": [
+            -0.8828451882845189,
+            -0.7551020408163265
+          ]
+        },
+        "knowcoder": {
+          "components": 110,
+          "mean_difference": -0.8284518828451883,
+          "paired_component_95_ci": [
+            -0.890295358649789,
+            -0.7644628099173554
+          ]
+        }
+      }
+    },
+    "any_criterion_disagreements": 214,
+    "acceptance_disagreements": 10,
+    "capacity_recovery": {
+      "reviewer": "B",
+      "batch": 24,
+      "original_capacity_failure_preserved": true,
+      "original_primary_only_judgments": 705,
+      "missing_before_recovery": 12,
+      "separate_recovery_attempts": 1,
+      "semantic_retries": 0,
+      "original_attempt_produced_scored_content": false,
+      "collector_new_model_calls": 0
+    },
+    "scheduling": {
+      "original_workers_per_pass": 6,
+      "additional_reverse_claim_workers_per_pass": 4,
+      "atomic_exclusive_batch_claims": true,
+      "duplicate_model_calls": 0
+    },
+    "source_reference_model_alias": "gpt-6.1-sol"
+  },
+  "parser_amendment": {
+    "status": "approved_and_derived",
+    "new_model_calls": 0,
+    "all_3600_original_files_unchanged": true,
+    "source_tree_sha256": "7f3cfd02e1e349016a5b4e5e1ae768985dc6f4fae033b0a96b098991ccb3735a",
+    "parser_sha256": "ee9ec882c78501f46d0ddf3ae3f57a271e365524e804301ecc1a06dab3cca6c3",
+    "retained_first_pass_counts": {
+      "gpt_direct": {
+        "amended_valid": 120,
+        "expected": 120,
+        "original_valid": 116
+      },
+      "gpt_propositions": {
+        "amended_valid": 239,
+        "expected": 239,
+        "original_valid": 238
+      }
+    },
+    "output_files": [
+      "/tmp/jep-extraction-parser-amendment-20261028/audit.json",
+      "/tmp/jep-extraction-parser-amendment-20261028/metrics.json",
+      "/tmp/jep-extraction-parser-amendment-20261028/source-integrity.json"
+    ]
+  },
+  "archives": [
+    {
+      "role": "original_native_prompt_control",
+      "filename": "jep-extraction-native-results-20261028.tar.gz",
+      "sha256": "2412203cce4393a94c12e5f17465737f8024fa253936333acfed17bcb67fa3e6"
+    },
+    {
+      "role": "gollie_v3",
+      "filename": "jep-extraction-gollie-v3-results-20261028.tar.gz",
+      "sha256": "90aeffe0ec1119652f30c531ad5740b97c4ab6be1e079b6cf3f3e5d4ca32299c"
+    },
+    {
+      "role": "knowcoder_v4",
+      "filename": "jep-extraction-knowcoder-v4-results-20261028.tar.gz",
+      "sha256": "173223104d1ee7fc96abfaef81b43bf230da6de343b09b0a9dc313a426dfeb63"
+    },
+    {
+      "role": "post_screen_author_pipeline_checks",
+      "filename": "jep-author-controls-results-20261028.tar.gz",
+      "sha256": "774cf6a2926c7562f3293beeaa8cb5f9f9cedd4f6415c58ee2077094eefe0bfe"
+    }
+  ],
+  "sources": {
+    "methods": "plans/csts-extraction-comparison-methods.md",
+    "origins_spec": "/tmp/jep-extraction-screen-analysis-20261028/assembly-spec.json",
+    "origin_manifest": "/tmp/jep-extraction-screen-analysis-20261028/origin-manifest.json",
+    "review_seal": "/tmp/jep-extraction-screen-analysis-20261028/review-seal.json",
+    "knowcoder_author_inference": "https://github.com/ICT-GoKnow/KnowCoder/blob/b7859789fc7641e03916074088859aa592332ad3/eval/src/inference.py",
+    "knowcoder_author_example": "https://github.com/ICT-GoKnow/KnowCoder/blob/b7859789fc7641e03916074088859aa592332ad3/Cases.md",
+    "gollie_author_example": "https://github.com/hitz-zentroa/GoLLIE/blob/164c611743fdc1befe71bbdf03e08c5eb4e35957/notebooks/Relation%20Extraction.ipynb",
+    "gollie_checkpoint": "https://huggingface.co/HiTZ/GoLLIE-7B/tree/d3e41fef45f6a7d438c46ba7d9fce5d0d486c7a9",
+    "knowcoder_checkpoint": "https://huggingface.co/golaxy/KnowCoder-7B-base/tree/4a7a076f573fe87fe0a97670c63c64214484742f"
+  },
+  "validation": {
+    "tests": 69,
+    "status": "passed",
+    "transport_amendment_independent_review": "approved",
+    "commands": [
+      "python3 -m unittest discover -s tests -p 'test_extraction*.py'",
+      "python3 -m unittest discover -s tests -p 'test_transport*.py'",
+      "python3 -m compileall -q csts_pilot scripts tests"
+    ],
+    "collector_synthetic_checks": 21,
+    "multi_origin_integration": "passed",
+    "offline_archive_reproduction": {
+      "status": "passed",
+      "indexed_files_verified": 6095,
+      "new_model_calls": 0,
+      "packet_sha256": "6283c270309bf60bacf3c6e66d4f1d7655447923d1c10556ab937cfeecfefda7",
+      "counts_intervals_and_disagreements_exactly_reproduced": true
+    }
+  },
+  "scope": {
+    "qwen_training_performed": false,
+    "full_test_evaluation_performed": false,
+    "published_benchmark_f1_reproduction_claimed": false,
+    "native_model_family_ranking_claimed": false
+  },
+  "public_reproduction_index": {
+    "artifact": "csts_extraction_screen_artifacts_20261028.tar.gz",
+    "sha256": "02ac804d78e54549fe057c2c7086c43fa16555a9a6ea7c5f483b72c9fd91b472",
+    "bytes": 2906278,
+    "indexed_files": 6095,
+    "member_index": "artifact-index.json",
+    "summary": "csts_extraction_fidelity_20261028.json",
+    "relocation_instructions": "csts_extraction_screen_reproduce_20261028.md"
+  },
+  "native_adapter_calibration": {
+    "same_task_controls_before_screen": false,
+    "validated": false,
+    "comparative_conclusion": "suspended",
+    "post_screen_diagnostic": "completed; see csts_native_adapter_diagnostic_20261028.json",
+    "confirmed_differences": [
+      "all conditions mapped to anonymous binary subject/value relation",
+      "JSON-escaped one-line policy vs author multiline class guidelines",
+      "unary typing and aggregate counts not separately calibrated"
+    ],
+    "representative_rerun_completed": false,
+    "gollie_joint_adapter_effect_observed": true,
+    "unique_root_cause_established": false
+  }
+}
