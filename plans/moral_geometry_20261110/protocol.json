@@ -1,0 +1,83 @@
+{
+  "experiment_id": "moral_geometry_pilot_20261110",
+  "version": 1,
+  "question_conditioning": "Does specifying a moral aspect improve held-out similarity/retrieval relative to an unconditioned embedding?",
+  "question_geometry": "Does enforcing inner-product geometry on otherwise unconstrained similarity predictions improve held-out fidelity or retrieval, rather than merely making the score matrix PSD?",
+  "scope": "Overnight computational pilot; existing human evidence and synthetic probes reported separately. No new-human-validation claim.",
+  "deadline_utc": "2026-11-10T13:00:00Z",
+  "primary_outcomes": [
+    "scenario-family-held-out ranking accuracy on controlled probes",
+    "Spearman agreement with available published human pair judgments",
+    "expert-grounded retrieval relevance where existing labels permit"
+  ],
+  "secondary_outcomes": [
+    "PSD-fit distortion under a predeclared fixed score mapping and unit diagonal",
+    "condition paraphrase invariance",
+    "sensitivity to relevant factual edits versus irrelevant wording edits",
+    "wall time, failed work, compute, and provenance overhead"
+  ],
+  "comparison_arms": [
+    "unconditioned shared embeddings",
+    "conditioned shared embeddings",
+    "condition-aware symmetric unconstrained pair scorer",
+    "geometry-constrained variant only when it adds a restriction beyond the preceding arms"
+  ],
+  "design_rules": [
+    "Cosine bi-encoder Gram matrices are already PSD; transforming cosine to Euclidean distance is not an improvement arm.",
+    "Hold each moral condition fixed across each similarity matrix; never pool unrelated conditions to test PSD.",
+    "Fit transformations, hyperparameters, score calibrations, and projection completion only on training/development observations. Test labels cannot be used to complete, repair, project, select, or tune predictions.",
+    "Scenario families rather than arbitrary pairs define train/dev/test groups. Freeze data IDs, split, conditions, inference prompts and metrics before inspecting evaluation results.",
+    "Keep published human labels, LLM labels and author-designed synthetic expectations distinct in files and tables. Preserve original human scores and disagreements.",
+    "A projected score matrix over a fixed known collection is transductive evidence. Generalization to unseen situations requires an actual text-to-score/embedding function and held-out families.",
+    "PSD and unit diagonal ensure a consistent inner-product representation, not moral correctness. Do not score known architectural guarantees as task performance.",
+    "If a needed checkpoint or arm is unavailable, record the missing comparison and continue useful independent arms. Never silently replace the evaluated question.",
+    "An architecture comparison alone cannot isolate a PSD causal effect; report capacity/training differences. If no clean intervention fits the budget, mark geometry benefit unresolved.",
+    "Synthetic probes are a falsification screen, not a new human-validated moral benchmark."
+  ],
+  "limits": {
+    "setup_and_data_discovery_minutes": 45,
+    "optional_viper_integration_minutes": 15,
+    "repair_minutes_per_issue": 20,
+    "max_repairs_per_stage": 2,
+    "max_total_recovery_launches": 2,
+    "minimum_seeds_for_trained_light_heads": 3,
+    "full_backbone_training": false,
+    "maximum_simultaneous_gpus": 1,
+    "gpu_compute_hours_total": 2,
+    "publication_retries": 3,
+    "network_timeout_seconds": 60
+  },
+  "sufficient_checks": [
+    "one end-to-end tiny run through load->score->evaluate->save",
+    "no split-family overlap and no test-label use during fitting",
+    "independent recomputation of final metrics from saved predictions",
+    "one simulated interrupted-stage resume/no-duplicate check before unattended execution"
+  ],
+  "viper": {
+    "policy": "local-first provenance plus separate durable asynchronous publisher",
+    "required_core_records": [
+      "source revision",
+      "protocol/data/split hashes",
+      "model revisions/checkpoint identity",
+      "commands/environment",
+      "predictions/metrics",
+      "exit status and timings"
+    ],
+    "publication_failure_is_compute_failure": false,
+    "retain_local_outbox": true,
+    "native_execution_rewrite": false,
+    "verify_remote_bytes_before_deleting_last_copy": true
+  },
+  "report_rule": "At deadline publish observed results, missing arms, failures, costs, uncertainties, and pursue/revise/abandon recommendation. Optional instrumentation or formatting cannot delay the scientific report.",
+  "execution_host": {
+    "project": "pvd-dev-232",
+    "vm": "dev",
+    "zone": "us-central1-a",
+    "linux_user": "pvd2112_columbia_edu",
+    "worktree": "/home/pvd2112_columbia_edu/columbia-worktrees/jep-moral-geometry-20261110",
+    "run_dir": "/home/pvd2112_columbia_edu/columbia-projects/jep/data/moral-geometry-20261110",
+    "durable_runner": "cloud-project --project jep"
+  },
+  "cleanup_rule": "Delete only task-created billable resources after retained artifacts are verified; include boot/data disks, reservations and IPs. Preserve the pre-existing dev VM and unrelated resources.",
+  "allowed_actions": "Implement, execute, repair within these bounds, commit/push task paths, publish results, and clean up task resources without another confirmation. No IAM/authentication changes or broad infrastructure work."
+}
