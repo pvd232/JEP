@@ -1,0 +1,87 @@
+{
+  "version": 2,
+  "created_before_scoring": true,
+  "protocol_sha256": "10022159160ebb7b8f66e9159e736512b7421a725c38df2c52278bf5e4f98e67",
+  "model": "Qwen/Qwen3-Embedding-8B",
+  "revision": "c90816d848505624c2434128dfc61132162a0ee9",
+  "adapter_sha256": "84458c9ae1bea5f86a37fc77dd949bccd6f5982c31d5e462aec2ee81f37134cc",
+  "adapter_trial": "A_condition_first_seed10",
+  "source_revision": "925d26ea2040161d3b5847984f705281761de9cd",
+  "max_length": 160,
+  "prompt": "Instruct: Represent the passage for semantic similarity with respect to this condition: {condition}\nQuery: {passage}",
+  "principles": [
+    {
+      "id": "welfare",
+      "short": "expected aggregate welfare",
+      "definition": "Compare expected lives saved with equal weight for each person, ignoring consent and how identical work costs are distributed.",
+      "paraphrase": "Match the total expected prevention of death, counting everyone equally; disregard voluntary choice and the allocation of work."
+    },
+    {
+      "id": "autonomy",
+      "short": "informed voluntary choice",
+      "definition": "Compare whether the workers give informed, unpressured consent and can refuse, ignoring lives saved and work distribution.",
+      "paraphrase": "Match the workers' knowledge and freedom to decline participation; disregard the outcome totals and allocation of burdens."
+    },
+    {
+      "id": "fairness",
+      "short": "equal-entitlement burden allocation",
+      "definition": "Compare how work burdens are divided among four equally responsible workers, ignoring consent and lives saved.",
+      "paraphrase": "Match the distribution of required work across people with the same responsibilities; disregard voluntariness and outcome totals."
+    }
+  ],
+  "assumptions": [
+    "Synthetic outcome numbers are expected deaths averted; equal value per life.",
+    "All workers are equally responsible and face identical linear disutility per work hour; sixteen work hours total in every case.",
+    "Autonomy of the four workers is separate from recipients' outcomes.",
+    "Partial resemblance orders under declared interpretations, not complete ethical theories or uniquely determined moral ratings."
+  ],
+  "methods": [
+    "unconditioned adapted Qwen",
+    "neutral-condition adapted Qwen",
+    "short-condition cosine",
+    "defined-condition cosine",
+    "paraphrased-definition cosine",
+    "situation condition displacement",
+    "conditional-minus-neutral pair score",
+    "oracle extractive evidence cards",
+    "counterfactual response vectors",
+    "equal-weight multi-principle kernel"
+  ],
+  "geometry": {
+    "features": "64-dimensional train-only PCA basis per paired bootstrap seed10,11,12; normalized projected Qwen vectors",
+    "objective": "mean squared error to cleaned [0,1] targets plus .001*mean((w-1)^2)",
+    "intervention": "same diagonal bilinear features; signed weights versus nonnegative weights; exact convex ridge/bounded least squares",
+    "training_sizes": [
+      64,
+      256
+    ],
+    "no_test_label_projection": true
+  },
+  "limits": {
+    "max_gpus": 1,
+    "gpu_seconds": 7200,
+    "max_recovery_launches": 2,
+    "deadline": "2026-11-10T13:00:00Z"
+  },
+  "labels": {
+    "synthetic": "author operational hypotheses",
+    "reference": "cleaned JEP v1.1 audited LLM-derived labels; not original human groundtruth",
+    "human": "no new verified conditional human labels"
+  },
+  "reference_counts": {
+    "train": 256,
+    "dev": 64,
+    "test": 128
+  },
+  "primary": "Cross-family conditional retrieval and condition-switch accuracy, paired family bootstrap2000 draws, lexical control",
+  "reserve": "Four frozen untouched families used for confirmation only of a single method selected on development; all choices logged before reserve evaluation.",
+  "leakage": "Retain cleaned preexisting partitions. Backbone previously trained on cleaned train; validation/test remain previously examined exploratory reference evidence.",
+  "novelty": "Conditional embeddings, moral geometry, CASE/SCS contrasts already exist. Test utility and controlled restrictions, no broad novelty/moral-reasoning claim.",
+  "references": [
+    "https://aclanthology.org/2023.emnlp-main.345/",
+    "https://aclanthology.org/2026.eacl-long.231/",
+    "https://aclanthology.org/2026.acl-long.50/",
+    "https://link.springer.com/article/10.1007/s13164-020-00495-5",
+    "https://link.springer.com/article/10.1007/s43681-026-01368-w"
+  ]
+}

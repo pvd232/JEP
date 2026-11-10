@@ -1,0 +1,50 @@
+{
+  "status": "complete",
+  "retained_at_utc": "2026-11-10T05:48:56.827470+00:00",
+  "instance": "jep-moral-20261110-g1",
+  "project": "mantra-477901",
+  "zone": "us-central1-a",
+  "gpu_unit": "jep-moral-replay-probe.service",
+  "unit_status": {
+    "ActiveState": "inactive",
+    "SubState": "dead",
+    "ExecMainStatus": 0
+  },
+  "runtime_limit_seconds": 420,
+  "previous_runtime": {
+    "torch": "2.14.0+cu130",
+    "transformers": "5.20.2",
+    "peft": "0.21.2",
+    "source": "925d26ea2040161d3b5847984f705281761de9cd:training_outputs/full_data_prompt_20261108/test-runtime-worker1.txt",
+    "source_sha256": "0fe02a4472ff08777f63f05bdc5d4593ec1e9840a303edac41bc394ebb00c0e7"
+  },
+  "current_runtime": {
+    "torch": "2.9.1+cu129",
+    "transformers": "4.57.1",
+    "peft": "0.17.1",
+    "gpu": "NVIDIA L4, GPU-e9512010-cf07-fd94-fb4e-77930d3c8328, 580.178.04"
+  },
+  "files": {
+    "replay_probe.py": {
+      "sha256": "3ee77cc0569c94a0b1cc5a800a1d0749a6265613bf797577bf00b07b20a2fd31",
+      "bytes": 5477
+    },
+    "replay_probe_input.json": {
+      "sha256": "c0ff473e8f3c4edeaa62734bad61ad011d294b6b8eab74192e6e800950451c27",
+      "bytes": 21488
+    },
+    "replay_probe_result.json": {
+      "sha256": "310123b696860609bebe43576c2c85b9085c61f5d7a98dfc05213cce208d1194",
+      "bytes": 16014
+    },
+    "replay_probe_complete.json": {
+      "sha256": "85ff925e042eadec1c875ab0917c5a239529d4fa38c7f1271ae83bf8b4c439d2",
+      "bytes": 116
+    },
+    "replay_probe.log": {
+      "sha256": "9c9e3103a85abb804f7b0ee093177bfe49a681259c32c96bcc316ce7486e8b60",
+      "bytes": 913
+    }
+  },
+  "interpretation": "Exact saved weights and original32-pair/64-text batch layout do not numerically reproduce historical predictions under the new pinned runtime. Layout alone does not explain drift. No fitting, threshold selection, dependency changes, new resources or main inference rerun."
+}

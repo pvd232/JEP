@@ -1,0 +1,617 @@
+{
+  "recorded_at": "2026-11-10T05:51:26.866542+00:00",
+  "jobs": [
+    {
+      "purpose": "restore_validation_frozen_Qwen_adapter_and_cleaned_CSTS",
+      "observed": {
+        "id": "885802463526428eb68211315581ad0c",
+        "status": "succeeded",
+        "created_at": "2026-11-10T05:04:26.278426+00:00",
+        "cwd": "/home/pvd2112_columbia_edu/columbia-worktrees/jep-moral-geometry-20261110",
+        "argv": [
+          "/home/pvd2112_columbia_edu/columbia-projects/jep/venv/bin/python",
+          "/home/pvd2112_columbia_edu/columbia-worktrees/jep-moral-geometry-20261110/scripts/moral_geometry_20261110/restore_qwen.py"
+        ],
+        "checkpoint": "/home/pvd2112_columbia_edu/columbia-projects/jep/data/moral-geometry-20261110",
+        "resume_argv": [
+          "/home/pvd2112_columbia_edu/columbia-projects/jep/venv/bin/python",
+          "/home/pvd2112_columbia_edu/columbia-worktrees/jep-moral-geometry-20261110/scripts/moral_geometry_20261110/restore_qwen.py"
+        ],
+        "git_revision": "9e9141821480acd4bf79cf14270a3ed8c4124eb1",
+        "project_id": "jep",
+        "environment_keys": [
+          "CLOUDSDK_COMPUTE_ZONE",
+          "CLOUDSDK_CONFIG",
+          "CLOUDSDK_CORE_ACCOUNT",
+          "CLOUDSDK_CORE_PROJECT",
+          "CLOUD_DEV_CONFIG",
+          "CLOUD_PROJECT_DATA",
+          "CLOUD_PROJECT_ID",
+          "HF_HOME",
+          "PIP_CACHE_DIR",
+          "UV_CACHE_DIR",
+          "VIRTUAL_ENV",
+          "XDG_CACHE_HOME"
+        ],
+        "started_at": "2026-11-10T05:04:27.112542+00:00",
+        "worker_pid": 573086,
+        "child_pid": 573088,
+        "exit_code": 0,
+        "finished_at": "2026-11-10T05:04:30.248168+00:00"
+      }
+    },
+    {
+      "purpose": "Qwen_moral_geometry_v2_controller",
+      "observed": {
+        "id": "f6dc2b3e233d411284a122a3584539f0",
+        "status": "failed",
+        "created_at": "2026-11-10T05:21:59.457168+00:00",
+        "cwd": "/home/pvd2112_columbia_edu/columbia-worktrees/jep-moral-geometry-20261110",
+        "argv": [
+          "/home/pvd2112_columbia_edu/columbia-projects/jep/venv/bin/python",
+          "/home/pvd2112_columbia_edu/columbia-worktrees/jep-moral-geometry-20261110/scripts/moral_geometry_20261110/controller.py",
+          "--resume"
+        ],
+        "checkpoint": "/home/pvd2112_columbia_edu/columbia-projects/jep/data/moral-geometry-20261110",
+        "resume_argv": [
+          "/home/pvd2112_columbia_edu/columbia-projects/jep/venv/bin/python",
+          "/home/pvd2112_columbia_edu/columbia-worktrees/jep-moral-geometry-20261110/scripts/moral_geometry_20261110/controller.py",
+          "--resume"
+        ],
+        "git_revision": "b19cae3fb3da81d819a91b3761d5d7bbf31ddc09",
+        "project_id": "jep",
+        "environment_keys": [
+          "CLOUDSDK_COMPUTE_ZONE",
+          "CLOUDSDK_CONFIG",
+          "CLOUDSDK_CORE_ACCOUNT",
+          "CLOUDSDK_CORE_PROJECT",
+          "CLOUD_DEV_CONFIG",
+          "CLOUD_PROJECT_DATA",
+          "CLOUD_PROJECT_ID",
+          "HF_HOME",
+          "PIP_CACHE_DIR",
+          "UV_CACHE_DIR",
+          "VIRTUAL_ENV",
+          "XDG_CACHE_HOME"
+        ],
+        "started_at": "2026-11-10T05:22:00.252021+00:00",
+        "worker_pid": 573881,
+        "child_pid": 573894,
+        "exit_code": 1,
+        "finished_at": "2026-11-10T05:22:03.265754+00:00"
+      }
+    },
+    {
+      "purpose": "private_Qwen_moral_geometry_v2_controller_recovery1",
+      "observed": {
+        "id": "6da126c4a6c044429a2c19ed16a183fd",
+        "status": "failed",
+        "created_at": "2026-11-10T05:23:17.743215+00:00",
+        "cwd": "/home/pvd2112_columbia_edu/columbia-worktrees/jep-moral-geometry-20261110",
+        "argv": [
+          "/home/pvd2112_columbia_edu/columbia-projects/jep/venv/bin/python",
+          "/home/pvd2112_columbia_edu/columbia-worktrees/jep-moral-geometry-20261110/scripts/moral_geometry_20261110/controller.py",
+          "--resume"
+        ],
+        "checkpoint": "/home/pvd2112_columbia_edu/columbia-projects/jep/data/moral-geometry-20261110",
+        "resume_argv": [
+          "/home/pvd2112_columbia_edu/columbia-projects/jep/venv/bin/python",
+          "/home/pvd2112_columbia_edu/columbia-worktrees/jep-moral-geometry-20261110/scripts/moral_geometry_20261110/controller.py",
+          "--resume"
+        ],
+        "git_revision": "9245704fb270f3ca09f2fcdc43d16e54ca2e06c9",
+        "project_id": "jep",
+        "environment_keys": [
+          "CLOUDSDK_COMPUTE_ZONE",
+          "CLOUDSDK_CONFIG",
+          "CLOUDSDK_CORE_ACCOUNT",
+          "CLOUDSDK_CORE_PROJECT",
+          "CLOUD_DEV_CONFIG",
+          "CLOUD_PROJECT_DATA",
+          "CLOUD_PROJECT_ID",
+          "HF_HOME",
+          "PIP_CACHE_DIR",
+          "UV_CACHE_DIR",
+          "VIRTUAL_ENV",
+          "XDG_CACHE_HOME"
+        ],
+        "started_at": "2026-11-10T05:23:18.540025+00:00",
+        "worker_pid": 574076,
+        "child_pid": 574078,
+        "exit_code": 1,
+        "finished_at": "2026-11-10T05:23:48.292783+00:00"
+      }
+    },
+    {
+      "purpose": "private_Qwen_moral_geometry_v2_controller_recovery2",
+      "observed": {
+        "id": "b043291d95b6401c8a5c5510773b2f91",
+        "status": "cancelled",
+        "created_at": "2026-11-10T05:26:13.684463+00:00",
+        "cwd": "/home/pvd2112_columbia_edu/columbia-worktrees/jep-moral-geometry-20261110",
+        "argv": [
+          "/home/pvd2112_columbia_edu/columbia-projects/jep/venv/bin/python",
+          "/home/pvd2112_columbia_edu/columbia-worktrees/jep-moral-geometry-20261110/scripts/moral_geometry_20261110/controller.py",
+          "--resume"
+        ],
+        "checkpoint": "/home/pvd2112_columbia_edu/columbia-projects/jep/data/moral-geometry-20261110",
+        "resume_argv": [
+          "/home/pvd2112_columbia_edu/columbia-projects/jep/venv/bin/python",
+          "/home/pvd2112_columbia_edu/columbia-worktrees/jep-moral-geometry-20261110/scripts/moral_geometry_20261110/controller.py",
+          "--resume"
+        ],
+        "git_revision": "49c298515d3f29bb58c123355aeeb8b93e68c438",
+        "project_id": "jep",
+        "environment_keys": [
+          "CLOUDSDK_COMPUTE_ZONE",
+          "CLOUDSDK_CONFIG",
+          "CLOUDSDK_CORE_ACCOUNT",
+          "CLOUDSDK_CORE_PROJECT",
+          "CLOUD_DEV_CONFIG",
+          "CLOUD_PROJECT_DATA",
+          "CLOUD_PROJECT_ID",
+          "HF_HOME",
+          "PIP_CACHE_DIR",
+          "UV_CACHE_DIR",
+          "VIRTUAL_ENV",
+          "XDG_CACHE_HOME"
+        ],
+        "started_at": "2026-11-10T05:26:14.459557+00:00",
+        "worker_pid": 574227,
+        "child_pid": 574229,
+        "exit_code": -15,
+        "finished_at": "2026-11-10T05:43:01.329956+00:00"
+      }
+    },
+    {
+      "purpose": "initial_CPU_heads_and_analysis_of_retained_Qwen_embeddings",
+      "observed": {
+        "id": "c73ec56ac290496dacfa88cd8c62d798",
+        "status": "succeeded",
+        "created_at": "2026-11-10T05:44:51.095996+00:00",
+        "cwd": "/home/pvd2112_columbia_edu/columbia-worktrees/jep-moral-geometry-20261110",
+        "argv": [
+          "/home/pvd2112_columbia_edu/columbia-projects/jep/venv/bin/python",
+          "/home/pvd2112_columbia_edu/columbia-worktrees/jep-moral-geometry-20261110/scripts/moral_geometry_20261110/analyze.py",
+          "--resume"
+        ],
+        "checkpoint": "/home/pvd2112_columbia_edu/columbia-projects/jep/data/moral-geometry-20261110",
+        "resume_argv": [
+          "/home/pvd2112_columbia_edu/columbia-projects/jep/venv/bin/python",
+          "/home/pvd2112_columbia_edu/columbia-worktrees/jep-moral-geometry-20261110/scripts/moral_geometry_20261110/analyze.py",
+          "--resume"
+        ],
+        "git_revision": "fd1e53aa157983d3d09ccb6cd0662144c5a26cab",
+        "project_id": "jep",
+        "environment_keys": [
+          "CLOUDSDK_COMPUTE_ZONE",
+          "CLOUDSDK_CONFIG",
+          "CLOUDSDK_CORE_ACCOUNT",
+          "CLOUDSDK_CORE_PROJECT",
+          "CLOUD_DEV_CONFIG",
+          "CLOUD_PROJECT_DATA",
+          "CLOUD_PROJECT_ID",
+          "HF_HOME",
+          "PIP_CACHE_DIR",
+          "UV_CACHE_DIR",
+          "VIRTUAL_ENV",
+          "XDG_CACHE_HOME"
+        ],
+        "started_at": "2026-11-10T05:44:52.153307+00:00",
+        "worker_pid": 575247,
+        "child_pid": 575249,
+        "exit_code": 0,
+        "finished_at": "2026-11-10T05:45:15.773552+00:00"
+      }
+    }
+  ],
+  "gpu_compute": {
+    "status": "complete",
+    "source_sha256": "7ab77bd852f07e1ea832a1d21f34028610cb5fe114263ccd52836f996e20cd3e",
+    "tasks": 2941,
+    "seconds": 328.391477968,
+    "encoder": {
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "revision": "c90816d848505624c2434128dfc61132162a0ee9",
+      "adapter_sha256": "84458c9ae1bea5f86a37fc77dd949bccd6f5982c31d5e462aec2ee81f37134cc",
+      "prompt_sha256": "18aa20eeecbdff1e24f607f120452be394b14bf8c1902b501f3116c4e2acc5d7",
+      "pooling": "last non-padding explicit EOD, float32 L2",
+      "max_length": 160,
+      "dimension": 4096,
+      "tasks_sha256": "6c4b6d3b9fbe5353eed6ebf9a1826981c67404b6a7e039849d8e630cc0f2c135",
+      "layer_probe": "EOD pooled layers 0,9,18,27,final36; layer0 is null (identical EOD input embedding)"
+    },
+    "gpu": "NVIDIA L4, GPU-e9512010-cf07-fd94-fb4e-77930d3c8328",
+    "torch": "2.9.1+cu129"
+  },
+  "failed_attempt": {
+    "status": "failed",
+    "encoder": {
+      "model": "Qwen/Qwen3-Embedding-8B",
+      "revision": "c90816d848505624c2434128dfc61132162a0ee9",
+      "adapter_sha256": "84458c9ae1bea5f86a37fc77dd949bccd6f5982c31d5e462aec2ee81f37134cc",
+      "prompt_sha256": "18aa20eeecbdff1e24f607f120452be394b14bf8c1902b501f3116c4e2acc5d7",
+      "pooling": "last non-padding explicit EOD, float32 L2",
+      "max_length": 160,
+      "dimension": 4096,
+      "tasks_sha256": "6c4b6d3b9fbe5353eed6ebf9a1826981c67404b6a7e039849d8e630cc0f2c135",
+      "layer_probe": "EOD pooled layers 0,9,18,27,final36; layer0 is null (identical EOD input embedding)"
+    },
+    "error": "OutOfMemoryError('CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacity of 22.03 GiB of which 21.12 MiB is free. Including non-PyTorch memory, this process has 22.01 GiB memory in use. Of the allocated memory 21.77 GiB is allocated by PyTorch, and 13.07 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)')",
+    "traceback": "Traceback (most recent call last):\n  File \"/var/lib/jep-moral-pilot/worker.py\", line 178, in <module>\n    try:run()\n  File \"/var/lib/jep-moral-pilot/worker.py\", line 156, in run\n    hidden=model(**batch).last_hidden_state\n  File \"/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py\", line 1775, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File \"/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py\", line 1786, in _call_impl\n    return forward_call(*args, **kwargs)\n  File \"/usr/local/lib/python3.10/dist-packages/peft/peft_model.py\", line 2898, in forward\n    return self.base_model(\n  File \"/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py\", line 1775, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File \"/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py\", line 1786, in _call_impl\n    return forward_call(*args, **kwargs)\n  File \"/usr/local/lib/python3.10/dist-packages/peft/tuners/tuners_utils.py\", line 222, in forward\n    return self.model.forward(*args, **kwargs)\n  File \"/usr/local/lib/python3.10/dist-packages/transformers/utils/generic.py\", line 1064, in wrapper\n    outputs = func(self, *args, **kwargs)\n  File \"/usr/local/lib/python3.10/dist-packages/transformers/models/qwen3/modeling_qwen3.py\", line 410, in forward\n    hidden_states = decoder_layer(\n  File \"/usr/local/lib/python3.10/dist-packages/transformers/modeling_layers.py\", line 94, in __call__\n    return super().__call__(*args, **kwargs)\n  File \"/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py\", line 1775, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File \"/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py\", line 1881, in _call_impl\n    return inner()\n  File \"/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py\", line 1829, in inner\n    result = forward_call(*args, **kwargs)\n  File \"/usr/local/lib/python3.10/dist-packages/transformers/utils/deprecation.py\", line 172, in wrapped_func\n    return func(*args, **kwargs)\n  File \"/usr/local/lib/python3.10/dist-packages/transformers/models/qwen3/modeling_qwen3.py\", line 275, in forward\n    hidden_states = self.mlp(hidden_states)\n  File \"/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py\", line 1775, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File \"/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py\", line 1786, in _call_impl\n    return forward_call(*args, **kwargs)\n  File \"/usr/local/lib/python3.10/dist-packages/transformers/models/qwen3/modeling_qwen3.py\", line 82, in forward\n    down_proj = self.down_proj(self.act_fn(self.gate_proj(x)) * self.up_proj(x))\n  File \"/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py\", line 1775, in _wrapped_call_impl\n    return self._call_impl(*args, **kwargs)\n  File \"/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py\", line 1786, in _call_impl\n    return forward_call(*args, **kwargs)\n  File \"/usr/local/lib/python3.10/dist-packages/transformers/activations.py\", line 99, in forward\n    return nn.functional.silu(input)\n  File \"/usr/local/lib/python3.10/dist-packages/torch/nn/functional.py\", line 2371, in silu\n    return torch._C._nn.silu(input)\ntorch.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB. GPU 0 has a total capacity of 22.03 GiB of which 21.12 MiB is free. Including non-PyTorch memory, this process has 22.01 GiB memory in use. Of the allocated memory 21.77 GiB is allocated by PyTorch, and 13.07 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)\n",
+    "seconds": 191.10119662900001
+  },
+  "cleanup": {
+    "complete": true,
+    "verified_at": "2026-11-10T05:50:29.461867+00:00",
+    "resources": {
+      "project": "mantra-477901",
+      "intents": [
+        {
+          "name": "jep-moral-20261110-g1",
+          "zone": "asia-northeast3-a",
+          "absent_before_create": true,
+          "at": "2026-11-10T05:22:01.033759+00:00",
+          "status": "reconciled_absent",
+          "error": "RuntimeError('412 https://compute.googleapis.com/compute/v1/projects/mantra-477901/zones/asia-northeast3-a/instances?requestId=4ed0bd3a-2b07-417e-8e39-9dae0cc2eb2a {\\n  \"error\": {\\n    \"code\": 412,\\n    \"message\": \"Constraint constraints/compute.vmExternalIpAccess violated for project 126764032188. Add instance projects/mantra-477901/zones/asia-northeast3-a/instances/jep-moral-20261110-g1 to the constraint to use external IP with it.\",\\n    \"errors\": [\\n      {\\n        \"message\": \"Constraint constraints/compute.vmExternalIpAccess violated for project 126764032188. Add instance projects/mantra-477901/zones/asia-northeast3-a/instances/jep-moral-20261110-g1 to the constraint to use external IP with it.\",\\n        \"domain\": \"global\",\\n        \"reason\": \"conditionNotMet\",\\n        \"location\": \"If-Match\",\\n        \"locationType\": \"header\"\\n      }\\n    ]\\n  }\\n}\\n')",
+          "reconciled_at": "2026-11-10T05:26:11.595903+00:00"
+        },
+        {
+          "name": "jep-moral-20261110-g1",
+          "zone": "asia-northeast3-a",
+          "absent_before_create": true,
+          "at": "2026-11-10T05:23:19.254718+00:00",
+          "status": "reconciled_absent",
+          "operation": "https://www.googleapis.com/compute/v1/projects/mantra-477901/zones/asia-northeast3-a/operations/operation-1794288200915-65fe546d71988-442a35c4-f883c6b9",
+          "error": {
+            "errors": [
+              {
+                "code": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+                "message": "The zone 'projects/mantra-477901/zones/asia-northeast3-a' does not have enough resources available to fulfill the request.  '(resource type:compute)'.",
+                "errorDetails": [
+                  {
+                    "help": {
+                      "links": [
+                        {
+                          "description": "Troubleshooting documentation",
+                          "url": "https://cloud.google.com/compute/docs/resource-error"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "localizedMessage": {
+                      "locale": "en-US",
+                      "message": "A g2-standard-8 VM instance with 1 nvidia-l4 accelerator(s) is currently unavailable in the asia-northeast3-a zone. Consider trying your request in another zone which has capacity to accommodate your request. Alternatively, you can try your request again with a different VM hardware configuration or at a later time. For more information, see the troubleshooting documentation."
+                    }
+                  },
+                  {
+                    "errorInfo": {
+                      "reason": "stockout",
+                      "domain": "compute.googleapis.com",
+                      "metadatas": {
+                        "attachment": "nvidia-l4:1",
+                        "vmType": "g2-standard-8",
+                        "zone": "asia-northeast3-a",
+                        "zonesAvailable": ""
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "reconciled_at": "2026-11-10T05:26:12.074461+00:00"
+        },
+        {
+          "name": "jep-moral-20261110-g1",
+          "zone": "asia-northeast3-b",
+          "absent_before_create": true,
+          "at": "2026-11-10T05:23:32.872445+00:00",
+          "status": "reconciled_absent",
+          "operation": "https://www.googleapis.com/compute/v1/projects/mantra-477901/zones/asia-northeast3-b/operations/operation-1794288214531-65fe547a6debb-17b91b50-7e1be132",
+          "error": {
+            "errors": [
+              {
+                "code": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+                "message": "The zone 'projects/mantra-477901/zones/asia-northeast3-b' does not have enough resources available to fulfill the request.  '(resource type:compute)'.",
+                "errorDetails": [
+                  {
+                    "help": {
+                      "links": [
+                        {
+                          "description": "Troubleshooting documentation",
+                          "url": "https://cloud.google.com/compute/docs/resource-error"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "localizedMessage": {
+                      "locale": "en-US",
+                      "message": "A g2-standard-8 VM instance with 1 nvidia-l4 accelerator(s) is currently unavailable in the asia-northeast3-b zone. Consider trying your request in another zone which has capacity to accommodate your request. Alternatively, you can try your request again with a different VM hardware configuration or at a later time. For more information, see the troubleshooting documentation."
+                    }
+                  },
+                  {
+                    "errorInfo": {
+                      "reason": "stockout",
+                      "domain": "compute.googleapis.com",
+                      "metadatas": {
+                        "attachment": "nvidia-l4:1",
+                        "vmType": "g2-standard-8",
+                        "zone": "asia-northeast3-b",
+                        "zonesAvailable": ""
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "reconciled_at": "2026-11-10T05:26:12.572599+00:00"
+        },
+        {
+          "name": "jep-moral-20261110-g1",
+          "zone": "asia-northeast3-c",
+          "absent_before_create": true,
+          "at": "2026-11-10T05:23:46.364199+00:00",
+          "status": "reconciled_absent",
+          "error": "RuntimeError('400 https://compute.googleapis.com/compute/v1/projects/mantra-477901/zones/asia-northeast3-c/instances?requestId=66682599-46ff-4b0e-b807-348335f45950 {\\n  \"error\": {\\n    \"code\": 400,\\n    \"message\": \"Invalid value for field \\'resource.machineType\\': \\'zones/asia-northeast3-c/machineTypes/g2-standard-8\\'. Machine type with name \\'g2-standard-8\\' does not exist in zone \\'asia-northeast3-c\\'.\",\\n    \"errors\": [\\n      {\\n        \"message\": \"Invalid value for field \\'resource.machineType\\': \\'zones/asia-northeast3-c/machineTypes/g2-standard-8\\'. Machine type with name \\'g2-standard-8\\' does not exist in zone \\'asia-northeast3-c\\'.\",\\n        \"domain\": \"global\",\\n        \"reason\": \"invalid\"\\n      }\\n    ]\\n  }\\n}\\n')",
+          "reconciled_at": "2026-11-10T05:26:13.091340+00:00"
+        },
+        {
+          "name": "jep-moral-20261110-g1",
+          "zone": "us-central1-a",
+          "absent_before_create": true,
+          "at": "2026-11-10T05:26:14.900143+00:00",
+          "status": "allocated",
+          "operation": "https://www.googleapis.com/compute/v1/projects/mantra-477901/zones/us-central1-a/operations/operation-1794288374992-65fe551374d0d-94af845c-f84cedc1"
+        }
+      ],
+      "allocations": [
+        {
+          "name": "jep-moral-20261110-g1",
+          "id": "3982521360388658200",
+          "zone": "us-central1-a",
+          "disk_id": "4853443687526372376",
+          "created_epoch": 1794288389.0344486,
+          "created_at": "2026-11-10T05:26:29.034455+00:00",
+          "labels": {
+            "task": "jep-moral-geometry-20261110",
+            "owner": "pvd232",
+            "experiment": "moral-v2"
+          },
+          "gpu_count": 1,
+          "provider_max_seconds": 7200,
+          "cleanup_verified_at": "2026-11-10T05:50:29.455126+00:00",
+          "deleted": true
+        }
+      ],
+      "gpu_seconds": 1440
+    },
+    "no_task_static_ips_reservations_snapshots_created": true,
+    "existing_dev_preserved": true
+  },
+  "final_inventory": {
+    "verified_at": "2026-11-10T05:50:31.267418+00:00",
+    "owned_resources_remaining": 0,
+    "attempted_zones": [
+      {
+        "zone": "asia-northeast3-a",
+        "instance_absent": true,
+        "disk_absent": true
+      },
+      {
+        "zone": "asia-northeast3-b",
+        "instance_absent": true,
+        "disk_absent": true
+      },
+      {
+        "zone": "asia-northeast3-c",
+        "instance_absent": true,
+        "disk_absent": true
+      },
+      {
+        "zone": "us-central1-a",
+        "instance_absent": true,
+        "disk_absent": true
+      }
+    ],
+    "static_ips_reservations_snapshots_created": 0,
+    "existing_dev_preserved": true
+  },
+  "replay_probe": {
+    "status": "complete",
+    "retained_at_utc": "2026-11-10T05:48:56.827470+00:00",
+    "instance": "jep-moral-20261110-g1",
+    "project": "mantra-477901",
+    "zone": "us-central1-a",
+    "gpu_unit": "jep-moral-replay-probe.service",
+    "unit_status": {
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "ExecMainStatus": 0
+    },
+    "runtime_limit_seconds": 420,
+    "previous_runtime": {
+      "torch": "2.14.0+cu130",
+      "transformers": "5.20.2",
+      "peft": "0.21.2",
+      "source": "925d26ea2040161d3b5847984f705281761de9cd:training_outputs/full_data_prompt_20261108/test-runtime-worker1.txt",
+      "source_sha256": "0fe02a4472ff08777f63f05bdc5d4593ec1e9840a303edac41bc394ebb00c0e7"
+    },
+    "current_runtime": {
+      "torch": "2.9.1+cu129",
+      "transformers": "4.57.1",
+      "peft": "0.17.1",
+      "gpu": "NVIDIA L4, GPU-e9512010-cf07-fd94-fb4e-77930d3c8328, 580.178.04"
+    },
+    "files": {
+      "replay_probe.py": {
+        "sha256": "3ee77cc0569c94a0b1cc5a800a1d0749a6265613bf797577bf00b07b20a2fd31",
+        "bytes": 5477
+      },
+      "replay_probe_input.json": {
+        "sha256": "c0ff473e8f3c4edeaa62734bad61ad011d294b6b8eab74192e6e800950451c27",
+        "bytes": 21488
+      },
+      "replay_probe_result.json": {
+        "sha256": "310123b696860609bebe43576c2c85b9085c61f5d7a98dfc05213cce208d1194",
+        "bytes": 16014
+      },
+      "replay_probe_complete.json": {
+        "sha256": "85ff925e042eadec1c875ab0917c5a239529d4fa38c7f1271ae83bf8b4c439d2",
+        "bytes": 116
+      },
+      "replay_probe.log": {
+        "sha256": "9c9e3103a85abb804f7b0ee093177bfe49a681259c32c96bcc316ce7486e8b60",
+        "bytes": 913
+      }
+    },
+    "interpretation": "Exact saved weights and original32-pair/64-text batch layout do not numerically reproduce historical predictions under the new pinned runtime. Layout alone does not explain drift. No fitting, threshold selection, dependency changes, new resources or main inference rerun."
+  },
+  "source_revision": "fd1e53aa157983d3d09ccb6cd0662144c5a26cab",
+  "source_files": {
+    "scripts/moral_geometry_20261110/extensions.py": "3934d6c08d621b5e89ec54cef56272d53b45ac62b6e51a6f148063946ca02b4d",
+    "scripts/moral_geometry_20261110/analyze.py": "0312ddc5a72285ee013931049350d8f802259d5a0fcaff437198ab8a98809813",
+    "scripts/moral_geometry_20261110/tasks.py": "a0f8ac1361b786a2b227d5d2ed8eaf35bd88109c05f950810c82d018ade06582",
+    "scripts/moral_geometry_20261110/closeout_diagnostics.py": "433cafeb0e18c922b87e41c1510e8c8aba5d05932b15f6d1521f10d9bfa6c01e",
+    "scripts/moral_geometry_20261110/visualize.py": "ac3cd22f3fa9c7fc699e485b56e65665a8a3e5eebc0cf4665ebb05d88e3bd64e",
+    "scripts/moral_geometry_20261110/publish_async.py": "8dea24494807cff4cfd2698c4d138855c692151dd4c942cf0218a443383d9f8d",
+    "scripts/moral_geometry_20261110/run.py": "3e3c7b8007de7a1444985673b47cdbf0bf18686ca648e8c5d265a6cedd54409f",
+    "scripts/moral_geometry_20261110/verify_metrics.py": "b605a53a0ee513bfbd5c0023a54f66e3634d749f513e4bb1c83418af9c94b8bc",
+    "scripts/moral_geometry_20261110/controller.py": "bfcfaefd4c991afe006a980dcd0c7418ddc2e6b5c11a94f0fbac8df7c5276310",
+    "scripts/moral_geometry_20261110/report.py": "fa0403a9e0214f5853baf5aaed362e9a3790c0692e018cb588db50750c518e3b",
+    "scripts/moral_geometry_20261110/prepare.py": "9fda05453fa47e8f51f652dd784a91e96ff19a9503490bec382204ccd8e3f28e",
+    "scripts/moral_geometry_20261110/restore_qwen.py": "ca199b0155a532a4d3c54d99849f3d7e73441cf68b38095ef13452c105f3c19b",
+    "scripts/moral_geometry_20261110/gpu_worker.py": "7ab77bd852f07e1ea832a1d21f34028610cb5fe114263ccd52836f996e20cd3e"
+  },
+  "protocol_sha256": "10022159160ebb7b8f66e9159e736512b7421a725c38df2c52278bf5e4f98e67",
+  "model_selection": {
+    "source_revision": "925d26ea2040161d3b5847984f705281761de9cd",
+    "selected": {
+      "trial_id": "A_condition_first_seed10",
+      "arm": "A_condition_first",
+      "seed": 10,
+      "training_source_commit": "9b163a100362580f99722eecc63895420ecec3b1",
+      "execution_source_commit": "83467f756d1d10e9c1f3183d9242cea4424e1ce4",
+      "protocol_sha256": "0aee2f8aece3e89ff12223fe40a54fb632305339f240475362212c432fd68a11",
+      "prompt_sha256": "2bee95ef599718c32b01fe55ca47a5b12f426290fd59731eab0cd939b68e88e2",
+      "native_run_id": "139218f3a3131c257bef0f69c6e56d68e7df4458f13c999b313b06182dc3ab73",
+      "native_run_reference": {
+        "sha256": "231e59140bfd99be6082c98017b87233ada3c92d557fa9ea52fe06178f2af7d8",
+        "bytes": 1090,
+        "stored_at": {
+          "kind": "local",
+          "workspace": "/home/machina/jep-full-data-task-20261107/repo",
+          "store": ".viper/store",
+          "store_id": "7c2d8e82b327dcd5e65a7958bf5c910d",
+          "commit": "97e753dd3d84964a6b1af7a0697a4f36e985c7739ad7dfd5d9641e32f3c25999",
+          "path": "experiments/full_prompt_83467f75_a_condition_first_s10_e4/runs/a_condition_first/01M6XV9CMKAH75CQVT0XHW3KAW/resolved.yaml"
+        },
+        "kind": "resolved_run"
+      },
+      "trace_sha256": "db79ed856ae65429571425cf7272cb3b8967a59940421755b0149326a2a1851c",
+      "model_sha256": "84458c9ae1bea5f86a37fc77dd949bccd6f5982c31d5e462aec2ee81f37134cc",
+      "validation_predictions_sha256": "e9ffb354f415b1e510c7eb0c9f8cf806b6533d2aa28ed8f41b46fa7ff4995840",
+      "training_sha256": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "validation_sha256": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "selected_epoch": 3,
+      "completed_epochs": 4,
+      "actual_updates": 760,
+      "stop_reason": "validation_patience",
+      "selection_metric": "validation_spearman",
+      "test_used": false,
+      "validation_metrics": {
+        "n": 1576,
+        "mse_0_1": 0.03192856229310998,
+        "mse_1_5": 0.5108569966897597,
+        "spearman": 0.8724975979532501,
+        "prediction_mean": 0.5972109626702962,
+        "target_mean": 0.6134200507614214,
+        "prediction_std": 0.3367859041556897,
+        "target_std": 0.3852562483034509,
+        "mean_prediction_by_rating": {
+          "1.0": {
+            "n": 266,
+            "mean": 0.11957057444921422
+          },
+          "2.0": {
+            "n": 213,
+            "mean": 0.3263610906794038
+          },
+          "3.0": {
+            "n": 302,
+            "mean": 0.5061700987500071
+          },
+          "4.0": {
+            "n": 130,
+            "mean": 0.6798239113046572
+          },
+          "5.0": {
+            "n": 665,
+            "mean": 0.9002155094106394
+          }
+        },
+        "condition_changes": {
+          "n": 551,
+          "correct": 531,
+          "ties": 0,
+          "accuracy_ties_half": 0.9637023593466425,
+          "difference_mse": 0.06731482257908468,
+          "unit": "Within-pair comparisons. These reuse captions and are dependent."
+        }
+      },
+      "initial_trainable_sha256": "d66f485ada57e135e7f1bad0d43c7a76c832fd6833c4be3f81b9ba4ebaf53ba1",
+      "batch_order_sha256": [
+        "9c621dc9d9acb39b750748d3d3d3fc61c4754266c20b33a63e78d8fe44b1e280",
+        "adc8a5007d9752ab59917d4acc774e5cdc2a400108efbba6fb37a48ac03fb9ac",
+        "c901c5804ecdbe60453be6c716828a2bdcc1e8d0a6777f1376d332a6c7f2c9b1",
+        "146995c09f147da7cf8dcd71dcc56d553d431d819cdd6e4e425e9f402448ed3f"
+      ]
+    },
+    "archive": {
+      "uri": "gs://mantra-mlfg-prod-uscentral1-8e7a/viper/pvd232/jep_full_data_prompt_20261107/862a854a546be65afa3ffa5a19e0206325d278cf633d90602be5069d5e322a19/baseline_results/full_data_prompt_20261107/worker2/transfer/A_condition_first_seed10_epoch04/native.tar",
+      "bytes": 492072960,
+      "sha256": "187fa2248a8635e589b962679db1848908e0c5c84523c1874d4cc2ea5a9e5d3d",
+      "controller_verified": true,
+      "verified_utc": "2026-11-08T21:52:04.745076+00:00",
+      "worker": "worker2",
+      "generation": "A_condition_first_seed10_epoch04",
+      "manifest_sha256": "317f44b7798af5ded20762ba1962e0b0b78f69cdc2cf68af143624922fd03103",
+      "ack_sha256": "5d74501f9984ec1aff6e51571b3703bd24c6c2a325dbd879f73b6dcf621125f9"
+    },
+    "selection_rule": "First predeclared condition-first seed10; selection frozen before this pilot, no moral evaluation used."
+  },
+  "input_manifest": {
+    "files": {
+      "cleaned_train.json": "9c1dae0aeff7683ba964254521f9fdb7c98c50adc624c209eff05daeb46a92e9",
+      "cleaned_dev.json": "0bace34100509e7f1657a5f971382b5205a7aabd3b674303df10d82143ed3a1d",
+      "cleaned_test.json": "7fc691471de0f729d2dd9552fa65189d9e2aa323b0c8f941447183a1f6e73fe0",
+      "cases_v2.json": "9cb8da8e0efa502f75b3a5fb4cf02214b313b5f95fef0a4be1008791c996032f",
+      "principles_v2.json": "fa5f54d5cf3a5fe60a00d0aa773061b3fe40e47b23fa2ba8fa642c8b7d7875ae",
+      "design_v2.json": "65fa50d4031c91907d2e31f05242973a1fd851f44d8a51d935d006793f990993"
+    },
+    "source_inputs": {
+      "train": "9a9eac21ee73b9b029ca6f62584891dd13c74aa78e80efd764532a87665ae6a4",
+      "validation": "e42d9544b2aa6814708337d0ce38eba1d64124645b62489ed448c6784dbc71ff",
+      "test_v1_1": "d6b40b7b891ed147befb30801c2f85a8787775adebdd98d134157cbb2a6e9f76"
+    },
+    "no_caption_overlap": true
+  },
+  "encoder_identity": {
+    "model": "Qwen/Qwen3-Embedding-8B",
+    "revision": "c90816d848505624c2434128dfc61132162a0ee9",
+    "adapter_sha256": "84458c9ae1bea5f86a37fc77dd949bccd6f5982c31d5e462aec2ee81f37134cc",
+    "prompt_sha256": "18aa20eeecbdff1e24f607f120452be394b14bf8c1902b501f3116c4e2acc5d7",
+    "pooling": "last non-padding explicit EOD, float32 L2",
+    "max_length": 160,
+    "dimension": 4096,
+    "tasks_sha256": "6c4b6d3b9fbe5353eed6ebf9a1826981c67404b6a7e039849d8e630cc0f2c135",
+    "layer_probe": "EOD pooled layers 0,9,18,27,final36; layer0 is null (identical EOD input embedding)"
+  },
+  "command_note": "GPU root unit jep-moral-inference.service completed with exit0. Initial CPU controller was cancelled after IAP-retained outputs because GPU-side GCS transport was denied. Separate CPU analysis succeeded; no successful inference repeated for reporting.",
+  "environment_note": "environment.txt was captured before Jinja-only bootstrap repair. torch/transformers/peft versions verified independently by replay probe; Jinja was upgraded with jinja2>=3.1.0, exact auxiliary patch version not retained.",
+  "owner_hosted_run_id": null,
+  "gpu_seconds": 1440
+}

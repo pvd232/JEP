@@ -1,0 +1,140 @@
+{
+  "code_reviewers": [
+    {
+      "agent": "review_science",
+      "initial": "Request changes",
+      "findings": [
+        "Raw reannotated CSVs and newly constructed splits discarded cleaned labels and would contaminate Qwen evaluation.",
+        "Repeated clauses/within-story candidates allowed lexical matching.",
+        "Independent metric and resume checks were not real."
+      ],
+      "replacement": "Cleaned cohorts, original partitions, cross-domain probes and explicit principles checked; no immediate inference blocker.",
+      "limits": [
+        "Synthetic hypotheses remain authored; reserve outcomes must follow logged development choice."
+      ]
+    },
+    {
+      "agent": "review_recovery",
+      "initial": "Request changes",
+      "findings": [
+        "Whole-script cache key would invalidate successful compute after report edits.",
+        "Deadline blocked reporting.",
+        "Resource inventory was reset and cleanup asserted without verification."
+      ],
+      "replacement": "Separate inference/analysis, lifetime lock, real interrupted-cache observer, retained immutable resource ledger, and local collection path.",
+      "limits": [
+        "Post-deadline preservation and allocation budget guards added after focused follow-up."
+      ]
+    },
+    {
+      "agent": "review_numerics",
+      "initial": "Request changes",
+      "findings": [
+        "Forced unit diagonal could make a PSD kernel look indefinite.",
+        "Identical evaluator rerun was not independent verification.",
+        "Constant predictions could crash NaN serialization."
+      ],
+      "replacement": "Matched convex signed/nonnegative ridge objective, correct score mapping, tie handling, train-only PCA and raw Gram diagnostics checked; no numerical blocker.",
+      "limits": [
+        "Added embedding hashes to head cache and paired family reference MSE uncertainty."
+      ]
+    },
+    {
+      "agent": "review_resources",
+      "initial": "Request changes",
+      "findings": [
+        "No actual async publisher/provenance environment export.",
+        "Startup metadata exceeded per-value limit.",
+        "Provider auto-delete could destroy unretained outputs.",
+        "Return object lacked execution binding."
+      ],
+      "replacement": "Split metadata measured below limits; STOP preserves disk; verified output precedes deletion; actual model/worker identities bound.",
+      "limits": [
+        "GPU-side namespace permission denied; existing IAP transfer used instead, without IAM changes."
+      ]
+    },
+    {
+      "agent": "review_model_restore",
+      "initial": "Request changes to draft; restored checkpoint valid",
+      "findings": [
+        "Plain AutoModel and mean pooling would silently evaluate a different representation.",
+        "Tokenizer truncation/EOD rules differed from original.",
+        "Adapter is exact named tensors, not a standard HF adapter directory."
+      ],
+      "replacement": "Verified adapter bytes, epoch3/step570, exact 288 tensors, original prompt, EOD last-token pooling and cleaned split hashes. Recovered exact original validation predictions for behavioral replay.",
+      "limits": [
+        "Post-review bootstrap/auxiliary-memory repairs retained actual source hashes and failed-attempt receipts."
+      ]
+    }
+  ],
+  "research_ideators": [
+    {
+      "agent": "ideas_theory",
+      "directions": [
+        "Explicit mid-level principle definitions with cross-domain condition-switch reversals.",
+        "Context residualization.",
+        "Counterfactual response vectors."
+      ],
+      "adopted": [
+        "Explicit welfare/autonomy/equal-entitlement interpretations.",
+        "MET value/theory factorization after exact paper/code check."
+      ]
+    },
+    {
+      "agent": "ideas_representation",
+      "directions": [
+        "Per-situation condition displacement removes topical similarity.",
+        "Multi-view operative relationships with matched compute controls.",
+        "Analogy between morally relevant changes."
+      ],
+      "adopted": [
+        "Residual and neutral controls.",
+        "Predeclared layer0/9/18/27/final probes; input EOD as null.",
+        "Principle-dependent invariance limits."
+      ]
+    },
+    {
+      "agent": "ideas_geometry",
+      "directions": [
+        "PSD as low-label regularizer with a matched convex intervention.",
+        "Noncompensatory aspect composition.",
+        "Preserve disagreement between normative views."
+      ],
+      "adopted": [
+        "64/256-label signed versus PSD fits on the same frozen feature basis; three seeds."
+      ],
+      "deferred": [
+        "Max-metric composition and selective retrieval require further expert relevance evaluation."
+      ]
+    },
+    {
+      "agent": "ideas_retrieval",
+      "directions": [
+        "Extractive issue cards as an oracle information-access upper bound.",
+        "Relational fact matching.",
+        "Prototype-assisted analogy with development-only prototypes."
+      ],
+      "adopted": [
+        "Oracle cards retain source facts only and remain separately labeled."
+      ],
+      "deferred": [
+        "Automatic evidence extraction and prototype selection."
+      ]
+    },
+    {
+      "agent": "ideas_falsification",
+      "directions": [
+        "Literature-guided conditional contrast without novelty overclaim.",
+        "Cross-story transformation analogies.",
+        "Separate principle geometries."
+      ],
+      "adopted": [
+        "SCS/CASE novelty boundary.",
+        "Harm-to-repair as typed contextual relation; no inverse/reflection assumption.",
+        "Restorative-justice and sentence-analogy prior-work checks."
+      ]
+    }
+  ],
+  "policy": "All reported arms were specified before their held-out metrics. Negative results are retained. Any later result-driven method needs fresh held-outs and an exploratory label.",
+  "source": "Reviews covered named snapshots and focused replacement boundaries, not a blanket certification of every later line."
+}

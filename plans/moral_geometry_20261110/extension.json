@@ -1,0 +1,46 @@
+{
+  "created_before_scoring": true,
+  "cases_sha256": "602300d8551c19511be8b419e904bbe57bde45b69432c2f3af1c1c25aa7ba097",
+  "tasks_sha256": "6c4b6d3b9fbe5353eed6ebf9a1826981c67404b6a7e039849d8e630cc0f2c135",
+  "theories": [
+    [
+      "Utilitarianism",
+      "Compare harm by expected suffering and loss of life, counting every person's welfare equally."
+    ],
+    [
+      "Deontology",
+      "Compare harm as interference with persons' rights, consent and duties owed to them, not merely aggregate outcomes."
+    ],
+    [
+      "Care Ethics",
+      "Compare harm through vulnerability, dependency and failures of care within the relationships described."
+    ]
+  ],
+  "framework": "MET-inspired factorial prompting only; no grounds-selection model, rejection sampling or MET-D self-distillation",
+  "fixed_value": "care/harm",
+  "other_dimensions": "Reason-based authority; supplied ground only; no generated ethical rationale.",
+  "invariants": [
+    "Irrelevant narrator prefix/suffix with no changed moral facts. Not claimed to exhaust semantic invariance.",
+    "No role-reversal invariance assumed."
+  ],
+  "restorative_relation": "Typed harm\u2192response analogy, not assumed reflection/inverse. Repairs are authored illustrative candidates, not expert-approved sufficient reparation.",
+  "layers": [
+    0,
+    9,
+    18,
+    27,
+    36
+  ],
+  "layer_selection": "report entire prespecified curve; final layer primary, no best-test-layer selection",
+  "references": [
+    "https://github.com/aylee2008/met/tree/130007d875fbb8a19bdebe8091c8925a694849c9",
+    "https://aclanthology.org/K19-1085/",
+    "https://aclanthology.org/2020.coling-main.300/",
+    "https://arxiv.org/abs/2506.05687"
+  ],
+  "counts": {
+    "tasks": 2923,
+    "extension_cases": 162,
+    "layer_tasks": 162
+  }
+}

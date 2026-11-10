@@ -1,0 +1,151 @@
+{
+  "complete": true,
+  "verified_at": "2026-11-10T05:50:29.461867+00:00",
+  "resources": {
+    "project": "mantra-477901",
+    "intents": [
+      {
+        "name": "jep-moral-20261110-g1",
+        "zone": "asia-northeast3-a",
+        "absent_before_create": true,
+        "at": "2026-11-10T05:22:01.033759+00:00",
+        "status": "reconciled_absent",
+        "error": "RuntimeError('412 https://compute.googleapis.com/compute/v1/projects/mantra-477901/zones/asia-northeast3-a/instances?requestId=4ed0bd3a-2b07-417e-8e39-9dae0cc2eb2a {\\n  \"error\": {\\n    \"code\": 412,\\n    \"message\": \"Constraint constraints/compute.vmExternalIpAccess violated for project 126764032188. Add instance projects/mantra-477901/zones/asia-northeast3-a/instances/jep-moral-20261110-g1 to the constraint to use external IP with it.\",\\n    \"errors\": [\\n      {\\n        \"message\": \"Constraint constraints/compute.vmExternalIpAccess violated for project 126764032188. Add instance projects/mantra-477901/zones/asia-northeast3-a/instances/jep-moral-20261110-g1 to the constraint to use external IP with it.\",\\n        \"domain\": \"global\",\\n        \"reason\": \"conditionNotMet\",\\n        \"location\": \"If-Match\",\\n        \"locationType\": \"header\"\\n      }\\n    ]\\n  }\\n}\\n')",
+        "reconciled_at": "2026-11-10T05:26:11.595903+00:00"
+      },
+      {
+        "name": "jep-moral-20261110-g1",
+        "zone": "asia-northeast3-a",
+        "absent_before_create": true,
+        "at": "2026-11-10T05:23:19.254718+00:00",
+        "status": "reconciled_absent",
+        "operation": "https://www.googleapis.com/compute/v1/projects/mantra-477901/zones/asia-northeast3-a/operations/operation-1794288200915-65fe546d71988-442a35c4-f883c6b9",
+        "error": {
+          "errors": [
+            {
+              "code": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+              "message": "The zone 'projects/mantra-477901/zones/asia-northeast3-a' does not have enough resources available to fulfill the request.  '(resource type:compute)'.",
+              "errorDetails": [
+                {
+                  "help": {
+                    "links": [
+                      {
+                        "description": "Troubleshooting documentation",
+                        "url": "https://cloud.google.com/compute/docs/resource-error"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "localizedMessage": {
+                    "locale": "en-US",
+                    "message": "A g2-standard-8 VM instance with 1 nvidia-l4 accelerator(s) is currently unavailable in the asia-northeast3-a zone. Consider trying your request in another zone which has capacity to accommodate your request. Alternatively, you can try your request again with a different VM hardware configuration or at a later time. For more information, see the troubleshooting documentation."
+                  }
+                },
+                {
+                  "errorInfo": {
+                    "reason": "stockout",
+                    "domain": "compute.googleapis.com",
+                    "metadatas": {
+                      "attachment": "nvidia-l4:1",
+                      "vmType": "g2-standard-8",
+                      "zone": "asia-northeast3-a",
+                      "zonesAvailable": ""
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "reconciled_at": "2026-11-10T05:26:12.074461+00:00"
+      },
+      {
+        "name": "jep-moral-20261110-g1",
+        "zone": "asia-northeast3-b",
+        "absent_before_create": true,
+        "at": "2026-11-10T05:23:32.872445+00:00",
+        "status": "reconciled_absent",
+        "operation": "https://www.googleapis.com/compute/v1/projects/mantra-477901/zones/asia-northeast3-b/operations/operation-1794288214531-65fe547a6debb-17b91b50-7e1be132",
+        "error": {
+          "errors": [
+            {
+              "code": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+              "message": "The zone 'projects/mantra-477901/zones/asia-northeast3-b' does not have enough resources available to fulfill the request.  '(resource type:compute)'.",
+              "errorDetails": [
+                {
+                  "help": {
+                    "links": [
+                      {
+                        "description": "Troubleshooting documentation",
+                        "url": "https://cloud.google.com/compute/docs/resource-error"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "localizedMessage": {
+                    "locale": "en-US",
+                    "message": "A g2-standard-8 VM instance with 1 nvidia-l4 accelerator(s) is currently unavailable in the asia-northeast3-b zone. Consider trying your request in another zone which has capacity to accommodate your request. Alternatively, you can try your request again with a different VM hardware configuration or at a later time. For more information, see the troubleshooting documentation."
+                  }
+                },
+                {
+                  "errorInfo": {
+                    "reason": "stockout",
+                    "domain": "compute.googleapis.com",
+                    "metadatas": {
+                      "attachment": "nvidia-l4:1",
+                      "vmType": "g2-standard-8",
+                      "zone": "asia-northeast3-b",
+                      "zonesAvailable": ""
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "reconciled_at": "2026-11-10T05:26:12.572599+00:00"
+      },
+      {
+        "name": "jep-moral-20261110-g1",
+        "zone": "asia-northeast3-c",
+        "absent_before_create": true,
+        "at": "2026-11-10T05:23:46.364199+00:00",
+        "status": "reconciled_absent",
+        "error": "RuntimeError('400 https://compute.googleapis.com/compute/v1/projects/mantra-477901/zones/asia-northeast3-c/instances?requestId=66682599-46ff-4b0e-b807-348335f45950 {\\n  \"error\": {\\n    \"code\": 400,\\n    \"message\": \"Invalid value for field \\'resource.machineType\\': \\'zones/asia-northeast3-c/machineTypes/g2-standard-8\\'. Machine type with name \\'g2-standard-8\\' does not exist in zone \\'asia-northeast3-c\\'.\",\\n    \"errors\": [\\n      {\\n        \"message\": \"Invalid value for field \\'resource.machineType\\': \\'zones/asia-northeast3-c/machineTypes/g2-standard-8\\'. Machine type with name \\'g2-standard-8\\' does not exist in zone \\'asia-northeast3-c\\'.\",\\n        \"domain\": \"global\",\\n        \"reason\": \"invalid\"\\n      }\\n    ]\\n  }\\n}\\n')",
+        "reconciled_at": "2026-11-10T05:26:13.091340+00:00"
+      },
+      {
+        "name": "jep-moral-20261110-g1",
+        "zone": "us-central1-a",
+        "absent_before_create": true,
+        "at": "2026-11-10T05:26:14.900143+00:00",
+        "status": "allocated",
+        "operation": "https://www.googleapis.com/compute/v1/projects/mantra-477901/zones/us-central1-a/operations/operation-1794288374992-65fe551374d0d-94af845c-f84cedc1"
+      }
+    ],
+    "allocations": [
+      {
+        "name": "jep-moral-20261110-g1",
+        "id": "3982521360388658200",
+        "zone": "us-central1-a",
+        "disk_id": "4853443687526372376",
+        "created_epoch": 1794288389.0344486,
+        "created_at": "2026-11-10T05:26:29.034455+00:00",
+        "labels": {
+          "task": "jep-moral-geometry-20261110",
+          "owner": "pvd232",
+          "experiment": "moral-v2"
+        },
+        "gpu_count": 1,
+        "provider_max_seconds": 7200,
+        "cleanup_verified_at": "2026-11-10T05:50:29.455126+00:00",
+        "deleted": true
+      }
+    ],
+    "gpu_seconds": 1440
+  },
+  "no_task_static_ips_reservations_snapshots_created": true,
+  "existing_dev_preserved": true
+}

@@ -1,0 +1,3313 @@
+{
+  "status": "complete",
+  "condition_switch": {
+    "primary": {
+      "unconditioned": 0.0,
+      "neutral": 0.0,
+      "short": 0.7951388888888888,
+      "defined": 0.9861111111111112,
+      "paraphrase": 1.0,
+      "residual": 0.9722222222222222,
+      "difference": 0.9861111111111112,
+      "oracle_cards": 1.0,
+      "lexical": 0.0
+    },
+    "reserve": {
+      "unconditioned": 0.0,
+      "neutral": 0.0,
+      "short": 0.875,
+      "defined": 0.9791666666666666,
+      "paraphrase": 1.0,
+      "residual": 0.9583333333333334,
+      "difference": 0.96875,
+      "oracle_cards": 1.0,
+      "lexical": 0.0
+    }
+  },
+  "change_analogy": {
+    "primary": {
+      "defined": {
+        "n": 36,
+        "families": 12,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "by_family": {
+          "shelter": 1.0,
+          "forest": 1.0,
+          "boat": 1.0,
+          "hospital": 1.0,
+          "bridge": 1.0,
+          "ambulance": 1.0,
+          "farm": 1.0,
+          "power": 1.0,
+          "road": 1.0,
+          "school": 1.0,
+          "radio": 1.0,
+          "fuel": 1.0
+        },
+        "recall1": 1.0,
+        "mrr": 1.0
+      },
+      "neutral": {
+        "n": 36,
+        "families": 12,
+        "accuracy": 0.8333333333333334,
+        "ci95": [
+          0.7222222222222222,
+          0.9166666666666669
+        ],
+        "by_family": {
+          "shelter": 0.8333333333333334,
+          "forest": 0.8333333333333334,
+          "boat": 0.3333333333333333,
+          "hospital": 0.6666666666666666,
+          "bridge": 1.0,
+          "ambulance": 0.8333333333333334,
+          "farm": 0.8333333333333334,
+          "power": 0.8333333333333334,
+          "road": 0.8333333333333334,
+          "school": 1.0,
+          "radio": 1.0,
+          "fuel": 1.0
+        },
+        "recall1": 0.75,
+        "mrr": 0.8611111111111112
+      },
+      "unconditioned": {
+        "n": 36,
+        "families": 12,
+        "accuracy": 0.8194444444444445,
+        "ci95": [
+          0.7361111111111112,
+          0.888888888888889
+        ],
+        "by_family": {
+          "shelter": 0.8333333333333334,
+          "forest": 1.0,
+          "boat": 0.8333333333333334,
+          "hospital": 1.0,
+          "bridge": 0.8333333333333334,
+          "ambulance": 0.6666666666666666,
+          "farm": 0.8333333333333334,
+          "power": 1.0,
+          "road": 0.6666666666666666,
+          "school": 0.8333333333333334,
+          "radio": 0.8333333333333334,
+          "fuel": 0.5
+        },
+        "recall1": 0.7222222222222222,
+        "mrr": 0.8472222222222222
+      },
+      "lexical": {
+        "n": 36,
+        "families": 12,
+        "accuracy": 0.9305555555555557,
+        "ci95": [
+          0.8472222222222223,
+          1.0
+        ],
+        "by_family": {
+          "shelter": 1.0,
+          "forest": 1.0,
+          "boat": 1.0,
+          "hospital": 1.0,
+          "bridge": 0.5,
+          "ambulance": 0.8333333333333334,
+          "farm": 1.0,
+          "power": 1.0,
+          "road": 1.0,
+          "school": 1.0,
+          "radio": 1.0,
+          "fuel": 0.8333333333333334
+        },
+        "recall1": 0.8888888888888888,
+        "mrr": 0.9398148148148147
+      }
+    },
+    "reserve": {
+      "defined": {
+        "n": 12,
+        "families": 4,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "by_family": {
+          "island": 1.0,
+          "warehouse": 1.0,
+          "tunnel": 1.0,
+          "coldchain": 1.0
+        },
+        "recall1": 1.0,
+        "mrr": 1.0
+      },
+      "neutral": {
+        "n": 12,
+        "families": 4,
+        "accuracy": 0.8750000000000001,
+        "ci95": [
+          0.8333333333333334,
+          0.9583333333333334
+        ],
+        "by_family": {
+          "island": 0.8333333333333334,
+          "warehouse": 0.8333333333333334,
+          "tunnel": 1.0,
+          "coldchain": 0.8333333333333334
+        },
+        "recall1": 0.75,
+        "mrr": 0.875
+      },
+      "unconditioned": {
+        "n": 12,
+        "families": 4,
+        "accuracy": 0.875,
+        "ci95": [
+          0.7499999999999999,
+          1.0
+        ],
+        "by_family": {
+          "island": 0.8333333333333334,
+          "warehouse": 1.0,
+          "tunnel": 1.0,
+          "coldchain": 0.6666666666666666
+        },
+        "recall1": 0.8333333333333334,
+        "mrr": 0.9027777777777778
+      },
+      "lexical": {
+        "n": 12,
+        "families": 4,
+        "accuracy": 0.8333333333333334,
+        "ci95": [
+          0.7083333333333333,
+          0.9583333333333334
+        ],
+        "by_family": {
+          "island": 0.8333333333333334,
+          "warehouse": 0.8333333333333334,
+          "tunnel": 1.0,
+          "coldchain": 0.6666666666666666
+        },
+        "recall1": 0.75,
+        "mrr": 0.8611111111111112
+      }
+    }
+  },
+  "behavioral_replay": {
+    "rows": 64,
+    "max_abs_difference": 0.009955108165740967,
+    "mean_abs_difference": 0.0021489100145117845,
+    "original_predictions_sha256": "e9ffb354f415b1e510c7eb0c9f8cf806b6533d2aa28ed8f41b46fa7ff4995840",
+    "compatible_numeric_replay": false
+  },
+  "reference_effects": {
+    "psd_s10_n64 minus signed_s10_n64": {
+      "family_mean_mse_difference": -0.01396319191573112,
+      "ci95": [
+        -0.02548947472868096,
+        -0.004258291660674191
+      ],
+      "families": 63,
+      "negative_favors_psd": true
+    },
+    "psd_s10_n256 minus signed_s10_n256": {
+      "family_mean_mse_difference": -0.0009589727632118659,
+      "ci95": [
+        -0.004984613754588968,
+        0.0043299760042147155
+      ],
+      "families": 63,
+      "negative_favors_psd": true
+    },
+    "psd_s11_n64 minus signed_s11_n64": {
+      "family_mean_mse_difference": -0.016981785420371195,
+      "ci95": [
+        -0.03224355784591692,
+        -0.003907437846808905
+      ],
+      "families": 63,
+      "negative_favors_psd": true
+    },
+    "psd_s11_n256 minus signed_s11_n256": {
+      "family_mean_mse_difference": -0.0036258826617255155,
+      "ci95": [
+        -0.0060642626052547525,
+        -0.0016195161004568545
+      ],
+      "families": 63,
+      "negative_favors_psd": true
+    },
+    "psd_s12_n64 minus signed_s12_n64": {
+      "family_mean_mse_difference": -0.006141499043135465,
+      "ci95": [
+        -0.014782013598594733,
+        0.0020998646316697472
+      ],
+      "families": 63,
+      "negative_favors_psd": true
+    },
+    "psd_s12_n256 minus signed_s12_n256": {
+      "family_mean_mse_difference": -0.0018979673394031308,
+      "ci95": [
+        -0.004412581181860757,
+        0.00037140865174111165
+      ],
+      "families": 63,
+      "negative_favors_psd": true
+    }
+  },
+  "selection": {
+    "selected": "paraphrase",
+    "dev_scores": {
+      "short": 0.7083333333333334,
+      "defined": 0.9791666666666666,
+      "paraphrase": 1.0,
+      "residual": 0.5729166666666666,
+      "difference": 0.9895833333333334
+    },
+    "rule": "Maximum dev family accuracy; fixed eligible-method tie order. Oracle excluded.",
+    "at": "2026-11-10T05:45:04.690085+00:00",
+    "reserve_metrics_not_used": true
+  },
+  "retrieval": {
+    "dev": {
+      "unconditioned": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 0.11458333333333334,
+        "ci95": [
+          0.005208333333333333,
+          0.21875
+        ],
+        "by_family": {
+          "flood": 0.22916666666666666,
+          "clinic": 0.0,
+          "mine": 0.020833333333333332,
+          "water": 0.20833333333333334
+        },
+        "recall1": 0.0,
+        "mrr": 0.37152777777777773
+      },
+      "neutral": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 0.15625,
+        "ci95": [
+          0.05208333333333333,
+          0.3020833333333333
+        ],
+        "by_family": {
+          "flood": 0.14583333333333334,
+          "clinic": 0.08333333333333333,
+          "mine": 0.020833333333333332,
+          "water": 0.375
+        },
+        "recall1": 0.0,
+        "mrr": 0.3854166666666667
+      },
+      "short": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 0.7083333333333334,
+        "ci95": [
+          0.6145833333333334,
+          0.7916666666666667
+        ],
+        "by_family": {
+          "flood": 0.6875,
+          "clinic": 0.8125,
+          "mine": 0.5625,
+          "water": 0.7708333333333334
+        },
+        "recall1": 0.65625,
+        "mrr": 0.7881944444444443
+      },
+      "defined": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 0.9791666666666666,
+        "ci95": [
+          0.9374999999999999,
+          1.0
+        ],
+        "by_family": {
+          "flood": 1.0,
+          "clinic": 1.0,
+          "mine": 1.0,
+          "water": 0.9166666666666666
+        },
+        "recall1": 0.9583333333333334,
+        "mrr": 0.9791666666666666
+      },
+      "paraphrase": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "by_family": {
+          "flood": 1.0,
+          "clinic": 1.0,
+          "mine": 1.0,
+          "water": 1.0
+        },
+        "recall1": 1.0,
+        "mrr": 1.0
+      },
+      "residual": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 0.5729166666666666,
+        "ci95": [
+          0.5260416666666667,
+          0.6145833333333333
+        ],
+        "by_family": {
+          "flood": 0.6041666666666666,
+          "clinic": 0.5208333333333334,
+          "mine": 0.5416666666666666,
+          "water": 0.625
+        },
+        "recall1": 0.16666666666666666,
+        "mrr": 0.5798611111111112
+      },
+      "difference": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 0.9895833333333334,
+        "ci95": [
+          0.9687500000000001,
+          1.0
+        ],
+        "by_family": {
+          "flood": 1.0,
+          "clinic": 1.0,
+          "mine": 1.0,
+          "water": 0.9583333333333334
+        },
+        "recall1": 0.9791666666666666,
+        "mrr": 0.9895833333333334
+      },
+      "oracle_cards": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 0.9791666666666666,
+        "ci95": [
+          0.9374999999999999,
+          1.0
+        ],
+        "by_family": {
+          "flood": 1.0,
+          "clinic": 1.0,
+          "mine": 1.0,
+          "water": 0.9166666666666666
+        },
+        "recall1": 0.9583333333333334,
+        "mrr": 0.9791666666666666
+      },
+      "lexical": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 0.17708333333333334,
+        "ci95": [
+          0.052083333333333336,
+          0.35416666666666663
+        ],
+        "by_family": {
+          "flood": 0.020833333333333332,
+          "clinic": 0.10416666666666667,
+          "mine": 0.4375,
+          "water": 0.14583333333333334
+        },
+        "recall1": 0.0,
+        "mrr": 0.3923611111111111
+      },
+      "signed_s10_n64": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 0.9375,
+        "ci95": [
+          0.859375,
+          1.0
+        ],
+        "by_family": {
+          "flood": 1.0,
+          "clinic": 0.9375,
+          "mine": 1.0,
+          "water": 0.8125
+        },
+        "recall1": 0.9270833333333334,
+        "mrr": 0.9548611111111112
+      },
+      "psd_s10_n64": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 0.9947916666666666,
+        "ci95": [
+          0.9843749999999999,
+          1.0
+        ],
+        "by_family": {
+          "flood": 1.0,
+          "clinic": 1.0,
+          "mine": 1.0,
+          "water": 0.9791666666666666
+        },
+        "recall1": 0.9895833333333334,
+        "mrr": 0.9947916666666666
+      },
+      "signed_s10_n256": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 0.921875,
+        "ci95": [
+          0.84375,
+          1.0
+        ],
+        "by_family": {
+          "flood": 0.875,
+          "clinic": 1.0,
+          "mine": 1.0,
+          "water": 0.8125
+        },
+        "recall1": 0.8958333333333334,
+        "mrr": 0.9392361111111112
+      },
+      "psd_s10_n256": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 0.9895833333333334,
+        "ci95": [
+          0.9687500000000001,
+          1.0
+        ],
+        "by_family": {
+          "flood": 0.9583333333333334,
+          "clinic": 1.0,
+          "mine": 1.0,
+          "water": 1.0
+        },
+        "recall1": 0.9791666666666666,
+        "mrr": 0.9895833333333334
+      },
+      "signed_s11_n64": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 0.9375,
+        "ci95": [
+          0.875,
+          1.0
+        ],
+        "by_family": {
+          "flood": 1.0,
+          "clinic": 0.9166666666666666,
+          "mine": 1.0,
+          "water": 0.8333333333333334
+        },
+        "recall1": 0.9166666666666666,
+        "mrr": 0.951388888888889
+      },
+      "psd_s11_n64": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 0.9947916666666666,
+        "ci95": [
+          0.9843749999999999,
+          1.0
+        ],
+        "by_family": {
+          "flood": 0.9791666666666666,
+          "clinic": 1.0,
+          "mine": 1.0,
+          "water": 1.0
+        },
+        "recall1": 0.9895833333333334,
+        "mrr": 0.9947916666666666
+      },
+      "signed_s11_n256": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 0.9895833333333334,
+        "ci95": [
+          0.9687500000000001,
+          1.0
+        ],
+        "by_family": {
+          "flood": 1.0,
+          "clinic": 1.0,
+          "mine": 1.0,
+          "water": 0.9583333333333334
+        },
+        "recall1": 0.9791666666666666,
+        "mrr": 0.9895833333333334
+      },
+      "psd_s11_n256": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "by_family": {
+          "flood": 1.0,
+          "clinic": 1.0,
+          "mine": 1.0,
+          "water": 1.0
+        },
+        "recall1": 1.0,
+        "mrr": 1.0
+      },
+      "signed_s12_n64": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 0.9895833333333334,
+        "ci95": [
+          0.9687500000000001,
+          1.0
+        ],
+        "by_family": {
+          "flood": 1.0,
+          "clinic": 1.0,
+          "mine": 1.0,
+          "water": 0.9583333333333334
+        },
+        "recall1": 0.9791666666666666,
+        "mrr": 0.9895833333333334
+      },
+      "psd_s12_n64": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "by_family": {
+          "flood": 1.0,
+          "clinic": 1.0,
+          "mine": 1.0,
+          "water": 1.0
+        },
+        "recall1": 1.0,
+        "mrr": 1.0
+      },
+      "signed_s12_n256": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "by_family": {
+          "flood": 1.0,
+          "clinic": 1.0,
+          "mine": 1.0,
+          "water": 1.0
+        },
+        "recall1": 1.0,
+        "mrr": 1.0
+      },
+      "psd_s12_n256": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "by_family": {
+          "flood": 1.0,
+          "clinic": 1.0,
+          "mine": 1.0,
+          "water": 1.0
+        },
+        "recall1": 1.0,
+        "mrr": 1.0
+      }
+    },
+    "primary": {
+      "unconditioned": {
+        "n": 288,
+        "families": 12,
+        "accuracy": 0.17534722222222224,
+        "ci95": [
+          0.10416666666666667,
+          0.25351562499999974
+        ],
+        "by_family": {
+          "shelter": 0.22916666666666666,
+          "forest": 0.10416666666666667,
+          "boat": 0.125,
+          "hospital": 0.20833333333333334,
+          "bridge": 0.3333333333333333,
+          "ambulance": 0.0,
+          "farm": 0.16666666666666666,
+          "power": 0.20833333333333334,
+          "road": 0.041666666666666664,
+          "school": 0.1875,
+          "radio": 0.4791666666666667,
+          "fuel": 0.020833333333333332
+        },
+        "recall1": 0.0,
+        "mrr": 0.39178240740740744
+      },
+      "neutral": {
+        "n": 288,
+        "families": 12,
+        "accuracy": 0.234375,
+        "ci95": [
+          0.13888888888888892,
+          0.32643229166666643
+        ],
+        "by_family": {
+          "shelter": 0.4791666666666667,
+          "forest": 0.16666666666666666,
+          "boat": 0.0,
+          "hospital": 0.4166666666666667,
+          "bridge": 0.3541666666666667,
+          "ambulance": 0.0,
+          "farm": 0.22916666666666666,
+          "power": 0.3333333333333333,
+          "road": 0.041666666666666664,
+          "school": 0.4166666666666667,
+          "radio": 0.2916666666666667,
+          "fuel": 0.08333333333333333
+        },
+        "recall1": 0.003472222222222222,
+        "mrr": 0.41261574074074076
+      },
+      "short": {
+        "n": 288,
+        "families": 12,
+        "accuracy": 0.7413194444444443,
+        "ci95": [
+          0.6753472222222223,
+          0.8090277777777778
+        ],
+        "by_family": {
+          "shelter": 0.7083333333333334,
+          "forest": 0.7291666666666666,
+          "boat": 0.7083333333333334,
+          "hospital": 0.9166666666666666,
+          "bridge": 0.6458333333333334,
+          "ambulance": 0.9375,
+          "farm": 0.8541666666666666,
+          "power": 0.5625,
+          "road": 0.8333333333333334,
+          "school": 0.5625,
+          "radio": 0.7708333333333334,
+          "fuel": 0.6666666666666666
+        },
+        "recall1": 0.6458333333333334,
+        "mrr": 0.7957175925925926
+      },
+      "defined": {
+        "n": 288,
+        "families": 12,
+        "accuracy": 0.9878472222222222,
+        "ci95": [
+          0.96875,
+          1.0
+        ],
+        "by_family": {
+          "shelter": 0.9166666666666666,
+          "forest": 1.0,
+          "boat": 1.0,
+          "hospital": 1.0,
+          "bridge": 1.0,
+          "ambulance": 1.0,
+          "farm": 0.9375,
+          "power": 1.0,
+          "road": 1.0,
+          "school": 1.0,
+          "radio": 1.0,
+          "fuel": 1.0
+        },
+        "recall1": 0.9826388888888888,
+        "mrr": 0.9901620370370369
+      },
+      "paraphrase": {
+        "n": 288,
+        "families": 12,
+        "accuracy": 0.9982638888888888,
+        "ci95": [
+          0.9947916666666665,
+          1.0
+        ],
+        "by_family": {
+          "shelter": 0.9791666666666666,
+          "forest": 1.0,
+          "boat": 1.0,
+          "hospital": 1.0,
+          "bridge": 1.0,
+          "ambulance": 1.0,
+          "farm": 1.0,
+          "power": 1.0,
+          "road": 1.0,
+          "school": 1.0,
+          "radio": 1.0,
+          "fuel": 1.0
+        },
+        "recall1": 0.9965277777777778,
+        "mrr": 0.9982638888888888
+      },
+      "residual": {
+        "n": 288,
+        "families": 12,
+        "accuracy": 0.642361111111111,
+        "ci95": [
+          0.5694444444444445,
+          0.7152777777777777
+        ],
+        "by_family": {
+          "shelter": 0.5208333333333334,
+          "forest": 0.5833333333333334,
+          "boat": 0.4583333333333333,
+          "hospital": 0.6666666666666666,
+          "bridge": 0.6458333333333334,
+          "ambulance": 0.5416666666666666,
+          "farm": 0.6875,
+          "power": 0.7708333333333334,
+          "road": 0.6875,
+          "school": 0.8125,
+          "radio": 0.875,
+          "fuel": 0.4583333333333333
+        },
+        "recall1": 0.3055555555555556,
+        "mrr": 0.6493055555555556
+      },
+      "difference": {
+        "n": 288,
+        "families": 12,
+        "accuracy": 0.9930555555555555,
+        "ci95": [
+          0.9809027777777777,
+          1.0
+        ],
+        "by_family": {
+          "shelter": 0.9375,
+          "forest": 1.0,
+          "boat": 1.0,
+          "hospital": 1.0,
+          "bridge": 1.0,
+          "ambulance": 1.0,
+          "farm": 1.0,
+          "power": 1.0,
+          "road": 1.0,
+          "school": 1.0,
+          "radio": 0.9791666666666666,
+          "fuel": 1.0
+        },
+        "recall1": 0.9861111111111112,
+        "mrr": 0.9930555555555556
+      },
+      "oracle_cards": {
+        "n": 288,
+        "families": 12,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "by_family": {
+          "shelter": 1.0,
+          "forest": 1.0,
+          "boat": 1.0,
+          "hospital": 1.0,
+          "bridge": 1.0,
+          "ambulance": 1.0,
+          "farm": 1.0,
+          "power": 1.0,
+          "road": 1.0,
+          "school": 1.0,
+          "radio": 1.0,
+          "fuel": 1.0
+        },
+        "recall1": 1.0,
+        "mrr": 1.0
+      },
+      "lexical": {
+        "n": 288,
+        "families": 12,
+        "accuracy": 0.18055555555555558,
+        "ci95": [
+          0.11979166666666667,
+          0.24136284722222198
+        ],
+        "by_family": {
+          "shelter": 0.4166666666666667,
+          "forest": 0.10416666666666667,
+          "boat": 0.1875,
+          "hospital": 0.08333333333333333,
+          "bridge": 0.22916666666666666,
+          "ambulance": 0.25,
+          "farm": 0.0,
+          "power": 0.0625,
+          "road": 0.10416666666666667,
+          "school": 0.2916666666666667,
+          "radio": 0.25,
+          "fuel": 0.1875
+        },
+        "recall1": 0.0,
+        "mrr": 0.39351851851851855
+      },
+      "signed_s10_n64": {
+        "n": 288,
+        "families": 12,
+        "accuracy": 0.9791666666666666,
+        "ci95": [
+          0.9583333333333331,
+          1.0
+        ],
+        "by_family": {
+          "shelter": 0.9166666666666666,
+          "forest": 1.0,
+          "boat": 0.9166666666666666,
+          "hospital": 1.0,
+          "bridge": 1.0,
+          "ambulance": 1.0,
+          "farm": 0.9166666666666666,
+          "power": 1.0,
+          "road": 1.0,
+          "school": 1.0,
+          "radio": 1.0,
+          "fuel": 1.0
+        },
+        "recall1": 0.9652777777777778,
+        "mrr": 0.9814814814814814
+      },
+      "psd_s10_n64": {
+        "n": 288,
+        "families": 12,
+        "accuracy": 0.9930555555555555,
+        "ci95": [
+          0.9791666666666665,
+          1.0
+        ],
+        "by_family": {
+          "shelter": 0.9166666666666666,
+          "forest": 1.0,
+          "boat": 1.0,
+          "hospital": 1.0,
+          "bridge": 1.0,
+          "ambulance": 1.0,
+          "farm": 1.0,
+          "power": 1.0,
+          "road": 1.0,
+          "school": 1.0,
+          "radio": 1.0,
+          "fuel": 1.0
+        },
+        "recall1": 0.9930555555555556,
+        "mrr": 0.9953703703703702
+      },
+      "signed_s10_n256": {
+        "n": 288,
+        "families": 12,
+        "accuracy": 0.9895833333333334,
+        "ci95": [
+          0.9739583333333331,
+          1.0
+        ],
+        "by_family": {
+          "shelter": 0.9166666666666666,
+          "forest": 0.9791666666666666,
+          "boat": 1.0,
+          "hospital": 0.9791666666666666,
+          "bridge": 1.0,
+          "ambulance": 1.0,
+          "farm": 1.0,
+          "power": 1.0,
+          "road": 1.0,
+          "school": 1.0,
+          "radio": 1.0,
+          "fuel": 1.0
+        },
+        "recall1": 0.9861111111111112,
+        "mrr": 0.991898148148148
+      },
+      "psd_s10_n256": {
+        "n": 288,
+        "families": 12,
+        "accuracy": 0.9930555555555555,
+        "ci95": [
+          0.9791666666666665,
+          1.0
+        ],
+        "by_family": {
+          "shelter": 0.9166666666666666,
+          "forest": 1.0,
+          "boat": 1.0,
+          "hospital": 1.0,
+          "bridge": 1.0,
+          "ambulance": 1.0,
+          "farm": 1.0,
+          "power": 1.0,
+          "road": 1.0,
+          "school": 1.0,
+          "radio": 1.0,
+          "fuel": 1.0
+        },
+        "recall1": 0.9930555555555556,
+        "mrr": 0.9953703703703702
+      },
+      "signed_s11_n64": {
+        "n": 288,
+        "families": 12,
+        "accuracy": 0.9739583333333334,
+        "ci95": [
+          0.9496527777777778,
+          0.9930555555555555
+        ],
+        "by_family": {
+          "shelter": 0.9166666666666666,
+          "forest": 1.0,
+          "boat": 0.9583333333333334,
+          "hospital": 1.0,
+          "bridge": 1.0,
+          "ambulance": 1.0,
+          "farm": 0.9166666666666666,
+          "power": 1.0,
+          "road": 1.0,
+          "school": 1.0,
+          "radio": 1.0,
+          "fuel": 0.8958333333333334
+        },
+        "recall1": 0.9583333333333334,
+        "mrr": 0.9774305555555556
+      },
+      "psd_s11_n64": {
+        "n": 288,
+        "families": 12,
+        "accuracy": 0.9930555555555555,
+        "ci95": [
+          0.9791666666666665,
+          1.0
+        ],
+        "by_family": {
+          "shelter": 0.9166666666666666,
+          "forest": 1.0,
+          "boat": 1.0,
+          "hospital": 1.0,
+          "bridge": 1.0,
+          "ambulance": 1.0,
+          "farm": 1.0,
+          "power": 1.0,
+          "road": 1.0,
+          "school": 1.0,
+          "radio": 1.0,
+          "fuel": 1.0
+        },
+        "recall1": 0.9930555555555556,
+        "mrr": 0.9953703703703702
+      },
+      "signed_s11_n256": {
+        "n": 288,
+        "families": 12,
+        "accuracy": 0.9930555555555555,
+        "ci95": [
+          0.9791666666666665,
+          1.0
+        ],
+        "by_family": {
+          "shelter": 0.9166666666666666,
+          "forest": 1.0,
+          "boat": 1.0,
+          "hospital": 1.0,
+          "bridge": 1.0,
+          "ambulance": 1.0,
+          "farm": 1.0,
+          "power": 1.0,
+          "road": 1.0,
+          "school": 1.0,
+          "radio": 1.0,
+          "fuel": 1.0
+        },
+        "recall1": 0.9930555555555556,
+        "mrr": 0.9953703703703702
+      },
+      "psd_s11_n256": {
+        "n": 288,
+        "families": 12,
+        "accuracy": 0.9930555555555555,
+        "ci95": [
+          0.9791666666666665,
+          1.0
+        ],
+        "by_family": {
+          "shelter": 0.9166666666666666,
+          "forest": 1.0,
+          "boat": 1.0,
+          "hospital": 1.0,
+          "bridge": 1.0,
+          "ambulance": 1.0,
+          "farm": 1.0,
+          "power": 1.0,
+          "road": 1.0,
+          "school": 1.0,
+          "radio": 1.0,
+          "fuel": 1.0
+        },
+        "recall1": 0.9930555555555556,
+        "mrr": 0.9953703703703702
+      },
+      "signed_s12_n64": {
+        "n": 288,
+        "families": 12,
+        "accuracy": 0.9930555555555555,
+        "ci95": [
+          0.9791666666666665,
+          1.0
+        ],
+        "by_family": {
+          "shelter": 0.9166666666666666,
+          "forest": 1.0,
+          "boat": 1.0,
+          "hospital": 1.0,
+          "bridge": 1.0,
+          "ambulance": 1.0,
+          "farm": 1.0,
+          "power": 1.0,
+          "road": 1.0,
+          "school": 1.0,
+          "radio": 1.0,
+          "fuel": 1.0
+        },
+        "recall1": 0.9930555555555556,
+        "mrr": 0.9953703703703702
+      },
+      "psd_s12_n64": {
+        "n": 288,
+        "families": 12,
+        "accuracy": 0.9930555555555555,
+        "ci95": [
+          0.9791666666666665,
+          1.0
+        ],
+        "by_family": {
+          "shelter": 0.9166666666666666,
+          "forest": 1.0,
+          "boat": 1.0,
+          "hospital": 1.0,
+          "bridge": 1.0,
+          "ambulance": 1.0,
+          "farm": 1.0,
+          "power": 1.0,
+          "road": 1.0,
+          "school": 1.0,
+          "radio": 1.0,
+          "fuel": 1.0
+        },
+        "recall1": 0.9930555555555556,
+        "mrr": 0.9953703703703702
+      },
+      "signed_s12_n256": {
+        "n": 288,
+        "families": 12,
+        "accuracy": 0.9930555555555555,
+        "ci95": [
+          0.9791666666666665,
+          1.0
+        ],
+        "by_family": {
+          "shelter": 0.9166666666666666,
+          "forest": 1.0,
+          "boat": 1.0,
+          "hospital": 1.0,
+          "bridge": 1.0,
+          "ambulance": 1.0,
+          "farm": 1.0,
+          "power": 1.0,
+          "road": 1.0,
+          "school": 1.0,
+          "radio": 1.0,
+          "fuel": 1.0
+        },
+        "recall1": 0.9930555555555556,
+        "mrr": 0.9953703703703702
+      },
+      "psd_s12_n256": {
+        "n": 288,
+        "families": 12,
+        "accuracy": 0.9930555555555555,
+        "ci95": [
+          0.9791666666666665,
+          1.0
+        ],
+        "by_family": {
+          "shelter": 0.9166666666666666,
+          "forest": 1.0,
+          "boat": 1.0,
+          "hospital": 1.0,
+          "bridge": 1.0,
+          "ambulance": 1.0,
+          "farm": 1.0,
+          "power": 1.0,
+          "road": 1.0,
+          "school": 1.0,
+          "radio": 1.0,
+          "fuel": 1.0
+        },
+        "recall1": 0.9930555555555556,
+        "mrr": 0.9953703703703702
+      }
+    },
+    "reserve": {
+      "unconditioned": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 0.15625,
+        "ci95": [
+          0.0,
+          0.375
+        ],
+        "by_family": {
+          "island": 0.5,
+          "warehouse": 0.0,
+          "tunnel": 0.125,
+          "coldchain": 0.0
+        },
+        "recall1": 0.0,
+        "mrr": 0.3854166666666667
+      },
+      "neutral": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 0.13541666666666666,
+        "ci95": [
+          0.03125,
+          0.2708333333333333
+        ],
+        "by_family": {
+          "island": 0.3333333333333333,
+          "warehouse": 0.08333333333333333,
+          "tunnel": 0.125,
+          "coldchain": 0.0
+        },
+        "recall1": 0.0,
+        "mrr": 0.37847222222222215
+      },
+      "short": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 0.7447916666666667,
+        "ci95": [
+          0.7083333333333334,
+          0.7708333333333334
+        ],
+        "by_family": {
+          "island": 0.6875,
+          "warehouse": 0.7708333333333334,
+          "tunnel": 0.7708333333333334,
+          "coldchain": 0.75
+        },
+        "recall1": 0.6458333333333334,
+        "mrr": 0.796875
+      },
+      "defined": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "by_family": {
+          "island": 1.0,
+          "warehouse": 1.0,
+          "tunnel": 1.0,
+          "coldchain": 1.0
+        },
+        "recall1": 1.0,
+        "mrr": 1.0
+      },
+      "paraphrase": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "by_family": {
+          "island": 1.0,
+          "warehouse": 1.0,
+          "tunnel": 1.0,
+          "coldchain": 1.0
+        },
+        "recall1": 1.0,
+        "mrr": 1.0
+      },
+      "residual": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 0.6145833333333334,
+        "ci95": [
+          0.47916666666666663,
+          0.75
+        ],
+        "by_family": {
+          "island": 0.7916666666666666,
+          "warehouse": 0.7083333333333334,
+          "tunnel": 0.5,
+          "coldchain": 0.4583333333333333
+        },
+        "recall1": 0.2708333333333333,
+        "mrr": 0.6284722222222222
+      },
+      "difference": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "by_family": {
+          "island": 1.0,
+          "warehouse": 1.0,
+          "tunnel": 1.0,
+          "coldchain": 1.0
+        },
+        "recall1": 1.0,
+        "mrr": 1.0
+      },
+      "oracle_cards": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "by_family": {
+          "island": 1.0,
+          "warehouse": 1.0,
+          "tunnel": 1.0,
+          "coldchain": 1.0
+        },
+        "recall1": 1.0,
+        "mrr": 1.0
+      },
+      "lexical": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 0.13541666666666666,
+        "ci95": [
+          0.041666666666666664,
+          0.22916666666666666
+        ],
+        "by_family": {
+          "island": 0.22916666666666666,
+          "warehouse": 0.22916666666666666,
+          "tunnel": 0.08333333333333333,
+          "coldchain": 0.0
+        },
+        "recall1": 0.0,
+        "mrr": 0.37847222222222215
+      },
+      "signed_s10_n64": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 0.96875,
+        "ci95": [
+          0.90625,
+          1.0
+        ],
+        "by_family": {
+          "island": 1.0,
+          "warehouse": 1.0,
+          "tunnel": 1.0,
+          "coldchain": 0.875
+        },
+        "recall1": 0.9583333333333334,
+        "mrr": 0.9756944444444445
+      },
+      "psd_s10_n64": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "by_family": {
+          "island": 1.0,
+          "warehouse": 1.0,
+          "tunnel": 1.0,
+          "coldchain": 1.0
+        },
+        "recall1": 1.0,
+        "mrr": 1.0
+      },
+      "signed_s10_n256": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "by_family": {
+          "island": 1.0,
+          "warehouse": 1.0,
+          "tunnel": 1.0,
+          "coldchain": 1.0
+        },
+        "recall1": 1.0,
+        "mrr": 1.0
+      },
+      "psd_s10_n256": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "by_family": {
+          "island": 1.0,
+          "warehouse": 1.0,
+          "tunnel": 1.0,
+          "coldchain": 1.0
+        },
+        "recall1": 1.0,
+        "mrr": 1.0
+      },
+      "signed_s11_n64": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 0.9739583333333334,
+        "ci95": [
+          0.9218750000000001,
+          1.0
+        ],
+        "by_family": {
+          "island": 1.0,
+          "warehouse": 1.0,
+          "tunnel": 1.0,
+          "coldchain": 0.8958333333333334
+        },
+        "recall1": 0.9583333333333334,
+        "mrr": 0.9774305555555557
+      },
+      "psd_s11_n64": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "by_family": {
+          "island": 1.0,
+          "warehouse": 1.0,
+          "tunnel": 1.0,
+          "coldchain": 1.0
+        },
+        "recall1": 1.0,
+        "mrr": 1.0
+      },
+      "signed_s11_n256": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "by_family": {
+          "island": 1.0,
+          "warehouse": 1.0,
+          "tunnel": 1.0,
+          "coldchain": 1.0
+        },
+        "recall1": 1.0,
+        "mrr": 1.0
+      },
+      "psd_s11_n256": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "by_family": {
+          "island": 1.0,
+          "warehouse": 1.0,
+          "tunnel": 1.0,
+          "coldchain": 1.0
+        },
+        "recall1": 1.0,
+        "mrr": 1.0
+      },
+      "signed_s12_n64": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "by_family": {
+          "island": 1.0,
+          "warehouse": 1.0,
+          "tunnel": 1.0,
+          "coldchain": 1.0
+        },
+        "recall1": 1.0,
+        "mrr": 1.0
+      },
+      "psd_s12_n64": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "by_family": {
+          "island": 1.0,
+          "warehouse": 1.0,
+          "tunnel": 1.0,
+          "coldchain": 1.0
+        },
+        "recall1": 1.0,
+        "mrr": 1.0
+      },
+      "signed_s12_n256": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "by_family": {
+          "island": 1.0,
+          "warehouse": 1.0,
+          "tunnel": 1.0,
+          "coldchain": 1.0
+        },
+        "recall1": 1.0,
+        "mrr": 1.0
+      },
+      "psd_s12_n256": {
+        "n": 96,
+        "families": 4,
+        "accuracy": 1.0,
+        "ci95": [
+          1.0,
+          1.0
+        ],
+        "by_family": {
+          "island": 1.0,
+          "warehouse": 1.0,
+          "tunnel": 1.0,
+          "coldchain": 1.0
+        },
+        "recall1": 1.0,
+        "mrr": 1.0
+      }
+    }
+  },
+  "paired_effects": {
+    "primary/paraphrase minus defined": {
+      "mean": 0.010416666666666666,
+      "ci95": [
+        0.0,
+        0.026041666666666668
+      ],
+      "families": 12
+    },
+    "primary/defined minus unconditioned": {
+      "mean": 0.8125,
+      "ci95": [
+        0.7291666666666666,
+        0.8871527777777778
+      ],
+      "families": 12
+    },
+    "primary/defined minus neutral": {
+      "mean": 0.7534722222222222,
+      "ci95": [
+        0.6527777777777778,
+        0.8541666666666666
+      ],
+      "families": 12
+    },
+    "primary/residual minus defined": {
+      "mean": -0.3454861111111111,
+      "ci95": [
+        -0.41666666666666674,
+        -0.2759982638888891
+      ],
+      "families": 12
+    },
+    "primary/oracle_cards minus defined": {
+      "mean": 0.012152777777777781,
+      "ci95": [
+        0.0,
+        0.03125000000000001
+      ],
+      "families": 12
+    },
+    "primary/psd_s10_n64 minus signed_s10_n64": {
+      "mean": 0.013888888888888895,
+      "ci95": [
+        0.0,
+        0.03472222222222224
+      ],
+      "families": 12
+    },
+    "primary/psd_s10_n256 minus signed_s10_n256": {
+      "mean": 0.0034722222222222285,
+      "ci95": [
+        0.0,
+        0.008680555555555572
+      ],
+      "families": 12
+    },
+    "primary/psd_s11_n64 minus signed_s11_n64": {
+      "mean": 0.01909722222222222,
+      "ci95": [
+        0.003472222222222219,
+        0.04166666666666666
+      ],
+      "families": 12
+    },
+    "primary/psd_s11_n256 minus signed_s11_n256": {
+      "mean": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "families": 12
+    },
+    "primary/psd_s12_n64 minus signed_s12_n64": {
+      "mean": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "families": 12
+    },
+    "primary/psd_s12_n256 minus signed_s12_n256": {
+      "mean": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "families": 12
+    },
+    "reserve/paraphrase minus defined": {
+      "mean": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "families": 4
+    },
+    "reserve/defined minus unconditioned": {
+      "mean": 0.84375,
+      "ci95": [
+        0.625,
+        1.0
+      ],
+      "families": 4
+    },
+    "reserve/defined minus neutral": {
+      "mean": 0.8645833333333334,
+      "ci95": [
+        0.7291666666666666,
+        0.96875
+      ],
+      "families": 4
+    },
+    "reserve/residual minus defined": {
+      "mean": -0.3854166666666667,
+      "ci95": [
+        -0.5208333333333334,
+        -0.25
+      ],
+      "families": 4
+    },
+    "reserve/oracle_cards minus defined": {
+      "mean": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "families": 4
+    },
+    "reserve/psd_s10_n64 minus signed_s10_n64": {
+      "mean": 0.03125,
+      "ci95": [
+        0.0,
+        0.09375
+      ],
+      "families": 4
+    },
+    "reserve/psd_s10_n256 minus signed_s10_n256": {
+      "mean": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "families": 4
+    },
+    "reserve/psd_s11_n64 minus signed_s11_n64": {
+      "mean": 0.026041666666666657,
+      "ci95": [
+        0.0,
+        0.07812499999999997
+      ],
+      "families": 4
+    },
+    "reserve/psd_s11_n256 minus signed_s11_n256": {
+      "mean": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "families": 4
+    },
+    "reserve/psd_s12_n64 minus signed_s12_n64": {
+      "mean": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "families": 4
+    },
+    "reserve/psd_s12_n256 minus signed_s12_n256": {
+      "mean": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "families": 4
+    }
+  },
+  "reference": {
+    "restored_Qwen_cosine": {
+      "n": 128,
+      "spearman": 0.8327308223139328,
+      "mse": 0.04565456243238124,
+      "source": "cleaned JEP v1.1 audited labels; exploratory reference evaluation"
+    },
+    "signed_s10_n64": {
+      "n": 128,
+      "spearman": 0.7295933232669566,
+      "mse": 0.07296552429532496,
+      "source": "cleaned JEP v1.1 audited labels; exploratory reference evaluation"
+    },
+    "psd_s10_n64": {
+      "n": 128,
+      "spearman": 0.7585659109797092,
+      "mse": 0.06295017396766375,
+      "source": "cleaned JEP v1.1 audited labels; exploratory reference evaluation"
+    },
+    "signed_s10_n256": {
+      "n": 128,
+      "spearman": 0.7833929773981092,
+      "mse": 0.058574892382715675,
+      "source": "cleaned JEP v1.1 audited labels; exploratory reference evaluation"
+    },
+    "psd_s10_n256": {
+      "n": 128,
+      "spearman": 0.7874832250752036,
+      "mse": 0.057358565178494754,
+      "source": "cleaned JEP v1.1 audited labels; exploratory reference evaluation"
+    },
+    "signed_s11_n64": {
+      "n": 128,
+      "spearman": 0.6927227497993338,
+      "mse": 0.08404825811622929,
+      "source": "cleaned JEP v1.1 audited labels; exploratory reference evaluation"
+    },
+    "psd_s11_n64": {
+      "n": 128,
+      "spearman": 0.7444895631179965,
+      "mse": 0.0696450449370187,
+      "source": "cleaned JEP v1.1 audited labels; exploratory reference evaluation"
+    },
+    "signed_s11_n256": {
+      "n": 128,
+      "spearman": 0.7793303665296437,
+      "mse": 0.06252412607533492,
+      "source": "cleaned JEP v1.1 audited labels; exploratory reference evaluation"
+    },
+    "psd_s11_n256": {
+      "n": 128,
+      "spearman": 0.7855947098188876,
+      "mse": 0.059571078982221914,
+      "source": "cleaned JEP v1.1 audited labels; exploratory reference evaluation"
+    },
+    "signed_s12_n64": {
+      "n": 128,
+      "spearman": 0.7328084053374655,
+      "mse": 0.0719223402419659,
+      "source": "cleaned JEP v1.1 audited labels; exploratory reference evaluation"
+    },
+    "psd_s12_n64": {
+      "n": 128,
+      "spearman": 0.7417105284725233,
+      "mse": 0.06643735744190625,
+      "source": "cleaned JEP v1.1 audited labels; exploratory reference evaluation"
+    },
+    "signed_s12_n256": {
+      "n": 128,
+      "spearman": 0.7839979164314332,
+      "mse": 0.05973909761128657,
+      "source": "cleaned JEP v1.1 audited labels; exploratory reference evaluation"
+    },
+    "psd_s12_n256": {
+      "n": 128,
+      "spearman": 0.7844063270478399,
+      "mse": 0.05831130183447911,
+      "source": "cleaned JEP v1.1 audited labels; exploratory reference evaluation"
+    }
+  },
+  "geometry_diagnostics": {
+    "unconditioned/welfare": {
+      "min_eigenvalue": 0.00039764674147590995,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999997019767761,
+      "max_diagonal": 1.000000238418579,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "neutral/welfare": {
+      "min_eigenvalue": 0.00024939177092164755,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999997615814209,
+      "max_diagonal": 1.000000238418579,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "short/welfare": {
+      "min_eigenvalue": 0.0020145983435213566,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999996423721313,
+      "max_diagonal": 1.0000003576278687,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "defined/welfare": {
+      "min_eigenvalue": 0.0006111068651080132,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999997615814209,
+      "max_diagonal": 1.0000003576278687,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "paraphrase/welfare": {
+      "min_eigenvalue": 0.0009447336778976023,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999997019767761,
+      "max_diagonal": 1.000000238418579,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "residual/welfare": {
+      "min_eigenvalue": 0.0007234279764816165,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999997615814209,
+      "max_diagonal": 1.000000238418579,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "difference/welfare": {
+      "min_eigenvalue": -8.301003456115723,
+      "negative_eigenvalues": 35,
+      "min_diagonal": -4.172325134277344e-07,
+      "max_diagonal": 4.172325134277344e-07,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "oracle_cards/welfare": {
+      "min_eigenvalue": -1.551163474197096e-14,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999998807907104,
+      "max_diagonal": 1.000000238418579,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "lexical/welfare": {
+      "min_eigenvalue": -1.7352391841191847e-15,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999999999999976,
+      "max_diagonal": 1.0000000000000009,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "signed_s10_n64/welfare": {
+      "min_eigenvalue": -0.10660429443065414,
+      "negative_eigenvalues": 13,
+      "min_diagonal": 0.27890244217961013,
+      "max_diagonal": 0.8258960887739353,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "psd_s10_n64/welfare": {
+      "min_eigenvalue": -4.255368113924236e-15,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.4517755141228767,
+      "max_diagonal": 0.8166225241373368,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "signed_s10_n256/welfare": {
+      "min_eigenvalue": -0.6477168236761883,
+      "negative_eigenvalues": 10,
+      "min_diagonal": 0.1140988972779287,
+      "max_diagonal": 0.8622884596873696,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "psd_s10_n256/welfare": {
+      "min_eigenvalue": -3.512928401704579e-15,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.47671586157239454,
+      "max_diagonal": 0.8552504903662879,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "signed_s11_n64/welfare": {
+      "min_eigenvalue": -0.13217453191287518,
+      "negative_eigenvalues": 12,
+      "min_diagonal": 0.3256473427964226,
+      "max_diagonal": 0.7481980876469203,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "psd_s11_n64/welfare": {
+      "min_eigenvalue": -4.008282117360581e-15,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.6882934596689649,
+      "max_diagonal": 0.8627452320161162,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "signed_s11_n256/welfare": {
+      "min_eigenvalue": -0.046217170118369885,
+      "negative_eigenvalues": 8,
+      "min_diagonal": 0.6669317342574829,
+      "max_diagonal": 0.9123637423796216,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "psd_s11_n256/welfare": {
+      "min_eigenvalue": -4.7762400475924246e-15,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.7484758432197197,
+      "max_diagonal": 0.9136026470351305,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "signed_s12_n64/welfare": {
+      "min_eigenvalue": -0.08571723647582412,
+      "negative_eigenvalues": 12,
+      "min_diagonal": 0.5779332478405893,
+      "max_diagonal": 0.9922894990830282,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "psd_s12_n64/welfare": {
+      "min_eigenvalue": -6.588967474882331e-15,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.7068729507189169,
+      "max_diagonal": 0.9800442720961552,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "signed_s12_n256/welfare": {
+      "min_eigenvalue": -0.010305589449495528,
+      "negative_eigenvalues": 10,
+      "min_diagonal": 0.6527482949994362,
+      "max_diagonal": 0.9490280526704936,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "psd_s12_n256/welfare": {
+      "min_eigenvalue": -3.1708684158608935e-15,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.6596770432041258,
+      "max_diagonal": 0.9240022881599494,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "unconditioned/autonomy": {
+      "min_eigenvalue": 0.00039764674147590995,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999997019767761,
+      "max_diagonal": 1.000000238418579,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "neutral/autonomy": {
+      "min_eigenvalue": 0.00024939177092164755,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999997615814209,
+      "max_diagonal": 1.000000238418579,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "short/autonomy": {
+      "min_eigenvalue": 0.00023035479534883052,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999997615814209,
+      "max_diagonal": 1.0000003576278687,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "defined/autonomy": {
+      "min_eigenvalue": 0.00015387126768473536,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999996423721313,
+      "max_diagonal": 1.0000005960464478,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "paraphrase/autonomy": {
+      "min_eigenvalue": 0.00016601121751591563,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999997615814209,
+      "max_diagonal": 1.0000003576278687,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "residual/autonomy": {
+      "min_eigenvalue": 0.0003840279532596469,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999997615814209,
+      "max_diagonal": 1.000000238418579,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "difference/autonomy": {
+      "min_eigenvalue": -8.459117889404297,
+      "negative_eigenvalues": 57,
+      "min_diagonal": -3.5762786865234375e-07,
+      "max_diagonal": 6.556510925292969e-07,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "oracle_cards/autonomy": {
+      "min_eigenvalue": -1.5055705705584177e-14,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999997615814209,
+      "max_diagonal": 1.000000238418579,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "lexical/autonomy": {
+      "min_eigenvalue": -1.7352391841191847e-15,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999999999999976,
+      "max_diagonal": 1.0000000000000009,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "signed_s10_n64/autonomy": {
+      "min_eigenvalue": -0.02774866314222196,
+      "negative_eigenvalues": 13,
+      "min_diagonal": 0.6520733138249739,
+      "max_diagonal": 0.9727097676973384,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "psd_s10_n64/autonomy": {
+      "min_eigenvalue": -4.841267554051526e-15,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.7902810571445387,
+      "max_diagonal": 1.0611033822990852,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "signed_s10_n256/autonomy": {
+      "min_eigenvalue": -0.13422813142310694,
+      "negative_eigenvalues": 10,
+      "min_diagonal": 0.6113526295943611,
+      "max_diagonal": 1.1802679679197075,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "psd_s10_n256/autonomy": {
+      "min_eigenvalue": -4.239103087940858e-15,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.6503100453285662,
+      "max_diagonal": 1.0929088727106044,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "signed_s11_n64/autonomy": {
+      "min_eigenvalue": -0.11596690033470795,
+      "negative_eigenvalues": 12,
+      "min_diagonal": 0.5052310978676543,
+      "max_diagonal": 0.9264234036583396,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "psd_s11_n64/autonomy": {
+      "min_eigenvalue": -4.915794809121276e-15,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.6890549098952843,
+      "max_diagonal": 1.003692409469511,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "signed_s11_n256/autonomy": {
+      "min_eigenvalue": -0.01764657606813897,
+      "negative_eigenvalues": 7,
+      "min_diagonal": 0.6669644747944878,
+      "max_diagonal": 0.9591262308785614,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "psd_s11_n256/autonomy": {
+      "min_eigenvalue": -2.9185383653936974e-15,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.7131782726799157,
+      "max_diagonal": 0.9580052686971234,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "signed_s12_n64/autonomy": {
+      "min_eigenvalue": -0.06910675017824616,
+      "negative_eigenvalues": 12,
+      "min_diagonal": 0.5156761453105407,
+      "max_diagonal": 0.9703853262075995,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "psd_s12_n64/autonomy": {
+      "min_eigenvalue": -4.0476925847996566e-15,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.6272494424621678,
+      "max_diagonal": 0.9815710927096736,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "signed_s12_n256/autonomy": {
+      "min_eigenvalue": -0.022339521967691556,
+      "negative_eigenvalues": 10,
+      "min_diagonal": 0.6336441578990157,
+      "max_diagonal": 0.9453692013498513,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "psd_s12_n256/autonomy": {
+      "min_eigenvalue": -5.272175435387446e-15,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.7459131470096273,
+      "max_diagonal": 0.9731244674394304,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "unconditioned/fairness": {
+      "min_eigenvalue": 0.00039764674147590995,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999997019767761,
+      "max_diagonal": 1.000000238418579,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "neutral/fairness": {
+      "min_eigenvalue": 0.00024939177092164755,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999997615814209,
+      "max_diagonal": 1.000000238418579,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "short/fairness": {
+      "min_eigenvalue": 0.0003962849441450089,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999996423721313,
+      "max_diagonal": 1.000000238418579,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "defined/fairness": {
+      "min_eigenvalue": 0.00021375819051172584,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999996423721313,
+      "max_diagonal": 1.000000238418579,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "paraphrase/fairness": {
+      "min_eigenvalue": 0.00015739821537863463,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999997019767761,
+      "max_diagonal": 1.000000238418579,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "residual/fairness": {
+      "min_eigenvalue": 0.00043873823597095907,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999996423721313,
+      "max_diagonal": 1.000000238418579,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "difference/fairness": {
+      "min_eigenvalue": -8.084794998168945,
+      "negative_eigenvalues": 46,
+      "min_diagonal": -4.76837158203125e-07,
+      "max_diagonal": 3.5762786865234375e-07,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "oracle_cards/fairness": {
+      "min_eigenvalue": -1.2219149066324767e-14,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999997615814209,
+      "max_diagonal": 1.0000003576278687,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "lexical/fairness": {
+      "min_eigenvalue": -1.7352391841191847e-15,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.9999999999999976,
+      "max_diagonal": 1.0000000000000009,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "signed_s10_n64/fairness": {
+      "min_eigenvalue": -0.07471178899748308,
+      "negative_eigenvalues": 13,
+      "min_diagonal": 0.6063775876413886,
+      "max_diagonal": 0.9373409292912572,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "psd_s10_n64/fairness": {
+      "min_eigenvalue": -5.112674225599164e-15,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.7352548689050716,
+      "max_diagonal": 0.9304054462361782,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "signed_s10_n256/fairness": {
+      "min_eigenvalue": -0.3189823527692988,
+      "negative_eigenvalues": 10,
+      "min_diagonal": 0.48216048455454474,
+      "max_diagonal": 0.8486565321804529,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "psd_s10_n256/fairness": {
+      "min_eigenvalue": -5.59036668807399e-15,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.6736153842580194,
+      "max_diagonal": 1.0020737832259865,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "signed_s11_n64/fairness": {
+      "min_eigenvalue": -0.06002072993874241,
+      "negative_eigenvalues": 12,
+      "min_diagonal": 0.545859531086031,
+      "max_diagonal": 0.9179615246190496,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "psd_s11_n64/fairness": {
+      "min_eigenvalue": -4.844959502988939e-15,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.7298460045691993,
+      "max_diagonal": 0.9755475409746083,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "signed_s11_n256/fairness": {
+      "min_eigenvalue": -0.010178951412086159,
+      "negative_eigenvalues": 7,
+      "min_diagonal": 0.550787403236585,
+      "max_diagonal": 0.8816319491113452,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "psd_s11_n256/fairness": {
+      "min_eigenvalue": -6.052759652226991e-15,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.6722718990096294,
+      "max_diagonal": 0.8814700807307067,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "signed_s12_n64/fairness": {
+      "min_eigenvalue": -0.07078088116429197,
+      "negative_eigenvalues": 12,
+      "min_diagonal": 0.6973099798164741,
+      "max_diagonal": 0.9948715885376358,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "psd_s12_n64/fairness": {
+      "min_eigenvalue": -5.9997196853839525e-15,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.7646493235844583,
+      "max_diagonal": 1.0200322771412123,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "signed_s12_n256/fairness": {
+      "min_eigenvalue": -0.009460921103201033,
+      "negative_eigenvalues": 10,
+      "min_diagonal": 0.7152224173431887,
+      "max_diagonal": 1.1020347093732754,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    },
+    "psd_s12_n256/fairness": {
+      "min_eigenvalue": -5.46454779314512e-15,
+      "negative_eigenvalues": 0,
+      "min_diagonal": 0.7530853270793864,
+      "max_diagonal": 1.0746961361410141,
+      "note": "Raw Gram/kernel. No unit-diagonal overwrite or projection used for prediction."
+    }
+  },
+  "extensions": {
+    "0": {
+      "invariance_mean_cosine": 1.0,
+      "invariance_min_cosine": 1.0,
+      "repair_vs_sanction_direction_margin": 0.0,
+      "typed": [
+        {
+          "theory": "Utilitarianism",
+          "family": "land",
+          "repair_alignment": 0.0,
+          "sanction_alignment": 0.0,
+          "margin": 0.0
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "home",
+          "repair_alignment": 0.0,
+          "sanction_alignment": 0.0,
+          "margin": 0.0
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "health",
+          "repair_alignment": 0.0,
+          "sanction_alignment": 0.0,
+          "margin": 0.0
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "school",
+          "repair_alignment": 0.0,
+          "sanction_alignment": 0.0,
+          "margin": 0.0
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "water",
+          "repair_alignment": 0.0,
+          "sanction_alignment": 0.0,
+          "margin": 0.0
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "truth",
+          "repair_alignment": 0.0,
+          "sanction_alignment": 0.0,
+          "margin": 0.0
+        },
+        {
+          "theory": "Deontology",
+          "family": "land",
+          "repair_alignment": 0.0,
+          "sanction_alignment": 0.0,
+          "margin": 0.0
+        },
+        {
+          "theory": "Deontology",
+          "family": "home",
+          "repair_alignment": 0.0,
+          "sanction_alignment": 0.0,
+          "margin": 0.0
+        },
+        {
+          "theory": "Deontology",
+          "family": "health",
+          "repair_alignment": 0.0,
+          "sanction_alignment": 0.0,
+          "margin": 0.0
+        },
+        {
+          "theory": "Deontology",
+          "family": "school",
+          "repair_alignment": 0.0,
+          "sanction_alignment": 0.0,
+          "margin": 0.0
+        },
+        {
+          "theory": "Deontology",
+          "family": "water",
+          "repair_alignment": 0.0,
+          "sanction_alignment": 0.0,
+          "margin": 0.0
+        },
+        {
+          "theory": "Deontology",
+          "family": "truth",
+          "repair_alignment": 0.0,
+          "sanction_alignment": 0.0,
+          "margin": 0.0
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "land",
+          "repair_alignment": 0.0,
+          "sanction_alignment": 0.0,
+          "margin": 0.0
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "home",
+          "repair_alignment": 0.0,
+          "sanction_alignment": 0.0,
+          "margin": 0.0
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "health",
+          "repair_alignment": 0.0,
+          "sanction_alignment": 0.0,
+          "margin": 0.0
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "school",
+          "repair_alignment": 0.0,
+          "sanction_alignment": 0.0,
+          "margin": 0.0
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "water",
+          "repair_alignment": 0.0,
+          "sanction_alignment": 0.0,
+          "margin": 0.0
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "truth",
+          "repair_alignment": 0.0,
+          "sanction_alignment": 0.0,
+          "margin": 0.0
+        }
+      ],
+      "layer0_is_identical_EOD_null": true
+    },
+    "9": {
+      "invariance_mean_cosine": 0.9920714613464143,
+      "invariance_min_cosine": 0.98908531665802,
+      "repair_vs_sanction_direction_margin": 0.10799583047628403,
+      "typed": [
+        {
+          "theory": "Utilitarianism",
+          "family": "land",
+          "repair_alignment": 0.5954276919364929,
+          "sanction_alignment": 0.3573691248893738,
+          "margin": 0.23805856704711914
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "home",
+          "repair_alignment": 0.5523002743721008,
+          "sanction_alignment": 0.3993038535118103,
+          "margin": 0.15299642086029053
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "health",
+          "repair_alignment": 0.496079683303833,
+          "sanction_alignment": 0.32837456464767456,
+          "margin": 0.16770511865615845
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "school",
+          "repair_alignment": 0.43906429409980774,
+          "sanction_alignment": 0.3192816972732544,
+          "margin": 0.11978259682655334
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "water",
+          "repair_alignment": 0.3057013154029846,
+          "sanction_alignment": 0.13931803405284882,
+          "margin": 0.1663832813501358
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "truth",
+          "repair_alignment": 0.3436812162399292,
+          "sanction_alignment": 0.3184744715690613,
+          "margin": 0.02520674467086792
+        },
+        {
+          "theory": "Deontology",
+          "family": "land",
+          "repair_alignment": 0.6044369339942932,
+          "sanction_alignment": 0.4121871590614319,
+          "margin": 0.19224977493286133
+        },
+        {
+          "theory": "Deontology",
+          "family": "home",
+          "repair_alignment": 0.5844494104385376,
+          "sanction_alignment": 0.47321635484695435,
+          "margin": 0.11123305559158325
+        },
+        {
+          "theory": "Deontology",
+          "family": "health",
+          "repair_alignment": 0.5049776434898376,
+          "sanction_alignment": 0.3920828104019165,
+          "margin": 0.11289483308792114
+        },
+        {
+          "theory": "Deontology",
+          "family": "school",
+          "repair_alignment": 0.45241400599479675,
+          "sanction_alignment": 0.3496359586715698,
+          "margin": 0.10277804732322693
+        },
+        {
+          "theory": "Deontology",
+          "family": "water",
+          "repair_alignment": 0.2166774570941925,
+          "sanction_alignment": 0.17823222279548645,
+          "margin": 0.038445234298706055
+        },
+        {
+          "theory": "Deontology",
+          "family": "truth",
+          "repair_alignment": 0.3652469217777252,
+          "sanction_alignment": 0.3590163290500641,
+          "margin": 0.006230592727661133
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "land",
+          "repair_alignment": 0.5671326518058777,
+          "sanction_alignment": 0.3488423824310303,
+          "margin": 0.2182902693748474
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "home",
+          "repair_alignment": 0.5318153500556946,
+          "sanction_alignment": 0.39435893297195435,
+          "margin": 0.13745641708374023
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "health",
+          "repair_alignment": 0.5096399784088135,
+          "sanction_alignment": 0.36930835247039795,
+          "margin": 0.14033162593841553
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "school",
+          "repair_alignment": 0.26528313755989075,
+          "sanction_alignment": 0.2746846079826355,
+          "margin": -0.009401470422744751
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "water",
+          "repair_alignment": 0.1960446834564209,
+          "sanction_alignment": 0.1441677212715149,
+          "margin": 0.051876962184906006
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "truth",
+          "repair_alignment": 0.2919929027557373,
+          "sanction_alignment": 0.32058602571487427,
+          "margin": -0.028593122959136963
+        }
+      ],
+      "layer0_is_identical_EOD_null": false
+    },
+    "18": {
+      "invariance_mean_cosine": 0.9892007774776883,
+      "invariance_min_cosine": 0.9832905530929565,
+      "repair_vs_sanction_direction_margin": 0.25438954143060577,
+      "typed": [
+        {
+          "theory": "Utilitarianism",
+          "family": "land",
+          "repair_alignment": 0.6122275590896606,
+          "sanction_alignment": 0.13839751482009888,
+          "margin": 0.47383004426956177
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "home",
+          "repair_alignment": 0.4933375120162964,
+          "sanction_alignment": 0.3200450539588928,
+          "margin": 0.17329245805740356
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "health",
+          "repair_alignment": 0.5733979344367981,
+          "sanction_alignment": 0.2825348377227783,
+          "margin": 0.2908630967140198
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "school",
+          "repair_alignment": 0.5073413252830505,
+          "sanction_alignment": 0.3679598569869995,
+          "margin": 0.13938146829605103
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "water",
+          "repair_alignment": 0.42392927408218384,
+          "sanction_alignment": 0.18132226169109344,
+          "margin": 0.2426070123910904
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "truth",
+          "repair_alignment": 0.498173326253891,
+          "sanction_alignment": 0.27311915159225464,
+          "margin": 0.22505417466163635
+        },
+        {
+          "theory": "Deontology",
+          "family": "land",
+          "repair_alignment": 0.657415509223938,
+          "sanction_alignment": 0.2323705554008484,
+          "margin": 0.4250449538230896
+        },
+        {
+          "theory": "Deontology",
+          "family": "home",
+          "repair_alignment": 0.5465830564498901,
+          "sanction_alignment": 0.400900274515152,
+          "margin": 0.14568278193473816
+        },
+        {
+          "theory": "Deontology",
+          "family": "health",
+          "repair_alignment": 0.509398341178894,
+          "sanction_alignment": 0.29967087507247925,
+          "margin": 0.2097274661064148
+        },
+        {
+          "theory": "Deontology",
+          "family": "school",
+          "repair_alignment": 0.5494956970214844,
+          "sanction_alignment": 0.4090695381164551,
+          "margin": 0.1404261589050293
+        },
+        {
+          "theory": "Deontology",
+          "family": "water",
+          "repair_alignment": 0.3901357650756836,
+          "sanction_alignment": 0.13101646304130554,
+          "margin": 0.25911930203437805
+        },
+        {
+          "theory": "Deontology",
+          "family": "truth",
+          "repair_alignment": 0.4309595227241516,
+          "sanction_alignment": 0.23940816521644592,
+          "margin": 0.1915513575077057
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "land",
+          "repair_alignment": 0.6510735750198364,
+          "sanction_alignment": 0.08693238347768784,
+          "margin": 0.5641411915421486
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "home",
+          "repair_alignment": 0.5512452721595764,
+          "sanction_alignment": 0.35273778438568115,
+          "margin": 0.19850748777389526
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "health",
+          "repair_alignment": 0.515285849571228,
+          "sanction_alignment": 0.30374473333358765,
+          "margin": 0.21154111623764038
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "school",
+          "repair_alignment": 0.37722495198249817,
+          "sanction_alignment": 0.25552722811698914,
+          "margin": 0.12169772386550903
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "water",
+          "repair_alignment": 0.40660420060157776,
+          "sanction_alignment": 0.13111642003059387,
+          "margin": 0.2754877805709839
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "truth",
+          "repair_alignment": 0.5132967233657837,
+          "sanction_alignment": 0.22224055230617523,
+          "margin": 0.29105617105960846
+        }
+      ],
+      "layer0_is_identical_EOD_null": false
+    },
+    "27": {
+      "invariance_mean_cosine": 0.9963557538059022,
+      "invariance_min_cosine": 0.9936515092849731,
+      "repair_vs_sanction_direction_margin": 0.5494559839264386,
+      "typed": [
+        {
+          "theory": "Utilitarianism",
+          "family": "land",
+          "repair_alignment": 0.8476811647415161,
+          "sanction_alignment": 0.3433419466018677,
+          "margin": 0.5043392181396484
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "home",
+          "repair_alignment": 0.916874885559082,
+          "sanction_alignment": 0.3404662609100342,
+          "margin": 0.5764086246490479
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "health",
+          "repair_alignment": 0.726706862449646,
+          "sanction_alignment": 0.19691577553749084,
+          "margin": 0.5297910869121552
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "school",
+          "repair_alignment": 0.9201920032501221,
+          "sanction_alignment": 0.335705429315567,
+          "margin": 0.584486573934555
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "water",
+          "repair_alignment": 0.8964710831642151,
+          "sanction_alignment": 0.21187980473041534,
+          "margin": 0.6845912784337997
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "truth",
+          "repair_alignment": 0.6839742064476013,
+          "sanction_alignment": 0.1397400051355362,
+          "margin": 0.5442342013120651
+        },
+        {
+          "theory": "Deontology",
+          "family": "land",
+          "repair_alignment": 0.8621504306793213,
+          "sanction_alignment": 0.4698057770729065,
+          "margin": 0.3923446536064148
+        },
+        {
+          "theory": "Deontology",
+          "family": "home",
+          "repair_alignment": 0.9032034873962402,
+          "sanction_alignment": 0.4212203025817871,
+          "margin": 0.4819831848144531
+        },
+        {
+          "theory": "Deontology",
+          "family": "health",
+          "repair_alignment": 0.7510254383087158,
+          "sanction_alignment": 0.23271659016609192,
+          "margin": 0.5183088481426239
+        },
+        {
+          "theory": "Deontology",
+          "family": "school",
+          "repair_alignment": 0.9184218049049377,
+          "sanction_alignment": 0.3064139485359192,
+          "margin": 0.6120078563690186
+        },
+        {
+          "theory": "Deontology",
+          "family": "water",
+          "repair_alignment": 0.8875934481620789,
+          "sanction_alignment": 0.30797910690307617,
+          "margin": 0.5796143412590027
+        },
+        {
+          "theory": "Deontology",
+          "family": "truth",
+          "repair_alignment": 0.6269005537033081,
+          "sanction_alignment": -0.00277582835406065,
+          "margin": 0.6296763820573688
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "land",
+          "repair_alignment": 0.894696056842804,
+          "sanction_alignment": 0.46187442541122437,
+          "margin": 0.4328216314315796
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "home",
+          "repair_alignment": 0.9262315630912781,
+          "sanction_alignment": 0.3762326240539551,
+          "margin": 0.549998939037323
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "health",
+          "repair_alignment": 0.7742750644683838,
+          "sanction_alignment": 0.37308037281036377,
+          "margin": 0.40119469165802
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "school",
+          "repair_alignment": 0.9211148023605347,
+          "sanction_alignment": 0.30742958188056946,
+          "margin": 0.6136852204799652
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "water",
+          "repair_alignment": 0.9083632230758667,
+          "sanction_alignment": 0.3285592794418335,
+          "margin": 0.5798039436340332
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "truth",
+          "repair_alignment": 0.7190383672714233,
+          "sanction_alignment": 0.044121332466602325,
+          "margin": 0.674917034804821
+        }
+      ],
+      "layer0_is_identical_EOD_null": false
+    },
+    "36": {
+      "invariance_mean_cosine": 0.992462631728914,
+      "invariance_min_cosine": 0.9843336343765259,
+      "repair_vs_sanction_direction_margin": 0.6480671370195018,
+      "typed": [
+        {
+          "theory": "Utilitarianism",
+          "family": "land",
+          "repair_alignment": 0.9281635284423828,
+          "sanction_alignment": 0.42044591903686523,
+          "margin": 0.5077176094055176
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "home",
+          "repair_alignment": 0.9715603590011597,
+          "sanction_alignment": 0.3906019926071167,
+          "margin": 0.580958366394043
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "health",
+          "repair_alignment": 0.9248327016830444,
+          "sanction_alignment": 0.2545342445373535,
+          "margin": 0.6702984571456909
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "school",
+          "repair_alignment": 0.9756181240081787,
+          "sanction_alignment": 0.3294917345046997,
+          "margin": 0.646126389503479
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "water",
+          "repair_alignment": 0.9744404554367065,
+          "sanction_alignment": 0.19242419302463531,
+          "margin": 0.7820162624120712
+        },
+        {
+          "theory": "Utilitarianism",
+          "family": "truth",
+          "repair_alignment": 0.7976845502853394,
+          "sanction_alignment": -0.014839015901088715,
+          "margin": 0.8125235661864281
+        },
+        {
+          "theory": "Deontology",
+          "family": "land",
+          "repair_alignment": 0.9183449745178223,
+          "sanction_alignment": 0.5548707842826843,
+          "margin": 0.36347419023513794
+        },
+        {
+          "theory": "Deontology",
+          "family": "home",
+          "repair_alignment": 0.9606564044952393,
+          "sanction_alignment": 0.3903922736644745,
+          "margin": 0.5702641308307648
+        },
+        {
+          "theory": "Deontology",
+          "family": "health",
+          "repair_alignment": 0.89013671875,
+          "sanction_alignment": 0.2640972435474396,
+          "margin": 0.6260394752025604
+        },
+        {
+          "theory": "Deontology",
+          "family": "school",
+          "repair_alignment": 0.9671335220336914,
+          "sanction_alignment": 0.3001254200935364,
+          "margin": 0.667008101940155
+        },
+        {
+          "theory": "Deontology",
+          "family": "water",
+          "repair_alignment": 0.9619014859199524,
+          "sanction_alignment": 0.3023991882801056,
+          "margin": 0.6595022976398468
+        },
+        {
+          "theory": "Deontology",
+          "family": "truth",
+          "repair_alignment": 0.7464885711669922,
+          "sanction_alignment": -0.11690439283847809,
+          "margin": 0.8633929640054703
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "land",
+          "repair_alignment": 0.9243862628936768,
+          "sanction_alignment": 0.44497328996658325,
+          "margin": 0.4794129729270935
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "home",
+          "repair_alignment": 0.965043306350708,
+          "sanction_alignment": 0.26121941208839417,
+          "margin": 0.7038238942623138
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "health",
+          "repair_alignment": 0.895328164100647,
+          "sanction_alignment": 0.42364269495010376,
+          "margin": 0.4716854691505432
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "school",
+          "repair_alignment": 0.9697009921073914,
+          "sanction_alignment": 0.29136720299720764,
+          "margin": 0.6783337891101837
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "water",
+          "repair_alignment": 0.9627361297607422,
+          "sanction_alignment": 0.27697840332984924,
+          "margin": 0.6857577264308929
+        },
+        {
+          "theory": "Care Ethics",
+          "family": "truth",
+          "repair_alignment": 0.7835156917572021,
+          "sanction_alignment": -0.11335711181163788,
+          "margin": 0.89687280356884
+        }
+      ],
+      "layer0_is_identical_EOD_null": false
+    },
+    "theory_sensitivity": {
+      "0": {
+        "mean_same_harm_between_theories_cosine_distance": 0.0,
+        "note": "Prompt-framing sensitivity only; not a correctness score."
+      },
+      "9": {
+        "mean_same_harm_between_theories_cosine_distance": 0.0034208595752716064,
+        "note": "Prompt-framing sensitivity only; not a correctness score."
+      },
+      "18": {
+        "mean_same_harm_between_theories_cosine_distance": 0.010529799593819512,
+        "note": "Prompt-framing sensitivity only; not a correctness score."
+      },
+      "27": {
+        "mean_same_harm_between_theories_cosine_distance": 0.01601758599281311,
+        "note": "Prompt-framing sensitivity only; not a correctness score."
+      },
+      "36": {
+        "mean_same_harm_between_theories_cosine_distance": 0.07932335469457838,
+        "note": "Prompt-framing sensitivity only; not a correctness score."
+      }
+    }
+  },
+  "reasoning_views": [
+    {
+      "family": "land",
+      "theory": "Utilitarianism",
+      "raw_view_cosine": 0.5745497941970825,
+      "truncated": true,
+      "view_was_shortened": false,
+      "word_count": 78
+    },
+    {
+      "family": "land",
+      "theory": "Deontology",
+      "raw_view_cosine": 0.6434223651885986,
+      "truncated": true,
+      "view_was_shortened": false,
+      "word_count": 75
+    },
+    {
+      "family": "land",
+      "theory": "Care Ethics",
+      "raw_view_cosine": 0.7312605977058411,
+      "truncated": true,
+      "view_was_shortened": false,
+      "word_count": 76
+    },
+    {
+      "family": "home",
+      "theory": "Utilitarianism",
+      "raw_view_cosine": 0.5197484493255615,
+      "truncated": true,
+      "view_was_shortened": false,
+      "word_count": 81
+    },
+    {
+      "family": "home",
+      "theory": "Deontology",
+      "raw_view_cosine": 0.517690896987915,
+      "truncated": true,
+      "view_was_shortened": false,
+      "word_count": 79
+    },
+    {
+      "family": "home",
+      "theory": "Care Ethics",
+      "raw_view_cosine": 0.6363852024078369,
+      "truncated": true,
+      "view_was_shortened": false,
+      "word_count": 79
+    },
+    {
+      "family": "health",
+      "theory": "Utilitarianism",
+      "raw_view_cosine": 0.4823901057243347,
+      "truncated": true,
+      "view_was_shortened": false,
+      "word_count": 79
+    },
+    {
+      "family": "health",
+      "theory": "Deontology",
+      "raw_view_cosine": 0.5052688717842102,
+      "truncated": true,
+      "view_was_shortened": false,
+      "word_count": 78
+    },
+    {
+      "family": "health",
+      "theory": "Care Ethics",
+      "raw_view_cosine": 0.5430974960327148,
+      "truncated": true,
+      "view_was_shortened": false,
+      "word_count": 83
+    },
+    {
+      "family": "school",
+      "theory": "Utilitarianism",
+      "raw_view_cosine": 0.6687853932380676,
+      "truncated": true,
+      "view_was_shortened": false,
+      "word_count": 80
+    },
+    {
+      "family": "school",
+      "theory": "Deontology",
+      "raw_view_cosine": 0.5211269855499268,
+      "truncated": true,
+      "view_was_shortened": false,
+      "word_count": 74
+    },
+    {
+      "family": "school",
+      "theory": "Care Ethics",
+      "raw_view_cosine": 0.5642936825752258,
+      "truncated": true,
+      "view_was_shortened": false,
+      "word_count": 77
+    },
+    {
+      "family": "water",
+      "theory": "Utilitarianism",
+      "raw_view_cosine": 0.47087448835372925,
+      "truncated": true,
+      "view_was_shortened": false,
+      "word_count": 80
+    },
+    {
+      "family": "water",
+      "theory": "Deontology",
+      "raw_view_cosine": 0.46791642904281616,
+      "truncated": true,
+      "view_was_shortened": false,
+      "word_count": 77
+    },
+    {
+      "family": "water",
+      "theory": "Care Ethics",
+      "raw_view_cosine": 0.5299561023712158,
+      "truncated": true,
+      "view_was_shortened": false,
+      "word_count": 80
+    },
+    {
+      "family": "truth",
+      "theory": "Utilitarianism",
+      "raw_view_cosine": 0.6429727077484131,
+      "truncated": true,
+      "view_was_shortened": false,
+      "word_count": 81
+    },
+    {
+      "family": "truth",
+      "theory": "Deontology",
+      "raw_view_cosine": 0.6546632051467896,
+      "truncated": true,
+      "view_was_shortened": false,
+      "word_count": 76
+    },
+    {
+      "family": "truth",
+      "theory": "Care Ethics",
+      "raw_view_cosine": 0.7151041030883789,
+      "truncated": true,
+      "view_was_shortened": false,
+      "word_count": 82
+    }
+  ],
+  "head_receipts": [
+    {
+      "arm": "signed_s10_n64",
+      "seed": 10,
+      "train_rows": 64,
+      "basis_fit_unlabeled_rows": 256,
+      "basis": "randomized training-only PCA, seed varies basis approximation",
+      "constraint": "signed",
+      "negative_weights": 13,
+      "objective": 0.005244883653904745,
+      "compatibility": "3f071abb97c41f35fda2ae76fb024824b9119f1a12d1d32ba1f38e5bcde2cf02",
+      "sha256": "29dec1fadc381511af840c877e7e315a6e640978ee740d78f1ae78bb00b84b44"
+    },
+    {
+      "arm": "psd_s10_n64",
+      "seed": 10,
+      "train_rows": 64,
+      "basis_fit_unlabeled_rows": 256,
+      "basis": "randomized training-only PCA, seed varies basis approximation",
+      "constraint": "w>=0",
+      "negative_weights": 0,
+      "objective": 0.006281480740010587,
+      "compatibility": "03963c61e778ac010fdc8b9a8dd9aa64fb3be8a0d5269f2c7b3210bb10b2edd4",
+      "sha256": "d872cc7cfe554dd201050bb3d809b099ab280232ed0ae1d884e52a9f7f73bb60"
+    },
+    {
+      "arm": "signed_s10_n256",
+      "seed": 10,
+      "train_rows": 256,
+      "basis_fit_unlabeled_rows": 256,
+      "basis": "randomized training-only PCA, seed varies basis approximation",
+      "constraint": "signed",
+      "negative_weights": 10,
+      "objective": 0.027594774371558422,
+      "compatibility": "a9ff11610acb39c57f272908bd686779e9e16ea688016d0ca76e926d9944aae4",
+      "sha256": "8e7e2efcb0d402549f98534f3a2e49ac23f145004f4e4e84c3f2244912dd3be5"
+    },
+    {
+      "arm": "psd_s10_n256",
+      "seed": 10,
+      "train_rows": 256,
+      "basis_fit_unlabeled_rows": 256,
+      "basis": "randomized training-only PCA, seed varies basis approximation",
+      "constraint": "w>=0",
+      "negative_weights": 0,
+      "objective": 0.029226346708384306,
+      "compatibility": "1bdd033c5f6757e0e1911e87ef914eb248cc211a894cfc49ec48f68b1f267335",
+      "sha256": "a8cf2d8f2896a7e7d046aff3aec0bb401994ce999de9dc7799972a812a641529"
+    },
+    {
+      "arm": "signed_s11_n64",
+      "seed": 11,
+      "train_rows": 64,
+      "basis_fit_unlabeled_rows": 256,
+      "basis": "randomized training-only PCA, seed varies basis approximation",
+      "constraint": "signed",
+      "negative_weights": 12,
+      "objective": 0.005111006817805827,
+      "compatibility": "f2453f956045d518618a27d3ee76116b51f35a7b64343b7eded04577f2f7b02c",
+      "sha256": "ce9b00b3bee40d438c6d2288fc4e76cc2a5a800fbd431874e2b13830acfa0cc8"
+    },
+    {
+      "arm": "psd_s11_n64",
+      "seed": 11,
+      "train_rows": 64,
+      "basis_fit_unlabeled_rows": 256,
+      "basis": "randomized training-only PCA, seed varies basis approximation",
+      "constraint": "w>=0",
+      "negative_weights": 0,
+      "objective": 0.0068235592637174965,
+      "compatibility": "7346f390662eac95fd0df6e55dac81ae031082a8d01b9b5b175b5b68b18c0e0e",
+      "sha256": "d802ea0d37ceee9dcff6e393edbebefc51c2a6900aac78f403ef9f6160f3e1a6"
+    },
+    {
+      "arm": "signed_s11_n256",
+      "seed": 11,
+      "train_rows": 256,
+      "basis_fit_unlabeled_rows": 256,
+      "basis": "randomized training-only PCA, seed varies basis approximation",
+      "constraint": "signed",
+      "negative_weights": 8,
+      "objective": 0.0308072585524894,
+      "compatibility": "06eddeebd6170c24573496662015a458fe2273ba53730780e0da00bcac35d9bf",
+      "sha256": "ac43526f13fb29492c2b0fb8350e26558a7007e1a8c6994dad1e0167b4d6df42"
+    },
+    {
+      "arm": "psd_s11_n256",
+      "seed": 11,
+      "train_rows": 256,
+      "basis_fit_unlabeled_rows": 256,
+      "basis": "randomized training-only PCA, seed varies basis approximation",
+      "constraint": "w>=0",
+      "negative_weights": 0,
+      "objective": 0.03136865987024096,
+      "compatibility": "8789bce8c6d079a17d6a8e46bf7754a11c472d8a3fa95e40629461d5e6dea54e",
+      "sha256": "43497c99b66ded18998bd152a2b24c6c2ea6b9356972c03da146f471b6a3195e"
+    },
+    {
+      "arm": "signed_s12_n64",
+      "seed": 12,
+      "train_rows": 64,
+      "basis_fit_unlabeled_rows": 256,
+      "basis": "randomized training-only PCA, seed varies basis approximation",
+      "constraint": "signed",
+      "negative_weights": 12,
+      "objective": 0.005193165050411055,
+      "compatibility": "fbebc242b0c93975bd458b7c1360cfb3a234ecdf7b16af329518b34e0bbd70b8",
+      "sha256": "f11118bffb8b1d6e90321b000af9cedb6c38cade87b23a58686522e01e8bb545"
+    },
+    {
+      "arm": "psd_s12_n64",
+      "seed": 12,
+      "train_rows": 64,
+      "basis_fit_unlabeled_rows": 256,
+      "basis": "randomized training-only PCA, seed varies basis approximation",
+      "constraint": "w>=0",
+      "negative_weights": 0,
+      "objective": 0.005858671572550388,
+      "compatibility": "8fb360b0544e01307324b6b3ddde05ed6756a7e6d45f78361fa213fa02068277",
+      "sha256": "6428fe9410a823f15882dc56cc341d49744556d594b9436ac0688eba4382eff4"
+    },
+    {
+      "arm": "signed_s12_n256",
+      "seed": 12,
+      "train_rows": 256,
+      "basis_fit_unlabeled_rows": 256,
+      "basis": "randomized training-only PCA, seed varies basis approximation",
+      "constraint": "signed",
+      "negative_weights": 10,
+      "objective": 0.03045373730779451,
+      "compatibility": "6e8ba30b75bd8f75e7fd0d79cb4aa24138651824de9768d75799c89668297f53",
+      "sha256": "53ee5d1f0c95228ae41fe4e0359f6a6ce9051f5a8170fb4d8c97848b426946b3"
+    },
+    {
+      "arm": "psd_s12_n256",
+      "seed": 12,
+      "train_rows": 256,
+      "basis_fit_unlabeled_rows": 256,
+      "basis": "randomized training-only PCA, seed varies basis approximation",
+      "constraint": "w>=0",
+      "negative_weights": 0,
+      "objective": 0.030730444855545633,
+      "compatibility": "292389147a2c8452752e5133336546ff377f1d2aa9db40dddd9de3a5ff2a22bc",
+      "sha256": "ccccbf0b6bc861aa1adb0abdcd69df2f07181efe585013bf15191dd1f8349a17"
+    }
+  ],
+  "counts": {
+    "embeddings": 2941,
+    "synthetic_cases": 160,
+    "retrieval_predictions": 10080
+  },
+  "limits": [
+    "Synthetic operational hypotheses, no new human/expert moral validation.",
+    "Reserve only4families; no best-layer selection. Original cleaned reference test previously examined.",
+    "Oracle cards contain authored relevant source spans; upper bound, not autonomous evidence selection.",
+    "MET-D released weights used with forced grounds; no selector or new self-distillation; short generated views may truncate.",
+    "Harm\u2192repair is typed and contextual, not assumed reflection or moral cancellation."
+  ],
+  "analysis_seconds": 11.58531772508286,
+  "runtime_replay_diagnostic": {
+    "status": "complete",
+    "retained_at_utc": "2026-11-10T05:48:56.827470+00:00",
+    "instance": "jep-moral-20261110-g1",
+    "project": "mantra-477901",
+    "zone": "us-central1-a",
+    "gpu_unit": "jep-moral-replay-probe.service",
+    "unit_status": {
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "ExecMainStatus": 0
+    },
+    "runtime_limit_seconds": 420,
+    "previous_runtime": {
+      "torch": "2.14.0+cu130",
+      "transformers": "5.20.2",
+      "peft": "0.21.2",
+      "source": "925d26ea2040161d3b5847984f705281761de9cd:training_outputs/full_data_prompt_20261108/test-runtime-worker1.txt",
+      "source_sha256": "0fe02a4472ff08777f63f05bdc5d4593ec1e9840a303edac41bc394ebb00c0e7"
+    },
+    "current_runtime": {
+      "torch": "2.9.1+cu129",
+      "transformers": "4.57.1",
+      "peft": "0.17.1",
+      "gpu": "NVIDIA L4, GPU-e9512010-cf07-fd94-fb4e-77930d3c8328, 580.178.04"
+    },
+    "files": {
+      "replay_probe.py": {
+        "sha256": "3ee77cc0569c94a0b1cc5a800a1d0749a6265613bf797577bf00b07b20a2fd31",
+        "bytes": 5477
+      },
+      "replay_probe_input.json": {
+        "sha256": "c0ff473e8f3c4edeaa62734bad61ad011d294b6b8eab74192e6e800950451c27",
+        "bytes": 21488
+      },
+      "replay_probe_result.json": {
+        "sha256": "310123b696860609bebe43576c2c85b9085c61f5d7a98dfc05213cce208d1194",
+        "bytes": 16014
+      },
+      "replay_probe_complete.json": {
+        "sha256": "85ff925e042eadec1c875ab0917c5a239529d4fa38c7f1271ae83bf8b4c439d2",
+        "bytes": 116
+      },
+      "replay_probe.log": {
+        "sha256": "9c9e3103a85abb804f7b0ee093177bfe49a681259c32c96bcc316ce7486e8b60",
+        "bytes": 913
+      }
+    },
+    "interpretation": "Exact saved weights and original32-pair/64-text batch layout do not numerically reproduce historical predictions under the new pinned runtime. Layout alone does not explain drift. No fitting, threshold selection, dependency changes, new resources or main inference rerun."
+  },
+  "restorative_transfer_diagnostic": {
+    "status": "post_hoc_diagnostic_not_confirmation",
+    "rationale": "High repair-versus-sanction alignment might be generic positive valence. Check whether translation adds anything beyond raw topic similarity among equally positive candidate repairs.",
+    "families": [
+      {
+        "family": "health",
+        "plain_rank": 1,
+        "translated_rank": 5
+      },
+      {
+        "family": "home",
+        "plain_rank": 1,
+        "translated_rank": 1
+      },
+      {
+        "family": "land",
+        "plain_rank": 1,
+        "translated_rank": 1
+      },
+      {
+        "family": "school",
+        "plain_rank": 1,
+        "translated_rank": 1
+      },
+      {
+        "family": "truth",
+        "plain_rank": 1,
+        "translated_rank": 1
+      },
+      {
+        "family": "water",
+        "plain_rank": 1,
+        "translated_rank": 1
+      }
+    ],
+    "plain_recall1": 1.0,
+    "translated_recall1": 0.8333333333333334,
+    "limits": "Same six previously inspected authored families; no valence-matched non-reparative benefit control; no expert sufficiency judgments."
+  }
+}
