@@ -1,11 +1,13 @@
 """Own one bounded GPU, retain returned bytes, close out locally, and clean owned resources."""
 import argparse,base64,datetime as dt,fcntl,gzip,hashlib,json,os,subprocess,sys,tarfile,time,urllib.error,urllib.parse,urllib.request,uuid
 from pathlib import Path
+import capacity_advisor
 ROOT=Path("/home/pvd2112_columbia_edu/columbia-worktrees/jep-moral-geometry-20261110")
 RUN=Path("/home/pvd2112_columbia_edu/columbia-projects/jep/data/moral-followup-20261110")
 PROJECT="mantra-477901";BUCKET="mantra-mlfg-prod-uscentral1-8e7a";NAME="jep-moral-followup-20261110-g1";LABEL="jep-moral-followup-20261110"
 HERE=Path(__file__).resolve().parent
 def now():return dt.datetime.now(dt.timezone.utc).isoformat()
+def deadline_epoch():return dt.datetime.fromisoformat(json.loads((RUN/"design_v2.json").read_text())["deadline_utc"].replace("Z","+00:00")).timestamp()
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def save(p,x):
  p=Path(p);p.parent.mkdir(parents=True,exist_ok=True);t=p.with_suffix(".tmp")
@@ -27,7 +29,7 @@ def request(url,method="GET",body=None,absent=False,timeout=60):
   text=e.read().decode()
   if absent and e.code==404:return None
   raise RuntimeError(str(e.code)+" "+url+" "+text[:1800]) from e
-def compute(path,**kw):return request("https://compute.googleapis.com/compute/v1/projects/"+PROJECT+"/"+path,**kw)
+def compute(path,**kw):return request("https://compute.googleapis.com/compute/v1/projects/"+PROJECT+("/"+path if path else ""),**kw)
 def waitop(op):
  end=time.monotonic()+180
  while op.get("status")!="DONE":
@@ -57,15 +59,17 @@ def cleanup(record):
  assert compute("zones/"+zone+"/disks/"+NAME,absent=True) is None
  record["cleanup_verified_at"]=now();record["deleted"]=True
  j=ledger()
+ record["gpu_seconds"]=max(record.get("gpu_seconds",0),int(time.time()-record.get("created_epoch",time.time())))
  for old in j["allocations"]:
-  if old["zone"]==zone:old.update(record)
- j["gpu_seconds"]=max(j.get("gpu_seconds",0),int(time.time()-record.get("created_epoch",time.time())))
+  if old.get("id")==record.get("id"):old.update(record)
+ j["gpu_seconds"]=sum(r.get("gpu_seconds",0) for r in j["allocations"])
  save(resourcefile(),j)
  save(RUN/"cleanup.json",dict(complete=True,verified_at=now(),resources=j,no_task_static_ips_reservations_snapshots_created=True,existing_dev_preserved=True))
 def startup(payload):
  encoded=base64.b64encode(gzip.compress(json.dumps(payload).encode())).decode()
  parts=[encoded[i:i+150000] for i in range(0,len(encoded),150000)]
  worker=base64.b64encode((HERE/"gpu_worker.py").read_bytes()).decode()
+ advisor=base64.b64encode((HERE/"capacity_advisor.py").read_bytes()).decode()
  script="""#!/bin/bash
 set -euo pipefail
 mkdir -p /var/lib/jep-moral-pilot
@@ -84,6 +88,7 @@ raw=gzip.decompress(base64.b64decode(b''.join(parts)))
 assert hashlib.sha256(raw).hexdigest()=='"""+hashlib.sha256(json.dumps(payload).encode()).hexdigest()+"""'
 (r/'payload.json').write_bytes(raw)
 (r/'worker.py').write_bytes(base64.b64decode('"""+worker+"""'))
+(r/'capacity_advisor.py').write_bytes(base64.b64decode('"""+advisor+"""'))
 BOOT
 /usr/bin/python3 -m pip install 'transformers==4.57.1' 'peft==0.17.1' 'jinja2>=3.1.0' accelerate requests > /var/lib/jep-moral-pilot/install.log 2>&1
 /usr/bin/python3 -m pip freeze > /var/lib/jep-moral-pilot/environment.txt
@@ -95,49 +100,98 @@ echo MORAL_WORKER_EXIT
  assert max(len(x["value"].encode()) for x in items)<262144
  assert sum(len(x["value"].encode())+len(x["key"]) for x in items)<512000
  return items
-def allocate(payload):
+def capacity_plan(output,machine_type=capacity_advisor.MACHINE_TYPE):
+ """Persist fresh advisory inputs and the exact score used for placement."""
+ plan=capacity_advisor.build_plan(compute,request,PROJECT,machine_type=machine_type)
+ plan["source_sha256"]=dict(controller=sha(__file__),advisor=sha(HERE/"capacity_advisor.py"))
+ save(output,plan)
+ return plan
+
+def admission_limits(j,search_admitted=False):
+ """Keep closed runs, consumed admissions, deadlines and GPU budgets sealed."""
+ state=json.loads((RUN/"state.json").read_text());design=json.loads((RUN/"design_v2.json").read_text())
+ if state.get("phase","").startswith("closed") or state.get("phase")=="complete":raise RuntimeError("Run is closed; preserve retained outputs")
+ if state.get("final_admission_consumed") and not search_admitted:raise RuntimeError("This recovery admission is already consumed")
+ if state.get("recovery_launches",0)>min(design["max_recovery_launches"],2):raise RuntimeError("Recovery launch budget exhausted")
+ if design["max_gpus"]!=1:raise RuntimeError("Expected a single-GPU design")
+ deadline=dt.datetime.fromisoformat(design["deadline_utc"].replace("Z","+00:00")).timestamp()
+ seconds=min(2700,design["max_gpu_seconds"])-j.get("gpu_seconds",0)
+ seconds=min(seconds,int(deadline-time.time()))
+ if seconds<=0:raise RuntimeError("Compute deadline or GPU-time budget reached")
+ return seconds
+
+def reconcile_jobs(state):
+ """Reconcile durable controller statuses before an allocation mutation."""
+ jobs=json.loads(subprocess.check_output(["cloud-project","--project","jep","list"],text=True))
+ ids={x["id"] for x in state.get("jobs",[]) if x.get("id")}
+ ids.update(x["id"] for x in jobs if x.get("cwd")==str(ROOT) and x.get("checkpoint")==str(RUN))
+ for job_id in sorted(ids):
+  listed=next((x for x in jobs if x["id"]==job_id),None)
+  if listed is not None and (not any(Path(a).name=="controller.py" for a in listed.get("argv",[])) or "--plan-only" in listed.get("argv",[])):continue
+  actual=json.loads(subprocess.check_output(["cloud-project","--project","jep","status",job_id],text=True))
+  argv=actual.get("argv",[])
+  if not any(Path(a).name=="controller.py" for a in argv) or "--plan-only" in argv:continue
+  if listed is None or listed.get("status")!=actual.get("status"):raise RuntimeError("Durable job status unresolved: "+job_id)
+  if actual.get("status") in {"succeeded","failed","cancelled","canceled","interrupted"}:continue
+  if actual.get("status")=="running" and actual.get("child_pid")==os.getpid():continue
+  raise RuntimeError("Another controller is active or unresolved: "+job_id)
+
+def allocate(payload,machine_type=capacity_advisor.MACHINE_TYPE):
+ """Try eligible L4 Spot placements in descending probability-times-uptime order."""
  j=ledger()
- # Reconcile all surviving intents before any new create.
  for record in j.get("allocations",[]):
   if not record.get("deleted"):return record
- if json.loads((RUN/"state.json").read_text()).get("recovery_launches",0)>2:raise RuntimeError("Recovery launch budget exhausted; preserve outputs/cleanup only")
- if any(i["status"] not in {"reconciled_absent","terminal_failed","allocated"} for i in j["intents"]):raise RuntimeError("Prior create intent requires reconciliation; automatic new allocation prohibited")
- admission=json.loads((RUN/"state.json").read_text());admission["final_admission_consumed"]=True;save(RUN/"state.json",admission)
- for zone in ["us-west4-c","us-west1-b","us-west1-c","us-central1-b","us-central1-c","us-east1-c","us-east1-d","us-east4-a","us-east4-c"]:
-  assert compute("zones/"+zone+"/instances/"+NAME,absent=True) is None
-  assert compute("zones/"+zone+"/disks/"+NAME,absent=True) is None
-  intent=dict(name=NAME,zone=zone,absent_before_create=True,at=now(),status="requesting")
+ admission_limits(j)
+ reconcile_jobs(json.loads((RUN/"state.json").read_text()))
+ if any(i["status"] not in {"reconciled_absent","terminal_failed","allocated"} for i in j["intents"]):raise RuntimeError("Prior create intent requires reconciliation")
+ for zone in {i["zone"] for i in j["intents"]}:
+  if compute("zones/"+zone+"/instances/"+NAME,absent=True) or compute("zones/"+zone+"/disks/"+NAME,absent=True):raise RuntimeError("Prior allocation resources require reconciliation")
+ attempted=set();plan=None;search_admitted=False
+ for attempt in range(capacity_advisor.MAX_ATTEMPTS):
+  seconds=admission_limits(j,search_admitted)
+  if plan is None or time.time()-plan["started_at_epoch"]>=capacity_advisor.ADVICE_TTL_SECONDS:
+   plan=capacity_plan(RUN/"capacity_advice"/("plan_"+str(time.time_ns())+".json"),machine_type)
+  choices=[x for x in plan["ranked"] if x["eligible"] and x["zone"] not in attempted]
+  if not choices:raise RuntimeError("Ranked eligible placements exhausted; inspect retained capacity plan")
+  candidate=choices[0]
+  if time.time()-candidate["checked_at_epoch"]>=capacity_advisor.ADVICE_TTL_SECONDS:
+   plan=None;continue
+  zone=candidate["zone"];attempted.add(zone)
+  if compute("zones/"+zone+"/instances/"+NAME,absent=True) or compute("zones/"+zone+"/disks/"+NAME,absent=True):raise RuntimeError("Candidate contains surviving resources")
+  seconds=admission_limits(j,search_admitted)
+  intent=dict(name=NAME,zone=zone,absent_before_create=True,at=now(),status="requesting",placement=candidate)
   j["intents"].append(intent);save(resourcefile(),j)
-  body=dict(name=NAME,machineType="zones/"+zone+"/machineTypes/g2-standard-8",
+  admission=json.loads((RUN/"state.json").read_text());admission["final_admission_consumed"]=True;save(RUN/"state.json",admission)
+  search_admitted=True
+  worker_payload=dict(payload,allocation_machine_type=machine_type,lease_deadline_utc=dt.datetime.fromtimestamp(time.time()+max(1,seconds-60),dt.timezone.utc).isoformat())
+  body=dict(name=NAME,machineType="zones/"+zone+"/machineTypes/"+machine_type,
    labels=dict(task=LABEL,owner="pvd232",experiment="moral-v2"),
    disks=[dict(boot=True,autoDelete=True,initializeParams=dict(diskName=NAME,diskSizeGb="120",diskType="zones/"+zone+"/diskTypes/pd-balanced",sourceImage="projects/deeplearning-platform-release/global/images/pytorch-2-9-cu129-ubuntu-2204-nvidia-580-v20261029"))],
-   networkInterfaces=[dict(network="global/networks/default",subnetwork="regions/"+zone.rsplit("-",1)[0]+"/subnetworks/default")],
+   networkInterfaces=[candidate["network_interface"]],
    serviceAccounts=[dict(email="jep-gpu-jobs@mantra-477901.iam.gserviceaccount.com",scopes=["https://www.googleapis.com/auth/cloud-platform"])],
-   scheduling=dict(provisioningModel="STANDARD",automaticRestart=False,onHostMaintenance="TERMINATE",instanceTerminationAction="STOP",maxRunDuration=dict(seconds="2700")),
-   metadata=dict(items=startup(payload)))
-  save(RUN/"allocation_request.json",dict(zone=zone,request={k:v for k,v in body.items() if k!="metadata"},startup_sha256=hashlib.sha256(body["metadata"]["items"][0]["value"].encode()).hexdigest()))
+   scheduling=dict(provisioningModel="SPOT",automaticRestart=False,onHostMaintenance="TERMINATE",instanceTerminationAction="STOP",maxRunDuration=dict(seconds=str(seconds))),
+   metadata=dict(items=startup(worker_payload)))
+  save(RUN/"allocation_request.json",dict(zone=zone,request={k:v for k,v in body.items() if k!="metadata"},placement=candidate,startup_sha256=hashlib.sha256(body["metadata"]["items"][0]["value"].encode()).hexdigest()))
   try:
    op=compute("zones/"+zone+"/instances?requestId="+str(uuid.uuid4()),method="POST",body=body)
    intent["operation"]=op["selfLink"];save(resourcefile(),j)
    terminal=waitop(op)
   except Exception as error:
    intent.update(status="unknown_or_denied",error=repr(error));save(resourcefile(),j)
-   # An API error is not evidence of absence; keep intent for explicit reconciliation.
    raise
   if terminal.get("error"):
    intent.update(status="terminal_failed",error=terminal["error"]);save(resourcefile(),j)
-   # No automatic fallback unless exact instance+disk are absent.
    live=compute("zones/"+zone+"/instances/"+NAME,absent=True);disk=compute("zones/"+zone+"/disks/"+NAME,absent=True)
    if live or disk:raise RuntimeError("Partial allocation resources retained; reconcile before fallback")
-   code=json.dumps(terminal["error"])
-   if not any(x in code for x in ["ZONE_RESOURCE_POOL_EXHAUSTED","RESOURCE_POOL_EXHAUSTED"]):raise RuntimeError(code)
+   codes={e.get("code") for e in terminal["error"].get("errors",[])}
+   if not any("RESOURCE_POOL_EXHAUSTED" in (code or "") for code in codes):raise RuntimeError(json.dumps(terminal["error"]))
    continue
   live=compute("zones/"+zone+"/instances/"+NAME);owned(live,{})
   disk=compute("zones/"+zone+"/disks/"+NAME)
-  record=dict(name=NAME,id=str(live["id"]),zone=zone,disk_id=str(disk["id"]),created_epoch=time.time(),created_at=now(),labels=live["labels"],gpu_count=1,provider_max_seconds=2700)
+  record=dict(name=NAME,id=str(live["id"]),zone=zone,disk_id=str(disk["id"]),created_epoch=dt.datetime.fromisoformat(intent["at"]).timestamp(),created_epoch_source="allocation_request_time_conservative",created_at=now(),labels=live["labels"],gpu_count=1,provider_max_seconds=seconds,placement=candidate,capacity_advisor_sha256=sha(HERE/"capacity_advisor.py"))
   j["allocations"].append(record);intent["status"]="allocated";save(resourcefile(),j)
   return record
- raise RuntimeError("Bounded Spot placement attempts exhausted")
+ raise RuntimeError("Bounded ranked Spot placement attempts exhausted")
 
 def collect(payload):
  if (RUN/"collection.json").exists():return True
@@ -166,6 +220,32 @@ def collect(payload):
  save(RUN/"collection.json",dict(files=manifest,bundle_sha256=sha(dest),transport="existing authenticated IAP",verified_at=now()))
  return True
 
+def prepare_host_memory_fallback(record):
+ """Authorize one larger-host retry from a verified, cleaned-up preflight failure."""
+ result=json.loads((RUN/"gpu_return"/"compute.json").read_text())
+ if result.get("status")!="failed" or result.get("failure_code")!="HOST_MEMORY_PREFLIGHT_FAILED":return False
+ if record.get("placement",{}).get("machine_type")!=capacity_advisor.MACHINE_TYPE:return False
+ memory=json.loads((RUN/"gpu_return"/"host_memory_preflight.json").read_text())
+ if memory.get("passed") is not False or memory.get("machine_type")!=capacity_advisor.MACHINE_TYPE or memory.get("source_sha256")!=record.get("capacity_advisor_sha256"):raise RuntimeError("Host-memory failure proof mismatch")
+ if (RUN/"gpu_return"/"embeddings.npz").exists() or (RUN/"gpu_return"/"shards").exists():raise RuntimeError("Retained inference stages require checkpoint-aware recovery before host replacement")
+ state=json.loads((RUN/"state.json").read_text());design=json.loads((RUN/"design_v2.json").read_text())
+ if state.get("recovery_launches",0)>=min(design["max_recovery_launches"],2):return False
+ try:admission_limits(ledger(),search_admitted=True)
+ except RuntimeError:return False
+ resources=ledger()
+ if any(not x.get("deleted") for x in resources.get("allocations",[])):raise RuntimeError("Clean the failed worker before host-memory fallback")
+ if not record.get("deleted") or not record.get("cleanup_verified_at"):raise RuntimeError("Worker cleanup proof required for fallback")
+ proof=json.loads((RUN/"collection.json").read_text())
+ if sha(RUN/"gpu_return.tar.gz")!=proof["bundle_sha256"]:raise RuntimeError("Retained failure bundle changed")
+ if not str(record["id"]).isdigit():raise RuntimeError("Expected immutable numeric VM identity")
+ archive=RUN/"attempts"/str(record["id"])
+ archive.mkdir(parents=True,exist_ok=False)
+ for name in ["gpu_return","gpu_return.tar.gz","collection.json"]:(RUN/name).rename(archive/name)
+ save(archive/"host_memory_fallback.json",dict(from_machine=capacity_advisor.MACHINE_TYPE,to_machine=capacity_advisor.HOST_MEMORY_FALLBACK,previous_vm_id=record["id"],failure=result,collection=proof,created_at=now()))
+ update(phase="allocating_gpu",allocation_machine_type=capacity_advisor.HOST_MEMORY_FALLBACK,recovery_launches=state.get("recovery_launches",0)+1,generation=state.get("generation",0)+1,final_admission_consumed=False,host_memory_fallback_from=record["id"],host_memory_fallback_archive=str(archive))
+ event("host_memory_fallback",previous_vm_id=record["id"],machine_type=capacity_advisor.HOST_MEMORY_FALLBACK)
+ return True
+
 def closeout():
  # CPU-only serialization/analysis may run after the compute deadline.
  script=HERE/"analyze.py"
@@ -174,10 +254,16 @@ def closeout():
  else:
   update(phase="inference_retained_analysis_pending",next_action="Run analyze.py on retained embeddings; never repeat inference.")
 def main():
- parser=argparse.ArgumentParser();parser.add_argument("--resume",action="store_true");parser.add_argument("--cleanup-only",action="store_true");args=parser.parse_args()
+ parser=argparse.ArgumentParser();parser.add_argument("--resume",action="store_true");parser.add_argument("--cleanup-only",action="store_true");parser.add_argument("--plan-only",action="store_true");parser.add_argument("--plan-output",type=Path);parser.add_argument("--plan-machine-type",choices=[capacity_advisor.MACHINE_TYPE,capacity_advisor.HOST_MEMORY_FALLBACK],default=capacity_advisor.MACHINE_TYPE);args=parser.parse_args()
+ if args.plan_only:
+  output=args.plan_output or RUN/"diagnostics"/("capacity_plan_"+str(time.time_ns())+".json")
+  plan=capacity_plan(output,args.plan_machine_type);print(json.dumps(dict(path=str(output),ranked=plan["ranked"],unknown_regions=[x["region"] for x in plan["region_reports"] if x["status"]=="unknown"])));return
  with (RUN/"execution.lock").open("a") as lock:
   try:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
   except BlockingIOError:print("Healthy owner holds execution.lock; no duplicate launch.");return
+  state=json.loads((RUN/"state.json").read_text())
+  if not args.cleanup_only and (state.get("phase","").startswith("closed") or state.get("phase")=="complete"):
+   print(json.dumps(dict(phase=state["phase"],action="retained_outputs_preserved")));return
   frozen=json.loads((RUN/"frozen_v2.json").read_text())
   for n,h in frozen["files"].items():assert sha(RUN/n)==h,"Frozen data/config changed"
   if args.cleanup_only:
@@ -192,28 +278,36 @@ def main():
   q=json.loads((RUN/"qwen_selection.json").read_text());encoder=json.loads((RUN/"encoder_identity.json").read_text())
   payload=dict(tasks=json.loads((RUN/"tasks.json").read_text()),encoder=encoder,selection=q["selected"],archive=q["archive"],bucket=BUCKET,result_object="moral_geometry_transfer_20261110/"+sha(RUN/"frozen_v2.json")[:16]+"/"+sha(HERE/"gpu_worker.py")[:16]+"/return.tar.gz",worker_sha256=sha(HERE/"gpu_worker.py"))
   payload["met_reasoner"]=None
+  payload["capacity_advisor_sha256"]=sha(HERE/"capacity_advisor.py")
+  payload["compute_deadline_utc"]=json.loads((RUN/"design_v2.json").read_text())["deadline_utc"]
   payload["extension_cases"]=json.loads((RUN/"extension_cases.json").read_text())
-  save(RUN/"payload_identity.json",dict(met_reasoner=payload["met_reasoner"],extension_sha256=sha(RUN/"extension_cases.json"),worker_sha256=payload["worker_sha256"],encoder=payload["encoder"]))
+  save(RUN/"payload_identity.json",dict(met_reasoner=payload["met_reasoner"],extension_sha256=sha(RUN/"extension_cases.json"),worker_sha256=payload["worker_sha256"],capacity_advisor_sha256=payload["capacity_advisor_sha256"],compute_deadline_utc=payload["compute_deadline_utc"],encoder=payload["encoder"]))
   save(RUN/"controller_execution.json",dict(argv=sys.argv,python=sys.executable,source_revision=subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip(),worker_sha256=payload["worker_sha256"],frozen_sha256=sha(RUN/"frozen_v2.json"),started_at=now(),owner_pid=os.getpid(),unknown_hosted_run_id=None))
   update(phase="allocating_gpu",stage="Qwen_v2_inference",owner_pid=os.getpid(),owner_relinquished=False,active_design_sha256=sha(RUN/"design_v2.json"),next_action="Inspect this durable controller and resource ledger; no duplicate allocation.")
-  if now()>="2026-11-10T15:30:00":
+  if time.time()>=deadline_epoch():
    if collect(payload):
     for owned_record in ledger()["allocations"]:
      if not owned_record.get("deleted"):cleanup(owned_record)
    else:update(phase="deadline_preservation_pending",next_action="No new compute. Retain existing owned disk and recover terminal outputs before cleanup.")
-   closeout();return
+   if (RUN/"collection.json").exists():closeout()
+   return
   save(RUN/"controller_payload.json",payload)
-  if now()>="2026-11-10T15:30:00":
+  if time.time()>=deadline_epoch():
    retained=collect(payload)
    if retained:
     for old in ledger()["allocations"]:
      if not old.get("deleted"):cleanup(old)
    update(phase="deadline_closeout" if retained else "deadline_output_preservation_pending",next_action="No new compute; preserve outputs and reconcile owned cleanup")
-   closeout();return
-  record=allocate(payload);update(phase="running",resource_ledger=str(resourcefile()),gpu=record)
+   if retained:closeout()
+   return
+  machine_type=json.loads((RUN/"state.json").read_text()).get("allocation_machine_type",capacity_advisor.MACHINE_TYPE)
+  record=allocate(payload,machine_type);update(phase="running",resource_ledger=str(resourcefile()),gpu=record)
   while True:
    if collect(payload):
-    update(phase="inference_retained",stage="cleanup");cleanup(record);break
+    update(phase="inference_retained",stage="cleanup");cleanup(record)
+    if prepare_host_memory_fallback(record):
+     record=allocate(payload,capacity_advisor.HOST_MEMORY_FALLBACK);update(phase="running",gpu=record);continue
+    break
    live=compute("zones/"+record["zone"]+"/instances/"+NAME,absent=True)
    if live is None:
     update(phase="interrupted_gpu",next_action="GPU no longer exists and return object absent. Inspect disk/result/serial before a bounded recovery.")
@@ -221,7 +315,7 @@ def main():
    owned(live,record)
    elapsed=time.time()-record["created_epoch"]
    update(heartbeat=now(),gpu_elapsed_seconds=int(elapsed))
-   if elapsed>2400 or now()>="2026-11-10T15:30:00":
+   if elapsed>min(2400,record["provider_max_seconds"]-30) or time.time()>=deadline_epoch():
     # Preserve sole disk bytes on timeout rather than assert successful cleanup.
     raise RuntimeError("GPU envelope nearly exhausted; inspect serial/output immediately; no new compute")
    time.sleep(45)
@@ -229,5 +323,6 @@ def main():
 if __name__=="__main__":
  try:main()
  except Exception as e:
+  if "--plan-only" in sys.argv:raise
   event("controller_error",error=repr(e));update(phase="controller_attention",error=repr(e),next_action="Reconcile actual job, resource intents, cloud inventory and surviving locks before any recovery. Preserve compatible stages.")
   raise

@@ -1,0 +1,109 @@
+{
+  "checked_at": "2026-11-10T16:31:54.466662+00:00",
+  "python": "/home/pvd2112_columbia_edu/columbia-projects/jep/venv/bin/python",
+  "version": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+  "unittest_methods": 26,
+  "malformed_input_subtests": 12,
+  "failures": 0,
+  "errors": 0,
+  "source_compilation": "passed",
+  "closed_resume_exit": 0,
+  "frozen_prepare_guard": "expected refusal passed",
+  "sealed_scientific_files_unchanged": true,
+  "source_sha256": {
+    "controller.py": "ac7040880d6ef9ae82265c4ceeb4908d2e0fcd1821b984d1311b108959f8eed2",
+    "gpu_worker.py": "921c577feb463999a2950219905d3f721d54c9432dea4c6c350ab6e9253922f8",
+    "prepare_run.py": "c930cf4de97afa02856664729fd43ba4d9a59e62306a60f1e71f78e37e30bc9d",
+    "capacity_advisor.py": "b73ccb1eb95d4e247cfbe83e518eff535100141bd9204e186ddbe0cb2cae9413",
+    "test_capacity_advisor.py": "b1243e09394985b0102132d06a8e9feddfe0346a3b70ed3dbb3431bd4434faa7"
+  },
+  "scope": "CPU verification and simulated provider operations; GPU allocation disabled for this validation",
+  "full_controller_sequence_simulated": "create g2-standard-4; collect failed host-memory preflight; delete VM; delete disk; archive evidence; requery and create g2-standard-8; collect success; delete VM; delete disk; close out",
+  "published_at": "2026-11-10T16:34:21.478899+00:00",
+  "live_advisor_jobs": [
+    {
+      "id": "57cbcb1e803c4850b256af92b22eb4ca",
+      "status": "succeeded",
+      "argv": [
+        "/home/pvd2112_columbia_edu/columbia-projects/jep/venv/bin/python",
+        "/home/pvd2112_columbia_edu/columbia-worktrees/jep-moral-geometry-20261110/research/followup_20261110/execution/controller.py",
+        "--plan-only",
+        "--plan-output",
+        "/home/pvd2112_columbia_edu/columbia-projects/jep/data/moral-followup-20261110/diagnostics/ranked_allocator_plan_small_20261110.json"
+      ],
+      "resume_argv": [
+        "/home/pvd2112_columbia_edu/columbia-projects/jep/venv/bin/python",
+        "/home/pvd2112_columbia_edu/columbia-worktrees/jep-moral-geometry-20261110/research/followup_20261110/execution/controller.py",
+        "--plan-only",
+        "--plan-output",
+        "/home/pvd2112_columbia_edu/columbia-projects/jep/data/moral-followup-20261110/diagnostics/ranked_allocator_plan_small_20261110.json"
+      ],
+      "git_revision": "19f83d0b35646f3bcd9b21e9fd801596dcb07ea8",
+      "started_at": "2026-11-10T16:27:28.358651+00:00",
+      "finished_at": "2026-11-10T16:27:40.431837+00:00",
+      "exit_code": 0
+    },
+    {
+      "id": "242f207e802f4c27b4e8c050e52e5d8a",
+      "status": "succeeded",
+      "argv": [
+        "/home/pvd2112_columbia_edu/columbia-projects/jep/venv/bin/python",
+        "/home/pvd2112_columbia_edu/columbia-worktrees/jep-moral-geometry-20261110/research/followup_20261110/execution/controller.py",
+        "--plan-only",
+        "--plan-machine-type",
+        "g2-standard-8",
+        "--plan-output",
+        "/home/pvd2112_columbia_edu/columbia-projects/jep/data/moral-followup-20261110/diagnostics/ranked_allocator_plan_large_20261110.json"
+      ],
+      "resume_argv": [
+        "/home/pvd2112_columbia_edu/columbia-projects/jep/venv/bin/python",
+        "/home/pvd2112_columbia_edu/columbia-worktrees/jep-moral-geometry-20261110/research/followup_20261110/execution/controller.py",
+        "--plan-only",
+        "--plan-machine-type",
+        "g2-standard-8",
+        "--plan-output",
+        "/home/pvd2112_columbia_edu/columbia-projects/jep/data/moral-followup-20261110/diagnostics/ranked_allocator_plan_large_20261110.json"
+      ],
+      "git_revision": "19f83d0b35646f3bcd9b21e9fd801596dcb07ea8",
+      "started_at": "2026-11-10T16:31:24.983123+00:00",
+      "finished_at": "2026-11-10T16:31:38.618240+00:00",
+      "exit_code": 0
+    }
+  ],
+  "live_plans": {
+    "g2-standard-4": {
+      "path": "research/followup_20261110/diagnostics/ranked_allocator_plan_small_20261110.json",
+      "sha256": "9c612d34eb92b4bd54a817c045e7cc43947f1f32b930f851bab2a4bf1f6b9731",
+      "top_zone": "asia-east1-a",
+      "top_score": 3240.0,
+      "eligible": [
+        "us-central1-b"
+      ]
+    },
+    "g2-standard-8": {
+      "path": "research/followup_20261110/diagnostics/ranked_allocator_plan_large_20261110.json",
+      "sha256": "deb84272e9a178538bcb720b7de3751fd4f65f2a00cec3f92c50a9c70233e4e6",
+      "top_zone": "asia-east1-a",
+      "top_score": 3240.0,
+      "eligible": [
+        "us-central1-a"
+      ]
+    }
+  },
+  "sealed_file_hashes": {
+    "state.json": "864ba22cde15c14cd7371a220c19de1fe1a327178a1dc6ba07466c1d11728c97",
+    "design_v2.json": "1c0d93a9282ba4ac26958eaa6d6e69d853bc3ef780a4f2b6783231348159bef4",
+    "frozen_v2.json": "c99b13027ae33de73284f60fd5377bc8a91e8a39068fd9e83874cbf22840eb7f",
+    "dataset.json": "b292fb89e11473a3a48563fbc52cfb80cddb0fc046c73427a852cc8d99086dc3",
+    "tasks.json": "6c44b27d3de9bc52f835f4c8cfedbb787ef9e78e52f0dd65e699ae66bab5ca29",
+    "outbox/manifest.json": "e5143a2f4999695e5c44369c46df3a729aabbe1131b9e5d4ee5d81cf54aa0307",
+    "publication.json": "d50c3e385a056d8cda6217dbece6fd0affe235db9524c3feede85f8fd8e591e4"
+  },
+  "retained_run_phase": "closed_partial_capacity_blocked",
+  "task_resource_inventory": {
+    "instances": 0,
+    "disks": 0
+  },
+  "new_gpu_execution": "not requested or launched during allocator validation; expired experiment bounds remain enforced",
+  "model_fit_on_16_gib_host": "GPU smoke test remains unobserved; host-memory preflight and fallback behavior validated on CPU fixtures"
+}

@@ -1,13 +1,16 @@
 """Pinned Qwen adapter inference. Local shards first; one terminal transfer."""
 import contextlib,datetime as dt,hashlib,json,os,subprocess,sys,tarfile,time,traceback,urllib.request,urllib.parse
 from pathlib import Path
+import capacity_advisor
 import numpy as np
 import torch
 from transformers import AutoModel,AutoTokenizer,AutoModelForCausalLM
 from peft import LoraConfig,TaskType,get_peft_model
 R=Path("/var/lib/jep-moral-pilot");R.mkdir(parents=True,exist_ok=True)
 C=json.loads((R/"payload.json").read_text())
-START=time.monotonic();END=min(START+2100,dt.datetime(2026,11,10,15,30,tzinfo=dt.timezone.utc).timestamp()-time.time()+START)
+START=time.monotonic()
+deadline=min(dt.datetime.fromisoformat(C[k].replace("Z","+00:00")).timestamp() for k in ["compute_deadline_utc","lease_deadline_utc"])
+END=min(START+2100,deadline-time.time()+START)
 torch.set_num_threads(4)
 def digest(p):
  h=hashlib.sha256()
@@ -81,6 +84,13 @@ def reasoning_views():
 
 def run():
  check()
+ if digest(R/"capacity_advisor.py")!=C["capacity_advisor_sha256"]:raise RuntimeError("Host preflight source identity mismatch")
+ shape=C.get("allocation_machine_type",capacity_advisor.MACHINE_TYPE)
+ minimum=28 if shape==capacity_advisor.HOST_MEMORY_FALLBACK else 14
+ memory=capacity_advisor.host_memory_preflight(Path("/proc/meminfo").read_text(),minimum_total_gib=minimum)
+ memory.update(machine_type=shape,source_sha256=digest(R/"capacity_advisor.py"))
+ save(R/"host_memory_preflight.json",memory)
+ if not memory["passed"]:raise RuntimeError("HOST_MEMORY_PREFLIGHT_FAILED")
  subprocess.run([sys.executable,__file__,"--reasoning-only"],check=True,timeout=600)
  views=json.loads((R/"reasoning_views.json").read_text())["views"]
  import gc;gc.collect();torch.cuda.empty_cache()
@@ -183,11 +193,11 @@ if __name__=="__main__":
   reasoning_views();sys.exit(0)
  try:run()
  except BaseException as e:
-  save(R/"compute.json",dict(status="failed",source_sha256=digest(__file__),encoder=C["encoder"],error=repr(e),traceback=traceback.format_exc(),seconds=time.monotonic()-START))
+  save(R/"compute.json",dict(status="failed",source_sha256=digest(__file__),encoder=C["encoder"],failure_code="HOST_MEMORY_PREFLIGHT_FAILED" if str(e)=="HOST_MEMORY_PREFLIGHT_FAILED" else None,error=repr(e),traceback=traceback.format_exc(),seconds=time.monotonic()-START))
   traceback.print_exc()
  finally:
   # Always preserve completed shards and failures, even if full inference failed.
-  names=["compute.json","progress.json","embeddings.npz","layers.npz","reasoning_views.json","generated_tasks.json","environment.txt","tiny_e2e.json","startup.log","install.log"]
+  names=["compute.json","progress.json","embeddings.npz","layers.npz","reasoning_views.json","generated_tasks.json","environment.txt","tiny_e2e.json","startup.log","install.log","host_memory_preflight.json"]
   manifest={}
   for n in names:
    p=R/n
