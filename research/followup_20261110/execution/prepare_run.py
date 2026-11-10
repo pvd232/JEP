@@ -28,6 +28,6 @@ save(RUN/"design_v2.json",protocol);save(HERE.parent/"FOLLOWUP_PROTOCOL.json",pr
 save(RUN/"frozen_v2.json",dict(files={n:sha(RUN/n) for n in ["dataset.json","tasks.json","encoder_identity.json","design_v2.json"]}))
 if not (RUN/"state.json").exists():save(RUN/"state.json",dict(phase="ready",jobs=[],recovery_launches=0,generation=0,owner_run_id=None))
 # Runtime sources are checked in and reviewed independently from frozen data.
-for name in ["controller.py", "gpu_worker.py", "capacity_advisor.py"]:
+for name in ["controller.py", "gpu_worker.py", "gcp_provider.json"]:
  assert (HERE/name).is_file(), "Missing checked-in runtime source: "+name
 print("FOLLOWUP_FROZEN",len(tasks),"contexts",sha(RUN/"frozen_v2.json"))

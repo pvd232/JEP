@@ -1,0 +1,32 @@
+{
+  "provider_scripts": "/home/pvd2112_columbia_edu/.local/share/agent-skills/run-gcp-l4-job/scripts",
+  "worktree": "/home/pvd2112_columbia_edu/columbia-worktrees/jep-moral-geometry-20261110",
+  "run_dir": "/home/pvd2112_columbia_edu/columbia-projects/jep/data/moral-followup-20261110",
+  "design_path": "/home/pvd2112_columbia_edu/columbia-projects/jep/data/moral-followup-20261110/design_v2.json",
+  "project": "mantra-477901",
+  "resource_name": "jep-moral-followup-20261110-g1",
+  "labels": {
+    "task": "jep-moral-followup-20261110",
+    "owner": "pvd232",
+    "experiment": "moral-v2"
+  },
+  "cloud_project": "jep",
+  "service_account": "jep-gpu-jobs@mantra-477901.iam.gserviceaccount.com",
+  "source_image": "projects/deeplearning-platform-release/global/images/pytorch-2-9-cu129-ubuntu-2204-nvidia-580-v20261029",
+  "network": "default",
+  "disk_gb": 120,
+  "max_attempts": 9,
+  "max_lease_seconds": 2700,
+  "recovery_limit": 2,
+  "workload_bucket": "mantra-mlfg-prod-uscentral1-8e7a",
+  "completed_stage_paths": [
+    "embeddings.npz",
+    "shards"
+  ],
+  "provider_repository": "pvd232/agents",
+  "provider_revision": "31428a22c03fce5d634d2e4c23417570340002a0",
+  "provider_files": {
+    "gcp_l4_provider.py": "97eaca8631a21476cb7cf8171530552348ce1341c27d76e4caf70de5d06ff4b8",
+    "capacity_advisor.py": "479ff8c6c14f27bf03ffc04cc9f7ae42229409a6a25c7276e3831f8f6c0af94f"
+  }
+}
