@@ -1,0 +1,222 @@
+{
+  "reviewer": "lit01_conditioning",
+  "search_date": "2026-11-10",
+  "scope": "Conditional text similarity/representations and relevance to JEP hearing retrieval",
+  "status": "bounded systematic lane; not an exhaustive global systematic review",
+  "included_primary_papers": [
+    {
+      "id": "CSTS2023",
+      "title": "C-STS: Conditional Semantic Textual Similarity",
+      "authors": "Deshpande et al.",
+      "year": 2023,
+      "url": "https://aclanthology.org/2023.emnlp-main.345/",
+      "doi": "10.18653/v1/2023.emnlp-main.345",
+      "inspected": "PDF \u00a7\u00a72\u20133 and Limitations; pp2\u20135,9",
+      "data": "English image-caption-derived sentence pairs; human conditional scalar ratings",
+      "method": "Arbitrary relevant natural-language conditions; cross/bi/tri encoders and paired high/low condition objectives.",
+      "limit": "Task specificity already exists. Caption-derived ratings do not establish evidence-grounded harm interpretation or expert testimony retrieval.",
+      "novelty_counterexample": "Natural-language moral conditioning is an application of an existing task.",
+      "relevance": "Use paired condition-switch tests, but require separate JEP relevance labels."
+    },
+    {
+      "id": "LCSTS2024",
+      "title": "Linguistically Conditioned Semantic Textual Similarity",
+      "authors": "Tu et al.",
+      "year": 2024,
+      "url": "https://aclanthology.org/2024.acl-long.64/",
+      "doi": "10.18653/v1/2024.acl-long.64",
+      "inspected": "PDF \u00a7\u00a73.2\u20133.3,4 and typed-feature discussion; pp3\u20136",
+      "data": "Human reannotation of English C-STS validation; four trained annotators",
+      "method": "Rules distinguish binary comparisons, ambiguity, inference degree and invalid conditions; QA-derived answers support error identification and training.",
+      "limit": "It already addresses implicit/missing condition evidence; invalid instances are excluded rather than retained as an uncertainty-aware retrieval target.",
+      "novelty_counterexample": "Condition-grounded extraction or missing-information awareness is not wholly new.",
+      "relevance": "Extend toward explicit/inferred/unknown harm statuses with evidence spans and expert disagreement, rather than merely discarding unknowns."
+    },
+    {
+      "id": "HyperCL2024",
+      "title": "Hyper-CL: Conditioning Sentence Representations with Hypernetworks",
+      "authors": "Yoo et al.",
+      "year": 2024,
+      "url": "https://aclanthology.org/2024.acl-long.41/",
+      "doi": "10.18653/v1/2024.acl-long.41",
+      "inspected": "PDF \u00a7\u00a73.2\u20133.5,4; pp4\u20136",
+      "data": "C-STS and knowledge-graph completion",
+      "method": "Condition embedding generates a linear sentence projection; contrastive training, low-rank parameterization and cached condition networks.",
+      "limit": "Efficient condition-specific subspaces are established; these experiments do not test JEP expert relevance or uncertain harm evidence.",
+      "novelty_counterexample": "A condition-generated projection is prior art.",
+      "relevance": "Strong amortized baseline for many expert-selected criteria on a fixed testimony corpus."
+    },
+    {
+      "id": "CSR2024",
+      "title": "Varying Sentence Representations via Condition-Specified Routers",
+      "authors": "Lin et al.",
+      "year": 2024,
+      "url": "https://aclanthology.org/2024.emnlp-main.963/",
+      "doi": "10.18653/v1/2024.emnlp-main.963",
+      "inspected": "PDF \u00a72 method, \u00a7\u00a73.1\u20133.3 experiments/ablations; pp2\u20135",
+      "data": "C-STS and knowledge-graph completion",
+      "method": "Condition queries reweight sentence token hidden states within transformer blocks; trades interaction quality against reusable representations.",
+      "limit": "Routing salient tokens and efficient repeated conditioning are covered; no testimony-specific evidence sufficiency evaluation in inspected experiments.",
+      "novelty_counterexample": "Condition-sensitive attention/routing is already a method family.",
+      "relevance": "Benchmark response time, cached storage and expert retrieval quality under changing JEP criteria."
+    },
+    {
+      "id": "SEAVER2024",
+      "title": "SEAVER: Attention Reallocation for Mitigating Distractions in Language Models for Conditional Semantic Textual Similarity Measurement",
+      "authors": "Baixuan Li, Yunlong Fan, Zhiqiang Gao",
+      "year": 2024,
+      "url": "https://aclanthology.org/2024.findings-emnlp.5/",
+      "doi": "10.18653/v1/2024.findings-emnlp.5",
+      "inspected": "PDF \u00a7\u00a73.1\u20133.2 and4.1\u20134.2; locally rendered/read pp3\u20135",
+      "data": "C-STS-2023; supervised English conditional pair ratings",
+      "method": "Extracts sentence\u2013condition attention submatrices, constructs reweighting signals, augments hidden states, and scores with a regressor.",
+      "limit": "Already targets dilution by irrelevant features. Cross-encoding is not interchangeable with cached shared embeddings for retrieval.",
+      "novelty_counterexample": "Attention-based removal of irrelevant context is not novel.",
+      "relevance": "Use as a targeted pairwise reranking baseline, with corpus-scale cost measured separately."
+    },
+    {
+      "id": "CCL2025",
+      "title": "Conditional Semantic Textual Similarity via Conditional Contrastive Learning",
+      "authors": "Liu et al.",
+      "year": 2025,
+      "url": "https://aclanthology.org/2025.coling-main.306/",
+      "doi": "10.18653/v1/2025.coling-main.306",
+      "inspected": "PDF \u00a7\u00a73.2\u20133.3 and test-results Table3; pp3\u20136",
+      "data": "C-STS; bi/tri encoder experiments across five backbones",
+      "method": "Weighted adaptive and balanced contrastive losses combined with score regression address over-optimization and hard/controversial negatives.",
+      "limit": "Hard-negative balancing is established, but requires meaningful similarity targets. Expert-contested moral comparisons are not automatically false negatives.",
+      "novelty_counterexample": "More perturbations or hard negatives alone do not establish novelty.",
+      "relevance": "Preserve annotation uncertainty and use verified relational negatives rather than forcing every nearby case apart."
+    },
+    {
+      "id": "Reannotation2025",
+      "title": "Annotating Training Data for Conditional Semantic Textual Similarity Measurement using Large Language Models",
+      "authors": "Zhang et al.",
+      "year": 2025,
+      "url": "https://aclanthology.org/2025.emnlp-main.1373/",
+      "doi": "10.18653/v1/2025.emnlp-main.1373",
+      "inspected": "PDF \u00a7\u00a72.1\u20132.2 and AppendixC/D/E; pp2\u20134,10\u201313",
+      "data": "English C-STS conditions/ratings; original human and multiple LLM signals",
+      "method": "Refines condition wording and reannotates ratings with few-shot justified LLM outputs; discusses sentence/condition split overlap.",
+      "limit": "Cleaner task specification and overlap auditing are already contributions. Cleaned labels still require task-specific validity for JEP.",
+      "novelty_counterexample": "Automatic annotation cleanup is prior art; the user's audited version should be retained, not replaced.",
+      "relevance": "Use existing cleaned JEP cohorts and preserve original partitions and provenance."
+    },
+    {
+      "id": "CASE2026",
+      "title": "CASE \u2013 Condition-Aware Sentence Embeddings for Conditional Semantic Textual Similarity Measurement",
+      "authors": "Zhang et al.",
+      "year": 2026,
+      "url": "https://aclanthology.org/2026.eacl-long.231/",
+      "doi": "10.18653/v1/2026.eacl-long.231",
+      "inspected": "PDF method; \u00a7\u00a74.1\u20134.4,6\u20137; especially pp9\u201310",
+      "data": "Existing English C-STS datasets and reannotations",
+      "method": "Condition-token contextual pooling, condition subtraction, and shared supervised projection. \u00a74.4 also evaluates LoRA-tuned Qwen3-Embedding-8B.",
+      "limit": "English-only evaluation and unassessed social bias are explicit limitations. Conditional subtraction and Qwen C-STS adaptation are already covered.",
+      "novelty_counterexample": "User's Qwen adaptation, small projections and condition subtraction cannot be claimed as new ingredients.",
+      "relevance": "Essential baseline; strongest opportunity is testimony-specific validity and culturally grounded Spanish annotation."
+    },
+    {
+      "id": "SCS2026",
+      "title": "Focusing Condition: Inference-Time Self-Contrastive Steering Elicits Better Conditional Text Embeddings in LLMs",
+      "authors": "Cheng et al.",
+      "year": 2026,
+      "url": "https://aclanthology.org/2026.acl-long.50/",
+      "doi": "10.18653/v1/2026.acl-long.50",
+      "inspected": "PDF \u00a7\u00a74.2\u20134.3,5.1,6; AppendixE, Tables5\u20137; pp4\u20138,11\u201312",
+      "data": "Conditional clustering, STS and triplet tasks; AppendixE includes Spanish/German Amazon-review clustering",
+      "method": "Masks condition with attention/position modifications, contrasts conditional/unconditional attention outputs, then steers activations. Studies intervention and output layers.",
+      "limit": "Broad multilingual conditioning and layer analysis already exist. Spanish review clustering is not Spanish expert conditional-judgment validation.",
+      "novelty_counterexample": "Generic contrastive steering, layerwise conditioning and Spanish transfer are not defensible broad gaps.",
+      "relevance": "Use a faithful steering baseline if feasible; keep layer choice on development families and assess JEP evidence/meaning preservation."
+    }
+  ],
+  "search_log": [
+    {
+      "engine": "system2",
+      "queries": [
+        "site.aclanthology.org conditional semantic textual similarity condition embeddings 2026 CASE SCS",
+        "site.aclanthology.org conditional similarity condition specified routers SEAVER contrastive learning"
+      ],
+      "purpose": "Core methods and backward/forward citation leads"
+    },
+    {
+      "engine": "system1",
+      "queries": [
+        "\"Hyper-CL\" \"conditional\" Yoo 2024",
+        "\"conditional semantic textual similarity\" \"Spanish\" benchmark",
+        "\"conditional semantic textual similarity\" \"harm\" \"moral\"",
+        "\"conditional retrieval\" \"missing information\" embeddings"
+      ],
+      "purpose": "Authoritative verification and gap counterexample search"
+    }
+  ],
+  "inclusion": "Primary full-text methods or annotation papers directly studying conditional textual similarity, with inspected methods/evaluation sections.",
+  "exclusion": "Generic STS-only benchmarks, secondary mirrors, vision-only condition networks, and dynamic RAG trigger papers where conditional retrieval means deciding whether to retrieve.",
+  "snowballing": "Hyper-CL retrieved from CSR/CCL references; inspected CASE LoRA comparison and SCS appendices rather than relying on abstracts.",
+  "pending": [
+    {
+      "url": "https://arxiv.org/abs/2611.08778",
+      "title": "Semantic Conditional Similarity (SCS): A Formal Mathematical Framework",
+      "reason": "Very recent Nov5 preprint; different apparent task formulation; passed to parent for mathematics-lane full-text screening. Not used as verified support."
+    }
+  ],
+  "gaps": [
+    {
+      "id": "G1",
+      "claim_type": "synthesis/proposed task gap",
+      "claim": "Retain explicit, inferred and unsupported harm evidence as distinct conditional retrieval states instead of forcing every pair onto one scalar or dropping unknown-condition cases.",
+      "confidence": "moderate within inspected core; not a claim no broader uncertainty/NLI work exists",
+      "closest_prior": [
+        "LCSTS2024",
+        "Reannotation2025"
+      ],
+      "experiment": "Expert-adjudicated evidence-status + relevance labels for held-out JEP families; compare full text, QA/extractive cards, conditional encoder and reranker. Measure unsupported-inference rate, selective Recall@k and coverage."
+    },
+    {
+      "id": "G2",
+      "claim_type": "bounded application/evaluation gap",
+      "claim": "Spanish/Colombian testimony-specific conditional judgments grounded in expert interpretations and evidence, including implicit harms and contested meanings.",
+      "confidence": "moderate; Spanish conditional clustering already exists",
+      "closest_prior": [
+        "SCS2026",
+        "CASE2026"
+      ],
+      "experiment": "Paired Spanish and independently reviewed English cases with role-preserving paraphrases, culturally specific implicit harms and unknown facts. Evaluate by family/language and expert disagreement; never treat translation agreement as cultural validity."
+    },
+    {
+      "id": "G3",
+      "claim_type": "proposed comparative evaluation",
+      "claim": "Jointly test selective invariance and selective sensitivity under explicit normative interpretations on difficult cross-story retrieval, beyond easy surface-feature matching.",
+      "confidence": "plausible JEP evaluation contribution; generic conditionality/negative sampling are established",
+      "closest_prior": [
+        "CSTS2023",
+        "CCL2025",
+        "CSR2024",
+        "SCS2026"
+      ],
+      "experiment": "Freeze paired variants with the same factual profile versus altered consent, intention, control or beneficiary roles. Add condition-aware lexical/factual parsers and oracle evidence controls; report worst-family failures, not only mean accuracy."
+    },
+    {
+      "id": "G4",
+      "claim_type": "engineering/research recommendation",
+      "claim": "Compare amortized condition projection/routing with expensive joint conditioning under changing expert criteria and real corpus-scale retrieval budgets.",
+      "confidence": "useful application study; weak architectural novelty by itself",
+      "closest_prior": [
+        "HyperCL2024",
+        "CSR2024",
+        "CASE2026"
+      ],
+      "experiment": "Hold source passages and expert relevance fixed; measure Recall@k, latency, storage, update cost and coverage when conditions change. Avoid comparing only model parameter counts."
+    }
+  ],
+  "not_gaps": [
+    "Natural-language-conditioned text embeddings",
+    "Condition subtraction/residualization as a generic idea",
+    "Condition-generated projections or token routing",
+    "Layerwise conditioning analysis in general",
+    "Spanish conditional representation transfer in general",
+    "LoRA adapting Qwen3-Embedding-8B to C-STS",
+    "More synthetic negatives without task-specific validity"
+  ]
+}

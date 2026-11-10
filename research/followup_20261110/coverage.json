@@ -1,0 +1,891 @@
+{
+  "review_type": "bounded systematic scoping review",
+  "cutoff": "2026-11-10",
+  "generated_at_utc": "2026-11-10T13:30:09.599602+00:00",
+  "lanes": [
+    {
+      "lane": "lit01",
+      "ledger": "lit01/evidence_ledger.json",
+      "sha256": "17415e4907e3517d6a833a0b899f29b0698ef2c0c977a25116e365e3a3eebd8f",
+      "included_records": 9,
+      "reports": [
+        "lit01/REVIEW.md"
+      ],
+      "search_logs": [],
+      "embedded_search_and_scope": {
+        "search_log": [
+          {
+            "engine": "system2",
+            "queries": [
+              "site.aclanthology.org conditional semantic textual similarity condition embeddings 2026 CASE SCS",
+              "site.aclanthology.org conditional similarity condition specified routers SEAVER contrastive learning"
+            ],
+            "purpose": "Core methods and backward/forward citation leads"
+          },
+          {
+            "engine": "system1",
+            "queries": [
+              "\"Hyper-CL\" \"conditional\" Yoo 2024",
+              "\"conditional semantic textual similarity\" \"Spanish\" benchmark",
+              "\"conditional semantic textual similarity\" \"harm\" \"moral\"",
+              "\"conditional retrieval\" \"missing information\" embeddings"
+            ],
+            "purpose": "Authoritative verification and gap counterexample search"
+          }
+        ],
+        "inclusion": "Primary full-text methods or annotation papers directly studying conditional textual similarity, with inspected methods/evaluation sections.",
+        "exclusion": "Generic STS-only benchmarks, secondary mirrors, vision-only condition networks, and dynamic RAG trigger papers where conditional retrieval means deciding whether to retrieve.",
+        "pending": [
+          {
+            "url": "https://arxiv.org/abs/2611.08778",
+            "title": "Semantic Conditional Similarity (SCS): A Formal Mathematical Framework",
+            "reason": "Very recent Nov5 preprint; different apparent task formulation; passed to parent for mathematics-lane full-text screening. Not used as verified support."
+          }
+        ]
+      }
+    },
+    {
+      "lane": "lit02",
+      "ledger": "lit02/evidence_ledger.json",
+      "sha256": "2602ab70a695cbccb3f3e7b3c102d802fac0e0789a2170532bec5e12446b7e43",
+      "included_records": 10,
+      "reports": [
+        "lit02/review.md"
+      ],
+      "search_logs": [
+        {
+          "path": "lit02/search_log.json",
+          "sha256": "900e6fd3a60a2798d7f0ddc7ed376bbf0e7979a9acf50833796975b1bafa7d4d",
+          "record": {
+            "date": "2026-11-10",
+            "scope": "Ethical theory-conditioned moral similarity, moral geometry, MET/MET-D, reasoning-to-encoder, JEP applicability",
+            "engines": [
+              "web system2 initial coverage",
+              "web system1 verification"
+            ],
+            "queries": [
+              "ethical theory conditioned moral reasoning embeddings MET MET-D moral similarity geometry",
+              "moral sentence embeddings similarity conceptual spaces ethical principles human judgments",
+              "ethical theory conditioned moral reasoning representations hidden states deontology utilitarianism 2026",
+              "moral theories language models benchmark ETHICS MoralChoice moral sentence embedding Schramowski"
+            ],
+            "inclusion": "Primary empirical/methodological work directly bearing on representation, similarity, theoretical conditioning, rationale alignment or contextual sensitivity; publication/preprint available by cutoff; inspect methods and limitations.",
+            "exclusion": "News, aggregators, Wikipedia, abstract-only claims and broad ethical essays without direct methodological bearing. Secondary search results used only to locate originals.",
+            "included_primary": 10,
+            "not_fully_screened_candidates": [
+              "Do Large GPT Models Discover Moral Dimensions in Language Representations? arXiv2309.09397",
+              "Moral Association Graph doi10.1111/tops.12774",
+              "The Moral Choice Machine (2020)",
+              "A roadmap for evaluating moral competence in large language models (2026)"
+            ],
+            "limitations": "Bounded specialist review, not a complete bibliographic census. English query bias; no exhaustive database export or full forward-citation census. Ten papers inspected at relevant method/limitation sections, not every appendix. Broader adjacent literatures assigned to other agents. Do not interpret absence in this sample as proof of novelty.",
+            "metadata_warning": "Agreement Is Not Alignment HTML gives a July date inconsistent with its August arXiv identifier; cite identifier/version/year, not a confidently asserted day."
+          }
+        }
+      ],
+      "embedded_search_and_scope": {}
+    },
+    {
+      "lane": "lit03",
+      "ledger": "lit03/ledger.json",
+      "sha256": "5c65973f14bf61ebf23105261ba1ac9cbdb8e762edfccf1fa44b3023643b612b",
+      "included_records": 11,
+      "reports": [
+        "lit03/report.md"
+      ],
+      "search_logs": [],
+      "embedded_search_and_scope": {
+        "queries": [
+          "metric learning positive semidefinite indefinite similarity generalization nonmetric human similarity Tversky conditional similarity",
+          "conditional similarity networks Veit 2017 metric learning multiple aspects",
+          "indefinite similarity learning Krein space Loosli Canu Ong 2016",
+          "Xing Ng Jordan Russell 2002 distance metric learning clustering side information pdf",
+          "Information theoretic metric learning Davis Kulis Jain Sra Dhillon 2007 pdf",
+          "LMNN Weinberger Saul 2009 JMLR pdf",
+          "Chechik Sharma Shalit Bengio 2010 OASIS JMLR",
+          "Bellet robustness generalization metric learning arxiv",
+          "order embeddings Vendrov 2016",
+          "Representation Learning Weighted Inner Product Universal Approximation General Similarities arxiv",
+          "Tversky Neural Networks differentiable similarity",
+          "Semantic Conditional Similarity 2611.08778 fulltext"
+        ],
+        "inclusion": "Primary methods/theory with inspectable relevant sections; explicit geometry, asymmetry, capacity or conditional relation bearing on experiment. Preprints labeled.",
+        "exclusion": "Secondary summaries, abstract-only results treated as deep, generic embedding papers lacking a concrete relevant constraint, and unsupported moral-reasoning extrapolation.",
+        "coverage_limits": "No independent Spanish/Colombian expert retrieval evidence established in this geometry stream. No claim that all legal/restorative applications have been exhausted. Some older theoretical papers use arXiv author versions; identify inspected version. Literature claims confined to inspected sections.",
+        "screened_not_deep": [
+          {
+            "title": "Conditional Similarity Networks",
+            "authors": "Veit; Belongie; Karaletsos",
+            "year": 2017,
+            "url": "https://openaccess.thecvf.com/content_cvpr_2017/html/Veit_Conditional_Similarity_Networks_CVPR_2017_paper.html",
+            "reason": "Abstract/author-code screening; PDF retrieval/extraction blocked in available environment. Full-method review left to conditional-similarity stream; do not count as a deep inspection."
+          },
+          {
+            "title": "Information-Theoretic Metric Learning",
+            "year": 2007,
+            "reason": "Screened primary publication landing page only; excluded from deep count."
+          }
+        ]
+      }
+    },
+    {
+      "lane": "lit04",
+      "ledger": "lit04/ledger.json",
+      "sha256": "5a2bcc51037262fdb3a3fa50dd0dcca480d2fa7090868de6318aa0cc4e0cbe89",
+      "included_records": 12,
+      "reports": [
+        "lit04/review.md"
+      ],
+      "search_logs": [],
+      "embedded_search_and_scope": {
+        "search_log": [
+          {
+            "query": "CheckList behavioral testing capabilities invariance directional tests",
+            "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+            "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+          },
+          {
+            "query": "contrast sets local decision boundaries Gardner 2020",
+            "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+            "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+          },
+          {
+            "query": "counterfactually augmented data effectiveness Joshi He 2022",
+            "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+            "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+          },
+          {
+            "query": "CNLI SNLI same-size augmentation Huang Bowman",
+            "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+            "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+          },
+          {
+            "query": "Polyjuice counterfactual generation task-dependent label change",
+            "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+            "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+          },
+          {
+            "query": "Tailor semantic roles passive voice perturbations",
+            "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+            "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+          },
+          {
+            "query": "HANS syntactic heuristics role reversal",
+            "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+            "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+          },
+          {
+            "query": "PAWS-X Spanish adversarial paraphrase",
+            "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+            "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+          },
+          {
+            "query": "sentence embedding semantic invariance negation ALIGN-SIM",
+            "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+            "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+          },
+          {
+            "query": "2025 2026 counterfactual augmentation invariant evaluation embeddings",
+            "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+            "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+          },
+          {
+            "query": "ConSERT token embedding augmentation",
+            "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+            "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+          },
+          {
+            "query": "restorative justice counterfactual embeddings",
+            "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+            "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+          },
+          {
+            "query": "transitional justice semantic augmentation",
+            "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+            "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+          },
+          {
+            "query": "conditional semantic invariance moral",
+            "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+            "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+          },
+          {
+            "query": "JEP harm retrieval language model",
+            "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+            "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+          }
+        ],
+        "exclusions": [
+          {
+            "title": "ConSERT (Yan et al., 2021)",
+            "url": "https://aclanthology.org/2021.acl-long.393.pdf",
+            "reason": "Methods inspected as background; token/dropout augmentation is less domain-specific than the 12 retained studies; no claim semantic preservation is proved."
+          },
+          {
+            "title": "Large Model Semantic Parsing of Court Records with Bias Calibration Benchmark for Restorative Justice",
+            "url": "https://doi.org/10.54254/2755-2721/2026.30609",
+            "reason": "Publisher primary landing page inspected only; methods/PDF and reproducible artifacts not verified. Published 18 December 2025 despite 2026 DOI suffix; data available on request. Retain as novelty-warning lead, not verified quantitative evidence."
+          },
+          {
+            "title": "Secondary summaries, ResearchGate mirrors and generic augmentation surveys",
+            "reason": "Excluded from evidentiary core when a primary paper was available."
+          }
+        ]
+      }
+    },
+    {
+      "lane": "lit05",
+      "ledger": "lit05/evidence_ledger.json",
+      "sha256": "57217c201bdb2c4891947a67f9f02703cdae68f33705e39ac12c461202466d66",
+      "included_records": 11,
+      "reports": [
+        "lit05/report.md"
+      ],
+      "search_logs": [
+        {
+          "path": "lit05/search_log.json",
+          "sha256": "3eaa977af098018c9ee58860a1a3380ecdf5782ed7fced9c8fa77dce6767b954",
+          "record": {
+            "reviewer": "lit05_restorative",
+            "date": "2026-11-10",
+            "scope": "Restorative/transitional justice harm-response relations for JEP hearing retrieval",
+            "review_type": "Structured scoped literature search and critical reading; not a complete PRISMA systematic review",
+            "queries": [
+              "site.jep.gov.co TOAR lineamientos daño reparacion restaurativa participacion victimas sanciones propias PDF",
+              "restorative justice reparation harm computational NLP remedy retrieval transitional justice paper",
+              "What Comes After Harm Mapping Reparative Actions AI justice frameworks paper",
+              "site.ohchr.org basic principles guidelines reparation restitution compensation rehabilitation satisfaction guarantees non repetition 60/147",
+              "site.aclanthology.org K19-1085 analogy preserving sentence embeddings",
+              "\"10.54254/2755-2721/2026.30609\"",
+              "\"Large Model Semantic Parsing\" \"Restorative Justice\" data results"
+            ],
+            "inclusion": "Primary empirical/conceptual research or official standards bearing directly on repair adequacy, victim agency, typed semantic relations, or claimed computational restorative justice.",
+            "excluded": [
+              {
+                "item": "After Harm: A Plea for Moral Repair after Algorithms Have Failed",
+                "reason": "Initial page metadata accessible, full relevant body later CAPTCHA blocked; not counted as deeply inspected."
+              },
+              {
+                "item": "ResearchGate / arxivlens / paperswithnocode duplicates",
+                "reason": "Used only to discover primary publisher versions."
+              },
+              {
+                "item": "Computer vision in transitional justice review",
+                "reason": "Outside text relation/retrieval scope; no claim drawn."
+              },
+              {
+                "item": "OHCHR original instrument page",
+                "reason": "HTTP403; official UN explanatory note included instead, authority level recorded."
+              }
+            ],
+            "snowballing": [
+              "Xiao justice-framework references → UN reparation forms and algorithmic reparation critiques",
+              "Algorithmic reparation → Doyle critique and Gilmore/Moffett victim agency",
+              "Sentence relation-vector hypothesis → Diallo and Zhu/deMelo",
+              "Parent/Lit04 alert → Li fullPDF scrutiny"
+            ],
+            "included_sources": 11,
+            "composition": "4 official/explanatory institutional sources and7 research papers; JEP pages overlap and are not independent empirical studies.",
+            "coverage_limits": [
+              "No exhaustive multilingual database export or complete citation-network traversal.",
+              "No statement that no JEP-relevant retrieval benchmark exists anywhere.",
+              "No empirical metrics from inaccessible sources treated as verified.",
+              "Legal sources define research annotation dimensions, not automatic case-specific judgments."
+            ]
+          }
+        }
+      ],
+      "embedded_search_and_scope": {}
+    },
+    {
+      "lane": "lit06",
+      "ledger": "lit06/evidence.json",
+      "sha256": "6729669edf0625663931861ab0df1b876e095bcf846859074ef103c1a1751355",
+      "included_records": 11,
+      "reports": [
+        "lit06/review.md"
+      ],
+      "search_logs": [
+        {
+          "path": "lit06/search_log.json",
+          "sha256": "8f3a2071713482e579c16d8994921b5d62fc3aea02610b496633515be5f48b87",
+          "record": {
+            "date": "2026-11-10",
+            "type": "targeted systematic scoping lane",
+            "inclusion": [
+              "Primary legal retrieval/analogy papers with accessible full text",
+              "Methods relevant to factual, element, reasoning, hierarchical, synthetic or evidence retrieval",
+              "Published/available by 2026-11-10"
+            ],
+            "exclusion": [
+              "Survey-only novelty evidence",
+              "Vendor/social/news claims",
+              "Abstract-only documents from deep evidence"
+            ],
+            "searches": [
+              {
+                "query": "site.aclanthology.org KELLER legal case retrieval element 2024",
+                "status": "screened; KELLER and Elem4LCR included"
+              },
+              {
+                "query": "site.aclanthology.org legal case retrieval reasoning facts implicit legal relevance 2025 2026",
+                "status": "screened; newer primary work included"
+              },
+              {
+                "query": "site.aclanthology.org legal case retrieval benchmark COLIEE LeCaRD CAIL",
+                "status": "screened and references snowballed"
+              },
+              {
+                "query": "\"DELTA\" \"Structural Word Alignment\" arxiv",
+                "status": "preprint full-text inspected; final AAAI page access unsuccessful"
+              },
+              {
+                "query": "\"IOT-Match\" \"Explainable\" legal case matching paper",
+                "status": "abstract/code screened; full text not accessible, excluded from deep evidence"
+              },
+              {
+                "query": "\"LeCaRDv2\" legal case retrieval dataset primary",
+                "status": "arxiv full text inspected"
+              },
+              {
+                "query": "\"JEP\" \"retrieval\" \"harm\" embeddings; \"Colombia\" \"transitional justice\" \"semantic\" retrieval; \"Spanish\" \"legal case retrieval\" benchmark; \"victim\" \"narrative\" \"legal retrieval\" harm",
+                "status": "output truncated; NOT adjudicated; NOT negative evidence of absence"
+              }
+            ],
+            "snowballing": "Followed papers' comparisons and dataset references to KELLER, Elem4LCR, LeCaRDv2, DELTA, NS-LCR and benchmark designs. Updated retrieval searches surfaced 2026 work; included close counterexamples rather than claiming earlier methods novel.",
+            "screened_not_deep": [
+              {
+                "title": "A Retrieval-Augmented Contrastive Framework for Legal Case Retrieval Based on Event Information",
+                "year": 2025,
+                "url": "https://proceedings.mlr.press/v260/fan25b.html",
+                "reason": "Abstract inspected; PDF octetstream unsupported"
+              },
+              {
+                "title": "IOT-Match",
+                "year": 2022,
+                "url": "https://arxiv.org/abs/2207.04182",
+                "reason": "Abstract/code landing inspected; PDF unavailable"
+              },
+              {
+                "title": "Legal Case Retrieval survey",
+                "year": 2024,
+                "reason": "Discovery map only; not primary novelty evidence"
+              }
+            ],
+            "limitations": [
+              "Not a PRISMA-complete database export or deduplicated exhaustive review",
+              "Domain-specific Spanish/JEP search requires additional coverage",
+              "Primary full-text targeted reads; results not reproduced",
+              "Human testimony labels and JEP reviewer studies proposed, not available or fabricated",
+              "Publication date/venue checked for 2026 papers; cutoff respected"
+            ]
+          }
+        }
+      ],
+      "embedded_search_and_scope": {
+        "review_status": "Targeted systematic scoping lane; not an exhaustive fieldwide absence proof"
+      }
+    },
+    {
+      "lane": "lit07",
+      "ledger": "lit07/evidence_ledger.json",
+      "sha256": "4ed13c430a2202d63a195aeab132a5a3fa56aa6265ce91738cc289f318d770ba",
+      "included_records": 10,
+      "reports": [
+        "lit07/review.md"
+      ],
+      "search_logs": [
+        {
+          "path": "lit07/search_log.json",
+          "sha256": "da984893a9a67d00ff7d82dc4b8b1385aded537c0dd3acd45785db9a07585861",
+          "record": {
+            "date": "2026-11-10",
+            "scope": "Layerwise ethical representations; causal probe validity; rationale distillation for retrieval",
+            "engines": [
+              "system2",
+              "system1"
+            ],
+            "queries": [
+              "site.aclanthology.org/2026 \"Do Morals Guide\"",
+              "site.arxiv.org/abs/2603.23659",
+              "site.aclanthology.org/2026 \"ContextualMoralChoice\"",
+              "causal probing moral representations language models activation steering moral foundations",
+              "\"ContextualMoralChoice\" Sauter Schirmer",
+              "\"Exploring and steering the moral compass\" 2405.17345",
+              "site.proceedings.neurips.cc 2021 Causal Abstractions Neural Networks Geiger",
+              "site.aclanthology.org 2021 amnesic probing Elazar Ravfogel",
+              "site.aclanthology.org reasoning distillation sentence embeddings rationales retrieval",
+              "Belinkov probing classifiers shortcomings Hewitt Liang control tasks",
+              "Turpin unfaithful explanations chain of thought 2023"
+            ],
+            "eligibility": {
+              "include": "Primary research available by Nov10 2026 with methods bearing directly on ethical layer representations, intervention validation or reasoning-to-retrieval learning. Original methods sections required.",
+              "exclude": "Abstract-only hits, unverified numerical search snippets, generic moral behavior without representation/retrieval relevance, later literature.",
+              "snowball": "Followed methodological citations from moral representation sources to control probes, amnesic probing and causal abstraction; followed rationale retrieval query to RADIO.",
+              "limits": "Single-agent bounded lane; no reproducible full database export, deduplicated global PRISMA counts or code replication. Parent synthesis must deduplicate across lanes."
+            },
+            "deep_verified_primary_count": 10,
+            "methodology_review_read": {
+              "title": "Probing Classifiers: Promises, Shortcomings, and Advances",
+              "author": "Belinkov",
+              "year": 2022,
+              "url": "https://aclanthology.org/2022.cl-1.7.pdf",
+              "doi": "10.1162/coli_a_00422",
+              "sections": "4.1–4.3 and conclusion",
+              "role": "Interpretive context only; not counted among ten primary papers."
+            },
+            "discovered_not_verified": [
+              {
+                "url": "https://arxiv.org/abs/2603.16017",
+                "title_hint": "Understanding Moral Reasoning Trajectories",
+                "status": "Pending full-text methods check; excluded from evidentiary conclusions."
+              },
+              {
+                "url": "https://arxiv.org/abs/2609.30405",
+                "title_hint": "Adaptive Multi-Value Control/AIMES",
+                "status": "Pending full-text check."
+              },
+              {
+                "url": "https://aclanthology.org/2026.findings-emnlp.858/",
+                "title_hint": "Scenario-based Probing and Steering Cultural Values",
+                "status": "Pending full-text check; cultural novelty uncertainty remains."
+              },
+              {
+                "url": "https://aclanthology.org/2026.findings-emnlp.2432/",
+                "title_hint": "Moral Trajectories",
+                "status": "Pending full-text check."
+              }
+            ],
+            "artifact_policy": "Own review directory only; no git, compute-job, billing or infrastructure changes."
+          }
+        }
+      ],
+      "embedded_search_and_scope": {}
+    },
+    {
+      "lane": "lit08",
+      "ledger": "lit08/evidence_ledger.json",
+      "sha256": "e7302c1fa352f383f23989deb12e31fde6d9b7e7e1b1fc3d052b8c8d197b758f",
+      "included_records": 9,
+      "reports": [
+        "lit08/review.md"
+      ],
+      "search_logs": [
+        {
+          "path": "lit08/search_log.json",
+          "sha256": "b8b1985a4773dca3e25130deee7adbe68469809854ec9530b73715752598e2a6",
+          "record": {
+            "cutoff": "2026-11-10",
+            "queries": [
+              "Spanish legal NLP benchmark Colombian legal language models COLIEE MultiLegalPile",
+              "Colombia JEP natural language processing testimonies harms indigenous cultural collective damage",
+              "multilingual moral benchmark culture language values MCLASH BLEnD",
+              "BLEnD benchmark everyday knowledge diverse cultures 2024 ACL",
+              "Spanish Legalese Language Model Corpora RoBERTalex arxiv",
+              "\"Transitional justice and other-than-human harm\" pdf",
+              "JEP daño colectivo territorial espiritual procesamiento lenguaje testimonios minería texto audiencias Caso 03",
+              "\"Colombia\" \"cultural\" \"moral\" \"embeddings\"",
+              "\"Legal-ES\" \"Samy\" \"2020\" corpus",
+              "\"Communities in restorative justice\" \"Colombia\" methods"
+            ],
+            "engines": "web system2 plus system1 targeted verification; primary URLs/PDFs followed",
+            "inclusion": [
+              "Primary research body available and methods/limits inspected",
+              "Direct Colombian/JEP relevance or necessary Spanish/multilingual cultural comparator",
+              "Official JEP institutional source kept separate from experiments"
+            ],
+            "exclusion": [
+              "Secondary summaries as scientific evidence",
+              "Abstract-only source counted as full review",
+              "Generic resources added solely to increase count"
+            ],
+            "counts": {
+              "research_bodies": 8,
+              "official_normative": 1,
+              "uninspected_access_limited_leads": 2
+            },
+            "limitations": [
+              "Bounded scoped search; no exhaustive novelty guarantee",
+              "No invented community/expert annotation",
+              "No cross-paper pooled performance comparison",
+              "MEL HTML/date inconsistency retained"
+            ],
+            "full_text_access": "Web primary HTML/PDF; Columbia connector PDF extraction; reading copies met.pdf and colombian.pdf excluded from intended publication"
+          }
+        }
+      ],
+      "embedded_search_and_scope": {
+        "unverified": [
+          {
+            "url": "https://doi.org/10.1080/13642987.2025.2502561",
+            "reason": "Publisher body inaccessible; not used as inspected evidence."
+          },
+          {
+            "url": "https://doi.org/10.3389/fsoc.2026.1936377",
+            "reason": "Conceptual JEP/restorative-community analysis identified; PMC access challenge; body not counted."
+          }
+        ]
+      }
+    },
+    {
+      "lane": "lit09",
+      "ledger": "lit09/evidence_ledger.json",
+      "sha256": "ca5fbe1a37239344c9506d72bf60a2ab8043f5fcdc56ff5b65132217d7d10ee2",
+      "included_records": 11,
+      "reports": [
+        "lit09/review.md"
+      ],
+      "search_logs": [
+        {
+          "path": "lit09/search_log.json",
+          "sha256": "463406303a18d84c247a95bb8934bda730a00ad468af82cf14b74b70ed38cfd0",
+          "record": {
+            "reviewer": "lit09_evaluation",
+            "cutoff": "2026-11-10",
+            "scope": "Benchmark validity and evaluation for conditional harm/reparation retrieval",
+            "protocol": {
+              "include": "Primary papers whose methods bear on perturbation validity, dependence, corpus overlap, incomplete/disputed relevance, selective retrieval or effort; recent direct novelty counterexamples included",
+              "exclude": "Uninspected abstract-only empirical claims, blogs, unrelated acronym JEP, cross-task numerical synthesis",
+              "screening": "Targeted systematic concept search plus backward/forward pointers; not database-complete PRISMA or exhaustive temporal coverage",
+              "languages": "Searches mainly English. Spanish/JEP substantive scholarship delegated to other lanes.",
+              "body_inspection": "Methods/limitations and selected appendices explicitly recorded in ledger; no assertion all pages were read"
+            },
+            "queries": [
+              [
+                "system2",
+                "site.aclanthology.org Checklist Beyond Accuracy behavioral testing NLP 2020"
+              ],
+              [
+                "system2",
+                "site.aclanthology.org Contrast Sets evaluating NLP models local decision boundaries 2020"
+              ],
+              [
+                "system2",
+                "site.acl anthology.org statistical significance tests NLP bootstrap paired samples Berg Kirkpatrick 2012 (malformed domain; corrected through direct ACL paper access)"
+              ],
+              [
+                "system2",
+                "site.proceedings.mlr.press selective classification deep neural networks Geifman El Yaniv 2017"
+              ],
+              [
+                "system2",
+                "Buckley Voorhees 2004 retrieval evaluation incomplete information bpref pdf"
+              ],
+              [
+                "system2",
+                "Cormack Grossman 2014 evaluation machine learning protocols technology assisted review pdf"
+              ],
+              [
+                "system2",
+                "Plank 2022 problem human label variation NLP pdf"
+              ],
+              [
+                "system2",
+                "Lee 2022 deduplicating training data makes language models better acl"
+              ],
+              [
+                "system1",
+                "\"JEP\" retrieval evaluation harm reparation benchmark expert uncertainty"
+              ],
+              [
+                "system1",
+                "\"conditional retrieval\" \"disagreement\" evaluation"
+              ],
+              [
+                "system1",
+                "\"risk coverage\" \"retrieval\" selective prediction evaluation benchmark"
+              ]
+            ],
+            "included_ids": [
+              "checklist",
+              "contrast",
+              "dror",
+              "bootstrap",
+              "dedup",
+              "variation",
+              "bpref",
+              "selective",
+              "spiral",
+              "countermem",
+              "evirag"
+            ],
+            "excluded_or_pending": [
+              {
+                "title": "Evaluation of Machine-Learning Protocols for Technology-Assisted Review in Electronic Discovery",
+                "authors": "Cormack and Grossman",
+                "year": 2014,
+                "doi": "10.1145/2600428.2609601",
+                "status": "pending primary methods inspection",
+                "reason": "Author bibliography located; primary PDF/study links returned 404. No detailed results asserted."
+              },
+              {
+                "title": "CARGO: Context-Aware Retrieval-Gated Evaluation of Agentic AI in Production",
+                "url": "https://arxiv.org/abs/2609.30471",
+                "status": "lead only",
+                "reason": "Search identified; primary body not sufficiently inspected for inclusion."
+              },
+              {
+                "title": "Do LLMs Know When Evidence is Insufficient?",
+                "url": "https://www.techscience.com/cmc/v89n1/68467/html",
+                "status": "lead only",
+                "reason": "Identified but not deeply inspected within bounded lane."
+              },
+              {
+                "title": "Consistency-Aware Judgments",
+                "url": "https://huggingface.co/datasets/SoroushVahidi/consistency-aware-judgments",
+                "status": "lead only",
+                "reason": "Dataset card lead, no adequate primary paper-method review."
+              },
+              {
+                "title": "Judgment Event Protocol (IETF)",
+                "status": "excluded",
+                "reason": "Unrelated acronym collision; not Colombia JEP."
+              }
+            ],
+            "snowballing": [
+              {
+                "from": "SelectiveNet and selective prediction search",
+                "to": "CONCURRENTQA/SPIRAL §6",
+                "outcome": "Included direct retrieval risk-coverage precedent"
+              },
+              {
+                "from": "Evidence intervention/disagreement targeted search",
+                "to": "CounterMem 2026; EVIRAG 2026",
+                "outcome": "Included methods/limitations and selected appendix discussion; close prior-art counterexamples"
+              }
+            ],
+            "execution_audit": {
+              "remote_files_read": [
+                "benchmark/cases.json",
+                "benchmark/execution.json"
+              ],
+              "fixture": "12 author-synthetic English families, 48 variants, 6 dev/6 test, not expert labels",
+              "resources": "No training jobs, cloud resource changes, git operations or publications performed by this lane"
+            },
+            "publication_allowlist": [
+              "review.md",
+              "evidence_ledger.json",
+              "search_log.json"
+            ],
+            "copyright_cache_exclude": [
+              "*.pdf",
+              "raw extracted article text"
+            ],
+            "limitations": [
+              "Search log captures concept-query families; search service may return overlapping results and does not provide a unique de-duplicated screening population.",
+              "No formal overall recall estimate for this literature search.",
+              "No claim of comprehensive Spanish ethical/legal scholarship in this lane."
+            ]
+          }
+        }
+      ],
+      "embedded_search_and_scope": {}
+    },
+    {
+      "lane": "lit10",
+      "ledger": "lit10/evidence_ledger.json",
+      "sha256": "cbd6587d599cd62b30c0aa98be1441751055042c158887361430456ca30249fb",
+      "included_records": 11,
+      "reports": [
+        "lit10/review.md"
+      ],
+      "search_logs": [
+        {
+          "path": "lit10/search_log.json",
+          "sha256": "4a727d61f39292e203ddf5172fa393a188c43232d8ffc892b71fe5c45bde9b6a",
+          "record": {
+            "date": "2026-11-10",
+            "eligibility": {
+              "include": [
+                "Primary methods or empirical fieldwork relevant to annotation cost, disagreement, perspective conditioning, LLM labeling or meaningful participation.",
+                "Primary conceptual papers included only as conceptual evidence, never as completed experiments.",
+                "Published or available by review date; body methods/limitations inspected for included sources."
+              ],
+              "exclude": [
+                "Search-only results from substantive efficacy claims.",
+                "Nonprimary commentary from methods evidence.",
+                "Claiming human labels, expert hours or Spanish transfer from synthetic/English results."
+              ]
+            },
+            "search_process": "Targeted topic searches and backward/forward leads from Plank, perspectivist labeling, ACTOR and annotation-cost papers; primary publisher or author-hosted versions opened. Earlier exploratory queries are not exhaustively recoverable from the retained task summary; listed queries below are exact final verification queries. No PRISMA flow counts claimed.",
+            "exact_queries": [
+              {
+                "engine": "system2",
+                "q": "\"active learning\" \"annotator\" \"disagreement\" annotation cost"
+              },
+              {
+                "engine": "system2",
+                "q": "\"participatory\" \"victim\" NLP annotation transitional justice Colombia"
+              },
+              {
+                "engine": "system2",
+                "q": "\"weak supervision\" \"human rights\" \"Spanish\" annotation"
+              },
+              {
+                "engine": "system2",
+                "q": "\"expert annotation\" \"preference elicitation\" NLP"
+              },
+              {
+                "engine": "system1",
+                "q": "\"weak supervision\" \"human rights\" \"Spanish\" annotation"
+              },
+              {
+                "engine": "system1",
+                "q": "\"Beyond Victims’ Mere Presence\" full text"
+              }
+            ],
+            "included": [
+              "plank2022",
+              "fleisig2024",
+              "jiang2022",
+              "actor2023",
+              "daal2023",
+              "haertel2008",
+              "ringger2008",
+              "jury2022",
+              "gilardi2023",
+              "suresh2024",
+              "dewaardt2019"
+            ],
+            "additional_screened": [
+              {
+                "title": "Beyond Consensus: Perspectivist Modeling and Evaluation of Annotator Disagreement in NLP",
+                "url": "https://arxiv.org/abs/2601.09065",
+                "status": "search lead; body not inspected; no efficacy conclusion"
+              },
+              {
+                "title": "When Is Data Annotation Participatory? A Comparative Study of Authority in AI Data Work",
+                "identifier": "SSRN 6983779",
+                "status": "search lead; body not inspected"
+              },
+              {
+                "title": "CrowdTruth 2.0",
+                "status": "search lead; weak-supervision method not inspected deeply"
+              },
+              {
+                "title": "Communities in restorative justice: insights from Colombia’s Special Jurisdiction for Peace",
+                "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13647457/",
+                "status": "search lead for domain lane; not relied upon"
+              },
+              {
+                "title": "How call-and-response facilitates restorative dialogic listening",
+                "doi": "10.1080/03078833.2026.2683367",
+                "status": "search lead for hearing/participation lane; not relied upon"
+              },
+              {
+                "title": "Active Learning++: Incorporating Annotator's Rationale using Local Model Explanation",
+                "url": "https://arxiv.org/abs/2009.04568",
+                "status": "search lead; no novelty claim for rationales"
+              }
+            ],
+            "coverage_limit": "Eleven deeply inspected sources; no exhaustive database harvest, deduplicated global count or comprehensive preference-elicitation/weak-supervision review. Strong prior-art counterexamples, moderate local gap confidence."
+          }
+        }
+      ],
+      "embedded_search_and_scope": {
+        "limits": [
+          "No prospective JEP annotation experiment executed by this reviewer.",
+          "No expert availability, consent, human labels or hour savings assumed.",
+          "DOI null means not separately verified, not absent.",
+          "Primary-body sections inspected through publisher/author-hosted text; report distinguishes conceptual and empirical evidence.",
+          "Internal cached PDFs must not be included in GitHub publication."
+        ]
+      }
+    }
+  ],
+  "counts": {
+    "lanes": 10,
+    "raw_included_lane_records": 105,
+    "deduplicated_included_sources": 98,
+    "duplicate_records_collapsed": 7,
+    "official_institutional_or_normative_unique_sources": 5,
+    "cross_lane_duplicate_studies": 7
+  },
+  "deduplication": {
+    "procedure": "Union identities by normalized DOI, version-stripped arXiv ID, canonical URL (ACL .pdf/landing equivalence), then Unicode normalized title. Preserve all lane records and statuses. No quantitative pooling.",
+    "merges": [
+      {
+        "left": 64,
+        "right": 14,
+        "matched": "doi:10.18653/v1/2026.acl-long.2002"
+      },
+      {
+        "left": 65,
+        "right": 15,
+        "matched": "arxiv:2603.23659"
+      },
+      {
+        "left": 68,
+        "right": 18,
+        "matched": "url:https://aclanthology.org/2026.emnlp-main.178"
+      },
+      {
+        "left": 80,
+        "right": 9,
+        "matched": "arxiv:2607.11736"
+      },
+      {
+        "left": 83,
+        "right": 30,
+        "matched": "doi:10.18653/v1/2020.acl-main.442"
+      },
+      {
+        "left": 84,
+        "right": 31,
+        "matched": "doi:10.18653/v1/2020.findings-emnlp.117"
+      },
+      {
+        "left": 94,
+        "right": 88,
+        "matched": "url:https://aclanthology.org/2022.emnlp-main.731"
+      }
+    ],
+    "version_rule": "Preprint/conference records merged only on shared identity or title. Version details remain original records.",
+    "limits": "Different titles/URLs without shared identity can remain unresolved; citation-only titles are not guessed. Pending/screened sources are preserved in lane logs rather than promoted into included counts."
+  },
+  "coverage_limits": [
+    "No reconstructed global database hit/screening denominator or PRISMA flow; lane query logs are bounded and some early queries were not exhaustively retained.",
+    "Source coverage and searches are heterogeneous; no dual independent screening, saturation or exhaustive novelty claim.",
+    "Normative official sources and position papers are included for construct definition, not counted as empirical performance evidence.",
+    "Weak supervision/preference elicitation not deeply reviewed in lane10. Inaccessible ecological/collective-justice leads remain open in lane08.",
+    "No pooled effect size across incompatible tasks, datasets, or supervision sources.",
+    "Recent preprints and metadata require version-sensitive citation. Machidon2026 HTML date and arXiv identity conflict; exact posting day unresolved."
+  ],
+  "publication_allowlist": [
+    "REVIEW_PROTOCOL.md",
+    "SYNTHESIS.md",
+    "merged_studies.json",
+    "coverage.json",
+    "lit01/evidence_ledger.json",
+    "lit01/REVIEW.md",
+    "lit02/evidence_ledger.json",
+    "lit02/review.md",
+    "lit02/search_log.json",
+    "lit03/ledger.json",
+    "lit03/report.md",
+    "lit04/ledger.json",
+    "lit04/review.md",
+    "lit05/evidence_ledger.json",
+    "lit05/report.md",
+    "lit05/search_log.json",
+    "lit06/evidence.json",
+    "lit06/review.md",
+    "lit06/search_log.json",
+    "lit07/evidence_ledger.json",
+    "lit07/review.md",
+    "lit07/search_log.json",
+    "lit08/evidence_ledger.json",
+    "lit08/review.md",
+    "lit08/search_log.json",
+    "lit09/evidence_ledger.json",
+    "lit09/review.md",
+    "lit09/search_log.json",
+    "lit10/evidence_ledger.json",
+    "lit10/review.md",
+    "lit10/search_log.json"
+  ],
+  "publication_exclusions": [
+    "All cached PDFs, extracted full text, screenshots, cache directories and other publisher-content reading copies.",
+    "Benchmark and model artifacts are separately owned by the execution lead; not added by this review aggregation."
+  ]
+}

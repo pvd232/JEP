@@ -1,0 +1,13 @@
+# JEP literature review protocol
+
+Review question: Which evidence-backed research gaps could improve finding and comparing harms, reparations, acknowledgment and guarantees of non-repetition in Colombian JEP testimony?
+
+Ten specialist searches cover conditional retrieval; moral theory; geometry; invariants; restorative justice; legal retrieval; layer/causal analysis; Spanish/cultural transfer; evaluation; and annotation efficiency. Search cutoff: November 10, 2026. Historical foundations remain eligible. Search English and Spanish terminology where applicable. Search primary publisher repositories, ACL Anthology, arXiv, OpenReview, JMLR/PMLR/NeurIPS, ACM proceedings and official JEP sources; supplement with backward/forward citation searches and explicit searches for prior art that defeats novelty.
+
+Include sources whose inspected methods, evidence, definitions or official requirements bear directly on the question. Distinguish empirical evidence, methodological proposals and normative requirements. Abstract-only leads and inaccessible sources remain pending, not verified. Record queries, inclusion/exclusion reasons, body sections inspected, annotation authority, languages, data access, baselines, split risks, reported results and limitations. Deduplicate by DOI/arXiv identity, then title/year; conference and preprint versions are one study unless substantive differences matter.
+
+Gap claims must name the closest counterexample and the dimension still unsupported. Classify established ingredient, under-tested application, or candidate gap with uncertain coverage. Do not infer absence from failed search. Quantitative comparisons across incompatible datasets or metrics will not be pooled. This is a systematic scoping review with an auditable search record, not a claim of exhaustive coverage of every subscription index.
+
+Translate each retained opportunity into a falsifiable JEP experiment, realistic expert workload and a rejection criterion. Keep factual harm evidence separate from normative interpretation; repair adequacy is a directed, potentially many-to-many relation. Any benchmark expectations authored by agents remain synthetic and require independent expert validation before human-grounded claims.
+
+Follow-up execution has begun with 12 fresh hypothetical story families and 48 contrast/invariance cases. A CPU lexical screen has executed. Its explicit missing-evidence wording is a potential cue and must be audited before model evaluation; no expert labels or new Qwen results are claimed. New GPU execution will use a separately frozen follow-up protocol rather than reopening the expired overnight pilot.

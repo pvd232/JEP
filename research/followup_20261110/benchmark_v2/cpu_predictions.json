@@ -1,0 +1,5042 @@
+[
+  {
+    "query": "market_base_completed_typed_response",
+    "family": "market",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "market_completed",
+      "market_proposed",
+      "market_other_beneficiary",
+      "market_voice",
+      "market_sanction",
+      "market_nonrepetition",
+      "market_completion_unknown"
+    ],
+    "scores": [
+      0.2845553443834595,
+      0.21105146221108928,
+      0.26794379487849806,
+      0.23847751500664738,
+      0.20604805745869856,
+      0.24993894849388867,
+      0.22937640698417355
+    ],
+    "gold": [
+      "market_completed"
+    ],
+    "top": [
+      "market_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "market_base_completed_typed_response",
+    "family": "market",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "market_completed",
+      "market_proposed",
+      "market_other_beneficiary",
+      "market_voice",
+      "market_sanction",
+      "market_nonrepetition",
+      "market_completion_unknown"
+    ],
+    "scores": [
+      0.2343207060323969,
+      0.15636805750111332,
+      0.2148158721371893,
+      0.1938911760792244,
+      0.15366591364701865,
+      0.18726084743918497,
+      0.16787641856385607
+    ],
+    "gold": [
+      "market_completed"
+    ],
+    "top": [
+      "market_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "market_base_completed_typed_response",
+    "family": "market",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "market_completed",
+      "market_proposed",
+      "market_other_beneficiary",
+      "market_voice",
+      "market_sanction",
+      "market_nonrepetition",
+      "market_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "market_completed"
+    ],
+    "top": [
+      "market_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "market_base_acknowledgment_voice",
+    "family": "market",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "market_completed",
+      "market_proposed",
+      "market_other_beneficiary",
+      "market_voice",
+      "market_sanction",
+      "market_nonrepetition",
+      "market_completion_unknown"
+    ],
+    "scores": [
+      0.2845553443834595,
+      0.21105146221108928,
+      0.26794379487849806,
+      0.23847751500664738,
+      0.20604805745869856,
+      0.24993894849388867,
+      0.22937640698417355
+    ],
+    "gold": [
+      "market_voice"
+    ],
+    "top": [
+      "market_completed"
+    ],
+    "recall1": 0,
+    "mrr": 0.25,
+    "strict_correct": false
+  },
+  {
+    "query": "market_base_acknowledgment_voice",
+    "family": "market",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "market_completed",
+      "market_proposed",
+      "market_other_beneficiary",
+      "market_voice",
+      "market_sanction",
+      "market_nonrepetition",
+      "market_completion_unknown"
+    ],
+    "scores": [
+      0.21764377579414093,
+      0.16374944847121187,
+      0.22167493071065594,
+      0.25204822306467356,
+      0.15156754951439322,
+      0.1892947983061826,
+      0.19853165588847305
+    ],
+    "gold": [
+      "market_voice"
+    ],
+    "top": [
+      "market_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "market_base_acknowledgment_voice",
+    "family": "market",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "market_completed",
+      "market_proposed",
+      "market_other_beneficiary",
+      "market_voice",
+      "market_sanction",
+      "market_nonrepetition",
+      "market_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "market_voice"
+    ],
+    "top": [
+      "market_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "market_retained_agent_passive_completed_typed_response",
+    "family": "market",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "market_completed",
+      "market_proposed",
+      "market_other_beneficiary",
+      "market_voice",
+      "market_sanction",
+      "market_nonrepetition",
+      "market_completion_unknown"
+    ],
+    "scores": [
+      0.2677989459152482,
+      0.19407700281399062,
+      0.2521770739883944,
+      0.22425419044115258,
+      0.1894760121928593,
+      0.2298368440662979,
+      0.21092810785269916
+    ],
+    "gold": [
+      "market_completed"
+    ],
+    "top": [
+      "market_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "market_retained_agent_passive_completed_typed_response",
+    "family": "market",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "market_completed",
+      "market_proposed",
+      "market_other_beneficiary",
+      "market_voice",
+      "market_sanction",
+      "market_nonrepetition",
+      "market_completion_unknown"
+    ],
+    "scores": [
+      0.22345166253257848,
+      0.1451443253469059,
+      0.2045738692272706,
+      0.18465203017411977,
+      0.1427109083368741,
+      0.17397455442515794,
+      0.155672718796112
+    ],
+    "gold": [
+      "market_completed"
+    ],
+    "top": [
+      "market_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "market_retained_agent_passive_completed_typed_response",
+    "family": "market",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "market_completed",
+      "market_proposed",
+      "market_other_beneficiary",
+      "market_voice",
+      "market_sanction",
+      "market_nonrepetition",
+      "market_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "market_completed"
+    ],
+    "top": [
+      "market_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "market_retained_agent_passive_acknowledgment_voice",
+    "family": "market",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "market_completed",
+      "market_proposed",
+      "market_other_beneficiary",
+      "market_voice",
+      "market_sanction",
+      "market_nonrepetition",
+      "market_completion_unknown"
+    ],
+    "scores": [
+      0.2677989459152482,
+      0.19407700281399062,
+      0.2521770739883944,
+      0.22425419044115258,
+      0.1894760121928593,
+      0.2298368440662979,
+      0.21092810785269916
+    ],
+    "gold": [
+      "market_voice"
+    ],
+    "top": [
+      "market_completed"
+    ],
+    "recall1": 0,
+    "mrr": 0.25,
+    "strict_correct": false
+  },
+  {
+    "query": "market_retained_agent_passive_acknowledgment_voice",
+    "family": "market",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "market_completed",
+      "market_proposed",
+      "market_other_beneficiary",
+      "market_voice",
+      "market_sanction",
+      "market_nonrepetition",
+      "market_completion_unknown"
+    ],
+    "scores": [
+      0.20565608739624017,
+      0.1516964981685444,
+      0.21036825636483455,
+      0.24176505653455035,
+      0.13981361559158872,
+      0.17502842084190534,
+      0.1853992901381561
+    ],
+    "gold": [
+      "market_voice"
+    ],
+    "top": [
+      "market_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "market_retained_agent_passive_acknowledgment_voice",
+    "family": "market",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "market_completed",
+      "market_proposed",
+      "market_other_beneficiary",
+      "market_voice",
+      "market_sanction",
+      "market_nonrepetition",
+      "market_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "market_voice"
+    ],
+    "top": [
+      "market_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "tools_base_completed_typed_response",
+    "family": "tools",
+    "split": "test",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "tools_completed",
+      "tools_proposed",
+      "tools_other_beneficiary",
+      "tools_voice",
+      "tools_sanction",
+      "tools_nonrepetition",
+      "tools_completion_unknown"
+    ],
+    "scores": [
+      0.34038744034502433,
+      0.2596009435456867,
+      0.3235443175385197,
+      0.2827660656526811,
+      0.24811730124982861,
+      0.25190077682369255,
+      0.2780362250380799
+    ],
+    "gold": [
+      "tools_completed"
+    ],
+    "top": [
+      "tools_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "tools_base_completed_typed_response",
+    "family": "tools",
+    "split": "test",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "tools_completed",
+      "tools_proposed",
+      "tools_other_beneficiary",
+      "tools_voice",
+      "tools_sanction",
+      "tools_nonrepetition",
+      "tools_completion_unknown"
+    ],
+    "scores": [
+      0.2710038692729341,
+      0.1890966184931686,
+      0.25169575045309045,
+      0.22329817750622674,
+      0.18200264391978388,
+      0.19008890604382433,
+      0.20066268935062678
+    ],
+    "gold": [
+      "tools_completed"
+    ],
+    "top": [
+      "tools_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "tools_base_completed_typed_response",
+    "family": "tools",
+    "split": "test",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "tools_completed",
+      "tools_proposed",
+      "tools_other_beneficiary",
+      "tools_voice",
+      "tools_sanction",
+      "tools_nonrepetition",
+      "tools_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "tools_completed"
+    ],
+    "top": [
+      "tools_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "tools_base_acknowledgment_voice",
+    "family": "tools",
+    "split": "test",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "tools_completed",
+      "tools_proposed",
+      "tools_other_beneficiary",
+      "tools_voice",
+      "tools_sanction",
+      "tools_nonrepetition",
+      "tools_completion_unknown"
+    ],
+    "scores": [
+      0.34038744034502433,
+      0.2596009435456867,
+      0.3235443175385197,
+      0.2827660656526811,
+      0.24811730124982861,
+      0.25190077682369255,
+      0.2780362250380799
+    ],
+    "gold": [
+      "tools_voice"
+    ],
+    "top": [
+      "tools_completed"
+    ],
+    "recall1": 0,
+    "mrr": 0.3333333333333333,
+    "strict_correct": false
+  },
+  {
+    "query": "tools_base_acknowledgment_voice",
+    "family": "tools",
+    "split": "test",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "tools_completed",
+      "tools_proposed",
+      "tools_other_beneficiary",
+      "tools_voice",
+      "tools_sanction",
+      "tools_nonrepetition",
+      "tools_completion_unknown"
+    ],
+    "scores": [
+      0.25524440295369566,
+      0.19669111450022025,
+      0.25876361936555037,
+      0.2804711149427466,
+      0.1802332313427821,
+      0.1903932881352575,
+      0.23097274533293405
+    ],
+    "gold": [
+      "tools_voice"
+    ],
+    "top": [
+      "tools_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "tools_base_acknowledgment_voice",
+    "family": "tools",
+    "split": "test",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "tools_completed",
+      "tools_proposed",
+      "tools_other_beneficiary",
+      "tools_voice",
+      "tools_sanction",
+      "tools_nonrepetition",
+      "tools_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "tools_voice"
+    ],
+    "top": [
+      "tools_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "tools_retained_agent_passive_completed_typed_response",
+    "family": "tools",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "tools_completed",
+      "tools_proposed",
+      "tools_other_beneficiary",
+      "tools_voice",
+      "tools_sanction",
+      "tools_nonrepetition",
+      "tools_completion_unknown"
+    ],
+    "scores": [
+      0.307415345219899,
+      0.23445434296464154,
+      0.29220375454870845,
+      0.25537554382435734,
+      0.2240830793916239,
+      0.2275000634274964,
+      0.25110386569222976
+    ],
+    "gold": [
+      "tools_completed"
+    ],
+    "top": [
+      "tools_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "tools_retained_agent_passive_completed_typed_response",
+    "family": "tools",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "tools_completed",
+      "tools_proposed",
+      "tools_other_beneficiary",
+      "tools_voice",
+      "tools_sanction",
+      "tools_nonrepetition",
+      "tools_completion_unknown"
+    ],
+    "scores": [
+      0.24930763055988356,
+      0.1724918594876085,
+      0.23105369323055097,
+      0.20526869869541695,
+      0.16613658807478981,
+      0.1739983779076417,
+      0.18287263670096773
+    ],
+    "gold": [
+      "tools_completed"
+    ],
+    "top": [
+      "tools_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "tools_retained_agent_passive_completed_typed_response",
+    "family": "tools",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "tools_completed",
+      "tools_proposed",
+      "tools_other_beneficiary",
+      "tools_voice",
+      "tools_sanction",
+      "tools_nonrepetition",
+      "tools_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "tools_completed"
+    ],
+    "top": [
+      "tools_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "tools_retained_agent_passive_acknowledgment_voice",
+    "family": "tools",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "tools_completed",
+      "tools_proposed",
+      "tools_other_beneficiary",
+      "tools_voice",
+      "tools_sanction",
+      "tools_nonrepetition",
+      "tools_completion_unknown"
+    ],
+    "scores": [
+      0.307415345219899,
+      0.23445434296464154,
+      0.29220375454870845,
+      0.25537554382435734,
+      0.2240830793916239,
+      0.2275000634274964,
+      0.25110386569222976
+    ],
+    "gold": [
+      "tools_voice"
+    ],
+    "top": [
+      "tools_completed"
+    ],
+    "recall1": 0,
+    "mrr": 0.3333333333333333,
+    "strict_correct": false
+  },
+  {
+    "query": "tools_retained_agent_passive_acknowledgment_voice",
+    "family": "tools",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "tools_completed",
+      "tools_proposed",
+      "tools_other_beneficiary",
+      "tools_voice",
+      "tools_sanction",
+      "tools_nonrepetition",
+      "tools_completion_unknown"
+    ],
+    "scores": [
+      0.23278256437881667,
+      0.17956393877786955,
+      0.2374422614401818,
+      0.2619346285437204,
+      0.16384975004251062,
+      0.17377329784233442,
+      0.21266580433905977
+    ],
+    "gold": [
+      "tools_voice"
+    ],
+    "top": [
+      "tools_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "tools_retained_agent_passive_acknowledgment_voice",
+    "family": "tools",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "tools_completed",
+      "tools_proposed",
+      "tools_other_beneficiary",
+      "tools_voice",
+      "tools_sanction",
+      "tools_nonrepetition",
+      "tools_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "tools_voice"
+    ],
+    "top": [
+      "tools_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "checkpoint_base_completed_typed_response",
+    "family": "checkpoint",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "checkpoint_completed",
+      "checkpoint_proposed",
+      "checkpoint_other_beneficiary",
+      "checkpoint_voice",
+      "checkpoint_sanction",
+      "checkpoint_nonrepetition",
+      "checkpoint_completion_unknown"
+    ],
+    "scores": [
+      0.30919781013107944,
+      0.2571527622458867,
+      0.2982024775193289,
+      0.261332993544741,
+      0.2292746626032101,
+      0.23062487304990892,
+      0.2658602998049292
+    ],
+    "gold": [
+      "checkpoint_completed"
+    ],
+    "top": [
+      "checkpoint_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "checkpoint_base_completed_typed_response",
+    "family": "checkpoint",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "checkpoint_completed",
+      "checkpoint_proposed",
+      "checkpoint_other_beneficiary",
+      "checkpoint_voice",
+      "checkpoint_sanction",
+      "checkpoint_nonrepetition",
+      "checkpoint_completion_unknown"
+    ],
+    "scores": [
+      0.2499029195148946,
+      0.18775226755088015,
+      0.23464503776016193,
+      0.20892351501113549,
+      0.1694253800284272,
+      0.17246458202056703,
+      0.19268566686714328
+    ],
+    "gold": [
+      "checkpoint_completed"
+    ],
+    "top": [
+      "checkpoint_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "checkpoint_base_completed_typed_response",
+    "family": "checkpoint",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "checkpoint_completed",
+      "checkpoint_proposed",
+      "checkpoint_other_beneficiary",
+      "checkpoint_voice",
+      "checkpoint_sanction",
+      "checkpoint_nonrepetition",
+      "checkpoint_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "checkpoint_completed"
+    ],
+    "top": [
+      "checkpoint_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "checkpoint_base_acknowledgment_voice",
+    "family": "checkpoint",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "checkpoint_completed",
+      "checkpoint_proposed",
+      "checkpoint_other_beneficiary",
+      "checkpoint_voice",
+      "checkpoint_sanction",
+      "checkpoint_nonrepetition",
+      "checkpoint_completion_unknown"
+    ],
+    "scores": [
+      0.30919781013107944,
+      0.2571527622458867,
+      0.2982024775193289,
+      0.261332993544741,
+      0.2292746626032101,
+      0.23062487304990892,
+      0.2658602998049292
+    ],
+    "gold": [
+      "checkpoint_voice"
+    ],
+    "top": [
+      "checkpoint_completed"
+    ],
+    "recall1": 0,
+    "mrr": 0.25,
+    "strict_correct": false
+  },
+  {
+    "query": "checkpoint_base_acknowledgment_voice",
+    "family": "checkpoint",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "checkpoint_completed",
+      "checkpoint_proposed",
+      "checkpoint_other_beneficiary",
+      "checkpoint_voice",
+      "checkpoint_sanction",
+      "checkpoint_nonrepetition",
+      "checkpoint_completion_unknown"
+    ],
+    "scores": [
+      0.23391731423287965,
+      0.19531021552572164,
+      0.24141555758802266,
+      0.2656774531430171,
+      0.16745901383252934,
+      0.17412443888115609,
+      0.2227839364643777
+    ],
+    "gold": [
+      "checkpoint_voice"
+    ],
+    "top": [
+      "checkpoint_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "checkpoint_base_acknowledgment_voice",
+    "family": "checkpoint",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "checkpoint_completed",
+      "checkpoint_proposed",
+      "checkpoint_other_beneficiary",
+      "checkpoint_voice",
+      "checkpoint_sanction",
+      "checkpoint_nonrepetition",
+      "checkpoint_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "checkpoint_voice"
+    ],
+    "top": [
+      "checkpoint_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "checkpoint_retained_agent_passive_completed_typed_response",
+    "family": "checkpoint",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "checkpoint_completed",
+      "checkpoint_proposed",
+      "checkpoint_other_beneficiary",
+      "checkpoint_voice",
+      "checkpoint_sanction",
+      "checkpoint_nonrepetition",
+      "checkpoint_completion_unknown"
+    ],
+    "scores": [
+      0.3038591678950168,
+      0.26620758935463756,
+      0.28911922971688814,
+      0.25328447227903234,
+      0.21367537049829582,
+      0.23476480924341991,
+      0.26672712005223265
+    ],
+    "gold": [
+      "checkpoint_completed"
+    ],
+    "top": [
+      "checkpoint_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "checkpoint_retained_agent_passive_completed_typed_response",
+    "family": "checkpoint",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "checkpoint_completed",
+      "checkpoint_proposed",
+      "checkpoint_other_beneficiary",
+      "checkpoint_voice",
+      "checkpoint_sanction",
+      "checkpoint_nonrepetition",
+      "checkpoint_completion_unknown"
+    ],
+    "scores": [
+      0.24714891202783074,
+      0.19465519441527904,
+      0.22926399904573894,
+      0.2041591416825176,
+      0.15933189401835546,
+      0.17593675525834312,
+      0.19398404137717928
+    ],
+    "gold": [
+      "checkpoint_completed"
+    ],
+    "top": [
+      "checkpoint_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "checkpoint_retained_agent_passive_completed_typed_response",
+    "family": "checkpoint",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "checkpoint_completed",
+      "checkpoint_proposed",
+      "checkpoint_other_beneficiary",
+      "checkpoint_voice",
+      "checkpoint_sanction",
+      "checkpoint_nonrepetition",
+      "checkpoint_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "checkpoint_completed"
+    ],
+    "top": [
+      "checkpoint_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "checkpoint_retained_agent_passive_acknowledgment_voice",
+    "family": "checkpoint",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "checkpoint_completed",
+      "checkpoint_proposed",
+      "checkpoint_other_beneficiary",
+      "checkpoint_voice",
+      "checkpoint_sanction",
+      "checkpoint_nonrepetition",
+      "checkpoint_completion_unknown"
+    ],
+    "scores": [
+      0.3038591678950168,
+      0.26620758935463756,
+      0.28911922971688814,
+      0.25328447227903234,
+      0.21367537049829582,
+      0.23476480924341991,
+      0.26672712005223265
+    ],
+    "gold": [
+      "checkpoint_voice"
+    ],
+    "top": [
+      "checkpoint_completed"
+    ],
+    "recall1": 0,
+    "mrr": 0.2,
+    "strict_correct": false
+  },
+  {
+    "query": "checkpoint_retained_agent_passive_acknowledgment_voice",
+    "family": "checkpoint",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "checkpoint_completed",
+      "checkpoint_proposed",
+      "checkpoint_other_beneficiary",
+      "checkpoint_voice",
+      "checkpoint_sanction",
+      "checkpoint_nonrepetition",
+      "checkpoint_completion_unknown"
+    ],
+    "scores": [
+      0.22953576396951528,
+      0.20101954669359617,
+      0.23441616841131835,
+      0.25932483688965285,
+      0.15615736351562798,
+      0.17648804231094775,
+      0.2227368407454949
+    ],
+    "gold": [
+      "checkpoint_voice"
+    ],
+    "top": [
+      "checkpoint_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "checkpoint_retained_agent_passive_acknowledgment_voice",
+    "family": "checkpoint",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "checkpoint_completed",
+      "checkpoint_proposed",
+      "checkpoint_other_beneficiary",
+      "checkpoint_voice",
+      "checkpoint_sanction",
+      "checkpoint_nonrepetition",
+      "checkpoint_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "checkpoint_voice"
+    ],
+    "top": [
+      "checkpoint_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "abduction_base_completed_typed_response",
+    "family": "abduction",
+    "split": "test",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "abduction_completed",
+      "abduction_proposed",
+      "abduction_other_beneficiary",
+      "abduction_voice",
+      "abduction_sanction",
+      "abduction_nonrepetition",
+      "abduction_completion_unknown"
+    ],
+    "scores": [
+      0.37255274862576404,
+      0.24936978129796172,
+      0.3105146271995417,
+      0.2765035641141099,
+      0.24131671935706553,
+      0.23556000750950287,
+      0.3047397955573088
+    ],
+    "gold": [
+      "abduction_completed"
+    ],
+    "top": [
+      "abduction_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "abduction_base_completed_typed_response",
+    "family": "abduction",
+    "split": "test",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "abduction_completed",
+      "abduction_proposed",
+      "abduction_other_beneficiary",
+      "abduction_voice",
+      "abduction_sanction",
+      "abduction_nonrepetition",
+      "abduction_completion_unknown"
+    ],
+    "scores": [
+      0.29384483121845345,
+      0.18254687301812947,
+      0.24329822485947564,
+      0.21949157221569693,
+      0.1777787773063648,
+      0.17600884948350662,
+      0.21948243197239728
+    ],
+    "gold": [
+      "abduction_completed"
+    ],
+    "top": [
+      "abduction_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "abduction_base_completed_typed_response",
+    "family": "abduction",
+    "split": "test",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "abduction_completed",
+      "abduction_proposed",
+      "abduction_other_beneficiary",
+      "abduction_voice",
+      "abduction_sanction",
+      "abduction_nonrepetition",
+      "abduction_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "abduction_completed"
+    ],
+    "top": [
+      "abduction_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "abduction_base_acknowledgment_voice",
+    "family": "abduction",
+    "split": "test",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "abduction_completed",
+      "abduction_proposed",
+      "abduction_other_beneficiary",
+      "abduction_voice",
+      "abduction_sanction",
+      "abduction_nonrepetition",
+      "abduction_completion_unknown"
+    ],
+    "scores": [
+      0.37255274862576404,
+      0.24936978129796172,
+      0.3105146271995417,
+      0.2765035641141099,
+      0.24131671935706553,
+      0.23556000750950287,
+      0.3047397955573088
+    ],
+    "gold": [
+      "abduction_voice"
+    ],
+    "top": [
+      "abduction_completed"
+    ],
+    "recall1": 0,
+    "mrr": 0.25,
+    "strict_correct": false
+  },
+  {
+    "query": "abduction_base_acknowledgment_voice",
+    "family": "abduction",
+    "split": "test",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "abduction_completed",
+      "abduction_proposed",
+      "abduction_other_beneficiary",
+      "abduction_voice",
+      "abduction_sanction",
+      "abduction_nonrepetition",
+      "abduction_completion_unknown"
+    ],
+    "scores": [
+      0.27854143280396604,
+      0.19018007479078602,
+      0.25041384706742853,
+      0.27679869608556545,
+      0.17607105147507213,
+      0.17785615988899411,
+      0.25044123391228634
+    ],
+    "gold": [
+      "abduction_voice"
+    ],
+    "top": [
+      "abduction_completed"
+    ],
+    "recall1": 0,
+    "mrr": 0.5,
+    "strict_correct": false
+  },
+  {
+    "query": "abduction_base_acknowledgment_voice",
+    "family": "abduction",
+    "split": "test",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "abduction_completed",
+      "abduction_proposed",
+      "abduction_other_beneficiary",
+      "abduction_voice",
+      "abduction_sanction",
+      "abduction_nonrepetition",
+      "abduction_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "abduction_voice"
+    ],
+    "top": [
+      "abduction_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "abduction_retained_agent_passive_completed_typed_response",
+    "family": "abduction",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "abduction_completed",
+      "abduction_proposed",
+      "abduction_other_beneficiary",
+      "abduction_voice",
+      "abduction_sanction",
+      "abduction_nonrepetition",
+      "abduction_completion_unknown"
+    ],
+    "scores": [
+      0.2962492996277143,
+      0.21300194932564012,
+      0.2797609779921674,
+      0.24527398624774524,
+      0.20526550960694007,
+      0.20120617871792096,
+      0.2302973748393191
+    ],
+    "gold": [
+      "abduction_completed"
+    ],
+    "top": [
+      "abduction_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "abduction_retained_agent_passive_completed_typed_response",
+    "family": "abduction",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "abduction_completed",
+      "abduction_proposed",
+      "abduction_other_beneficiary",
+      "abduction_voice",
+      "abduction_sanction",
+      "abduction_nonrepetition",
+      "abduction_completion_unknown"
+    ],
+    "scores": [
+      0.24178080206304445,
+      0.15776150181689333,
+      0.22240064307281235,
+      0.19825148621009867,
+      0.1532069877211153,
+      0.1525985341849138,
+      0.1686416788435196
+    ],
+    "gold": [
+      "abduction_completed"
+    ],
+    "top": [
+      "abduction_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "abduction_retained_agent_passive_completed_typed_response",
+    "family": "abduction",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "abduction_completed",
+      "abduction_proposed",
+      "abduction_other_beneficiary",
+      "abduction_voice",
+      "abduction_sanction",
+      "abduction_nonrepetition",
+      "abduction_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "abduction_completed"
+    ],
+    "top": [
+      "abduction_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "abduction_retained_agent_passive_acknowledgment_voice",
+    "family": "abduction",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "abduction_completed",
+      "abduction_proposed",
+      "abduction_other_beneficiary",
+      "abduction_voice",
+      "abduction_sanction",
+      "abduction_nonrepetition",
+      "abduction_completion_unknown"
+    ],
+    "scores": [
+      0.2962492996277143,
+      0.21300194932564012,
+      0.2797609779921674,
+      0.24527398624774524,
+      0.20526550960694007,
+      0.20120617871792096,
+      0.2302973748393191
+    ],
+    "gold": [
+      "abduction_voice"
+    ],
+    "top": [
+      "abduction_completed"
+    ],
+    "recall1": 0,
+    "mrr": 0.3333333333333333,
+    "strict_correct": false
+  },
+  {
+    "query": "abduction_retained_agent_passive_acknowledgment_voice",
+    "family": "abduction",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "abduction_completed",
+      "abduction_proposed",
+      "abduction_other_beneficiary",
+      "abduction_voice",
+      "abduction_sanction",
+      "abduction_nonrepetition",
+      "abduction_completion_unknown"
+    ],
+    "scores": [
+      0.2241065035750936,
+      0.1639003750995137,
+      0.22766852586875433,
+      0.2535701098262726,
+      0.15009276975320404,
+      0.15304224612799694,
+      0.1974582176401519
+    ],
+    "gold": [
+      "abduction_voice"
+    ],
+    "top": [
+      "abduction_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "abduction_retained_agent_passive_acknowledgment_voice",
+    "family": "abduction",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "abduction_completed",
+      "abduction_proposed",
+      "abduction_other_beneficiary",
+      "abduction_voice",
+      "abduction_sanction",
+      "abduction_nonrepetition",
+      "abduction_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "abduction_voice"
+    ],
+    "top": [
+      "abduction_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "threatened_home_base_completed_typed_response",
+    "family": "threatened_home",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "threatened_home_completed",
+      "threatened_home_proposed",
+      "threatened_home_other_beneficiary",
+      "threatened_home_voice",
+      "threatened_home_sanction",
+      "threatened_home_nonrepetition",
+      "threatened_home_completion_unknown"
+    ],
+    "scores": [
+      0.44407090170223973,
+      0.31471399759787194,
+      0.38214630884054424,
+      0.33870444254406507,
+      0.3009244382658283,
+      0.29865583823972164,
+      0.3717276613694869
+    ],
+    "gold": [
+      "threatened_home_completed"
+    ],
+    "top": [
+      "threatened_home_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "threatened_home_base_completed_typed_response",
+    "family": "threatened_home",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "threatened_home_completed",
+      "threatened_home_proposed",
+      "threatened_home_other_beneficiary",
+      "threatened_home_voice",
+      "threatened_home_sanction",
+      "threatened_home_nonrepetition",
+      "threatened_home_completion_unknown"
+    ],
+    "scores": [
+      0.3399739934890421,
+      0.22662611538996308,
+      0.2903026125756324,
+      0.26052161660999557,
+      0.2179817542120447,
+      0.21849231091039484,
+      0.2646543683064121
+    ],
+    "gold": [
+      "threatened_home_completed"
+    ],
+    "top": [
+      "threatened_home_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "threatened_home_base_completed_typed_response",
+    "family": "threatened_home",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "threatened_home_completed",
+      "threatened_home_proposed",
+      "threatened_home_other_beneficiary",
+      "threatened_home_voice",
+      "threatened_home_sanction",
+      "threatened_home_nonrepetition",
+      "threatened_home_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "threatened_home_completed"
+    ],
+    "top": [
+      "threatened_home_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "threatened_home_base_acknowledgment_voice",
+    "family": "threatened_home",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "threatened_home_completed",
+      "threatened_home_proposed",
+      "threatened_home_other_beneficiary",
+      "threatened_home_voice",
+      "threatened_home_sanction",
+      "threatened_home_nonrepetition",
+      "threatened_home_completion_unknown"
+    ],
+    "scores": [
+      0.44407090170223973,
+      0.31471399759787194,
+      0.38214630884054424,
+      0.33870444254406507,
+      0.3009244382658283,
+      0.29865583823972164,
+      0.3717276613694869
+    ],
+    "gold": [
+      "threatened_home_voice"
+    ],
+    "top": [
+      "threatened_home_completed"
+    ],
+    "recall1": 0,
+    "mrr": 0.25,
+    "strict_correct": false
+  },
+  {
+    "query": "threatened_home_base_acknowledgment_voice",
+    "family": "threatened_home",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "threatened_home_completed",
+      "threatened_home_proposed",
+      "threatened_home_other_beneficiary",
+      "threatened_home_voice",
+      "threatened_home_sanction",
+      "threatened_home_nonrepetition",
+      "threatened_home_completion_unknown"
+    ],
+    "scores": [
+      0.32695786312549674,
+      0.23489568419507073,
+      0.29814544946785954,
+      0.3161436954402854,
+      0.2172164623163293,
+      0.2211886000766327,
+      0.29516166602908617
+    ],
+    "gold": [
+      "threatened_home_voice"
+    ],
+    "top": [
+      "threatened_home_completed"
+    ],
+    "recall1": 0,
+    "mrr": 0.5,
+    "strict_correct": false
+  },
+  {
+    "query": "threatened_home_base_acknowledgment_voice",
+    "family": "threatened_home",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "threatened_home_completed",
+      "threatened_home_proposed",
+      "threatened_home_other_beneficiary",
+      "threatened_home_voice",
+      "threatened_home_sanction",
+      "threatened_home_nonrepetition",
+      "threatened_home_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "threatened_home_voice"
+    ],
+    "top": [
+      "threatened_home_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "threatened_home_retained_agent_passive_completed_typed_response",
+    "family": "threatened_home",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "threatened_home_completed",
+      "threatened_home_proposed",
+      "threatened_home_other_beneficiary",
+      "threatened_home_voice",
+      "threatened_home_sanction",
+      "threatened_home_nonrepetition",
+      "threatened_home_completion_unknown"
+    ],
+    "scores": [
+      0.3893697805928221,
+      0.30001734081185527,
+      0.3699932187586882,
+      0.3278790761587184,
+      0.2868717325664501,
+      0.2847090726517554,
+      0.3204361507780762
+    ],
+    "gold": [
+      "threatened_home_completed"
+    ],
+    "top": [
+      "threatened_home_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "threatened_home_retained_agent_passive_completed_typed_response",
+    "family": "threatened_home",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "threatened_home_completed",
+      "threatened_home_proposed",
+      "threatened_home_other_beneficiary",
+      "threatened_home_voice",
+      "threatened_home_sanction",
+      "threatened_home_nonrepetition",
+      "threatened_home_completion_unknown"
+    ],
+    "scores": [
+      0.3030052016022586,
+      0.21689618441686173,
+      0.2824107104729986,
+      0.25349480026064075,
+      0.20868007613687445,
+      0.2092639807907531,
+      0.2299088613420667
+    ],
+    "gold": [
+      "threatened_home_completed"
+    ],
+    "top": [
+      "threatened_home_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "threatened_home_retained_agent_passive_completed_typed_response",
+    "family": "threatened_home",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "threatened_home_completed",
+      "threatened_home_proposed",
+      "threatened_home_other_beneficiary",
+      "threatened_home_voice",
+      "threatened_home_sanction",
+      "threatened_home_nonrepetition",
+      "threatened_home_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "threatened_home_completed"
+    ],
+    "top": [
+      "threatened_home_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "threatened_home_retained_agent_passive_acknowledgment_voice",
+    "family": "threatened_home",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "threatened_home_completed",
+      "threatened_home_proposed",
+      "threatened_home_other_beneficiary",
+      "threatened_home_voice",
+      "threatened_home_sanction",
+      "threatened_home_nonrepetition",
+      "threatened_home_completion_unknown"
+    ],
+    "scores": [
+      0.3893697805928221,
+      0.30001734081185527,
+      0.3699932187586882,
+      0.3278790761587184,
+      0.2868717325664501,
+      0.2847090726517554,
+      0.3204361507780762
+    ],
+    "gold": [
+      "threatened_home_voice"
+    ],
+    "top": [
+      "threatened_home_completed"
+    ],
+    "recall1": 0,
+    "mrr": 0.3333333333333333,
+    "strict_correct": false
+  },
+  {
+    "query": "threatened_home_retained_agent_passive_acknowledgment_voice",
+    "family": "threatened_home",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "threatened_home_completed",
+      "threatened_home_proposed",
+      "threatened_home_other_beneficiary",
+      "threatened_home_voice",
+      "threatened_home_sanction",
+      "threatened_home_nonrepetition",
+      "threatened_home_completion_unknown"
+    ],
+    "scores": [
+      0.28819774054215097,
+      0.2241319000376012,
+      0.28899724382217157,
+      0.30787455688780757,
+      0.20694188914421943,
+      0.21097813180423453,
+      0.25884469983372993
+    ],
+    "gold": [
+      "threatened_home_voice"
+    ],
+    "top": [
+      "threatened_home_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "threatened_home_retained_agent_passive_acknowledgment_voice",
+    "family": "threatened_home",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "threatened_home_completed",
+      "threatened_home_proposed",
+      "threatened_home_other_beneficiary",
+      "threatened_home_voice",
+      "threatened_home_sanction",
+      "threatened_home_nonrepetition",
+      "threatened_home_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "threatened_home_voice"
+    ],
+    "top": [
+      "threatened_home_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "burned_home_base_completed_typed_response",
+    "family": "burned_home",
+    "split": "test",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "burned_home_completed",
+      "burned_home_proposed",
+      "burned_home_other_beneficiary",
+      "burned_home_voice",
+      "burned_home_sanction",
+      "burned_home_nonrepetition",
+      "burned_home_completion_unknown"
+    ],
+    "scores": [
+      0.28450034335852664,
+      0.2022845611255723,
+      0.3162702865338184,
+      0.2252653152836096,
+      0.20217929315385538,
+      0.21212076626403858,
+      0.21892907589563826
+    ],
+    "gold": [
+      "burned_home_completed"
+    ],
+    "top": [
+      "burned_home_other_beneficiary"
+    ],
+    "recall1": 0,
+    "mrr": 0.5,
+    "strict_correct": false
+  },
+  {
+    "query": "burned_home_base_completed_typed_response",
+    "family": "burned_home",
+    "split": "test",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "burned_home_completed",
+      "burned_home_proposed",
+      "burned_home_other_beneficiary",
+      "burned_home_voice",
+      "burned_home_sanction",
+      "burned_home_nonrepetition",
+      "burned_home_completion_unknown"
+    ],
+    "scores": [
+      0.23455336735193477,
+      0.150112006322653,
+      0.24781167857425196,
+      0.18480297556624398,
+      0.15074640420770555,
+      0.15911519177983804,
+      0.16044535340561333
+    ],
+    "gold": [
+      "burned_home_completed"
+    ],
+    "top": [
+      "burned_home_other_beneficiary"
+    ],
+    "recall1": 0,
+    "mrr": 0.5,
+    "strict_correct": false
+  },
+  {
+    "query": "burned_home_base_completed_typed_response",
+    "family": "burned_home",
+    "split": "test",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "burned_home_completed",
+      "burned_home_proposed",
+      "burned_home_other_beneficiary",
+      "burned_home_voice",
+      "burned_home_sanction",
+      "burned_home_nonrepetition",
+      "burned_home_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "burned_home_completed"
+    ],
+    "top": [
+      "burned_home_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "burned_home_base_acknowledgment_voice",
+    "family": "burned_home",
+    "split": "test",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "burned_home_completed",
+      "burned_home_proposed",
+      "burned_home_other_beneficiary",
+      "burned_home_voice",
+      "burned_home_sanction",
+      "burned_home_nonrepetition",
+      "burned_home_completion_unknown"
+    ],
+    "scores": [
+      0.28450034335852664,
+      0.2022845611255723,
+      0.3162702865338184,
+      0.2252653152836096,
+      0.20217929315385538,
+      0.21212076626403858,
+      0.21892907589563826
+    ],
+    "gold": [
+      "burned_home_voice"
+    ],
+    "top": [
+      "burned_home_other_beneficiary"
+    ],
+    "recall1": 0,
+    "mrr": 0.3333333333333333,
+    "strict_correct": false
+  },
+  {
+    "query": "burned_home_base_acknowledgment_voice",
+    "family": "burned_home",
+    "split": "test",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "burned_home_completed",
+      "burned_home_proposed",
+      "burned_home_other_beneficiary",
+      "burned_home_voice",
+      "burned_home_sanction",
+      "burned_home_nonrepetition",
+      "burned_home_completion_unknown"
+    ],
+    "scores": [
+      0.2173029719569226,
+      0.1573247986635512,
+      0.2551348698393081,
+      0.24330793537668943,
+      0.14845140769884319,
+      0.16068852662469585,
+      0.19117644859004562
+    ],
+    "gold": [
+      "burned_home_voice"
+    ],
+    "top": [
+      "burned_home_other_beneficiary"
+    ],
+    "recall1": 0,
+    "mrr": 0.5,
+    "strict_correct": false
+  },
+  {
+    "query": "burned_home_base_acknowledgment_voice",
+    "family": "burned_home",
+    "split": "test",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "burned_home_completed",
+      "burned_home_proposed",
+      "burned_home_other_beneficiary",
+      "burned_home_voice",
+      "burned_home_sanction",
+      "burned_home_nonrepetition",
+      "burned_home_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "burned_home_voice"
+    ],
+    "top": [
+      "burned_home_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "burned_home_retained_agent_passive_completed_typed_response",
+    "family": "burned_home",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "burned_home_completed",
+      "burned_home_proposed",
+      "burned_home_other_beneficiary",
+      "burned_home_voice",
+      "burned_home_sanction",
+      "burned_home_nonrepetition",
+      "burned_home_completion_unknown"
+    ],
+    "scores": [
+      0.28190430844611203,
+      0.19563384972586828,
+      0.31223128433560327,
+      0.22327932727258892,
+      0.19553204275431682,
+      0.20514666013129015,
+      0.21173112617231793
+    ],
+    "gold": [
+      "burned_home_completed"
+    ],
+    "top": [
+      "burned_home_other_beneficiary"
+    ],
+    "recall1": 0,
+    "mrr": 0.5,
+    "strict_correct": false
+  },
+  {
+    "query": "burned_home_retained_agent_passive_completed_typed_response",
+    "family": "burned_home",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "burned_home_completed",
+      "burned_home_proposed",
+      "burned_home_other_beneficiary",
+      "burned_home_voice",
+      "burned_home_sanction",
+      "burned_home_nonrepetition",
+      "burned_home_completion_unknown"
+    ],
+    "scores": [
+      0.233053779966387,
+      0.14574699811220124,
+      0.24534262481743008,
+      0.18366200959925968,
+      0.1463844945937049,
+      0.1545399103270843,
+      0.15571883789824098
+    ],
+    "gold": [
+      "burned_home_completed"
+    ],
+    "top": [
+      "burned_home_other_beneficiary"
+    ],
+    "recall1": 0,
+    "mrr": 0.5,
+    "strict_correct": false
+  },
+  {
+    "query": "burned_home_retained_agent_passive_completed_typed_response",
+    "family": "burned_home",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "burned_home_completed",
+      "burned_home_proposed",
+      "burned_home_other_beneficiary",
+      "burned_home_voice",
+      "burned_home_sanction",
+      "burned_home_nonrepetition",
+      "burned_home_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "burned_home_completed"
+    ],
+    "top": [
+      "burned_home_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "burned_home_retained_agent_passive_acknowledgment_voice",
+    "family": "burned_home",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "burned_home_completed",
+      "burned_home_proposed",
+      "burned_home_other_beneficiary",
+      "burned_home_voice",
+      "burned_home_sanction",
+      "burned_home_nonrepetition",
+      "burned_home_completion_unknown"
+    ],
+    "scores": [
+      0.28190430844611203,
+      0.19563384972586828,
+      0.31223128433560327,
+      0.22327932727258892,
+      0.19553204275431682,
+      0.20514666013129015,
+      0.21173112617231793
+    ],
+    "gold": [
+      "burned_home_voice"
+    ],
+    "top": [
+      "burned_home_other_beneficiary"
+    ],
+    "recall1": 0,
+    "mrr": 0.3333333333333333,
+    "strict_correct": false
+  },
+  {
+    "query": "burned_home_retained_agent_passive_acknowledgment_voice",
+    "family": "burned_home",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "burned_home_completed",
+      "burned_home_proposed",
+      "burned_home_other_beneficiary",
+      "burned_home_voice",
+      "burned_home_sanction",
+      "burned_home_nonrepetition",
+      "burned_home_completion_unknown"
+    ],
+    "scores": [
+      0.2149769636376226,
+      0.15234096919403686,
+      0.2517185192108635,
+      0.24134034977737334,
+      0.1434916368873946,
+      0.1554728207823289,
+      0.18573149154512195
+    ],
+    "gold": [
+      "burned_home_voice"
+    ],
+    "top": [
+      "burned_home_other_beneficiary"
+    ],
+    "recall1": 0,
+    "mrr": 0.5,
+    "strict_correct": false
+  },
+  {
+    "query": "burned_home_retained_agent_passive_acknowledgment_voice",
+    "family": "burned_home",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "burned_home_completed",
+      "burned_home_proposed",
+      "burned_home_other_beneficiary",
+      "burned_home_voice",
+      "burned_home_sanction",
+      "burned_home_nonrepetition",
+      "burned_home_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "burned_home_voice"
+    ],
+    "top": [
+      "burned_home_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "missing_son_base_completed_typed_response",
+    "family": "missing_son",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "missing_son_completed",
+      "missing_son_proposed",
+      "missing_son_other_beneficiary",
+      "missing_son_voice",
+      "missing_son_sanction",
+      "missing_son_nonrepetition",
+      "missing_son_completion_unknown"
+    ],
+    "scores": [
+      0.3967898995267823,
+      0.3115817736038542,
+      0.3828447002507024,
+      0.3620721070826931,
+      0.3181746302896694,
+      0.2927464319411746,
+      0.3455003004600685
+    ],
+    "gold": [
+      "missing_son_completed"
+    ],
+    "top": [
+      "missing_son_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "missing_son_base_completed_typed_response",
+    "family": "missing_son",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "missing_son_completed",
+      "missing_son_proposed",
+      "missing_son_other_beneficiary",
+      "missing_son_voice",
+      "missing_son_sanction",
+      "missing_son_nonrepetition",
+      "missing_son_completion_unknown"
+    ],
+    "scores": [
+      0.3081145175885982,
+      0.22493579667863708,
+      0.2914388357376775,
+      0.27711522160663116,
+      0.23024976850917458,
+      0.21458621930565874,
+      0.24715685713751714
+    ],
+    "gold": [
+      "missing_son_completed"
+    ],
+    "top": [
+      "missing_son_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "missing_son_base_completed_typed_response",
+    "family": "missing_son",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "missing_son_completed",
+      "missing_son_proposed",
+      "missing_son_other_beneficiary",
+      "missing_son_voice",
+      "missing_son_sanction",
+      "missing_son_nonrepetition",
+      "missing_son_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "missing_son_completed"
+    ],
+    "top": [
+      "missing_son_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "missing_son_base_acknowledgment_voice",
+    "family": "missing_son",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "missing_son_completed",
+      "missing_son_proposed",
+      "missing_son_other_beneficiary",
+      "missing_son_voice",
+      "missing_son_sanction",
+      "missing_son_nonrepetition",
+      "missing_son_completion_unknown"
+    ],
+    "scores": [
+      0.3967898995267823,
+      0.3115817736038542,
+      0.3828447002507024,
+      0.3620721070826931,
+      0.3181746302896694,
+      0.2927464319411746,
+      0.3455003004600685
+    ],
+    "gold": [
+      "missing_son_voice"
+    ],
+    "top": [
+      "missing_son_completed"
+    ],
+    "recall1": 0,
+    "mrr": 0.3333333333333333,
+    "strict_correct": false
+  },
+  {
+    "query": "missing_son_base_acknowledgment_voice",
+    "family": "missing_son",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "missing_son_completed",
+      "missing_son_proposed",
+      "missing_son_other_beneficiary",
+      "missing_son_voice",
+      "missing_son_sanction",
+      "missing_son_nonrepetition",
+      "missing_son_completion_unknown"
+    ],
+    "scores": [
+      0.30927880334749813,
+      0.24523030075063817,
+      0.3129915422597984,
+      0.34391524219120595,
+      0.2406014011007864,
+      0.22840268077539186,
+      0.28932373181753446
+    ],
+    "gold": [
+      "missing_son_voice"
+    ],
+    "top": [
+      "missing_son_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "missing_son_base_acknowledgment_voice",
+    "family": "missing_son",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "missing_son_completed",
+      "missing_son_proposed",
+      "missing_son_other_beneficiary",
+      "missing_son_voice",
+      "missing_son_sanction",
+      "missing_son_nonrepetition",
+      "missing_son_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "missing_son_voice"
+    ],
+    "top": [
+      "missing_son_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "missing_son_retained_agent_passive_completed_typed_response",
+    "family": "missing_son",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "missing_son_completed",
+      "missing_son_proposed",
+      "missing_son_other_beneficiary",
+      "missing_son_voice",
+      "missing_son_sanction",
+      "missing_son_nonrepetition",
+      "missing_son_completion_unknown"
+    ],
+    "scores": [
+      0.40456760569449524,
+      0.2906019632766419,
+      0.3743591807596267,
+      0.3247122822972118,
+      0.2925025231413962,
+      0.2756898379455665,
+      0.3224112573612627
+    ],
+    "gold": [
+      "missing_son_completed"
+    ],
+    "top": [
+      "missing_son_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "missing_son_retained_agent_passive_completed_typed_response",
+    "family": "missing_son",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "missing_son_completed",
+      "missing_son_proposed",
+      "missing_son_other_beneficiary",
+      "missing_son_voice",
+      "missing_son_sanction",
+      "missing_son_nonrepetition",
+      "missing_son_completion_unknown"
+    ],
+    "scores": [
+      0.31455330988638586,
+      0.21129984795800283,
+      0.28663208035511234,
+      0.25239673581230426,
+      0.2134050170742055,
+      0.20361226694686974,
+      0.23214861094773864
+    ],
+    "gold": [
+      "missing_son_completed"
+    ],
+    "top": [
+      "missing_son_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "missing_son_retained_agent_passive_completed_typed_response",
+    "family": "missing_son",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "missing_son_completed",
+      "missing_son_proposed",
+      "missing_son_other_beneficiary",
+      "missing_son_voice",
+      "missing_son_sanction",
+      "missing_son_nonrepetition",
+      "missing_son_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "missing_son_completed"
+    ],
+    "top": [
+      "missing_son_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "missing_son_retained_agent_passive_acknowledgment_voice",
+    "family": "missing_son",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "missing_son_completed",
+      "missing_son_proposed",
+      "missing_son_other_beneficiary",
+      "missing_son_voice",
+      "missing_son_sanction",
+      "missing_son_nonrepetition",
+      "missing_son_completion_unknown"
+    ],
+    "scores": [
+      0.40456760569449524,
+      0.2906019632766419,
+      0.3743591807596267,
+      0.3247122822972118,
+      0.2925025231413962,
+      0.2756898379455665,
+      0.3224112573612627
+    ],
+    "gold": [
+      "missing_son_voice"
+    ],
+    "top": [
+      "missing_son_completed"
+    ],
+    "recall1": 0,
+    "mrr": 0.3333333333333333,
+    "strict_correct": false
+  },
+  {
+    "query": "missing_son_retained_agent_passive_acknowledgment_voice",
+    "family": "missing_son",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "missing_son_completed",
+      "missing_son_proposed",
+      "missing_son_other_beneficiary",
+      "missing_son_voice",
+      "missing_son_sanction",
+      "missing_son_nonrepetition",
+      "missing_son_completion_unknown"
+    ],
+    "scores": [
+      0.3140831671901084,
+      0.2304934848040688,
+      0.3066790395385606,
+      0.31782539910892416,
+      0.22266651092471276,
+      0.21637384494706638,
+      0.27307332446184274
+    ],
+    "gold": [
+      "missing_son_voice"
+    ],
+    "top": [
+      "missing_son_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "missing_son_retained_agent_passive_acknowledgment_voice",
+    "family": "missing_son",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "missing_son_completed",
+      "missing_son_proposed",
+      "missing_son_other_beneficiary",
+      "missing_son_voice",
+      "missing_son_sanction",
+      "missing_son_nonrepetition",
+      "missing_son_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "missing_son_voice"
+    ],
+    "top": [
+      "missing_son_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "withheld_fate_base_completed_typed_response",
+    "family": "withheld_fate",
+    "split": "test",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "withheld_fate_completed",
+      "withheld_fate_proposed",
+      "withheld_fate_other_beneficiary",
+      "withheld_fate_voice",
+      "withheld_fate_sanction",
+      "withheld_fate_nonrepetition",
+      "withheld_fate_completion_unknown"
+    ],
+    "scores": [
+      0.33440151771951954,
+      0.26315644303805547,
+      0.3233220906185346,
+      0.3112270644813177,
+      0.27547949805365257,
+      0.24754391303898965,
+      0.29705453856059516
+    ],
+    "gold": [
+      "withheld_fate_completed"
+    ],
+    "top": [
+      "withheld_fate_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "withheld_fate_base_completed_typed_response",
+    "family": "withheld_fate",
+    "split": "test",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "withheld_fate_completed",
+      "withheld_fate_proposed",
+      "withheld_fate_other_beneficiary",
+      "withheld_fate_voice",
+      "withheld_fate_sanction",
+      "withheld_fate_nonrepetition",
+      "withheld_fate_completion_unknown"
+    ],
+    "scores": [
+      0.2653652408962207,
+      0.19139506070340634,
+      0.2505027051575572,
+      0.24200951140848806,
+      0.20059528671347615,
+      0.18327584197576247,
+      0.213545174931059
+    ],
+    "gold": [
+      "withheld_fate_completed"
+    ],
+    "top": [
+      "withheld_fate_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "withheld_fate_base_completed_typed_response",
+    "family": "withheld_fate",
+    "split": "test",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "withheld_fate_completed",
+      "withheld_fate_proposed",
+      "withheld_fate_other_beneficiary",
+      "withheld_fate_voice",
+      "withheld_fate_sanction",
+      "withheld_fate_nonrepetition",
+      "withheld_fate_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "withheld_fate_completed"
+    ],
+    "top": [
+      "withheld_fate_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "withheld_fate_base_acknowledgment_voice",
+    "family": "withheld_fate",
+    "split": "test",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "withheld_fate_completed",
+      "withheld_fate_proposed",
+      "withheld_fate_other_beneficiary",
+      "withheld_fate_voice",
+      "withheld_fate_sanction",
+      "withheld_fate_nonrepetition",
+      "withheld_fate_completion_unknown"
+    ],
+    "scores": [
+      0.33440151771951954,
+      0.26315644303805547,
+      0.3233220906185346,
+      0.3112270644813177,
+      0.27547949805365257,
+      0.24754391303898965,
+      0.29705453856059516
+    ],
+    "gold": [
+      "withheld_fate_voice"
+    ],
+    "top": [
+      "withheld_fate_completed"
+    ],
+    "recall1": 0,
+    "mrr": 0.3333333333333333,
+    "strict_correct": false
+  },
+  {
+    "query": "withheld_fate_base_acknowledgment_voice",
+    "family": "withheld_fate",
+    "split": "test",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "withheld_fate_completed",
+      "withheld_fate_proposed",
+      "withheld_fate_other_beneficiary",
+      "withheld_fate_voice",
+      "withheld_fate_sanction",
+      "withheld_fate_nonrepetition",
+      "withheld_fate_completion_unknown"
+    ],
+    "scores": [
+      0.26881818289915344,
+      0.2136908601294022,
+      0.27468693141506817,
+      0.31208581549170483,
+      0.21281195052646368,
+      0.19887292296555273,
+      0.25834671216154165
+    ],
+    "gold": [
+      "withheld_fate_voice"
+    ],
+    "top": [
+      "withheld_fate_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "withheld_fate_base_acknowledgment_voice",
+    "family": "withheld_fate",
+    "split": "test",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "withheld_fate_completed",
+      "withheld_fate_proposed",
+      "withheld_fate_other_beneficiary",
+      "withheld_fate_voice",
+      "withheld_fate_sanction",
+      "withheld_fate_nonrepetition",
+      "withheld_fate_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "withheld_fate_voice"
+    ],
+    "top": [
+      "withheld_fate_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "withheld_fate_retained_agent_passive_completed_typed_response",
+    "family": "withheld_fate",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "withheld_fate_completed",
+      "withheld_fate_proposed",
+      "withheld_fate_other_beneficiary",
+      "withheld_fate_voice",
+      "withheld_fate_sanction",
+      "withheld_fate_nonrepetition",
+      "withheld_fate_completion_unknown"
+    ],
+    "scores": [
+      0.34878240678121497,
+      0.24862153860387534,
+      0.3192560417571493,
+      0.2747431195979869,
+      0.2556210605002451,
+      0.23683818137935675,
+      0.28090115949950667
+    ],
+    "gold": [
+      "withheld_fate_completed"
+    ],
+    "top": [
+      "withheld_fate_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "withheld_fate_retained_agent_passive_completed_typed_response",
+    "family": "withheld_fate",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "withheld_fate_completed",
+      "withheld_fate_proposed",
+      "withheld_fate_other_beneficiary",
+      "withheld_fate_voice",
+      "withheld_fate_sanction",
+      "withheld_fate_nonrepetition",
+      "withheld_fate_completion_unknown"
+    ],
+    "scores": [
+      0.2761196672033788,
+      0.18206632029799824,
+      0.24855338019122597,
+      0.21779422396321665,
+      0.187645642437168,
+      0.17654655321529827,
+      0.20318048075006323
+    ],
+    "gold": [
+      "withheld_fate_completed"
+    ],
+    "top": [
+      "withheld_fate_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "withheld_fate_retained_agent_passive_completed_typed_response",
+    "family": "withheld_fate",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "withheld_fate_completed",
+      "withheld_fate_proposed",
+      "withheld_fate_other_beneficiary",
+      "withheld_fate_voice",
+      "withheld_fate_sanction",
+      "withheld_fate_nonrepetition",
+      "withheld_fate_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "withheld_fate_completed"
+    ],
+    "top": [
+      "withheld_fate_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "withheld_fate_retained_agent_passive_acknowledgment_voice",
+    "family": "withheld_fate",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "withheld_fate_completed",
+      "withheld_fate_proposed",
+      "withheld_fate_other_beneficiary",
+      "withheld_fate_voice",
+      "withheld_fate_sanction",
+      "withheld_fate_nonrepetition",
+      "withheld_fate_completion_unknown"
+    ],
+    "scores": [
+      0.34878240678121497,
+      0.24862153860387534,
+      0.3192560417571493,
+      0.2747431195979869,
+      0.2556210605002451,
+      0.23683818137935675,
+      0.28090115949950667
+    ],
+    "gold": [
+      "withheld_fate_voice"
+    ],
+    "top": [
+      "withheld_fate_completed"
+    ],
+    "recall1": 0,
+    "mrr": 0.25,
+    "strict_correct": false
+  },
+  {
+    "query": "withheld_fate_retained_agent_passive_acknowledgment_voice",
+    "family": "withheld_fate",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "withheld_fate_completed",
+      "withheld_fate_proposed",
+      "withheld_fate_other_beneficiary",
+      "withheld_fate_voice",
+      "withheld_fate_sanction",
+      "withheld_fate_nonrepetition",
+      "withheld_fate_completion_unknown"
+    ],
+    "scores": [
+      0.27876166748235714,
+      0.20372274480811092,
+      0.2719346578498926,
+      0.2870271025588,
+      0.19917957977633743,
+      0.1915378701945229,
+      0.2472721565340636
+    ],
+    "gold": [
+      "withheld_fate_voice"
+    ],
+    "top": [
+      "withheld_fate_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "withheld_fate_retained_agent_passive_acknowledgment_voice",
+    "family": "withheld_fate",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "withheld_fate_completed",
+      "withheld_fate_proposed",
+      "withheld_fate_other_beneficiary",
+      "withheld_fate_voice",
+      "withheld_fate_sanction",
+      "withheld_fate_nonrepetition",
+      "withheld_fate_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "withheld_fate_voice"
+    ],
+    "top": [
+      "withheld_fate_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "sacred_site_base_completed_typed_response",
+    "family": "sacred_site",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "sacred_site_completed",
+      "sacred_site_proposed",
+      "sacred_site_other_beneficiary",
+      "sacred_site_voice",
+      "sacred_site_sanction",
+      "sacred_site_nonrepetition",
+      "sacred_site_completion_unknown"
+    ],
+    "scores": [
+      0.4090869602559953,
+      0.31964793311869477,
+      0.3912978239640955,
+      0.34266541144829954,
+      0.3085456667748237,
+      0.3324602764299424,
+      0.33946429103856346
+    ],
+    "gold": [
+      "sacred_site_completed"
+    ],
+    "top": [
+      "sacred_site_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "sacred_site_base_completed_typed_response",
+    "family": "sacred_site",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "sacred_site_completed",
+      "sacred_site_proposed",
+      "sacred_site_other_beneficiary",
+      "sacred_site_voice",
+      "sacred_site_sanction",
+      "sacred_site_nonrepetition",
+      "sacred_site_completion_unknown"
+    ],
+    "scores": [
+      0.31543713333812845,
+      0.22987888455497335,
+      0.2962426885899861,
+      0.2632041327134634,
+      0.22298779294456775,
+      0.24111180501049484,
+      0.24239918804746566
+    ],
+    "gold": [
+      "sacred_site_completed"
+    ],
+    "top": [
+      "sacred_site_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "sacred_site_base_completed_typed_response",
+    "family": "sacred_site",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "sacred_site_completed",
+      "sacred_site_proposed",
+      "sacred_site_other_beneficiary",
+      "sacred_site_voice",
+      "sacred_site_sanction",
+      "sacred_site_nonrepetition",
+      "sacred_site_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "sacred_site_completed"
+    ],
+    "top": [
+      "sacred_site_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "sacred_site_base_acknowledgment_voice",
+    "family": "sacred_site",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "sacred_site_completed",
+      "sacred_site_proposed",
+      "sacred_site_other_beneficiary",
+      "sacred_site_voice",
+      "sacred_site_sanction",
+      "sacred_site_nonrepetition",
+      "sacred_site_completion_unknown"
+    ],
+    "scores": [
+      0.4090869602559953,
+      0.31964793311869477,
+      0.3912978239640955,
+      0.34266541144829954,
+      0.3085456667748237,
+      0.3324602764299424,
+      0.33946429103856346
+    ],
+    "gold": [
+      "sacred_site_voice"
+    ],
+    "top": [
+      "sacred_site_completed"
+    ],
+    "recall1": 0,
+    "mrr": 0.3333333333333333,
+    "strict_correct": false
+  },
+  {
+    "query": "sacred_site_base_acknowledgment_voice",
+    "family": "sacred_site",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "sacred_site_completed",
+      "sacred_site_proposed",
+      "sacred_site_other_beneficiary",
+      "sacred_site_voice",
+      "sacred_site_sanction",
+      "sacred_site_nonrepetition",
+      "sacred_site_completion_unknown"
+    ],
+    "scores": [
+      0.3017034445761014,
+      0.23784896310160206,
+      0.30369429260049174,
+      0.3186685618594702,
+      0.22196532514866196,
+      0.2508872533035837,
+      0.27211967137430454
+    ],
+    "gold": [
+      "sacred_site_voice"
+    ],
+    "top": [
+      "sacred_site_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "sacred_site_base_acknowledgment_voice",
+    "family": "sacred_site",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "sacred_site_completed",
+      "sacred_site_proposed",
+      "sacred_site_other_beneficiary",
+      "sacred_site_voice",
+      "sacred_site_sanction",
+      "sacred_site_nonrepetition",
+      "sacred_site_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "sacred_site_voice"
+    ],
+    "top": [
+      "sacred_site_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "sacred_site_retained_agent_passive_completed_typed_response",
+    "family": "sacred_site",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "sacred_site_completed",
+      "sacred_site_proposed",
+      "sacred_site_other_beneficiary",
+      "sacred_site_voice",
+      "sacred_site_sanction",
+      "sacred_site_nonrepetition",
+      "sacred_site_completion_unknown"
+    ],
+    "scores": [
+      0.40301651412949613,
+      0.3105861087579397,
+      0.3854744278277799,
+      0.33761446385838306,
+      0.2997985849078895,
+      0.32303522993412315,
+      0.32984068499135205
+    ],
+    "gold": [
+      "sacred_site_completed"
+    ],
+    "top": [
+      "sacred_site_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "sacred_site_retained_agent_passive_completed_typed_response",
+    "family": "sacred_site",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "sacred_site_completed",
+      "sacred_site_proposed",
+      "sacred_site_other_beneficiary",
+      "sacred_site_voice",
+      "sacred_site_sanction",
+      "sacred_site_nonrepetition",
+      "sacred_site_completion_unknown"
+    ],
+    "scores": [
+      0.31157751080908447,
+      0.22389302672787018,
+      0.29253422518852573,
+      0.25999340435700696,
+      0.2172108581929197,
+      0.2348878968961343,
+      0.2360406300457959
+    ],
+    "gold": [
+      "sacred_site_completed"
+    ],
+    "top": [
+      "sacred_site_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "sacred_site_retained_agent_passive_completed_typed_response",
+    "family": "sacred_site",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "sacred_site_completed",
+      "sacred_site_proposed",
+      "sacred_site_other_beneficiary",
+      "sacred_site_voice",
+      "sacred_site_sanction",
+      "sacred_site_nonrepetition",
+      "sacred_site_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "sacred_site_completed"
+    ],
+    "top": [
+      "sacred_site_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "sacred_site_retained_agent_passive_acknowledgment_voice",
+    "family": "sacred_site",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "sacred_site_completed",
+      "sacred_site_proposed",
+      "sacred_site_other_beneficiary",
+      "sacred_site_voice",
+      "sacred_site_sanction",
+      "sacred_site_nonrepetition",
+      "sacred_site_completion_unknown"
+    ],
+    "scores": [
+      0.40301651412949613,
+      0.3105861087579397,
+      0.3854744278277799,
+      0.33761446385838306,
+      0.2997985849078895,
+      0.32303522993412315,
+      0.32984068499135205
+    ],
+    "gold": [
+      "sacred_site_voice"
+    ],
+    "top": [
+      "sacred_site_completed"
+    ],
+    "recall1": 0,
+    "mrr": 0.3333333333333333,
+    "strict_correct": false
+  },
+  {
+    "query": "sacred_site_retained_agent_passive_acknowledgment_voice",
+    "family": "sacred_site",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "sacred_site_completed",
+      "sacred_site_proposed",
+      "sacred_site_other_beneficiary",
+      "sacred_site_voice",
+      "sacred_site_sanction",
+      "sacred_site_nonrepetition",
+      "sacred_site_completion_unknown"
+    ],
+    "scores": [
+      0.29678651270577744,
+      0.23101071561170594,
+      0.29894378544494804,
+      0.3144177612298895,
+      0.21538258077847622,
+      0.24376663836088933,
+      0.26481140464367414
+    ],
+    "gold": [
+      "sacred_site_voice"
+    ],
+    "top": [
+      "sacred_site_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "sacred_site_retained_agent_passive_acknowledgment_voice",
+    "family": "sacred_site",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "sacred_site_completed",
+      "sacred_site_proposed",
+      "sacred_site_other_beneficiary",
+      "sacred_site_voice",
+      "sacred_site_sanction",
+      "sacred_site_nonrepetition",
+      "sacred_site_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "sacred_site_voice"
+    ],
+    "top": [
+      "sacred_site_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "language_base_completed_typed_response",
+    "family": "language",
+    "split": "test",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "language_completed",
+      "language_proposed",
+      "language_other_beneficiary",
+      "language_voice",
+      "language_sanction",
+      "language_nonrepetition",
+      "language_completion_unknown"
+    ],
+    "scores": [
+      0.35377321141420903,
+      0.2724568448896333,
+      0.3353247636386186,
+      0.2989190599783611,
+      0.2625142542179521,
+      0.3599471895037005,
+      0.292252901880527
+    ],
+    "gold": [
+      "language_completed"
+    ],
+    "top": [
+      "language_nonrepetition"
+    ],
+    "recall1": 0,
+    "mrr": 0.5,
+    "strict_correct": false
+  },
+  {
+    "query": "language_base_completed_typed_response",
+    "family": "language",
+    "split": "test",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "language_completed",
+      "language_proposed",
+      "language_other_beneficiary",
+      "language_voice",
+      "language_sanction",
+      "language_nonrepetition",
+      "language_completion_unknown"
+    ],
+    "scores": [
+      0.280058032913735,
+      0.1983754108989352,
+      0.25988711590515573,
+      0.23456882391520245,
+      0.19231810317147832,
+      0.26016046150691924,
+      0.21091349223206193
+    ],
+    "gold": [
+      "language_completed"
+    ],
+    "top": [
+      "language_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "language_base_completed_typed_response",
+    "family": "language",
+    "split": "test",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "language_completed",
+      "language_proposed",
+      "language_other_beneficiary",
+      "language_voice",
+      "language_sanction",
+      "language_nonrepetition",
+      "language_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "language_completed"
+    ],
+    "top": [
+      "language_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "language_base_acknowledgment_voice",
+    "family": "language",
+    "split": "test",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "language_completed",
+      "language_proposed",
+      "language_other_beneficiary",
+      "language_voice",
+      "language_sanction",
+      "language_nonrepetition",
+      "language_completion_unknown"
+    ],
+    "scores": [
+      0.35377321141420903,
+      0.2724568448896333,
+      0.3353247636386186,
+      0.2989190599783611,
+      0.2625142542179521,
+      0.3599471895037005,
+      0.292252901880527
+    ],
+    "gold": [
+      "language_voice"
+    ],
+    "top": [
+      "language_nonrepetition"
+    ],
+    "recall1": 0,
+    "mrr": 0.25,
+    "strict_correct": false
+  },
+  {
+    "query": "language_base_acknowledgment_voice",
+    "family": "language",
+    "split": "test",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "language_completed",
+      "language_proposed",
+      "language_other_beneficiary",
+      "language_voice",
+      "language_sanction",
+      "language_nonrepetition",
+      "language_completion_unknown"
+    ],
+    "scores": [
+      0.26499794324989123,
+      0.20610375231145284,
+      0.2670816841330862,
+      0.2911277613074317,
+      0.19081553832121015,
+      0.2633969806219866,
+      0.24102437207928845
+    ],
+    "gold": [
+      "language_voice"
+    ],
+    "top": [
+      "language_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "language_base_acknowledgment_voice",
+    "family": "language",
+    "split": "test",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "language_completed",
+      "language_proposed",
+      "language_other_beneficiary",
+      "language_voice",
+      "language_sanction",
+      "language_nonrepetition",
+      "language_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "language_voice"
+    ],
+    "top": [
+      "language_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "language_retained_agent_passive_completed_typed_response",
+    "family": "language",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "language_completed",
+      "language_proposed",
+      "language_other_beneficiary",
+      "language_voice",
+      "language_sanction",
+      "language_nonrepetition",
+      "language_completion_unknown"
+    ],
+    "scores": [
+      0.32476881617846876,
+      0.2503266041998693,
+      0.3078422096370998,
+      0.26848877539051,
+      0.2357900183502291,
+      0.33313876296889655,
+      0.2683870622042607
+    ],
+    "gold": [
+      "language_completed"
+    ],
+    "top": [
+      "language_nonrepetition"
+    ],
+    "recall1": 0,
+    "mrr": 0.5,
+    "strict_correct": false
+  },
+  {
+    "query": "language_retained_agent_passive_completed_typed_response",
+    "family": "language",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "language_completed",
+      "language_proposed",
+      "language_other_beneficiary",
+      "language_voice",
+      "language_sanction",
+      "language_nonrepetition",
+      "language_completion_unknown"
+    ],
+    "scores": [
+      0.2592362105675129,
+      0.1825441589677805,
+      0.24017773396271652,
+      0.21293906209919386,
+      0.1733723941386223,
+      0.2409103384699373,
+      0.19385164102765173
+    ],
+    "gold": [
+      "language_completed"
+    ],
+    "top": [
+      "language_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "language_retained_agent_passive_completed_typed_response",
+    "family": "language",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "language_completed",
+      "language_proposed",
+      "language_other_beneficiary",
+      "language_voice",
+      "language_sanction",
+      "language_nonrepetition",
+      "language_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "language_completed"
+    ],
+    "top": [
+      "language_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "language_retained_agent_passive_acknowledgment_voice",
+    "family": "language",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "language_completed",
+      "language_proposed",
+      "language_other_beneficiary",
+      "language_voice",
+      "language_sanction",
+      "language_nonrepetition",
+      "language_completion_unknown"
+    ],
+    "scores": [
+      0.32476881617846876,
+      0.2503266041998693,
+      0.3078422096370998,
+      0.26848877539051,
+      0.2357900183502291,
+      0.33313876296889655,
+      0.2683870622042607
+    ],
+    "gold": [
+      "language_voice"
+    ],
+    "top": [
+      "language_nonrepetition"
+    ],
+    "recall1": 0,
+    "mrr": 0.25,
+    "strict_correct": false
+  },
+  {
+    "query": "language_retained_agent_passive_acknowledgment_voice",
+    "family": "language",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "language_completed",
+      "language_proposed",
+      "language_other_beneficiary",
+      "language_voice",
+      "language_sanction",
+      "language_nonrepetition",
+      "language_completion_unknown"
+    ],
+    "scores": [
+      0.24516662566897696,
+      0.1909784616313048,
+      0.24831513154634474,
+      0.27034136914209395,
+      0.1724623964014827,
+      0.24509510241534535,
+      0.22474128134266627
+    ],
+    "gold": [
+      "language_voice"
+    ],
+    "top": [
+      "language_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "language_retained_agent_passive_acknowledgment_voice",
+    "family": "language",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "language_completed",
+      "language_proposed",
+      "language_other_beneficiary",
+      "language_voice",
+      "language_sanction",
+      "language_nonrepetition",
+      "language_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "language_voice"
+    ],
+    "top": [
+      "language_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "assault_base_completed_typed_response",
+    "family": "assault",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "assault_completed",
+      "assault_proposed",
+      "assault_other_beneficiary",
+      "assault_voice",
+      "assault_sanction",
+      "assault_nonrepetition",
+      "assault_completion_unknown"
+    ],
+    "scores": [
+      0.31719685403658204,
+      0.2620346955764895,
+      0.30023052143843854,
+      0.2710106751914119,
+      0.23399586344488765,
+      0.2405257048539055,
+      0.2688891657549502
+    ],
+    "gold": [
+      "assault_completed"
+    ],
+    "top": [
+      "assault_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "assault_base_completed_typed_response",
+    "family": "assault",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "assault_completed",
+      "assault_proposed",
+      "assault_other_beneficiary",
+      "assault_voice",
+      "assault_sanction",
+      "assault_nonrepetition",
+      "assault_completion_unknown"
+    ],
+    "scores": [
+      0.254963977221708,
+      0.19091738188022392,
+      0.23570184575620884,
+      0.21527320090320237,
+      0.17249734313361842,
+      0.1791141756651467,
+      0.19458007092984614
+    ],
+    "gold": [
+      "assault_completed"
+    ],
+    "top": [
+      "assault_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "assault_base_completed_typed_response",
+    "family": "assault",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "assault_completed",
+      "assault_proposed",
+      "assault_other_beneficiary",
+      "assault_voice",
+      "assault_sanction",
+      "assault_nonrepetition",
+      "assault_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "assault_completed"
+    ],
+    "top": [
+      "assault_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "assault_base_acknowledgment_voice",
+    "family": "assault",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "assault_completed",
+      "assault_proposed",
+      "assault_other_beneficiary",
+      "assault_voice",
+      "assault_sanction",
+      "assault_nonrepetition",
+      "assault_completion_unknown"
+    ],
+    "scores": [
+      0.31719685403658204,
+      0.2620346955764895,
+      0.30023052143843854,
+      0.2710106751914119,
+      0.23399586344488765,
+      0.2405257048539055,
+      0.2688891657549502
+    ],
+    "gold": [
+      "assault_voice"
+    ],
+    "top": [
+      "assault_completed"
+    ],
+    "recall1": 0,
+    "mrr": 0.3333333333333333,
+    "strict_correct": false
+  },
+  {
+    "query": "assault_base_acknowledgment_voice",
+    "family": "assault",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "assault_completed",
+      "assault_proposed",
+      "assault_other_beneficiary",
+      "assault_voice",
+      "assault_sanction",
+      "assault_nonrepetition",
+      "assault_completion_unknown"
+    ],
+    "scores": [
+      0.2388019861322883,
+      0.19817581904638842,
+      0.24206778019194394,
+      0.27141745618260615,
+      0.1703163261117921,
+      0.1805823825253267,
+      0.2241995900373306
+    ],
+    "gold": [
+      "assault_voice"
+    ],
+    "top": [
+      "assault_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "assault_base_acknowledgment_voice",
+    "family": "assault",
+    "split": "dev",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "assault_completed",
+      "assault_proposed",
+      "assault_other_beneficiary",
+      "assault_voice",
+      "assault_sanction",
+      "assault_nonrepetition",
+      "assault_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "assault_voice"
+    ],
+    "top": [
+      "assault_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "assault_retained_agent_passive_completed_typed_response",
+    "family": "assault",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "assault_completed",
+      "assault_proposed",
+      "assault_other_beneficiary",
+      "assault_voice",
+      "assault_sanction",
+      "assault_nonrepetition",
+      "assault_completion_unknown"
+    ],
+    "scores": [
+      0.31129620316076967,
+      0.24493482658673754,
+      0.29466527135281984,
+      0.28104046842689,
+      0.2187257535067804,
+      0.22482947030519124,
+      0.25134198751942083
+    ],
+    "gold": [
+      "assault_completed"
+    ],
+    "top": [
+      "assault_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "assault_retained_agent_passive_completed_typed_response",
+    "family": "assault",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "assault_completed",
+      "assault_proposed",
+      "assault_other_beneficiary",
+      "assault_voice",
+      "assault_sanction",
+      "assault_nonrepetition",
+      "assault_completion_unknown"
+    ],
+    "scores": [
+      0.25146374892301554,
+      0.1796073073733221,
+      0.2323904210342102,
+      0.22260372285563695,
+      0.162401771725453,
+      0.16874071798985607,
+      0.18297130579933263
+    ],
+    "gold": [
+      "assault_completed"
+    ],
+    "top": [
+      "assault_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "assault_retained_agent_passive_completed_typed_response",
+    "family": "assault",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "assault_completed",
+      "assault_proposed",
+      "assault_other_beneficiary",
+      "assault_voice",
+      "assault_sanction",
+      "assault_nonrepetition",
+      "assault_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "assault_completed"
+    ],
+    "top": [
+      "assault_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "assault_retained_agent_passive_acknowledgment_voice",
+    "family": "assault",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "assault_completed",
+      "assault_proposed",
+      "assault_other_beneficiary",
+      "assault_voice",
+      "assault_sanction",
+      "assault_nonrepetition",
+      "assault_completion_unknown"
+    ],
+    "scores": [
+      0.31129620316076967,
+      0.24493482658673754,
+      0.29466527135281984,
+      0.28104046842689,
+      0.2187257535067804,
+      0.22482947030519124,
+      0.25134198751942083
+    ],
+    "gold": [
+      "assault_voice"
+    ],
+    "top": [
+      "assault_completed"
+    ],
+    "recall1": 0,
+    "mrr": 0.3333333333333333,
+    "strict_correct": false
+  },
+  {
+    "query": "assault_retained_agent_passive_acknowledgment_voice",
+    "family": "assault",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "assault_completed",
+      "assault_proposed",
+      "assault_other_beneficiary",
+      "assault_voice",
+      "assault_sanction",
+      "assault_nonrepetition",
+      "assault_completion_unknown"
+    ],
+    "scores": [
+      0.23331208161556777,
+      0.1852053315419287,
+      0.2367897141095447,
+      0.2767181966293522,
+      0.1587733341237766,
+      0.16868446401750825,
+      0.21076579182470634
+    ],
+    "gold": [
+      "assault_voice"
+    ],
+    "top": [
+      "assault_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "assault_retained_agent_passive_acknowledgment_voice",
+    "family": "assault",
+    "split": "dev",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "assault_completed",
+      "assault_proposed",
+      "assault_other_beneficiary",
+      "assault_voice",
+      "assault_sanction",
+      "assault_nonrepetition",
+      "assault_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "assault_voice"
+    ],
+    "top": [
+      "assault_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "mine_base_completed_typed_response",
+    "family": "mine",
+    "split": "test",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "mine_completed",
+      "mine_proposed",
+      "mine_other_beneficiary",
+      "mine_voice",
+      "mine_sanction",
+      "mine_nonrepetition",
+      "mine_completion_unknown"
+    ],
+    "scores": [
+      0.3682604645718124,
+      0.2437585469373791,
+      0.3098913690621203,
+      0.2691976628160005,
+      0.24160170574968645,
+      0.22149354455296735,
+      0.29557841994360723
+    ],
+    "gold": [
+      "mine_completed"
+    ],
+    "top": [
+      "mine_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "mine_base_completed_typed_response",
+    "family": "mine",
+    "split": "test",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "mine_completed",
+      "mine_proposed",
+      "mine_other_beneficiary",
+      "mine_voice",
+      "mine_sanction",
+      "mine_nonrepetition",
+      "mine_completion_unknown"
+    ],
+    "scores": [
+      0.29111837415829445,
+      0.17900720292671485,
+      0.2431026345767436,
+      0.2147361997904624,
+      0.17828097913736163,
+      0.16607688303270252,
+      0.213583655783522
+    ],
+    "gold": [
+      "mine_completed"
+    ],
+    "top": [
+      "mine_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "mine_base_completed_typed_response",
+    "family": "mine",
+    "split": "test",
+    "variant": "base",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "mine_completed",
+      "mine_proposed",
+      "mine_other_beneficiary",
+      "mine_voice",
+      "mine_sanction",
+      "mine_nonrepetition",
+      "mine_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "mine_completed"
+    ],
+    "top": [
+      "mine_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "mine_base_acknowledgment_voice",
+    "family": "mine",
+    "split": "test",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "mine_completed",
+      "mine_proposed",
+      "mine_other_beneficiary",
+      "mine_voice",
+      "mine_sanction",
+      "mine_nonrepetition",
+      "mine_completion_unknown"
+    ],
+    "scores": [
+      0.3682604645718124,
+      0.2437585469373791,
+      0.3098913690621203,
+      0.2691976628160005,
+      0.24160170574968645,
+      0.22149354455296735,
+      0.29557841994360723
+    ],
+    "gold": [
+      "mine_voice"
+    ],
+    "top": [
+      "mine_completed"
+    ],
+    "recall1": 0,
+    "mrr": 0.25,
+    "strict_correct": false
+  },
+  {
+    "query": "mine_base_acknowledgment_voice",
+    "family": "mine",
+    "split": "test",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "mine_completed",
+      "mine_proposed",
+      "mine_other_beneficiary",
+      "mine_voice",
+      "mine_sanction",
+      "mine_nonrepetition",
+      "mine_completion_unknown"
+    ],
+    "scores": [
+      0.2756381768947104,
+      0.1863586093390316,
+      0.24992317842826578,
+      0.27141297766061306,
+      0.17640678696703568,
+      0.17481396166056554,
+      0.2440386922269988
+    ],
+    "gold": [
+      "mine_voice"
+    ],
+    "top": [
+      "mine_completed"
+    ],
+    "recall1": 0,
+    "mrr": 0.5,
+    "strict_correct": false
+  },
+  {
+    "query": "mine_base_acknowledgment_voice",
+    "family": "mine",
+    "split": "test",
+    "variant": "base",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "mine_completed",
+      "mine_proposed",
+      "mine_other_beneficiary",
+      "mine_voice",
+      "mine_sanction",
+      "mine_nonrepetition",
+      "mine_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "mine_voice"
+    ],
+    "top": [
+      "mine_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "mine_retained_agent_passive_completed_typed_response",
+    "family": "mine",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_query",
+    "candidates": [
+      "mine_completed",
+      "mine_proposed",
+      "mine_other_beneficiary",
+      "mine_voice",
+      "mine_sanction",
+      "mine_nonrepetition",
+      "mine_completion_unknown"
+    ],
+    "scores": [
+      0.3061165580463115,
+      0.21490851741159495,
+      0.28756640195096633,
+      0.24976212692338756,
+      0.2130069490450163,
+      0.19527868816983796,
+      0.23238636821337016
+    ],
+    "gold": [
+      "mine_completed"
+    ],
+    "top": [
+      "mine_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "mine_retained_agent_passive_completed_typed_response",
+    "family": "mine",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "mine_completed",
+      "mine_proposed",
+      "mine_other_beneficiary",
+      "mine_voice",
+      "mine_sanction",
+      "mine_nonrepetition",
+      "mine_completion_unknown"
+    ],
+    "scores": [
+      0.24936000269553613,
+      0.15977470672928196,
+      0.22858635973029887,
+      0.2021095591201669,
+      0.15922166188500292,
+      0.14861307263760645,
+      0.170832147330119
+    ],
+    "gold": [
+      "mine_completed"
+    ],
+    "top": [
+      "mine_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "mine_retained_agent_passive_completed_typed_response",
+    "family": "mine",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "completed_typed_response",
+    "method": "attribute_oracle",
+    "candidates": [
+      "mine_completed",
+      "mine_proposed",
+      "mine_other_beneficiary",
+      "mine_voice",
+      "mine_sanction",
+      "mine_nonrepetition",
+      "mine_completion_unknown"
+    ],
+    "scores": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "mine_completed"
+    ],
+    "top": [
+      "mine_completed"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "mine_retained_agent_passive_acknowledgment_voice",
+    "family": "mine",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_query",
+    "candidates": [
+      "mine_completed",
+      "mine_proposed",
+      "mine_other_beneficiary",
+      "mine_voice",
+      "mine_sanction",
+      "mine_nonrepetition",
+      "mine_completion_unknown"
+    ],
+    "scores": [
+      0.3061165580463115,
+      0.21490851741159495,
+      0.28756640195096633,
+      0.24976212692338756,
+      0.2130069490450163,
+      0.19527868816983796,
+      0.23238636821337016
+    ],
+    "gold": [
+      "mine_voice"
+    ],
+    "top": [
+      "mine_completed"
+    ],
+    "recall1": 0,
+    "mrr": 0.3333333333333333,
+    "strict_correct": false
+  },
+  {
+    "query": "mine_retained_agent_passive_acknowledgment_voice",
+    "family": "mine",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "lexical_with_condition",
+    "candidates": [
+      "mine_completed",
+      "mine_proposed",
+      "mine_other_beneficiary",
+      "mine_voice",
+      "mine_sanction",
+      "mine_nonrepetition",
+      "mine_completion_unknown"
+    ],
+    "scores": [
+      0.23100133065052286,
+      0.1653020220706028,
+      0.23302410954301186,
+      0.25639303911457856,
+      0.15558402260323925,
+      0.15564934993226212,
+      0.19885639413614598
+    ],
+    "gold": [
+      "mine_voice"
+    ],
+    "top": [
+      "mine_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  },
+  {
+    "query": "mine_retained_agent_passive_acknowledgment_voice",
+    "family": "mine",
+    "split": "test",
+    "variant": "retained_agent_passive",
+    "criterion": "acknowledgment_voice",
+    "method": "attribute_oracle",
+    "candidates": [
+      "mine_completed",
+      "mine_proposed",
+      "mine_other_beneficiary",
+      "mine_voice",
+      "mine_sanction",
+      "mine_nonrepetition",
+      "mine_completion_unknown"
+    ],
+    "scores": [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "gold": [
+      "mine_voice"
+    ],
+    "top": [
+      "mine_voice"
+    ],
+    "recall1": 1.0,
+    "mrr": 1.0,
+    "strict_correct": true
+  }
+]

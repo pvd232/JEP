@@ -1,0 +1,54 @@
+{
+  "status": "complete",
+  "methods": {
+    "lexical_query": {
+      "test_queries": 24,
+      "test_families": 6,
+      "recall1": 0.3333333333333333,
+      "ci95": [
+        0.16666666666666666,
+        0.5
+      ],
+      "mrr": 0.5659722222222222,
+      "joint_strict_switch_accuracy": 0.0,
+      "passive_topset_stability": 1.0
+    },
+    "lexical_with_condition": {
+      "test_queries": 24,
+      "test_families": 6,
+      "recall1": 0.75,
+      "ci95": [
+        0.4583333333333333,
+        0.9583333333333334
+      ],
+      "mrr": 0.875,
+      "joint_strict_switch_accuracy": 0.6666666666666666,
+      "passive_topset_stability": 0.8333333333333334
+    },
+    "attribute_oracle": {
+      "test_queries": 24,
+      "test_families": 6,
+      "recall1": 1.0,
+      "ci95": [
+        1.0,
+        1.0
+      ],
+      "mrr": 1.0,
+      "joint_strict_switch_accuracy": 1.0,
+      "passive_topset_stability": 1.0
+    }
+  },
+  "epistemic_scope": "Authored asserted attributes; not human moral/reparative adequacy.",
+  "lexical_scope": "Unlabeled query/candidate corpus vocabulary and IDF; no gold labels used.",
+  "dataset_sha256": "b292fb89e11473a3a48563fbc52cfb80cddb0fc046c73427a852cc8d99086dc3",
+  "encoder": null,
+  "actual_runtime": null,
+  "verification": "Independent strict rank comparison passed",
+  "limitations": [
+    "English and structured synthetic cases",
+    "Only six test families",
+    "No expert validation",
+    "Directed victim/incident linking is distinct from cross-victim analogy",
+    "No theory/representation training or novel-architecture claim"
+  ]
+}

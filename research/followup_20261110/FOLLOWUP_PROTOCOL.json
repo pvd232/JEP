@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "authorization": "New follow-up explicitly requested after overnight pilot completed. Not a recovery of the expired pilot.",
+  "dataset_sha256": "b292fb89e11473a3a48563fbc52cfb80cddb0fc046c73427a852cc8d99086dc3",
+  "scope": "Directed response-linking/attribute diagnostic; not symmetric moral analogy or normative adequacy.",
+  "methods": [
+    "fixed-condition Qwen cosine",
+    "neutral-condition Qwen cosine",
+    "unconditioned lexical cosine",
+    "condition-aware lexical cosine with equal query/criterion vector weights",
+    "explicit attribute oracle upper bound"
+  ],
+  "splits": "Original family dev/test; no fitting or selection on test labels.",
+  "labels": "Author-designed asserted beneficiary/status/type expectations, no human labels.",
+  "limitations": [
+    "English only",
+    "Small structured hypothetical pool",
+    "No full theory-sensitive moral validation",
+    "Benchmark pilot, not claimed novel method"
+  ],
+  "deadline_utc": "2026-11-10T15:30:00Z",
+  "max_gpus": 1,
+  "max_gpu_seconds": 2700,
+  "max_recovery_launches": 2,
+  "original_pilot_gpu_seconds": 1440,
+  "combined_gpu_seconds_upper_bound": 4140,
+  "model_runtime": "Pinned same new runtime as previous pilot; historical numerical replay limitation retained.",
+  "followup_scope_note": "Response linking within named victim/incident, separate from cross-victim harm analogy. No novelty claim."
+}

@@ -1,0 +1,422 @@
+{
+  "scope": "lit04: synthetic robustness and condition-dependent semantic invariance",
+  "cutoff": "2026-11-10",
+  "review_type": "Focused systematic search and methods-level evidence review; not an exhaustive field census",
+  "papers": [
+    {
+      "id": "checklist",
+      "authors": "Ribeiro et al.",
+      "year": 2020,
+      "title": "Beyond Accuracy: Behavioral Testing of NLP Models with CheckList",
+      "url": "https://aclanthology.org/2020.acl-main.442.pdf",
+      "doi": "10.18653/v1/2020.acl-main.442",
+      "inspected_support": "§§2.1–2.3; capability/test-type matrix",
+      "data_languages_labels": "English sentiment, question-pair and reading-comprehension tasks; task labels and behavioral relations",
+      "method_result": "Capability-specific minimum-functionality, invariance and directional tests expose failures missed by aggregate accuracy.",
+      "limitation": "Template combinations do not establish coverage or normative validity; relation depends on task/capability.",
+      "jep_applicability": "Prior art for abundant invariance testing, including negation and roles. Adapt as criterion-indexed tests; never globally declare role swap invariant.",
+      "inspection": "Primary paper methods/results inspected; section-level evidence, not abstract-only",
+      "gap_confidence": "High confidence this is relevant prior art; no exhaustive-absence claim"
+    },
+    {
+      "id": "contrastsets",
+      "authors": "Gardner et al.",
+      "year": 2020,
+      "title": "Evaluating Models' Local Decision Boundaries via Contrast Sets",
+      "url": "https://aclanthology.org/2020.findings-emnlp.117.pdf",
+      "doi": "10.18653/v1/2020.findings-emnlp.117",
+      "inspected_support": "§2; §4.2 contrast-set construction",
+      "data_languages_labels": "Ten NLP datasets; knowledgeable annotators minimally edit existing cases and relabel",
+      "method_result": "Model-blind local contrasts reveal brittle decision boundaries; knowledgeable dataset authors produce meaningful edits.",
+      "limitation": "Local edits sample a neighborhood, not the entire decision boundary. Task labels are not JEP ethical judgments.",
+      "jep_applicability": "Expert-reviewed local contrasts and no model-in-loop test selection are precedents; keep descendants in one source-family split.",
+      "inspection": "Primary paper methods/results inspected; section-level evidence, not abstract-only",
+      "gap_confidence": "High confidence this is relevant prior art; no exhaustive-absence claim"
+    },
+    {
+      "id": "joshihe",
+      "authors": "Joshi and He",
+      "year": 2022,
+      "title": "An Investigation of the (In)effectiveness of Counterfactually Augmented Data",
+      "url": "https://aclanthology.org/2022.acl-long.256.pdf",
+      "doi": "10.18653/v1/2022.acl-long.256",
+      "inspected_support": "§2 Proposition 1; §§3.1–3.2; Tables 1–2",
+      "data_languages_labels": "English SNLI and BoolQ counterfactual datasets; annotated task labels; controlled perturbation types",
+      "method_result": "Theory and experiments show incomplete augmentation can suppress other robust features and impair unseen-perturbation transfer.",
+      "limitation": "Evidence comes from particular task/feature settings; it is not a universal argument against augmentation.",
+      "jep_applicability": "Strong counterevidence to 'max out invariants'. Hold out operator types and compare equal-size multi-operator versus narrow-operator augmentation.",
+      "inspection": "Primary paper methods/results inspected; section-level evidence, not abstract-only",
+      "gap_confidence": "High confidence this is relevant prior art; no exhaustive-absence claim"
+    },
+    {
+      "id": "huang",
+      "authors": "Huang, Liu and Bowman",
+      "year": 2020,
+      "title": "Counterfactually-Augmented SNLI Training Data Does Not Yield Better Generalization Than Unaugmented Data",
+      "url": "https://aclanthology.org/2020.insights-1.13.pdf",
+      "doi": "10.18653/v1/2020.insights-1.13",
+      "inspected_support": "§3 experimental setup; §4 results",
+      "data_languages_labels": "English SNLI/CNLI, MNLI and diagnostic NLI tests; entailment labels",
+      "method_result": "RoBERTa comparisons with equal-size original training data find no generalization advantage for counterfactual augmentation; negation behavior can worsen.",
+      "limitation": "Does not exclude better augmentation selection or other domains; extra data and augmentation effects must be separated.",
+      "jep_applicability": "Control examples/tokens and expert effort. Compare ordinary labeled source data with synthetic additions at the same budget.",
+      "inspection": "Primary paper methods/results inspected; section-level evidence, not abstract-only",
+      "gap_confidence": "High confidence this is relevant prior art; no exhaustive-absence claim"
+    },
+    {
+      "id": "polyjuice",
+      "authors": "Wu et al.",
+      "year": 2021,
+      "title": "Polyjuice: Generating Counterfactuals for Explaining, Evaluating, and Improving Models",
+      "url": "https://aclanthology.org/2021.acl-long.523.pdf",
+      "doi": "10.18653/v1/2021.acl-long.523",
+      "inspected_support": "§§2.1–2.2; Table 1; §3 human annotation",
+      "data_languages_labels": "English task-diverse perturbation corpus; generated controls and human application labels",
+      "method_result": "Controlled GPT-2 infilling generates diverse local edits; the same perturbation can change one task label and preserve another.",
+      "limitation": "Fluent, close text and control codes do not certify legal facts or ethical label validity.",
+      "jep_applicability": "Direct counterexample to claiming condition-dependent augmentation itself novel; use generator only as proposal engine, with separate annotation.",
+      "inspection": "Primary paper methods/results inspected; section-level evidence, not abstract-only",
+      "gap_confidence": "High confidence this is relevant prior art; no exhaustive-absence claim"
+    },
+    {
+      "id": "tailor",
+      "authors": "Ross et al.",
+      "year": 2022,
+      "title": "Tailor: Generating and Perturbing Text with Semantic Controls",
+      "url": "https://aclanthology.org/2022.acl-long.228.pdf",
+      "doi": "10.18653/v1/2022.acl-long.228",
+      "inspected_support": "§2 semantic controls and generator; Tables 2 and 6",
+      "data_languages_labels": "English semantic-role controlled generation; NLI and HANS downstream evaluation",
+      "method_result": "Semantic-role controls support actor/patient, temporal and voice changes, including composition; downstream robustness improves in studied settings.",
+      "limitation": "Semantic-role parser and generator errors remain; NLI success does not establish legal meaning preservation.",
+      "jep_applicability": "Prior art for retained-agent passive and explicit role controls. Test role-preserving positives jointly with role-changing negatives.",
+      "inspection": "Primary paper methods/results inspected; section-level evidence, not abstract-only",
+      "gap_confidence": "High confidence this is relevant prior art; no exhaustive-absence claim"
+    },
+    {
+      "id": "hans",
+      "authors": "McCoy, Pavlick and Linzen",
+      "year": 2019,
+      "title": "Right for the Wrong Reasons: Diagnosing Syntactic Heuristics in Natural Language Inference",
+      "url": "https://aclanthology.org/P19-1334.pdf",
+      "doi": "10.18653/v1/P19-1334",
+      "inspected_support": "§3 dataset construction and controls; §4",
+      "data_languages_labels": "English synthetic NLI; template-derived entailment/non-entailment labels",
+      "method_result": "Examples cross lexical-overlap, subsequence and constituent heuristics with true entailment to reveal shortcut reliance.",
+      "limitation": "Synthetic restricted grammar and vocabulary constrain external validity.",
+      "jep_applicability": "Use same-word role reversals, plausible actors/patients and controls for implausibility. Keyword-only baselines are essential.",
+      "inspection": "Primary paper methods/results inspected; section-level evidence, not abstract-only",
+      "gap_confidence": "High confidence this is relevant prior art; no exhaustive-absence claim"
+    },
+    {
+      "id": "pawsx",
+      "authors": "Yang et al.",
+      "year": 2019,
+      "title": "PAWS-X: A Cross-lingual Adversarial Dataset for Paraphrase Identification",
+      "url": "https://aclanthology.org/D19-1382.pdf",
+      "doi": "10.18653/v1/D19-1382",
+      "inspected_support": "§2 corpus construction; §3 models",
+      "data_languages_labels": "English PAWS translated to French, Spanish, German, Chinese, Japanese and Korean; paraphrase labels",
+      "method_result": "Human-translated development/test and machine-translated training create multilingual high-overlap paraphrase challenges.",
+      "limitation": "Translation ambiguity and entity/meaning errors need validation; translated siblings are not independent observations.",
+      "jep_applicability": "Native Spanish JEP source is reference. A bilingual reviewer must check actor, patient, scope, evidentiality and temporal relations.",
+      "inspection": "Primary paper methods/results inspected; section-level evidence, not abstract-only",
+      "gap_confidence": "High confidence this is relevant prior art; no exhaustive-absence claim"
+    },
+    {
+      "id": "alignsim",
+      "authors": "Mahajan et al.",
+      "year": 2024,
+      "title": "ALIGN-SIM: A Task-Free Test Bed for Evaluating and Interpreting Sentence Embeddings through Semantic Similarity Alignment",
+      "url": "https://aclanthology.org/2024.findings-emnlp.436.pdf",
+      "doi": "10.18653/v1/2024.findings-emnlp.436",
+      "inspected_support": "§4 criteria; §5.1 data construction",
+      "data_languages_labels": "English QQP, PAWS-Wiki, MRPC and Afin-derived tests; declared semantic expectations",
+      "method_result": "Embedding evaluation covers distinction, synonyms, antonym/paraphrase relations, negation-free paraphrases and word jumbling.",
+      "limitation": "Natural-expectation relations are not independent expert moral judgments; task-free claims do not cover competing criteria.",
+      "jep_applicability": "Direct prior art for semantic coherence/invariant-direction embedding tests. Novelty needs explicit JEP criteria and independent validation.",
+      "inspection": "Primary paper methods/results inspected; section-level evidence, not abstract-only",
+      "gap_confidence": "High confidence this is relevant prior art; no exhaustive-absence claim"
+    },
+    {
+      "id": "coba",
+      "authors": "Jin et al.",
+      "year": 2025,
+      "title": "CoBA: Counterbias Text Augmentation for Mitigating Various Spurious Correlations via Semantic Triples",
+      "url": "https://aclanthology.org/2025.emnlp-main.520.pdf",
+      "doi": "10.18653/v1/2025.emnlp-main.520",
+      "inspected_support": "§3 method and importance; §§4.1–4.2",
+      "data_languages_labels": "English SNLI/MNLI and SST-2/IMDB; supervised task labels and bias evaluations",
+      "method_result": "Subject-predicate-object decomposition plus feature importance alters principal features while retaining spurious cues; reports robustness gains.",
+      "limitation": "Estimated feature importance is not causal truth; reconstruction/deletion can remove legally decisive facts.",
+      "jep_applicability": "Triple-based augmentation is existing work. Authority, status or place cannot be presumed spurious in Colombian legal narratives.",
+      "inspection": "Primary paper methods/results inspected; section-level evidence, not abstract-only",
+      "gap_confidence": "High confidence this is relevant prior art; no exhaustive-absence claim"
+    },
+    {
+      "id": "variation",
+      "authors": "Gebreegziabher et al.",
+      "year": 2025,
+      "title": "Leveraging Variation Theory in Counterfactual Data Augmentation for Optimized Active Learning",
+      "url": "https://aclanthology.org/2025.findings-acl.50.pdf",
+      "doi": "10.18653/v1/2025.findings-acl.50",
+      "inspected_support": "§2.3; §§3.1–3.2; §§4.1–4.3; Appendix B",
+      "data_languages_labels": "Yelp, MASSIVE and Emotions classification subsets; original labels plus generator-assigned target labels",
+      "method_result": "Pattern-controlled generation varies one dimension while preserving others; filters and active-learning comparisons show greatest gains at low annotation counts.",
+      "limitation": "LLM discrimination is not independent human validation; gains diminish with more labels and depend on filtering.",
+      "jep_applicability": "Direct prior art for holding all but one aspect fixed. Compare review cost and independent validity, not generated volume alone.",
+      "inspection": "Primary paper methods/results inspected; section-level evidence, not abstract-only",
+      "gap_confidence": "High confidence this is relevant prior art; no exhaustive-absence claim"
+    },
+    {
+      "id": "negation",
+      "authors": "Cao",
+      "year": 2025,
+      "title": "Enhancing Negation Awareness in Universal Text Embeddings: A Data-efficient and Computational-efficient Approach",
+      "url": "https://arxiv.org/html/2504.00584v1",
+      "doi": "10.48550/arXiv.2504.00584",
+      "inspected_support": "§III-A/B; §IV; §V-A and Table I",
+      "data_languages_labels": "English STS-B with automatic negation; semantic/antonym/negation evaluations; synthetic expectations",
+      "method_result": "Frozen-embedding feature reweighting improves negation sensitivity with a tradeoff in ordinary semantic similarity.",
+      "limitation": "Preprint version inspected; generated negations and evaluation construction limit claims; not JEP judgments.",
+      "jep_applicability": "Negation-aware lightweight geometry is prior work. Scope-sensitive weighting and unknown-versus-negative separation need domain validation.",
+      "inspection": "Primary paper methods/results inspected; section-level evidence, not abstract-only",
+      "gap_confidence": "High confidence this is relevant prior art; no exhaustive-absence claim"
+    }
+  ],
+  "search_log": [
+    {
+      "query": "CheckList behavioral testing capabilities invariance directional tests",
+      "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+      "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+    },
+    {
+      "query": "contrast sets local decision boundaries Gardner 2020",
+      "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+      "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+    },
+    {
+      "query": "counterfactually augmented data effectiveness Joshi He 2022",
+      "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+      "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+    },
+    {
+      "query": "CNLI SNLI same-size augmentation Huang Bowman",
+      "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+      "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+    },
+    {
+      "query": "Polyjuice counterfactual generation task-dependent label change",
+      "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+      "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+    },
+    {
+      "query": "Tailor semantic roles passive voice perturbations",
+      "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+      "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+    },
+    {
+      "query": "HANS syntactic heuristics role reversal",
+      "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+      "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+    },
+    {
+      "query": "PAWS-X Spanish adversarial paraphrase",
+      "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+      "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+    },
+    {
+      "query": "sentence embedding semantic invariance negation ALIGN-SIM",
+      "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+      "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+    },
+    {
+      "query": "2025 2026 counterfactual augmentation invariant evaluation embeddings",
+      "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+      "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+    },
+    {
+      "query": "ConSERT token embedding augmentation",
+      "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+      "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+    },
+    {
+      "query": "restorative justice counterfactual embeddings",
+      "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+      "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+    },
+    {
+      "query": "transitional justice semantic augmentation",
+      "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+      "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+    },
+    {
+      "query": "conditional semantic invariance moral",
+      "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+      "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+    },
+    {
+      "query": "JEP harm retrieval language model",
+      "engines": "ACL Anthology targeted search and general web; stronger engine for legal/JEP novelty counterexamples",
+      "decision": "Include primary methods papers with controllable text perturbation, embedding semantic relations, or augmentation generalization evidence"
+    }
+  ],
+  "exclusions": [
+    {
+      "title": "ConSERT (Yan et al., 2021)",
+      "url": "https://aclanthology.org/2021.acl-long.393.pdf",
+      "reason": "Methods inspected as background; token/dropout augmentation is less domain-specific than the 12 retained studies; no claim semantic preservation is proved."
+    },
+    {
+      "title": "Large Model Semantic Parsing of Court Records with Bias Calibration Benchmark for Restorative Justice",
+      "url": "https://doi.org/10.54254/2755-2721/2026.30609",
+      "reason": "Publisher primary landing page inspected only; methods/PDF and reproducible artifacts not verified. Published 18 December 2025 despite 2026 DOI suffix; data available on request. Retain as novelty-warning lead, not verified quantitative evidence."
+    },
+    {
+      "title": "Secondary summaries, ResearchGate mirrors and generic augmentation surveys",
+      "reason": "Excluded from evidentiary core when a primary paper was available."
+    }
+  ],
+  "augmentation_contract": {
+    "status": "Proposed next-benchmark specification; no human labels claimed",
+    "unit": "Source family, with all descendants and translations assigned together",
+    "condition_fields": [
+      "value_system_or_normative_authority",
+      "ethical_theory",
+      "comparison_criterion",
+      "focal_actor",
+      "affected_party",
+      "temporal_scope",
+      "epistemic_status"
+    ],
+    "operators": [
+      {
+        "id": "retained_agent_passive",
+        "rule": "Change active/passive voice while retaining explicit actor, patient, modality, negation, attribution and time.",
+        "relation": "invariant only when semantic-role and evidential checks pass",
+        "review": "bilingual semantic review for benchmark cases"
+      },
+      {
+        "id": "consistent_pseudonym",
+        "rule": "Apply a bijection to non-identifying names; preserve all coreference and social/legal roles.",
+        "relation": "invariant only for declared identity-irrelevant criterion",
+        "review": "expert check identity is not legally or collectively relevant"
+      },
+      {
+        "id": "actor_patient_swap",
+        "rule": "Swap who acts and who experiences effects, retaining plausible event.",
+        "relation": "sensitive for responsibility; potentially invariant for stipulated unweighted aggregate harm only",
+        "review": "expert label and rationale required"
+      },
+      {
+        "id": "negation_scope",
+        "rule": "Toggle one explicit proposition; record exact scope and preserve all others.",
+        "relation": "criterion-dependent sensitive or directional; never globally antonymic distance",
+        "review": "human semantic and normative review"
+      },
+      {
+        "id": "information_missing",
+        "rule": "Remove whether an event occurred or who performed it; mark unknown.",
+        "relation": "unknown, not harmless/false/zero; evaluate epistemic discrimination or abstention",
+        "review": "human check omission does not imply negation"
+      },
+      {
+        "id": "attribution_status",
+        "rule": "Contrast allegation, admission, judicial finding, denial and retraction with explicit source.",
+        "relation": "epistemic change; topical similarity may persist, evidential retrieval should respond",
+        "review": "legal/domain review required"
+      },
+      {
+        "id": "reparation_target",
+        "rule": "Keep positive wording fixed while changing whose harm a measure addresses, adequacy, consent or completion.",
+        "relation": "sensitive for restoration adequacy; no universal harm/reparation vector inverse",
+        "review": "affected-community/domain expert review required"
+      },
+      {
+        "id": "bilingual",
+        "rule": "Translate Spanish meaning preserving roles, negation, evidentiality, time and culturally specific harm; retain original.",
+        "relation": "invariant only after bilingual adjudication",
+        "review": "bilingual review required; automatic backtranslation is a flag, not certification"
+      }
+    ],
+    "schema": [
+      "case_id",
+      "parent_id",
+      "source_family",
+      "source_identity_and_hash",
+      "language",
+      "original_or_synthetic",
+      "audio_validation_status_if_excerpt",
+      "condition_fields",
+      "operator_id",
+      "changed_fields",
+      "preserved_fields",
+      "expected_relation",
+      "rationale",
+      "label_provenance",
+      "reviewer_id",
+      "review_status",
+      "confidence",
+      "split_hash"
+    ],
+    "provenance_classes": [
+      "authored_synthetic_expectation",
+      "LLM_proposal_or_judgment",
+      "independent_human_annotation",
+      "adjudicated_expert_annotation"
+    ],
+    "automated_checks": [
+      "IDs/split/hash consistency",
+      "explicit-actor presence",
+      "entity bijection and coreference flags",
+      "negation/modality/number/date diff",
+      "truncation and token-length audit",
+      "duplicate/near-duplicate cross-split audit"
+    ],
+    "human_required": [
+      "theory-dependent relevance and direction",
+      "collective/cultural harm and restoration adequacy",
+      "legal role relevance and epistemic interpretation",
+      "Spanish bilingual preservation",
+      "ambiguous role/scope/causality",
+      "independent stratified validity sample of generator outputs"
+    ],
+    "splits": [
+      "source family",
+      "held-out perturbation operator",
+      "operator composition",
+      "condition paraphrase",
+      "original Spanish source domain"
+    ],
+    "metrics": [
+      "family-bootstrap retrieval MRR/Recall with independent relevance labels",
+      "invariance score drift and rank agreement",
+      "sensitivity accuracy and direction accuracy",
+      "joint invariance AND sensitivity success",
+      "worst-operator/criterion score and validity yield",
+      "unknown/negated confusion",
+      "cost per independently valid item"
+    ],
+    "training_controls": [
+      "equal examples/tokens and expert-review cost",
+      "natural-data additional-label control",
+      "single-operator versus balanced multi-operator",
+      "condition-aware positives plus semantic hard negatives",
+      "no test examples used for prompt/model selection",
+      "dev-only thresholds and frozen pre-test specification"
+    ]
+  },
+  "gap": {
+    "claim": "An independently expert-validated Spanish JEP benchmark of joint criterion-dependent invariance and sensitivity, epistemic-status preservation and unseen-operator/source-family transfer is a promising empirical contribution.",
+    "confidence": "Moderate for useful empirical gap; low for global novelty until specialist legal/Spanish/JEP literature and adjacent restorative paper are checked.",
+    "non_novel": [
+      "generic paraphrase augmentation",
+      "vary one semantic dimension while holding others fixed",
+      "condition-dependent label preservation",
+      "semantic-role controlled generation",
+      "embedding negation sensitivity",
+      "metamorphic behavior tests"
+    ],
+    "decisive_experiment": "Freeze a source-family test with expert-adjudicated contrasting criteria. Compare recovered conditional Qwen with unconditioned/base model and lightweight heads; train balanced condition-aware augmentation versus equal-budget natural labels and narrow-operator augmentation. Report joint invariant/sensitive success and retrieval with family uncertainty, including Spanish, unknown-status and unseen-operator slices. Failure of independent validity or transfer is a revise result, not a reason to tune on held-out cases."
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "lane": "lit08_spanish_cultural",
+  "cutoff": "2026-11-10",
+  "status": "bounded systematic scoping review; not exhaustive",
+  "source_count": {
+    "research": 8,
+    "normative": 1
+  },
+  "sources": [
+    {
+      "id": "L08-01",
+      "title": "Construyendo la verdad: minería de texto y redes lingüísticas en audiencias públicas del Caso 03 de la JEP",
+      "year": 2026,
+      "url": "https://doi.org/10.15446/rce.v49n1.119765",
+      "body": "https://revistas.unal.edu.co/index.php/estad/article/download/119765/96813/765446",
+      "inspected": "§3 pp9–10; regional/role network results; 44-page primary PDF",
+      "data": "441 official Case03 videos through 2025-02-02; Spanish auto-subtitles; six subcases including Casanare; selective audio/manual quality control",
+      "method": "Sentiment and skip-gram/co-occurrence networks, modularity and centrality; descriptive regional/speaker comparisons",
+      "result": "Existing direct JEP text-mining and linguistic-network study; not expert conditional harm/reparation retrieval.",
+      "limits": "Excludes unsubtitled videos; selective rather than exhaustive audio checking; lexical communities do not validate moral relevance.",
+      "gap": "Closest direct JEP counterexample. Novelty must concern validated conditional relevance and source fidelity, not JEP NLP or visualizations."
+    },
+    {
+      "id": "L08-02",
+      "title": "Do Large Language Models Know Colombian Law? A Reliability Benchmark for the Colombian Legal System",
+      "year": 2026,
+      "url": "https://arxiv.org/abs/2610.03639",
+      "inspected": "PDF pp3–9, §§3–4, expert-validation design; later results not independently inspected",
+      "data": "1042 items: 305 MCQ,682 semi-open,55 open; ten Colombian legal areas; five workshops",
+      "method": "Legal-assistant review, specialized evaluator and committee; MCQ accuracy; free-text reference metrics and RAG evaluation",
+      "result": "Colombian expert-reviewed legal evaluation exists.",
+      "limits": "Three specialist evaluators; mostly one per area; no formal independent double-coding/IAA; legal QA differs from testimony relevance.",
+      "gap": "Do not claim absence of Colombian legal benchmarks; require explicit specialist disagreement and source-grounded harm-response ranking."
+    },
+    {
+      "id": "L08-03",
+      "title": "MEL: Legal Spanish language model",
+      "year": 2025,
+      "url": "https://arxiv.org/html/2501.16011v1",
+      "inspected": "§§3.1–3.4 and4.2",
+      "data": "Spanish legal corpus; 5.52 million 512-token chunks; MultiEURLEX and private legal classification evaluation",
+      "method": "XLM-R-large continued masked language modeling; classification comparisons",
+      "result": "Reports improved classification learning/performance over base models.",
+      "limits": "Spain/EU formal law; no inspected victim-testimony similarity or moral-conditional ranking evaluation. HTML date metadata conflicts with arXivv1 year.",
+      "gap": "Legal-language adaptation is established; test actual Colombian oral testimony transfer instead of assuming it."
+    },
+    {
+      "id": "L08-04",
+      "title": "MultiLegalPile: A 689GB Multilingual Legal Corpus",
+      "year": 2024,
+      "url": "https://aclanthology.org/2024.acl-long.805/",
+      "inspected": "§§3–4 primary PDF",
+      "data": "24 languages,17 jurisdictions; native legal corpora, Eurlex and legal-filtered mC4",
+      "method": "Multilingual and monolingual masked-language-model adaptation; LEXTREME/LexGLUE evaluation",
+      "result": "Multilingual legal encoders and many improved monolingual legal models already exist.",
+      "limits": "mC4 precision inspection has small language-specific samples; legal benchmark aggregate does not establish Colombian victim-cultural understanding.",
+      "gap": "Use available multilingual/legal models as comparators; distinguish legal register, language and normative condition."
+    },
+    {
+      "id": "L08-05",
+      "title": "Spanish Legalese Language Model and Corpora",
+      "year": 2021,
+      "url": "https://arxiv.org/abs/2110.12201",
+      "inspected": "§§2–6 including Table2 primary PDF",
+      "data": "8.9GB Spanish legal corpus; general Spanish POS,NER,STS,classification,paraphrase,NLI tests",
+      "method": "RoBERTalex plus fastText word/subword embeddings",
+      "result": "Legal embeddings predate this project; Table2 does not show superiority to general Spanish RoBERTa.",
+      "limits": "Fixed model hyperparameters versus searched comparator; no domain-specific evaluation then available.",
+      "gap": "Do not presume legal pretraining improves semantic similarity; include an empirical baseline rather than novelty claim."
+    },
+    {
+      "id": "L08-06",
+      "title": "BLEnD: A Benchmark for LLMs on Everyday Knowledge in Diverse Cultures and Languages",
+      "year": 2024,
+      "url": "https://arxiv.org/abs/2406.09948",
+      "body": "https://papers.neurips.cc/paper_files/paper/2024/file/8eb88844dafefa92a26aaec9f3acad93-Paper-Datasets_and_Benchmarks_Track.pdf",
+      "inspected": "§3,Table1,annotation/aggregation pp4–5; introductory result summaries",
+      "data": "16 countries/regions,13 languages; Spain/Mexico Spanish; 500 templates across six everyday categories; native annotators",
+      "method": "Short-answer and multiple-choice cultural knowledge; typically five valid responses; native local review",
+      "result": "Cultural/language performance disparities; Spanish is not one cultural unit.",
+      "limits": "No Colombia in Table1; everyday practices differ from contested moral judgments; national categories miss within-group variation.",
+      "gap": "Collect plural local relevance judgments, not a single Spanish-cultural gold label."
+    },
+    {
+      "id": "L08-07",
+      "title": "MET / MET-D and MCLASH",
+      "year": 2026,
+      "url": "https://arxiv.org/abs/2607.11736",
+      "inspected": "PDF pp3–6, §§3–4",
+      "data": "Culturally adapted CLASH across English,Chinese,Hindi,Korean,Malay,Spanish; 1852 situations and9260 character descriptions",
+      "method": "37 grounds in six dimensions; instance-specific ground selection then reasoning; synthetic character-priority rejection/self-distillation",
+      "result": "Authors report multilingual moral-decision improvements; this is a direct theory-conditioning/training predecessor.",
+      "limits": "Language used as cultural proxy; character-priority synthetic labels are not Colombian victim judgments; no evidence here of validated harm-reparation geometry.",
+      "gap": "Theory prompting and multilingual moral distillation cannot be novel claims. Test whether local collective-harm semantics survive conditioning."
+    },
+    {
+      "id": "L08-08",
+      "title": "Legal-ES: A Set of Large Scale Resources for Spanish Legal Text Processing",
+      "year": 2020,
+      "url": "https://aclanthology.org/2020.lt4gov-1.6/",
+      "inspected": "§§2–4 primary PDF",
+      "data": "Spanish public legal sources, principally Spain/Europe/international with Mexico/Argentina resource leads; availability-driven sampling",
+      "method": "300-dimensional raw/lemmatized embeddings, BOE topic models and preliminary document community graphs",
+      "result": "Legal semantic navigation and community visualization are established.",
+      "limits": "Qualitative neighbors/topics; graph experiments explicitly preliminary; planned NER annotation is not completed conditional-relevance gold.",
+      "gap": "Do not repackage legal similarity graphs as novel; demonstrate held-out validated retrieval utility."
+    },
+    {
+      "id": "L08-N01",
+      "type": "normative_primary_institutional",
+      "title": "JEP abre Caso09 para investigar crímenes contra pueblos y territorios étnicos",
+      "year": 2022,
+      "url": "https://www.jep.gov.co/Sala-de-Prensa/Paginas/JEP-abre-caso-09-investigar-crimenes-contra-pueblos-etnicos.aspx",
+      "inspected": "Communiqué075,2022-09-13, substantive paragraphs on territory and intergenerational practices",
+      "data": "Institutional description; not a labeled dataset",
+      "method": "Official normative/contextual authority, not an NLP experiment",
+      "result": "Collective and territorial victim subjects, sacred/spiritual relations, knowledge transmission and intergenerational effects are central.",
+      "limits": "Does not authorize a universal harm ontology or substitute for community-specific validation.",
+      "gap": "Individual-utility-only relevance can omit legally/contextually material harm."
+    }
+  ],
+  "unverified": [
+    {
+      "url": "https://doi.org/10.1080/13642987.2025.2502561",
+      "reason": "Publisher body inaccessible; not used as inspected evidence."
+    },
+    {
+      "url": "https://doi.org/10.3389/fsoc.2026.1936377",
+      "reason": "Conceptual JEP/restorative-community analysis identified; PMC access challenge; body not counted."
+    }
+  ],
+  "global_absence_claim": false
+}

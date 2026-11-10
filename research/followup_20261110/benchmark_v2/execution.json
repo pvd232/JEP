@@ -1,0 +1,29 @@
+{
+  "status": "CPU_built_checked_and_lexical_screen_executed",
+  "utc": "2026-11-10T13:28:22Z",
+  "families": 12,
+  "queries": 48,
+  "candidates": 84,
+  "criteria": 2,
+  "switch_pairs": 24,
+  "tokenizer_path": "/home/pvd2112_columbia_edu/columbia-projects/jep/data/moral-geometry-20261110/qwen-tokenizer/models--Qwen--Qwen3-Embedding-8B/snapshots/c90816d848505624c2434128dfc61132162a0ee9",
+  "scaffold": "Instruct: Represent the passage for semantic similarity with respect to this condition: {condition}\nQuery: {passage}",
+  "eod_tokens": 1,
+  "max_query_tokens": 88,
+  "max_candidate_tokens": 84,
+  "token_limit": 160,
+  "truncated": false,
+  "checks_passed": [
+    "unique_ids",
+    "same_fixed_pool_under_switch",
+    "family_disjoint_split",
+    "status_adequacy_provenance",
+    "token_length_without_truncation"
+  ],
+  "dataset_sha256": "b292fb89e11473a3a48563fbc52cfb80cddb0fc046c73427a852cc8d99086dc3",
+  "no_gpu": true,
+  "no_training": true,
+  "independent_human_labels": false,
+  "review_status": "Root independent audit required before frozen inference",
+  "python": "3.12.3"
+}

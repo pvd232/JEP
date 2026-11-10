@@ -1,0 +1,60 @@
+{
+  "date": "2026-11-10",
+  "scope": "Layerwise ethical representations; causal probe validity; rationale distillation for retrieval",
+  "engines": [
+    "system2",
+    "system1"
+  ],
+  "queries": [
+    "site.aclanthology.org/2026 \"Do Morals Guide\"",
+    "site.arxiv.org/abs/2603.23659",
+    "site.aclanthology.org/2026 \"ContextualMoralChoice\"",
+    "causal probing moral representations language models activation steering moral foundations",
+    "\"ContextualMoralChoice\" Sauter Schirmer",
+    "\"Exploring and steering the moral compass\" 2405.17345",
+    "site.proceedings.neurips.cc 2021 Causal Abstractions Neural Networks Geiger",
+    "site.aclanthology.org 2021 amnesic probing Elazar Ravfogel",
+    "site.aclanthology.org reasoning distillation sentence embeddings rationales retrieval",
+    "Belinkov probing classifiers shortcomings Hewitt Liang control tasks",
+    "Turpin unfaithful explanations chain of thought 2023"
+  ],
+  "eligibility": {
+    "include": "Primary research available by Nov10 2026 with methods bearing directly on ethical layer representations, intervention validation or reasoning-to-retrieval learning. Original methods sections required.",
+    "exclude": "Abstract-only hits, unverified numerical search snippets, generic moral behavior without representation/retrieval relevance, later literature.",
+    "snowball": "Followed methodological citations from moral representation sources to control probes, amnesic probing and causal abstraction; followed rationale retrieval query to RADIO.",
+    "limits": "Single-agent bounded lane; no reproducible full database export, deduplicated global PRISMA counts or code replication. Parent synthesis must deduplicate across lanes."
+  },
+  "deep_verified_primary_count": 10,
+  "methodology_review_read": {
+    "title": "Probing Classifiers: Promises, Shortcomings, and Advances",
+    "author": "Belinkov",
+    "year": 2022,
+    "url": "https://aclanthology.org/2022.cl-1.7.pdf",
+    "doi": "10.1162/coli_a_00422",
+    "sections": "4.1–4.3 and conclusion",
+    "role": "Interpretive context only; not counted among ten primary papers."
+  },
+  "discovered_not_verified": [
+    {
+      "url": "https://arxiv.org/abs/2603.16017",
+      "title_hint": "Understanding Moral Reasoning Trajectories",
+      "status": "Pending full-text methods check; excluded from evidentiary conclusions."
+    },
+    {
+      "url": "https://arxiv.org/abs/2609.30405",
+      "title_hint": "Adaptive Multi-Value Control/AIMES",
+      "status": "Pending full-text check."
+    },
+    {
+      "url": "https://aclanthology.org/2026.findings-emnlp.858/",
+      "title_hint": "Scenario-based Probing and Steering Cultural Values",
+      "status": "Pending full-text check; cultural novelty uncertainty remains."
+    },
+    {
+      "url": "https://aclanthology.org/2026.findings-emnlp.2432/",
+      "title_hint": "Moral Trajectories",
+      "status": "Pending full-text check."
+    }
+  ],
+  "artifact_policy": "Own review directory only; no git, compute-job, billing or infrastructure changes."
+}

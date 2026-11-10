@@ -1,0 +1,138 @@
+{
+  "reviewer": "lit09_evaluation",
+  "cutoff": "2026-11-10",
+  "scope": "Benchmark validity and evaluation for conditional harm/reparation retrieval",
+  "protocol": {
+    "include": "Primary papers whose methods bear on perturbation validity, dependence, corpus overlap, incomplete/disputed relevance, selective retrieval or effort; recent direct novelty counterexamples included",
+    "exclude": "Uninspected abstract-only empirical claims, blogs, unrelated acronym JEP, cross-task numerical synthesis",
+    "screening": "Targeted systematic concept search plus backward/forward pointers; not database-complete PRISMA or exhaustive temporal coverage",
+    "languages": "Searches mainly English. Spanish/JEP substantive scholarship delegated to other lanes.",
+    "body_inspection": "Methods/limitations and selected appendices explicitly recorded in ledger; no assertion all pages were read"
+  },
+  "queries": [
+    [
+      "system2",
+      "site.aclanthology.org Checklist Beyond Accuracy behavioral testing NLP 2020"
+    ],
+    [
+      "system2",
+      "site.aclanthology.org Contrast Sets evaluating NLP models local decision boundaries 2020"
+    ],
+    [
+      "system2",
+      "site.acl anthology.org statistical significance tests NLP bootstrap paired samples Berg Kirkpatrick 2012 (malformed domain; corrected through direct ACL paper access)"
+    ],
+    [
+      "system2",
+      "site.proceedings.mlr.press selective classification deep neural networks Geifman El Yaniv 2017"
+    ],
+    [
+      "system2",
+      "Buckley Voorhees 2004 retrieval evaluation incomplete information bpref pdf"
+    ],
+    [
+      "system2",
+      "Cormack Grossman 2014 evaluation machine learning protocols technology assisted review pdf"
+    ],
+    [
+      "system2",
+      "Plank 2022 problem human label variation NLP pdf"
+    ],
+    [
+      "system2",
+      "Lee 2022 deduplicating training data makes language models better acl"
+    ],
+    [
+      "system1",
+      "\"JEP\" retrieval evaluation harm reparation benchmark expert uncertainty"
+    ],
+    [
+      "system1",
+      "\"conditional retrieval\" \"disagreement\" evaluation"
+    ],
+    [
+      "system1",
+      "\"risk coverage\" \"retrieval\" selective prediction evaluation benchmark"
+    ]
+  ],
+  "included_ids": [
+    "checklist",
+    "contrast",
+    "dror",
+    "bootstrap",
+    "dedup",
+    "variation",
+    "bpref",
+    "selective",
+    "spiral",
+    "countermem",
+    "evirag"
+  ],
+  "excluded_or_pending": [
+    {
+      "title": "Evaluation of Machine-Learning Protocols for Technology-Assisted Review in Electronic Discovery",
+      "authors": "Cormack and Grossman",
+      "year": 2014,
+      "doi": "10.1145/2600428.2609601",
+      "status": "pending primary methods inspection",
+      "reason": "Author bibliography located; primary PDF/study links returned 404. No detailed results asserted."
+    },
+    {
+      "title": "CARGO: Context-Aware Retrieval-Gated Evaluation of Agentic AI in Production",
+      "url": "https://arxiv.org/abs/2609.30471",
+      "status": "lead only",
+      "reason": "Search identified; primary body not sufficiently inspected for inclusion."
+    },
+    {
+      "title": "Do LLMs Know When Evidence is Insufficient?",
+      "url": "https://www.techscience.com/cmc/v89n1/68467/html",
+      "status": "lead only",
+      "reason": "Identified but not deeply inspected within bounded lane."
+    },
+    {
+      "title": "Consistency-Aware Judgments",
+      "url": "https://huggingface.co/datasets/SoroushVahidi/consistency-aware-judgments",
+      "status": "lead only",
+      "reason": "Dataset card lead, no adequate primary paper-method review."
+    },
+    {
+      "title": "Judgment Event Protocol (IETF)",
+      "status": "excluded",
+      "reason": "Unrelated acronym collision; not Colombia JEP."
+    }
+  ],
+  "snowballing": [
+    {
+      "from": "SelectiveNet and selective prediction search",
+      "to": "CONCURRENTQA/SPIRAL §6",
+      "outcome": "Included direct retrieval risk-coverage precedent"
+    },
+    {
+      "from": "Evidence intervention/disagreement targeted search",
+      "to": "CounterMem 2026; EVIRAG 2026",
+      "outcome": "Included methods/limitations and selected appendix discussion; close prior-art counterexamples"
+    }
+  ],
+  "execution_audit": {
+    "remote_files_read": [
+      "benchmark/cases.json",
+      "benchmark/execution.json"
+    ],
+    "fixture": "12 author-synthetic English families, 48 variants, 6 dev/6 test, not expert labels",
+    "resources": "No training jobs, cloud resource changes, git operations or publications performed by this lane"
+  },
+  "publication_allowlist": [
+    "review.md",
+    "evidence_ledger.json",
+    "search_log.json"
+  ],
+  "copyright_cache_exclude": [
+    "*.pdf",
+    "raw extracted article text"
+  ],
+  "limitations": [
+    "Search log captures concept-query families; search service may return overlapping results and does not provide a unique de-duplicated screening population.",
+    "No formal overall recall estimate for this literature search.",
+    "No claim of comprehensive Spanish ethical/legal scholarship in this lane."
+  ]
+}

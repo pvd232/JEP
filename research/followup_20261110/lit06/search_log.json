@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-10",
+  "type": "targeted systematic scoping lane",
+  "inclusion": [
+    "Primary legal retrieval/analogy papers with accessible full text",
+    "Methods relevant to factual, element, reasoning, hierarchical, synthetic or evidence retrieval",
+    "Published/available by 2026-11-10"
+  ],
+  "exclusion": [
+    "Survey-only novelty evidence",
+    "Vendor/social/news claims",
+    "Abstract-only documents from deep evidence"
+  ],
+  "searches": [
+    {
+      "query": "site.aclanthology.org KELLER legal case retrieval element 2024",
+      "status": "screened; KELLER and Elem4LCR included"
+    },
+    {
+      "query": "site.aclanthology.org legal case retrieval reasoning facts implicit legal relevance 2025 2026",
+      "status": "screened; newer primary work included"
+    },
+    {
+      "query": "site.aclanthology.org legal case retrieval benchmark COLIEE LeCaRD CAIL",
+      "status": "screened and references snowballed"
+    },
+    {
+      "query": "\"DELTA\" \"Structural Word Alignment\" arxiv",
+      "status": "preprint full-text inspected; final AAAI page access unsuccessful"
+    },
+    {
+      "query": "\"IOT-Match\" \"Explainable\" legal case matching paper",
+      "status": "abstract/code screened; full text not accessible, excluded from deep evidence"
+    },
+    {
+      "query": "\"LeCaRDv2\" legal case retrieval dataset primary",
+      "status": "arxiv full text inspected"
+    },
+    {
+      "query": "\"JEP\" \"retrieval\" \"harm\" embeddings; \"Colombia\" \"transitional justice\" \"semantic\" retrieval; \"Spanish\" \"legal case retrieval\" benchmark; \"victim\" \"narrative\" \"legal retrieval\" harm",
+      "status": "output truncated; NOT adjudicated; NOT negative evidence of absence"
+    }
+  ],
+  "snowballing": "Followed papers' comparisons and dataset references to KELLER, Elem4LCR, LeCaRDv2, DELTA, NS-LCR and benchmark designs. Updated retrieval searches surfaced 2026 work; included close counterexamples rather than claiming earlier methods novel.",
+  "screened_not_deep": [
+    {
+      "title": "A Retrieval-Augmented Contrastive Framework for Legal Case Retrieval Based on Event Information",
+      "year": 2025,
+      "url": "https://proceedings.mlr.press/v260/fan25b.html",
+      "reason": "Abstract inspected; PDF octetstream unsupported"
+    },
+    {
+      "title": "IOT-Match",
+      "year": 2022,
+      "url": "https://arxiv.org/abs/2207.04182",
+      "reason": "Abstract/code landing inspected; PDF unavailable"
+    },
+    {
+      "title": "Legal Case Retrieval survey",
+      "year": 2024,
+      "reason": "Discovery map only; not primary novelty evidence"
+    }
+  ],
+  "limitations": [
+    "Not a PRISMA-complete database export or deduplicated exhaustive review",
+    "Domain-specific Spanish/JEP search requires additional coverage",
+    "Primary full-text targeted reads; results not reproduced",
+    "Human testimony labels and JEP reviewer studies proposed, not available or fabricated",
+    "Publication date/venue checked for 2026 papers; cutoff respected"
+  ]
+}

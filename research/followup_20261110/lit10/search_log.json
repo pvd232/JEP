@@ -1,0 +1,87 @@
+{
+  "date": "2026-11-10",
+  "eligibility": {
+    "include": [
+      "Primary methods or empirical fieldwork relevant to annotation cost, disagreement, perspective conditioning, LLM labeling or meaningful participation.",
+      "Primary conceptual papers included only as conceptual evidence, never as completed experiments.",
+      "Published or available by review date; body methods/limitations inspected for included sources."
+    ],
+    "exclude": [
+      "Search-only results from substantive efficacy claims.",
+      "Nonprimary commentary from methods evidence.",
+      "Claiming human labels, expert hours or Spanish transfer from synthetic/English results."
+    ]
+  },
+  "search_process": "Targeted topic searches and backward/forward leads from Plank, perspectivist labeling, ACTOR and annotation-cost papers; primary publisher or author-hosted versions opened. Earlier exploratory queries are not exhaustively recoverable from the retained task summary; listed queries below are exact final verification queries. No PRISMA flow counts claimed.",
+  "exact_queries": [
+    {
+      "engine": "system2",
+      "q": "\"active learning\" \"annotator\" \"disagreement\" annotation cost"
+    },
+    {
+      "engine": "system2",
+      "q": "\"participatory\" \"victim\" NLP annotation transitional justice Colombia"
+    },
+    {
+      "engine": "system2",
+      "q": "\"weak supervision\" \"human rights\" \"Spanish\" annotation"
+    },
+    {
+      "engine": "system2",
+      "q": "\"expert annotation\" \"preference elicitation\" NLP"
+    },
+    {
+      "engine": "system1",
+      "q": "\"weak supervision\" \"human rights\" \"Spanish\" annotation"
+    },
+    {
+      "engine": "system1",
+      "q": "\"Beyond Victims’ Mere Presence\" full text"
+    }
+  ],
+  "included": [
+    "plank2022",
+    "fleisig2024",
+    "jiang2022",
+    "actor2023",
+    "daal2023",
+    "haertel2008",
+    "ringger2008",
+    "jury2022",
+    "gilardi2023",
+    "suresh2024",
+    "dewaardt2019"
+  ],
+  "additional_screened": [
+    {
+      "title": "Beyond Consensus: Perspectivist Modeling and Evaluation of Annotator Disagreement in NLP",
+      "url": "https://arxiv.org/abs/2601.09065",
+      "status": "search lead; body not inspected; no efficacy conclusion"
+    },
+    {
+      "title": "When Is Data Annotation Participatory? A Comparative Study of Authority in AI Data Work",
+      "identifier": "SSRN 6983779",
+      "status": "search lead; body not inspected"
+    },
+    {
+      "title": "CrowdTruth 2.0",
+      "status": "search lead; weak-supervision method not inspected deeply"
+    },
+    {
+      "title": "Communities in restorative justice: insights from Colombia’s Special Jurisdiction for Peace",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13647457/",
+      "status": "search lead for domain lane; not relied upon"
+    },
+    {
+      "title": "How call-and-response facilitates restorative dialogic listening",
+      "doi": "10.1080/03078833.2026.2683367",
+      "status": "search lead for hearing/participation lane; not relied upon"
+    },
+    {
+      "title": "Active Learning++: Incorporating Annotator's Rationale using Local Model Explanation",
+      "url": "https://arxiv.org/abs/2009.04568",
+      "status": "search lead; no novelty claim for rationales"
+    }
+  ],
+  "coverage_limit": "Eleven deeply inspected sources; no exhaustive database harvest, deduplicated global count or comprehensive preference-elicitation/weak-supervision review. Strong prior-art counterexamples, moderate local gap confidence."
+}

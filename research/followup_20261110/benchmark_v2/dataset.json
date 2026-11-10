@@ -1,0 +1,2973 @@
+{
+  "schema_version": "2.0",
+  "provenance": "Wholly authored hypothetical diagnostic; no human labels or real JEP excerpts.",
+  "claim_scope": "Asserted beneficiary, completion status and typed response retrieval only. No normative adequacy, moral reasoning or ethical theory claim.",
+  "language": "English",
+  "families": [
+    {
+      "id": "market",
+      "kind": "livelihood",
+      "split": "dev"
+    },
+    {
+      "id": "tools",
+      "kind": "livelihood",
+      "split": "test"
+    },
+    {
+      "id": "checkpoint",
+      "kind": "liberty",
+      "split": "dev"
+    },
+    {
+      "id": "abduction",
+      "kind": "liberty",
+      "split": "test"
+    },
+    {
+      "id": "threatened_home",
+      "kind": "displacement",
+      "split": "dev"
+    },
+    {
+      "id": "burned_home",
+      "kind": "displacement",
+      "split": "test"
+    },
+    {
+      "id": "missing_son",
+      "kind": "fate",
+      "split": "dev"
+    },
+    {
+      "id": "withheld_fate",
+      "kind": "fate",
+      "split": "test"
+    },
+    {
+      "id": "sacred_site",
+      "kind": "cultural",
+      "split": "dev"
+    },
+    {
+      "id": "language",
+      "kind": "cultural",
+      "split": "test"
+    },
+    {
+      "id": "assault",
+      "kind": "bodily",
+      "split": "dev"
+    },
+    {
+      "id": "mine",
+      "kind": "bodily",
+      "split": "test"
+    }
+  ],
+  "criteria": {
+    "completed_typed_response": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+    "acknowledgment_voice": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion."
+  },
+  "queries": [
+    {
+      "id": "market_base_completed_typed_response",
+      "family": "market",
+      "split": "dev",
+      "variant": "base",
+      "kind": "livelihood",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "Soldiers barred the farmers from the market. The farmers lost sales income.",
+      "affected_party": "the farmers",
+      "specified_response": "livelihood grants",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "Soldiers barred the farmers from the market. The farmers lost sales income. Named affected party: the farmers. Specified response: livelihood grants.",
+      "candidate_ids": [
+        "market_completed",
+        "market_proposed",
+        "market_other_beneficiary",
+        "market_voice",
+        "market_sanction",
+        "market_nonrepetition",
+        "market_completion_unknown"
+      ],
+      "qwen_tokens": 77
+    },
+    {
+      "id": "market_base_acknowledgment_voice",
+      "family": "market",
+      "split": "dev",
+      "variant": "base",
+      "kind": "livelihood",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "Soldiers barred the farmers from the market. The farmers lost sales income.",
+      "affected_party": "the farmers",
+      "specified_response": "livelihood grants",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "Soldiers barred the farmers from the market. The farmers lost sales income. Named affected party: the farmers. Specified response: livelihood grants.",
+      "candidate_ids": [
+        "market_completed",
+        "market_proposed",
+        "market_other_beneficiary",
+        "market_voice",
+        "market_sanction",
+        "market_nonrepetition",
+        "market_completion_unknown"
+      ],
+      "qwen_tokens": 77
+    },
+    {
+      "id": "market_retained_agent_passive_completed_typed_response",
+      "family": "market",
+      "split": "dev",
+      "variant": "retained_agent_passive",
+      "kind": "livelihood",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "The farmers were barred from the market by soldiers. Sales income was lost by the farmers.",
+      "affected_party": "the farmers",
+      "specified_response": "livelihood grants",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "The farmers were barred from the market by soldiers. Sales income was lost by the farmers. Named affected party: the farmers. Specified response: livelihood grants.",
+      "candidate_ids": [
+        "market_completed",
+        "market_proposed",
+        "market_other_beneficiary",
+        "market_voice",
+        "market_sanction",
+        "market_nonrepetition",
+        "market_completion_unknown"
+      ],
+      "qwen_tokens": 81
+    },
+    {
+      "id": "market_retained_agent_passive_acknowledgment_voice",
+      "family": "market",
+      "split": "dev",
+      "variant": "retained_agent_passive",
+      "kind": "livelihood",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "The farmers were barred from the market by soldiers. Sales income was lost by the farmers.",
+      "affected_party": "the farmers",
+      "specified_response": "livelihood grants",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "The farmers were barred from the market by soldiers. Sales income was lost by the farmers. Named affected party: the farmers. Specified response: livelihood grants.",
+      "candidate_ids": [
+        "market_completed",
+        "market_proposed",
+        "market_other_beneficiary",
+        "market_voice",
+        "market_sanction",
+        "market_nonrepetition",
+        "market_completion_unknown"
+      ],
+      "qwen_tokens": 81
+    },
+    {
+      "id": "tools_base_completed_typed_response",
+      "family": "tools",
+      "split": "test",
+      "variant": "base",
+      "kind": "livelihood",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "An armed unit seized the mechanic's tools. The mechanic lost repair earnings.",
+      "affected_party": "the mechanic",
+      "specified_response": "replacement work tools",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "An armed unit seized the mechanic's tools. The mechanic lost repair earnings. Named affected party: the mechanic. Specified response: replacement work tools.",
+      "candidate_ids": [
+        "tools_completed",
+        "tools_proposed",
+        "tools_other_beneficiary",
+        "tools_voice",
+        "tools_sanction",
+        "tools_nonrepetition",
+        "tools_completion_unknown"
+      ],
+      "qwen_tokens": 79
+    },
+    {
+      "id": "tools_base_acknowledgment_voice",
+      "family": "tools",
+      "split": "test",
+      "variant": "base",
+      "kind": "livelihood",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "An armed unit seized the mechanic's tools. The mechanic lost repair earnings.",
+      "affected_party": "the mechanic",
+      "specified_response": "replacement work tools",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "An armed unit seized the mechanic's tools. The mechanic lost repair earnings. Named affected party: the mechanic. Specified response: replacement work tools.",
+      "candidate_ids": [
+        "tools_completed",
+        "tools_proposed",
+        "tools_other_beneficiary",
+        "tools_voice",
+        "tools_sanction",
+        "tools_nonrepetition",
+        "tools_completion_unknown"
+      ],
+      "qwen_tokens": 79
+    },
+    {
+      "id": "tools_retained_agent_passive_completed_typed_response",
+      "family": "tools",
+      "split": "test",
+      "variant": "retained_agent_passive",
+      "kind": "livelihood",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "The mechanic's tools were seized by an armed unit. Repair earnings were lost by the mechanic.",
+      "affected_party": "the mechanic",
+      "specified_response": "replacement work tools",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "The mechanic's tools were seized by an armed unit. Repair earnings were lost by the mechanic. Named affected party: the mechanic. Specified response: replacement work tools.",
+      "candidate_ids": [
+        "tools_completed",
+        "tools_proposed",
+        "tools_other_beneficiary",
+        "tools_voice",
+        "tools_sanction",
+        "tools_nonrepetition",
+        "tools_completion_unknown"
+      ],
+      "qwen_tokens": 83
+    },
+    {
+      "id": "tools_retained_agent_passive_acknowledgment_voice",
+      "family": "tools",
+      "split": "test",
+      "variant": "retained_agent_passive",
+      "kind": "livelihood",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "The mechanic's tools were seized by an armed unit. Repair earnings were lost by the mechanic.",
+      "affected_party": "the mechanic",
+      "specified_response": "replacement work tools",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "The mechanic's tools were seized by an armed unit. Repair earnings were lost by the mechanic. Named affected party: the mechanic. Specified response: replacement work tools.",
+      "candidate_ids": [
+        "tools_completed",
+        "tools_proposed",
+        "tools_other_beneficiary",
+        "tools_voice",
+        "tools_sanction",
+        "tools_nonrepetition",
+        "tools_completion_unknown"
+      ],
+      "qwen_tokens": 83
+    },
+    {
+      "id": "checkpoint_base_completed_typed_response",
+      "family": "checkpoint",
+      "split": "dev",
+      "variant": "base",
+      "kind": "liberty",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "Guards confined the driver for three days. The driver could not leave.",
+      "affected_party": "the driver",
+      "specified_response": "release from confinement",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "Guards confined the driver for three days. The driver could not leave. Named affected party: the driver. Specified response: release from confinement.",
+      "candidate_ids": [
+        "checkpoint_completed",
+        "checkpoint_proposed",
+        "checkpoint_other_beneficiary",
+        "checkpoint_voice",
+        "checkpoint_sanction",
+        "checkpoint_nonrepetition",
+        "checkpoint_completion_unknown"
+      ],
+      "qwen_tokens": 78
+    },
+    {
+      "id": "checkpoint_base_acknowledgment_voice",
+      "family": "checkpoint",
+      "split": "dev",
+      "variant": "base",
+      "kind": "liberty",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "Guards confined the driver for three days. The driver could not leave.",
+      "affected_party": "the driver",
+      "specified_response": "release from confinement",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "Guards confined the driver for three days. The driver could not leave. Named affected party: the driver. Specified response: release from confinement.",
+      "candidate_ids": [
+        "checkpoint_completed",
+        "checkpoint_proposed",
+        "checkpoint_other_beneficiary",
+        "checkpoint_voice",
+        "checkpoint_sanction",
+        "checkpoint_nonrepetition",
+        "checkpoint_completion_unknown"
+      ],
+      "qwen_tokens": 78
+    },
+    {
+      "id": "checkpoint_retained_agent_passive_completed_typed_response",
+      "family": "checkpoint",
+      "split": "dev",
+      "variant": "retained_agent_passive",
+      "kind": "liberty",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "The driver was confined for three days by guards. Leaving was impossible for the driver.",
+      "affected_party": "the driver",
+      "specified_response": "release from confinement",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "The driver was confined for three days by guards. Leaving was impossible for the driver. Named affected party: the driver. Specified response: release from confinement.",
+      "candidate_ids": [
+        "checkpoint_completed",
+        "checkpoint_proposed",
+        "checkpoint_other_beneficiary",
+        "checkpoint_voice",
+        "checkpoint_sanction",
+        "checkpoint_nonrepetition",
+        "checkpoint_completion_unknown"
+      ],
+      "qwen_tokens": 81
+    },
+    {
+      "id": "checkpoint_retained_agent_passive_acknowledgment_voice",
+      "family": "checkpoint",
+      "split": "dev",
+      "variant": "retained_agent_passive",
+      "kind": "liberty",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "The driver was confined for three days by guards. Leaving was impossible for the driver.",
+      "affected_party": "the driver",
+      "specified_response": "release from confinement",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "The driver was confined for three days by guards. Leaving was impossible for the driver. Named affected party: the driver. Specified response: release from confinement.",
+      "candidate_ids": [
+        "checkpoint_completed",
+        "checkpoint_proposed",
+        "checkpoint_other_beneficiary",
+        "checkpoint_voice",
+        "checkpoint_sanction",
+        "checkpoint_nonrepetition",
+        "checkpoint_completion_unknown"
+      ],
+      "qwen_tokens": 81
+    },
+    {
+      "id": "abduction_base_completed_typed_response",
+      "family": "abduction",
+      "split": "test",
+      "variant": "base",
+      "kind": "liberty",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "Fighters abducted the nurse. The fighters prevented the nurse from returning home.",
+      "affected_party": "the nurse",
+      "specified_response": "safe return home",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "Fighters abducted the nurse. The fighters prevented the nurse from returning home. Named affected party: the nurse. Specified response: safe return home.",
+      "candidate_ids": [
+        "abduction_completed",
+        "abduction_proposed",
+        "abduction_other_beneficiary",
+        "abduction_voice",
+        "abduction_sanction",
+        "abduction_nonrepetition",
+        "abduction_completion_unknown"
+      ],
+      "qwen_tokens": 78
+    },
+    {
+      "id": "abduction_base_acknowledgment_voice",
+      "family": "abduction",
+      "split": "test",
+      "variant": "base",
+      "kind": "liberty",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "Fighters abducted the nurse. The fighters prevented the nurse from returning home.",
+      "affected_party": "the nurse",
+      "specified_response": "safe return home",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "Fighters abducted the nurse. The fighters prevented the nurse from returning home. Named affected party: the nurse. Specified response: safe return home.",
+      "candidate_ids": [
+        "abduction_completed",
+        "abduction_proposed",
+        "abduction_other_beneficiary",
+        "abduction_voice",
+        "abduction_sanction",
+        "abduction_nonrepetition",
+        "abduction_completion_unknown"
+      ],
+      "qwen_tokens": 78
+    },
+    {
+      "id": "abduction_retained_agent_passive_completed_typed_response",
+      "family": "abduction",
+      "split": "test",
+      "variant": "retained_agent_passive",
+      "kind": "liberty",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "The nurse was abducted by fighters. Returning home was prevented by the fighters.",
+      "affected_party": "the nurse",
+      "specified_response": "safe return home",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "The nurse was abducted by fighters. Returning home was prevented by the fighters. Named affected party: the nurse. Specified response: safe return home.",
+      "candidate_ids": [
+        "abduction_completed",
+        "abduction_proposed",
+        "abduction_other_beneficiary",
+        "abduction_voice",
+        "abduction_sanction",
+        "abduction_nonrepetition",
+        "abduction_completion_unknown"
+      ],
+      "qwen_tokens": 79
+    },
+    {
+      "id": "abduction_retained_agent_passive_acknowledgment_voice",
+      "family": "abduction",
+      "split": "test",
+      "variant": "retained_agent_passive",
+      "kind": "liberty",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "The nurse was abducted by fighters. Returning home was prevented by the fighters.",
+      "affected_party": "the nurse",
+      "specified_response": "safe return home",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "The nurse was abducted by fighters. Returning home was prevented by the fighters. Named affected party: the nurse. Specified response: safe return home.",
+      "candidate_ids": [
+        "abduction_completed",
+        "abduction_proposed",
+        "abduction_other_beneficiary",
+        "abduction_voice",
+        "abduction_sanction",
+        "abduction_nonrepetition",
+        "abduction_completion_unknown"
+      ],
+      "qwen_tokens": 79
+    },
+    {
+      "id": "threatened_home_base_completed_typed_response",
+      "family": "threatened_home",
+      "split": "dev",
+      "variant": "base",
+      "kind": "displacement",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "A patrol threatened the household. The household fled its home.",
+      "affected_party": "the household",
+      "specified_response": "housing access in a safe location",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "A patrol threatened the household. The household fled its home. Named affected party: the household. Specified response: housing access in a safe location.",
+      "candidate_ids": [
+        "threatened_home_completed",
+        "threatened_home_proposed",
+        "threatened_home_other_beneficiary",
+        "threatened_home_voice",
+        "threatened_home_sanction",
+        "threatened_home_nonrepetition",
+        "threatened_home_completion_unknown"
+      ],
+      "qwen_tokens": 79
+    },
+    {
+      "id": "threatened_home_base_acknowledgment_voice",
+      "family": "threatened_home",
+      "split": "dev",
+      "variant": "base",
+      "kind": "displacement",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "A patrol threatened the household. The household fled its home.",
+      "affected_party": "the household",
+      "specified_response": "housing access in a safe location",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "A patrol threatened the household. The household fled its home. Named affected party: the household. Specified response: housing access in a safe location.",
+      "candidate_ids": [
+        "threatened_home_completed",
+        "threatened_home_proposed",
+        "threatened_home_other_beneficiary",
+        "threatened_home_voice",
+        "threatened_home_sanction",
+        "threatened_home_nonrepetition",
+        "threatened_home_completion_unknown"
+      ],
+      "qwen_tokens": 79
+    },
+    {
+      "id": "threatened_home_retained_agent_passive_completed_typed_response",
+      "family": "threatened_home",
+      "split": "dev",
+      "variant": "retained_agent_passive",
+      "kind": "displacement",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "The household was threatened by a patrol. The household fled its home.",
+      "affected_party": "the household",
+      "specified_response": "housing access in a safe location",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "The household was threatened by a patrol. The household fled its home. Named affected party: the household. Specified response: housing access in a safe location.",
+      "candidate_ids": [
+        "threatened_home_completed",
+        "threatened_home_proposed",
+        "threatened_home_other_beneficiary",
+        "threatened_home_voice",
+        "threatened_home_sanction",
+        "threatened_home_nonrepetition",
+        "threatened_home_completion_unknown"
+      ],
+      "qwen_tokens": 81
+    },
+    {
+      "id": "threatened_home_retained_agent_passive_acknowledgment_voice",
+      "family": "threatened_home",
+      "split": "dev",
+      "variant": "retained_agent_passive",
+      "kind": "displacement",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "The household was threatened by a patrol. The household fled its home.",
+      "affected_party": "the household",
+      "specified_response": "housing access in a safe location",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "The household was threatened by a patrol. The household fled its home. Named affected party: the household. Specified response: housing access in a safe location.",
+      "candidate_ids": [
+        "threatened_home_completed",
+        "threatened_home_proposed",
+        "threatened_home_other_beneficiary",
+        "threatened_home_voice",
+        "threatened_home_sanction",
+        "threatened_home_nonrepetition",
+        "threatened_home_completion_unknown"
+      ],
+      "qwen_tokens": 81
+    },
+    {
+      "id": "burned_home_base_completed_typed_response",
+      "family": "burned_home",
+      "split": "test",
+      "variant": "base",
+      "kind": "displacement",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "An armed group burned the family's house. The family moved to another town.",
+      "affected_party": "the family",
+      "specified_response": "replacement housing",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "An armed group burned the family's house. The family moved to another town. Named affected party: the family. Specified response: replacement housing.",
+      "candidate_ids": [
+        "burned_home_completed",
+        "burned_home_proposed",
+        "burned_home_other_beneficiary",
+        "burned_home_voice",
+        "burned_home_sanction",
+        "burned_home_nonrepetition",
+        "burned_home_completion_unknown"
+      ],
+      "qwen_tokens": 79
+    },
+    {
+      "id": "burned_home_base_acknowledgment_voice",
+      "family": "burned_home",
+      "split": "test",
+      "variant": "base",
+      "kind": "displacement",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "An armed group burned the family's house. The family moved to another town.",
+      "affected_party": "the family",
+      "specified_response": "replacement housing",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "An armed group burned the family's house. The family moved to another town. Named affected party: the family. Specified response: replacement housing.",
+      "candidate_ids": [
+        "burned_home_completed",
+        "burned_home_proposed",
+        "burned_home_other_beneficiary",
+        "burned_home_voice",
+        "burned_home_sanction",
+        "burned_home_nonrepetition",
+        "burned_home_completion_unknown"
+      ],
+      "qwen_tokens": 79
+    },
+    {
+      "id": "burned_home_retained_agent_passive_completed_typed_response",
+      "family": "burned_home",
+      "split": "test",
+      "variant": "retained_agent_passive",
+      "kind": "displacement",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "The family's house was burned by an armed group. The family moved to another town.",
+      "affected_party": "the family",
+      "specified_response": "replacement housing",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "The family's house was burned by an armed group. The family moved to another town. Named affected party: the family. Specified response: replacement housing.",
+      "candidate_ids": [
+        "burned_home_completed",
+        "burned_home_proposed",
+        "burned_home_other_beneficiary",
+        "burned_home_voice",
+        "burned_home_sanction",
+        "burned_home_nonrepetition",
+        "burned_home_completion_unknown"
+      ],
+      "qwen_tokens": 81
+    },
+    {
+      "id": "burned_home_retained_agent_passive_acknowledgment_voice",
+      "family": "burned_home",
+      "split": "test",
+      "variant": "retained_agent_passive",
+      "kind": "displacement",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "The family's house was burned by an armed group. The family moved to another town.",
+      "affected_party": "the family",
+      "specified_response": "replacement housing",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "The family's house was burned by an armed group. The family moved to another town. Named affected party: the family. Specified response: replacement housing.",
+      "candidate_ids": [
+        "burned_home_completed",
+        "burned_home_proposed",
+        "burned_home_other_beneficiary",
+        "burned_home_voice",
+        "burned_home_sanction",
+        "burned_home_nonrepetition",
+        "burned_home_completion_unknown"
+      ],
+      "qwen_tokens": 81
+    },
+    {
+      "id": "missing_son_base_completed_typed_response",
+      "family": "missing_son",
+      "split": "dev",
+      "variant": "base",
+      "kind": "fate",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "Soldiers took away the son. The parents did not know whether their son was alive.",
+      "affected_party": "the parents",
+      "specified_response": "a verified report of their son's fate",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "Soldiers took away the son. The parents did not know whether their son was alive. Named affected party: the parents. Specified response: a verified report of their son's fate.",
+      "candidate_ids": [
+        "missing_son_completed",
+        "missing_son_proposed",
+        "missing_son_other_beneficiary",
+        "missing_son_voice",
+        "missing_son_sanction",
+        "missing_son_nonrepetition",
+        "missing_son_completion_unknown"
+      ],
+      "qwen_tokens": 86
+    },
+    {
+      "id": "missing_son_base_acknowledgment_voice",
+      "family": "missing_son",
+      "split": "dev",
+      "variant": "base",
+      "kind": "fate",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "Soldiers took away the son. The parents did not know whether their son was alive.",
+      "affected_party": "the parents",
+      "specified_response": "a verified report of their son's fate",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "Soldiers took away the son. The parents did not know whether their son was alive. Named affected party: the parents. Specified response: a verified report of their son's fate.",
+      "candidate_ids": [
+        "missing_son_completed",
+        "missing_son_proposed",
+        "missing_son_other_beneficiary",
+        "missing_son_voice",
+        "missing_son_sanction",
+        "missing_son_nonrepetition",
+        "missing_son_completion_unknown"
+      ],
+      "qwen_tokens": 86
+    },
+    {
+      "id": "missing_son_retained_agent_passive_completed_typed_response",
+      "family": "missing_son",
+      "split": "dev",
+      "variant": "retained_agent_passive",
+      "kind": "fate",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "The son was taken away by soldiers. Whether their son was alive was unknown to the parents.",
+      "affected_party": "the parents",
+      "specified_response": "a verified report of their son's fate",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "The son was taken away by soldiers. Whether their son was alive was unknown to the parents. Named affected party: the parents. Specified response: a verified report of their son's fate.",
+      "candidate_ids": [
+        "missing_son_completed",
+        "missing_son_proposed",
+        "missing_son_other_beneficiary",
+        "missing_son_voice",
+        "missing_son_sanction",
+        "missing_son_nonrepetition",
+        "missing_son_completion_unknown"
+      ],
+      "qwen_tokens": 88
+    },
+    {
+      "id": "missing_son_retained_agent_passive_acknowledgment_voice",
+      "family": "missing_son",
+      "split": "dev",
+      "variant": "retained_agent_passive",
+      "kind": "fate",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "The son was taken away by soldiers. Whether their son was alive was unknown to the parents.",
+      "affected_party": "the parents",
+      "specified_response": "a verified report of their son's fate",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "The son was taken away by soldiers. Whether their son was alive was unknown to the parents. Named affected party: the parents. Specified response: a verified report of their son's fate.",
+      "candidate_ids": [
+        "missing_son_completed",
+        "missing_son_proposed",
+        "missing_son_other_beneficiary",
+        "missing_son_voice",
+        "missing_son_sanction",
+        "missing_son_nonrepetition",
+        "missing_son_completion_unknown"
+      ],
+      "qwen_tokens": 88
+    },
+    {
+      "id": "withheld_fate_base_completed_typed_response",
+      "family": "withheld_fate",
+      "split": "test",
+      "variant": "base",
+      "kind": "fate",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "Officials withheld the detained woman's whereabouts. The children did not know whether she survived.",
+      "affected_party": "the children",
+      "specified_response": "a verified report of their mother's whereabouts",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "Officials withheld the detained woman's whereabouts. The children did not know whether she survived. Named affected party: the children. Specified response: a verified report of their mother's whereabouts.",
+      "candidate_ids": [
+        "withheld_fate_completed",
+        "withheld_fate_proposed",
+        "withheld_fate_other_beneficiary",
+        "withheld_fate_voice",
+        "withheld_fate_sanction",
+        "withheld_fate_nonrepetition",
+        "withheld_fate_completion_unknown"
+      ],
+      "qwen_tokens": 86
+    },
+    {
+      "id": "withheld_fate_base_acknowledgment_voice",
+      "family": "withheld_fate",
+      "split": "test",
+      "variant": "base",
+      "kind": "fate",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "Officials withheld the detained woman's whereabouts. The children did not know whether she survived.",
+      "affected_party": "the children",
+      "specified_response": "a verified report of their mother's whereabouts",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "Officials withheld the detained woman's whereabouts. The children did not know whether she survived. Named affected party: the children. Specified response: a verified report of their mother's whereabouts.",
+      "candidate_ids": [
+        "withheld_fate_completed",
+        "withheld_fate_proposed",
+        "withheld_fate_other_beneficiary",
+        "withheld_fate_voice",
+        "withheld_fate_sanction",
+        "withheld_fate_nonrepetition",
+        "withheld_fate_completion_unknown"
+      ],
+      "qwen_tokens": 86
+    },
+    {
+      "id": "withheld_fate_retained_agent_passive_completed_typed_response",
+      "family": "withheld_fate",
+      "split": "test",
+      "variant": "retained_agent_passive",
+      "kind": "fate",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "The detained woman's whereabouts were withheld by officials. Whether she survived was unknown to the children.",
+      "affected_party": "the children",
+      "specified_response": "a verified report of their mother's whereabouts",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "The detained woman's whereabouts were withheld by officials. Whether she survived was unknown to the children. Named affected party: the children. Specified response: a verified report of their mother's whereabouts.",
+      "candidate_ids": [
+        "withheld_fate_completed",
+        "withheld_fate_proposed",
+        "withheld_fate_other_beneficiary",
+        "withheld_fate_voice",
+        "withheld_fate_sanction",
+        "withheld_fate_nonrepetition",
+        "withheld_fate_completion_unknown"
+      ],
+      "qwen_tokens": 88
+    },
+    {
+      "id": "withheld_fate_retained_agent_passive_acknowledgment_voice",
+      "family": "withheld_fate",
+      "split": "test",
+      "variant": "retained_agent_passive",
+      "kind": "fate",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "The detained woman's whereabouts were withheld by officials. Whether she survived was unknown to the children.",
+      "affected_party": "the children",
+      "specified_response": "a verified report of their mother's whereabouts",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "The detained woman's whereabouts were withheld by officials. Whether she survived was unknown to the children. Named affected party: the children. Specified response: a verified report of their mother's whereabouts.",
+      "candidate_ids": [
+        "withheld_fate_completed",
+        "withheld_fate_proposed",
+        "withheld_fate_other_beneficiary",
+        "withheld_fate_voice",
+        "withheld_fate_sanction",
+        "withheld_fate_nonrepetition",
+        "withheld_fate_completion_unknown"
+      ],
+      "qwen_tokens": 88
+    },
+    {
+      "id": "sacred_site_base_completed_typed_response",
+      "family": "sacred_site",
+      "split": "dev",
+      "variant": "base",
+      "kind": "cultural",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "An armed group destroyed the community's ceremonial site. The community stopped rituals there.",
+      "affected_party": "the community",
+      "specified_response": "access to a rebuilt ceremonial site",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "An armed group destroyed the community's ceremonial site. The community stopped rituals there. Named affected party: the community. Specified response: access to a rebuilt ceremonial site.",
+      "candidate_ids": [
+        "sacred_site_completed",
+        "sacred_site_proposed",
+        "sacred_site_other_beneficiary",
+        "sacred_site_voice",
+        "sacred_site_sanction",
+        "sacred_site_nonrepetition",
+        "sacred_site_completion_unknown"
+      ],
+      "qwen_tokens": 83
+    },
+    {
+      "id": "sacred_site_base_acknowledgment_voice",
+      "family": "sacred_site",
+      "split": "dev",
+      "variant": "base",
+      "kind": "cultural",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "An armed group destroyed the community's ceremonial site. The community stopped rituals there.",
+      "affected_party": "the community",
+      "specified_response": "access to a rebuilt ceremonial site",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "An armed group destroyed the community's ceremonial site. The community stopped rituals there. Named affected party: the community. Specified response: access to a rebuilt ceremonial site.",
+      "candidate_ids": [
+        "sacred_site_completed",
+        "sacred_site_proposed",
+        "sacred_site_other_beneficiary",
+        "sacred_site_voice",
+        "sacred_site_sanction",
+        "sacred_site_nonrepetition",
+        "sacred_site_completion_unknown"
+      ],
+      "qwen_tokens": 83
+    },
+    {
+      "id": "sacred_site_retained_agent_passive_completed_typed_response",
+      "family": "sacred_site",
+      "split": "dev",
+      "variant": "retained_agent_passive",
+      "kind": "cultural",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "The community's ceremonial site was destroyed by an armed group. The community stopped rituals there.",
+      "affected_party": "the community",
+      "specified_response": "access to a rebuilt ceremonial site",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "The community's ceremonial site was destroyed by an armed group. The community stopped rituals there. Named affected party: the community. Specified response: access to a rebuilt ceremonial site.",
+      "candidate_ids": [
+        "sacred_site_completed",
+        "sacred_site_proposed",
+        "sacred_site_other_beneficiary",
+        "sacred_site_voice",
+        "sacred_site_sanction",
+        "sacred_site_nonrepetition",
+        "sacred_site_completion_unknown"
+      ],
+      "qwen_tokens": 85
+    },
+    {
+      "id": "sacred_site_retained_agent_passive_acknowledgment_voice",
+      "family": "sacred_site",
+      "split": "dev",
+      "variant": "retained_agent_passive",
+      "kind": "cultural",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "The community's ceremonial site was destroyed by an armed group. The community stopped rituals there.",
+      "affected_party": "the community",
+      "specified_response": "access to a rebuilt ceremonial site",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "The community's ceremonial site was destroyed by an armed group. The community stopped rituals there. Named affected party: the community. Specified response: access to a rebuilt ceremonial site.",
+      "candidate_ids": [
+        "sacred_site_completed",
+        "sacred_site_proposed",
+        "sacred_site_other_beneficiary",
+        "sacred_site_voice",
+        "sacred_site_sanction",
+        "sacred_site_nonrepetition",
+        "sacred_site_completion_unknown"
+      ],
+      "qwen_tokens": 85
+    },
+    {
+      "id": "language_base_completed_typed_response",
+      "family": "language",
+      "split": "test",
+      "variant": "base",
+      "kind": "cultural",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "A commander prohibited the elders from teaching the community language. The children stopped receiving those lessons.",
+      "affected_party": "the children",
+      "specified_response": "resumed community-language lessons",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "A commander prohibited the elders from teaching the community language. The children stopped receiving those lessons. Named affected party: the children. Specified response: resumed community-language lessons.",
+      "candidate_ids": [
+        "language_completed",
+        "language_proposed",
+        "language_other_beneficiary",
+        "language_voice",
+        "language_sanction",
+        "language_nonrepetition",
+        "language_completion_unknown"
+      ],
+      "qwen_tokens": 83
+    },
+    {
+      "id": "language_base_acknowledgment_voice",
+      "family": "language",
+      "split": "test",
+      "variant": "base",
+      "kind": "cultural",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "A commander prohibited the elders from teaching the community language. The children stopped receiving those lessons.",
+      "affected_party": "the children",
+      "specified_response": "resumed community-language lessons",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "A commander prohibited the elders from teaching the community language. The children stopped receiving those lessons. Named affected party: the children. Specified response: resumed community-language lessons.",
+      "candidate_ids": [
+        "language_completed",
+        "language_proposed",
+        "language_other_beneficiary",
+        "language_voice",
+        "language_sanction",
+        "language_nonrepetition",
+        "language_completion_unknown"
+      ],
+      "qwen_tokens": 83
+    },
+    {
+      "id": "language_retained_agent_passive_completed_typed_response",
+      "family": "language",
+      "split": "test",
+      "variant": "retained_agent_passive",
+      "kind": "cultural",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "The elders were prohibited from teaching the community language by a commander. Those lessons were no longer received by the children.",
+      "affected_party": "the children",
+      "specified_response": "resumed community-language lessons",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "The elders were prohibited from teaching the community language by a commander. Those lessons were no longer received by the children. Named affected party: the children. Specified response: resumed community-language lessons.",
+      "candidate_ids": [
+        "language_completed",
+        "language_proposed",
+        "language_other_beneficiary",
+        "language_voice",
+        "language_sanction",
+        "language_nonrepetition",
+        "language_completion_unknown"
+      ],
+      "qwen_tokens": 88
+    },
+    {
+      "id": "language_retained_agent_passive_acknowledgment_voice",
+      "family": "language",
+      "split": "test",
+      "variant": "retained_agent_passive",
+      "kind": "cultural",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "The elders were prohibited from teaching the community language by a commander. Those lessons were no longer received by the children.",
+      "affected_party": "the children",
+      "specified_response": "resumed community-language lessons",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "The elders were prohibited from teaching the community language by a commander. Those lessons were no longer received by the children. Named affected party: the children. Specified response: resumed community-language lessons.",
+      "candidate_ids": [
+        "language_completed",
+        "language_proposed",
+        "language_other_beneficiary",
+        "language_voice",
+        "language_sanction",
+        "language_nonrepetition",
+        "language_completion_unknown"
+      ],
+      "qwen_tokens": 88
+    },
+    {
+      "id": "assault_base_completed_typed_response",
+      "family": "assault",
+      "split": "dev",
+      "variant": "base",
+      "kind": "bodily",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "An officer beat the worker and broke the worker's leg. The worker had pain for months.",
+      "affected_party": "the worker",
+      "specified_response": "medical rehabilitation sessions",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "An officer beat the worker and broke the worker's leg. The worker had pain for months. Named affected party: the worker. Specified response: medical rehabilitation sessions.",
+      "candidate_ids": [
+        "assault_completed",
+        "assault_proposed",
+        "assault_other_beneficiary",
+        "assault_voice",
+        "assault_sanction",
+        "assault_nonrepetition",
+        "assault_completion_unknown"
+      ],
+      "qwen_tokens": 83
+    },
+    {
+      "id": "assault_base_acknowledgment_voice",
+      "family": "assault",
+      "split": "dev",
+      "variant": "base",
+      "kind": "bodily",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "An officer beat the worker and broke the worker's leg. The worker had pain for months.",
+      "affected_party": "the worker",
+      "specified_response": "medical rehabilitation sessions",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "An officer beat the worker and broke the worker's leg. The worker had pain for months. Named affected party: the worker. Specified response: medical rehabilitation sessions.",
+      "candidate_ids": [
+        "assault_completed",
+        "assault_proposed",
+        "assault_other_beneficiary",
+        "assault_voice",
+        "assault_sanction",
+        "assault_nonrepetition",
+        "assault_completion_unknown"
+      ],
+      "qwen_tokens": 83
+    },
+    {
+      "id": "assault_retained_agent_passive_completed_typed_response",
+      "family": "assault",
+      "split": "dev",
+      "variant": "retained_agent_passive",
+      "kind": "bodily",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "The worker was beaten by an officer and the worker's leg was broken. Pain was experienced by the worker for months.",
+      "affected_party": "the worker",
+      "specified_response": "medical rehabilitation sessions",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "The worker was beaten by an officer and the worker's leg was broken. Pain was experienced by the worker for months. Named affected party: the worker. Specified response: medical rehabilitation sessions.",
+      "candidate_ids": [
+        "assault_completed",
+        "assault_proposed",
+        "assault_other_beneficiary",
+        "assault_voice",
+        "assault_sanction",
+        "assault_nonrepetition",
+        "assault_completion_unknown"
+      ],
+      "qwen_tokens": 88
+    },
+    {
+      "id": "assault_retained_agent_passive_acknowledgment_voice",
+      "family": "assault",
+      "split": "dev",
+      "variant": "retained_agent_passive",
+      "kind": "bodily",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "The worker was beaten by an officer and the worker's leg was broken. Pain was experienced by the worker for months.",
+      "affected_party": "the worker",
+      "specified_response": "medical rehabilitation sessions",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "The worker was beaten by an officer and the worker's leg was broken. Pain was experienced by the worker for months. Named affected party: the worker. Specified response: medical rehabilitation sessions.",
+      "candidate_ids": [
+        "assault_completed",
+        "assault_proposed",
+        "assault_other_beneficiary",
+        "assault_voice",
+        "assault_sanction",
+        "assault_nonrepetition",
+        "assault_completion_unknown"
+      ],
+      "qwen_tokens": 88
+    },
+    {
+      "id": "mine_base_completed_typed_response",
+      "family": "mine",
+      "split": "test",
+      "variant": "base",
+      "kind": "bodily",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "Fighters placed a mine. The mine injured the civilian. The civilian needed assistance to walk.",
+      "affected_party": "the civilian",
+      "specified_response": "mobility assistance equipment",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "Fighters placed a mine. The mine injured the civilian. The civilian needed assistance to walk. Named affected party: the civilian. Specified response: mobility assistance equipment.",
+      "candidate_ids": [
+        "mine_completed",
+        "mine_proposed",
+        "mine_other_beneficiary",
+        "mine_voice",
+        "mine_sanction",
+        "mine_nonrepetition",
+        "mine_completion_unknown"
+      ],
+      "qwen_tokens": 82
+    },
+    {
+      "id": "mine_base_acknowledgment_voice",
+      "family": "mine",
+      "split": "test",
+      "variant": "base",
+      "kind": "bodily",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "Fighters placed a mine. The mine injured the civilian. The civilian needed assistance to walk.",
+      "affected_party": "the civilian",
+      "specified_response": "mobility assistance equipment",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "Fighters placed a mine. The mine injured the civilian. The civilian needed assistance to walk. Named affected party: the civilian. Specified response: mobility assistance equipment.",
+      "candidate_ids": [
+        "mine_completed",
+        "mine_proposed",
+        "mine_other_beneficiary",
+        "mine_voice",
+        "mine_sanction",
+        "mine_nonrepetition",
+        "mine_completion_unknown"
+      ],
+      "qwen_tokens": 82
+    },
+    {
+      "id": "mine_retained_agent_passive_completed_typed_response",
+      "family": "mine",
+      "split": "test",
+      "variant": "retained_agent_passive",
+      "kind": "bodily",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "A mine was placed by fighters. The civilian was injured by the mine. Assistance was needed by the civilian to walk.",
+      "affected_party": "the civilian",
+      "specified_response": "mobility assistance equipment",
+      "criterion_id": "completed_typed_response",
+      "condition": "Retrieve an account explicitly stating that the named affected party received the specified response as completed. Match beneficiary, response type and completion; do not judge sufficiency.",
+      "text": "A mine was placed by fighters. The civilian was injured by the mine. Assistance was needed by the civilian to walk. Named affected party: the civilian. Specified response: mobility assistance equipment.",
+      "candidate_ids": [
+        "mine_completed",
+        "mine_proposed",
+        "mine_other_beneficiary",
+        "mine_voice",
+        "mine_sanction",
+        "mine_nonrepetition",
+        "mine_completion_unknown"
+      ],
+      "qwen_tokens": 88
+    },
+    {
+      "id": "mine_retained_agent_passive_acknowledgment_voice",
+      "family": "mine",
+      "split": "test",
+      "variant": "retained_agent_passive",
+      "kind": "bodily",
+      "source_incident_status": "asserted_in_hypothetical",
+      "source_completion_inference": "not_inferred_from_incident",
+      "context": "A mine was placed by fighters. The civilian was injured by the mine. Assistance was needed by the civilian to walk.",
+      "affected_party": "the civilian",
+      "specified_response": "mobility assistance equipment",
+      "criterion_id": "acknowledgment_voice",
+      "condition": "Retrieve an account explicitly stating that the named affected party spoke and their account was acknowledged. Completion of material support alone does not meet this criterion.",
+      "text": "A mine was placed by fighters. The civilian was injured by the mine. Assistance was needed by the civilian to walk. Named affected party: the civilian. Specified response: mobility assistance equipment.",
+      "candidate_ids": [
+        "mine_completed",
+        "mine_proposed",
+        "mine_other_beneficiary",
+        "mine_voice",
+        "mine_sanction",
+        "mine_nonrepetition",
+        "mine_completion_unknown"
+      ],
+      "qwen_tokens": 88
+    }
+  ],
+  "candidates": [
+    {
+      "id": "market_completed",
+      "family": "market",
+      "split": "dev",
+      "text": "A helpful support program delivered livelihood grants to the farmers. The specified delivery was completed. No speaking session is recorded.",
+      "response_class": "completed",
+      "beneficiary": "the farmers",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 72
+    },
+    {
+      "id": "market_proposed",
+      "family": "market",
+      "split": "dev",
+      "text": "A helpful support program proposed livelihood grants for the farmers. Delivery is planned for next year and has not begun. No speaking session is recorded.",
+      "response_class": "proposed",
+      "beneficiary": "the farmers",
+      "completion_status": "asserted_not_started",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 77
+    },
+    {
+      "id": "market_other_beneficiary",
+      "family": "market",
+      "split": "dev",
+      "text": "A helpful support program delivered livelihood grants to another affected party, not the farmers. Delivery was completed. No speaking session is recorded.",
+      "response_class": "other_beneficiary",
+      "beneficiary": "another affected party",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 75
+    },
+    {
+      "id": "market_voice",
+      "family": "market",
+      "split": "dev",
+      "text": "At a supportive public session, the farmers spoke about the incident and the account was acknowledged. The session did not deliver livelihood grants.",
+      "response_class": "voice",
+      "beneficiary": "the farmers",
+      "completion_status": "asserted_session_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 75
+    },
+    {
+      "id": "market_sanction",
+      "family": "market",
+      "split": "dev",
+      "text": "A lawful accountability process imposed a sanction on the responsible actors. The process did not deliver livelihood grants to the farmers or give them a speaking session.",
+      "response_class": "sanction",
+      "beneficiary": "the farmers",
+      "completion_status": "asserted_sanction",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 78
+    },
+    {
+      "id": "market_nonrepetition",
+      "family": "market",
+      "split": "dev",
+      "text": "A protective program completed market access for the farmers. No delivery of livelihood grants and no speaking session are recorded.",
+      "response_class": "nonrepetition",
+      "beneficiary": "the farmers",
+      "completion_status": "asserted_prevention_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 71
+    },
+    {
+      "id": "market_completion_unknown",
+      "family": "market",
+      "split": "dev",
+      "text": "A helpful support program approved livelihood grants for the farmers. The available record does not establish whether delivery occurred. No speaking session is recorded.",
+      "response_class": "completion_unknown",
+      "beneficiary": "the farmers",
+      "completion_status": "not_established",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 76
+    },
+    {
+      "id": "tools_completed",
+      "family": "tools",
+      "split": "test",
+      "text": "A helpful support program delivered replacement work tools to the mechanic. The specified delivery was completed. No speaking session is recorded.",
+      "response_class": "completed",
+      "beneficiary": "the mechanic",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 73
+    },
+    {
+      "id": "tools_proposed",
+      "family": "tools",
+      "split": "test",
+      "text": "A helpful support program proposed replacement work tools for the mechanic. Delivery is planned for next year and has not begun. No speaking session is recorded.",
+      "response_class": "proposed",
+      "beneficiary": "the mechanic",
+      "completion_status": "asserted_not_started",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 78
+    },
+    {
+      "id": "tools_other_beneficiary",
+      "family": "tools",
+      "split": "test",
+      "text": "A helpful support program delivered replacement work tools to another affected party, not the mechanic. Delivery was completed. No speaking session is recorded.",
+      "response_class": "other_beneficiary",
+      "beneficiary": "another affected party",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 76
+    },
+    {
+      "id": "tools_voice",
+      "family": "tools",
+      "split": "test",
+      "text": "At a supportive public session, the mechanic spoke about the incident and the account was acknowledged. The session did not deliver replacement work tools.",
+      "response_class": "voice",
+      "beneficiary": "the mechanic",
+      "completion_status": "asserted_session_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 76
+    },
+    {
+      "id": "tools_sanction",
+      "family": "tools",
+      "split": "test",
+      "text": "A lawful accountability process imposed a sanction on the responsible actors. The process did not deliver replacement work tools to the mechanic or give them a speaking session.",
+      "response_class": "sanction",
+      "beneficiary": "the mechanic",
+      "completion_status": "asserted_sanction",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 79
+    },
+    {
+      "id": "tools_nonrepetition",
+      "family": "tools",
+      "split": "test",
+      "text": "A protective program completed safe access to the workshop for the mechanic. No delivery of replacement work tools and no speaking session are recorded.",
+      "response_class": "nonrepetition",
+      "beneficiary": "the mechanic",
+      "completion_status": "asserted_prevention_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 75
+    },
+    {
+      "id": "tools_completion_unknown",
+      "family": "tools",
+      "split": "test",
+      "text": "A helpful support program approved replacement work tools for the mechanic. The available record does not establish whether delivery occurred. No speaking session is recorded.",
+      "response_class": "completion_unknown",
+      "beneficiary": "the mechanic",
+      "completion_status": "not_established",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 77
+    },
+    {
+      "id": "checkpoint_completed",
+      "family": "checkpoint",
+      "split": "dev",
+      "text": "A helpful support program delivered release from confinement to the driver. The specified delivery was completed. No speaking session is recorded.",
+      "response_class": "completed",
+      "beneficiary": "the driver",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 73
+    },
+    {
+      "id": "checkpoint_proposed",
+      "family": "checkpoint",
+      "split": "dev",
+      "text": "A helpful support program proposed release from confinement for the driver. Delivery is planned for next year and has not begun. No speaking session is recorded.",
+      "response_class": "proposed",
+      "beneficiary": "the driver",
+      "completion_status": "asserted_not_started",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 78
+    },
+    {
+      "id": "checkpoint_other_beneficiary",
+      "family": "checkpoint",
+      "split": "dev",
+      "text": "A helpful support program delivered release from confinement to another affected party, not the driver. Delivery was completed. No speaking session is recorded.",
+      "response_class": "other_beneficiary",
+      "beneficiary": "another affected party",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 76
+    },
+    {
+      "id": "checkpoint_voice",
+      "family": "checkpoint",
+      "split": "dev",
+      "text": "At a supportive public session, the driver spoke about the incident and the account was acknowledged. The session did not deliver release from confinement.",
+      "response_class": "voice",
+      "beneficiary": "the driver",
+      "completion_status": "asserted_session_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 76
+    },
+    {
+      "id": "checkpoint_sanction",
+      "family": "checkpoint",
+      "split": "dev",
+      "text": "A lawful accountability process imposed a sanction on the responsible actors. The process did not deliver release from confinement to the driver or give them a speaking session.",
+      "response_class": "sanction",
+      "beneficiary": "the driver",
+      "completion_status": "asserted_sanction",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 79
+    },
+    {
+      "id": "checkpoint_nonrepetition",
+      "family": "checkpoint",
+      "split": "dev",
+      "text": "A protective program completed unimpeded future travel for the driver. No delivery of release from confinement and no speaking session are recorded.",
+      "response_class": "nonrepetition",
+      "beneficiary": "the driver",
+      "completion_status": "asserted_prevention_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 75
+    },
+    {
+      "id": "checkpoint_completion_unknown",
+      "family": "checkpoint",
+      "split": "dev",
+      "text": "A helpful support program approved release from confinement for the driver. The available record does not establish whether delivery occurred. No speaking session is recorded.",
+      "response_class": "completion_unknown",
+      "beneficiary": "the driver",
+      "completion_status": "not_established",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 77
+    },
+    {
+      "id": "abduction_completed",
+      "family": "abduction",
+      "split": "test",
+      "text": "A helpful support program delivered safe return home to the nurse. The specified delivery was completed. No speaking session is recorded.",
+      "response_class": "completed",
+      "beneficiary": "the nurse",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 73
+    },
+    {
+      "id": "abduction_proposed",
+      "family": "abduction",
+      "split": "test",
+      "text": "A helpful support program proposed safe return home for the nurse. Delivery is planned for next year and has not begun. No speaking session is recorded.",
+      "response_class": "proposed",
+      "beneficiary": "the nurse",
+      "completion_status": "asserted_not_started",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 78
+    },
+    {
+      "id": "abduction_other_beneficiary",
+      "family": "abduction",
+      "split": "test",
+      "text": "A helpful support program delivered safe return home to another affected party, not the nurse. Delivery was completed. No speaking session is recorded.",
+      "response_class": "other_beneficiary",
+      "beneficiary": "another affected party",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 76
+    },
+    {
+      "id": "abduction_voice",
+      "family": "abduction",
+      "split": "test",
+      "text": "At a supportive public session, the nurse spoke about the incident and the account was acknowledged. The session did not deliver safe return home.",
+      "response_class": "voice",
+      "beneficiary": "the nurse",
+      "completion_status": "asserted_session_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 76
+    },
+    {
+      "id": "abduction_sanction",
+      "family": "abduction",
+      "split": "test",
+      "text": "A lawful accountability process imposed a sanction on the responsible actors. The process did not deliver safe return home to the nurse or give them a speaking session.",
+      "response_class": "sanction",
+      "beneficiary": "the nurse",
+      "completion_status": "asserted_sanction",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 79
+    },
+    {
+      "id": "abduction_nonrepetition",
+      "family": "abduction",
+      "split": "test",
+      "text": "A protective program completed protection against renewed abduction for the nurse. No delivery of safe return home and no speaking session are recorded.",
+      "response_class": "nonrepetition",
+      "beneficiary": "the nurse",
+      "completion_status": "asserted_prevention_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 74
+    },
+    {
+      "id": "abduction_completion_unknown",
+      "family": "abduction",
+      "split": "test",
+      "text": "A helpful support program approved safe return home for the nurse. The available record does not establish whether delivery occurred. No speaking session is recorded.",
+      "response_class": "completion_unknown",
+      "beneficiary": "the nurse",
+      "completion_status": "not_established",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 77
+    },
+    {
+      "id": "threatened_home_completed",
+      "family": "threatened_home",
+      "split": "dev",
+      "text": "A helpful support program delivered housing access in a safe location to the household. The specified delivery was completed. No speaking session is recorded.",
+      "response_class": "completed",
+      "beneficiary": "the household",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 76
+    },
+    {
+      "id": "threatened_home_proposed",
+      "family": "threatened_home",
+      "split": "dev",
+      "text": "A helpful support program proposed housing access in a safe location for the household. Delivery is planned for next year and has not begun. No speaking session is recorded.",
+      "response_class": "proposed",
+      "beneficiary": "the household",
+      "completion_status": "asserted_not_started",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 81
+    },
+    {
+      "id": "threatened_home_other_beneficiary",
+      "family": "threatened_home",
+      "split": "dev",
+      "text": "A helpful support program delivered housing access in a safe location to another affected party, not the household. Delivery was completed. No speaking session is recorded.",
+      "response_class": "other_beneficiary",
+      "beneficiary": "another affected party",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 79
+    },
+    {
+      "id": "threatened_home_voice",
+      "family": "threatened_home",
+      "split": "dev",
+      "text": "At a supportive public session, the household spoke about the incident and the account was acknowledged. The session did not deliver housing access in a safe location.",
+      "response_class": "voice",
+      "beneficiary": "the household",
+      "completion_status": "asserted_session_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 79
+    },
+    {
+      "id": "threatened_home_sanction",
+      "family": "threatened_home",
+      "split": "dev",
+      "text": "A lawful accountability process imposed a sanction on the responsible actors. The process did not deliver housing access in a safe location to the household or give them a speaking session.",
+      "response_class": "sanction",
+      "beneficiary": "the household",
+      "completion_status": "asserted_sanction",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 82
+    },
+    {
+      "id": "threatened_home_nonrepetition",
+      "family": "threatened_home",
+      "split": "dev",
+      "text": "A protective program completed protection against renewed threats for the household. No delivery of housing access in a safe location and no speaking session are recorded.",
+      "response_class": "nonrepetition",
+      "beneficiary": "the household",
+      "completion_status": "asserted_prevention_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 77
+    },
+    {
+      "id": "threatened_home_completion_unknown",
+      "family": "threatened_home",
+      "split": "dev",
+      "text": "A helpful support program approved housing access in a safe location for the household. The available record does not establish whether delivery occurred. No speaking session is recorded.",
+      "response_class": "completion_unknown",
+      "beneficiary": "the household",
+      "completion_status": "not_established",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 80
+    },
+    {
+      "id": "burned_home_completed",
+      "family": "burned_home",
+      "split": "test",
+      "text": "A helpful support program delivered replacement housing to the family. The specified delivery was completed. No speaking session is recorded.",
+      "response_class": "completed",
+      "beneficiary": "the family",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 72
+    },
+    {
+      "id": "burned_home_proposed",
+      "family": "burned_home",
+      "split": "test",
+      "text": "A helpful support program proposed replacement housing for the family. Delivery is planned for next year and has not begun. No speaking session is recorded.",
+      "response_class": "proposed",
+      "beneficiary": "the family",
+      "completion_status": "asserted_not_started",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 77
+    },
+    {
+      "id": "burned_home_other_beneficiary",
+      "family": "burned_home",
+      "split": "test",
+      "text": "A helpful support program delivered replacement housing to another affected party, not the family. Delivery was completed. No speaking session is recorded.",
+      "response_class": "other_beneficiary",
+      "beneficiary": "another affected party",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 75
+    },
+    {
+      "id": "burned_home_voice",
+      "family": "burned_home",
+      "split": "test",
+      "text": "At a supportive public session, the family spoke about the incident and the account was acknowledged. The session did not deliver replacement housing.",
+      "response_class": "voice",
+      "beneficiary": "the family",
+      "completion_status": "asserted_session_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 75
+    },
+    {
+      "id": "burned_home_sanction",
+      "family": "burned_home",
+      "split": "test",
+      "text": "A lawful accountability process imposed a sanction on the responsible actors. The process did not deliver replacement housing to the family or give them a speaking session.",
+      "response_class": "sanction",
+      "beneficiary": "the family",
+      "completion_status": "asserted_sanction",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 78
+    },
+    {
+      "id": "burned_home_nonrepetition",
+      "family": "burned_home",
+      "split": "test",
+      "text": "A protective program completed protection against renewed house attacks for the family. No delivery of replacement housing and no speaking session are recorded.",
+      "response_class": "nonrepetition",
+      "beneficiary": "the family",
+      "completion_status": "asserted_prevention_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 74
+    },
+    {
+      "id": "burned_home_completion_unknown",
+      "family": "burned_home",
+      "split": "test",
+      "text": "A helpful support program approved replacement housing for the family. The available record does not establish whether delivery occurred. No speaking session is recorded.",
+      "response_class": "completion_unknown",
+      "beneficiary": "the family",
+      "completion_status": "not_established",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 76
+    },
+    {
+      "id": "missing_son_completed",
+      "family": "missing_son",
+      "split": "dev",
+      "text": "A helpful support program delivered a verified report of their son's fate to the parents. The specified delivery was completed. No speaking session is recorded.",
+      "response_class": "completed",
+      "beneficiary": "the parents",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 78
+    },
+    {
+      "id": "missing_son_proposed",
+      "family": "missing_son",
+      "split": "dev",
+      "text": "A helpful support program proposed a verified report of their son's fate for the parents. Delivery is planned for next year and has not begun. No speaking session is recorded.",
+      "response_class": "proposed",
+      "beneficiary": "the parents",
+      "completion_status": "asserted_not_started",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 83
+    },
+    {
+      "id": "missing_son_other_beneficiary",
+      "family": "missing_son",
+      "split": "dev",
+      "text": "A helpful support program delivered a verified report of their son's fate to another affected party, not the parents. Delivery was completed. No speaking session is recorded.",
+      "response_class": "other_beneficiary",
+      "beneficiary": "another affected party",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 81
+    },
+    {
+      "id": "missing_son_voice",
+      "family": "missing_son",
+      "split": "dev",
+      "text": "At a supportive public session, the parents spoke about the incident and the account was acknowledged. The session did not deliver a verified report of their son's fate.",
+      "response_class": "voice",
+      "beneficiary": "the parents",
+      "completion_status": "asserted_session_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 81
+    },
+    {
+      "id": "missing_son_sanction",
+      "family": "missing_son",
+      "split": "dev",
+      "text": "A lawful accountability process imposed a sanction on the responsible actors. The process did not deliver a verified report of their son's fate to the parents or give them a speaking session.",
+      "response_class": "sanction",
+      "beneficiary": "the parents",
+      "completion_status": "asserted_sanction",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 84
+    },
+    {
+      "id": "missing_son_nonrepetition",
+      "family": "missing_son",
+      "split": "dev",
+      "text": "A protective program completed safeguards against information concealment for the parents. No delivery of a verified report of their son's fate and no speaking session are recorded.",
+      "response_class": "nonrepetition",
+      "beneficiary": "the parents",
+      "completion_status": "asserted_prevention_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 80
+    },
+    {
+      "id": "missing_son_completion_unknown",
+      "family": "missing_son",
+      "split": "dev",
+      "text": "A helpful support program approved a verified report of their son's fate for the parents. The available record does not establish whether delivery occurred. No speaking session is recorded.",
+      "response_class": "completion_unknown",
+      "beneficiary": "the parents",
+      "completion_status": "not_established",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 82
+    },
+    {
+      "id": "withheld_fate_completed",
+      "family": "withheld_fate",
+      "split": "test",
+      "text": "A helpful support program delivered a verified report of their mother's whereabouts to the children. The specified delivery was completed. No speaking session is recorded.",
+      "response_class": "completed",
+      "beneficiary": "the children",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 78
+    },
+    {
+      "id": "withheld_fate_proposed",
+      "family": "withheld_fate",
+      "split": "test",
+      "text": "A helpful support program proposed a verified report of their mother's whereabouts for the children. Delivery is planned for next year and has not begun. No speaking session is recorded.",
+      "response_class": "proposed",
+      "beneficiary": "the children",
+      "completion_status": "asserted_not_started",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 83
+    },
+    {
+      "id": "withheld_fate_other_beneficiary",
+      "family": "withheld_fate",
+      "split": "test",
+      "text": "A helpful support program delivered a verified report of their mother's whereabouts to another affected party, not the children. Delivery was completed. No speaking session is recorded.",
+      "response_class": "other_beneficiary",
+      "beneficiary": "another affected party",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 81
+    },
+    {
+      "id": "withheld_fate_voice",
+      "family": "withheld_fate",
+      "split": "test",
+      "text": "At a supportive public session, the children spoke about the incident and the account was acknowledged. The session did not deliver a verified report of their mother's whereabouts.",
+      "response_class": "voice",
+      "beneficiary": "the children",
+      "completion_status": "asserted_session_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 81
+    },
+    {
+      "id": "withheld_fate_sanction",
+      "family": "withheld_fate",
+      "split": "test",
+      "text": "A lawful accountability process imposed a sanction on the responsible actors. The process did not deliver a verified report of their mother's whereabouts to the children or give them a speaking session.",
+      "response_class": "sanction",
+      "beneficiary": "the children",
+      "completion_status": "asserted_sanction",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 84
+    },
+    {
+      "id": "withheld_fate_nonrepetition",
+      "family": "withheld_fate",
+      "split": "test",
+      "text": "A protective program completed safeguards against information concealment for the children. No delivery of a verified report of their mother's whereabouts and no speaking session are recorded.",
+      "response_class": "nonrepetition",
+      "beneficiary": "the children",
+      "completion_status": "asserted_prevention_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 80
+    },
+    {
+      "id": "withheld_fate_completion_unknown",
+      "family": "withheld_fate",
+      "split": "test",
+      "text": "A helpful support program approved a verified report of their mother's whereabouts for the children. The available record does not establish whether delivery occurred. No speaking session is recorded.",
+      "response_class": "completion_unknown",
+      "beneficiary": "the children",
+      "completion_status": "not_established",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 82
+    },
+    {
+      "id": "sacred_site_completed",
+      "family": "sacred_site",
+      "split": "dev",
+      "text": "A helpful support program delivered access to a rebuilt ceremonial site to the community. The specified delivery was completed. No speaking session is recorded.",
+      "response_class": "completed",
+      "beneficiary": "the community",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 76
+    },
+    {
+      "id": "sacred_site_proposed",
+      "family": "sacred_site",
+      "split": "dev",
+      "text": "A helpful support program proposed access to a rebuilt ceremonial site for the community. Delivery is planned for next year and has not begun. No speaking session is recorded.",
+      "response_class": "proposed",
+      "beneficiary": "the community",
+      "completion_status": "asserted_not_started",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 81
+    },
+    {
+      "id": "sacred_site_other_beneficiary",
+      "family": "sacred_site",
+      "split": "dev",
+      "text": "A helpful support program delivered access to a rebuilt ceremonial site to another affected party, not the community. Delivery was completed. No speaking session is recorded.",
+      "response_class": "other_beneficiary",
+      "beneficiary": "another affected party",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 79
+    },
+    {
+      "id": "sacred_site_voice",
+      "family": "sacred_site",
+      "split": "dev",
+      "text": "At a supportive public session, the community spoke about the incident and the account was acknowledged. The session did not deliver access to a rebuilt ceremonial site.",
+      "response_class": "voice",
+      "beneficiary": "the community",
+      "completion_status": "asserted_session_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 79
+    },
+    {
+      "id": "sacred_site_sanction",
+      "family": "sacred_site",
+      "split": "dev",
+      "text": "A lawful accountability process imposed a sanction on the responsible actors. The process did not deliver access to a rebuilt ceremonial site to the community or give them a speaking session.",
+      "response_class": "sanction",
+      "beneficiary": "the community",
+      "completion_status": "asserted_sanction",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 82
+    },
+    {
+      "id": "sacred_site_nonrepetition",
+      "family": "sacred_site",
+      "split": "dev",
+      "text": "A protective program completed protection of ceremonial sites for the community. No delivery of access to a rebuilt ceremonial site and no speaking session are recorded.",
+      "response_class": "nonrepetition",
+      "beneficiary": "the community",
+      "completion_status": "asserted_prevention_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 77
+    },
+    {
+      "id": "sacred_site_completion_unknown",
+      "family": "sacred_site",
+      "split": "dev",
+      "text": "A helpful support program approved access to a rebuilt ceremonial site for the community. The available record does not establish whether delivery occurred. No speaking session is recorded.",
+      "response_class": "completion_unknown",
+      "beneficiary": "the community",
+      "completion_status": "not_established",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 80
+    },
+    {
+      "id": "language_completed",
+      "family": "language",
+      "split": "test",
+      "text": "A helpful support program delivered resumed community-language lessons to the children. The specified delivery was completed. No speaking session is recorded.",
+      "response_class": "completed",
+      "beneficiary": "the children",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 74
+    },
+    {
+      "id": "language_proposed",
+      "family": "language",
+      "split": "test",
+      "text": "A helpful support program proposed resumed community-language lessons for the children. Delivery is planned for next year and has not begun. No speaking session is recorded.",
+      "response_class": "proposed",
+      "beneficiary": "the children",
+      "completion_status": "asserted_not_started",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 79
+    },
+    {
+      "id": "language_other_beneficiary",
+      "family": "language",
+      "split": "test",
+      "text": "A helpful support program delivered resumed community-language lessons to another affected party, not the children. Delivery was completed. No speaking session is recorded.",
+      "response_class": "other_beneficiary",
+      "beneficiary": "another affected party",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 77
+    },
+    {
+      "id": "language_voice",
+      "family": "language",
+      "split": "test",
+      "text": "At a supportive public session, the children spoke about the incident and the account was acknowledged. The session did not deliver resumed community-language lessons.",
+      "response_class": "voice",
+      "beneficiary": "the children",
+      "completion_status": "asserted_session_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 77
+    },
+    {
+      "id": "language_sanction",
+      "family": "language",
+      "split": "test",
+      "text": "A lawful accountability process imposed a sanction on the responsible actors. The process did not deliver resumed community-language lessons to the children or give them a speaking session.",
+      "response_class": "sanction",
+      "beneficiary": "the children",
+      "completion_status": "asserted_sanction",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 80
+    },
+    {
+      "id": "language_nonrepetition",
+      "family": "language",
+      "split": "test",
+      "text": "A protective program completed protection for community-language teaching for the children. No delivery of resumed community-language lessons and no speaking session are recorded.",
+      "response_class": "nonrepetition",
+      "beneficiary": "the children",
+      "completion_status": "asserted_prevention_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 76
+    },
+    {
+      "id": "language_completion_unknown",
+      "family": "language",
+      "split": "test",
+      "text": "A helpful support program approved resumed community-language lessons for the children. The available record does not establish whether delivery occurred. No speaking session is recorded.",
+      "response_class": "completion_unknown",
+      "beneficiary": "the children",
+      "completion_status": "not_established",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 78
+    },
+    {
+      "id": "assault_completed",
+      "family": "assault",
+      "split": "dev",
+      "text": "A helpful support program delivered medical rehabilitation sessions to the worker. The specified delivery was completed. No speaking session is recorded.",
+      "response_class": "completed",
+      "beneficiary": "the worker",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 73
+    },
+    {
+      "id": "assault_proposed",
+      "family": "assault",
+      "split": "dev",
+      "text": "A helpful support program proposed medical rehabilitation sessions for the worker. Delivery is planned for next year and has not begun. No speaking session is recorded.",
+      "response_class": "proposed",
+      "beneficiary": "the worker",
+      "completion_status": "asserted_not_started",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 78
+    },
+    {
+      "id": "assault_other_beneficiary",
+      "family": "assault",
+      "split": "dev",
+      "text": "A helpful support program delivered medical rehabilitation sessions to another affected party, not the worker. Delivery was completed. No speaking session is recorded.",
+      "response_class": "other_beneficiary",
+      "beneficiary": "another affected party",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 76
+    },
+    {
+      "id": "assault_voice",
+      "family": "assault",
+      "split": "dev",
+      "text": "At a supportive public session, the worker spoke about the incident and the account was acknowledged. The session did not deliver medical rehabilitation sessions.",
+      "response_class": "voice",
+      "beneficiary": "the worker",
+      "completion_status": "asserted_session_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 76
+    },
+    {
+      "id": "assault_sanction",
+      "family": "assault",
+      "split": "dev",
+      "text": "A lawful accountability process imposed a sanction on the responsible actors. The process did not deliver medical rehabilitation sessions to the worker or give them a speaking session.",
+      "response_class": "sanction",
+      "beneficiary": "the worker",
+      "completion_status": "asserted_sanction",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 79
+    },
+    {
+      "id": "assault_nonrepetition",
+      "family": "assault",
+      "split": "dev",
+      "text": "A protective program completed protection against renewed assault for the worker. No delivery of medical rehabilitation sessions and no speaking session are recorded.",
+      "response_class": "nonrepetition",
+      "beneficiary": "the worker",
+      "completion_status": "asserted_prevention_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 74
+    },
+    {
+      "id": "assault_completion_unknown",
+      "family": "assault",
+      "split": "dev",
+      "text": "A helpful support program approved medical rehabilitation sessions for the worker. The available record does not establish whether delivery occurred. No speaking session is recorded.",
+      "response_class": "completion_unknown",
+      "beneficiary": "the worker",
+      "completion_status": "not_established",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 77
+    },
+    {
+      "id": "mine_completed",
+      "family": "mine",
+      "split": "test",
+      "text": "A helpful support program delivered mobility assistance equipment to the civilian. The specified delivery was completed. No speaking session is recorded.",
+      "response_class": "completed",
+      "beneficiary": "the civilian",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 73
+    },
+    {
+      "id": "mine_proposed",
+      "family": "mine",
+      "split": "test",
+      "text": "A helpful support program proposed mobility assistance equipment for the civilian. Delivery is planned for next year and has not begun. No speaking session is recorded.",
+      "response_class": "proposed",
+      "beneficiary": "the civilian",
+      "completion_status": "asserted_not_started",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 78
+    },
+    {
+      "id": "mine_other_beneficiary",
+      "family": "mine",
+      "split": "test",
+      "text": "A helpful support program delivered mobility assistance equipment to another affected party, not the civilian. Delivery was completed. No speaking session is recorded.",
+      "response_class": "other_beneficiary",
+      "beneficiary": "another affected party",
+      "completion_status": "asserted_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 76
+    },
+    {
+      "id": "mine_voice",
+      "family": "mine",
+      "split": "test",
+      "text": "At a supportive public session, the civilian spoke about the incident and the account was acknowledged. The session did not deliver mobility assistance equipment.",
+      "response_class": "voice",
+      "beneficiary": "the civilian",
+      "completion_status": "asserted_session_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 76
+    },
+    {
+      "id": "mine_sanction",
+      "family": "mine",
+      "split": "test",
+      "text": "A lawful accountability process imposed a sanction on the responsible actors. The process did not deliver mobility assistance equipment to the civilian or give them a speaking session.",
+      "response_class": "sanction",
+      "beneficiary": "the civilian",
+      "completion_status": "asserted_sanction",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 79
+    },
+    {
+      "id": "mine_nonrepetition",
+      "family": "mine",
+      "split": "test",
+      "text": "A protective program completed clearance of remaining mines for the civilian. No delivery of mobility assistance equipment and no speaking session are recorded.",
+      "response_class": "nonrepetition",
+      "beneficiary": "the civilian",
+      "completion_status": "asserted_prevention_complete",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 74
+    },
+    {
+      "id": "mine_completion_unknown",
+      "family": "mine",
+      "split": "test",
+      "text": "A helpful support program approved mobility assistance equipment for the civilian. The available record does not establish whether delivery occurred. No speaking session is recorded.",
+      "response_class": "completion_unknown",
+      "beneficiary": "the civilian",
+      "completion_status": "not_established",
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "adequacy": "not_evaluated",
+      "qwen_tokens": 77
+    }
+  ],
+  "relevant_sets": [
+    {
+      "query_id": "market_base_completed_typed_response",
+      "relevant_candidate_ids": [
+        "market_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "market_base_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "market_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "market_retained_agent_passive_completed_typed_response",
+      "relevant_candidate_ids": [
+        "market_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "market_retained_agent_passive_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "market_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "tools_base_completed_typed_response",
+      "relevant_candidate_ids": [
+        "tools_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "tools_base_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "tools_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "tools_retained_agent_passive_completed_typed_response",
+      "relevant_candidate_ids": [
+        "tools_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "tools_retained_agent_passive_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "tools_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "checkpoint_base_completed_typed_response",
+      "relevant_candidate_ids": [
+        "checkpoint_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "checkpoint_base_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "checkpoint_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "checkpoint_retained_agent_passive_completed_typed_response",
+      "relevant_candidate_ids": [
+        "checkpoint_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "checkpoint_retained_agent_passive_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "checkpoint_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "abduction_base_completed_typed_response",
+      "relevant_candidate_ids": [
+        "abduction_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "abduction_base_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "abduction_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "abduction_retained_agent_passive_completed_typed_response",
+      "relevant_candidate_ids": [
+        "abduction_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "abduction_retained_agent_passive_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "abduction_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "threatened_home_base_completed_typed_response",
+      "relevant_candidate_ids": [
+        "threatened_home_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "threatened_home_base_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "threatened_home_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "threatened_home_retained_agent_passive_completed_typed_response",
+      "relevant_candidate_ids": [
+        "threatened_home_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "threatened_home_retained_agent_passive_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "threatened_home_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "burned_home_base_completed_typed_response",
+      "relevant_candidate_ids": [
+        "burned_home_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "burned_home_base_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "burned_home_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "burned_home_retained_agent_passive_completed_typed_response",
+      "relevant_candidate_ids": [
+        "burned_home_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "burned_home_retained_agent_passive_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "burned_home_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "missing_son_base_completed_typed_response",
+      "relevant_candidate_ids": [
+        "missing_son_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "missing_son_base_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "missing_son_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "missing_son_retained_agent_passive_completed_typed_response",
+      "relevant_candidate_ids": [
+        "missing_son_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "missing_son_retained_agent_passive_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "missing_son_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "withheld_fate_base_completed_typed_response",
+      "relevant_candidate_ids": [
+        "withheld_fate_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "withheld_fate_base_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "withheld_fate_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "withheld_fate_retained_agent_passive_completed_typed_response",
+      "relevant_candidate_ids": [
+        "withheld_fate_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "withheld_fate_retained_agent_passive_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "withheld_fate_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "sacred_site_base_completed_typed_response",
+      "relevant_candidate_ids": [
+        "sacred_site_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "sacred_site_base_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "sacred_site_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "sacred_site_retained_agent_passive_completed_typed_response",
+      "relevant_candidate_ids": [
+        "sacred_site_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "sacred_site_retained_agent_passive_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "sacred_site_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "language_base_completed_typed_response",
+      "relevant_candidate_ids": [
+        "language_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "language_base_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "language_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "language_retained_agent_passive_completed_typed_response",
+      "relevant_candidate_ids": [
+        "language_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "language_retained_agent_passive_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "language_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "assault_base_completed_typed_response",
+      "relevant_candidate_ids": [
+        "assault_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "assault_base_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "assault_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "assault_retained_agent_passive_completed_typed_response",
+      "relevant_candidate_ids": [
+        "assault_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "assault_retained_agent_passive_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "assault_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "mine_base_completed_typed_response",
+      "relevant_candidate_ids": [
+        "mine_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "mine_base_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "mine_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "mine_retained_agent_passive_completed_typed_response",
+      "relevant_candidate_ids": [
+        "mine_completed"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    },
+    {
+      "query_id": "mine_retained_agent_passive_acknowledgment_voice",
+      "relevant_candidate_ids": [
+        "mine_voice"
+      ],
+      "label_source": "author_synthetic_attribute_expectation_not_human_gold",
+      "rationale": "Explicit asserted beneficiary/status/type match only; no moral rightness or adequate reparation claim."
+    }
+  ],
+  "criterion_switch_pairs": [
+    {
+      "id": "market_base",
+      "query_ids": [
+        "market_base_completed_typed_response",
+        "market_base_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "market_completed",
+        "market_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    },
+    {
+      "id": "market_retained_agent_passive",
+      "query_ids": [
+        "market_retained_agent_passive_completed_typed_response",
+        "market_retained_agent_passive_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "market_completed",
+        "market_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    },
+    {
+      "id": "tools_base",
+      "query_ids": [
+        "tools_base_completed_typed_response",
+        "tools_base_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "tools_completed",
+        "tools_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    },
+    {
+      "id": "tools_retained_agent_passive",
+      "query_ids": [
+        "tools_retained_agent_passive_completed_typed_response",
+        "tools_retained_agent_passive_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "tools_completed",
+        "tools_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    },
+    {
+      "id": "checkpoint_base",
+      "query_ids": [
+        "checkpoint_base_completed_typed_response",
+        "checkpoint_base_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "checkpoint_completed",
+        "checkpoint_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    },
+    {
+      "id": "checkpoint_retained_agent_passive",
+      "query_ids": [
+        "checkpoint_retained_agent_passive_completed_typed_response",
+        "checkpoint_retained_agent_passive_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "checkpoint_completed",
+        "checkpoint_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    },
+    {
+      "id": "abduction_base",
+      "query_ids": [
+        "abduction_base_completed_typed_response",
+        "abduction_base_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "abduction_completed",
+        "abduction_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    },
+    {
+      "id": "abduction_retained_agent_passive",
+      "query_ids": [
+        "abduction_retained_agent_passive_completed_typed_response",
+        "abduction_retained_agent_passive_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "abduction_completed",
+        "abduction_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    },
+    {
+      "id": "threatened_home_base",
+      "query_ids": [
+        "threatened_home_base_completed_typed_response",
+        "threatened_home_base_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "threatened_home_completed",
+        "threatened_home_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    },
+    {
+      "id": "threatened_home_retained_agent_passive",
+      "query_ids": [
+        "threatened_home_retained_agent_passive_completed_typed_response",
+        "threatened_home_retained_agent_passive_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "threatened_home_completed",
+        "threatened_home_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    },
+    {
+      "id": "burned_home_base",
+      "query_ids": [
+        "burned_home_base_completed_typed_response",
+        "burned_home_base_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "burned_home_completed",
+        "burned_home_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    },
+    {
+      "id": "burned_home_retained_agent_passive",
+      "query_ids": [
+        "burned_home_retained_agent_passive_completed_typed_response",
+        "burned_home_retained_agent_passive_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "burned_home_completed",
+        "burned_home_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    },
+    {
+      "id": "missing_son_base",
+      "query_ids": [
+        "missing_son_base_completed_typed_response",
+        "missing_son_base_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "missing_son_completed",
+        "missing_son_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    },
+    {
+      "id": "missing_son_retained_agent_passive",
+      "query_ids": [
+        "missing_son_retained_agent_passive_completed_typed_response",
+        "missing_son_retained_agent_passive_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "missing_son_completed",
+        "missing_son_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    },
+    {
+      "id": "withheld_fate_base",
+      "query_ids": [
+        "withheld_fate_base_completed_typed_response",
+        "withheld_fate_base_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "withheld_fate_completed",
+        "withheld_fate_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    },
+    {
+      "id": "withheld_fate_retained_agent_passive",
+      "query_ids": [
+        "withheld_fate_retained_agent_passive_completed_typed_response",
+        "withheld_fate_retained_agent_passive_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "withheld_fate_completed",
+        "withheld_fate_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    },
+    {
+      "id": "sacred_site_base",
+      "query_ids": [
+        "sacred_site_base_completed_typed_response",
+        "sacred_site_base_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "sacred_site_completed",
+        "sacred_site_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    },
+    {
+      "id": "sacred_site_retained_agent_passive",
+      "query_ids": [
+        "sacred_site_retained_agent_passive_completed_typed_response",
+        "sacred_site_retained_agent_passive_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "sacred_site_completed",
+        "sacred_site_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    },
+    {
+      "id": "language_base",
+      "query_ids": [
+        "language_base_completed_typed_response",
+        "language_base_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "language_completed",
+        "language_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    },
+    {
+      "id": "language_retained_agent_passive",
+      "query_ids": [
+        "language_retained_agent_passive_completed_typed_response",
+        "language_retained_agent_passive_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "language_completed",
+        "language_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    },
+    {
+      "id": "assault_base",
+      "query_ids": [
+        "assault_base_completed_typed_response",
+        "assault_base_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "assault_completed",
+        "assault_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    },
+    {
+      "id": "assault_retained_agent_passive",
+      "query_ids": [
+        "assault_retained_agent_passive_completed_typed_response",
+        "assault_retained_agent_passive_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "assault_completed",
+        "assault_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    },
+    {
+      "id": "mine_base",
+      "query_ids": [
+        "mine_base_completed_typed_response",
+        "mine_base_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "mine_completed",
+        "mine_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    },
+    {
+      "id": "mine_retained_agent_passive",
+      "query_ids": [
+        "mine_retained_agent_passive_completed_typed_response",
+        "mine_retained_agent_passive_acknowledgment_voice"
+      ],
+      "expected_top_ids": [
+        "mine_completed",
+        "mine_voice"
+      ],
+      "relation": "criterion_switch_top_rank_reversal"
+    }
+  ],
+  "exclusions": [
+    "No claim sanction/voice/nonrepetition has lower moral worth.",
+    "No claim listed support is sufficient or culturally appropriate.",
+    "Source incident facts remain asserted in every variant; unknown applies only to candidate response completion.",
+    "Passive variants are author-reviewed proposals, not independently human-validated."
+  ],
+  "invariants": [
+    "Same fixed candidate pool under both criteria.",
+    "All descendants in source-family split.",
+    "Known injury and confinement remain asserted.",
+    "Unknown response completion is separate from known noncompletion.",
+    "Only typed response completion vs explicit acknowledged voice determines relevance."
+  ]
+}

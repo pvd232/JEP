@@ -1,0 +1,167 @@
+{
+  "lane": "lit06_legal_retrieval",
+  "as_of": "2026-11-10",
+  "scope": "Legal analogy, fact/reasoning/element retrieval and evaluation for JEP harm/repair",
+  "review_status": "Targeted systematic scoping lane; not an exhaustive fieldwide absence proof",
+  "reading_policy": "Primary full text selectively read for methods, data, evaluation and limitations; no independent reproduction; bibliographic-only items excluded from deep evidence",
+  "papers": [
+    {
+      "id": "KELLER",
+      "year": 2024,
+      "title": "Learning Interpretable Legal Case Retrieval via Knowledge-Guided Case Reformulation",
+      "url": "https://aclanthology.org/2024.emnlp-main.73/",
+      "support_locations": "§3.2–3.4; §4.1; Limitations",
+      "data_and_label_authority": "Chinese LeCaRD/LeCaRDv2; case-level expert relevance and charges, heuristic sub-fact supervision",
+      "method": "Legal-knowledge-guided LLM sub-facts; normalized embeddings; MaxSim/Sum; case and sub-fact contrastive losses.",
+      "reported_results_and_limits": "Authors report benchmark improvements. Annotated candidate pools, external knowledge and LLM reformulation costs limit transfer; charge-derived sub-fact labels can be noisy.",
+      "JEP_implication": "Closest counterexample to novelty of typed harm cards or sub-fact matching; JEP must establish victim-centered harm labels and extraction fidelity.",
+      "status": "primary_full_text_targeted_read"
+    },
+    {
+      "id": "Elem4LCR",
+      "year": 2024,
+      "title": "An Element is Worth a Thousand Words: Enhancing Legal Case Retrieval by Incorporating Legal Elements",
+      "url": "https://aclanthology.org/2024.findings-acl.139/",
+      "support_locations": "§2; element extraction and models; §8 Limitations",
+      "data_and_label_authority": "Chinese criminal LeCaRD-Elem; judicial text clusters named/validated by legal experts",
+      "method": "Extract legal elements, explicitly predict them or internalize teacher representations in a student encoder.",
+      "reported_results_and_limits": "Authors report improvements; standardized judicial language and annotated elements support training, while annotations restrict transfer.",
+      "JEP_implication": "Element conditioning/internalization precedes JEP; testimony-specific harm mechanisms and contested facts need independent labels.",
+      "status": "primary_full_text_targeted_read"
+    },
+    {
+      "id": "NS-LCR",
+      "year": 2024,
+      "title": "Logic Rules as Explanations for Legal Case Retrieval",
+      "url": "https://aclanthology.org/2024.lrec-main.939/",
+      "support_locations": "Method sections; experimental setup; explanation evaluation",
+      "data_and_label_authority": "Chinese LeCaRD/ELAM; relevance labels, BM25-derived predicate supervision; small human and LLM explanation evaluations",
+      "method": "Fuzzy first-order law predicates, sentence-alignment case rules and weighted reciprocal-rank fusion.",
+      "reported_results_and_limits": "Authors report relevance/explanation gains; rule-shaped transparency does not independently establish factual truth or causal explanation faithfulness.",
+      "JEP_implication": "Audit source entailment, testimony attribution and missing evidence; explicit logic alone is not a new contribution.",
+      "status": "primary_full_text_targeted_read"
+    },
+    {
+      "id": "LEAD",
+      "year": 2024,
+      "title": "Enhancing Legal Case Retrieval via Scaling High-quality Synthetic Query-Candidate Pairs",
+      "url": "https://aclanthology.org/2024.emnlp-main.402/",
+      "support_locations": "Synthetic construction; experiments; Limitations",
+      "data_and_label_authority": "Chinese judgments; LLM short queries; positive augmentation using charges/articles/prison terms",
+      "method": "Large synthetic short-query/long-case contrastive training with key-fact extraction and anonymization.",
+      "reported_results_and_limits": "Authors report benchmark gains; China-only evaluation and legally defined positive heuristics do not validate victim-centered harm equivalence.",
+      "JEP_implication": "Synthetic scale is established; JEP contribution requires invariant validity, hard semantic counterexamples and human-held-out transfer.",
+      "status": "primary_full_text_targeted_read"
+    },
+    {
+      "id": "CLERC",
+      "year": 2025,
+      "title": "CLERC: A Dataset for U.S. Legal Case Retrieval and Retrieval-Augmented Analysis Generation",
+      "url": "https://aclanthology.org/2025.findings-naacl.441/",
+      "support_locations": "Dataset construction; §5.2; §7",
+      "data_and_label_authority": "English historical US federal opinions from CAP; removed citations supply relevance",
+      "method": "Citation-context retrieval with document/chunk candidates and retrieval-augmented legal analysis.",
+      "reported_results_and_limits": "Authors document retrieval/generation challenges; citation agreement need not mean sound analysis; OCR and historical biases remain.",
+      "JEP_implication": "Citation recovery cannot substitute for harm relevance or restorative adequacy; evaluate supported spans and expert usefulness separately.",
+      "status": "primary_full_text_targeted_read"
+    },
+    {
+      "id": "FR-MEG",
+      "year": 2026,
+      "title": "Case-based Statute Retrieval for Multi-turn Legal Consultation with Fact-level and Rationale-level Mixed Evidence Graphs",
+      "url": "https://aclanthology.org/2026.findings-emnlp.2013/",
+      "support_locations": "Methods; experimental setup; Limitations",
+      "data_and_label_authority": "Chinese LexRAG; LeCaRDv2/ClaimGen-CN case evidence; LLM-assisted links; dialogue-grouped selection",
+      "method": "Fact/rationale case evidence graphs fused with full-corpus dense statute retrieval.",
+      "reported_results_and_limits": "Authors report improvements; no large-scale human validation of accepted graph links; coverage and single-language benchmark limits. Generation only diagnostic.",
+      "JEP_implication": "Reason/fact bridges are prior art; JEP needs source-faithful graphs and raw retrieval fallback under missing coverage.",
+      "status": "primary_full_text_targeted_read"
+    },
+    {
+      "id": "SAGA",
+      "year": 2026,
+      "title": "SAGA: Structured Applicability-Guided Alignment for Conversational Legal Retrieval",
+      "url": "https://aclanthology.org/2026.emnlp-main.702/",
+      "support_locations": "Applicability frames; experiments; Limitations",
+      "data_and_label_authority": "Chinese LexRAG and STARD; statute-retrieval relevance",
+      "method": "Training-free raw/structured dense fusion; case frames include missing facts; statute frames encode prerequisites/effects.",
+      "reported_results_and_limits": "Authors report stronger gains on multi-turn LexRAG than STARD. Extraction omissions and fine applicability remain unresolved; fusion tuned on development data.",
+      "JEP_implication": "Missing-fact frames already exist; JEP novelty must preserve unknown/contested testimony and source roles rather than inventing inferred facts.",
+      "status": "primary_full_text_targeted_read"
+    },
+    {
+      "id": "DSLaw",
+      "year": 2026,
+      "title": "Implicit Hierarchical Modeling for Cross-System Legal Case Retrieval",
+      "url": "https://aclanthology.org/2026.findings-emnlp.853/",
+      "support_locations": "Hierarchical modeling; training; datasets; Limitations",
+      "data_and_label_authority": "English COLIEE2025 citation relevance; Chinese ELAM annotated pairs",
+      "method": "Legal-span representations; residual quantization semantic IDs; hierarchy graph; staged contrastive representation training.",
+      "reported_results_and_limits": "Authors report gains in two legal systems; latent hierarchy is not expert doctrinal taxonomy. Two benchmarks do not prove general jurisdiction transfer.",
+      "JEP_implication": "Hierarchical legal geometry is established; test actual alignment to expert harm/repair distinctions and counterexamples.",
+      "status": "primary_full_text_targeted_read"
+    },
+    {
+      "id": "CaseFacts",
+      "year": 2026,
+      "title": "CaseFacts: A Benchmark for Legal Fact-Checking and Precedent Retrieval",
+      "url": "https://aclanthology.org/2026.acl-long.785/",
+      "support_locations": "Dataset annotation; retrieval and fact-checking evaluation",
+      "data_and_label_authority": "English SCOTUS/Oyez summaries; LLM synthesis/verification and human-quality-annotated test subset",
+      "method": "Supported/refuted/overruled claims; contrastive claim-case retrieval; evidence and verdict evaluation.",
+      "reported_results_and_limits": "Unrestricted search worsened their measured joint performance through noisy/out-of-corpus evidence; this is benchmark-specific, not a universal web-search result.",
+      "JEP_implication": "Fact support, harm resemblance and adequacy of repair need separate labels; synthetic quality validation has clear precedent.",
+      "status": "primary_full_text_targeted_read"
+    },
+    {
+      "id": "DELTA",
+      "year": 2025,
+      "title": "DELTA: Pre-train a Discriminative Encoder for Legal Case Retrieval via Structural Word Alignment",
+      "url": "https://arxiv.org/html/2403.18435v1",
+      "support_locations": "§3 methods; experimental setup/results; inspected March2024 preprint, not final AAAI text",
+      "data_and_label_authority": "Chinese LeCaRD/CAIL and English COLIEE; judgment fact/reasoning/decision sections",
+      "method": "Fact encoder bottleneck reconstructs masked reasoning/decision; structural word alignment pulls toward key facts.",
+      "reported_results_and_limits": "Authors report zero-shot/fine-tuned gains; court reasoning and decisions provide supervision that hearings may lack. Final venue DOI 10.1609/AAAI.V39I25.34914.",
+      "JEP_implication": "Connecting reasoning back into the encoder is not itself novel; source-faithful theory conditioning needs causal controls and no outcome leakage.",
+      "status": "primary_full_text_targeted_read"
+    },
+    {
+      "id": "LeCaRDv2",
+      "year": 2024,
+      "title": "LeCaRDv2: A Large-Scale Chinese Legal Case Retrieval Dataset",
+      "url": "https://arxiv.org/pdf/2310.17609",
+      "support_locations": "Query taxonomy; relevance annotation; candidate pooling",
+      "data_and_label_authority": "Chinese criminal law; 800 queries/55,192 candidates; multi-expert relevance on characterization/penalty/procedure",
+      "method": "Diverse query strata and candidate pooling across lexical, dense and article similarity systems.",
+      "reported_results_and_limits": "Pool construction explicitly addresses lexical-only omissions; benchmark judgments remain pool-dependent. DOI 10.1145/3626772.3657887.",
+      "JEP_implication": "Diverse hard-negative pools are established; JEP must audit unjudged relevant material and split hearing/episode families.",
+      "status": "primary_full_text_targeted_read"
+    }
+  ],
+  "gaps": [
+    {
+      "id": "G1",
+      "claim": "Victim-centered conditional harm resemblance and restorative response adequacy require distinct relevance judgments; citation/offense/statute relevance cannot supply them.",
+      "confidence": "High task mismatch; moderate novelty confidence because Spanish/domain review incomplete",
+      "closest_counterexample": "KELLER, Elem4LCR, SAGA"
+    },
+    {
+      "id": "G2",
+      "claim": "Unknown and contested testimony should remain source-traceable, with explicit abstention rather than inferred normative facts.",
+      "confidence": "Moderate JEP applicability; missing-fact representation itself already established",
+      "closest_counterexample": "SAGA, FR-MEG"
+    },
+    {
+      "id": "G3",
+      "claim": "Human-held-out testimony retrieval needs diverse pooled qrels, unjudged audits, family splits and expert-review effort.",
+      "confidence": "High evaluation need; benchmark methodology is adaptation, not novel",
+      "closest_counterexample": "LeCaRDv2, CLERC"
+    },
+    {
+      "id": "G4",
+      "claim": "Theory-conditioned source-faithful reasoning must demonstrate encoder changes beyond labels, topics or verdict leakage.",
+      "confidence": "Potentially useful experiment; not established novel",
+      "closest_counterexample": "DELTA, Elem4LCR, KELLER"
+    }
+  ]
+}
