@@ -114,3 +114,7 @@ The post-hoc repair-translation diagnostic retrieved the authored matched respon
 All 18 short MET-D views hit the 96-token bound and often retained introductory meta-reasoning. The decoder-view arm therefore remains incomplete as a test of useful grounded reasoning. Preserve its outputs and improve the generation protocol on fresh scenarios before evaluating a reasoning-to-encoder gain.
 
 The next useful study is a harder, independently reviewed cross-family dataset: implicit harms, competing principles, role-sensitive responsibility, irrelevant-fact and linguistic invariants, and valence-matched alternative remedies. Keep fixed harm under alternative explicit theories, test selective sensitivity, and compare raw text, well-formed reasoning views and matched factual extraction. All cases here are English; Spanish/Colombian cultural transfer remains untested. These changes need fresh held-outs rather than tuning this screen.
+
+## Publication and cleanup
+
+The report, code, predictions and five figures are published on this branch. VIPER publication verified all 50 files in the sealed scientific outbox, including embeddings and layer vectors. The single GPU used 24 minutes; its VM and boot disk were deleted and absence verified. The existing Columbia dev VM and unrelated infrastructure were preserved. The recovery automation is disabled because the report and cleanup are complete. See [publication.json](publication.json) and [COMPLETION.json](COMPLETION.json).

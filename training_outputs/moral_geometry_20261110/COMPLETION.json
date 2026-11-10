@@ -1,0 +1,27 @@
+{
+  "status": "complete_with_reported_scientific_limits",
+  "finished_at": "2026-11-10T05:55:52.183396+00:00",
+  "scientific_report_commit": "4cae6686557e48826a835ad47c47cc484e32e66b",
+  "recommendation": "revise",
+  "gpu_seconds": 1440,
+  "gpu_hours": 0.4,
+  "owned_billable_resources_remaining": 0,
+  "cleanup_verified": true,
+  "automation_disabled": true,
+  "review_agents": 5,
+  "ideation_agents": 5,
+  "viper": {
+    "status": "verified",
+    "files": 50,
+    "successful_job": "7c2e3aecbbe24ca9bdcd9af8d7260c82",
+    "initial_local_validation_failure_job": "1ab5a742dac040feaed88ec0e2540951"
+  },
+  "important_limits": [
+    "No new human/expert moral validation",
+    "Synthetic aspect-following ceiling",
+    "No gain over original Qwen baseline from compressed PSD heads",
+    "MET-D auxiliary views truncated",
+    "Exact historical numerical replay not achieved under different runtime",
+    "Post-hoc repair translation did not outperform direct cosine"
+  ]
+}
