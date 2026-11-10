@@ -1,0 +1,1024 @@
+{
+  "diagnosed_at": "2026-11-10T15:32:13.963091+00:00",
+  "failure_stage": "Compute Engine instances.insert asynchronous allocation",
+  "project": "mantra-477901",
+  "operation_count": 15,
+  "zone_count": 12,
+  "audit_entries": 30,
+  "operation_http_errors": {
+    "503": 15
+  },
+  "provider_error": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+  "provider_error_info_reasons": [
+    "resource_availability",
+    "stockout"
+  ],
+  "provider_pool_state": "STOCKOUT",
+  "provider_resource_type": "compute",
+  "requested_accelerator": "nvidia-l4:1",
+  "requested_machine_types": [
+    "g2-standard-4",
+    "g2-standard-8"
+  ],
+  "workload_started": false,
+  "current_relevant_quota": {
+    "project": [
+      {
+        "metric": "CPUS_ALL_REGIONS",
+        "limit": 32,
+        "usage": 0
+      },
+      {
+        "metric": "GPUS_ALL_REGIONS",
+        "limit": 2,
+        "usage": 0
+      }
+    ],
+    "region_us-central1": [
+      {
+        "metric": "DISKS_TOTAL_GB",
+        "limit": 4096,
+        "usage": 0
+      },
+      {
+        "metric": "NVIDIA_L4_GPUS",
+        "limit": 1,
+        "usage": 0
+      },
+      {
+        "metric": "PREEMPTIBLE_NVIDIA_L4_GPUS",
+        "limit": 1,
+        "usage": 0
+      }
+    ],
+    "region_us-east1": [
+      {
+        "metric": "DISKS_TOTAL_GB",
+        "limit": 4096,
+        "usage": 0
+      },
+      {
+        "metric": "NVIDIA_L4_GPUS",
+        "limit": 1,
+        "usage": 0
+      },
+      {
+        "metric": "PREEMPTIBLE_NVIDIA_L4_GPUS",
+        "limit": 1,
+        "usage": 0
+      }
+    ],
+    "region_us-east4": [
+      {
+        "metric": "DISKS_TOTAL_GB",
+        "limit": 4096,
+        "usage": 0
+      },
+      {
+        "metric": "NVIDIA_L4_GPUS",
+        "limit": 1,
+        "usage": 0
+      },
+      {
+        "metric": "PREEMPTIBLE_NVIDIA_L4_GPUS",
+        "limit": 1,
+        "usage": 0
+      }
+    ],
+    "region_us-west1": [
+      {
+        "metric": "DISKS_TOTAL_GB",
+        "limit": 4096,
+        "usage": 0
+      },
+      {
+        "metric": "NVIDIA_L4_GPUS",
+        "limit": 1,
+        "usage": 0
+      },
+      {
+        "metric": "PREEMPTIBLE_NVIDIA_L4_GPUS",
+        "limit": 1,
+        "usage": 0
+      }
+    ],
+    "region_us-west4": [
+      {
+        "metric": "DISKS_TOTAL_GB",
+        "limit": 4096,
+        "usage": 0
+      },
+      {
+        "metric": "NVIDIA_L4_GPUS",
+        "limit": 1,
+        "usage": 0
+      },
+      {
+        "metric": "PREEMPTIBLE_NVIDIA_L4_GPUS",
+        "limit": 1,
+        "usage": 0
+      }
+    ]
+  },
+  "machine_type_validation": [
+    {
+      "zone": "us-central1-a",
+      "machine_type": "g2-standard-4",
+      "registered": true,
+      "vCPUs": 4,
+      "host_memory_MiB": 16384,
+      "accelerators": [
+        {
+          "guestAcceleratorType": "nvidia-l4",
+          "guestAcceleratorCount": 1
+        }
+      ]
+    },
+    {
+      "zone": "us-central1-b",
+      "machine_type": "g2-standard-4",
+      "registered": true,
+      "vCPUs": 4,
+      "host_memory_MiB": 16384,
+      "accelerators": [
+        {
+          "guestAcceleratorType": "nvidia-l4",
+          "guestAcceleratorCount": 1
+        }
+      ]
+    },
+    {
+      "zone": "us-central1-c",
+      "machine_type": "g2-standard-4",
+      "registered": true,
+      "vCPUs": 4,
+      "host_memory_MiB": 16384,
+      "accelerators": [
+        {
+          "guestAcceleratorType": "nvidia-l4",
+          "guestAcceleratorCount": 1
+        }
+      ]
+    },
+    {
+      "zone": "us-west1-a",
+      "machine_type": "g2-standard-4",
+      "registered": true,
+      "vCPUs": 4,
+      "host_memory_MiB": 16384,
+      "accelerators": [
+        {
+          "guestAcceleratorType": "nvidia-l4",
+          "guestAcceleratorCount": 1
+        }
+      ]
+    },
+    {
+      "zone": "us-east1-b",
+      "machine_type": "g2-standard-4",
+      "registered": true,
+      "vCPUs": 4,
+      "host_memory_MiB": 16384,
+      "accelerators": [
+        {
+          "guestAcceleratorType": "nvidia-l4",
+          "guestAcceleratorCount": 1
+        }
+      ]
+    },
+    {
+      "zone": "us-central1-a",
+      "machine_type": "g2-standard-8",
+      "registered": true,
+      "vCPUs": 8,
+      "host_memory_MiB": 32768,
+      "accelerators": [
+        {
+          "guestAcceleratorType": "nvidia-l4",
+          "guestAcceleratorCount": 1
+        }
+      ]
+    },
+    {
+      "zone": "us-west4-c",
+      "machine_type": "g2-standard-8",
+      "registered": true,
+      "vCPUs": 8,
+      "host_memory_MiB": 32768,
+      "accelerators": [
+        {
+          "guestAcceleratorType": "nvidia-l4",
+          "guestAcceleratorCount": 1
+        }
+      ]
+    },
+    {
+      "zone": "us-west1-b",
+      "machine_type": "g2-standard-8",
+      "registered": true,
+      "vCPUs": 8,
+      "host_memory_MiB": 32768,
+      "accelerators": [
+        {
+          "guestAcceleratorType": "nvidia-l4",
+          "guestAcceleratorCount": 1
+        }
+      ]
+    },
+    {
+      "zone": "us-west1-c",
+      "machine_type": "g2-standard-8",
+      "registered": true,
+      "vCPUs": 8,
+      "host_memory_MiB": 32768,
+      "accelerators": [
+        {
+          "guestAcceleratorType": "nvidia-l4",
+          "guestAcceleratorCount": 1
+        }
+      ]
+    },
+    {
+      "zone": "us-central1-b",
+      "machine_type": "g2-standard-8",
+      "registered": true,
+      "vCPUs": 8,
+      "host_memory_MiB": 32768,
+      "accelerators": [
+        {
+          "guestAcceleratorType": "nvidia-l4",
+          "guestAcceleratorCount": 1
+        }
+      ]
+    },
+    {
+      "zone": "us-central1-c",
+      "machine_type": "g2-standard-8",
+      "registered": true,
+      "vCPUs": 8,
+      "host_memory_MiB": 32768,
+      "accelerators": [
+        {
+          "guestAcceleratorType": "nvidia-l4",
+          "guestAcceleratorCount": 1
+        }
+      ]
+    },
+    {
+      "zone": "us-east1-c",
+      "machine_type": "g2-standard-8",
+      "registered": true,
+      "vCPUs": 8,
+      "host_memory_MiB": 32768,
+      "accelerators": [
+        {
+          "guestAcceleratorType": "nvidia-l4",
+          "guestAcceleratorCount": 1
+        }
+      ]
+    },
+    {
+      "zone": "us-east1-d",
+      "machine_type": "g2-standard-8",
+      "registered": true,
+      "vCPUs": 8,
+      "host_memory_MiB": 32768,
+      "accelerators": [
+        {
+          "guestAcceleratorType": "nvidia-l4",
+          "guestAcceleratorCount": 1
+        }
+      ]
+    },
+    {
+      "zone": "us-east4-a",
+      "machine_type": "g2-standard-8",
+      "registered": true,
+      "vCPUs": 8,
+      "host_memory_MiB": 32768,
+      "accelerators": [
+        {
+          "guestAcceleratorType": "nvidia-l4",
+          "guestAcceleratorCount": 1
+        }
+      ]
+    },
+    {
+      "zone": "us-east4-c",
+      "machine_type": "g2-standard-8",
+      "registered": true,
+      "vCPUs": 8,
+      "host_memory_MiB": 32768,
+      "accelerators": [
+        {
+          "guestAcceleratorType": "nvidia-l4",
+          "guestAcceleratorCount": 1
+        }
+      ]
+    }
+  ],
+  "evidence_scope": "All 15 raw operation GETs returned HTTP200 with terminal status DONE and allocation HTTP503; all 30 matching insert audit records reviewed. Current quota snapshots postdate failures.",
+  "component_attribution": "Google returned generic compute/machine-type capacity, with component-specific cause absent from both operation and audit error details. CPU versus accelerator versus host memory versus backing-storage allocation is unresolved.",
+  "new_cloud_mutations": false,
+  "audit_summary": {
+    "provisioning_models": {
+      "SPOT": 5,
+      "STANDARD": 10
+    },
+    "completed_with_grpc_status_8": 15,
+    "request_cpu_platform_restrictions": 0,
+    "specific_reservation_requests": 0
+  },
+  "operations": [
+    {
+      "name": "operation-1794317549498-65fec1c26f271-9b042370-3478186d",
+      "zone": "us-central1-a",
+      "status": "DONE",
+      "http_error_status": 503,
+      "start_time": "2026-11-10T05:32:32.866-08:00",
+      "end_time": "2026-11-10T05:32:40.892-08:00",
+      "error": {
+        "errors": [
+          {
+            "code": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+            "message": "The zone 'projects/mantra-477901/zones/us-central1-a' does not have enough resources available to fulfill the request.  'NULL:0/NULL:0/NULL:0 (state:STOCKOUT, sub-state:STOCKOUT, resource type:compute)'.",
+            "errorDetails": [
+              {
+                "help": {
+                  "links": [
+                    {
+                      "description": "Troubleshooting documentation",
+                      "url": "https://cloud.google.com/compute/docs/resource-error"
+                    }
+                  ]
+                }
+              },
+              {
+                "localizedMessage": {
+                  "locale": "en-US",
+                  "message": "A g2-standard-4 VM instance with 1 nvidia-l4 accelerator(s) is currently unavailable in the us-central1-a zone. Alternatively, you can try your request again with a different VM hardware configuration or at a later time. For more information, see the troubleshooting documentation."
+                }
+              },
+              {
+                "errorInfo": {
+                  "reason": "resource_availability",
+                  "domain": "compute.googleapis.com",
+                  "metadatas": {
+                    "attachment": "nvidia-l4:1",
+                    "vmType": "g2-standard-4",
+                    "zone": "us-central1-a",
+                    "zonesAvailable": ""
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "operation-1794317563074-65fec1cf61984-53c0180f-abd5475c",
+      "zone": "us-central1-b",
+      "status": "DONE",
+      "http_error_status": 503,
+      "start_time": "2026-11-10T05:32:45.426-08:00",
+      "end_time": "2026-11-10T05:32:49.338-08:00",
+      "error": {
+        "errors": [
+          {
+            "code": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+            "message": "The zone 'projects/mantra-477901/zones/us-central1-b' does not have enough resources available to fulfill the request.  '(resource type:compute)'.",
+            "errorDetails": [
+              {
+                "help": {
+                  "links": [
+                    {
+                      "description": "Troubleshooting documentation",
+                      "url": "https://cloud.google.com/compute/docs/resource-error"
+                    }
+                  ]
+                }
+              },
+              {
+                "localizedMessage": {
+                  "locale": "en-US",
+                  "message": "A g2-standard-4 VM instance with 1 nvidia-l4 accelerator(s) is currently unavailable in the us-central1-b zone. Consider trying your request in another zone which has capacity to accommodate your request. Alternatively, you can try your request again with a different VM hardware configuration or at a later time. For more information, see the troubleshooting documentation."
+                }
+              },
+              {
+                "errorInfo": {
+                  "reason": "stockout",
+                  "domain": "compute.googleapis.com",
+                  "metadatas": {
+                    "attachment": "nvidia-l4:1",
+                    "vmType": "g2-standard-4",
+                    "zone": "us-central1-b",
+                    "zonesAvailable": ""
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "operation-1794317572516-65fec1d862b56-2c770cc3-79b4faf7",
+      "zone": "us-central1-c",
+      "status": "DONE",
+      "http_error_status": 503,
+      "start_time": "2026-11-10T05:32:55.909-08:00",
+      "end_time": "2026-11-10T05:32:59.315-08:00",
+      "error": {
+        "errors": [
+          {
+            "code": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+            "message": "The zone 'projects/mantra-477901/zones/us-central1-c' does not have enough resources available to fulfill the request.  '(resource type:compute)'.",
+            "errorDetails": [
+              {
+                "help": {
+                  "links": [
+                    {
+                      "description": "Troubleshooting documentation",
+                      "url": "https://cloud.google.com/compute/docs/resource-error"
+                    }
+                  ]
+                }
+              },
+              {
+                "localizedMessage": {
+                  "locale": "en-US",
+                  "message": "A g2-standard-4 VM instance with 1 nvidia-l4 accelerator(s) is currently unavailable in the us-central1-c zone. Consider trying your request in another zone which has capacity to accommodate your request. Alternatively, you can try your request again with a different VM hardware configuration or at a later time. For more information, see the troubleshooting documentation."
+                }
+              },
+              {
+                "errorInfo": {
+                  "reason": "stockout",
+                  "domain": "compute.googleapis.com",
+                  "metadatas": {
+                    "attachment": "nvidia-l4:1",
+                    "vmType": "g2-standard-4",
+                    "zone": "us-central1-c",
+                    "zonesAvailable": ""
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "operation-1794317582851-65fec1e23dd63-5cfb131c-0e9bd154",
+      "zone": "us-west1-a",
+      "status": "DONE",
+      "http_error_status": 503,
+      "start_time": "2026-11-10T05:33:06.665-08:00",
+      "end_time": "2026-11-10T05:33:10.261-08:00",
+      "error": {
+        "errors": [
+          {
+            "code": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+            "message": "The zone 'projects/mantra-477901/zones/us-west1-a' does not have enough resources available to fulfill the request.  '(resource type:compute)'.",
+            "errorDetails": [
+              {
+                "help": {
+                  "links": [
+                    {
+                      "description": "Troubleshooting documentation",
+                      "url": "https://cloud.google.com/compute/docs/resource-error"
+                    }
+                  ]
+                }
+              },
+              {
+                "localizedMessage": {
+                  "locale": "en-US",
+                  "message": "A g2-standard-4 VM instance with 1 nvidia-l4 accelerator(s) is currently unavailable in the us-west1-a zone. Consider trying your request in another zone which has capacity to accommodate your request. Alternatively, you can try your request again with a different VM hardware configuration or at a later time. For more information, see the troubleshooting documentation."
+                }
+              },
+              {
+                "errorInfo": {
+                  "reason": "stockout",
+                  "domain": "compute.googleapis.com",
+                  "metadatas": {
+                    "attachment": "nvidia-l4:1",
+                    "vmType": "g2-standard-4",
+                    "zone": "us-west1-a",
+                    "zonesAvailable": ""
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "operation-1794317593790-65fec1ecac8cd-41aa107d-1775c6d4",
+      "zone": "us-east1-b",
+      "status": "DONE",
+      "http_error_status": 503,
+      "start_time": "2026-11-10T05:33:17.780-08:00",
+      "end_time": "2026-11-10T05:33:21.532-08:00",
+      "error": {
+        "errors": [
+          {
+            "code": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+            "message": "The zone 'projects/mantra-477901/zones/us-east1-b' does not have enough resources available to fulfill the request.  '(resource type:compute)'.",
+            "errorDetails": [
+              {
+                "help": {
+                  "links": [
+                    {
+                      "description": "Troubleshooting documentation",
+                      "url": "https://cloud.google.com/compute/docs/resource-error"
+                    }
+                  ]
+                }
+              },
+              {
+                "localizedMessage": {
+                  "locale": "en-US",
+                  "message": "A g2-standard-4 VM instance with 1 nvidia-l4 accelerator(s) is currently unavailable in the us-east1-b zone. Consider trying your request in another zone which has capacity to accommodate your request. Alternatively, you can try your request again with a different VM hardware configuration or at a later time. For more information, see the troubleshooting documentation."
+                }
+              },
+              {
+                "errorInfo": {
+                  "reason": "stockout",
+                  "domain": "compute.googleapis.com",
+                  "metadatas": {
+                    "attachment": "nvidia-l4:1",
+                    "vmType": "g2-standard-4",
+                    "zone": "us-east1-b",
+                    "zonesAvailable": ""
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "operation-1794317718346-65fec263759ad-ec837ac7-ad27c071",
+      "zone": "us-central1-a",
+      "status": "DONE",
+      "http_error_status": 503,
+      "start_time": "2026-11-10T05:35:23.561-08:00",
+      "end_time": "2026-11-10T05:35:33.638-08:00",
+      "error": {
+        "errors": [
+          {
+            "code": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+            "message": "The zone 'projects/mantra-477901/zones/us-central1-a' does not have enough resources available to fulfill the request.  'NULL:0/NULL:0/NULL:0 (state:STOCKOUT, sub-state:STOCKOUT, resource type:compute)'.",
+            "errorDetails": [
+              {
+                "help": {
+                  "links": [
+                    {
+                      "description": "Troubleshooting documentation",
+                      "url": "https://cloud.google.com/compute/docs/resource-error"
+                    }
+                  ]
+                }
+              },
+              {
+                "localizedMessage": {
+                  "locale": "en-US",
+                  "message": "A g2-standard-8 VM instance with 1 nvidia-l4 accelerator(s) is currently unavailable in the us-central1-a zone. Alternatively, you can try your request again with a different VM hardware configuration or at a later time. For more information, see the troubleshooting documentation."
+                }
+              },
+              {
+                "errorInfo": {
+                  "reason": "resource_availability",
+                  "domain": "compute.googleapis.com",
+                  "metadatas": {
+                    "attachment": "nvidia-l4:1",
+                    "vmType": "g2-standard-8",
+                    "zone": "us-central1-a",
+                    "zonesAvailable": ""
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "operation-1794317989283-65fec365d87cd-38f5f80b-6a6aea35",
+      "zone": "us-west4-c",
+      "status": "DONE",
+      "http_error_status": 503,
+      "start_time": "2026-11-10T05:39:53.717-08:00",
+      "end_time": "2026-11-10T05:39:59.399-08:00",
+      "error": {
+        "errors": [
+          {
+            "code": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+            "message": "The zone 'projects/mantra-477901/zones/us-west4-c' does not have enough resources available to fulfill the request.  'NULL:0/NULL:0/NULL:0 (state:STOCKOUT, sub-state:STOCKOUT, resource type:compute)'.",
+            "errorDetails": [
+              {
+                "help": {
+                  "links": [
+                    {
+                      "description": "Troubleshooting documentation",
+                      "url": "https://cloud.google.com/compute/docs/resource-error"
+                    }
+                  ]
+                }
+              },
+              {
+                "localizedMessage": {
+                  "locale": "en-US",
+                  "message": "A g2-standard-8 VM instance with 1 nvidia-l4 accelerator(s) is currently unavailable in the us-west4-c zone. Alternatively, you can try your request again with a different VM hardware configuration or at a later time. For more information, see the troubleshooting documentation."
+                }
+              },
+              {
+                "errorInfo": {
+                  "reason": "resource_availability",
+                  "domain": "compute.googleapis.com",
+                  "metadatas": {
+                    "attachment": "nvidia-l4:1",
+                    "vmType": "g2-standard-8",
+                    "zone": "us-west4-c",
+                    "zonesAvailable": ""
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "operation-1794318000874-65fec370e6401-fbb432c1-1a388bc7",
+      "zone": "us-west1-b",
+      "status": "DONE",
+      "http_error_status": 503,
+      "start_time": "2026-11-10T05:40:10.035-08:00",
+      "end_time": "2026-11-10T05:40:15.601-08:00",
+      "error": {
+        "errors": [
+          {
+            "code": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+            "message": "The zone 'projects/mantra-477901/zones/us-west1-b' does not have enough resources available to fulfill the request.  'NULL:0/NULL:0/NULL:0 (state:STOCKOUT, sub-state:STOCKOUT, resource type:compute)'.",
+            "errorDetails": [
+              {
+                "help": {
+                  "links": [
+                    {
+                      "description": "Troubleshooting documentation",
+                      "url": "https://cloud.google.com/compute/docs/resource-error"
+                    }
+                  ]
+                }
+              },
+              {
+                "localizedMessage": {
+                  "locale": "en-US",
+                  "message": "A g2-standard-8 VM instance with 1 nvidia-l4 accelerator(s) is currently unavailable in the us-west1-b zone. Alternatively, you can try your request again with a different VM hardware configuration or at a later time. For more information, see the troubleshooting documentation."
+                }
+              },
+              {
+                "errorInfo": {
+                  "reason": "resource_availability",
+                  "domain": "compute.googleapis.com",
+                  "metadatas": {
+                    "attachment": "nvidia-l4:1",
+                    "vmType": "g2-standard-8",
+                    "zone": "us-west1-b",
+                    "zonesAvailable": ""
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "operation-1794318017121-65fec38064b1e-ad8e554a-7af49c58",
+      "zone": "us-west1-c",
+      "status": "DONE",
+      "http_error_status": 503,
+      "start_time": "2026-11-10T05:40:22.752-08:00",
+      "end_time": "2026-11-10T05:40:28.862-08:00",
+      "error": {
+        "errors": [
+          {
+            "code": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+            "message": "The zone 'projects/mantra-477901/zones/us-west1-c' does not have enough resources available to fulfill the request.  'NULL:0/NULL:0/NULL:0 (state:STOCKOUT, sub-state:STOCKOUT, resource type:compute)'.",
+            "errorDetails": [
+              {
+                "help": {
+                  "links": [
+                    {
+                      "description": "Troubleshooting documentation",
+                      "url": "https://cloud.google.com/compute/docs/resource-error"
+                    }
+                  ]
+                }
+              },
+              {
+                "localizedMessage": {
+                  "locale": "en-US",
+                  "message": "A g2-standard-8 VM instance with 1 nvidia-l4 accelerator(s) is currently unavailable in the us-west1-c zone. Alternatively, you can try your request again with a different VM hardware configuration or at a later time. For more information, see the troubleshooting documentation."
+                }
+              },
+              {
+                "errorInfo": {
+                  "reason": "resource_availability",
+                  "domain": "compute.googleapis.com",
+                  "metadatas": {
+                    "attachment": "nvidia-l4:1",
+                    "vmType": "g2-standard-8",
+                    "zone": "us-west1-c",
+                    "zonesAvailable": ""
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "operation-1794318029712-65fec38c66d83-dae16519-b45c8d49",
+      "zone": "us-central1-b",
+      "status": "DONE",
+      "http_error_status": 503,
+      "start_time": "2026-11-10T05:40:34.107-08:00",
+      "end_time": "2026-11-10T05:40:44.419-08:00",
+      "error": {
+        "errors": [
+          {
+            "code": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+            "message": "The zone 'projects/mantra-477901/zones/us-central1-b' does not have enough resources available to fulfill the request.  'NULL:0/NULL:0/NULL:0 (state:STOCKOUT, sub-state:STOCKOUT, resource type:compute)'.",
+            "errorDetails": [
+              {
+                "help": {
+                  "links": [
+                    {
+                      "description": "Troubleshooting documentation",
+                      "url": "https://cloud.google.com/compute/docs/resource-error"
+                    }
+                  ]
+                }
+              },
+              {
+                "localizedMessage": {
+                  "locale": "en-US",
+                  "message": "A g2-standard-8 VM instance with 1 nvidia-l4 accelerator(s) is currently unavailable in the us-central1-b zone. Alternatively, you can try your request again with a different VM hardware configuration or at a later time. For more information, see the troubleshooting documentation."
+                }
+              },
+              {
+                "errorInfo": {
+                  "reason": "resource_availability",
+                  "domain": "compute.googleapis.com",
+                  "metadatas": {
+                    "attachment": "nvidia-l4:1",
+                    "vmType": "g2-standard-8",
+                    "zone": "us-central1-b",
+                    "zonesAvailable": ""
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "operation-1794318047338-65fec39d35f64-da7e59c5-134b10d4",
+      "zone": "us-central1-c",
+      "status": "DONE",
+      "http_error_status": 503,
+      "start_time": "2026-11-10T05:40:51.387-08:00",
+      "end_time": "2026-11-10T05:41:00.431-08:00",
+      "error": {
+        "errors": [
+          {
+            "code": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+            "message": "The zone 'projects/mantra-477901/zones/us-central1-c' does not have enough resources available to fulfill the request.  'NULL:0/NULL:0/NULL:0 (state:STOCKOUT, sub-state:STOCKOUT, resource type:compute)'.",
+            "errorDetails": [
+              {
+                "help": {
+                  "links": [
+                    {
+                      "description": "Troubleshooting documentation",
+                      "url": "https://cloud.google.com/compute/docs/resource-error"
+                    }
+                  ]
+                }
+              },
+              {
+                "localizedMessage": {
+                  "locale": "en-US",
+                  "message": "A g2-standard-8 VM instance with 1 nvidia-l4 accelerator(s) is currently unavailable in the us-central1-c zone. Alternatively, you can try your request again with a different VM hardware configuration or at a later time. For more information, see the troubleshooting documentation."
+                }
+              },
+              {
+                "errorInfo": {
+                  "reason": "resource_availability",
+                  "domain": "compute.googleapis.com",
+                  "metadatas": {
+                    "attachment": "nvidia-l4:1",
+                    "vmType": "g2-standard-8",
+                    "zone": "us-central1-c",
+                    "zonesAvailable": ""
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "operation-1794318061943-65fec3ab2397f-ff66c195-be9d886b",
+      "zone": "us-east1-c",
+      "status": "DONE",
+      "http_error_status": 503,
+      "start_time": "2026-11-10T05:41:05.044-08:00",
+      "end_time": "2026-11-10T05:41:17.097-08:00",
+      "error": {
+        "errors": [
+          {
+            "code": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+            "message": "The zone 'projects/mantra-477901/zones/us-east1-c' does not have enough resources available to fulfill the request.  'NULL:0/NULL:0/NULL:0 (state:STOCKOUT, sub-state:STOCKOUT, resource type:compute)'.",
+            "errorDetails": [
+              {
+                "help": {
+                  "links": [
+                    {
+                      "description": "Troubleshooting documentation",
+                      "url": "https://cloud.google.com/compute/docs/resource-error"
+                    }
+                  ]
+                }
+              },
+              {
+                "localizedMessage": {
+                  "locale": "en-US",
+                  "message": "A g2-standard-8 VM instance with 1 nvidia-l4 accelerator(s) is currently unavailable in the us-east1-c zone. Alternatively, you can try your request again with a different VM hardware configuration or at a later time. For more information, see the troubleshooting documentation."
+                }
+              },
+              {
+                "errorInfo": {
+                  "reason": "resource_availability",
+                  "domain": "compute.googleapis.com",
+                  "metadatas": {
+                    "attachment": "nvidia-l4:1",
+                    "vmType": "g2-standard-8",
+                    "zone": "us-east1-c",
+                    "zonesAvailable": ""
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "operation-1794318078687-65fec3bb1b854-8b84e88e-54c71dfe",
+      "zone": "us-east1-d",
+      "status": "DONE",
+      "http_error_status": 503,
+      "start_time": "2026-11-10T05:41:24.866-08:00",
+      "end_time": "2026-11-10T05:41:30.729-08:00",
+      "error": {
+        "errors": [
+          {
+            "code": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+            "message": "The zone 'projects/mantra-477901/zones/us-east1-d' does not have enough resources available to fulfill the request.  'NULL:0/NULL:0/NULL:0 (state:STOCKOUT, sub-state:STOCKOUT, resource type:compute)'.",
+            "errorDetails": [
+              {
+                "help": {
+                  "links": [
+                    {
+                      "description": "Troubleshooting documentation",
+                      "url": "https://cloud.google.com/compute/docs/resource-error"
+                    }
+                  ]
+                }
+              },
+              {
+                "localizedMessage": {
+                  "locale": "en-US",
+                  "message": "A g2-standard-8 VM instance with 1 nvidia-l4 accelerator(s) is currently unavailable in the us-east1-d zone. Alternatively, you can try your request again with a different VM hardware configuration or at a later time. For more information, see the troubleshooting documentation."
+                }
+              },
+              {
+                "errorInfo": {
+                  "reason": "resource_availability",
+                  "domain": "compute.googleapis.com",
+                  "metadatas": {
+                    "attachment": "nvidia-l4:1",
+                    "vmType": "g2-standard-8",
+                    "zone": "us-east1-d",
+                    "zonesAvailable": ""
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "operation-1794318092164-65fec3c7f5d62-dad9414a-26e24d5a",
+      "zone": "us-east4-a",
+      "status": "DONE",
+      "http_error_status": 503,
+      "start_time": "2026-11-10T05:41:35.200-08:00",
+      "end_time": "2026-11-10T05:41:40.476-08:00",
+      "error": {
+        "errors": [
+          {
+            "code": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+            "message": "The zone 'projects/mantra-477901/zones/us-east4-a' does not have enough resources available to fulfill the request.  'NULL:0/NULL:0/NULL:0 (state:STOCKOUT, sub-state:STOCKOUT, resource type:compute)'.",
+            "errorDetails": [
+              {
+                "help": {
+                  "links": [
+                    {
+                      "description": "Troubleshooting documentation",
+                      "url": "https://cloud.google.com/compute/docs/resource-error"
+                    }
+                  ]
+                }
+              },
+              {
+                "localizedMessage": {
+                  "locale": "en-US",
+                  "message": "A g2-standard-8 VM instance with 1 nvidia-l4 accelerator(s) is currently unavailable in the us-east4-a zone. Alternatively, you can try your request again with a different VM hardware configuration or at a later time. For more information, see the troubleshooting documentation."
+                }
+              },
+              {
+                "errorInfo": {
+                  "reason": "resource_availability",
+                  "domain": "compute.googleapis.com",
+                  "metadatas": {
+                    "attachment": "nvidia-l4:1",
+                    "vmType": "g2-standard-8",
+                    "zone": "us-east4-a",
+                    "zonesAvailable": ""
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "operation-1794318102188-65fec3d18530b-c54a6c70-6c8ef71f",
+      "zone": "us-east4-c",
+      "status": "DONE",
+      "http_error_status": 503,
+      "start_time": "2026-11-10T05:41:45.447-08:00",
+      "end_time": "2026-11-10T05:41:54.759-08:00",
+      "error": {
+        "errors": [
+          {
+            "code": "ZONE_RESOURCE_POOL_EXHAUSTED_WITH_DETAILS",
+            "message": "The zone 'projects/mantra-477901/zones/us-east4-c' does not have enough resources available to fulfill the request.  'NULL:0/NULL:0/NULL:0 (state:STOCKOUT, sub-state:STOCKOUT, resource type:compute)'.",
+            "errorDetails": [
+              {
+                "help": {
+                  "links": [
+                    {
+                      "description": "Troubleshooting documentation",
+                      "url": "https://cloud.google.com/compute/docs/resource-error"
+                    }
+                  ]
+                }
+              },
+              {
+                "localizedMessage": {
+                  "locale": "en-US",
+                  "message": "A g2-standard-8 VM instance with 1 nvidia-l4 accelerator(s) is currently unavailable in the us-east4-c zone. Alternatively, you can try your request again with a different VM hardware configuration or at a later time. For more information, see the troubleshooting documentation."
+                }
+              },
+              {
+                "errorInfo": {
+                  "reason": "resource_availability",
+                  "domain": "compute.googleapis.com",
+                  "metadatas": {
+                    "attachment": "nvidia-l4:1",
+                    "vmType": "g2-standard-8",
+                    "zone": "us-east4-c",
+                    "zonesAvailable": ""
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
