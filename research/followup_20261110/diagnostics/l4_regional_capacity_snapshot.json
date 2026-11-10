@@ -1,0 +1,855 @@
+{
+  "checked_at": "2026-11-10T15:41:52.965525+00:00",
+  "project": "mantra-477901",
+  "gpu": "NVIDIA L4",
+  "catalog_zones": [
+    "asia-east1-a",
+    "asia-east1-b",
+    "asia-east1-c",
+    "asia-northeast1-a",
+    "asia-northeast1-b",
+    "asia-northeast1-c",
+    "asia-northeast3-a",
+    "asia-northeast3-b",
+    "asia-south1-a",
+    "asia-south1-b",
+    "asia-south1-c",
+    "asia-southeast1-a",
+    "asia-southeast1-b",
+    "asia-southeast1-c",
+    "europe-west1-b",
+    "europe-west1-c",
+    "europe-west2-a",
+    "europe-west2-b",
+    "europe-west3-a",
+    "europe-west3-b",
+    "europe-west4-a",
+    "europe-west4-b",
+    "europe-west4-c",
+    "europe-west6-b",
+    "europe-west6-c",
+    "me-central2-a",
+    "me-central2-c",
+    "northamerica-northeast1-b",
+    "northamerica-northeast1-c",
+    "northamerica-northeast2-a",
+    "northamerica-northeast2-b",
+    "us-central1-a",
+    "us-central1-b",
+    "us-central1-c",
+    "us-east1-b",
+    "us-east1-c",
+    "us-east1-d",
+    "us-east4-a",
+    "us-east4-c",
+    "us-west1-a",
+    "us-west1-b",
+    "us-west1-c",
+    "us-west4-a",
+    "us-west4-c"
+  ],
+  "catalog_regions": [
+    "asia-east1",
+    "asia-northeast1",
+    "asia-northeast3",
+    "asia-south1",
+    "asia-southeast1",
+    "europe-west1",
+    "europe-west2",
+    "europe-west3",
+    "europe-west4",
+    "europe-west6",
+    "me-central2",
+    "northamerica-northeast1",
+    "northamerica-northeast2",
+    "us-central1",
+    "us-east1",
+    "us-east4",
+    "us-west1",
+    "us-west4"
+  ],
+  "capacity_advisor_request": {
+    "instanceProperties": {
+      "scheduling": {
+        "provisioningModel": "SPOT"
+      }
+    },
+    "instanceFlexibilityPolicy": {
+      "instanceSelections": {
+        "l4": {
+          "machineTypes": [
+            "g2-standard-4"
+          ]
+        }
+      }
+    },
+    "distributionPolicy": {
+      "targetShape": "ANY_SINGLE_ZONE"
+    },
+    "size": 1
+  },
+  "capacity_advisor_responses": {
+    "asia-east1": {
+      "http": 200,
+      "response": {
+        "recommendations": [
+          {
+            "scores": {
+              "obtainability": 0.9,
+              "estimatedUptime": "3600s"
+            },
+            "shards": [
+              {
+                "zone": "https://www.googleapis.com/compute/beta/projects/mantra-477901/zones/asia-east1-a",
+                "machineType": "g2-standard-4",
+                "instanceCount": 1,
+                "provisioningModel": "SPOT"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "asia-northeast1": {
+      "http": 400,
+      "error": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Machine specification is not supported in locations: [asia-northeast1-a asia-northeast1-b asia-northeast1-c].\",\n    \"errors\": [\n      {\n        \"message\": \"Machine specification is not supported in locations: [asia-northeast1-a asia-northeast1-b asia-northeast1-c].\",\n        \"domain\": \"global\",\n        \"reason\": \"badRequest\"\n      }\n    ]\n  }\n}\n"
+    },
+    "asia-northeast3": {
+      "http": 200,
+      "response": {
+        "recommendations": [
+          {
+            "scores": {
+              "obtainability": 0.5,
+              "estimatedUptime": "60s"
+            },
+            "shards": [
+              {
+                "zone": "https://www.googleapis.com/compute/beta/projects/mantra-477901/zones/asia-northeast3-a",
+                "machineType": "g2-standard-4",
+                "instanceCount": 1,
+                "provisioningModel": "SPOT"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "asia-south1": {
+      "http": 200,
+      "response": {
+        "recommendations": [
+          {
+            "scores": {
+              "obtainability": 0.9,
+              "estimatedUptime": "3600s"
+            },
+            "shards": [
+              {
+                "zone": "https://www.googleapis.com/compute/beta/projects/mantra-477901/zones/asia-south1-c",
+                "machineType": "g2-standard-4",
+                "instanceCount": 1,
+                "provisioningModel": "SPOT"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "asia-southeast1": {
+      "http": 200,
+      "response": {
+        "recommendations": [
+          {
+            "scores": {
+              "obtainability": 0.9,
+              "estimatedUptime": "600s"
+            },
+            "shards": [
+              {
+                "zone": "https://www.googleapis.com/compute/beta/projects/mantra-477901/zones/asia-southeast1-c",
+                "machineType": "g2-standard-4",
+                "instanceCount": 1,
+                "provisioningModel": "SPOT"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "europe-west1": {
+      "http": 400,
+      "error": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Machine specification is not supported in locations: [europe-west1-b europe-west1-c europe-west1-d].\",\n    \"errors\": [\n      {\n        \"message\": \"Machine specification is not supported in locations: [europe-west1-b europe-west1-c europe-west1-d].\",\n        \"domain\": \"global\",\n        \"reason\": \"badRequest\"\n      }\n    ]\n  }\n}\n"
+    },
+    "europe-west2": {
+      "http": 200,
+      "response": {
+        "recommendations": [
+          {
+            "scores": {
+              "obtainability": 0.9,
+              "estimatedUptime": "3600s"
+            },
+            "shards": [
+              {
+                "zone": "https://www.googleapis.com/compute/beta/projects/mantra-477901/zones/europe-west2-b",
+                "machineType": "g2-standard-4",
+                "instanceCount": 1,
+                "provisioningModel": "SPOT"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "europe-west3": {
+      "http": 200,
+      "response": {
+        "recommendations": [
+          {
+            "scores": {
+              "obtainability": 0.9,
+              "estimatedUptime": "600s"
+            },
+            "shards": [
+              {
+                "zone": "https://www.googleapis.com/compute/beta/projects/mantra-477901/zones/europe-west3-b",
+                "machineType": "g2-standard-4",
+                "instanceCount": 1,
+                "provisioningModel": "SPOT"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "europe-west4": {
+      "http": 200,
+      "response": {
+        "recommendations": [
+          {
+            "scores": {
+              "obtainability": 0.5,
+              "estimatedUptime": "60s"
+            },
+            "shards": [
+              {
+                "zone": "https://www.googleapis.com/compute/beta/projects/mantra-477901/zones/europe-west4-a",
+                "machineType": "g2-standard-4",
+                "instanceCount": 1,
+                "provisioningModel": "SPOT"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "europe-west6": {
+      "http": 200,
+      "response": {
+        "recommendations": [
+          {
+            "scores": {
+              "obtainability": 0.9,
+              "estimatedUptime": "600s"
+            },
+            "shards": [
+              {
+                "zone": "https://www.googleapis.com/compute/beta/projects/mantra-477901/zones/europe-west6-b",
+                "machineType": "g2-standard-4",
+                "instanceCount": 1,
+                "provisioningModel": "SPOT"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "me-central2": {
+      "http": 200,
+      "response": {
+        "recommendations": [
+          {
+            "scores": {
+              "obtainability": 0.9,
+              "estimatedUptime": "3600s"
+            },
+            "shards": [
+              {
+                "zone": "https://www.googleapis.com/compute/beta/projects/mantra-477901/zones/me-central2-a",
+                "machineType": "g2-standard-4",
+                "instanceCount": 1,
+                "provisioningModel": "SPOT"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "northamerica-northeast1": {
+      "http": 400,
+      "error": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Machine specification is not supported in locations: [northamerica-northeast1-a northamerica-northeast1-b northamerica-northeast1-c].\",\n    \"errors\": [\n      {\n        \"message\": \"Machine specification is not supported in locations: [northamerica-northeast1-a northamerica-northeast1-b northamerica-northeast1-c].\",\n        \"domain\": \"global\",\n        \"reason\": \"badRequest\"\n      }\n    ]\n  }\n}\n"
+    },
+    "northamerica-northeast2": {
+      "http": 400,
+      "error": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Machine specification is not supported in locations: [northamerica-northeast2-a northamerica-northeast2-b northamerica-northeast2-c].\",\n    \"errors\": [\n      {\n        \"message\": \"Machine specification is not supported in locations: [northamerica-northeast2-a northamerica-northeast2-b northamerica-northeast2-c].\",\n        \"domain\": \"global\",\n        \"reason\": \"badRequest\"\n      }\n    ]\n  }\n}\n"
+    },
+    "us-central1": {
+      "http": 200,
+      "response": {
+        "recommendations": [
+          {
+            "scores": {
+              "obtainability": 0.1,
+              "estimatedUptime": "60s"
+            },
+            "shards": [
+              {
+                "zone": "https://www.googleapis.com/compute/beta/projects/mantra-477901/zones/us-central1-a",
+                "machineType": "g2-standard-4",
+                "instanceCount": 1,
+                "provisioningModel": "SPOT"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "us-east1": {
+      "http": 400,
+      "error": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Machine specification is not supported in locations: [us-east1-b us-east1-c us-east1-d].\",\n    \"errors\": [\n      {\n        \"message\": \"Machine specification is not supported in locations: [us-east1-b us-east1-c us-east1-d].\",\n        \"domain\": \"global\",\n        \"reason\": \"badRequest\"\n      }\n    ]\n  }\n}\n"
+    },
+    "us-east4": {
+      "http": 400,
+      "error": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Machine specification is not supported in locations: [us-east4-a us-east4-b us-east4-c].\",\n    \"errors\": [\n      {\n        \"message\": \"Machine specification is not supported in locations: [us-east4-a us-east4-b us-east4-c].\",\n        \"domain\": \"global\",\n        \"reason\": \"badRequest\"\n      }\n    ]\n  }\n}\n"
+    },
+    "us-west1": {
+      "http": 400,
+      "error": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Machine specification is not supported in locations: [us-west1-a us-west1-b us-west1-c].\",\n    \"errors\": [\n      {\n        \"message\": \"Machine specification is not supported in locations: [us-west1-a us-west1-b us-west1-c].\",\n        \"domain\": \"global\",\n        \"reason\": \"badRequest\"\n      }\n    ]\n  }\n}\n"
+    },
+    "us-west4": {
+      "http": 400,
+      "error": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Machine specification is not supported in locations: [us-west4-a us-west4-b us-west4-c].\",\n    \"errors\": [\n      {\n        \"message\": \"Machine specification is not supported in locations: [us-west4-a us-west4-b us-west4-c].\",\n        \"domain\": \"global\",\n        \"reason\": \"badRequest\"\n      }\n    ]\n  }\n}\n"
+    }
+  },
+  "quota_and_existing_egress": {
+    "asia-east1": {
+      "zones": [
+        "asia-east1-a",
+        "asia-east1-b",
+        "asia-east1-c"
+      ],
+      "quota": {
+        "http": 200,
+        "quotas": [
+          {
+            "metric": "CPUS",
+            "limit": 100,
+            "usage": 0
+          },
+          {
+            "metric": "DISKS_TOTAL_GB",
+            "limit": 4096,
+            "usage": 0
+          },
+          {
+            "metric": "NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          },
+          {
+            "metric": "PREEMPTIBLE_NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          }
+        ]
+      },
+      "routers": {
+        "http": 200,
+        "routers": []
+      }
+    },
+    "asia-northeast1": {
+      "zones": [
+        "asia-northeast1-a",
+        "asia-northeast1-b",
+        "asia-northeast1-c"
+      ],
+      "quota": {
+        "http": 200,
+        "quotas": [
+          {
+            "metric": "CPUS",
+            "limit": 100,
+            "usage": 0
+          },
+          {
+            "metric": "DISKS_TOTAL_GB",
+            "limit": 4096,
+            "usage": 0
+          },
+          {
+            "metric": "NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          },
+          {
+            "metric": "PREEMPTIBLE_NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          }
+        ]
+      },
+      "routers": {
+        "http": 200,
+        "routers": [
+          {
+            "name": "jep-csts-format-jp-20261021",
+            "network": "https://www.googleapis.com/compute/v1/projects/mantra-477901/global/networks/default",
+            "nats": []
+          }
+        ]
+      }
+    },
+    "asia-northeast3": {
+      "zones": [
+        "asia-northeast3-a",
+        "asia-northeast3-b"
+      ],
+      "quota": {
+        "http": 200,
+        "quotas": [
+          {
+            "metric": "CPUS",
+            "limit": 100,
+            "usage": 0
+          },
+          {
+            "metric": "DISKS_TOTAL_GB",
+            "limit": 4096,
+            "usage": 0
+          },
+          {
+            "metric": "NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          },
+          {
+            "metric": "PREEMPTIBLE_NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          }
+        ]
+      },
+      "routers": {
+        "http": 200,
+        "routers": [
+          {
+            "name": "jep-csts-format-20261021",
+            "network": "https://www.googleapis.com/compute/v1/projects/mantra-477901/global/networks/default",
+            "nats": [
+              {
+                "name": "jep-csts-publisher-egress",
+                "allocation": "AUTO_ONLY",
+                "sourceRanges": "LIST_OF_SUBNETWORKS",
+                "subnetworks": [
+                  {
+                    "name": "https://www.googleapis.com/compute/v1/projects/mantra-477901/regions/asia-northeast3/subnetworks/jep-csts-format-20261021",
+                    "sourceIpRangesToNat": [
+                      "PRIMARY_IP_RANGE"
+                    ]
+                  }
+                ],
+                "endpointTypes": [
+                  "ENDPOINT_TYPE_VM"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "asia-south1": {
+      "zones": [
+        "asia-south1-a",
+        "asia-south1-b",
+        "asia-south1-c"
+      ],
+      "quota": {
+        "http": 200,
+        "quotas": [
+          {
+            "metric": "CPUS",
+            "limit": 100,
+            "usage": 0
+          },
+          {
+            "metric": "DISKS_TOTAL_GB",
+            "limit": 4096,
+            "usage": 0
+          },
+          {
+            "metric": "NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          },
+          {
+            "metric": "PREEMPTIBLE_NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          }
+        ]
+      },
+      "routers": {
+        "http": 200,
+        "routers": []
+      }
+    },
+    "asia-southeast1": {
+      "zones": [
+        "asia-southeast1-a",
+        "asia-southeast1-b",
+        "asia-southeast1-c"
+      ],
+      "quota": {
+        "http": 200,
+        "quotas": [
+          {
+            "metric": "CPUS",
+            "limit": 100,
+            "usage": 0
+          },
+          {
+            "metric": "DISKS_TOTAL_GB",
+            "limit": 4096,
+            "usage": 0
+          },
+          {
+            "metric": "NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          },
+          {
+            "metric": "PREEMPTIBLE_NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          }
+        ]
+      },
+      "routers": {
+        "http": 200,
+        "routers": []
+      }
+    },
+    "europe-west1": {
+      "zones": [
+        "europe-west1-b",
+        "europe-west1-c"
+      ],
+      "quota": {
+        "http": 200,
+        "quotas": [
+          {
+            "metric": "CPUS",
+            "limit": 200,
+            "usage": 0
+          },
+          {
+            "metric": "DISKS_TOTAL_GB",
+            "limit": 4096,
+            "usage": 0
+          },
+          {
+            "metric": "NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          },
+          {
+            "metric": "PREEMPTIBLE_NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          }
+        ]
+      },
+      "routers": {
+        "http": 200,
+        "routers": []
+      }
+    },
+    "europe-west2": {
+      "zones": [
+        "europe-west2-a",
+        "europe-west2-b"
+      ],
+      "quota": {
+        "http": 200,
+        "quotas": [
+          {
+            "metric": "CPUS",
+            "limit": 200,
+            "usage": 0
+          },
+          {
+            "metric": "DISKS_TOTAL_GB",
+            "limit": 4096,
+            "usage": 0
+          },
+          {
+            "metric": "NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          },
+          {
+            "metric": "PREEMPTIBLE_NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          }
+        ]
+      },
+      "routers": {
+        "http": 200,
+        "routers": []
+      }
+    },
+    "europe-west3": {
+      "zones": [
+        "europe-west3-a",
+        "europe-west3-b"
+      ],
+      "quota": {
+        "http": 200,
+        "quotas": [
+          {
+            "metric": "CPUS",
+            "limit": 200,
+            "usage": 0
+          },
+          {
+            "metric": "DISKS_TOTAL_GB",
+            "limit": 4096,
+            "usage": 0
+          },
+          {
+            "metric": "NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          },
+          {
+            "metric": "PREEMPTIBLE_NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          }
+        ]
+      },
+      "routers": {
+        "http": 200,
+        "routers": []
+      }
+    },
+    "europe-west4": {
+      "zones": [
+        "europe-west4-a",
+        "europe-west4-b",
+        "europe-west4-c"
+      ],
+      "quota": {
+        "http": 200,
+        "quotas": [
+          {
+            "metric": "CPUS",
+            "limit": 200,
+            "usage": 0
+          },
+          {
+            "metric": "DISKS_TOTAL_GB",
+            "limit": 4096,
+            "usage": 0
+          },
+          {
+            "metric": "NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          },
+          {
+            "metric": "PREEMPTIBLE_NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          }
+        ]
+      },
+      "routers": {
+        "http": 200,
+        "routers": []
+      }
+    },
+    "europe-west6": {
+      "zones": [
+        "europe-west6-b",
+        "europe-west6-c"
+      ],
+      "quota": {
+        "http": 200,
+        "quotas": [
+          {
+            "metric": "CPUS",
+            "limit": 100,
+            "usage": 0
+          },
+          {
+            "metric": "DISKS_TOTAL_GB",
+            "limit": 4096,
+            "usage": 0
+          },
+          {
+            "metric": "NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          },
+          {
+            "metric": "PREEMPTIBLE_NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          }
+        ]
+      },
+      "routers": {
+        "http": 200,
+        "routers": []
+      }
+    },
+    "me-central2": {
+      "zones": [
+        "me-central2-a",
+        "me-central2-c"
+      ],
+      "quota": {
+        "http": 200,
+        "quotas": [
+          {
+            "metric": "CPUS",
+            "limit": 72,
+            "usage": 0
+          },
+          {
+            "metric": "DISKS_TOTAL_GB",
+            "limit": 4096,
+            "usage": 0
+          },
+          {
+            "metric": "NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          },
+          {
+            "metric": "PREEMPTIBLE_NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          }
+        ]
+      },
+      "routers": {
+        "http": 200,
+        "routers": []
+      }
+    },
+    "northamerica-northeast1": {
+      "zones": [
+        "northamerica-northeast1-b",
+        "northamerica-northeast1-c"
+      ],
+      "quota": {
+        "http": 200,
+        "quotas": [
+          {
+            "metric": "CPUS",
+            "limit": 200,
+            "usage": 0
+          },
+          {
+            "metric": "DISKS_TOTAL_GB",
+            "limit": 4096,
+            "usage": 0
+          },
+          {
+            "metric": "NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          },
+          {
+            "metric": "PREEMPTIBLE_NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          }
+        ]
+      },
+      "routers": {
+        "http": 200,
+        "routers": []
+      }
+    },
+    "northamerica-northeast2": {
+      "zones": [
+        "northamerica-northeast2-a",
+        "northamerica-northeast2-b"
+      ],
+      "quota": {
+        "http": 200,
+        "quotas": [
+          {
+            "metric": "CPUS",
+            "limit": 100,
+            "usage": 0
+          },
+          {
+            "metric": "DISKS_TOTAL_GB",
+            "limit": 4096,
+            "usage": 0
+          },
+          {
+            "metric": "NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          },
+          {
+            "metric": "PREEMPTIBLE_NVIDIA_L4_GPUS",
+            "limit": 1,
+            "usage": 0
+          }
+        ]
+      },
+      "routers": {
+        "http": 200,
+        "routers": []
+      }
+    }
+  },
+  "tokyo_alternative_shape_check": {
+    "region": "asia-northeast1",
+    "request": {
+      "instanceProperties": {
+        "scheduling": {
+          "provisioningModel": "SPOT"
+        }
+      },
+      "instanceFlexibilityPolicy": {
+        "instanceSelections": {
+          "l4": {
+            "machineTypes": [
+              "g2-standard-8"
+            ]
+          }
+        }
+      },
+      "distributionPolicy": {
+        "targetShape": "ANY_SINGLE_ZONE"
+      },
+      "size": 1
+    },
+    "result": {
+      "http": 400,
+      "error": "{\n  \"error\": {\n    \"code\": 400,\n    \"message\": \"Machine specification is not supported in locations: [asia-northeast1-a asia-northeast1-b asia-northeast1-c].\",\n    \"errors\": [\n      {\n        \"message\": \"Machine specification is not supported in locations: [asia-northeast1-a asia-northeast1-b asia-northeast1-c].\",\n        \"domain\": \"global\",\n        \"reason\": \"badRequest\"\n      }\n    ]\n  }\n}\n"
+    },
+    "checked_at": "2026-11-10T15:43:53.432242+00:00"
+  },
+  "scope": "Advertised locations and quota are independent of physical capacity. Scores are momentary Spot obtainability forecasts, not successful allocations. HTTP400 advisor responses leave the forecast unknown. All requests were read-only advisory/inventory calls; no VMs, disks, IPs, reservations or NATs created."
+}
